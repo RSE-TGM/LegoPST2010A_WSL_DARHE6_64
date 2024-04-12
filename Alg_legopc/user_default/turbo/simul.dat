@@ -1,0 +1,17 @@
+* TSTEP
+0.1
+* NPASREC
+1
+* METHOD (M=MA28; N=QUASI NEWTON)
+M
+* INPUTS 2
+ALZA0___
+WE_113__
+* MONITORED 3
+QMEC2___
+PCOL13__
+WVAL0___
+* PRINTOUTS (1=ingressi,2=jacobiani;3=num.iterazioni;4=matr.topologica;5=residui)
+0     
+* END
+EOF

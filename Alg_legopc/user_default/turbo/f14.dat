@@ -1,0 +1,44 @@
+*LG*NOME IMPIANTO =TURBO   
+*LG*DATI DI NORMALIZZAZIONE P0=      *H0=      *W0=      *T0=      *R0=      *
+*LG*                        L0=      *V0=      *DP0=      *
+*LG*CONDIZIONI INIZIALI VARIABILI DEL SISTEMA (MKS)
+  1 WVAL0___ =          *BL.(VALV0___)=    * qqqqqqqqFLUID FLOW RATE IN THE VALVE                           
+  2 HCOL13__ =          *BL.(COLT13__)=    * FLUID ENTHALPY IN THE MANIFOLD                                 
+  3 PCOL13__ =          *BL.(COLT13__)=    * FLUID PRESSURE IN THE MANIFOLD                                 
+  4 TCOL13__ =          *BL.(COLT13__)=    * METAL TEMPERATURE IN THE MANIFOLD                              
+  5 HUTZ2___ =          *BL.(TREN2___)=    * FLUID ENTHALPY AT THE REACTION STAG                            
+  6 WUTZ2___ =          *BL.(TREN2___)=    * STEAM FLOW RATE AT THE REACTION STA                            
+  7 PITZ2___ =          *BL.(TREN2___)=    * STEAM PRESSURE AT THE REACTION STAG                            
+  8 QMEC2___ =          *BL.(TREN2___)=    * MECHANICAL POWER OF THE REACTION TU                            
+  9 PSPZ2___ =          *BL.(TREN2___)=    * STEAM PRESSURE AT BLEEDING OUTLET                              
+ 10 HSPZ2___ =          *BL.(TREN2___)=    * STEAM ENTHALPY AT BLEEDING OUTLET                              
+*LG*CONDIZIONI INIZIALI VARIABILI DI INGRESSO  
+  1 ALZA0___ =          *BL.(VALV0___)=    * VALVE LIFT                                                     
+  2 WE_113__ =          *BL.(COLT13__)=    * FLOW RATE IN THE ENTERING BRANCH N.                            
+  3 HE_113__ =          *BL.(COLT13__)=    * ENTHALPY IN THE ENTERING BRANCH N.                             
+  4 HU_113__ =          *BL.(COLT13__)=    * ENTHALPY IN THE COMING OUT BRANCH N                            
+  5 TEST13__ =          *BL.(COLT13__)=    * FLUID TEMPERATURE OUTSIDE THE MANIF                            
+  6 GEST13__ =          *BL.(COLT13__)=    * THERMAL EXCHANGE COEFF. OUTSIDE THE                            
+  7 WSPZ2___ =          *BL.(TREN2___)=    * FLOW RATE OF STEAM BLED FROM THE RE                            
+  8 PUTZ2___ =          *BL.(TREN2___)=    * STEAM PRESSURE AT THE REACTION STAG                            
+  9 SERC2___ =          *BL.(TREN2___)=    * LOAD REJECTION OR TRIP SIGNAL                                  
+ 10 SEAV2___ =          *BL.(TREN2___)=    * STARTING BUTTON OF THE REACTION TUR                            
+ 11 RPMV2___ =          *BL.(TREN2___)=    * ROTATIONAL SPEED OF THE REACTION TU                            
+*LG*DATI FISICI E GEOMETRICI DEL SISTEMA SUDDIVISI A BLOCCHI
+*LG*DATI DEL BLOCCO VALV0___  MODULO VALV - VALV - Water/steam valve (Wout compu     
+*   VALVE DATA (COD. = IDENTIFIER FOR MATHEMATICAL MODEL CHOICE)
+    ALFA     =          *    CFA      =          *    COD.     =          *
+*   DATA RELATED TO THE DISCHARGING CHARACTERISTIC
+    CVA      =          *    PORTATA  =          *    P1 MONTE =          *
+    P2 VALLE =          *    ENTALPIA =          *    CORSA    =          *
+*   DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)
+    DP. APER =          *    DP. CHIU =          *
+*LG*DATI DEL BLOCCO COLT13__  MODULO COLT - COLT - Collettore 1 ingresso 1 uscita    
+    NU.TU.EN =          *    NU.TU.US =          *    VOLUME   =          *
+    MASSA ME =          *    CP MET.  =          *    COND MET =          *
+    SPESSORE =          *    SUP.  ES =          *
+*LG*DATI DEL BLOCCO TREN2___  MODULO TREN - TREN - Steam turbine stage               
+    PRES__IN =          *    ENTA__IN =          *    PORT__IN =          *
+    PRES_OUT =          *    ENTA_SPL =          *    RPMV_NOM =          *
+    REND_NOM =          *    PORT_SPL =          *
+*LG*EOF

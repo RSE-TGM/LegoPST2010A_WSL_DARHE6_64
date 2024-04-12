@@ -1,0 +1,37 @@
+PRSC
+
+exchanger for CALT - power calc                                                 
+3
+1
+
+t0
+WREF ____ ____ ____ ____ HIRE ____ ____ 
+2 0 0 0 0 1 0 0 
+t1
+WREF ____ ____ ____ ____ HURE ____ ____ 
+2 0 0 0 0 1 0 0 
+t5
+WADI TMAD GAMS ____ ____ ____ ____ ____ ____ ____ 
+1 1 1 0 0 0 0 0 0 0 
+
+0
+3
+5
+
+HURE UA
+ENTALPIA DI USCITA                                             
+TMED UA
+TEMPERATURA MEDIA FLUIDO                                       
+QREF UA
+POTENZA CEDUTA (>0 USCENTE)                                    
+WREF IN
+PORTATA                                                        
+HIRE IN
+ENTALPIA DI INGRESSO                                           
+TMAD IN
+TEMPERATURA MEDIA FLUIDO ADIACENTE                             
+GAMS IN
+PROD. COEFF. * SUP. SCAMBIO LATO ADIACENTE                     
+WADI IN
+PORTATA FLUIDO ADIACENTE                                       
+

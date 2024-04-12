@@ -1,0 +1,160 @@
+EUTRON
+
+Internet : http://www.smartkey.eutron.it
+Helpdesk email : helpdesk@eutron.it
+Commercial email : info@eutron.it
+Commercial phone : 035697080
+Fax : 035697092
+
+
+SmartKey 3 USB User Level Driver for Linux
+------------------------------------------
+
+Questo pacchetto contiene il software necessario ad utilizzare la chiave 
+SmartKey 3 USB e SmartKey 3 USB DL in ambiente Linux.
+
+A differenza dei driver generici SmartKey, questo driver non richiede 
+l'installazione di un driver binario nel kernel di Linux, garantendo la 
+compatibilita' con ogni versione esistente e futura del kernel Linux.
+
+L'accesso alla SmartKey 3 USB e' realizzato completamente ad user level, 
+utilizzando l'interfaccia usbfs (anche chiamata usbdevfs) presente in 
+tutti i kernel Linux dal 2.2 in poi.
+
+L'unica limitazione di questo driver rispetto alla versione del driver 
+SmartKey generico e' che non supporta le SmartKey Parallele e le 
+SmartKey 2 USB.
+
+
+CONTENUTO
+---------
+
+Il pacchetto e' costituito dai seguenti file:
+
+clink.o
+	Modulo oggetto da linkare alla applicazione da proteggere.
+
+clinka.o
+	Modulo oggetto da linkare alla applicazione da proteggere
+	con un nome alternativo della funzione di interfaccia SmartKey:
+	clink_alt() al posto di clink().
+
+clink.h
+	Definisce la struttura dell'interfaccia SmartKey.
+
+smartdem.c
+	Esempio di utilizzo della chiave SmartKey scritto in
+	linguaggio C.
+
+smartdem
+	Forma eseguibile del programma esempio.
+
+
+SUPPORTO USB
+------------
+
+Il driver SmartKey, come ogni altro driver USB, richiede che i moduli 
+USB del kernel siano caricati ed attivi. Generalmente questo si puo' 
+ottenere con i comandi :
+
+	insmod usbcore
+	insmod usb-uhci
+
+per PC con controller USB UHCI di Intel, VIA, ...
+
+	insmod usbcore
+	insmod usb-ohci
+
+per PC con controller USB OHCI di Compaq, iMacs, OPTi, SiS, ALi...
+
+	insmod usbcore
+	insmod usb-ehci
+
+per PC con controller USB 2.
+
+Il driver richiede inoltre che l'interfaccia filesystem usbfs (anche 
+chiamata usbdevfs) sia attiva ed accessibile dal programma protetto 
+nella directory /proc/bus/usb.
+
+Nel caso tale filesystem non sia montato per default in /proc/bus/usb 
+occorre montarlo manualmente con il comando:
+
+	mount -t usbfs none /proc/bus/usb
+
+o aggiungere la seguente riga nel file /etc/fstab:
+
+	none /proc/bus/usb usbfs defaults 0 0
+
+Nel caso il programma protetto non sia avviato da root occorre 
+configurare il sistema per rendere accessibile il filesystem usbfs ad 
+utenti generici.
+
+Ci sono tre diffenti possibilita':
+
+- Aggiungere permessi di root al programma protetto. Generalmente
+  sono sufficienti i comandi:
+
+	chown root:root program
+	chmod u+s program
+
+- Montare il filesystem usbfs con l'opzione "devmode=0666" che rende 
+  tutti i device USB accessibili a tutti gli utenti. Ad esempio basta 
+  aggiungere la riga:
+
+	none /proc/bus/usb usbfs defaults,devmode=0666 0 0
+
+  nel file /etc/fstab.
+  
+  Con le prime versioni del kernel 2.6, l'opzione devmode non funziona a 
+  causa di un bug nel kernel. Riferirsi al link:
+  
+  	http://bugzilla.kernel.org/show_bug.cgi?id=1418
+  	
+  per maggiori informazioni.
+
+- Configurare il supporto hotplug per rendere accessibile la SmartKey 
+  USB a tutti gli utenti. Occorre aggiungere la riga:
+
+	smartkey3 0x03 0x073d 0x0025 0 0 0 0 0 0 0 0 0
+
+  al file /etc/hotplug/usb.usermap, e copiare lo script smartkey3 dalla 
+  directory corrente nella directory /etc/hotplug/usb
+
+
+UTILIZZO 
+--------
+
+Per utilizzare l'interfaccia SmartKey e' necessario aggiungere nel 
+programma da proteggere le opportune chiamate alla funzione clink() e 
+aggiungere il file clink.o nel processo di link del programma.
+
+Ad esempio per compilare il programma di esempio smartdem.c occorre 
+utilizzare il seguente comando:
+
+	gcc -o smartdem clink.o smartdem.c
+
+
+UTILIZZO CONTEMPORANEO DEL VECCHIO DRIVER
+-----------------------------------------
+
+Il modulo clinka.o puo' essere utilizzato nel caso si intendano
+utilizzare contemporaneamente sia il driver user level sia
+il driver kernel level.
+
+E' possibile combinare l'utilizzo dei due driver costruendo una nuova
+funzione clink_all() che utilizzi i due driver in cascata:
+
+int clink_all(SKEY_DATA* key)
+{
+	int r;
+
+	r = clink(key);
+	if (r == ST_NONE_KEY)
+		r = clink_alt(key);
+
+	return r;
+}
+
+In questo caso occorre linkare il programma con il modulo clinka.o
+del driver user level e con il modulo clink.o del driver kernel level.
+

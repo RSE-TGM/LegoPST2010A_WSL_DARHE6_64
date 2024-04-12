@@ -1,0 +1,617 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>PALL</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE PALL</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE PALL</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">BALL MILL FOR COAL</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">The PALL module simulates the operation of a ball mill to grind
+the coal destined to combustion in thermal power plants.</p>
+<p ALIGN="left">For the definition of the mathematical model reference was made
+to this configuration of the mill: the raw coal is conveyed by a belt at
+variable speed, it enters the center of the scoop and by centrifugal force it is
+pushed toward the area where balls (or rollers) grind it and reaches the
+external edge of the scoop and the slot between the scoop and the mill case. Hot
+air (primary air) outflows from this opening, rejecting large size coal towards
+the grinding area and transporting the lower size coal towards the classifier.
+Coal particles in the classifier, have radial spreading according to the size:
+larger ones, having higher centrifugal force, are at the outside and fall in the
+scoop, smaller ones are placed inward and are transported by air along coal dust
+ducts.</p>
+<p ALIGN="left">In the mathematical model adoped, the following hypothesis are
+assumed:</p>
+<p ALIGN="left">i - The coal dust in the grinding area has a size distribution
+where each particle can be identified by a linear dimension (D) called particle
+diameter;</p>
+<p ALIGN="left">ii - The size distribution is uniform in the area where grinding
+takes place (zero-dimensional model); therefore we can assume to have a unique
+diametral density function N, depending on the diameter of particles D and on
+time t, where N(D,t) * deltaD represents the mass of coal particles in the
+grinding area of diameters within D and D + deltaD.</p>
+<p ALIGN="left">iii - The coal dust flow rate from the central area of the scoop
+to the grinding area is function of the centrifugal force acting on the
+difference of level between coal masses in the scoop and in the grinding area.</p>
+<p ALIGN="left">iv - The coal dust mass accumulation in the scoop is considered.</p>
+<p ALIGN="left">v - Grinding phenomena of coal in the grinding area are treated
+as a continuous process with a Um grinding speed expressed by the relation Um =
+dD / dt.</p>
+<p ALIGN="left">vi - The coal particle mass accumulation in the grinding area is
+also considered.</p>
+<p ALIGN="left">vii - The coal rate per diameter unit from the grinding area
+towards the flue depends on the centrifugal force acting on the level difference
+between the mass of particles in the grinding area and the mass of particles in
+the flue.</p>
+<p ALIGN="left">viii - Primary air through the flue rejects the particles having
+larger size towards the grinding area (mixing particles according to the
+zero-dimensional hypothesis) and transports only smaller particles to the
+classifier, for which the conveyance force by air overcomes the gravity force.</p>
+<p ALIGN="left">ix - It is considered a mass accumulation in the classifier
+area. In this phenomenon, different staying times are considered with respect to
+the distribution of particles sizes.</p>
+<p ALIGN="left">x - Due to considerable delays in the grinding phenomenon. small
+delays associated to recyling rates through the flue and the classifier towards
+the grinding area are neglected.</p>
+<p ALIGN="left">xi - The classifier selects, with 100% effectiveness, the
+particle at a break Db diameter depending on the position of the classifier
+gates.</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">In these hypothesis, the material accumulation in the scoop area
+and in the classifier area has not been considered (hypothesis iv and ix), since
+numeric coefficients present in the equations governing the two phenomena are
+not available.</p>
+<p ALIGN="left">The equations on which the module is based are the mass
+conservation equation in the scoop, grinding and flue areas.</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">NOTES ON OPERATION OF THE PALL MODULE</p>
+<p ALIGN="left">The coal diametral density inside the scoop N(D,t) is recorded
+by the module in appropriate elements of the DATA vector, which position is
+calculated on the basis of the number of divisions required by NDIV.</p>
+<p ALIGN="left">The integral of N versus the diameter represents the coal mass
+therein contained, whose value is used for the cauculation of the grinding speed
+Um, required in the evaluation of vector N. Unfortunately, at the first
+iteration of the steady state, the DATA vector is null, and therefore also the
+estimated coal mass is null: the content of vector N so calculated is wrong and
+does not correspond to a steady state condition (and in fact the results of a
+derivative are physically not plausible).</p>
+<p ALIGN="left">This problem has been solved forcing the module to make several
+calculation cycles of vector N until the mass calculated as integral of vector N
+does not correspond (unless setting of an appropriate threshold, set at 1.E-3
+kg) to the one previously used to estimate the vector itself.</p>
+<p ALIGN="left">The procedure, usually requiring less than ten cycles, is very
+quick, particularly when the selected number of cells is low and results
+obtained actually represent a steady state of the system.</p>
+<p ALIGN="left">This iteration cycle could be performed also in a transient
+state (making comments of an &quot;IF (KREGIM) THEN&quot; instruction and the
+corresponding &quot;ENDIF&quot;). Results obtained in transient state with this
+option are obviously more accurate, but with an extension of calculation times
+of about 10%, results are subject to neglectable variations (lower than 0.5%).</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE PALL</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="CENTER">INPUT - OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font SIZE="2">
+<p align="center"><img SRC="images/Image790.gif" width="374" height="162"></p>
+</font><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT - OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WFEE</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">coal delivery from feeder</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WARI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">air flow rate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ROAR</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">air density</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMEG</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">angular speed of scoop</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[N*m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">XCOP</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">motive torque (pressure force
+      applied on grinding device multiplied by the grinding area radius)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">MASS</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass of coal dust in
+      classifier</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WUCL</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">outcoming coal dust mass flow
+      rate</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER">NORMALIZATION FACTORS OF INPUT - OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Variables</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Normalization</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WFEE, WARI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">10.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ROAR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RO0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMEG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">300.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">XCOP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">1.E6</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">MASS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">100.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WUCL</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">10.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE PALL</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i>
+</b>
+          </font>
+<font FACE="Arial">
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">In addition to the initial values of variables, the following <i>data
+set</i> must be provided:</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="left" style="margin-bottom: 9"><b>Coefficients for friction angle
+    calculation</b><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<!--mstheme--></font><table border="0" width="100%" height="49">
+  <tr>
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FI</font><!--mstheme--></font></td>
+    <td width="72%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">constant term in friction
+      angle equation (default: 0.0344)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s/kg]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FPI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">angular coefficient in
+      friction angle equation (default: 0.002)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="center">&nbsp;</p>
+<p align="center">Friction-Factor (<font FACE="Symbol">F</font> ) = FI + FPI *W<sub>coal</sub>&nbsp;</p>
+<i>
+<p align="left">Hints for initialization: the relationship between pulverized
+mass flow rate and friction angle is an experimental law. It can be provided by
+the constructor of the mill or found pointwise by examining the mill working
+point at several charges and interpolating a line through them. If only the
+nominal working point is available, only one point in the characteristic is
+known, calculated as:</p>
+<p ALIGN="CENTER"><font FACE="Symbol">F</font> = P / (F R<sub>m</sub> <font FACE="Symbol">w</font>
+)</p>
+<p align="left">where P is the grinding power (by ignoring the mechanical
+efficiency rate, it’s the nominal motor power at the turning shaft), F is the
+nominal pressure force of the grinding device, R<sub>m</sub> is the grinding
+zone radius and <font FACE="Symbol">w</font> is the shaft nominal angular speed.
+In order to allow a complete definition of the linear characteristic, one should
+also know the slope of the line (FPI). Nevertheless, as the contribution of this
+slope is usually not significant, it could, as a first approximation, be kept
+equal to the default value, improving data refinement only if a particular
+tuning is necessary for non-nominal work points.</p>
+<p>&nbsp;</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+</i><b>
+<!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+  <p style="margin-bottom: 9">Coefficients for breakage law calculation<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<!--mstheme--></font><table border="0" width="100%" height="49">
+  <tr>
+    <td width="13%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="15%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NLAW</font><!--mstheme--></font></td>
+    <td width="72%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">exponent appearing in the
+      relationship expressing the grinding law (default: 2.0)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ </font><font FACE="Arial" SIZE="3">m<sup>NLAW+1</sup>/s<sup>2</sup></font><font FACE="Arial">]</font><!--mstheme--></font></td>
+    <td width="15%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CLAW</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">coefficient of
+      proportionality between mass grinding energy and diameter decrease (default:
+      3.15)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="15%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="15%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="15%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p align="left">U<sub>m</sub> = - <font FACE="Symbol">m</font> D<sup>NLAW</sup></font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="15%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p align="left"><font FACE="Symbol">m</font> = CLAW <sup>-1</sup> (F Rm <font FACE="Symbol">w</font>
+      <font FACE="Symbol">F</font> ) / M</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></b>
+<p ALIGN="left">where U<sub>m</sub> is the coal particles breaking speed and M
+is the total coal mass inside the mill</p>
+<i>
+<p ALIGN="left">Hints for initialization: as far as NLAW is concerned, it
+depends from the comminution theory. The default value corresponds to the
+Rittiger’s theory which is the most usual. As regards CLAW it could be tuned
+starting from the default value (valid for ball mills)</p>
+<p ALIGN="left">&nbsp;</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+</i><b>
+<!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+  <p style="margin-bottom: 9">Geometrical factors<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<!--mstheme--></font><table border="0" width="100%" height="49">
+  <tr>
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="18%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VT</font><!--mstheme--></font></td>
+    <td width="72%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mill volume</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FS1, FS2, FS3</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">shape adimensional parameters<br>
+      (defaults: 0.00317476, 0.21434 e 0.247221). They could be considered the
+      same for whole classes of geometrically similar mills</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></b><i>
+<p ALIGN="JUSTIFY">Hints for initialization: VT is only a adimensionalization
+factor for the shape parameter FS3 and, therefore, isn’t but of lesser
+importance. FS1, FS2, FS3 are contained in the expression of the efflux
+coefficient <font FACE="Symbol">n</font> <sub>0</sub> which has the dimension of
+[s<sup>-1</sup>] and ties the spectral mass (N) accumulated inside the grinding
+zone with the spectral mass flow rate of coal particles through the mill (W<sub>u</sub>’).
+So, the parameter <font FACE="Symbol">n</font> <sub>0</sub><sup>-1</sup> defines
+the main time constant inside the coal mill: the greater is <font FACE="Symbol">n</font>
+<sub>0</sub><sup>-1</sup>, the slower the dynamics of mass transport (there is
+another time constant related to mass accumulation in the classifier, but the
+implied dynamics is far less important).</p>
+<p ALIGN="JUSTIFY">The formula defining <font FACE="Symbol">n</font> <sub>0</sub>
+has FS2 at its numerator, FS1 at its denominator and FS3 at both:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</i>
+<p ALIGN="CENTER"><img SRC="images/Image791.gif" width="296" height="93"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<i>
+<p ALIGN="left">where V<sub>t</sub> is the total mill volume, W<sub>ar</sub> the
+air mass flow rate, <font FACE="Symbol">w</font> the shaft rotational speed.and
+the coal particles mass flow rate coming out of the grinding zone.</p>
+<p ALIGN="left">Modifying shape factors produces the following effects on
+dynamics:</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">increasing FS1 accelerates coal transport dynamics<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">increasing FS2 slows down coal transport dynamics<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">increasing FS3 has &quot;a priori&quot; an incertain influence on dynamics,
+    but experimental essays show slight effects in the same direction as an
+    increase of FS1.<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left">In conclusion, FS1, FS2 and FS3 can be very useful for tuning
+the dynamics of a coal mill on the base of experimental trends: while the usage
+of the theoretical expressions of FS1, FS2, FS3 and <font FACE="Symbol">n</font>
+<sub>0</sub><sup>-1</sup> is not advised because of various correction
+coefficients that should be considereded to take into account the many
+differences between theoretical model and actual coal mill, the abovementioned
+considerations on the dynamic response could help performing a fine tuning of
+shape factors starting from the default values provided by the module PALL.</p>
+</i>
+<p ALIGN="CENTER">&nbsp;</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <b>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p style="margin-bottom: 9">Parameters for calculation of break-diameter
+    (Db)<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+  <!--mstheme--></font><table border="0" width="100%" height="49">
+  <tr>
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">KCL</font><!--mstheme--></font></td>
+    <td width="74%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">coefficient of proportionality
+      between break diameter Db and air mass flow rate (default: 1.0)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="16%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DB0</font><!--mstheme--></font></td>
+    <td width="74%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">rated value of particles
+      break diameter (default: 7.E-5)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="16%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAR0</font><!--mstheme--></font></td>
+    <td width="74%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">air flow rate in rated
+      conditions (no default)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+  <p ALIGN="CENTER">&nbsp;</p>
+</b>
+<p ALIGN="CENTER">Db = DB0*KCL*(WAR/WAR0)</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<b>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p style="margin-bottom: 9">Parameters for defining max/min diameter and the
+    number of classes<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<!--mstheme--></font><table border="0" width="100%" height="49">
+  <tr>
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="16%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DFEED</font><!--mstheme--></font></td>
+    <td width="74%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">coal size diameter at mill
+      intake (default: 0.001)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="16%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DM</font><!--mstheme--></font></td>
+    <td width="74%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">average diameter of particles
+      at mill output (default: 1.E-8)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NDIV</font><!--mstheme--></font></td>
+    <td width="74%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of intervals adopted
+      for the discretization of the grinded particles diameters (minimum: 10,
+      maximum: 300, default: 10, suggested value: 25)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></b>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <blockquote>
+          <blockquote>
+            <blockquote>
+              <blockquote>
+                <p>&nbsp;</p>
+              </blockquote>
+            </blockquote>
+          </blockquote>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <b>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p style="margin-bottom: 9">Classifier law data<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+  <!--mstheme--></font><table border="0" width="100%" height="49">
+  <tr>
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TAUC</font><!--mstheme--></font></td>
+    <td width="74%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal time constant of mass
+      storage inside the classifier (default: 60.)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">EXALFA</font><!--mstheme--></font></td>
+    <td width="74%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">exponent of the correction
+      term for non-nominal air mass flow rate (default: 0.)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></b>
+<p style="margin-bottom: 9" align="center">dMb/dt = - TAUC <sup>-1</sup>
+(WAR/WAR0)<sup>EXALFA</sup> Mb + Wb</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE PALL</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i></b></font><font FACE="Arial">
+<p align="left">See CARD B.</p>
+<p align="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE PALL</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></b></font><font FACE="Arial">
+<p align="left">No auxiliary fortran (FORAUS) is foreseen.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE PALL</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">The equations forming the module mathematical model, given in
+card A1, provide the following residuals:</p>
+<p ALIGN="justify" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+RNI(1) = DMASDT / 100. (norm. fact. = 100.)</p>
+<p ALIGN="justify" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+RNI(2) = (WUCL - WUCLC) / 10. (norm. fact. = 10.)</p>
+<p ALIGN="JUSTIFY">Where: DMASDT is the derivative in time of the coal mass
+contained in the classifier, WUCL is the coal dust rate coming out from the
+classified (and therefore from the mill) and WUCLC is the value of this flow
+rate calculated inside the module.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE PALL</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font></b><font FACE="Arial">
+<p>&nbsp;</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p align="left">SUBROUTINE PALLI3(IFO,IOB,DEBL)</p>
+<p align="left">SUBROUTINE PALLI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+<p align="left">$ IBL1,IBL2,IER,CNXYU,TOL)</p>
+<p align="left">SUBROUTINE PALLC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</p>
+<p align="left">SUBROUTINE PALL(IFUN,IXYU,XYU,IPD,DATI,RNI)</p>
+<p align="left">FUNCTION FMASS(DD, AN, NDIV, ALFA, ALF1)</p>
+<p align="left">FUNCTION FANU0(WARI,ROAR,VT,OMEG,FS1,FS2,FS3)</p>
+<p align="left">FUNCTION FDB(DB0,XKCL,WARI,WAR0)</p>
+<p align="left">FUNCTION FAMU0(XCOP,AMASS,OMEG,FI,FPI,DB,RLAW,ANU0,CLAW)</p>
+<p align="left">SUBROUTINE PALLD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</p>
+<p align="left">$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE PALL</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Test case PALL_T is provided, described in a separate document.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

@@ -1,0 +1,49 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><b><i><font size="5"><span lang="EN-GB" class="MsoFootnoteReference">How</span><span lang="EN-GB">
+to compute Jacobian matrix as double side incremental ratios (using BNAJAC)</span></font></i></b><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">Sometimes, it is better to compute the
+Jacobian matrix of the block residuals as double side incremental ratios:</span></p>
+<p class="MsoNormal" align="center"><span lang="EN-GB"><span style="mso-text-raise:-15.0pt">&nbsp;
+</span><img border="0" src="images/lg_mod26.gif" width="229" height="42"><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1025"
+  DrawAspect="Content" ObjectID="_1067255872">
+ </o:OLEObject>
+</xml><![endif]-->
+</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Note that the actual value of the
+residual <span style="mso-text-raise:-7.0pt"><!--[if gte vml 1]><v:shape id="_x0000_i1026"
+ type="#_x0000_t75" style='width:33pt;height:19.8pt' o:ole="">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image003.wmz" o:title=""/>
+</v:shape><![endif]-->
+</span><img border="0" src="images/lg_mod27.gif" width="38" height="21"><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1026"
+  DrawAspect="Content" ObjectID="_1067255875">
+ </o:OLEObject>
+</xml><![endif]-->
+<span style="mso-spacerun: yes">&nbsp;</span>is not used in this algorithm.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">This can be done using the BNAJAC
+routine instead of the NAJAC. The BNAJAC routine works like the NAJAC, and it
+must be used in the same way (same calling parameters and same prescriptions in
+the calling routine).</span></p>
+<span lang="EN-GB" style="font-size:12.0pt;mso-bidi-font-size:10.0pt;font-family:
+Arial;mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-ansi-language:EN-GB;mso-fareast-language:IT;mso-bidi-language:AR-SA">The
+computing time of BNAJAC is about two times the time required for NAJAC routine,
+as the &quot;xxxx&quot; subroutine of the LEGO module has to be called twice for
+each column of Jacobian matrix (while in NAJAC the actual values of the
+residuals are computed only once for all the columns).</span>
+
+<!--mstheme--></font></body>
+
+</html>

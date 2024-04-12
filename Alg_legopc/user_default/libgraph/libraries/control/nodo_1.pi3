@@ -1,0 +1,14 @@
+NODO_1                                                                          
+NODO                                                                            
+NODO - Pressure measure                                                         
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 1
+ 
+NCONF = 1
+ 
+USOM      --UA-- LINEAR RELATION : OUTPUT VARIABLE                              
+IN_1      --IN-- LINEAR RELATION : INPUT N.  1                                  
+==============================                                                  
+EOF                                                                             

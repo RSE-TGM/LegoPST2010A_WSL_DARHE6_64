@@ -1,0 +1,716 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>TANK</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE TANK</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TANK</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">STEAM-WATER TANK</p>
+<p>&nbsp;</p>
+<p align="left">The TANK module simulates the dynamics of thermo-hydraulic
+phenomena in a cavity containing water in water and steam states tending to
+separate each other under force of gravity effect. Such module is commonly used
+to simulate plant components like:</p>
+<p ALIGN="left">- steam drums of boiler with natural or forced circulation</p>
+<p ALIGN="left">- &quot;upper plenum&quot; of PWR reactors steam generators</p>
+<p ALIGN="left">- &quot;upper plenum&quot; of BWR reactors</p>
+<p ALIGN="left">- drainage collecting and expansion tanks and flash tanks</p>
+<p ALIGN="left">- tanks usually containing water in liquid and steam phases</p>
+<p align="left">In the above-mentioned components, having a very similar
+purpose, a water-steam mixture flows in. The mixture is separated by means of
+gravity or centrifugal forces.</p>
+<p align="left">Steam and water conditions at the cavity outlet are imposed as
+identical to the nominal ones (total separation efficiency).</p>
+<p align="left">To modify the separation model it is necessary to intervene on
+FORTRAN's module code (see below).</p>
+<p align="left">In order to use the TANK module in building a circulation loop
+model (natural or forced), to define input and output variables the following
+items are taken into account:</p>
+<p ALIGN="left">- the outlet of liquid towards circulation loop</p>
+<p ALIGN="left">- the inlet of liquid-steam mixture coming from the circulation
+loop</p>
+<p ALIGN="left">- the inlet of subcooled feed-water.</p>
+<p align="left">In the mathematical model it is presumed that the entering
+subcooled liquid is uniformly mixed with all present in the cavity.</p>
+<p align="left">Further characteristics of the adopted mathematical model are:</p>
+<p ALIGN="left">- the liquid-steam phases may not be in thermodynamic
+equilibrium</p>
+<p ALIGN="left">- the condensation-evaporation phenomena between the liquid and
+steam phases are taken into account</p>
+<p ALIGN="left">- the thermal exchanges between internal fluid and cavity walls
+are not considered.</p>
+<p align="left">The used equations are:</p>
+<p ALIGN="left">1) the conservation equation of mass in steam phase</p>
+<p ALIGN="left">2) the conservation equation of energy in steam phase</p>
+<p ALIGN="left">3) the conservation equation of energy in liquid phase</p>
+<p ALIGN="left">4) the conservation equation of mass in liquid phase</p>
+<p ALIGN="left">5) the equation for liquid level calculation as percentage of
+the measuring instruments working range</p>
+<p ALIGN="left">6) the equation for pressure calculation on the cavity bottom.</p>
+<p align="left">The first four equations are differential whereas the other ones
+are algebraical.</p>
+<p align="left">The equation 5), related to the level calculation, is formulated
+for a cavity having constant horizontal cross section area characterized by the
+data required in input (see below). If the cavity has not constant horizontal
+cross section area, user can assign again the equation 5) by means of a suitable
+subprogram (see below).</p>
+<p ALIGN="left">It is useful to note that TANK module is able to simulate a
+situation in which in the cavity only one of the two phases is present. So, it
+is possible to determine stationary conditions and transients in which the
+cavity is only filled by water or steam.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TANK</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<blockquote>
+  <blockquote>
+  </font><font FACE="Arial" SIZE="2">
+  <p ALIGN="center"><img SRC="images/Image728.gif" width="379" height="210"></p>
+  </font><font FACE="Arial">
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  </blockquote>
+</blockquote>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WMIC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of water-steam mixture at the
+      cavity inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HMIC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of water-steam mixture at the
+      cavity inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAIC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of subcooled water at the
+      cavity inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HAIC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of subcooled water at the cavity
+      inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WVCA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of steam flowing out from the
+      cavity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAUC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of water flowing out from the
+      cavity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LIV%</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">water level, as percentage of the
+      measuring instruments working range</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PFCA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure on the cavity bottom</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PCAV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure in the cavity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HVCA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam flowing out from the
+      cavity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HLCA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of water flowing out from the
+      cavity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">MLCA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass of water inside the cavity</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<p ALIGN="center"><font FACE="Arial" SIZE="4"><b><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TANK</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to the initial values of input and output variables,
+user must assign the following data:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TYPE_CAV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">selection index about type of cavity to
+      deal with (see below)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VOL.CAV.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cavity internal volume (steam volume +
+      water volume)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">MISURA_Y</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">selection index about the type of level
+      measurement:<br>
+      1. = the level is determined as elevation measure of the liquid surface,
+      including the steam bubbles as inclusion in liquid phase;<br>
+      -1. = the level is determined as elevation measure that liquid surface
+      would have excluding the steam bubbles in liquid phase.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">X_OVER</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal ratio of steam flowing out from
+      the cavity top (typical value 99. &lt; X_OVER &lt; 100.)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">X_UNDER</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal ratio of water flowing out from
+      the cavity bottom (typical value X_UNDER = 0.0)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ZERO_Y</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">elevation gap between the liquid level
+      corresponding to the zero of measuring instrument and the water outlet
+      pipe</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VOL_Y</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cavity volume between the zero of level
+      measuring instrument and the water outlet pipe</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GAMMA_Y</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">working range of the level measuring
+      instrument</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SEZ_Y</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">horizontal cross section area of the
+      cavity</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">To determine the liquid level, the TANK module refers to a
+cavity whose liquid volume below the measuring instrument nozzles is known and
+the level variation is proportional to the liquid volume variation. So it is a
+cavity where within the working range the horizontal cross section area is
+constant. If a collection basin having a more complex geometry is considered,
+user can provide the related data through the user's subprogram</p>
+<p align="left">SUBROUTINE TANKLIV(TYP, VLIV, Y, YTOT, AREA)</p>
+<p align="left">(see below). Knowing the engaged volume this subprogram
+calculates:</p>
+<p ALIGN="left">- the liquid level as a function of the cavity geometrical
+characteristics</p>
+<p ALIGN="left">- the proportional level of liquid as a function of the
+measuring instruments nozzles characteristic</p>
+<p ALIGN="left">- the area of separating surface between the liquid and steam
+phases.</p>
+<p align="left">In this case, user has to assign to the SEZ_Y a negative or zero
+value.</p>
+<p align="left">If this signal is found, the user subprogram is called and
+values of ZERO_Y, VOL_Y, GAMMA_Y, and SEZ_Y are ignored.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TANK</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the TANK module variables no particular
+prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TANK</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">If the tank has a more complex geometry than the reference one,
+to provide the related data to the module, user has to assign a negative or zero
+value to SEZ_Y and write a user's subprogram whose declarative statement is:</p>
+<p align="left">SUBROUTINE TANKLIV(TYP, VLIV, Y, YTOT, AREA).</p>
+<p align="left">Knowing the engaged liquid volume such subprogram calculates:</p>
+<p ALIGN="left">- the level of liquid as a function of the cavity geometrical
+characteristics</p>
+<p ALIGN="left">- the proportional level of liquid as a function of the
+measuring instruments characteristics</p>
+<p ALIGN="left">- the area of separating surface between the liquid and steam
+phases</p>
+<p align="left">Input parameters: TYP, VLIV</p>
+<p align="left">Output parameters: Y, YTOT, AREA</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TYP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">corresponds to the TYPE_CAV datum
+      required in input (see above). It can be used as pointer to select the
+      required cavity geometry in case user has to introduce different models of
+      cavities into only one user subprogram</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VLIV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">engaged liquid volume</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Y</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">liquid level, as percentage of the
+      measuring instruments working range</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m] </font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">YTOT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">level of liquid inside the cavity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AREA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">area of separating surface between liquid
+      and steam phases.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p>Since cylindrical geometry having horizontal axis is one of the most usual
+geometries for drums, in the module the following subprogram is available:</p>
+<p>SUBROUTINE TANKLIO(VLIV, RCAV, HLCAV, Y, YTOT, AREA),</p>
+<p>which calculates (once the liquid volume contained inside an horizontal
+cylinder has been assigned) the level and area of contact surface between the
+liquid and steam phases.</p>
+<p>The meanings of calling parameters are:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VLIV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">level of liquid inside the cylinder</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RCAV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cylinder radius</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HLCAV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cylinder length</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Y</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">liquid level, as percentage of the
+      measuring instruments working range</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">YTOT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">level of liquid inside the cylinder</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AREA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">area of separating surface between the
+      liquid and steam phases.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">Thereinafter it is indicated a TANKLIV subroutine example using the
+TANKLIO,
+related to a cavity consisting of a cylindrical drum having radius RCAV = 1 m
+and length HLCAV = 10 m, positioned on a parallelepiped having volume VOL_Y = 5
+m³. The gap ZERO_Y between the zero of level measuring instrument and the pipe
+nozzle of flowing out liquid is 2 m. The level Y is indicated as percentage as
+regards to a range GAMMA_Y = 1.6 m centred round the horizontal axis of
+cylinder.</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p align="left">SUBROUTINE TANKLIV(TYP,VLIV,Y,YTOT,AREA)</p>
+<p align="left">IF(TYP.NE.1.) RETURN</p>
+<p align="left">GAMMA_Y=1.6</p>
+<p align="left">RCAV=1.</p>
+<p align="left">HLCAV=10.</p>
+<p align="left">VOL_Y=5.</p>
+<p align="left">ZERO_Y=2.</p>
+<p align="left">VCIL=VLIV-VOL_Y</p>
+<p align="left">CALL TANKLIO(VCIL,RCAV,HLCAV,Y,YTOT,AREA)</p>
+<p align="left">Y=(YTOT-(RCAV-GAMMA_Y/2.))/GAMMA_Y</p>
+<p align="left">YTOT=YTOT+ZERO_Y</p>
+<p align="left">RETURN</p>
+<p align="left">END</p>
+<p align="left">C</p>
+<p align="left">SUBROUTINE TANKLIO(VCAV,RCAV,HLCAV,Y,YTOT,SEZ)</p>
+<p align="left">C</p>
+<p align="left">C CALCULATES THE LEVEL IN A HORIZONTAL CYLINDER</p>
+<p align="left">C</p>
+<p align="left">C Y level divided 100</p>
+<p align="left">C YTOT level in meters</p>
+<p align="left">C SEZ area of liquid surface</p>
+<p align="left">C KNOWN:</p>
+<p align="left">C VCAV engaged volume</p>
+<p align="left">C RCAV cylinder radius</p>
+<p align="left">C HLCAV cylinder length</p>
+<p align="left">C</p>
+<p align="left">C EXECUTION</p>
+<p align="left">C</p>
+<p align="left">Y0=Y</p>
+<p align="left">VMAX=RCAV*RCAV*3.141592*HLCAV</p>
+<p align="left">IF(VCAV.LT.VMAX)GO TO 99</p>
+<p align="left">YTOT=2*RCAV</p>
+<p align="left">Y=YTOT/100.</p>
+<p align="left">SEZ=0.</p>
+<p align="left">RETURN</p>
+<p align="left">99 IF(VCAV.GT.1.E-3)GO TO 98</p>
+<p align="left">YTOT=0.</p>
+<p align="left">Y=0.</p>
+<p align="left">SEZ=0.</p>
+<p align="left">RETURN</p>
+<p align="left">C</p>
+<p align="left">C ITERATIVE CALCULATION ACCORDING TO NEWTON-RAPHSON'S</p>
+<p align="left">C</p>
+<p align="left">98 IT=0</p>
+<p align="left">Y=RCAV</p>
+<p align="left">1 IT=IT+1</p>
+<p align="left">C</p>
+<p align="left">C ALFA: ANGLE TO THE CENTRE OF CIRCULAR SEGMENT</p>
+<p align="left">C</p>
+<p align="left">ALFA=ACOS((RCAV-Y)/RCAV)</p>
+<p align="left">AST=RCAV**2.*ALFA-RCAV*(RCAV-Y)*SIN(ALFA)</p>
+<p align="left">C</p>
+<p align="left">C RESIDUAL</p>
+<p align="left">C</p>
+<p align="left">RES=VCAV-HLCAV*AST</p>
+<p align="left">C</p>
+<p align="left">IF(ABS(RES).LT.1.E-4)GO TO 10</p>
+<p align="left">IF(IT.GT.100)GO TO 20</p>
+<p align="left">C</p>
+<p align="left">C JACOBIAN</p>
+<p align="left">C</p>
+<p align="left">DALFA=1./(RCAV*SQRT(1.-((RCAV-Y)/RCAV)**2.))</p>
+<p align="left">DASOT=RCAV**2.*DALFA+RCAV*SIN(ALFA)+COS(ALFA)*RCAV*</p>
+<p align="left">$ DALFA*(Y-RCAV)</p>
+<p align="left">DVDY=DASOT*HLCAV</p>
+<p align="left">C</p>
+<p align="left">C ITERATION</p>
+<p align="left">C</p>
+<p align="left">DY=RES/DVDY</p>
+<p align="left">Y=Y+DY</p>
+<p align="left">GO TO 1</p>
+<p align="left">C</p>
+<p align="left">C SOLUTION</p>
+<p align="left">C</p>
+<p align="left">10 CONTINUE</p>
+<p align="left">YTOT=Y</p>
+<p align="left">SEZ=HLCAV*2*SQRT(2*RCAV*Y-Y*Y)</p>
+<p align="left">Y=Y/100.</p>
+<p align="left">RETURN</p>
+<p align="left">20 WRITE(6,1000)RES</p>
+<p align="left">1000 FORMAT(//10X,'SUBROUTINE TANKLIO'/</p>
+<p align="left">$ 10X,'MAX NUM. ITERATION REACHED - RESIDUAL = ',E12.5//)</p>
+<p align="left">GO TO 10</p>
+<p align="left">END</p>
+</font></b><font FACE="Arial">
+<p align="left">A &quot;drying&quot; phase (dehumidification) of steam may follow the mixture
+separation phase. This second phase is typical in steam generators of PWR and
+BWR nuclear reactors. The mathematical model of TANK module does not make
+distinction between the separation and drying phases. In addition, the outlet
+conditions of steam and liquid from the cavity are fixed by assigned input data
+and considered as boundary conditions.</p>
+<p align="left">In order to take into account the thermo-hydraulic conditions influence of
+mixture, at the cavity inlet, on separation-dehumidification process, user must
+intervene on the module programming, suitably modifying the subprogram:</p>
+<p align="left">SUBROUTINE TANKSEP(TYP, RXOV, RXUN, XR, WR, P, XOV, XUN).</p>
+<p align="left">Input parameters: TYP, RXOV, RXUN, XR, WR, P</p>
+<p align="left">Outlet parameters: XOV, XUN</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ TYP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ corresponds to the TYPE_CAV value required in input
+              (see above). It can be used as pointer to associate to a given
+              geometry of a selected cavity the efficiency of corresponding
+              separation-dehumidification process, in case user has to introduce
+              different models of this efficiency into only one user subprogram</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ RXOV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ nominal ratio of steam flowing out from the cavity
+              (it corresponds to X_OVER datum assigned in input)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ RXUN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ nominal ratio of water flowing out from the cavity
+              (it corresponds to X_UNDER datum assigned in input)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ XR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ enthalpy ratio of mixture at the cavity inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ WR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ flow rate of mixture at the cavity inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ P</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ pressure in the cavity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ XOV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ ratio of steam flowing out from the cavity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ XUN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ ratio of water flowing out from the cavity</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TANK</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The equations forming the module mathematical model give rise to the
+following residuals:</p>
+<p ALIGN="CENTER">RNI(1) = WRG-WVCA+WEV-WCSUP-WC</p>
+<p ALIGN="RIGHT">(normalization factor = W0)</p>
+<p ALIGN="CENTER">RNI(2) = WRG*(HRG-HVCA)+WEV*(HVSAT-HVCA)-WCSUP*(HVSAT-HVCA)+</p>
+<p ALIGN="CENTER">-WC*(HWSAT-HVCA)-QSUP</p>
+<p ALIGN="RIGHT">(normalization factor = W0*H0)</p>
+<p ALIGN="CENTER">RNI(3) = WAIC*(HAIC-HLCA)+WRL*(HRL-HLCA)+WCSUP*(HVSAT-HLCA)+</p>
+<p ALIGN="CENTER">+WC*(HWSAT-HLCA)-WEV*(HVSAT-HLCA)+QSUP</p>
+<p ALIGN="RIGHT">(normalization factor = W0*H0)</p>
+<p ALIGN="CENTER">RNI(4) = WAIC+WRL-WAUC+WCSUP+WC-WEV</p>
+<p ALIGN="RIGHT">(normalization factor = W0)</p>
+<p ALIGN="CENTER">RNI(5) = LIV% - Y</p>
+<p ALIGN="RIGHT">(normalization factor = 100.)</p>
+<p ALIGN="CENTER">RNI(6) = PFCA-PCAV-ROY*9.81*YTOT/P0</p>
+<p ALIGN="RIGHT">(normalization factor = P0)</p>
+<p align="left">Where:</p>
+      <p ALIGN="left">- WRG flow rate related to the steam part of the
+      mixture flowing into the cavity</p>
+      <p ALIGN="left">- HRG its enthalpy</p>
+      <p ALIGN="left">- WEV evaporation flow rate from the liquid zone</p>
+      <p ALIGN="left">- WCSUP contribution to condensation flow rate produced
+      by the surface phenomena at water-steam interface</p>
+      <p ALIGN="left">- WC contribution to the condensation flow rate
+      produced by total mass of steam present inside the cavity</p>
+      <p ALIGN="left">- HVSAT enthalpy of saturated steam</p>
+      <p ALIGN="left">- HWSAT enthalpy of saturated water</p>
+      <p ALIGN="left">- QSUP exchanged thermal power between the liquid and
+      steam through the separating surface</p>
+      <p ALIGN="left">- WRL flow rate related to the liquid part of the
+      mixture flowing into the cavity</p>
+      <p ALIGN="left">- ROY water density.</p>
+<p align="left">The physical meanings of remaining variables are already defined above.</p>
+<p ALIGN="left">Further explanations about meanings of the above-mentioned
+quantities are available in the section concerning the TANK module of the
+manual: &quot;LEGOCAD - Modelling Library for Simulation of Power Generation
+Plants - Theory&quot;.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TANK</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<p align="left">SUBROUTINE TANKI3(IFO, IOB, DEBL)</p>
+<p align="left">SUBROUTINE TANKI4(IOB, MOD)</p>
+<p align="left">SUBROUTINE TANKI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</p>
+<p align="left">$ IBLOC1, IBLOC2, IER, CNXYU, TOL)</p>
+<p align="left">SUBROUTINE TANKC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+<p align="left">$ IBLOC1, IBLOC2)</p>
+<p align="left">SUBROUTINE TANK(IFUN, IXYU, XYU, IPD, DATI, RN)</p>
+<p align="left">SUBROUTINE TANKLIV(TYP, VLIV, Y, YTOT, AREA)</p>
+<p align="left">SUBROUTINE TANKLIO(VCAV, RCAV, HLCAV, Y, YTOT, SEZ)</p>
+<p align="left">SUBROUTINE TANKPAR(TYP, P, TG, TL, BETA, ALFA, AKQ, AKW)</p>
+<p align="left">SUBROUTINE TANKSEP(TYP, RXOV, RXUN, XR, WR, P, XOV, XUN)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TANK</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are in user manual section
+dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;ANELLO&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

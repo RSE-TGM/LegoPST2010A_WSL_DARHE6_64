@@ -1,0 +1,1031 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>CCCM</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE CCCM</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCCM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">BOILER FURNACE 1-D MODEL (POLY-FUEL)</p>
+<p>&nbsp;</p>
+<p>The CCCM module simulates the functioning of a boiler combustion furnace fed,
+also simultaneously, by different fuels (coal, natural gas, fuel oil).</p>
+<p>It particularly simulates the thermodynamic behaviour of fluid present on the
+&quot;air/flue gas side&quot; of combustion furnace. In order to realize a
+complete combustion furnace model, user must interconnect the CCCM and EVAP
+modules. EVAP simulates the
+thermo-hydraulic behaviour of water flowing inside the tube bundles forming the
+combustion furnace walls and the influence that the metal of pipes has in the
+thermal exchanges between flue gas and water.</p>
+<p>The physical-mathematical model, encoded in the CCCM, is referred to a boiler
+combustion furnace equipped with or without &quot;NOx-ports&quot;. The
+combustion furnace is subdivided in &quot;NCEL&quot; axial cells (3&lt;NCEL&lt;10)
+(see Fig.1). In every cell the flue gas exchanges heat with &quot;NPi&quot;
+surfaces having different temperatures (max. 9 per cell and altogether max. 48)
+(see note 1).</p>
+<p>Combustion stoichiometric balance in each cell is based on the fuel and air
+quantity actually present inside the cell taking into account the following flow
+rates:</p>
+    <p ALIGN="left">- introduced from outside</p>
+    <p ALIGN="JUSTIFY">- made available from other cell burners training</p>
+    <p ALIGN="JUSTIFY">- unburnt coming from the preceding cell</p>
+<p>For the NBRUC cells with burner(1 &lt; NBRUC &lt; 6) (see note 2) the
+presence of several burners at the same cell is foreseen. They are represented
+in each of NBRUC cell as only one equivalent burner.</p>
+<p>Further hypotheses introduced in developing the physic - mathematical model,
+encoded in this module, are the following:</p>
+    <p ALIGN="JUSTIFY">- the monodimensional approximation with concentrated
+    parameters is valid for the conservation equations of fluid mass and energy
+    inside the combustion furnace</p>
+    <p ALIGN="JUSTIFY">- links between the input and output quantities from
+    control volumes (coinciding with the cell volumes), for which the
+    conservation equations are written are instantaneous (static model). In
+    other words, in the conservation equations the accumulation terms are not
+    considered, so equations themselves are algebraical and not differential.</p>
+    <p ALIGN="JUSTIFY">- To deal with the energetic exchanges the following
+    thermal exchange mechanisms are considered:</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="JUSTIFY">a) the convective thermal exchange between the fluid
+      flowing through the cell and the NPi cell exchange surfaces</p>
+      <p ALIGN="JUSTIFY">b) the radiative thermal exchange between the fluid
+      flowing through the cell and the NPi cell exchange surfaces</p>
+      <p ALIGN="JUSTIFY">c) the radiative thermal exchange between the fluid
+      flowing through the cell and the fluid flowing through the preceding and
+      following cells.</p>
+    </blockquote>
+  </font><font FACE="Arial" SIZE="2">
+  <p ALIGN="JUSTIFY"><img SRC="images/Image19.gif" width="653" height="583"></p>
+  </blockquote>
+</blockquote>
+</font><font FACE="Arial">
+<p ALIGN="CENTER">fig. 1. Combustion furnace scheme</p>
+<p ALIGN="CENTER">&nbsp;</p>
+    <p ALIGN="JUSTIFY">- the flue gas is assumed as a grey body (emissivity
+    independent from radiation wavelength)</p>
+    <p ALIGN="JUSTIFY">- the combustion furnace walls are assumed as a grey body
+    with constant emissivity (independent, particularly, from temperature)</p>
+    <p ALIGN="JUSTIFY">- the combustion process is represented as a thermal
+    power release corresponding to the air-fuel complete reaction of the fuel
+    flow rate flowing into the cell(source terms).</p>
+    <p ALIGN="JUSTIFY">- in the energetical balance related to one cell the
+    source terms is only given by the whole thermal power coming from combustion
+    inside the cell.</p>
+<p>The used equations are:</p>
+<p>1) the conservation equation of fluid mass</p>
+<p>2) the conservation equation of fluid energy</p>
+<p>3) the equation of radiative thermal exchange between two fluids</p>
+<p>4) the equation of radiative thermal exchange between one fluid and one
+surface</p>
+<p>5) the equation of convective thermal exchange between one fluid and one
+surface</p>
+<p>6) the partial pressure calculation equation for oxygen (O2) present in the
+flue gas at the combustion furnace outlet</p>
+<p>7) the partial pressure calculation equation for carbon dioxide (CO2) present
+in the flue gas at the combustion furnace outlet</p>
+<p>8) the partial pressure calculation equation for water (H2O) present in the
+flue gas at the combustion furnace outlet</p>
+<p>9) the fraction calculation equation for water (H2O) present in the flue gas
+at the combustion furnace outlet.</p>
+<p>Further analyses related to physic-mathematical model development are
+available in the section concerning this module of the manual &quot;LEGOCAD&quot;
+- Modelling Library for Simulation of Power Generation Plants-Theory&quot;.</p>
+<b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p>Because of software limits regarding the solution of the whole equation
+system (maximum number of equations for each module) it needs that exchanging
+surfaces do not exceed 48, even if each cell can exchange heat with 9 surfaces
+having different temperatures.</p>
+<b>
+<p ALIGN="RIGHT">Note 2</p>
+</b>
+<p ALIGN="JUSTIFY">If the combustion furnace to simulate is equipped with NOx-ports,
+the cells to which the NOx-ports are associated must be considered as equipped
+with burners. User must assign to these cells zero fuel flow rate.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCCM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+    <p ALIGN="left">NCEL = cells total number</p>
+    <p ALIGN="JUSTIFY">NPi = number of exchanging surfaces in the i-th cell</p>
+    <p ALIGN="JUSTIFY">NBRUC = number of cells equipped with burners</p>
+    <p ALIGN="JUSTIFY">i = 1, 2, ... NCEL</p>
+    <p ALIGN="JUSTIFY">j = 1, 2, ... NPi</p>
+    <p ALIGN="JUSTIFY">k = 1, 2, ... NBRUC</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="center"><img SRC="images/Image20.gif" width="478" height="423"></p>
+</font><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%" height="388">
+  <tr>
+    <td width="12%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[K]&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="10%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ TF_i
+</font><!--mstheme--></font></td>
+    <td width="78%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ flue gas temperature inside the i-th
+            cell
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[W/m²/K]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ GCi
+</font><!--mstheme--></font></td>
+    <td width="78%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ equivalent total thermal exchange
+            coefficient between flue gas and the i-th cell surfaces
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[kg/s]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ WFCC
+</font><!--mstheme--></font></td>
+    <td width="78%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ total flow rate of gas flowing out
+            from the combustion furnace
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[%]&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="10%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ %O2
+</font><!--mstheme--></font></td>
+    <td width="78%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ partial pressure (*) of oxygen present in
+            flue gas at the combustion furnace outlet
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[%]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ %CO2&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="78%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ partial pressure (*) of carbon dioxide
+            present in flue gas at the combustion furnace outlet
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="52"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[%]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="52"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ %H2O
+</font><!--mstheme--></font></td>
+    <td width="78%" height="52"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ partial pressure (*) of water present in
+            flue gas at the combustion furnace outlet
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="10%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="78%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+            <p ALIGN="JUSTIFY">(*) partial pressures are expressed in percent of
+            flue gas pressure: in fact they are molar (and volumetric) fractions
+            (multiplied by 100)</p>
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[%]&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+%FMA
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+mass fraction of water present in flue
+            gas at the combustion furnace outlet in percent
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[K]&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ TMij&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+            <p ALIGN="JUSTIFY"> temperature of the j-th exchanging
+            surface inside the i-th cell</p>
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[kg/s]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ WCOk
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ fuel flow rate to the k-th burner
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ ICOk
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+            <p ALIGN="JUSTIFY"> fuel type to the k-th burner (1. for
+            gas, 2. for fuel oil, 3. for coal)</p>
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[kg/s]&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ WARk
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ flow rate of comburent (air and
+            recirculating flue gas) to the k-th burner
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[deg]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ ABRk
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ training arc of the k-th burner
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[kg/s]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ WRIF
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ flow rate of recirculating flue gas
+            supplied into the combustion furnace from hopper
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[K]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ TRIF
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ temperature of recirculating flue gas
+            supplied into the combustion furnace from hopper
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[kg/s]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ WARC&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ total flow rate of comburent air
+            supplied into the combustion furnace (recirculating gases excluded,
+            see note 3)
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[K]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ TACO
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ temperature of combustion flue gas
+            supplied into the combustion furnace from burners
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ FACC
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ convective thermal exchange corrective
+            factor (see note 4)
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ FACR
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ radiative thermal exchange corrective
+            factor (see note 4)
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ AKFL
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ flame length corrective factor (see note
+            5)
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[kg/s]&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="10%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ WGAT
+</font><!--mstheme--></font></td>
+    <td width="78%" height="26"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">total flow rate of tempering gas
+            supplied into the combustion furnace (see note 6)
+</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <blockquote>
+          <blockquote>
+            <p ALIGN="JUSTIFY">&nbsp;</p>
+          </blockquote>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<b>
+<p ALIGN="RIGHT">Note 3</p>
+          </b>
+<p ALIGN="left">Air total flow rate is understood for all burners,
+          included NOx - port; for all burners, air is homogeneously blended
+          with recirculation flue gas.</p>
+<p ALIGN="RIGHT"><b>Note 4</p>
+</b>
+<p>FACC,FACR are corrective factors inserted in the total thermal exchange
+calculation for changing its entity.</p>
+<p>This may be useful in case user has to determine some stationary conditions
+where quantities like the exchanged power or the flue gas temperature into given
+cells are known.</p>
+<b>
+<p ALIGN="RIGHT">Note 5</p>
+</b>
+<p>The AKFL factor allows the setting of proportionality constant to calculate
+the fictitious flame length from the injected fuel flow rate; this calculation
+gives one of the elements to evaluate training effects.</p>
+<b>
+<p ALIGN="RIGHT">Note 6</p>
+</b>
+<p>The WGAT variable (total flow rate of tempering gas flowing into the
+combustion furnace) represents a module optional input. During topology
+building, it is asked to user if in the combustion furnace model a tempering gas
+contribution is foreseen.</p>
+<p ALIGN="JUSTIFY">If the answer is affirmative the WGAT flow rate appears among
+the module variables and included among the input variables, otherwise the WGAT
+flow rate is not considered.</p>
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCCM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p>In addition to the initial values of input and output variables, user must
+assign the following data:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+            <p ALIGN="JUSTIFY">NCEL (max.10.) cells total number</p>
+      </font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ NBRUC (max. 6.) number of cells equipped with
+            burners</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]&nbsp;</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+            <p ALIGN="JUSTIFY"> EMISPAR combustion furnace walls emissivity</p>
+      </font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+            <p ALIGN="JUSTIFY"> ITMPRING parameter indicating if tempering
+            gas is flowing (or not) into the combustion furnace</p>
+      </font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">for ITMPRING &gt; 0 there is gas tempering into the
+      combustion furnace, at the indicated cell</p>
+      </font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">for ITMPRING &lt; 0 (or = 0) there is not tempering gas
+      flowing into the combustion furnace</p>
+      </font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ UMIDARIA mass fraction of water present in
+            the comburent air (air humidity)</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ IBRUCk with k = 1, 6 relation index between
+            cells and burners (see note 6)</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[kg/s]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+WNCOGAS, WNCONAFT, WNCOCARB nominal flow
+            rates per burner for each of the three fuel</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b>
+<p ALIGN="RIGHT">for gas:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+            <p ALIGN="JUSTIFY">CARBGAS, HYDRGAS, SOLFGAS, NITRGAS, OXYGGAS,
+          UMIDGAS except UMIDGAS, which is the fraction of water mass present in
+          the fuel, other data represent the mass fraction of each component in
+          remaining dry gas</p>
+      </font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[1/ft/K]&nbsp;</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ ELUMGAS luminous contribution to the gas
+          emissivity</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[J/kg]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ ENTGAS gas reference enthalpy</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[J/kg]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ PCIGAS net heat value</font>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="RIGHT">for fuel oil:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+CARBNAFT, HYDRNAFT, SOLFNAFT, NITRNAFT, OXYGNAFT, UMIDNAFT except UMIDNAFT which is the fraction of water mass
+          present in the fuel, other data represent the mass fraction of each
+          component in remaining dry fuel;</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[J/kg]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ ENTNAFT fuel oil reference enthalpy</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[J/kg]&nbsp;</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ PCINAFT net heat value</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ SOOTCi i = 1, 10 volumetric fraction of solid
+          particles (for fuel oil)</font>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <blockquote>
+          <blockquote>
+          </b>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+</blockquote>
+<b>
+<p ALIGN="RIGHT">for coal:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[s]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ COMBTIME total combustion time</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[kg/m³]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ ROCARB coal density</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ DIAMPART particles mean diameter</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ ASHCARB mass fraction of ash on the dry</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[J/kg]&nbsp;</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+          <p ALIGN="JUSTIFY"> ENTCARB reference enthalpy</p>
+      </font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[J/kg]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ PCICARB net heat value</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+CARBCARB, HYDRCARB, SOLFCARB, NITRCARB, OXYGCARB, UMIDCARB except UMIDCARB, which is the fraction of water
+          mass present in the fuel, a part of the dry fuel is composed by ash
+          (solid substances not participating to the combustion); the ash
+          fraction included in dry fuel is indicated by ASHCARB. Data listed
+          before UMIDCARD represent the fractions in mass of elements present in
+          the remaining substance.</font>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+          </b>
+<p>In the module are available default values regarding the kind of fuels, so
+user may omit the input of unknown fuel characteristics and values.</p>
+<p>Characteristic data about the cell geometry are the following:</p>
+    <p ALIGN="left">data concerning each cell:</p>
+<b>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ LUNG (i) cell length</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m²]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ SEZ (i) cross section area of cell outlet</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m²]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+SUP(j) C (i) j-th exchange surface area of
+            the i_cell</font>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]</font>
+    <!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ FCOjCi ratio between the exchange surface and
+            his plain projection if &lt;1, vice versa if &gt;1</font>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+          </b>
+<p>If several consecutive cells have the same data, it is enough to assign those
+concerning the first cell. The preceding cell data are automatically assigned to
+the following cells.</p>
+<p>Even if in filling mask always appear the maximum number of data, user may
+fill the file F14 up to:</p>
+    <p ALIGN="JUSTIFY">i = 1, 2, ... NCEL</p>
+    <p ALIGN="JUSTIFY">j = 1, 2, ... NPi</p>
+    <p ALIGN="JUSTIFY">k = 1, 2, ... NBRUC</p>
+<p>Note 7 gives an example of this aspect.</p>
+<b>
+<p ALIGN="RIGHT">Note 7</p>
+</b>
+<p>The simulation foresees a maximum of 6 cells equipped with burners. In the
+IBRUK_(k) fields user specifies, in a progressive order, the number of cell
+equipped with burners. If this number is lower than the maximum allowed, the
+remaining fields must be empty. E.g. if the cells total number is 6 and the
+cells 2 and 3 are only equipped with burners, user must indicate:</p>
+<p>IBRUC_1 =2., IBRUC_2 =3., IBRUC_(k=3,4,5,6) =0.</p>
+<p ALIGN="JUSTIFY">It is an error to indicate: IBRUC_1 =3., IBRUC_2 =2.</p>
+</font>
+<p ALIGN="left">&nbsp;</p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCCM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p>The fuel index can not decrease advancing with burners number, e.g. if in the
+k-th burner fuel oil is burning (ICOk = 2), in none of the following burners,
+having plane index from k+1 to NBRUC, gas can burn (ICOi = 1).</p>
+<p>Corrective factor for the FACS thermal exchange (see note 3), must usually
+assume unitary value and NOTO must be imposed.</p>
+<p>It can be free if user has to determine stationary conditions where the flue
+gas temperatures in some cells are known.</p>
+<p>For the cells equipped with burners, user must indicate the air total flow
+rate flowing into the cell, and the fuel total flow rate related to the lighted
+burners present in the cell.</p>
+<p ALIGN="JUSTIFY">For the remaining variables no particular prescription is
+required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCCM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p>The CCCM module does not foresee user subprograms. For the air and flue gas
+enthalpy calculation, user must refer to the HTFU library routine, which gives
+the enthalpy on the basis of temperature and water mass fraction, apart from the
+fact that air, flue gas or their blending are used.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCCM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p>Equations forming the module mathematical model give rise to a set of
+residuals whose are only indicated their respective normalization factors.
+Further explanations are given in the manual section: &quot;LEGOCAD - Modelling
+Library for Simulation of Power Generation Plants - Theory&quot;.</p>
+    <p ALIGN="JUSTIFY">&nbsp;</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+i = 1, 2, ... NCEL
+    </font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+    <p ALIGN="JUSTIFY">j= 1,NSUP</p>
+    </font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+RNI(i)&nbsp;
+    </font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ normalization factor = W0*H0
+    </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+RNI(NCEL+j )&nbsp;
+    </font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ normalization factor = 1000.
+    </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+RNI(3*NCEL+1)
+    </font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ normalization factor = W0
+    </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+RNI(3*NCEL+2)
+    </font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ normalization factor = 1000.
+    </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+RNI(3*NCEL+3)
+    </font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ normalization factor = 1000.
+    </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+RNI(3*NCEL+4)
+    </font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ normalization factor = 1000.
+    </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+RNI(3*NCEL+5)
+    </font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ normalization factor = 1000.
+    </font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    </font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCCM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>SUBROUTINE CCCMI3(IFO, IOB, DEBL)</p>
+<p>SUBROUTINE CCCMI4(IOB, MOD)</p>
+<p>SUBROUTINE CCCMI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</p>
+<p>$ IBLOC1, IBLOC2, IER, CNXYU, TOL)</p>
+<p>SUBROUTINE CCCMC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RN,</p>
+<p>$ IBLOC1, IBLOC2)</p>
+<p>SUBROUTINE CCCM(IFUN, IXYU, XYU, IPD, DATI, RN)</p>
+<p>SUBROUTINE EPSPCARB(IFUN, T, CO, FV, D, EPS)</p>
+<p>SUBROUTINE EPSPNAFT(IFUN, T, CO, FV, RHC, EPS)</p>
+<p>SUBROUTINE VOLFRAX(ASH, UMCOMB, NCEL, WR, WCE, WAI, ROCA, RO,</p>
+<p>$ S, ALT, FRAVOL)</p>
+<p>&nbsp;</p>
+  </font></b>
+<p ALIGN="left"><font face="Arial">For EPSCARB and EPSNAFT:</font></p>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font face="Arial">T = gas temperature</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">CO = optical path toward other system by
+  which the exchange is calculated</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">FV = volumetric fraction of solid
+  particles</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">D = mean diameter of solid particles</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">RHC = carbonhydrogen ratio in the fuel</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">EPS = gas emissivity (return value)</font></p>
+</blockquote>
+<p ALIGN="JUSTIFY"><font face="Arial">For VOLFRAX:</font></p>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font face="Arial">up to NCEL: see variables and data
+  explanation</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">WR = hopper flue gas recirculating flow
+  rate</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">WCE = fuel flow rate vector</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">WAI = comburent flow rate vector</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">ROCA = coal density</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">RO = flue gas density equivalent to air
+  having a perfect gas behaviour, with 1 bar pressure and temperature TF (I)</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">S = combustion area</font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial">ALT = cell height vector</font></p>
+</blockquote>
+<font FACE="Arial">
+<p ALIGN="JUSTIFY">FRAVOL volumetric fraction of solid particles (return
+variable)</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCCM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b>
+<font FACE="Arial">
+<p>Reference test cases related to this module are in the user manual section
+dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;...module application examples not variable
+jet....&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

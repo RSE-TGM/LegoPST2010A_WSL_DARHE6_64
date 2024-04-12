@@ -1,0 +1,46 @@
+ZAVO
+
+ZAVO - Ballast load                                                             
+2
+1
+
+t0
+VR00 VX00 IR00 IX00 
+1 1 -1 -1 
+t1
+SISC 
+1 
+
+0
+7
+7
+
+IR00 UA
+CORRENTE REALE DI CARICO                                       
+IX00 UA
+CORRENTE IMMAG. DI CARICO                                      
+QATT UA
+POTENZA ATTIVA DI CARICO                                       
+QREA UA
+POTENZA REATTIVA DI CARICO                                     
+IM00 UA
+MODULO CORRENTE DI CARICO                                      
+VM00 UA
+MODULO TENSIONE AI MORSETTI                                    
+FDIP UA
+FATTORE DI POTENZA                                             
+VR00 IN
+TENSIONE REALE DEL CARICO                                      
+VX00 IN
+TENSIONE IMMAG. DEL CARICO                                     
+P100 IN
+PICCO DI POTENZA ATTIVA                                        
+Q100 IN
+PICCO DI POTENZA REATTIVA                                      
+FP00 IN
+MOLTIPLICATORE DI POTENZA ATTIVA                               
+FQ00 IN
+MOLTIPLICATORE DI POTENZA REATTIVA                             
+SISC IN
+STATO INTERRUTTORE CARICO (1=on)                               
+

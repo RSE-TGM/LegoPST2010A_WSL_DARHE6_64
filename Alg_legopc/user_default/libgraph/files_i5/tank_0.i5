@@ -1,0 +1,48 @@
+TANK
+
+TANK - Boiler drum (water/steam)                                                
+4
+1
+
+t0
+WMIC PCAV ____ ____ ____ HMIC ____ HVCA 
+1 -1 0 0 0 1 0 -1 
+t3
+WAUC PFCA ____ ____ ____ HLCA ____ ____ 
+-1 1 0 0 0 1 0 0 
+t2
+WAIC PCAV ____ ____ ____ HAIC ____ HLCA 
+1 -1 0 0 0 1 0 -1 
+t1
+WVCA PCAV ____ ____ ____ HVCA ____ ____ 
+-1 1 0 0 0 1 0 0 
+
+4
+2
+6
+
+PCAV US
+STEAM PRESSURE IN THE CAVITY                                   
+HVCA US
+STEAM ENTHALPY IN THE CAVITY                                   
+HLCA US
+WATER ENTHALPY IN THE CAVITY                                   
+MLCA US
+WATER MASS IN THE CAVITY                                       
+LIV% UA
+WATER LEVEL IN THE CAVITY                                      
+PFCA UA
+PRESSURE ON THE BOTTOM OF THE CAVITY                           
+WMIC IN
+FLOW RATE OF WATER-STEAM ON THE BOTTOM OF THE CAVITY           
+HMIC IN
+ENTHALPY OF WATER-STEAM AT THE INLET OF THE CAVITY             
+WAIC IN
+WATER FLOW RATE AT THE INLET OF THE CAVITY                     
+HAIC IN
+WATER ENTHALPY AT THE INLET OF THE CAVITY                      
+WVCA IN
+STEAM FLOW RATE AT THE OUTLET OF THE CAVITY                    
+WAUC IN
+WATER FLOW RATE AT THE OUTLET OF THE CAVITY                    
+

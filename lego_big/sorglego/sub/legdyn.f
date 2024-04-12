@@ -1,0 +1,307 @@
+C*********************************************************************
+C       Fortran Source:             legdyn.f
+C       Subsystem:              1
+C       Description:
+C       %created_by:    lomgr %
+C       %date_created:  Tue Aug 21 10:23:46 2001 %
+C
+C**********************************************************************
+C
+C Procedura contenete la variabile per l'identificazione della versione
+C
+      BLOCK DATA BDD_legdyn_f
+      CHARACTER*80  RepoID
+      COMMON /CM_legdyn_f / RepoID
+      DATA RepoID/'@(#)1,fsrc,legdyn.f,2'/
+      END
+C**********************************************************************
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C                                                                      C
+C           LEGO unificato per singola / doppia precisione             C
+C                 e per diverse piattaforme operative                  C
+C                                                                      C
+C   Attivata versione singola precisione per sistema operativo Unix    C
+C                                                                      C
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C
+      SUBROUTINE LEGDYN(RESTAR)
+C
+C     DEL PROGRAMMA  LG5
+C
+      include '../main/lg_parameter.fh'
+C
+C
+C**************DATI GENERALI
+C
+      DIMENSION NOSL(N001),NOSUB(N002),NOBLC(N002,2),NUSTA(N002),
+     $          NUSCI(N002),NINGR(N002),ISLB(N002),IP(M003),IPVRS(N005),
+     $          IPS(M004),IPVRT(N005),IPI(M005),IPVRI(M001),
+     $          XY(N003),UU(N004),XYU(N005),DATI(N007),IPDATI(M003),
+     $          CNXYU(N005),IPLOT(N003),ISTMP(N003),TOLL(N003),
+     $          IVPER(NP00),ITPER(NP00),IPPER(MP01),DATPER(MP02)
+      COMMON/C0LG5A/XY,UU,XYU,DATI,CNXYU,TOLL,DATPER,NOSL,NOSUB,NOBLC,
+     $              NUSTA,NUSCI,NINGR,ISLB,IP,IPVRS,IPS,IPVRT,IPI,
+     $              IPVRI,IPDATI,IPLOT,ISTMP,IVPER,ITPER,IPPER
+C
+C*********MEMORIA PER LA MATRICE JACOBIANA
+C
+      DIMENSION IPCJ(M004),ICJ(M006),ICBJ(M006),FJ(M007),ICN(M007),
+     $          IRN(M007),IKEEP(M008),IW(M009),W(N003),RHS(N003),
+     $          AJAC(N008,N006),RNI(N003),RIGA(N003)
+      COMMON/C0LG5B/FJ,W,RHS,AJAC,RNI,RIGA,
+     $              IPCJ,ICJ,ICBJ,ICN,IRN,IKEEP,IW
+C
+C*********MEMORIA PER RIDEFINIZIONE DELLE REALI DIMENSIONI DEL SISTEMA
+C
+      DIMENSION NQMODU(N002),IPVRSV(N005),
+     $          IPVVSS(N003),IPSSVV(N003),RNV(N003),XYV(N003)
+      COMMON/C0LG5C/RNV,XYV,NQMODU,IPVRSV,IPVVSS,IPSSVV
+C
+C*********VARIABILI DI TIPO CARATTERE
+C
+      CHARACTER*8 VAR(N005),SIVAR(N003),VARI(N004),VARSYS(N003)
+      COMMON/C0LG5D/VAR,SIVAR,VARI,VARSYS
+C
+C*********MEMORIA PER LA SOLUZIONE DEL SISTEMA
+C
+      DIMENSION TN(N003),PX(N003),ICONV(N003)
+      DIMENSION RN(N003),RNO(N003),XYO(N003),CNXY(N003),CNUU(N004),
+     $          UUP(N004),XYOUT(M010),IVECT(M006),JVECT(M006)
+C
+      EQUIVALENCE (IVECT(1),IRN(1)),(JVECT(1),IRN(M006+1)),
+     $            (RIGA(1),ICONV(1))
+C
+      CHARACTER*100 GIASEL(N005+N002)
+      CHARACTER*8 NMMODU,SIGLA,SYOUT(M010)
+      COMMON/VARDE1/NSEL
+      COMMON/VARDE2/GIASEL,NMMODU
+C
+      DIMENSION ITITOL(20)
+      COMMON/NORM/P0,H0,T0,Q0,R0,AL0,V0,DP0
+      COMMON/DIMAJA/NRXJC,NCXJC
+      COMMON/PARINT/ITITOL,TFIN,TSTEP,FATOLL,INTERR,TINTER
+      COMMON/INTEGR/TSTOP,TEMPO,DTINT,NPAS,CDT,ALFADT
+      COMMON/INPAR1/NBL,NEQAL,NEQSIS,NU,NST,NVART,NPVRT,NVRI,NDATI
+      COMMON/INPARV/NQALV,NQSISV
+      COMMON/PARPAR/NPER,NVPLT,NVSTP,NSTPLT,NSTSTP,KPLT,KSTP,ITERT
+C%%% TOLLERANZA ASSEGNATA RUN_TIME DAI MODULI
+      COMMON/TOLEG00/TOLIN(N008)
+C>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 15 FEB 87 <<<<<<<<<<<<<<<<<<<<<<<<<
+      COMMON/FIXPAS/PASFIX
+      LOGICAL PASFIX
+C>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 15 FEB 87 <<<<<<<<<<<<<<<<<<<<<<<<<
+      LOGICAL RESTAR
+C********************** TAVOLE ******************************
+C       ILEGO = INDICATORE DEL PROGRAMMA CHIAMANTE LE TAVOLE
+C             =1 LEGO E` IL PROGRAMMA CHIAMANTE
+C             =0 NON E` IL LEGO IL PROGRAMMA CHIAMANTE
+C
+C       ICNTMX = CONTATORE STABILITO DAL PROGRAMMA CHIAMANTE LE TAVOLE
+C                  SUPERATO IL QUALE VIENE DECRETATO LO STOP .
+C
+      COMMON/LGTV01/LGTEMP,ILEGO,ICOUNT,ICNTMX
+      COMMON/LGTV02/LGMODU,LGBLOC
+      CHARACTER*8 LGMODU,LGBLOC
+      REAL LGTEMP
+      ILEGO = 1
+C********************** TAVOLE ******************************
+      NX2=N002
+      NX3=N003
+      NX4=N004
+      NX8=N008
+      MX7=M007
+      MX10=M010
+C
+      ALFADT=0.63
+C
+C
+C     BLOCCO DEL PASSO DI INTEGRAZIONE SE RICHIESTO DALL'UTENTE
+C
+C>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 15 FEB 87 <<<<<<<<<<<<<<<<<<<<<<<<<
+      PASFIX=.FALSE.
+      IF(FATOLL.LT.0)PASFIX=.TRUE.
+C>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 15 FEB 87 <<<<<<<<<<<<<<<<<<<<<<<<<
+C
+      CALL BLLEG1(IPVRS,NVART,CNXYU,CNXY,CNUU)
+C
+C
+C       INIZIALIZZAZIONE FILE DI OUTPUT
+C
+      IVAI=1
+      CALL RECOUT(IVAI,NVPLT,IPLOT,NSTPLT,TSTEP,TFIN,IGRAD,TEMPO,
+     $                  SIVAR,NX3,VARI,NX4,NEQSIS,NU,XY,UU,CNXY,CNUU,
+     $  XYOUT,SYOUT,MX10,ITITOL,KPLT,NPER,NSEL,GIASEL,NMMODU)
+      CALL LEGPRI(IVAI,NSTSTP,TSTEP,TFIN,ITITOL,IGRAD,NVSTP,
+     $                  ISTMP,SIVAR,NX3,VARI,NX4,NEQSIS,NU,XY,UU,
+     $                  CNXY,CNUU,XYOUT,SYOUT,MX10,TEMPO,KSTP)
+C
+C      CALCOLO DELLE DERIVATE PX(0)
+C
+      NEQDIF=NEQSIS-NEQAL
+      CDT=1.
+      IF(NEQDIF.GT.0) THEN
+          DO 5 I=1,NEQDIF
+          K=NEQAL+I
+          TN(I)=XY(K)
+    5 CONTINUE
+      ENDIF
+      ICONVE=1
+C
+      CALL LEGRES(NBL,ISLB,NUSTA,NUSCI,IPDATI,DATI,IP,TN,CDT,XYU,
+     $             RN,ICONV,SIVAR,NX3,NEQSIS,IPVRS,TOLL,ICONVE,
+     $             NOBLC,NX2,RNI,
+C_________ NUOVI PARAMETRI
+     $                  IPVVSS,IPSSVV,RNV,XY,IPS,IPVRT,
+C********************** TAVOLE ******************************
+     $                  NOSUB)
+C
+      IF(NEQDIF.GT.0) THEN
+         DO 10 I=1,NEQDIF
+         K=NEQAL+I
+         PX(I)=RN(K)
+   10 CONTINUE
+      ENDIF
+C
+C      INIZIALIZZAZIONE
+C
+      NPAS=0
+      TEMPO=0.
+C********************** TAVOLE ******************************
+      LGTEMP=TEMPO
+C********************** TAVOLE ******************************
+C
+      CDT=0.
+      CDTN=0.
+      WRITE(6,*)' Metodo implicito con alfa = ',ALFADT
+C
+      IVAI=2
+      JACYES=1
+      IGO=1
+      ICDTR=0
+      KSTEP=0
+C
+C     LETTURA DATI ED INIZIALIZZAZIONE REGOLAZIONE
+C
+C      STAMPA E REGISTRAZIONE 0-
+C
+      CALL RECOUT(IVAI,NVPLT,IPLOT,NSTPLT,TSTEP,TFIN,IGRAD,TEMPO,
+     $                  SIVAR,NX3,VARI,NX4,NEQSIS,NU,XY,UU,CNXY,CNUU,
+     $  XYOUT,SYOUT,MX10,ITITOL,KPLT,NPER,NSEL,GIASEL,NMMODU)
+      CALL LEGPRI(IVAI,NSTSTP,TSTEP,TFIN,ITITOL,IGRAD,NVSTP,
+     $                  ISTMP,SIVAR,NX3,VARI,NX4,NEQSIS,NU,XY,UU,
+     $                  CNXY,CNUU,XYOUT,SYOUT,MX10,TEMPO,KSTP)
+C
+C      LOOP DI INTEGRAZIONE
+C
+  999 CONTINUE
+C
+      DO 15 I=1,NU
+      UUP(I)=UU(I)
+   15 CONTINUE
+C
+C      ESECUZIONE PERTURBAZIONI AL TEMPO = TEMPO+DTINT
+C
+      CALL PERTUR(NPER,ITPER,IPPER,IVPER,DATPER,UU,NU,
+     $         VARI,NX4,TEMPO,TSTEP,DTINT,IGRAD)
+C
+      IF(TEMPO.EQ.0.)GO TO 18
+      IF(IGRAD.EQ.0)GO TO 18
+C
+C      LA PERTURBAZIONE E' UN GRADINO
+C
+C      STAMPA E REGISTRAZIONE T-
+C
+      IF(KPLT.EQ.1)GO TO 16
+      CALL RECOUT(IVAI,NVPLT,IPLOT,NSTPLT,TSTEP,TFIN,IGRAD,TEMPO,
+     $                  SIVAR,NX3,VARI,NX4,NEQSIS,NU,XY,UUP,CNXY,CNUU,
+     $  XYOUT,SYOUT,MX10,ITITOL,KPLT,NPER,NSEL,GIASEL,NMMODU)
+   16 IF(KSTP.EQ.1)GO TO 18
+      CALL LEGPRI(IVAI,NSTSTP,TSTEP,TFIN,ITITOL,IGRAD,NVSTP,
+     $                  ISTMP,SIVAR,NX3,VARI,NX4,NEQSIS,NU,XY,UUP,
+     $                  CNXY,CNUU,XYOUT,SYOUT,MX10,TEMPO,KSTP)
+C
+C      ESECUZIONE DI UN PASSO DI INTEGRAZIONE
+C
+   18 CONTINUE
+C
+      ICDTU=1
+      DO 20 I=1,NU
+      AAB=ABS(UUP(I)-UU(I))
+      IF(AAB.GT.1.E-8)ICDTU=0
+   20 CONTINUE
+      ICDT=ICDTR*ICDTU
+C
+C>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 15 FEB 87 <<<<<<<<<<<<<<<<<<<<<<<<<
+      IF(PASFIX)ICDT=0
+C>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 15 FEB 87 <<<<<<<<<<<<<<<<<<<<<<<<<
+      NPAS=NPAS+1
+      TEMPO= TEMPO+ DTINT
+C********************** TAVOLE ******************************
+      LGTEMP=TEMPO
+C********************** TAVOLE ******************************
+      CDT =DTINT*ALFADT + CDT*ICDT
+      CDTN=DTINT*(1.-ALFADT) + CDTN*ICDT
+      IF(ICDT.EQ.0)GO TO 27
+      IF(NSTEP.NE.0)GO TO 28
+      NSTEP=999
+      IF(NEQDIF.GT.0) THEN
+         DO 25  I=1,NEQDIF
+         NSTP=999
+         APX=ABS(PX(I))*DTINT
+         IF(APX.LT.1.E-8)GO TO 25
+         NSTP=TOLL(NEQAL+I)/APX-1
+         IF(NSTEP.GT.NSTP)NSTEP=NSTP
+   25 CONTINUE
+      ENDIF
+C
+      KSTEP=0
+      GO TO 28
+   27 NSTEP=0
+   28 KSTEP=KSTEP+1
+      IF (KSTEP.LE.NSTEP) GO TO 31
+      IF (NEQDIF.GT.0) THEN
+         DO 30 I=1,NEQDIF
+         M=NEQAL+I
+         TN(I)= XY(M) + CDTN*PX(I)
+   30 CONTINUE
+      ENDIF
+C
+C     RISOLUZIONE DEL SISTEMA ALGEBRICO-DIFFERENZIALE
+C
+      CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+      CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+C
+      CALL LEGSIS (IGO,NEQSIS,IPCJ,ICJ,NBL,ISLB,NUSTA,NUSCI,IPDATI,DATI,
+     $             IP,TN,CDT,XYU,RN,ICONV,SIVAR,NX3,IPVRS,TOLL,RNO,XYO,
+     $             JACYES,NITERJ,NJACMX,IPS,IPVRT,XY,UU,NU,IPI,IPVRI,
+     $             ICBJ,FJ,RIGA,PX,NEQAL,TEMPO,AJAC,NX8,NOBLC,NX2,RNI,
+     $             ICDTR,ICDTU,IGRAD,ICN,IRN,IKEEP,IW,W,RHS,IVECT,
+     $             JVECT,MX7,
+C___________ NUOVI PARAMETRI
+     $             IPVVSS,IPSSVV,IPVRSV,RNV,NQSISV,XYV,NQMODU,NQALV,
+C********************** TAVOLE ******************************
+     $             NOSUB)
+C********************** TAVOLE ******************************
+C
+C      CALCOLO MATRICE JACOBIANA RETTANGOLARE DEL MODELLO LINEAR.
+C
+   31 CONTINUE
+C
+C     STAMPE PASSO PASSO
+C
+      CALL RECOUT (IVAI,NVPLT,IPLOT,NSTPLT,TSTEP,TFIN,IGRAD,TEMPO,
+     $            SIVAR,NX3,VARI,NX4,NEQSIS,NU,XY,UU,CNXY,CNUU,XYOUT,
+     $            SYOUT,MX10,ITITOL,KPLT,NPER,NSEL,GIASEL,NMMODU)
+      CALL LEGPRI (IVAI,NSTSTP,TSTEP,TFIN,ITITOL,IGRAD,NVSTP,
+     $            ISTMP,SIVAR,NX3,VARI,NX4,NEQSIS,NU,XY,UU,
+     $            CNXY,CNUU,XYOUT,SYOUT,MX10,TEMPO,KSTP)
+C
+C      TEST  FINE TRANSITORIO
+C
+      IGO=0
+      IF (TEMPO.LT.TFIN) GO TO 999
+      WRITE(6,96)
+   96 FORMAT(///10X,'FINE DEL CALCOLO PASSO-PASSO DEL TRANSITORIO')
+      RETURN
+      END
+C            

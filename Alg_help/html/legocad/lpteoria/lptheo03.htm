@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_wspipe"></A>Water and steam pipes, exchangers and evaporators</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_wspipe"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_wpipexc"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Exchangers and evaporators</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_wpipexc"></A>Water and steam pipes, exchangers and evaporators: exchangers and evaporators</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/exch.htm#lg_libproc_EXCH_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">EXCH</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">These components are modelled as a series of control volumes, called cells.</P>
+<P ALIGN="JUSTIFY">The basic 1-D equations in local form for a constant cross-section straight tube are</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image521.gif" WIDTH=94 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image522.gif" WIDTH=245 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image523.gif" WIDTH=330 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Dropping the terms </FONT>v(<FONT FACE="Symbol">¶</FONT>p/<FONT FACE="Symbol">¶</FONT>x) <FONT FACE="Arial, helvetica">and </FONT>(<FONT FACE="Symbol">x</FONT>/D<FONT SIZE=1>h</FONT>)<FONT FACE="Symbol">r</FONT>v³<FONT FACE="Arial, helvetica"> in the energy conservation equation and integrating the conservation equations on a fixed control volume, the following equations for the i-th cell are obtained:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image524.gif" WIDTH=137 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image525.gif" WIDTH=478 HEIGHT=53></P>
+<P ALIGN="CENTER"><IMG SRC="Image526.gif" WIDTH=465 HEIGHT=45></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following assumptions are made:</P>
+<P ALIGN="JUSTIFY">G</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN,i</FONT><FONT FACE="Arial, helvetica"> = G</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> and of course G</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,i</FONT><FONT FACE="Arial, helvetica"> = G</FONT><FONT FACE="Arial, helvetica" SIZE=1>i+1</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">h</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,i</FONT><FONT FACE="Arial, helvetica"> = h</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> and of course h</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN,i</FONT><FONT FACE="Arial, helvetica"> = h</FONT><FONT FACE="Arial, helvetica" SIZE=1>i-1</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">p</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,i</FONT><FONT FACE="Arial, helvetica"> = p</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> and of course p</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN,i</FONT><FONT FACE="Arial, helvetica"> = p</FONT><FONT FACE="Arial, helvetica" SIZE=1>i-1</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the terms dG</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica">/dt, G²</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN,i</FONT><FONT FACE="Arial, helvetica">/Ar</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN,i</FONT><FONT FACE="Arial, helvetica"> and G²</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,i</FONT><FONT FACE="Arial, helvetica">/Ar</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,i</FONT><FONT FACE="Arial, helvetica"> can be neglected in the momentum equation</P>
+<P ALIGN="JUSTIFY">the term V</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica">(dp</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica">/dt) can be neglected in the energy conservation equation</P>
+<P ALIGN="JUSTIFY">and the conservation equations become:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image527.gif" WIDTH=217 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image528.gif" WIDTH=300 HEIGHT=53></P>
+<P ALIGN="CENTER"><IMG SRC="Image529.gif" WIDTH=265 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">If the two-phase flow </FONT><A HREF="lptheoge.htm#lg_lptheo_drift"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">drift flux</U></FONT></A><FONT FACE="Arial, helvetica"> model is adopted new terms are added to the momentum and energy conservation equations</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image530.gif" WIDTH=620 HEIGHT=53></P>
+<P ALIGN="CENTER"><IMG SRC="Image531.gif" WIDTH=597 HEIGHT=48></P>
+<P ALIGN="JUSTIFY"><A HREF="lptheoge.htm#lg_lptheo_twofrict"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Pressure drop</U></FONT></A><FONT FACE="Arial, helvetica"> and </FONT><A HREF="lptheoge.htm#lg_lptheo_heatws"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">heat transfer coefficients</U></FONT></A><FONT FACE="Arial, helvetica"> are computed by means of empirical correlations.</P>
+<P ALIGN="JUSTIFY">The wall energy conservation equation is, in local form and in cylindrical coordinates,</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image532.gif" WIDTH=450 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following assumptions are made:</P>
+<P ALIGN="JUSTIFY">T</FONT><FONT FACE="Arial, helvetica" SIZE=1>w</FONT><FONT FACE="Arial, helvetica"> doesn’ t depend on f</P>
+<P ALIGN="JUSTIFY">The axial thermal conduction term can be neglected</P>
+<P ALIGN="JUSTIFY">The wall thermal conductivity l</FONT><FONT FACE="Arial, helvetica" SIZE=1>w</FONT><FONT FACE="Arial, helvetica"> is constant</P>
+<P ALIGN="JUSTIFY">Integrating the wall energy equation on a control volume of length l</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> spanning from r</FONT><FONT FACE="Arial, helvetica" SIZE=1>int</FONT><FONT FACE="Arial, helvetica"> to r</FONT><FONT FACE="Arial, helvetica" SIZE=1>ext</FONT><FONT FACE="Arial, helvetica"> with the boundary conditions:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image533.gif" WIDTH=233 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image534.gif" WIDTH=228 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and assuming the whole wall heat capacity is lumped on the mean wall radius it is for each cell:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image535.gif" WIDTH=606 HEIGHT=96></P></BODY>
+</HTML>

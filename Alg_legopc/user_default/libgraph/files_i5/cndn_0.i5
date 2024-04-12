@@ -1,0 +1,75 @@
+CNDN
+
+CNDN - Steam condenser (water cooled)                                           
+7
+1
+
+t5
+WTUR PCND ____ ____ ____ HTUR ____ ____ 
+1 -1 0 0 0 1 0 0 
+t0
+WEXT PCND ____ ____ ____ HEXT ____ HLCN 
+1 -1 0 0 0 1 0 -1 
+t1
+WDRE PCND ____ ____ ____ HDRE ____ HLCN 
+1 -1 0 0 0 1 0 -1 
+t2
+WRIC PCND ____ ____ ____ HRIC ____ HLCN 
+1 -1 0 0 0 1 0 -1 
+t6
+WLCP PFCN ____ ____ ____ HLCN ____ ____ 
+-1 1 0 0 0 1 0 0 
+t3
+WRFT ____ ____ ____ ____ HUFT ____ ____ 
+2 0 0 0 0 1 0 0 
+t4
+WRFT ____ ____ ____ ____ HIFT ____ ____ 
+2 0 0 0 0 1 0 0 
+
+2
+5
+14
+
+PCND US
+STEAM PRESSURE IN THE CONDENSER                                
+LCND US
+LEVEL OF LIQUID IN THE CONDENSER                               
+TMFT UA
+MEAN TEMPERATURE OF METAL AT TUBE BUNDLE OUTLET                
+HUFT UA
+COOLER ENTHALPY AT THE TUBE BUNDLE OUTLET                      
+HLCN UA
+ENTHALPY OF THE CONDENSATE LIQUID                              
+PFCN UA
+PRESSURE IN THE CONDENSER BOTTOM                               
+%LCN UA
+MEASURED LIQUID LEVEL                                          
+WTUR IN
+FLOW RATE OF MAIN TURBINE BLOW-OFF STEAM                       
+HTUR IN
+ENTHALPY OF MAIN TURBINE BLOW-OFF STEAM                        
+WEXT IN
+FLOW RATE OF STEAM FROM SECONDARY CONDENSER INLET              
+HEXT IN
+ENTHALPY OF STEAM AT SECONDARY CONDENSER INLET                 
+WLCP IN
+CONDENSATE EXTRACTION FLOW RATE                                
+WDRE IN
+DRAINS FLOW RATE AT THE CONDENSER INLET                        
+HDRE IN
+DRAINS ENTHALPY AT THE CONDENSER INLET                         
+WLCX IN
+LEVEL CONTROL EXTRACTED (SUPPL.) LIQUID FLOW RATE              
+WVCN IN
+FLOW RATE OF STEAM EXTRACTED FOR CONDENSER VACUUM              
+WRIC IN
+FLOW RATE OF LIQUID RECIRCULATED BY EXTR. PUMPS                
+HRIC IN
+ENTHALPY OF LIQUID RECIRCULATED BY EXTR. PUMPS                 
+WRFT IN
+COOLING WATER FLOW RATE INTO THE TUBE BUNDLE                   
+HIFT IN
+COOLING WATER ENTHALPY AT THE TUBE BUNDLE INLET                
+CORR IN
+THERMAL EXCHANGE CORRECTION COEFFICIENT                        
+

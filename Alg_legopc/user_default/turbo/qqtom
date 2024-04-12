@@ -1,0 +1,48 @@
+# this file created with LEGOPHI rel. 0.2
+1200 600
+valv_0
+n
+0___
+100.0 100.0
+LibH20
+colt_0
+n
+13__
+200.0 100.0
+LibH20
+tren_0
+n
+2___
+300.0 100.0
+Turb
+****
+valv_0
+0___
+port0
+free
+port1
+busy port1 13__
+port2
+busy port0 2___
+++++
+colt_0
+13__
+port0
+free
+port1
+busy port1 0___
+++++
+tren_0
+2___
+port0
+busy port2 0___
+port2
+free
+port1
+free
+port3
+free
+port4
+free
+++++
+****

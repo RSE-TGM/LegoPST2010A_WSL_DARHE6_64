@@ -1,0 +1,318 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Puertollano Dynamic Simulator Project</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="scada_main"></A>SCADA-OSF1</P>
+</B><I><P ALIGN="CENTER"><A NAME="_Ref352393214"><A NAME="_Toc353762512">Scada "Help on line"</P>
+</I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><A HREF="#scada_interface"><U><FONT COLOR="#0000ff">SCADA interface</U></FONT></A><B><FONT FACE="Courier New" SIZE=4>&#9;</P>
+</B></FONT><P ALIGN="JUSTIFY"><A HREF="#scada_env"><U><FONT COLOR="#0000ff">Environment</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#scada_execute"><U><FONT COLOR="#0000ff">How to execute SCADA</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#scada_files"><U><FONT COLOR="#0000ff">Configuration files</U></FONT></A><B><FONT FACE="Courier New">&#9;</P>
+</B><P ALIGN="JUSTIFY"><A NAME="_Toc400499471"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Courier New" SIZE=5><P ALIGN="JUSTIFY">SCADA interface<A NAME="scada_interface"></A></A></A></A></B></FONT><FONT FACE="Courier New">&nbsp;</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">SCADA is designed to work in two different ways:</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#scada_char_interf"><U><FONT COLOR="#0000ff">character interface</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#scada_graph_interf"><U><FONT COLOR="#0000ff">graphic interface</U></FONT></A></P>
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">To have SCADA running with the graphic interface it’s necessary to compile it having configured X_USR_INTERFACE environment variable to 1, while to have SCADA running with the character interface X_USR_INTERFACE must be set to 0.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Courier New" SIZE=5><P ALIGN="JUSTIFY"><A NAME="scada_char_interf"><A NAME="_Toc353762513"><A NAME="_Toc400499472"></A>Character interface</A></A></P><DIR>
+<DIR>
+
+</B></FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">Character interface allows machine maximum resource saving and it is very rudimentary.</P>
+<P ALIGN="JUSTIFY">On the display it appears:</P>
+<P ALIGN="JUSTIFY">- SCADA -</P>
+<P ALIGN="JUSTIFY">Q) Quit</P>
+<P ALIGN="JUSTIFY">By pressing ‘Q’ the program ends.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY"><A NAME="scada_graph_interf"><A NAME="_Toc353762514"><A NAME="_Toc400499473"></A></P><DIR>
+<DIR>
+
+</FONT><B><FONT FACE="Courier New" SIZE=5><P ALIGN="JUSTIFY">Graphic interface</A></A></P><DIR>
+<DIR>
+
+</B></FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">Graphic interface is made up by a set of windows, which allow the user to interact</FONT> with the system.</P>
+<P ALIGN="JUSTIFY">After the system has started the main window, see &nbsp; Figure <FONT FACE="Courier New">1</FONT>, is shown.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="Image1287.gif" WIDTH=303 HEIGHT=320></P>
+<FONT FACE="Courier New"><P ALIGN="CENTER"><A NAME="_Ref353696892"></P>
+<P ALIGN="CENTER">Figure 1</A> Main window</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The Main window is made up by three push buttons that allow opening three more windows.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#scada_mandb"><U><FONT COLOR="#0000ff">Mandb window</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#scada_debug"><U><FONT COLOR="#0000ff">Debug window</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#scada_log"><U><FONT COLOR="#0000ff">Log window</U></FONT></A></P>
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">By selecting "Exit" in the "File" menu SCADA ends</P>
+</FONT><P ALIGN="JUSTIFY"><A NAME="_Toc353762515"></P>
+<B><FONT FACE="Courier New" SIZE=5><P ALIGN="JUSTIFY"><A NAME="scada_mandb"><A NAME="_Toc400499474"></A>Mandb window</A></A></P><DIR>
+<DIR>
+
+</B></FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">Click "Mandb" push button to open the window, shown in &nbsp; </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Figure 3: this window is divided into five areas that allow managing up to five measures.</P>
+<P ALIGN="JUSTIFY">To view and to modify measures value and flags perform the following steps:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Type the measure tag into the editing window (Figure 2) and then press the button with</P>
+<P ALIGN="JUSTIFY">the three dots. If the measure does not exist an error message appears otherwise its</P>
+<P ALIGN="JUSTIFY">value and flags are presented:</P>
+<P ALIGN="JUSTIFY">Click "Set mode";</P>
+<P ALIGN="JUSTIFY">Type in the new value;</P>
+<P ALIGN="JUSTIFY">Modify flags;</P>
+<P ALIGN="JUSTIFY">Press "Apply" to accept modification or press "Vis.mode" to cancel and to go back to normal monitoring.</P>
+<P ALIGN="JUSTIFY">Press "Quit" to close the Mandb window.</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="Image1288.gif" WIDTH=494 HEIGHT=216></P>
+<FONT FACE="Courier New"><P ALIGN="CENTER"><A NAME="_Ref353764148"><A NAME="_Ref353764187"></P>
+<P ALIGN="CENTER">Figure 2</A> Mandb areas</A></P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+
+<B><FONT FACE="Courier New" SIZE=5><P ALIGN="JUSTIFY"><A NAME="scada_debug"><A NAME="_Toc353762516"><A NAME="_Toc400499475"></A>Debug windo</A></A>w</P><DIR>
+
+</B></FONT><P ALIGN="JUSTIFY">Click the "Debug" push button to open the window shown in &nbsp; Figure<FONT FACE="Courier New"> 5</FONT>. It shows the status and the priority index of each SCADA thread.</P>
+<P ALIGN="JUSTIFY">Press "Quit" to close the Debug window.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+
+<B><FONT FACE="Courier New" SIZE=5><P ALIGN="JUSTIFY"><A NAME="scada_log"><A NAME="_Toc353762517"><A NAME="_Toc400499478"></A>Log wi</A></A>ndow</P><DIR>
+
+</B></FONT><P ALIGN="JUSTIFY">Click "Log" to open the window shown in &nbsp; Figure <FONT FACE="Courier New">7</FONT>. The Log window displays SCADA possible messages.</P>
+<P ALIGN="JUSTIFY">Press "Quit" to close the Log window.</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="Image1289.gif" WIDTH=459 HEIGHT=635><A NAME="_Ref353697614"></P>
+<FONT FACE="Courier New"><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">Figure 3</A> Mandb window</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1290.gif" WIDTH=400 HEIGHT=481></P>
+<FONT FACE="Courier New"><P ALIGN="CENTER"><A NAME="_Ref353705450"></P>
+<P ALIGN="CENTER">Figure 5</A> Debug window</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1291.gif" WIDTH=423 HEIGHT=504></P>
+<FONT FACE="Courier New"><P ALIGN="CENTER"><A NAME="_Ref353705719"></P>
+<P ALIGN="CENTER">Figure 7</A> Log window</P></DIR>
+</DIR>
+
+</FONT><P ALIGN="JUSTIFY"><A NAME="scada_env"><A NAME="_Toc400499479"><A NAME="_Toc352396742"><A NAME="_Toc353762518"></A></P>
+<B><FONT FACE="Courier New" SIZE=5><P ALIGN="JUSTIFY">Environment</A></A></A></P><DIR>
+<DIR>
+
+</B></FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">In order to activate SCADA you have to define the following environment variables:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">DISPLAY (if the SCADA was generated with the &lt;XUSR_INTERFACE&gt; flag OFFSET_SCADA_PORT: this variable defines the offset added by SCADA to assigned port numbers for its services (connection with MMI stations, connection with the simulator [data and command] and with the configuration station).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Table 1 shows the algorithm with which SCADA builds connection ports values.</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1 BORDERCOLOR="#000000" CELLPADDING=4 WIDTH=378>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><I><FONT FACE="Courier New">Service</I></FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<I><FONT FACE="Courier New"><P ALIGN="JUSTIFY">Port</I></FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">MMIxx</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">OFFSET_SCADA_PORT+1900+xx-1</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">Config</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">OFFSET_SCADA_PORT+2000</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">Simulator (command)</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">OFFSET_SCADA_PORT+2050</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">Simulator(data)</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">OFFSET_SCADA_PORT+3000</FONT></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+<DIR>
+<DIR>
+
+<FONT FACE="Courier New"><P ALIGN="CENTER"><A NAME="_Ref353706852"></P>
+<P ALIGN="CENTER">Table 1<A NAME="_Toc353762519"></A> Net ports</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<B><FONT FACE="Courier New" SIZE=5><P ALIGN="JUSTIFY">How to execute SCADA<A NAME="scada_execute"></A></A></P><DIR>
+<DIR>
+
+</B></FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">In order to start the SCADA process you have to type &lt;scada&gt; at the prompt command line.</P>
+<P ALIGN="JUSTIFY">SCADA has several starting flags: Type &lt;scada /h&gt; to have more information about the starting flags; on the terminal this message will appear:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">SCADA</P>
+<P ALIGN="JUSTIFY">Use: SCADA&#9;[/Ffunction] [/Alarm_option] (/F function - /A allarm options)</P>
+<P ALIGN="JUSTIFY">[/Tcycle] ( /T time of one cycle)</P>
+<P ALIGN="JUSTIFY">[/Vlowest_rate] [/Mmmi_number] (/V the lowest refresh rate of MMI’s page</P>
+<P ALIGN="JUSTIFY">/M how many MMI you can connect to the SCADA system) function:</P>
+<P ALIGN="JUSTIFY">T logs enabled</P>
+<P ALIGN="JUSTIFY">A archive enabled</P>
+<P ALIGN="JUSTIFY">alarm options: R single alarm acknowledge enabled</P>
+<P ALIGN="JUSTIFY">S alarm acknowledge log enabled</P>
+<P ALIGN="JUSTIFY">V alarm browsing enabled</P>
+<P ALIGN="JUSTIFY">C alarm account for database and zone enabled</P>
+<P ALIGN="JUSTIFY">W closing weekly logs</P>
+<P ALIGN="JUSTIFY">F alarm string format: HH/MM/SS.</P>
+<P ALIGN="JUSTIFY">Lowest_rate: the lowest refresh rate of MMI’s page (the default is 1 Hz the max is 2 Hz)</P>
+<P ALIGN="JUSTIFY">Mmi_number: how many MMI you can connect to the SCADA system (a number between 1 and 16, the default is 1)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">A possible starting macro is:</P>
+<P ALIGN="JUSTIFY">scada /FAT /ARV /M2</P>
+<P ALIGN="JUSTIFY">In this way logs and archives are enabled with /FAT, single alarm acknowledge and alarm browsing are enabled with /ARV and it is possible to connect to two mmi.</P>
+<P ALIGN="JUSTIFY">It is recommended, for two reasons, to activate SCADA via the starter process as you can see in the following command line: </P>
+<P ALIGN="JUSTIFY">starter&#9;/usr/users/scada/pscs32/bin scada /FAT /ARV /M2</P>
+<P ALIGN="JUSTIFY">&#9;&#9;&lt;process path&gt; &lt;process name&gt; &lt;process flags&gt;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The starter process is able to rerun SCADA if it has an abnormal termination. Furthermore starter is owned by root (having the "s" flag set and its children (like SCADA) inherit this feature.</P>
+<P ALIGN="JUSTIFY">In this way the SCADA process is allowed to alter its user-id (in order to gain root authority) to manage its threads priority index. </P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+
+<P ALIGN="JUSTIFY"><A NAME="scada_files"><A NAME="_Toc400499493"><A NAME="_Toc353762520"></A></P></DIR>
+
+<B><FONT FACE="Courier New" SIZE=5><P ALIGN="JUSTIFY">Configuration file</A></A>s</P><DIR>
+<DIR>
+
+</B></FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">It is possible to configure SCADA via a set of files that are read by SCADA at start-up time.</P>
+<P ALIGN="JUSTIFY">Table 2 lists configuration file names and it gives a brief description of their utility</P>
+<P ALIGN="JUSTIFY">and meaning.</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+</FONT>
+<P ALIGN="RIGHT"><TABLE BORDER CELLSPACING=1 BORDERCOLOR="#000000" CELLPADDING=4 WIDTH=428>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><A NAME="_Ref353694058"><I><FONT FACE="Courier New">name</I></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<I><FONT FACE="Courier New"><P ALIGN="JUSTIFY">description</I></FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">arcfile.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">used by SCADA during run-time</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">conf.cfg</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">SCADA working directory</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">de_arcXX.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">archive XX descriptor</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fdarc.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">archives descriptor</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fdbdp.hea</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">database size</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fdbdp.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">system database</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fdcom.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">digital outputs descriptor</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fdde.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">measures tags and descriptions</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fdeacq.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">acquisition settings</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fdeao.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">analogic outputs descriptor</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fdesal.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">strings and colour setting descriptor</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fdizst.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">devices status descriptor</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fdiztab.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">logs list</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fgerarch.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">measures hierarchy descriptor</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fnomi.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">measures list</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fstato.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">devices types and status</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fsvinana.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">relationship between SCADA and simulator analog inputs</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fsvindig.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">relationship between SCADA and simulator digital inputs</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">ftab.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">logs scripts</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">fvirtprn.rtf</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">virtual printers descriptor</FONT></TD>
+</TR>
+</TABLE>
+</P>
+
+<FONT FACE="Courier New"><P ALIGN="RIGHT">&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER">Table 2</A> Configuration file list</P></FONT></BODY>
+</HTML>

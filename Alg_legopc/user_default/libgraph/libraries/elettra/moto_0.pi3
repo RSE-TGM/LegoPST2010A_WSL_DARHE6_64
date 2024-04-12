@@ -1,0 +1,35 @@
+MOTO_0                                                                          
+MOTO                                                                            
+MOTO - Asynchronous machine                                                     
+                                                                                
+NSTAT = 3
+NUSCI =14
+NINGR = 6
+ 
+NCONF = 1
+ 
+OMMA      --US-- PULSAZIONE MECCANICA ALBERO [rad/sec]                          
+ED00      --US-- FEM TRANSITORIA ASSE DIRETTO [pu]                              
+EQ00      --US-- FEM TRANSITORIA ASSE IN QUADRATURA [pu]                        
+IR00      --UA-- CORRENTE REALE EROGATA [A]                                     
+IX00      --UA-- CORRENTE IMMAGINARIA EROGATA [A]                               
+KE00      --UA-- COPPIA ELETTROMAGNETICA [N*m]                                  
+QM00      --UA-- POTENZA MOTRICE [W]                                            
+SCOR      --UA-- SCORRIMENTO [%]                                                
+VRM0      --UA-- TENSIONE REALE AI MORSETTI [V]                                 
+VXM0      --UA-- TENSIONE IMMAG AI MORSETTI [V]                                 
+FDP0      --UA-- FATTORE DI POTENZA                                             
+QPE0      --UA-- POTENZA ATTIVA EROGATA  DAL MOTORE [W]                         
+QQE0      --UA-- POTENZA REATTIVA EROGATA DAL MOTORE [W]                        
+IMMA      --UA-- PERCENTUALE DI CARICO [%]                                      
+QPST      --UA-- PERDITE RAME STATORICHE [W]                                    
+QPRO      --UA-- PERDITE RAME ROTORICHE [W]                                     
+QPFE      --UA-- PERDITE NEL FERRO [W]                                          
+VR00      --IN-- TENSIONE REALE DI SBARRA [V]                                   
+VX00      --IN-- TENSIONE IMMAG DI SBARRA [V]                                   
+QRES      --IN-- POTENZA MECCANICA RESISTENTE [W]                               
+STIN      --IN-- STATO INTERRUTTORE (1.-->chiuso)                               
+SMAL      --IN-- MALFUNZIONAMENTO DEL MOTORE (1-->cto-cto)                      
+FREQ      --IN-- FREQUENZA DI ALIMENTAZIONE STATORE [Hz]                        
+==============================                                                  
+EOF                                                                             

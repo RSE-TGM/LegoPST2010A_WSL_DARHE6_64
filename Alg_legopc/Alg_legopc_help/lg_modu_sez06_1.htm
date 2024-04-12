@@ -1,0 +1,92 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>The output which an</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p class="MsoNormal" align="center"><span lang="EN-GB"><b><i><font size="5">The
+output which an &quot;xxxxI3&quot; subroutine must produce</font></i></b></span></p>
+<p class="MsoNormal"><span lang="EN-GB">The &quot;xxxxI3&quot; subroutine of
+every LEGO module must set the complete block name and the block variables set
+and names, writing the module header and the list of the block variables on the
+topological data file.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The module header must be written in the
+following format:</span></p>
+<p class="elenco3" align="center"><span lang="EN-GB">&nbsp;<o:p>
+ <font face="Courier New"><b>CCCCCCCC<span style="mso-spacerun: yes">&nbsp;
+</span>BL.-BBBB- ***** MODULO AAAA - ddd ddd ddd</b></font>
+</span></p>
+<p class="MsoNormal"><span lang="EN-GB">where:</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="MsoNormal"><span lang="EN-GB">&quot;AAAA&quot; is the module name, set once by the module developer
+(exactly&nbsp;&nbsp;&nbsp; 4 characters);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">&quot;BBBB&quot; is the block name, set by the user creating an instance
+of AAAA module (exactly 4 characters);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">&quot;CCCCCCCC&quot;
+is the complete block name, set by the module (usually, CCCCCCCC is equal to
+    AAAABBBB);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">&quot;ddd ddd ddd&quot; is the block description, set by the user (no
+more than 50 characters)</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p class="MsoNormal"><span lang="EN-GB">The variable list, must be written in
+the following format:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3" align="center"><span lang="EN-GB"><font face="Courier New" size="2"><b>V001AAAA<span style="mso-spacerun: yes">&nbsp;
+</span>--XX-- V001descr</b></font></span></p>
+<p class="elenco3" align="center"><span lang="EN-GB"><font face="Courier New" size="2"><b>V002AAAA<span style="mso-spacerun: yes">&nbsp;
+</span>--XX-- V002descr</b></font></span></p>
+<p class="elenco3" align="center"><span lang="EN-GB"><font face="Courier New" size="2"><b>...</b></font></span></p>
+<p class="elenco3" align="center"><span lang="EN-GB"><font face="Courier New" size="2"><b>VVVVAAAA<span style="mso-spacerun: yes">&nbsp;
+</span>--XX-- Vvvvdescr</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">where:</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">&quot;V001AAAA&quot;,
+&quot;V002AAAA&quot;, ..., &quot;VVVVAAAA&quot; are the complete name of the
+module variables (exactly 8 characters);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">&quot;XX&quot; defines the variable type (exactly 2 characters):</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p class="elencobis"><span lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&quot;US&quot; for state outputs;</span></p>
+<p class="elencobis"><span lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&quot;UA&quot; for algebraic outputs;</span></p>
+<p class="elencobis"><span lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&quot;IN&quot; for inputs;</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">&quot;V001descr&quot;,
+&quot;V002descr&quot;, ..., &quot;Vvvvdescr&quot; are the original description
+of the module variables (not more than 50 characters).</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p class="MsoNormal"><span lang="EN-GB">Note that:</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">all state outputs (&quot;US&quot;) must precede all algebraic outputs
+(&quot;UA&quot;), and all algebraic outputs must precede all inputs
+(&quot;IN&quot;): no other type is allowed;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">if there are no state output or no algebraic output in the module, the
+    related list section will be absent (at least one output and one input should be
+present: a module with no input or no output variable is not very useful :-);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">the total number of module outputs (state + algebraic) must not exceed
+40; the total number of module variables (outputs + inputs) must not exceed 100;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">the original descriptions shall be written by the module, but they can be
+furthermore modified by the user (description fields are also automatically
+modified for connected input variables).</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<!--mstheme--></font></body>
+
+</html>

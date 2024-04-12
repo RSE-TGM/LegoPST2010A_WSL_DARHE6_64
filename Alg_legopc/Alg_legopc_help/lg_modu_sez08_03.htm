@@ -1,0 +1,138 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">What does &quot;xxxxC1&quot; have to do when it is called
+for Jacobian matrix computation?</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">When IFUN is 3 &quot;xxxxC1&quot; must
+compute the Jacobian matrix of the block equations (both differential and
+algebraic ones) and assign it to the AJAC array (the same used for Jacobian
+topology when IFUN is 1).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The Jacobian matrix is defined as the
+matrix of the partial derivatives of all block equation's residual computed by
+all block variables (the sign of the derivatives of algebraic residuals must be
+inverted):</span></p>
+<p class="centrato" align="center"><span lang="EN-GB"><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
+ coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+ filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:357pt;
+ height:96pt' o:ole="">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image001.wmz" o:title=""/>
+</v:shape><![endif]-->
+<img border="0" src="images/lg_mod12.gif" width="402" height="111"><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1025"
+  DrawAspect="Content" ObjectID="_1067254847">
+ </o:OLEObject>
+</xml><![endif]-->
+</span></p>
+<p class="elencolargo2"><span lang="EN-GB">where:</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">n =<span style="mso-tab-count: 1">
+    </span>number of state outputs (and differential equations);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">m =<span style="mso-tab-count: 1">
+    </span>number of algebraic outputs (and algebraic equations);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">p =<span style="mso-tab-count: 1">
+    </span>number of input variables;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">{x}</span><span lang="EN-GB" style="font-size:9.0pt;mso-text-raise:-3.0pt">n</span><span lang="EN-GB">
+=<span style="mso-tab-count:1"> </span>state output variables;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">{y}</span><span lang="EN-GB" style="font-size:9.0pt;mso-text-raise:-3.0pt">m</span><span lang="EN-GB">
+=<span style="mso-tab-count:1"> </span>algebraic output variables;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">{u}</span><span lang="EN-GB" style="font-size:9.0pt;mso-text-raise:-3.0pt">p</span><span lang="EN-GB">
+=<span style="mso-tab-count:1">&nbsp;</span>input variables;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">{R}</span><span lang="EN-GB" style="font-size:9.0pt;mso-text-raise:-3.0pt">n+m</span><span lang="EN-GB">
+=<span style="mso-tab-count:1">&nbsp;</span>equation residuals (differential and algebraic);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">{<span style="mso-text-raise:-2.0pt"><!--[if gte vml 1]><v:shape id="_x0000_i1026"
+ type="#_x0000_t75" style='width:10.2pt;height:12pt' o:ole="">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image003.wmz" o:title=""/>
+</v:shape><![endif]-->
+<img src="images/lg_mod13.gif" v:shapes="_x0000_i1026" width="13" height="16"></span><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1026"
+  DrawAspect="Content" ObjectID="_1067254850">
+ </o:OLEObject>
+</xml><![endif]-->
+}</span><span lang="EN-GB" style="font-size:9.0pt;mso-text-raise:
+-3.0pt">n+m+p</span><span lang="EN-GB"> =<span style="mso-tab-count:1">&nbsp;</span>partial differential operator (for all block variables);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">i = 1, ...,
+n<span style="mso-tab-count:1">&nbsp;&nbsp; </span>for differential equations;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">i = n+1,
+..., n+m<span style="mso-tab-count:1">&nbsp;&nbsp; </span>for algebraic equations;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">j = 1, ...,
+n<span style="mso-tab-count:1">&nbsp; </span>for state output variables;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">j = n+1,
+..., n+m<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;</span>for algebraic output variables;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elencolargo2" style="tab-stops:141.8pt"><span lang="EN-GB">j = n+m+1,
+..., n+m+p<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;</span>for
+input variables.</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p class="MsoNormal" style="tab-stops:141.8pt"><span lang="EN-GB">Both the block
+equations and the block variables have to be considered as normalized values.
+Note that the value of the partial derivative is independent of the
+normalization factors only in case of the variable and the residual have the
+same normalization factor.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Most modules don't compute Jacobian
+matrix directly in their &quot;xxxxC1&quot; subroutines, as often their
+expression is not analytical, or is analytical but too complicated. In this
+cases, the Jacobian matrix can be computed in numerical way, as matrix of
+incremental ratios:</span></p>
+<p class="centrato" align="center"><span lang="EN-GB"><span style="mso-text-raise:-15.0pt"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1027" type="#_x0000_t75" style='width:168pt;height:37.8pt' o:ole="">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image005.wmz" o:title=""/>
+</v:shape><![endif]-->
+<img border="0" src="images/lg_mod14.gif" width="195" height="42"></span><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1027"
+  DrawAspect="Content" ObjectID="_1067254853">
+ </o:OLEObject>
+</xml><![endif]-->
+</span></p>
+<p class="MsoNormal"><span lang="EN-GB">In LEGO system there is a library
+routine, called NAJAC, which computes numerically the Jacobian matrix. It may be
+used if the module developers wants to compute numerically the Jacobian matrix
+but he doesn't like to build its own algorithm to do it (as other people did it
+before :-).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">To use the NAJAC routine, the block
+residuals cannot be computed directly in &quot;xxxxC1&quot; subroutine, but they
+have to be computed in an auxiliary semi-standard routine, whose name is usually
+&quot;xxxx&quot; (the same of the module, with no suffix), which has to be
+called by NAJAC.</span></p>
+
+<!--mstheme--></font></body>
+
+</html>

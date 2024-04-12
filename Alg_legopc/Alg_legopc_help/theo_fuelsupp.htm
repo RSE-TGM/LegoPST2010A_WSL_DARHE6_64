@@ -1,0 +1,248 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title></title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font size="4">FOSSIL FUEL SUPPLY SYSTEMS FOR STEAM
+      GENERATORS</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Arial"><a href="#parte1">Fuel oil header</a></p>
+  </font>
+  <p ALIGN="JUSTIFY"><font FACE="Arial"><a href="#parte2">Fuel oil header with
+  damper</a></p>
+  </font>
+  <p ALIGN="JUSTIFY"><font FACE="Arial"><a href="#parte3">Fuel oil valve</a></p>
+  </font>
+  <p ALIGN="JUSTIFY"><font FACE="Arial"><a href="#parte4">Fuel oil volumetric
+  pump</a></p>
+  </font>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte1"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Fuel oil header<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">Modules referred to: <a href="mina.htm" target="_blank">MINA</a></p>
+<p ALIGN="left">The model computes the fuel oil conditions in a tank or header
+into which a few pipes converge.</p>
+<p ALIGN="left">The main hypotheses are:</p>
+<font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">perfect mixing of the fuel oil in
+the tank;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">constant fuel oil compressibility;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">constant specific heat and thermal
+conductivity of the tank wall material;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">flat slab approximation for heat
+conduction in the tank walls;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">constant heat transfer coefficients.</p>
+</font>
+<p ALIGN="left">The continuity equation and the energy conservation equation for
+the fuel oil are:</p>
+<p ALIGN="CENTER"><img SRC="images/Image520.gif" width="176" height="60"></p>
+<p ALIGN="CENTER"><img SRC="images/Image521.gif" width="346" height="60"></p>
+<p ALIGN="left">Developing the equations and dropping the term dp/dt in the
+energy conservation equation it is obtained:</p>
+<p ALIGN="CENTER"><img SRC="images/Image522.gif" width="246" height="78"></p>
+<p ALIGN="CENTER"><img SRC="images/Image523.gif" WIDTH="255" HEIGHT="113"></p>
+<p ALIGN="left">The wall energy conservation equation is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image524.gif" width="221" height="53"></p>
+<p ALIGN="left">where the heat transfer power Q</font><font FACE="Arial" SIZE="1">int</font><font FACE="Arial">
+with the fuel oil and Q</font><font FACE="Arial" SIZE="1">ext</font><font FACE="Arial">
+with the ambient air are:</p>
+<p ALIGN="CENTER"><img SRC="images/Image525.gif" width="213" height="31"> <img SRC="images/Image526.gif" width="248" height="31"></p>
+<p ALIGN="left">T is the internal fuel oil temperature and the termal exchanange
+coefficients are defined as:</p>
+<p ALIGN="CENTER"><img SRC="images/Image527.gif" WIDTH="156" HEIGHT="85"> <img SRC="images/Image528.gif" WIDTH="165" HEIGHT="85"></p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte2"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Fuel oil header with damper<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">Modules referred to: <a href="cona.htm" target="_blank">CONA</a></p>
+<p ALIGN="left">The model computes the fuel oil conditions in a tank into which
+a few pipes converge. The tank is equipped with a volume (damper) filled with
+nitrogen.</p>
+<p ALIGN="left">The main hypotheses are:</p>
+<font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">perfect mixing of the fuel oil in
+the tank;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">the fuel oil is an incompressible
+and thermally expandable fluid;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">constant specific heat and thermal
+conductivity of the tank wall material;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">flat slab approximation for heat
+conduction in the tank walls;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">constant heat transfer coefficients;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">constant gas mass in the damper;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">gas in the damper behaves as a
+perfect gas.</p>
+</font>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">The total volume, comprised of gas and damper, is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image529.gif" width="101" height="31"></p>
+<p ALIGN="left">where V</font><font FACE="Arial" SIZE="1">l</font><font FACE="Arial">
+is the volume of the oil and V</font><font FACE="Arial" SIZE="1">g</font><font FACE="Arial">
+is the volume of the gas.</p>
+<p ALIGN="left">It is of course:</p>
+<p ALIGN="CENTER"><img SRC="images/Image530.gif" width="111" height="56"></p>
+<p ALIGN="left">The continuity equation for the fuel oil is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image531.gif" width="180" height="60"></p>
+<p ALIGN="left">which becomes:</p>
+<p ALIGN="CENTER"><img SRC="images/Image532.gif" width="271" height="60"></p>
+<p ALIGN="left">the energy conservation equation for the fuel oil:</p>
+<p ALIGN="CENTER"><img SRC="images/Image533.gif" width="401" height="60"></p>
+<p ALIGN="left">where Q</font><font FACE="Arial" SIZE="1">l,g</font><font FACE="Arial">
+is the heat transfer power between fuel oil and gas.</p>
+<p ALIGN="left">Developing the equation, substituting in it the continuity
+equation and dropping the term dp/dt in the energy conservation equation it is
+obtained:</p>
+<p ALIGN="CENTER"><img SRC="images/Image534.gif" width="306" height="78"></p>
+<p ALIGN="CENTER"><img SRC="images/Image523.gif" WIDTH="255" HEIGHT="113"></p>
+<p ALIGN="left">The perfect gas law states:</p>
+<p ALIGN="CENTER"><img SRC="images/Image535.gif" width="108" height="63"></p>
+<p ALIGN="left">and the gas energy conservation equation is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image536.gif" width="296" height="56"></p>
+<p ALIGN="left">from which:</p>
+<p ALIGN="CENTER"><img SRC="images/Image537.gif" WIDTH="375" HEIGHT="68"></p>
+<p ALIGN="left">The wall energy conservation equation is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image538.gif" WIDTH="295" HEIGHT="53"></p>
+<p ALIGN="left">where the heat transfer power Q</font><font FACE="Arial" SIZE="1">int,l</font><font FACE="Arial">
+with the fuel oil, Q</font><font FACE="Arial" SIZE="1">int,g</font><font FACE="Arial">
+with the gas and Q</font><font FACE="Arial" SIZE="1">ext</font><font FACE="Arial">
+with the ambient air are:</p>
+<p ALIGN="CENTER"><img SRC="images/Image539.gif" width="233" height="31"></p>
+<p ALIGN="CENTER"><img SRC="images/Image540.gif" width="258" height="31"></p>
+<p>&nbsp;
+<p ALIGN="left">T is the internal fuel oil temperature and the termal exchanange
+coefficients are defined as:</p>
+<p ALIGN="CENTER"><img SRC="images/Image541.gif" WIDTH="170" HEIGHT="86"> <img SRC="images/Image542.gif" width="180" height="88">
+<img SRC="images/Image528.gif" WIDTH="165" HEIGHT="85"></p>
+<p ALIGN="left">The internal heat transfer surfaces </font><font FACE="Symbol">S</font><font FACE="Arial" SIZE="1">int,l</font><font FACE="Arial">
+and </font><font FACE="Symbol">S</font><font FACE="Arial" SIZE="1">int,g</font><font FACE="Arial">
+depend on the fractions of the total volume occupied by oil and gas.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte3"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Fuel oil valve<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">Modules referred to: <a href="vana.htm" target="_blank">VANA</a></p>
+<p ALIGN="left">The model simulates the operation of a valve and of a piping
+where it is installed on, when the process fluid is fuel oil.</p>
+<p ALIGN="left">The main hypotheses are:</p>
+<font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">no mass storage;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">no inertia;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">no heat storage;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">the oil density is the same
+everywhere in the pipe;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">the oil undergoes an isenthalpic
+transformation.</p>
+</font>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">The continuity equation and the energy conservation equation are</p>
+<p ALIGN="CENTER"><img SRC="images/Image543.gif" width="121" height="60"></p>
+<p ALIGN="left">The momentum equation is:</p>
+</font><font FACE="Arial" SIZE="1">
+<p ALIGN="CENTER"><img SRC="images/Image544.gif" width="401" height="66"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">where the distributed head loss coefficient </font><font FACE="Symbol">x</font><font FACE="Arial">
+is computed by means of the Blasius correlation for laminar flow:</p>
+<p ALIGN="CENTER"><img SRC="images/Image545.gif" WIDTH="93" HEIGHT="110"></p>
+<p ALIGN="left">The first term is due to the distributed losses, the second one
+to the valve loss and the third one is the gravitational term.</p>
+<p ALIGN="left">Due to the hypotheses, the valve location in the pipe is not
+relevant.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte4"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Fuel oil volumetric pump<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">Modules referred to: <a href="vpna.htm" target="_blank">VPNA</a></p>
+<p ALIGN="left">The model simulates the operation of a volumetric pump, when the
+process fluid is fuel oil.</p>
+<p ALIGN="left">The main hypotheses are:</p>
+<font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">no mass storage;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">no inertia;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">no heat storage.</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">the fluid is incompressible;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">no fluid leakage inside the pump.</p>
+</font>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">The pump mass flow rate </font><font FACE="Symbol">G</font><font FACE="Arial">
+is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image546.gif" width="156" height="58"></p>
+<p ALIGN="left">and the mechanical power </font><font FACE="Symbol">P</font><font FACE="Arial">
+is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image547.gif" width="141" height="58"></p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<b><font FACE="Arial" SIZE="5" COLOR="#ffffff"></font></b><!--mstheme--></font></body>
+
+</html>

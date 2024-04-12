@@ -1,0 +1,150 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE TUBO</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TUBO_summ"></A>MODULE TUBO CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I><P>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TUBO_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TUBO_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TUBO_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TUBO_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TUBO_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TUBO_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TUBO_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TUBO_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_TUBO_A"></A>MODULE TUBO CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PIPE HEAD LOSS</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The TUBO module determines the head loss of a fluid flowing through a piping, also taking into account the gap level between its inlet and outlet sides.</P>
+<P>The mathematical model consists of the following relation:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image418.gif" WIDTH=553 HEIGHT=38><FONT FACE="Arial">&#9;(1)</P>
+<P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">- RO is the fluid density</P>
+<P ALIGN="JUSTIFY">- G is the gravitational acceleration</P>
+<P ALIGN="JUSTIFY">- Z is the level gap between piping inlet and outlet sides</P>
+<P>The physical meanings of other variables are defined below.</P>
+<P>The fluid density is supposed to be constant and equal to its density at the piping inlet.</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TUBO_B"></A>MODULE TUBO CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P>&nbsp;</P>
+<P>The module can be interconnected with other ones according to the following three methods:</P>
+<P ALIGN="JUSTIFY">1) output in flow rate</P>
+<P ALIGN="JUSTIFY">prescription about block name: none</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image419.gif" WIDTH=379 HEIGHT=114></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">2) outlet in inlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block name: preceded by a '+' sign</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image420.gif" WIDTH=379 HEIGHT=114></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">3) output in outlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block name: preceded by a '-' sign</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image421.gif" WIDTH=379 HEIGHT=114></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WTUB&#9;&#9;water flow rate inside the piping</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PITU&#9;&#9;pressure upstream the piping</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PUTU&#9;&#9;pressure downstream the piping</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HTUB&#9;&#9;water enthalpy at the piping inlet</P>
+<P ALIGN="JUSTIFY">[ ]&#9;AKTB&#9;&#9;corrective factor of piping friction coefficient (see equation (1) above)</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>&nbsp;</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="CENTER"><A NAME="lg_libproc_TUBO_C"></A>MODULE TUBO CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables, user must assign the following data:</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;PORTATA&#9;water flow rate in the piping</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;P1 MONTE&#9;pressure upstream the piping</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;P2 VALLE&#9;pressure downstream piping</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;ENTALPIA&#9;water enthalpy at the piping inlet</P>
+<P ALIGN="JUSTIFY">[ ]&#9;COEFF&#9;head loss coefficient (see equation (1) above)</P>
+<P ALIGN="JUSTIFY">[m] &#9;DISLIV.&#9;geodetic gap between the piping inlet and outlet (positive if the piping outlet elevation is higher than the inlet one)</P>
+<B><P>Note</P>
+</B><P>The COEFF piping head loss coefficient must only be assigned when the data related to a known condition are not available (flow rate, upstream and downstream pressures, enthalpy). If these data are assigned, the COEFF coefficient is obtained replacing them in the equation (1) above, without considering the geodetic term:</P>
+<P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image422.gif" WIDTH=352 HEIGHT=41><FONT FACE="Arial">&#9; (2)</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TUBO_D"></A>MODULE TUBO CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the TUBO module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TUBO_E"></A>MODULE TUBO CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In the TUBO module no user subprogram is foreseen.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TUBO_F"></A>MODULE TUBO CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module has only one residual; it is normalized as regards to the P0 pressure corresponding to the equation (1) above. Its expression is the following:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image423.gif" WIDTH=616 HEIGHT=38></P>
+<FONT FACE="Arial"><P>Its variables have the same physical meanings already indicated above.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TUBO_G"></A>MODULE TUBO CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>SUBROUTINE TUBOI3</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TUBOI4</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TUBOI2</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial" SIZE=2>NOM1, NOM2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TUBOC1</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RN, NOM1,</P>
+<P>$ </B></FONT><FONT FACE="Arial">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial" SIZE=2>NOM2)</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TUBO_H"></A>MODULE TUBO CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the user manual section dedicated to the examples developed under the abbreviations:</P>
+<P ALIGN="CENTER">"ANELLO"</P></FONT></BODY>
+</HTML>

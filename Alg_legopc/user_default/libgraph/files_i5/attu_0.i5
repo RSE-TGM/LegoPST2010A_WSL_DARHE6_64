@@ -1,0 +1,22 @@
+ATTU
+
+ATTU - Time constant transfer function                                          
+2
+1
+
+t0
+AS_1 
+1 
+t1
+AV_1 
+1 
+
+1
+0
+1
+
+AV_1 US
+ACTUATOR: VALUE OF ACTUATED VARIABLE N. 1                      
+AS_1 IN
+ACTUATOR: SET POINT OF ACTUATED VARIABLE N. 1                  
+

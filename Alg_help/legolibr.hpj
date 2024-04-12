@@ -1,0 +1,32 @@
+[OPTIONS]
+ROOT=c:\help\recine
+BMROOT=c:\help\recine
+CONTENTS=lg_libproc_main;lg_libreg_main
+TITLE=LEGOCAD Libraries Help
+COMPRESS=False
+ERRORLOG=legolibr.err
+REPORT=ON
+COPYRIGHT=Copyright © ENEL/DSR/CRA 1995 
+
+WARNING=3
+
+[FILES]
+lg_libr.rtf
+modu_abc.rtf
+modu_dl.rtf
+modu_mr.rtf
+modu_sz.rtf
+rego_ac.rtf
+rego_df.rtf
+rego_gm.rtf
+rego_nr.rtf
+rego_sz.rtf
+
+[CONFIG]
+BrowseButtons()
+CreateButton("button_up", "&Up", "")
+CreateButton("button_glossary","&Glossary","JumpId(`gloshelp.hlp',`lgc_gl_glossary')")
+CreateButton("button_exit","&Exit","Exit()")
+
+[WINDOWS]
+main=,,0,(192,220,192),(127,255,255)

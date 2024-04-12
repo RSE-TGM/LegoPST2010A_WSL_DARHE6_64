@@ -1,0 +1,11 @@
+La versione 64 è gestita con la variabile di ambiente PLATFORM=`uname -i`, che nella versione 64 bit vale x86_64, nel codice ci sono delle #ifdef x86_64 ...
+
+Alg_rt/net_simula/new_monit/refresh.c
+da errore il calcolo del colore di default con la chiamata read_background_color (w);
+per il momento l'ho commentata
+
+bug su 64 bit. visto in PHSAT.  funzione C chiamata da fortran non restituisce il valore corretto con return da C.
+si ripara con -fno-f2c ma questo causa errori ancora più gravi con funzioni fortran chiamate da fortran!
+g77 ha come default -ff2c
+gfortran ha invertito il default che è -fno-f2c: corregge ma non va bene altri problemi in altri file
+fatta nuova phsat.f che chiama una nuova phsat C.

@@ -1,0 +1,148 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>User environment and files</TITLE>
+<META NAME="subject" CONTENT="Documentazione BI Puertollano">
+<META NAME="doccomm" CONTENT="Documentazione relativa alla prima release, consegnata in aprile 96. Vedere sp_bist.doc per specifica completa.">
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc331993691"><A NAME="_Toc331993476"><A NAME="_Toc331818982"><A NAME="_Toc353789920"><A NAME="_Toc353787620"><A NAME="_Toc353787416"><A NAME="_Toc353775544"><A NAME="_Toc353769411"><A NAME="_Toc353756031"><A NAME="_Toc353686262"><A NAME="_Toc353674634"><A NAME="ist_stat_fil_main"></A>User environment and Instructor Station fil</A></A></A></A></A></A></A></A>es</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><P><A HREF="#ist_stat_us_env"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">User Environment</U></FONT></A><FONT FACE="Arial, helvetica">&nbsp;</P>
+</FONT><P><A HREF="#ist_stat_files"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Instructor Station files</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_us_env"></A>User environment</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The instructor logs in the instructor station machine with the account used to install the simulator.</P>
+<P>The environment variables provide paths for executable programs and for location where instructor station software stores special files.</P>
+<P>The .Xdefaults file located in the user login directory provides resource settings for the instructor station graphic interface.</P>
+<P>If the installation process ran without errors and no modifications are requested from the standard installation the user does not need any configuration of these 2 files.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_files"></A>Instructor Station files</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>During the training session the instructor station software uses some files for log and configuration purposes.</P>
+<P>They are:</P>
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=651>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<P><FONT FACE="Arial, helvetica">.message_list</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>contains the log of all the operations the instructor made since the simulator startup; it is the copy of the master menu message list.</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>.preview</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>contains the list of the 10 default variables used by the view function.</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>*.view</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>files created by the instructor to hold sets of variables used by the view function.</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>.bi_options</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>holds the informations related to the user configurable portion of the instructor station interface.</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>*.c_rec</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>files created by the instructor to hold sets of variables used by the continuos recording function as alternative to the default file (recorder.edf).</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>All the above files are stored in the directory specified by the environment variable $BANCO_FILES. They are created and maintained by the instructor station interface.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>Other files used by the instructor station software, that reside in the directory where the simulator is initialized, are:</P>
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=651>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<P><FONT FACE="Arial, helvetica">S01</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>contains the simulator topology</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>S02_OSF1</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>contains the simulator topology database</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>variabili.edf</P>
+<P>variabili.rtf</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>contain the ASCII and binary variables database</P>
+<P>&nbsp;</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>recorder.edf</P>
+<P>recorder.rtf</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>contain the ASCII and binary database for the continuos recording function</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>snapshot.dat</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>holds up to 60 initial conditions. If not existent, it is created at startup time.</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>backtrack.dat</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>holds up to 120 time based automatically recorded snapshots. If not existent, it is created at startup time.</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>perturbazioni.dat</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>records all the commands to the models issued by the instructor and the trainee. If not existent, it is created at startup time.</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>f22circ.hd f22circ.dat</P>
+<P>f22_fgraf.edf</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>set of file that hold the header and the data recorded by the continuos recording function. The last one records the groups of variables as they are aggregated by the user during the view function. If not existent, they are created at startup time.</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Simulator</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY"></A></A></A></P></FONT></BODY>
+</HTML>

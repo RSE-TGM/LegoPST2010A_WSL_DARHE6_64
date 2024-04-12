@@ -1,0 +1,132 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE PLEN</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_PLEN_summ"></A>MODULE PLEN&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_PLEN_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_PLEN_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_PLEN_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_PLEN_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_PLEN_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_PLEN_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_PLEN_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_PLEN_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_PLEN_A"></A>MODULE PLEN&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">GAS DUCT VOLUME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The PLEN module simulates the big cavities in which a gaseous fluid mixing occurs.</P>
+<P>In these components the mass accumulation phenomenon is prevailing.</P>
+<P>The model is based on the following main hypotheses:</P>
+<P ALIGN="JUSTIFY">- the surface of cavities is adiabatic</P>
+<P ALIGN="JUSTIFY">- perfectly mixed gas in the volume so that it is possible to consider its temperature unvarying</P>
+<P ALIGN="JUSTIFY">- for the fluid in the cavity it is valid the perfect gas law.</P>
+<P>The utilized equations are:</P>
+<P ALIGN="JUSTIFY">1) the equation of gas mass conservation</P>
+<P ALIGN="JUSTIFY">2) the equation of gas energy conservation.</P>
+<P>In applying the equation 1, it is presumed gas temperature varies so slowly that density variations are not influenced by it.</P>
+<P>In applying the equation 2, instead, enthalpy variations coming from pressure variations are not considered.</P>
+<P>Such hypotheses are valid if the module application is limited to air chambers or precipitators, where there are not sudden temperature variations and pressure variations are so low that fluid enthalpy is not influenced by.</P>
+<P ALIGN="JUSTIFY">Therefore the module is not suitable to simulate a combustion furnace or a second gas pass zone of a boiler, where the temperature variations are quick and considerable. Instead the model keeps its validity in case of back-flow in the ducts at the cavity inlet.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_PLEN_B"></A>MODULE PLEN&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">NWIN &#9;&#9;=&#9;number of ducts coming in</P>
+<P ALIGN="JUSTIFY">NWOU&#9;=&#9;number of ducts coming out</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image364.gif" WIDTH=414 HEIGHT=106></P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WE(i)&#9;(i = 1, NWIN) air-gas flow rate in the i-th duct coming into the plenum</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WU(j)&#9;(j = 1, NWOU) air-gas flow rate in the j-th duct coming out of the plenum</P>
+<P ALIGN="JUSTIFY">[K]&#9;TE(i)&#9;(i = 1, NWIN) air-gas temperature in the i-th duct coming into the plenum</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PFPL&#9;fluid pressure in the plenum</P>
+<P ALIGN="JUSTIFY">[K]&#9;TFPL&#9;fluid temperature in the plenum</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_PLEN_C"></A>MODULE PLEN&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables, user must assign the following data:</P>
+<P ALIGN="JUSTIFY">[m³]&#9;&#9;VOL.&#9;&#9;plenum internal volume</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;NWIN&#9;&#9;the number of ducts coming into the plenum</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;NWOU&#9;the number of ducts coming out of the plenum</P>
+<P ALIGN="JUSTIFY">[J/kg*K]&#9;RGAS&#9;&#9;the constant utilized in the perfect gas law (see note)</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;&#9;UMID&#9;&#9;gas relative humidity (in weight)</P>
+<B><P>Note</P>
+</B><P>The perfect gas law is expressed by the following state equation:</P>
+<P ALIGN="CENTER">P*V = n*R*T</P>
+<P>where P is the gas pressure, V its volume, T its temperature, R is the gas universal constant and n is the number of considered moles of gas.</P>
+<P>Dividing for the gas mass M we have:</P>
+<P ALIGN="CENTER">P/RO = (n*R/M)*T</P>
+<P ALIGN="JUSTIFY">where RO is the gas density.</P>
+<P>Assuming:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image365.gif" WIDTH=202 HEIGHT=38></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where M/n is the gas molecular mass, we have:</P>
+<P ALIGN="JUSTIFY">P/RO = RGAS*T</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_PLEN_D"></A>MODULE PLEN&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the PLEN module variables, no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_PLEN_E"></A>MODULE PLEN&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In the PLEN module no user subprogram is foreseen.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_PLEN_F"></A>MODULE PLEN&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module mathematical model consists of the equations mentioned in the first paragraph which give rise to the following residuals:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image366.gif" WIDTH=212 HEIGHT=64></P>
+<FONT FACE="Arial, helvetica"><P>The residual is normalized as regards to the pressure PRIF = 1.E+05 Pa.</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image367.gif" WIDTH=316 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">HE(I) is the enthalpy associated to the flow rate entering from the i-th duct</P>
+<P ALIGN="JUSTIFY">HU(J) is the enthalpy associated to the flow rate coming out from the i-th duct</P>
+<P ALIGN="JUSTIFY">Cp is the specific heat, at constant pressure, of fluid present in the cavity</P>
+<P ALIGN="JUSTIFY">The residual is normalized as regards to the temperature T0.</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_PLEN_G"></A>MODULE PLEN&#9;CARD G</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE PLENI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE PLENI4</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE PLENI2</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>NOMBL1, NOMBL2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE PLENC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, ID2, DATI,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>RN, NOMBL1, NOMBL2)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_PLEN_H"></A>MODULE PLEN&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the user manual section dedicated to the examples developed under the abbreviations:</P>
+<P ALIGN="CENTER">"ARIAGAS"</P></FONT></BODY>
+</HTML>

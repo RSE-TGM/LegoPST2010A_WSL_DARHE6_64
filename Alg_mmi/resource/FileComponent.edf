@@ -1,0 +1,37 @@
+****                    |25
+Valvole                 VAIN
+                        VALC
+                        VALV
+****
+Fumi                    FUMN
+                        FUMB
+****
+Pompe                   CPOM
+****
+Camere di combustione   CCDY
+                        CCMB
+                        CCMP
+                        CCPN
+                        CCTG
+****
+Collettori              COLN
+                        COLT
+                        COLV
+****
+Degasatori              DEGB
+                        DEGN
+****
+Pareti Metalliche       META
+                        METP
+****
+Miscelatori             MIX2
+                        MIXN
+****
+Cavita'                 TANK
+                        RISO
+                        COND
+****
+Tubazioni               TUBA
+                        TUBO
+                        TUBS
+****

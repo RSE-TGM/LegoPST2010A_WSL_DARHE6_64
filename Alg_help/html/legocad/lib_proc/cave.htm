@@ -1,0 +1,177 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE CAVE</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CAVE_summ"></A>MODULE CAVE&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><P><A HREF="#lg_libproc_CAVE_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CAVE_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CAVE_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CAVE_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CAVE_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CAVE_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CAVE_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CAVE_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CAVE_A"></A>MODULE CAVE&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">CAVITY WITH STEAM AND WATER IN EQUILIBRIUM</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The CAVE module belongs to the thermodinamic base library.</P>
+<P>It simulates the dynamics of thermo-hydraulic phenomena in a cavity containing water and steam tending to separate each other under the force of gravity effect. Such a module is commonly used to simulate plant components like:</P>
+<P ALIGN="JUSTIFY">- steam drums of boiler with natural or forced circulation;</P>
+<P ALIGN="JUSTIFY">- drainage collecting and expansion tanks and flash tanks;</P>
+<P ALIGN="JUSTIFY">- tanks usually containing water in liquid and steam phases.</P>
+<P>In the above-mentioned components, having a very similar purpose, a water-steam mixture flows in. The mixture is separated by means of gravity or centrifugal forces.</P>
+<P>Steam and water conditions at the cavity outlet are imposed as identical to the nominal ones (total separation efficiency).</P>
+<P>At present the separation model cannot be modified by means of user's subprograms. </P>
+<P>In order to use the CAVE module in building a circulation loop model (natural or forced), to define input and output variables, the following items have been taken into account:</P>
+<P ALIGN="JUSTIFY">- the outlet of liquid towards the circulation loop</P>
+<P ALIGN="JUSTIFY">- the inlet of liquid-steam mixture coming from the circulation loop</P>
+<P ALIGN="JUSTIFY">- the inlet of subcooled feedwater.</P>
+<P>In the mathematical model it is presumed that the entering subcooled liquid is uniformly mixed with all the liquid present in the cavity.</P>
+<P>Further characteristics of the adopted mathematical model are:</P>
+<P ALIGN="JUSTIFY">- the liquid-steam phases are in thermodynamic equilibrium;</P>
+<P ALIGN="JUSTIFY">- the liquid volume is in saturated conditions;</P>
+<P ALIGN="JUSTIFY">- the steam volume is in saturated conditions;</P>
+<P ALIGN="JUSTIFY">- the thermal exchanges between the internal fluid and the cavity walls are not considered;</P>
+<P ALIGN="JUSTIFY">- the cavity has constant horizontal cross section area and total volume characterized by the data required in input. </P>
+<P>The used equations are:</P>
+<P ALIGN="JUSTIFY">1) the conservation equation of mass (water + steam) in the cavity </P>
+<P ALIGN="JUSTIFY">2) the conservation equation of energy (water + steam) in the cavity </P>
+<P ALIGN="JUSTIFY">3) the equation for saturated steam enthalpy calculation</P>
+<P ALIGN="JUSTIFY">4) the equation for saturated water enthalpy calculation</P>
+<P ALIGN="JUSTIFY">5) the equation for pressure calculation on the cavity bottom.</P>
+<P>The first two equations are differential whereas the other ones are algebraical.</P>
+<P ALIGN="JUSTIFY">It is useful to note that CAVE module is able to simulate a situation in which only one of the two phases is present in the cavity. So, it is possible to determine steady-state conditions and transients in which the cavity is only filled by water or steam.</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CAVE_B"></A>MODULE CAVE&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+<DIR>
+
+<P><IMG SRC="Image270.gif" WIDTH=379 HEIGHT=210></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;&nbsp;</P></DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WLIN&#9;&#9;flow rate of subcooled water at the cavity inlet</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HLIN&#9;&#9;enthalpy of subcooled water at the cavity inlet</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WMXI&#9;&#9;flow rate of water-steam mixture at the cavity inlet</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HMXI&#9;&#9;enthalpy of water-steam mixture at the cavity inlet</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WLUS&#9;&#9;flow rate of saturated water flowing out from the cavity</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WVUS&#9;flow rate of saturated steam flowing out from the cavity</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PCAV&#9;&#9;pressure in the cavity</P>
+<P ALIGN="JUSTIFY">[m]&#9;LCAV&#9;&#9;water level in the cavity</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HVSA&#9;&#9;enthalpy of saturated steam flowing out from the cavity</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HLSA&#9;&#9;enthalpy of saturated water flowing out from the cavity</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PFCA&#9;&#9;pressure on the cavity bottom</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CAVE_C"></A>MODULE CAVE&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables, the user must assign the following data:</P>
+<P ALIGN="JUSTIFY">[m³]&#9;VOLTOT&#9;cavity internal total volume (steam volume + water volume)</P>
+<P ALIGN="JUSTIFY">[m²]&#9;SEZLIQ&#9;horizontal cross section area of the cavity</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To determine the liquid level, the CAVE module refers to a cavity whose liquid volume below the measuring instrument nozzles is known and the level variation is proportional to the liquid volume variation. So it is a cavity where, within the working range, the horizontal cross section area is constant. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CAVE_D"></A>MODULE CAVE&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the CAVE module variables no particular prescription is required.</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CAVE_E"></A>MODULE CAVE&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P>&nbsp;</P>
+<P>No user subprograms are present in the CAVE module. </P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CAVE_F"></A>MODULE CAVE&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>The equations forming the module mathematical model give rise to the following residuals for the calculation of the output variables (PCAV, LCAV; HVSA, HLSA, PFCA):</P>
+<P>RNI(1) = dPCAV/dt = (F-D*E/B)/(C-D*A/B) (normalization factor = P0)</P>
+<P>RNI(2) = dLCAV/dt = (F-C*E/A)/(D-C*B/A) (normalization factor = 1)</P>
+<P>RNI(3) = HVSA - HVSAT (normalization factor = H0)</P>
+<P>RNI(4) = HLSA - HLSAT (normalization factor = H0)</P>
+<P>RNI(5) = PFCA - PFCC (normalization factor = P0)</P>
+<P ALIGN="JUSTIFY">where:</P>
+<P>- HVSAT = HVSAT(PCAV) enthalpy of saturated steam in the cavity</P>
+<P>- HLSAT = HLSAT(PCAV) enthalpy of saturated water in the cavity</P>
+<P>- ROVS = ROVS(PCAV) density of saturated steam in the cavity</P>
+<P>- ROLS = ROLS(PCAV) density of saturated water in the cavity</P>
+<P>- PFCC = PCAV + g*ROLS*LCAV pressure on the cavity bottom</P>
+<P>- g = 9.80665 m/s² gravity acceleration</P>
+<P ALIGN="JUSTIFY">and:</P>
+<P>- A = VV*DROVSDP + VL*DROLSDP</P>
+<P>- B = (ROLS-ROVS)*SEZLIQ</P>
+<P>- C = VV*(ROVS*DHVSDP+HVSAT*DROVSDP-1) + VL*(ROLS*DHLSDP+HLSAT*DROLSDP-1)</P>
+<P>- D = (ROLS*HLSAT - ROVS*HVSAT)*SEZLIQ</P>
+<P>- E = WLIN+WMXI-WLUS-WVUS</P>
+<P>- F = WLIN*HLIN + WMXI*HMXI - WLUS*HLSAT - WVUS*HVSAT</P>
+<P ALIGN="JUSTIFY">with:</P>
+<P>- VL = LCAV*SEZLIQ water volume in the cavity</P>
+<P>- VV = VOLTOT - VL steam volume in the cavity</P>
+<P>- DROVSDP = dROVS/dPCAV derivative of the saturated steam density with regard to the cavity pressure</P>
+<P>- DROLSDP = dROLS/dPCAV derivative of the saturated water density with regard to the cavity pressure</P>
+<P>- DHVSDP = dHVSAT/dPCAV derivative of the saturated steam enthalpy with regard to the cavity pressure</P>
+<P>- DHLSDP = dHLSAT/dPCAV derivative of the saturated water enthalpy with regard to the cavity pressure</P>
+<P>The physical meanings of remaining variables have already been defined above.</P>
+<P ALIGN="JUSTIFY">Further explanations about meanings of the above-mentioned quantities are available in the section concerning the CAVE module of the manual: "LEGOCAD - Modelling Library for Simulation of Power Generation Plants - Theory".</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CAVE_G"></A>MODULE CAVE&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE CAVEI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CAVEI4</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CAVEI2</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1, IBL2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CAVEC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1, IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CAVEJC</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1, IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CAVE</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, IXYU, XYU, IPD, DATI, RNI)</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CAVE_H"></A>MODULE CAVE&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are not available at present.</P></FONT></BODY>
+</HTML>

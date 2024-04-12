@@ -1,0 +1,87 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">What does &quot;xxxxI2&quot; have to do when it is called
+by the LG3 activity?</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">When the &quot;xxxxI2&quot; subroutine
+is called by LG3 activity (steady state computation), it must perform the
+following actions:</span></p>
+<p class="elenco"><span lang="EN-GB">1.<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>read the physical and geometrical data area of the block;</span></p>
+<p class="elenco"><span lang="EN-GB">2.<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>allocate in the DATI vector the right area for the block;</span></p>
+<p class="elenco"><span lang="EN-GB">3.<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>assign the normalization factors for the block variables;</span></p>
+<p class="elenco"><span lang="EN-GB">4.<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>set the tolerance thresholds for the block equations during transients
+simulation (for the iterations convergence criterion).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The physical and geometrical data area
+includes also the heading line and the comment lines (if any). The heading line
+must always be read, also if the block has no physical or geometrical data (it
+must move the file pointer to the beginning of the area related to the following
+block).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Data values must be read from the value
+fields of the data area, which is 10 character long for each datum: a FORTRAN
+format '(3(14X,F10.0,1X))' is very often used for reading data, except in case
+of character data, which require specific reading formats (physical and
+geometrical data are almost always floating point quantities, as DATI is a
+floating point vector).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Note that no error occurs if this format
+is used to read less than three data, and it may also be used to read more than
+three data (from more than one line) if every line (except the last) is used for
+three data.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Data values has to be recorded into DATI
+vector, starting with the ID2 position. Into the DATI vector the module must
+also record every data which has to be used in steady state and transients
+computation. For instance, DATI vector may also contain configuration setting
+informations, temporary variables and internal states (input variables or
+quantities computed in the module, whose values has to be recorded during the
+simulation).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">So the &quot;xxxxI2&quot; subroutine has
+to evaluate the total size of the DATI vector section which will be used by the
+following activities, and change the value of the ID2 pointer to the last
+allocated element of DATI vector. As the incoming value of ID2 points to the
+first not-allocated element, its value must be increased by (N-1), where N is
+the total number of elements allocated.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">If the module has no data, the value of
+ID2 could be decreased by one, as the module doesn't require any data (neither
+the first one, pointed by the incoming value of ID2), but this is not usually
+done by either standard modules or automatically produced ones.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">As we sad, the configuration
+informations, which can be read from the data section, from the complete block
+name and/or from the outputs and inputs values, shall be evaluated by
+&quot;xxxxI2&quot; subroutine and recorded into the DATI vector.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The normalization factors of all the
+block variables must be recorded into the CNXYU vector, from the IV1 to the IV2
+element (the number of allocated elements always matches the number of block
+variables). If the position and/or the number of the variables may change due to
+module configurability, also the normalization factors' values has to be
+correctly chosen and ordered to exactly match the variables sequence. As the
+normalization factors have no default values, if the module does not assign them
+(or it assigns zero values) then a &quot;Division by zero&quot; error will
+occur, and the LG3 activity will abort.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">As the LEGO code provides (in the NORM
+common area) the reference normalization factors for many different quantities,
+module developers are strongly suggested, when feasible, to use only standard
+values and their combinations:</span></p>
+<p class="MsoNormal"><span lang="EN-GB">If particular prescription on
+convergence criterion are required, the module may also assign the tolerance
+upper thresholds for the transient computation (assigning the correct values to
+the first N elements of TOL vector, where N is the number of block equations).
+As the tolerance thresholds have a default value (0.0001), usually the TOL
+values are not assigned. Note that TOL vector values are used only during
+transients simulation: the steady state computation threshold is always assigned
+by the user.</span></p>
+
+<!--mstheme--></font></body>
+
+</html>

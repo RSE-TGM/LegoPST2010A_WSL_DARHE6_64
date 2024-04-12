@@ -1,0 +1,26 @@
+#
+# This makefile was expanded from rerunlg2.mk-1 by Telelogic.
+# Expanded macros and dependencies may be found at the
+# end of this file
+#
+
+default: all
+
+all: lg2_done.out
+
+lg2_done.out: proc/f03.dat
+	touch lg2_done.out
+
+proc/f03.dat: proc/f02.dat
+	proc/lg2 > lg2.out
+
+proc/f02.dat: f01.dat
+	$(LEGOCAD_BIN)/lg1 > lg1.out
+	rm -f proc/ltm.f
+# ******* Telelogic expanded section *******
+
+# make_macros from project "Alg_legopc-2007A1_RHE4_lomgr
+#CFLAGS = -g -Wall
+F_FLAGS=-fno-second-underscore -g -fno-automatic -finit-local-zero
+CFLAGS = -Wall -DLinux
+CC = gcc

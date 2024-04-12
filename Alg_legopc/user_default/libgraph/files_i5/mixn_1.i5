@@ -1,0 +1,54 @@
+MIXN
+
+Miscelatore 5 ing                                                               
+6
+1
+
+t5
+WE_5 XXXX ____ ____ ____ HE_5 ____ HMIX 
+1 2 0 0 0 1 0 -1 
+t0
+WE_1 XXXX ____ ____ ____ HE_1 ____ HMIX 
+1 2 0 0 0 1 0 -1 
+t2
+WE_2 XXXX ____ ____ ____ HE_2 ____ HMIX 
+1 2 0 0 0 1 0 -1 
+t3
+WE_3 XXXX ____ ____ ____ HE_3 ____ HMIX 
+1 2 0 0 0 1 0 -1 
+t6
+WE_4 XXXX ____ ____ ____ HE_4 ____ HMIX 
+1 2 0 0 0 1 0 -1 
+t1
+WMIX XXXX ____ ____ ____ HMIX ____ ____ 
+1 2 0 0 0 1 0 0 
+
+0
+2
+10
+
+WMIX UA
+FLUID FLOW RATE AT THE MIXER OUTPUT                            
+HMIX UA
+FLUID ENTHALPY AT THE MIXER OUTPUT                             
+WE_1 IN
+FLUID FLOW RATE AT THE INLET PIPE N.  1                        
+HE_1 IN
+FLUID ENTHALPY AT THE INLET PIPE N.  1                         
+WE_2 IN
+FLUID FLOW RATE AT THE INLET PIPE N.  2                        
+HE_2 IN
+FLUID ENTHALPY AT THE INLET PIPE N.  2                         
+WE_3 IN
+FLUID FLOW RATE AT THE INLET PIPE N.  3                        
+HE_3 IN
+FLUID ENTHALPY AT THE INLET PIPE N.  3                         
+WE_4 IN
+FLUID FLOW RATE AT THE INLET PIPE N.  4                        
+HE_4 IN
+FLUID ENTHALPY AT THE INLET PIPE N.  4                         
+WE_5 IN
+FLUID FLOW RATE AT THE INLET PIPE N.  5                        
+HE_5 IN
+FLUID ENTHALPY AT THE INLET PIPE N.  5                         
+

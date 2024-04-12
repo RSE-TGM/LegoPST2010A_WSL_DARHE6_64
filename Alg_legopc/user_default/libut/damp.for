@@ -1,0 +1,434 @@
+      SUBROUTINE DAMPI3(IFO,IOB,DEBL)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/DAMP00/IBLOC
+      CHARACTER*80 DEBL
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MOD
+      CHARACTER*1 IWP,IMEN
+      DATA MOD/'DAMP'/
+      DATA IMEN/'-'/
+C
+C
+C----- SERRANDA CIRCUITO ARIA-GAS
+C
+C
+      CALL DAMPI4(IOB,MOD)
+C
+C
+      READ(IBLOC,'(A1)')IWP
+      WP=0.
+      IF(IWP.EQ.IMEN)WP=1.
+C
+C
+      WRITE(IFO,2999)IBLOC,IOB,MOD,DEBL
+ 2999 FORMAT(A,2X,'BL.-',A4,'- **** MODULO ',A4,' - ',A)
+C
+      IF(WP.EQ.0.)WRITE(IFO,3002)IOB
+ 3002 FORMAT('WFSR',A4,2X,'--UA-- FLUID FLOW RATE INTO THE REGISTER')
+      IF(WP.EQ.1.)WRITE(IFO,3007)IOB
+ 3007 FORMAT('PFSV',A4,2X,
+     $  '--UA-- FLUID PRESSURE AT THE REGISTER OUTLET')
+C
+      IF(WP.EQ.0.)WRITE(IFO,3012)IOB
+      IF(WP.EQ.1.)WRITE(IFO,3011)IOB
+ 3011 FORMAT('WFSR',A4,2X,'--IN-- FLUID FLOW RATE INTO THE REGISTER')
+ 3012 FORMAT('PFSV',A4,2X,
+     $  '--IN-- FLUID PRESSURE AT THE REGISTER OUTLET')
+C
+      WRITE(IFO,3009)IOB
+ 3009 FORMAT('PFSM',A4,2X,
+     $  '--IN-- FLUID PRESSURE AT THE REGISTER INLET')
+C
+      WRITE(IFO,3008)IOB
+ 3008 FORMAT('TFSI',A4,2X,
+     $  '--IN-- FLUID TEMPERATURE AT THE REGISTER INLET')
+C
+      WRITE(IFO,3010)IOB
+ 3010 FORMAT('TFSU',A4,2X,
+     $  '--IN-- FLUID TEMP. AT THE REGISTER OUTLET (INV. FLOW)')
+C
+      WRITE(IFO,3014)IOB
+ 3014 FORMAT('ALZS',A4,2X,'--IN-- REGISTER OPENING')
+C
+      WRITE(IFO,3015)IOB
+ 3015 FORMAT('AKCO',A4,2X,
+     $  '--IN-- CORRECTIVE COEFF. HEAD LOSS IN THE DUCT')
+C
+      RETURN
+      END
+      SUBROUTINE DAMPI4(IOB,MOD)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/DAMP00/IBLOC
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MOD
+C
+      CHARACTER*4 MODU
+      CHARACTER*1 ICA,IMEN,IPIU
+      CHARACTER*1 IBL
+C
+      DATA IBL/' '/
+      DATA IPIU/'+'/
+      DATA IMEN/'-'/
+C
+    5 WRITE(6,2999)
+ 2999 FORMAT(/5X,'GIVE A CHARACTER TO CHOOOSE THE OUTPUT'
+     $ /5X,' - FLOW RATE AS OUTPUT =========> BLANK',
+     $ /5X,' - OUTLET PRESSURE AS OUTPUT ===>   -')
+      READ(5,3001)ICA
+      IF(ICA.EQ.IMEN)GO TO 10
+      IF(ICA.EQ.IBL)GO TO 10
+      GO TO 5
+ 3001 FORMAT(A)
+   10 CONTINUE
+C
+      WRITE(MODU,1001)ICA,MOD
+ 1001 FORMAT(A1,A3)
+      IF(ICA.EQ.IBL)MODU=MOD
+      WRITE(IBLOC,1000)MODU,IOB
+ 1000 FORMAT(2A4)
+C
+      RETURN
+      END
+C     MODULO SERRANDA
+C
+      SUBROUTINE DAMPI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,
+     $  NOMBL1,NOMBL2,IER,CNXYU,TOL)
+C
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      INTEGER VAR
+      DIMENSION VAR(MX1,*)
+      DIMENSION XYU(*),DATI(*),CNXYU(*),TOL(*)
+      CHARACTER*1 IWP
+      CHARACTER*10 SAREA,SALFA,SRGAS,SDELTPS,SDELTPC,SWNOM,STNOM
+      COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+      DATA SAREA  /'AREA     ='/
+      DATA SALFA  /'ALFA     ='/
+      DATA SRGAS  /'RGAS     ='/
+      DATA SDELTPS /'DP S NOM ='/
+      DATA SDELTPC /'DP C NOM ='/
+      DATA SWNOM  /'WNOM     ='/
+      DATA STNOM  /'T  NOM.  ='/
+C
+C
+      DATA PRIF/1.E+05/
+      DATA PAV/101300./
+C
+C
+C     SCITTURA SIMBOLI E DATI
+C
+      GOTO(1,10),IFUN
+C
+1     WRITE(14,1011)SWNOM,STNOM,SRGAS
+      WRITE(14,1010)
+ 1010 FORMAT('*   DATA ABOUT THE REGISTER')
+      WRITE(14,1011)SDELTPS,SAREA,SALFA
+ 1011 FORMAT(3(4X,A,10X,'*'),5X)
+      WRITE(14,1012)
+ 1012 FORMAT('*   DATA ABOUT THE DUCT')
+      WRITE(14,1011)SDELTPC
+C
+      RETURN
+C
+C     LETTURA DATI
+C
+10    READ(14,104)
+      READ(14,104) WNOM,TNOM,RGAS
+      READ(14,104)
+      READ(14,104) DPNOMS,AREA,ALFA
+      READ(14,104)
+      READ(14,104) DPNOMC
+C
+      IF (ALFA.EQ.0.0) ALFA = 1.
+104   FORMAT(3(14X,F10.2,1X),5X)
+C___ VALORI DI DEFAULT DELLA COSTANTE DEI GAS (ARIA=287,FUMO 274)
+      IF(RGAS.EQ.1.) RGAS=287.
+      IF(RGAS.EQ.2.) RGAS=274.
+C
+C     RICONOSCIMENTO DI IWP
+C
+      WRITE(IWP,2222)NOMBL1
+ 2222 FORMAT(A1,3X)
+      WP=0.
+      IF(IWP.EQ.'-')WP=1.
+      IND=WP
+C
+C____ CALCOLI DEI COEFFICIENTI DELL'EQUAZIONE
+C
+      RO=PAV/(RGAS*TNOM)
+      CSI =2.*DPNOMS*RO*AREA*AREA/WNOM/WNOM
+      COATT=DPNOMC*RO/(WNOM*WNOM+WNOM/100.)
+      COATT=COATT*W0*W0/DP0
+C
+C
+C     MEMORIZZAZIONE DEI DATI ELABORATI
+C
+      DATI(ID1)  =(CSI/2./AREA/AREA)*W0*W0/DP0
+      DATI(ID1+1)=RGAS
+      DATI(ID1+2)=WP
+      DATI(ID1+3)=COATT
+      DATI(ID1+4)=ALFA
+      ID2=ID1+4
+C
+C
+C     COSTANTI DI NORMALIZZAZIONE
+C
+      IND=WP
+C      IND=0 :USCITA IN PORTATA
+C      IND=1 :USCITA IN PVALLE
+C
+      CNXYU(IV1)=W0*(1-IND)+PRIF*IND
+      CNXYU(IV1+1)=PRIF*(1-IND)+W0*IND
+      CNXYU(IV1+2)=PRIF
+      CNXYU(IV1+3)=T0
+      CNXYU(IV1+4)=T0
+      CNXYU(IV1+5)=1.
+      CNXYU(IV1+6)=1.
+C
+      RETURN
+      END
+C
+      SUBROUTINE DAMPC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)
+      COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+      COMMON/DAMP05/IBL01,IBL02
+      EXTERNAL DAMP
+      DATA PRIF/1.E+05/
+C
+C---MODULO SERRANDA
+C
+      IBL01=IBL1
+      IBL02=IBL2
+      GO TO(100,200,300),IFUN
+C
+C---topologia jacobiano
+C
+  100 DO I = 1,7
+      AJAC(1,I)=1.
+      END DO
+C
+      RETURN
+C
+C---calcolo residui
+C
+  200 CALL DAMP(IFUN,IXYU,XYU,IPD,DATI,RNI)
+C
+      RETURN
+C
+C---calcolo jacobiano numerico
+C
+  300 NSTATI = 0
+      NUSCIT = 1
+      NINGRE = 6
+      EPS    = 1.E-3
+      EPSLIM = 1.E-4
+      CALL NAJAC(AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,
+     1    NSTATI,NUSCIT,NINGRE,EPS,EPSLIM,DAMP)
+      RETURN
+      END
+C
+      SUBROUTINE DAMP(IFUN,IXYU,XYU,IPD,DATI,RNI)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      DIMENSION XYU(*),DATI(*),RNI(*)
+      COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+      COMMON/DAMP05/IBL1,IBL2
+      COMMON/REGIME/KREGIM
+      LOGICAL KREGIM
+      DATA PRIF/1.E+05/
+      DATA PAV/101300./
+C
+C---MODULO SERRANDA
+C   CALCOLO RESIDUI
+C
+C---decodifica dati e variabili
+C
+      COATS=DATI(IPD)
+      RGAS =DATI(IPD+1)
+      IND  =DATI(IPD+2)
+      COATT=DATI(IPD+3)
+      ALFA =DATI(IPD+4)
+C
+      W=XYU(IXYU)*(1-IND)+XYU(IXYU+1)*IND
+      P2=XYU(IXYU)*IND+XYU(IXYU+1)*(1-IND)
+      P1=XYU(IXYU+2)
+      TI1=XYU(IXYU+3)
+      TI2=XYU(IXYU+4)
+      TETA=XYU(IXYU+5)
+      AKAT=XYU(IXYU+6)
+C
+C
+      TK=TI1*T0
+      IF(W.LT.0.AND..NOT.KREGIM) THEN
+      TK=TI2*T0
+      END IF
+C
+      RO=PAV/(RGAS*TK)
+      DELTAP= (P1-P2)*PRIF/DP0
+C
+C____ CONTROLLO CHE IL CORRETTIVO DELLE PERDITE DI CARICO SIA > 0.
+C
+	  IF((AKAT.LE.0.).AND.(KREGIM).AND.(IFUN.EQ.2)) THEN
+	     WRITE(6,3300)IBL1,IBL2
+ 3300 FORMAT(///5X,'* WARNING!  - CORRECTIVE LOSS OF LOAD < 0.'
+     $ /10X,'BLOCK  ',2A4)
+	  ENDIF
+C---------------------------------------------------
+	IF(TETA.GT.1.E-2) THEN
+C
+C____ CONTROLLO CHE L'ALZATA DELLA SERRANDA SIA < = 1.
+C
+	  IF(TETA.LE.1.) GO TO 10
+	  IF(.NOT.KREGIM) THEN
+	     TETA=1.
+	     GO TO 10
+	  ENDIF
+	     IF(IFUN.NE.2)GO TO 10
+	     WRITE(6,3000)IBL1,IBL2,TETA
+ 3000 FORMAT(///5X,'***** WARNING!  - REGISTER OPENING > 1.'
+     $ /10X,'BLOCK  ',2A4,'  ALZS = ',E12.5/)
+ 10   CONTINUE
+C
+	   AA=ADAM10(TETA,ALFA)
+C
+	   RNI(1) = DELTAP
+     $         - (W*ABS(W)*(COATS/AA/AA + AKAT*COATT)
+     $            + W*AKAT*COATT/10./W0)/RO
+	   RETURN
+C------------------------------------------------
+	ELSE
+C
+C____ CASI IN CUI L'ALZATA SERRANDA E` < 0.
+C
+	  TETA=0.
+	  RNI(1)=-W
+	  RETURN
+	ENDIF
+      END
+C
+C
+C===============  CARATTERISTICHE DELLA SERRANDA
+C
+C
+      REAL FUNCTION ADAM10(Z,ALFA)                                      !SNGL
+C      DOUBLE PRECISION FUNCTION ADAM10(Z,ALFA)                          !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      IF(ALFA.GT.10.)GO TO 1
+      ADAM10=Z**ALFA
+      RETURN
+C
+C      CALCOLO DI ADAM10 CON UNA FUNCTION
+C      CREATA DALL'UTENTE
+C
+    1 ADAM10=ADNS10(Z,ALFA)
+      RETURN
+      END
+C
+      SUBROUTINE DAMPD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,
+     $   XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      CHARACTER*8 BLOCCO, SYMVAR(*), UNITEQ(*)*10, SIGNEQ(*)*50
+      DIMENSION XYU(*), DATI(*), COSNOR(*), ITOPVA(MXT,*)
+C
+      COMMON /NORM/ P0,H0,T0,W0,RO0,AL0,V0,DP0
+C
+      TETA = XYU(IXYU+5)
+      IND  = DATI(IPD+2)
+C
+      IF(TETA.GT.1.E-2) THEN
+	SIGNEQ(1) = 'REGISTER FLOW RATE / HEAD LOSS EQUATION'
+	UNITEQ(1) = 'Pa'
+	COSNOR(1) = P0
+	ITOPVA(1,1) = 1
+	ITOPVA(1,2) = 1
+	ITOPVA(1,3) = 1
+	ITOPVA(1,4) = 1
+	ITOPVA(1,6) = 1
+	ITOPVA(1,7) = 1
+      ELSE
+C---serranda chiusa: RNI(1) = -W
+C
+	SIGNEQ(1) = 'REGISTER FLOW INTERCEPTION (TETA <= 0)'
+	UNITEQ(1) = 'kg/s'
+	COSNOR(1) = W0
+	IF (IND .EQ. 0) THEN
+	  ITOPVA(1,1) = 1
+C---uscita in portata
+	ELSE
+	  ITOPVA(1,2) = 1
+C---uscita in pressione a valle
+	ENDIF
+      ENDIF
+C
+      RETURN
+      END
+C
+C~FORAUS_DAMP~C
+C
+C FORTRAN AUSILIARIO DEL MODULO SERRANDA CIRCUITO ARIA_GAS
+C PER LA SUA SCRITTURA VEDERE MANUALE D'USO O
+C UTILIZZARE L'APPOSITO COMANDO DI LEGOCAD.
+C
+C               FUNCTION ADNS10(ALZAS,ALFA)
+C
+C  Function per l'assegnazione della caratteristica della SERRANDA
+C
+C  Parametri d'ingresso: ALZAS,ALFA
+C  Parametri d'uscita  : ADNS10
+C
+C************* BREVE SPIEGAZIONE DEI PARAMETRI DELLA FUNCTION ************
+C
+C [p.u.]  ALZAS  -  grado di apertura della serranda.
+C
+C [ ]     ALFA   -  (>10) parametro,  proveniente  dai  dati  in input, che puo`
+C                   essere utilizzato come indice  di  scelta nel caso in cui si
+C                   vogliano introdurre diverse caratteristiche standard tramite
+C                   un'unica FUNCTION ADNS10(ALZAS,ALFA).
+C
+C [p.u.]  ADNS10 -  valore calcolato dell'area di passaggio (per una data
+C                   posizione di serranda) rapportato all'area della
+C                   serranda completamente aperta. (valore compreso da 0. e 1.)
+C
+C  Esempio di caratteristica assegnata per punti:
+C
+C
+CC       REAL FUNCTION ADNS10(Z,ALFA)                                     !SNGL
+CC       DOUBLE PRECISION FUNCTION ADNS10(Z,ALFA)                         !DBLE
+CC      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C       DIMENSION X1(11),Y1(11)
+C       DATA X1/0.,.1,.2,.3,.4,.5,.6,.7,.8,.9,1./
+C       DATA Y1/0.,.055,.085,.125,.17,.22,.28,.35,.43,.55,1./
+CC
+CC
+C       CALL ADNSIN(Z,X1,Y1,11,A)
+C       ADNS10=A
+C       RETURN
+C       END
+C       SUBROUTINE ADNSIN(Z,X,Y,NP,A)
+CC      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C       DIMENSION X(*),Y(*)
+CC
+CC     INTERPOLAZIONE
+CC
+C       A=0.
+C       IF(Z.LE.X(1))RETURN
+C       A=1.
+C       IF(Z.GE.X(NP))RETURN
+C       DO I=1,NP-1
+C       J=I
+C       IF(Z.GE.X(J).AND.Z.LE.X(J+1))GO TO 15
+C       END DO
+C   15  A=Y(J)+(Z-X(J))*(Y(J+1)-Y(J))/(X(J+1)-X(J))
+C       RETURN
+C       END
+C
+C************** INIZIO DEL TESTO FORTRAN DA SCRIVERE ********************
+C
+CC      REAL FUNCTION ADNS10(ALZS,ALFA)                                   !SNGL
+CC      DOUBLE PRECISION FUNCTION ADNS10(ALZS,ALFA)                       !DBLE
+CC      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C      RETURN
+C      END
+C
+C~FORAUS_DAMP~C

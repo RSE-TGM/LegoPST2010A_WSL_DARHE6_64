@@ -1,0 +1,871 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>MOTO</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE MOTO</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MOTO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">ASYNCHRONOUS MOTOR</p>
+<p>&nbsp;</p>
+<p align="left">A three order induction motor model is implemented in the MOTO
+module.</p>
+<p align="left">In this representation, the stator transients are neglected, an
+assumption generally accepted in stability studies and essential to ensure
+compatibility with the models used for representing other system components,
+particularly the transmission network.</p>
+<p align="left">The module can be used according to twodifferent modalities:</p>
+<p align="left">&quot;VELOCITA’ MECCANICA: 0--&gt;INGRESSO 1--&gt;USCITA&quot;</p>
+<p align="left">(rotational speed) (input) (output)</p>
+<p align="left">In the latter case, the mechanical equation is taken into
+account within the residuals of the module</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MOTO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<font FACE="Arial" SIZE="4"><b>
+<i>
+<p ALIGN="CENTER">Topological data</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+</font><font FACE="Arial" SIZE="5">
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER">Rotational speed among output variables</p>
+<p ALIGN="CENTER"><img border="0" src="images/moto.h1.gif" width="443" height="516"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER">Rotational speed among input variables</p>
+</font><font FACE="Arial">
+<p ALIGN="CENTER"><img border="0" src="images/moto.h2.gif" width="444" height="485"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ OMMA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ angular velocity of the rotor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ ED00</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ transient d-axis component of the electromotive
+              force</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ EQ00</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ transient q-axis component of the electromotive
+              force</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ IR00</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ real component of output current</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ IX00</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ imaginary component of output current</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[N·m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ KE00</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ electromagnetic torque</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ QM00</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ mechanical load power</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ SCOR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ slip</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ VRM0</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ real component of voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ VXM0</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ imaginary component of voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ FDP0</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ power factor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ QPE0</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ load active power</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[VAR]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ QQE0</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ load reactive power</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ IMMA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ load percentage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ QPST</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ stator loss resistance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ QPRO</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ rotor loss resistance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ QPFE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ no-load loss</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ VR00</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ real component of supply voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ VX00</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ imaginary component of supply voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ QRES</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ mechanical load</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ STIN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ breaker state variable (1=closed, 0=open)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ SMAL</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ fault (short circuit) logical variable</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[Hz]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ FREQ</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ frequency of stator voltages</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MOTO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i>
+</b>
+          </font>
+<font FACE="Arial">
+<p align="left">The data of the module are:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ SDATI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ data input option</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ POLI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ number of poles</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ QNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ rated power</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[Hz]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ FNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ rated frequency</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ VNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ rated stator voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ VBASE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ system basic voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ INM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ rated current</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ SCORN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ rated slip speed of the rotor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ PU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ p.u./absolute values option (1<font FACE="Wingdings">à</font>
+              in p.u.; 0<font FACE="Wingdings">à</font> absolute)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ TA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ starting time</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ COEFF</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ friction coefficient</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ I0</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ no-load current</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ COSFI0</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ no-load power factor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ ICC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ short circuit current</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ COSFICC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ short circuit power factor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ QPERD</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ mechanical losses</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ QPFER</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ losses at rated voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[<font FACE="Symbol">W</font> ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ RS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ stator resistance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ RXDSXDR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ stator and rotor reactance ratio</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[<font FACE="Symbol">W</font> ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ XM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ magnetising reactance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[<font FACE="Symbol">W</font> ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ XDS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ stator reactance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[<font FACE="Symbol">W</font> ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ XDR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ rotor reactance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[<font FACE="Symbol">W</font> ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ RRSN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ stator resistance at rated
+              slip</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[<font FACE="Symbol">W</font> ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ RRS1</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ stator resistance at
+              unitary slip</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ XM_PU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ magnetising reactance in p.u.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ XDS_PU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ stator reactance in p.u.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ XDR_PU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ rotor reactance in p.u.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ RS_PU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ stator resistance in p.u.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ RRSN_PU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ stator resistance in p.u. at rated slip</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ RRS1_PU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ stator resistance in p.u. at unitary slip</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">TA and COEFF are defined only in case of MECC=1.</p>
+<p align="left">During the data input it is possible to choose one of three different
+acquisition data modalities:</p>
+  <p align="left">SDATI=1, if measurement data are known;</p>
+  <p align="left">SDATI=2, if the parameters of the equivalent circuit are known in
+  S.I. units;</p>
+  <p align="left">SDATI=3, if the parameters of the equivalent circuit are known in per
+  unit.</p>
+<p align="left">&nbsp;</p>
+<p align="left">In case b), the program transforms the data in p.u. values:</p>
+<p align="left">XM_PU=XM/ZNOM</p>
+<p align="left">XDS_PU=XDS/ZNOM, and so on,</p>
+<p align="left">where ZNOM=(VNOM<sup>2</sup>/QNOM).</p>
+<p align="left">In case a), data are dealt with conforming at the IEEE standards
+(ANSI/IEEE
+Std 112-1978 – revision of IEEE Std 112A-1964).</p>
+<p align="left">The default value for SDATI is 2.</p>
+<p align="left">Other default values are the following:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+QNOM &lt; 250 MVA</font><!--mstheme--></font></td>
+    <td width="34%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ QNOM&gt;250 MVA</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+XDS</font><!--mstheme--></font></td>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.1*ZNOM</font><!--mstheme--></font></td>
+    <td width="34%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.1*ZNOM</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+XDR</font><!--mstheme--></font></td>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.1*ZNOM</font><!--mstheme--></font></td>
+    <td width="34%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.1*ZNOM</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+RS</font><!--mstheme--></font></td>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.04*ZNOM</font><!--mstheme--></font></td>
+    <td width="34%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.005*ZNOM</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+RRS1</font><!--mstheme--></font></td>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.04*ZNOM</font><!--mstheme--></font></td>
+    <td width="34%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.03*ZNOM</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+RRSN</font><!--mstheme--></font></td>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.04*ZNOM</font><!--mstheme--></font></td>
+    <td width="34%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.03*ZNOM</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+XM</font><!--mstheme--></font></td>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+4.5*ZNOM</font><!--mstheme--></font></td>
+    <td width="34%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+3.5*ZNOM</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="28%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+QPFER</font><!--mstheme--></font></td>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.01*QNOM</font><!--mstheme--></font></td>
+    <td width="34%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+0.015*QNOM</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><p align="left">&nbsp;RXDSXDR = 1 (only if SDATI=1),</p>
+<p align="left">and RS = (QP0-QPERD-QPFER)/(3*I0**2) (only if SDATI=1),</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MOTO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Arial" SIZE="4"><b>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i></b></font><font FACE="Arial">
+<p align="left">No particular prescription is required for the MOTO module
+initialization.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MOTO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b>
+<i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></b></font><font FACE="Arial">
+<p align="left">No user’s subprogram is required in the MOTO module.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MOTO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b>
+<i>
+<p ALIGN="CENTER">Residuals</p>
+</i></b></font><font FACE="Arial">
+<p align="left">The equations of the mathematical model are translated in the following
+residuals:</p>
+      <p align="left">If the module contains the mechanical equation</p>
+<p align="left">IF (KREGIM.AND.OMROT.LE.0.0) THEN (steady-state calculation, and motor
+stopped)</p>
+<blockquote>
+<p align="left">RNI(1) = OMROT</p>
+</blockquote>
+<p align="left">ELSE</p>
+<blockquote>
+<p align="left">IF (OMMA.LE.0.001) THEN</p>
+<p align="left">RNI(1) = KE00*CPOLI/TA</p>
+<p align="left">ELSE</p>
+<p align="left">RNI(1) = (KE00*CPOLI-(QRES/OMROT)-COEFF)/TA</p>
+<p align="left">ENDIF</p>
+</blockquote>
+<p align="left">ENDIF</p>
+      <u>
+      <p>&nbsp;</p>
+      <p align="left">If the breaker is closed (STIN=1)</u>,</p>
+<p align="left">RNI(1+MECC) = -(ED00-(XS-XS1)*IAUX)/T01+EQ00*DELTOM</p>
+<p align="left">RNI(2+MECC) = -(EQ00-(XS-XS1)*IAUR)/T01+ED00*DELTOM</p>
+<p align="left">If there's a short circuit (SMAL=1)</p>
+<p align="left">RNI(3+MECC) = IR00+(VR00*RCT0+VX00*XCT0)/ZCT0**2.</p>
+<p align="left">RNI(4+MECC) = IX00+(VR00*RCT0-VR00*XCT0)/ZCT0**2.</p>
+<p align="left">otherwise,</p>
+    <p align="left">RNI(3+MECC) = -IAUR-(VX00/(FREQ/FNOM*XS1) - EQ00/XS1+ +RS*IAUX/(FREQ/FNOM*XS1))</p>
+    <p align="left">RNI(4+MECC) = -IAUX-(-VR00/(FREQ/FNOM*XS1)+ ED00/XS1+ +RS*IAUR/(FREQ/FNOM*XS1))</p>
+<p align="left">RNI(5+MECC) = KE00+ED00*IAUR+EQ00*IAUX</p>
+<p align="left">RNI(6+MECC) = QM00-KE00*(OMMA+EPSI)</p>
+<p align="left">RNI(7+MECC) = SCOR-(FREQ/FNOM-OMMA)/ /(FREQ/FNOM)</p>
+<p align="left">RNI(8+MECC) = VRM0-VR00</p>
+<p align="left">RNI(9+MECC) = VXM0-VX00</p>
+<p align="left">&nbsp;</p>
+      <p align="left">If the apparent power output is different from zero,</p>
+<p align="left">FDP1 = QPE1/QSE1</p>
+<p align="left">otherwise</p>
+<p align="left">FDP1 = 0</p>
+<p>&nbsp;</p>
+<p align="left">During steady-state calculations,</p>
+<p align="left">RNI (10+MECC) = -FDP0+FDP1</p>
+<p align="left">RNI (11+MECC) = -QPE0+VR00*IR00+VX00*IX00</p>
+<p align="left">RNI(12+MECC) = -QQE0+VX00*IR00-VR00*IX00</p>
+<p align="left">RNI(13+MECC) = -IMMA+IMOD/INM</p>
+<p align="left">RNI(14+MECC) = -QPST+RS*(IAUR**2+IAUX**2)</p>
+<p align="left">RNI(15+MECC) = -QPRO+(-QPE0-QPFE-QPST)*SCOR</p>
+<p align="left">RNI(16+MECC) = -QPFE+QPFER*(VR00**2+VX00**2)</p>
+<p align="left">&nbsp;</p>
+<p align="left">For transient simulations</p>
+<p align="left">RNI(10+MECC) = FDP1</p>
+<p align="left">RNI(11+MECC) = VR00*IR00+VX00*IX00</p>
+<p align="left">RNI(12+MECC) = VX00*IR00-VR00*IX00</p>
+<p align="left">RNI(13+MECC) = IMOD/INM</p>
+<p align="left">RNI(14+MECC) = RS*(IAUR**2.+IAUX**2.)</p>
+<p align="left">RNI(15+MECC) = (-QPE0-QPFE-QPST)*SCOR</p>
+<p align="left">RNI(16+MECC) = QPFER*(VR00**2.+VX00**2.)</p>
+<p align="left">&nbsp;</p>
+      <u>
+      <p align="left">If the breaker is open (STIN=0)</u>,</p>
+      <p align="left">RNI(3+MECC) = -IR00</p>
+<p align="left">RNI(4+MECC) = -IX00</p>
+<p align="left">RNI(5+MECC) = KE00+ED00*IAUR+EQ00*IAUX</p>
+<p align="left">RNI(6+MECC) = QM00-KE00*OMMA</p>
+<p align="left">RNI(7+MECC) = -SCOR</p>
+<p align="left">RNI(8+MECC) = -VRM0+ED00*OMMA</p>
+<p align="left">RNI(9+MECC) = -VXM0+EQ00*OMMA</p>
+<p align="left">&nbsp;</p>
+<p align="left">During transient simulations,</p>
+<p align="left">RNI(1+MECC) = -(ED00-(XS-XS1)*IAUX)/T01</p>
+<p align="left">RNI(2+MECC) = -(EQ00-(XS-XS1)*IAUR)/T01</p>
+<p align="left">RNI(10+MECC) = 0</p>
+<p align="left">RNI(11+MECC) = 0</p>
+<p align="left">RNI(12+MECC) = 0</p>
+<p align="left">RNI(13+MECC) = 0</p>
+<p align="left">RNI(14+MECC) = 0</p>
+<p align="left">RNI(15+MECC) = 0</p>
+<p align="left">RNI(16+MECC) = 0</p>
+<p>&nbsp;</p>
+<p align="left">for steady-state calculations,</p>
+<p align="left">RNI(1+MECC) = -ED00</p>
+<p align="left">RNI(2+MECC) = -EQ00</p>
+<p align="left">RNI(10+MECC) = -FDP0</p>
+<p align="left">RNI(11+MECC) = -QPE0</p>
+<p align="left">RNI(12+MECC) = -QQE0</p>
+<p align="left">RNI(13+MECC) = IMMA</p>
+<p align="left">RNI(14+MECC) = -QPST</p>
+<p align="left">RNI(15+MECC) = -QPRO</p>
+<p align="left">RNI(16+MECC) = -QPFE</p>
+<p align="left">&nbsp;</p>
+      <p align="left">where</p>
+<p align="left">DELTOM = (FREQ/FNOM-OMMA)*OMBA</p>
+<p align="left">IMOD = SQRT(IR00**2+IX00**2)</p>
+<p align="left">XR = XDR+XM</p>
+    <p align="left">XS = XDS+XM (XR and XS are parameters of the asynchronous motor
+    equivalent circuit)</p>
+<p align="left">&nbsp;</p>
+<p align="left">If the motor is running (OMMA.GT.0.001)</p>
+<p align="left">EPSI = 0.01</p>
+<p align="left">otherwise</p>
+<p align="left">EPSI = 0.</p>
+<p>&nbsp;</p>
+<p align="left">If the breaker is closed (STIN=1)</p>
+<p align="left">DELTAR = (RRS1 - RRSN)/(1. - SCORN/100.)</p>
+<p align="left">RR = RRSN + DELTAR*((SCOR)-SCORN/100.)</p>
+<p align="left">T01 = XR/(OMBA*RR)</p>
+<p align="left">otherwise,</p>
+<p align="left">T01 = XR/(OMBA*RRSN)</p>
+<p>&nbsp;</p>
+<p align="left">XS1 = XS-((XM**2)/XR)</p>
+<p align="left">QPE1 = (-VR00*IR00-VX00*IX00)</p>
+<p align="left">QQE1 = (-VX00*IR00+VR00*IX00)</p>
+<p align="left">QSE1 = SQRT(QPE1*QPE1+QQE1*QQE1)</p>
+<p align="left">I0R = VRM0*QPFER</p>
+<p align="left">I0X = VXM0*QPFER</p>
+<p>&nbsp;</p>
+<p align="left">IAUR = IR00+I0R</p>
+<p align="left">IAUX = IX00+I0X</p>
+<p align="left">Or if there's a short circuit (SMAL=1),</p>
+<p align="left">IAUR = 0.</p>
+<p align="left">IAUX = 0.</p>
+<p>&nbsp;</p>
+<p align="left">RCT0 = .075*QNOM/VNOM**2 (short-circuit resistance)</p>
+<p align="left">XCT0 = .075* QNOM/VNOM**2 (short-circuit reactance)</p>
+<p align="left">ZCT0 = SQRT(RCT0**2.+XCT0**2.) (short-circuit impedance)</p>
+<p>&nbsp;</p>
+<p align="left">IF (FREQ.LT.0.5) FREQ = 0.5</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MOTO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b>
+<i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></b></font>
+              <p>&nbsp;</p>
+              <p style="line-height: 100%" align="left"><font face="Arial">SUBROUTINE MOTOI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</font></p>
+              <p style="line-height: 100%" align="left"><font face="Arial">IBL1,IBL2,IER,CNXYU,TOL)</font></p>
+              <p style="line-height: 100%" align="left"><font face="Arial">SUBROUTINE MOTOC1
+              (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></p>
+              <p style="line-height: 100%" align="left"><font face="Arial">SUBROUTINE MOTOJC
+              (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></p>
+              <p style="line-height: 100%" align="left"><font face="Arial">SUBROUTINE MOTOJAC (AJAC,MX5,IXYU,IPD,DATI,RN,NRIG,NCOL,NSTATI,</font></p>
+              <p style="line-height: 100%" align="left"><font face="Arial">EPS,EPSLIM,RESIDUI)</font></p>
+              <p style="line-height: 100%" align="left"><font face="Arial">SUBROUTINE MOTO (IFUN,IXYU,XYU,IPD,DATI,RNI)</font></p>
+              <p style="line-height: 100%" align="left"><font face="Arial">SUBROUTINE MOTOI3 (IFO,IOB,DEBL)</font></p>
+              <p style="line-height: 100%" align="left"><font face="Arial">SUBROUTINE MOTOI4 (IOB,MOD)</font></p>
+              <p style="line-height: 100%" align="left"><font face="Arial">SUBROUTINE MOTOD1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</font></p>
+              <p style="line-height: 100%" align="left"><font face="Arial">IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</font></p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MOTO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b>
+<font FACE="Arial" SIZE="4"><b>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i></b></font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

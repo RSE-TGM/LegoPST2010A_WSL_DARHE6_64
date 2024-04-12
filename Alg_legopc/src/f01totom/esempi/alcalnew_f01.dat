@@ -1,0 +1,2078 @@
+****
+EVAP      BLOCCO (1PAS) - PRIMO PASSO DI CALDAIA                               
+EVAP      BLOCCO (2PAS) - SECONDO PASSO DI CALDAIA                             
+EVAP      BLOCCO (3PAS) - TERZO PASSO DI CALDAIA                               
+EVAP      BLOCCO (4PAS) - QUARTO PASSO DI CALDAIA                              
+COLT      BLOCCO (CU1P) - COLLETTORE USCITA PASSO 1                            
+COLT      BLOCCO (CU2P) - COLLETTORE USCITA PASSO 2                            
+COLT      BLOCCO (CU3P) - COLLETTORE USCITA PASSO 3                            
+COLT      BLOCCO (CU4P) - collettore uscita passo 4                            
+EVAP      BLOCCO (CIEL) - CIELO DI CALDAIA                                     
+COLT      BLOCCO (CUCI) - COLLETTORE USCITA CIELO                              
+EVAP      BLOCCO (GABB) - GABBIE DI CALDAIA                                    
+FUMN      BLOCCO (SOVR) - SOVRA PASSO                                          
+DISN      BLOCCO (T3PA) - DISTRIB. TEMP. PASSO 3 CELLA 2                       
+DISN      BLOCCO (T1CI) - DISTRIB. DI TEMP. CIELO  CELLA 1                     
+DISN      BLOCCO (T2CI) - DISTRIBUTORE DI TEMP. CIELO  CELLA 2                 
+DISN      BLOCCO (T1GA) - DISTRIB. DI TEMP. GABBIE CELLA 1                     
+DISN      BLOCCO (T2GA) - DISTRIB. DI TEMP. GABBIE CELLA 2                     
+DISN      BLOCCO (T3GA) - DISTRIB. DI TEMP. GABBIE CELLA 3                     
+COLT      BLOCCO (CUGA) - collettore uscita gabbie                             
+EVAP      BLOCCO (SH1 ) - scambiatore sh1                                      
+COLT      BLOCCO (CUS1) - collettore uscita sh1                                
+VALV      BLOCCO (B401) - valvola  401 lato   B                                
+VALV      BLOCCO (A401) - valvola 401 lato A                                   
+COLT      BLOCCO (CATA) - collettore  attemperamento SH2 lato A                
+COLT      BLOCCO (CATB) - collettore attemperamento SH2 lato  B                
+VALV      BLOCCO (ATSA) - valvola attemperamento ad acqua SH2 lato A           
+VALV      BLOCCO (ATSB) - attemperamento ad acqua SH2 lato B                   
+FUMN      BLOCCO (RETR) - condotto fumi -retropasso di caldaia                 
+TUBO      BLOCCO (TASA) - tubo suul'attemp. sh2  lato a                        
+TUBO      BLOCCO (TASB) - tubo sull'attemperamento sh2 lato b                  
+COLT      BLOCCO (CIS2) - collettore ingresso sh2                              
+EVAP      BLOCCO (SH2 ) - surriscaldatore SH2                                  
+COLT      BLOCCO (CUS2) - collettore uscita SH2                                
+EVAP      BLOCCO (LVS1) - tubazione ammissione turbina A.P.                    
+EVAP      BLOCCO (LVS2) - tubazione ammissione turbina A.P.                    
+COLT      BLOCCO (CIEC) - collettore ingresso all'economizzatore               
+EVAP      BLOCCO (ECO ) - economizzatore                                       
+COLT      BLOCCO (CUEC) - collettore uscita economizzatore                     
+DISN      BLOCCO (T4EC) - distributore di temperature cella 4 ECO              
+TUBO      BLOCCO (TECO) - tubo di collegamento eco-passo1                      
+TUBO      BLOCCO (TP12) - tubo di collegamento passo1 passo2                   
+COLT      BLOCCO (CUAP) - collettore uscita turbina alta pressione             
+SPIL      BLOCCO (TI5A) - spillamento vapore risc. 5A                          
+SPIL      BLOCCO (TI5B) - spillamento vapore risc. 5 B                         
+SPIL      BLOCCO (TSDG) - spillamento vapore per pegging degasatore            
+VALV      BLOCCO (TUAV) - spillamento vapore utenze diverse                    
+NODO      BLOCCO (CSP2) - sommatore portate spillamento                        
+EVAP      BLOCCO (LIR1) - tubaz. da uscita turbina AP a RH                     
+EVAP      BLOCCO (LIR2) - tubaz. da uscita turbina AP a RH                     
+COLT      BLOCCO (CARB) - collettore attemperamento RH lato B                  
+COLT      BLOCCO (CARA) - collettore attemperamento RH lato A                  
+TUBO      BLOCCO (TARA) - tubo attemperam. rh lato A                           
+TUBO      BLOCCO (TARB) - tubo attemp. rh lato B                               
+COLT      BLOCCO (CIRH) - collettore ingresso RH                               
+EVAP      BLOCCO (RH  ) - risurriscaldatore RH                                 
+COLT      BLOCCO (CURH) - collettore uscita RH                                 
+EVAP      BLOCCO (LUR1) - tubazione riammiss. vapore turbina  MP               
+EVAP      BLOCCO (LUR2) - tubazione riammissione turbina RH                    
+DISN      BLOCCO (T2RH) - distributore temperature cella 2 rh                  
+VALV      BLOCCO (VSH1) - valvole di sfiato e sicurezza SH1                    
+VALV      BLOCCO (VSH2) - valvole di sfiato e sicurezza SH2                    
+VALV      BLOCCO (VRHI) - valvole di sfiato e sicurezza ingresso RH            
+VALV      BLOCCO (VRHU) - valvole sfiato e sicurezza uscita RH                 
+NODO      BLOCCO (QECO) - POTENZA ASSORBITA DALL'ECONOMIZZATORE                
+NODO      BLOCCO (Q1P ) - POTENZA ASSORBITA DAL PASSO 1 DI CALDAIA             
+NODO      BLOCCO (Q2P ) - POTENZA ASSORBITA DAL PASSO 2 DI CALDAIA             
+NODO      BLOCCO (Q3P ) - POTENZA ASSORBITA DAL PASSO 3 DI CALDAIA             
+NODO      BLOCCO (Q4P ) - POTENZA ASSORBITA DAL PASSO 4 DI CALDAIA             
+NODO      BLOCCO (QCIE) - POTENZA ASSORBITA DAL CIELO DI CALDAIA               
+NODO      BLOCCO (QGAB) - POTENZA ASSORBITA DALLE GABBIE DI CALDAIA            
+NODO      BLOCCO (QSH1) - POTENZA ASSORBITA DALL' SH1                          
+NODO      BLOCCO (QSH2) - POTENZA ASSORBITA DALL' SH2                          
+NODO      BLOCCO (QRH ) - POTENZA ASSORBITA DALL' RH                           
+NODO      BLOCCO (PAMM) - CALCOLO DELLA PRESSIONE AMMISSIONE                   
+CCN1      BLOCCO (COMB) - Camera di combustione                                
+****
+ALCALNEW                                                        
+****
+-EVA1PAS  BL.-1PAS- **** MODULO EVAP - PRIMO PASSO DI CALDAIA                  
+PC1_1PAS  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_1PAS  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_1PAS  --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+PC4_1PAS  --US-- PRESSIONE MEDIA CELLA  4 DEL TUBO                             
+PC5_1PAS  --US-- PRESSIONE MEDIA CELLA  5 DEL TUBO                             
+PC6_1PAS  --US-- PRESSIONE MEDIA CELLA  6 DEL TUBO                             
+WG1_1PAS  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_1PAS  --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+WG3_1PAS  --UA-- PORTATA FLUIDO USCITA CELLA 3 DEL TUBO                        
+WG4_1PAS  --UA-- PORTATA FLUIDO USCITA CELLA 4 DEL TUBO                        
+WG5_1PAS  --UA-- PORTATA FLUIDO USCITA CELLA 5 DEL TUBO                        
+WUTU1PAS  --UA-- PORTATA FLUIDO USCITA TUBAZIONE                               
+WITU1PAS  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_1PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_1PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_1PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+TM4_1PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  4 DEL TUBO                 
+TM5_1PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  5 DEL TUBO                 
+TM6_1PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  6 DEL TUBO                 
+QT1_1PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_1PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_1PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+QT4_1PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  4 DEL TUBO                      
+QT5_1PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  5 DEL TUBO                      
+QT6_1PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  6 DEL TUBO                      
+HUTU1PAS  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIIT1PAS  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCUEC  --IN-- #HITU1PAS#....................<===COLTCUEC  BL.-CUEC-         
+HCOLCU1P  --IN-- #HUIT1PAS#....................<===COLTCU1P  BL.-CU1P-         
+PCOLCU1P  --IN-- #PUTU1PAS#....................<===COLTCU1P  BL.-CU1P-         
+PUTUTECO  --IN-- #PITU1PAS#....................<===-TUBTECO  BL.-TECO-         
+TF_1COMB  --IN-- #TF111PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_2COMB  --IN-- #TF211PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_3COMB  --IN-- #TF311PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_4COMB  --IN-- #TF411PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_5COMB  --IN-- #TF511PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_6COMB  --IN-- #TF611PAS#....................<===CCN1COMB  BL.-COMB-         
+GC11COMB  --IN-- #GF111PAS#....................<===CCN1COMB  BL.-COMB-         
+GC12COMB  --IN-- #GF211PAS#....................<===CCN1COMB  BL.-COMB-         
+GC13COMB  --IN-- #GF311PAS#....................<===CCN1COMB  BL.-COMB-         
+GC14COMB  --IN-- #GF411PAS#....................<===CCN1COMB  BL.-COMB-         
+GC15COMB  --IN-- #GF511PAS#....................<===CCN1COMB  BL.-COMB-         
+GC16COMB  --IN-- #GF611PAS#....................<===CCN1COMB  BL.-COMB-         
+ATTR1PAS  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+-EVA2PAS  BL.-2PAS- **** MODULO EVAP - SECONDO PASSO DI CALDAIA                
+PC1_2PAS  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_2PAS  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_2PAS  --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+PC4_2PAS  --US-- PRESSIONE MEDIA CELLA  4 DEL TUBO                             
+PC5_2PAS  --US-- PRESSIONE MEDIA CELLA  5 DEL TUBO                             
+PC6_2PAS  --US-- PRESSIONE MEDIA CELLA  6 DEL TUBO                             
+WG1_2PAS  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_2PAS  --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+WG3_2PAS  --UA-- PORTATA FLUIDO USCITA CELLA 3 DEL TUBO                        
+WG4_2PAS  --UA-- PORTATA FLUIDO USCITA CELLA 4 DEL TUBO                        
+WG5_2PAS  --UA-- PORTATA FLUIDO USCITA CELLA 5 DEL TUBO                        
+WUTU2PAS  --UA-- PORTATA FLUIDO USCITA TUBAZIONE                               
+WITU2PAS  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_2PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_2PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_2PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+TM4_2PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  4 DEL TUBO                 
+TM5_2PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  5 DEL TUBO                 
+TM6_2PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  6 DEL TUBO                 
+QT1_2PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_2PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_2PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+QT4_2PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  4 DEL TUBO                      
+QT5_2PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  5 DEL TUBO                      
+QT6_2PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  6 DEL TUBO                      
+HUTU2PAS  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIIT2PAS  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCU1P  --IN-- #HITU2PAS#....................<===COLTCU1P  BL.-CU1P-         
+HCOLCU2P  --IN-- #HUIT2PAS#....................<===COLTCU2P  BL.-CU2P-         
+PCOLCU2P  --IN-- #PUTU2PAS#....................<===COLTCU2P  BL.-CU2P-         
+PUTUTP12  --IN-- #PITU2PAS#....................<===-TUBTP12  BL.-TP12-         
+TF_1COMB  --IN-- #TF112PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_2COMB  --IN-- #TF212PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_3COMB  --IN-- #TF312PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_4COMB  --IN-- #TF412PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_5COMB  --IN-- #TF512PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_6COMB  --IN-- #TF612PAS#....................<===CCN1COMB  BL.-COMB-         
+GC21COMB  --IN-- #GF112PAS#....................<===CCN1COMB  BL.-COMB-         
+GC22COMB  --IN-- #GF212PAS#....................<===CCN1COMB  BL.-COMB-         
+GC23COMB  --IN-- #GF312PAS#....................<===CCN1COMB  BL.-COMB-         
+GC24COMB  --IN-- #GF412PAS#....................<===CCN1COMB  BL.-COMB-         
+GC25COMB  --IN-- #GF512PAS#....................<===CCN1COMB  BL.-COMB-         
+GC26COMB  --IN-- #GF612PAS#....................<===CCN1COMB  BL.-COMB-         
+ATTR2PAS  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+-EVA3PAS  BL.-3PAS- **** MODULO EVAP - TERZO PASSO DI CALDAIA                  
+PC1_3PAS  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_3PAS  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+WG1_3PAS  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WUTU3PAS  --UA-- PORTATA FLUIDO USCITA TUBAZIONE                               
+WITU3PAS  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_3PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_3PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+QT1_3PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_3PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+HUTU3PAS  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIIT3PAS  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCU2P  --IN-- #HITU3PAS#....................<===COLTCU2P  BL.-CU2P-         
+HCOLCU3P  --IN-- #HUIT3PAS#....................<===COLTCU3P  BL.-CU3P-         
+PCOLCU3P  --IN-- #PUTU3PAS#....................<===COLTCU3P  BL.-CU3P-         
+PCOLCU2P  --IN-- #PITU3PAS#....................<===COLTCU2P  BL.-CU2P-         
+TF_7COMB  --IN-- #TF113PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_8COMB  --IN-- #TF213PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_1SOVR  --IN-- #TF223PAS#....................<===FUMNSOVR  BL.-SOVR-         
+TF_2SOVR  --IN-- #TF233PAS#....................<===FUMNSOVR  BL.-SOVR-         
+TF_3SOVR  --IN-- #TF243PAS#....................<===FUMNSOVR  BL.-SOVR-         
+TF_4SOVR  --IN-- #TF253PAS#....................<===FUMNSOVR  BL.-SOVR-         
+GC17COMB  --IN-- #GF113PAS#....................<===CCN1COMB  BL.-COMB-         
+GC18COMB  --IN-- #GF213PAS#....................<===CCN1COMB  BL.-COMB-         
+GF_1SOVR  --IN-- #GF223PAS#....................<===FUMNSOVR  BL.-SOVR-         
+GF_2SOVR  --IN-- #GF233PAS#....................<===FUMNSOVR  BL.-SOVR-         
+GF_3SOVR  --IN-- #GF243PAS#....................<===FUMNSOVR  BL.-SOVR-         
+GF_4SOVR  --IN-- #GF253PAS#....................<===FUMNSOVR  BL.-SOVR-         
+ATTR3PAS  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+-EVA4PAS  BL.-4PAS- **** MODULO EVAP - QUARTO PASSO DI CALDAIA                 
+PC1_4PAS  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_4PAS  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+WG1_4PAS  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WUTU4PAS  --UA-- PORTATA FLUIDO USCITA TUBAZIONE                               
+WITU4PAS  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_4PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_4PAS  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+QT1_4PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_4PAS  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+HUTU4PAS  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIIT4PAS  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCU3P  --IN-- #HITU4PAS#....................<===COLTCU3P  BL.-CU3P-         
+HCOLCU4P  --IN-- #HUIT4PAS#....................<===COLTCU4P  BL.-CU4P-         
+PCOLCU4P  --IN-- #PUTU4PAS#....................<===COLTCU4P  BL.-CU4P-         
+PCOLCU3P  --IN-- #PITU4PAS#....................<===COLTCU3P  BL.-CU3P-         
+TF_7COMB  --IN-- #TF114PAS#....................<===CCN1COMB  BL.-COMB-         
+TF_8COMB  --IN-- #TF214PAS#....................<===CCN1COMB  BL.-COMB-         
+GC27COMB  --IN-- #GF114PAS#....................<===CCN1COMB  BL.-COMB-         
+GC28COMB  --IN-- #GF214PAS#....................<===CCN1COMB  BL.-COMB-         
+ATTR4PAS  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+COLTCU1P  BL.-CU1P- **** MODULO COLT - COLLETTORE USCITA PASSO 1               
+HCOLCU1P  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCU1P  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCU1P  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTU1PAS  --IN-- #WE_1CU1P#....................<===-EVA1PAS  BL.-1PAS-         
+HUTU1PAS  --IN-- #HE_1CU1P#....................<===-EVA1PAS  BL.-1PAS-         
+WITU2PAS  --IN-- #WU_1CU1P#....................<===-EVA2PAS  BL.-2PAS-         
+HIIT2PAS  --IN-- #HU_1CU1P#....................<===-EVA2PAS  BL.-2PAS-         
+TESTCU1P  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCU1P  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+COLTCU2P  BL.-CU2P- **** MODULO COLT - COLLETTORE USCITA PASSO 2               
+HCOLCU2P  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCU2P  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCU2P  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTU1PAS  --IN-- #WE_1CU2P#....................<===-EVA1PAS  BL.-1PAS-         
+HUTU2PAS  --IN-- #HE_1CU2P#....................<===-EVA2PAS  BL.-2PAS-         
+WITU3PAS  --IN-- #WU_1CU2P#....................<===-EVA3PAS  BL.-3PAS-         
+HIIT3PAS  --IN-- #HU_1CU2P#....................<===-EVA3PAS  BL.-3PAS-         
+TESTCU2P  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCU2P  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+COLTCU3P  BL.-CU3P- **** MODULO COLT - COLLETTORE USCITA PASSO 3               
+HCOLCU3P  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCU3P  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCU3P  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTU3PAS  --IN-- #WE_1CU3P#....................<===-EVA3PAS  BL.-3PAS-         
+HUTU3PAS  --IN-- #HE_1CU3P#....................<===-EVA3PAS  BL.-3PAS-         
+WITU4PAS  --IN-- #WU_1CU3P#....................<===-EVA4PAS  BL.-4PAS-         
+HIIT4PAS  --IN-- #HU_1CU3P#....................<===-EVA4PAS  BL.-4PAS-         
+TESTCU3P  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCU3P  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+COLTCU4P  BL.-CU4P- **** MODULO COLT - collettore uscita passo 4               
+HCOLCU4P  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCU4P  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCU4P  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTU4PAS  --IN-- #WE_1CU4P#....................<===-EVA4PAS  BL.-4PAS-         
+HUTU4PAS  --IN-- #HE_1CU4P#....................<===-EVA4PAS  BL.-4PAS-         
+WITUCIEL  --IN-- #WU_1CU4P#....................<===-EVACIEL  BL.-CIEL-         
+HIITCIEL  --IN-- #HU_1CU4P#....................<===-EVACIEL  BL.-CIEL-         
+TESTCU4P  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCU4P  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+-EVACIEL  BL.-CIEL- **** MODULO EVAP - CIELO DI CALDAIA                        
+PC1_CIEL  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_CIEL  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+WG1_CIEL  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WUTUCIEL  --UA-- PORTATA FLUIDO USCITA TUBAZIONE                               
+WITUCIEL  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_CIEL  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_CIEL  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+QT1_CIEL  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_CIEL  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+HUTUCIEL  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIITCIEL  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCU4P  --IN-- #HITUCIEL#....................<===COLTCU4P  BL.-CU4P-         
+HCOLCUCI  --IN-- #HUITCIEL#....................<===COLTCUCI  BL.-CUCI-         
+PCOLCUCI  --IN-- #PUTUCIEL#....................<===COLTCUCI  BL.-CUCI-         
+PCOLCU4P  --IN-- #PITUCIEL#....................<===COLTCU4P  BL.-CU4P-         
+TF_8COMB  --IN-- #TF11CIEL#....................<===CCN1COMB  BL.-COMB-         
+TF_1SOVR  --IN-- #TF12CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+TF_2SOVR  --IN-- #TF13CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+TF_3SOVR  --IN-- #TF14CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+TF_4SOVR  --IN-- #TF15CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+TF_5SOVR  --IN-- #TF16CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+TF_6SOVR  --IN-- #TF21CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+TF_7SOVR  --IN-- #TF22CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+TF_8SOVR  --IN-- #TF23CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+TF_9SOVR  --IN-- #TF24CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+GC38COMB  --IN-- #GF11CIEL#....................<===CCN1COMB  BL.-COMB-         
+GF_1SOVR  --IN-- #GF12CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+GF_2SOVR  --IN-- #GF13CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+GF_3SOVR  --IN-- #GF14CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+GF_4SOVR  --IN-- #GF15CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+GF_5SOVR  --IN-- #GF16CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+GF_6SOVR  --IN-- #GF21CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+GF_7SOVR  --IN-- #GF22CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+GF_8SOVR  --IN-- #GF23CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+GF_9SOVR  --IN-- #GF24CIEL#....................<===FUMNSOVR  BL.-SOVR-         
+ATTRCIEL  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+COLTCUCI  BL.-CUCI- **** MODULO COLT - COLLETTORE USCITA CIELO                 
+HCOLCUCI  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCUCI  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCUCI  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTUCIEL  --IN-- #WE_1CUCI#....................<===-EVACIEL  BL.-CIEL-         
+HUTUCIEL  --IN-- #HE_1CUCI#....................<===-EVACIEL  BL.-CIEL-         
+WITUGABB  --IN-- #WU_1CUCI#....................<===-EVAGABB  BL.-GABB-         
+HIITGABB  --IN-- #HU_1CUCI#....................<===-EVAGABB  BL.-GABB-         
+TESTCUCI  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUCI  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+-EVAGABB  BL.-GABB- **** MODULO EVAP - GABBIE DI CALDAIA                       
+PC1_GABB  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_GABB  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_GABB  --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+WG1_GABB  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_GABB  --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+WUTUGABB  --UA-- PORTATA FLUIDO USCITA TUBAZIONE                               
+WITUGABB  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_GABB  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_GABB  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_GABB  --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+QT1_GABB  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_GABB  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_GABB  --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+HUTUGABB  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIITGABB  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCUCI  --IN-- #HITUGABB#....................<===COLTCUCI  BL.-CUCI-         
+HCOLCUGA  --IN-- #HUITGABB#....................<===COLTCUGA  BL.-CUGA-         
+PCOLCUGA  --IN-- #PUTUGABB#....................<===COLTCUGA  BL.-CUGA-         
+PCOLCUCI  --IN-- #PITUGABB#....................<===COLTCUCI  BL.-CUCI-         
+TF_8SOVR  --IN-- #TF11GABB#....................<===FUMNSOVR  BL.-SOVR-         
+TF_9SOVR  --IN-- #TF12GABB#....................<===FUMNSOVR  BL.-SOVR-         
+TF_1RETR  --IN-- #TF13GABB#....................<===FUMNRETR  BL.-RETR-         
+TF_2RETR  --IN-- #TF14GABB#....................<===FUMNRETR  BL.-RETR-         
+TF_3RETR  --IN-- #TF15GABB#....................<===FUMNRETR  BL.-RETR-         
+TF_3SOVR  --IN-- #TF21GABB#....................<===FUMNSOVR  BL.-SOVR-         
+TF_4SOVR  --IN-- #TF22GABB#....................<===FUMNSOVR  BL.-SOVR-         
+TF_5SOVR  --IN-- #TF23GABB#....................<===FUMNSOVR  BL.-SOVR-         
+TF_6SOVR  --IN-- #TF24GABB#....................<===FUMNSOVR  BL.-SOVR-         
+TF_7SOVR  --IN-- #TF25GABB#....................<===FUMNSOVR  BL.-SOVR-         
+TF_7COMB  --IN-- #TF31GABB#....................<===CCN1COMB  BL.-COMB-         
+TF_1SOVR  --IN-- #TF32GABB#....................<===FUMNSOVR  BL.-SOVR-         
+TF_2SOVR  --IN-- #TF33GABB#....................<===FUMNSOVR  BL.-SOVR-         
+GF_8SOVR  --IN-- #GF11GABB#....................<===FUMNSOVR  BL.-SOVR-         
+GF_9SOVR  --IN-- #GF12GABB#....................<===FUMNSOVR  BL.-SOVR-         
+GF_1RETR  --IN-- #GF13GABB#....................<===FUMNRETR  BL.-RETR-         
+GF_2RETR  --IN-- #GF14GABB#....................<===FUMNRETR  BL.-RETR-         
+GF_3RETR  --IN-- #GF15GABB#....................<===FUMNRETR  BL.-RETR-         
+GF_3SOVR  --IN-- #GF21GABB#....................<===FUMNSOVR  BL.-SOVR-         
+GF_4SOVR  --IN-- #GF22GABB#....................<===FUMNSOVR  BL.-SOVR-         
+GF_5SOVR  --IN-- #GF23GABB#....................<===FUMNSOVR  BL.-SOVR-         
+GF_6SOVR  --IN-- #GF24GABB#....................<===FUMNSOVR  BL.-SOVR-         
+GF_7SOVR  --IN-- #GF25GABB#....................<===FUMNSOVR  BL.-SOVR-         
+GC37COMB  --IN-- #GF31GABB#....................<===CCN1COMB  BL.-COMB-         
+GF_1SOVR  --IN-- #GF32GABB#....................<===FUMNSOVR  BL.-SOVR-         
+GF_2SOVR  --IN-- #GF33GABB#....................<===FUMNSOVR  BL.-SOVR-         
+ATTRGABB  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+FUMNSOVR  BL.-SOVR- **** MODULO FUMN - SOVRA PASSO                             
+TUF_SOVR  --UA-- TEMPERATURA DI USCITA FUMI                                    
+TF_1SOVR  --UA-- TEMPERATURA MEDIA FUMI CELLA  1                               
+TF_2SOVR  --UA-- TEMPERATURA MEDIA FUMI CELLA  2                               
+TF_3SOVR  --UA-- TEMPERATURA MEDIA FUMI CELLA  3                               
+TF_4SOVR  --UA-- TEMPERATURA MEDIA FUMI CELLA  4                               
+TF_5SOVR  --UA-- TEMPERATURA MEDIA FUMI CELLA  5                               
+TF_6SOVR  --UA-- TEMPERATURA MEDIA FUMI CELLA  6                               
+TF_7SOVR  --UA-- TEMPERATURA MEDIA FUMI CELLA  7                               
+TF_8SOVR  --UA-- TEMPERATURA MEDIA FUMI CELLA  8                               
+TF_9SOVR  --UA-- TEMPERATURA MEDIA FUMI CELLA  9                               
+GF_1SOVR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  1                             
+GF_2SOVR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  2                             
+GF_3SOVR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  3                             
+GF_4SOVR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  4                             
+GF_5SOVR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  5                             
+GF_6SOVR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  6                             
+GF_7SOVR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  7                             
+GF_8SOVR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  8                             
+GF_9SOVR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  9                             
+WFCCCOMB  --IN-- #WIF_SOVR#....................<===CCN1COMB  BL.-COMB-         
+TF_8COMB  --IN-- #TIF_SOVR#....................<===CCN1COMB  BL.-COMB-         
+FAS_SOVR  --IN-- FATTORE DI SPORCAMENTO TUBI                                   
+%CO2COMB  --IN-- #%CO2SOVR#....................<===CCN1COMB  BL.-COMB-         
+%H2OCOMB  --IN-- #%PH2SOVR#....................<===CCN1COMB  BL.-COMB-         
+%FMACOMB  --IN-- #%H2OSOVR#....................<===CCN1COMB  BL.-COMB-         
+T_1_T3PA  --IN-- #TM11SOVR#....................<===DISNT3PA  BL.-T3PA-         
+T_1_T1CI  --IN-- #TM21SOVR#....................<===DISNT1CI  BL.-T1CI-         
+T_1_T3GA  --IN-- #TM31SOVR#....................<===DISNT3GA  BL.-T3GA-         
+TM1_SH2   --IN-- #TM41SOVR#....................<===-EVASH2   BL.-SH2 -         
+T_2_T3PA  --IN-- #TM12SOVR#....................<===DISNT3PA  BL.-T3PA-         
+T_2_T1CI  --IN-- #TM22SOVR#....................<===DISNT1CI  BL.-T1CI-         
+T_2_T3GA  --IN-- #TM32SOVR#....................<===DISNT3GA  BL.-T3GA-         
+TM2_SH2   --IN-- #TM42SOVR#....................<===-EVASH2   BL.-SH2 -         
+T_3_T3PA  --IN-- #TM13SOVR#....................<===DISNT3PA  BL.-T3PA-         
+T_3_T1CI  --IN-- #TM23SOVR#....................<===DISNT1CI  BL.-T1CI-         
+T_1_T2GA  --IN-- #TM33SOVR#....................<===DISNT2GA  BL.-T2GA-         
+TM3_SH2   --IN-- #TM43SOVR#....................<===-EVASH2   BL.-SH2 -         
+T_4_T3PA  --IN-- #TM14SOVR#....................<===DISNT3PA  BL.-T3PA-         
+T_4_T1CI  --IN-- #TM24SOVR#....................<===DISNT1CI  BL.-T1CI-         
+T_2_T2GA  --IN-- #TM34SOVR#....................<===DISNT2GA  BL.-T2GA-         
+TM4_SH2   --IN-- #TM44SOVR#....................<===-EVASH2   BL.-SH2 -         
+T_5_T1CI  --IN-- #TM15SOVR#....................<===DISNT1CI  BL.-T1CI-         
+T_3_T2GA  --IN-- #TM25SOVR#....................<===DISNT2GA  BL.-T2GA-         
+TM6_RH    --IN-- #TM35SOVR#....................<===-EVARH    BL.-RH  -         
+T_1_T2CI  --IN-- #TM16SOVR#....................<===DISNT2CI  BL.-T2CI-         
+T_4_T2GA  --IN-- #TM26SOVR#....................<===DISNT2GA  BL.-T2GA-         
+TM5_RH    --IN-- #TM36SOVR#....................<===-EVARH    BL.-RH  -         
+T_2_T2CI  --IN-- #TM17SOVR#....................<===DISNT2CI  BL.-T2CI-         
+T_5_T2GA  --IN-- #TM27SOVR#....................<===DISNT2GA  BL.-T2GA-         
+TM4_RH    --IN-- #TM37SOVR#....................<===-EVARH    BL.-RH  -         
+T_3_T2CI  --IN-- #TM18SOVR#....................<===DISNT2CI  BL.-T2CI-         
+T_1_T1GA  --IN-- #TM28SOVR#....................<===DISNT1GA  BL.-T1GA-         
+TM3_RH    --IN-- #TM38SOVR#....................<===-EVARH    BL.-RH  -         
+TM4_ECO   --IN-- #TM19SOVR#....................<===-EVAECO   BL.-ECO -         
+T_4_T2CI  --IN-- #TM29SOVR#....................<===DISNT2CI  BL.-T2CI-         
+T_2_T1GA  --IN-- #TM39SOVR#....................<===DISNT1GA  BL.-T1GA-         
+TM3_SH1   --IN-- #TM49SOVR#....................<===-EVASH1   BL.-SH1 -         
+TM2_RH    --IN-- #TM59SOVR#....................<===-EVARH    BL.-RH  -         
+****                                                                           
+****                                                                           
+DISNT3PA  BL.-T3PA- **** MODULO DISN - DISTRIB. TEMP. PASSO 3 CELLA 2          
+T_1_T3PA  --UA--     USCITA  1                                                 
+T_2_T3PA  --UA--     USCITA  2                                                 
+T_3_T3PA  --UA--     USCITA  3                                                 
+T_4_T3PA  --UA--     USCITA  4                                                 
+TM2_3PAS  --IN-- #AINGT3PA#....................<===-EVA3PAS  BL.-3PAS-         
+****                                                                           
+****                                                                           
+DISNT1CI  BL.-T1CI- **** MODULO DISN - DISTRIB. DI TEMP. CIELO  CELLA 1        
+T_1_T1CI  --UA--     USCITA  1                                                 
+T_2_T1CI  --UA--     USCITA  2                                                 
+T_3_T1CI  --UA--     USCITA  3                                                 
+T_4_T1CI  --UA--     USCITA  4                                                 
+T_5_T1CI  --UA--     USCITA  5                                                 
+TM1_CIEL  --IN-- #AINGT1CI#....................<===-EVACIEL  BL.-CIEL-         
+****                                                                           
+****                                                                           
+DISNT2CI  BL.-T2CI- **** MODULO DISN - DISTRIBUTORE DI TEMP. CIELO  CELLA 2    
+T_1_T2CI  --UA--     USCITA  1                                                 
+T_2_T2CI  --UA--     USCITA  2                                                 
+T_3_T2CI  --UA--     USCITA  3                                                 
+T_4_T2CI  --UA--     USCITA  4                                                 
+TM2_CIEL  --IN-- #AINGT2CI#....................<===-EVACIEL  BL.-CIEL-         
+****                                                                           
+****                                                                           
+DISNT1GA  BL.-T1GA- **** MODULO DISN - DISTRIB. DI TEMP. GABBIE CELLA 1        
+T_1_T1GA  --UA--     USCITA  1                                                 
+T_2_T1GA  --UA--     USCITA  2                                                 
+T_3_T1GA  --UA--     USCITA  3                                                 
+TM1_GABB  --IN-- #AINGT1GA#....................<===-EVAGABB  BL.-GABB-         
+****                                                                           
+****                                                                           
+DISNT2GA  BL.-T2GA- **** MODULO DISN - DISTRIB. DI TEMP. GABBIE CELLA 2        
+T_1_T2GA  --UA--     USCITA  1                                                 
+T_2_T2GA  --UA--     USCITA  2                                                 
+T_3_T2GA  --UA--     USCITA  3                                                 
+T_4_T2GA  --UA--     USCITA  4                                                 
+T_5_T2GA  --UA--     USCITA  5                                                 
+TM2_GABB  --IN-- #AINGT2GA#....................<===-EVAGABB  BL.-GABB-         
+****                                                                           
+****                                                                           
+DISNT3GA  BL.-T3GA- **** MODULO DISN - DISTRIB. DI TEMP. GABBIE CELLA 3        
+T_1_T3GA  --UA--     USCITA  1                                                 
+T_2_T3GA  --UA--     USCITA  2                                                 
+TM3_GABB  --IN-- #AINGT3GA#....................<===-EVAGABB  BL.-GABB-         
+****                                                                           
+****                                                                           
+COLTCUGA  BL.-CUGA- **** MODULO COLT - collettore uscita gabbie                
+HCOLCUGA  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCUGA  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCUGA  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTUGABB  --IN-- #WE_1CUGA#....................<===-EVAGABB  BL.-GABB-         
+HUTUGABB  --IN-- #HE_1CUGA#....................<===-EVAGABB  BL.-GABB-         
+WITUSH1   --IN-- #WU_1CUGA#....................<===-EVASH1   BL.-SH1 -         
+HIITSH1   --IN-- #HU_1CUGA#....................<===-EVASH1   BL.-SH1 -         
+TESTCUGA  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUGA  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+-EVASH1   BL.-SH1 - **** MODULO EVAP - scambiatore sh1                         
+PC1_SH1   --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_SH1   --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_SH1   --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+WG1_SH1   --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_SH1   --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+WUTUSH1   --UA-- PORTATA FLUIDO USCITA TUBAZIONE                               
+WITUSH1   --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_SH1   --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_SH1   --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_SH1   --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+QT1_SH1   --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_SH1   --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_SH1   --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+HUTUSH1   --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIITSH1   --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCUGA  --IN-- #HITUSH1 #....................<===COLTCUGA  BL.-CUGA-         
+HCOLCUS1  --IN-- #HUITSH1 #....................<===COLTCUS1  BL.-CUS1-         
+PCOLCUS1  --IN-- #PUTUSH1 #....................<===COLTCUS1  BL.-CUS1-         
+PCOLCUGA  --IN-- #PITUSH1 #....................<===COLTCUGA  BL.-CUGA-         
+TF_2RETR  --IN-- #TF11SH1 #....................<===FUMNRETR  BL.-RETR-         
+TF_1RETR  --IN-- #TF21SH1 #....................<===FUMNRETR  BL.-RETR-         
+TF_9SOVR  --IN-- #TF31SH1 #....................<===FUMNSOVR  BL.-SOVR-         
+GF_2RETR  --IN-- #GF11SH1 #....................<===FUMNRETR  BL.-RETR-         
+GF_1RETR  --IN-- #GF21SH1 #....................<===FUMNRETR  BL.-RETR-         
+GF_9SOVR  --IN-- #GF31SH1 #....................<===FUMNSOVR  BL.-SOVR-         
+ATTRSH1   --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+COLTCUS1  BL.-CUS1- **** MODULO COLT - collettore uscita sh1                   
+HCOLCUS1  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCUS1  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCUS1  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTUSH1   --IN-- #WE_1CUS1#....................<===-EVASH1   BL.-SH1 -         
+HUTUSH1   --IN-- #HE_1CUS1#....................<===-EVASH1   BL.-SH1 -         
+WVALA401  --IN-- #WU_1CUS1#....................<===VALVA401  BL.-A401-         
+HCOLCATA  --IN-- #HU_1CUS1#....................<===COLTCATA  BL.-CATA-         
+WVALB401  --IN-- #WU_2CUS1#....................<===VALVB401  BL.-B401-         
+HCOLCATB  --IN-- #HU_2CUS1#....................<===COLTCATB  BL.-CATB-         
+WVALVSH1  --IN-- #WU_3CUS1#....................<===VALVVSH1  BL.-VSH1-         
+HU_3CUS1  --IN-- ENTALPIA RAMO USCENTE N. 3 (W<0)                              
+WU_4CUS1  --IN-- PORTATA RAMO USCENTE N. 4                                     
+HU_4CUS1  --IN-- ENTALPIA RAMO USCENTE N. 4 (W<0)                              
+WU_5CUS1  --IN-- PORTATA RAMO USCENTE N. 5                                     
+HU_5CUS1  --IN-- ENTALPIA RAMO USCENTE N. 5 (W<0)                              
+WU_6CUS1  --IN-- PORTATA RAMO USCENTE N. 6                                     
+HU_6CUS1  --IN-- ENTALPIA RAMO USCENTE N. 6 (W<0)                              
+TESTCUS1  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUS1  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+VALVB401  BL.-B401- **** MODULO VALV - valvola  401 lato   B                   
+WVALB401  --UA-- PORTATA FLUIDO NELLA VALVOLA                                  
+PCOLCUS1  --IN-- #PIVAB401#....................<===COLTCUS1  BL.-CUS1-         
+PCOLCATB  --IN-- #PUVAB401#....................<===COLTCATB  BL.-CATB-         
+HCOLCUS1  --IN-- #HVALB401#....................<===COLTCUS1  BL.-CUS1-         
+ALZAB401  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+VALVA401  BL.-A401- **** MODULO VALV - valvola 401 lato A                      
+WVALA401  --UA-- PORTATA FLUIDO NELLA VALVOLA                                  
+PCOLCUS1  --IN-- #PIVAA401#....................<===COLTCUS1  BL.-CUS1-         
+PCOLCATA  --IN-- #PUVAA401#....................<===COLTCATA  BL.-CATA-         
+HCOLCUS1  --IN-- #HVALA401#....................<===COLTCUS1  BL.-CUS1-         
+ALZAA401  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+COLTCATA  BL.-CATA- **** MODULO COLT - collettore  attemperamento SH2 lato A   
+HCOLCATA  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCATA  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCATA  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WVALA401  --IN-- #WE_1CATA#....................<===VALVA401  BL.-A401-         
+HCOLCUS1  --IN-- #HE_1CATA#....................<===COLTCUS1  BL.-CUS1-         
+WVALATSA  --IN-- #WE_2CATA#....................<===VALVATSA  BL.-ATSA-         
+HCOLCIEC  --IN-- #HE_2CATA#....................<===COLTCIEC  BL.-CIEC-         
+WTUBTASA  --IN-- #WU_1CATA#....................<===TUBOTASA  BL.-TASA-         
+HCOLCIS2  --IN-- #HU_1CATA#....................<===COLTCIS2  BL.-CIS2-         
+TESTCATA  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCATA  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+COLTCATB  BL.-CATB- **** MODULO COLT - collettore attemperamento SH2 lato  B   
+HCOLCATB  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCATB  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCATB  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WVALB401  --IN-- #WE_1CATB#....................<===VALVB401  BL.-B401-         
+HCOLCUS1  --IN-- #HE_1CATB#....................<===COLTCUS1  BL.-CUS1-         
+WVALATSB  --IN-- #WE_2CATB#....................<===VALVATSB  BL.-ATSB-         
+HCOLCIEC  --IN-- #HE_2CATB#....................<===COLTCIEC  BL.-CIEC-         
+WTUBTASB  --IN-- #WU_1CATB#....................<===TUBOTASB  BL.-TASB-         
+HCOLCIS2  --IN-- #HU_1CATB#....................<===COLTCIS2  BL.-CIS2-         
+TESTCATB  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCATB  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+VALVATSA  BL.-ATSA- **** MODULO VALV - valvola attemperamento ad acqua SH2 lato
+WVALATSA  --UA-- port. attemp. ad acqua SH2 lato A                             
+PCOLCIEC  --IN-- #PIVAATSA#....................<===COLTCIEC  BL.-CIEC-         
+PCOLCATA  --IN-- #PUVAATSA#....................<===COLTCATA  BL.-CATA-         
+HCOLCIEC  --IN-- #HVALATSA#....................<===COLTCIEC  BL.-CIEC-         
+ALZAATSA  --IN-- posiz. attemp. ad acqua SH2 lato A                            
+****                                                                           
+****                                                                           
+VALVATSB  BL.-ATSB- **** MODULO VALV - attemperamento ad acqua SH2 lato B      
+WVALATSB  --UA-- port. attemperamento ad acqua SH2 lato B                      
+PCOLCIEC  --IN-- #PIVAATSB#....................<===COLTCIEC  BL.-CIEC-         
+PCOLCATB  --IN-- #PUVAATSB#....................<===COLTCATB  BL.-CATB-         
+HCOLCIEC  --IN-- #HVALATSB#....................<===COLTCIEC  BL.-CIEC-         
+ALZAATSB  --IN-- posiz. valv. attemp. SH2 lato B                               
+****                                                                           
+****                                                                           
+FUMNRETR  BL.-RETR- **** MODULO FUMN - condotto fumi -retropasso di caldaia    
+TUF_RETR  --UA-- TEMPERATURA DI USCITA FUMI                                    
+TF_1RETR  --UA-- TEMPERATURA MEDIA FUMI CELLA  1                               
+TF_2RETR  --UA-- TEMPERATURA MEDIA FUMI CELLA  2                               
+TF_3RETR  --UA-- TEMPERATURA MEDIA FUMI CELLA  3                               
+TF_4RETR  --UA-- TEMPERATURA MEDIA FUMI CELLA  4                               
+TF_5RETR  --UA-- TEMPERATURA MEDIA FUMI CELLA  5                               
+TF_6RETR  --UA-- TEMPERATURA MEDIA FUMI CELLA  6                               
+GF_1RETR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  1                             
+GF_2RETR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  2                             
+GF_3RETR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  3                             
+GF_4RETR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  4                             
+GF_5RETR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  5                             
+GF_6RETR  --UA-- COEFFICIENTE DI SCAMBIO  CELLA  6                             
+WFCCCOMB  --IN-- #WIF_RETR#....................<===CCN1COMB  BL.-COMB-         
+TUF_SOVR  --IN-- #TIF_RETR#....................<===FUMNSOVR  BL.-SOVR-         
+FAS_RETR  --IN-- FATTORE DI SPORCAMENTO TUBI                                   
+%CO2COMB  --IN-- #%CO2RETR#....................<===CCN1COMB  BL.-COMB-         
+%H2OCOMB  --IN-- #%PH2RETR#....................<===CCN1COMB  BL.-COMB-         
+%FMACOMB  --IN-- #%H2ORETR#....................<===CCN1COMB  BL.-COMB-         
+T_1_T4EC  --IN-- #TM11RETR#....................<===DISNT4EC  BL.-T4EC-         
+T_1_T1GA  --IN-- #TM21RETR#....................<===DISNT1GA  BL.-T1GA-         
+TM2_SH1   --IN-- #TM31RETR#....................<===-EVASH1   BL.-SH1 -         
+T_1_T2RH  --IN-- #TM41RETR#....................<===DISNT2RH  BL.-T2RH-         
+T_2_T4EC  --IN-- #TM12RETR#....................<===DISNT4EC  BL.-T4EC-         
+T_2_T1GA  --IN-- #TM22RETR#....................<===DISNT1GA  BL.-T1GA-         
+TM1_SH1   --IN-- #TM32RETR#....................<===-EVASH1   BL.-SH1 -         
+T_2_T2RH  --IN-- #TM42RETR#....................<===DISNT2RH  BL.-T2RH-         
+T_3_T4EC  --IN-- #TM13RETR#....................<===DISNT4EC  BL.-T4EC-         
+T_3_T1GA  --IN-- #TM23RETR#....................<===DISNT1GA  BL.-T1GA-         
+TM1_RH    --IN-- #TM33RETR#....................<===-EVARH    BL.-RH  -         
+TM3_ECO   --IN-- #TM14RETR#....................<===-EVAECO   BL.-ECO -         
+TM2_ECO   --IN-- #TM15RETR#....................<===-EVAECO   BL.-ECO -         
+TM1_ECO   --IN-- #TM16RETR#....................<===-EVAECO   BL.-ECO -         
+****                                                                           
+****                                                                           
+TUBOTASA  BL.-TASA- **** MODULO TUBO - tubo suul'attemp. sh2  lato a           
+WTUBTASA  --UA-- PORTATA MONTE-VALLE PERDITA DI CARICO                         
+PCOLCATA  --IN-- #PITUTASA#....................<===COLTCATA  BL.-CATA-         
+PCOLCIS2  --IN-- #PUTUTASA#....................<===COLTCIS2  BL.-CIS2-         
+HCOLCATA  --IN-- #HTUBTASA#....................<===COLTCATA  BL.-CATA-         
+AKTBTASA  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+****                                                                           
+****                                                                           
+TUBOTASB  BL.-TASB- **** MODULO TUBO - tubo sull'attemperamento sh2 lato b     
+WTUBTASB  --UA-- PORTATA MONTE-VALLE PERDITA DI CARICO                         
+PCOLCATB  --IN-- #PITUTASB#....................<===COLTCATB  BL.-CATB-         
+PCOLCIS2  --IN-- #PUTUTASB#....................<===COLTCIS2  BL.-CIS2-         
+HCOLCATB  --IN-- #HTUBTASB#....................<===COLTCATB  BL.-CATB-         
+AKTBTASB  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+****                                                                           
+****                                                                           
+COLTCIS2  BL.-CIS2- **** MODULO COLT - collettore ingresso sh2                 
+HCOLCIS2  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCIS2  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCIS2  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WTUBTASA  --IN-- #WE_1CIS2#....................<===TUBOTASA  BL.-TASA-         
+HCOLCATA  --IN-- #HE_1CIS2#....................<===COLTCATA  BL.-CATA-         
+WTUBTASB  --IN-- #WE_2CIS2#....................<===TUBOTASB  BL.-TASB-         
+HCOLCATB  --IN-- #HE_2CIS2#....................<===COLTCATB  BL.-CATB-         
+WE_3CIS2  --IN-- PORTATA RAMO ENTRANTE  N. 3                                   
+HE_3CIS2  --IN-- ENTALPIA RAMO ENTRANTE N. 3                                   
+WITUSH2   --IN-- #WU_1CIS2#....................<===-EVASH2   BL.-SH2 -         
+HIITSH2   --IN-- #HU_1CIS2#....................<===-EVASH2   BL.-SH2 -         
+TESTCIS2  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCIS2  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+-EVASH2   BL.-SH2 - **** MODULO EVAP - surriscaldatore SH2                     
+PC1_SH2   --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_SH2   --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_SH2   --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+PC4_SH2   --US-- PRESSIONE MEDIA CELLA  4 DEL TUBO                             
+WG1_SH2   --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_SH2   --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+WG3_SH2   --UA-- PORTATA FLUIDO USCITA CELLA 3 DEL TUBO                        
+WUTUSH2   --UA-- port. vapore uscita SH2                                       
+WITUSH2   --UA-- port. vapore ingresso SH2                                     
+TM1_SH2   --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_SH2   --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_SH2   --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+TM4_SH2   --UA-- TEMPERATURA ESTERNA METALLO CELLA  4 DEL TUBO                 
+QT1_SH2   --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_SH2   --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_SH2   --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+QT4_SH2   --UA-- POTENZA ENTRANTE NELLA CELLA  4 DEL TUBO                      
+HUTUSH2   --UA-- ENTALPIA vap. uscita SH2                                      
+HIITSH2   --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCIS2  --IN-- #HITUSH2 #....................<===COLTCIS2  BL.-CIS2-         
+HCOLCUS2  --IN-- #HUITSH2 #....................<===COLTCUS2  BL.-CUS2-         
+PCOLCUS2  --IN-- #PUTUSH2 #....................<===COLTCUS2  BL.-CUS2-         
+PCOLCIS2  --IN-- #PITUSH2 #....................<===COLTCIS2  BL.-CIS2-         
+TF_8COMB  --IN-- #TF11SH2 #....................<===CCN1COMB  BL.-COMB-         
+TF_1SOVR  --IN-- #TF12SH2 #....................<===FUMNSOVR  BL.-SOVR-         
+TF_2SOVR  --IN-- #TF21SH2 #....................<===FUMNSOVR  BL.-SOVR-         
+TF_3SOVR  --IN-- #TF31SH2 #....................<===FUMNSOVR  BL.-SOVR-         
+TF_4SOVR  --IN-- #TF41SH2 #....................<===FUMNSOVR  BL.-SOVR-         
+GC48COMB  --IN-- #GF11SH2 #....................<===CCN1COMB  BL.-COMB-         
+GF_1SOVR  --IN-- #GF12SH2 #....................<===FUMNSOVR  BL.-SOVR-         
+GF_2SOVR  --IN-- #GF21SH2 #....................<===FUMNSOVR  BL.-SOVR-         
+GF_3SOVR  --IN-- #GF31SH2 #....................<===FUMNSOVR  BL.-SOVR-         
+GF_4SOVR  --IN-- #GF41SH2 #....................<===FUMNSOVR  BL.-SOVR-         
+ATTRSH2   --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+COLTCUS2  BL.-CUS2- **** MODULO COLT - collettore uscita SH2                   
+HCOLCUS2  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCUS2  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCUS2  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTUSH2   --IN-- #WE_1CUS2#....................<===-EVASH2   BL.-SH2 -         
+HUTUSH2   --IN-- #HE_1CUS2#....................<===-EVASH2   BL.-SH2 -         
+WE_2CUS2  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CUS2  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WITULVS1  --IN-- #WU_1CUS2#....................<===+EVALVS1  BL.-LVS1-         
+HIITLVS1  --IN-- #HU_1CUS2#....................<===+EVALVS1  BL.-LVS1-         
+WITULVS2  --IN-- #WU_2CUS2#....................<===+EVALVS2  BL.-LVS2-         
+HIITLVS2  --IN-- #HU_2CUS2#....................<===+EVALVS2  BL.-LVS2-         
+WVALVSH2  --IN-- #WU_3CUS2#....................<===VALVVSH2  BL.-VSH2-         
+HU_3CUS2  --IN-- ENTALPIA RAMO USCENTE N. 3 (W<0)                              
+WU_4CUS2  --IN-- PORTATA RAMO USCENTE N. 4                                     
+HU_4CUS2  --IN-- ENTALPIA RAMO USCENTE N. 4 (W<0)                              
+TESTCUS2  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUS2  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
++EVALVS1  BL.-LVS1- **** MODULO EVAP - tubazione ammissione turbina A.P.       
+PC1_LVS1  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_LVS1  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_LVS1  --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+WG1_LVS1  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_LVS1  --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+PUTULVS1  --UA-- PRESSIONE DI USCITA TUBAZIONE                                 
+WITULVS1  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_LVS1  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_LVS1  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_LVS1  --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+QT1_LVS1  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_LVS1  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_LVS1  --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+HUTULVS1  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIITLVS1  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCUS2  --IN-- #HITULVS1#....................<===COLTCUS2  BL.-CUS2-         
+HUITLVS1  --IN-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+WUTULVS1  --IN-- PORTATA FLUIDO USCITA TUBAZIONE                               
+PCOLCUS2  --IN-- #PITULVS1#....................<===COLTCUS2  BL.-CUS2-         
+TF11LVS1  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LVS1  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LVS1  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LVS1  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LVS1  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LVS1  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLVS1  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
++EVALVS2  BL.-LVS2- **** MODULO EVAP - tubazione ammissione turbina A.P.       
+PC1_LVS2  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_LVS2  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_LVS2  --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+WG1_LVS2  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_LVS2  --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+PUTULVS2  --UA-- PRESSIONE DI USCITA TUBAZIONE                                 
+WITULVS2  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_LVS2  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_LVS2  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_LVS2  --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+QT1_LVS2  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_LVS2  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_LVS2  --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+HUTULVS2  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIITLVS2  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCUS2  --IN-- #HITULVS2#....................<===COLTCUS2  BL.-CUS2-         
+HUITLVS2  --IN-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+WUTULVS2  --IN-- PORTATA FLUIDO USCITA TUBAZIONE                               
+PCOLCUS2  --IN-- #PITULVS2#....................<===COLTCUS2  BL.-CUS2-         
+TF11LVS2  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LVS2  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LVS2  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LVS2  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LVS2  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LVS2  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLVS2  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+COLTCIEC  BL.-CIEC- **** MODULO COLT - collettore ingresso all'economizzatore  
+HCOLCIEC  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCIEC  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCIEC  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WE_1CIEC  --IN-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CIEC  --IN-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WITUECO   --IN-- #WU_1CIEC#....................<===-EVAECO   BL.-ECO -         
+HIITECO   --IN-- #HU_1CIEC#....................<===-EVAECO   BL.-ECO -         
+WVALATSA  --IN-- #WU_2CIEC#....................<===VALVATSA  BL.-ATSA-         
+HCOLCATA  --IN-- #HU_2CIEC#....................<===COLTCATA  BL.-CATA-         
+WVALATSB  --IN-- #WU_3CIEC#....................<===VALVATSB  BL.-ATSB-         
+HCOLCATB  --IN-- #HU_3CIEC#....................<===COLTCATB  BL.-CATB-         
+TESTCIEC  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCIEC  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+-EVAECO   BL.-ECO - **** MODULO EVAP - economizzatore                          
+PC1_ECO   --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_ECO   --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_ECO   --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+PC4_ECO   --US-- PRESSIONE MEDIA CELLA  4 DEL TUBO                             
+WG1_ECO   --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_ECO   --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+WG3_ECO   --UA-- PORTATA FLUIDO USCITA CELLA 3 DEL TUBO                        
+WUTUECO   --UA-- PORTATA FLUIDO USCITA TUBAZIONE                               
+WITUECO   --UA-- port. acqua ingresso ECO                                      
+TM1_ECO   --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_ECO   --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_ECO   --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+TM4_ECO   --UA-- TEMPERATURA ESTERNA METALLO CELLA  4 DEL TUBO                 
+QT1_ECO   --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_ECO   --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_ECO   --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+QT4_ECO   --UA-- POTENZA ENTRANTE NELLA CELLA  4 DEL TUBO                      
+HUTUECO   --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIITECO   --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCIEC  --IN-- #HITUECO #....................<===COLTCIEC  BL.-CIEC-         
+HCOLCUEC  --IN-- #HUITECO #....................<===COLTCUEC  BL.-CUEC-         
+PCOLCUEC  --IN-- #PUTUECO #....................<===COLTCUEC  BL.-CUEC-         
+PCOLCIEC  --IN-- #PITUECO #....................<===COLTCIEC  BL.-CIEC-         
+TF_6RETR  --IN-- #TF11ECO #....................<===FUMNRETR  BL.-RETR-         
+TF_5RETR  --IN-- #TF21ECO #....................<===FUMNRETR  BL.-RETR-         
+TF_4RETR  --IN-- #TF31ECO #....................<===FUMNRETR  BL.-RETR-         
+TF_9SOVR  --IN-- #TF41ECO #....................<===FUMNSOVR  BL.-SOVR-         
+TF_1RETR  --IN-- #TF42ECO #....................<===FUMNRETR  BL.-RETR-         
+TF_2RETR  --IN-- #TF43ECO #....................<===FUMNRETR  BL.-RETR-         
+TF_3RETR  --IN-- #TF44ECO #....................<===FUMNRETR  BL.-RETR-         
+GF_6RETR  --IN-- #GF11ECO #....................<===FUMNRETR  BL.-RETR-         
+GF_5RETR  --IN-- #GF21ECO #....................<===FUMNRETR  BL.-RETR-         
+GF_4RETR  --IN-- #GF31ECO #....................<===FUMNRETR  BL.-RETR-         
+GF_9SOVR  --IN-- #GF41ECO #....................<===FUMNSOVR  BL.-SOVR-         
+GF_1RETR  --IN-- #GF42ECO #....................<===FUMNRETR  BL.-RETR-         
+GF_2RETR  --IN-- #GF43ECO #....................<===FUMNRETR  BL.-RETR-         
+GF_3RETR  --IN-- #GF44ECO #....................<===FUMNRETR  BL.-RETR-         
+ATTRECO   --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+COLTCUEC  BL.-CUEC- **** MODULO COLT - collettore uscita economizzatore        
+HCOLCUEC  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCUEC  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCUEC  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTUECO   --IN-- #WE_1CUEC#....................<===-EVAECO   BL.-ECO -         
+HUTUECO   --IN-- #HE_1CUEC#....................<===-EVAECO   BL.-ECO -         
+WITU1PAS  --IN-- #WU_1CUEC#....................<===-EVA1PAS  BL.-1PAS-         
+HIIT1PAS  --IN-- #HU_1CUEC#....................<===-EVA1PAS  BL.-1PAS-         
+TESTCUEC  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUEC  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+DISNT4EC  BL.-T4EC- **** MODULO DISN - distributore di temperature cella 4 ECO 
+T_1_T4EC  --UA--     USCITA  1                                                 
+T_2_T4EC  --UA--     USCITA  2                                                 
+T_3_T4EC  --UA--     USCITA  3                                                 
+TM4_ECO   --IN-- #AINGT4EC#....................<===-EVAECO   BL.-ECO -         
+****                                                                           
+****                                                                           
+-TUBTECO  BL.-TECO- **** MODULO TUBO - tubo di collegamento eco-passo1         
+PUTUTECO  --UA-- PRESSIONE A VALLE PERDITA DI CARICO                           
+PCOLCUEC  --IN-- #PITUTECO#....................<===COLTCUEC  BL.-CUEC-         
+WITU1PAS  --IN-- #WTUBTECO#....................<===-EVA1PAS  BL.-1PAS-         
+HCOLCUEC  --IN-- #HTUBTECO#....................<===COLTCUEC  BL.-CUEC-         
+AKTBTECO  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+****                                                                           
+****                                                                           
+-TUBTP12  BL.-TP12- **** MODULO TUBO - tubo di collegamento passo1 passo2      
+PUTUTP12  --UA-- PRESSIONE A VALLE PERDITA DI CARICO                           
+PCOLCU1P  --IN-- #PITUTP12#....................<===COLTCU1P  BL.-CU1P-         
+WITU2PAS  --IN-- #WTUBTP12#....................<===-EVA2PAS  BL.-2PAS-         
+HCOLCU1P  --IN-- #HTUBTP12#....................<===COLTCU1P  BL.-CU1P-         
+AKTBTP12  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+****                                                                           
+****                                                                           
+COLTCUAP  BL.-CUAP- **** MODULO COLT - collettore uscita turbina alta pressione
+HCOLCUAP  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCUAP  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCUAP  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WE_1CUAP  --IN-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CUAP  --IN-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WE_2CUAP  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CUAP  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WITULIR1  --IN-- #WU_1CUAP#....................<===-EVALIR1  BL.-LIR1-         
+HIITLIR1  --IN-- #HU_1CUAP#....................<===-EVALIR1  BL.-LIR1-         
+WITULIR2  --IN-- #WU_2CUAP#....................<===-EVALIR2  BL.-LIR2-         
+HIITLIR2  --IN-- #HU_2CUAP#....................<===-EVALIR2  BL.-LIR2-         
+USOMCSP2  --IN-- #WU_3CUAP#....................<===NODOCSP2  BL.-CSP2-         
+HU_3CUAP  --IN-- ENTALPIA RAMO USCENTE N. 3 (W<0)                              
+TESTCUAP  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUAP  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+SPILTI5A  BL.-TI5A- **** MODULO SPIL - spillamento vapore risc. 5A             
+WSPITI5A  --UA-- Portata vapore spillamento turbina                            
+PCOLCUAP  --IN-- #PTURTI5A#....................<===COLTCUAP  BL.-CUAP-         
+WALITI5A  --IN-- Portata acqua riscaldata                                      
+HALITI5A  --IN-- Entalpia acqua ingresso riscaldatore                          
+HALUTI5A  --IN-- Entalpia acqua uscita riscaldatore                            
+PALITI5A  --IN-- Pressione acqua riscaldata                                    
+ALZ1TI5A  --IN-- Alzata valvola motorizzata sullo spillamento                  
+ALZCTI5A  --IN-- Alzata valvola di non ritorno                                 
+ALZ2TI5A  --IN-- Alzata valvola motorizzata a monte riscaldatore               
+****                                                                           
+****                                                                           
+SPILTI5B  BL.-TI5B- **** MODULO SPIL - spillamento vapore risc. 5 B            
+WSPITI5B  --UA-- Portata vapore spillamento turbina                            
+PCOLCUAP  --IN-- #PTURTI5B#....................<===COLTCUAP  BL.-CUAP-         
+WALITI5B  --IN-- Portata acqua riscaldata                                      
+HALITI5B  --IN-- Entalpia acqua ingresso riscaldatore                          
+HALUTI5B  --IN-- Entalpia acqua uscita riscaldatore                            
+PALITI5B  --IN-- Pressione acqua riscaldata                                    
+ALZ1TI5B  --IN-- Alzata valvola motorizzata sullo spillamento                  
+ALZCTI5B  --IN-- Alzata valvola di non ritorno                                 
+ALZ2TI5B  --IN-- Alzata valvola motorizzata a monte riscaldatore               
+****                                                                           
+****                                                                           
+SPILTSDG  BL.-TSDG- **** MODULO SPIL - spillamento vapore per pegging degasator
+WSPITSDG  --UA-- Portata vapore spillamento turbina                            
+PCOLCUAP  --IN-- #PTURTSDG#....................<===COLTCUAP  BL.-CUAP-         
+WALITSDG  --IN-- Portata acqua riscaldata                                      
+HALITSDG  --IN-- Entalpia acqua ingresso riscaldatore                          
+HALUTSDG  --IN-- Entalpia acqua uscita riscaldatore                            
+PALITSDG  --IN-- Pressione acqua riscaldata                                    
+ALZ1TSDG  --IN-- Alzata valvola motorizzata sullo spillamento                  
+ALZCTSDG  --IN-- Alzata valvola di non ritorno                                 
+ALZ2TSDG  --IN-- Alzata valvola motorizzata a monte riscaldatore               
+****                                                                           
+****                                                                           
+VALVTUAV  BL.-TUAV- **** MODULO VALV - spillamento vapore utenze diverse       
+WVALTUAV  --UA-- PORTATA FLUIDO NELLA VALVOLA                                  
+PCOLCUAP  --IN-- #PIVATUAV#....................<===COLTCUAP  BL.-CUAP-         
+PUVATUAV  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+HCOLCUAP  --IN-- #HVALTUAV#....................<===COLTCUAP  BL.-CUAP-         
+ALZATUAV  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+NODOCSP2  BL.-CSP2- **** MODULO NODO - sommatore portate spillamento           
+USOMCSP2  --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+WSPITI5A  --IN-- #IN_1CSP2#....................<===SPILTI5A  BL.-TI5A-         
+WSPITI5B  --IN-- #IN_2CSP2#....................<===SPILTI5B  BL.-TI5B-         
+WSPITSDG  --IN-- #IN_3CSP2#....................<===SPILTSDG  BL.-TSDG-         
+WVALTUAV  --IN-- #IN_4CSP2#....................<===VALVTUAV  BL.-TUAV-         
+****                                                                           
+****                                                                           
+-EVALIR1  BL.-LIR1- **** MODULO EVAP - tubaz. da uscita turbina AP a RH        
+PC1_LIR1  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_LIR1  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_LIR1  --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+WG1_LIR1  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_LIR1  --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+WUTULIR1  --UA-- PORTATA FLUIDO USCITA TUBAZIONE                               
+WITULIR1  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_LIR1  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_LIR1  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_LIR1  --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+QT1_LIR1  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_LIR1  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_LIR1  --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+HUTULIR1  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIITLIR1  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCUAP  --IN-- #HITULIR1#....................<===COLTCUAP  BL.-CUAP-         
+HCOLCARA  --IN-- #HUITLIR1#....................<===COLTCARA  BL.-CARA-         
+PCOLCARA  --IN-- #PUTULIR1#....................<===COLTCARA  BL.-CARA-         
+PCOLCUAP  --IN-- #PITULIR1#....................<===COLTCUAP  BL.-CUAP-         
+TF11LIR1  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LIR1  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LIR1  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LIR1  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LIR1  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LIR1  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLIR1  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+-EVALIR2  BL.-LIR2- **** MODULO EVAP - tubaz. da uscita turbina AP a RH        
+PC1_LIR2  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_LIR2  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_LIR2  --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+WG1_LIR2  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_LIR2  --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+WUTULIR2  --UA-- PORTATA FLUIDO USCITA TUBAZIONE                               
+WITULIR2  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_LIR2  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_LIR2  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_LIR2  --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+QT1_LIR2  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_LIR2  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_LIR2  --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+HUTULIR2  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIITLIR2  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCUAP  --IN-- #HITULIR2#....................<===COLTCUAP  BL.-CUAP-         
+HCOLCARB  --IN-- #HUITLIR2#....................<===COLTCARB  BL.-CARB-         
+PCOLCARB  --IN-- #PUTULIR2#....................<===COLTCARB  BL.-CARB-         
+PCOLCUAP  --IN-- #PITULIR2#....................<===COLTCUAP  BL.-CUAP-         
+TF11LIR2  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LIR2  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LIR2  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LIR2  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LIR2  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LIR2  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLIR2  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+COLTCARB  BL.-CARB- **** MODULO COLT - collettore attemperamento RH lato B     
+HCOLCARB  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCARB  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCARB  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTULIR2  --IN-- #WE_1CARB#....................<===-EVALIR2  BL.-LIR2-         
+HUTULIR2  --IN-- #HE_1CARB#....................<===-EVALIR2  BL.-LIR2-         
+WE_2CARB  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CARB  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WTUBTARB  --IN-- #WU_1CARB#....................<===TUBOTARB  BL.-TARB-         
+HCOLCIRH  --IN-- #HU_1CARB#....................<===COLTCIRH  BL.-CIRH-         
+TESTCARB  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCARB  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+COLTCARA  BL.-CARA- **** MODULO COLT - collettore attemperamento RH lato A     
+HCOLCARA  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCARA  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCARA  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTULIR1  --IN-- #WE_1CARA#....................<===-EVALIR1  BL.-LIR1-         
+HUTULIR1  --IN-- #HE_1CARA#....................<===-EVALIR1  BL.-LIR1-         
+WE_2CARA  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CARA  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WTUBTARA  --IN-- #WU_1CARA#....................<===TUBOTARA  BL.-TARA-         
+HCOLCIRH  --IN-- #HU_1CARA#....................<===COLTCIRH  BL.-CIRH-         
+TESTCARA  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCARA  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+TUBOTARA  BL.-TARA- **** MODULO TUBO - tubo attemperam. rh lato A              
+WTUBTARA  --UA-- PORTATA MONTE-VALLE PERDITA DI CARICO                         
+PCOLCARA  --IN-- #PITUTARA#....................<===COLTCARA  BL.-CARA-         
+PCOLCIRH  --IN-- #PUTUTARA#....................<===COLTCIRH  BL.-CIRH-         
+HCOLCARA  --IN-- #HTUBTARA#....................<===COLTCARA  BL.-CARA-         
+AKTBTARA  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+****                                                                           
+****                                                                           
+TUBOTARB  BL.-TARB- **** MODULO TUBO - tubo attemp. rh lato B                  
+WTUBTARB  --UA-- PORTATA MONTE-VALLE PERDITA DI CARICO                         
+PCOLCARB  --IN-- #PITUTARB#....................<===COLTCARB  BL.-CARB-         
+PCOLCIRH  --IN-- #PUTUTARB#....................<===COLTCIRH  BL.-CIRH-         
+HCOLCARB  --IN-- #HTUBTARB#....................<===COLTCARB  BL.-CARB-         
+AKTBTARB  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+****                                                                           
+****                                                                           
+COLTCIRH  BL.-CIRH- **** MODULO COLT - collettore ingresso RH                  
+HCOLCIRH  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCIRH  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCIRH  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WTUBTARA  --IN-- #WE_1CIRH#....................<===TUBOTARA  BL.-TARA-         
+HCOLCARA  --IN-- #HE_1CIRH#....................<===COLTCARA  BL.-CARA-         
+WTUBTARB  --IN-- #WE_2CIRH#....................<===TUBOTARB  BL.-TARB-         
+HCOLCARB  --IN-- #HE_2CIRH#....................<===COLTCARB  BL.-CARB-         
+WITURH    --IN-- #WU_1CIRH#....................<===-EVARH    BL.-RH  -         
+HIITRH    --IN-- #HU_1CIRH#....................<===-EVARH    BL.-RH  -         
+WVALVRHI  --IN-- #WU_2CIRH#....................<===VALVVRHI  BL.-VRHI-         
+HU_2CIRH  --IN-- ENTALPIA RAMO USCENTE N. 2 (W<0)                              
+TESTCIRH  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCIRH  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
+-EVARH    BL.-RH  - **** MODULO EVAP - risurriscaldatore RH                    
+PC1_RH    --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_RH    --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_RH    --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+PC4_RH    --US-- PRESSIONE MEDIA CELLA  4 DEL TUBO                             
+PC5_RH    --US-- PRESSIONE MEDIA CELLA  5 DEL TUBO                             
+PC6_RH    --US-- PRESSIONE MEDIA CELLA  6 DEL TUBO                             
+WG1_RH    --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_RH    --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+WG3_RH    --UA-- PORTATA FLUIDO USCITA CELLA 3 DEL TUBO                        
+WG4_RH    --UA-- PORTATA FLUIDO USCITA CELLA 4 DEL TUBO                        
+WG5_RH    --UA-- PORTATA FLUIDO USCITA CELLA 5 DEL TUBO                        
+WUTURH    --UA-- port. usc. risurriscaldatore RH                               
+WITURH    --UA-- port. ingress. RH                                             
+TM1_RH    --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_RH    --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_RH    --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+TM4_RH    --UA-- TEMPERATURA ESTERNA METALLO CELLA  4 DEL TUBO                 
+TM5_RH    --UA-- TEMPERATURA ESTERNA METALLO CELLA  5 DEL TUBO                 
+TM6_RH    --UA-- TEMPERATURA ESTERNA METALLO CELLA  6 DEL TUBO                 
+QT1_RH    --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_RH    --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_RH    --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+QT4_RH    --UA-- POTENZA ENTRANTE NELLA CELLA  4 DEL TUBO                      
+QT5_RH    --UA-- POTENZA ENTRANTE NELLA CELLA  5 DEL TUBO                      
+QT6_RH    --UA-- POTENZA ENTRANTE NELLA CELLA  6 DEL TUBO                      
+HUTURH    --UA-- ENTALPIA uscita RH                                            
+HIITRH    --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCIRH  --IN-- #HITURH  #....................<===COLTCIRH  BL.-CIRH-         
+HCOLCURH  --IN-- #HUITRH  #....................<===COLTCURH  BL.-CURH-         
+PCOLCURH  --IN-- #PUTURH  #....................<===COLTCURH  BL.-CURH-         
+PCOLCIRH  --IN-- #PITURH  #....................<===COLTCIRH  BL.-CIRH-         
+TF_3RETR  --IN-- #TF11RH  #....................<===FUMNRETR  BL.-RETR-         
+TF_9SOVR  --IN-- #TF21RH  #....................<===FUMNSOVR  BL.-SOVR-         
+TF_1RETR  --IN-- #TF22RH  #....................<===FUMNRETR  BL.-RETR-         
+TF_2RETR  --IN-- #TF23RH  #....................<===FUMNRETR  BL.-RETR-         
+TF_8SOVR  --IN-- #TF31RH  #....................<===FUMNSOVR  BL.-SOVR-         
+TF_7SOVR  --IN-- #TF41RH  #....................<===FUMNSOVR  BL.-SOVR-         
+TF_6SOVR  --IN-- #TF51RH  #....................<===FUMNSOVR  BL.-SOVR-         
+TF_5SOVR  --IN-- #TF61RH  #....................<===FUMNSOVR  BL.-SOVR-         
+GF_3RETR  --IN-- #GF11RH  #....................<===FUMNRETR  BL.-RETR-         
+GF_9SOVR  --IN-- #GF21RH  #....................<===FUMNSOVR  BL.-SOVR-         
+GF_1RETR  --IN-- #GF22RH  #....................<===FUMNRETR  BL.-RETR-         
+GF_2RETR  --IN-- #GF23RH  #....................<===FUMNRETR  BL.-RETR-         
+GF_8SOVR  --IN-- #GF31RH  #....................<===FUMNSOVR  BL.-SOVR-         
+GF_7SOVR  --IN-- #GF41RH  #....................<===FUMNSOVR  BL.-SOVR-         
+GF_6SOVR  --IN-- #GF51RH  #....................<===FUMNSOVR  BL.-SOVR-         
+GF_5SOVR  --IN-- #GF61RH  #....................<===FUMNSOVR  BL.-SOVR-         
+ATTRRH    --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+COLTCURH  BL.-CURH- **** MODULO COLT - collettore uscita RH                    
+HCOLCURH  --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                
+PCOLCURH  --UA-- PRESSIONE FLUIDO NEL COLLETTORE                               
+TCOLCURH  --UA-- TEMPERATURA METALLO DEL COLLETTORE                            
+WUTURH    --IN-- #WE_1CURH#....................<===-EVARH    BL.-RH  -         
+HUTURH    --IN-- #HE_1CURH#....................<===-EVARH    BL.-RH  -         
+WE_2CURH  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CURH  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WE_3CURH  --IN-- PORTATA RAMO ENTRANTE  N. 3                                   
+HE_3CURH  --IN-- ENTALPIA RAMO ENTRANTE N. 3                                   
+WITULUR1  --IN-- #WU_1CURH#....................<===+EVALUR1  BL.-LUR1-         
+HIITLUR1  --IN-- #HU_1CURH#....................<===+EVALUR1  BL.-LUR1-         
+WITULUR2  --IN-- #WU_2CURH#....................<===+EVALUR2  BL.-LUR2-         
+HIITLUR2  --IN-- #HU_2CURH#....................<===+EVALUR2  BL.-LUR2-         
+WVALVRHU  --IN-- #WU_3CURH#....................<===VALVVRHU  BL.-VRHU-         
+HU_3CURH  --IN-- ENTALPIA RAMO USCENTE N. 3 (W<0)                              
+TESTCURH  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCURH  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+****                                                                           
+****                                                                           
++EVALUR1  BL.-LUR1- **** MODULO EVAP - tubazione riammiss. vapore turbina  MP  
+PC1_LUR1  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_LUR1  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_LUR1  --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+WG1_LUR1  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_LUR1  --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+PUTULUR1  --UA-- PRESSIONE DI USCITA TUBAZIONE                                 
+WITULUR1  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_LUR1  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_LUR1  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_LUR1  --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+QT1_LUR1  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_LUR1  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_LUR1  --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+HUTULUR1  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIITLUR1  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCURH  --IN-- #HITULUR1#....................<===COLTCURH  BL.-CURH-         
+HUITLUR1  --IN-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+WUTULUR1  --IN-- PORTATA FLUIDO USCITA TUBAZIONE                               
+PCOLCURH  --IN-- #PITULUR1#....................<===COLTCURH  BL.-CURH-         
+TF11LUR1  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LUR1  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LUR1  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LUR1  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LUR1  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LUR1  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLUR1  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
++EVALUR2  BL.-LUR2- **** MODULO EVAP - tubazione riammissione turbina RH       
+PC1_LUR2  --US-- PRESSIONE MEDIA CELLA  1 DEL TUBO                             
+PC2_LUR2  --US-- PRESSIONE MEDIA CELLA  2 DEL TUBO                             
+PC3_LUR2  --US-- PRESSIONE MEDIA CELLA  3 DEL TUBO                             
+WG1_LUR2  --UA-- PORTATA FLUIDO USCITA CELLA 1 DEL TUBO                        
+WG2_LUR2  --UA-- PORTATA FLUIDO USCITA CELLA 2 DEL TUBO                        
+PUTULUR2  --UA-- PRESSIONE DI USCITA TUBAZIONE                                 
+WITULUR2  --UA-- PORTATA FLUIDO INGRESSO TUBAZIONE                             
+TM1_LUR2  --UA-- TEMPERATURA ESTERNA METALLO CELLA  1 DEL TUBO                 
+TM2_LUR2  --UA-- TEMPERATURA ESTERNA METALLO CELLA  2 DEL TUBO                 
+TM3_LUR2  --UA-- TEMPERATURA ESTERNA METALLO CELLA  3 DEL TUBO                 
+QT1_LUR2  --UA-- POTENZA ENTRANTE NELLA CELLA  1 DEL TUBO                      
+QT2_LUR2  --UA-- POTENZA ENTRANTE NELLA CELLA  2 DEL TUBO                      
+QT3_LUR2  --UA-- POTENZA ENTRANTE NELLA CELLA  3 DEL TUBO                      
+HUTULUR2  --UA-- ENTALPIA FLUIDO USCITA TUBAZIONE                              
+HIITLUR2  --UA-- ENTALPIA INGRESSO TUBAZIONE (INVERSIONE DI PORTATA)           
+HCOLCURH  --IN-- #HITULUR2#....................<===COLTCURH  BL.-CURH-         
+HUITLUR2  --IN-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+WUTULUR2  --IN-- PORTATA FLUIDO USCITA TUBAZIONE                               
+PCOLCURH  --IN-- #PITULUR2#....................<===COLTCURH  BL.-CURH-         
+TF11LUR2  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LUR2  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LUR2  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LUR2  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LUR2  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LUR2  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLUR2  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+****                                                                           
+****                                                                           
+DISNT2RH  BL.-T2RH- **** MODULO DISN - distributore temperature cella 2 rh     
+T_1_T2RH  --UA--     USCITA  1                                                 
+T_2_T2RH  --UA--     USCITA  2                                                 
+TM2_RH    --IN-- #AINGT2RH#....................<===-EVARH    BL.-RH  -         
+****                                                                           
+****                                                                           
+VALVVSH1  BL.-VSH1- **** MODULO VALV - valvole di sfiato e sicurezza SH1       
+WVALVSH1  --UA-- PORTATA FLUIDO NELLA VALVOLA                                  
+PCOLCUS1  --IN-- #PIVAVSH1#....................<===COLTCUS1  BL.-CUS1-         
+PUVAVSH1  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+HCOLCUS1  --IN-- #HVALVSH1#....................<===COLTCUS1  BL.-CUS1-         
+ALZAVSH1  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+VALVVSH2  BL.-VSH2- **** MODULO VALV - valvole di sfiato e sicurezza SH2       
+WVALVSH2  --UA-- PORTATA FLUIDO NELLA VALVOLA                                  
+PCOLCUS2  --IN-- #PIVAVSH2#....................<===COLTCUS2  BL.-CUS2-         
+PUVAVSH2  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+HCOLCUS2  --IN-- #HVALVSH2#....................<===COLTCUS2  BL.-CUS2-         
+ALZAVSH2  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+VALVVRHI  BL.-VRHI- **** MODULO VALV - valvole di sfiato e sicurezza ingresso R
+WVALVRHI  --UA-- PORTATA FLUIDO NELLA VALVOLA                                  
+PCOLCIRH  --IN-- #PIVAVRHI#....................<===COLTCIRH  BL.-CIRH-         
+PUVAVRHI  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+HCOLCIRH  --IN-- #HVALVRHI#....................<===COLTCIRH  BL.-CIRH-         
+ALZAVRHI  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+VALVVRHU  BL.-VRHU- **** MODULO VALV - valvole sfiato e sicurezza uscita RH    
+WVALVRHU  --UA-- PORTATA FLUIDO NELLA VALVOLA                                  
+PCOLCURH  --IN-- #PIVAVRHU#....................<===COLTCURH  BL.-CURH-         
+PUVAVRHU  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+HCOLCURH  --IN-- #HVALVRHU#....................<===COLTCURH  BL.-CURH-         
+ALZAVRHU  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+NODOQECO  BL.-QECO- **** MODULO NODO - POTENZA ASSORBITA DALL'ECONOMIZZATORE   
+QSOMQECO  --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+QT1_ECO   --IN-- #IN_1QECO#....................<===-EVAECO   BL.-ECO -         
+QT2_ECO   --IN-- #IN_2QECO#....................<===-EVAECO   BL.-ECO -         
+QT3_ECO   --IN-- #IN_3QECO#....................<===-EVAECO   BL.-ECO -         
+QT4_ECO   --IN-- #IN_4QECO#....................<===-EVAECO   BL.-ECO -         
+****                                                                           
+****                                                                           
+NODOQ1P   BL.-Q1P - **** MODULO NODO - POTENZA ASSORBITA DAL PASSO 1 DI CALDAIA
+QSOMQ1P   --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+QT1_1PAS  --IN-- #IN_1Q1P #....................<===-EVA1PAS  BL.-1PAS-         
+QT2_1PAS  --IN-- #IN_2Q1P #....................<===-EVA1PAS  BL.-1PAS-         
+QT3_1PAS  --IN-- #IN_3Q1P #....................<===-EVA1PAS  BL.-1PAS-         
+QT4_1PAS  --IN-- #IN_4Q1P #....................<===-EVA1PAS  BL.-1PAS-         
+QT5_1PAS  --IN-- #IN_5Q1P #....................<===-EVA1PAS  BL.-1PAS-         
+QT6_1PAS  --IN-- #IN_6Q1P #....................<===-EVA1PAS  BL.-1PAS-         
+****                                                                           
+****                                                                           
+NODOQ2P   BL.-Q2P - **** MODULO NODO - POTENZA ASSORBITA DAL PASSO 2 DI CALDAIA
+QSOMQ2P   --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+QT1_2PAS  --IN-- #IN_1Q2P #....................<===-EVA2PAS  BL.-2PAS-         
+QT2_2PAS  --IN-- #IN_2Q2P #....................<===-EVA2PAS  BL.-2PAS-         
+QT3_2PAS  --IN-- #IN_3Q2P #....................<===-EVA2PAS  BL.-2PAS-         
+QT4_2PAS  --IN-- #IN_4Q2P #....................<===-EVA2PAS  BL.-2PAS-         
+QT5_2PAS  --IN-- #IN_5Q2P #....................<===-EVA2PAS  BL.-2PAS-         
+QT6_2PAS  --IN-- #IN_6Q2P #....................<===-EVA2PAS  BL.-2PAS-         
+****                                                                           
+****                                                                           
+NODOQ3P   BL.-Q3P - **** MODULO NODO - POTENZA ASSORBITA DAL PASSO 3 DI CALDAIA
+QSOMQ3P   --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+QT1_3PAS  --IN-- #IN_1Q3P #....................<===-EVA3PAS  BL.-3PAS-         
+QT2_3PAS  --IN-- #IN_2Q3P #....................<===-EVA3PAS  BL.-3PAS-         
+****                                                                           
+****                                                                           
+NODOQ4P   BL.-Q4P - **** MODULO NODO - POTENZA ASSORBITA DAL PASSO 4 DI CALDAIA
+QSOMQ4P   --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+QT1_4PAS  --IN-- #IN_1Q4P #....................<===-EVA4PAS  BL.-4PAS-         
+QT2_4PAS  --IN-- #IN_2Q4P #....................<===-EVA4PAS  BL.-4PAS-         
+****                                                                           
+****                                                                           
+NODOQCIE  BL.-QCIE- **** MODULO NODO - POTENZA ASSORBITA DAL CIELO DI CALDAIA  
+QSOMQCIE  --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+QT1_CIEL  --IN-- #IN_1QCIE#....................<===-EVACIEL  BL.-CIEL-         
+QT2_CIEL  --IN-- #IN_2QCIE#....................<===-EVACIEL  BL.-CIEL-         
+****                                                                           
+****                                                                           
+NODOQGAB  BL.-QGAB- **** MODULO NODO - POTENZA ASSORBITA DALLE GABBIE DI CALDAI
+QSOMQGAB  --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+QT1_GABB  --IN-- #IN_1QGAB#....................<===-EVAGABB  BL.-GABB-         
+QT2_GABB  --IN-- #IN_2QGAB#....................<===-EVAGABB  BL.-GABB-         
+QT3_GABB  --IN-- #IN_3QGAB#....................<===-EVAGABB  BL.-GABB-         
+****                                                                           
+****                                                                           
+NODOQSH1  BL.-QSH1- **** MODULO NODO - POTENZA ASSORBITA DALL' SH1             
+QSOMQSH1  --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+QT1_SH1   --IN-- #IN_1QSH1#....................<===-EVASH1   BL.-SH1 -         
+QT2_SH1   --IN-- #IN_2QSH1#....................<===-EVASH1   BL.-SH1 -         
+QT3_SH1   --IN-- #IN_3QSH1#....................<===-EVASH1   BL.-SH1 -         
+****                                                                           
+****                                                                           
+NODOQSH2  BL.-QSH2- **** MODULO NODO - POTENZA ASSORBITA DALL' SH2             
+QSOMQSH2  --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+QT1_SH2   --IN-- #IN_1QSH2#....................<===-EVASH2   BL.-SH2 -         
+QT2_SH2   --IN-- #IN_2QSH2#....................<===-EVASH2   BL.-SH2 -         
+QT3_SH2   --IN-- #IN_3QSH2#....................<===-EVASH2   BL.-SH2 -         
+QT4_SH2   --IN-- #IN_4QSH2#....................<===-EVASH2   BL.-SH2 -         
+****                                                                           
+****                                                                           
+NODOQRH   BL.-QRH - **** MODULO NODO - POTENZA ASSORBITA DALL' RH              
+QSOMQRH   --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+QT1_RH    --IN-- #IN_1QRH #....................<===-EVARH    BL.-RH  -         
+QT2_RH    --IN-- #IN_2QRH #....................<===-EVARH    BL.-RH  -         
+QT3_RH    --IN-- #IN_3QRH #....................<===-EVARH    BL.-RH  -         
+QT4_RH    --IN-- #IN_4QRH #....................<===-EVARH    BL.-RH  -         
+QT5_RH    --IN-- #IN_5QRH #....................<===-EVARH    BL.-RH  -         
+QT6_RH    --IN-- #IN_6QRH #....................<===-EVARH    BL.-RH  -         
+****                                                                           
+****                                                                           
+NODOPAMM  BL.-PAMM- **** MODULO NODO - CALCOLO DELLA PRESSIONE AMMISSIONE      
+PSOMPAMM  --UA-- press. ammissione TV                                          
+PUTULVS1  --IN-- #IN_1PAMM#....................<===+EVALVS1  BL.-LVS1-         
+PUTULVS2  --IN-- #IN_2PAMM#....................<===+EVALVS2  BL.-LVS2-         
+****                                                                           
+****                                                                           
+CCN1COMB  BL.-COMB- **** MODULO CCN1 - Camera di combustione                   
+TF_1COMB  --UA-- TEMPERATURA FUMI C.C. CELLA  1                                
+TF_2COMB  --UA-- TEMPERATURA FUMI C.C. CELLA  2                                
+TF_3COMB  --UA-- TEMPERATURA FUMI C.C. CELLA  3                                
+TF_4COMB  --UA-- TEMPERATURA FUMI C.C. CELLA  4                                
+TF_5COMB  --UA-- TEMPERATURA FUMI C.C. CELLA  5                                
+TF_6COMB  --UA-- TEMPERATURA FUMI C.C. CELLA  6                                
+TF_7COMB  --UA-- TEMPERATURA FUMI C.C. CELLA  7                                
+TF_8COMB  --UA-- TEMPERATURA FUMI C.C. CELLA  8                                
+ENOXCOMB  --UA-- CONC.NOX IN mg/Nm3 AL 3% O2                                   
+ECO_COMB  --UA-- CONC.CO  IN mg/Nm3 AL 3% O2                                   
+ESO2COMB  --UA-- CONC.SO2 IN mg/Nm3 AL 3% O2                                   
+EPOLCOMB  --UA-- CONC.POLV. IN mg/Nm3 ALa3% O2                                 
+GC11COMB  --UA-- COEFF.GLOBALE PARETE  1 CELLA  1                              
+GC21COMB  --UA-- COEFF.GLOBALE PARETE  2 CELLA  1                              
+GC12COMB  --UA-- COEFF.GLOBALE PARETE  1 CELLA  2                              
+GC22COMB  --UA-- COEFF.GLOBALE PARETE  2 CELLA  2                              
+GC13COMB  --UA-- COEFF.GLOBALE PARETE  1 CELLA  3                              
+GC23COMB  --UA-- COEFF.GLOBALE PARETE  2 CELLA  3                              
+GC14COMB  --UA-- COEFF.GLOBALE PARETE  1 CELLA  4                              
+GC24COMB  --UA-- COEFF.GLOBALE PARETE  2 CELLA  4                              
+GC15COMB  --UA-- COEFF.GLOBALE PARETE  1 CELLA  5                              
+GC25COMB  --UA-- COEFF.GLOBALE PARETE  2 CELLA  5                              
+GC16COMB  --UA-- COEFF.GLOBALE PARETE  1 CELLA  6                              
+GC26COMB  --UA-- COEFF.GLOBALE PARETE  2 CELLA  6                              
+GC17COMB  --UA-- COEFF.GLOBALE PARETE  1 CELLA  7                              
+GC27COMB  --UA-- COEFF.GLOBALE PARETE  2 CELLA  7                              
+GC37COMB  --UA-- COEFF.GLOBALE PARETE  3 CELLA  7                              
+GC18COMB  --UA-- COEFF.GLOBALE PARETE  1 CELLA  8                              
+GC28COMB  --UA-- COEFF.GLOBALE PARETE  2 CELLA  8                              
+GC38COMB  --UA-- COEFF.GLOBALE PARETE  3 CELLA  8                              
+GC48COMB  --UA-- COEFF.GLOBALE PARETE  4 CELLA  8                              
+WFCCCOMB  --UA-- PORTATA TOTALE FUMI C.C.                                      
+QTOTCOMB  --UA-- TOTAL HEAT TRANSFER RATE IN C.C.                              
+%O2_COMB  --UA-- PRESSIONE PARZIALE O2  IN %                                   
+%CO2COMB  --UA-- PRESSIONE PARZIALE CO2 IN %                                   
+%H2OCOMB  --UA-- PRESSIONE PARZIALE H2O IN %                                   
+%FMACOMB  --UA-- FRAZIONE MASSICA H2O (IN %)NEI FUMI                           
+TM1_1PAS  --IN-- #TM11COMB#....................<===-EVA1PAS  BL.-1PAS-         
+TM1_2PAS  --IN-- #TM21COMB#....................<===-EVA2PAS  BL.-2PAS-         
+TM2_1PAS  --IN-- #TM12COMB#....................<===-EVA1PAS  BL.-1PAS-         
+TM2_2PAS  --IN-- #TM22COMB#....................<===-EVA2PAS  BL.-2PAS-         
+TM3_1PAS  --IN-- #TM13COMB#....................<===-EVA1PAS  BL.-1PAS-         
+TM3_2PAS  --IN-- #TM23COMB#....................<===-EVA2PAS  BL.-2PAS-         
+TM4_1PAS  --IN-- #TM14COMB#....................<===-EVA1PAS  BL.-1PAS-         
+TM4_2PAS  --IN-- #TM24COMB#....................<===-EVA2PAS  BL.-2PAS-         
+TM5_1PAS  --IN-- #TM15COMB#....................<===-EVA1PAS  BL.-1PAS-         
+TM5_2PAS  --IN-- #TM25COMB#....................<===-EVA2PAS  BL.-2PAS-         
+TM6_1PAS  --IN-- #TM16COMB#....................<===-EVA1PAS  BL.-1PAS-         
+TM6_2PAS  --IN-- #TM26COMB#....................<===-EVA2PAS  BL.-2PAS-         
+TM1_3PAS  --IN-- #TM17COMB#....................<===-EVA3PAS  BL.-3PAS-         
+TM1_4PAS  --IN-- #TM27COMB#....................<===-EVA4PAS  BL.-4PAS-         
+TM3_GABB  --IN-- #TM37COMB#....................<===-EVAGABB  BL.-GABB-         
+TM2_3PAS  --IN-- #TM18COMB#....................<===-EVA3PAS  BL.-3PAS-         
+TM2_4PAS  --IN-- #TM28COMB#....................<===-EVA4PAS  BL.-4PAS-         
+TM1_CIEL  --IN-- #TM38COMB#....................<===-EVACIEL  BL.-CIEL-         
+TM1_SH2   --IN-- #TM48COMB#....................<===-EVASH2   BL.-SH2 -         
+WC11COMB  --IN-- PORTATA COMBUSTIBILE 1 PIANO BRUC. 1                          
+IC11COMB  --IN-- TIPO COMBUSTIBILE 1 PIANO BRUC. 1                             
+WC21COMB  --IN-- PORTATA COMBUSTIBILE 2 PIANO BRUC. 1                          
+IC21COMB  --IN-- TIPO COMBUSTIBILE 2 PIANO BRUC. 1                             
+WC12COMB  --IN-- PORTATA COMBUSTIBILE 1 PIANO BRUC. 2                          
+IC12COMB  --IN-- TIPO COMBUSTIBILE 1 PIANO BRUC. 2                             
+WC22COMB  --IN-- PORTATA COMBUSTIBILE 2 PIANO BRUC. 2                          
+IC22COMB  --IN-- TIPO COMBUSTIBILE 2 PIANO BRUC. 2                             
+WC13COMB  --IN-- PORTATA COMBUSTIBILE 1 PIANO BRUC. 3                          
+IC13COMB  --IN-- TIPO COMBUSTIBILE 1 PIANO BRUC. 3                             
+WC23COMB  --IN-- PORTATA COMBUSTIBILE 2 PIANO BRUC. 3                          
+IC23COMB  --IN-- TIPO COMBUSTIBILE 2 PIANO BRUC. 3                             
+WC14COMB  --IN-- PORTATA COMBUSTIBILE 1 PIANO BRUC. 4                          
+IC14COMB  --IN-- TIPO COMBUSTIBILE 1 PIANO BRUC. 4                             
+WC24COMB  --IN-- PORTATA COMBUSTIBILE 2 PIANO BRUC. 4                          
+IC24COMB  --IN-- TIPO COMBUSTIBILE 2 PIANO BRUC. 4                             
+WC15COMB  --IN-- PORTATA COMBUSTIBILE 1 PIANO BRUC. 5                          
+IC15COMB  --IN-- TIPO COMBUSTIBILE 1 PIANO BRUC. 5                             
+WC25COMB  --IN-- PORTATA COMBUSTIBILE 2 PIANO BRUC. 5                          
+IC25COMB  --IN-- TIPO COMBUSTIBILE 2 PIANO BRUC. 5                             
+WAR1COMB  --IN-- PORTATA ARIA-FUMI MISC.1 PIANO BRUC.                          
+WAR2COMB  --IN-- PORTATA ARIA-FUMI MISC.2 PIANO BRUC.                          
+WAR3COMB  --IN-- PORTATA ARIA-FUMI MISC.3 PIANO BRUC.                          
+WAR4COMB  --IN-- PORTATA ARIA-FUMI MISC.4 PIANO BRUC.                          
+WAR5COMB  --IN-- PORTATA ARIA-FUMI MISC.5 PIANO BRUC.                          
+ABR1COMB  --IN-- ANGOLO BRANDEGGIO 1.o PIANO BRUC.                             
+ABR2COMB  --IN-- ANGOLO BRANDEGGIO 2.o PIANO BRUC.                             
+ABR3COMB  --IN-- ANGOLO BRANDEGGIO 3.o PIANO BRUC.                             
+ABR4COMB  --IN-- ANGOLO BRANDEGGIO 4.o PIANO BRUC.                             
+ABR5COMB  --IN-- ANGOLO BRANDEGGIO 5.o PIANO BRUC.                             
+WRIFCOMB  --IN-- PORTATA RICIRCOLO DA TRAMOGGIA                                
+TRIFCOMB  --IN-- TEMPER. FUMI TRAMOGGIA E TEMPERING                            
+WGMXCOMB  --IN-- PORTATA TOTALE GAS MIXING                                     
+TACOCOMB  --IN-- TEMPERATURA ARIA COMBURENTE                                   
+ATOMCOMB  --IN-- RAPPORTO VAPORE/NAFTA                                         
+FACCCOMB  --IN-- FATTORE CORRETTIVO SC.CONVETTIVO                              
+FACRCOMB  --IN-- FATTORE CORRETTIVO SC.RADIATIVO                               
+AKFLCOMB  --IN-- FATT. CORRETTIVO LUNGH. FIAMMA                                
+****                                                                           
+****      >>>>>>INGRESSI DI TUTTI I MODULI<<<<<<
+ATTR1PAS  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+ATTR2PAS  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+ATTR3PAS  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+ATTR4PAS  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+TESTCU1P  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCU1P  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+TESTCU2P  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCU2P  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+TESTCU3P  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCU3P  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+TESTCU4P  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCU4P  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+ATTRCIEL  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+TESTCUCI  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUCI  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+ATTRGABB  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+FAS_SOVR  --IN-- FATTORE DI SPORCAMENTO TUBI                                   
+TESTCUGA  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUGA  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+ATTRSH1   --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+HU_3CUS1  --IN-- ENTALPIA RAMO USCENTE N. 3 (W<0)                              
+WU_4CUS1  --IN-- PORTATA RAMO USCENTE N. 4                                     
+HU_4CUS1  --IN-- ENTALPIA RAMO USCENTE N. 4 (W<0)                              
+WU_5CUS1  --IN-- PORTATA RAMO USCENTE N. 5                                     
+HU_5CUS1  --IN-- ENTALPIA RAMO USCENTE N. 5 (W<0)                              
+WU_6CUS1  --IN-- PORTATA RAMO USCENTE N. 6                                     
+HU_6CUS1  --IN-- ENTALPIA RAMO USCENTE N. 6 (W<0)                              
+TESTCUS1  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUS1  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+ALZAB401  --IN-- ALZATA VALVOLA                                                
+ALZAA401  --IN-- ALZATA VALVOLA                                                
+TESTCATA  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCATA  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+TESTCATB  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCATB  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+ALZAATSA  --IN-- posiz. attemp. ad acqua SH2 lato A                            
+ALZAATSB  --IN-- posiz. valv. attemp. SH2 lato B                               
+FAS_RETR  --IN-- FATTORE DI SPORCAMENTO TUBI                                   
+AKTBTASA  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+AKTBTASB  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+WE_3CIS2  --IN-- PORTATA RAMO ENTRANTE  N. 3                                   
+HE_3CIS2  --IN-- ENTALPIA RAMO ENTRANTE N. 3                                   
+TESTCIS2  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCIS2  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+ATTRSH2   --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+WE_2CUS2  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CUS2  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+HU_3CUS2  --IN-- ENTALPIA RAMO USCENTE N. 3 (W<0)                              
+WU_4CUS2  --IN-- PORTATA RAMO USCENTE N. 4                                     
+HU_4CUS2  --IN-- ENTALPIA RAMO USCENTE N. 4 (W<0)                              
+TESTCUS2  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUS2  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+HUITLVS1  --IN-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+WUTULVS1  --IN-- PORTATA FLUIDO USCITA TUBAZIONE                               
+TF11LVS1  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LVS1  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LVS1  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LVS1  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LVS1  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LVS1  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLVS1  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+HUITLVS2  --IN-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+WUTULVS2  --IN-- PORTATA FLUIDO USCITA TUBAZIONE                               
+TF11LVS2  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LVS2  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LVS2  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LVS2  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LVS2  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LVS2  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLVS2  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+WE_1CIEC  --IN-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CIEC  --IN-- ENTALPIA RAMO ENTRANTE N. 1                                   
+TESTCIEC  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCIEC  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+ATTRECO   --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+TESTCUEC  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUEC  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+AKTBTECO  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+AKTBTP12  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+WE_1CUAP  --IN-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CUAP  --IN-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WE_2CUAP  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CUAP  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+HU_3CUAP  --IN-- ENTALPIA RAMO USCENTE N. 3 (W<0)                              
+TESTCUAP  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCUAP  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+WALITI5A  --IN-- Portata acqua riscaldata                                      
+HALITI5A  --IN-- Entalpia acqua ingresso riscaldatore                          
+HALUTI5A  --IN-- Entalpia acqua uscita riscaldatore                            
+PALITI5A  --IN-- Pressione acqua riscaldata                                    
+ALZ1TI5A  --IN-- Alzata valvola motorizzata sullo spillamento                  
+ALZCTI5A  --IN-- Alzata valvola di non ritorno                                 
+ALZ2TI5A  --IN-- Alzata valvola motorizzata a monte riscaldatore               
+WALITI5B  --IN-- Portata acqua riscaldata                                      
+HALITI5B  --IN-- Entalpia acqua ingresso riscaldatore                          
+HALUTI5B  --IN-- Entalpia acqua uscita riscaldatore                            
+PALITI5B  --IN-- Pressione acqua riscaldata                                    
+ALZ1TI5B  --IN-- Alzata valvola motorizzata sullo spillamento                  
+ALZCTI5B  --IN-- Alzata valvola di non ritorno                                 
+ALZ2TI5B  --IN-- Alzata valvola motorizzata a monte riscaldatore               
+WALITSDG  --IN-- Portata acqua riscaldata                                      
+HALITSDG  --IN-- Entalpia acqua ingresso riscaldatore                          
+HALUTSDG  --IN-- Entalpia acqua uscita riscaldatore                            
+PALITSDG  --IN-- Pressione acqua riscaldata                                    
+ALZ1TSDG  --IN-- Alzata valvola motorizzata sullo spillamento                  
+ALZCTSDG  --IN-- Alzata valvola di non ritorno                                 
+ALZ2TSDG  --IN-- Alzata valvola motorizzata a monte riscaldatore               
+PUVATUAV  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+ALZATUAV  --IN-- ALZATA VALVOLA                                                
+TF11LIR1  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LIR1  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LIR1  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LIR1  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LIR1  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LIR1  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLIR1  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+TF11LIR2  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LIR2  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LIR2  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LIR2  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LIR2  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LIR2  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLIR2  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+WE_2CARB  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CARB  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+TESTCARB  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCARB  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+WE_2CARA  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CARA  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+TESTCARA  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCARA  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+AKTBTARA  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+AKTBTARB  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+HU_2CIRH  --IN-- ENTALPIA RAMO USCENTE N. 2 (W<0)                              
+TESTCIRH  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCIRH  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+ATTRRH    --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+WE_2CURH  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CURH  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WE_3CURH  --IN-- PORTATA RAMO ENTRANTE  N. 3                                   
+HE_3CURH  --IN-- ENTALPIA RAMO ENTRANTE N. 3                                   
+HU_3CURH  --IN-- ENTALPIA RAMO USCENTE N. 3 (W<0)                              
+TESTCURH  --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                           
+GESTCURH  --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                             
+HUITLUR1  --IN-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+WUTULUR1  --IN-- PORTATA FLUIDO USCITA TUBAZIONE                               
+TF11LUR1  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LUR1  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LUR1  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LUR1  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LUR1  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LUR1  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLUR1  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+HUITLUR2  --IN-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+WUTULUR2  --IN-- PORTATA FLUIDO USCITA TUBAZIONE                               
+TF11LUR2  --IN-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21LUR2  --IN-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31LUR2  --IN-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11LUR2  --IN-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21LUR2  --IN-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31LUR2  --IN-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+ATTRLUR2  --IN-- COEFFICIENTE DI ATTRITO TUBO                                  
+PUVAVSH1  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+ALZAVSH1  --IN-- ALZATA VALVOLA                                                
+PUVAVSH2  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+ALZAVSH2  --IN-- ALZATA VALVOLA                                                
+PUVAVRHI  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+ALZAVRHI  --IN-- ALZATA VALVOLA                                                
+PUVAVRHU  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+ALZAVRHU  --IN-- ALZATA VALVOLA                                                
+WC11COMB  --IN-- PORTATA COMBUSTIBILE 1 PIANO BRUC. 1                          
+IC11COMB  --IN-- TIPO COMBUSTIBILE 1 PIANO BRUC. 1                             
+WC21COMB  --IN-- PORTATA COMBUSTIBILE 2 PIANO BRUC. 1                          
+IC21COMB  --IN-- TIPO COMBUSTIBILE 2 PIANO BRUC. 1                             
+WC12COMB  --IN-- PORTATA COMBUSTIBILE 1 PIANO BRUC. 2                          
+IC12COMB  --IN-- TIPO COMBUSTIBILE 1 PIANO BRUC. 2                             
+WC22COMB  --IN-- PORTATA COMBUSTIBILE 2 PIANO BRUC. 2                          
+IC22COMB  --IN-- TIPO COMBUSTIBILE 2 PIANO BRUC. 2                             
+WC13COMB  --IN-- PORTATA COMBUSTIBILE 1 PIANO BRUC. 3                          
+IC13COMB  --IN-- TIPO COMBUSTIBILE 1 PIANO BRUC. 3                             
+WC23COMB  --IN-- PORTATA COMBUSTIBILE 2 PIANO BRUC. 3                          
+IC23COMB  --IN-- TIPO COMBUSTIBILE 2 PIANO BRUC. 3                             
+WC14COMB  --IN-- PORTATA COMBUSTIBILE 1 PIANO BRUC. 4                          
+IC14COMB  --IN-- TIPO COMBUSTIBILE 1 PIANO BRUC. 4                             
+WC24COMB  --IN-- PORTATA COMBUSTIBILE 2 PIANO BRUC. 4                          
+IC24COMB  --IN-- TIPO COMBUSTIBILE 2 PIANO BRUC. 4                             
+WC15COMB  --IN-- PORTATA COMBUSTIBILE 1 PIANO BRUC. 5                          
+IC15COMB  --IN-- TIPO COMBUSTIBILE 1 PIANO BRUC. 5                             
+WC25COMB  --IN-- PORTATA COMBUSTIBILE 2 PIANO BRUC. 5                          
+IC25COMB  --IN-- TIPO COMBUSTIBILE 2 PIANO BRUC. 5                             
+WAR1COMB  --IN-- PORTATA ARIA-FUMI MISC.1 PIANO BRUC.                          
+WAR2COMB  --IN-- PORTATA ARIA-FUMI MISC.2 PIANO BRUC.                          
+WAR3COMB  --IN-- PORTATA ARIA-FUMI MISC.3 PIANO BRUC.                          
+WAR4COMB  --IN-- PORTATA ARIA-FUMI MISC.4 PIANO BRUC.                          
+WAR5COMB  --IN-- PORTATA ARIA-FUMI MISC.5 PIANO BRUC.                          
+ABR1COMB  --IN-- ANGOLO BRANDEGGIO 1.o PIANO BRUC.                             
+ABR2COMB  --IN-- ANGOLO BRANDEGGIO 2.o PIANO BRUC.                             
+ABR3COMB  --IN-- ANGOLO BRANDEGGIO 3.o PIANO BRUC.                             
+ABR4COMB  --IN-- ANGOLO BRANDEGGIO 4.o PIANO BRUC.                             
+ABR5COMB  --IN-- ANGOLO BRANDEGGIO 5.o PIANO BRUC.                             
+WRIFCOMB  --IN-- PORTATA RICIRCOLO DA TRAMOGGIA                                
+TRIFCOMB  --IN-- TEMPER. FUMI TRAMOGGIA E TEMPERING                            
+WGMXCOMB  --IN-- PORTATA TOTALE GAS MIXING                                     
+TACOCOMB  --IN-- TEMPERATURA ARIA COMBURENTE                                   
+ATOMCOMB  --IN-- RAPPORTO VAPORE/NAFTA                                         
+FACCCOMB  --IN-- FATTORE CORRETTIVO SC.CONVETTIVO                              
+FACRCOMB  --IN-- FATTORE CORRETTIVO SC.RADIATIVO                               
+AKFLCOMB  --IN-- FATT. CORRETTIVO LUNGH. FIAMMA                                
+****
+HITU1PAS  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUIT1PAS  --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTU1PAS  --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITU1PAS  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+TF111PAS  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF211PAS  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF311PAS  --CO-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF411PAS  --CO-- CELLA 4 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF511PAS  --CO-- CELLA 5 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF611PAS  --CO-- CELLA 6 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF111PAS  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF211PAS  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF311PAS  --CO-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF411PAS  --CO-- CELLA 4 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF511PAS  --CO-- CELLA 5 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF611PAS  --CO-- CELLA 6 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+HITU2PAS  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUIT2PAS  --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTU2PAS  --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITU2PAS  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+TF112PAS  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF212PAS  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF312PAS  --CO-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF412PAS  --CO-- CELLA 4 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF512PAS  --CO-- CELLA 5 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF612PAS  --CO-- CELLA 6 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF112PAS  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF212PAS  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF312PAS  --CO-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF412PAS  --CO-- CELLA 4 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF512PAS  --CO-- CELLA 5 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF612PAS  --CO-- CELLA 6 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+HITU3PAS  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUIT3PAS  --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTU3PAS  --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITU3PAS  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+TF113PAS  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF213PAS  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF223PAS  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 2                     
+TF233PAS  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 3                     
+TF243PAS  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 4                     
+TF253PAS  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 5                     
+GF113PAS  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF213PAS  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF223PAS  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 2          
+GF233PAS  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 3          
+GF243PAS  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 4          
+GF253PAS  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 5          
+HITU4PAS  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUIT4PAS  --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTU4PAS  --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITU4PAS  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+TF114PAS  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF214PAS  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF114PAS  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF214PAS  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+WE_1CU1P  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CU1P  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CU1P  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CU1P  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+WE_1CU2P  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CU2P  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CU2P  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CU2P  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+WE_1CU3P  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CU3P  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CU3P  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CU3P  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+WE_1CU4P  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CU4P  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CU4P  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CU4P  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+HITUCIEL  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUITCIEL  --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTUCIEL  --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITUCIEL  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+TF11CIEL  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF12CIEL  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 2                     
+TF13CIEL  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 3                     
+TF14CIEL  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 4                     
+TF15CIEL  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 5                     
+TF16CIEL  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 6                     
+TF21CIEL  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF22CIEL  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 2                     
+TF23CIEL  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 3                     
+TF24CIEL  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 4                     
+GF11CIEL  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF12CIEL  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 2          
+GF13CIEL  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 3          
+GF14CIEL  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 4          
+GF15CIEL  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 5          
+GF16CIEL  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 6          
+GF21CIEL  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF22CIEL  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 2          
+GF23CIEL  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 3          
+GF24CIEL  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 4          
+WE_1CUCI  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CUCI  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CUCI  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CUCI  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+HITUGABB  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUITGABB  --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTUGABB  --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITUGABB  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+TF11GABB  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF12GABB  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 2                     
+TF13GABB  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 3                     
+TF14GABB  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 4                     
+TF15GABB  --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 5                     
+TF21GABB  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF22GABB  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 2                     
+TF23GABB  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 3                     
+TF24GABB  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 4                     
+TF25GABB  --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 5                     
+TF31GABB  --CO-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF32GABB  --CO-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 2                     
+TF33GABB  --CO-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 3                     
+GF11GABB  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF12GABB  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 2          
+GF13GABB  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 3          
+GF14GABB  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 4          
+GF15GABB  --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 5          
+GF21GABB  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF22GABB  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 2          
+GF23GABB  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 3          
+GF24GABB  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 4          
+GF25GABB  --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 5          
+GF31GABB  --CO-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF32GABB  --CO-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 2          
+GF33GABB  --CO-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 3          
+WIF_SOVR  --CO-- PORTATA DI INGRESSO FUMI                                      
+TIF_SOVR  --CO-- TEMPERATURA DI INGRESSO FUMI                                  
+%CO2SOVR  --CO-- PRESSIONE PARZIALE CO2                                        
+%PH2SOVR  --CO-- PRESSIONE PARZIALE H2O                                        
+%H2OSOVR  --CO-- % MASSICA H2O NEI FUMI                                        
+TM11SOVR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 1                                
+TM21SOVR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 1                                
+TM31SOVR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 1                                
+TM41SOVR  --CO-- TEMP. MET. 4 LATO FUMI CELLA 1                                
+TM12SOVR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 2                                
+TM22SOVR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 2                                
+TM32SOVR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 2                                
+TM42SOVR  --CO-- TEMP. MET. 4 LATO FUMI CELLA 2                                
+TM13SOVR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 3                                
+TM23SOVR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 3                                
+TM33SOVR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 3                                
+TM43SOVR  --CO-- TEMP. MET. 4 LATO FUMI CELLA 3                                
+TM14SOVR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 4                                
+TM24SOVR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 4                                
+TM34SOVR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 4                                
+TM44SOVR  --CO-- TEMP. MET. 4 LATO FUMI CELLA 4                                
+TM15SOVR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 5                                
+TM25SOVR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 5                                
+TM35SOVR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 5                                
+TM16SOVR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 6                                
+TM26SOVR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 6                                
+TM36SOVR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 6                                
+TM17SOVR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 7                                
+TM27SOVR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 7                                
+TM37SOVR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 7                                
+TM18SOVR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 8                                
+TM28SOVR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 8                                
+TM38SOVR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 8                                
+TM19SOVR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 9                                
+TM29SOVR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 9                                
+TM39SOVR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 9                                
+TM49SOVR  --CO-- TEMP. MET. 4 LATO FUMI CELLA 9                                
+TM59SOVR  --CO-- TEMP. MET. 5 LATO FUMI CELLA 9                                
+AINGT3PA  --CO--     INGRESSO                                                  
+AINGT1CI  --CO--     INGRESSO                                                  
+AINGT2CI  --CO--     INGRESSO                                                  
+AINGT1GA  --CO--     INGRESSO                                                  
+AINGT2GA  --CO--     INGRESSO                                                  
+AINGT3GA  --CO--     INGRESSO                                                  
+WE_1CUGA  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CUGA  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CUGA  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CUGA  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+HITUSH1   --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUITSH1   --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTUSH1   --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITUSH1   --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+TF11SH1   --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21SH1   --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31SH1   --CO-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11SH1   --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21SH1   --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31SH1   --CO-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+WE_1CUS1  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CUS1  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CUS1  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CUS1  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+WU_2CUS1  --CO-- PORTATA RAMO USCENTE N. 2                                     
+HU_2CUS1  --CO-- ENTALPIA RAMO USCENTE N. 2 (W<0)                              
+WU_3CUS1  --CO-- PORTATA RAMO USCENTE N. 3                                     
+PIVAB401  --CO-- PRESSIONE FLUIDO MONTE VALVOLA                                
+PUVAB401  --CO-- PRESSIONE FLUIDO VALLE VALVOLA                                
+HVALB401  --CO-- ENTALPIA FLUIDO MONTE-VALLE VALVOLA                           
+PIVAA401  --CO-- PRESSIONE FLUIDO MONTE VALVOLA                                
+PUVAA401  --CO-- PRESSIONE FLUIDO VALLE VALVOLA                                
+HVALA401  --CO-- ENTALPIA FLUIDO MONTE-VALLE VALVOLA                           
+WE_1CATA  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CATA  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WE_2CATA  --CO-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CATA  --CO-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WU_1CATA  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CATA  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+WE_1CATB  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CATB  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WE_2CATB  --CO-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CATB  --CO-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WU_1CATB  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CATB  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+PIVAATSA  --CO-- PRESSIONE FLUIDO MONTE VALVOLA                                
+PUVAATSA  --CO-- PRESSIONE FLUIDO VALLE VALVOLA                                
+HVALATSA  --CO-- ENTALPIA FLUIDO MONTE-VALLE VALVOLA                           
+PIVAATSB  --CO-- PRESSIONE FLUIDO MONTE VALVOLA                                
+PUVAATSB  --CO-- PRESSIONE FLUIDO VALLE VALVOLA                                
+HVALATSB  --CO-- ENTALPIA FLUIDO MONTE-VALLE VALVOLA                           
+WIF_RETR  --CO-- PORTATA DI INGRESSO FUMI                                      
+TIF_RETR  --CO-- TEMPERATURA DI INGRESSO FUMI                                  
+%CO2RETR  --CO-- PRESSIONE PARZIALE CO2                                        
+%PH2RETR  --CO-- PRESSIONE PARZIALE H2O                                        
+%H2ORETR  --CO-- % MASSICA H2O NEI FUMI                                        
+TM11RETR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 1                                
+TM21RETR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 1                                
+TM31RETR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 1                                
+TM41RETR  --CO-- TEMP. MET. 4 LATO FUMI CELLA 1                                
+TM12RETR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 2                                
+TM22RETR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 2                                
+TM32RETR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 2                                
+TM42RETR  --CO-- TEMP. MET. 4 LATO FUMI CELLA 2                                
+TM13RETR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 3                                
+TM23RETR  --CO-- TEMP. MET. 2 LATO FUMI CELLA 3                                
+TM33RETR  --CO-- TEMP. MET. 3 LATO FUMI CELLA 3                                
+TM14RETR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 4                                
+TM15RETR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 5                                
+TM16RETR  --CO-- TEMP. MET. 1 LATO FUMI CELLA 6                                
+PITUTASA  --CO-- PRESSIONE A MONTE PERDITA DI CARICO                           
+PUTUTASA  --CO-- PRESSIONE A VALLE PERDITA DI CARICO                           
+HTUBTASA  --CO-- ENTALPIA MONTE-VALLE PERDITA DI CARICO                        
+PITUTASB  --CO-- PRESSIONE A MONTE PERDITA DI CARICO                           
+PUTUTASB  --CO-- PRESSIONE A VALLE PERDITA DI CARICO                           
+HTUBTASB  --CO-- ENTALPIA MONTE-VALLE PERDITA DI CARICO                        
+WE_1CIS2  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CIS2  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WE_2CIS2  --CO-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CIS2  --CO-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WU_1CIS2  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CIS2  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+HITUSH2   --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUITSH2   --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTUSH2   --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITUSH2   --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+TF11SH2   --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF12SH2   --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 2                     
+TF21SH2   --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31SH2   --CO-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF41SH2   --CO-- CELLA 4 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11SH2   --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF12SH2   --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 2          
+GF21SH2   --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31SH2   --CO-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF41SH2   --CO-- CELLA 4 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+WE_1CUS2  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CUS2  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CUS2  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CUS2  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+WU_2CUS2  --CO-- PORTATA RAMO USCENTE N. 2                                     
+HU_2CUS2  --CO-- ENTALPIA RAMO USCENTE N. 2 (W<0)                              
+WU_3CUS2  --CO-- PORTATA RAMO USCENTE N. 3                                     
+HITULVS1  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+PITULVS1  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+HITULVS2  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+PITULVS2  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+WU_1CIEC  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CIEC  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+WU_2CIEC  --CO-- PORTATA RAMO USCENTE N. 2                                     
+HU_2CIEC  --CO-- ENTALPIA RAMO USCENTE N. 2 (W<0)                              
+WU_3CIEC  --CO-- PORTATA RAMO USCENTE N. 3                                     
+HU_3CIEC  --CO-- ENTALPIA RAMO USCENTE N. 3 (W<0)                              
+HITUECO   --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUITECO   --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTUECO   --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITUECO   --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+TF11ECO   --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21ECO   --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF31ECO   --CO-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF41ECO   --CO-- CELLA 4 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF42ECO   --CO-- CELLA 4 TEMP. MEDIA FLUIDO ZONA ESTERNA 2                     
+TF43ECO   --CO-- CELLA 4 TEMP. MEDIA FLUIDO ZONA ESTERNA 3                     
+TF44ECO   --CO-- CELLA 4 TEMP. MEDIA FLUIDO ZONA ESTERNA 4                     
+GF11ECO   --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21ECO   --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF31ECO   --CO-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF41ECO   --CO-- CELLA 4 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF42ECO   --CO-- CELLA 4 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 2          
+GF43ECO   --CO-- CELLA 4 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 3          
+GF44ECO   --CO-- CELLA 4 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 4          
+WE_1CUEC  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CUEC  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CUEC  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CUEC  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+AINGT4EC  --CO--     INGRESSO                                                  
+PITUTECO  --CO-- PRESSIONE A MONTE PERDITA DI CARICO                           
+WTUBTECO  --CO-- PORTATA MONTE-VALLE PERDITA DI CARICO                         
+HTUBTECO  --CO-- ENTALPIA MONTE-VALLE PERDITA DI CARICO                        
+PITUTP12  --CO-- PRESSIONE A MONTE PERDITA DI CARICO                           
+WTUBTP12  --CO-- PORTATA MONTE-VALLE PERDITA DI CARICO                         
+HTUBTP12  --CO-- ENTALPIA MONTE-VALLE PERDITA DI CARICO                        
+WU_1CUAP  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CUAP  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+WU_2CUAP  --CO-- PORTATA RAMO USCENTE N. 2                                     
+HU_2CUAP  --CO-- ENTALPIA RAMO USCENTE N. 2 (W<0)                              
+WU_3CUAP  --CO-- PORTATA RAMO USCENTE N. 3                                     
+PTURTI5A  --CO-- Pressione vapore spillato dalla turbina                       
+PTURTI5B  --CO-- Pressione vapore spillato dalla turbina                       
+PTURTSDG  --CO-- Pressione vapore spillato dalla turbina                       
+PIVATUAV  --CO-- PRESSIONE FLUIDO MONTE VALVOLA                                
+HVALTUAV  --CO-- ENTALPIA FLUIDO MONTE-VALLE VALVOLA                           
+IN_1CSP2  --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2CSP2  --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+IN_3CSP2  --CO-- RELAZIONE LINEARE : INGRESSO N.  3                            
+IN_4CSP2  --CO-- RELAZIONE LINEARE : INGRESSO N.  4                            
+HITULIR1  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUITLIR1  --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTULIR1  --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITULIR1  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+HITULIR2  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUITLIR2  --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTULIR2  --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITULIR2  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+WE_1CARB  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CARB  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CARB  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CARB  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+WE_1CARA  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CARA  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CARA  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CARA  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+PITUTARA  --CO-- PRESSIONE A MONTE PERDITA DI CARICO                           
+PUTUTARA  --CO-- PRESSIONE A VALLE PERDITA DI CARICO                           
+HTUBTARA  --CO-- ENTALPIA MONTE-VALLE PERDITA DI CARICO                        
+PITUTARB  --CO-- PRESSIONE A MONTE PERDITA DI CARICO                           
+PUTUTARB  --CO-- PRESSIONE A VALLE PERDITA DI CARICO                           
+HTUBTARB  --CO-- ENTALPIA MONTE-VALLE PERDITA DI CARICO                        
+WE_1CIRH  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CIRH  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WE_2CIRH  --CO-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2CIRH  --CO-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WU_1CIRH  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CIRH  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+WU_2CIRH  --CO-- PORTATA RAMO USCENTE N. 2                                     
+HITURH    --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+HUITRH    --CO-- ENTALPIA USCITA TUBAZIONE (INVERSIONE DI PORTATA)             
+PUTURH    --CO-- PRESSIONE DI USCITA TUBAZIONE                                 
+PITURH    --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+TF11RH    --CO-- CELLA 1 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF21RH    --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF22RH    --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 2                     
+TF23RH    --CO-- CELLA 2 TEMP. MEDIA FLUIDO ZONA ESTERNA 3                     
+TF31RH    --CO-- CELLA 3 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF41RH    --CO-- CELLA 4 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF51RH    --CO-- CELLA 5 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+TF61RH    --CO-- CELLA 6 TEMP. MEDIA FLUIDO ZONA ESTERNA 1                     
+GF11RH    --CO-- CELLA 1 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF21RH    --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF22RH    --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 2          
+GF23RH    --CO-- CELLA 2 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 3          
+GF31RH    --CO-- CELLA 3 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF41RH    --CO-- CELLA 4 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF51RH    --CO-- CELLA 5 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+GF61RH    --CO-- CELLA 6 COEFF. DI SCAMBIO FLUIDO SUP. ESTERNA ZONA 1          
+WE_1CURH  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1CURH  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WU_1CURH  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1CURH  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+WU_2CURH  --CO-- PORTATA RAMO USCENTE N. 2                                     
+HU_2CURH  --CO-- ENTALPIA RAMO USCENTE N. 2 (W<0)                              
+WU_3CURH  --CO-- PORTATA RAMO USCENTE N. 3                                     
+HITULUR1  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+PITULUR1  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+HITULUR2  --CO-- ENTALPIA FLUIDO INGRESSO TUBAZIONE                            
+PITULUR2  --CO-- PRESSIONE DI INGRESSO TUBAZIONE                               
+AINGT2RH  --CO--     INGRESSO                                                  
+PIVAVSH1  --CO-- PRESSIONE FLUIDO MONTE VALVOLA                                
+HVALVSH1  --CO-- ENTALPIA FLUIDO MONTE-VALLE VALVOLA                           
+PIVAVSH2  --CO-- PRESSIONE FLUIDO MONTE VALVOLA                                
+HVALVSH2  --CO-- ENTALPIA FLUIDO MONTE-VALLE VALVOLA                           
+PIVAVRHI  --CO-- PRESSIONE FLUIDO MONTE VALVOLA                                
+HVALVRHI  --CO-- ENTALPIA FLUIDO MONTE-VALLE VALVOLA                           
+PIVAVRHU  --CO-- PRESSIONE FLUIDO MONTE VALVOLA                                
+HVALVRHU  --CO-- ENTALPIA FLUIDO MONTE-VALLE VALVOLA                           
+IN_1QECO  --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2QECO  --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+IN_3QECO  --CO-- RELAZIONE LINEARE : INGRESSO N.  3                            
+IN_4QECO  --CO-- RELAZIONE LINEARE : INGRESSO N.  4                            
+IN_1Q1P   --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2Q1P   --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+IN_3Q1P   --CO-- RELAZIONE LINEARE : INGRESSO N.  3                            
+IN_4Q1P   --CO-- RELAZIONE LINEARE : INGRESSO N.  4                            
+IN_5Q1P   --CO-- RELAZIONE LINEARE : INGRESSO N.  5                            
+IN_6Q1P   --CO-- RELAZIONE LINEARE : INGRESSO N.  6                            
+IN_1Q2P   --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2Q2P   --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+IN_3Q2P   --CO-- RELAZIONE LINEARE : INGRESSO N.  3                            
+IN_4Q2P   --CO-- RELAZIONE LINEARE : INGRESSO N.  4                            
+IN_5Q2P   --CO-- RELAZIONE LINEARE : INGRESSO N.  5                            
+IN_6Q2P   --CO-- RELAZIONE LINEARE : INGRESSO N.  6                            
+IN_1Q3P   --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2Q3P   --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+IN_1Q4P   --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2Q4P   --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+IN_1QCIE  --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2QCIE  --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+IN_1QGAB  --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2QGAB  --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+IN_3QGAB  --CO-- RELAZIONE LINEARE : INGRESSO N.  3                            
+IN_1QSH1  --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2QSH1  --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+IN_3QSH1  --CO-- RELAZIONE LINEARE : INGRESSO N.  3                            
+IN_1QSH2  --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2QSH2  --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+IN_3QSH2  --CO-- RELAZIONE LINEARE : INGRESSO N.  3                            
+IN_4QSH2  --CO-- RELAZIONE LINEARE : INGRESSO N.  4                            
+IN_1QRH   --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2QRH   --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+IN_3QRH   --CO-- RELAZIONE LINEARE : INGRESSO N.  3                            
+IN_4QRH   --CO-- RELAZIONE LINEARE : INGRESSO N.  4                            
+IN_5QRH   --CO-- RELAZIONE LINEARE : INGRESSO N.  5                            
+IN_6QRH   --CO-- RELAZIONE LINEARE : INGRESSO N.  6                            
+IN_1PAMM  --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+IN_2PAMM  --CO-- RELAZIONE LINEARE : INGRESSO N.  2                            
+TM11COMB  --CO-- TEMP. MET. 1 LATO FUMI CELLA  1                               
+TM21COMB  --CO-- TEMP. MET. 2 LATO FUMI CELLA  1                               
+TM12COMB  --CO-- TEMP. MET. 1 LATO FUMI CELLA  2                               
+TM22COMB  --CO-- TEMP. MET. 2 LATO FUMI CELLA  2                               
+TM13COMB  --CO-- TEMP. MET. 1 LATO FUMI CELLA  3                               
+TM23COMB  --CO-- TEMP. MET. 2 LATO FUMI CELLA  3                               
+TM14COMB  --CO-- TEMP. MET. 1 LATO FUMI CELLA  4                               
+TM24COMB  --CO-- TEMP. MET. 2 LATO FUMI CELLA  4                               
+TM15COMB  --CO-- TEMP. MET. 1 LATO FUMI CELLA  5                               
+TM25COMB  --CO-- TEMP. MET. 2 LATO FUMI CELLA  5                               
+TM16COMB  --CO-- TEMP. MET. 1 LATO FUMI CELLA  6                               
+TM26COMB  --CO-- TEMP. MET. 2 LATO FUMI CELLA  6                               
+TM17COMB  --CO-- TEMP. MET. 1 LATO FUMI CELLA  7                               
+TM27COMB  --CO-- TEMP. MET. 2 LATO FUMI CELLA  7                               
+TM37COMB  --CO-- TEMP. MET. 3 LATO FUMI CELLA  7                               
+TM18COMB  --CO-- TEMP. MET. 1 LATO FUMI CELLA  8                               
+TM28COMB  --CO-- TEMP. MET. 2 LATO FUMI CELLA  8                               
+TM38COMB  --CO-- TEMP. MET. 3 LATO FUMI CELLA  8                               
+TM48COMB  --CO-- TEMP. MET. 4 LATO FUMI CELLA  8                               

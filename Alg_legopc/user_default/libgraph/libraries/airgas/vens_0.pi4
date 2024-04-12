@@ -1,0 +1,29 @@
+VENS_0                                                                          
+VENS                                                                            
+Fan ambient air                                                                 
+                                                                                
+NSTAT = 0
+NUSCI = 3
+NINGR = 4
+ 
+NCONF = 1
+ 
+WARI      --UA-- PORTATA FLUIDO VENTILATORE                                     
+GAMM      --UA-- COEFF. SCAMBIO CONVETTIVO                                      
+TFME      --UA-- TEMPERATURA MEDIA FLUIDO                                       
+OMPV      --IN-- VELOCITA' DI ROTAZIONE                                         
+TING      --IN-- TEMPERATURA INGRESSO FLUIDO                                    
+CGAM      --IN-- CORRETTIVO COEFF. DI SCAMBIO                                   
+TMET      --IN-- TEMPERATURA PARETE METALLICA                                   
+==============================                                                  
+EOF                                                                             
+3
+t1 6
+Actuation input
+OMPV
+t0 3
+Termic output
+TFME TMET GAMM ____
+t4 11
+Generical output
+WARI TFME GAMM ____ ____ ____ ____ ____ ____ ____

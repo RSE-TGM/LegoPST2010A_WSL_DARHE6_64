@@ -1,0 +1,123 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE TEMP</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TEMP_summ"></A>MODULE TEMP CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TEMP_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TEMP_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TEMP_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TEMP_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TEMP_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TEMP_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TEMP_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TEMP_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=6><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TEMP_A"></A>MODULE TEMP CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">EQUIVALENT STEM POSITION OF A SET OF VALVES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module TEMP simulates the functioning of a temperature measuring instrument for water/steam. This intrument is supposed constituted by two parts:</P>
+<P ALIGN="JUSTIFY">a hot well welded to a metallic body (e.g. a manifold)</P>
+<P ALIGN="JUSTIFY">a thermocouple inserted into the hot well and in contact with its lower part through a sheathing</P>
+<P ALIGN="JUSTIFY">The modelized system can be divided into three control volumes:</P>
+<U><P ALIGN="JUSTIFY">the hot well</U>: the part lying between inner surface of the manifiold and the group "sheathing-thermocouple". It exchanges heat with the fluid, with the metal body and with the remaining part of the well and the adjoining group "sheathing-thermocouple". On the contrary it’s supposed adiabatic as far as the exchange in the inner direction is concerned.</P>
+<U><P ALIGN="JUSTIFY">the terminal</U>: the part lying at the end of the hot well and adjoining the group "sheathing-thermocouple". It exchanges with fluid, hot well and with the group "sheathing-thermocouple" itself.</P>
+<U><P ALIGN="JUSTIFY">the thermocouple</U>: constituted by the group "sheathing-thermocouple". It exchanges heat with the terminal</P>
+<P ALIGN="JUSTIFY">The foremost simplifying hypothesis is that the hot well portion inserted and welded to the metallic body, thus not directly exposed to the thermal exchange with the working fluid, is mantained to an isothermic equilibrium by the manifold metal wall.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TEMP_B"></A>MODULE TEMP CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;<IMG SRC="Image1260.gif" WIDTH=398 HEIGHT=263></P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[-]&#9;ITYP&#9;Device type:</P>
+<P ALIGN="JUSTIFY">0 </FONT><FONT FACE="Wingdings">&eth;</FONT><FONT FACE="Arial"> geometrical characteristics from file f14.dat</P>
+<P ALIGN="JUSTIFY">1</FONT><FONT FACE="Wingdings">&eth;</FONT><FONT FACE="Arial"> Hot well type III/IA and standard thermocouple</P>
+<P ALIGN="JUSTIFY">2</FONT><FONT FACE="Wingdings">&eth;</FONT><FONT FACE="Arial"> Hot well type II and standard thermocouple</P>
+<P ALIGN="JUSTIFY">3</FONT><FONT FACE="Wingdings">&eth;</FONT><FONT FACE="Arial"> Hot well type IIC and fast response thermocouple&#9;&#9;</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PFLD&#9;working fluid pressure&#9;&#9;</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HFLD&#9;working fluid enthalpy&#9;</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WFLD&#9;working fluid mass flow rate&#9;</P>
+<P ALIGN="JUSTIFY">[m<SUP>2</SUP>]&#9;ESEC&#9;equivalent fluid cross-section (for use in the corelations)&#9;</P>
+<P ALIGN="JUSTIFY">[-]&#9;AFLG&#9;flag of activation (see note 1)&#9;&#9;</P>
+<P ALIGN="JUSTIFY">[K]&#9;TSUP&#9;metal body temperature&#9;&#9;</P>
+<P ALIGN="JUSTIFY">[K]&#9;TFLD&#9;working fluid temperature&#9;</P>
+<P ALIGN="JUSTIFY">[°C]&#9;XFMT&#9;thermocouple temperature&#9;</P>
+<P ALIGN="JUSTIFY">[°C]&#9;XWTL&#9;terminal temperature&#9;</P>
+<P ALIGN="JUSTIFY">[°C]&#9;XWTU&#9;hot well temperature&#9;</P>
+<P ALIGN="JUSTIFY">[W/(m<SUP>2</SUP> K)]&#9;GTER&#9;fluid-terminal thermal exchange coefficient</P>
+<P ALIGN="JUSTIFY">[W/(m<SUP>2</SUP> K)]&#9;GPOZ&#9;well-fluid thermal exchange coefficient&#9;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">NOTE 1 </B>For steady state calculations and when AFLG is not active, the three temperatures XFMT, XWTL and XWTU are trivially set to the same phisical value as TFLD. This avoids many calls to steam tables, allowing, thus, a faster solution, while keeping small the involved error (as the thermal resistences are comparatively high, at least if the fluid is not still).</P>
+<B><U><P ALIGN="JUSTIFY">&nbsp;</P>
+</U></FONT><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_TEMP_C"></A>MODULE TEMP CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables, user must assign the following data (see note 2):</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;LUNGPO&#9;hot well length</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;RINTPO&#9;hot well inner radius&#9;</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;REXTPO&#9;hot well external radius</P>
+<P ALIGN="JUSTIFY">[W/(m K)]&#9;CONDPO&#9;hot well thermal conductivity&#9;</P>
+<P ALIGN="JUSTIFY">[J/(kg K)]&#9;CASPPO&#9;hot wells metal walls specific heat&#9;</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;LUNGTE&#9;terminal length&#9;&#9;</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;RINTTE&#9;terminal inner radius&#9;</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;REXTTE&#9;terminal external radius&#9;&#9;</P>
+<P ALIGN="JUSTIFY">[kg/m<SUP>3</SUP>]&#9;DENSTC&#9;thermocouple metal density&#9;</P>
+<P ALIGN="JUSTIFY">[W/(m K)]&#9;CONDTC&#9;thermocouple metal thermal conductivity&#9;</P>
+<P ALIGN="JUSTIFY">[J/(kg K)]&#9;CASPTC&#9;thermocouple metal specific heat</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">NOTE 2 </B>In case of non-zero ITYP all data values are ignored and can, therefore, be left set to zero</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TEMP_D"></A>MODULE TEMP CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the TEMP module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TEMP_E"></A>MODULE TEMP CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">TEMP doesn’t prescribe any FORAUS subroutine.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TEMP_F"></A>MODULE TEMP CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P>&nbsp;</P>
+<P>Residuals are not reported here as their expressions are not significant of the employed calculations.</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TEMP_G"></A>MODULE TEMP CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Courier New"><P>SUBROUTINE TEMPI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>SUBROUTINE TEMPI3(IFO,IOB,DEBL)</P>
+<P>SUBROUTINE TEMPI4(IOB,MOD)</P>
+<P>SUBROUTINE TEMPC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE TEMP(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>SUBROUTINE TEMPD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TEMP_H"></A>MODULE TEMP CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module aren’t yet available.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

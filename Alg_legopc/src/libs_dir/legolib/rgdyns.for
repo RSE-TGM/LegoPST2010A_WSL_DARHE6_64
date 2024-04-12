@@ -1,0 +1,200 @@
+C******************************************************************************
+C modulo rgdyns.f
+C tipo 
+C release 2.2
+C data 11/7/95
+C reserver @(#)rgdyns.f	2.2
+C******************************************************************************
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C                                                                      C
+C           LEGO unificato per singola / doppia precisione             C
+C                 e per diverse piattaforme operative                  C
+C                                                                      C
+C   Attivata versione singola precisione per sistema operativo Unix    C
+C                                                                      C
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+      SUBROUTINE RGDYNS
+C
+C     DEL PROGRAMMA  RG5SIM
+C
+C      INCLUDE  'LG5_PARAMETER.F'
+C**   Descrizione delle parameter di LG5
+C**
+C**   N000= MOLTIPLICATORE
+C**
+C**   N001= N. MODULI
+C**   N002= N. BLOCCHI
+C**   N003= N.STATI+ALG. = ORDINE MASSIMO SISTEMA ALGEBRICO
+C**   N004= N. INGRESSI
+C**   N005= N. VARIABILI
+C**   N006= N. VAR. DI 1 BLOCCO
+C**   N007= N. DI DATI
+C**   N008= N. DI EQUAZIONI DI UN BLOCCO
+C**   NR00= N. DI TERMINI #0 PER OGNI EQUAZIONE
+C**   NP00= N. DI PERTURBAZIONI
+C
+      PARAMETER (N000=70, N001=N000*10, N002=N000*25, N003=N000*50,
+     $           N004=N000*25, N005=N000*100, N006=100,
+     $           N007=N000*500, N008=40, NR00=12, NP00=10)
+C
+      PARAMETER (M003 = N002+1, M004 = N003+1, M005 = N004+1,
+     $           M001 = N005-N003, M002 = M001-N004)
+C
+C**      M006 = N. TERMINI # 0 DELLO JACOBIANO
+C**      M007 = N. TERMINI # 0 DELLO JACOBIANO FATTORIZZATO
+C**      M010 = N.VARIABILI IN OUTPUT
+C
+      PARAMETER (M006 = N003*NR00, M007 = 2*M006, M008 = 5*N003,
+     $           M009 = 8*N003, M010 = N004+N003, MP01 = NP00+1,
+     $           MP02 = NP00*200)
+C
+C**************DATI GENERALI
+C
+      DIMENSION NOSL(N001),NOSUB(N002),NOBLC(N002,2),NUSTA(N002),
+     $          NUSCI(N002),NINGR(N002),ISLB(N002),IP(M003),IPVRS(N005),
+     $          IPS(M004),IPVRT(N005),IPI(M005),IPVRI(M001),XY(N003),
+     $          UU(N004),XYU(N005),DATI(N007),IPDATI(M003),CNXYU(N005),
+     $          AJAC(1,1),RNI(N003),CNXY(N003),CNUU(N004)
+      COMMON/C0RG5A/XY,UU,XYU,DATI,CNXYU,AJAC,RNI,CNXY,CNUU,
+     $              NOSL,NOSUB,NOBLC,NUSTA,NUSCI,NINGR,ISLB,IP,
+     $              IPVRS,IPS,IPVRT,IPI,IPVRI,IPDATI
+      CHARACTER*8 SIGLA
+C
+C*****DATI UTILIZZATI PER COMUNICARE AL LEGO RUN-TIME LE DIM DEL LEGO
+C
+      INTEGER  KN000, KN001, KN002, KN003, KN004, KN005, KN007,
+     $         KM001, KM002, KM003, KM004, KM005
+      COMMON/PARSKED/KN000, KN001, KN002, KN003, KN004, KN005, KN007,
+     $               KM001, KM002, KM003, KM004, KM005
+C
+      DIMENSION ITITOL(20),NUL(7)
+      COMMON/NORM/P0,H0,T0,Q0,R0,AL0,V0,DP0
+      COMMON/PARINT/ITITOL,TFIN,TSTEP,FATOLL,INTERR,TINTER
+      COMMON/INTEGR/TSTOP,TEMPO,DTINT,NPAS,CDT,ALFADT
+      COMMON/INPAR1/NBL,NEQAL,NEQSIS,NU,NST,NVART,NPVRT,NVRI,NDATI
+      COMMON/PARPAR/NUL,ITERT
+C********************** TAVOLE ******************************
+C       ILEGO = INDICATORE DEL PROGRAMMA CHIAMANTE LE TAVOLE
+C             =1 LEGO E` IL PROGRAMMA CHIAMANTE
+C             =0 NON E` IL LEGO IL PROGRAMMA CHIAMANTE
+C
+C       ICNTMX = CONTATORE STABILITO DAL PROGRAMMA CHIAMANTE LE TAVOLE
+C                  SUPERATO IL QUALE VIENE DECRETATO LO STOP.
+C
+      COMMON/LGTV01/LGTEMP,ILEGO,ICOUNT,ICNTMX
+      COMMON/LGTV02/LGMODU,LGBLOC
+      CHARACTER*8 LGMODU,LGBLOC
+      REAL LGTEMP
+      ILEGO    =1
+C
+C*****SETTAGGIO DEI DATI DA PASSARE ALLA PARTE RUN-TIME
+C
+      KN000 = N000
+      KN001 = N001
+      KN002 = N002
+      KN003 = N003
+      KN004 = N004
+      KN005 = N005
+      KN007 = N007
+      KM001 = M001
+      KM002 = M002
+      KM003 = M003
+      KM004 = M004
+      KM005 = M005
+C********************** TAVOLE ******************************
+C
+      CALL BLLEG1(IPVRS,NVART,CNXYU,CNXY,CNUU)
+C
+      NEQDIF=0
+C
+C      INIZIALIZZAZIONE
+C
+      ITERT=0
+      JAC=0
+C
+C    T_PROC=1   task di processo   T_PROC=0 task di regolazione
+C
+      T_PROC=0
+      IFUN=2
+      ITERT=0
+      NPAS=0
+      TEMPO=0.
+      LGTEMP=TEMPO
+      IPR=1
+      CALL REG000(IPR,XY,UU,PX,DATI,NEQSIS,NU,NEQDIF,NDATI,CNXY,CNUU
+     $            ,TSTEP,IFINE,T_PROC,JAC,ITERT)
+C
+      GO TO (999, 1000) IFINE
+C
+C      LOOP DI INTEGRAZIONE
+C
+  999 CONTINUE
+C
+C      ESECUZIONE DI UN PASSO DI
+C
+      DTINT=TSTEP
+      NPAS=NPAS+1
+      TEMPO= TEMPO+ DTINT
+      LGTEMP=TEMPO
+C
+      CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+      CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+C
+C     CALCOLO DELLA RISPOSTA DELLA REGOLAZIONE
+C
+      M=0
+      DO 500 I=1,NBL
+      K=ISLB(I)
+      IPD=IPDATI(I)
+      NUS=NUSCI(I)
+      IXYU=IP(I)
+      IBLOC1=NOBLC(I,1)
+      IBLOC2=NOBLC(I,2)
+C********************** TAVOLE ******************************
+      WRITE(LGMODU,'(A4)')NOSUB(I)
+      WRITE(LGBLOC,'(2A4)')IBLOC1,IBLOC2
+C********************** TAVOLE ******************************
+C
+      CALL MODC1(K,IFUN,AJAC,1,IXYU,XYU,IPD,DATI,RNI,IBLOC1,IBLOC2)
+C
+C     TRASFERIMENTO DI RNI (VALORI DELLE USCITE DI UN BLOCCO)
+C     NEL VETTORE XY (VARIABILI RESIDUI EQ. DEL SISTEMA)
+C
+      DO 101 J=1,NUS
+      M = M+1
+      XY (M) = RNI(J)
+C
+C     TRASFERIMENTO DELLE USCITE VERSO GLI INGRESSI DEGLI ALTRI SCHEMI
+C     CONNESSI (NON ESISTEVA IN REGOGRAF)
+C
+      KJ1=IPS(M)
+      KJ2=IPS(M+1)-1
+      IF(KJ2.LT.KJ1) GO TO 101
+      DO 95 KJ=KJ1,KJ2
+      KKJ=IPVRT(KJ)
+      XYU(KKJ)=XY(M)
+   95 CONTINUE
+C
+C     FINE AGGIUNTA TRASFERIMENTO USCITE
+C
+  101 CONTINUE
+  500 CONTINUE
+C
+      IPR=2
+      CALL REG000(IPR,XY,UU,PX,DATI,NEQSIS,NU,NEQDIF,NDATI,CNXY,
+     $            CNUU,TSTEP,IFINE,T_PROC,JAC,ITERT)
+C
+C      TEST  FINE TRANSITORIO
+C
+      GO TO (999,1000) IFINE
+ 1000 CONTINUE
+      RETURN
+      END
+C            
+C Procedura contenete la variabile per l'identificazione della versione
+C        
+      SUBROUTINE SCCS_rgdyns
+      CHARACTER*80 SccsID
+      DATA SccsId/'@(#)rgdyns.f	2.2\t11/7/95'/
+      END

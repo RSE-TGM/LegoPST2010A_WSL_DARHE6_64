@@ -1,0 +1,57 @@
+COLN
+
+Water/Steam Manifold (2 inputs, 3 outputs)                                      
+5
+1
+
+t0
+WE_1 PCOL ____ ____ ____ HE_1 ____ HCOL 
+1 -1 0 0 0 1 0 -1 
+t1
+WE_2 PCOL ____ ____ ____ HE_2 ____ HCOL 
+1 -1 0 0 0 1 0 -1 
+t3
+WU_1 PCOL ____ ____ ____ HCOL ____ HU_1 
+-1 1 0 0 0 1 0 -1 
+t4
+WU_2 PCOL ____ ____ ____ HCOL ____ HU_2 
+-1 1 0 0 0 1 0 -1 
+t2
+WU_3 PCOL ____ ____ ____ HCOL ____ HU_3 
+-1 1 0 0 0 1 0 -1 
+
+0
+3
+12
+
+HCOL UA
+FLUID ENTHALPY IN THE MANIFOLD                                 
+PCOL UA
+FLUID PRESSURE IN THE MANIFOLD                                 
+TCOL UA
+METAL TEMPERATURE IN THE MANIFOLD                              
+WE_1 IN
+FLOW RATE IN THE ENTERING BRANCH N. 1                          
+HE_1 IN
+ENTHALPY IN THE ENTERING BRANCH N. 1                           
+WE_2 IN
+FLOW RATE IN THE ENTERING BRANCH N. 2                          
+HE_2 IN
+ENTHALPY IN THE ENTERING BRANCH N. 2                           
+WU_1 IN
+FLOW RATE IN THE COMING OUT BRANCH N. 1                        
+HU_1 IN
+ENTHALPY IN THE COMING OUT BRANCH N. 1 (W<0)                   
+WU_2 IN
+FLOW RATE IN THE COMING OUT BRANCH N. 2                        
+HU_2 IN
+ENTHALPY IN THE COMING OUT BRANCH N. 2 (W<0)                   
+WU_3 IN
+FLOW RATE IN THE COMING OUT BRANCH N. 3                        
+HU_3 IN
+ENTHALPY IN THE COMING OUT BRANCH N. 3 (W<0)                   
+TEST IN
+FLUID TEMPERATURE OUTSIDE THE MANIFOLD                         
+GEST IN
+THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD                   
+

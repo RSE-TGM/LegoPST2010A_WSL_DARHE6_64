@@ -1,0 +1,664 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>GEN5</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE GEN5</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE GEN5</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">SYNCHRONOUS GENERATOR</p>
+<p>&nbsp;</p>
+<p align="left">A four-order model of synchronous generator is implemented in
+the module GEN5.</p>
+<p align="left">In the mathematical model, the following hypothesis are assumed:</p>
+<p align="left">1) hysteresis and magnetic saturations are disregarded;</p>
+<p align="left">2) the field circuit acts according to the direct axis;</p>
+<p align="left">3) there is a damper circuit according to the direct axis and
+one according to axis in quadrature;</p>
+<p align="left">4) distributions of magnetomotive forces and of flows are
+sinusoidal to the entrefer;</p>
+<p align="left">5) the homopolar circuit is neglected;</p>
+<p align="left">6) stator transient are neglected;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE GEN5</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p>&nbsp;</p>
+<p align="center"><img border="0" src="images/gen5.h1.gif" width="436" height="485"></p>
+<p>&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMGA</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">rotor angular velocity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">E1Q0</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">transient q-axis component of
+      the electromotive force</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">E2Q0</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">subtransient q-axis component
+      of the electromotive force</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">E2D0</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">subtransient d-axis component
+      of the electromotive force</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DE00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">angle between generator
+      d-axis and reference generator d-axis</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">UMMA</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">generator voltage magnitude</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FAMA</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">generator voltage phase</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QATT</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">active output</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[VAR]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QREA</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">reactive output</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IR00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">real component of stator
+      current</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IX00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">imaginary component of stator
+      current</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Hz]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FREQ</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">generator frequency</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IFLD</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">field current</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ORIN</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">reference angular velocity of
+      system</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DRIN</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">reference system rotor angle</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">UR00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">real component of the voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">UX00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">imaginary component of the
+      voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">UF00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">excitation voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QMEC</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mechanical power</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">STIN</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">network-generator connection
+      logical variable</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SFER</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">stopped generator logical
+      variable</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SMRI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">autoreferred generator
+      logical variable</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMRI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">autoreferred generator
+      angular velocity</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE GEN5</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i>
+</b>
+          </font>
+<font FACE="Arial">
+<p align="left">In addition to the initial values of input and output variables
+of the GEN5 module, whose meaning has been defined in card B1, the user must
+assign the following set of data to complete the input required by the module:</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TAA</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">d-axis short circuit time
+      constant</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T1D0</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">d-axis open circuit transient
+      time constant</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T2D</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">d-axis short circuit
+      subtrabsient time constant</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T2Q</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">q-axis short circuit
+      subtrabsient time constant</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TA</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">starting time</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.m.]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">XD</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">d-axis synchronous reactance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.m.]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">X1D</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">d-axis transient reactance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.m.]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">X2D</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">d-axis subtransient reactance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.m.]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">XQ</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">q-axis reactance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.m.]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">X2Q</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">q-axis subtransient reactance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Ohm]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RF</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">resistance of the excitation
+      circuit</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Hz]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FNOM</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">rated frequency</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[VA]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QNOM</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">rated power</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VNOM</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">rated voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VBEC</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">rated excitation voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RIGIDO</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">generator-network connection:
+      1<font FACE="Wingdings">à</font> without breaker, 0<font FACE="Wingdings">à</font>
+      with one (STIN variable)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">variables normalization
+      option: 1<font FACE="Wingdings">à</font> in p.u., 0<font FACE="Wingdings">à</font>
+      S.I.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">The machine per unit is indicated with p.u.m., that is the one
+calculated with the generator rated values.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE GEN5</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i></b></font><font FACE="Arial">
+<p align="left">No particular prescription is required for the GEN5 module
+initialization.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE GEN5</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></b></font><font FACE="Arial">
+<p align="left">No user’s subprogram is required in the GEN5 module.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE GEN5</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b>
+<i>
+<p ALIGN="CENTER">Residuals</p>
+</i></b></font><font FACE="Arial">
+<p>&nbsp;</p>
+<p align="left">The equations of the mathematical model, mentioned in Card A,
+give the following residuals:</p>
+<u>
+<p align="left">Steady-state calculation</p>
+</u>
+<p align="left">If the generator is connected to the network,</p>
+<blockquote>
+  <p align="left" style="margin-top: 2; margin-bottom: 2">if the machine is a
+  reference generator,</p>
+  <blockquote>
+    <p align="left" style="margin-top: 2; margin-bottom: 2">OM=OMRI</p>
+    <p align="left" style="margin-top: 2; margin-bottom: 2">DELASS=DE00</p>
+  </blockquote>
+  <p align="left" style="margin-top: 2; margin-bottom: 2">otherwise,</p>
+  <blockquote>
+    <p align="left" style="margin-top: 2; margin-bottom: 2">OM=ORIN</p>
+    <p align="left" style="margin-top: 2; margin-bottom: 2">DELASS=DE00+DRIN</p>
+  </blockquote>
+</blockquote>
+<blockquote>
+<p style="margin-top: 2; margin-bottom: 2">DATI(IPD+16)=DE00</p>
+<p style="margin-top: 2; margin-bottom: 2">ID00=(VR00*SIN(DELASS)-VX00*COS(DELASS)+E2Q0)/X2D</p>
+<p style="margin-top: 2; margin-bottom: 2">IQ00=(VR00*COS(DELASS)+VX00*SIN(DELASS)-E2D0)/X2Q</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(1) = QMEC-QATT</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(2) = -E1Q0-(XD-X1D-CAMD)*ID00+(1-TAA/T1D0)*VF00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(3) = -E2Q0+E1Q0-(X1D-X2D+CAMD)*ID00+TAA/T1D0*VF00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(4) = -E2D0+(XQ-X2Q)*IQ00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(5) = OMGA-OM</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(6) = VMMA-SQRT(VR00**2+VX00**2)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(7) = FAMA-ATAN2(VX00,VR00)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(8) = QATT-VR00*IR00-VX00*IX00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(9) = QREA-VX00*IR00+VR00*IX00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(10) = IR00-ID00*CK*COS(DELASS)+IQ00*CK*SIN(DELASS)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(11) = IX00-IQ00*CK*COS(DELASS)-ID00*CK*SIN(DELASS)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(12) = FREQ-OMGA*FNOM</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(13) = IFLD-E2Q0-GAM3*ID00</p>
+<p style="margin-top: 2; margin-bottom: 2">otherwise, if the generator is not connected without
+excitation,
+or if the machine is stopped</p>
+<p style="margin-top: 2; margin-bottom: 2">DATI(IPD+16)=DE00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(1) = DE00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(2) = E1Q0</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(3) = E2Q0</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(4) = E2D0</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(5) = OMGA</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(6) = VMMA</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(7) = FAMA</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(8) = QATT</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(9) = QREA</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(10) = IR00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(11) = IX00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(12) = FREQ</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(13) = IFLD</p>
+<p style="margin-top: 2; margin-bottom: 2">otherwise,</p>
+<p style="margin-top: 2; margin-bottom: 2">DATI(IPD+16)=DE00</p>
+<p style="margin-top: 2; margin-bottom: 2">if there is not any breaker between generator and network</p>
+<p style="margin-top: 2; margin-bottom: 2">ID00=(VR00*SIN(DE00)-VX00*COS(DE00)+E2Q0)/X2D</p>
+<p style="margin-top: 2; margin-bottom: 2">IQ00=(VR00*COS(DE00)+VX00*SIN(DE00)-E2D0)/X2Q</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(1) = QMEC-QATT</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(2) = -E1Q0-(XD-X1D-CAMD)*ID00+(1-TAA/T1D0)*VF00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(3) = -E2Q0+E1Q0-(X1D-X2D+CAMD)*ID00+TAA/T1D0*VF00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(4) = -E2D0+(XQ-X2Q)*IQ00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(5) = OMGA-OMRI</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(6) = VMMA-SQRT(VR00**2+VX00**2)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(7) = FAMA-ATAN2(VX00,VR00)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(8) = QATT-VR00*IR00-VX00*IX00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(9) = QREA-VX00*IR00+VR00*IX00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(10) = IR00-ID00*CK*COS(DE00)+IQ00*CK*SIN(DE00)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(11) = IX00-IQ00*CK*COS(DE00)-ID00*CK*SIN(DE00)</p>
+<p style="margin-top: 2; margin-bottom: 2">otherwise</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(1) = DE00-ATAN2(VX00,VR00)+3.141592/2.</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(2) = -E1Q0+(1-TAA/T1D0)*VF00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(3) = -E2Q0+E1Q0+TAA/T1D0*VF00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(4) = -E2D0</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(5) = OMGA-OMRI</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(6) = VMMA-ABS(E2Q0)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(7) = FAMA-ATAN2(VX00,VR00)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(8) = QATT</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(9) = QREA</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(10) = IR00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(11) = IX00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(12) = FREQ-OMGA*FNOM</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(13) = IFLD-E2Q0</p>
+</blockquote>
+<u>
+<p align="left">transient calculation</p>
+</u>
+<blockquote>
+<p align="left" style="margin-top: 2; margin-bottom: 2">DE_P = DATI(IPD+16)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">if the generator is not connected</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; if the machine is the reference
+generator,</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OM=OMGA</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; otherwise</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OM=OMRI</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">DELTOM = (OMGA-OM)*2*3.14169*FNOM</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">DELREL = DE_P+DELTOM*DTINT</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">IF (DELREL.NE.0.) THEN</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; ASS =
+ABS(DELREL)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; AM =
+AMOD(ASS,2*3.141592)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; DELREL =
+DELREL/ASS*AM</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">ENDIF</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">IF (ITERT.LE.0.AND.IFUN.EQ.2) THEN</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+DATI(IPD+16)=DELREL</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">ENDIF</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">if the generator is stopped</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(1) = 0.</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(2) = 0.</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(3) = 0.</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(4) = 0.</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(5) = DE00-DE_P</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">otherwise</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(1) =
+1./(TA*OMGA)*(QMEC/CK-QATT/CK)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; if there is not any breaker between generator and network</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ID00=(VR00*SIN(DE00)-VX00*COS(DE00)+E2Q0)/X2D</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+IQ00=(VR00*COS(DE00)+VX00*SIN(DE00)-E2D0)/X2Q</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+RNI(2) = -A4*E1Q0-A5*ID00+A6*VF00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+RNI(3) = -A1*E2Q0+A1*E1Q0-A2*ID00+A3*VF00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+RNI(4) = -B1*E2D0+B2*IQ00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+otherwise,</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+RNI(2) = -A4*E1Q0+A6*VF00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+RNI(3) = -A1*E2Q0+A1*E1Q0+A3*VF00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+RNI(4) = -B1*E2D0</p>
+</blockquote>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RNI(5) = DE00-DELREL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<blockquote>
+<p align="left" style="margin-top: 2; margin-bottom: 2">if there is not any breaker between generator and network</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(6) =
+VMMA-SQRT(VR00**2+VX00**2)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(7) = FAMA-ATAN2(VX00,VR00)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(8) = QATT-VR00*IR00-VX00*IX00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(9) = QREA-VX00*IR00+VR00*IX00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(10) =
+IR00-ID00*CK*COS(DE00)+IQ00*CK*SIN(DE00)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(11) =
+IX00-IQ00*CK*COS(DE00)-ID00*CK*SIN(DE00)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(12) =
+FREQ-OMGA*FNOM</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(13) = IFLD-E2Q0-GAM3*ID00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">otherwise</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(6) =
+VMMA-ABS(E2Q0)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(7) = FAMA-DE00-3.141592/2.</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(8) = QATT</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(9) = QREA</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(10) = IR00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(11) = IX00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(12) = FREQ-OMGA*FNOM</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(13) = IFLD-E2Q0</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">otherwise, if the machine is connected to the network</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">if the generator is autoreferred,</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; OM=OMGA</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">otherwise</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; OM=ORIN</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">DELTOM = (OMGA-OM)*2*3.14169*FNOM</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">DELREL = DE_P+DELTOM*DTINT</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">IF (DELREL.NE.0.) THEN</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; ASS = ABS(DELREL)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; AM = AMOD(ASS,2*3.141592)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; DELREL = DELREL/ASS*AM</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">ENDIF</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">IF (ITERT.LE.0.AND.IFUN.EQ.2) THEN</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+DATI(IPD+16)=DELREL</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">ENDIF</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">if the generator is autoreferred,</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+DELASS=DELREL</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">otherwise</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+DELASS=DELREL+DRIN</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">ID00=(VR00*SIN(DELASS)-VX00*COS(DELASS)+E2Q0)/X2D</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">IQ00=(VR00*COS(DELASS)+VX00*SIN(DELASS)-E2D0)/X2Q</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(1) = 1./(TA*OMGA)*(QMEC/CK-QATT/CK)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(2) = -A4*E1Q0-A5*ID00+A6*VF00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(3) = -A1*E2Q0+A1*E1Q0-A2*ID00+A3*VF00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(4) = -B1*E2D0+B2*IQ00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(5) = DE00-DELREL</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(6) = VMMA-SQRT(VR00**2+VX00**2)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(7) = FAMA-ATAN2(VX00,VR00)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(8) = QATT-VR00*IR00-VX00*IX00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(9) = QREA-VX00*IR00+VR00*IX00</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(10) = IR00-ID00*CK*COS(DELASS)+IQ00*CK*SIN(DELASS)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(11) = IX00-IQ00*CK*COS(DELASS)-ID00*CK*SIN(DELASS)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(12) = FREQ-OMGA*FNOM</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">RNI(13) = IFLD-E2Q0-GAM3*ID00</p>
+</blockquote>
+<p align="left">Expressions of coefficients of parameters used in residuals are
+the following:</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">T1D = X1D*T1D0/XD</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">T2D0 = X1D*T2D/X2D</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">T2Q0 = XQ*T2Q/X2Q</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">CAMD = T2D/T1D0*(XD-X1D)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">A1 = 1./T2D0</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">A2 = 1./T2D0*(X1D-X2D+CAMD)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">A3 = TAA/(T1D0*T2D0)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">A4 = 1./T1D0</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">A5 = 1./T1D0*(XD-X1D-CAMD)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">A6 = 1./T1D0*(1-TAA/T1D0)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">B1 = 1./T2Q0</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">B2 = 1./T2Q0*(XQ-X2Q)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">CK = (QNOM/QBASE)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">GAM3 = (QNOM*RF*TAA)/((VBEC*VBEC)*2*3.142*FNOM*T1D0*T2D0)</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE GEN5</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+<p ALIGN="CENTER">&nbsp;</p>
+</i></font></b>
+<p align="left"><font face="Arial">SUBROUTINE GEN5I2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</font></p>
+<p align="left"><font face="Arial">IBL1,IBL2,IER,CNXYU,TOL)</font></p>
+<p align="left"><font face="Arial">SUBROUTINE GEN5C1 (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></p>
+<p align="left"><font face="Arial">SUBROUTINE GEN5JC (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></p>
+<p align="left"><font face="Arial">SUBROUTINE GEN5 (IFUN,IXYU,XYU,IPD,DATI,RNI)</font></p>
+<p align="left"><font face="Arial">SUBROUTINE GEN5I3 (IFO,IOB,DEBL)</font></p>
+<p align="left"><font face="Arial">SUBROUTINE GEN5I4 (IOB,MOD)</font></p>
+<p align="left"><font face="Arial">SUBROUTINE GEN5D1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</font></p>
+<p align="left"><font face="Arial">IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</font></p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE GEN5</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b>
+<p ALIGN="center"><font FACE="Arial" SIZE="4"><b><i>Test cases</i></b></font></p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

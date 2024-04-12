@@ -1,0 +1,22 @@
+:
+#@(#)EXTERNALREF	Estrae da include/X11/*.h e include/Xm/*.h  ...
+
+X11=/usr/include/X11
+Xm=/usr/include/Xm
+doc=~/doc
+cn=EXTERNALREF
+
+cd $X11
+grep 'externalref.*xm.*Class' *.h | sed -e 's/:/ /' > $doc/$cn.X11
+
+cd $Xm
+grep 'externalref.*xm.*Class' *.h | sed -e 's/[:;]/ /g' > $doc/$cn.Xm
+
+cd $doc
+eval ls -rtg "$cn*"
+
+awk '{ printf( "%-13s%-32s %s\n", $1, $3, $4 ) }'  $doc/$cn.Xm| sort | uniq >  $doc/$cn.Xmf
+
+sort +0.12 $doc/$cn.Xmf > $doc/$cn.Xmt
+
+sort +0.45 $doc/$cn.Xmf > $doc/$cn.Xmn

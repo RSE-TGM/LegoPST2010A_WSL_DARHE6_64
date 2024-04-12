@@ -1,0 +1,640 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>REGULATION MODULE</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_SETM"></A>SETM regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module SETM calculates the difference (UE error), in case multiplied by a gain K_ERRO, between the value considered for a quantity (US set-point) and its measured value IM, appropriately scaled down to make it comparable with the set-point (UM quantity).</P>
+<P ALIGN="JUSTIFY">The state of SETM module (automatic or manual), is defined by the logical variable J3 or by the value of logic related to the set-point J1. The US set-point can defines different quantities.</P>
+<P ALIGN="JUSTIFY">For clearness, it had better to discriminate among different cases, but first we point out some preliminary operations common to all of them.</P>
+<P ALIGN="JUSTIFY">The value scaled down from the measured quantity UM (comparable with US set-point) is calculated, dividing the measured quantity IM by its end scale value K_MISU (fixed by user):</P>
+<P ALIGN="CENTER">UM = IM / K_MISU</P>
+<P ALIGN="JUSTIFY">Besides, the two output logical variables JE (met set-point increased) and JF (met set-point decreased) are put to the value "false".</P>
+<P ALIGN="JUSTIFY">1) SETM in automatic: J3 true.</P>
+<P ALIGN="JUSTIFY">User has to operate so that the output error UE is null, copying the scaled down measure UM on the set-point US:</P>
+<P ALIGN="CENTER">US = UM</P>
+<P ALIGN="JUSTIFY">2) SETM in manual: J3 false.</P>
+<P ALIGN="JUSTIFY">2.1) Logic of set-point J1 true.</P>
+<P ALIGN="JUSTIFY">The US set-point is put equal to its TARGET II value:</P>
+<P ALIGN="CENTER">US = II</P>
+<P ALIGN="JUSTIFY">2.2) Logic of set point J1 false.</P>
+<P ALIGN="JUSTIFY">2.2.1) Stationary condition: no calculation is carried out, therefore the US output keeps the value fixed by user during the filling phase of the file F14.DAT.</P>
+<P ALIGN="JUSTIFY">2.2.2) Transient condition: the two logical signals J4 (request of set-point increasing) and J5 (request of decreasing set-point) are compared. If they are equal (0 =&gt; no request, 1 =&gt; contemporary request of increase and decrease, are both ignored), for the US set-point the value of the preceding time interval (USP) is kept:</P>
+<P ALIGN="CENTER">US = USP</P>
+<P ALIGN="JUSTIFY">If J4 and J5 are different, user tests which of them is "true".</P>
+<P ALIGN="JUSTIFY">a) J4 true (request of set-point increasing). The US set-point is increased of a quantity equal to the product of the time interval Dt by the KK gradient value:</P>
+<P ALIGN="CENTER">US = USP + KK * Dt</P>
+<P ALIGN="JUSTIFY">the Je signal (increasing of met set-point) is put to the value "true".</P>
+<P ALIGN="JUSTIFY">b) J5 true (request of set-point decreasing). The US set-point is decreased of a quantity equal to the product of the time interval Dt by the KK gradient value:</P>
+<P ALIGN="CENTER">US = USP - KK * Dt</P>
+<P ALIGN="JUSTIFY">the JF signal (decreasing of met set-point) is put to the value "true".</P>
+<P ALIGN="JUSTIFY">Finally we have the calculation operation of the UE error, which is common to all possibilities previously mentioned:</P>
+<P ALIGN="CENTER">UE = K_ERRO * (US - UM)</P>
+<P ALIGN="JUSTIFY">where K_ERRO represents the SETM module gain.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1149.gif" WIDTH=383 HEIGHT=193></P>
+<B><FONT FACE="Arial, helvetica"><P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</B><P ALIGN="JUSTIFY">[]&#9;IM&#9;measured quantity</P>
+<P ALIGN="JUSTIFY">[]&#9;II&#9;TARGET value of set-point</P>
+<P ALIGN="JUSTIFY">[]&#9;J1&#9;set-point logic</P>
+<P ALIGN="JUSTIFY">[]&#9;J3&#9;AUTOMATIC/MANUAL logic of local set-point</P>
+<P ALIGN="JUSTIFY">[]&#9;J4&#9;logic of increasing request related to local set-point</P>
+<P ALIGN="JUSTIFY">[]&#9;J5&#9;logic of decreasing request related to local set-point</P>
+<P ALIGN="JUSTIFY">[]&#9;KK&#9;INCREASE/DECREASE gradient of local set-point</P>
+<P ALIGN="JUSTIFY">[]&#9;UE&#9;error between set-point and measure.</P>
+<P ALIGN="JUSTIFY">[]&#9;US&#9;local set-point</P>
+<P ALIGN="JUSTIFY">[]&#9;UM&#9;scaled down value of measured quantity</P>
+<P ALIGN="JUSTIFY">[]&#9;JE&#9;met increasing logic of set-point</P>
+<P ALIGN="JUSTIFY">[]&#9;JF&#9;met decreasing logic of set-point.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Besides the initial values of input-output variables related to the SETM module, whose meaning has been defined above, user has to assign the following data set to complete the INPUT required by module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;K_MISU&#9;end scale value of IM measured quantity</P>
+<P ALIGN="JUSTIFY">[]&#9;K_ERRO&#9;gain value of local set-point.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of SETM module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">On the contrary, during the assigning phase of the datum K_MISU some precautions are needing. In fact, since the value of IM measured quantity is scaled down dividing it by its end scale value K_MISU, user has to assign to this datum a value different from zero in order to avoid numerical problems (division with null denominator).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1150.gif" WIDTH=426 HEIGHT=660></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_SOGA"></A>SOGA regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module SOGA is a comparator (with or without hysteresis) between an input analogue signal and a reference gate; it provides as output (logical) a true or false value depending on whether the input signal exceeds or not the gate.</P>
+<P ALIGN="JUSTIFY">Splitting the case without hysteresis from those with hysteresis, we can explain more in detail the module functioning:</P>
+<P ALIGN="JUSTIFY">1) <B>Without hysteresis</B> (KL signal minor or equal to zero).</P>
+<P ALIGN="JUSTIFY">Defined as II the input signal and as KS the value of reference gate, the logical output JU is:</P>
+<P ALIGN="CENTER">JU = false (or 0), for II &lt; KS</P>
+<P ALIGN="CENTER">JU = true (or 1), for II &gt;= KS</P>
+<P ALIGN="JUSTIFY">Presenting by a diagram the transfer function, the graphic shown in figure 1 is obtained:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1151.gif" WIDTH=260 HEIGHT=106></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="JUSTIFY">2) <B>With hysteresis</B> (KL signal higher than zero).</P>
+<P ALIGN="JUSTIFY">In this case two gate values are available, (lower KSINF, upper KSSUP) which are calculated beginning from KS (reference gate) and KL (width of hysteresis):</P>
+<P ALIGN="CENTER">KSINF = KS - KL</P>
+<P ALIGN="CENTER">KSSUP = KS</P>
+<P ALIGN="JUSTIFY">Between the two calculated gates, only one is active (the other being irrelevant) which depends on previous history (state). Therefore, it is necessary to determine one or more variables which can univocally identify the system state; for the case in question it is sufficient to know the output value at the preceding time interval JUP.</P>
+<P ALIGN="JUSTIFY">If JUP is false, the active gate is the upper one KSSUP; defined as II the input variable, the output logical variable JU is:</P>
+<P ALIGN="CENTER">JU = false (or 0), for II &lt; KSSUP</P>
+<P ALIGN="CENTER">JU = true (or 1), for II &gt;= KSSUP</P>
+<P ALIGN="JUSTIFY">If JUP is true, the active gate is the lower one KSINF; defined as II the input variable, the output logical variable JU is:</P>
+<P ALIGN="CENTER">JU = false (or 0), for II &lt; KSINF</P>
+<P ALIGN="CENTER">JU = true (or 1), for II &gt;= KSINF</P>
+<P ALIGN="JUSTIFY">Presenting by a diagram the transfer function, the graphic shown in figure 2 is obtained:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1152.gif" WIDTH=300 HEIGHT=106></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 2</P>
+<B><P>Note 1</P>
+</B><P ALIGN="JUSTIFY">Only during the calculation phase of a transient, it makes sense to use as discriminant variable the output at the preceding time interval JUP. On the contrary under stationary condition it is not possible to calculate the JU output in a univocal way. In fact we have:</P>
+<P ALIGN="CENTER">JU = false (or 0), for II &lt; KSINF</P>
+<P ALIGN="CENTER">JU = true (or 1), for II &gt;= KSINF</P>
+<P ALIGN="JUSTIFY">Within the interval included between the two gates, it is no possible to establish in a univocal way the JU value, therefore this is kept equal to the tentative value assigned by user.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1153.gif" WIDTH=375 HEIGHT=114></P>
+<B><FONT FACE="Arial, helvetica"><P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;II&#9;input analogue variable to compare</P>
+<P ALIGN="JUSTIFY">[]&#9;KS&#9;value of reference gate</P>
+<P ALIGN="JUSTIFY">[]&#9;KL&#9;width of hysteresis (non-existent if KL &lt;= 0)</P>
+<P ALIGN="JUSTIFY">[]&#9;JU&#9;output logical variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module SOGA has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the SOGA module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1154.gif" WIDTH=508 HEIGHT=660></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_SOGB"></A>SOGB regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module SOGB is a comparator (with or without hysteresis) between an input analogue signal and a reference gate; it provides as output (logical) a true or false value depending on whether the input signal exceeds or not the gate.</P>
+<P ALIGN="JUSTIFY">Splitting the case without hysteresis from those with hysteresis, we can explain more in detail the module functioning:</P>
+<P ALIGN="JUSTIFY">1) <B>Without hysteresis</B> (KL signal minor or equal to zero).</P>
+<P ALIGN="JUSTIFY">Defined as II the input signal and as KS the value of reference gate, the logical output JU is:</P>
+<P ALIGN="CENTER">JU = true (or 1), for II &lt; KS</P>
+<P ALIGN="CENTER">JU = false (or 0), for II &gt;= KS</P>
+<P ALIGN="JUSTIFY">Presenting by a diagram the transfer function, the graphic shown in figure 1 is obtained:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1155.gif" WIDTH=260 HEIGHT=106></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="JUSTIFY">2) <B>With hysteresis</B> (KL signal higher than zero).</P>
+<P ALIGN="JUSTIFY">In this case two gate values are available, (lower KSINF, upper KSSUP) which are calculated beginning from KS (reference gate) and KL (width of hysteresis):</P>
+<P ALIGN="CENTER">KSINF = KS - KL</P>
+<P ALIGN="CENTER">KSSUP = KS</P>
+<P ALIGN="JUSTIFY">Between the two calculated gates, only one is active (the other being irrelevant) which depends on previous history (state). Therefore, it is necessary to determine one or more variables which can univocally identify the system state; for the case in question it is sufficient to know the output value at the preceding time interval JUP.</P>
+<P ALIGN="JUSTIFY">If JUP is true, the active gate is the upper one KSSUP; defined as II the input variable, the output logical variable JU is:</P>
+<P ALIGN="CENTER">JU = true (or 1), for II &lt; KSSUP</P>
+<P ALIGN="CENTER">JU = false (or 0), for II &gt;= KSSUP</P>
+<P ALIGN="JUSTIFY">If JUP is false, the active gate is the lower one KSINF; defined as II the input variable, the output logical variable JU is:</P>
+<P ALIGN="CENTER">JU = true (or 1), for II &lt; KSINF</P>
+<P ALIGN="CENTER">JU = false (or 0), for II &gt;= KSINF</P>
+<P ALIGN="JUSTIFY">Presenting by a diagram the transfer function, the graphic shown in figure 2 is obtained:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1156.gif" WIDTH=300 HEIGHT=106></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 2</P>
+<B><P>Note 1</P>
+</B><P ALIGN="JUSTIFY">Only during the calculation phase of a transient, it makes sense to use as discriminant variable the output at the preceding time interval JUP. On the contrary under stationary condition it is not possible to calculate the JU output in a univocal way. In fact we have:</P>
+<P ALIGN="CENTER">JU = true (or 1), for II &lt; KSINF</P>
+<P ALIGN="CENTER">JU = false (or 0), for II &gt;= KSSUP</P>
+<P ALIGN="JUSTIFY">Within the interval included between the two gates, it is no possible to establish in a univocal way the JU value, therefore this is kept equal to the tentative value assigned by user.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1157.gif" WIDTH=375 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;II&#9;input analogue variable to compare</P>
+<P ALIGN="JUSTIFY">[]&#9;KS&#9;value of reference gate</P>
+<P ALIGN="JUSTIFY">[]&#9;KL&#9;width of hysteresis (non-existent if KL &lt; = 0)</P>
+<P ALIGN="JUSTIFY">[]&#9;JU&#9;output logical variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module SOGB has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the SOGB module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1158.gif" WIDTH=508 HEIGHT=660></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_SOGC"></A>SOGC regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module SOGC is a comparator between an input analogue signal and two reference gates; it provides, as output (logical) a false or true value depending on whether the input signal is or not included within the interval identified by the two gates.</P>
+<P ALIGN="JUSTIFY">Defined as II the input signal and as KS and KD respectively left and right gate values, the logical output JU is:</P>
+<P ALIGN="CENTER">JU = true (or 1), for II &lt; KS or II &gt; KD</P>
+<P ALIGN="CENTER">JU = false (or 0), for KS &lt;= II &lt;= KD</P>
+<P ALIGN="JUSTIFY">Presenting by a diagram the transfer function, the graphic shown in figure 1 is obtained:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1159.gif" WIDTH=265 HEIGHT=106></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1160.gif" WIDTH=375 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;II&#9;input analogue variable from comparator</P>
+<P ALIGN="JUSTIFY">[]&#9;KS&#9;value of left reference gate</P>
+<P ALIGN="JUSTIFY">[]&#9;KD&#9;value of right reference gate</P>
+<P ALIGN="JUSTIFY">[]&#9;JU&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The SOGC module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In order to obtain a function as indicated in figure 1 it is necessary to assign values such as KS input variable is minor than KD. The non-respect of this condition does not cause error, but it makes the SOGC module banal.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1161.gif" WIDTH=334 HEIGHT=289></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_SOGD"></A>SOGD regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module SOGD is a comparator between an input analogue signal and two reference gates; it provides, as output (logical) a true or false value depending on whether the input signal is or not included within the interval identified by the two gates.</P>
+<P ALIGN="JUSTIFY">Defined as II the input signal and as KS and KD respectively left and right gate values, the logical output JU is:</P>
+<P ALIGN="CENTER">JU = false (or 0), for II &lt; KS or II &gt; KD</P>
+<P ALIGN="CENTER">JU = true (or 1), for KS &lt;= II &lt;= KD</P>
+<P ALIGN="JUSTIFY">Presenting by a diagram the transfer function, the graphic shown in figure 1 is obtained:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1162.gif" WIDTH=265 HEIGHT=106></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1163.gif" WIDTH=375 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;II&#9;input analogue variable from comparator</P>
+<P ALIGN="JUSTIFY">[]&#9;KS&#9;value of left reference gate</P>
+<P ALIGN="JUSTIFY">[]&#9;KD&#9;value of right reference gate</P>
+<P ALIGN="JUSTIFY">[]&#9;JU&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The SOGD module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In order to obtain a function as indicated in figure 1 it is necessary to assign values such as KS input variable is minor than KD. The non-respect of this condition does not cause error, but it makes the SOGD module banal.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1164.gif" WIDTH=334 HEIGHT=289></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_SOM2"></A>SOM2 regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module SOM2 provides, as output, the addition, suitably weighted, of the two input analogue variables.</P>
+<P ALIGN="JUSTIFY">Once defined as I1 and I2 the two input analogue variables, as GUAD1 and GUAD2 the respective weights to assign to the two input and as UA the output analogue variables, in the formula we can write:</P>
+<P ALIGN="CENTER">UA = GUAD1*I1 + GUAD2*I2</P>
+<B><P>Note 1</P>
+</B><P ALIGN="JUSTIFY">It is evident that the SOM2 module can also carry out subtractions, for example it is enough to provide as weights the following values:</P>
+<P ALIGN="CENTER">GUAD1 = 1</P>
+<P ALIGN="CENTER">GUAD2 = -1</P>
+<P ALIGN="JUSTIFY">In this case the operation executed by the SOM2 module is the following:</P>
+<P ALIGN="CENTER">UA = I1 - I2</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1165.gif" WIDTH=375 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;I1&#9;input analogue variable 1</P>
+<P ALIGN="JUSTIFY">[]&#9;I2&#9;input analogue variable 2</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In addition to the initial values of input and output variables, whose meaning has been defined above, user must assign the following data set to complete the INPUT required by the SOM2 module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;GUAD1&#9;weight assigned to the input 1</P>
+<P ALIGN="JUSTIFY">[]&#9;GUAD2&#9;weight assigned to the input 2.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the SOM2 module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1166.gif" WIDTH=259 HEIGHT=244></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_SOM3"></A>SOM3 regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module SOM3 provides, as output, the addition, suitably weighted, of the three input analogue variables.</P>
+<P ALIGN="JUSTIFY">Once defined as I1, I2 and I3 the three input analogue variables, as GUAD1, GUAD2 and GUAD3 the respective weights to assign to the three variables and as UA the output analogue variable, in the formula we can write:</P>
+<P ALIGN="CENTER">UA = GUAD1*I1 + GUAD2*I2 + GUAD3*I3</P>
+<B><P>Note 1</P>
+</B><P ALIGN="JUSTIFY">It is evident that the SOM3 module carries out algebraical additions if to some weights a negative value is assigned.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1167.gif" WIDTH=375 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;I1&#9;input analogue variable 1</P>
+<P ALIGN="JUSTIFY">[]&#9;I2&#9;input analogue variable 2</P>
+<P ALIGN="JUSTIFY">[]&#9;I3&#9;input analogue variable 3</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In addition to the initial values of input and output variables, whose meaning has been defined above, user must assign the following data set to complete the INPUT required by the SOM3 module.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;GUAD1&#9;weight assigned to the input 1</P>
+<P ALIGN="JUSTIFY">[]&#9;GUAD2&#9;weight assigned to the input 2</P>
+<P ALIGN="JUSTIFY">[]&#9;GUAD3&#9;weight assigned to the input 3</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the SOM3 module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1168.gif" WIDTH=327 HEIGHT=262></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_SOM4"></A>SOM4 regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module SOM4 provides, as output, the addition, suitably weighted, of the four input analogue variables.</P>
+<P ALIGN="JUSTIFY">Once defined as I1, I2, I3 and I4 the four input analogue variables, as GUAD1, GUAD2, GUAD3 and GUAD4 the respective weights to assign to the four input and as UA the output analogue variable, in the formula we can write:</P>
+<P ALIGN="CENTER">UA = GUAD1*I1 + GUAD2*I2 + GUAD3*I3 + GUAD4*I4</P>
+<B><P>Note 1</P>
+</B><P ALIGN="JUSTIFY">It is evident that the SOM4 module carries out algebraical additions if to some weights a negative value is assigned.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1169.gif" WIDTH=375 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;I1&#9;input analogue variable 1</P>
+<P ALIGN="JUSTIFY">[]&#9;I2&#9;input analogue variable 2</P>
+<P ALIGN="JUSTIFY">[]&#9;I3&#9;input analogue variable 3</P>
+<P ALIGN="JUSTIFY">[]&#9;I4&#9;input analogue variable 4</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In addition to the initial value of input and output variables, whose meaning has been defined above, user must assign the following data set to complete the INPUT required by the SOM4 module.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;GUAD1&#9;weight assigned to the input 1</P>
+<P ALIGN="JUSTIFY">[]&#9;GUAD2&#9;weight assigned to the input 2</P>
+<P ALIGN="JUSTIFY">[]&#9;GUAD3&#9;weight assigned to the input 3</P>
+<P ALIGN="JUSTIFY">[]&#9;GUAD4&#9;weight assigned to the input 4.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the SOM4 module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+<P>&nbsp;</P><DIR>
+<DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1170.gif" WIDTH=426 HEIGHT=286></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_SWTC"></A>SWTC regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module SWTC provides, as output, one of the two input analogue signals according to the value of the third input signal (analogue).</P>
+<P ALIGN="JUSTIFY">More precisely, once defined as I1 and I2 the two input analogue variables, as JJ the input logical variable and as UI the output analogue variable, in the formula we can write:</P>
+<P ALIGN="CENTER">UI = I1 for JJ false (or 0)</P>
+<P ALIGN="CENTER">UI = I2 for JJ true (or 1).</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1171.gif" WIDTH=375 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;I1&#9;input analogue variable 1</P>
+<P ALIGN="JUSTIFY">[]&#9;I2&#9;input analogue variable 2</P>
+<P ALIGN="JUSTIFY">[]&#9;JJ&#9;inlet logical variable functioning as switch</P>
+<P ALIGN="JUSTIFY">[]&#9;UI&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The SWTC module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variable initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the SWTC module variable, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT SIZE=1><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1172.gif" WIDTH=334 HEIGHT=289></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_TIMF"></A>TIMF regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module TIMF simulates the behaviour of a one-shot multivibrator sensitive to the rise fronts on the START input JS. More precisely, the logical output JU is normally positioned on the value "false"; it moves to the value "true", keeping this position for a time KT fixed in advance (TIMER duration), when the input JS changes over from "false" to "true" (or from 0 to 1 from which the term "rise front"), coming back successively to the value "false". It is interesting to note that such behaviour of the output is obtained independently from the variations that the input JS has during the wide time interval KT (figure 1). Therefore it is clear that the output signal JU, keeping "true" for a time interval fixed in advance, can serve as time basis in various applications.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1173.gif" WIDTH=436 HEIGHT=225></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">We can examine more in detail the operation carried out by this module.</P>
+<P ALIGN="JUSTIFY">First of all, user has to consider that "to count" the time, the variable ST is used. Then we identify the different possibilities according to the values of some logical variables:</P>
+<P ALIGN="JUSTIFY">1) Stationary condition: the output JU is put at the value "false" (a monostable has only one stable state, in this case "false").</P>
+<P ALIGN="JUSTIFY">2) Transient condition: using the input to the preceding time interval JSP, user has to consider if, in correspondence with the last 2 time instants (the preceding and the present), there are some "rise fronts" on JS.</P>
+<P ALIGN="JUSTIFY">2.1) Rise front on JS (JS "true" and JSP "false"). The output JU is forced to the value "true" and the counter is increased with a quantity equal to the time interval.</P>
+<P ALIGN="CENTER">ST = ST + Dt</P>
+<P ALIGN="JUSTIFY">If the counter ST exceeds the interval KT fixed in advance, the output JU is brought back to the value "false" and the counter is set to zero, otherwise no action can be engaged in.</P>
+<P ALIGN="JUSTIFY">2.2) No rise front on JS.</P>
+<P ALIGN="JUSTIFY">2.2.1) Output signal JU false. No action can be engaged in.</P>
+<P ALIGN="JUSTIFY">2.2.2) Output signal JU true. The counter is increased with a quantity equal to the time interval:</P>
+<P ALIGN="CENTER">ST = ST + Dt</P>
+<P ALIGN="JUSTIFY">If the counter ST exceeds the interval KT fixed in advance, the output JU is brought back to the value "false" and the counter is set to zero, otherwise no action can be engaged in.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1174.gif" WIDTH=375 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;JS&#9;START logical input</P>
+<P ALIGN="JUSTIFY">[s]&#9;KT&#9;TIMER duration (output on JU true)</P>
+<P ALIGN="JUSTIFY">[]&#9;JU&#9;output logical variable.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module TIMF has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the TIMF module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1175.gif" WIDTH=391 HEIGHT=660></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_TIMR"></A>TIMR regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module TIMR simulates the behaviour of a one-shot multivibrator. More precisely, the logical output JU is normally positioned on the value "false" (input JS false); it moves to the value "true", keeping this position for a time KT fixed in advance (TIMER duration), when the input JS turn "true", coming back successively to the value "false". It is interesting to note that such behaviour of the output is obtained independently from the variations that the input JS has during the wide time interval KT (figure 1). Therefore it is clear that the output signal JU, keeping "true" for a time interval fixed in advance, can serve as time basis in various applications.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1176.gif" WIDTH=516 HEIGHT=225></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="JUSTIFY">Besides, as input, a RESET signal is present (prevailing), which, if "true" forces in any case the output JU to the value "false"(input of set to zero).</P>
+<P ALIGN="JUSTIFY">We can examine more in detail the operation carried out by this module.</P>
+<P ALIGN="JUSTIFY">First of all, user has to consider that "to count" the time, the variable ST is used. Then we identify the different possibilities according to the values of some logical variables:</P>
+<P ALIGN="JUSTIFY">1) RESET signal JR true. The output JU is forced to the value "false" and the counter ST is set to zero.</P>
+<P ALIGN="JUSTIFY">2) RESET signal JF false.</P>
+<P ALIGN="JUSTIFY">2.1) START signal JS true. The output JU is forced to the value "true" and the counter is increased with a quantity equal to the time interval:</P>
+<P ALIGN="CENTER">ST = ST + Dt</P>
+<P ALIGN="JUSTIFY">If the counter ST exceeds the interval KT fixed in advance, the output JU is brought back to the value "false" and the counter is set to zero, otherwise no action can be engaged in.</P>
+<P ALIGN="JUSTIFY">2.2) START signal JS false.</P>
+<P ALIGN="JUSTIFY">2.2.1) Output signal JU false. No action can be engaged in.</P>
+<P ALIGN="JUSTIFY">2.2.2) Output signal JU true. The counter is increased with a quantity equal to the time interval:</P>
+<P ALIGN="CENTER">ST = ST + Dt</P>
+<P ALIGN="JUSTIFY">If the counter ST exceeds the interval KT fixed in advance, the output JU is brought back to the value "false" and the counter is set to zero, otherwise no action can be engaged in.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1177.gif" WIDTH=375 HEIGHT=114></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;JS&#9;START logical input</P>
+<P ALIGN="JUSTIFY">[]&#9;JR&#9;RESET logical input (prevailing)</P>
+<P ALIGN="JUSTIFY">[s]&#9;KT&#9;TIMER duration (output on JU true)</P>
+<P ALIGN="JUSTIFY">[]&#9;JU&#9;output logical variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module TIMR has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the TIMR module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1178.gif" WIDTH=406 HEIGHT=660></P></DIR>
+</DIR>
+</BODY>
+</HTML>

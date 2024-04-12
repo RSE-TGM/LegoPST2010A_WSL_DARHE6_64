@@ -1,0 +1,8 @@
+Grafics*foreground:                  #f6f6f6
+Grafics*background:                  #3d8093
+Grafics*Background:                  #3d8093
+Grafics*XmScrolledWindow*background: #396674
+Grafics*XmText.background:           #396674
+Grafics*XmTextField.background:      #396674
+Grafics*XmList.fontList: -adobe-courier-bold-r-normal--14-*
+Grafics*fontList:        -adobe-helvetica-bold-r-normal--14-*

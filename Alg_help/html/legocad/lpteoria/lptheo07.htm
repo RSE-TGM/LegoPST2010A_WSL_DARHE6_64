@@ -1,0 +1,113 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_turb"></A>Steam turbines and related modules</P>
+</B></FONT><STRIKE><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</STRIKE><P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_turb"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_turbgen"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Generalities (on these modules)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_turbazio"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Impulse stage</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_turbreaz"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Reaction stage</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_turbcase"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Radiative heat exchange in turbine casing</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_turbgen"></A>Steam turbines and related modules: generalities</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">A steam turbine consists of a series of stages, through which steam is passing, in which the initial pressure is progressively broken down to exhaust pressure, each stage contributing to the power output of the machine.</P>
+<P ALIGN="JUSTIFY">Each stage consists of a nozzle (stationary blades) and a bucket (rotating blades).</P>
+<P ALIGN="JUSTIFY">The fractional reaction R</FONT><FONT FACE="Arial, helvetica" SIZE=1>x</FONT><FONT FACE="Arial, helvetica"> of a stage is defined as the ratio of the energy released in the bucket passage to the total stage energy.</P>
+<P ALIGN="JUSTIFY">Turbine stages can be classified as impulse stages (R</FONT><FONT FACE="Arial, helvetica" SIZE=1>x</FONT><FONT FACE="Arial, helvetica"> = 0) and reaction stages (R</FONT><FONT FACE="Arial, helvetica" SIZE=1>x</FONT><FONT FACE="Arial, helvetica"> &gt; 0).</P>
+<P ALIGN="JUSTIFY">The overall efficiency of a steam turbine is a combination of the stage efficiency and the reheat factor. In any stage the efficiency depends on the physical dimensions and the thermodynamic conditions. The efficiency of a stage is equal to the nozzle-bucket efficiency minus the loss due to several other items: the rotation loss (windage) of the stage, the diaphragm-packing leakage loss caused by part of the steam passing through the diaphragm packing (interstage gland), the moisture loss, the nozzle-end loss in a partial-admission stage and the exhaust loss.</P>
+<P ALIGN="JUSTIFY">The theoretical stage efficiency</FONT> <FONT FACE="Symbol">h</FONT> <FONT FACE="Arial, helvetica">is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image633.gif" WIDTH=426 HEIGHT=69></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where v</FONT><FONT FACE="Arial, helvetica" SIZE=1>mean</FONT><FONT FACE="Arial, helvetica"> is the peripheral speed of the mean point of the rotating blades and v</FONT><FONT FACE="Arial, helvetica" SIZE=1>iso</FONT><FONT FACE="Arial, helvetica"> is the steam absolute speed at stage outlet if the stage expansion were isentropic. If r</FONT><FONT FACE="Arial, helvetica" SIZE=1>mean</FONT><FONT FACE="Arial, helvetica"> is the mean radius of the rotating blades it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image634.gif" WIDTH=132 HEIGHT=53></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">It may be shown by differentiation that for maximum efficiency it must be:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image635.gif" WIDTH=121 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">It must be remembered that as the velocity ratio v</FONT><FONT FACE="Arial, helvetica" SIZE=1>mean</FONT><FONT FACE="Arial, helvetica">/v</FONT><FONT FACE="Arial, helvetica" SIZE=1>iso</FONT><FONT FACE="Arial, helvetica"> changes for a given stage, the fractional reaction R</FONT><FONT FACE="Arial, helvetica" SIZE=1>x</FONT><FONT FACE="Arial, helvetica"> also changes, increasing as the velocity ratio increases.</P>
+<P ALIGN="JUSTIFY">In an actual nozzle-bucket system many deviations from the ideal case occur. For example it is impossible for the entrance angle of the steam to the bucket to be in the plane of the wheel, because there would be mechanical interference between the bucket and the nozzle, and it is impossible for the steam to leave the bucket at an angle of 0° with respect to the plane of rotation of the bucket, because if it did, there would be no opportunity for the flow of steam to progress axially through the turbine. Several other deviations from the ideal case exist. Therefore the efficiency will not be 1 even at optimum velocity ratio.</P>
+<P ALIGN="JUSTIFY">To determine the mass flow rate through a turbine stage two conditions must be taken into consideration:</P>
+<P ALIGN="JUSTIFY">1.&#9;the flow is not critical</P>
+<P ALIGN="JUSTIFY">2.&#9;the flow is critical</P>
+<P ALIGN="JUSTIFY">In the former case the following expression can be used:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image636.gif" WIDTH=354 HEIGHT=70></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In the last case the flow can be critical in the nozzle or in the bucket. The expressions for the evaluation of the mass flow rate are not reported here.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_turbazio"></A>Steam turbines and related modules: impulse stage</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In an impulse stage of a steam turbine the stationary blades convert potential energy of the steam to kinetic energy by reducing the flow area, which increases the velocity. In addition to accelerating the steam, these blades direct the flow into the rotating blades at the proper angle. The rotating blades then convert the kinetic energy to torque. All of the stage pressure drop, thus all of the stage energy is on the stationary blades. There is no pressure drop across the rotating blades and no change in relative steam velocity.</P>
+<P ALIGN="JUSTIFY">The following assumptions are made:</P>
+<P ALIGN="JUSTIFY">superheated steam behaves as a perfect gas</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no inertia</P>
+<P ALIGN="JUSTIFY">no energy storage in the fluid</P>
+<P ALIGN="JUSTIFY">no heat transfer between fluid and mechanical parts</P>
+<P ALIGN="JUSTIFY">The impulse stage mass flow rate</FONT> <FONT FACE="Symbol">G</FONT> <FONT FACE="Arial, helvetica">is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image637.gif" WIDTH=462 HEIGHT=156></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The impulse stage outlet enthalpy h</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX</FONT><FONT FACE="Arial, helvetica"> is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image638.gif" WIDTH=174 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and the stage efficiency</FONT> <FONT FACE="Symbol">h</FONT> <FONT FACE="Arial, helvetica">is determined as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image639.gif" WIDTH=224 HEIGHT=54></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In fact the whole steam admission system model is included in the module. The system consists in one or more inlet pipes which feed discrete segments, called arcs of admission, of the first stage stationary blades periphery. Each arc is supplied by its own control valve.</P>
+<P ALIGN="JUSTIFY">The control valve can be activated in a sequential mode so the turbine can be operated with both active and inactive arcs of admission (partial arc admission), or the steam can be admitted to the entire periphery of the first stage as the control valves are opened and the arc of admission does not vary (full arc admission).</P>
+<P ALIGN="JUSTIFY">Of course the total control valves mass flow rate must be equal to the impulse stage mass flow rate.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_turbreaz"></A>Steam turbines and related modules: reaction stage</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/tren.htm#lg_libproc_TREN_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">TREN</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">The basic difference between impulse and reaction stages is the distribution of energy between the stationary and rotating blades.</P>
+<P ALIGN="JUSTIFY">The same assumptions as for the impulse stage model are made:</P>
+<P ALIGN="JUSTIFY">superheated steam behaves as a perfect gas</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no inertia</P>
+<P ALIGN="JUSTIFY">no energy storage in the fluid</P>
+<P ALIGN="JUSTIFY">no heat transfer between fluid and mechanical parts</P>
+<P ALIGN="JUSTIFY">In reaction stages performance calculation the method known as stage-group method is often used, and it is referred to in the following discussions. In such method entire groups of turbine stages are treated as if they were single nozzles.</P>
+<P ALIGN="JUSTIFY">The stage outlet enthalpy h</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX</FONT><FONT FACE="Arial, helvetica"> is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image638.gif" WIDTH=174 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and the stage efficiency</FONT> <FONT FACE="Symbol">h</FONT> <FONT FACE="Arial, helvetica">is determined as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image653.gif" WIDTH=105 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The term</FONT> <FONT FACE="Symbol">h</FONT><FONT FACE="Symbol" SIZE=1>w</FONT> <FONT FACE="Arial, helvetica">takes into account the reduction in efficiency due to operation at different speed from nominal one:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image641.gif" WIDTH=189 HEIGHT=54></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The term</FONT> <FONT FACE="Symbol">h</FONT><FONT FACE="Symbol" SIZE=1>G</FONT> <FONT FACE="Arial, helvetica">takes into account the reduction in efficiency due to operation at low mass flow rate:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image642.gif" WIDTH=322 HEIGHT=88></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For an infinite number of pressure stages the relation known as Stodola’s Ellipse, which states:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image643.gif" WIDTH=186 HEIGHT=60></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where k</FONT><FONT FACE="Arial, helvetica" SIZE=1>T </FONT><FONT FACE="Arial, helvetica">is a constant coefficient, is valid, but it can be used down to as few as eight 50-percent reaction stages. The Stodola law can be used for each group of reaction stages between extractions in condensing turbines in normal working conditions. For the last stage or the last two stages of the low pressure section the Stodola law gives inaccurate results.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_turbcase"></A>Steam turbines and related modules: radiative heat exchange in turbine casing</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The powers exchanged by the walls of an enclosure built up by N radiating surfaces are calculated. In the STIT module it is N = 3.</P>
+<P ALIGN="JUSTIFY">The zonal method is used, in which the surface and the volume of the enclosure is divided into a number of zones, each assumed to have a uniform distribution of temperature and radiative properties. Then, the direct exchange areas between the surface and volume elements are evaluated and the total exchange areas are determined.</P>
+<P ALIGN="JUSTIFY">The main hypotheses are:</P>
+<P ALIGN="JUSTIFY">the transparency of the surfaces is null</P>
+<P ALIGN="JUSTIFY">the absorptivity and emissivity of each surface are equal</P>
+<P ALIGN="JUSTIFY">the medium in the enclosure is neither emitting nor adsorbing</P>
+<P ALIGN="JUSTIFY">The set of energy balances for the zones is:</P>
+<B><P ALIGN="CENTER">SE</B> = <B>Q</P>
+</B><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image644.gif" WIDTH=420 HEIGHT=141></P>
+<P ALIGN="CENTER"><IMG SRC="Image645.gif" WIDTH=72 HEIGHT=97>&#9;<IMG SRC="Image646.gif" WIDTH=70 HEIGHT=97></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">S</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica">S</FONT><FONT FACE="Arial, helvetica" SIZE=1>j</FONT><FONT FACE="Arial, helvetica"> is the total exchange area which is the ratio of the radiant energy emitted by a zone i which is absorbed by zone j (directly or after multiple reflections from other zones) to the total energy emitted by zone i, E</FONT><FONT FACE="Arial, helvetica" SIZE=1>bi</FONT><FONT FACE="Arial, helvetica"> is the total blackbody emitted flux and Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> is the imposed heat flux at zone i.</P>
+<P ALIGN="JUSTIFY">It is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image647.gif" WIDTH=70 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image648.gif" WIDTH=114 HEIGHT=36></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Usually view factor F</FONT><FONT FACE="Arial, helvetica" SIZE=1>v,ij</FONT> <FONT FACE="Arial, helvetica">and the direct exchange area S</FONT><FONT FACE="Arial, helvetica" SIZE=1>d,ij</FONT><FONT FACE="Arial, helvetica"> are defined.</P>
+<P ALIGN="JUSTIFY">The view factor F</FONT><FONT FACE="Arial, helvetica" SIZE=1>v,ij</FONT><FONT FACE="Arial, helvetica"> between zones i and j is the ratio of the solid angle described by a beam joining a point of zone i with each point of zone j to 2</FONT><FONT FACE="Symbol">p</FONT>.</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The direct exchange area S</FONT><FONT FACE="Arial, helvetica" SIZE=1>d,ij</FONT><FONT FACE="Arial, helvetica"> between zones i and j is</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image649.gif" WIDTH=86 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and it must be:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image650.gif" WIDTH=76 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image651.gif" WIDTH=89 HEIGHT=36></P>
+<P ALIGN="CENTER"><IMG SRC="Image652.gif" WIDTH=100 HEIGHT=36></P></BODY>
+</HTML>

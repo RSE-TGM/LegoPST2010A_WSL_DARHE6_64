@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE AMDI</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMDI_summ"></A>MODULE AMDI&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMDI_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMDI_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMDI_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMDI_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMDI_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMDI_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMDI_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMDI_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMDI_A"></A>MODULE AMDI&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">ANALOG MULTIPLIER OF TWO SIGNALS</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module AMDI multiplies two analog signals. The output value is restricted between an assigned low and high limit value.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMDI_B"></A>MODULE AMDI&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1297.gif" WIDTH=398 HEIGHT=263></P>
+<FONT FACE="Arial"><P>&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[…]&#9;UMOL&#9;product</P>
+<P ALIGN="JUSTIFY">[…]&#9;I1MO&#9;first factor</P>
+<P ALIGN="JUSTIFY">[…]&#9;I2MO&#9;second factor&nbsp;</P>
+<B><U><P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+</B></U></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMDI_C"></A>MODULE AMDI&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables, the user must assign the following data:</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY">[…]&#9;U_MAX&#9;product high limit value</P>
+<P ALIGN="JUSTIFY">[…]&#9;U_MIN&#9;product low limit value</P>
+<P ALIGN="JUSTIFY">[…]&#9;NORM FA1&#9;first factor normalization</P>
+<P ALIGN="JUSTIFY">[…]&#9;NORM FA2&#9;second factor normalization</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMDI_D"></A>MODULE AMDI&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the AMDI module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMDI_E"></A>MODULE AMDI&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">AMDI doesn’t prescribe any FORAUS subroutine.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMDI_F"></A>MODULE AMDI&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>RNI(1) = (UMOL-I1MO*I2MO)/(NORM FA1*NORM FA2)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMDI_G"></A>MODULE AMDI&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>SUBROUTINE AMDII2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>SUBROUTINE AMDII3(IFO,IOB,DEBL)</P>
+<P>SUBROUTINE AMDII4(IOB,MOD)</P>
+<P>SUBROUTINE AMDIC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE AMDISI(IFUN,DATI,ID,NIN)</P>
+<P>SUBROUTINE AMDISR(UU,II,ID,DATI,SAT,NIN,UMAX,UMIN)</P>
+<P>SUBROUTINE AMDID1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMDI_H"></A>MODULE AMDI&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module aren’t yet available.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

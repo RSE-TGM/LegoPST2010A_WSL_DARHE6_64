@@ -1,0 +1,372 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Tosi 320 MW</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#99CCFF" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font FACE="Arial" SIZE="4">
+      <p ALIGN="CENTER">Tosi 320 MW turbine data acquisition subroutine</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><b><font FACE="Courier New" SIZE="2">
+<p>SUBROUTINE DXTOS320(TIPO,</p>
+<p>$ R, AALAM, UDVU, CCR, AETA, BETA, CEME, NVALV,</p>
+<p>$ CA, CCF, AUG, NIA, CAV, CK, NIP, CPV, NIPF, CPVF,</p>
+<p>$ ALFA, HRIF, PSHNOM, TSHNOM, VUNOM, WNOM, RAGGIO,</p>
+<p>$ DPVE, PSHF, TSHF, RCA, XF, WF, IAM)</p>
+<p>CC IMPLICIT DOUBLE PRECISION (A-H,O-Z)</p>
+<p>DIMENSION</p>
+<p>$ CA(16),CCF(16,3),AUG(16),NIA(16),CAV(16,3,4),</p>
+<p>$ NIP(16),CPV(16,10,4),CPVF(10,4),RCA(16),IAM(16)</p>
+<p>DIMENSION</p>
+<p>$ DXCA(16),DXCCF(16,3),DXAUG(16),IDXNIA(16),</p>
+<p>$ DXCAV(16,3,4),IDXNIP(16),DXCPV(16,10,4),</p>
+<p>$ DXCPVF(10,4),DXRCA(16),IDXIAM(16)</p>
+<p>CHARACTER*36 TIPO</p>
+<p>CHARACTER*36 DXTIPO</p>
+<p>C</p>
+<p>DATA DXTIPO/' TURBINA TOSI DA 320 MW '/</p>
+<p>C</p>
+<p>DATA DXPSHNOM,DXTSHNOM,DXVUNOM,DXWNOM,DXRAGGIO,DXCCR,DXAETA,</p>
+<p>$ DXBETA,DXDPVE,DXPSHF,DXTSHF,DXXF,DXWF,IDXNVALV,IDXNIPF</p>
+<p>C</p>
+<p>$/ 16671000., 811.15 , 50. , 284.25 , .456 ,</p>
+<p>C PSHNOM TSHNOM VUNOM WNOM RAGGIO</p>
+<p>C</p>
+<p>$ .0000265 , -7.617 , 4.875 , 166700. , 16671000. ,</p>
+<p>C CCR AETA BETA DPVE PSHF</p>
+<p>C</p>
+<p>$ 811.15 , 1. , 293.44 , 8 , 1 /</p>
+<p>C TSHF XF WF NVALV NIPF</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE IAM</p>
+<p>C</p>
+<p>DATA (IDXIAM(I),I=1,8)/1,2,1,2,1,2,1,2/</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE RCA</p>
+<p>C</p>
+<p>DATA (DXRCA(I),I=1, 8 )</p>
+<p>C NVALV</p>
+<p>C</p>
+<p>$/ 1. , 1. , 1. , 1. , 1. , 1. , 1. , 1. /</p>
+<p>C (1) (2) (3) (4) (5) (6) (7) (8)</p>
+<p>C</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CCF</p>
+<p>C</p>
+<p>DATA ((DXCCF(I,J),J=1, 3 ),I=1, 8 )</p>
+<p>C NVALV</p>
+<p>C</p>
+<p>$/ .14 , -.49 , .93 , .14 , -.49 , .93 ,</p>
+<p>C (1,1) (1,2) (1,3) (2,1) (2,2) (2,3)</p>
+<p>$ .14 , -.49 , .93 , .14 , -.49 , .93 ,</p>
+<p>C (3,1) (3,2) (3,3) (4,1) (4,2) (4,3)</p>
+<p>$ .14 , -.49 , .93 , .14 , -.49 , .93 ,</p>
+<p>C (5,1) (5,2) (5,3) (6,1) (6,2) (6,3)</p>
+<p>$ .14 , -.49 , .93 , .14 , -.49 , .93 /</p>
+<p>C (7,1) (7,2) (7,3) (8,1) (8,2) (8,3)</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE AUG</p>
+<p>C</p>
+<p>DATA (DXAUG(I),I=1, 8 )</p>
+<p>C NVALV</p>
+<p>C</p>
+<p>$/.0022340,.0022340,.0022340,.0022340,</p>
+<p>C (1) (2) (3) (4)</p>
+<p>$ .0022340,.0022340,.0022340,.0022340/</p>
+<p>C (5) (6) (7) (8)</p>
+<p>C</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE NIA</p>
+<p>C</p>
+<p>DATA (IDXNIA(I),I=1, 8 )</p>
+<p>C NVALV</p>
+<p>C</p>
+<p>$/ 2 , 2 , 2 , 2 ,</p>
+<p>C (1) (2) (3) (4)</p>
+<p>$ 2 , 2 , 2 , 2 /</p>
+<p>C (5) (6) (7) (8)</p>
+<p>C</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CAV VALVOLA 1</p>
+<p>C</p>
+<p>DATA ((DXCAV(1,I02,L),L=1,4),I02=1, 2 )</p>
+<p>C NIA(1)</p>
+<p>C</p>
+<p>$/ .55 , 0. , 1.24 , 0. ,</p>
+<p>C z a b c</p>
+<p>$ 1.0 ,-1.1851852 , 2.5437037 , -.35851852/</p>
+<p>C z a b c</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CAV VALVOLA 2</p>
+<p>C</p>
+<p>DATA ((DXCAV(2,I02,L),L=1,4),I02=1, 2 )</p>
+<p>C NIA(2)</p>
+<p>C</p>
+<p>$/ .55 , 0. , 1.24 , 0. ,</p>
+<p>C z a b c</p>
+<p>$ 1.0 ,-1.1851852 , 2.5437037 , -.35851852/</p>
+<p>C z a b c</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CAV VALVOLA 3</p>
+<p>C</p>
+<p>DATA ((DXCAV(3,I02,L),L=1,4),I02=1, 2 )</p>
+<p>C NIA(3)</p>
+<p>C</p>
+<p>$/ .55 , 0. , 1.24 , 0. ,</p>
+<p>C z a b c</p>
+<p>$ 1.0 ,-1.1851852 , 2.5437037 , -.35851852/</p>
+<p>C z a b c</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CAV VALVOLA 4</p>
+<p>C</p>
+<p>DATA ((DXCAV(4,I02,L),L=1,4),I02=1, 2 )</p>
+<p>C NIA(4)</p>
+<p>C</p>
+<p>$/ .55 , 0. , 1.24 , 0. ,</p>
+<p>C z a b c</p>
+<p>$ 1.0 ,-1.1851852 , 2.5437037 , -.35851852/</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CAV VALVOLA 5</p>
+<p>C</p>
+<p>DATA ((DXCAV(5,I02,L),L=1,4),I02=1, 2 )</p>
+<p>C NIA(5)</p>
+<p>C</p>
+<p>$/ .55 , 0. , 1.24 , 0. ,</p>
+<p>C z a b c</p>
+<p>$ 1.0 ,-1.1851852 , 2.5437037 , -.35851852/</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CAV VALVOLA 6</p>
+<p>C</p>
+<p>DATA ((DXCAV(6,I02,L),L=1,4),I02=1, 2 )</p>
+<p>C NIA(6)</p>
+<p>C</p>
+<p>$/ .55 , 0. , 1.24 , 0. ,</p>
+<p>C z a b c</p>
+<p>$ 1.0 ,-1.1851852 , 2.5437037 , -.35851852/</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CAV VALVOLA 7</p>
+<p>C</p>
+<p>DATA ((DXCAV(7,I02,L),L=1,4),I02=1, 2 )</p>
+<p>C NIA(7)</p>
+<p>C</p>
+<p>$/ .55 , 0. , 1.24 , 0. ,</p>
+<p>C z a b c</p>
+<p>$ 1.0 ,-1.1851852 , 2.5437037 , -.35851852/</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CAV VALVOLA 8</p>
+<p>C</p>
+<p>DATA ((DXCAV(8,I02,L),L=1,4),I02=1, 2 )</p>
+<p>C NIA(8)</p>
+<p>C</p>
+<p>$/ .55 , 0. , 1.24 , 0. ,</p>
+<p>C z a b c</p>
+<p>$ 1.0 ,-1.1851852 , 2.5437037 , -.35851852/</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE NIP</p>
+<p>C</p>
+<p>DATA (IDXNIP(I),I=1, 8 )</p>
+<p>C NVALV</p>
+<p>C</p>
+<p>$/ 4 , 4 , 4 , 4 ,</p>
+<p>C (1) (2) (3) (4)</p>
+<p>$ 4 , 4 , 5 , 5 /</p>
+<p>C (5) (6) (7) (8)</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CPV VALVOLA 1</p>
+<p>C</p>
+<p>DATA ((DXCPV(1,I02,L),L=1,4),I02=1, 4 )</p>
+<p>C NIP(1)</p>
+<p>C</p>
+<p>$/ .02 , 0. , 5.01 , 0. ,</p>
+<p>C x a b c</p>
+<p>$ .291 , 0. , 1.3815, .07242,</p>
+<p>C x a b c</p>
+<p>$ .341 , 0. , 10.521 , -2.5908,</p>
+<p>C x a b c</p>
+<p>$ 1.05 , 0. , 0. , 1. /</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CPV VALVOLA 2</p>
+<p>C</p>
+<p>DATA ((DXCPV(2,I02,L),L=1,4),I02=1, 4 )</p>
+<p>C NIP(2)</p>
+<p>C</p>
+<p>$/ .02 , 0. , 5.01 , 0. ,</p>
+<p>C x a b c</p>
+<p>$ .291 , 0. , 1.3815, .07242,</p>
+<p>C x a b c</p>
+<p>$ .341 , 0. , 10.521 , -2.5908,</p>
+<p>C x a b c</p>
+<p>$ 1.05 , 0. , 0. , 1. /</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CPV VALVOLA 3</p>
+<p>C</p>
+<p>DATA ((DXCPV(3,I02,L),L=1,4),I02=1, 4 )</p>
+<p>C NIP(3)</p>
+<p>C</p>
+<p>$/ .24 , 0. , 0. , 0. ,</p>
+<p>C x a b c</p>
+<p>$ .423 , 0. , 2.5054, -.6 ,</p>
+<p>C x a b c</p>
+<p>$ .463 , 0. , 13.51 , -5.2561,</p>
+<p>C x a b c</p>
+<p>$ 1.05 , 0. , 0. , 1. /</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CPV VALVOLA 4</p>
+<p>C</p>
+<p>DATA ((DXCPV(4,I02,L),L=1,4),I02=1, 4 )</p>
+<p>C NIP(4)</p>
+<p>C</p>
+<p>$/ .379 , 0. , 0. , 0. ,</p>
+<p>C x a b c</p>
+<p>$ .547 , 0. , 2.5641, -0.97023,</p>
+<p>C x a b c</p>
+<p>$ .599 , 0. , 10.9826, -5.5764,</p>
+<p>C x a b c</p>
+<p>$ 1.05 , 0. , 0. , 1. /</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CPV VALVOLA 5</p>
+<p>C</p>
+<p>DATA ((DXCPV(5,I02,L),L=1,4),I02=1, 4 )</p>
+<p>C NIP(5)</p>
+<p>C</p>
+<p>$/ .479 , 0. , 0. , 0. ,</p>
+<p>C x a b c</p>
+<p>$ .671 , 0. , 2.4269, -1.1624,</p>
+<p>C x a b c</p>
+<p>$ .739 , 0. , 7.8792 , -4.8188,</p>
+<p>C x a b c</p>
+<p>$ 1.05 , 0. , 0. , 1. /</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CPV VALVOLA 6</p>
+<p>C</p>
+<p>DATA ((DXCPV(6,I02,L),L=1,4),I02=1, 4 )</p>
+<p>C NIP(6)</p>
+<p>C</p>
+<p>$/ .604 , 0. , 0. , 0. ,</p>
+<p>C x a b c</p>
+<p>$ .782 , 0. , 2.577 , -1.5562,</p>
+<p>C x a b c</p>
+<p>$ .854 , 0. , 7.5104 , -5.4161,</p>
+<p>C x a b c</p>
+<p>$ 1.05 , 0. , 0. , 1. /</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CPV VALVOLA 7</p>
+<p>C</p>
+<p>DATA ((DXCPV(7,I02,L),L=1,4),I02=1, 5 )</p>
+<p>C NIP(7)</p>
+<p>C</p>
+<p>$/ .679 , 0. , 0. , 0. ,</p>
+<p>C x a b c</p>
+<p>$ .874 , 0. , 1.4315, -.9714 ,</p>
+<p>C x a b c</p>
+<p>$ .954 , 0. , 2.0651 , -1.5253,</p>
+<p>C x a b c</p>
+<p>$ 1. , 0. , 12.0915, -11.0915,</p>
+<p>C x a b c</p>
+<p>$ 1.05 , 0. , 15. , 1. /</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CPV VALVOLA 8</p>
+<p>C</p>
+<p>DATA ((DXCPV(8,I02,L),L=1,4),I02=1, 5 )</p>
+<p>C NIP(8)</p>
+<p>C</p>
+<p>$/ .679 , 0. , 0. , 0. ,</p>
+<p>C x a b c</p>
+<p>$ .874 , 0. , 1.4315, -.9714 ,</p>
+<p>C x a b c</p>
+<p>$ .954 , 0. , 2.0651 , -1.5253,</p>
+<p>C x a b c</p>
+<p>$ 1. , 0. , 12.0915, -11.0915,</p>
+<p>C x a b c</p>
+<p>$ 1.05 , 0. , 15. , 1. /</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>C CARICAMENTO VETTORE CPVF</p>
+<p>C</p>
+<p>DATA ((DXCPVF(I02,L),L=1,4),I02=1, 1 )</p>
+<p>C NIPF</p>
+<p>C</p>
+<p>$/ 1.05 , 0. , 1. , 0. /</p>
+<p>C x a b c</p>
+<p>C</p>
+<p>TIPO=DXTIPO</p>
+<p>C</p>
+<p>PSHNOM=DXPSHNOM</p>
+<p>TSHNOM=DXTSHNOM</p>
+<p>VUNOM =DXVUNOM</p>
+<p>WNOM =DXWNOM</p>
+<p>RAGGIO=DXRAGGIO</p>
+<p>CCR =DXCCR</p>
+<p>AETA =DXAETA</p>
+<p>BETA =DXBETA</p>
+<p>DPVE =DXDPVE</p>
+<p>PSHF =DXPSHF</p>
+<p>TSHF =DXTSHF</p>
+<p>XF =DXXF</p>
+<p>WF =DXWF</p>
+<p>NVALV =IDXNVALV</p>
+<p>NIPF =IDXNIPF</p>
+<p>C</p>
+<p>DO I=1,16</p>
+<p>CA(I) =DXCA(I)</p>
+<p>AUG(I) =DXAUG(I)</p>
+<p>NIA(I) =IDXNIA(I)</p>
+<p>NIP(I) =IDXNIP(I)</p>
+<p>RCA(I) =DXRCA(I)</p>
+<p>IAM(I) =IDXIAM(I)</p>
+<p>DO J=1,3</p>
+<p>CCF(I,J)=DXCCF(I,J)</p>
+<p>ENDDO</p>
+<p>ENDDO</p>
+<p>C</p>
+<p>DO I=1,16</p>
+<p>DO J=1,3</p>
+<p>DO K=1,4</p>
+<p>CAV(I,J,K)=DXCAV(I,J,K)</p>
+<p>ENDDO</p>
+<p>ENDDO</p>
+<p>ENDDO</p>
+<p>C</p>
+<p>DO I=1,16</p>
+<p>DO J=1,10</p>
+<p>DO K=1,4</p>
+<p>CPV(I,J,K)=DXCPV(I,J,K)</p>
+<p>ENDDO</p>
+<p>ENDDO</p>
+<p>ENDDO</p>
+<p>DO J=1,10</p>
+<p>DO K=1,4</p>
+<p>CPVF(J,K)=DXCPVF(J,K)</p>
+<p>ENDDO</p>
+<p>ENDDO</p>
+<p>C</p>
+<p>RETURN</p>
+<p>END</p>
+</font></b><!--mstheme--></font></body>
+
+</html>

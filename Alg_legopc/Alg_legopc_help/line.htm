@@ -1,0 +1,446 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>LINE</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE LINE</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LINE</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">TRANSMISSION LINE</p>
+<p>&nbsp;</p>
+<p align="left">The LINE module simulates an electrical transmission line.</p>
+<p align="left">Fig.1 shows the single-phase equivalent circuit of the line
+implemented in the module:</p>
+<p align="center"><img border="0" src="images/line.h5.gif" width="437" height="250"><img border="0" src="images/line.h6.gif" width="95" height="57"></p>
+<p align="center"></font><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LINE</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p align="center"><img border="0" src="images/line.h7.gif" width="443" height="485"></p>
+<p>&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">I1RE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">node 1 current real component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">I1IM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">node 1 current imaginary component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">I2RE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">node 2 current real component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">I2IM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">node 2 current imaginary component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Hz]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FROU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">output frequency</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">V1RE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">node 1 voltage real component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">V1IM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">node 1 voltage imaginary component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">V2RE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">node 2 voltage real component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">V2IM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">node 2 voltage imaginary component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">INTA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">breaker A state variable (1=closed,
+      0=open)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">INTB</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">breaker B state variable (1=closed,
+      0=open)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Hz]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FREQ</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">input frequency</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LINE</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i>
+</b>
+          </font>
+<font FACE="Arial">
+<p align="left">The data of the module are:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[<font FACE="Symbol">W</font> /Km]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RES</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">series resistance per unit length</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[<font FACE="Symbol">W</font> /Km]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">XL</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">series reactance per unit length</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[S/Km]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">BMEZZI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">shunt half susceptance per unit length</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[S/Km]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GMEZZI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">shunt half conductance per unit length</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Km]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LUNG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">line length</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">rated voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">p.u./absolute values option (1<font FACE="Wingdings">à</font>
+      in p.u.; 0<font FACE="Wingdings">à</font> absolute)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LINE</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i></b></font><font FACE="Arial">
+<p align="left">No particular prescription is required for the LINE module
+initialization.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LINE</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></b></font><font FACE="Arial">
+<p align="left">No user’s subprogram is required in the LINE module.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LINE</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<p ALIGN="center"><font FACE="Arial" SIZE="4"><b><i>Residuals</i></b></font></p>
+<font FACE="Arial">
+<p align="left">The equations of the mathematical model are translated in the
+following residuals:</p>
+<p align="left">RNI(5) = FREQ-FROU</p>
+<p align="left">&nbsp;</p>
+<u>
+<p align="left">If the breakers A and B are closed</u>,</p>
+<p align="left">RNI(1) = I1RE+(Y11RE*V1RE)-(Y11IM*V1IM)+
+(Y12RE*V2RE)-(Y21IM*V2IM)</p>
+<p align="left">RNI(2) = I1IM+(Y11RE*V1IM)+(Y11IM*V1RE)+
+(Y12IM*V2RE)+(Y12RE*V2IM)</p>
+<p align="left">RNI(3) =
+I2RE+(Y21RE*V1RE)-(Y21IM*V1IM)+(Y22RE*V2RE)-(Y22IM*V2IM)</p>
+<p align="left">RNI(4) =
+I2IM+(Y21IM*V1RE)+(Y21RE*V1IM)+(Y22RE*V2IM)+(Y22IM*V2RE)</p>
+<p align="left">&nbsp;</p>
+<u>
+<p align="left">If A is closed, and B is open</p>
+</u>
+<p align="left">RNI(1) = I1RE+(YEQRE*V1RE)-(YEQIM*V1IM)</p>
+<p align="left">RNI(2) = I1IM+(YEQRE*V1IM)+(YEQIM*V1RE)</p>
+<p align="left">RNI(3) = I2RE</p>
+<p align="left">RNI(4) = I2IM</p>
+<p align="left">&nbsp;</p>
+<u>
+<p align="left">If B is closed, and A open</p>
+</u>
+<p align="left">RNI(1) = I1RE</p>
+<p align="left">RNI(2) = I1IM</p>
+<p align="left">RNI(3) = -I2RE+(YEQRE*V2RE)-(YEQIM*V2IM)</p>
+<p align="left">RNI(4) = -I2IM+(YEQRE*V2IM)+(YEQIM*V2RE)</p>
+<p align="left">&nbsp;</p>
+<u>
+<p align="left">If A and B are open</p>
+</u>
+<p align="left">RNI(1) = I1RE</p>
+<p align="left">RNI(2) = I1IM</p>
+<p align="left">RNI(3) = I2RE</p>
+<p align="left">RNI(4) = I2IM</p>
+<p align="left">&nbsp;</p>
+<p align="left">Base power:</p>
+<p align="left">QBASE = H0*W0</p>
+<p align="left">&nbsp;</p>
+<p align="left">Real and imaginary components of the series and shunt impedances,
+in per unit of base impedance Z<sub>n</sub>=(VNOM)<sup>2</sup>/QBASE:</p>
+<p align="left">ZMRE = RES*LUNG*QBASE/(VNOM*VNOM)</p>
+<p align="left">ZMIM = XL*(FREQ/50.)*LUNG*QBASE/(VNOM*VNOM)</p>
+<p align="left">ZARE = ((GMEZZI/BMEZZI**2)/LUNG)*((50./FREQ)**2)* *QBASE/(VNOM*VNOM)</p>
+<p align="left">ZAIM = -(1/BMEZZI*LUNG))*(50./FREQ) * *QBASE/(VNOM*VNOM)</p>
+<p align="left">COMPLEX variables are defined</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">ZA</font><!--mstheme--></font></td>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">= CMPLX(ZARE,ZAIM)</font><!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">(ZA = R+j·XL)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">ZM</font><!--mstheme--></font></td>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">= CMPLX(ZMRE,ZMIM)</font><!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">(ZM = (G/2+j·B/2)<sup>-1</sup>)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">Admittances matrix elements</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">Y11</font><!--mstheme--></font></td>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">= (ZA+ZM)/(ZA*ZM)</font><!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">Y12</font><!--mstheme--></font></td>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">= -1/ZM</font><!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">Y21</font><!--mstheme--></font></td>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">= -Y12</font><!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">Y22</font><!--mstheme--></font></td>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">= -Y11</font><!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">YEQ = (2*ZA+ZM)/((ZA+ZM)*ZA)</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">Y11RE</font><!--mstheme--></font></td>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">= REAL(Y11)</font><!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">Y11IM</font><!--mstheme--></font></td>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">= AIMAG(Y11)</font><!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">Y12RE</font><!--mstheme--></font></td>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">= REAL(Y12)</font><!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[…]</font><!--mstheme--></font></td>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">Y22IM</font><!--mstheme--></font></td>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">= AIMAG(Y22)</font><!--mstheme--></font></td>
+    <td width="61%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LINE</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+<p ALIGN="CENTER">&nbsp;</p>
+</i></font></b>
+<p><font face="Arial">SUBROUTINE LINEI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</font></p>
+<p><font face="Arial">IBL1,IBL2,IER,CNXYU,TOL)</font></p>
+<p><font face="Arial">SUBROUTINE LINEC1 (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></p>
+<p><font face="Arial">SUBROUTINE LINEJC (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></p>
+<p><font face="Arial">SUBROUTINE LINE (IFUN,IXYU,XYU,IPD,DATI,RNI)</font></p>
+<p><font face="Arial">SUBROUTINE LINEI3 (IFO,IOB,DEBL)</font></p>
+<p><font face="Arial">SUBROUTINE LINEI4 (IOB,MOD)</font></p>
+<p><font face="Arial">SUBROUTINE LINED1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</font></p>
+<p><font face="Arial">IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</font></p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LINE</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b>
+<p ALIGN="center"><font FACE="Arial" SIZE="4"><b><i>Test cases</i></b></font></p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

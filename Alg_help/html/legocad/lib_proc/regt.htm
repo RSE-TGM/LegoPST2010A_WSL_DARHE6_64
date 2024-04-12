@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE REGT</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGT_summ"></A>MODULE REGT CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGT_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGT_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGT_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGT_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGT_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGT_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGT_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGT_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=6><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGT_A"></A>MODULE REGT CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">VOLTAGE REGULATOR</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module REGT simulates the behavior of an eccitation device made out of a voltage regulator and a converter. The pole-zero behavior is described by the following relationship:</P>
+<P>&nbsp;</P>
+<P>1 + sT2</P>
+<P>Vecc = (Vrge - Vgen) Gv -------</P>
+<P>1 + sT1</P>
+<P>&nbsp;</P>
+<P>where:</P>
+<P>&nbsp;</P>
+<P>s = Laplace operator</P>
+<P>Gv = regulator gain</P>
+<P>T1 = numerator time constant</P>
+<P>T2 = denominator time constant</P>
+<P>Vrge= generator reference voltage</P>
+<P>Vgen= generator voltage</P>
+<P>Vecc= eccitation device voltage</P>
+<P>&nbsp;</P>
+<P>In steady state:</P>
+</FONT><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>Vecc = (Vrge - Vgen) Gv .</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_REGT_B"></A>MODULE REGT CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="Image1279.gif" WIDTH=398 HEIGHT=263></P>
+<P>&nbsp;</P>
+<FONT FACE="Arial"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P>&nbsp;</P>
+<P>[V] UF00&#9;eccitation voltage</P>
+<P>[V] UMOD&#9;module of generator tension</P>
+<P>[V] UFRI &#9;eccitation voltage bias</P>
+<P>[V] URIF&#9;generator reference voltage</P>
+<P>[ ] GUAD &#9;voltage regulator gain</P>
+<P>[s] T1PO &#9;denominator time constant</P>
+<P>[s] T2ZE &#9;numerator time constant</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">&nbsp;</P>
+</U></FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGT_C"></A>MODULE REGT CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>[V] &#9;VBASE_v &#9;generator base chained voltage</P>
+<P>[A] &#9;IECC0_A &#9;void excitation current</P>
+<P>[ohm] &#9;RECC_ohm&#9;resistence of excitation circuit</P>
+<P>[V] &#9;VECCN_v&#9;nominal excitation voltage</P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGT_D"></A>MODULE REGT CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the REGT module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGT_E"></A>MODULE REGT CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">REGT doesn’t prescribe any FORAUS subroutine.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGT_F"></A>MODULE REGT CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>RNI(1) = UF00-UFC </P>
+<P>Where:</P>
+<P>Steady state:</P>
+<P>UFC = UFRI-GV*(UMOD-URIF)</P>
+<P>Transient:</P>
+<P>UFC = UFRI-GV*K1*(UMOD-URIF)+GV*K2*(UMODP-URIFP)+K3*(UFCP-UFRIP) </P>
+</FONT><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>UMODP=UMOD previous step</P>
+<P>UFCP =UFC previous step</P>
+<P>URIFP=URIF previous step </P>
+<P>UFRIP=UFRI previous step </P>
+<P>DTINT=time step</P>
+<P>K1=(DTINT+T2)/(DTINT+T1)</P>
+<P>K2=T2/(DTINT+T1)</P>
+<P>K3=T1/(DTINT+T1)</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGT_G"></A>MODULE REGT CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>SUBROUTINE REGTI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>SUBROUTINE REGTI3(IFO,IOB,DEBL)</P>
+<P>SUBROUTINE REGTI4(IOB,MOD)</P>
+<P>SUBROUTINE REGTC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE REGTJC (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>&nbsp;SUBROUTINE REGT (IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>SUBROUTINE REGTD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGT_H"></A>MODULE REGT CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module aren’t yet available.</P></FONT></BODY>
+</HTML>

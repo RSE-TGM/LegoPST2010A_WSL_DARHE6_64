@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_stress"></A>Stress analysis in steam plant components</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_stress"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_tsmltsml"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Turbine and manifold stress analyser</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_tsmltsml"></A>Stress analysis in steam plant components: turbine and manifold stress analyser</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The model estimates the thermomechanical stress in a steam turbine or of a manifold, subjected to manoeuvres carried out by the plant operator. The effects of such manoeuvres on the component are also evaluated: they consist in a damage of the component itself with a subsequent reduction of its operating life. This evaluation is performed on the basis of the estimated number of times the considered manoeuvre is repeatable, namely before the beginning of crack formations.</P>
+<P ALIGN="JUSTIFY">Besides, only for the rotors, a verification of the brittle fracture danger, occurring near the internal hole, is fulfilled.</P>
+<P ALIGN="JUSTIFY">The turbine machines taken into consideration are the following:</P>
+<P ALIGN="JUSTIFY">320 MW (WESTINGHOUSE) TOSI turbine</P>
+<P ALIGN="JUSTIFY">660 MW (WESTINGHOUSE) TOSI turbine</P>
+<P ALIGN="JUSTIFY">320 MW (GENERAL ELECTRIC) ANSALDO turbine</P>
+<P ALIGN="JUSTIFY">The damage of the rotor external surface, which is cause of the thermal fatigue breaking, is localised at critical sections specified by the manufacturers. Such sections are:</P>
+<P ALIGN="JUSTIFY">TOSI turbines</P>
+<P ALIGN="JUSTIFY">High Pressure rotor: the section corresponding to the first row of reaction blades;</P>
+<P ALIGN="JUSTIFY">Intermediate Pressure rotor: considering the cooled rotor, the section corresponding to the slot bottom of the third row of reaction blades, that is the first one not cooled;</P>
+<P ALIGN="JUSTIFY">ANSALDO turbines</P>
+<P ALIGN="JUSTIFY">High Pressure rotor: the section corresponding to the union between the cylinder and the first disk downstream the same device;</P>
+<P ALIGN="JUSTIFY">Intermediate Pressure rotor: the section corresponding to the union between the cylinder and the second disk upstream the same device.</P>
+<P ALIGN="JUSTIFY">In such sections, at the internal surface (that is at the rotor hole), the thermal and centrifugal stresses, responsible for the fracture breaking of the rotor, are also evaluated.</P>
+<P ALIGN="JUSTIFY">As far as the manifolds are concerned, any cylindrical (or assimilable) component, interested by a fluid (water, steam or two-phase mixture) flowing through, can be modelled using the present module.</P>
+<P ALIGN="JUSTIFY">The adopted mathematical model is characterised by the following hypotheses:</P>
+<P>only a segment of the rotor or manifold most stressed zone is considered, while changes along the axis are disregarded; this &#9;hypothesis gives results in favour of the safety because disregarding the heat axial diffusion allows to compute an oversized thermal gradient;</P>
+<P>a radial one-dimensional model, constituted by a hollow, smooth, infinitely long cylinder, has been assumed, so considering the temperature behaviour with axial symmetry; such an approximation will be permissible if in the total stresses calculation suitable stress concentration coefficients are introduced, so that the component effective shape is properly taken into account;</P>
+<P ALIGN="JUSTIFY">to evaluate the stresses the hypothesis of plane deformation state (inherent in the infinite length cylinder approximation) is assumed; we note that this hypothesis too is conservative because the possible presence of axial deformation would reduce the stress computed without such a condition.</P>
+<P ALIGN="JUSTIFY">Finally, only for the rotors, the hypothesis of material characteristic quantities independent from the temperature have been made. On the contrary, for the manifolds, the aforementioned characteristic quantities are evaluated each time as a function of the chosen material, specified by a proper index.</P></FONT></BODY>
+</HTML>

@@ -1,0 +1,42 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">What does &quot;xxxxC1&quot; have to do when it is called
+for Jacobian matrix topology setting?</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">When IFUN is 1 &quot;xxxxC1&quot; must
+assign the topology of the Jacobian matrix during transients simulation. The
+subroutine must assign to the AJAC array elements 1. or 0. values whose meaning
+is whether the row-indicated equation's residual depends (1.) or doesn't depend
+(0.) from the column-indicated block variable.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">As zero is the default value for AJAC's
+elements, only ones have to be assigned.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">In transients simulations, only the
+terms of Jacobian matrix pointed by non-zero elements of Jacobian topology are
+used to solve the differential-algebraic system: the other terms are neglected,
+also if they are not zero (it means: also if there actually were an influence of
+the related variable on the related residual). So, if the module's developers is
+not absolutely sure that there is no influence, it is better to set the 1. value
+also for terms where the influence could not be present: the easiest solution is
+to set as 1. all the elements of the topology!</span></p>
+<span lang="EN-GB" style="font-size:12.0pt;mso-bidi-font-size:10.0pt;font-family:
+Arial;mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-ansi-language:EN-GB;mso-fareast-language:IT;mso-bidi-language:AR-SA">Obviously
+this is only the easiest solution, but is not the best one: setting to 1.
+elements related to variables which don't have ever any influence on the
+row-indicated residual may hardly increase the computing times and the memory
+storage requirements (only the non-zero elements of Jacobian matrix are stored
+and used during differential-algebraic system solving, as it is a
+&quot;sparse&quot; matrix - a matrix where only a few elements are non-zero).</span>
+
+<!--mstheme--></font></body>
+
+</html>

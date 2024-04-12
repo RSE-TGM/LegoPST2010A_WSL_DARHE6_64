@@ -1,0 +1,383 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>DENI</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE DENI</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DENI</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">VARIABLES DENORMALIZER</p>
+<p>&nbsp;</p>
+<p align="left">In the DENI module, differently from most of LEGOCAD library
+modules, no equation has been coded. The module simply transfers the input
+variables values to correspondent output variables, using for the latter ones a
+unitary normalization factor. In short, therefore, a denormalization of the
+input variables is performed.</p>
+<p align="left">This operation is indispensable when some blocks dealing with
+regulation schemes and built up through the CONTROL CAD RG1 activity have to be
+used in a process LEGOCAD model.</p>
+<p align="left">We note that the DENI module has not to be used if the process
+control is performed with a LEGOCAD model set up only by means of regulation
+schemes.</p>
+<p align="left">In this case in fact, the value transfers from the process
+output variables to the regulation input variables are carried out by the
+SCHEDULER on the basis of the topological information supplied by the user in
+the file S01.DAT.</p>
+<p align="left">During the topology construction activity, for each output
+variable (max.20), the module requires four alphanumeric characters that will be
+used as the first four characters of the FORTRAN symbol adopted for each output
+variable.</p>
+<p align="left">The first two of such alphanumeric characters must be assigned
+respecting the LEGOCAD convention for the physical quantity which the variable
+represents.</p>
+<p align="left">According to this convention the following associations are
+given:</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="5%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">P</font><!--mstheme--></font></td>
+    <td width="77%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DP</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Pressure Difference</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">W</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Flow rate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Q</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Power</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">H</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Specific enthalpy</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Temperature</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AL</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Valve stem position</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">O</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Angular velocity in rad/s</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">R</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Angular velocity in
+      revolutions/min</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">M</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Mass</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">C</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Concentration</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">%</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Percentages</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">L</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Level</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Y</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Level</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RE</font><!--mstheme--></font></td>
+    <td width="77%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Reactivity</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">In the following paragraph the four characters assigned during
+the topology definition are indicated with &quot;U__i&quot;, where &quot;U_&quot;
+represent the first two characters identifying the physical nature of the
+variable, while &quot;i&quot; (i = 1,..., n) is the progressive order number of
+the considered variables.</p>
+<p ALIGN="left">The same convention is adopted for the input variables, just
+replacing the letter &quot;U&quot; with the letter &quot;I&quot;.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DENI</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER"><font FACE="Arial" SIZE="2"><img SRC="images/Image770.gif" width="385" height="210"></font></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="JUSTIFY">n = number of input/output variables (max. 20)</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%" height="52">
+  <tr>
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">U__1,..., U__n</font><!--mstheme--></font></td>
+    <td width="72%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">denormalized variables</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">I__1,..., I__n</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">variables to be denormalized</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DENI</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to initial values of DENI module input and output
+variables (meanings defined above), user must assign the following data set to
+complete the module input on the file F14:</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="14%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="14%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NORM_I__n</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">alphanumeric value
+      identifying the normalization factor of the input variables according to
+      the following rule:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">blank</font><!--mstheme--></font></td>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">1.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">W0</font><!--mstheme--></font></td>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">default value for flow rates</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">H0</font><!--mstheme--></font></td>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">default value for enthalpies</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T0</font><!--mstheme--></font></td>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">default value for
+      temperatures</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">P0</font><!--mstheme--></font></td>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">default value for pressures</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Q0</font><!--mstheme--></font></td>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">default value for powers (=
+      W0 * H0)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RO0</font><!--mstheme--></font></td>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">default value for densities</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AL0</font><!--mstheme--></font></td>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">default value for lengths</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">V0</font><!--mstheme--></font></td>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">default value for volumes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DP0</font><!--mstheme--></font></td>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">default value for pressure
+      differences</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">numeric value</font><!--mstheme--></font></td>
+    <td width="14%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">value to be used as
+      normalization factor</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DENI</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the DENI module variables on the file F14, no
+particular prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DENI</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">No user subprograms are present in the DENI module.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DENI</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In the DENI module no equations have been coded, so no residuals
+are present.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DENI</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font></b><font FACE="Arial"><b><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<p align="left">SUBROUTINE DENII3(IFO, IOB, DEBL)</p>
+<p align="left">SUBROUTINE CARINI(NVARIAB, VARIAB, DESVAR)</p>
+<p align="left">SUBROUTINE DENII4(IOB, MOD)</p>
+<p align="left">SUBROUTINE DENII2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</p>
+<p align="left">$ IBLOC1, IBLOC2, IER, CNXYU, TOL)</p>
+<p align="left">SUBROUTINE DENIC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+<p align="left">$ IBLOC1, IBLOC2)</p>
+</font></b></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DENI</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b>
+<font FACE="Arial">
+<p align="left">Reference test cases related to this module are not available at
+present.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

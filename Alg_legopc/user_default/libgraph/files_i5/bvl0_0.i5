@@ -1,0 +1,78 @@
+BVL0
+
+Brine valve                                                                     
+2
+3
+
+t0
+WVAL PIVA ____ FNAC HVAL FINV HINV ____ ____ ____ 
+3 3 0 2 2 2 2 0 0 0 
+-1 1 0 2 2 2 2 0 0 0 
+2 -1 0 2 2 2 2 0 0 0 
+2 1 0 2 2 2 2 0 0 0 
+t1
+WVAL PUVA ____ FNAC HVAL FINV HINV ____ ____ ____ 
+3 3 0 2 2 2 2 0 0 0 
+1 -1 0 2 2 2 2 0 0 0 
+2 -1 0 2 2 2 2 0 0 0 
+2 1 0 2 2 2 2 0 0 0 
+
+0
+1
+7
+
+no comment
+no comment
+no comment
+
+WVAL UA
+FLUID FLOW RATE IN THE VALVE                                   
+PIVA IN
+FLUID PRESSURE AT THE VALVE INLET                              
+PUVA IN
+FLUID PRESSURE AT THE VALVE OUTLET                             
+HVAL IN
+VALVE INLET FLUID ENTHALPY                                     
+FNAC IN
+VALVE INLET NaCl mass fraction                                 
+ALZA IN
+VALVE LIFT                                                     
+HINV IN
+VALVE outlet FLUID ENTHALPY ( W<0 )                            
+FINV IN
+VALVE outlet NaCl mass fraction ( W<0 )                        
+
+PIVA UA
+FLUID PRESSURE AT THE VALVE INLET                              
+WVAL IN
+FLUID FLOW RATE IN THE VALVE                                   
+PUVA IN
+FLUID PRESSURE AT THE VALVE OUTLET                             
+HVAL IN
+VALVE INLET FLUID ENTHALPY                                     
+FNAC IN
+VALVE INLET NaCl mass fraction                                 
+ALZA IN
+VALVE LIFT                                                     
+HINV IN
+VALVE outlet FLUID ENTHALPY ( W<0 )                            
+FINV IN
+VALVE outlet NaCl mass fraction ( W<0 )                        
+
+PUVA UA
+FLUID PRESSURE AT THE VALVE OUTLET                             
+PIVA IN
+FLUID PRESSURE AT THE VALVE INLET                              
+WVAL IN
+FLUID FLOW RATE IN THE VALVE                                   
+HVAL IN
+VALVE INLET FLUID ENTHALPY                                     
+FNAC IN
+VALVE INLET NaCl mass fraction                                 
+ALZA IN
+VALVE LIFT                                                     
+HINV IN
+VALVE outlet FLUID ENTHALPY ( W<0 )                            
+FINV IN
+VALVE outlet NaCl mass fraction ( W<0 )                        
+

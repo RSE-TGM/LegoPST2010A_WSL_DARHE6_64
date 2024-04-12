@@ -1,0 +1,38 @@
+Nota tecnica sulla realizzazione del nuovo snaf14 (sna2f14)
+
+
+Autore:		Marco Bonasoro (CISE)
+Rev. 1.0	21 Maggio 1996
+
+
+Introduzione
+
+	L'attivita` di riscrittura del programma snaf14 si e` resa necessaria a seguito della modifica del formato interno del file di snapshot, la cui dimensione, nella versione attuale, e` dinamica (dipende dalle dimensioni delle task del simulatore).
+In questa prima versione, e` stata tralasciata la funzionalita` di riscrittura dei file F04.dat delle diverse task, il cui mantenimento avrebbe comportato 
+l'inserimento di parti FORTRAN, e avrebbe complicato notevolmente la gestione 
+dei parametri caratteristici del LEGO. Tuttavia, l'interfaccia interattiva mantiene la struttura del vecchio programma (a livello di richieste all'utente), 
+in modo da garantire la compatibilita` all'interno di altri ambienti software, dove le risposte vengono fornite automaticamente dall'ambiente che lancia il programma.
+
+
+Architettura del software
+
+	Ove possibile, si e` fatto uso delle funzioni relative all'oggetto RtDbPuntiOggetto, in modo da rendere possibile la modifica delle strutture dati esterne al programma in maniera trasparente per il programma stesso.
+
+	La prima parte del programma si occupa di allocare la struttura dbpunti (di tipo RtDbPuntiOggetto), utilizzando i metodi RtCreateDbPunti() e RtDbPClearData(); 
+quindi si recuperano le informazioni su posizionamento e dimensionamento dell'area dati del simulatore, attraverso i metodi RtDbPGetPuntSnapshot(), 
+RtDbPPuntData() e RtDbPSizeData().
+Un'altra azione necessaria e` la lettura del file S02.dat, eseguita dalla funzione read_S02_net(), allo scopo di reperire l'informazione sul path di residenza dei vari modelli.
+
+	Segue la lettura dal file "snapshot.dat" delle informazioni relative agli header dei diversi snapshot, che vengono poi presentate all'utente per la selezione dello snapshot di interesse.
+Una volta selezionato lo snapshot, il suo contenuto (in termini di valori delle variabili) viene caricato nell'area dati di dbpunti.
+
+	L'informazione sul numero di modelli del simulatore viene ottenuta usando il metodo RtDbPNumeroModelli(), dopodiche` per ogni modello viene richiamata la funzione write_f14(), che esegue la riscrittura dei file.
+
+	Il flusso logico della write_f14() e` il seguente: dopo l'apertura del file f14.dat (in lettura) e del file f14.s (in scrittura), vengono copiate senza modifiche le prime quattro righe del file.
+A questo punto si recuperano le informazioni essenziali sul numero di variabili di ingresso e di uscita presenti nel modello: 
+tali informazioni vengono ricavate dalla struttura s02 precedentemente caricata. Per evitare di modificare l'interfaccia dell'oggetto RtDbPuntiOggetto, 
+per il momento non sono stati implementati dei nuovi metodi per il recupero di tali informazioni, ma nulla vieta di farlo in futuro. 
+Il punto di inizio di un modello all'interno dell'area dati viene reperito usando il metodo RtDbPInizioModelli(), mentre i valori effettivi delle variabili nella memoria condivisa vengono recuperati con il metodo RtDbPGetValueD().
+La lettura e modifica della linea di caratteri viene effettuata utilizzando due semplici funzioni di utilita`, loadAline() e fixValue(), dopodiche` la linea 
+corretta viene scritta sul nuovo file.
+Infine, la parte rimanente del file viene ricopiata senza modifiche sul file f14.s.

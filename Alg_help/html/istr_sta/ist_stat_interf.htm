@@ -1,0 +1,683 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Interfaces description</TITLE>
+<META NAME="subject" CONTENT="Documentazione BI Puertollano">
+<META NAME="doccomm" CONTENT="Documentazione relativa alla prima release, consegnata in aprile 96. Vedere sp_bist.doc per specifica completa.">
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789921"><A NAME="_Toc353787621"><A NAME="_Toc353787417"><A NAME="_Toc353775545"><A NAME="_Toc353769412"><A NAME="_Toc353756032"><A NAME="_Toc353686263"><A NAME="_Toc353674635"><A NAME="ist_stat_interf_main"></A>Instructor station interfaces description</A></A></A></A></A></A></A></A></P>
+</B></FONT><P><A HREF="#ist_stat_interf_mm"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Master menu interface</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_snman"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Snapshot management</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_vint"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">View interface</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_filt"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Filter for view interface</U></FONT></A></P>
+<P><A HREF="ist_stat_bm.htm#ist_stat_bm_main"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Backtrack management</U></FONT></A></P>
+<P><A HREF="ist_stat_conre.htm#ist_stat_conre_main"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Continuous recording</U></FONT></A></P>
+<P><A HREF="ist_stat_shst.htm#ist_stat_shst_main"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Show statistics</U></FONT></A></P>
+<P><A HREF="ist_stat_prac.htm#ist_stat_prac_main"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Program activation</U></FONT></A></P>
+<P><A HREF="ist_stat_opcon.htm#ist_stat_opcon_main"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Options configuration</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_interf_mm"></A>Master menu interface</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The master menu is always present at the instructor station interface and allows to initiate all the functions provided by the instructor station.</P>
+<U><P>&nbsp;</P>
+</U></FONT><P><A HREF="#ist_stat_interf_descr"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Interface description</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_oper"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Interface operations</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_exit"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Exit the interface</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<U><P>&nbsp;</P>
+</U></FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789926"><A NAME="_Toc353787626"><A NAME="_Toc353787422"><A NAME="_Toc353775550"><A NAME="_Toc353769417"><A NAME="_Toc353756037"><A NAME="_Toc353686268"><A NAME="ist_stat_interf_descr"></A>Interface description</A></A></A></A></A></A></A></P>
+<P>&nbsp;</P>
+</B></FONT><P><IMG SRC="Image1338.gif" WIDTH=604 HEIGHT=173></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>The interface is divided in the following parts:</P>
+<P>&nbsp;</P>
+<P>a menubar, through which it is possible to initiate all the instructor station functions</P>
+<P>&nbsp;</P>
+<P>a two button command area, that give the possibility to run, freeze and step the simulator</P>
+<P>&nbsp;</P>
+<P>a display area, that shows the simulator current state, the simulation time, the delay time and the speed of the simulator</P>
+<P>&nbsp;</P>
+<P>a command area, that provides direct access to some of the instructor station functions</P>
+<P>&nbsp;</P>
+<P>a message list area, where are listed all the commands issued by the instructor </P>
+<P>&nbsp;</P>
+<P>the title bar that specifies the session title (as written by the instructor) and where the database was coming from (I.C., B.T. or steady state)</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>The commands provided by the menubar are:</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=651>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<P><B><FONT FACE="Arial, helvetica">File</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Speed ...</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to set the desired simulator speed</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>File</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Max speed</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to impose the maximum speed without delay</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>File</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Clear</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to put the simulation time to zero, and clear all the recording files</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Snapshot</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Snapshot management</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to activate the snapshot management interface</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Recording</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Backtrack management</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to activate the backtrack management interface</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Recording</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Continuos recording </P>
+<P>&nbsp;</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to access the C.R. menu</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Continuos recording</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>Select variables</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>to activate the filter that allows the instructor to select the variables that are to be recorded by the C.R. function</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Continuos recording</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>View recorded data</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>to activate the program that shows the recorded data in trend format</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Show</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Statistics</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to activate the interface that shows the CPU time occupancy of all the simulator models</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Programs</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Xaing</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to activate the filter that allows the instructor to select variables to be modified by the Xaing program</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Programs</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>User programs ...</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to show the list of the configured custom shell commands</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Options</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Edit</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to initiate the interface that allows user configurations </FONT></TD>
+</TR>
+<TR><TD WIDTH="21%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Archiving</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Session</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P>&nbsp;&nbsp;</P>
+<P>In the command area are located four buttons:</P>
+<P>&nbsp;</P>
+<B><I><P>"S"</B></I>&#9;to activate the snapshot management interface</P>
+<B><I><P>"B"</B></I>&#9;to activate the backtrack management interface</P>
+<B><I><P>"G"</B></I>&#9;to activate the graphics program</P>
+<B><I><P>"I"</B></I>&#9;to activate the Xaing functionality</P>
+<P>&nbsp;</P>
+<P>When the simulator is in <B><I>RUN</B></I> or <B><I>REPLAY</B></I> status, a frame situated around the status label will blink at the simulation executing frequency.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789927"><A NAME="_Toc353787627"><A NAME="_Toc353787423"><A NAME="_Toc353775551"><A NAME="_Toc353769418"><A NAME="_Toc353756038"><A NAME="_Toc353686269"><A NAME="ist_stat_interf_oper"></A>Interface operation</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The master menu interface becomes available once the instructor has request the startup of the simulator. When popped up, the interface will show that the simulator is in the <B><I>STOP</B></I> state (because the models are non initialized yet), and the buttons are not available.</P>
+<P>At the end of the initialization procedure the simulator goes in <B><I>FREEZE</B></I> status, the simulation time field shows the current time and the buttons become sensitive.</P>
+<P>At that time the instructor can RUN the simulation starting from the steady state or from an I.C. or a B.T. (if any); if sessions were previously recorded, the REPLAY function is also available.</P>
+<P>&nbsp;</P>
+<P>The selection of the buttons presented by the menubar will drive the instructor station to activate the available interfaces.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789928"><A NAME="_Toc353787628"><A NAME="_Toc353787424"><A NAME="_Toc353775552"><A NAME="_Toc353769419"><A NAME="_Toc353756039"><A NAME="_Toc353686270"><A NAME="ist_stat_interf_exit"></A>Exit the interface</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The master menu interface is terminated by the Instructor Station interface when either the SHUTDOWN or Quit function is requested.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789929"><A NAME="_Toc353787629"><A NAME="_Toc353787425"><A NAME="_Toc353775553"><A NAME="_Toc353769420"><A NAME="_Toc353756040"><A NAME="_Toc353686271"><A NAME="_Toc353674640"><A NAME="ist_stat_interf_snman"></A>Snapshot management</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The function can be activated by clicking the <B>Snapshot</B> -&gt; <B>Snapshot Management</B> button, or, more quickly, through the selection of the <B><I>S</B></I> button shortcut, both providing the initial condition interface to open.</P>
+<P>&nbsp;</P>
+</FONT><P><A HREF="#ist_stat_interf_descr1"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Interface description</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_oper"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Interface operation</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_exit1"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Exit the dialog</U></FONT></A></P>
+<U><FONT FACE="Arial, helvetica" COLOR="#0000ff"><P>&nbsp;</P>
+</U></FONT><FONT FACE="Arial, helvetica"><P><A NAME="_Toc353789930"><A NAME="_Toc353787630"><A NAME="_Toc353787426"><A NAME="_Toc353775554"><A NAME="_Toc353769421"><A NAME="_Toc353756041"><A NAME="_Toc353686272"><A NAME="_Toc353674641"></P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_interf_descr1"></A>Interface description</A></A></A></A></A></A></A></A></P>
+<P>&nbsp;</P>
+</B></FONT><P><IMG SRC="Image1304.gif" WIDTH=604 HEIGHT=342></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>The window shows five fields for each of the 60 possible Initial Conditions:</P>
+<P>&nbsp;</P>
+<P>the I.C. number</P>
+<P>the padlock, displayed if the I.C. is protected</P>
+<P>the simulation time at which the I.C. was snapped, or blank if the I.C. is available</P>
+<P>the comment the instructor entered when the I.C. was snapped, or the phrase <B>&lt;&lt;&lt; AVAILABLE &gt;&gt;&gt; </B>if the I.C. is not snapped</P>
+<P>the "previous topology" icon, if the snapshot was recorded before the last time the simulator has been compiled.</P>
+<P>&nbsp;</P>
+<P>The bottom side of the window contains the following buttons:</P>
+<P>&nbsp;</P>
+<B><P>LOAD</B> to load the selected I.C. in the simulator database, making it the starting point of a new training session</P>
+<B><P>SAVE</B> to snap the present simulator database into the selected I.C.</P>
+<B><P>VIEW</B> to initiate the conversation that allows to select and view the recorded values of patterns of simulator variables</P>
+<B><P>QUIT</B> to terminate the Initial Condition interface</P>
+<P>&nbsp;</P>
+<P>The same commands are available from a popup menu activated by clicking the rightmost mouse button while the pointer is in the snapshot list area.</P>
+<P>&nbsp;</P>
+<P>More commands are provided via the menubar:</P>
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=614>
+<TR><TD WIDTH="13%" VALIGN="TOP">
+<P><B><FONT FACE="Arial, helvetica">File</B></FONT></TD>
+<TD WIDTH="12%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Quit</B></FONT></TD>
+<TD WIDTH="75%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to terminate the Initial Condition interface</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Edit</B></FONT></TD>
+<TD WIDTH="12%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Cut</B></FONT></TD>
+<TD WIDTH="75%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to free the selected I.C</P>
+<P>.</FONT></TD>
+</TR>
+<TR><TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Edit</B></FONT></TD>
+<TD WIDTH="12%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Copy</B></FONT></TD>
+<TD WIDTH="75%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to copy the selected I.C. in a buffer</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Edit</B></FONT></TD>
+<TD WIDTH="12%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Paste</B></FONT></TD>
+<TD WIDTH="75%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to copy the buffer filled by a previously executed Copy or Cut operation into the selected I.C</P>
+<P>.</FONT></TD>
+</TR>
+<TR><TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Edit</B></FONT></TD>
+<TD WIDTH="12%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Check</B></FONT></TD>
+<TD WIDTH="75%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to accept as correct an I.C. tagged as possibly unaligned with the current simulator version</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P><A NAME="_Toc353756042"><A NAME="_Toc353686273"><A NAME="_Toc353674642"></P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789931"><A NAME="_Toc353787631"><A NAME="_Toc353787427"><A NAME="_Toc353775555"><A NAME="_Toc353769422"><A NAME="ist_stat_interf_oper1"></A>Interface operation</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>This interface is used to save, load and maintain a set of 60 simulator snapshots (Initial Conditions).</P>
+<P>&nbsp;</P>
+</FONT><P><A HREF="#ist_stat_interf_savic"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Saving Initial Conditions</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_loaic"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Loading Initial Conditions</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_remic"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Removing Initial Conditions</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_copyic"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Copy an Initial Conditions into the local buffer</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_pasic"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Paste the local buffer into an Initial Condition</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_valic"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Validation of "old topology" Initial Conditions</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_viewic"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">View the variables value recorded into an Initial Condition</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787632"><A NAME="_Toc353787428"><A NAME="_Toc353775556"><A NAME="_Toc353769423"><A NAME="_Toc353756043"><A NAME="_Toc353686274"><A NAME="_Toc353674643"><A NAME="ist_stat_interf_savic"></A>Saving Initial Conditions</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The <B>SAVE</B> buttons are <B>not</B> available when:</P>
+<P>&nbsp;</P>
+<P>the simulator state is <B><I>STOP</B></I> or <B><I>ERROR</P>
+</B></I><P>the I.C. selected as destination of the snapshot is protected by the padlock and the instructor is not SUPERUSER</P>
+<P>&nbsp;</P>
+<P>and are available in all the other cases.</P>
+<P>&nbsp;</P>
+<P>To save the simulator database into an I.C.:</P>
+<P>&nbsp;</P>
+<P>select a valid I.C. from the list</P>
+<P>click on one of the provided <B>SAVE</B> button</P>
+<P>answer to the warning message if the I.C. is busy</P>
+<P>enter the comment and push the <B>SAVE</B> button</P>
+<P>&nbsp;</P>
+<P>The save initial condition protocol presents a warning message if a snapshot is already present in the destination I.C.. Choose the <B>OK</B> pushbutton to continue or the <B>Cancel</B> pushbutton to abort the operation.</P>
+<P>Before the I.C. is actually saved the instructor is prompted to enter his own comment, that will be the phrase displayed in the comment field of the I.C. list. Choosing the <B>SAVE</B> pushbutton the operation will take place, while the <B>QUIT</B> pushbutton is the last chance the instructor has to abort the operation.</P>
+<P>After the operation has been successfully executed the I.C. list is refreshed.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787633"><A NAME="_Toc353787429"><A NAME="_Toc353775557"><A NAME="_Toc353769424"><A NAME="_Toc353756044"><A NAME="_Toc353686275"><A NAME="_Toc353674644"><A NAME="ist_stat_interf_loaic"></A>Loading Initial Conditions</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The <B>LOAD</B> buttons are available when:</P>
+<P>&nbsp;</P>
+<P>the simulator is in the <B><I>FREEZE</B></I> state and a valid snapshot is recorded in the selected I.C. (snapshot recorded and not flagged as "previous topology")</P>
+<P>&nbsp;</P>
+<P>and are not available in all the other cases.</P>
+<P>&nbsp;</P>
+<P>To load an I.C. into the simulator database:</P>
+<P>&nbsp;</P>
+<P>select a valid I.C. from the list</P>
+<P>click on one of the provided <B>LOAD</B> buttons</P>
+<P>&nbsp;</P>
+<P>The function is immediately executed and the new content of the database can be explored by looking at the mimics interface.</P>
+<P>The initial condition interface remain active for further operations.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787634"><A NAME="_Toc353787430"><A NAME="_Toc353775558"><A NAME="_Toc353769425"><A NAME="_Toc353756045"><A NAME="_Toc353686276"><A NAME="_Toc353674645"><A NAME="ist_stat_interf_remic"></A>Remove Initial Conditions</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The <B>CUT</B> button is available when:</P>
+<P>&nbsp;</P>
+<P>the selected I.C. contains a valid snapshot and it is not protected by the padlock</P>
+<P>the selected I.C. contains a valid snapshot and the instructor has SUPERUSER privileges</P>
+<P>&nbsp;</P>
+<P>and is insensitive in all the other cases.</P>
+<P>&nbsp;</P>
+<P>To remove an I.C. from the list:</P>
+<P>&nbsp;</P>
+<P>select a valid I.C. from the list</P>
+<P>click on the <B>Cut</B> button</P>
+<P>answer to the warning message</P>
+<P>&nbsp;</P>
+<P>The cut initial condition protocol presents a warning message. Choose the <B>OK</B> pushbutton to continue or the <B>Cancel</B> pushbutton to abort the operation.</P>
+<P>After the operation has been successfully executed the I.C. list is refreshed.</P>
+<P>The removed I.C. has been copied into an Instructor Station buffer, and is available for subsequent <B>Paste</B> operations. </P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787635"><A NAME="_Toc353787431"><A NAME="_Toc353775559"><A NAME="_Toc353769426"><A NAME="_Toc353756046"><A NAME="_Toc353686277"><A NAME="_Toc353674646"><A NAME="ist_stat_interf_copyic"></A>Copy an Initial Conditions into the local buffer</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The <B>COPY</B> button is available when:</P>
+<P>&nbsp;</P>
+<P>the selected I.C. contains a valid snapshot (snapshot recorded and not flagged as "previous topology") and is insensitive in all the other cases.</P>
+<P>&nbsp;</P>
+<P>To copy an I.C. into the local buffer:</P>
+<P>&nbsp;</P>
+<P>select a valid I.C. from the list</P>
+<P>click on the Copy button</P>
+<P>&nbsp;</P>
+<P>The function is immediately executed: the I.C. is copied into an Instructor Station buffer, and is available for subsequent <B>Paste</B> operations.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787636"><A NAME="_Toc353787432"><A NAME="_Toc353775560"><A NAME="_Toc353769427"><A NAME="_Toc353756047"><A NAME="_Toc353686278"><A NAME="_Toc353674647"><A NAME="ist_stat_interf_pasic"></A>Paste the local buffer into an Initial Condition</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The <B>PASTE</B> button is available when:</P>
+<P>&nbsp;</P>
+<P>the local buffer has been filled from a previously executed Cut or Copy operation and the selected I.C. is not protected by the padlock</P>
+<P>the local buffer has been filled from a previously executed Cut or Copy operation and the instructor has the SUPERUSER privileges</P>
+<P>&nbsp;</P>
+<P>and is insensitive in all the other cases.</P>
+<P>&nbsp;</P>
+<P>To paste the local buffer into an I.C.:</P>
+<P>&nbsp;</P>
+<P>fill the local buffer by copying or removing an I.C.</P>
+<P>select the destination I.C.</P>
+<P>click the <B>Paste</B> button</P>
+<P>answer to the warning message if the I.C. is busy</P>
+<P>&nbsp;</P>
+<P>The paste I.C. protocol presents a warning message if a snapshot is already present in the destination I.C.. Choose the <B>OK</B> pushbutton to continue or the <B>Cancel</B> pushbutton to abort the operation. </P>
+<P>After the operation has been successfully executed the I.C. list is refreshed.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787637"><A NAME="_Toc353787433"><A NAME="_Toc353775561"><A NAME="_Toc353769428"><A NAME="_Toc353756048"><A NAME="_Toc353686279"><A NAME="_Toc353674648"><A NAME="ist_stat_interf_valic"></A>Validation of "old topology" Initial Conditions</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The check button is available when:</P>
+<P>&nbsp;</P>
+<P>the selected I.C. is flagged as "previous topology" and the instructor has the SUPERUSER privileges</P>
+<P>&nbsp;</P>
+<P>and is insensitive in all the other cases.</P>
+<P>&nbsp;</P>
+<P>To accept as valid a "previous topology" I.C.:</P>
+<P>&nbsp;</P>
+<P>select a flagged I.C.</P>
+<P>click on the <B>Check</B> button</P>
+<P>answer to the warning message</P>
+<P>&nbsp;</P>
+<P>The Check I.C. protocol presents a warning message. Choose the <B>OK</B> pushbutton to continue or the <B>Cancel</B> pushbutton to abort the operation. After the operation has been successfully executed the I.C. list is refreshed. The "previous topology" flag is not present anymore and the I.C. is available for normal operations.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787638"><A NAME="_Toc353787434"><A NAME="_Toc353775562"><A NAME="_Toc353769429"><A NAME="_Toc353756049"><A NAME="_Toc353686280"><A NAME="_Toc353674649"><A NAME="ist_stat_interf_viewic"></A>View the variables value recorded into an Initial Condition</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The <B>VIEW</B> buttons are available when:</P>
+<P>&nbsp;</P>
+<P>a valid snapshot is recorded in the selected I.C. (snapshot recorded and not flagged as "previous topology")</P>
+<P>&nbsp;</P>
+<P>and are not available in all the other cases.</P>
+<P>&nbsp;</P>
+<P>To inspect the values of the recorded variables:</P>
+<P>&nbsp;</P>
+<P>select a valid I.C.</P>
+<P>click on one of the provided <B>VIEW</B> buttons</P>
+<P>&nbsp;</P>
+<P>At this time a new window will appear that shows the values of up to 10 variables. From this interface the instructor can configure and select different patterns of variables using a filter function. See the appropriated paragraph to know more about this interface.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787639"><A NAME="_Toc353787435"><A NAME="_Toc353775563"><A NAME="_Toc353769430"><A NAME="_Toc353756050"><A NAME="_Toc353686281"><A NAME="_Toc353674650"><A NAME="ist_stat_interf_exit1"></A>Exit the dialog</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>To close the interface select one of the <B>QUIT</B> buttons provided by the interface.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789932"><A NAME="_Toc353787640"><A NAME="_Toc353787436"><A NAME="_Toc353775564"><A NAME="_Toc353769431"><A NAME="_Toc353756051"><A NAME="_Toc353686282"><A NAME="_Toc353674651"><A NAME="ist_stat_interf_vint"></A>View interface</A></A></A></A></A></A></A></A> </P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>This function allows the instructor to read the value of all the simulator variables as they are recorded into a snapshot or backtrack record.</P>
+<P>&nbsp;</P>
+<P>The interface is activated selecting one of the <B>VIEW</B> buttons provided in the snapshot and backtrack management interfaces.</P>
+<P>The instructor can have any number of VIEW INTERFACES opened at any given time.</P>
+<P>&nbsp;</P>
+</FONT><P><A HREF="#ist_stat_interf_descr2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Interface description</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_oper2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Interface operations</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_descr2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Exit the dialog</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789933"><A NAME="_Toc353787641"><A NAME="_Toc353787437"><A NAME="_Toc353775565"><A NAME="_Toc353769432"><A NAME="_Toc353756052"><A NAME="_Toc353686283"><A NAME="_Toc353674652"><A NAME="ist_stat_interf_descr2"></A>Interface description</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The window shows the values of up to 10 variables and the title bar specifies what I.C. or B.T. record they are related to. </P>
+<P>&nbsp;</P>
+</FONT><P><IMG SRC="Image1339.gif" WIDTH=630 HEIGHT=260></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>The menubar provides the following commands:</P>
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=651>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<P><B><FONT FACE="Arial, helvetica">File</B></FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Open default</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to select the default configuration file</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>File</B></FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Open ...</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to open an alternative configuration file</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>File</B></FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Save default</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to save the current configuration as the default one</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>File</B></FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Save as ...</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to save the current configuration in a selectable file</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>File</B></FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Quit </B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to terminate the VIEW interface</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Edit</B></FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Select new ...</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to activate the filter that allows the instructor to select variables for the VIEW interface</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Edit</B></FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Cut</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to remove a selected entry from the list</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Edit</B></FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Clear all</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to clean the list</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789934"><A NAME="_Toc353787642"><A NAME="_Toc353787438"><A NAME="_Toc353775566"><A NAME="_Toc353769433"><A NAME="_Toc353756053"><A NAME="_Toc353686284"><A NAME="_Toc353674653"><A NAME="ist_stat_interf_oper2"></A>Interface operation</A></A></A></A></A></A></A></A></P>
+</B></FONT><P><A HREF="#ist_stat_interf_del"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Deleting items from the list</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_sel"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Selecting new variables</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_savconf"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Saving the configuration file</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_open"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Opening the configuration file</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787643"><A NAME="_Toc353787439"><A NAME="_Toc353775567"><A NAME="_Toc353769434"><A NAME="_Toc353756054"><A NAME="_Toc353686285"><A NAME="_Toc353674654"><A NAME="ist_stat_interf_del"></A>Deleting items from the list</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>To remove one variable at a time from the displayed list:</P>
+<P>&nbsp;</P>
+<P>select an entry clicking the toggle button at the left side of the window</P>
+<P>click on the <B>Cut</B> button</P>
+<P>&nbsp;</P>
+<P>The list will be immediately updated.</P>
+<P>&nbsp;</P>
+<P>To clean the entire list:</P>
+<P>&nbsp;</P>
+<P>click on the <B>Clear all</B> button</P>
+<P>&nbsp;</P>
+<P>The list will be immediately updated.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787644"><A NAME="_Toc353787440"><A NAME="_Toc353775568"><A NAME="_Toc353769435"><A NAME="_Toc353756055"><A NAME="_Toc353686286"><A NAME="_Toc353674655"><A NAME="ist_stat_interf_sel"></A>Selecting new variables</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>To select new variables to fill the displayed list:</P>
+<P>&nbsp;</P>
+<P>activate the filter selecting the <B>Select new ...</B> button</P>
+<P>select a position in the list clicking the toggle button at the left side of the window</P>
+<P>choose a variable in the filter interface</P>
+<P>push the <B>SELECT</B> button in the </FONT><A HREF="#ist_stat_interf_filt"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">filter interface</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>The list will be immediately updated.</P>
+<P>&nbsp;</P>
+<P>The selection is rejected if no position in the list is selected.</P>
+<P>No protection exists against the replacement of occupied position in the list.</P>
+<P>See the appropriated paragraph to know more about this interface.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787645"><A NAME="_Toc353787441"><A NAME="_Toc353775569"><A NAME="_Toc353769436"><A NAME="_Toc353756056"><A NAME="_Toc353686287"><A NAME="_Toc353674656"><A NAME="ist_stat_interf_savconf"></A>Saving the configuration files</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The present set of variables can be stored in a file for future use; to make it the default set (i.e. the one first accessed when calling the interface):</P>
+<P>&nbsp;</P>
+<P>click on the <B>Save default</B> button</P>
+<P>&nbsp;</P>
+<P>To save the set present on display:</P>
+<P>&nbsp;</P>
+<P>click on the <B>Save as ...</B> button to activate the file selection interface</P>
+<P>enter a new file name or select an existent one if it is desired to overwrite that file</P>
+<P>select <B>OK</B> on the file selection interface</P>
+<P>&nbsp;</P>
+<P>It is recommended to respect the termination suggested by the interface.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787646"><A NAME="_Toc353787442"><A NAME="_Toc353775570"><A NAME="_Toc353769437"><A NAME="_Toc353756057"><A NAME="_Toc353686288"><A NAME="_Toc353674657"><A NAME="ist_stat_interf_open"></A>Opening the configuration files</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The list of the variables the values of which are to be displayed is stored in a default file by the instructor station.</P>
+<P>However, the instructor has the possibility to save different sets of variables in different files.</P>
+<P>&nbsp;</P>
+<P>To load the default configuration file:</P>
+<P>&nbsp;</P>
+<P>push the <B>Open default</B> button</P>
+<P>&nbsp;</P>
+<P>The list will be immediately updated.</P>
+<P>&nbsp;</P>
+<P>To load an instructor configured pattern of variables:</P>
+<P>&nbsp;</P>
+<P>push the <B>Open ...</B> button to activate the file selection interface</P>
+<P>choose a valid file from the list</P>
+<P>select <B>OK</B> in the file selection interface</P>
+<P>&nbsp;</P>
+<P>The list will be immediately updated.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787647"><A NAME="_Toc353787443"><A NAME="_Toc353775571"><A NAME="_Toc353769438"><A NAME="_Toc353756058"><A NAME="_Toc353686289"><A NAME="_Toc353674658"><A NAME="ist_stat_interf_exit2"></A>Exit the dialog</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>To close the interface select one of the <B>QUIT</B> buttons provided by the interface.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789935"><A NAME="_Toc353787648"><A NAME="_Toc353787444"><A NAME="_Toc353775572"><A NAME="_Toc353769439"><A NAME="_Toc353756059"><A NAME="_Toc353686290"><A NAME="_Toc353674659"><A NAME="ist_stat_interf_filt"></A>Filter for VIEW interface</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>This interface is activated from the <B>Select New</B> button of a VIEW interface; it allows the selection of variables among the entire database for the VIEW interface.</P>
+<P>&nbsp;</P>
+</FONT><P><A HREF="#ist_stat_interf_descr3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Interface description</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_oper3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Interface operations</U></FONT></A></P>
+<P><A HREF="#ist_stat_interf_exit3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Exit the dialog</U></FONT></A></P>
+<U><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</U></FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789936"><A NAME="_Toc353787649"><A NAME="_Toc353787445"><A NAME="_Toc353775573"><A NAME="_Toc353769440"><A NAME="_Toc353756060"><A NAME="ist_stat_interf_descr3"></A>Interface description</A></A></A></A></A></A></P>
+</B></FONT><P><IMG SRC="Image1340.gif" WIDTH=494 HEIGHT=487></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>The interface is divided into 4 main zones:</P>
+<P>&nbsp;</P>
+<P>the menubar</P>
+<P>the filter area</P>
+<P>the variables list area</P>
+<P>the command area</P>
+<P>&nbsp;</P>
+<P>The commands provided by the menubar are:</P>
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=651>
+<TR><TD WIDTH="18%" VALIGN="TOP">
+<P><B><FONT FACE="Arial, helvetica">File</B></FONT></TD>
+<TD WIDTH="26%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Quit</B></FONT></TD>
+<TD WIDTH="56%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to terminate the interface</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Filter</B></FONT></TD>
+<TD WIDTH="26%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>All variables</B></FONT></TD>
+<TD WIDTH="56%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to keep variables of all the models</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Filter</B></FONT></TD>
+<TD WIDTH="26%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>models &amp; blocks</B></FONT></TD>
+<TD WIDTH="56%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to provide filtering by models &amp; blocks</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Filter</B></FONT></TD>
+<TD WIDTH="26%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>models only</B></FONT></TD>
+<TD WIDTH="56%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to provide filtering by model</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Filter</B></FONT></TD>
+<TD WIDTH="26%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>KKS filter</B></FONT></TD>
+<TD WIDTH="56%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to provide filtering by KKS tag</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Filter</B></FONT></TD>
+<TD WIDTH="26%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>by type</B></FONT></TD>
+<TD WIDTH="56%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to provide filtering by type of variable (temperature, pressure, etc)</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="26%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="56%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P>The filter area presents the filters currently selected.</P>
+<P>&nbsp;</P>
+<P>The variable list area lists all the variables that currently satisfy the filter selection criterion. Furthermore, a "find" function is available for string search.</P>
+<P>&nbsp;</P>
+<P>The command area presents two buttons:</P>
+<P>&nbsp;</P>
+<B><P>SELECT</B> to transfer the selected variable to the VIEW list</P>
+<B><P>QUIT</B> to terminate this dialog</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789937"><A NAME="_Toc353787650"><A NAME="_Toc353787446"><A NAME="_Toc353775574"><A NAME="_Toc353769441"><A NAME="_Toc353756061"><A NAME="ist_stat_interf_oper3"></A>Interface operation</A></A></A></A></A></A></P>
+<P><A NAME="_Toc353787651"><A NAME="_Toc353787447"><A NAME="_Toc353775575"><A NAME="_Toc353769442"><A NAME="_Toc353756062">Variable selection</A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The interface is activated with the <B>KKS</B> filter activated by default; in that way all the variables of the simulator that have been tagged with a KKS label are displayed. Further selection among the displayed variables is possible by typing characters in the KKS FILTERS fields and clicking on the <B>APPLY</B> button.</P>
+<P>&nbsp;</P>
+<P>Using the menubar, the instructor can activate the <B>Models &amp; Blocks</B> filter or the <B>Models Only</B> filter (they are both alternatives to the <B>All Variables</B> default filter).</P>
+<P>In the first case the lists of the models constituting the simulator is displayed along with, for each model, the list of the respective blocks. At the bottom of the Blocks list a "find" function is provided for string search. </P>
+<P>In the latter case it is displayed the list of the models only.</P>
+<P>&nbsp;</P>
+<P>The activation of the <B>By Type</B> filter makes available the part of the interface that allows to restrict the visibility to the variables that match the type selection (no type selected means no filter applied); further selection is available filtering by <B>Input</B>, <B>Output</B> and <B>Not connected input</B> variables. The <B>APPLY</B> button starts the procedure that updates the variables list area.</P>
+<P>&nbsp;</P>
+<P>The selection is made at the variables list area, eventually using the provided "find" function, clicking on the desired item of the list.</P>
+<P>&nbsp;</P>
+</FONT><P><IMG SRC="Image1341.gif" WIDTH=548 HEIGHT=483></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>The <B>SELECT</B> button transfers the selected variable to the tagged entry of the VIEW interface.</P>
+<P><A NAME="_Toc353787652"><A NAME="_Toc353787448"><A NAME="_Toc353775576"><A NAME="_Toc353769443"><A NAME="_Toc353756063">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_interf_exit3"></A>Exit the dialog</A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>To close the interface select the <B>QUIT</B> button provided by the interface.</P>
+</FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

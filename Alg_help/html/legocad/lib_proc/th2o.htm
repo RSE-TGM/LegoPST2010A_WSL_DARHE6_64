@@ -1,0 +1,210 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE TH2O</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TH2O_summ"></A>MODULE TH2O&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><P>&nbsp;</P>
+<P><A HREF="#lg_libproc_TH2O_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TH2O_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TH2O_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TH2O_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TH2O_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TH2O_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TH2O_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TH2O_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_TH2O_A"></A>MODULE TH2O&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">WATER EXCHANGER</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The TH2O module simulates the dynamics of thermo-hydraulic phenomena which subcooled water is subjected flowing through a metallic piping (or tube bundle) able to exchange heat with outside.</P>
+<P>The module mathematical model is based on the following hypoteses:</P>
+<P ALIGN="JUSTIFY">- the piping is subdivided, along its main axis, in an arbitrary number of cells which may or not exchange heat with outside</P>
+<P ALIGN="JUSTIFY">- the piping wall has a thin thickness as regards to the diameter</P>
+<P ALIGN="JUSTIFY">- the water density is constant</P>
+<P ALIGN="JUSTIFY">- in conservation equation of momentum, the water inertia is negligible</P>
+<P ALIGN="JUSTIFY">- water backflow inside the piping is not considered</P>
+<P ALIGN="JUSTIFY">- heat longitudinal conduction is negligible</P>
+<P ALIGN="JUSTIFY">- thermal exchange between piping external surface and fluid licking it occurs in a certain number of thermal exchange "zones". Each of these can include several axial cells.</P>
+<P>The used equations are:</P>
+<P ALIGN="JUSTIFY">1) conservation equation of water momentum</P>
+<P ALIGN="JUSTIFY">2) energy conservation equation in the water</P>
+<P ALIGN="JUSTIFY">3) energy conservation equation in the piping wall metal</P>
+<P ALIGN="JUSTIFY">4) thermal exchange equation between the piping external surface and fluid licking it.</P>
+<P>In the equations 1), 2) and 3) the concentrated parameter monodimensional approximation is used, so the energy and momentum balances are carried out for each single cell. Nevertheless, in energy balances the contributions of single cells are separated whereas in momentum balances they are added, giving rise to only one equation determinating the head loss in the whole piping.</P>
+<P>The equation 4) is applied to each thermal exchange zone allowing the calculation of the mean temperature on the piping external surface.</P>
+<P>The TH2O module can be used in simulating of connection pipes or tube bundle of surface-type exchangers containing subcooled water (heaters, condenser, etc.). In order to simulate the whole component (in case of tube bundle) several modules (like RISO, COND etc.) has to be interconnected with TH2O module. This is able to simulate the behaviour of a two phase fluid in contact with the tube bundle external surface.</P>
+<P ALIGN="JUSTIFY">If the piping (or tube bundle) to simulate has concentrated head losses (e.g. elbows or reduction fittings), they have to be distributed on the whole piping, incorporating them in an equivalent friction coefficient. The coefficient value can be calculated under stationary condition, considering suitable boundary conditions.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TH2O_B"></A>MODULE TH2O&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">NCEL = number of cells</P>
+<P ALIGN="JUSTIFY">NZON = number of thermal exchange zones</P>
+<P>&nbsp;</P>
+<P>The module can be interconnected with other ones following three methods:</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY">1) output in flow rate</P>
+<P ALIGN="JUSTIFY">prescription about block name: none</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image404.gif" WIDTH=471 HEIGHT=180></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">2) output in inlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block name: preceded by '+' sign</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image405.gif" WIDTH=471 HEIGHT=180></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">3) output in outlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block name: preceded by '-' sign</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image406.gif" WIDTH=471 HEIGHT=180></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">[J/kg]&#9;HITU&#9;&#9;enthalpy of water at the piping inlet</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WTUB&#9;&#9;water flow rate inside piping</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PITU&#9;&#9;pressure at the piping inlet</P>
+<P ALIGN="JUSTIFY">[ ]&#9;ATTR&#9;&#9;piping friction coefficient (see note 1)</P>
+<P ALIGN="JUSTIFY">[W]&#9;QE(j)&#9;&#9; (j = 1, NZON) thermal power exchanghed by the j-th zone (see note 2)</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HU(i)&#9;&#9; (i = 1, NCEL-1) enthalpy of water at the i-th cell outlet</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HUTU&#9;&#9;enthalpy of water at the tube outlet</P>
+<P ALIGN="JUSTIFY">[K]&#9;TM(i)&#9;&#9; (i = 1, NCEL) metal mean temperature of the i-th cell</P>
+<P ALIGN="JUSTIFY">[K]&#9;TE(j)&#9;&#9; (j = 1, NZON) external surface temperature of piping in the j-th thermal exchange zone</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PUTU&#9;&#9;pressure at the piping outlet</P>
+<B><P>Note 1</P>
+</B><P>The module refers to the Fanning's friction coefficient which has the following formula:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image407.gif" WIDTH=252 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">- RO is the fluid density</P>
+<P ALIGN="JUSTIFY">- &lt;v&gt; is the mean speed</P>
+<P>The remaining variables have the physical meaning indicated above and below.</P>
+<B><P>Note 2</P>
+</B><P ALIGN="JUSTIFY">The exchanged thermal power between the piping external surface and fluid licking it is positive whether the surface gives up heat to the fluid.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_TH2O_C"></A>MODULE TH2O&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial value of input-output variables, user must assign the following data:</P>
+<P>&nbsp;</P>
+<P>Data related to the whole considered piping:</P>
+<P ALIGN="JUSTIFY">[kg/m³]&#9;ROM&#9;&#9;piping metal density</P>
+<P ALIGN="JUSTIFY">[J/kg/K]&#9;CP MET.&#9;specific heat of piping metal</P>
+<P ALIGN="JUSTIFY">[W/m/K]&#9;COND.MET&#9;thermal conductivity of piping metal</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;DELZ&#9;&#9;geodetic gap between the piping inlet and outlet (positive if the outlet side is higher the inlet one).</P>
+<P>&nbsp;</P>
+<P>Data related to the single cells:</P>
+<P ALIGN="JUSTIFY">[ ]&#9;NTUB&#9;&#9;number of pipes in parallel configuration</P>
+<P ALIGN="JUSTIFY">[m] &#9;LUNG&#9;&#9;length of pipes in parallel configuration</P>
+<P ALIGN="JUSTIFY">[ ]&#9;ZONA&#9;&#9;thermal exchange zone which the cell belong</P>
+<P ALIGN="JUSTIFY">[m]&#9;DIAI&#9;&#9;internal diameter of pipes in parallel configuration</P>
+<P ALIGN="JUSTIFY">[m]&#9;DIAE&#9;&#9;external diameter of pipes in parallel configuration.</P>
+<P>&nbsp;</P>
+<P>If several consecutive cells have the same geometrical data, it is enough to assign those related to the first cell. To the following cells the same data are automatically assigned.</P>
+<P>As other metal physical properties, thermal conductivity is considered constant. Nevertheless, if necessary, a law giving the thermal conductivity as a function of temperature can be introduced by using the user subprogram</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE COND03(ICO, T, COND)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">(see below). In this case, a negative value has to be assigned to the COND.MET. It acts both as user subprogram calling signal and selection index if several correlations in an only user subprogram has to be assigned.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TH2O_D"></A>MODULE TH2O&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the TH2O module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TH2O_E"></A>MODULE TH2O&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To introduce into the module one law giving the thermal conductivity as a function of metal temperature, user must assign to the COND.MET a negative value writing a user subprogram whose declarative statement is:</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE COND03(ICO, T, COND).</P>
+<P ALIGN="JUSTIFY">Input parameters: ICO, T</P>
+<P ALIGN="JUSTIFY">Output parameters: COND</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;ICO&#9;&#9;selection index of correlation to use for thermal conductivity calculation if several correlations through only one &#9;&#9;&#9;&#9;&#9;subprogram has to be introduced (see note 3)</P>
+<P ALIGN="JUSTIFY">[K]&#9;&#9;T&#9;&#9;metal temperature</P>
+<P ALIGN="JUSTIFY">[W/m/K]&#9;COND&#9;metal thermal conductivity.</P>
+<P>&nbsp;</P>
+<P>An example of SUBROUTINE COND03(ICO, T, COND) related to a linear dependence of temperature thermal conductivity is following:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE COND03(ICO, T, COND)</P>
+<P>GO TO (1,2,2,2) ICO</P>
+<P>1 COND=9.872+.0153*T</P>
+<P>2 RETURN</P>
+<P>END</P>
+</FONT><FONT FACE="Arial, helvetica"><P>Note 3</P>
+</B><P>After checking that COND.MET has negative value, and use of user subprogram SUBROUTINE COND03(ICO, T, COND) is consequently required, used has to assign:</P>
+<P>ICO = - COND.MET</P>
+<P ALIGN="JUSTIFY">whose effect is to assign to ICO the positive integer obtained changing the COND.MET value sign and eliminating the decimal part.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TH2O_F"></A>MODULE TH2O&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The residuals present in the module directly correspond to the equation mentioned in first paragraph. Here are only indicated the correspondences between residuals and equations. Further explanations are given in section of the manual "LEGOCAD-Modelling for Simulation of Power Generation Plants-Theory".</P>
+<P ALIGN="JUSTIFY">i = 1, NCEL</P>
+<P ALIGN="JUSTIFY">j = 1, NZON</P>
+<P>&nbsp;</P>
+<P>1) RNI(i) - normalization factor = W0*H0</P>
+<P>they are related, cell by cell, to the energy balance of water flowing through the piping</P>
+<P>2) RNI(NCEL+i) - normalization factor = W0*H0</P>
+<P>they are related, cell by cell, to the energy balance in piping metal</P>
+<P>3) RNI(2*NCEL+1) - normalization factor = P0</P>
+<P>it is related to the equation of piping total head loss</P>
+<P>4) RNI(2*NCEL+1+j)- normalization factor = T0</P>
+<P ALIGN="JUSTIFY">they are related, zone by zone, to the thermal exchange equation between piping external surface and fluid licking it.</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TH2O_G"></A>MODULE TH2O&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE TH2OI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TH2OI4</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TH2OI2</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBLOC1, IBLOC2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TH2OC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBLOC1, IBLOC2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE COND03</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(ICO, T, COND)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE GAM03</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(GAM, DGAM, W, A, D, P, T)</P>
+<P>&nbsp;</P>
+<P>FUNCTION DITBOE</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(G, D, CP, MU, LAM)</P>
+<P>&nbsp;</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TH2O_H"></A>MODULE TH2O&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the manual section dedicated to the examples developed under the abbreviations:</P>
+<P ALIGN="CENTER">"CONDENSA"</P>
+<P ALIGN="CENTER">"MOTORE"</P>
+<P ALIGN="CENTER">"POMPE"</P></FONT></BODY>
+</HTML>

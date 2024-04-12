@@ -1,0 +1,705 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>testcase2</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test2_a"></A>Test case 2: general description</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following example represents a simplified air/flue-gas path model of the fossil fired thermoelectrical plant of Brindisi Sud.</P>
+<P ALIGN="JUSTIFY">The dynamical behaviour of this model has been studied in the case of a sudden blowing out of the burners flames.</P>
+<P ALIGN="JUSTIFY">The following figure shows the block diagram of the simulated system.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image29.gif" WIDTH=562 HEIGHT=540></P>
+<B><FONT FACE="Arial, helvetica" SIZE=6><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test2_m"></A>Test case 2: topological diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following picture represents the topological diagram of the "ARIAGAS" model:</P>
+</FONT><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="image57.gif" WIDTH=505 HEIGHT=485></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the related topological description file, automatically written by LEGOCAD System (MACROBLOCKS.DAT):</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>****</P>
+<P>ARIAGAS</P>
+<P>****</P>
+<P>ARIAGAS 0000 0000 Circuito aria fumi semplificato</P>
+<P>****</P>
+<P>0 VENTVNTP VENT 0 550 370 0</P>
+<P>0 DAMPPCVC DAMP 0 630 355 0</P>
+<P>0 PLENPLNM PLEN 0 615 155 0</P>
+<P>0 DAMPPCC1 DAMP 0 710 195 0</P>
+<P>0 DAMPPCC2 DAMP 0 710 115 0</P>
+<P>0 CCPNCALD CCPN 0 825 115 0</P>
+<P>0 VENTVNTA VENT 1 730 495 0</P>
+<P>0 DAMPPCVA DAMP 0 635 480 0</P>
+<P>0 RAVAPRAV RAVA 0 690 355 0</P>
+<P>0 DISNCPLJ DISN 0 750 355 0</P>
+<P>0 DISNCRLJ DISN 1 915 175 0</P>
+<P>0 LJUNPLJ2 LJUN 1 870 335 0</P>
+<P>0 LJUNPLJ1 LJUN 1 870 410 0</P>
+<P>1 *REMARK* 505 380 Air</P>
+<P>1 *REMARK* 505 480 Exhaust gas</P>
+<P>3 *GLINES* 2 4 12 6 1 3</P>
+<P>(940,235)</P>
+<P>(940,318)</P>
+<P>(940,330)</P>
+<P>3 *GLINES* 2 4 12 6 1 5</P>
+<P>(905,130)</P>
+<P>(940,130)</P>
+<P>(940,130)</P>
+<P>(940,158)</P>
+<P>(940,170)</P>
+<P>3 *GLINES* 2 5 12 6 1 3</P>
+<P>(765,220)</P>
+<P>(808,220)</P>
+<P>(820,220)</P>
+<P>3 *GLINES* 2 5 12 6 1 7</P>
+<P>(765,140)</P>
+<P>(790,140)</P>
+<P>(790,140)</P>
+<P>(790,205)</P>
+<P>(790,205)</P>
+<P>(808,205)</P>
+<P>(820,205)</P>
+<P>3 *GLINES* 2 5 12 6 1 7</P>
+<P>(670,180)</P>
+<P>(685,180)</P>
+<P>(685,180)</P>
+<P>(685,140)</P>
+<P>(685,140)</P>
+<P>(693,140)</P>
+<P>(705,140)</P>
+<P>3 *GLINES* 2 5 12 6 1 5</P>
+<P>(685,175)</P>
+<P>(685,220)</P>
+<P>(685,220)</P>
+<P>(693,220)</P>
+<P>(705,220)</P>
+<P>3 *GLINES* 2 5 12 6 1 3</P>
+<P>(505,410)</P>
+<P>(533,410)</P>
+<P>(545,410)</P>
+<P>3 *GLINES* 2 5 12 6 1 9</P>
+<P>(805,380)</P>
+<P>(835,380)</P>
+<P>(835,380)</P>
+<P>(835,515)</P>
+<P>(835,515)</P>
+<P>(895,515)</P>
+<P>(895,515)</P>
+<P>(895,497)</P>
+<P>(895,485)</P>
+<P>3 *GLINES* 2 5 12 6 1 9</P>
+<P>(895,330)</P>
+<P>(895,315)</P>
+<P>(895,315)</P>
+<P>(575,315)</P>
+<P>(575,315)</P>
+<P>(575,175)</P>
+<P>(575,175)</P>
+<P>(598,175)</P>
+<P>(610,175)</P>
+<P>3 *GLINES* 2 4 12 6 1 5</P>
+<P>(940,485)</P>
+<P>(940,535)</P>
+<P>(940,535)</P>
+<P>(817,535)</P>
+<P>(805,535)</P>
+<P>3 *GLINES* 2 4 12 6 1 3</P>
+<P>(725,505)</P>
+<P>(702,505)</P>
+<P>(690,505)</P>
+<P>3 *GLINES* 2 4 12 6 1 3</P>
+<P>(625,505)</P>
+<P>(517,505)</P>
+<P>(505,505)</P>
+<P>****</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test2_b"></A>Test case 2: model topology</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the topological file (F01.DAT) of the "ARIAGAS" model, which is produced by LEGOCAD System topology building activity:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>****</P>
+<P>VENT BLOCCO (VNTP) - forcing fan</P>
+<P>DAMP BLOCCO (PCVC) - head loss downstream the forcing fan</P>
+<P>PLEN BLOCCO (PLNM) - air manifold</P>
+<P>DAMP BLOCCO (PCC1) - air flow to cell 1 of boiler register</P>
+<P>DAMP BLOCCO (PCC2) - air flow to cell 2 of boiler register</P>
+<P>CCPN BLOCCO (CALD) - boiler</P>
+<P>VENT BLOCCO (VNTA) - gas suction fan</P>
+<P>DAMP BLOCCO (PCVA) - head loss downstream suction fan</P>
+<P>RAVA BLOCCO (PRAV) - air/steam heat exchanger (RAV)</P>
+<P>DISN BLOCCO (CPLJ) - variables connection</P>
+<P>DISN BLOCCO (CRLJ) - variables connection</P>
+<P>LJUN BLOCCO (PLJ2) - ljungstrom heater (cell 2)</P>
+<P>LJUN BLOCCO (PLJ1) - ljungstrom heater (cell 1)</P>
+<P>****</P>
+<P>ARIAGAS</P>
+<P>****</P>
+<P>VENTVNTP BL.-VNTP- **** MODULO VENT - forcing fan</P>
+<P>PFVEVNTP --UA-- AIR PRESSURE AT THE FORCING FAN OUTLET</P>
+<P>TFU2VNTP --UA-- AIR TEMPERATURE AT THE FORCING FAN OUTLET</P>
+<P>TFU1VNTP --UA--</P>
+<P>OMVEVNTP --IN-- FORCING FAN ROTATIONAL SPEED</P>
+<P>WFSRPCVC --IN-- #WFVEVNTP#....................&lt;===DAMPPCVC BL.-PCVC-</P>
+<P>PFMVVNTP --IN-- AIR PRESSURE AT THE FORCING FAN INLET</P>
+<P>ALSRVNTP --IN-- REGISTER OPENING DEGREE OF THE FORCING FAN</P>
+<P>TFI1VNTP --IN-- AIR TEMPERATURE AT THE FORCING FAN INLET</P>
+<P>TUA1PRAV --IN-- #TFI2VNTP#....................&lt;===RAVAPRAV BL.-PRAV-</P>
+<P>NVENVNTP --IN--</P>
+<P>****</P>
+<P>****</P>
+<P>DAMPPCVC BL.-PCVC- **** MODULO DAMP - head loss downstream the forcing fan</P>
+<P>WFSRPCVC --UA-- AIR FLOW RATE IN THE FORCING FAN</P>
+<P>PFPLPLNM --IN-- #PFSVPCVC#....................&lt;===PLENPLNM BL.-PLNM-</P>
+<P>PFVEVNTP --IN-- #PFSMPCVC#....................&lt;===VENTVNTP BL.-VNTP-</P>
+<P>TFU2VNTP --IN-- #TFSIPCVC#....................&lt;===VENTVNTP BL.-VNTP-</P>
+<P>TUA1PRAV --IN-- #TFSUPCVC#....................&lt;===RAVAPRAV BL.-PRAV-</P>
+<P>ALZSPCVC --IN--</P>
+<P>AKCOPCVC --IN--</P>
+<P>****</P>
+<P>****</P>
+<P>PLENPLNM BL.-PLNM- **** MODULO PLEN - air manifold</P>
+<P>PFPLPLNM --US-- AIR PRESSURE IN THE MANIFOLD</P>
+<P>TFPLPLNM --US-- AIR TEMPERATURE IN THE MANIFOLD</P>
+<P>WFSRPCVC --IN-- #WE_1PLNM#....................&lt;===DAMPPCVC BL.-PCVC-</P>
+<P>WFSRPCC1 --IN-- #WU_1PLNM#....................&lt;===DAMPPCC1 BL.-PCC1-</P>
+<P>WFSRPCC2 --IN-- #WU_2PLNM#....................&lt;===DAMPPCC2 BL.-PCC2-</P>
+<P>TAULPLJ2 --IN-- #TE_1PLNM#....................&lt;===LJUNPLJ2 BL.-PLJ2-</P>
+<P>****</P>
+<P>****</P>
+<P>DAMPPCC1 BL.-PCC1- **** MODULO DAMP - air flow to cell 1 of boiler register</P>
+<P>WFSRPCC1 --UA-- AIR FLOW RATE TO CELL 1 OF BOILER</P>
+<P>PFUMCALD --IN-- #PFSVPCC1#....................&lt;===CCPNCALD BL.-CALD-</P>
+<P>PFPLPLNM --IN-- #PFSMPCC1#....................&lt;===PLENPLNM BL.-PLNM-</P>
+<P>TFPLPLNM --IN-- #TFSIPCC1#....................&lt;===PLENPLNM BL.-PLNM-</P>
+<P>TFSUPCC1 --IN--</P>
+<P>ALZSPCC1 --IN-- AIR FLOW REGISTER OPENING (CELL 1)</P>
+<P>AKCOPCC1 --IN--</P>
+<P>****</P>
+<P>****</P>
+<P>DAMPPCC2 BL.-PCC2- **** MODULO DAMP - air flow to cell 2 of boiler register</P>
+<P>WFSRPCC2 --UA-- AIR FLOW RATE TO CELL 2 OF BOILER</P>
+<P>PFUMCALD --IN-- #PFSVPCC2#....................&lt;===CCPNCALD BL.-CALD-</P>
+<P>PFPLPLNM --IN-- #PFSMPCC2#....................&lt;===PLENPLNM BL.-PLNM-</P>
+<P>TFPLPLNM --IN-- #TFSIPCC2#....................&lt;===PLENPLNM BL.-PLNM-</P>
+<P>TFSUPCC2 --IN--</P>
+<P>ALZSPCC2 --IN-- AIR FLOW RATE REGISTER OPENING (CELL 2)</P>
+<P>AKCOPCC2 --IN--</P>
+<P>****</P>
+<P>****</P>
+<P>CCPNCALD BL.-CALD- **** MODULO CCPN - boiler</P>
+<P>MFUMCALD --US--</P>
+<P>PFUMCALD --UA-- GAS PRESSURE IN THE BOILER</P>
+<P>WC_1CALD --IN-- FUEL FLOW RATE TO CELL 1 OF BOILER</P>
+<P>WC_2CALD --IN-- FUEL FLOW RATE TO CELL 2 OF BOILER</P>
+<P>WFSRPCC1 --IN-- #WA_1CALD#....................&lt;===DAMPPCC1 BL.-PCC1-</P>
+<P>WFSRPCC2 --IN-- #WA_2CALD#....................&lt;===DAMPPCC2 BL.-PCC2-</P>
+<P>WRICCALD --IN-- CIRCULATING GAS FLOW RATE IN THE BOILER</P>
+<P>WFSRPCVA --IN-- #WFUCCALD#....................&lt;===DAMPPCVA BL.-PCVA-</P>
+<P>TF_1CALD --IN-- GAS TEMPERATURE IN CELL 1 OF BOILER</P>
+<P>TF_2CALD --IN-- GAS TEMPERATURE IN CELL 2 OF BOILER</P>
+<P>TF_3CALD --IN-- GAS TEMPERATURE IN CELL 3 OF BOILER</P>
+<P>TF_4CALD --IN-- GAS TEMPERATURE IN CELL 4 OF BOILER</P>
+<P>TF_5CALD --IN-- GAS TEMPERATURE IN CELL 5 OF BOILER</P>
+<P>TF_6CALD --IN-- GAS TEMPERATURE IN CELL 6 OF BOILER</P>
+<P>****</P>
+<P>****</P>
+<P>VENTVNTA BL.-VNTA- **** MODULO VENT - gas suction fan</P>
+<P>PFVEVNTA --UA-- GAS PRESSURE AT THE SUCTION FAN OUTLET</P>
+<P>TFU2VNTA --UA-- GAS TEMPERATURE AT THE SUCTION FAN OUTLET</P>
+<P>TFU1VNTA --UA--</P>
+<P>OMVEVNTA --IN-- ROTATIONAL SPEED OF THE SUCTION FAN</P>
+<P>WFSRPCVA --IN-- #WFVEVNTA#....................&lt;===DAMPPCVA BL.-PCVA-</P>
+<P>PFUMCALD --IN-- #PFMVVNTA#....................&lt;===CCPNCALD BL.-CALD-</P>
+<P>ALSRVNTA --IN-- REGISTER OPENING DEGREE OF THE SUCTION FAN</P>
+<P>TFULPLJ1 --IN-- #TFI1VNTA#....................&lt;===LJUNPLJ1 BL.-PLJ1-</P>
+<P>TFI2VNTA --IN--</P>
+<P>NVENVNTA --IN--</P>
+<P>****</P>
+<P>****</P>
+<P>DAMPPCVA BL.-PCVA- **** MODULO DAMP - head loss downstream suction fan</P>
+<P>WFSRPCVA --UA-- GAS FLOW RATE IN THE SUCTION FAN</P>
+<P>PFSVPCVA --IN-- GAS PRESSURE AT THE REGISTER OUTLET</P>
+<P>PFVEVNTA --IN-- #PFSMPCVA#....................&lt;===VENTVNTA BL.-VNTA-</P>
+<P>TFU2VNTA --IN-- #TFSIPCVA#....................&lt;===VENTVNTA BL.-VNTA-</P>
+<P>TFSUPCVA --IN--</P>
+<P>ALZSPCVA --IN-- REGISTER OPENING</P>
+<P>AKCOPCVA --IN--</P>
+<P>****</P>
+<P>****</P>
+<P>RAVAPRAV BL.-PRAV- **** MODULO RAVA - air/steam heat exchanger (RAV)</P>
+<P>TMARPRAV --US--</P>
+<P>TUA2PRAV --UA-- AIR TEMPERATURE AT THE RAV OUTLET</P>
+<P>TUA1PRAV --UA--</P>
+<P>GAMRPRAV --UA--</P>
+<P>WFSRPCVC --IN-- #WARIPRAV#....................&lt;===DAMPPCVC BL.-PCVC-</P>
+<P>TMETPRAV --IN-- RAV METAL TEMPERATURE</P>
+<P>TFU2VNTP --IN-- #TIA1PRAV#....................&lt;===VENTVNTP BL.-VNTP-</P>
+<P>TFPLPLNM --IN-- #TIA2PRAV#....................&lt;===PLENPLNM BL.-PLNM-</P>
+<P>****</P>
+<P>****</P>
+<P>DISNCPLJ BL.-CPLJ- **** MODULO DISN - variables connection</P>
+<P>T_1_CPLJ --UA-- AIR TEMPERATURE AT LJUNGSTROM INLET</P>
+<P>T_2_CPLJ --UA-- AIR TEMPERATURE AT LJUNGSTROM INLET</P>
+<P>TUA2PRAV --IN-- #AINGCPLJ#....................&lt;===RAVAPRAV BL.-PRAV-</P>
+<P>****</P>
+<P>****</P>
+<P>DISNCRLJ BL.-CRLJ- **** MODULO DISN - variables connection</P>
+<P>T_1_CRLJ --UA-- GAS TEMPERATURE AT LJUNGSTROM INLET</P>
+<P>T_2_CRLJ --UA-- GAS TEMPERATURE AT LJUNGSTROM INLET</P>
+<P>AINGCRLJ --IN-- GAS TEMPERATURE IN CELL 6 OF THE BOILER</P>
+<P>****</P>
+<P>****</P>
+<P>LJUNPLJ2 BL.-PLJ2- **** MODULO LJUN - ljungstrom heater (cell 2)</P>
+<P>TM_1PLJ2 --US--</P>
+<P>TM_2PLJ2 --US--</P>
+<P>TM_3PLJ2 --US--</P>
+<P>TM_4PLJ2 --US--</P>
+<P>TU_1PLJ2 --UA--</P>
+<P>TU_2PLJ2 --UA--</P>
+<P>TU_3PLJ2 --UA--</P>
+<P>TU_4PLJ2 --UA--</P>
+<P>TF_1PLJ2 --UA--</P>
+<P>TF_2PLJ2 --UA--</P>
+<P>TA_3PLJ2 --UA--</P>
+<P>TA_4PLJ2 --UA--</P>
+<P>TFULPLJ2 --UA--</P>
+<P>TAULPLJ2 --UA-- AIR TEMPERATURE AT THE LYUNGSTROM OUTLET</P>
+<P>WFSRPCVA --IN-- #WFLJPLJ2#....................&lt;===DAMPPCVA BL.-PCVA-</P>
+<P>WFSRPCVC --IN-- #WALJPLJ2#....................&lt;===DAMPPCVC BL.-PCVC-</P>
+<P>T_1_CRLJ --IN-- #TG_1PLJ2#....................&lt;===DISNCRLJ BL.-CRLJ-</P>
+<P>T_2_CRLJ --IN-- #TG_2PLJ2#....................&lt;===DISNCRLJ BL.-CRLJ-</P>
+<P>TA_3PLJ1 --IN-- #TI_3PLJ2#....................&lt;===LJUNPLJ1 BL.-PLJ1-</P>
+<P>TA_4PLJ1 --IN-- #TI_4PLJ2#....................&lt;===LJUNPLJ1 BL.-PLJ1-</P>
+<P>OMLJPLJ2 --IN-- ROTATIONAL SPEED OF THE LJUNGSTROM</P>
+<P>CSCAPLJ2 --IN--</P>
+<P>****</P>
+<P>****</P>
+<P>LJUNPLJ1 BL.-PLJ1- **** MODULO LJUN - ljungstrom heater (cell 1)</P>
+<P>TM_1PLJ1 --US--</P>
+<P>TM_2PLJ1 --US--</P>
+<P>TM_3PLJ1 --US--</P>
+<P>TM_4PLJ1 --US--</P>
+<P>TU_1PLJ1 --UA--</P>
+<P>TU_2PLJ1 --UA--</P>
+<P>TU_3PLJ1 --UA--</P>
+<P>TU_4PLJ1 --UA--</P>
+<P>TF_1PLJ1 --UA--</P>
+<P>TF_2PLJ1 --UA--</P>
+<P>TA_3PLJ1 --UA--</P>
+<P>TA_4PLJ1 --UA--</P>
+<P>TFULPLJ1 --UA-- GAS TEMPERATURE AT THE LJUNGSTROM OUTLET</P>
+<P>TAULPLJ1 --UA--</P>
+<P>WFSRPCVA --IN-- #WFLJPLJ1#....................&lt;===DAMPPCVA BL.-PCVA-</P>
+<P>WFSRPCVC --IN-- #WALJPLJ1#....................&lt;===DAMPPCVC BL.-PCVC-</P>
+<P>TF_1PLJ2 --IN-- #TG_1PLJ1#....................&lt;===LJUNPLJ2 BL.-PLJ2-</P>
+<P>TF_2PLJ2 --IN-- #TG_2PLJ1#....................&lt;===LJUNPLJ2 BL.-PLJ2-</P>
+<P>T_1_CPLJ --IN-- #TI_3PLJ1#....................&lt;===DISNCPLJ BL.-CPLJ-</P>
+<P>T_2_CPLJ --IN-- #TI_4PLJ1#....................&lt;===DISNCPLJ BL.-CPLJ-</P>
+<P>OMLJPLJ1 --IN-- ROTATIONAL SPEED OF THE LJUNGSTROM</P>
+<P>CSCAPLJ1 --IN--</P>
+<P>****</P>
+<P>**** &gt;&gt;&gt;&gt;&gt;&gt;INGRESSI DI TUTTI I MODULI&lt;&lt;&lt;&lt;&lt;&lt;</P>
+<P>OMVEVNTP --IN-- FORCING FAN ROTATIONAL SPEED</P>
+<P>PFMVVNTP --IN-- AIR PRESSURE AT THE FORCING FAN INLET</P>
+<P>ALSRVNTP --IN-- REGISTER OPENING DEGREE OF THE FORCING FAN</P>
+<P>TFI1VNTP --IN-- AIR TEMPERATURE AT THE FORCING FAN INLET</P>
+<P>NVENVNTP --IN--</P>
+<P>ALZSPCVC --IN--</P>
+<P>AKCOPCVC --IN--</P>
+<P>TFSUPCC1 --IN--</P>
+<P>ALZSPCC1 --IN-- AIR FLOW REGISTER OPENING (CELL 1)</P>
+<P>AKCOPCC1 --IN--</P>
+<P>TFSUPCC2 --IN--</P>
+<P>ALZSPCC2 --IN-- AIR FLOW RATE REGISTER OPENING (CELL 2)</P>
+<P>AKCOPCC2 --IN--</P>
+<P>WC_1CALD --IN-- FUEL FLOW RATE TO CELL 1 OF BOILER</P>
+<P>WC_2CALD --IN-- FUEL FLOW RATE TO CELL 2 OF BOILER</P>
+<P>WRICCALD --IN-- CIRCULATING GAS FLOW RATE IN THE BOILER</P>
+<P>TF_1CALD --IN-- GAS TEMPERATURE IN CELL 1 OF BOILER</P>
+<P>TF_2CALD --IN-- GAS TEMPERATURE IN CELL 2 OF BOILER</P>
+<P>TF_3CALD --IN-- GAS TEMPERATURE IN CELL 3 OF BOILER</P>
+<P>TF_4CALD --IN-- GAS TEMPERATURE IN CELL 4 OF BOILER</P>
+<P>TF_5CALD --IN-- GAS TEMPERATURE IN CELL 5 OF BOILER</P>
+<P>TF_6CALD --IN-- GAS TEMPERATURE IN CELL 6 OF BOILER</P>
+<P>OMVEVNTA --IN-- ROTATIONAL SPEED OF THE SUCTION FAN</P>
+<P>ALSRVNTA --IN-- REGISTER OPENING DEGREE OF THE SUCTION FAN</P>
+<P>TFI2VNTA --IN--</P>
+<P>NVENVNTA --IN--</P>
+<P>PFSVPCVA --IN-- GAS PRESSURE AT THE REGISTER OUTLET</P>
+<P>TFSUPCVA --IN--</P>
+<P>ALZSPCVA --IN-- REGISTER OPENING</P>
+<P>AKCOPCVA --IN--</P>
+<P>TMETPRAV --IN-- RAV METAL TEMPERATURE</P>
+<P>AINGCRLJ --IN-- GAS TEMPERATURE IN CELL 6 OF THE BOILER</P>
+<P>OMLJPLJ2 --IN-- ROTATIONAL SPEED OF THE LJUNGSTROM</P>
+<P>CSCAPLJ2 --IN--</P>
+<P>OMLJPLJ1 --IN-- ROTATIONAL SPEED OF THE LJUNGSTROM</P>
+<P>CSCAPLJ1 --IN--</P>
+<P>****</P>
+<P>WFVEVNTP --CO--</P>
+<P>TFI2VNTP --CO--</P>
+<P>PFSVPCVC --CO--</P>
+<P>PFSMPCVC --CO--</P>
+<P>TFSIPCVC --CO--</P>
+<P>TFSUPCVC --CO--</P>
+<P>WE_1PLNM --CO--</P>
+<P>WU_1PLNM --CO--</P>
+<P>WU_2PLNM --CO--</P>
+<P>TE_1PLNM --CO--</P>
+<P>PFSVPCC1 --CO--</P>
+<P>PFSMPCC1 --CO--</P>
+<P>TFSIPCC1 --CO--</P>
+<P>PFSVPCC2 --CO--</P>
+<P>PFSMPCC2 --CO--</P>
+<P>TFSIPCC2 --CO--</P>
+<P>WA_1CALD --CO--</P>
+<P>WA_2CALD --CO--</P>
+<P>WFUCCALD --CO--</P>
+<P>WFVEVNTA --CO--</P>
+<P>PFMVVNTA --CO--</P>
+<P>TFI1VNTA --CO--</P>
+<P>PFSMPCVA --CO--</P>
+<P>TFSIPCVA --CO--</P>
+<P>WARIPRAV --CO--</P>
+<P>TIA1PRAV --CO--</P>
+<P>TIA2PRAV --CO--</P>
+<P>AINGCPLJ --CO--</P>
+<P>WFLJPLJ2 --CO--</P>
+<P>WALJPLJ2 --CO--</P>
+<P>TG_1PLJ2 --CO--</P>
+<P>TG_2PLJ2 --CO--</P>
+<P>TI_3PLJ2 --CO--</P>
+<P>TI_4PLJ2 --CO--</P>
+<P>WFLJPLJ1 --CO--</P>
+<P>WALJPLJ1 --CO--</P>
+<P>TG_1PLJ1 --CO--</P>
+<P>TG_2PLJ1 --CO--</P>
+<P>TI_3PLJ1 --CO--</P>
+<P>TI_4PLJ1 --CO--</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test2_c"></A>Test case 2: geometrical and physical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Geometrical and physical data of the model:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">1.&#9;<U>Block forcing fan</P>
+</U><P ALIGN="JUSTIFY">Fan model:&#9;E. MARELLI AD 3150/2440-CA/VIV/3G&#9;(TIPO=1)</P>
+<P ALIGN="JUSTIFY">Rated rotational speed:&#9;76.93&#9;rad/s</P>
+<P ALIGN="JUSTIFY">Gas constant for the air:&#9;287&#9;m²/s²/K</P>
+<P ALIGN="JUSTIFY">&#9;</P>
+<P ALIGN="JUSTIFY">2.&#9;<U>Block air head loss</P>
+</U><P ALIGN="JUSTIFY">Air cross section area (register fully opened):&#9;45&#9;m²</P>
+<P ALIGN="JUSTIFY">Gas constant for the air:&#9;287&#9;m²/s²/K</P>
+<P ALIGN="JUSTIFY">Rated flow rate:&#9;800 &#9;kg/s</P>
+<P ALIGN="JUSTIFY">Rated pressure drop:&#9;800&#9;Pa</P>
+<P ALIGN="JUSTIFY">Opening characteristic:&#9;linear&#9;(ALFA=1)</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">3.&#9;<U>Block air/steam exchanger</P>
+</U><P ALIGN="JUSTIFY">Total heat-exchange surface:&#9;6450&#9;m²</P>
+<P ALIGN="JUSTIFY">Constant used for the calculation of the</P>
+<P ALIGN="JUSTIFY">thermal-exchange coefficient:&#9;1.3</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">4.&#9;<U>Blocks Ljungstrom heater</P>
+</U><P ALIGN="JUSTIFY">Metal specific heat:&#9;700&#9;J/kg/K</P>
+<P ALIGN="JUSTIFY">Metal density:&#9;7800&#9;kg/m³</P>
+<P ALIGN="JUSTIFY">Metal volume:&#9;64.65&#9;m³</P>
+<P ALIGN="JUSTIFY">Total heat-exchange surface:&#9;161790&#9;m²</P>
+<P ALIGN="JUSTIFY">Metal cylinder radius:&#9;7.25&#9;m</P>
+<P ALIGN="JUSTIFY">Weight factor for the mean temperature:&#9;7.25&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">5.&#9;<U>Block air manifold</P>
+</U><P ALIGN="JUSTIFY">Manifold internal volume:&#9;1350&#9;m³</P>
+<P ALIGN="JUSTIFY">Manifold inlet pipes number:&#9;1</P>
+<P ALIGN="JUSTIFY">Manifold outlet pipes number:&#9;2</P>
+<P ALIGN="JUSTIFY">Gas constant for the air:&#9;287.&#9;m²/s²/K</P>
+<P ALIGN="JUSTIFY">Air umidity in the manifold:&#9;0.01&#9;p.u.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">6.&#9;<U>Block air flow register</P>
+</U><P ALIGN="JUSTIFY">Gas cross section area</P>
+<P ALIGN="JUSTIFY">(register completely opened):&#9;25&#9;m²</P>
+<P ALIGN="JUSTIFY">Gas constant for the air:&#9;287&#9;m²/s²/K</P>
+<P ALIGN="JUSTIFY">Rated flow rate:&#9;400&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Rated pressure drop:&#9;300&#9;Pa</P>
+<P ALIGN="JUSTIFY">Opening characteristic:&#9;linear&#9;(ALFA=1)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">7.&#9;<U>Block boiler</P>
+</U><P ALIGN="JUSTIFY">Number of cells:&#9;6</P>
+<P ALIGN="JUSTIFY">Number of cells with burners:&#9;2</P>
+<P ALIGN="JUSTIFY">Cell 1 volume:&#9;4466.9&#9;m³</P>
+<P ALIGN="JUSTIFY">Cell 2 volume:&#9;3871.8&#9;m³</P>
+<P ALIGN="JUSTIFY">Cell 3 volume:&#9;7247.1&#9;m³</P>
+<P ALIGN="JUSTIFY">Cell 4 volume:&#9;1337.5&#9;m³</P>
+<P ALIGN="JUSTIFY">Cell 5 volume:&#9;3031&#9;m³</P>
+<P ALIGN="JUSTIFY">Cell 6 volume:&#9;2227.4&#9;m³</P>
+<P ALIGN="JUSTIFY">First cell with burners:&#9;2</P>
+<P ALIGN="JUSTIFY">Second cell with burners:&#9;2</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">8.&#9;<U>Block suction fan</P>
+</U><P ALIGN="JUSTIFY">Fan model:&#9;F. TOSI SERIE 4000 DWDI PALA B/C </P>
+<P ALIGN="JUSTIFY">TIPO 4154 ARR 3&#9;(TIPO=3)</P>
+<P ALIGN="JUSTIFY">Rated rotational speed:&#9;61.753&#9;rad/s</P>
+<P ALIGN="JUSTIFY">Gas constant for the exhaust gas:&#9;274&#9;m²/s²/K</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">9.&#9;<U>Block gas flow register</P>
+</U><P ALIGN="JUSTIFY">Gas cross section area (register fully opened):&#9;45&#9;m²</P>
+<P ALIGN="JUSTIFY">Gas constant for the exhaust gas:&#9;274&#9;m²/s²/K</P>
+<P ALIGN="JUSTIFY">Rated flow rate:&#9;800&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Rated pressure drop:&#9;900&#9;Pa</P>
+<P ALIGN="JUSTIFY">Opening characteristic:&#9;linear&#9;(ALFA=1)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">Main data for the calculation of a steady state condition:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</U><P ALIGN="JUSTIFY">Inlet forcing fan pressure:&#9;1.01&#9;bar</P>
+<P ALIGN="JUSTIFY">Inlet forcing fan temperature:&#9;298.96&#9;K</P>
+<P ALIGN="JUSTIFY">Forcing fan rotational speed:&#9;77.37&#9;rad/s</P>
+<P ALIGN="JUSTIFY">Number of forcing fans:&#9;2</P>
+<P ALIGN="JUSTIFY">Mean metal temperature in air/steam </P>
+<P ALIGN="JUSTIFY">heat-exchanger:&#9;480&#9;K</P>
+<P ALIGN="JUSTIFY">Ljungstrom heater rotational speed:&#9;0.136&#9;rad/s</P>
+<P ALIGN="JUSTIFY">Fuel flow rate to cell 1 of boiler:&#9;18.445&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Fuel flow rate to cell 2 of boiler:&#9;18.445&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Circulating gas flow rate in the boiler:&#9;151.61&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Mean gas temperature in cell 1 of boiler:&#9;1307.7&#9;K</P>
+<P ALIGN="JUSTIFY">Mean gas temperature in cell 2 of boiler:&#9;1654.5&#9;K</P>
+<P ALIGN="JUSTIFY">Mean gas temperature in cell 3 of boiler:&#9;1481.2&#9;K</P>
+<P ALIGN="JUSTIFY">Mean gas temperature in cell 4 of boiler:&#9;1277.5&#9;K</P>
+<P ALIGN="JUSTIFY">Mean gas temperature in cell 5 of boiler:&#9;1074.9&#9;K</P>
+<P ALIGN="JUSTIFY">Mean gas temperature in cell 6 of boiler:&#9;675.34&#9;K</P>
+<P ALIGN="JUSTIFY">Suction fan rotational speed:&#9;60.01&#9;rad/s</P>
+<P ALIGN="JUSTIFY">Outlet gas pressure:&#9;1.04&#9;bar</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test2_e"></A>Test case 2: steady state condition</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the data file (F14.DAT) of the "ARIAGAS" model.</P>
+<P ALIGN="JUSTIFY">File F14.DAT is written by LEGOCAD System data assignment activity. Steady states evaluation activity rewrites (only for unknown variables) the values obtained for the calculated steady state condition:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>*LG*NOME IMPIANTO =ARIAGAS</P>
+<P>*LG*DATI DI NORMALIZZAZIONE P0=2.E+07*H0=1.E+06*W0=1.E+03*T0=1.E+03*R0=1.E+02*</P>
+<P>*LG* L0=1.E+01*V0=5.E+01*DP0=1.E+05*</P>
+<P>*LG*CONDIZIONI INIZIALI VARIABILI DEL SISTEMA (MKS)</P>
+<P>1 PFVEVNTP =.10471E+06*BL.(VENTVNTP)= * AIR PRESSURE AT THE FORCING FAN OUT</P>
+<P>2 TFU2VNTP =305.56 *BL.(VENTVNTP)= * AIR TEMPERATURE AT THE FORCING FAN</P>
+<P>3 TFU1VNTP =298.96 *BL.(VENTVNTP)= *</P>
+<P>4 WFSRPCVC =810.00 *BL.(DAMPPCVC)= * AIR FLOW RATE IN THE FORCING FAN</P>
+<P>5 WFSRPCC1 =405.00 *BL.(DAMPPCC1)= * AIR FLOW RATE TO CELL 1 OF BOILER</P>
+<P>6 WFSRPCC2 =405.00 *BL.(DAMPPCC2)= * AIR FLOW RATE TO CELL 2 OF BOILER</P>
+<P>7 PFUMCALD =.10330E+06*BL.(CCPNCALD)= * GAS PRESSURE IN THE BOILER</P>
+<P>8 PFVEVNTA =.10573E+06*BL.(VENTVNTA)= * GAS PRESSURE AT THE SUCTION FAN OUT</P>
+<P>9 TFU2VNTA =459.45 *BL.(VENTVNTA)= * GAS TEMPERATURE AT THE SUCTION FAN</P>
+<P>10 TFU1VNTA =451.52 *BL.(VENTVNTA)= *</P>
+<P>11 WFSRPCVA =998.50 *BL.(DAMPPCVA)= * GAS FLOW RATE IN THE SUCTION FAN</P>
+<P>12 TUA2PRAV =335.21 *BL.(RAVAPRAV)= * AIR TEMPERATURE AT THE RAV OUTLET</P>
+<P>13 TUA1PRAV =305.56 *BL.(RAVAPRAV)= *</P>
+<P>14 GAMRPRAV =25.908 *BL.(RAVAPRAV)= *</P>
+<P>15 T_1_CPLJ =335.21 *BL.(DISNCPLJ)= * AIR TEMPERATURE AT LJUNGSTROM INLET</P>
+<P>16 T_2_CPLJ =335.21 *BL.(DISNCPLJ)= * AIR TEMPERATURE AT LJUNGSTROM INLET</P>
+<P>17 T_1_CRLJ =675.34 *BL.(DISNCRLJ)= * GAS TEMPERATURE AT LJUNGSTROM INLET</P>
+<P>18 T_2_CRLJ =675.34 *BL.(DISNCRLJ)= * GAS TEMPERATURE AT LJUNGSTROM INLET</P>
+<P>19 TU_1PLJ2 =598.41 *BL.(LJUNPLJ2)= *</P>
+<P>20 TU_2PLJ2 =605.18 *BL.(LJUNPLJ2)= *</P>
+<P>21 TU_3PLJ2 =598.25 *BL.(LJUNPLJ2)= *</P>
+<P>22 TU_4PLJ2 =590.99 *BL.(LJUNPLJ2)= *</P>
+<P>23 TF_1PLJ2 =578.74 *BL.(LJUNPLJ2)= *</P>
+<P>24 TF_2PLJ2 =587.24 *BL.(LJUNPLJ2)= *</P>
+<P>25 TA_3PLJ2 =621.08 *BL.(LJUNPLJ2)= *</P>
+<P>26 TA_4PLJ2 =614.95 *BL.(LJUNPLJ2)= *</P>
+<P>27 TFULPLJ2 =582.99 *BL.(LJUNPLJ2)= *</P>
+<P>28 TAULPLJ2 =618.02 *BL.(LJUNPLJ2)= * AIR TEMPERATURE AT THE LYUNGSTROM O</P>
+<P>29 TU_1PLJ1 =473.32 *BL.(LJUNPLJ1)= *</P>
+<P>30 TU_2PLJ1 =483.02 *BL.(LJUNPLJ1)= *</P>
+<P>31 TU_3PLJ1 =472.93 *BL.(LJUNPLJ1)= *</P>
+<P>32 TU_4PLJ1 =463.54 *BL.(LJUNPLJ1)= *</P>
+<P>33 TF_1PLJ1 =446.52 *BL.(LJUNPLJ1)= *</P>
+<P>34 TF_2PLJ1 =456.52 *BL.(LJUNPLJ1)= *</P>
+<P>35 TA_3PLJ1 =507.48 *BL.(LJUNPLJ1)= *</P>
+<P>36 TA_4PLJ1 =495.72 *BL.(LJUNPLJ1)= *</P>
+<P>37 TFULPLJ1 =451.52 *BL.(LJUNPLJ1)= * GAS TEMPERATURE AT THE LJUNGSTROM O</P>
+<P>38 TAULPLJ1 =501.60 *BL.(LJUNPLJ1)= *</P>
+<P>39 PFPLPLNM =.10375E+06*BL.(PLENPLNM)= * AIR PRESSURE IN THE MANIFOLD</P>
+<P>40 TFPLPLNM =618.02 *BL.(PLENPLNM)= * AIR TEMPERATURE IN THE MANIFOLD</P>
+<P>41 MFUMCALD =6357.8 *BL.(CCPNCALD)= *</P>
+<P>42 TMARPRAV =335.21 *BL.(RAVAPRAV)= *</P>
+<P>43 TM_1PLJ2 =596.93 *BL.(LJUNPLJ2)= *</P>
+<P>44 TM_2PLJ2 =603.83 *BL.(LJUNPLJ2)= *</P>
+<P>45 TM_3PLJ2 =599.64 *BL.(LJUNPLJ2)= *</P>
+<P>46 TM_4PLJ2 =592.45 *BL.(LJUNPLJ2)= *</P>
+<P>47 TM_1PLJ1 =471.37 *BL.(LJUNPLJ1)= *</P>
+<P>48 TM_2PLJ1 =481.08 *BL.(LJUNPLJ1)= *</P>
+<P>49 TM_3PLJ1 =474.95 *BL.(LJUNPLJ1)= *</P>
+<P>50 TM_4PLJ1 =465.42 *BL.(LJUNPLJ1)= *</P>
+<P>*LG*CONDIZIONI INIZIALI VARIABILI DI INGRESSO</P>
+<P>1 OMVEVNTP =77.370 *BL.(VENTVNTP)=NOTO* FORCING FAN ROTATIONAL SPEED</P>
+<P>2 PFMVVNTP =.10100E+06*BL.(VENTVNTP)=NOTO* AIR PRESSURE AT THE FORCING FAN INL</P>
+<P>3 ALSRVNTP =.73974 *BL.(VENTVNTP)=NOTO* REGISTER OPENING DEGREE OF THE FORC</P>
+<P>4 TFI1VNTP =298.96 *BL.(VENTVNTP)=NOTO* AIR TEMPERATURE AT THE FORCING FAN</P>
+<P>5 NVENVNTP =2.0000 *BL.(VENTVNTP)=NOTO*</P>
+<P>6 ALZSPCVC =.93281 *BL.(DAMPPCVC)=NOTO*</P>
+<P>7 AKCOPCVC =1.0000 *BL.(DAMPPCVC)=NOTO*</P>
+<P>8 TFSUPCC1 =675.34 *BL.(DAMPPCC1)=NOTO*</P>
+<P>9 ALZSPCC1 =.82538 *BL.(DAMPPCC1)=NOTO* AIR FLOW REGISTER OPENING (CELL 1)</P>
+<P>10 AKCOPCC1 =1.0000 *BL.(DAMPPCC1)=NOTO*</P>
+<P>11 TFSUPCC2 =675.34 *BL.(DAMPPCC2)=NOTO*</P>
+<P>12 ALZSPCC2 =.82538 *BL.(DAMPPCC2)=NOTO* AIR FLOW RATE REGISTER OPENING (CEL</P>
+<P>13 AKCOPCC2 =1.0000 *BL.(DAMPPCC2)=NOTO*</P>
+<P>14 WC_1CALD =18.445 *BL.(CCPNCALD)=NOTO* FUEL FLOW RATE TO CELL 1 OF BOILER</P>
+<P>15 WC_2CALD =18.445 *BL.(CCPNCALD)=NOTO* FUEL FLOW RATE TO CELL 2 OF BOILER</P>
+<P>16 WRICCALD =151.61 *BL.(CCPNCALD)=NOTO* CIRCULATING GAS FLOW RATE IN THE BO</P>
+<P>17 TF_1CALD =1307.7 *BL.(CCPNCALD)=NOTO* GAS TEMPERATURE IN CELL 1 OF BOILER</P>
+<P>18 TF_2CALD =1654.5 *BL.(CCPNCALD)=NOTO* GAS TEMPERATURE IN CELL 2 OF BOILER</P>
+<P>19 TF_3CALD =1481.2 *BL.(CCPNCALD)=NOTO* GAS TEMPERATURE IN CELL 3 OF BOILER</P>
+<P>20 TF_4CALD =1277.5 *BL.(CCPNCALD)=NOTO* GAS TEMPERATURE IN CELL 4 OF BOILER</P>
+<P>21 TF_5CALD =1074.9 *BL.(CCPNCALD)=NOTO* GAS TEMPERATURE IN CELL 5 OF BOILER</P>
+<P>22 TF_6CALD =675.34 *BL.(CCPNCALD)=NOTO* GAS TEMPERATURE IN CELL 6 OF BOILER</P>
+<P>23 OMVEVNTA =60.010 *BL.(VENTVNTA)=NOTO* ROTATIONAL SPEED OF THE SUCTION FAN</P>
+<P>24 ALSRVNTA =.42019 *BL.(VENTVNTA)=NOTO* REGISTER OPENING DEGREE OF THE SUCT</P>
+<P>25 TFI2VNTA =487.00 *BL.(VENTVNTA)=NOTO*</P>
+<P>26 NVENVNTA =2.0000 *BL.(VENTVNTA)=NOTO*</P>
+<P>27 PFSVPCVA =.10400E+06*BL.(DAMPPCVA)=NOTO* GAS PRESSURE AT THE REGISTER OUTLET</P>
+<P>28 TFSUPCVA =450.00 *BL.(DAMPPCVA)=NOTO*</P>
+<P>29 ALZSPCVA =.87172 *BL.(DAMPPCVA)=NOTO* REGISTER OPENING</P>
+<P>30 AKCOPCVA =1.0000 *BL.(DAMPPCVA)=NOTO*</P>
+<P>31 TMETPRAV =480.00 *BL.(RAVAPRAV)=NOTO* RAV METAL TEMPERATURE</P>
+<P>32 AINGCRLJ =675.34 *BL.(DISNCRLJ)=NOTO* GAS TEMPERATURE IN CELL 6 OF THE BO</P>
+<P>33 OMLJPLJ2 =.13600 *BL.(LJUNPLJ2)=NOTO* ROTATIONAL SPEED OF THE LJUNGSTROM</P>
+<P>34 CSCAPLJ2 =11.760 *BL.(LJUNPLJ2)=NOTO*</P>
+<P>35 OMLJPLJ1 =.13600 *BL.(LJUNPLJ1)=NOTO* ROTATIONAL SPEED OF THE LJUNGSTROM</P>
+<P>36 CSCAPLJ1 =11.760 *BL.(LJUNPLJ1)=NOTO*</P>
+<P>*LG*DATI FISICI E GEOMETRICI DEL SISTEMA SUDDIVISI A BLOCCHI</P>
+<P>*LG*DATI DEL BLOCCO VENTVNTP MODULO VENT - forcing fan</P>
+<P>TIPO =1. * ORIF =76.93 * ERRE =287. *</P>
+<P>*LG*DATI DEL BLOCCO DAMPPCVC MODULO DAMP - head loss downstream the forcing fan</P>
+<P>WNOM =800. * T NOM. =300. * RGAS =287. *</P>
+<P>* DATA ABOUT THE REGISTER</P>
+<P>DP S NOM =800. * AREA =45. * ALFA =1. *</P>
+<P>* DATA ABOUT THE DUCT</P>
+<P>DP C NOM = *</P>
+<P>*LG*DATI DEL BLOCCO PLENPLNM MODULO PLEN - air manifold</P>
+<P>VOL. =1350. * NWIN =1. * NWOU =2. *</P>
+<P>RGAS =287. * UMID =.01 *</P>
+<P>*LG*DATI DEL BLOCCO DAMPPCC1 MODULO DAMP - air flow to cell 1 of boiler registe</P>
+<P>WNOM =400. * T NOM. =620. * RGAS =287. *</P>
+<P>* DATA ABOUT THE REGISTER</P>
+<P>DP S NOM =300. * AREA =25. * ALFA =1. *</P>
+<P>* DATA ABOUT THE DUCT</P>
+<P>DP C NOM = *</P>
+<P>*LG*DATI DEL BLOCCO DAMPPCC2 MODULO DAMP - air flow to cell 2 of boiler registe</P>
+<P>WNOM =400. * T NOM. =620. * RGAS =287. *</P>
+<P>* DATA ABOUT THE REGISTER</P>
+<P>DP S NOM =300. * AREA =25. * ALFA =1. *</P>
+<P>* DATA ABOUT THE DUCT</P>
+<P>DP C NOM =0. *</P>
+<P>*LG*DATI DEL BLOCCO CCPNCALD MODULO CCPN - boiler</P>
+<P>NUM_CEL. =6. * N_C_BRU. =2. *</P>
+<P>VOLCEL 1 =4466.9 * VOLCEL 2 =3871.8 * VOLCEL 3 =7247.1 *</P>
+<P>VOLCEL 4 =1337.53 * VOLCEL 5 =3030.96 * VOLCEL 6 =2227.43 *</P>
+<P>VOLCEL 7 = * VOLCEL 8 = * VOLCEL 9 = *</P>
+<P>VOLCEL10 = * VOLCEL11 = * VOLCEL12 = *</P>
+<P>VOLCEL13 = * VOLCEL14 = * VOLCEL15 = *</P>
+<P>VOLCEL16 = * VOLCEL17 = * VOLCEL18 = *</P>
+<P>VOLCEL19 = * VOLCEL20 = * VOLCEL21 = *</P>
+<P>VOLCEL22 = * VOLCEL23 = * VOLCEL24 = *</P>
+<P>VOLCEL25 = * VOLCEL26 = * VOLCEL27 = *</P>
+<P>VOLCEL28 = * VOLCEL29 = * VOLCEL30 = *</P>
+<P>IBRUC_1 =1. * IBRUC_2 =2. * IBRUC_3 = *</P>
+<P>IBRUC_4 = * IBRUC_5 = * IBRUC_6 = *</P>
+<P>IBRUC_7 = * IBRUC_8 = * IBRUC_9 = *</P>
+<P>TAU_1 =6.5 * TAU_2 =.5 *</P>
+<P>*LG*DATI DEL BLOCCO VENTVNTA MODULO VENT - gas suction fan</P>
+<P>TIPO =3. * ORIF =61.753 * ERRE =274. *</P>
+<P>*LG*DATI DEL BLOCCO DAMPPCVA MODULO DAMP - head loss downstream suction fan</P>
+<P>WNOM =800. * T NOM. =490. * RGAS =274. *</P>
+<P>* DATA ABOUT THE REGISTER</P>
+<P>DP S NOM =900. * AREA =45. * ALFA =1. *</P>
+<P>* DATA ABOUT THE DUCT</P>
+<P>DP C NOM =0. *</P>
+<P>*LG*DATI DEL BLOCCO RAVAPRAV MODULO RAVA - air/steam heat exchanger (RAV)</P>
+<P>SUSCA =6450. * CAPPA =1.3 * ALFA = *</P>
+<P>*LG*DATI DEL BLOCCO DISNCPLJ MODULO DISN - variables connection</P>
+<P>NORM =T0 * COEF =1. *</P>
+<P>*LG*DATI DEL BLOCCO DISNCRLJ MODULO DISN - variables connection</P>
+<P>NORM =T0 * COEF =1. *</P>
+<P>*LG*DATI DEL BLOCCO LJUNPLJ2 MODULO LJUN - ljungstrom heater (cell 2)</P>
+<P>CM =700. * ROM =7800. *</P>
+<P>VMET =64.65 * ASCA =161790. * RALJ =7.25 *</P>
+<P>LUNG =5. * ALAM =0.2 * ALIB =133. *</P>
+<P>*LG*DATI DEL BLOCCO LJUNPLJ1 MODULO LJUN - ljungstrom heater (cell 1)</P>
+<P>CM =700. * ROM =7800. *</P>
+<P>VMET =64.65 * ASCA =161790. * RALJ =7.25 *</P>
+<P>LUNG =5. * ALAM =0.2 * ALIB =133. *</P>
+<P>*LG*EOF</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test2_f"></A>Test case 2: transient simulation</P>
+</B></FONT><U><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P ALIGN="JUSTIFY">Data for the simulation of a transient condition:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</U><P ALIGN="JUSTIFY">Simulation time:&#9;30&#9;s</P>
+<P ALIGN="JUSTIFY">Integration step:&#9;0.1&#9;s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">Perturbated variables:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</U><P ALIGN="JUSTIFY">WC_1CALD</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;step</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;2&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;0&#9;kg/s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">WC_2CALD</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;step</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;2&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;0&#9;kg/s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">WRICCALD</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;step</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;2&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;0&#9;kg/s</P>
+<U><P ALIGN="JUSTIFY">&nbsp;</P>
+</U><P ALIGN="JUSTIFY">TF_1CALD</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;2&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;3&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;620&#9;K</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">TF_2CALD</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;2&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;3&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;624&#9;K</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">TF_3CALD</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;2&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;3&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;640&#9;K</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">TF_4CALD</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;2&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;3&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;680&#9;K</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">TF_5CALD</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;2&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;3&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;690&#9;K</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">TF_6CALD</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;2&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;3&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;630&#9;K</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image30.gif" WIDTH=567 HEIGHT=189></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Perturbations: fuel oil and recirculating flue gas flow rates</P>
+</FONT><FONT SIZE=2><P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image31.gif" WIDTH=567 HEIGHT=283></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Perturbations: flue gas cells temperatures in the combustion chamber</P>
+</FONT><FONT SIZE=2><P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image32.gif" WIDTH=567 HEIGHT=283></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Results: air and flue gas flow rates and pressure in the combustion chamber</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P></BODY>
+</HTML>

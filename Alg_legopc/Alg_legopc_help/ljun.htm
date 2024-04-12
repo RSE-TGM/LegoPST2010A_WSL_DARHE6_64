@@ -1,0 +1,436 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>LJUN</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE LJUN</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LJUN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">LJUNGSTRÖM TYPE AIR PREHEATER</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p align="left">The LJUN module simulates the dynamics of thermal exchange
+between air and flue gas in a Ljungström type air preheater. These preheaters
+are constituted by an iron sheet vertical cylinder subdivided into sectors. In
+each sector mill packs, arranged so as to realize a large exchange surface
+between fluid (flue gas or air) and metal, are inserted.</p>
+<p align="left">A part of the sectors (generally one half) is crossed lengthwise
+by the flue gas, the remaining part is crossed by the air, in countercurrent
+with respect to the flue gas flow. The cylinder is kept in rotation at an
+angular velocity of 0.1 rad/s - 0.2 rad/s. As a result of the rotation, the mill
+packs of the same sector are crossed first by the flue gas, from which heat is
+absorbed, and then by the air that gets the heat previously taken away from flue
+gas.</p>
+<p align="left">In the mathematical model implemented in LJUN module the
+cylinder is assumed to be subdivided into an even number of sectors and, at a
+given time &quot;t&quot;, one half of the sectors is supposed to be crossed by
+the flue gas and the other half by the air.</p>
+<p align="left">Considering a cylindrical coordinates frame of reference with
+the &quot;z&quot; axis coinciding with the axis of rotation of the sheet iron
+cylinder, the temperature distribution in the metal of the mill packs contained
+in each sector is assumed as uniform both along the &quot;z&quot; axis and in
+the radial direction.</p>
+<p align="left">Besides, treating the thermal exchange between the fluid (flue
+gas or air) flowing through a given sector and the mill packs metal, the angular
+distribution of the metal temperature and the axial distribution of the fluid
+temperature along the sector are both approximated by means of a weighted
+average of the temperature at the considered sector extremes (in the angular
+direction and in the axial direction, respectively).</p>
+<p align="left">In particular, the average temperature TM_j of the mill packs
+metal contained in the sector &quot;j&quot; is given by the relation:</p>
+<p ALIGN="CENTER">TM_j = ALAM * TU_j-1 + (1-ALAM) * TU_j (1)</p>
+<p align="left">where ALAM is the weight factor and TU_j the average temperature
+(in the radial direction and along the &quot;z&quot; axis) of the mill packs
+metal at the separation surface between the sectors &quot;j&quot; and
+&quot;j+1&quot; (see fig. 1).</p>
+<p ALIGN="CENTER"><img SRC="images/Image773.gif" width="381" height="303"></p>
+<p ALIGN="CENTER">fig.1 Metal temperatures in the cylindrical heater sectors</p>
+<p align="left">Moreover, the average temperature Tf_j of the fluid (air or flue
+gas) in the sector &quot;j&quot; is given by the relation:</p>
+<p ALIGN="CENTER">Tf_j = ALAM * Ti_j + (1-ALAM) * Tu_j (2)</p>
+<p align="left">where ALAM is the same weight factor used for the metal average
+temperature, while Ti_j and Tu_j are the inlet and outlet fluid temperatures of
+the sector &quot;j&quot;, respectively.</p>
+<p align="left">Further hypotheses of the model are:</p>
+<p ALIGN="left">- negligible mass accumulation in the flue gas as well as in the
+air;</p>
+<p ALIGN="left">- uniform flue gas flow rate through all the sectors crossed by
+the flue gas;</p>
+<p ALIGN="left">- uniform air flow rate through all the sectors crossed by the
+air;</p>
+<p ALIGN="left">- uniform flue gas inlet specific enthalpy over the whole
+section of each sector crossed by the flue gas;</p>
+<p ALIGN="left">- uniform air inlet specific enthalpy over the whole section of
+each sector crossed by the air;</p>
+<p ALIGN="left">- negligible kinetic and gravitational terms in the energy
+conservation equations both of the flue gas and of the air.</p>
+<p align="left">The following equations have been used:</p>
+<p ALIGN="left">1) conservation equation of flue gas mass;</p>
+<p ALIGN="left">2) conservation equation of flue gas energy;</p>
+<p ALIGN="left">3) conservation equation of air mass;</p>
+<p ALIGN="left">4) conservation equation of air energy;</p>
+<p ALIGN="left">5) conservation equation of energy in the mill packs metal.</p>
+<p align="left">The first four of the equations above are algebraical, whereas
+the last one is differential (being associated to a state variable).</p>
+<p align="left">With the introduction of the weighted averages already cited,
+the approximation degree of the solutions determined by the module is depending
+both on the weight factor ALAM value and on the sectors (angular and axial)
+dimensions (see: Theory - GENERAL PRINCIPLES - par. I.1.8.4 &quot;The problem of
+the averages definition in the lumped parameters conservation equations&quot;).</p>
+<p align="left">On the basis of the acquired experience in developing the
+Brindisi Sud plant model, a subdivision of the heater into at least four angular
+sectors and into at least three axial cells is suggested, while a weight factor
+ALAM equal to 0.4 is advised.</p>
+<p ALIGN="left">Finally, we note that, since an axial nodalization has not been
+foreseen in the physical-mathematical model, a single application of the module
+represents a single axial cell. Therefore, generally, to obtain &quot;m&quot;
+axial cells &quot;m&quot; LJUN modules must be connected in series.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LJUN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<blockquote>
+  <blockquote>
+    <p ALIGN="center"><img SRC="images/Image774.gif" width="374" height="403"></p>
+    <p ALIGN="JUSTIFY">&nbsp;</p>
+  </blockquote>
+</blockquote>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WFLJ</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flue gas total flow rate
+      crossing the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WALJ</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">air total flow rate crossing
+      the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TG_1, ..., TG_n/2</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">inlet flue gas temperature in
+      the sector 1, 2, ..., n/2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TI_n/2+1 ... TI_n</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">inlet air temperature in the
+      sector n/2+1, n/2+2, ..., n</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMLJ</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">rotation velocity of the
+      metal cylinder containing the mill packs</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CSCA</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">correction factor of the
+      thermal exchange coefficient between the fluid crossing the heater and the
+      mill packs of the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TM_1, ..., TM_n</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">metal average temperature of
+      the mill packs contained in the sector 1, 2,..., n (see above)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TU_1, ..., TU_n</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">metal average temperature (in
+      the radial and axial directions) of the mill packs at the separation
+      surface between two subsequent sectors (see above)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TF_1, ..., TF_n/2</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">outlet flue gas temperature
+      of the sector 1, 2, ..., n/2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TA_n/2+1 ... TA_n</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">outlet air temperature of the
+      sector n/2+1, n/2+2, ..., n</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LJUN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to initial values of LJUN module input and output
+variables (meanings defined above), user must assign the following data set to
+complete the module input on the file F14:</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg/K]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CM</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">specific heat of the heater
+      metal</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ROM</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">density of the heater metal</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VMET</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">volume of the heater metal</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ASCA</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">area of the heater total
+      thermal exchange surface</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RALJ</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">radius of the metal cylinder
+      containing the mill packs</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALAM</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">weight factor used to define
+      both the metal average temperature of the mill packs and the average
+      temperature of the fluid (flue gas or air) crossing the different sectors
+      (see above; usual value ALAM = 0.4)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALIB</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">area of the fluid (air and
+      flue gas) total cross section in the heater</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LJUN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the LJUN module variables on the file F14, no
+particular prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LJUN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">No user subprograms are present in the LJUN module.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LJUN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The equations forming the LJUN module mathematical model, give
+rise to the following set of residuals (characterized by the reported
+normalization factors):</p>
+<p ALIGN="CENTER"><img SRC="images/Image775.gif" WIDTH="596" HEIGHT="40"></p>
+<p ALIGN="CENTER"><img SRC="images/Image776.gif" width="198" height="18"></p>
+<p ALIGN="RIGHT">(normalization factor = T0)</p>
+<p ALIGN="CENTER">RNI(n+1) = - TM_1 + ALAM*TU_n + (1-ALAM)*TU_1</p>
+<p ALIGN="RIGHT">(normalization factor = T0)</p>
+<p ALIGN="CENTER"><img SRC="images/Image777.gif" WIDTH="620" HEIGHT="40"></p>
+<p ALIGN="CENTER"><img SRC="images/Image778.gif" WIDTH="220" HEIGHT="40"></p>
+<p ALIGN="RIGHT">(normalization factor = W0*H0)</p>
+<p>j = 2, ..., n/2</p>
+<p ALIGN="CENTER"><img SRC="images/Image779.gif" WIDTH="512" HEIGHT="40"></p>
+<p ALIGN="CENTER">*(ALAM*TG_j + (1-ALAM)*TF_j - TM_j)</p>
+<p ALIGN="RIGHT">(normalization factor = T0)</p>
+<p ALIGN="CENTER">RNI(n+j) = - TM_j + ALAM*TU_j-1 + (1-ALAM)*TU_j</p>
+<p ALIGN="RIGHT">(normalization factor = T0)</p>
+<p ALIGN="CENTER"><img SRC="images/Image780.gif" WIDTH="606" HEIGHT="40"></p>
+<p ALIGN="CENTER"><img SRC="images/Image781.gif" WIDTH="218" HEIGHT="40"></p>
+<p ALIGN="RIGHT">(normalization factor = W0*H0)</p>
+<p>j = n/2+1,..., n</p>
+<p ALIGN="CENTER"><img SRC="images/Image782.gif" WIDTH="512" HEIGHT="40"></p>
+<p ALIGN="CENTER">*(ALAM*TI_j + (1-ALAM)*TA_j - TM_j)</p>
+<p ALIGN="RIGHT">(normalization factor = T0)</p>
+<p ALIGN="CENTER">RNI(n+j) = - TM_j + ALAM*TU_j-1 + (1-ALAM)*TU_j</p>
+<p ALIGN="RIGHT">(normalization factor = T0)</p>
+<p ALIGN="CENTER"><img SRC="images/Image783.gif" WIDTH="598" HEIGHT="40"></p>
+<p ALIGN="CENTER"><img SRC="images/Image784.gif" WIDTH="221" HEIGHT="40"></p>
+<p ALIGN="RIGHT">(normalization factor = W0*H0)</p>
+<p ALIGN="CENTER"><img SRC="images/Image785.gif" width="218" height="49"></p>
+<p ALIGN="RIGHT">(normalization factor = T0)</p>
+<p ALIGN="CENTER"><img SRC="images/Image786.gif" width="253" height="49"></p>
+<p ALIGN="RIGHT">(normalization factor = T0)</p>
+<p align="left">where: &quot;n&quot; is the number of sectors the heater has
+been subdivided into;</p>
+<p ALIGN="left">GAM-j (j = 1, 2,..., n) is the thermal exchange coefficient
+between fluid and metal in the sector &quot;j&quot;;</p>
+<p ALIGN="left">HF_j and HFI_j (j = 1, 2,..., n/2) are respectively the flue gas
+output and input enthalpies in the sector &quot;j&quot;;</p>
+<p ALIGN="left">HA_j and HAI_j (j = n/2+1, n/2+2,..., n) are respectively the
+air output and input enthalpies in the sector &quot;j&quot;;</p>
+<p align="left">while the other variables have the physical meaning already
+defined above.</p>
+<p ALIGN="left">Further explanations are given in the manual section: &quot;LEGOCAD
+- Modelling Library for the Simulation of Power Generation Plants - Theory -
+Modules Description&quot;.</p>
+<p ALIGN="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LJUN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<p align="left">SUBROUTINE LJUNI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+<p align="left">$ NOMBL1,NOMBL2,IER,CNXYU,TOL)</p>
+<p align="left">SUBROUTINE LJUNC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RN,</p>
+<p align="left">$ IBLOC1,IBLOC2)</p>
+<p align="left">SUBROUTINE GAMMA(TMM,T,TF,TA,WF,WA,ALIB,DIAI,NCEL,GAM,</p>
+<p align="left">$ DGADTM,DGADT,DGADTF,DGADTA,DGADWF,DGADWA)</p>
+<p align="left">SUBROUTINE LJUNI3(IFO,IOB,DEBL)</p>
+<p align="left">SUBROUTINE LJUNI4(IOB,MOD)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE LJUN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p ALIGN="left">Test case LJUN_T is provided, described in a separate document.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

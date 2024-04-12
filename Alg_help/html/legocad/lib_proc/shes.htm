@@ -1,0 +1,195 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE SHES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SHES_summ"></A>MODULE SHES&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SHES_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SHES_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SHES_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SHES_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SHES_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SHES_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SHES_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SHES_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SHES_A"></A>MODULE SHES&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">SIMPLIFIED HEAT EXCHANGER SHELL SIDE MODEL</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The SHES module simulates the perfect mixing of "n" water flow rates (at liquid or steam state) flowing into an heat exchanger shell. It determines the enthalpy and pressure temporal evolution of fluid flowing through the heat exchanger as well as the temperature of the metallic shell wall.</P>
+<P>In the physic-mathematical model the following simplifying hypotheses are adopted: </P>
+<P ALIGN="JUSTIFY">- it is admitted that fluid back-flow can occur inside one or more heat exchanger branches (both at inlet and outlet)</P>
+<P ALIGN="JUSTIFY">- heat exchanger shell metallic wall is able to exchange heat with the external environment</P>
+<P ALIGN="JUSTIFY">- only one temperature value identifies the thermal condition of the metallic walls</P>
+<P ALIGN="JUSTIFY">the heat transfer coefficient between shell side fluid and tubes’ surface is admitted as a function of the fluid temperature and strenght</P>
+<P ALIGN="JUSTIFY">the heat transfer coefficient shell wall – external environment is a constant value provided by user</P>
+<P ALIGN="JUSTIFY">if the fluid state is biphase (mixture liquid and steam) the extracted fluid enthalpy is the saturated liquid enthalpy if the liquid volume is greater then an assigned fraction of the shell side volume. If the liquid volume is lower then the assigned fraction of the shell side volume, the extracted fluid enthalpy has an interpolation value among saturated liquid enthalpy and saturated steam enthalpy.</P>
+<P>&nbsp;</P>
+<P>The used equations are: </P>
+<P ALIGN="JUSTIFY">1) shell side fluid mass conservation </P>
+<P ALIGN="JUSTIFY">2) shell side fluid energy conservation</P>
+<P ALIGN="JUSTIFY">3) shell metal wall energy conservation.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SHES_B"></A>MODULE SHES&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Ne = number of heat exchanger shell side inlet branches (max.10)</P>
+<P ALIGN="JUSTIFY">Nu = number of heat exchanger shell side outlet branches (max.10)</P>
+<P ALIGN="JUSTIFY">Nz = number of heat transfer zone between shell side water and tubes (max.9)</P>
+<P ALIGN="JUSTIFY">i = 1, 2, ... Ne</P>
+<P ALIGN="JUSTIFY">j = 1, 2, ... Nu</P>
+<P ALIGN="JUSTIFY">n = 1, 2, ... Nz</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1265.gif" WIDTH=420 HEIGHT=263></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PWSS&#9;shell side water pressure</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HWSS&#9;shell side water enthalpy</P>
+<P ALIGN="JUSTIFY">[K]&#9;TAMS&#9;&#9;shell metal average temperature</P>
+<P ALIGN="JUSTIFY">[K]&#9;TWSS&#9;&#9;shell side water temperature</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HAWE&#9;extracted water enthalpy</P>
+<P ALIGN="JUSTIFY">[w m<SUP>-2</SUP>K<SUP>-1</SUP>]&#9;GST_n&#9;(n = 1, 2,..., Nz) heat transfer coefficient in the n-th zone</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WE_i&#9;&#9; (i = 1, 2,..., Ne) flow rate of fluid flowing into the heat exchanger coming through the i-th branch</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HE_i&#9;&#9; (i = 1, 2,..., Ne) enthalpy of fluid flowing into the heat exchanger coming through the i-th branch</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WU_j&#9;&#9; (j = 1, 2,..., Ne) flow rate of fluid flowing out the heat exchanger through the j-th branch</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HU_j&#9;&#9; (j = 1, 2,..., Ne) enthalpy of fluid flowing out the heat exchanger through the j-th branch (in case of back-flow)</P>
+<P ALIGN="JUSTIFY">[K]&#9;TMI_n&#9;&#9; (n = 1, 2,..., Nz) tubes metal average temperature in the n-th zone</P>
+<P ALIGN="JUSTIFY">[-]&#9;CORR&#9;&#9;thermal exchange water-tubes correction factor</P>
+<P ALIGN="JUSTIFY">[K]&#9;TEST&#9;&#9;external environment temperature</P>
+<P ALIGN="JUSTIFY">[w m<SUP>-2</SUP>K<SUP>-1</SUP>]&#9;GEST&#9;shell- external environment heat transfer coefficient</P>
+<P ALIGN="JUSTIFY">[-]&#9;EHIF&#9;&#9;extracted water enthalpy interpolation factor</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_SHES_C"></A>MODULE SHES&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to initial values of input and output variables (meaning defined above) user must assign the following data: </P>
+<P ALIGN="JUSTIFY">[ ]&#9;I.BRN.N.&#9;number of heat exchanger inlet branches (max.10)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;O.BRN.N.&#9;number of heat exchanger outlet branches (max.10)</P>
+<P ALIGN="JUSTIFY">[m]&#9;SH.O.D.&#9;shell outsider diameter</P>
+<P ALIGN="JUSTIFY">[m]&#9;SH.THICK&#9;shell thickness</P>
+<P ALIGN="JUSTIFY">[m]&#9;SH.LENGH&#9;shell length</P>
+<P ALIGN="JUSTIFY">[kg/m³]&#9;SH.M.RO.&#9;shell metal density</P>
+<P ALIGN="JUSTIFY">[J/k*kg]&#9;CP MET.&#9;shell metal specific heat</P>
+<P ALIGN="JUSTIFY">[W/m*k]&#9;COND MET.&#9;shell metal thermal conductivity</P>
+<P ALIGN="JUSTIFY">[-]&#9;TUB.NUMB&#9;tubes number</P>
+<P ALIGN="JUSTIFY">[m]&#9;TUB.O.D.&#9;tubes outsider diameter</P>
+<P ALIGN="JUSTIFY">[m]&#9;TUB.THIC&#9;tubes thickness</P>
+<P ALIGN="JUSTIFY">[m]&#9;TUB.LENG&#9;tubes length</P>
+<P ALIGN="JUSTIFY">[m²]&#9;TUB.SURF&#9;tubes shell side heat transfer surface</P>
+<P ALIGN="JUSTIFY">[-]&#9;TUB. H/V&#9;tubes disposition index (horizontal/vertical) (0= horizontal, any else = vertical)</P>
+<P ALIGN="JUSTIFY">[-]&#9;H.E.Z.N.&#9;tubes heat exchange zone number (max. 9)</P>
+<P ALIGN="JUSTIFY">[-]&#9;U.E.H.C&#9;user heat transfer correlation index</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SHES_D"></A>MODULE SHES&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the SHES module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SHES_E"></A>MODULE SHES&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To assign user heat transfer correlation it need a user subprogram of which the declarative statement is :</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE SHESGAMUT(P, H, S, T, RO, Y, TMI, EQD, VERT, W, FCSA, TUBZSURF, LTUB, DETB, UEHC, GAMMA,VOL, SHIVWT)</P>
+<P>&nbsp;&nbsp;</P>
+<P>Input parameters:&#9;P, H, S, T, RO, Y, TMI, EQD, VERT, W, FCSA, TUBZSURF, LTUB, DETB, UEHC, VOL, SHIVWT</P>
+<P>&nbsp;</P>
+<P>output parameters:&#9;GAMMA</P>
+<P>&nbsp;&nbsp;</P>
+<P>[Pa]&#9;&#9;P&#9;&#9;water shell side pressure</P>
+<P>[J/kg]&#9;&#9;H&#9;&#9;water shell side enthalpy</P>
+<P>[J kg<SUP>-1</SUP>K<SUP>-1</SUP>]&#9;S&#9;&#9;water shell side entropy</P>
+<P>[K]&#9;&#9;T&#9;&#9;water shell side temperature</P>
+<P>[kg/m<SUP>3</SUP>]&#9;RO&#9;&#9;water shell side density</P>
+<P>[-]&#9;&#9;Y&#9;&#9;shell side water steam ratio</P>
+<P>[K]&#9;&#9;TMI&#9;&#9;tubes shell side wall temperature&#9;</P>
+<P>[m]&#9;&#9;EQD&#9;&#9;equivalent diameter</P>
+<P>[-]&#9;&#9;VERT&#9;&#9;tubes disposition index (horizontal/vertical)</P>
+<P>[kg/s]&#9;&#9;W&#9;&#9;mass flow rate entering the heat exchanger shell side</P>
+<P>[m<SUP>2</SUP>]&#9;&#9;FCSA&#9;&#9;shell side flow cross sectional area</P>
+<P>[m<SUP>2</SUP>]&#9;&#9;TUBZSURF&#9;tubes’ heat transfer surface per zone</P>
+<P>[m]&#9;&#9;LTUB&#9;&#9;tubes’ length</P>
+<P>[m]&#9;&#9;DETB&#9;&#9;tubes’ outsider diameter</P>
+<P>[-]&#9;&#9;UEHC&#9;&#9;user heat transfer correlation index</P>
+<P>[m<SUP>3</SUP>]&#9;&#9;VOL&#9;&#9;shell side liquid volume</P>
+<P>[m<SUP>3</SUP>]&#9;&#9;SHIVWT&#9;shell inside volume without tubes’ volume</P>
+<P>[W m<SUP>-2</SUP>K<SUP>-1</SUP>]&#9;GAMMA&#9;heat transfer coefficient</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SHES_F"></A>MODULE SHES&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module mathematical model consists of the equations which give rise to the following residuals:</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1266.gif" WIDTH=204 HEIGHT=46></P></DIR>
+</DIR>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">- under stationary condition</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1267.gif" WIDTH=605 HEIGHT=46></P></DIR>
+</DIR>
+
+<FONT FACE="Arial"><P>(normalization factor = W0)</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1268.gif" WIDTH=156 HEIGHT=41></P></DIR>
+</DIR>
+
+<FONT FACE="Arial"><P>(normalization factor = W0*H0)</P>
+<P>(normalization factor = T0)</P>
+<P>&nbsp;</P>
+<P>where:</P>
+<I><P>Qshi</I> is the energy transferred from water to shell wall;</P>
+<I><P>Qshe</I> is the energy transferred from the shell wall to the external environment;</P>
+<I><P>Qwt</I> is the energy transferred from water to the tubes’ wall.</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SHES_G"></A>MODULE SHES&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</I></FONT><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE SHESI3(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE SHESI4(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE SHESI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ IBL1, IBL2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE SHESC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ IBL1, IBL2)</P>
+<P>SUBROUTINE SHESJAC(AJAC, MX5, IXYU, XYU, IPD, DATI, RN, NSTATI,</P>
+<P>$ NUSCIT, NINGRE, EPS, EPSLIM, RESIDUI)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE SHES(IFUN, IXYU, XYU, IPD, DATI, RNI)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE SHESHTC(P, H, S, T, RO, TIT, TP, D, VERT, W, SEZ, LTUB, DETB,</P>
+<P>$&#9;&#9;&#9;UEHC, HT, VWMASS, SHIVWT)</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SHES_H"></A>MODULE SHES&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the manual section dedicated to the examples developed under the abbreviations: </P>
+<P ALIGN="CENTER">" … not available …"</P></FONT></BODY>
+</HTML>

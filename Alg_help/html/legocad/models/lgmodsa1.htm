@@ -1,0 +1,176 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>lgmodsa1</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample1_a"></A>Example 1 - manifold simulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The model is composed of four components: a manifold and three valves. The dynamical behaviour pipes between the valves and the manifold will be simulated, according to the "lumped parameters" criterion, by the manifold mathematical model.</P>
+<P ALIGN="JUSTIFY">To take in account the mass and energy storage effects in the fluid contained inside the manifold (and the adducting and deducting pipes, which are simulated with the manifold) a dynamical model has to be used. This choice also allows that all the three valves may be contemporaneously closed.</P>
+<P ALIGN="JUSTIFY">So the LEGO library module choosen for the manifold must be the COLT module, whose model also takes into account the energy storage in the metal wall and the thermal exchange between the metal wall and the environment.</P>
+<P ALIGN="JUSTIFY">For the COLT module, the number of inlet and outlet pipes must be selected by the model maker when a new block (instance of COLT module) is added to the model. The COLT module will so be instanciated selecting two inlet branches and one outlet branches.</P>
+<P ALIGN="JUSTIFY">The following list is the variables list of the COLL (manifold) block:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P><DIR>
+
+<P>COLTCOLL BL.-COLL- **** MODULO COLT - manifold</P>
+<P>HCOLCOLL --UA-- FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>PCOLCOLL --UA-- FLUID PRESSURE IN THE MANIFOLD</P>
+<P>TCOLCOLL --UA-- METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>WE_1COLL --IN-- FLOW RATE IN THE ENTERING BRANCH N. 1</P>
+<P>HE_1COLL --IN-- ENTHALPY IN THE ENTERING BRANCH N. 1</P>
+<P>WE_2COLL --IN-- FLOW RATE IN THE ENTERING BRANCH N. 2</P>
+<P>HE_2COLL --IN-- ENTHALPY IN THE ENTERING BRANCH N. 2</P>
+<P>WU_1COLL --IN-- FLOW RATE IN THE COMING OUT BRANCH N. 1</P>
+<P>HU_1COLL --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>TESTCOLL --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTCOLL --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>&nbsp;</P></DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample1_b"></A>Example 1 - valves simulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The LEGO library module which simulates a valve is the VALV module. So this module will be instanciated three times, one for each valve. When a new module is added instanciating the VALV module, the model maker has to choose the output variable, between fluid flow rate, inlet pressure and outlet pressure.</P>
+<P ALIGN="JUSTIFY">The input variables for the COLT module are the incoming and outcoming fluid flow rates throw the inlet and outlet branches. So for all the three instances of the VALV module, the output variable selected must be the fluid flow rate.</P>
+<P ALIGN="JUSTIFY">The following lists are the variables list of the VIN1 (inlet valve 1), VIN2 (inlet valve 2) and VOUT (outlet valve) blocks:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P><DIR>
+
+<P>VALVVIN1 BL.-VIN1- **** MODULO VALV - inlet valve 1</P>
+<P>WVALVIN1 --UA-- FLUID FLOW RATE IN THE VALVE</P>
+<P>PIVAVIN1 --IN-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>PUVAVIN1 --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HVALVIN1 --IN-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>ALZAVIN1 --IN-- VALVE LIFT</P>
+<P>&nbsp;</P>
+<P>VALVVIN2 BL.-VIN2- **** MODULO VALV - inlet valve 2</P>
+<P>WVALVIN2 --UA-- FLUID FLOW RATE IN THE VALVE</P>
+<P>PIVAVIN2 --IN-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>PUVAVIN2 --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HVALVIN2 --IN-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>ALZAVIN2 --IN-- VALVE LIFT</P>
+<P>&nbsp;</P>
+<P>VALVVOUT BL.-VOUT- **** MODULO VALV - outlet valve</P>
+<P>WVALVOUT --UA-- FLUID FLOW RATE IN THE VALVE</P>
+<P>PIVAVOUT --IN-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>PUVAVOUT --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HVALVOUT --IN-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>ALZAVOUT --IN-- VALVE LIFT</P></DIR>
+
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The fluid flow rate through the manifold inlet and outlet branches must be connected with the fluid flow rate throw the related valve. The outlet pressure of the two inlet valves and the inlet pressure of the otulet valve has to be connected to the pressure inside the manifold. At last, the entalpy of the fluid at the inlet of the outlet valve has to be connected to the entalpy of the fluid inside the manifold.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample1_c"></A>Example 1 - fluid inlet entalpy</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">If one looks the variables list of the COLL block, he can see that it must get the values of the entalpy of the water (or steam) coming from both the inlet branches. Also the VIN1 and VIN2 blocks must read these value (to evaluate the fluid density), but they don't give the values as outputs to be connected to the following blocks of the model.</P>
+<P ALIGN="JUSTIFY">This is not a problem: only it means that both the manifold and the valve must get the entalpy value from the same source. For the steady state computation, this is very easy: the model maker only has to impose the same value to two variables. But during the simulation of a transient condition, every variation of one of the two variables musty be <B>exactly</B> replied on the other variable, to ensure the model coherency (otherwise the results of the simulation will be distorted).</P>
+<P ALIGN="JUSTIFY">This is neither easy nor convenient, so it is better to add two auxiliary blocks (using DISN or NODO modules, whose effect is to copy the value of an input variable to one or more outputs). The DISN module is required when the same value has to be read by more variables belonging to the same module. In this case each value (the entalpies of the fluid in branches 1 and 2) has to be read by variables belonging to different modules, so the NODO module will be used.</P>
+<P ALIGN="JUSTIFY">When a new block is added instanciating the NODO module, the number of input values to be added and the initial character of the variables names has to be choosen. As in this case the NODO module is used to copy a value (and not to sum different values) only one input will be selected; as the variables to be copied are entalpies, the "H" initial will be choosen (all the variables related to entalpies must have the "H" initial inside LEGOCAD System).</P>
+<P ALIGN="JUSTIFY">The following lists are the variables list of the HIN1 (inlet branch 1 entalpy) and HIN2 (inlet branch 2 entalpy) blocks:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P><DIR>
+
+<P>NODOHIN1 BL.-HIN1- **** MODULO NODO - entalpy in branch 1</P>
+<P>HSOMHIN1 --UA-- LINEAR RELATION: OUTPUT VARIABLE</P>
+<P>HI_1HIN1 --IN-- LINEAR RELATION: INPUT N. 1</P>
+<P>&nbsp;</P>
+<P>NODOHIN2 BL.-HIN2- **** MODULO NODO - entalpy in branch 2</P>
+<P>HSOMHIN2 --UA-- LINEAR RELATION: OUTPUT VARIABLE</P>
+<P>HI_1HIN2 --IN-- LINEAR RELATION: INPUT N. 1</P></DIR>
+
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The output value of each of these block will be connected both to the fluid entalpy in the related branch valve and to the fluid entalpy in the related incoming branch of the manifold.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample1_d"></A>Example 1 - topological connections scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">This scheme shows the topology of the connections between the variables of the six listed modules:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image17.gif" WIDTH=622 HEIGHT=383></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample1_e"></A>Example 1 - topological diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following picture represents the topological diagram of the model:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image18.gif" WIDTH=505 HEIGHT=212></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample1_f"></A>Example 1 - resulting topological file</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In order to complete the model topology building, the last action to be performed is to modify the descriptions of the most important variables to allow the user more easily understand the variable meaning inside the plant.</P>
+<P ALIGN="JUSTIFY">Obviously only outputs and not-connected inputs descriptions has to be modified, as connected inputs are no more included in model variables (they have been substituted with the related connected output).</P>
+<P ALIGN="JUSTIFY">The resulting topological file (F01.DAT) of the model is the following one:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P><DIR>
+
+<P>****</P>
+<P>VALV BLOCCO (VIN1) - inlet valve 1</P>
+<P>VALV BLOCCO (VIN2) - inlet valve 2</P>
+<P>VALV BLOCCO (VOUT) - outlet valve</P>
+<P>COLT BLOCCO (COLL) - manifold</P>
+<P>NODO BLOCCO (HIN1) - entalpy in branch 1</P>
+<P>NODO BLOCCO (HIN2) - entalpy in branch 2</P>
+<P>****</P>
+<P>EXAMPLE1</P>
+<P>****</P>
+<P>VALVVIN1 BL.-VIN1- **** MODULO VALV - inlet valve 1</P>
+<P>WVALVIN1 --UA-- FLUID FLOW RATE TROUGH INLET VALVE 1</P>
+<P>PIVAVIN1 --IN-- PRESSURE UPSTREAM INLET VALVE 1</P>
+<P>PCOLCOLL --IN-- #PUVAVIN1#....................&lt;===COLTCOLL BL.-COLL-</P>
+<P>HSOMHIN1 --IN-- #HVALVIN1#....................&lt;===NODOHIN1 BL.-HIN1-</P>
+<P>ALZAVIN1 --IN-- INLET VALVE 1 STEM POSITION</P>
+<P>****</P>
+<P>****</P>
+<P>VALVVIN2 BL.-VIN2- **** MODULO VALV - inlet valve 2</P>
+<P>WVALVIN2 --UA-- FLUID FLOW RATE TROUGH INLET VALVE 2</P>
+<P>PIVAVIN2 --IN-- PRESSURE UPSTREAM INLET VALVE 2</P>
+<P>PCOLCOLL --IN-- #PUVAVIN2#....................&lt;===COLTCOLL BL.-COLL-</P>
+<P>HSOMHIN2 --IN-- #HVALVIN2#....................&lt;===NODOHIN2 BL.-HIN2-</P>
+<P>ALZAVIN2 --IN-- INLET VALVE 2 STEM POSITION</P>
+<P>****</P>
+<P>****</P>
+<P>VALVVOUT BL.-VOUT- **** MODULO VALV - outlet valve</P>
+<P>WVALVOUT --UA-- FLUID FLOW RATE TROUGH OUTLET VALVE</P>
+<P>PCOLCOLL --IN-- #PIVAVOUT#....................&lt;===COLTCOLL BL.-COLL-</P>
+<P>PUVAVOUT --IN-- PRESSURE DOWNSTREAM OUTLET VALVE</P>
+<P>HCOLCOLL --IN-- #HVALVOUT#....................&lt;===COLTCOLL BL.-COLL-</P>
+<P>ALZAVOUT --IN-- OUTLET VALVE STEM POSITION</P>
+<P>****</P>
+<P>****</P>
+<P>COLTCOLL BL.-COLL- **** MODULO COLT - manifold</P>
+<P>HCOLCOLL --UA-- FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>PCOLCOLL --UA-- FLUID PRESSURE IN THE MANIFOLD</P>
+<P>TCOLCOLL --UA-- METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>WVALVIN1 --IN-- #WE_1COLL#....................&lt;===VALVVIN1 BL.-VIN1-</P>
+<P>HSOMHIN1 --IN-- #HE_1COLL#....................&lt;===NODOHIN1 BL.-HIN1-</P>
+<P>WVALVIN2 --IN-- #WE_2COLL#....................&lt;===VALVVIN2 BL.-VIN2-</P>
+<P>HSOMHIN2 --IN-- #HE_2COLL#....................&lt;===NODOHIN2 BL.-HIN2-</P>
+<P>WVALVOUT --IN-- #WU_1COLL#....................&lt;===VALVVOUT BL.-VOUT-</P>
+<P>HU_1COLL --IN-- FLUID ENTHALPY IN THE OUTLET BRANCH (W&lt;0)</P>
+<P>TESTCOLL --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTCOLL --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>****</P>
+<P>****</P>
+<P>NODOHIN1 BL.-HIN1- **** MODULO NODO - entalpy in branch 1</P>
+<P>HSOMHIN1 --UA-- FLUID ENTHALPY IN THE INLET BRANCH 1</P>
+<P>HI_1HIN1 --IN-- FLUID ENTHALPY IN THE INLET BRANCH 1</P>
+<P>****</P>
+<P>****</P>
+<P>NODOHIN2 BL.-HIN2- **** MODULO NODO - entalpy in branch 2</P>
+<P>HSOMHIN2 --UA-- FLUID ENTHALPY IN THE INLET BRANCH 2</P>
+<P>HI_1HIN2 --IN-- FLUID ENTHALPY IN THE INLET BRANCH 2</P>
+<P>****</P>
+<P>**** &gt;&gt;&gt;&gt;&gt;&gt;INGRESSI DI TUTTI I MODULI&lt;&lt;&lt;&lt;&lt;&lt;</P>
+<P>PIVAVIN1 --IN-- PRESSURE UPSTREAM INLET VALVE 1</P>
+<P>ALZAVIN1 --IN-- INLET VALVE 1 STEM POSITION</P>
+<P>PIVAVIN2 --IN-- PRESSURE UPSTREAM INLET VALVE 2</P>
+<P>ALZAVIN2 --IN-- INLET VALVE 2 STEM POSITION</P>
+<P>PUVAVOUT --IN-- PRESSURE DOWNSTREAM OUTLET VALVE</P>
+<P>ALZAVOUT --IN-- OUTLET VALVE STEM POSITION</P>
+<P>HU_1COLL --IN-- FLUID ENTHALPY IN THE OUTLET BRANCH (W&lt;0)</P>
+<P>TESTCOLL --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTCOLL --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>HI_1HIN1 --IN-- FLUID ENTHALPY IN THE INLET BRANCH 1</P>
+<P>HI_1HIN2 --IN-- FLUID ENTHALPY IN THE INLET BRANCH 2</P>
+<P>****</P>
+<P>PUVAVIN1 --CO-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HVALVIN1 --CO-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>PUVAVIN2 --CO-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HVALVIN2 --CO-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>PIVAVOUT --CO-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>HVALVOUT --CO-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>WE_1COLL --CO-- FLOW RATE IN THE ENTERING BRANCH N. 1</P>
+<P>HE_1COLL --CO-- ENTHALPY IN THE ENTERING BRANCH N. 1</P>
+<P>WE_2COLL --CO-- FLOW RATE IN THE ENTERING BRANCH N. 2</P>
+<P>HE_2COLL --CO-- ENTHALPY IN THE ENTERING BRANCH N. 2</P>
+<P>WU_1COLL --CO-- FLOW RATE IN THE COMING OUT BRANCH N. 1</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</FONT></BODY>
+</HTML>

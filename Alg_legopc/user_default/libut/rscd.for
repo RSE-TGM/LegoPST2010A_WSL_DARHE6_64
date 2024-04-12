@@ -1,0 +1,1035 @@
+C**********************************************************************
+C modulo rscd.f
+C tipo 
+C release 5.2
+C data 4/12/95
+C reserver @(#)rscd.f	5.2
+C**********************************************************************
+C
+      SUBROUTINE RSCDI3(IFO,IOB,DEBL)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/RSCD01/IBLOC
+      COMMON/RSCD02/NCEL,NPAR
+      CHARACTER*80 DEBL
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MOD
+      CHARACTER*4 NOMAPP
+      DATA MOD/'RSCD'/
+C
+      CALL RSCDI4(IOB,MOD)
+C
+      WRITE(IFO,2999)IBLOC,IOB,MOD,DEBL
+ 2999 FORMAT(A,2X,'BL.-',A4,'- **** MODULO ',A4,' - ',A)
+C
+      WRITE(NOMAPP,'(A1)')IBLOC
+      WP=0.
+      IF(NOMAPP(1:1).EQ.'+')WP=1.
+      IF(NOMAPP(1:1).EQ.'-')WP=2.
+C
+      WRITE(IFO,3001)IOB
+ 3001 FORMAT('LIVR',A4,2X,
+     $'--US-- CONDENSED WATER LEVEL IN THE HEATER')
+      WRITE(IFO,3002)IOB
+ 3002 FORMAT('PRIS',A4,2X,
+     $'--US-- MEAN PRESSURE IN THE HEATER')
+      WRITE(IFO,3003)IOB
+ 3003 FORMAT('HLUR',A4,2X,
+     $'--US-- ENTHALPY OF THE CONDENSATED AT HEATER OUTLET')
+      WRITE(IFO,3004)IOB
+ 3004 FORMAT('HALU',A4,2X,
+     $'--US-- FEED WATER ENTHALPY AT HEATER OUTLET')
+      WRITE(IFO,3005)IOB
+ 3005 FORMAT('TMMD',A4,2X,
+     $'--US-- MEAN METAL PIPES TEMP. IN THE DEHEATING ZONE OF THE H.')
+      WRITE(IFO,3006)IOB
+ 3006 FORMAT('HALC',A4,2X,
+     $'--US-- FEED WATER ENTHALPY AT THE CONDENSING ZONE OUTLET')
+      WRITE(IFO,3007)IOB
+ 3007 FORMAT('TMMC',A4,2X,
+     $'--US-- MEAN METAL PIPES TEMP. IN THE CONDENSING ZONE OF THE H.')
+      WRITE(IFO,3008)IOB
+ 3008 FORMAT('HALF',A4,2X,
+     $'--US-- FEED WATER ENTHALPY AT THE SUBCOOLING ZONE OUTLET')
+      WRITE(IFO,3009)IOB
+ 3009 FORMAT('TMMF',A4,2X,
+     $'--US-- MEAN TEMP. OF PIPE IN THE SUB COOLING ZONE OF THE H.')
+C
+C
+C
+      IF(WP.EQ.2.)WRITE(IFO,5010)IOB
+      IF(WP.EQ.1.)WRITE(IFO,4010)IOB
+      IF(WP.EQ.0.)WRITE(IFO,3010)IOB
+ 3010 FORMAT('WALR',A4,2X,
+     $'--UA-- FEED WATER FLOW RATE INTO THE HEATER')
+ 4010 FORMAT('PALI',A4,2X,
+     $'--UA-- FEED WATER PRESSURE AT THE HEATER INLET')
+ 5010 FORMAT('PALU',A4,2X,
+     $'--UA-- FEED WATER PRESSURE AT THE HEATER OUTLET')
+C
+C
+      IF(WP.EQ.2..OR.WP.EQ.0.)WRITE(IFO,3011)IOB
+      IF(WP.EQ.1.)WRITE(IFO,3012)IOB
+C
+ 3011 FORMAT('PALI',A4,2X,
+     $'--IN-- FEED WATER PRESSURE AT THE HEATER INLET')
+ 3012 FORMAT('PALU',A4,2X,
+     $'--IN-- FEED WATER PRESSURE AT THE HEATER OUTLET')
+C
+      IF(WP.EQ.1..OR.WP.EQ.2.)WRITE(IFO,4012)IOB
+      IF(WP.EQ.0.)WRITE(IFO,3012)IOB
+C
+ 4012 FORMAT('WALR',A4,2X,
+     $'--IN-- FEED WATER FLOW RATE THROUGH THE HEATER')
+C
+      WRITE(IFO,3013)IOB
+ 3013 FORMAT('HALI',A4,2X,
+     $'--IN-- FEED WATER ENTHALPY AT THE HEATER INLET')
+      WRITE(IFO,3014)IOB
+ 3014 FORMAT('WDIR',A4,2X,
+     $'--IN-- DRAINAGES FLOW RATE ENTERING THE HEATER')
+      WRITE(IFO,3015)IOB
+ 3015 FORMAT('HDIR',A4,2X,
+     $'--IN-- DRAINAGES ENTHALPY AT THE HEATER INLET')
+      WRITE(IFO,3016)IOB
+ 3016 FORMAT('WLUR',A4,2X,
+     $'--IN-- CONDENSATED FLOW RATE AT THE HEATER OUTLET')
+      WRITE(IFO,3017)IOB
+ 3017 FORMAT('WTUR',A4,2X,
+     $'--IN-- STEAM FLOW RATE FROM THE TURBINE TO THE HEATER')
+      WRITE(IFO,3018)IOB
+ 3018 FORMAT('HTUR',A4,2X,
+     $'--IN-- STEAM ENTHALPY FROM THE TURBINE TO THE HEATER')
+      WRITE(IFO,3019)IOB
+ 3019 FORMAT('GAMV',A4,2X,
+     $'--IN-- CORRECTOR EXCHANGE COEFF. TUBES-STEAM IN THE H.')
+      WRITE(IFO,3020)IOB
+ 3020 FORMAT('GAMW',A4,2X,
+     $'--IN-- CORRECTOR EXCHANGE COEFF. TUBES-WATER IN THE H.')
+      WRITE(IFO,3021)IOB
+ 3021 FORMAT('ATTR',A4,2X,
+     $'--IN-- FRICTION COEFFICIENT FEED PIPES TO THE HEATER')
+      RETURN
+      END
+      SUBROUTINE RSCDI4(IOB,MOD)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/RSCD01/IBLOC
+      COMMON/RSCD02/NCEL,NPAR
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MODU
+C
+      CHARACTER*1 ICA,IMEN,IPIU
+      CHARACTER*1 IBL
+      CHARACTER*4 MOD
+C
+      DATA IBL/' '/
+      DATA IPIU/'+'/
+      DATA IMEN/'-'/
+C
+    2 CONTINUE
+C
+      WRITE(6,2999)
+ 2999 FORMAT(//10X,'GIVE A CHARACTER'
+     $ /5X,' - FEED WATER FLOW RATE AS OUTPUT =========> BLANK'
+     $ /5X,' - FEED WATER INLET PRESSURE AS OUTPUT ====>   +'
+     $ /5X,' - FEED WATER OUTLET PRESSURE AS OUTPUT ===>   -')
+      READ(5,3001)ICA
+      IF(ICA.EQ.IPIU)GO TO 1
+      IF(ICA.EQ.IMEN)GO TO 1
+      IF(ICA.EQ.IBL)GO TO 1
+      GO TO 2
+ 3001 FORMAT(A)
+    1 CONTINUE
+C
+      WRITE(MODU,1001)ICA,MOD
+ 1001 FORMAT(A1,A3)
+      IF(ICA.EQ.IBL)MODU=MOD
+      WRITE(IBLOC,1000)MODU,IOB
+ 1000 FORMAT(2A4)
+C
+      RETURN
+      END
+C&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+      SUBROUTINE RSCDI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,IBLOC1,
+     $                 IBLOC2,IER,CNXYU,TOL)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      INTEGER WP
+      INTEGER VAR
+      DIMENSION VAR(MX1,2),XYU(*),DATI(*),CNXYU(*),TOL(*)
+      COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+      CHARACTER*4 P1,P2,P3,P20,P21,P22,P23,P24,P30,P31,P32,ISPA
+     $,P33,P34,P35,P36
+      CHARACTER*4 NOMAPP
+      DATA P1/'D CA'/,P2/'VITA'/,P3/'L CA'/
+     $,P20/'ROM '/,P21/'CP M'/,P22/'ET. '/,P23/'COND'/,P24/'.MET'/
+     $,P30/'NTUB'/,P31/'DIAI'/,P32/'DIAE'/,ISPA/'    '/
+     $,P33/'L TO'/,P34/'TALE'/,P35/'L DE'/,P36/'SUR.'/
+      DATA PIG/3.1415926/
+C
+      GO TO (1,10),IFUN
+C
+C--- scrittura simboli dei dati su file 14
+C
+    1 WRITE(14,2000)
+ 2000 FORMAT('*   CAVITY DATA')
+C
+      WRITE(14,1000)P1,P2,P3,P2,ISPA,ISPA
+ 1000 FORMAT(3(4X,2A4,' =',10X,'*'),5X)
+C
+      WRITE(14,2001)
+ 2001 FORMAT('*   PIPES BUNDLE DATA')
+C
+      WRITE(14,1000)P20,ISPA,P21,P22,P23,P24
+      WRITE(14,1000)P30,ISPA,P31,ISPA,P32,ISPA
+      WRITE(14,1000)P33,P34,P35,P36
+      RETURN
+C
+C----  lettura dei dati da file 14
+C
+   10 READ(14,1022)
+      READ(14,1022)
+      READ(14,1002)DCAV,HCAV
+      READ(14,1022)
+      READ(14,1002)ROM,CPMET,CONDMET
+      READ(14,1002)ANTUB,DIAI,DIAE
+      READ(14,1002)ALUN,ALDS
+ 1002 FORMAT(3(14X,F10.0,1X),5X)
+ 1022 FORMAT(A)
+C
+C---- elaborazione dati letti da F14.DAT
+C
+C ! superficie di scambio totale lato cavita'
+      SE=PIG*DIAE*ANTUB*ALUN
+C
+C ! volume totale occupato dal fascio tubiero
+      VE=.25*PIG*DIAE*DIAE*ANTUB*ALUN
+C
+C ! volume libero cavita'
+      VCAV=DCAV*DCAV*PIG*HCAV/4.-VE
+C
+C ! perimetro bagnato interno fascio tubiero
+      PERI=PIG*DIAI*ANTUB
+C
+C ! perimetro bagnato esterno fascio tubiero
+      PERE=PIG*DIAE*ANTUB
+C
+C ! perimetro medio metallo
+      PERM=0.5*(PERI+PERE)
+C
+C ! conduttanza metallo fascio tubiero
+      GM=2.*CONDMET/(DIAE-DIAI)
+C
+C ! sezione pelo libero
+      AW=DCAV*DCAV*PIG/8.-VE/ALUN
+C
+C ! sezione di passaggio acqua alimento
+      SW=0.25*PIG*DIAI*DIAI*ANTUB
+C
+C ! coeff. per il calcolo di Dittus-B.
+      D02=1./(ANTUB**0.8)/(DIAI**1.8)
+C
+      ROMCM=ROM*CPMET
+C
+C ! sezione totale metallo fascio tub.
+      SEZM=0.25*PIG*(DIAE*DIAE
+     $-DIAI*DIAI)*ANTUB
+C
+      C02=0.5*ALUN*PERI/(0.25*PIG*DIAI*DIAI*ANTUB)**3.
+C
+C---  stampa dei dati
+C
+      WRITE(6,5000)IBLOC1,IBLOC2
+ 5000 FORMAT(//10X,'CAVITY DATA OF THE HEATER ',2A4/)
+      WRITE(6,5001)VCAV,SE,AW
+ 5001 FORMAT(10X,'VOLUME = ',F8.3,3X,'SUP.SC = ',F8.3,3X,'SEZ.P.LIB.
+     $= ',F8.3//)
+C
+C---- memorizzazione dati
+C
+      WRITE(NOMAPP,'(A1)')IBLOC1
+C ! uscita in portata
+      WP=1
+C ! uscita in pressione a monte
+      IF(NOMAPP(1:1).EQ.'+') WP=2
+C ! uscita in pressione a valle
+      IF(NOMAPP(1:1).EQ.'-') WP=3
+C
+      DATI(ID2   )=VCAV
+      DATI(ID2+ 1)=AW
+      DATI(ID2+ 2)=FLOAT(WP)
+      DATI(ID2+ 3)=PERE
+      DATI(ID2+ 4)=PERI
+      DATI(ID2+ 5)=PERM
+      DATI(ID2+ 6)=GM
+      DATI(ID2+ 7)=ALUN
+      DATI(ID2+ 8)=SW
+      DATI(ID2+ 9)=D02
+      DATI(ID2+10)=ROMCM
+      DATI(ID2+11)=SEZM
+      DATI(ID2+12)=C02
+      DATI(ID2+13)=ALDS
+C---> DATI(ID2+14) contiene SCADS
+C---> DATI(ID2+15) contiene SCAC
+C---> DATI(ID2+16) contiene SCAW
+C---> DATI(ID2+17) contiene TEMPOP
+C
+      ID2=ID2+20
+C
+C---  normalizzazione variabili
+C
+      CNXYU(IV1   )=1.
+      CNXYU(IV1+ 1)=P0
+      CNXYU(IV1+ 2)=H0
+      CNXYU(IV1+ 3)=H0
+      CNXYU(IV1+ 4)=T0
+      CNXYU(IV1+ 5)=H0
+      CNXYU(IV1+ 6)=T0
+      CNXYU(IV1+ 7)=H0
+      CNXYU(IV1+ 8)=T0
+C
+      GO TO (3001,3002,3003),WP
+C--- uscita in portata
+ 3001 CNXYU(IV1+ 9)=W0
+      CNXYU(IV1+10)=P0
+      CNXYU(IV1+11)=P0
+      GO TO 3004
+C--- uscita in pressione a monte
+ 3002 CNXYU(IV1+ 9)=P0
+      CNXYU(IV1+10)=P0
+      CNXYU(IV1+11)=W0
+      GO TO 3004
+C--- uscita in pressione a valle
+ 3003 CNXYU(IV1+ 9)=P0
+      CNXYU(IV1+10)=P0
+      CNXYU(IV1+11)=W0
+C
+ 3004 CNXYU(IV1+12)=H0
+      CNXYU(IV1+13)=W0
+      CNXYU(IV1+14)=H0
+      CNXYU(IV1+15)=W0
+      CNXYU(IV1+16)=W0
+      CNXYU(IV1+17)=H0
+      CNXYU(IV1+18)=1.
+      CNXYU(IV1+19)=1.
+      CNXYU(IV1+20)=0.1
+C
+C---  tolleranze standard di LEGO
+C
+C
+C--- inizializzazione variabili riscaldatore
+C
+      CALL RSCDXINI(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,IBLOC1,
+     $                 IBLOC2,IER,CNXYU,TOL)
+C
+      RETURN
+      END
+C
+      SUBROUTINE RSCDC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBLOC1,
+     $                  IBLOC2)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)
+      COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+      EXTERNAL RSCD
+C
+      GO TO (10,20,30),IFUN
+C
+C      TOPOLOGIA DELLA MATRICE JACOBIANA
+C
+   10 DO I=1,10
+      DO J=1,21
+      AJAC(I,J)=1.
+      END DO
+      END DO
+      RETURN
+C
+C    CALCOLO RESIDUI
+C
+20    CALL RSCD(IFUN,IXYU,XYU,IPD,DATI,RNI)
+      RETURN
+C
+C   CALCOLO JACOBIANO NUMERICO
+C
+   30 NSTATI=9
+      NUSCIT=1
+      NINGRE=11
+      EPS=1.E-3
+      EPSLIM=1.E-4
+      CALL RNAJAC(AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,
+     $           NSTATI,NUSCIT,NINGRE,EPS,EPSLIM,RSCD)
+      RETURN
+      END
+      SUBROUTINE RNAJAC(AJAC,MX5,IXYU,XYU,IPD,DATI,RN,
+     1               NSTATI,NUSCIT,NINGRE,EPS,EPSLIM,RESIDUI)
+C
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RN(*)
+      DIMENSION CRN(50),CXYU(100)
+      EXTERNAL RESIDUI
+C
+      NRIG=NSTATI+NUSCIT
+      NCOL=NRIG+NINGRE
+C
+C     residui(ifun,ixyu,xyu,ipd,dati,rn)
+C
+      CALL RESIDUI(3,IXYU,XYU,IPD,DATI,RN)
+C
+      DO 30 J=1,NCOL
+      VAR=EPS*XYU(IXYU+J-1)
+      IF(ABS(VAR).LT.EPSLIM) VAR=EPSLIM
+C
+C**** INCREMENTO PARTICOLARE PER CALCOLARE LE DERIVATE RISPETTO
+C     ALLA PRESSIONE NELLA CAVITA` DEL RISCALDATORE
+C
+      IF(J.EQ.2) VAR= 0.01*XYU(IXYU+J-1)
+C
+      DO 10 K=1,NCOL
+      CXYU(K)=XYU(IXYU+K-1)
+      IF(K.EQ.J) CXYU(K)=CXYU(K)+VAR
+   10      CONTINUE
+C
+      CALL RESIDUI(3,1,CXYU,IPD,DATI,CRN)
+C
+      DO 20 I=1,NRIG
+      AJAC(I,J)=(CRN(I)-RN(I))/VAR
+      IF(I.GT.NSTATI) AJAC(I,J)=-AJAC(I,J)
+   20      CONTINUE
+C
+   30      CONTINUE
+C
+      RETURN
+      END
+C
+      SUBROUTINE RSCD(IFUN,IXYU,XYU,IPD,DATI,RNI)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      LOGICAL KREGIM
+      DIMENSION XYU(*),DATI(*),RNI(*)
+      COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+      COMMON/PARPAR/NUL(6),KSTC,ITERT
+      COMMON/INTEGR/TSTOP,TEMPO,DTINT,NPAS,CDT                          !SNGL
+C      COMMON/INTEG1/TSTOP,TEMPO,DTINT,CDT,ALFADT,NPAS                   !DBLE
+      COMMON/REGIME/KREGIM
+      DATA TAUEV/5./
+C_____ CONDUCIBILITA` ACQUA
+      DATA ALAH2O/.6/
+C_____ CONDUCIBILITA` METALLO
+      DATA ALAMET/35./
+C
+C--- decodifica dati
+C
+      VCAV = DATI(IPD  )
+      AW   = DATI(IPD+1)
+      IWP  = DATI(IPD+2)
+      PERE = DATI(IPD+3)
+      PERI = DATI(IPD+4)
+      PERM = DATI(IPD+5)
+      GM   = DATI(IPD+6)
+      ALUN = DATI(IPD+7)
+      SW   = DATI(IPD+8)
+      D02  = DATI(IPD+9)
+      ROMCM= DATI(IPD+10)
+      SEZM = DATI(IPD+11)
+      C02  = DATI(IPD+12)
+      ALDS = DATI(IPD+13)
+C
+C--- decodifica variabili
+C
+      YW     =XYU(IXYU   )
+      PCAV   =XYU(IXYU+ 1)*P0
+      HDU    =XYU(IXYU+ 2)*H0
+      HALDSU =XYU(IXYU+ 3)*H0
+      TMDS   =XYU(IXYU+ 4)*T0
+      HALDSI =XYU(IXYU+ 5)*H0
+      TMC    =XYU(IXYU+ 6)*T0
+      HALCI  =XYU(IXYU+ 7)*H0
+      TMW    =XYU(IXYU+ 8)*T0
+C
+      GO TO (3001,3002,3003),IWP
+C--- uscita in portata
+3001  WAL    =XYU(IXYU+ 9)*W0
+      PIR    =XYU(IXYU+10)*P0
+      PUR    =XYU(IXYU+11)*P0
+      GO TO 3004
+C--- uscita in pressione a monte
+3002  PIR    =XYU(IXYU+ 9)*P0
+      PUR    =XYU(IXYU+10)*P0
+      WAL    =XYU(IXYU+11)*W0
+      GO TO 3004
+C--- uscita in pressione a valle
+3003  PUR    =XYU(IXYU+ 9)*P0
+      PIR    =XYU(IXYU+10)*P0
+      WAL    =XYU(IXYU+11)*W0
+C
+3004  HALI   =XYU(IXYU+12)*H0
+      WDI    =XYU(IXYU+13)*W0
+      HDI    =XYU(IXYU+14)*H0
+      WDU    =XYU(IXYU+15)*W0
+      WSP    =XYU(IXYU+16)*W0
+      HSP    =XYU(IXYU+17)*H0
+      CXGV   =XYU(IXYU+18)
+      CXGW   =XYU(IXYU+19)
+      CF     =XYU(IXYU+20)*0.1
+C
+C--- chiamate tavole H2O
+C
+      CALL SATUR(PCAV,2,HWS,HVS,1)
+      CALL SATUR(PCAV,3,RWS,RVS,1)
+      CALL SATUR(PCAV,7,TSAT,COM,1)
+C
+      SDU=SHEV(PCAV,HDU,1)
+      RDU=ROEV(PCAV,SDU,1)
+CCCC      TDU=TEV(PCAV,SDU,1)
+CCCC**** CALCOLO DI TDU VINCOLATA A TSAT(PCAV)
+      ALF = 0.3
+      VEL=WDU/AW/RDU
+      IF(VEL.LT..1) THEN
+       ALF = 0.3*VEL/.1
+      ENDIF
+      TDU= ALF*TSAT+(1.-ALF)*TEV(PCAV,SDU,1)
+CCCC      IF(TDU.EQ.TSAT) THEN
+      CPDU=CPEV(PCAV,SDU,0.,.5,1)
+CCCC      ELSE
+CCCC      CPDU=(HWS-HDU)/(TSAT-TDU)
+CCCC      ENDIF
+C
+      DELP=0.1*PCAV
+      PCAVD=PCAV+DELP
+      CALL SATUR(PCAVD,3,RWSD,RVSD,1)
+C
+      SALDSU=SHEV(PUR,HALDSU,1)
+      TALDSU=TEV(PUR,SALDSU,1)
+      ROAL=ROEV(PUR,SALDSU,1)
+      CPAL=CPEV(PUR,SALDSU,0.,0.5,1)
+C
+      SALDSI=SHEV(PUR,HALDSI,1)
+      TALDSI=TEV(PUR,SALDSI,1)
+C
+      SSP=SHEV(PCAV,HSP,1)
+      TSP=TEV(PCAV,SSP,1)
+      IF(TSP.EQ.TSAT) THEN
+      CPV=CPEV(PCAV,SSP,1.,0.5,1)
+      ELSE
+      CPV=(HSP-HVS)/(TSP-TSAT)
+      ENDIF
+C
+      SALI=SHEV(PIR,HALI,1)
+      TALI=TEV(PIR,SALI,1)
+
+      SALCI=SHEV(PIR,HALCI,1)
+      TALCI=TEV(PIR,SALCI,1)
+CCCC
+CCCC _____ TEMPERATURE ALIMENTO PER IL CALCOLO DELLO SCAMBIO TERMICO
+CCCC
+      ALF = 0.3
+      VEL=WAL/SW/ROAL
+      IF(VEL.LT..1) THEN
+       ALF = 0.3*VEL/.1
+      ENDIF
+      TALISC =ALF*TALI+(1-ALF)*TALCI
+      TALCSC =ALF*TALCI+(1.-ALF)*TALDSI
+      TALDSC =ALF*TALDSI+(1.-ALF)*TALDSU
+CCCC
+C
+C--- calcoli vari
+C
+      YDI=(HDI-HWS)/(HVS-HWS)
+      IF(YDI.GT.1.) YDI=1.
+      IF(YDI.LT.0.) YDI=0.
+      WDIW=WDI*(1.-YDI)
+      WDIV=WDI*YDI
+      HDIW=HDI
+      IF(YDI.GT.0.) HDIW=HWS
+C
+      YDU=(HDU-HWS)/(HVS-HWS)
+      IF(YDU.GT.1.) YDU=1.
+      IF(YDU.LT.0.) YDU=0.
+      WEV=RDU*AW*YW*YDU/TAUEV
+C
+      VWS=1./RWS
+      VVS=1./RVS
+      VVSD=1./RVSD
+      DROVS=-(VVSD-VVS)/(DELP*VVS*VVS)
+C
+C--- calcolo coefficienti di scambio
+C
+      WSPX=WSP
+      IF(WSPX.LT.1.) WSPX=1.
+      WALX=WAL
+      IF(WALX.LT.1.) WALX=1.
+      WDUX=WDU
+      IF(WDUX.LT.1.) WDUX=1.
+C
+      GDB=(4.0125+0.0375*TALDSU)*D02*WALX**0.8
+      IF(GDB.LT..1) GDB=.1
+      GDS=50.*CXGV*WSPX**0.8
+      IF(GDS.LT..1) GDS=.1
+      GC =1000.*CXGV*(WSPX+WDIV)**0.4
+      IF(GC.LT..1) GC=.1
+      GW =200.*CXGW*WDUX**0.8
+      IF(GW.LT..1) GW=.1
+C
+C--- calcolo di SCADS, SCAC, SCAW
+C
+      ALFADS=PERE*(1./(GDB*PERI)+1./(GDS*PERE)+1./(GM*PERM))
+      EPSIDS=PERE/ALFADS*(1./(WSPX*CPV)-1./(WALX*CPAL))
+C
+      ALC=ALUN-ALDS-YW
+C
+      ALFAC=PERE*(1./(GDB*PERI)+1./(GC*PERE)+1./(GM*PERM))
+      EPSIC=PERE/(WALX*CPAL*ALFAC)
+C
+      ALFAW=PERE*(1./(GDB*PERI)+1./(GW*PERE)+1./(GM*PERM))
+      EPSIW=PERE/ALFAW*(1./(WDUX*CPDU)-1./(WALX*CPAL))
+C
+      TAUDS = ALDS/(ALDS+ALC)*(VCAV-AW*YW)*RVS/WSPX
+      TAUC  = ALC/(ALDS+ALC)*(VCAV-AW*YW)*RVS/WSPX
+CCCC      TAUW  = AW*YW*RDU/WDUX
+      TAUW  = AW*YW*RWS/WDUX
+      CALL RSCDXSCA(SCADS,SCAC,SCAW,EPSIDS,ALDS
+     $,EPSIC,ALC,EPSIW,YW,TAUDS,TAUC,TAUW,DATI,IPD)
+C
+C---  calcolo delle TAU
+C
+CCCC      TAUW01=AW*RDU
+      TAUW01=AW*RWS
+CCCC      TAUW02=(RDU-RVS)*AW
+      TAUW02=(RWS-RVS)*AW
+      TAUP02=(VCAV-AW*YW)*DROVS
+      TAUP03=AW*YW
+CCCC      TAUH03=AW*YW*RDU
+      TAUH03=AW*YW*RWS
+      TAUH04=ROAL*ALDS*SW
+      TAUQ05=SEZM*ROMCM*ALDS
+      TAUH06=ROAL*ALC*SW
+      TAUQ07=SEZM*ROMCM*ALC
+      TAUH08=ROAL*YW*SW
+      TAUQ09=SEZM*ROMCM*YW
+C
+C--- calcolo temperature esterne e interne metalli e potenze
+C--- scambiate esterne ed interne metalli fascio tubiero
+C
+CCCC      TMDSI=(PERI*GDB*TALDSU+2.*PERM*GM*TMDS)
+      TMDSI=(PERI*GDB*TALDSC+2.*PERM*GM*TMDS)
+     $/(PERI*GDB+2.*PERM*GM)
+C
+      TMCE=(PERE*GC*TSAT+2.*PERM*GM*TMC)
+     $/(PERE*GC+2.*PERM*GM)
+C
+CCCC      TMCI=(PERI*GDB*TALDSI+2.*PERM*GM*TMC)
+      TMCI=(PERI*GDB*TALCSC+2.*PERM*GM*TMC)
+     $/(PERI*GDB+2.*PERM*GM)
+C
+      TMWE=(PERE*GW*TDU+2.*PERM*GM*TMW)
+     $/(PERE*GW+2.*PERM*GM)
+C
+CCCC      TMWI=(PERI*GDB*TALI+2.*PERM*GM*TMW)
+      TMWI=(PERI*GDB*TALISC+2.*PERM*GM*TMW)
+     $/(PERI*GDB+2.*PERM*GM)
+C
+C_____ SE LA PORTATA DI SPILLAMENTO E` NULLA IL CALORE SCAMBIATO
+C      IN ZONA DESURRISCALDANTE SI CALCOLA DIVERSAMENTE
+C______E SI CALCOLA ANCHE LO SCAMBIO SUPERFICIALE FRA ZONA CONDENSANTE E
+C      ZONA SOTTORAFFREDDATA
+C
+      WCSUP=0.
+      QSUP=0.
+      IF(WSP.LT.1.E-3) THEN
+	 QDS=PERE*ALDS*100.*(TSAT-TMDS)
+	 QSUP = 1.E4*(TSAT-TDU) + QDS
+	 WCSUP=QSUP/(HVS-HWS)
+	 IF(WCSUP.LT.0.) WCSUP=0.
+      ELSE
+	 QDS=WSP*(HSP-HVS)
+      ENDIF
+C
+      QDC=PERE*ALC*GC*(TSAT-TMCE)*SCAC
+C
+      QW=PERE*YW*GW*(TDU-TMWE)*SCAW
+C
+CCCC      QDSW=PERI*ALDS*GDB*(TMDSI-TALDSU)*SCADS
+      QDSW=PERI*ALDS*GDB*(TMDSI-TALDSC)*SCADS
+C
+CCCC      QDCW=PERI*ALC*GDB*(TMCI-TALDSI)*SCAC
+      QDCW=PERI*ALC*GDB*(TMCI-TALCSC)*SCAC
+C
+      IF(WAL.LE.1.E-3) THEN
+	 QWW=PERI*YW*GDB*(TMWI-TALCI)*SCAW
+      ELSE
+CCCC         QWW=PERI*YW*GDB*(TMWI-TALI)*SCAW
+	 QWW=PERI*YW*GDB*(TMWI-TALISC)*SCAW
+      ENDIF
+C
+C--- caclolo portata di condensazione
+C
+C$$$$$$$$$$
+      WC=QDC/(HVS-HWS)+WCSUP
+C_____ NON BISOGNA LIMITARE IL VALORE DI WC QUANDO SI CALCOLA LO JACOBIANO
+C      PERCHE` SI INTRODUCE UNA DISCONTINUITA` NELLA DERIVATA CHE
+C      IMPEDISCE POI LA CONVERGENZA
+      IF(IFUN.EQ.2.AND.QDC.LT.0.) THEN
+	 WSP=-QDC/(HVS-HWS)
+	 HSP=HVS
+	 WC=WCSUP
+      ENDIF
+      IF(KREGIM)THEN
+	WC=WSP+WDIV+WCSUP
+	WEV=0.
+      ENDIF
+C$$$$$$$$$$
+C
+C---  calcolo dei residui
+C
+C--- livello cavita'
+      RNI(1)=(WDIW-WDU+WC-WEV)/TAUW01
+C
+C--- pressione cavita'
+C$$$$$$$$$$
+      IF(KREGIM) THEN
+      RNI(2)=(WSP*HSP+WDI*HDI-(WSP+WDI)*HDU -
+     $       QDS-QDC-QW)/W0/H0
+      ELSE
+      RNI(2)=(WSP+WDI-WDU-TAUW02*RNI(1))/TAUP02/P0
+      ENDIF
+C
+C--- entalpia uscita drenaggio
+C
+      IF(KREGIM) THEN
+      RNI(3)=(WDU*(HWS-HDU)-QW + QSUP)/W0/H0
+      IF(WDU.LT.1.E-3)RNI(3)=(HWS-HDU)/H0
+      ELSE
+      RNI(3)=(WDIW*(HDIW-HDU)+WC*(HWS-HDU)-QW
+     $-WEV*(HVS-HDU)+TAUP03*P0*RNI(2))/TAUH03/H0
+      ENDIF
+C$$$$$$$$$$
+      QDIFM1= SEZM*2.*ALAMET*(-(TMC-TMW )/(ALUN-ALDS))
+      QDIFM2= SEZM*2.*ALAMET*( (TMDS-TMC)/(ALC +ALDS))
+      QDIFM =QDIFM1+QDIFM2
+C
+      QDIFF1= SW*2.*ALAH2O*(-(TALDSI-TALCI )/(ALUN-ALDS))
+      QDIFF2= SW*2.*ALAH2O*( (TALDSU-TALDSI)/(ALC +ALDS))
+      QDIFF =QDIFF1+QDIFF2
+C
+C--- entalpia acqua alimento uscita riscaldatore
+      RNI(4)=(WAL*(HALDSI-HALDSU)+QDSW - QDIFF2)/TAUH04/H0
+C
+C--- temperatura media metallo in zona desurriscaldante
+      RNI(5)=(QDS-QDSW-QDIFM2)/TAUQ05/T0
+C
+C--- entalpia acqua alimento uscita zona condensante
+      RNI(6)=(WAL*(HALCI-HALDSI)+QDCW  + QDIFF)/TAUH06/H0
+C
+C--- temperatura media metallo in zona condensante
+      RNI(7)=(QDC-QDCW + QDIFM)/TAUQ07/T0
+C
+C--- entalpia  acqua alimento uscita zona sottoraffreddante
+      RNI(8)=(WAL*(HALI-HALCI)+QWW - QDIFF1)/TAUH08/H0
+C
+C--- temperatura media metallo in zona sottoraffreddante
+      RNI(9)=(QW-QWW-QDIFM1)/TAUQ09/T0
+C
+C--- perdite di carico sulla linea alimento
+      RNI(10)=(PIR-PUR-C02*CF*WAL*(ABS(WAL)+1./10.)/ROAL)/P0
+
+      RETURN
+      END
+      SUBROUTINE RSCDXINI(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,
+     $                    ID2,IBLOC1,IBLOC2,IER,CNXYU,TOL)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      INTEGER VAR
+      DIMENSION VAR(MX1,2),XYU(*),DATI(*),CNXYU(*),TOL(*)
+C
+C--- decodifica dati
+C
+      VCAV = DATI(ID1  )
+      AW   = DATI(ID1+1)
+      IWP  = DATI(ID1+2)
+      PERE = DATI(ID1+3)
+      PERI = DATI(ID1+4)
+      PERM = DATI(ID1+5)
+      GM   = DATI(ID1+6)
+      ALUN = DATI(ID1+7)
+      SW   = DATI(ID1+8)
+      D02  = DATI(ID1+9)
+      ROMCM= DATI(ID1+10)
+      SEZM = DATI(ID1+11)
+      C02  = DATI(ID1+12)
+      ALDS = DATI(ID1+13)
+C
+C--- decodifica variabili
+C
+      YW     =XYU(IV1   )
+      PCAV   =XYU(IV1+ 1)
+      HDU    =XYU(IV1+ 2)
+      HALDSU =XYU(IV1+ 3)
+      TMDS   =XYU(IV1+ 4)
+      HALDSI =XYU(IV1+ 5)
+      TMC    =XYU(IV1+ 6)
+      HALCI  =XYU(IV1+ 7)
+      TMW    =XYU(IV1+ 8)
+C
+      GO TO (3001,3002,3003),IWP
+C--- uscita in portata
+3001  WAL    =XYU(IV1+ 9)
+      PIR    =XYU(IV1+10)
+      PUR    =XYU(IV1+11)
+      GO TO 3004
+C--- uscita in pressione a monte
+3002  PIR    =XYU(IV1+ 9)
+      PUR    =XYU(IV1+10)
+      WAL    =XYU(IV1+11)
+      GO TO 3004
+C--- uscita in pressione a valle
+3003  PUR    =XYU(IV1+ 9)
+      PIR    =XYU(IV1+10)
+      WAL    =XYU(IV1+11)
+C
+3004  HALI   =XYU(IV1+12)
+      WDI    =XYU(IV1+13)
+      HDI    =XYU(IV1+14)
+      WDU    =XYU(IV1+15)
+      WSP    =XYU(IV1+16)
+      HSP    =XYU(IV1+17)
+      CXGV   =XYU(IV1+18)
+      CXGW   =XYU(IV1+19)
+      CF     =XYU(IV1+20)
+C
+C--- chiamate tavole H2O
+C
+      CALL SATUR(PCAV,2,HWS,HVS,1)
+      CALL SATUR(PCAV,7,TSAT,COM,1)
+C
+      SALDSU=SHEV(PUR,HALDSU,1)
+      TALDSU=TEV(PUR,SALDSU,1)
+      CPAL=CPEV(PUR,SALDSU,0.,0.5,1)
+C
+      SDU=SHEV(PCAV,HDU,1)
+      RDU=ROEV(PCAV,SDU,1)
+CCCC      TDU=TEV(PCAV,SDU,1)
+CCCC**** CALCOLO DI TDU VINCOLATA A TSAT(PCAV)
+      ALF = 0.3
+      VEL=WDU/AW/RDU
+      IF(VEL.LT..1) THEN
+       ALF = 0.3*VEL/.1
+      ENDIF
+      TDU= ALF*TSAT+(1.-ALF)*TEV(PCAV,SDU,1)
+C$$$$$$$$$$$$$$$$$$$
+CCCC      IF(TSAT-TDU.LT..1) THEN
+      CPDU=CPEV(PCAV,SDU,0.,.5,1)
+CCCC      ELSE
+CCCC      CPDU=(HWS-HDU)/(TSAT-TDU)
+CCCC      ENDIF
+C
+      SSP=SHEV(PCAV,HSP,1)
+      TSP=TEV(PCAV,SSP,1)
+C$$$$$$
+      IF(WSP.LE.0.) TSP =TSAT
+C$$$$$$
+      IF(TSP-TSAT.LT..1) THEN
+      CPV=CPEV(PCAV,SSP,1.,0.5,1)
+      ELSE
+      CPV=(HSP-HVS)/(TSP-TSAT)
+      ENDIF
+C
+      SALI=SHEV(PIR,HALI,1)
+      TALI=TEV(PIR,SALI,1)
+C
+C--- calcoli vari
+C
+      YDI=(HDI-HWS)/(HVS-HWS)
+      IF(YDI.GT.1.) YDI=1.
+      IF(YDI.LT.0.) YDI=0.
+      WDIV=WDI*YDI
+C
+      WSPX=WSP
+      IF(WSPX.LT.1.) WSPX=1.
+      WALX=WAL
+      IF(WALX.LT.1.) WALX=1.
+      WDUX=WDU
+      IF(WDUX.LT.1.) WDUX=1.
+C
+      GDB=(4.0125+0.0375*TALDSU)*D02*WAL**0.8
+      IF(GDB.LT.10.) GDB=10.
+      GDS=50.*CXGV*WSPX**0.8
+      IF(GDS.LT.10.) GDS=10.
+      GC =1000.*CXGV*(WSPX+WDIV)**0.4
+      IF(GC.LT.10.) GC=10.
+      GW =200.*CXGW*WDUX**0.8
+      IF(GW.LT.10.) GW=10.
+C
+      ALFADS=PERE*(1./(GDB*PERI)+1./(GDS*PERE)+1./(GM*PERM))
+      EPSIDS=PERE/ALFADS*(1./(WSPX*CPV)-1./(WALX*CPAL))
+C
+      ALFAC=PERE*(1./(GDB*PERI)+1./(GC*PERE)+1./(GM*PERM))
+      EPSIC=PERE/(WALX*CPAL*ALFAC)
+C
+      ALFAW=PERE*(1./(GDB*PERI)+1./(GW*PERE)+1./(GM*PERM))
+      EPSIW=PERE/ALFAW*(1./(WDUX*CPDU)-1./(WALX*CPAL))
+C
+      ALC=ALUN-ALDS-YW
+      IF(ALC.LT.0.) THEN
+      STOP 'ERROR IN THE CALCULATION OF THE CONDENSING ZONE'
+      ENDIF
+C
+      SCADS = (1.-EXP(-EPSIDS*ALDS))/(EPSIDS*ALDS)
+      IF(SCADS.GT.10.) SCADS=10.
+      SCAC  = (EXP(EPSIC*ALC)-1.)/(EPSIC*ALC)
+      IF(SCAC.GT.10.) SCAC=10.
+      SCAW  = (EXP(EPSIW*YW)-1.)/(EPSIW*YW)
+      IF(SCAW.GT.10.) SCAW=10.
+C
+C--- calcolo
+C
+C--- calcolo di QDSW
+      QDS  = WSP*(HSP-HVS)
+      QDSW = QDS
+C
+C--- calcolo di TMDSE
+      TMDSE=TSP-QDS/(PERE*GDS*SCADS*ALDS)
+C
+C--- calcolo di TMDSI
+      TMDSI=TALDSU+QDS/(PERI*GDB*SCADS*ALDS)
+C
+C--- calcolo di TMDS
+      TMDS=0.5*(TMDSI+TMDSE)
+C
+C$$$$$$$$$ protezione per un valore di tentativo molto sbagliato
+C$$$$$$$$$$DI HALDSU
+      DELH=WSP*(HSP-HWS)/WALX
+      IF(HALDSU-HALI.LT.DELH) HALDSU=HALI+DELH
+C
+C--- calcolo di HALDSI
+      HALDSI=HALDSU-QDS/WALX
+      SALDSI=SHEV(PIR,HALDSI,1)
+      TALDSI=TEV(PIR,SALDSI,1)
+C
+C--- calcolo di QDC e QDCW
+      QDC  = (WSP+WDIV)*(HVS-HWS)
+      QDCW = QDC
+C
+C--- calcolo di TMCE
+      TMCE=TSAT-QDC/(PERE*GC*SCAC*ALC)
+C
+C--- calcolo di TMCI
+      TMCI=TALDSI+QDC/(PERI*GDB*SCAC*ALC)
+C
+C--- calcolo di TMC
+      TMC=0.5*(TMCI+TMCE)
+C
+C--- calcolo di HALCI
+      HALCI=HALDSI-QDC/WALX
+      SALCI=SHEV(PIR,HALCI,1)
+      TALCI=TEV(PIR,SALCI,1)
+C
+C--- calcolo di QW e QWW
+      QW=0.
+      IF(WDI+WSP.GT.0.) THEN
+      HENT=(WDI*HDI+WSP*HWS)/(WDI+WSP)
+      QW=(HENT-HDU)*WDU
+      ENDIF
+      QWW=QW
+C
+C--- calcolo di TMWE
+      TMWE=TDU-QW/(PERE*GW*SCAW*YW)
+C
+C--- calcolo di TMWI
+      TMWI=TALI+QW/(PERI*GDB*SCAW*YW)
+C
+C--- calcolo di TMW
+      TMW=0.5*(TMWI+TMWE)
+C
+C--- riassegnazione variabili calcolate
+C
+C             XYU(IV1   ) = YW
+C             XYU(IV1+ 1) = PCAV
+C             XYU(IV1+ 2) = HDU
+C             XYU(IV1+ 3) = HALDSU
+      XYU(IV1+ 4) = TMDS
+      XYU(IV1+ 5) = HALDSI
+      XYU(IV1+ 6) = TMC
+      XYU(IV1+ 7) = HALCI
+      XYU(IV1+ 8) = TMW
+      RETURN
+      END
+C
+      SUBROUTINE RSCDXSCA(SCADS,SCAC,SCAW,EPSIDS,ALDS
+     $,EPSIC,ALC,EPSIW,YW,TAUDS,TAUC,TAUW,DATI,IPD)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      LOGICAL KREGIM
+      DIMENSION DATI(*)
+      COMMON/INTEGR/TSTOP,TEMPO,DTINT,NPAS,CDT                          !SNGL
+C      COMMON/INTEG1/TSTOP,TEMPO,DTINT,CDT,ALFADT,NPAS                   !DBLE
+      COMMON/PARPAR/NUL(7),ITERT
+      COMMON/REGIME/KREGIM
+C
+      IF(KREGIM) THEN
+      SCADS = (1.-EXP(-EPSIDS*ALDS))/(EPSIDS*ALDS)
+      IF(SCADS.GT.10.) SCADS=10.
+      SCAC  = (EXP(EPSIC*ALC)-1.)/(EPSIC*ALC)
+      IF(SCAC.GT.10.) SCAC=10.
+      SCAW  = (EXP(EPSIW*YW)-1.)/(EPSIW*YW)
+      IF(SCAW.GT.10.) SCAW=10.
+      DATI(IPD+14) = SCADS
+      DATI(IPD+15) = SCAC
+      DATI(IPD+16) = SCAW
+      RETURN
+      ELSE
+      SCADS = DATI(IPD+14)
+      SCAC  = DATI(IPD+15)
+      SCAW  = DATI(IPD+16)
+      TEMPOP= DATI(IPD+17)
+      ENDIF
+C
+CCCC     IF(TEMPO.EQ.TEMPOP) RETURN
+      IF(ITERT.GT.0) RETURN
+      IF(DTINT.LE.0.)RETURN
+C
+C____ FILTRAGGIO COEFFICIENTI
+C
+      TAUDDS = 0.5+TAUDS/DTINT
+      TAUNDS = 0.5-TAUDS/DTINT
+      TAUDC  = 0.5+TAUC/DTINT
+      TAUNC  = 0.5-TAUC/DTINT
+      TAUDW  = 0.5+TAUW/DTINT
+      TAUNW  = 0.5-TAUW/DTINT
+C
+      EXPDS=EPSIDS*ALDS
+      IF(EXPDS.LT.-30.) EXPDS=-30.
+      IF(EXPDS.EQ.0.) THEN
+      USCADS=1.
+      ELSE
+      USCADS=(1.-EXP(-EXPDS))/EXPDS
+      IF(USCADS.GT.10.) USCADS=10.
+      ENDIF
+C
+      EXPC=EPSIC*ALC
+      IF(EXPC.GT.30.) EXPC=30.
+      IF(EXPC.EQ.0.) THEN
+      USCAC=1.
+      ELSE
+      USCAC=(EXP(EXPC)-1.)/EXPC
+      IF(USCAC.GT.10.) USCAC=10.
+      ENDIF
+C
+      EXPW=EPSIW*YW
+      IF(EXPW.GT.30.) EXPW=30.
+      IF(EXPW.EQ.0.) THEN
+      USCAW=1.
+      ELSE
+      USCAW=(EXP(EXPW)-1.)/EXPW
+      IF(USCAW.GT.10.) USCAW=10.
+      ENDIF
+C
+      SCADS = -SCADS*TAUNDS/TAUDDS+USCADS/TAUDDS
+      SCAC  = -SCAC*TAUNC/TAUDC+USCAC/TAUDC
+      SCAW  = -SCAW*TAUNW/TAUDW+USCAW/TAUDW
+      DATI(IPD+14) = SCADS
+      DATI(IPD+15) = SCAC
+      DATI(IPD+16) = SCAW
+      DATI(IPD+17) = TEMPO
+      RETURN
+      END
+CC
+      SUBROUTINE RSCDD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,
+     $   XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)
+      RETURN
+      END

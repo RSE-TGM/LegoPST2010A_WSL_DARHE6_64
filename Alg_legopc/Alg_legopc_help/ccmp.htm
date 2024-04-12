@@ -1,0 +1,715 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>CCMP</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE CCMP</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">BOILER FURNACE 1-D MODEL</p>
+<p align="left">The CCMP module simulates the functioning of a boiler combustion
+furnace fed by fossil fuels (fuel oil, coal, natural gas).</p>
+<p align="left">It particularly simulates the thermodynamic behaviour of fluid
+present on the &quot;air/flue gas side&quot; of the combustion furnace.</p>
+<p align="left">In order to realize a complete combustion furnace model, user
+must interconnect the CCMP and EVAP modules. EVAP simulates the thermo-hydraulic
+behaviour of water flowing through the tube bundles forming the combustion
+furnace walls and the influence that pipes metal has in the thermal exchange
+between flue gas and water.</p>
+<p align="left">The physic-mathematical model, encoded in the CCMP, is referred
+to a radiance boiler equipped with or without &quot;NOx-ports&quot;. The
+combustion furnace is subdivided in &quot;NCEL&quot; axial cells (3&lt;NCEL&lt;10)
+(see fig.1). In every cell the flue gas exchanges heat with &quot;NPi&quot;
+(max. 9) (see note 1) surfaces having different temperatures. The combustion
+stoichiometric balance in each cell is based on the fuel and air quantities
+actually present inside the cell taking into account the flow rates introduced
+from outside as well as coming from the preceding cell (if stoichiometrically
+exceeding).</p>
+<p align="left">For the NBRUC cells (1&lt;NBRUC&lt;6) (see note 2) the presence
+of several burners is foreseen. They are represented in each NBRUC cell as only
+one equivalent burner. To each equivalent burner user must assign a training arc
+(only for the boiler equipped with tangential burner it may be different than
+zero). The used fuel can be gas, fuel oil or coal.</p>
+<p align="left">Further hypotheses introduced in developing the
+physic-mathematical model, encoded in this module, are the following:</p>
+<p ALIGN="left">- the monodimensional approximation with concentrated parameters
+is valid for the conservation equations of fluid mass and energy inside the
+combustion furnace</p>
+<p ALIGN="left">- links between the input and output quantities from control
+volumes (coinciding with the cell volumes), for which the conservation equations
+are written, are instantaneous (static model). In other words in the
+conservation equations the accumulation terms are not considered, so equations
+themselves are algebraical and not differential.</p>
+<p ALIGN="left">- To deal with the energetic exchanges the following thermal
+exchange mechanisms are considered:</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="JUSTIFY">a) the convective thermal exchange between the fluid
+      flowing through the cell and the NPi cell exchange surfaces.</p>
+      <p ALIGN="JUSTIFY">b) The radiative thermal exchange between the fluid
+      flowing through the cell and the NPi cell exchange surfaces.</p>
+      <p ALIGN="JUSTIFY">c) The radiative thermal exchange between the fluid
+      flowing through the cell and the fluid flowing through the preceding and
+      following ones.</p>
+    </blockquote>
+  </font><font FACE="Arial" SIZE="2">
+  <p ALIGN="JUSTIFY"><img SRC="images/Image21.gif" WIDTH="653" HEIGHT="583"></p>
+  </blockquote>
+</blockquote>
+</font><font FACE="Arial">
+<p ALIGN="CENTER">fig. 1. Combustion furnace scheme</p>
+<p ALIGN="JUSTIFY">- the flue gas is assumed as a grey body (emissivity
+independent from radiation wavelength)</p>
+<p ALIGN="JUSTIFY">- the &quot;Diffusion Hypothesis&quot; is valid for the
+thermal power calculation exchanged by radiance between the cell fluid and near
+cell fluid</p>
+<p ALIGN="JUSTIFY">- the combustion furnace walls are assumed as a grey body
+with constant emissivity (independent, particularly, from temperature)</p>
+<p ALIGN="JUSTIFY">- the combustion process is represented as thermal power
+release corresponding to the complete reaction of the fuel flow rate flowing
+into the cell</p>
+<p ALIGN="JUSTIFY">- in the energetical balance related to one cell the source
+term is only given by the whole thermal power coming from combustion in the
+cell.</p>
+<p align="left">The used equations are:</p>
+<p ALIGN="left">1) the conservation equation of fluid mass</p>
+<p ALIGN="JUSTIFY">2) the conservation equation of fluid energy</p>
+<p ALIGN="JUSTIFY">3) the equation of radiative thermal exchange between two
+fluids</p>
+<p ALIGN="JUSTIFY">4) the equation of radiative thermal exchange between one
+fluid and one surface</p>
+<p ALIGN="JUSTIFY">5) the equation of convective thermal exchange between one
+fluid and one surface</p>
+<p ALIGN="JUSTIFY">6) the partial pressure calculation equation for oxygen (O2)
+present in the flue gas at the combustion furnace outlet</p>
+<p ALIGN="JUSTIFY">7) the partial pressure calculation equation for carbon
+dioxide (CO2) present in the flue gas at the combustion furnace outlet</p>
+<p ALIGN="JUSTIFY">8) the partial pressure calculation equation for sulphur
+dioxin (SO2) present in the flue gas at the combustion furnace outlet</p>
+<p ALIGN="JUSTIFY">9) the partial pressure calculation equation for water (H2O)
+present in the flue gas at the combustion furnace outlet</p>
+<p ALIGN="JUSTIFY">10) the mass fraction calculation equation for water (H2O)
+present in the flue gas at the combustion furnace outlet.</p>
+<p align="left">Further analyses related to physic-mathematical model
+development are available in the section concerning this module of the manual
+&quot;LEGOCAD-Modelling Library for Simulation of Power Generation
+Plants-Theory&quot;.</p>
+<b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p align="left">Because of software limits regarding the solution of the whole
+equation system (maximum number of equations for each module) it needs that the
+exchanging surfaces do not exceed 51, even if each cell can exchange heat with 9
+surfaces having different temperatures.</p>
+<b>
+<p ALIGN="RIGHT">Note 2</p>
+</b>
+<p align="left">If the combustion furnace to simulate is equipped with NOx -
+ports, the cells which are associated to the NOx - ports must be considered as
+equipped with burners. User must assign to these cells zero fuel flow rate.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p align="left">NCEL = cells total number</p>
+<p align="left">NPi = number of exchanging surfaces in the i-th cell</p>
+<p align="left">NBRUC = number of cells equipped with burners</p>
+<p align="left">i = 1, 2, ... NCEL</p>
+<p align="left">j = 1, 2, ... NPi</p>
+<p align="left">k = 1, 2, ... NBRUC</p>
+<blockquote>
+  <blockquote>
+  </font><font FACE="Arial" SIZE="2">
+  <p ALIGN="center"><img SRC="images/Image22.gif" width="478" height="423"></p>
+  </font><font FACE="Arial">
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  </blockquote>
+</blockquote>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TF_i</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flue gas temperature in the i-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/m²/K]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GCij</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">equivalent thermal exchange coefficient
+      between flue gas and the j-th surfaces of the i-th cell (see note 3)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WFCC</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">total flow rate of flue gas flowing out
+      from the combustion furnace</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">%O2</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">partial pressure of oxygen present in the
+      flue gas at the combustion furnace outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">%CO2</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">partial pressure of carbon dioxide
+      present in the flue gas at the combustion furnace outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">%H2O</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">partial pressure of water present in the
+      flue gas at the combustion furnace outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">%FMA</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass fraction of water present in the
+      flue gas at the combustion furnace outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TMij</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">temperature of the j-th exchanging
+      surface in the i-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WCOk</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fuel flow rate to the k-th burner</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WARk</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">air and blending flow rate to the k-th
+      burners</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[deg]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ABRk</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">training arc of k-th burner as regards to
+      a horizontal plain</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WRIF</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of recirculating flue gas
+      supplied into the combustion furnace</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TRIF</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">temperature of recirculating flue gas
+      supplied into the combustion furnace</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TACO</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">temperature of comburent air supplied
+      into the combustion furnace</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FACS</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">corrective factor of equivalent thermal
+      exchange coefficient (see note 3)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WARC</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">total flow rate of comburent air supplied
+      into the combustion furnace</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ETAC</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">combustion efficiency</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WGAT</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">total flow rate of tempering gas supplied
+      into the combustion furnace (see note 4)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AKFL</font><!--mstheme--></font></td>
+    <td width="77%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flame length corrective factor (see note
+      5).</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b>
+<p ALIGN="RIGHT">Note 3</p>
+</b>
+<p align="left">The coefficient of GCij equivalent thermal exchange related to
+the j-th wall of the i-th cell is calculated as follows:</p>
+<p ALIGN="JUSTIFY">if FCOij &gt; 1</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">GCij = [GARij * (TF_i² + TMij²) * (TF_i + TMij) + GACij *
+  FCOij] * FACS</p>
+</blockquote>
+<p ALIGN="JUSTIFY">if FCOij &lt; 1</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">GCij = [GARij * FCOij * (TF_i² + TMij²) * (TF_i + TMij) +
+  GACij] * FACS</p>
+</blockquote>
+<p ALIGN="JUSTIFY">where</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">GARij radiative thermal exchange coefficient</p>
+  <p ALIGN="JUSTIFY">GACij convective thermal exchange coefficient</p>
+  <p ALIGN="JUSTIFY">FCOij corresponding to the data FCO(J) C(i)</p>
+</blockquote>
+<p align="left">The FACS is a corrective factor of thermal exchange coefficient
+which can be identified in case user has to determine stationary conditions
+where quantities like the exchanged power or the flue gas temperature in a given
+cell are known.</p>
+<b>
+<p ALIGN="RIGHT">Note 4</p>
+</b>
+<p align="left">The WGAT variable (total flow rate of tempering gas supplied
+into the combustion furnace) represents a module optional input. During topology
+building, it is asked to user if, in the combustion furnace model, a tempering
+gas contribution is foreseen.</p>
+<p align="left">If answer is affirmative the WGAT flow rate appears among the
+module variables and included among the input variables; otherwise the WGAT flow
+rate is not considered.</p>
+<b>
+<p ALIGN="RIGHT">Note 5</p>
+</b>
+<p align="left">AKFL is a corrective factor of flame length. In case of training
+arcs different from zero, AKFL can be identified when user has to determine the
+stationary conditions in which some quantities like the exchanged power or the
+flue gas temperature in some cells are known.</p>
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to the initial values of input and output variables,
+user must assign the following data:</p>
+<p ALIGN="left">NCEL = cells total number</p>
+<p ALIGN="left">NPi = number of exchanging surfaces in the i-th cell</p>
+<p ALIGN="left">i = 1, 2, ... NCEL</p>
+<p ALIGN="left">j = 1, 2, ... NPi</p>
+<p ALIGN="left">k = 1, 2, ... N.CE.BR.</p>
+<p align="left">&nbsp;</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NCEL</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of cells in the combustion furnace
+      scheme</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">N.CE.BR.</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(max. 6.) number of cells equipped with
+      burners</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PARACOMB</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p style="text-indent: 0"><font FACE="Arial">parameter for fuel type
+      choosing:</font></p>
+      <p><font FACE="Arial">0 = gas<br>
+      1 = fuel oil<br>
+      2 = coal</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DIAMPART</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">coal particles mean diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ROCARBON</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">coal density</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COMBTIME</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">characteristic time of coal complete
+      combustion</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SOLIDFRA</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">burnable volumetric fraction of fuel
+      solid part</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">EMISPAR</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">emissivity of combustion furnace walls</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ITMPRING</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">parameter indicating if tempering gas
+      is flowing (or not) into the combustion furnace:<br>
+      for ITMPRING &gt; 0.there is tempering gas flowing into the combustion
+      furnace; the index value identifies the cell where tempering gas is
+      flowing into<br>
+      for ITMPRING &lt; 0. (or = 0.)there is not tempering gas flowing into the
+      combustion furnace</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PCI COMB</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fuel net heat value</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IBRUC(k)</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">corresponding index between cells and
+      burners (see note 6)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CARBONIO</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass fraction of carbon present in the
+      fuel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IDROGENO</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass fraction of hydrogen present in the
+      fuel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ZOLFO</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass fraction of sulphur present in the
+      fuel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AZOTO</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass fraction of nitrogen present in the
+      fuel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OSSIGENO</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass fraction of oxygen present in the
+      fuel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">UMIDCOMB</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass fraction of water present in the
+      fuel (fuel humidity)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">UMIDARIA&nbsp;</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass fraction of water present in the
+      comburent air (air humidity)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[1/ft/K]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">EMLUM K</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">absorption factor of flame luminous
+      emissivity (see note 3)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WNCO C (k)</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal fuel flow rate to the k-th burner</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SOOT C (k)</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">solid particles volumetric concentration
+      (for fuel oil and coal)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">EN.COMB</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fuel specific enthalpy</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p>Data concerning each cell:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LUNG (i)</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cell length</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SEZ (i)</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cross section area of cell outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SU (j) C (i)</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">exchange surface area of the j-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FCO(j) C (i)</font><!--mstheme--></font></td>
+    <td width="73%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">if FCO(j) C (i) &gt; 1: ratio between
+      the real surface licked by fluid and the radiated surfaces for the j-th
+      wall;<br>
+      if FCO(j) C (i) &lt; 1: ratio between the radiated surface and the real
+      surface licked by fluid for the j-th wall</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">If several consecutive cells have the same data, it is enough to
+assign those concerning the first cell. The preceding cell data are
+automatically assigned to the following cells.</p>
+<b>
+<p ALIGN="RIGHT">Note 6</p>
+</b>
+<p align="left">The simulation foresees a maximum of 6 cells equipped with
+burners. In the IBRUC_(k) fields user specifies, in a progressive order, the
+number of cell equipped with burners. If the number of equipped cells is lower
+than the maximum allowed, the remaining fields must be empty. E.g.: if the
+cells' total number is 6 and the cells 2 and 3 are only equipped with burners,
+user must indicate:</p>
+<p>IBRUC_1 =2., IBRUC_2 =3., IBRUC_(k=3,4,5,6) =0.</p>
+<p>It is an error to indicate: IBRUC_1 =3., IBRUC_2 =2.</p>
+<b></b></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">For the cells equipped with burners, user must indicate the
+total air flow rate flowing into the cell, and the fuel total flow rate related
+to the lighted burners present in the cell.</p>
+<p align="left">For the remaining variables no particular prescription is
+required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In the CCMP module no user subprogram is foreseen.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The equations forming the module mathematical model give rise to
+a set of residuals of which only the respective normalization factors are
+indicated.</p>
+<p align="left">Further explanations are given in the manual section: &quot;LEGOCAD
+- Modelling Library for Simulation of Power Generation Plants - Theory&quot;.</p>
+<p align="left">i = 1, 2, ... NCEL</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(i)&nbsp;</font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">normalization factor = W0*H0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(NCEL+i)</font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">normalization factor = 1000.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(2*NCEL+i)</font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">normalization factor = 1000.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(3*NCEL+1)</font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">normalization factor = W0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(3*NCEL+2)</font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">normalization factor = 1000.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(3*NCEL+3)</font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">normalization factor = 1000.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(3*NCEL+4)</font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">normalization factor = 1000.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="22%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(3*NCEL+5)</font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">normalization factor = 1000.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<p>SUBROUTINE CCMPI3(IFO, IOB, DEBL)</p>
+<p>SUBROUTINE CCMPI4(IOB, MOD)</p>
+<p>SUBROUTINE CCMPI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</p>
+<p>$ IBLOC1, IBLOC2, IER, CNXYU, TOL)</p>
+<p>SUBROUTINE CCMPC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RN,</p>
+<p>$ IBLOC1, IBLOC2)</p>
+<p>SUBROUTINE CCMP(IFUN, IXYU, XYU, IPD, DATI, RN)</p>
+<p>SUBROUTINE CCMPPF(NC, FA, FF, WC, WAI, WN, WNT, WFCO,</p>
+<p>$ RAST, NCMIX)</p>
+<p align="center"></font><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CCMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are in the user
+manual section dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;..... module application examples not available
+jet.....&quot;</p>
+<p ALIGN="CENTER"></font><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<font FACE="Arial">
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="JUSTIFY">&nbsp;</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+</font><!--mstheme--></font></body>
+
+</html>

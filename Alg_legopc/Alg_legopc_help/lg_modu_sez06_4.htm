@@ -1,0 +1,154 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">An example of the &quot;xxxxI3&quot; subroutine in a
+standard process module (RAVA)</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">An example of the output produced by the
+&quot;xxxxI3&quot; subroutine of a LEGO standard module is the following:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><font face="Courier New" size="2"><b>RAVACAPH<span style="mso-spacerun: yes">&nbsp;
+</span>BL.-CAPH- **** MODULO RAVA - Comburent air preheater</b></font></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><font face="Courier New" size="2"><b>TMARCAPH<span style="mso-spacerun: yes">&nbsp;
+</span>--US-- MEAN AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER</b></font></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><font face="Courier New" size="2"><b>TUA2CAPH<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- AIR OUTLET TEMPERATURE IN THE AIR-STEAM EXCHANGER</b></font></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><font face="Courier New" size="2"><b>TUA1CAPH<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- AIR TEMP. AT THE EXCHANGER INLET (FLOW RATE INV.)</b></font></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><font face="Courier New" size="2"><b>GAMRCAPH<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- THERMAL EXCHANGE COEFFICIENT AIR-METAL</b></font></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><font face="Courier New" size="2"><b>WARICAPH<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- AIR FLOW RATE IN THE AIR-STEAM EXCHANGER</b></font></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><font face="Courier New" size="2"><b>TMETCAPH<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- METAL TEMPERATURE IN THE AIR-STEAM EXCHANGER</b></font></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><font face="Courier New" size="2"><b>TIA1CAPH<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- INLET AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER</b></font></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><font face="Courier New" size="2"><b>TIA2CAPH<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- OUTLET AIR TEMP. IN THE EXCHANGER (FLOW RATE INV.)</b></font></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><font face="Courier New" size="2"><b>AKCOCAPH<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- CORRECTOR COEFF. THERMAL EXCHANGE AIR-METAL</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">This output has been produced
+instanciating the RAVA module (which simulates the behaviour of the air side of
+an air/steam heat exchanger) choosing &quot;CAPH&quot; as block name and &quot;Comburent
+air preheater&quot; as block description. As one can see, the RAVA modules has 1
+state output, 3 algebraic outputs and 5 inputs.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The source code of RAVAI3 and RAVAI4
+follows. The actual code of RAVA module is a bit different: this code works <b style="mso-bidi-font-weight:normal">exactly</b>
+like the actual one, but it has been simplified (the original one was too
+different from an automatically produced source).&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier New" size="2">
+</font>
+</span><font face="Courier New" size="2"><b>SUBROUTINE RAVAI3(IFO,IOB,DEBL)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C--- MODULE RAVA: AIR-STEAM PREHEATER</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PARAMETER (NV=9)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CHARACTER*4 IOB, MOD, IBLOC*8, DEBL*80</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CHARACTER*4 NOME(NV), TIPO(NV)*2, DESC(NV)*50</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON /RAVA01/ IBLOC</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON /RAVA02/ NCEL,NPAR</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATA MOD/'RAVA'/</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATA (NOME(I),TIPO(I),DESC(I),I=1,NV) /</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$'TMAR','US','MEAN AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER',</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$'TUA2','UA','AIR OUTLET TEMPERATURE IN THE AIR-STEAM EXCHANGER',</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$'TUA1','UA','AIR TEMP. AT THE EXCHANGER INLET (FLOW RATE INV.)',</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$'GAMR','UA','THERMAL EXCHANGE COEFFICIENT AIR-METAL',</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$'WARI','IN','AIR FLOW RATE IN THE AIR-STEAM EXCHANGER',</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$'TMET','IN','METAL TEMPERATURE IN THE AIR-STEAM EXCHANGER',</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$'TIA1','IN','INLET AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER',</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$'TIA2','IN','OUTLET AIR TEMP. IN THE EXCHANGER (FLOW RATE INV.)',</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$'AKCO','IN','CORRECTOR COEFF. THERMAL EXCHANGE AIR-METAL'/</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CALL RAVAI4(IOB,MOD)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WRITE(IFO,2999)IBLOC,IOB,MOD,DEBL</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WRITE(IFO,3000)(NOME(I),IOB,TIPO(I),DESC(I),I=1,NV)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;</span>2999
+FORMAT(A8,'<span style="mso-spacerun: yes">&nbsp; </span>BL.-',A4,'- **** MODULO
+',A4,' - ',A)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;</span>3000
+FORMAT(2A4,'<span style="mso-spacerun: yes">&nbsp; </span>--',A2,'-- ',A)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SUBROUTINE RAVAI4(IOB,MOD)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CHARACTER*4 IOB, MOD, IBLOC*8</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON /RAVA01/ IBLOC</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON /RAVA02/ NCEL,NPAR</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WRITE(IBLOC,1000)MOD,IOB</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;</span>1000
+FORMAT(2A4)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">Note that the only calling parameters of
+RAVAI4 subroutine are IOB and MOD; user is allowed to add other calling
+parameters in &quot;xxxxI4&quot; subroutines, but this is not feasible in
+automatically produced code.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">All other variables can be passed via
+common areas; the first two areas are always provided by source generation
+activity:</span></p>
+<p class="elenco3"><span lang="EN-GB">&nbsp;<o:p> <b><font size="2"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier New">
+</font></span><font face="Courier New">COMMON /RAVA01/ IBLOC</font></font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON /RAVA02/ NCEL,NPAR</font></b></span></p>
+<p class="elencosuperlargo"><span lang="EN-GB">IBLOC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="mso-tab-count:
+1"> </span>[character * 8]<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>is the complete
+block name, and it must be set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+in the &quot;xxxxI4&quot; subroutine.</span></p>
+<p class="elencosuperlargo"><span lang="EN-GB">NCEL<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>[integer]<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>and</span></p>
+<span lang="EN-GB" style="font-size:12.0pt;mso-bidi-font-size:10.0pt;font-family:
+Arial;mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-ansi-language:EN-GB;mso-fareast-language:IT;mso-bidi-language:AR-SA">NPAR<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>[integer]<span style="mso-tab-count:
+1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>have no predefined meaning
+(they are provided&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+only for module developer commodity).</span>
+
+<!--mstheme--></font></body>
+
+</html>

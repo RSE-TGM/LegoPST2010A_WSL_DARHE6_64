@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE REGF</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGF_summ"></A>MODULE REGF&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGF_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGF_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGF_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGF_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGF_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGF_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGF_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_REGF_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGF_A"></A>MODULE REGF&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial"><P ALIGN="CENTER">FREQUENCY REGULATOR</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module REGF simulates the behavior of a primary frequency regulator and of the turbine connected to it (the model output is, in facts, the mechanical power produced by the turbine).</P>
+<P ALIGN="JUSTIFY">The functioning is described by the following simplified equation:</P>
+<P>&nbsp;</P>
+<P>s = Laplace operator</P>
+<P>Kp = regulator gain (reciproque of the statism)</P>
+<P>T1 = denominator time constant</P>
+<P>T2 = numerator time constant</P>
+<P>Omri= reference angular velocity</P>
+<P>Omeg= net angular velocity</P>
+<P>Qrif= reference power</P>
+<P>Qmec= turbine mechanical power</P>
+<P>&nbsp;</P>
+<P>The following relationship provides the turbine mechanical power:</P>
+<P>&nbsp;</P>
+<P>1 + sT2</P>
+<P>Qmec = Qrif + (Omri - Omeg) Kp -------</P>
+<P>1 + sT1</P>
+<P>In steady state:</P>
+<P>Qmec = Qrif + Kp (Omri - Omeg) .</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_REGF_B"></A>MODULE REGF&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+</FONT><P>&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="Image1278.gif" WIDTH=398 HEIGHT=263></P>
+<FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P>&nbsp;</P>
+<P>[W] &#9;QPMG&#9;turbine mechanical power</P>
+<P>[rad/s] OMEG&#9;net angular velocity</P>
+<P>[W] &#9;QPRI&#9;&#9;reference power</P>
+<P>[rad/s] OMRI&#9;&#9;reference angular velocity</P>
+<P>[ ] &#9;SPAR&#9;&#9;paralel signal (1=true, 0=false)</P>
+</FONT><U><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</U></FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGF_C"></A>MODULE REGF&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P>&nbsp;</P>
+<P>[W] &#9;Qbase_W &#9;base power</P>
+<P>[rad/s] Omba_r/s &#9;base angular velocity</P>
+<P>[W] &#9;Pn.gr._W &#9;generator nominal power </P>
+<P>[%]&#9;Stat_% &#9;statism (reciproque of regulator gain)</P>
+<P>[s] &#9;T1POLO_s &#9;regulator pole time constant</P>
+<P>[s] &#9;T2ZERO_s &#9;regulator zero time constant</P>
+<P>[W] &#9;Pmax_W &#9;generator max power </P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGF_D"></A>MODULE REGF&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the REGF module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGF_E"></A>MODULE REGF&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">REGF doesn’t prescribe any FORAUS subroutine.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGF_F"></A>MODULE REGF&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P>&nbsp;</P>
+<P>RNI(1) =QPMG-QPM </P>
+<P>Where:</P>
+<P>If (SPAR=0):</P>
+<P>QPM = QPRI </P>
+<P>If (SPAR=1):</P>
+<P>Steady state:</P>
+<P>QPM = QPRI-KP*(OMEG-OMRI)</P>
+<P>Transient:</P>
+<P>QPM = QPRI - KP*K1*(OMEG-OMRI) + KP*K2*(OMEGP-OMRIP) + K3*(QPMP-QPRIP)</P>
+<P>OMEGP=OMEG of previous step</P>
+<P>OMRIP=OMRI of previous step</P>
+<P>QPMP =QPM of previous step</P>
+<P>QPRIP=QPRI of previous step</P>
+<P>KP=1/Stat_%</P>
+<P>K1=(DTINT+T2)/(DTINT+T1)</P>
+<P>K2=T2/(DTINT+T1)</P>
+<P>K3=T1/(DTINT+T1).</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGF_G"></A>MODULE REGF&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>SUBROUTINE REGFI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>SUBROUTINE REGFI3(IFO,IOB,DEBL)</P>
+<P>SUBROUTINE REGFI4(IOB,MOD)</P>
+<P>SUBROUTINE REGFC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE REGFJC (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE REGF (IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>SUBROUTINE REGFD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_REGF_H"></A>MODULE REGF&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module aren’t yet available.</P></FONT></BODY>
+</HTML>

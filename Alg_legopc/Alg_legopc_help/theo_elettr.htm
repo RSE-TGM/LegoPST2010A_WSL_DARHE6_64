@@ -1,0 +1,653 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title></title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><p align="center"><b><font size="4">SYNCHRONOUS AND
+      ASYNCHRONOUS MACHINES AUTOMATIC VOLTAGE REGULATORS NETWORK COMPONENTS AND
+      LOADS</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+  <p ALIGN="JUSTIFY"><font face="Arial"><a href="#parte1">Busbar</a></font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial"><a href="#parte2">Synchronous generator</a></font></p>
+  <p><font face="Arial"><a href="#parte3">Ballast load</a></font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial"><a href="#parte4">Induction motor</a></font></p>
+  <p ALIGN="JUSTIFY"><font face="Arial"><a href="#parte5">Network</a></font></p>
+  <p><font face="Arial"><a href="#parte6">Excitation system</a></font></p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte1"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><p align="center">Busbar<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+</font>
+<p ALIGN="left"><font face="Arial">This module is used to represent the bus-bars
+of the electrical network. It allows the connection of various loads to the same
+bus of the network module.</font></p>
+<p ALIGN="left"><font face="Arial">The equation of the module is:</font></p>
+<p ALIGN="center"><font SIZE="2"><img SRC="images/Image555.gif" WIDTH="85" HEIGHT="63"></p>
+</font>
+<p align="left"><font face="Arial">where</font></p>
+<p align="left"><font face="Arial">N is the number of the branches connected to
+the bar and</font></p>
+<p align="left"><font face="Arial">I are the currents injected to the bar.</font></p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte2"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Synchronous generator<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<p ALIGN="left"><font face="Arial">The main hypotheses are:</font></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="left"><font face="Arial">the stator windings are sinusoidally
+    distributed along the air-gap;</font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="left"><font face="Arial">the stator slots cause not appreciable
+    variation of the rotor inductances with rotor position;</font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="left"><font face="Arial">magnetic hysteresis is negligible;</font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="left"><font face="Arial">magnetic saturation effects are
+    negligible.</font><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><font face="Arial">Fig. 1 shows the circuits involved in the
+generator modeling. The stator circuits consist of three-phase armature windings
+carrying alternating currents. The rotor circuits comprise field and amortisseur
+windings. The field winding is connected to a source of direct current. The
+currents in the amortisseur (solid rotor and damper windings) are assumed to
+flow in two closed circuits: one whose flux is along the d-axis and the other
+whose flux is along the q-axis.</font></p>
+<p ALIGN="left"><font face="Arial">In Fig. 1, q is defined as the angle by which
+the d-axis leads the centerline of phase a windings in the direction of
+rotation. Angle q is related to the rotor angular velocity and time as follows:</font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image556.gif" WIDTH="109" HEIGHT="36"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><a NAME="_966777030"></a><a NAME="_972225381"></a></font><sub><font face="Arial"><img SRC="images/Image557.gif" WIDTH="559" HEIGHT="517"></font></p>
+</sub>
+<p ALIGN="CENTER"><font face="Arial"><b>Stator and rotor circuits of a
+synchronous machine</b></font></p>
+<u><font FACE="Arial" SIZE="4">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font></u>
+<p ALIGN="JUSTIFY"><font face="Arial"><u>Electrical equations</u>:</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">The equations of the electric circuits
+are:</font></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><font face="Arial">circuits of the stator phases:</font><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image558.gif" WIDTH="163" HEIGHT="66">
+i=1,2,3</font></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="left"><font face="Arial">excitation circuit</font><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="center"><font face="Arial"><img SRC="images/Image559.gif" WIDTH="190" HEIGHT="66">
+(1)</font></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><font face="Arial">d axis damp circuit:</font><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial" SIZE="4"></font>
+<p align="center"><font face="Arial"><img SRC="images/Image560.gif" WIDTH="210" HEIGHT="66">
+(2)</font></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><font face="Arial">q axis damp circuit:</font><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image561.gif" WIDTH="208" HEIGHT="68"></font></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><font face="Arial">equations of the magnetic circuits:</font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY">&nbsp;<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image562.gif" WIDTH="659" HEIGHT="39"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image563.gif" WIDTH="687" HEIGHT="38"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image564.gif" WIDTH="675" HEIGHT="39"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image565.gif" WIDTH="677" HEIGHT="39"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image566.gif" WIDTH="750" HEIGHT="39"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image567.gif" WIDTH="746" HEIGHT="39"></font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="CENTER">&nbsp;</p>
+</font>
+<p ALIGN="left"><font face="Arial">Coefficients <img SRC="images/Image568.gif" width="23" height="28">
+(i=1,2,3) are the stator self-inductances, <img SRC="images/Image569.gif" width="23" height="31"> (i=1,2,3
+and j =1,2,3 with i¹ j) are the stator mutual inductances. Coefficients <img SRC="images/Image570.gif" width="30" height="30">,
+<img SRC="images/Image571.gif" width="36" height="30">, <img SRC="images/Image572.gif" width="36" height="31"> (i=1,2,3) are
+the mutual inductances between stator and rotor windings. The other coefficients
+are the rotor self and mutual inductances.</font></p>
+<p ALIGN="left"><font face="Arial">The previous equations contain inductance
+terms, which vary with angle, which in turns varies with time. This introduces
+considerable complexity in solving machine and power system problems. A much
+simpler form is obtained by Park's transformation, which eliminates all
+time-varying inductances from the voltages equations by replacing the variables
+associated with the stator windings with variables associated with fictitious
+windings rotating with the rotor.</font></p>
+<p ALIGN="left"><font face="Arial">The transformation from the abc phase
+variables to the dq0 variables can be written in the following form:</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image573.gif" width="503" height="180"></font></p>
+<p align="left"><font face="Arial">The inverse transformation is given by</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image574.gif" width="421" height="180"></font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="CENTER">&nbsp;</p>
+</font>
+<p ALIGN="left"><font face="Arial">The above transformation also applies to the
+stator flux linkages and voltages.</font></p>
+<p ALIGN="left"><font face="Arial">flux linkages in dq0 components</font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font>
+<p align="center"><font face="Arial"><img SRC="images/Image575.gif" WIDTH="357" HEIGHT="37">
+(3)</font></p>
+<p align="center"><font face="Arial"><img SRC="images/Image576.gif" WIDTH="258" HEIGHT="39">
+(4)</font></p>
+<p align="center"><font face="Arial"><img SRC="images/Image577.gif" WIDTH="140" HEIGHT="37">
+(5)</font></p>
+<p align="center"><font face="Arial"><img SRC="images/Image578.gif" WIDTH="392" HEIGHT="64">
+(6)</font></p>
+<p align="center"><font face="Arial"><img SRC="images/Image579.gif" WIDTH="413" HEIGHT="64">
+(7)</font></p>
+<p align="center"><font face="Arial"><img SRC="images/Image580.gif" WIDTH="322" HEIGHT="64">
+(8)</font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font>
+<p ALIGN="left"><font face="Arial">All the inductances are constant; i.e. they
+are independent of the rotor position. The mutual inductances between stator and
+rotor quantities are not reciprocal. This fact is overcome by appropriate choice
+of the per unit system for the rotor quantities, as it will be shown in the
+following section.</font></p>
+<p ALIGN="left"><font face="Arial">Stator voltage equations in dq0 components</font></p>
+<p align="center"><font face="Arial"><img SRC="images/Image581.gif" WIDTH="262" HEIGHT="188">
+(9)</font></p>
+<p ALIGN="left"><font face="Arial">where w represents the angular velocity of
+the rotor. In the above equations the <img SRC="images/Image582.gif" WIDTH="53" HEIGHT="39">
+and <img SRC="images/Image583.gif" WIDTH="53" HEIGHT="37"> term are referred to
+as speed voltages (due to flux change in space) and the terms <img SRC="images/Image584.gif" WIDTH="57" HEIGHT="66">
+and <img SRC="images/Image585.gif" WIDTH="57" HEIGHT="68"> are the transformer
+voltages (due to flux change in time).</font></p>
+<p ALIGN="left"><font face="Arial">The speed voltage terms are the dominant
+components of the stator voltage and the transformer voltage terms are
+neglected. Therefore, the stator quantities contain only fundamental frequency
+components and the stator voltage equations appear as algebraic equations. This
+allows the use of steady-state relationships for representing the
+interconnecting transmission network.</font></p>
+<p ALIGN="left"><font face="Arial">The air-gap torque T<sub>e</sub> is obtained
+by dividing the power transferred across the air-gap (i.e. power corresponding
+to the speed voltages) by the rotor speed</font></p>
+<p align="center"><font face="Arial"><img SRC="images/Image586.gif" WIDTH="246" HEIGHT="64">
+(10)</font></p>
+<p ALIGN="left"><font face="Arial">The flux linkage equations (3)-(8) associated
+with the stator and rotor circuits, together with the voltage equations (9) for
+the stator, the voltage equations (1) and (2) for the rotor, and the torque
+equation (10) describe the electrical dynamic performance of the machine in
+terms of the dq0 components.</font></p>
+<p ALIGN="left"><font face="Arial">Moreover, a convenient method of identifying
+electrical characteristics is in terms of operational parameters relating the
+armature and field terminal quantities. Equations (3)-(8) can be substituted by</font></p>
+<p ALIGN="center"><font face="Arial"><img SRC="images/Image587.gif" WIDTH="384" HEIGHT="37"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image588.gif" WIDTH="250" HEIGHT="39"></font></p>
+<p ALIGN="left"><font face="Arial">In power systems analysis, it is usually
+convenient to use a per unit system to normalize system variables. In the case
+of a synchronous machine, the per unit system is used to remove arbitrary
+constants and simplify mathematical equations. The basis for selection of the
+per unit system for the stator is straightforward, whereas it requires careful
+consideration for the rotor and several alternative per unit systems have been
+proposed in the literature. In the model, the following base quantities have
+been chosen:</font></p>
+<p ALIGN="left"><font face="Arial"><img SRC="images/Image589.gif" width="56" height="31"> = peak value
+of the rated line-to-neutral voltage, V</font></p>
+<p ALIGN="left"><font face="Arial"><img SRC="images/Image590.gif" WIDTH="58" HEIGHT="35">
+= peak value of rated line current, A</font></p>
+<p ALIGN="left"><font face="Arial"><img SRC="images/Image591.gif" WIDTH="58" HEIGHT="35">
+= rated frequency, Hz</font></p>
+<p ALIGN="left"><font face="Arial">For rotor quantities, the base field current
+is chosen so as it produces the no-load rated generator terminal voltage on the
+d-axis open-circuit air-gap line and the base field voltage is simply taken as
+the base field current times the field resistance.</font></p>
+<p ALIGN="left"><font face="Arial">The base values of the remaining quantities
+are automatically set and depend on the above as follows:</font></p>
+<p ALIGN="left"><font face="Arial"><img SRC="images/Image592.gif" WIDTH="165" HEIGHT="31"></font></p>
+<p><font face="Arial"><img SRC="images/Image593.gif" WIDTH="145" HEIGHT="61"></font></p>
+<p><font face="Arial"><img SRC="images/Image594.gif" width="136" height="58"></font></p>
+<p><font face="Arial"><img SRC="images/Image595.gif" width="281" height="61"></font></p>
+<p><font face="Arial"><img SRC="images/Image596.gif" WIDTH="183" HEIGHT="65"></font></p>
+<p ALIGN="left"><font face="Arial">By converting the above equations of the
+synchronous machine in normal form, it results</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image597.gif" width="330" height="56"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image598.gif" width="261" height="56"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image599.gif" width="323" height="61"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image600.gif" width="128" height="61"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image601.gif" width="136" height="61"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image602.gif" WIDTH="165" HEIGHT="31"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image603.gif" width="173" height="31"></font></p>
+<p ALIGN="left"><font face="Arial">where:</font></p>
+<p ALIGN="left"><font face="Arial"><img SRC="images/Image604.gif" width="98" height="61">; <img SRC="images/Image605.gif" width="246" height="61">;
+<img SRC="images/Image606.gif" WIDTH="145" HEIGHT="65"></font></p>
+<p ALIGN="JUSTIFY"><font face="Arial"><img SRC="images/Image607.gif" width="91" height="58">; <img SRC="images/Image608.gif" width="223" height="58">;
+<img SRC="images/Image609.gif" width="178" height="63">;</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial"><img SRC="images/Image610.gif" width="90" height="61">; <img SRC="images/Image611.gif" width="228" height="61">;</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial"><img SRC="images/Image612.gif" width="91" height="61">; <img SRC="images/Image613.gif" width="216" height="61">;</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial"><img SRC="images/Image614.gif" width="176" height="58">; <img SRC="images/Image615.gif" WIDTH="175" HEIGHT="65">;</font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font>
+<p ALIGN="left"><font face="Arial"><u>Equations of motion</u></font></p>
+<p ALIGN="left"><font face="Arial">The equation of motion is</font></p>
+<p ALIGN="center"><font face="Arial"><img SRC="images/Image616.gif" WIDTH="165" HEIGHT="56">
+(11)</font></p>
+<p align="left"><font face="Arial">where</font></p>
+<p align="left"><font face="Arial">T<sub>m</sub> = mechanical torque</font></p>
+<p align="left"><font face="Arial">T<sub>e</sub> = electromagnetic torque</font></p>
+<p align="left"><font face="Arial">J = combined moment of inertia of generator
+and turbine</font></p>
+<p align="left"><font face="Arial">W = angular velocity of the rotor</font></p>
+<p ALIGN="left"><font face="Arial">The above equation can be normalized in terms
+of per unit inertia constant H, defined as the kinetic energy in watt-seconds at
+rated speed divided by the VA base. Thus, the equation of motion in per unit
+form is</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image617.gif" WIDTH="190" HEIGHT="61"></font></p>
+<p align="left"><font face="Arial">where</font></p>
+<p align="left"><font face="Arial">T<sub>a</sub> = 2H</font></p>
+<p ALIGN="left"><font face="Arial">If d is the angular position of the rotor in
+electrical radians with respect to a synchronously rotating reference,</font></p>
+<p ALIGN="center"><font face="Arial"><img SRC="images/Image618.gif" width="181" height="53"></font></p>
+<p ALIGN="left"><font face="Arial">From equation (11), including also a
+component of damping torque, not accounted for in the calculation of Te,</font></p>
+<p ALIGN="center"><font face="Arial"><img SRC="images/Image619.gif" width="270" height="63"> (12)</font></p>
+<p ALIGN="left"><font face="Arial">Equation (12) is commonly referred to as
+swing equation because represents swings in rotor angle d during disturbances.</font></p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte3"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Ballast load<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<u>
+<p align="left"><font face="Arial">Module assumptions</font></p>
+</u>
+<p ALIGN="left"><font face="Arial">With the exception of purely resistive loads,
+all other loads, after their energisation, exhibit a transient absorption of
+active and reactive power whose amplitude may reach a value of several times the
+steady-state one.</font></p>
+<p ALIGN="left"><font face="Arial">The transient is, in general, of short
+duration (1-2 s). However, especially when air conditioning and refrigerator
+apparatuses are energised, it can last a longer time, hindering the regular
+restoration of the network.</font></p>
+<p ALIGN="left"><font face="Arial">To reproduce the behavior of aggregate loads
+after their energization, a specific module has been developed. Such a module is
+characterized by a power consumption which varies with time, as shown in the
+figure below. The function describing such a power variation is characterized by
+a peak value (P1), the value before the black-out (Pnom) and the steady state
+value after the initial transient (P2).</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image620.gif" WIDTH="496" HEIGHT="309"></font></p>
+<p ALIGN="left"><font face="Arial">To function describing the reactive power
+variation is shown in figure below, in which the behavior is exponentially
+decreasing (the exponential decay factor is a module data).</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image621.gif" WIDTH="501" HEIGHT="373"></font></p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte4"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Induction motor<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<p ALIGN="left"><font face="Arial">The main hypotheses used in this module are:</font></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><font face="Arial">magnetic saturation effects are
+    negligible</font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><font face="Arial">magnetic hysteresis and eddy currents
+    are negligible</font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><font face="Arial">the stator windings are sinusoidally
+    distributed as far as the mutual effects with the rotor are concerned</font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><font face="Arial">the rotor has a symmetrical structure.</font><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><font face="Arial">These assumptions are generally accepted in
+stability studies.</font></p>
+<p ALIGN="left"><font face="Arial">The currents induced in the shorted rotor
+windings produce a field with the same number of poles as that produced by the
+stator winding. Rotor windings may therefore be modelled by an equivalent
+three-phase winding.</font></p>
+<p ALIGN="left"><font face="Arial">A schematic representation of the inductor
+motor is shown in Fig. 1:</font></p>
+<p ALIGN="CENTER"><a NAME="_969690186"><font face="Arial"></font></a><font face="Arial"><a NAME="_969692390"></a><a NAME="_969692474"></a><img SRC="images/Image622.gif" width="586" height="507"><a NAME="_969716494"></a></font></p>
+<font FACE="Arial">
+<p ALIGN="CENTER">Fig. 1.<i> Schematic representation of the inductor motor</p>
+</i></font><font FACE="Arial" SIZE="4">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><u>
+<p ALIGN="JUSTIFY"><font face="Arial">Basic equations of an induction machine:</font></p>
+</u>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><font face="Arial">Stator voltage equations:</font><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image623.gif" WIDTH="226" HEIGHT="65"><i>
+</i>i=a,b,c</font></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="left"><font face="Arial">Rotor voltage equations:</font><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image624.gif" WIDTH="206" HEIGHT="66">
+i=A,B,C</font></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><font face="Arial">Flux linkage equations:</font><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image625.gif" WIDTH="726" HEIGHT="62"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image626.gif" WIDTH="747" HEIGHT="65"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image627.gif" WIDTH="747" HEIGHT="67"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image628.gif" WIDTH="757" HEIGHT="65"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image629.gif" WIDTH="743" HEIGHT="65"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image630.gif" WIDTH="766" HEIGHT="67"></font></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left"><font face="Arial">where</font></p>
+<p ALIGN="left"><font face="Arial">L<sub>ss</sub> and L<sub>rr</sub> are the
+self-inductance of the stator and the rotor windings respectively;</font></p>
+<p ALIGN="left"><font face="Arial">M<sub>s</sub> and M<sub>r</sub> are the
+mutual inductance of the between stator windings and between rotor windings
+respectively;</font></p>
+<p ALIGN="left"><font face="Arial">M<sub>rs</sub> is maximum value of the mutual
+inductance between stator and rotor windings.</font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><u>
+<p ALIGN="JUSTIFY"><font face="Arial">The d-q transformation</font></p>
+</u>
+<p ALIGN="left"><font face="Arial">The above equations can be simplified by
+appropriate transformation of phase variables into components along rotating
+axes. The reference frame is one with the axes rotating at the angular velocity
+W s=2p f (where f is the network frequency). The q-axis is assumed to be 90°
+ahead of the d-axis in the direction of rotation. With no neutral currents, the
+stator and rotor voltages in terms of the d and q components are:</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image631.gif" WIDTH="371" HEIGHT="58"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image632.gif" WIDTH="317" HEIGHT="57"></font></p>
+<p align="left"><font face="Arial">where:</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image633.gif" WIDTH="164" HEIGHT="206"></font></p>
+<p ALIGN="left"><font face="Arial">The magnetic equation are:</font></p>
+<p ALIGN="center"><font face="Arial"><img SRC="images/Image634.gif" WIDTH="237" HEIGHT="32"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image635.gif" WIDTH="232" HEIGHT="33"></font></p>
+<p ALIGN="left"><font face="Arial">where</font></p>
+<p ALIGN="center"><font face="Arial"><img SRC="images/Image636.gif" WIDTH="137" HEIGHT="86"></font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="CENTER">&nbsp;</p>
+</font>
+<p ALIGN="left"><font face="Arial">For representation in stability studies <img SRC="images/Image637.gif" WIDTH="73" HEIGHT="45">
+and <img SRC="images/Image638.gif" width="73" height="48"> are neglected in the stator voltage
+relation. This simplification is essential to ensure compatibility with the
+models used for representing other system components, particularly the
+transmission network.</font></p>
+<p ALIGN="left"><font face="Arial">Then, by choosing the following base
+quantities for the stator:</font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font>
+<p ALIGN="JUSTIFY"><font face="Arial"><img SRC="images/Image639.gif" WIDTH="401" HEIGHT="31"></font></p>
+<p><font face="Arial"><img SRC="images/Image640.gif" WIDTH="178" HEIGHT="66"></font></p>
+<p><font face="Arial"><img SRC="images/Image641.gif" WIDTH="171" HEIGHT="70"></font></p>
+<p><font face="Arial"><img SRC="images/Image642.gif" WIDTH="145" HEIGHT="31">
+(where fn is the rated frequency)</font></p>
+<p align="left"><font face="Arial">and</font></p>
+<p><font face="Arial"><img SRC="images/Image643.gif" WIDTH="166" HEIGHT="62">
+for the angular mechanic speed</font></p>
+<p><font face="Arial"><img SRC="images/Image644.gif" WIDTH="152" HEIGHT="64">
+for magnetic flows</font></p>
+<p><font face="Arial"><img SRC="images/Image645.gif" width="141" height="63"> for impedances</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial"><img SRC="images/Image646.gif" width="148" height="61"> for
+inductances</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial"><img SRC="images/Image647.gif" width="161" height="61"> for
+torques,</font></p>
+<p ALIGN="left"><font face="Arial">the stator and rotor equations become</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image648.gif" WIDTH="321" HEIGHT="37"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image649.gif" WIDTH="351" HEIGHT="65"></font></p>
+<p ALIGN="left"><font face="Arial">where</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image650.gif" width="120" height="36"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image651.gif" WIDTH="124" HEIGHT="124"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image652.gif" WIDTH="80" HEIGHT="58"></font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="CENTER">&nbsp;</p>
+</font><u>
+<p ALIGN="JUSTIFY"><font face="Arial">Acceleration equation:</font></p>
+</u>
+<p ALIGN="left"><font face="Arial">The electromagnetic torque T<sub>e</sub>
+developed by the motor drives the mechanical load. If there is a mismatch
+between the electromagnetic torque and the mechanical load torque T<sub>m</sub>,
+the differential torque accelerates the rotor mass:</font></p>
+<p ALIGN="center"><font face="Arial"><img SRC="images/Image653.gif" WIDTH="218" HEIGHT="59"></font></p>
+<p ALIGN="left"><font face="Arial">In p.u., it becomes</font></p>
+<p ALIGN="center"><font face="Arial"><img SRC="images/Image654.gif" WIDTH="238" HEIGHT="64"></font></p>
+<p ALIGN="left"><font face="Arial">where</font></p>
+<p ALIGN="center"><font face="Arial"><img SRC="images/Image655.gif" WIDTH="126" HEIGHT="75"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image656.gif" WIDTH="317" HEIGHT="44"></font></p>
+<p ALIGN="left"><font face="Arial">Double squirrel-cage arrangements are used to
+obtain a high value of rotor resistance at starting and low value of the
+resistance at full-load operation.</font></p>
+<p ALIGN="left"><font face="Arial">The equivalent circuit of a motor with
+double-cage rotor may be represented by an equivalent single rotor circuit with
+slip-dependent rotor parameters (Fig. 2):</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image657.gif" WIDTH="350" HEIGHT="135"></font></p>
+<p ALIGN="left"><font face="Arial">where</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial"><img SRC="images/Image658.gif" WIDTH="140" HEIGHT="67"></font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image659.gif" WIDTH="633" HEIGHT="262"></font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="CENTER">&nbsp;</p>
+</font>
+<p ALIGN="left"><font face="Arial">The iron core power losses may be simulated
+by means of a resistance Rf, so that</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image660.gif" WIDTH="365" HEIGHT="70"></font></p>
+<p ALIGN="left"><font face="Arial">then</font></p>
+<p ALIGN="center"><font face="Arial"><img SRC="images/Image661.gif" WIDTH="160" HEIGHT="71"></font></p>
+<p ALIGN="left"><font face="Arial">Currents i<sub>d</sub> and i<sub>q</sub>
+become:</font></p>
+<p ALIGN="center"><font face="Arial"><img SRC="images/Image662.gif" WIDTH="165" HEIGHT="133"></font></p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte5"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Network<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<u>
+<p align="left"><font face="Arial">Module assumptions</font></p>
+</u>
+<p ALIGN="left"><font face="Arial">The system is assumed to be balanced; this
+allows a single phase representation.</font></p>
+<p ALIGN="left"><font face="Arial">The electromagnetic transients associated
+with the transmission network elements (lines and transformers) decay very
+rapidly in comparison with electromechanical transients due to machines
+oscillations. Indeed, network transients will have died out by the time the
+solution of the swing equation is advanced by one time step. Therefore, it is
+usually adequate to regard the network, during the electromechanical transients
+conditions, as though it were passing directly from one steady state to another.
+The fundamental frequency variations may be regarded as micro-processes, and
+only the variation in the envelopes (amplitude modulation) of currents and
+voltage waveforms are considered for stability analysis.</font></p>
+<p ALIGN="left"><font face="Arial">Therefore, the network representation is
+similar to that for power-flow analysis and the most convenient form of network
+representation is in terms of the node admittance matrix <i>Y</i>. The network
+equation is</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image663.gif" width="286" height="126"></font></p>
+<p ALIGN="left"><font face="Arial">where</font></p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="6%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><i><font face="Arial">n</font></i><!--mstheme--></font></td>
+    <td width="94%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">is the total number of nodes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="6%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><i><font face="Arial">Y<sub>ii</sub></font></i><!--mstheme--></font></td>
+    <td width="94%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">is the self admittance of node <i>i</i></font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="6%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="94%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">= sum of all the admittance terminating
+      at node i</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="6%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><i><font face="Arial">Y<sub>ij</sub></font></i><!--mstheme--></font></td>
+    <td width="94%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">is mutual admittance between nodes <i>i</i>
+      and <i>j</i></font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="6%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="94%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">= negative of the sum of all admittances
+      between nodes <i>i</i> and <i>j</i></font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="6%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><i><font face="Arial">V<sub>i</sub></font></i><!--mstheme--></font></td>
+    <td width="94%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">is the phasor voltage to ground at node <i>i</i></font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="6%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><i><font face="Arial">I<sub>i</sub></font></i><!--mstheme--></font></td>
+    <td width="94%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">is the phasor current flowing into the
+      network at node <i>i</i></font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><font face="Arial">The elements of the matrix <i>Y</i> are
+constant except for changes introduced by network switching and transformer tap
+changing operations.</font></p>
+<p ALIGN="left"><font face="Arial">The admittance matrix is sparse with the
+degree of sparsity increasing with the network size, it is singular if floating
+(i.e., if there are no shunt branches to ground), it has weak diagonal
+dominance, and it is symmetrical if there are no phase-shifting transformers.</font></p>
+<p ALIGN="left"><font face="Arial">Any phase shift due to transformer connection
+is not represented. In radial networks, such phase shifts do not affect
+power-flow analysis since currents and voltages are shifted by the same angle.
+In close-loop networks, utilities take special care to connect transformer
+windings so that there is no net phase shift introduced in a common direction
+round a loop; otherwise, circulating current will flow, which is normally
+unacceptable.</font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><u>
+<p ALIGN="left"><font face="Arial">Simulation of faults</font></p>
+</u>
+<p ALIGN="left"><font face="Arial">The negative- and zero-sequence voltages and
+currents throughout the system are generally not of interest in stability
+studies. Therefore, it is unnecessary to simulate the complete negative- and
+zero-sequence networks in system stability simulations. Their effects may be
+represented by equivalent impedances (Z<sub>2</sub> and Z<sub>0</sub>) as viewed
+at the fault point F. these impedances are combined appropriately depending on
+the type of fault and inserted as the effective fault impedance Z<sub>ef</sub>
+in the positive-sequence network as shown in Fig. 1.</font></p>
+<font FACE="Arial" SIZE="4"></font>
+<p ALIGN="center"><a NAME="_973430127"><font face="Arial"></font></a><font face="Arial"><a NAME="_973430143"></a><img SRC="images/Image664.gif" WIDTH="416" HEIGHT="392"></font></p>
+<p ALIGN="CENTER"><font face="Arial">Fig. 1. Representation of faults in system
+stability studies</font></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left"><font face="Arial">A fault at or near a bus is thus simulated by
+appropriately changing the self-admittance of the bus. This representation gives
+the correct voltages and currents in the positive-sequence network. Since there
+are no negative- or zero-sequence voltages generated in the system and the
+negative- and zero-sequence currents that flow during unbalanced faults are
+driven by the positive -sequence voltage sources, the positive-sequence power
+outputs computed represent the actual power supplied electrically by the
+machines and include all negative and zero-sequence resistance losses supplied
+electrically.</font></p>
+<p ALIGN="left"><font face="Arial">For a three-phase fault, the fault impedance
+is zero and the faulted bus has the same potential as the ground. In the module
+this is taking into account by the equation</font></p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image665.gif" WIDTH="65" HEIGHT="31"></font></p>
+<p ALIGN="left"><font face="Arial">where V<sub>F</sub> is the voltage at the
+fault node F.</font></p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte6"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Excitation system<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<p ALIGN="left"><font face="Arial">The basic function of the system is to
+provide direct current to the synchronous machine field winding. In addition it
+performs control and protective functions: it controls the voltage ensuring that
+the capability limits of the synchronous machine are not exceeded.</font></p>
+<p ALIGN="left"><font face="Arial">The implemented model represents a
+controlled-rectifier excitation system and its block scheme is shown in Fig. 1,
+where V<sub>rif</sub> is the voltage set point and V is the terminal voltage of
+the synchronous machine.</font></p>
+<font FACE="Arial" SIZE="4"></font>
+<p ALIGN="CENTER"><a NAME="_972890149"><font face="Arial"></font></a><font face="Arial"><a NAME="_972895582"></a><a NAME="_972895610"></a><img SRC="images/Image666.gif" width="666" height="182"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><i>Fig. 1. Primary voltage regulator scheme</i></font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font>
+<p ALIGN="CENTER"><a NAME="_972893692"><font face="Arial"></font></a><font face="Arial"><a NAME="_973430263"></a><a NAME="_973431167"></a><a NAME="_973432533"></a><img SRC="images/Image667.gif" width="722" height="463"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><i>Fig. 2. Block diagram representation of
+field-current and underexcitation limiters</i></font></p>
+<p ALIGN="CENTER"><a NAME="_972893718"><font face="Arial"></font></a><font face="Arial"><a NAME="_973408290"></a><a NAME="_973410090"></a><a NAME="_973427180"></a><a NAME="_973427232"></a><a NAME="_973433043"></a><img SRC="images/Image668.gif" WIDTH="687" HEIGHT="423"></font></p>
+<p ALIGN="CENTER"><font face="Arial"><i>Fig. 3 Generator capability curve</i></font></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left"><font face="Arial">Fig. 2 shows the scheme of the field-current
+limiter and that of the underexcitation limiter. These limiters do not come to
+play under normal conditions. They may, however, be important for long-term
+stability and voltage stability studies.</font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="left">&nbsp;</p>
+</font>
+<p ALIGN="left"><font face="Arial"><i>Field-current limiter</i>:</font></p>
+<p ALIGN="left"><font face="Arial">setting <img SRC="images/Image669.gif" WIDTH="49" HEIGHT="41">
+provides a limiting action with time delay dependent on the level of field
+current.</font></p>
+<font FACE="Arial" SIZE="4">
+<p ALIGN="left">&nbsp;</p>
+</font>
+<p ALIGN="left"><font face="Arial"><i>Underexcitation limiter</i>:</font></p>
+<p ALIGN="left"><font face="Arial">parameter b determine the characteristics of
+the limiter on the P-Q plane, as shown in Fig. 3, where P and Q are the active
+and reactive power output of the generator.</font></p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="center">&nbsp;</p>
+<!--mstheme--></font></body>
+
+</html>

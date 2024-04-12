@@ -1,0 +1,61 @@
+****
+VALV      BLOCCO (0___) - VALV - Water/steam valve (Wout computed)             
+COLT      BLOCCO (13__) - COLT - Collettore 1 ingresso 1 uscita                
+TREN      BLOCCO (2___) - TREN - Steam turbine stage                           
+****
+TURBO
+****
+VALV0___  BL.-0___- **** MODULO VALV - VALV - Water/steam valve (Wout computed)
+WVAL0___  --UA-- FLUID FLOW RATE IN THE VALVE                                   
+PCOL13__  --IN-- #PIVA0___#....................<===COLT13__  BL.-13__-
+PITZ2___  --IN-- #PUVA0___#....................<===TREN2___  BL.-2___-
+HCOL13__  --IN-- #HVAL0___#....................<===COLT13__  BL.-13__-
+ALZA0___  --IN-- VALVE LIFT                                                     
+****
+****
+COLT13__  BL.-13__- **** MODULO COLT - COLT - Collettore 1 ingresso 1 uscita   
+HCOL13__  --UA-- FLUID ENTHALPY IN THE MANIFOLD                                 
+PCOL13__  --UA-- FLUID PRESSURE IN THE MANIFOLD                                 
+TCOL13__  --UA-- METAL TEMPERATURE IN THE MANIFOLD                              
+WE_113__  --IN-- FLOW RATE IN THE ENTERING BRANCH N. 1                          
+HE_113__  --IN-- ENTHALPY IN THE ENTERING BRANCH N. 1                           
+WVAL0___  --IN-- #WU_113__#....................<===VALV0___  BL.-0___-
+HU_113__  --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W<0)                   
+TEST13__  --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD                         
+GEST13__  --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD                   
+****
+****
+TREN2___  BL.-2___- **** MODULO TREN - TREN - Steam turbine stage              
+HUTZ2___  --UA-- FLUID ENTHALPY AT THE REACTION STAGE OUTLET                    
+WUTZ2___  --UA-- STEAM FLOW RATE AT THE REACTION STAGE OUTLET                   
+PITZ2___  --UA-- STEAM PRESSURE AT THE REACTION STAGE INLET                     
+QMEC2___  --UA-- MECHANICAL POWER OF THE REACTION TURBINE STAGE                 
+PSPZ2___  --UA-- STEAM PRESSURE AT BLEEDING OUTLET                              
+HSPZ2___  --UA-- STEAM ENTHALPY AT BLEEDING OUTLET                              
+WVAL0___  --IN-- #WITZ2___#....................<===VALV0___  BL.-0___-
+WSPZ2___  --IN-- FLOW RATE OF STEAM BLED FROM THE REACTION TURB. STAGE          
+HCOL13__  --IN-- #HITZ2___#....................<===COLT13__  BL.-13__-
+PUTZ2___  --IN-- STEAM PRESSURE AT THE REACTION STAGE OUTLET                    
+SERC2___  --IN-- LOAD REJECTION OR TRIP SIGNAL                                  
+SEAV2___  --IN-- STARTING BUTTON OF THE REACTION TURBINE                        
+RPMV2___  --IN-- ROTATIONAL SPEED OF THE REACTION TURBINE                       
+****
+****      >>>>>>INGRESSI DI TUTTI I MODULI<<<<<<
+ALZA0___  --IN-- VALVE LIFT                                                     
+WE_113__  --IN-- FLOW RATE IN THE ENTERING BRANCH N. 1                          
+HE_113__  --IN-- ENTHALPY IN THE ENTERING BRANCH N. 1                           
+HU_113__  --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W<0)                   
+TEST13__  --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD                         
+GEST13__  --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD                   
+WSPZ2___  --IN-- FLOW RATE OF STEAM BLED FROM THE REACTION TURB. STAGE          
+PUTZ2___  --IN-- STEAM PRESSURE AT THE REACTION STAGE OUTLET                    
+SERC2___  --IN-- LOAD REJECTION OR TRIP SIGNAL                                  
+SEAV2___  --IN-- STARTING BUTTON OF THE REACTION TURBINE                        
+RPMV2___  --IN-- ROTATIONAL SPEED OF THE REACTION TURBINE                       
+****
+PIVA0___  --CO-- FLUID PRESSURE AT THE VALVE INLET                              
+PUVA0___  --CO-- FLUID PRESSURE AT THE VALVE OUTLET                             
+HVAL0___  --CO-- VALVE INLET-OUTLET FLUID ENTHALPY                              
+WU_113__  --CO-- FLOW RATE IN THE COMING OUT BRANCH N. 1                        
+WITZ2___  --CO-- STEAM FLOW RATE AT THE REACTION STAGE INLET                    
+HITZ2___  --CO-- STEAM ENTHALPY AT THE REACTION STAGE INLET                     

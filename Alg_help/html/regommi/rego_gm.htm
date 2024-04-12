@@ -1,0 +1,1016 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>REGULATION MODULE</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_GFUN"></A>GFUN regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module GFUN is a function generator with NP sharp points, where NP is included within 2 and 10, which operates as follows: defined as I1 the input signal and as (X(1), Y(1), X(2), Y(2)), ..., (X(NP), Y(NP)) the NP couples of points on the X-Y plane (which will identify the NP sharp points) with X(1) &lt; X(2) &lt; ... X(NP), the output UA is:</P>
+<P ALIGN="JUSTIFY">UA = Y(1), for II &lt; X(1)</P>
+<P ALIGN="JUSTIFY">UA = lin.funct. of II passing through (X(1), Y(1)), (X(2), Y(2)), for X(1) &lt; II &lt; X(2)</P>
+<P ALIGN="JUSTIFY">UA = lin.funct. of II passing through (X(2), Y(2)), (X(3), Y(3)), for X(2) &lt; II &lt; X(3)</P>
+<P ALIGN="JUSTIFY">...</P>
+<P>UA = lin.funct. of II passing through (X(NP-1), YNP-1)), (X(NP), Y(NP)),<BR>
+for X(NP-1) &lt; II &lt; X(NP)</P>
+<P ALIGN="JUSTIFY">UA = Y(NP), for II &gt; X(NP)</P>
+<P ALIGN="JUSTIFY">It is evident that we can have different broken line diagrams depending on mutual ratio between Y(1), Y(2), ..., Y(NP) (see figure 1).</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1053.gif" WIDTH=546 HEIGHT=248></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1054.gif" WIDTH=367 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;II&#9;input analogue variable</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In addition to the initial values of input and output variables, whose meaning has been defined above, user must assign the following data set to complete the INPUT required by the GFUN module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;NPUNTI&#9;number of NP sharp points characterizing the function (it has to be included within 2 and 10)</P>
+<P ALIGN="JUSTIFY">[]&#9;Xi&#9;&#9;abscissa X(i) of the i-th sharp point (i = 1, ..., 10)</P>
+<P ALIGN="JUSTIFY">[]&#9;Yi&#9;&#9;ordinate Y(i) of the i-th sharp point (i = 1, ..., 10)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Independently of the number of sharp points NP, fixed by user, it is useful to note that within the set of data ten couples of points always appear.</P>
+<P ALIGN="JUSTIFY">Among these points, only the first NP are significant, the other being totally ignored by module. So, user can assign to the irrilevant couples of points any value (also no value).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the GFUN module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">On the contrary, during the data assignment phase some precautions are needed:</P>
+<P ALIGN="JUSTIFY">1) number of sharp points NP included within 2 and 10</P>
+<P ALIGN="JUSTIFY">2) first NPUNTI abscisse X1, X2, ..., XNPUNTI such as to respect the condition:</P>
+<P ALIGN="CENTER">X1 &lt; X2 &lt; ... &lt; XNPUNTI</P>
+<P ALIGN="JUSTIFY">The non-respect of this condition can casue errors.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1055.gif" WIDTH=594 HEIGHT=721></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_GPRO"></A>GPRO regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module GPRO is a function generator with two sharp points which operates as follows:</P>
+<P ALIGN="JUSTIFY">defined as II the input signal and as (X0, Y0), (X1, Y1) the two couples of points on the plane X-Y (which will identify the two sharp points), where X0 &lt; X1, the UA output is:</P>
+<P ALIGN="JUSTIFY">UA = Y0, for II &lt; X0</P>
+<P ALIGN="JUSTIFY">UA = Y1, for II &gt; X1</P>
+<P ALIGN="JUSTIFY">UA = lin.funct. of II passing through (X0, Y0), (X1, Y1), for X0 &lt; II &lt; X1</P>
+<P ALIGN="JUSTIFY">It is evident that we can have two type of diagrams when Y0 is less than Y1 or vice-versa. (see figure 1).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1056.gif" WIDTH=468 HEIGHT=227></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1057.gif" WIDTH=367 HEIGHT=162></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;II&#9;input analogue variable</P>
+<P ALIGN="JUSTIFY">[]&#9;KA&#9;abscissa X0 of the first sharp point</P>
+<P ALIGN="JUSTIFY">[]&#9;KB&#9;abscissa X1 of the second sharp point</P>
+<P ALIGN="JUSTIFY">[]&#9;KC&#9;ordinate Y0 of the first sharp point</P>
+<P ALIGN="JUSTIFY">[]&#9;KD&#9;ordinate Y1 of the second sharp point</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The GPRO module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1058.gif" WIDTH=441 HEIGHT=329></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_INTG"></A>INTG regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module INTG simulates the behaviour of an integrator whose transfer function (writes using the Laplace transform) is the following (see the theoretical treatment related to the integrator):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1059.gif" WIDTH=206 HEIGHT=41></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where KI and KT respectively represent the gain and the integrator time constant, "s" is the Laplace operator, and IN(s), UA(s) indicate the L-transforms of the input IN(t) and output UA(t) respectively.</P>
+<P ALIGN="JUSTIFY">The following formulae make clear as previously said. A distinction is now useful between the cases in which a stationary or transient condition is calculating.</P>
+<P ALIGN="JUSTIFY">1) Stationary condition: no calculation is carried out, therefore the UA output keeps the value fixed by user during the filling phase of the file F14.DAT.</P>
+<P ALIGN="JUSTIFY">2) Transient condition: the UA output is calculated using the following expression:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1060.gif" WIDTH=213 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where Dt, UAP and INPU respectively represent the time interval, the output at the preceding time interval and the input normalized with its end scale value FOSCII:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1061.gif" WIDTH=121 HEIGHT=38></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">This expression is obtained beginning from the above mentioned transfer function passing from the domain of Laplace transforms to the temporal domain and discretizing.</P>
+<P ALIGN="JUSTIFY">Finally we have an operation which is common both to the stationary or transient condition (previously defined) consisting of the limitation that the UA output has to belong to the time interval identified by minimum and maximum saturation values SAT_MN and SAT_MX.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1062.gif" WIDTH=367 HEIGHT=130></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;IN&#9;integrator input</P>
+<P ALIGN="JUSTIFY">[]&#9;KI&#9;integrator gain</P>
+<P ALIGN="JUSTIFY">[s]&#9;KT&#9;integrator time constant</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Besides the initial values of input-output variables related to the INTG module, whose meaning has been defined above, user has to assign the following data set to complete the INPUT required by module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;SAT_MX&#9;maximum value (saturation) of UA output</P>
+<P ALIGN="JUSTIFY">[]&#9;SAT_MN&#9;minimum value (saturation) of UA output</P>
+<P ALIGN="JUSTIFY">[]&#9;FOSCII&#9;end scale value for the IN input.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the calculation phase of a stationary condition, the output and input keep the tentative value assigned by user during the filling phase of the file F14.DAT. Considering the function that INTG module has (input integration), user has to assign null value to the IN input in order to obtain that the actual condition be stationary (see theoretical treatment related to the INTG module).</P>
+<P ALIGN="JUSTIFY">Besides, since inside the INTG module the IN input is normalized, dividing it for its end scale value FOSCII, user has to assign to this datum a value different from zero in order to avoid numerical problems (division with null denominator).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1063.gif" WIDTH=259 HEIGHT=556></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_LOGO"></A>LOG0 regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In all cases in which user has to use the STAZ program to simulate the behaviour of actual actuator stations (see related documentation), the regulation module LOG0 (or LOGS) must be utilized. In fact, this module consists of a logic block presented between an actuation station and a regulation in the strict sense of the word.</P>
+<P ALIGN="JUSTIFY">It is important to point out that STAZ program only operates within the "CAD SIMULATOR" environment (LEGOCAD environment allowing to simulate a plant functioning by means of a mathematical model consisting of sub-models, or tasks managed in a centralized way by SCHEDULER). Consequently, it makes sense to insert LOG0 module in a regulation scheme only whether user aims to simulate, in "CAD SIMULATOR" environment, a model consisting of (besides the regulation scheme), almost an actuation station (STAZ program).</P>
+<P ALIGN="JUSTIFY">Hereinafter, we examine the function that this module has, postponing in the following cards the description of its possible uses.</P>
+<P ALIGN="JUSTIFY">We begin pointing out the different possibilities that module has according to the values of some logical variables:</P>
+<P ALIGN="JUSTIFY">1) Stationary condition: the JS logical output (logic state toward the regulation) is set equal to the state requested by the JR station. Besides the JE output is forced to the "false" value (JE becomes "true" when a request coming from station is examined, on the contrary it is "false").</P>
+<P ALIGN="CENTER">JS = JR</P>
+<P ALIGN="CENTER">JE = false</P>
+<P ALIGN="JUSTIFY">2) Transient condition.</P>
+<P ALIGN="JUSTIFY">2.1) JE true: the request coming from station has already been examined; therefore JE signal is equated to the "false" value.</P>
+<P ALIGN="JUSTIFY">2.2) JE false: the request coming from station has not been examined jet.</P>
+<P ALIGN="JUSTIFY">2.2.1) JS = JR: the state JS is equal to the JR request; no operation is carried out.</P>
+<P ALIGN="JUSTIFY">2.2.2) JS &lt; &gt; JR: the state is different than the request; the state JS if forced so that it becomes equal to JR; besides, JE is set on "true" (request coming from examined station):</P>
+<P ALIGN="CENTER">JS = JR</P>
+<P ALIGN="CENTER">JE = true</P>
+<P ALIGN="JUSTIFY">Now we analyse the cases in which the module LOG0 is used. Since it acts as interface between station and regulation, it is better to examine the different types of station foreseen one by one, looking at the interconnecting schemes and related regulation blocks.</P>
+<P ALIGN="JUSTIFY">Five different types of station has been defined:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libreg_LOGO_typ1"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">station type AUTOMATIC/MANUAL (type 1)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libreg_LOGO_typ2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">station type CONNECT/DISCONNECT (type 2)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libreg_LOGO_typ3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">station type TRIMMER (type 3)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libreg_LOGO_typ4"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">station type START/STOP (type 4)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libreg_LOGO_typ5"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">station type WAYS (type 5)</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1><P><A NAME="lg_libreg_LOGO_typ1"></A></P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">STATION TYPE AUTOMATIC/MANUAL (type 1)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">It is the station AUTOMATIC/MANUAL associable to a PI regulator (module RPIA or REPI), to an actuator or to a set-point managing.</P>
+<P ALIGN="JUSTIFY">When it is in manual, it foresees the possibility to set up a target value or to give increasing/decreasing by means of use of key at target value.</P>
+<P ALIGN="JUSTIFY">If the presence of interblocks and/or forcing is not foreseen, in all three mentioned cases user has to introduce the logic module LOG0 which makes itself responsible of interface between station and related regulation module RPIA (or REPI), ATAM or SETM.</P>
+<P ALIGN="JUSTIFY">Hereinafter we examine, for the three cases, how the associability with the regulation module happens:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>case PI REGULATOR (RPIA regulation LEGO block)</P>
+<P>&nbsp;</P><DIR>
+<DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1064.gif" WIDTH=533 HEIGHT=303></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Meaning of RPIA variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>UP --UA-- OUTPUT OF PI REGULATOR</P>
+<P>UA --UA-- ACTUATOR POSITION</P>
+<P>JA --UA-- LOGICS OF CLOSED END STROKE</P>
+<P>JB --UA-- LOGICS OF NOT CLOSED END STROKE</P>
+<P>JC --UA-- LOGICS OF OPENED END STROKE</P>
+<P>JD --UA-- LOGICS OF NOT OPENED END STROKE</P>
+<P>JE --UA-- MET LOGICS OF INCREASING ACTUATOR</P>
+<P>JF --UA-- MET LOGICS OF DECREASING ACTUATOR</P>
+<P>IE --IN-- ERROR</P>
+<P>IZ --IN-- ANTICIPATION IN INPUT TO THE PI REGULATOR</P>
+<P>II --IN-- PI REGULATOR OUTPUT IN BALANCING (TARGET VALUE)</P>
+<P>J1 --IN-- CONTROL LOGICS OF TARGET VALUE</P>
+<P>J3 --IN-- LOGICS OF AUTOMATIC/MANUAL STATE</P>
+<P>J4 --IN-- REQUEST OF ACTUATOR MANUAL INCREASING</P>
+<P>J5 --IN-- REQUEST OF ACTUATOR MANUAL DECREASING</P>
+<P>KP --IN-- PROPORTIONAL GAIN OF PI REGULATOR</P>
+<P>KZ --IN-- ANTICIPATING GAIN OF PI REGULATOR</P>
+<P>KT --IN-- INTEGRAL TIME OF PI REGULATOR</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Meaning of LOG0 variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- LOGICS OF CONNECTED/DISCONNECTED STATE</P>
+<P>JE --UA-- LOGICS OF MET REQUEST EXAMINATED</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>case ACTUATOR with AUTOMATIC/MANUAL station (ATAM regulation LEGO block)</P>
+<P>&nbsp;</P><DIR>
+<DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1065.gif" WIDTH=533 HEIGHT=303></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Meaning of ATAM variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>UA --UA-- ACTUATOR POSITION</P>
+<P>JA --UA-- LOGICS OF CLOSED END STROKE</P>
+<P>JB --UA-- LOGICS OF NOT CLOSED END STROKE</P>
+<P>JC --UA-- LOGICS OF OPENED END STROKE</P>
+<P>JD --UA-- LOGICS OF NOT OPENED END STROKE</P>
+<P>JE --UA-- MET LOGICS OF INCREASING ACTUATOR</P>
+<P>JF --UA-- MET LOGICS OF DECREASING ACTUATOR</P>
+<P>IE --IN-- REQUEST TO MEET</P>
+<P>II --IN-- TARGET VALUE</P>
+<P>J1 --IN-- CONTROL LOGICS OF TARGET VALUE</P>
+<P>J3 --IN-- LOGICS OG AUTOMATIC/MANUAL STATE</P>
+<P>J4 --IN-- REQUEST OF ACTUATOR MANUAL INCREASING</P>
+<P>J5 --IN-- REQUEST OF ACTUATOR MANUAL DECREASING</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Meaning of LOG0 variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- LOGICS OF CONNECTED/DISCONNECTED STATE</P>
+<P>JE --UA-- LOGICS OF MET REQUEST EXAMINATED</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P>case SET-POINT (SETM regulation LEGO block)</P>
+<P>&nbsp;</P><DIR>
+<DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1066.gif" WIDTH=533 HEIGHT=303></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Meaning of SETM variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>UE --UA-- ERROR BETWEEN SET POINT AND MEASURE</P>
+<P>US --UA-- LOCAL SET-POINT</P>
+<P>UM --UA-- TAKEN OFF VALUE OF QUANTITY TO MEASURE</P>
+<P>JE --UA-- MET INCREASED LOGICS OF SET-POINT</P>
+<P>JF --UA-- MET DECREASED LOGICS OF SET-POINT</P>
+<P>JM --UA-- MEASURE OF QUANTITY TO REGULATE</P>
+<P>II --IN-- SET-POINT OF TARGET VALUE</P>
+<P>J1 --IN-- SET-POINT LOGICS OF ENTER TARGET VALUE</P>
+<P>J3 --IN-- LOGICS OF AUTOMATIC/MANUAL STATE</P>
+<P>J4 --IN-- INCREASING LOGICS OF LOCAL SET-POINT</P>
+<P>J5 --IN-- DECREASING LOGICS OF LOCAL SET-POINT</P>
+<P>KK --IN-- DECREASE/INCREASE GRADIENT OF LOCAL SET-POINT</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Meaning of LOG0 variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- LOGICS OF CONNECTED/DISCONNECTED STATE</P>
+<P>JE --UA-- LOGICS OF MET REQUEST EXAMINATED</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libreg_LOGO_typ2"></A>STATION TYPE CONNECT/DISCONNECT (type 2)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">It is a CONNECT/DISCONNECT station associable to a regulation component type switch or similar.</P>
+<P ALIGN="JUSTIFY">If the presence of interblocks or forcing is not foreseen user has to introduce the LOG0 logic module which makes itself responsible of the interface between station and related regulation module (SWTC).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1067.gif" WIDTH=514 HEIGHT=245></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Meaning of SWTC variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>UI --UA-- OUTPUT VALUE</P>
+<P>I1 --IN-- INPUT VALUE 1</P>
+<P>I2 --IN-- INPUT VALUE 2</P>
+<P>JJ --IN-- LOGICS OF CONNECTED/DISCONNECTED STATE</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Meaning of LOG0 variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- LOGICS OF CONNECTED/DISCONNECTED STATE</P>
+<P>JE --UA-- LOGICS OF MET REQUEST EXAMINATED</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libreg_LOGO_typ3"></A>STATION TYPE TRIMMER (type 3)</P>
+</B></FONT><P>&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">It is the TRIMMER station, associable with whatever LEGO input variable of analogue type.</P>
+<P ALIGN="JUSTIFY">It foresees the possibility to set up a target value.</P>
+<P ALIGN="JUSTIFY">The associability with the regulation module is simple: in fact, it is sufficient to link the TRIMMER station with whatever input variable of the LEGO module (also not belonging to the regulation), without interposition of LOG0 module.</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1068.gif" WIDTH=418 HEIGHT=66></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libreg_LOGO_typ4"></A>STATION TYPE START/STOP (type 4)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">It is the START/STOP station, associable to a slope generator. It foresees the possibility to set up a target value and a gradient.</P>
+<P ALIGN="JUSTIFY">If interblock or forcing are not foreseen, user has to introduce the module of LOG0 logic which will makes itself responsible for the interface between station and related regulation module (RAMP).</P>
+<P ALIGN="JUSTIFY">The following scheme shows the associability with the regulation module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1069.gif" WIDTH=546 HEIGHT=315></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Meaning of the RAMP variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>UA --UA-- SLOPE GENERATOR OUTPUT</P>
+<P>JA --UA-- START/STOP LOGICS OF SLOPE GENERATOR OUTPUT</P>
+<P>IN --IN-- FINAL VALUE FIXED IN ADVANCE OF SLOPE GENERATOR</P>
+<P>II --IN-- TRACKING ANALOGUE INPUT OF SLOPE GENERATOR</P>
+<P>J1 --IN-- LOGICS WHICH ENABLES THE TRACKING OF SLOPE GENERATOR</P>
+<P>J3 --IN-- START/STOP LOGICS OF SLOPE GENERATOR INPUT</P>
+<P>KT --IN-- TIME INTERVAL FIXED IN ADVANCE</P>
+<P>KP --IN-- INCREASING VARIATION WITHIN THE TIME FIXED IN ADVANCE</P>
+<P>KM --IN-- DECREASING VARIATION WITHIN THE TIME FIXED IN ADVANCE.</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Meaning of the LOG0 variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- LOGICS OF START/STOP STATE</P>
+<P>JE --UA-- EXAMINATED LOGICS OF MET REQUEST</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE.</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libreg_LOGO_typ5"></A>STATION TYPE WAYS (type 5)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">It is the WAYS station to select the way to drive a regulation system within a predetermined number of possible ways (max. 6 ways).</P>
+<P ALIGN="JUSTIFY">If interblock or forcing are not foreseen, user has to introduce the module of LOG0 logic which will makes itself responsible for the interface between station and regulation, identified by the block "LOGIC" in the figure indicated below.</P>
+<P ALIGN="JUSTIFY">The output state variable of the LOG0 block (input to the "LOGIC" block) assumes the value 1 when the way 1 is selected, the value 2 for the way 2 and so on.</P>
+<P ALIGN="JUSTIFY">The following scheme shows the associability with the regulation module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1070.gif" WIDTH=501 HEIGHT=200></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Meaning of LOG0 variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- STATE/WAY LOGICS</P>
+<P>JE --UA-- EXAMINATED LOGICS OF MET REQUEST</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE.</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1071.gif" WIDTH=367 HEIGHT=130></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;JR&#9;requested state by the station</P>
+<P ALIGN="JUSTIFY">[]&#9;JS&#9;state of logic toward the regulation</P>
+<P ALIGN="JUSTIFY">[]&#9;JE&#9;request indicator coming from the examined station.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The LOG0 module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the LOG0 module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1072.gif" WIDTH=401 HEIGHT=318></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P></DIR>
+</DIR>
+
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_LOGS"></A>LOGS regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In all cases in which user has to use the STAZ program to simulate the behaviour of actual actuator stations (see related documentation), the regulation module LOGS (or LOG0) must be utilized. In fact, this module consists of a logic block presented between an actuation station and a regulation in the strict sense of the word.</P>
+<P ALIGN="JUSTIFY">It is important to point out that STAZ program only operates within the "CAD SIMULATOR" environment (LEGOCAD environment allowing to simulate a plant functioning by means of a mathematical model consisting of sub-models, or tasks managed in a centralized way by SCHEDULER). Consequently, it makes sense to insert LOGS module in a regulation scheme only whether user aims to simulate, in "CAD SIMULATOR" environment, a model consisting of (besides the regulation scheme), almost an actuation station (STAZ program).</P>
+<P ALIGN="JUSTIFY">Hereinafter, we examine the function that this module has, postponing in the following cards the description of its possible uses.</P>
+<P ALIGN="JUSTIFY">We begin pointing out the different possibilities that module has according to the values of some logical variables:</P>
+<P ALIGN="JUSTIFY">1) Stationary condition: the JS logical output (logic state toward the regulation) is set equal to the state requested by the JR station. Besides the JE output is forced to the "false" value (JE becomes "true" when a request coming from station is examined, on the contrary it is "false").</P>
+<P ALIGN="CENTER">JS = JR</P>
+<P ALIGN="CENTER">JE = false</P>
+<P ALIGN="JUSTIFY">2) Transient condition.</P>
+<P ALIGN="JUSTIFY">2.1) JE true: the request coming from station has already been examined.</P>
+<P ALIGN="JUSTIFY">2.1.1) JS = JR: the already examined request has been met; therefore JE signal is indicated to the "false" value.</P>
+<P ALIGN="JUSTIFY">2.1.2) JS &lt; &gt; JR: the request, already examined, has not been met; no action is carried out so that JE keeps al the "true" value.</P>
+<P ALIGN="JUSTIFY">2.2) JE false: the request coming from station has not been examined jet.</P>
+<P ALIGN="JUSTIFY">2.2.1) JA true: a forcing is enabled.</P>
+<P ALIGN="JUSTIFY">2.2.1.1) JS = JF: the state is equal to the forcing. JS and JR are compared: if they are different JE is forced to the value "true" (examined request), if they are equals no action is carried out (JE keeps its preceding value).</P>
+<P ALIGN="JUSTIFY">2.2.1.2) JS &lt; &gt; JF: the state is different than the forcing value. JS is forced to the JF value and JE is forced to the value "true" (examined request).</P>
+<P ALIGN="JUSTIFY">2.2.2) JA false: no forcing is enabled.</P>
+<P ALIGN="JUSTIFY">2.2.2.1) JS = JR: the state JS is equal to the JR request; no operation is carried out.</P>
+<P ALIGN="JUSTIFY">2.2.2.2) JS &lt; &gt; JR: the state is different than the request; the presence of interblocks is examined (variable JI):</P>
+<P ALIGN="JUSTIFY">a) JI true: no interblocks, the state JS if forced so that it becomes equal to JR; besides, JE is set on "true" (request coming from examined station).</P>
+<P ALIGN="CENTER">JS = JR</P>
+<P ALIGN="CENTER">JE = true</P>
+<P ALIGN="JUSTIFY">b) JI false: interblocks are present, JS keeps to its value (different from JR), nevertheless JE is set to the value "true" (request coming from examined station, but not met because of interblocks).</P>
+<P ALIGN="JUSTIFY">Now we analyse the cases in which the module LOGS is used. Since it acts as interface between station and regulation, it is better to examine the different types of station foreseen one by one, looking at the interconnecting schemes and related regulation blocks.</P>
+<P ALIGN="JUSTIFY">Five different types of station has been defined:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libreg_LOGS_typ1"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">station type AUTOMATIC/MANUAL (type 1)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libreg_LOGS_typ2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">station type CONNECT/DISCONNECT (type 2)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libreg_LOGS_typ3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">station type TRIMMER (type 3)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libreg_LOGS_typ4"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">station type START/STOP (type 4)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libreg_LOGS_typ5"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">station type WAYS (type 5)</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libreg_LOGS_typ1"></A>STATION TYPE AUTOMATIC/MANUAL (type 1)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">It is the station AUTOMATIC/MANUAL associable to a PI regulator (module RPIA or REPI), to an actuator or to a set-point managing.</P>
+<P ALIGN="JUSTIFY">When it is in manual, it foresees the possibility to set up a target value or to give increasing/decreasing by means of use of key at target value.</P>
+<P ALIGN="JUSTIFY">If the presence of interblocks and/or forcing is foreseen, in all three mentioned cases user has to introduce the logic module LOGS which makes itself responsible of interface between station and related regulation module RPIA (or REPI), ATAM or SETM.</P>
+<P ALIGN="JUSTIFY">Hereinafter we examine, for the three cases, how the associability with the regulation module happens:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>case PI REGULATOR (RPIA regulation LEGO block)</P>
+</B><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1073.gif" WIDTH=533 HEIGHT=303></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Meaning of RPIA variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>UP --UA-- OUTPUT OF PI REGULATOR</P>
+<P>UA --UA-- ACTUATOR POSITION</P>
+<P>JA --UA-- LOGICS OF CLOSED END STROKE</P>
+<P>JB --UA-- LOGICS OF NOT CLOSED END STROKE</P>
+<P>JC --UA-- LOGICS OF OPENED END STROKE</P>
+<P>JD --UA-- LOGICS OF NOT OPENED END STROKE</P>
+<P>JE --UA-- MET LOGICS OF INCREASING ACTUATOR</P>
+<P>JF --UA-- MET LOGICS OF DECREASING ACTUATOR</P>
+<P>IE --IN-- ERROR</P>
+<P>IZ --IN-- ANTICIPATION IN INPUT TO THE PI REGULATOR</P>
+<P>II --IN-- PI REGULATOR OUTPUT IN BALANCING (TARGET VALUE)</P>
+<P>J1 --IN-- CONTROL LOGICS OF TARGET VALUE</P>
+<P>J3 --IN-- LOGICS OF AUTOMATIC/MANUAL STATE</P>
+<P>J4 --IN-- REQUEST OF ACTUATOR MANUAL INCREASING</P>
+<P>J5 --IN-- REQUEST OF ACTUATOR MANUAL DECREASING</P>
+<P>KP --IN-- PROPORTIONAL GAIN OF PI REGULATOR</P>
+<P>KZ --IN-- ANTICIPATING GAIN OF PI REGULATOR</P>
+<P>KT --IN-- INTEGRAL TIME OF PI REGULATOR</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Meaning of LOGS variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- LOGICS OF AUTOMATIC/MANUAL STATE</P>
+<P>JE --UA-- MET LOGICS OF EXAMINATED REQUEST</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE</P>
+<P>JA --IN-- FORCING ENABLING</P>
+<P>JF --IN-- FORCING</P>
+<P>JI --IN-- NO INTERBLOCK</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P>case ACTUATOR with AUTOMATIC/MANUAL station (ATAM regulation LEGO block)</P>
+<P>&nbsp;</P><DIR>
+<DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1074.gif" WIDTH=533 HEIGHT=303></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Meaning of ATAM variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>UA --UA-- ACTUATOR POSITION</P>
+<P>JA --UA-- LOGICS OF CLOSED END STROKE</P>
+<P>JB --UA-- LOGICS OF NOT CLOSED END STROKE</P>
+<P>JC --UA-- LOGICS OF OPENED END STROKE</P>
+<P>JD --UA-- LOGICS OF NOT OPENED END STROKE</P>
+<P>JE --UA-- MET LOGICS OF INCREASING ACTUATOR</P>
+<P>JF --UA-- MET LOGICS OF DECREASING ACTUATOR</P>
+<P>IE --IN-- REQUEST TO MEET</P>
+<P>II --IN-- TARGET VALUE</P>
+<P>J1 --IN-- CONTROL LOGICS OF TARGET VALUE</P>
+<P>J3 --IN-- LOGICS OG AUTOMATIC/MANUAL STATE</P>
+<P>J4 --IN-- REQUEST OF ACTUATOR MANUAL INCREASING</P>
+<P>J5 --IN-- REQUEST OF ACTUATOR MANUAL DECREASING</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Meaning of LOGS variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- LOGICS OF AUTOMATIC/MANUAL STATE</P>
+<P>JE --UA-- MET LOGICS OF EXAMINATED REQUEST</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE</P>
+<P>JA --IN-- FORCING ENABLING</P>
+<P>JF --IN-- FORCING</P>
+<P>JI --IN-- NO INTERBLOCK</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P>case SET-POINT (SETM regulation LEGO block)</P>
+<P>&nbsp;</P><DIR>
+<DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1075.gif" WIDTH=533 HEIGHT=303></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Meaning of SETM variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>UE --UA-- ERROR BETWEEN SET POINT AND MEASURE</P>
+<P>US --UA-- LOCAL SET-POINT</P>
+<P>UM --UA-- TAKEN OFF VALUE OF QUANTITY TO MEASURE</P>
+<P>JE --UA-- MET INCREASED LOGICS OF SET-POINT</P>
+<P>JF --UA-- MET DECREASED LOGICS OF SET-POINT</P>
+<P>JM --UA-- MEASURE OF QUANTITY TO REGULATE</P>
+<P>II --IN-- SET-POINT OF TARGET VALUE</P>
+<P>J1 --IN-- SET-POINT LOGICS OF ENTER TARGET VALUE</P>
+<P>J3 --IN-- LOGICS OF AUTOMATIC/MANUAL STATE</P>
+<P>J4 --IN-- INCREASING LOGICS OF LOCAL SET-POINT</P>
+<P>J5 --IN-- DECREASING LOGICS OF LOCAL SET-POINT</P>
+<P>KK --IN-- DECREASE/INCREASE GRADIENT OF LOCAL SET-POINT</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Meaning of LOGS variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- LOGICS OF AUTOMATIC/MANUAL STATE</P>
+<P>JE --UA-- LOGICS OF MET REQUEST EXAMINATED</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE</P>
+<P>JA --IN-- FORCING ENABLING</P>
+<P>JF --IN-- FORCING</P>
+<P>JI --IN-- NO INTERBLOCK</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libreg_LOGS_typ2"></A>STATION TYPE CONNECT/DISCONNECT (type 2)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">It is a CONNECT/DISCONNECT station associable to a regulation component type switch or similar.</P>
+<P ALIGN="JUSTIFY">If the presence of interblocks and/or forcing is not foreseen, user has to introduce the LOGS logic module which makes itself responsible of the interface between station and related regulation module (SWTC).</P>
+<P ALIGN="JUSTIFY">Now we examine how the associability with the regulation module happens:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1076.gif" WIDTH=514 HEIGHT=245></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Meaning of SWTC variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>UI --UA-- OUTPUT VALUE</P>
+<P>I1 --IN-- INPUT VALUE 1</P>
+<P>I2 --IN-- INPUT VALUE 2</P>
+<P>JJ --IN-- LOGICS OF CONNECTED/DISCONNECTED STATE</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Meaning of LOGS variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- LOGICS OF CONNECTED/DISCONNECTED STATE</P>
+<P>JE --UA-- LOGICS OF MET REQUEST EXAMINATED</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE</P>
+<P>JA --IN-- FORCING ENABLING</P>
+<P>JF --IN-- FORCING</P>
+<P>JI --IN-- NO INTERBLOCK</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libreg_LOGS_typ3"></A>STATION TYPE TRIMMER (type 3)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">It is the TRIMMER station, associable with whatever LEGO input variable of analogue type.</P>
+<P ALIGN="JUSTIFY">It foresees the possibility to set up a target value.</P>
+<P ALIGN="JUSTIFY">The associability with the regulation module is simple: in fact, it is sufficient to link the TRIMMER station with whatever input variable of the LEGO module (also not belonging to the regulation), without interposition of LOGS module.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1068.gif" WIDTH=418 HEIGHT=66></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libreg_LOGS_typ4"></A>STATION TYPE START/STOP (type 4)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">It is the START/STOP station, associable to a slope generator. It foresees the possibility to set up a target value and a gradient.</P>
+<P ALIGN="JUSTIFY">If interblock or forcing are foreseen, user has to introduce the module LOGS logic module which will makes itself responsible for the interface between station and related regulation module (RAMP).</P>
+<P ALIGN="JUSTIFY">The following scheme shows the associability with the regulation module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1077.gif" WIDTH=546 HEIGHT=315></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Meaning of the RAMP variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>UA --UA-- SLOPE GENERATOR OUTPUT</P>
+<P>JA --UA-- START/STOP LOGICS OF SLOPE GENERATOR OUTPUT</P>
+<P>IN --IN-- FINAL VALUE FIXED IN ADVANCE OF SLOPE GENERATOR</P>
+<P>II --IN-- TRACKING ANALOGUE INPUT OF SLOPE GENERATOR</P>
+<P>J1 --IN-- LOGICS WHICH ENABLES THE TRACKING OF SLOPE GENERATOR</P>
+<P>J3 --IN-- START/STOP LOGICS OF SLOPE GENERATOR INPUT</P>
+<P>KT --IN-- TIME INTERVAL FIXED IN ADVANCE</P>
+<P>KP --IN-- INCREASING VARIATION WITHIN THE TIME FIXED IN ADVANCE</P>
+<P>KM --IN-- DECREASING VARIATION WITHIN THE TIME FIXED IN ADVANCE</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Meaning of the LOGS variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- LOGICS OF START/STOP STATE</P>
+<P>JE --UA-- EXAMINATED LOGICS OF MET REQUEST</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE</P>
+<P>JA --IN-- FORCING ENABLING</P>
+<P>JF --IN-- FORCING</P>
+<P>JI --IN-- NO INTERBLOCK</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libreg_LOGS_typ5"></A>STATION TYPE WAYS (type 5)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">It is the WAYS station to select the way to drive a regulation system within a predetermined number of possible ways (max. 6 ways).</P>
+<P ALIGN="JUSTIFY">If interblock and/or forcing are foreseen, user has to introduce the LOGS logic module which will makes itself responsible for the interface between station and regulation, identified by the block "LOGIC" in the figure indicated below.</P>
+<P ALIGN="JUSTIFY">The output state variable of the LOGS block (input to the "LOGIC" block) assumes the value 1 when the way 1 is selected, the value 2 for the way 2 and so on.</P>
+<P ALIGN="JUSTIFY">The following scheme shows the associability with the regulation module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1078.gif" WIDTH=501 HEIGHT=200></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Meaning of LOGS variables:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>JS --UA-- STATE/WAY LOGICS</P>
+<P>JE --UA-- EXAMINATED LOGICS OF MET REQUEST</P>
+<P>JR --IN-- LOGICS OF REQUESTED STATE</P>
+<P>JA --IN-- FORCING ENABLING</P>
+<P>JF --IN-- FORCING</P>
+<P>JI --IN-- NO INTERBLOCK</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><P>&nbsp;</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY"><IMG SRC="Image1079.gif" WIDTH=367 HEIGHT=130></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;JR&#9;state request by station</P>
+<P ALIGN="JUSTIFY">[]&#9;JA&#9;forcing enabling</P>
+<P ALIGN="JUSTIFY">[]&#9;JF&#9;forcing</P>
+<P ALIGN="JUSTIFY">[]&#9;JI&#9;no interblock (false =&gt; interbl., true =&gt; no interbl.)</P>
+<P ALIGN="JUSTIFY">[]&#9;JS&#9;logic state toward regulation</P>
+<P ALIGN="JUSTIFY">[]&#9;JE&#9;indicator of request coming from examined station.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The LOGS module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the LOGS module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1080.gif" WIDTH=504 HEIGHT=433></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_MAX2"></A>MAX2 regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module MAX2 provides, as output, the maximum between the two analogue input.</P>
+<P ALIGN="JUSTIFY">Once defined as I1 and I2 the two input analogue variables and as UI the output analogue variable, in the formula we can write: </P>
+<P ALIGN="CENTER">UI = Max (I1, I2)</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1081.gif" WIDTH=367 HEIGHT=97></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;I1&#9;input analogue variable 1</P>
+<P ALIGN="JUSTIFY">[]&#9;I2&#9;input analogue variable 2</P>
+<P ALIGN="JUSTIFY">[]&#9;UI&#9;output analogue variable.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module MAX2 has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the MAX2 module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1082.gif" WIDTH=154 HEIGHT=168></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_MEMA"></A>MEMA regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The MEMA regulation module simulates an analogue memory with automatic/manual station.</P>
+<P ALIGN="JUSTIFY">In normal functioning, the analogue memory copies on the output UA the value of the automatic input IA or of the manual input II (target), according to the logic input J3 (A/M logic input).</P>
+<P ALIGN="JUSTIFY">Moreover, the output value may be forced to that of the input IB (if the logic input JB is "true"), regardless of the state of the memory (automatic or manual).</P>
+<P ALIGN="JUSTIFY">The value of the automatic input may be scaled by the multiplying factor K_INGA.</P>
+<P ALIGN="JUSTIFY">The operating strategy of the MEMA module is furthermore described.</P>
+<P ALIGN="JUSTIFY">1) Forcing imposed: JB true.</P>
+<P ALIGN="JUSTIFY">The output UA is set equal to the forcing input IB:</P>
+<P ALIGN="CENTER">UA = IB</P>
+<P ALIGN="JUSTIFY">2) Normal operating conditions: JB false.</P>
+<P ALIGN="JUSTIFY">2.1) Automatic functioning: J3 true.</P>
+<P ALIGN="JUSTIFY">The output UA is set equal to the product of the automatic input IA by the coefficient K_INGA (assigned by the user):</P>
+<P ALIGN="CENTER">UA = K_INGA * IA</P>
+<P ALIGN="JUSTIFY">2.2) Manual functioning: J3 false.</P>
+<P ALIGN="JUSTIFY">2.2.1) Logic "target-value" J1 true.</P>
+<P ALIGN="JUSTIFY">The output UA is set equal to the target value II:</P>
+<P ALIGN="CENTER">UA = II</P>
+<P ALIGN="JUSTIFY">2.2.2) Logic "target-value" J1 false.</P>
+<P ALIGN="JUSTIFY">2.2.2.1) Steady state: no calculations are performed, and the output UA maintains its value, as imposed by the user in the file F14.DAT.</P>
+<P ALIGN="JUSTIFY">2.2.2.2) Transient: the logic inputs J4 (manual increase request button) and J5 (manual decrease request button) are compared; if they are equal (0 =&gt; no request, 1 =&gt; contemporary request of increase and decrease, both discarded) the output UA maintains the value at the preceding time step (UAP):</P>
+<P ALIGN="CENTER">UA = UAP</P>
+<P ALIGN="JUSTIFY">If J4 and J5 are different the module tests which one is true:</P>
+<P ALIGN="JUSTIFY">a) J4 true (manual increase request button). The output UA is increased by the product of the time step Dt and the gradient KK:</P>
+<P ALIGN="CENTER">UA = UAP + KK * Dt</P>
+<P ALIGN="JUSTIFY">the logic output JE (manual increase request satisfied) is set to true.</P>
+<P ALIGN="JUSTIFY">b) J5 true (manual decrease request button). The output UA is decreased by the product of the time step Dt and the gradient KK:</P>
+<P ALIGN="CENTER">UA = UAP - KK * Dt</P>
+<P ALIGN="JUSTIFY">the logic output JF (manual decrease request satisfied) is set to true.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1083.gif" WIDTH=367 HEIGHT=241></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;IA&#9;automatic input</P>
+<P ALIGN="JUSTIFY">[]&#9;II&#9;manual target value</P>
+<P ALIGN="JUSTIFY">[]&#9;IB&#9;memory forcing value</P>
+<P ALIGN="JUSTIFY">[]&#9;J1&#9;manual target selection button</P>
+<P ALIGN="JUSTIFY">[]&#9;J3&#9;automatic / manual selection button</P>
+<P ALIGN="JUSTIFY">[]&#9;J4&#9;manual increase request button</P>
+<P ALIGN="JUSTIFY">[]&#9;J5&#9;manual decrease request button</P>
+<P ALIGN="JUSTIFY">[]&#9;JB&#9;memory forcing button</P>
+<P ALIGN="JUSTIFY">[]&#9;KK&#9;manual increase / decrease gradient</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;memory output</P>
+<P ALIGN="JUSTIFY">[]&#9;JE&#9;manual increase request satisfied</P>
+<P ALIGN="JUSTIFY">[]&#9;JF&#9;manual decrease request satisfied</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Besides the initial value of input-output variables related to the MEMA module, whose meaning has been defined above, user has to assign the following data set to complete the INPUT required by module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;K_INGA&#9;multiplying coefficient of automatic input.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of MEMA module variables, user must not pay particular attention. On the contrary, we have to note that if to the K_INGA datum no value is assigned, it assumes unitary value (the automatic input IA is copied on the output UA).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1084.gif" WIDTH=604 HEIGHT=793></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_MEMB"></A>MEMB regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module MEMB is a memory block functioning as follows: </P>
+<P ALIGN="JUSTIFY">1) When the switching logical signal AUTOMATIC/MANUAL J3 (automatic) is true, it copies on the UA output the automatic input IA</P>
+<P ALIGN="JUSTIFY">2) When the switching logical signal AUTOMATIC/MANUAL J3 (manual) is false, it keeps the output blocked.</P>
+<P ALIGN="JUSTIFY">Therefore we can conclude that the MEMB module behaves as memory (hold) only when J3 is false, and as tracker (sample) when J3 is true.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1085.gif" WIDTH=367 HEIGHT=97></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;IA&#9;input analogue variable (automatic)</P>
+<P ALIGN="JUSTIFY">[]&#9;J3&#9;switching logical variable AUTOMATIC/MANUAL</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The MEMB module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of MEMB module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><P>&nbsp;</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY"><IMG SRC="Image1086.gif" WIDTH=186 HEIGHT=222></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_MIN2"></A>MIN2 regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module MIN2 provides, as output, the minimum between the two analogue input.</P>
+<P ALIGN="JUSTIFY">Once defined as I1 and I2 the two input analogue variables and as UI the output analogue variable, in the formula we can write:</P>
+<P ALIGN="CENTER">UI = min (I1, I2)</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><P>&nbsp;</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY"><IMG SRC="Image1087.gif" WIDTH=367 HEIGHT=97></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;I1&#9;input analogue variable 1</P>
+<P ALIGN="JUSTIFY">[]&#9;I2&#9;input analogue variable 2</P>
+<P ALIGN="JUSTIFY">[]&#9;UI&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The MIN2 module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the MIN2 module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1088.gif" WIDTH=154 HEIGHT=168></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_MIST"></A>MIST regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module MIST simulates the behaviour of a thermocouple for water and steam. It takes as input the pressure IP [Pa], the enthalpy IH [J/kg] and the flow rate IW [kg/s] of the fluid, and produces as output the estimated temperature UT [°C].</P>
+<P ALIGN="JUSTIFY">This module contains great simplifications and should be considered temporary, until a new one, able to describe some phenomena here neglected, will be developed.</P>
+<P ALIGN="JUSTIFY">It is supposed that the estimated temperature UT is in relationship with the real one IT (obtainable by means of the steam tables, knowing enthalpy IH and pressure IP) by a transfer function of a low-pass filter (see the theoretical discussion in the </FONT><A HREF="rego_df.htm#lg_libreg_FILT"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FILT</U></FONT></A><FONT FACE="Arial, helvetica"> module):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1089.gif" WIDTH=217 HEIGHT=41></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where s is the Laplace operator, IT(s) and UT(s) are the Laplace transforms of the real temperature IT(t) and of the estimated one UT(t), TMIS is the time constant of the filter. The latest is not constant but it is considered inversely proportional to the fluid flow rate IW. Assuming that the relationship TMIS - IW does not depend on the direction of the flow, and limiting the time constant in order to avoid it reaches too large values when the flow rate comes near zero, one gets a graphic of the relation TMIS - IW as shown in figure 1.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1090.gif" WIDTH=418 HEIGHT=180></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The following formulae make clear what previously said.</P>
+<P ALIGN="JUSTIFY">First of all we have the actual temperature calculation of fluid IT, using the steam tables:</P>
+<P ALIGN="CENTER">IT = f (IP, IS)</P>
+<P ALIGN="JUSTIFY">where IS is the fluid entropy, also obtainable through the steam tables:</P>
+<P ALIGN="CENTER">IS = f (IP, IH)</P>
+<P ALIGN="JUSTIFY">A distinction is now useful between the cases in which a stationary or transient condition is calculating:</P>
+<P ALIGN="JUSTIFY">1) Stationary condition: the UT output is set equal to the calculated actual temperature IT:</P>
+<P ALIGN="CENTER">UT = IT</P>
+<P ALIGN="JUSTIFY">2) Transient condition: using the following formula the UT output is calculated:</P>
+<P ALIGN="CENTER">UT = TMIS / (TMIS + Dt) * UTP + Dt / (TMIS + Dt) * IT</P>
+<P ALIGN="JUSTIFY">where Dt and UTP respectively represent the time interval and the output to the preceding time interval. This expression is obtained beginning from the transfer function previously mentioned, passing from the domain of Laplace transforms to the temporal domain and discretizing.</P>
+<P ALIGN="JUSTIFY">We consider now the time constant expression TMIS which is given by the product of a constant term T_MISU (fixed by user), for a term inversely proportional to the IW flow rate and limited on the upper part to the value 100:</P>
+<P ALIGN="CENTER">TMIS = T_MISU * min (W_NOM./IW, 100)</P>
+<P ALIGN="JUSTIFY">where W_NOM. and T_MISU respectively represent the nominal values of flow rate (fixed by user), and of time constant (when the flow rate IW is equal to the nominal one W_NOM. the time constant is equal to T_MISU). This formula is clearly in accordance with the diagram shown in figure 1, where we set:</P>
+<P ALIGN="CENTER">Tmax = T_MISU * 100</P>
+<P ALIGN="CENTER">IWmin = W_NOM. * 1 / 100</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><P>&nbsp;</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY"><IMG SRC="Image1091.gif" WIDTH=367 HEIGHT=97></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;IP&#9;fluid pressure</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;IH&#9;fluid enthalpy</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;IW&#9;fluid flow rate</P>
+<P ALIGN="JUSTIFY">[°C]&#9;UT&#9;measured fluid temperature.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Besides the initial value of input-output variables related to the MIST module, whose meaning has been defined above, user has to assign the following data set to complete the INPUT required by module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[s]&#9;T_MISU&#9;time constant at the nominal flow rate</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;W_NOM.&#9;fluid nominal flow rate</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the MIST module variables, user must assign judicious data to input variables for pressure, enthalpy, and flow rate as well as T_MISU and W_NOM. In fact, an error could happens by using data out of the steam tables.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1092.gif" WIDTH=406 HEIGHT=793></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_MOLT"></A>MOLT regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module MOLT provides, as output, the product of the two input analogue variables.</P>
+<P ALIGN="JUSTIFY">Once defined as I1 and I2 the two input analogue variables and UA the output analogue variable, in the formula we can write:</P>
+<P ALIGN="CENTER">UA = I1 * I2</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1093.gif" WIDTH=367 HEIGHT=97></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;I1&#9;input analogue variable 1</P>
+<P ALIGN="JUSTIFY">[]&#9;I2&#9;input analogue variable 2</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module MOLT has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the MOLT module variable, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1094.gif" WIDTH=154 HEIGHT=168></P></DIR>
+</DIR>
+</BODY>
+</HTML>

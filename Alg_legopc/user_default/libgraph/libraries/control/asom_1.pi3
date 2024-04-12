@@ -1,0 +1,16 @@
+ASOM_1                                                                          
+ASOM                                                                            
+ASOM - Linear equation with 4 terms                                             
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 3
+ 
+NCONF = 1
+ 
+USOM      --UA-- ANALOG OUTPUT SIGNAL FROM THE ADDER                            
+I1SO      --IN-- INPUT SIGNAL 1 TO THE ADDER                                    
+I2SO      --IN-- INPUT SIGNAL 2 TO THE ADDER                                    
+I3SO      --IN-- INPUT SIGNAL 3 TO THE ADDER                                    
+==============================                                                  
+EOF                                                                             

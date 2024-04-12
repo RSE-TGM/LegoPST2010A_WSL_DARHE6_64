@@ -1,0 +1,27 @@
+COLT_3                                                                          
+COLT                                                                            
+Water/Steam Manifold (2 inputs, 3 outputs)                                      
+                                                                                
+NSTAT = 0
+NUSCI = 3
+NINGR =12
+ 
+NCONF = 1
+ 
+HCOL      --UA-- FLUID ENTHALPY IN THE MANIFOLD                                 
+PCOL      --UA-- FLUID PRESSURE IN THE MANIFOLD                                 
+TCOL      --UA-- METAL TEMPERATURE IN THE MANIFOLD                              
+WE_1      --IN-- FLOW RATE IN THE ENTERING BRANCH N. 1                          
+HE_1      --IN-- ENTHALPY IN THE ENTERING BRANCH N. 1                           
+WE_2      --IN-- FLOW RATE IN THE ENTERING BRANCH N. 2                          
+HE_2      --IN-- ENTHALPY IN THE ENTERING BRANCH N. 2                           
+WU_1      --IN-- FLOW RATE IN THE COMING OUT BRANCH N. 1                        
+HU_1      --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W<0)                   
+WU_2      --IN-- FLOW RATE IN THE COMING OUT BRANCH N. 2                        
+HU_2      --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 2 (W<0)                   
+WU_3      --IN-- FLOW RATE IN THE COMING OUT BRANCH N. 3                        
+HU_3      --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 3 (W<0)                   
+TEST      --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD                         
+GEST      --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD                   
+==============================                                                  
+EOF                                                                             

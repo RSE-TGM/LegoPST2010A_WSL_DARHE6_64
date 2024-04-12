@@ -1,0 +1,75 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>STANDARD SUBROUTINES</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"></font>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#99CCFF" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">
+      <font FACE="Arial">Standard subroutines in a LEGOPC process module</font>
+    </font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+<font SIZE="3">
+<p align="left">Every LEGO module must contain at least 4 standard subroutines, whose names 
+must be &quot;xxxxI3&quot;, &quot;xxxxI2&quot;, &quot;xxxxC1&quot; and &quot;xxxxD1&quot;, 
+where &quot;xxxx&quot; is the module name.</p>
+<p align="left">Obviously, this also means that the name of every module must be 
+<b>exactly four character long</b> a it must be <b>a valid FORTRAN identifier</b> 
+(its first character must be alphabetical, and the following three can must be 
+alphabetical or numerical).</p>
+<p align="left">A LEGO module can also contain other routines (subroutine and/or functions), 
+called by the standard ones. Very often, modules also contains two other semi-standard 
+subroutines, whose names are &quot;xxxxI4&quot; and &quot;xxxx&quot;.</p>
+<p align="left">The name &quot;semi-standard subroutines&quot; mean that many library 
+modules (about three quarters of them) have these routines, and they performs the same 
+kind of actions in all the modules. As they are not ought to exist, they also may exist 
+with other name and same function, or they may exist with the same name but different 
+function; obviously, a skilled modules' developer won't ever make it!</p>
+<p align="left">Very frequently, modules' standard routines calls other standard routines, 
+contained in the following libraries:</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p align="left"> standard correlations library<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p align="left"> water and steam thermodinamical properties<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p align="left"> air and flue gases thermodinamical properties<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p align="left"> water and steam thermal exchange coefficients<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p align="left"> air and flue gases thermal exchange coefficients<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">In some special version of LEGO code, but not in standard one, also other 
+libraries are present for thermodinamical properties computation:</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p align="left"> liquid sodium (for nuclear applications like PHOENIX)<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p align="left"> liquid air (for air separation unit models)<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p align="left"> liquid methane (for natural gas stocking unit models)<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p align="left"> gas mixtures (for chemical and special plant models)<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">The most used is no doubtly the numerical Jacobian matrix computation 
+(subroutine NAJAC), contained in the standard correlations library.</p>
+<p align="left">As LEGO code requires modules to compute Jacobian matrix of all differential 
+and algebraic equations, almost every LEGO module whose equations are not in analytical form 
+(or they are too complex) calls NAJAC routine for Jacobian matrix computation. Only a few modules, 
+instead of using NAJAC routine, perform the numerical computation of Jacobian matrix
+inside the module (sometimes using <i>ad-hoc</i> modified versions of NAJAC).</p>
+<p align="left">In exceptional cases, a module can call a routine inserted in another module, 
+but this is allowed only for special couples of modules, as the first one will not work if the 
+second one is not present in the user library (also if it is not necessary that the second is used
+in the plant model).</p>
+</font></font></font><!--mstheme--></font></body>
+
+</html>

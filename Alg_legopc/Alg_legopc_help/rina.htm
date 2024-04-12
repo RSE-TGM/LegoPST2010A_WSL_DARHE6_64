@@ -1,0 +1,611 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title></title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE RINA</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RINA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">HEAVY OIL HEATER</p>
+<p>&nbsp;</p>
+<p ALIGN="left">The RINA module simulates the operation of a steam heater for
+heavy oil.</p>
+<p ALIGN="left">The heater is of the &quot;shell and tube&quot; type; steam
+condensates inside the tube bundle, while heavy oil flows through the bundle and
+the shell.</p>
+<p ALIGN="left">All the pipes of the tube bundle have been represented with a
+unique equivalent tube.</p>
+<p ALIGN="left">The heavy oil path has been represented in diagram with n cells
+(maximum 5).</p>
+<p ALIGN="left">Main hypothesis introduced in the model are:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> Heavy oil reaching the heater, which
+must be all of the same type, perfectly mixes inside each cell;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> Heavy oil has a very low
+compressibility, which depends neither on temperature nor on pressure;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> The steam perfectly mixes inside the
+volume occupied by the same;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> The specific heat and the thermal
+conductivity of the pipe and heater wall material are constant;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> Thermal exchange coefficient between
+steam and pipes, between heavy oil and wall and between wall and external
+environment are constant.</p>
+</font>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">The equations forming the mathematical model are</p>
+<p ALIGN="left">for each cell:</p>
+<p ALIGN="left">- Conservation equation of heavy oil mass;</p>
+<p ALIGN="left">- Conservation equation of heavy oil energy;</p>
+<p ALIGN="left">- Conservation equation of pipe wall energy;</p>
+<p ALIGN="left">- Equation of thermal exchange between heavy oil and the pipe
+wall;</p>
+<p ALIGN="left">- Equation of thermal exchange between heavy oil and the heater
+wall;</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">for the heater inside:</p>
+<p ALIGN="left">- Conservation equation of heavy oil mass;</p>
+<p ALIGN="left">- Conservation equation of the steam mass;</p>
+<p ALIGN="left">- Conservation equation of steam energy;</p>
+<p ALIGN="left">- Conservation equation of the energy of the heater wall;</p>
+<p ALIGN="left">- Equation of thermal exchange between steam and the pipe wall;</p>
+<p ALIGN="left">- Equation of thermal exchange between the heater wall and the
+otuside environment.</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">The type of heavy oil considered is determined through an
+appropriate index assigned among input data.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RINA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">N = number of cells of the tube bundle schematization (max.
+5)</p>
+<p ALIGN="JUSTIFY">i = 1, 2, ..., N</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font SIZE="2">
+<p align="center"><img SRC="images/Image794.gif" width="382" height="226"></p>
+</font><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT - OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TNUi</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">temperature of heavy oil
+      coming out from the i-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TPFi</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">temperature of the wall of
+      the i-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WNUi</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of heavy oil coming
+      out from the i-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HVUC</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam coming out
+      from the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PVTU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PNRI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">heavy oil pressure in the
+      heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TMRI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">temperature of the heater
+      wall</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WNIN</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of heavy oil
+      entering the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TNIN</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">temperature of heavy oil
+      entering the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WNUR</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of heavy oil coming
+      out from heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WVIN</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of steam entering
+      the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HVIN</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam entering
+      the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WVUS</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of steam coming out
+      from heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TEST</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">temperature of environment
+      outside the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/m²/K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CSES</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">thermal exchange coefficient
+      between the heater wall and the outside environment</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left" style="margin-top: 3; margin-bottom: 3">&nbsp;</p>
+<p ALIGN="left" style="margin-top: 3; margin-bottom: 3">Note 1 : In the model
+topology definition phase, the user shall be required to indicate the number of
+cells for the heater he intends to simulate.</p>
+<p ALIGN="left" style="margin-top: 3; margin-bottom: 3">In particular the
+following string shall appear on the screen:</p>
+<p ALIGN="left" style="margin-top: 3; margin-bottom: 3">NUMBER OF CELLS (MAX =
+5) ?</p>
+<p ALIGN="left" style="margin-top: 3; margin-bottom: 3">&nbsp;</p>
+<p ALIGN="left" style="margin-top: 3; margin-bottom: 3">Whenever the cell number
+is assigned, it is assumed equal to 1; if a number of cells &gt; 5 is assigned
+the following string appears:</p>
+<p ALIGN="left" style="margin-top: 3; margin-bottom: 3">NUMBER OF CELLS N OUT OF
+LIMITS</p>
+<p ALIGN="left" style="margin-top: 3; margin-bottom: 3">&nbsp;</p>
+<p ALIGN="left" style="margin-top: 3; margin-bottom: 3">and entering of the cell
+number is newly required.</p>
+<p ALIGN="left" style="margin-top: 3; margin-bottom: 3">The information relevant
+to the number of cells must be included also in the model geometrical data (see
+Card C).</p>
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RINA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="left">In addition to the initial values of input and output variables
+of the RINA module, whose meaning has been defined in card B, the user must
+assign the following set of data to complete the input required by the module:</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TIPONAFT</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">index defining the type of
+      heavy oil present in the heater (for heavy oil classification see
+      documents relevant to &quot;heavy oil properties&quot;)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LUN.MANT</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">length of heater shell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">N. TUBI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of pipes of the tube
+      bundle</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DENS.TUB</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">density of the tube bundle
+      material</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FATT.FOU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pipe fouling factor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">N. PASSI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of spacings</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m²]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DENS.MAN</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">density of shell material</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">D.INT.TU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pipes internal diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg/K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CASP.TUB</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">specific heat of pipes
+      material</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">D.INT.MA</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">shell internal diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg/K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CASP.MAN</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">specific heat of shell
+      material</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">D.EST.TU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pipes external diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/m²/K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COND.TUB</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">thermal conductivity of pipes
+      material</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">D.E.MANT</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">shell external diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/m²/K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COND.MAN</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">thermal conductivity of shell
+      diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LUN.TUBI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">length of pipes of tube
+      bundle</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PAS.TUBI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">spacing of pipes of tube
+      bundle</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COR.SCTE</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">corrective of thermal
+      exchange coefficient between shell and outside environment</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">N. CELLE</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of cells</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RINA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p ALIGN="left">No particular prescription is required for the initialization of
+RINA module variables.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RINA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="left">No user’s subprograms are required for this module.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RINA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">Residuals for the calculation of the steady state condition
+have the following expression:</p>
+<p ALIGN="JUSTIFY">for each one of the n cells (i = 1, ..., n)</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IR = 4*(I-1)</font><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(IR+1) = WNIC*(HNIC-HNUC)+QNA(I)-QMA(I)</font><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><font FACE="Arial">(norm. fact.W0*H0)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(IR+2) = WNIC-WNUC</font><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><font FACE="Arial">(norm fact. W0)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(IR+3) = QVA(I)-QNA(I)</font><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><font FACE="Arial">(norm fact. W0*H0)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="JUSTIFY">for the whole heater</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(IR+4) = QVAP-(HVIN-HVUC)*WVIN</font><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><font FACE="Arial">(norm fact. W0*H0)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(IR+5) = WVIN-WVUS</font><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><font FACE="Arial">(norm. fact. W0)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(IR+6) = WNUC-WNUR</font><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><font FACE="Arial">(norm. fact. W0)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RNI(IR+7) = QMAN-QAMB</font><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><font FACE="Arial">(norm. fact.W0*H0)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="JUSTIFY">where:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WNIC</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of heavy oil entering the i-th
+      cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WNUC</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of heavy oil coming out from
+      the i-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HNIC</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of heavy oil entering the i-th
+      cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HNUC</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of heavy oil coming out from the
+      i-th</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QNA(I)</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">power exchanged by heavy oil with pipes
+      of the i-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QMA(I)</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">power exchanged by heavy oil with the
+      shell of the i-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QVA(I)</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">power exchanged by steam with pipes of
+      the i-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QVAP</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">total power exchanged by steam with pipes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QMAN</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">total power exchanged by heavy oil with
+      the shell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QAMB</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">total power exchanged by the shell with
+      the outside environment</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WVIN</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam flow rate entering the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WVUS</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam flow rate coming out from heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HVIN</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam entering the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HVUC</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam coming out from heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WNUC</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">heavy oil flow rate coming out from the
+      i-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WNUR</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">heavy oil flow rate coming out from
+      heater</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left">The expression of residuals for the calculation of the transient
+condition has not been indicated. We notice that in differential equations, time
+derivatives are expressed as finished differences, so that the
+algebraic-differential equation system has been transformed into a system of
+algebraic equations.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RINA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">SUBROUTINE RINAI3 (IFO,IOB,DEBL)</p>
+<p ALIGN="left">SUBROUTINE RINAI4 (IOB,MOD)</p>
+<p ALIGN="left">SUBROUTINE RINAI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+<p ALIGN="left">$ IBL1,IBL2,IER,CNXYU,TOL)</p>
+<p ALIGN="left">SUBROUTINE RINAC1 (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</p>
+<p ALIGN="left">SUBROUTINE RINA (IFUN,IXYU,XYU,IPD,DATI,RNI)</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RINA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b>
+<font FACE="Arial">
+<p ALIGN="left">Reference test cases relevant to this module are in the manual
+section dedicated to the examples carried out and marked with the tag:</p>
+<p ALIGN="CENTER">&quot;HEAVY OIL CIRCUIT&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

@@ -1,0 +1,29 @@
+VALV_2                                                                          
+VALV                                                                            
+VALV - Motorized water/steam valve                                              
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 4
+ 
+NCONF = 3
+ 
+WVAL      --UA-- FLUID FLOW RATE IN THE VALVE                                   
+PIVA      --IN-- FLUID PRESSURE AT THE VALVE INLET                              
+PUVA      --IN-- FLUID PRESSURE AT THE VALVE OUTLET                             
+HVAL      --IN-- VALVE INLET-OUTLET FLUID ENTHALPY                              
+ALZA      --IN-- VALVE LIFT                                                     
+==============================                                                  
+PIVA      --UA-- FLUID PRESSURE AT THE VALVE INLET                              
+WVAL      --IN-- FLUID FLOW RATE IN THE VALVE                                   
+PUVA      --IN-- FLUID PRESSURE AT THE VALVE OUTLET                             
+HVAL      --IN-- VALVE INLET-OUTLET FLUID ENTHALPY                              
+ALZA      --IN-- VALVE LIFT                                                     
+==============================                                                  
+PUVA      --UA-- FLUID PRESSURE AT THE VALVE OUTLET                             
+PIVA      --IN-- FLUID PRESSURE AT THE VALVE INLET                              
+WVAL      --IN-- FLUID FLOW RATE IN THE VALVE                                   
+HVAL      --IN-- VALVE INLET-OUTLET FLUID ENTHALPY                              
+ALZA      --IN-- VALVE LIFT                                                     
+==============================                                                  
+EOF                                                                             

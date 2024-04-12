@@ -1,0 +1,684 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>CNDN</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE CNDN</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CNDN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial"><b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<p ALIGN="CENTER">STEAM CONDENSER</p>
+<p align="left">&nbsp;</p>
+<p align="left">The CNDN module simulates the dynamics of thermo-hydraulic
+phenomena which the fluid present in the condenser cavity is subjected to. The
+simulation includes the thermal exchanges between the fluid in the cavity and
+the cooling fluid flowing through a tube bundle subdivided in NCEL cells having
+the same surface.</p>
+<p align="left">To define the cavity mathematical model the following
+simplifying hypotheses are considered:</p>
+<p ALIGN="left">- the thermal exchange with outside is negligible</p>
+<p ALIGN="left">- complete separation between steam and liquid phases</p>
+<p ALIGN="left">- thermodynamic equilibrium between the phases</p>
+<p ALIGN="left">- the pressure in the cavity is uniform</p>
+<p ALIGN="left">- the distribution of enthalpy in steam phase is uniform</p>
+<p ALIGN="left">- the distribution of enthalpy in liquid phase is uniform</p>
+<p ALIGN="left">- the exchange coefficient between the fluid and the tube bundle
+walls is constant</p>
+<p ALIGN="left">- absence of incondensable gas.</p>
+<p align="left">The used equations are:</p>
+<p ALIGN="left">1) the energy conservation equation of fluid contained in the
+cavity</p>
+<p ALIGN="left">2) the mass conservation equation of fluid contained in the
+cavity</p>
+<p ALIGN="left">3) the equation for liquid level calculation</p>
+<p ALIGN="left">4) the equation for pressure calculation on the condenser bottom</p>
+<p ALIGN="left">5) the equation for liquid level calculation as percentage of
+the measuring instruments working range.</p>
+<p align="left">&nbsp;</p>
+<p align="left">To define the tube bundle mathematical model the following
+hypotheses are considered:</p>
+<p ALIGN="left">- the monodimensional approximation with concentrated parameters
+for energy conservation equation in the fluid</p>
+<p ALIGN="left">- the tube bundle discretized in NCEL axial cells having the
+same surface</p>
+<p ALIGN="left">- the liquid flowing through the subcooled tube bundle</p>
+<p ALIGN="left">- the pressure of fluid inside the tube bundle is constant</p>
+<p ALIGN="left">- the physical properties of tube bundle metal are constant</p>
+<p ALIGN="left">- the tube bundle pipes having thin thickness, so a
+discretization with only one radial cell is enough</p>
+<p ALIGN="left">- both in the metal and fluid the longitudinal conductivity of
+heat is negligible.</p>
+<p align="left">The used equations are:</p>
+<p ALIGN="left">6) the energy conservation equation in the fluid</p>
+<p ALIGN="left">7) the energy conservation equation in the metal.</p>
+<p align="left">The equation 5) can be defined both trough the data required by
+module and through the functions which user has to assign by an appropriate
+subprogram (see below).</p>
+<p align="left">The equations 6) and 7) are separately integrated and do not
+participate to the iterative process of general algorithm for system equation
+solution.</p>
+<p align="left">These equations contain inner module variables. Only two of them
+(respectively the fluid enthalpy and temperature at tube bundle outlet) are
+module output variables.</p>
+<p align="left">The CNDN module itself forms a complete model of steam
+condenser, so it can be used in place of the interconnected COND and TH2O
+modules.</p>
+<p align="left">Use of only one module in place of two, besides simplifying the
+achievement of a plant model, allows a saving in calculation time.</p>
+<p align="left">Nevertheless, acquisition of similar advantages is cause of
+precision drop; in fact, the CNDN module in spite of the COND module, can not
+suitably simulate flashing events.</p>
+<p ALIGN="left">Further informations about the two different models and their
+comparison are available in the section concerning this module of the manual
+&quot;LEGOCAD - Modelling Library for Simulation of Power Generation Plants -
+Theory&quot;.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CNDN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="CENTER">&nbsp;</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="center"><img SRC="images/Image45.gif" width="474" height="423"></p>
+</font><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WTUR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of main turbine blow-off steam</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HTUR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of main turbine blow-off steam</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WEXT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of steam at the condenser
+      inlet, different from main turbine blow-off steam</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HEXT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam at the condenser inlet,
+      different from main turbine blow off-steam</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WLCP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">condensate extraction flow rate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WDRE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">drains flow rate at the condenser inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HDRE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">drains enthalpy at the condenser inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WLCX</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of extracted or supplied liquid
+      for level control (positive value: extracted liquid; negative value:
+      supplied liquid)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WVCN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of steam extracted for
+      condenser vacuum</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WRIC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of liquid recirculated by the
+      condensate extraction pumps</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HRIC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of liquid recirculated by the
+      condensate extraction pumps</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WRFT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of cooler flowing through the
+      tube bundle</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HIFT&nbsp;</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cooler enthalpy at the tube bundle inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PCND</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">condensation pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LCND</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">level of liquid in the condenser</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TMFT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">metal temperature at the tube bundle
+      outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HUFT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cooler enthalpy at the tube bundle outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HLCN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">condensate enthalpy</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PFCN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure on the condenser bottom</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">%LCN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">liquid level, as percentage of the
+      measuring instruments' working range.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CNDN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to the initial values of input and output variables
+(meanings defined above), user must assign the following data:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NTUB</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of pipes in the cooling tube
+      bundle</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DIAE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">external diameter of cooling tube bundle
+      pipes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DIAI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">internal diameter of cooling tube bundle
+      pipes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LUNG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">length of cooling bundle pipes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TYPE_CAV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">selection index of cavity type to deal
+      with (its value is assigned to the TYP variable, input parameters of the
+      user program CNDLIV)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VOL.CAV.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cavity internal volume (steam volume +
+      liquid volume)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ZERO_Y</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">elevation gap between the condensate
+      level, corresponding to the zero of measuring instruments, and the
+      condensate outlet pipe</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VOL_Y</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cavity volume between the zero of liquid
+      level measuring instrument and the condensate outlet pipe</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GAMMA_Y</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">working range of level measuring
+      instruments (max. level over ZERO_Y)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SEZ_Y</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cavity horizontal cross section area</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ROM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">density of tube bundle metal</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg/K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CP MET.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">specific heat of tube bundle metal</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/m/K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COND.MET</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">thermal conductivity of tube bundle metal</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NCEL</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of cells in which is discretized
+      the tube bundle (max. 5).</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">To determine the condensate level, the CNDN module refers to a
+cavity where the liquid volume below the measuring instruments is known and
+level variation is proportional to liquid volume variation. So, it is a cavity
+where, within the working level range, the horizontal cross section area is
+constant. If user needs to refer to a more complex geometry of collection basin,
+data related to the new geometry can be supplied through the user subprogram
+SUBROUTINE CNDLIV(TYP, Y, VL, DVLDY, YPER) (see below). With an assigned liquid
+level, the subprogram calculates:</p>
+<p ALIGN="left">- the volume engaged by liquid as a function of the cavity
+geometrical characteristics</p>
+<p ALIGN="left">- the partial derivative of volume engaged by liquid
+evaluated as regards to the level</p>
+<p ALIGN="left">- the liquid proportional level as a function of the
+measuring instruments characteristic.</p>
+<p ALIGN="left">In this case, user has to assign to the SEZ_Y a negative or
+zero value. If this signal is found, the user subprogram is called and values of
+ZERO_Y, VOL_Y, GAMMA_Y, and SEZ_Y are not considered.</p>
+<p ALIGN="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CNDN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the input and output variables of CNDN module, it
+needs to consider that in thermodynamic equilibrium hypotheses, once fixed the
+condensation pressure, the enthalpies of two phases are fixed too and,
+consequently the condensate enthalpy. Besides, if enthalpies and flow rates
+input are all known, power to give up to the cooler is fixed too.</p>
+<p align="left">On the basis of such considerations (beginning from the
+condensation pressure and presuming all enthalpies and flow rates at the cavity
+and tube bundle inlet are known) in the CNDNI2 subprogram are evaluated: -the
+two phase enthalpies -the pressure on the cavity bottom -the cooler enthalpy
+-the metal temperature at the tube bundle outlet.</p>
+<p align="left">So, to avoid inconsistencies with the above-mentioned
+calculations, user must assign and impose NOTO the values of condensation
+pressure and liquid level.</p>
+<p align="left">The remaining system values must not be imposed. To avoid the
+system to be over-constrained, user has to keep free two of the input variables
+and to impose NOTO to the remaining ones.</p>
+<p ALIGN="left">It is suggested to keep free the enthalpy of main turbine
+blow-off steam and condensate extraction flow rate.</p>
+<p ALIGN="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CNDN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">If the collection basin has a more complex geometry than the reference one,
+in providing the related data to the module, user has to assign a negative or
+zero value to the SEZ_Y and write a user subprogram whose declarative statement
+is:</p>
+<p align="left">SUBROUTINE CNDLIV(TYP, Y, VL, DVLDY, YPER)</p>
+<p align="left">As a function of the liquid level, such program calculates:</p>
+    <p ALIGN="left">- the engaged volume of liquid as a function of the
+    cavity geometrical characteristics</p>
+    <p ALIGN="left">- the partial derivative of volume engaged by the liquid,
+    calculated as regards to the level</p>
+    <p ALIGN="left">- the liquid proportional level as a function of the
+    measuring instruments characteristics.</p>
+    <p ALIGN="left">Input parameters: TYP, Y</p>
+    <p ALIGN="left">Output parameters: VL, DVLDY, YPER</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[ ]
+</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ TYP&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ corresponds to the TYPE_CAV datum required in input
+                (see above). It can be used as pointer to select the required
+                cavity geometry in case user has to introduce different models
+                of cavities into only one user subprogram
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m]
+</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ Y
+</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ liquid level inside the cavity
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m³]
+</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ VL
+</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ volume engaged by liquid
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m²]
+</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ DVLDY
+</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ derivative of volume engaged by liquid as regards
+                to the level
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[%]
+</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ YPER
+</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ liquid level in percentage of the measuring
+                instruments working range.
+</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p>&nbsp;</p>
+<p>Since cylindrical geometry having horizontal axis is one of the most usual
+geometry for drums, in the module the following user subprogram is available:</p>
+<p>SUBROUTINE CNDLIO(Y, RCAV, HLCAV, VL, DVLDY)</p>
+<p>which calculates (once assigned the level) the volume engaged by the liquid
+contained inside a cylinder having horizontal axis and the derivative of this
+volume as regards to the level.</p>
+<p>The meanings of calling parameters are:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m]
+</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ Y
+</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ level of liquid inside the cylinder
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m]
+</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ RCAV
+</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ cylinder internal radius
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m]
+</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ HLCAV
+</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ cylinder internal length
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m³]
+</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ VL
+</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ volume engaged by the liquid present inside the
+                cylinder
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[m²]
+</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ DVLDY
+</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ derivative of volume engaged by liquid as regards
+                to the level
+</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">Thereinafter a CNDLIV subroutine example is indicated, using the CNDLIO
+subroutine, related to a cylindrical drum having radius RCAV = 1 m and length
+HLCAV = 10 m, whose level YPER is given as percentage of a range GAM = 2m.</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<blockquote>
+<p>SUBROUTINE CNDLIV(TYP, Y, VL, DVLDY, YPER)</p>
+<p>IF(TYP.NE.1.) RETURN</p>
+<p>RCAV=1.</p>
+<p>HLCAV=10.</p>
+<p>CALL CNDLIO(Y,RCAV,HLCAV,VL,DVLDY)</p>
+<p>GAM=RCAV*2.</p>
+<p>YPER=Y/GAM/100.</p>
+<p>RETURN</p>
+<p>END</p>
+<p>SUBROUTINE CNDLIO(Y, RCAV, HLCAV, VL, DVLDY)</p>
+<p>ALFA = ACOS((RCAV-Y)/RCAV)</p>
+<p>VL = RCAV².*(ALFA-COS(ALFA)*SIN(ALFA))*HLCAV</p>
+<p>DVLDY = 2.*RCAV*SIN(ALFA)*HLCAV</p>
+<p>IF(DVLDY.LT..1E-5)DVLDY = 0.</p>
+<p>RETURN</p>
+<p>END</p>
+</blockquote>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CNDN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The residuals present in the module do not directly correspond
+to the equations mentioned above. Here only their respective normalization
+factors are indicated. Further explanations are given in the manual section
+&quot;LEGOCAD - Modelling Library for Simulation of Power Generation Plants -
+Theory&quot;</p>
+<p ALIGN="left">RNI(1) - normalization factor = P0</p>
+<p ALIGN="left">RNI(2) - normalization factor = 1.</p>
+<p ALIGN="left">RNI(3) - normalization factor = T0</p>
+<p ALIGN="left">RNI(4) - normalization factor = H0</p>
+<p ALIGN="left">RNI(5) - normalization factor = H0</p>
+<p ALIGN="left">RNI(6) - normalization factor = P0</p>
+<p ALIGN="left">RNI(7) - normalization factor = 1.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CNDN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<p>SUBROUTINE CNDNI3 (IFO,IOB,DEBL)</p>
+<p>SUBROUTINE CNDNI4 (IOB,MOD)</p>
+<p>SUBROUTINE CNDNI2 (IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</p>
+<p>$ IBL1, IBL2, IER, CNXYU, TOL)</p>
+<p>SUBROUTINE CNDNC1 (IFUN, AJAC, MX5, IXYU, XYU, IPD,</p>
+<p>$ DATI, RNI, IBLI, IBL2)</p>
+<p>SUBROUTINE CNDN (IFUN, IXYU, XYU, IPD, DATI, RNI)</p>
+<p>SUBROUTINE VSATR(P,HL,HV,ROL,ROV,TS,DRLDP,DRVDP,DHLDP,DHVDP)</p>
+<p>SUBROUTINE CDTYP(TYP,SEZY,Y,ZERY,GY,VY,VL,DVLDY,YPER)</p>
+<p>SUBROUTINE GAM03(GAM,DGAM,W,A,D,P,T)</p>
+<p>SUBROUTINE NAJAC(AJAC,MX5,IXYU,XYU,IPD,DATI,RN,</p>
+<p>$ NSTATI,NUSCIT,NINGRE,EPS,EPSLIM,RESIDU)</p>
+<p>SUBROUTINE CNDLIV(TYP,Y,VL,DVLDY,YPER)</p>
+<p>SUBROUTINE CNDLIO(Y,RCAV,HLCAV,VL,DVLDY)</p>
+<p>FUNCTION DITBOE(G,D,CP,MU,LAM)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CNDN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are in the user
+manual section dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;CONDEQUI&quot;</p>
+<p>&nbsp;</p>
+<p align="left">Besides, in section dedicated to the COND module of manual
+&quot;LEGOCAD - Modelling Library for Simulation of Power Generation Plants -
+Theory&quot;, it is indicated the comparison between the answers of COND and
+CNDN modules and the experimental results related to a transient concerning load
+rejection in the French power plant &quot;St. Laurent B1&quot;.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<font FACE="Arial" SIZE="1">
+</font><!--mstheme--></font></body>
+
+</html>

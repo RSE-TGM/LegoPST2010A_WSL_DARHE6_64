@@ -1,0 +1,6 @@
+
+!	BlockSelectionBox.rf
+!	This resource file is loaded by BlockSelectionBox.c
+
+*.textBlockName1.editable: true
+

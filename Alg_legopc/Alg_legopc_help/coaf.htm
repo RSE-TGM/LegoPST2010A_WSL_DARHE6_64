@@ -1,0 +1,548 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>COAF</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE COAF</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">AIR AXIAL COMPRESSOR</p>
+<p>&nbsp;</p>
+<p align="left">The COAF module simulates a gas turbine axial compressor with
+the following features:</p>
+<p ALIGN="left">- the &quot;choke flow&quot; phenomenon is taken into account;</p>
+<p ALIGN="left">- the &quot;surge&quot; conditions are identified;</p>
+<p ALIGN="left">- the isentropic efficiency is depending on the compression
+ratio;</p>
+<p ALIGN="left">- a bypass valve is used during the start up to reduce the
+delivery air flow rate and consequently keep lower the pressure inside the
+furnace.</p>
+<p align="left">The air thermodynamic characteristics are obtained by calling
+the air and flue gas tables (TAVARFUM.FOR), based on the statistical theory of
+perfect gases, and considering the specific heat of each gas constituent the
+mixture as dependent on the temperature.</p>
+<p align="left">In the module air is treated as a real gas; the calculated
+results, therefore, depend on the relations utilized in the called tables (that
+means that real gases could be actually used by means of a simple substitution
+of the TAVARFUM tables with other ones at user's choice).</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<blockquote>
+  <blockquote>
+  </font><font FACE="Arial" SIZE="2">
+  <p ALIGN="center"><img SRC="images/Image46.gif" width="484" height="243"></p>
+  </font><font FACE="Arial">
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  </blockquote>
+</blockquote>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PING&nbsp;</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor suction air pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PUSC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor delivery air pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TING</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor suction air temperature</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMEG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor rotation velocity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ABYP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor by-pass valve opening</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">XBYP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor by-pass valve discharge
+      coefficient</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">XIGV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IGV opening (see note 1)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WARI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor air flow rate (suction and
+      delivery)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TUSC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor delivery air temperature</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PBYP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Air pressure upstream the compressor
+      by-pass valve</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TBYP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Air temperature upstream the compressor
+      by-pass valve</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WBYP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Air flow rate through the compressor
+      by-pass valve</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QCOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Mechanical power absorbed by the
+      compressor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">APER</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IGV opening degree (see note 1)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p align="left">IGV (Inlet Guide Vanes) opening is assigned as opening angle in
+degree for the FIAT gas turbine, as servomotor position for the TurboTecnica gas
+turbine and as opening factor in percentage for any other different compressor.</p>
+<p align="left">The XIGV input variable typical values are:</p>
+<p ALIGN="left">FIAT gas turbine XIGV = 0 for full-load operating</p>
+<blockquote>
+  <p ALIGN="left">XIGV = 38 for self-sustaining operating</p>
+  <p ALIGN="left">XIGV = 22 for start-up operating</p>
+</blockquote>
+<p ALIGN="left">TurboTecnica gas turbine XIGV = 90 for full-load operating</p>
+<blockquote>
+  <p ALIGN="left">XIGV = 38 for self-sustaining operating</p>
+  <p ALIGN="left">XIGV = 0 for start-up operating</p>
+</blockquote>
+<p ALIGN="left">Any other gas turbine XIGV = 100 for full-load operating</p>
+<blockquote>
+  <p ALIGN="left">XIGV = 82 for self-sustaining operating</p>
+  <p ALIGN="left">XIGV = 70 for start-up operating</p>
+</blockquote>
+<p align="left">The APER (IGV opening degree) output variable represents a flow
+rate multiplying coefficient and its value is 1 when IGV are fully open. It is
+evaluated on the basis of the XIGV input variable value and of the type of
+considered gas turbine.</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER">INPUT-OUTPUT VARIABLES NORMALIZATION FACTORS</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="32%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Variables&nbsp;</font><!--mstheme--></font></td>
+    <td width="68%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Normalization</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="32%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PBYP, PING, PUSC</font><!--mstheme--></font></td>
+    <td width="68%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">P0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="32%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WARI, WBYP&nbsp;</font><!--mstheme--></font></td>
+    <td width="68%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">W0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="32%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TUSC, TBYP, TING&nbsp;</font><!--mstheme--></font></td>
+    <td width="68%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="32%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QCOM</font><!--mstheme--></font></td>
+    <td width="68%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">W0 * H0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="32%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">APER, ABYP, XBYP</font><!--mstheme--></font></td>
+    <td width="68%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">1.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="32%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">XIGV&nbsp;</font><!--mstheme--></font></td>
+    <td width="68%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">100.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="32%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMEG</font><!--mstheme--></font></td>
+    <td width="68%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">300.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p>In addition to initial values of COAF module input and output variables, user
+must assign the following data set to complete the module input on the file F14:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">W nom.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor outlet air flow rate in
+      nominal conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Pi nom.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor inlet pressure in nominal
+      conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Pu nom.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor outlet pressure in nominal
+      conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Ti nom.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor inlet air temperature in
+      nominal conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Omeg nom</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Compressor rotation velocity in nominal
+      conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">KpBypass</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Coefficient defining the pressure
+      upstream the compressor by-pass valve (see note 2)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Csi nom.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Reciprocal of compressor efficiency in
+      nominal conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Coeff.K1</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">First coefficient of the compressor
+      efficiency variation curve as a function of load (see note 3)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Coeff.K2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Second coefficient of the compressor
+      efficiency variation curve as a function of load (see note 3)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Tipo TG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">TurboCompressor set type:<br>
+      Tipo TG = 1. FIAT TG50D e TC50C<br>
+      Tipo TG = 2. TurboTecnica MS9001<br>
+      Tipo TG = 3. Any other compressor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Coeff.AA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">First coefficient of the air flow rate
+      variation curve as a function of IGV position (see note 4)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Coeff.BB</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Second coefficient of the air flow rate
+      variation curve as a function of IGV position (see note 4)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Coeff.B1</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">First coefficient of the choke flow curve
+      (see note 5)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Coeff.B2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Second coefficient of the choke flow
+      curve (see note 5)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Coeff.A0</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">First coefficient of the flow rate curves
+      (see note 5)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Coeff.A2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Second coefficient of the flow rate
+      curves (see note 5)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Coeff.A3</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Third coefficient of the flow rate curves
+      (see note 5)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b>
+<p ALIGN="RIGHT">Note 2</p>
+</b>
+<p align="left">Pressure at the bypass valve is equal to the induction pressure
+added with a fraction of the drop pressure:</p>
+<p ALIGN="CENTER">PBYP = PING + KpBypass * (PUSC - PING)</p>
+<p align="left">Typical value for KpBypass: 0.5</p>
+<b>
+<p ALIGN="RIGHT">Note 3</p>
+</b>
+<p align="left">The compressor efficiency varies with the law:</p>
+<p ALIGN="CENTER">Csi = CsiNom * (AK1 + (1. - AK1) * (1. + AK2 * (1. - X) **
+2.))</p>
+<p ALIGN="left">where X is the compression ratio in p.u.:</p>
+<p ALIGN="CENTER">X = ((PUSC - PING) / PING) / ((PuNom - PiNom) / PiNom)</p>
+<b>
+<p ALIGN="RIGHT">Note 4</p>
+</b>
+<p align="left">For FIAT compressor, AA and BB are two angles in degree (default
+values: AA = 40. and BB = 66.75) of the law:</p>
+<p ALIGN="CENTER">APER = (cos(AA) + sin(BB)) / (cos(AA - XIGV) + sin(BB))</p>
+<p align="left">For TurboTecnica compressor they are coefficients of a parabola
+(default values: AA = 0.02896 and BB = 0.28629) depending on XXX = (1. - XIGV /
+90):</p>
+<p ALIGN="CENTER">APER = 1. - AA * XXX ** 2. - BB * XXX</p>
+<p align="left">For any other compressor values of AA and BB are not utilized:</p>
+<p ALIGN="CENTER">APER = XIGV / 100.</p>
+<b>
+<p ALIGN="RIGHT">Note 5</p>
+</b>
+<p align="left">The choke flow curve is given by:</p>
+<p ALIGN="CENTER">XCF = B1 * Y + B2 * Y ** 2.</p>
+<p ALIGN="left">where Y is the blade Mach number in p.u. (see note 3 for the
+meaning of X).</p>
+<p align="left">The flow rate curves (as functions of X and Y) are given by the
+relations:</p>
+<p ALIGN="left">choke flow (X &lt;= XCF): Z = A0</p>
+<p ALIGN="left">elsewhere (X &gt; XCF): Z = A0 + A2 * (X - XCF)². + A3 * (X -
+XCF)³.</p>
+<p ALIGN="left">where Z is the flow number in p.u. (default values: B1 = -5., B2
+= 6.1111, A0 = 1., A2 = -0.405 and A3 = 0.).</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the COAF module variables on the file F14, no
+particular prescription is required.</p>
+<p align="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">No user subprograms are present in the COAF module.</p>
+<p align="left">The COAF module makes use of the procedures contained in the air
+and flue gas thermodynamic tables (TAVARFUM) which must be present in the user
+library.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The equations forming the COAF module mathematical model
+(mentioned above) give rise to a set of residuals. Here only their
+correspondences with the output variables equations have been indicated, also
+mentioning the respective normalization factors. Further explanations are given
+in the manual section: &quot;LEGOCAD - Modelling Library for Simulation of Power
+Generation Plants - Theory - Modules Description&quot;.</p>
+<p ALIGN="JUSTIFY">1) RNI(1) - normalization factor = W0</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">related to the compressor air flow rate;</p>
+</blockquote>
+<p ALIGN="JUSTIFY">2) RNI(2) - normalization factor = T0</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">related to the compressor delivery air temperature;</p>
+</blockquote>
+<p ALIGN="JUSTIFY">3) RNI(3) - normalization factor = P0</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">related to the bypass air pressure;</p>
+</blockquote>
+<p ALIGN="JUSTIFY">4) RNI(4) - normalization factor = T0</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">related to the bypass air temperature;</p>
+</blockquote>
+<p ALIGN="JUSTIFY">5) RNI(5) - normalization factor = W0</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">related to the bypass air flow rate during start-up;</p>
+</blockquote>
+<p ALIGN="JUSTIFY">6) RNI(6) - normalization factor = W0 * H0</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">related to the mechanical power absorbed by the compressor;</p>
+</blockquote>
+<p ALIGN="JUSTIFY">7) RNI(7) - normalization factor = 1.</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">related to the IGV opening coefficient.</p>
+</blockquote>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<p align="left">SUBROUTINE COAFI3 (IFO,IOB,DEBL)</p>
+<p align="left">SUBROUTINE COAFI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+<p align="left">$ IBL1,IBL2,IER,CNXYU,TOL)</p>
+<p align="left">SUBROUTINE COAFC1
+(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</p>
+<p align="left">SUBROUTINE COAF (IFUN,IXYU,XYU,IPD,DATI,RNI)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are reported in the
+user manual section devoted to the examples developed under the abbreviation:</p>
+<p ALIGN="CENTER">&quot;.........&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

@@ -1,0 +1,32 @@
+ASOM
+
+ASOM - Linear equation with 4 terms                                             
+4
+1
+
+t0
+I1SO 
+1 
+t3
+I2SO 
+1 
+t2
+I3SO 
+1 
+t1
+USOM 
+1 
+
+0
+1
+3
+
+USOM UA
+ANALOG OUTPUT SIGNAL FROM THE ADDER                            
+I1SO IN
+INPUT SIGNAL 1 TO THE ADDER                                    
+I2SO IN
+INPUT SIGNAL 2 TO THE ADDER                                    
+I3SO IN
+INPUT SIGNAL 3 TO THE ADDER                                    
+

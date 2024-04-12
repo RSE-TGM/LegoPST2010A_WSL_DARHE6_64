@@ -1,0 +1,1044 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>STAZ</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE STAZ</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE STAZ</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">IMPULSE STAGE OF STEAM TURBINE</p>
+<p align="left">&nbsp;</p>
+<p align="left">The STAZ module simulates the behaviour of an impulse stage of
+steam turbine; it belongs to the thermodynamic standard library.</p>
+<p align="left">As impulse stage is intended a stage in which the conversion of
+enthalpy possessed by steam into kinetic energy exclusively occurs in guide
+blading (also called stator or nozzle arch). The kinetic energy acquired by
+steam is transferred to bucket blading (rotor). Usually only the first stage of
+an high pressure turbine consists of one impulse stage. On the contrary, both in
+following stages of high pressure turbine and those having mean and low pressure
+generally are reaction stages. In the last one a further conversion of enthalpy
+energy on bucket blading is obtained.</p>
+<p align="left">By using a merely thermodynamic statement, the STAZ module
+simulates the functioning of the steam turbine impulse stage. In particular it
+simulates the first stage of an high pressure turbine known as control stage. In
+fact in the STAZ module is included whole inlet steam system into the turbine
+(inlet valves, piping feeding the sector in which nozzle arch is subdivided and
+related regulating valves).</p>
+<p align="left">From a structural point of view, steam inlet system into the
+turbine consists of one or more inlet pipes which let in steam into different
+feeding pipes equipped with one's regulating valve. Each feeding pipe is
+connected with a particular sector of nozzle arch (see figure 1).</p>
+</font><font FACE="Courier New" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image725.gif" width="364" height="253"></p>
+</font><font FACE="Arial">
+<p ALIGN="CENTER">figure 1</p>
+<p align="left">The model is based on the following main hypotheses:</p>
+<p ALIGN="left">- steam behaviour is assimilate to a perfect gas one</p>
+<p ALIGN="left">- absence of accumulation phenomenon (mass, momentum, energy) in
+the system</p>
+<p ALIGN="left">- absence of thermal exchange between steam and metallic surface
+of connection pipes</p>
+<p ALIGN="left">- isenthalpic expansion of steam up to inlet into the nozzles</p>
+<p ALIGN="left">- head losses along connection piping are supposed to be
+concentrated in regulating valves and consequently at their outlet the pressure
+is coincident with pressure at the nozzle inlet.</p>
+<p align="left">A further detailed discussion about validity of the above
+mentioned hypotheses is available in &quot;Turbine Mathematical Model in
+Temperature Calculation of Steam Inside the Impulse Rotor Chamber&quot; by
+R.Terrazzani, A.Beato and M.Colombini published by ENEL Milano October 1979. A
+synthesis is carried out in the module theoretical documentation.</p>
+<p align="left">Steam turbines usually have two inlet pipes. The STAZ module
+allows to operate with two inlet valves to connect with two steam inlet piping.
+So, it is possible to reproduce the actual configuration or use only one inlet
+valve connected with only one equivalent inlet piping. This configuration can be
+used when are not interesting the problems concerning the feeding dissymmetry.</p>
+<p align="left">For every feeding piping in parallel configuration the flow rate
+is calculated as regards to:</p>
+<p ALIGN="left">- opening and geometry of regulating valve associated to the
+piping</p>
+<p ALIGN="left">- nozzles geometry</p>
+<p ALIGN="left">- enthalpy and pressure upstream the inlet valve</p>
+<p ALIGN="left">- pressure at nozzles outlet, so in rotor chamber.</p>
+<p align="left">It is useful to note that the model takes into account the
+possibility in which valves and/or nozzles are under critical functioning
+conditions (sonic conditions).</p>
+<p align="left">As already mentioned, in determining the state evolution of
+steam along every feeding piping, the expansion into the regulating valve is
+considered isenthalpic. On the contrary, enthalpy at the nozzle outlet is
+calculated beginning from the inlet one (valve outlet), by using the
+thermodynamic efficiency definition of steam transformation which is considered
+almost isenthropic. In this way it is possible to quantify the efficiency as
+quadratic function of ratio between the revolving speed of a turbine blade
+median point and the absolute speed of steam at the nozzles outlet. The enthalpy
+in rotor chambers is then calculated mixing the enthalpies of different pipes.</p>
+<p align="left">Once calculated the quantities interesting every single feeding
+piping, the quantities characterizing the stage total behaviour are calculated
+too.</p>
+<p align="left">On the basis of assigned manufacturing and functioning
+characteristics as well as some boundary thermodynamic and physical conditions
+(like pressure and enthalpy of supplied steam and its pressure inside the rotor)
+the following are calculated:</p>
+<p ALIGN="left">- values of flow rate flowing into the stage</p>
+<p ALIGN="left">- enthalpy value inside the rotor chamber</p>
+<p ALIGN="left">- mechanic power generated in the stage.</p>
+<p align="left">Two functioning conditions are possible:</p>
+<p ALIGN="left">- start-up: when turbine revolving speed is variable and the
+turbine is uncoupled from alternator (see note 1)</p>
+<p ALIGN="left">- running: when turbine revolving speed is constant and the
+turbine is coupled with alternator.</p>
+<p align="left">Two different conditions of turbine feeding are foreseen:</p>
+<p ALIGN="left">- steam inlet on whole nozzle ring synchronizing the opening of
+regulating valves (functioning in total arc)</p>
+<p ALIGN="left">- steam inlet in a gradual manner on different nozzle ring
+sectors, by opening regulating valves with a suitably sequence (functioning in
+partial arc).</p>
+<p align="left">During start-up and under low loads (when considerable thermal
+shocks on the turbine could be caused by a sequence feeding), the total arc
+functioning is used.</p>
+<p align="left">Under transient condition the module also allows the changeover
+from total to partial arc functioning and vice versa.</p>
+<p align="left">The first five residual equations are related to overall
+quantities characterizing the whole stage. The utilized equations are:</p>
+<p ALIGN="left">1) calculation equation of total flow rate flowing into the
+stage</p>
+<p ALIGN="left">2) calculation equation of enthalpy in the rotor chamber</p>
+<p ALIGN="left">3) calculation equation of power generated inside the stage</p>
+<p ALIGN="left">4) calculation equation of flow rate flowing through the nozzle
+arc sectors fed by the first feeding piping</p>
+<p ALIGN="left">5) calculation equation of flow rate flowing through the nozzle
+arc sectors fed by the (possible) second feeding piping.</p>
+<p align="left">It is useful to precise the meanings of WAM1 and WAM2 flow rates
+calculated through the equations 4 and 5. Each of these flow rates (in case of
+two inlet piping) represents the total flow rate flowing through these nozzle
+arc sectors fed by the same inlet piping. In particular an half nozzle arc
+sector is assigned to each inlet piping. Even if only one inlet piping is
+considered, the calculation of WAM1 and WAM2 flow rate keeps separate. In this
+case each of them has merely the meaning of the flow rate flowing through half
+nozzle arc.</p>
+<p align="left">Among own output variables, the module also has the pressure
+upstream nozzles and the position of regulating valves. To each of these output
+variables does not correspond an equation solved by LEGO code simultaneously
+with rest part of the system. Therefore in coupling these output variables with
+input ones, coming from other modules, some precaution are required.</p>
+<p align="left">To simulate the whole turbine, besides the STAZ module, also the
+TREN module simulating reaction stages has to be used. Bleedings in a reaction
+stage are simulated by a suitable use of VALV or SPIL modules (see related
+documents).</p>
+<p align="left">When the simulation is referred to a start-up condition the MART
+module has to be utilized too. This module evaluates the (possible) turbine
+speed variation (during transient condition) taking into account the turbine
+inertia and its generated mechanics power. In start-up simulation, use of a
+model representing the turbine speed regulation is also required (see note 1 for
+a description of start-up conditions).</p>
+<p align="left">A monitoring of metal temperature both for casing and rotor can
+be done by using the nozzles upstream pressure and utilizing the FLEX, TSML and
+MEST modules.</p>
+<p align="left">The FLEX module determines the temperature and thermal exchange
+coefficient of steam by using pressure and enthalpy values upstream the
+regulating valves of flow rate flowing into the stage. Afterwards, the TSML and
+MEST modules calculate the thermal range on casing and rotor and, for the last
+one, is also calculated the wear consequent to a fixed transient.</p>
+<p align="left">The STAZ module includes the data needing in simulating of
+control stages related to the following turbines:</p>
+<p ALIGN="left">- TOSI (320 and 660 MW)</p>
+<p ALIGN="left">- ANSALDO (320 MW).</p>
+<p align="left">If different turbine control stages has to be simulate, user
+must built a subprogram including data concerning the quantities listed in
+section on physical and geometrical data, in accordance with &quot;User
+subprograms&quot; section. In building such subroutine user can imitate one of
+those related to the three control stages carried out in &quot;Data acquisition
+subroutines&quot; section.</p>
+<b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p align="left">Progressive and controlled heating of turbine different parts is
+the basic problem during start-up operations.</p>
+<p align="left">Time required in starting the machine, to reach full load
+conditions, is determined by needs to obtain its progressive heating. This means
+that a progressive inlet of steam into the turbine has to be carried out both in
+thermal stabilization periods (with revolving speed lower than target one), and
+in slow increasing load after paralleling.</p>
+<p align="left">During start-up operations the following conditions are met: at
+the beginning inlet and regulating valves must be closed.</p>
+<p align="left">The turbine is driven by a barring device with an angular speed
+equal to few runs per minute.</p>
+<p align="left">In machine resetting is automatically arranged the speed control
+by means of inlet valves while regulating valves are fully opened. When the
+fixed speed is set up by operator, speed default (difference between pre-set and
+actual speed), suitably increased, controls the inlet valves opening. To higher
+and higher set up speeds corresponds a progressive opening of inlet valves as
+well as increased steam flow rate into the turbine.</p>
+<p align="left">When turbine speed is close to 2700 rpm (nominal speed), the
+operator actuates the speed regulation changeover from inlet valves to
+regulating ones.</p>
+<p align="left">Steam flow rate which allows to keep constant the turbine speed
+(2700 rpm) is the WAVV flow rate mentioned in physical and geometrical data
+section. The corresponding inlet valve lift is the ZETAM quantity mentioned in
+same section.</p>
+<p align="left">Inlet valve fully open while, at the same time, regulating
+valves begin to close so that a speed regulation is assured.</p>
+<p align="left">Speed regulation changeover from inlet valves to regulating
+ones, is carried out through a suitable control of electrohydraulic regulation
+system.</p>
+<p ALIGN="left">Afterwards, when target speed is reached, the parallel coupling
+with network is carried out. Start-up operations can be considered settled.</p>
+</font>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE STAZ</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p>&nbsp;</p>
+<p align="left">As a function of the number of inlet piping chosen by user (see
+below) the module has the two following configurations, being NVALV the number
+of regulating valves (max. 16):</p>
+<p ALIGN="left">1) input-output scheme about turbine with one inlet piping:</p>
+<p ALIGN="center"><font FACE="Arial" SIZE="2"><img SRC="images/Image726.gif" WIDTH="531" HEIGHT="232"></font></p>
+<p ALIGN="center">&nbsp;</p>
+<p ALIGN="left">2) input-output scheme about a turbine with two inlet piping:</p>
+<p ALIGN="center"></font><font FACE="Arial" SIZE="2"><img SRC="images/Image727.gif" WIDTH="531" HEIGHT="309"></p>
+</font><font FACE="Arial">
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<b>
+<p align="left">Turbine with one inlet piping</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ZVA1</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">inlet valve lift</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PAMM</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam pressure at the turbine inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HAMM</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam enthalpy at the turbine inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PCRT</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure inside rotor chamber</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SEAV</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">turbine start-up push button:<br>
+      SEAV = 1 start-up condition<br>
+      SEAV = 0 stopping condition</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALZS</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">control parameter of regulating valves
+      (in case of 320 MW Ansaldo turbine it coincides with the stroke of
+      regulating valve servo motor)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rpm]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RPMT</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">turbine angular speed</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FARC</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">inlet method parameter of steam into the
+      turbine:<br>
+      FARC = 1 partial arc inlet<br>
+      FARC = 0 total arc inlet<br>
+      the transition from one to the other conditions is admitted</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AT i</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">requirement of coming out position from
+      valve tester related to the i-th valve (i = 1, ... NVALV)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAMM</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of steam through the turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HCRT</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam in the rotor chamber</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QMEC</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mechanics power supplied by the stage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAM1</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate on an half nozzle arc</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAM2</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate on the second half nozzle arc</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AR i</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">lift of the i-th regulating valve (i = 1,
+      ... NVALV)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PU i</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure upstream of the i-th nozzle arc
+      sector (i = 1, ... NVALV)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p>Turbine with two inlet piping</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ZVA1</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">first inlet valve lift</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ZVA2</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">second inlet valve lift</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PAM1</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure of steam upstream the first
+      inlet valve</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PAM2</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure of steam upstream the second
+      inlet valve</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HAM1</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam on the first inlet
+      valve</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HAM2</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam on the second inlet
+      valve</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PCRT</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure in the rotor chamber</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SEAV</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">turbine start-up push button:<br>
+      SEAV = 1 start-up condition<br>
+      SEAV = 2 stopping condition</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALZS</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">control parameter of regulating valve (in case of 320
+      MW Ansaldo turbine it coincides with the stroke of regulating valve servo
+      motor)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rpm]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RPMT</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">turbine angular speed</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FARC</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">inlet method parameter of steam into the
+      turbine:<br>
+      FARC = 1 partial arc inlet<br>
+      FARC = 0 total arc inlet<br>
+      the transition from one condition to another is admitted with FARC
+      variable between 1 and 0 and vice versa</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AT i</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">requirement of coming out position from
+      valve tester related to the i-th valve (i = 1, ... NVALV)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAMM</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam flow rate through the turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HCRT</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam enthalpy in the rotor chamber</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QMEC</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mechanics power supplied by the stage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAM1</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate on the first inlet piping</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAM2</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate on the second inlet piping</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AR i</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">lift of the i-th regulating valve (i = 1,
+      ... NVALV)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="14%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PU i</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure upstream of the i-th nozzle arc
+      sector (i = 1, ... NVALV)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="RIGHT">Note 2</p>
+</b>
+<p align="left">During definition of model topology, user is asked to indicate:</p>
+<p ALIGN="left">- if turbine has to be connected with one or two inlet piping</p>
+<p ALIGN="left">- the number of regulating valve foreseen in the particular type
+of control stage to simulate.</p>
+<p align="left">In particular on the screen first appears:</p>
+<p align="left">ARE THERE TWO INLET PIPING ? (YES/NOT)</p>
+<p align="left">and subsequently:</p>
+<p align="left">HOW MANY REGULATING VALVES ? (MAX = 16)</p>
+<p align="left">Answering to this question user must indicate the number of
+regulating valves foreseen in the impulse stage to simulate.</p>
+<p align="left">For implemented impulse stage inside the module is foreseen:</p>
+<p ALIGN="left">- 320 MW Tosi turbine: 8 regulating valves</p>
+<p ALIGN="left">- 660 MW Tosi turbine: 8 regulating valves</p>
+<p ALIGN="left">- 320 MW Ansaldo turbine: 4 regulating valves.</p>
+<b>
+<p ALIGN="RIGHT">Note 3</p>
+</b>
+<p ALIGN="left">The PU i and AR i outputs must never become module inputs whose
+equations are solved by LEGO code. Nevertheless they can be input of
+&quot;definite&quot; regulators or LEGO modules whose equations are solved
+inside it so without to be involved in the process of total iterative solution.</p>
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE STAZ</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to initial values of input and output variables,
+user must assign the following data:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="89%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TIP_TURB string of characters for
+      selection of simulating control stage type:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="89%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">- ANSALDO320 to simulate the control stage of 320 MW
+      Ansaldo turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="89%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">- TOSI320 to simulate the control stage of a 320 MW
+      Tosi turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="89%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">- TOSI660 to simulate the control stage of a 660 MW
+      Tosi turbine</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">A further string can be assigned if user has to simulate a
+different type of turbine control stage.</p>
+<p align="left">The quantities ZETAM, PAVV, HAVV and WAVV thereinafter mentioned
+characterize the behaviour of turbine inlet valves. On this subject it is useful
+to precise how inlet valve can be described as consisting of two valves. The
+smaller one (pilot valve) is used for turbine start-up whereas the bigger one is
+the real on-off valve. In the first lift step (values from zero to ZETAM) the
+valve discharge coefficient is the pilot valve one and for higher values it is
+the on-off valve one.</p>
+<p align="left">The quantities ZETAM, PAVV and HAVV defines the inlet valve
+dimensioning in agreement with the fully opening of pilot valve that is for a
+ZETAM opening value by using the following relation:</p>
+<p ALIGN="CENTER">CVA(ZETAM) = WAVV/SQRT(1-R)/SQRT(PAVV*ROAV)</p>
+<p ALIGN="left">where:</p>
+<p ALIGN="left">- R indicates the so called critical ratio (a constant in the
+adopted model)</p>
+<p ALIGN="left">- ROAV is the density value corresponding to HAVV and PAVV</p>
+<p ALIGN="left">- CVA is the valve discharge capacity (to avoid possible
+misunderstanding it is perhaps useful to emphasize that CVA has the meaning of
+the specific discharge capacity per the valve cross section area).</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ZETAM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">lift value of inlet valve throwing with
+      start-up flow rate WAVV is flowing (pilot valve fully opened)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PAVV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">inlet steam pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HAVV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">inlet steam enthalpy</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAVV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam flow rate given by only one inlet
+      valve with ZETAM lift, PAVV pressure upstream inlet valve and HAVV steam
+      enthalpy.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">When lift values are lower than ZETAM, the valve outlet
+coefficient is calculated with the following linear relation:</p>
+<p ALIGN="CENTER">CVA(ZETA) = CVA(ZETAM)*ZETA/ZETAM</p>
+<p align="left">when lift values are higher than ZETAM it is used a parabolic
+curve connecting the CVA value related to ZETAM with the CVA value related to a
+situation which foreseen an inlet valve fully opened (the CVA value related to a
+fully open valve condition is calculated inside the module by using the data
+related to the nominal conditions DPVE, PSHNOM, TSHNOM and WNOM thereinafter
+described in physical and geometrical data section).</p>
+<p align="left">These quantities assume control only in start-up simulation (see
+note 1).</p>
+<p align="left">All turbine data needing for simulation (describing the
+manufacturing characteristics of different impulse stages implemented in the
+module) are included in some subroutines of STAZ module (DXANS320 subroutine for
+impulse stage of a 320 MW Ansaldo turbine, DXTOS320 for a 320 MW Tosi turbine
+and DXTTOS660 for a 660 MW Tosi turbine).</p>
+<p align="left">The listing of these subroutines is thereinafter mentioned in
+&quot;Data acquisition subroutines&quot; section.</p>
+<p align="left">If a control stage for a different turbine has to be simulate,
+user must write a subprogram including the same type of informations of existing
+subroutines, referring to the interested control stage.</p>
+<p align="left">Informations about user subprogram are included below.</p>
+<p align="left">The meaning of FORTRAN's symbols used in the mentioned
+subroutines and describing the turbine characteristics is the following:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TIPO</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">text indicating the type of turbine (36
+      alphanumeric characters)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PHSNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam nominal pressure at the turbine
+      inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[k]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TSHNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam nominal temperature at the turbine
+      inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Hz]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VUNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">turbine angular speed</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal steam flow rate into the turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RAGGIO</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">minimum radius of impulse stage blades</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s/Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CCR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">proportionality constant between steam
+      pressure an flow rate in the rotor chamber</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AETA, BETA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">coefficients for ETA efficiency
+      calculation as a function of the ratio between TIP speed of a turbine
+      blade mid point (U) and steam absolute speed at nozzles outlet (C):</font><font FACE="Arial">
+      <p ALIGN="CENTER">ETA = AETA*(U/C)²+BETA*(U/C)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DPVE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">head loss inside inlet valves under
+      nominal conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PSHF</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">reference pressure for discharge capacity
+      calculation of regulating valves</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[k]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TSHF</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">reference temperature for discharge
+      capacity calculation of regulating valves</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">XF</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">X parameter reference value for discharge
+      capacity calculation of regulating valves</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WF</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">reference flow rate for discharge
+      capacity calculation of regulating valves</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NVALV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of regulating valves (max. 16)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NIPF</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of intervals, identical for all
+      the valves, in which the values range of X control parameter is subdivided
+      in case of total arc functioning (for 320 MW Ansaldo turbines, X is the
+      servo motor stroke).</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IAM(i)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">index specifying which inlet piping is
+      feeding the i-th regulating valve and the corresponding nozzles arc sector
+      (i = 1, ..., NVALV)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RCA(i)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ratio between the i-th valve discharge
+      capacity and the valve 1 discharge capacity (i = 1, ..., NVALV)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CCF(i, j)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">triad of parabola arc coefficients approximating the
+      dependence of i-th value recovery coefficient from the AR_i valve disc. (i
+      = 1, ..., NVALV; j = 1, ..., 3).</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AUG(i)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">i-th nozzle sector area (i = 1, ..., NVALV)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NIA(i)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of intervals in which is
+      subdivided the value range of valve disc AR_i position for every
+      regulating valves (i = 1, ..., NVALV)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CAV(i, IO2, k)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">set of four data whose first one is the
+      extreme right-hand of each interval in which AR_i value range is
+      subdivided, while other data are the triad of parabola arc coefficients
+      approximating, in each interval, the dependence of the i-th valve area
+      from valve disc AR_i position (i = 1, ..., NVALV; IO2 = 1, ..., NIA(i); k
+      = 1, ..., 4)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NIP(i)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of interval, identical for each
+      valve, in which the value range of X control parameter is subdivided in
+      case of partial arc functioning (for 320 MW Ansaldo turbines, X is the
+      servo motor stroke) (i = 1, ..., NVALV)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CPV(i, IO2, k)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">set of four data whose first one is the
+      extreme right-hand of each interval in which X parameter value range is
+      subdivided, while other data are the triad of parabola arc coefficients
+      approximating the dependence of valve disc AR_i position in the i-th valve
+      from X control parameter position in partial arc functioning (k = 1, ...,
+      4)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CPVF(IO2, k)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">set of four data whose first one is the
+      extreme right-hand of each interval in which X parameter value range is
+      subdivided, while other data are the triad of parabola arc coefficients
+      approximating the dependence of the i-th valve disc AR_i position from X
+      control parameter position in total arc functioning (in this case the
+      dependence law of AR_i from X is identical for all valves (IO2 = 1, ...,
+      NIPF; k = 1, ..., 4)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b>
+<p ALIGN="RIGHT">Data acquisition subroutines</p>
+</b>
+<p align="left">Clicking on the following items, one can see wich is the form of
+a data acquisition subroutine, for the following turbines:</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><a href="staz_tosi320.htm" target="_blank">Tosi 320 MW</a><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><a href="staz_ansaldo320.htm" target="_blank">Ansaldo 320
+    MW</a><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><a href="staz_tosi660.htm" target="_blank">Tosi 660 MW</a><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE STAZ</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the STAZ module variables no particular
+prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE STAZ</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In the present version of STAZ module are implemented the data
+related to impulse stages simulation of the following turbines:</p>
+<p align="left">- 320 MW ANSALDO</p>
+<p align="left">- 320 MW TOSI</p>
+<p align="left">- 660 MW TOSI</p>
+<p align="left">If an impulse stage for a different turbine has to be simulated,
+user must assign to TIP-TURB variable (see above) a different string from those
+indicated.</p>
+<p align="left">User must further write a subprogram whose declarative statement
+is:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<blockquote>
+  <p align="left">SUBROUTINE DXSTAZ(TIPO,</p>
+  <p align="left">$ R, AALAM, UDVU, CCR, AETA, BETA, CEME, NVALV,</p>
+  <p align="left">$ CA, CCF, AUG, NIA, CAV, CK, NIP, CPV, NIPF, CPVF, ALFA, HRIF,</p>
+  <p align="left">$ PSHNOM, TSHNOM, VUNOM, WNOM, RAGGIO, DPVE, PSHF, TSHF,</p>
+  <p align="left">$ RCA, XF, WF, IAM)</p>
+</blockquote>
+</font></b><font FACE="Arial">
+<p ALIGN="left">In this subprogram must be included physical and geometrical
+data; it is a matter of writing a subroutine identical to the other indicated
+above (&quot;Data acquisition subroutines&quot;) modifying the DATA sections in
+order to put in the data related to the interested turbine.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE STAZ</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">From a normal point of view, residual the number of present
+residuals is not fixed up but it varies at varying of number of regulating
+valves. Nevertheless, the first five residuals are fixed up, independent from
+number of regulating valves and constitute the actual module equations.</p>
+<p align="left">The first residual has the following form:</p>
+<p align="center">RNI(1) = (WAMM-WAM1-WAM2)</p>
+<p align="right">(normalization factor = W0)</p>
+<p align="left">The residual RNI(2) has the following form:</p>
+<p ALIGN="CENTER">RNI(2) = (HCRT - HMISC)</p>
+<p ALIGN="RIGHT">(normalization factor = H0/100)</p>
+<p ALIGN="left">where HMISC has the meaning of the enthalpy obtained by mixing
+enthalpies of flow rate flowing on the different nozzles arc sectors.</p>
+<p align="left">The residual RNI(3) has two different expressions as a function
+of the considered number of inlet piping. So, in case of only one inlet piping:</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="center">RNI(3) = QMEC-WAMM*(HAMM-HCRT)</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p ALIGN="RIGHT">(normalization factor = W0*H0)</p>
+<p ALIGN="JUSTIFY">while in case of two inlet piping:</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="center">RNI(3) = QMEC-(WAM1*(HAM1-HCRT)+WAM2*(HAM2-HCRT))</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p ALIGN="RIGHT">(normalization factor = W0*H0)</p>
+<p>The residual RNI(4) can be formally written as:</p>
+<p ALIGN="JUSTIFY">- only one inlet piping</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="center">RNI(4) = WAM1 - f4(PAMM, HAMM, ALZS, FARC, PCRT)</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p ALIGN="RIGHT">(normalization factor = W0)</p>
+<p ALIGN="JUSTIFY">- two inlet piping</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="center">RNI(4) = WAM1 - f4(PAM1, HAM1, ALZS, FARC, PCRT)</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p ALIGN="RIGHT">(normalization factor = W0)</p>
+<p>Similarly, the RNI(5) residual can be formally written as:</p>
+<p ALIGN="JUSTIFY">- only one inlet piping</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="center">RNI(5) = WAM2 - f5(PAMM, HAMM, ALZS, FARC, PCRT)</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p ALIGN="RIGHT">(normalization factor = W0)</p>
+<p ALIGN="JUSTIFY">- two inlet pipings</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="center">RNI(5) = WAM2 - f5(PAM2, HAM2, ALZS, FARC, PCRT);</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p ALIGN="RIGHT">(normalization factor = W0)</p>
+<p align="left">Remaining residuals equations can be used for monitoring the
+values of the i-th regulating valve lift and upstream pressure of arc sector
+supplied by the i-th regulating valve. So the NVALV equation for lifts and NVALV
+equations for the pressures are present.</p>
+<p ALIGN="CENTER">RNI(5+i) = AR_i - f(ALZS, FARC) i = 1...NVALV</p>
+<p ALIGN="CENTER">RNI(5+NVALV+i) = PU_i - f(PAM, HAM, PCRT, ALZS, FARC) i = 1...NVALV</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE STAZ</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<p align="left">SUBROUTINE STAZI3 (IFO, IOB, DEBL)</p>
+<p align="left">SUBROUTINE STAZI4 (IOB, MOD)</p>
+<p align="left">SUBROUTINE STAZI2 (IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1,
+ID2,</p>
+<p align="left">$ IBLOC1, IBLOC2, IER, CNXYU, TOL)</p>
+<p align="left">SUBROUTINE STAZC1 (IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+<p align="left">$ IBLOC1, IBLOC2)</p>
+<p align="left">SUBROUTINE STAZJC (AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+<p align="left">$ NRIG, NCOL, EPS, EPSLIM, RESIDUI)</p>
+<p align="left">SUBROUTINE STAZ (IFUN, IXYU, XYU, IPD, DATI, RNI)</p>
+<p align="left">SUBROUTINE STAZAV (PSH1, PSH2, HSH1 ,HSH2, PCR, WCR, X,</p>
+<p align="left">$ WF20, HF20, WAM1, WAM2, LINAM, ZETAM,</p>
+<p align="left">$ ZVA1, ZVA2, NVR, ACVR,</p>
+<p align="left">$ APVR, PMUG, PMUGC, R, AALAM, UDVU, CCR, AETA,</p>
+<p align="left">$ BETA, NVALV, CA, CCF, AUG, NIA, CAV, NIPF,</p>
+<p align="left">$ CPVF, ALFA, HRIF, IAM, CVAM, A2, B1, C0)</p>
+<p align="left">SUBROUTINE STAZPORT (PSH, ROSH, X, WF20, II, APVR, ACVR, R,</p>
+<p align="left">$ UDVU, NVALV, CA, CCF, AUG, NIA, CAV, NIPF,</p>
+<p align="left">$ CPVF, CPVF, ALFA, HRIF, IAM, ZEVA, ZETAM,</p>
+<p align="left">$ CVAM, A2, B1, C0, PCR)</p>
+<p align="left">SUBROUTINE SXMGT18 (PSH1, PSH2, HSH1, HSH2, PCR, RPS, WTOT, PXN,</p>
+<p align="left">$ FARC, WF20, HF20, WAM1, WAM2, LINAM, NVR,</p>
+<p align="left">$ ACVR, APVR, PMUG, PMUGC, R, AALAM, UDVU,</p>
+<p align="left">$ CCR, AETA, BETA, CEME.NVALV, CA, CCF, AUG,</p>
+<p align="left">$ NIA, CAV, CK, NIP, CPV, NIPF, CPVF, ALFA,</p>
+<p align="left">$ HRIF, PSHNOM, TSHNOM, VUNOM, WNOM, RAGGIO,</p>
+<p align="left">$ DPVE, PSHF, TSHF, RCA, XF, WF, IAM)</p>
+<p align="left">SUBROUTINE SXF2018 (PSERV, FARC, Y, R2, WSOM, II, APVR, ACVR,</p>
+<p align="left">$ R, AALAM, UDVU, CCR, AETA, BETA, CEME,</p>
+<p align="left">$ NVALV, CA, CCF, AUG, NIA, CAV, CK, NIP, CPV,</p>
+<p align="left">$ NIPF, CPVF, ALFA, HRIF, PSHNOM, TSHNOM, VUNOM,</p>
+<p align="left">$ WNOM, RAGGIO, DPVE, PSHF, TSHF, RCA, XF,</p>
+<p align="left">$ WF, IAM)</p>
+<p align="left">SUBROUTINE STAZCVA (CEME, CVAM, ZETAM, A2, B1, C0)</p>
+<p align="left">SUBROUTINE CALCCVA (ZEVA, CVA, CVAM, A2, B1, C0, ZETAM)</p>
+<p align="left">FUNCTION SXF2218 (IV, P2, N3, P4, N5)</p>
+<p align="left">SUBROUTINE SXSTAZ (IPRNT, ITYP, TIPO, R, AALAM, UDVU, CCR,</p>
+<p align="left">$ AETA, BETA, CEME, NVALV, CA, CCF, AUG, NIA,</p>
+<p align="left">$ CAV, CK, NIP, CPV, NIPF, CPVF, ALFA, HRIF,</p>
+<p align="left">$ PSHNOM, TSHNOM, VUNOM, WNOM, RAGGIO,</p>
+<p align="left">$ DPVE, PSHF, TSHF, RCA, XF, WF, IAM)</p>
+<p align="left">SUBROUTINE SXABC018 (R3, R4, A, B)</p>
+<p align="left">FUNCTION SXF2318 (P2, N3, P4, N5)</p>
+<p align="left">SUBROUTINE DXTOS320 (TIPO, R, AALAM, UDVU, CCR, AETA,</p>
+<p align="left">$ BETA, CEME, NVALV, CA, CCF, AUG, NIA, CAV,</p>
+<p align="left">$ CK, NIP, CPV, NIPF, CPVF, ALFA, HRIF,</p>
+<p align="left">$ PSHNOM, TSHNOM, VUNOM, WNOM,</p>
+<p align="left">$ RAGGIO, DPVE, PSHF, TSHF, RCA, XF, WF, IAM)</p>
+<p align="left">SUBROUTINE DXANS320 (TIPO, R, AALAM, UDVU, CCR, AETA,</p>
+<p align="left">$ BETA, CEME, NVALV, CA, CCF, AUG, NIA,</p>
+<p align="left">$ CAV, CK, NIP, CPV,</p>
+<p align="left">$ NIPF, CPVF, ALFA, HRIF, PSHNOM, TSHNOM,</p>
+<p align="left">$ VUNOM, WNOM, RAGGIO, DPVE, PSHF, TSHF,</p>
+<p align="left">$ RCA, XF, WF, IAM)</p>
+<p align="left">SUBROUTINE DXTOS660 (TIPO, R, AALAM, UDVU, CCR, AETA,</p>
+<p align="left">$ BETA, CEME, NVALV, CA, CCF, AUG, NIA,</p>
+<p align="left">$ CAV, CK, NIP, CPV, NIPF, CPVF, ALFA,</p>
+<p align="left">$ HRIF, PSHNOM, TSHNOM, VUNOM, WNOM,</p>
+<p align="left">$ RAGGIO, DPVE, PSHF, TSHF, RCA, XF, WF,</p>
+<p align="left">$ IAM)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE STAZ</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are in the user
+manual section dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;TURBNEW1&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

@@ -1,0 +1,97 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">Storage of variables values (at the end or the beginning
+of each time step)</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">Storage of variables values may be
+needed in LEGO modules for two different reasons:</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">to evaluate the time trend of a variable;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">to select a working condition.</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p class="MsoNormal"><span lang="EN-GB">The selection of a working condition
+(e.g.: normal or inverted flow in a pipe, check valve opened or closed,
+insulated or grid connected turbine, ...) has to be done using the incoming
+value of the related variables at the first iteration. Otherwise (if the
+residual expression changes due to the working condition) the residual could
+look non-continuous to the calling routine if input values variations may cause
+switching between two different expressions. This may happen both during the
+iterations used to solve the algebraic-differential system and during residuals
+evaluation for incremental ratios evaluation (numerical Jacobian matrix
+computation).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Using for working condition selections
+the previous step values is not correct, as it wouldn't take into account actual
+input variables values if they are modified by external actions (user inputs
+actuation, other tasks connection, control system outputs, ...)</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Obviously the difference is present only
+during transients simulation, but not during steady state computation.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">In both the cases, the REGIME and PARPAR
+common areas must be present in the subroutine which computes the module
+residuals (&quot;xxxxC1&quot; or &quot;xxxx&quot;):&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;<b><font size="2" face="Courier New">&nbsp;
+</font></b>
+</span><b><font size="2" face="Courier New">LOGICAL KREGIM</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON /REGIME/ KREGIM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON /PARPAR/ NPER,NVPLT,NVSTP,NSTPLT,NSTSTP,KPLT,KSTP,ITERT</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">The storage of first-iteration values
+requires <b style="mso-bidi-font-weight:normal">one</b> free element in DATI
+vector (for each variable stored). The contents of this element (which has to be
+used for the selection of the working condition) must be assigned at the <b style="mso-bidi-font-weight:normal">beginning</b>
+of the subroutine under the following condition:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><font face="Courier New" size="2">
+</font></b>
+</span><b><font face="Courier New" size="2">IF (IFUN .EQ. 2 .AND. ITERT .LE. 0) ...</font></b></span></p>
+<p class="MsoNormal"><span lang="EN-GB">using the actual values of the
+variables.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The storage of previous step values
+requires <b style="mso-bidi-font-weight:normal">two</b> free elements in DATI
+vector (for each variable stored).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">If the expressions of the steady state
+residuals are the same as the transient ones, the contents of the <b style="mso-bidi-font-weight:normal">first</b>
+element must be assigned twice, using the actual values of the variables: at the
+beginning of the subroutine, <b style="mso-bidi-font-weight:normal">before</b>
+the assignment of the second one, under the following condition:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (KREGIM) ...</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">and <b style="mso-bidi-font-weight:normal">unconditionally</b>
+at the end of the subroutine (or elsewhere after the assignment of the second
+one).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The <b style="mso-bidi-font-weight:normal">second</b>
+element (which has to be used inside the module) must be assigned at the <b style="mso-bidi-font-weight:normal">beginning</b>
+of the subroutine under the following condition:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="2" face="Courier New"><b>
+</b></font>
+</span><font size="2" face="Courier New"><b>IF (IFUN .EQ. 2 .AND. ITERT .LE. 0) ...</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">copying the value stored in the first
+element.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">If the expressions of the steady state
+residuals are different from the transient ones, maybe they don't need to use
+the value stored in the second element. In this case it is not necessary to
+store the value in the first element two times: only the second one is actually
+needed (unconditionally at the end of the subroutine or elsewhere after the
+assignment of the second one).</span></p>
+
+<!--mstheme--></font></body>
+
+</html>

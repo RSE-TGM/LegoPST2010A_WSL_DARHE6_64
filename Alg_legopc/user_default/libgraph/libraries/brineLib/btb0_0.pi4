@@ -1,0 +1,45 @@
+BTB0_0                                                                          
+BTB0                                                                            
+Brine head loss                                                                 
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 7
+ 
+NCONF = 3
+ 
+WTUB      --UA-- FLOW RATE THROUGH THE HEAD LOSS                                
+PITU      --IN-- PRESSURE AT THE HEAD LOSS INLET                                
+PUTU      --IN-- PRESSURE AT THE HEAD LOSS OUTLET                               
+HTUB      --IN-- ENTHALPY AT HEAD LOSS INLET AND OUTLET                         
+AKTB      --IN-- CORRECTOR COEFFICIENT OF THE HEAD LOSS                         
+FNAC      --IN-- NaCl MASS FRACTION COMING INTO HEAD LOSS                       
+FINV      --IN-- NaCl MASS FRACTION FOR FLOW INVERSION                          
+HINV      --IN-- ENTHALPY AT INLET FOR FLOW INVERSION                           
+==============================                                                  
+PITU      --UA-- PRESSURE AT THE HEAD LOSS INLET                                
+WTUB      --IN-- FLOW RATE THROUGH THE HEAD LOSS                                
+PUTU      --IN-- PRESSURE AT THE HEAD LOSS OUTLET                               
+HTUB      --IN-- ENTHALPY AT HEAD LOSS INLET AND OUTLET                         
+AKTB      --IN-- CORRECTOR COEFFICIENT OF THE HEAD LOSS                         
+FNAC      --IN-- NaCl MASS FRACTION COMING INTO HEAD LOSS                       
+FINV      --IN-- NaCl MASS FRACTION FOR FLOW INVERSION                          
+HINV      --IN-- ENTHALPY AT INLET FOR FLOW INVERSION                           
+==============================                                                  
+PUTU      --UA-- PRESSURE AT THE HEAD LOSS OUTLET                               
+PITU      --IN-- PRESSURE AT THE HEAD LOSS INLET                                
+WTUB      --IN-- FLOW RATE THROUGH THE HEAD LOSS                                
+HTUB      --IN-- ENTHALPY AT HEAD LOSS INLET AND OUTLET                         
+AKTB      --IN-- CORRECTOR COEFFICIENT OF THE HEAD LOSS                         
+FNAC      --IN-- NaCl MASS FRACTION COMING INTO HEAD LOSS                       
+FINV      --IN-- NaCl MASS FRACTION FOR FLOW INVERSION                          
+HINV      --IN-- ENTHALPY AT INLET FOR FLOW INVERSION                           
+==============================                                                  
+EOF                                                                             
+2
+t0 10
+Generical input
+WTUB PITU ____ FNAC HTUB FINV HINV ____ ____ ____
+t1 11
+Generical output
+WTUB PUTU ____ FNAC HTUB FINV HINV ____ ____ ____

@@ -1,0 +1,27 @@
+AMOL
+
+AMOL - Two signals product                                                      
+3
+1
+
+t0
+I1MO 
+1 
+t1
+I2MO 
+1 
+t2
+UMOL 
+1 
+
+0
+1
+2
+
+UMOL UA
+OUTPUT ANALOG SIGNAL FROM MULTIPLIER                           
+I1MO IN
+INPUT SIGNAL 1 TO MULTIPLIER                                   
+I2MO IN
+INPUT SIGNAL 2 TO MULTIPLIER                                   
+

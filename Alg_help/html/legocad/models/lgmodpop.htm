@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Stop and safety valves</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_stopvalve"></A>Stop and safety valves</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For every kind of valve the most important data is the discharge coefficent, which is a function of the maximum flow crossing section. As often (as usual in a lumped parameters model) the head losses of inlet and outlet pipes are added to valve head loss, the computed value should be accordingly modified.</P>
+<P ALIGN="JUSTIFY">The valve discharge coefficient may be taken from the <B>valve data sheet</B>, if available. Otherwise it may be automatically computed (by the related LEGO modules) supplying <B>one working condition</B> of the valve (inlet and outlet pressure, inlet fluid conditions, stem position and fluid flow rate).</P>
+<P ALIGN="JUSTIFY">For stop and safety valves (whose opening degree is always zero or one, excluding during opening and closing transients), it is not important to know the valve characteristic curve (the relation between the stem position and the throwing section) as it doesn't affect the model behaviour.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_regvalve"></A>Regulation valves</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For every kind of valve the most important data is the discharge coefficent, which is a function of the maximum flow crossing section. As often (as usual in a lumped parameters model) the head losses of inlet and outlet pipes are added to valve head loss, the computed value should be accordingly modified.</P>
+<P ALIGN="JUSTIFY">The valve discharge coefficient may be taken from the <B>valve data sheet</B>, if available. Otherwise it may be automatically computed (by the related LEGO modules) supplying <B>one working condition</B> of the valve (inlet and outlet pressure, inlet fluid conditions, stem position and fluid flow rate).</P>
+<P ALIGN="JUSTIFY">For regulation valves (whose opening degree is directly related to control system behaviour), it is also important to know the <B>valve characteristic curve</B> (the relation between the stem position and the throwing section) as it greatly affects the model behaviour. As the actual characteristic curve gradient is (in every working condition) directly multiplied by the control proportional gain, any error in the curve form will directly affect the control system behaviour (it may also invalidate the simulation results, if the target of the simulation is the analysis or the design of control system parameters and strategies).</P>
+<P ALIGN="JUSTIFY">In the related LEGO modules, simple characteristic curves (linear, quadratic and so on) can be directly simulated by the module; more complicated curves must be assigned by the model maker supplying a related Fortran procedure in the FORAUS section (using auxiliary Fortran definition activity).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_checkvalve"></A>Check valves</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For check valves, the only required data is the check valve <B>opening and closing differential pressures</B> (the minimum differential pressure that is needed to get the valve checking the fluid flow and the minimum differential pressure that is needed to get the valve opening again).</P>
+<P ALIGN="JUSTIFY">In LEGO standard libraries check valves are not directly simulated: check valves are always simulated together with other valves (stop, safety or regulation). An isolated check valve may be simulated as a couple of a stop valve and a check valve, where the head loss of the stop valve (which will be always fully opened) is the actual head loss through the check valve (when it is opened).</P>
+<P ALIGN="JUSTIFY">In the related LEGO modules, default values for opening and closing differential pressures are assumed if the actual values are unknown.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_pumpfans"></A>Pumps and fans</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For pumps and fans the <B>working characteristic curve</B> (the relation between the rotational speed, the inlet and outlet pressures and the fluid flow rate) is very important, as during the simulation it affects the dynamical behaviour of the plant. Obviously the actual weight of the exact curve depends on the simulation targets, the variability of the pump (or fun) working conditions during the transients to be simulated, and on the presence or the absence of particular plant devices (like bypasses or recirculating gates) which can allow the pump (or the fan) to work almost always in the same working conditions.</P>
+<P ALIGN="JUSTIFY">In the related LEGO modules, in most cases the characteristic curves must be assigned by the model maker supplying a related Fortran procedure in the <B>FORAUS section</B> (using auxiliary Fortran definition activity).</P>
+<P ALIGN="JUSTIFY">For <B>pumps</B> the related LEGO library module allows to use predefined classes of characteristic curves (using similarity criterion) supplying <B>one working condition</B> of the pump (inlet and outlet pressure, inlet fluid conditions, rotational speed and fluid flow rate).</P>
+<P ALIGN="JUSTIFY">For <B>fans</B> the similarity criterion is not used, and only a little set of predefined fan curves is present in the library module: for every other kind of fun the characteristic curve must be assigned using FORAUS.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_manifolds"></A>Manifolds and drums</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The most important datum required for the simulation of a manifold or a drum is its <B>internal volume</B>, which affects the dynamic behaviour of mass and energy storage in the fluid.</P>
+<P ALIGN="JUSTIFY">If the LEGO model choosen for the simulation of the energy storage in the manifold metal wall; in this case also the metal wall dimensions and the wall material properties. The actual dimensions can be taken from <B>manifold drawings</B> and/or plant design; from the same source also the material kind can be taken; the thermodynamical properties of the material must often be taken from <B>steel technical standards</B> (ISO, AISI, ASTM, UNI, DIN and so on, depending on the steel manufacturer).</P>
+<P ALIGN="JUSTIFY">In most cases, when <B>pipelines</B> between other components (like valves or pumps) and manifolds are short enough to neglect the transport delay effect, their volumes (according to lumped parameters criterion) are added to manifold one. Note that also the pipelines metal mass must be added to the manifold: the dimensions to be assigned for the manifold should be computed according not only to the total volume, but also to the total mass and the total exchanging surfaces. Pipelines lenght, section, thickness and material can be taken from plant design and <B>plant isometrics</B>.</P>
+<P ALIGN="JUSTIFY">For <B>drums</B> (where liquid and gaseous phases are not mixed) it is required to simulate the relation between liquid phase volume and liquid level inside the drum (given by drum shape). Easy shapes are automatically simulated; more complicated shapes can be simulated supplying a related Fortran procedure in the FORAUS section (using auxiliary Fortran definition activity). This feature is not always very important: if the control system forces the level of the liquid to be always at the "nominal" value, and only small differences may occur, only the local gradient is important (the shape simulation may be greatly simplified). The exact shape must be simulated only when an accurate analysis is required for the simulation of malfunctioning involving "level too high" and/or "level too low" alarm signals.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_exchangers"></A>Exchangers and pipelines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In most cases, when <B>pipelines</B> between other components (like valves or pumps) and manifolds are short enough to neglect the transport delay effect, their volumes (according to lumped parameters criterion) are added to manifold one (see "manifolds and drums").</P>
+<P ALIGN="JUSTIFY">On the contrary, long pipelines must be simulated like exchangers, as the cellized model used for exchangers takes into account the transport delay effect.</P>
+<P ALIGN="JUSTIFY">The most important data required for the simulation of the <B>water/steam side</B> of an exchanger are the <B>internal volume</B>, the <B>exchanging surfaces</B> (internal and external) and the <B>metal wall mass</B> of the pipe bundle which affects the dynamic behaviour of mass and energy storage in the fluid.</P>
+<P ALIGN="JUSTIFY">The pipes dimensions (internal diameter, thickness, length and number of pipes) can be taken from <B>manifold drawings</B> and/or plant design; from the same source also the material kind can be taken; the thermodynamical properties of the material must often be taken from <B>steel technical standards</B> (ISO, AISI, ASTM, UNI, DIN and so on, depending on the steel manufacturer). For finned pipes, also the actual external exchangin area must be given.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_macicons"></A>Icons</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">An icon is the representation of a process block on the topological scheme.</P>
+<P ALIGN="JUSTIFY">An icon is composed of a bitmap and an 8-characters string, whick is the complete name of the block (obtained collating the 4-characters name of the module with a 4-characters block name).</P>
+<P ALIGN="JUSTIFY">The bitmap can be selected by the user between the icon-bitmaps defined for that module (up to 10 bitmaps for each module). New icon-bitmaps for user-library modules can be drawed by the model maker and/or the module developer (if they aren't the same person).</P>
+<P ALIGN="JUSTIFY">New icon-bitmaps can be drawed even for library standard modules, but this action is not recommended for model portability reasons.</P>
+<P ALIGN="JUSTIFY">The bitmap definition also includes the bitmap colour; for library process modules the one colour actually used is black (red is used for regulation schemes in mixed simulation models).</P>
+<P ALIGN="JUSTIFY">Icons can be moved and modified (choosing another bitmap in the set defined for the related module) after their definition, so no particular attention must be payed in icon positionning.</P>
+<P ALIGN="JUSTIFY">As an example, the following icons are the 8 icons actually defined for VALV module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1203.gif" WIDTH=558 HEIGHT=95><B><FONT FACE="Arial, helvetica" SIZE=5>&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_maclines"></A>Lines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">A line is a simply line (straight or broken) which can be drawed on the macroblocks to represent a (logical, phisical or electrical) connections between two blocks (joining their icons) or a connection between a block and the environment (or a part of a plant simulated in another model: see "LEGOCAD simulators").</P>
+<P ALIGN="JUSTIFY">A line may have an arrow at his ending point. Line thickness, line colour, arrow presence, arrow thickness and arrow lenght can be set by the model maker (before he draws the line). Composed, multicoloured, branched and two-side arrowed lines can be drawed joining single lines.</P>
+<P ALIGN="JUSTIFY">Note that a line can't be moved or modified after it has been drawed (it can only be deleted) so particular attention must be payed during their drawing. Also lines has to be deleted and redrawed if the joined icons are moved.</P>
+<P ALIGN="JUSTIFY">Actually there is a way to modify drawed lines, manually editing the topological description file (macroblocks.dat) but this way should not be performed and it is intentionally not described as a not-skilled model maker may produce serious damages to the model in progress.</P>
+<P ALIGN="JUSTIFY">As an example, the following picture represents three icons joined with a branched line (drawed joining an arrowed line and a not-arrowed line):</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1204.gif" WIDTH=259 HEIGHT=164></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_maccomm"></A>Comments</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">A comment is a single-line text string which can be added on the macroblocks to entitle a page, to describe a block, to describe an external inlet or outlet, to comment a connection between two blocks and so on.</P>
+<P ALIGN="JUSTIFY">Comment font can't be choosen. Also it may depend on the processor and the screen used to display the macroblock: a default processor-dependent font will be used if the font selected by LEGOCAD System font is not defined on the processor. Topologic definition activity resource definition file and/or user's window manager resource definition file could be modified to set the LEGOCAD selected font.</P>
+<P ALIGN="JUSTIFY">A comment can be modified and moved after its definition. The moving action must be performed whenever a new comment is defined, as there is no way to set its position during the creation phase, and all the new comments are placed by LEGOCAD System in the upper left corner of the active macroblock window.</P>
+<P ALIGN="JUSTIFY">As an example, the following picture represents a comment placed to describe a connection between two blocks (the blocks are not represented):</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1205.gif" WIDTH=336 HEIGHT=75></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_macsymb"></A>Symbols</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">A symbol is a pre-defined bitmap whick can be placed wherever the model maker likes in the macroblock. Obviously the usage of a symbol depends strictly on what the related bitmap represents.</P>
+<P ALIGN="JUSTIFY">In the LEGOCAD System there are at the moment 70 different symbols. New symbols can't be drawed by the model maker using standard LEGOCAD activities. They can be added using BITMAP utility and manually modifying the symbols definition file: the most serious damage which can be produced during this operation is to make impossible to use symbols in macroblocks drawings.</P>
+<P ALIGN="JUSTIFY">The following picture represents the most important symbols actually defined:</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1206.gif" WIDTH=360 HEIGHT=400></P></BODY>
+</HTML>

@@ -1,0 +1,97 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">LEGO modules with less equations than output variables</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">Some LEGO module has less equations than
+output variables. this means that the values of some output variables are
+directly assigned, without the resolution of LEGO iterative equations (like in
+regulators). The difference is that in regulators no equation is present: in
+this kind of module, there are both equations and non-equations.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Unfortunately, this kind of module will
+not work in steady state computation: so the developer must choose (for steady
+state only) whether to add equations also for non-iterative outputs or to
+directly assign values also for iterative outputs.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">In the second case, the module will be a
+regulator (with no equation) during steady state computation. Note that this is
+not usually done, as regulators don't participate in steady state system
+solution (this may invalidate the steady state obtained). This case will not be
+furthermore discussed, as it has been discussed in the previous section.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">In the first (and more usual) case, the
+residuals for non-iterative outputs (which will be iterative outputs in steady
+state computation phase) may be written in a very easy way, as difference
+between the actual value and the computed value (this the easiest kind of
+implicit equation).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The &quot;xxxxI2&quot; subroutine is not
+affected by this feature: it must be exactly like the &quot;xxxxI2&quot; of a
+standard module (same features and same prescriptions).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The &quot;xxxxD1&quot; subroutine is not
+affected by this feature: as the module is a standard module during steady state
+computation, the &quot;xxxxD1&quot; subroutine must be exactly like the
+&quot;xxxxD1&quot; of a standard module (on the contrary, if the module has no
+steady-state equation, the &quot;xxxxD1&quot; will be an empty skeleton).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The &quot;xxxxI3&quot; subroutine is
+only a bit affected by this feature: the non-iterative output variables must be
+defined as algebraic outputs (&quot;UA&quot;), and they must follow all the
+other algebraic outputs (the iterative ones).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The &quot;xxxxC1&quot; subroutine is the
+one actually affected by this feature, as the actions to be performed by this
+subroutine are very different.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">First of all, in the &quot;xxxxC1&quot;
+subroutine must be present the NEQUAZ and the REGIME common areas:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>LOGICAL KREGIM</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON /REGIME/ KREGIM</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON /NEQUAZ/ NEQMOD</font></b></span></p>
+<p class="MsoNormal"><span lang="EN-GB">During steady state computation (KREGIM
+= .TRUE.) the value of NEQMOD must not be modified, as the module must be a
+standard one.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">During transients simulation (KREGIM =
+.FALSE.) the value of NEQMOD must be set to the number of <u>iterative algebraic
+equations</u> (differential equations and non-equations must not be computed) at
+every call of &quot;xxxxC1&quot; (independently of the value of IFUN).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The Jacobian matrix (IFUN = 3) and its
+topology (IFUN = 1) must be assigned taking into account both the differential
+equation and the iterative algebraic equations. As during steady state
+computation also the non-iterative outputs must be computed using algebraic
+equation, the Jacobian matrix must take into account also these residuals
+(during steady state computation). This is not required for Jacobian matrix
+topology, as topology is defined in subroutine &quot;xxxxC1&quot; only for
+transients simulation.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">If the module developer wants to let the
+module compute numerically the Jacobian matrix, he can use the NAJAC (or the
+BNAJAC) routine cheating on the numbers of variables:</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">NSTATI (number of state outputs) must be the actual one;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">NUSCIT (number of algebraic output) must be computed taking into account
+only the iterative ones;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB"><span style="mso-tab-count:1">&nbsp;</span>NINGRE (number of inputs) must be the sum of the actual number of inputs
+and the number of non-iterative outputs.</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+&nbsp;
+<p>
+<span lang="EN-GB" style="font-size:12.0pt;mso-bidi-font-size:10.0pt;font-family:
+Arial;mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-ansi-language:EN-GB;mso-fareast-language:IT;mso-bidi-language:AR-SA">(cheating
+is not a thing a good programmer should do, but in this case it works well and
+avoids the realization of another clone of NAJAC :-).</span>
+
+</p>
+<!--mstheme--></font></body>
+
+</html>

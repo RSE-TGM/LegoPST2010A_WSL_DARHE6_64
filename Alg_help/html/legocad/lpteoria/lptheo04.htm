@@ -1,0 +1,147 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_conds"></A>Steam condensers and feedwater heaters</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> on </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_conds"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">steam condensers</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> on </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_wscavi"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">feedwater heaters</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_condgen"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Generalities (on these modules)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_condcond"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Steam condensers</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_condhori"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Feed water horizzontal heaters</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_condvert"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Feed water vertical heaters</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_condgen"></A>Steam condensers and feedwater heaters: generalities</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The mathematical models regard both the shell side and the tube side fluids, the tube bundles and the casing of a shell-and-tube heat exchanger.</P>
+<P ALIGN="JUSTIFY">The main hypotheses of the tube side fluid model are:</P>
+<P ALIGN="JUSTIFY">the fluid always is subcooled liquid</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no inertia</P>
+<P ALIGN="JUSTIFY">It is moreover assumed:</P>
+<P ALIGN="JUSTIFY">the tube bundle is represented by one equivalent pipe, axially split in cells</P>
+<P>the tube flow cross-section area is constant</P>
+<P>the inlet and outlet component elevations are equal, namely:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image155.gif" WIDTH=69 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Integrating the conservation equations on a control volume (cell) and assuming:</P>
+<P ALIGN="JUSTIFY">G</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN,i</FONT><FONT FACE="Arial, helvetica"> = G</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> and of course G</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,i</FONT><FONT FACE="Arial, helvetica"> = G</FONT><FONT FACE="Arial, helvetica" SIZE=1>i+1</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">h</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,i</FONT><FONT FACE="Arial, helvetica"> = h</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> and of course h</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN,i</FONT><FONT FACE="Arial, helvetica"> = h</FONT><FONT FACE="Arial, helvetica" SIZE=1>i-1</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">p</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,i</FONT><FONT FACE="Arial, helvetica"> = p</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> and of course p</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN,i</FONT><FONT FACE="Arial, helvetica"> = p</FONT><FONT FACE="Arial, helvetica" SIZE=1>i-1</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the terms G²</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN,i</FONT><FONT FACE="Arial, helvetica">/Ar</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN,i</FONT><FONT FACE="Arial, helvetica"> and G²</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,i</FONT><FONT FACE="Arial, helvetica">/Ar</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,i</FONT><FONT FACE="Arial, helvetica"> can be neglected in the momentum equation</P>
+<P ALIGN="JUSTIFY">the term V</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica">(dp</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica">/dt) can be neglected in the energy conservation equation</P>
+<P ALIGN="JUSTIFY">the conservation equations for the i-th cell become:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image536.gif" WIDTH=86 HEIGHT=22></P>
+<P ALIGN="CENTER"><IMG SRC="Image537.gif" WIDTH=177 HEIGHT=53></P>
+<P ALIGN="CENTER"><IMG SRC="Image529.gif" WIDTH=265 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P>The tubes wall energy equation is, making the same hypotheses as for heat exchangers walls:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image538.gif" WIDTH=289 HEIGHT=44></P>
+<P ALIGN="CENTER"><IMG SRC="Image539.gif" WIDTH=257 HEIGHT=94><FONT FACE="Arial, helvetica">&#9;<IMG SRC="Image540.gif" WIDTH=276 HEIGHT=94></P>
+<P ALIGN="JUSTIFY">where the </FONT><A HREF="#lg_lptheo_heatws"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">heat transfer coefficients</U></FONT></A><FONT FACE="Arial, helvetica"> are computed by means of empirical correlations, depending on the local conditions.</P>
+<P ALIGN="JUSTIFY">The shell side fluid undergoes the following transformations:</P>
+<P ALIGN="JUSTIFY">desuperheating</P>
+<P ALIGN="JUSTIFY">condensation</P>
+<P ALIGN="JUSTIFY">subcooling</P>
+<P ALIGN="JUSTIFY">As a rule the shell side volume is split in three zones, the desuperheating zone, the condensation zone and the subcooling zone. On each of them the continuity and energy equations are integrated:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image541.gif" WIDTH=165 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image542.gif" WIDTH=382 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Once the fluid mass in the subcooling zone is known, the zone volume and the liquid level can be computed.</P>
+<P ALIGN="JUSTIFY">The momentum equation takes the form:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image448.gif" WIDTH=49 HEIGHT=42><FONT FACE="Arial, helvetica">&#9;<IMG SRC="Image449.gif" WIDTH=49 HEIGHT=45>&#9;<IMG SRC="Image450.gif" WIDTH=49 HEIGHT=42></P>
+<P ALIGN="JUSTIFY">for heat exchangers, and the form:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image451.gif" WIDTH=49 HEIGHT=42><FONT FACE="Arial, helvetica">&#9;<IMG SRC="Image452.gif" WIDTH=49 HEIGHT=45>&#9;<IMG SRC="Image453.gif" WIDTH=106 HEIGHT=46></P>
+<P ALIGN="JUSTIFY">for condensers (that is to say p is the same for all zones but in the condensers the bottom pressure is computed).</P>
+<P ALIGN="JUSTIFY">The total volume is constant:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image543.gif" WIDTH=156 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The heat transfer between the shell side fluid and the casing is always neglected.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_condcond"></A>Steam condensers and feedwater heaters: steam condensers</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/cndn.htm#lg_libproc_CNDN_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">CNDN</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">The following hypotheses are made for the shell side fluid model:</P>
+<P ALIGN="JUSTIFY">desuperheating zone:</P>
+<P ALIGN="JUSTIFY">since the condenser is fed with the turbine exhaust steam, which is already wet, the desuperheating zone is not modelled</P>
+<P ALIGN="JUSTIFY">condensation and subcooling zones:</P>
+<P ALIGN="JUSTIFY">instantaneous and complete separation between gas and liquid phases</P>
+<P ALIGN="JUSTIFY">thermal equilibrium everywhere between gas and liquid phases (that is to say the liquid zone is really not a subcooling zone)</P>
+<P ALIGN="JUSTIFY">the non-condensable gas is not considered in the model</P>
+<P ALIGN="JUSTIFY">The continuity and energy equations of the two zones can be summed, resulting in:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image544.gif" WIDTH=222 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image545.gif" WIDTH=376 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where it is:</P>
+<P>h</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,j</FONT><FONT FACE="Arial, helvetica"> = h</FONT><FONT FACE="Arial, helvetica" SIZE=1>ls</FONT><FONT FACE="Arial, helvetica">&#9;if the flow G</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,j</FONT><FONT FACE="Arial, helvetica"> exits the liquid zone</P>
+<P>h</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,j</FONT><FONT FACE="Arial, helvetica"> = h</FONT><FONT FACE="Arial, helvetica" SIZE=1>gs</FONT><FONT FACE="Arial, helvetica">&#9;if the flow G</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,j</FONT><FONT FACE="Arial, helvetica"> exits the gas zone</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image546.gif" WIDTH=70 HEIGHT=22></P>
+<P ALIGN="CENTER"><IMG SRC="Image547.gif" WIDTH=117 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In the tube side fluid model and the tube wall model the equations are referred to five cells and it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image548.gif" WIDTH=129 HEIGHT=52></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Because the shell side fluid temperature T</FONT><FONT FACE="Arial, helvetica" SIZE=1>ext,i</FONT><FONT FACE="Arial, helvetica"> is always the saturation temperature at the condenser pressure and the external heat transfer coefficient g</FONT><FONT FACE="Arial, helvetica" SIZE=1>ext,i</FONT><FONT FACE="Arial, helvetica"> is considered as a constant, it doesn’t matter which external zone the tube cells face.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_condhori"></A>Steam condensers and feedwater heaters: horizontal feedwater heaters</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Some additional hypotheses are made for the shell side fluid model:</P>
+<P ALIGN="JUSTIFY">the heat transfer among the fluid in the zones is negligible with respect to the heat transfer among the fluid and the tube bundle</P>
+<P ALIGN="JUSTIFY">the evaporation mass flow rate G</FONT><FONT FACE="Arial, helvetica" SIZE=1>ev</FONT><FONT FACE="Arial, helvetica"> between the subcooling zone and the evaporation zone is negligible</P>
+<P ALIGN="JUSTIFY">desuperheating zone:</P>
+<P ALIGN="JUSTIFY">since the horizontal feedwater heaters are fed with the lowest pressure steam extractions, where the steam is already wet, the desuperheating zone is not modelled</P>
+<P ALIGN="JUSTIFY">condensation zone:</P>
+<P ALIGN="JUSTIFY">no heat storage</P>
+<P ALIGN="JUSTIFY">the drainage inlet flow immediately separates in a steam flow G</FONT><FONT FACE="Arial, helvetica" SIZE=1>DRg</FONT><FONT FACE="Arial, helvetica">, which enters the condensation zone, and a liquid flow G</FONT><FONT FACE="Arial, helvetica" SIZE=1>DRl</FONT><FONT FACE="Arial, helvetica"> which enters straight the subcooling zone</P>
+<P ALIGN="JUSTIFY">the fluid inside the zone is dry saturated steam, because the condensate immediately separates so the equations for the condensation zone are:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image549.gif" WIDTH=333 HEIGHT=48></P>
+<P ALIGN="CENTER"><IMG SRC="Image550.gif" WIDTH=278 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">subcooling zone:</P>
+<P ALIGN="JUSTIFY">the term </FONT>(<FONT FACE="Symbol">¶r</FONT>/<FONT FACE="Symbol">¶</FONT>p) <FONT FACE="Arial, helvetica">(dp/dt) is negligible in the continuity equation</P>
+<P ALIGN="JUSTIFY">therefore:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image551.gif" WIDTH=297 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image552.gif" WIDTH=412 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image553.gif" WIDTH=121 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In the tube side fluid model and the tube wall model the aforesaid equations are referred to two cells, corresponding to the two zones of the shell side fluid model. The first tube cell faces the subcooling zone and the second one the condensation zone.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_condvert"></A>Steam condensers and feedwater heaters: vertical feedwater heaters</P>
+</B></FONT><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Some additional hypotheses are made for the shell side fluid model:</P>
+<P ALIGN="JUSTIFY">the heat transfer among the fluid in the zones is negligible with respect to the heat transfer among the fluid and the tube bundle</P>
+<P ALIGN="JUSTIFY">desuperheating zone:</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no thermal storage</P>
+<P ALIGN="JUSTIFY">the volume of the zone is very small with respect to the volume of the condensation zone, that is</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image554.gif" WIDTH=176 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the fluid leaving the zone is dry saturated steam, that is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image555.gif" WIDTH=70 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">since there are one inlet flow and one outlet flow the equations become:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image556.gif" WIDTH=97 HEIGHT=22></P>
+<P ALIGN="CENTER"><IMG SRC="Image557.gif" WIDTH=136 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">condensation zone:</P>
+<P ALIGN="JUSTIFY">no heat storage</P>
+<P ALIGN="JUSTIFY">the drainage inlet flow immediately separates in a steam flow </FONT><FONT FACE="Symbol">G</FONT><FONT FACE="Arial, helvetica" SIZE=1>DRg</FONT><FONT FACE="Arial, helvetica">, which enters the condensation zone, and a liquid flow </FONT><FONT FACE="Symbol">G</FONT><FONT FACE="Arial, helvetica" SIZE=1>DRl</FONT><FONT FACE="Arial, helvetica"> which enters straight the subcooling zone</P>
+<P ALIGN="JUSTIFY">the fluid inside the zone is dry saturated steam, because the condensate immediately separates</P>
+<P ALIGN="JUSTIFY">so the equations are for the condensating zone are:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image558.gif" WIDTH=372 HEIGHT=48></P>
+<P ALIGN="CENTER"><IMG SRC="Image559.gif" WIDTH=169 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">subcooling zone:</P>
+<P ALIGN="JUSTIFY">the fluid density derivatives are null</P>
+<P ALIGN="JUSTIFY">therefore:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image560.gif" WIDTH=240 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image561.gif" WIDTH=514 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image553.gif" WIDTH=121 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P>The evaporation mass flow rate </FONT><FONT FACE="Symbol">G</FONT><FONT SIZE=1>ev</FONT> is</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image562.gif" WIDTH=108 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">based on the same considerations as for the cavities models.</P>
+<P ALIGN="JUSTIFY">In the tube side fluid model and the tube wall model the aforesaid equations are referred to three cells, corresponding to the three zones of the shell side fluid model. The first tube cell faces the subcooling zone, the second one the condensation zone and the third one the desuperheating zone.</P>
+<P ALIGN="JUSTIFY">It obviously is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image563.gif" WIDTH=93 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">whereas the other heat transfer powers, namely Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>ext,2</FONT><FONT FACE="Arial, helvetica">, Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>ext,1</FONT><FONT FACE="Arial, helvetica">, Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>cond</FONT><FONT FACE="Arial, helvetica"> and Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>SB</FONT><FONT FACE="Arial, helvetica"> are computed by means of the customary relationships.</P></FONT></BODY>
+</HTML>

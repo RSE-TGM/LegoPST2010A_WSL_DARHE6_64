@@ -1,0 +1,883 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>testcase1</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test1_a"></A>Test case 1: general description</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The purpose of the following test case is to represent the HP steam production in a waste heat boiler of a 50 MW dual steam combined cycle plant.</P>
+<P ALIGN="JUSTIFY">The HP drum is represented by the block S101 (module CLAV); the water circulation (without circulating pumps) and steam generation system is simulated by the blocks E102 (module DRIS), X102 (module METP) and F115-F165 (modules FUMB). Each of these blocks performs a particular function:</P>
+<P ALIGN="JUSTIFY">E102 represents the thermo-hydraulical water evolution in the water circulation system;</P>
+<P ALIGN="JUSTIFY">X102 represents the heat transfer through the pipes metal wall;</P>
+<P ALIGN="JUSTIFY">F115, F125, F135, F145, F155, F155 represent the gas-metal wall heat exchange.</P>
+<P ALIGN="JUSTIFY">E102 and X102 are divided into 8 cells: the first cell simulate the downcomers; the following 6 cells represent the water evaporator pipes; the last cell represents the return pipes to the drum. Each of the evaporator cells interfaces with a module FUMB to simulate the cross-flow heat exchange between exhaust gas and metal pipes.</P>
+<P ALIGN="JUSTIFY">The pressure drop in the steam traps of the drum is simulated by the valve V132 (module VALV).</P>
+<P ALIGN="JUSTIFY">A steam valve (block TURB) is provided to represent, in a simplified way, the steam pressure drop from the drum to the turbine discharge.</P>
+<P ALIGN="JUSTIFY">The dynamical behaviour of this system is studied in a case of feedwater flow rate increase and temperature reduction.</P>
+<P ALIGN="JUSTIFY">The following figure shows the block diagram of the simulated system.</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="image25.gif" WIDTH=512 HEIGHT=489></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test1_m"></A>Test case 1: topological diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following picture represents the topological diagram of the "ANELLO" model:</P>
+</FONT><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="image56.gif" WIDTH=439 HEIGHT=638></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the related topological description file, automatically written by LEGOCAD System (MACROBLOCKS.DAT):</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>****</P>
+<P>ANELLO</P>
+<P>****</P>
+<P>ANELLO 0000 0000</P>
+<P>****</P>
+<P>0 CLAVS101 CLAV 0 695 255 0</P>
+<P>0 FUMBF112 FUMB 0 510 320 0</P>
+<P>0 FUMBF122 FUMB 0 510 395 0</P>
+<P>0 FUMBF132 FUMB 0 510 470 0</P>
+<P>0 FUMBF142 FUMB 0 510 545 0</P>
+<P>0 FUMBF152 FUMB 0 510 620 0</P>
+<P>0 FUMBF162 FUMB 0 510 695 0</P>
+<P>0 NODON1T2 NODO 0 450 395 0</P>
+<P>0 NODON1W2 NODO 0 450 470 0</P>
+<P>0 NODON1CA NODO 0 450 545 0</P>
+<P>0 NODON1HA NODO 0 450 620 0</P>
+<P>0 NODON1MA NODO 0 450 695 0</P>
+<P>0 DRISE102 DRIS 3 655 515 0</P>
+<P>0 METPX102 METP 2 595 495 0</P>
+<P>0 VALVV132 VALV 6 620 340 0</P>
+<P>0 NODON1T1 NODO 0 450 320 0</P>
+<P>0 VALVTURB VALV 0 570 160 0</P>
+<P>1 *REMARK* 775 265 Feedwater</P>
+<P>1 *REMARK* 480 165 Steam</P>
+<P>1 *REMARK* 450 240 Gas from the superheater</P>
+<P>1 *REMARK* 720 730 Gas to the economizer</P>
+<P>3 *GLINES* 2 5 12 6 1 9</P>
+<P>(765,315)</P>
+<P>(820,370)</P>
+<P>(820,370)</P>
+<P>(820,675)</P>
+<P>(820,675)</P>
+<P>(680,675)</P>
+<P>(680,675)</P>
+<P>(680,632)</P>
+<P>(680,620)</P>
+<P>3 *GLINES* 2 1 12 6 1 5</P>
+<P>(610,725)</P>
+<P>(610,725)</P>
+<P>(710,725)</P>
+<P>(710,748)</P>
+<P>(710,760)</P>
+<P>3 *GLINES* 2 1 12 6 1 5</P>
+<P>(455,265)</P>
+<P>(545,265)</P>
+<P>(545,265)</P>
+<P>(545,303)</P>
+<P>(545,315)</P>
+<P>3 *GLINES* 2 4 12 6 1 7</P>
+<P>(680,505)</P>
+<P>(680,460)</P>
+<P>(680,460)</P>
+<P>(655,460)</P>
+<P>(655,460)</P>
+<P>(655,432)</P>
+<P>(655,420)</P>
+<P>3 *GLINES* 2 5 12 6 1 3</P>
+<P>(840,290)</P>
+<P>(782,290)</P>
+<P>(770,290)</P>
+<P>3 *GLINES* 2 4 12 6 1 5</P>
+<P>(655,330)</P>
+<P>(655,290)</P>
+<P>(655,290)</P>
+<P>(678,290)</P>
+<P>(690,290)</P>
+<P>3 *GLINES* 2 4 12 6 1 5</P>
+<P>(730,250)</P>
+<P>(730,190)</P>
+<P>(730,190)</P>
+<P>(642,190)</P>
+<P>(630,190)</P>
+<P>3 *GLINES* 2 4 12 6 1 3</P>
+<P>(560,190)</P>
+<P>(462,190)</P>
+<P>(450,190)</P>
+<P>****</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test1_b"></A>Test case 1: model topology</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the topological file (F01.DAT) of the "ANELLO" model, which is produced by LEGOCAD System topology building activity:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>****</P>
+<P>CLAV BLOCCO (S101) - HP drum</P>
+<P>FUMB BLOCCO (F112) - gas duct (cell 1)</P>
+<P>FUMB BLOCCO (F122) - gas duct (cell 2)</P>
+<P>FUMB BLOCCO (F132) - gas duct (cell 3)</P>
+<P>FUMB BLOCCO (F142) - gas duct (cell 4)</P>
+<P>FUMB BLOCCO (F152) - gas duct (cell 5)</P>
+<P>FUMB BLOCCO (F162) - gas duct (cell 6)</P>
+<P>NODO BLOCCO (N1T2) - gas temperature at the evaporator outlet</P>
+<P>NODO BLOCCO (N1W2) - gas flow rate</P>
+<P>NODO BLOCCO (N1CA) - CO2 partial pressure in the gas</P>
+<P>NODO BLOCCO (N1HA) - H2O partial pressure in the gas</P>
+<P>NODO BLOCCO (N1MA) - O2 percentage in the gas</P>
+<P>DRIS BLOCCO (E102) - waste-heat boiler (downcomers+risers)</P>
+<P>METP BLOCCO (X102) - metal wall of the evaporating pipes</P>
+<P>VALV BLOCCO (V132) - steam traps in HP drum</P>
+<P>NODO BLOCCO (N1T1) - gas temperature at the evaporator inlet</P>
+<P>VALV BLOCCO (TURB) - outlet steam valve</P>
+<P>****</P>
+<P>ANELLO</P>
+<P>****</P>
+<P>CLAVS101 BL.-S101- **** MODULO CLAV - HP drum</P>
+<P>MASAS101 --US--</P>
+<P>PCAVS101 --US-- PRESSURE IN HP DRUM</P>
+<P>HVCAS101 --US-- ENTHALPY OF HP DRUM STEAM</P>
+<P>HLCAS101 --US-- ENTHALPY OF HP WATER DRUM</P>
+<P>MLCAS101 --US--</P>
+<P>LIVCS101 --UA-- WATER LEVEL INSIDE HP DRUM</P>
+<P>PFCAS101 --UA-- PRESSURE AT THE BOTTOM OF THE CAVITY</P>
+<P>PPVCS101 --UA--</P>
+<P>WVUSS101 --UA--</P>
+<P>WASCS101 --UA--</P>
+<P>PPACS101 --UA--</P>
+<P>WCESS101 --UA--</P>
+<P>WVALV132 --IN-- #WMICS101#....................&lt;===VALVV132 BL.-V132-</P>
+<P>HUTUE102 --IN-- #HMICS101#....................&lt;===DRISE102 BL.-E102-</P>
+<P>WAICS101 --IN-- FEEDWATER FLOW RATE</P>
+<P>HAICS101 --IN-- ENTALPY OF THE FEEDWATER</P>
+<P>WVALTURB --IN-- #WVCAS101#....................&lt;===VALVTURB BL.-TURB-</P>
+<P>WITUE102 --IN-- #WAUCS101#....................&lt;===DRISE102 BL.-E102-</P>
+<P>ALZSS101 --IN--</P>
+<P>PVVSS101 --IN--</P>
+<P>TAISS101 --IN--</P>
+<P>****</P>
+<P>****</P>
+<P>FUMBF112 BL.-F112- **** MODULO FUMB - gas duct (cell 1)</P>
+<P>QSCAF112 --UA--</P>
+<P>TFUCF112 --UA--</P>
+<P>TE_7X102 --IN-- #TMFTF112#....................&lt;===METPX102 BL.-X102-</P>
+<P>USOMN1T1 --IN-- #TFICF112#....................&lt;===NODON1T1 BL.-N1T1-</P>
+<P>WSOMN1W2 --IN-- #WFUMF112#....................&lt;===NODON1W2 BL.-N1W2-</P>
+<P>FSFUF112 --IN--</P>
+<P>USOMN1CA --IN-- #%PCOF112#....................&lt;===NODON1CA BL.-N1CA-</P>
+<P>USOMN1HA --IN-- #%PHOF112#....................&lt;===NODON1HA BL.-N1HA-</P>
+<P>USOMN1MA --IN-- #%O2FF112#....................&lt;===NODON1MA BL.-N1MA-</P>
+<P>****</P>
+<P>****</P>
+<P>FUMBF122 BL.-F122- **** MODULO FUMB - gas duct (cell 2)</P>
+<P>QSCAF122 --UA--</P>
+<P>TFUCF122 --UA--</P>
+<P>TE_6X102 --IN-- #TMFTF122#....................&lt;===METPX102 BL.-X102-</P>
+<P>USOMN1T1 --IN-- #TFICF122#....................&lt;===NODON1T1 BL.-N1T1-</P>
+<P>WSOMN1W2 --IN-- #WFUMF122#....................&lt;===NODON1W2 BL.-N1W2-</P>
+<P>FSFUF122 --IN--</P>
+<P>USOMN1CA --IN-- #%PCOF122#....................&lt;===NODON1CA BL.-N1CA-</P>
+<P>USOMN1HA --IN-- #%PHOF122#....................&lt;===NODON1HA BL.-N1HA-</P>
+<P>USOMN1MA --IN-- #%O2FF122#....................&lt;===NODON1MA BL.-N1MA-</P>
+<P>****</P>
+<P>****</P>
+<P>FUMBF132 BL.-F132- **** MODULO FUMB - gas duct (cell 3)</P>
+<P>QSCAF132 --UA--</P>
+<P>TFUCF132 --UA--</P>
+<P>TE_5X102 --IN-- #TMFTF132#....................&lt;===METPX102 BL.-X102-</P>
+<P>USOMN1T1 --IN-- #TFICF132#....................&lt;===NODON1T1 BL.-N1T1-</P>
+<P>WSOMN1W2 --IN-- #WFUMF132#....................&lt;===NODON1W2 BL.-N1W2-</P>
+<P>FSFUF132 --IN--</P>
+<P>USOMN1CA --IN-- #%PCOF132#....................&lt;===NODON1CA BL.-N1CA-</P>
+<P>USOMN1HA --IN-- #%PHOF132#....................&lt;===NODON1HA BL.-N1HA-</P>
+<P>USOMN1MA --IN-- #%O2FF132#....................&lt;===NODON1MA BL.-N1MA-</P>
+<P>****</P>
+<P>****</P>
+<P>FUMBF142 BL.-F142- **** MODULO FUMB - gas duct (cell 4)</P>
+<P>QSCAF142 --UA--</P>
+<P>TFUCF142 --UA--</P>
+<P>TE_4X102 --IN-- #TMFTF142#....................&lt;===METPX102 BL.-X102-</P>
+<P>USOMN1T1 --IN-- #TFICF142#....................&lt;===NODON1T1 BL.-N1T1-</P>
+<P>WSOMN1W2 --IN-- #WFUMF142#....................&lt;===NODON1W2 BL.-N1W2-</P>
+<P>FSFUF142 --IN--</P>
+<P>USOMN1CA --IN-- #%PCOF142#....................&lt;===NODON1CA BL.-N1CA-</P>
+<P>USOMN1HA --IN-- #%PHOF142#....................&lt;===NODON1HA BL.-N1HA-</P>
+<P>USOMN1MA --IN-- #%O2FF142#....................&lt;===NODON1MA BL.-N1MA-</P>
+<P>****</P>
+<P>****</P>
+<P>FUMBF152 BL.-F152- **** MODULO FUMB - gas duct (cell 5)</P>
+<P>QSCAF152 --UA--</P>
+<P>TFUCF152 --UA--</P>
+<P>TE_3X102 --IN-- #TMFTF152#....................&lt;===METPX102 BL.-X102-</P>
+<P>USOMN1T1 --IN-- #TFICF152#....................&lt;===NODON1T1 BL.-N1T1-</P>
+<P>WSOMN1W2 --IN-- #WFUMF152#....................&lt;===NODON1W2 BL.-N1W2-</P>
+<P>FSFUF152 --IN--</P>
+<P>USOMN1CA --IN-- #%PCOF152#....................&lt;===NODON1CA BL.-N1CA-</P>
+<P>USOMN1HA --IN-- #%PHOF152#....................&lt;===NODON1HA BL.-N1HA-</P>
+<P>USOMN1MA --IN-- #%O2FF152#....................&lt;===NODON1MA BL.-N1MA-</P>
+<P>****</P>
+<P>****</P>
+<P>FUMBF162 BL.-F162- **** MODULO FUMB - gas duct (cell 6)</P>
+<P>QSCAF162 --UA--</P>
+<P>TFUCF162 --UA--</P>
+<P>TE_2X102 --IN-- #TMFTF162#....................&lt;===METPX102 BL.-X102-</P>
+<P>USOMN1T1 --IN-- #TFICF162#....................&lt;===NODON1T1 BL.-N1T1-</P>
+<P>WSOMN1W2 --IN-- #WFUMF162#....................&lt;===NODON1W2 BL.-N1W2-</P>
+<P>FSFUF162 --IN--</P>
+<P>USOMN1CA --IN-- #%PCOF162#....................&lt;===NODON1CA BL.-N1CA-</P>
+<P>USOMN1HA --IN-- #%PHOF162#....................&lt;===NODON1HA BL.-N1HA-</P>
+<P>USOMN1MA --IN-- #%O2FF162#....................&lt;===NODON1MA BL.-N1MA-</P>
+<P>****</P>
+<P>****</P>
+<P>NODON1T2 BL.-N1T2- **** MODULO NODO - gas temperature at the evaporator outlet</P>
+<P>TSOMN1T2 --UA-- GAS TEMPERATURE AT THE EVAPORATOR OUTLET</P>
+<P>TFUCF112 --IN-- #IN_1N1T2#....................&lt;===FUMBF112 BL.-F112-</P>
+<P>TFUCF122 --IN-- #IN_2N1T2#....................&lt;===FUMBF122 BL.-F122-</P>
+<P>TFUCF132 --IN-- #IN_3N1T2#....................&lt;===FUMBF132 BL.-F132-</P>
+<P>TFUCF142 --IN-- #IN_4N1T2#....................&lt;===FUMBF142 BL.-F142-</P>
+<P>TFUCF152 --IN-- #IN_5N1T2#....................&lt;===FUMBF152 BL.-F152-</P>
+<P>TFUCF162 --IN-- #IN_6N1T2#....................&lt;===FUMBF162 BL.-F162-</P>
+<P>****</P>
+<P>****</P>
+<P>NODON1W2 BL.-N1W2- **** MODULO NODO - gas flow rate</P>
+<P>WSOMN1W2 --UA-- GAS FLOW RATE</P>
+<P>IN_1N1W2 --IN-- GAS FLOW RATE</P>
+<P>****</P>
+<P>****</P>
+<P>NODON1CA BL.-N1CA- **** MODULO NODO - CO2 partial pressure in the gas</P>
+<P>USOMN1CA --UA-- CO2 PARTIAL PRESSURE IN THE GAS</P>
+<P>IN_1N1CA --IN-- CO2 PARTIAL PRESSURE IN THE GAS</P>
+<P>****</P>
+<P>****</P>
+<P>NODON1HA BL.-N1HA- **** MODULO NODO - H2O partial pressure in the gas</P>
+<P>USOMN1HA --UA-- H2O PARTIAL PRESSURE IN THE GAS</P>
+<P>IN_1N1HA --IN-- H2O PARTIAL PRESSURE IN THE GAS</P>
+<P>****</P>
+<P>****</P>
+<P>NODON1MA BL.-N1MA- **** MODULO NODO - O2 percentage in the gas</P>
+<P>USOMN1MA --UA-- O2 PERCENTAGE IN THE GAS</P>
+<P>IN_1N1MA --IN-- O2 PERCENTAGE IN THE GAS</P>
+<P>****</P>
+<P>****</P>
+<P>DRISE102 BL.-E102- **** MODULO DRIS - waste-heat boiler (downcomers+risers)</P>
+<P>HM_1E102 --UA--</P>
+<P>HM_2E102 --UA--</P>
+<P>HM_3E102 --UA--</P>
+<P>HM_4E102 --UA--</P>
+<P>HM_5E102 --UA--</P>
+<P>HM_6E102 --UA--</P>
+<P>HM_7E102 --UA--</P>
+<P>HM_8E102 --UA--</P>
+<P>PU_1E102 --UA--</P>
+<P>PU_2E102 --UA--</P>
+<P>PU_3E102 --UA--</P>
+<P>PU_4E102 --UA--</P>
+<P>PU_5E102 --UA--</P>
+<P>PU_6E102 --UA--</P>
+<P>PU_7E102 --UA--</P>
+<P>PUTUE102 --UA-- FLUID PRESSURE AT THE EVAPORATOR OUTLET</P>
+<P>WITUE102 --UA-- WATER FLOW RATE AT THE DOWNCOMERS INLET</P>
+<P>WI_1E102 --UA--</P>
+<P>WI_2E102 --UA--</P>
+<P>WI_3E102 --UA--</P>
+<P>WI_4E102 --UA--</P>
+<P>WI_5E102 --UA--</P>
+<P>WI_6E102 --UA--</P>
+<P>WI_7E102 --UA--</P>
+<P>Q1_1E102 --UA--</P>
+<P>Q1_2E102 --UA--</P>
+<P>Q1_3E102 --UA--</P>
+<P>Q1_4E102 --UA--</P>
+<P>Q1_5E102 --UA--</P>
+<P>Q1_6E102 --UA--</P>
+<P>Q1_7E102 --UA--</P>
+<P>Q1_8E102 --UA--</P>
+<P>HU_1E102 --UA--</P>
+<P>HU_2E102 --UA--</P>
+<P>HU_3E102 --UA--</P>
+<P>HU_4E102 --UA--</P>
+<P>HU_5E102 --UA--</P>
+<P>HU_6E102 --UA--</P>
+<P>HU_7E102 --UA--</P>
+<P>HUTUE102 --UA-- FLUID ENTHALPY AT THE EVAPORATOR OUTLET</P>
+<P>HLCAS101 --IN-- #HITUE102#....................&lt;===CLAVS101 BL.-S101-</P>
+<P>PFCAS101 --IN-- #PITUE102#....................&lt;===CLAVS101 BL.-S101-</P>
+<P>WVALV132 --IN-- #WUTUE102#....................&lt;===VALVV132 BL.-V132-</P>
+<P>HVCAS101 --IN-- #HVALE102#....................&lt;===CLAVS101 BL.-S101-</P>
+<P>TI_1X102 --IN-- #T1_1E102#....................&lt;===METPX102 BL.-X102-</P>
+<P>TI_2X102 --IN-- #T1_2E102#....................&lt;===METPX102 BL.-X102-</P>
+<P>TI_3X102 --IN-- #T1_3E102#....................&lt;===METPX102 BL.-X102-</P>
+<P>TI_4X102 --IN-- #T1_4E102#....................&lt;===METPX102 BL.-X102-</P>
+<P>TI_5X102 --IN-- #T1_5E102#....................&lt;===METPX102 BL.-X102-</P>
+<P>TI_6X102 --IN-- #T1_6E102#....................&lt;===METPX102 BL.-X102-</P>
+<P>TI_7X102 --IN-- #T1_7E102#....................&lt;===METPX102 BL.-X102-</P>
+<P>TI_8X102 --IN-- #T1_8E102#....................&lt;===METPX102 BL.-X102-</P>
+<P>ATTRE102 --IN-- FRICTION COEFFICIENT IN THE PIPES</P>
+<P>****</P>
+<P>****</P>
+<P>METPX102 BL.-X102- **** MODULO METP - metal wall of the evaporating pipes</P>
+<P>TM_1X102 --US--</P>
+<P>TM_2X102 --US--</P>
+<P>TM_3X102 --US--</P>
+<P>TM_4X102 --US--</P>
+<P>TM_5X102 --US--</P>
+<P>TM_6X102 --US--</P>
+<P>TM_7X102 --US--</P>
+<P>TM_8X102 --US--</P>
+<P>TI_1X102 --UA--</P>
+<P>TI_2X102 --UA--</P>
+<P>TI_3X102 --UA--</P>
+<P>TI_4X102 --UA--</P>
+<P>TI_5X102 --UA--</P>
+<P>TI_6X102 --UA--</P>
+<P>TI_7X102 --UA--</P>
+<P>TI_8X102 --UA--</P>
+<P>TE_1X102 --UA--</P>
+<P>TE_2X102 --UA--</P>
+<P>TE_3X102 --UA--</P>
+<P>TE_4X102 --UA--</P>
+<P>TE_5X102 --UA--</P>
+<P>TE_6X102 --UA--</P>
+<P>TE_7X102 --UA--</P>
+<P>TE_8X102 --UA--</P>
+<P>Q1_1E102 --IN-- #QI_1X102#....................&lt;===DRISE102 BL.-E102-</P>
+<P>Q1_2E102 --IN-- #QI_2X102#....................&lt;===DRISE102 BL.-E102-</P>
+<P>Q1_3E102 --IN-- #QI_3X102#....................&lt;===DRISE102 BL.-E102-</P>
+<P>Q1_4E102 --IN-- #QI_4X102#....................&lt;===DRISE102 BL.-E102-</P>
+<P>Q1_5E102 --IN-- #QI_5X102#....................&lt;===DRISE102 BL.-E102-</P>
+<P>Q1_6E102 --IN-- #QI_6X102#....................&lt;===DRISE102 BL.-E102-</P>
+<P>Q1_7E102 --IN-- #QI_7X102#....................&lt;===DRISE102 BL.-E102-</P>
+<P>Q1_8E102 --IN-- #QI_8X102#....................&lt;===DRISE102 BL.-E102-</P>
+<P>QE_1X102 --IN--</P>
+<P>QSCAF162 --IN-- #QE_2X102#....................&lt;===FUMBF162 BL.-F162-</P>
+<P>QSCAF152 --IN-- #QE_3X102#....................&lt;===FUMBF152 BL.-F152-</P>
+<P>QSCAF142 --IN-- #QE_4X102#....................&lt;===FUMBF142 BL.-F142-</P>
+<P>QSCAF132 --IN-- #QE_5X102#....................&lt;===FUMBF132 BL.-F132-</P>
+<P>QSCAF122 --IN-- #QE_6X102#....................&lt;===FUMBF122 BL.-F122-</P>
+<P>QSCAF112 --IN-- #QE_7X102#....................&lt;===FUMBF112 BL.-F112-</P>
+<P>QE_8X102 --IN--</P>
+<P>****</P>
+<P>****</P>
+<P>VALVV132 BL.-V132- **** MODULO VALV - steam traps in HP drum</P>
+<P>WVALV132 --UA-- STEAM/WATER FLOW RATE TO HP DRUM</P>
+<P>PUTUE102 --IN-- #PIVAV132#....................&lt;===DRISE102 BL.-E102-</P>
+<P>PCAVS101 --IN-- #PUVAV132#....................&lt;===CLAVS101 BL.-S101-</P>
+<P>HUTUE102 --IN-- #HVALV132#....................&lt;===DRISE102 BL.-E102-</P>
+<P>ALZAV132 --IN-- VALVE V132 LIFT</P>
+<P>****</P>
+<P>****</P>
+<P>NODON1T1 BL.-N1T1- **** MODULO NODO - gas temperature at the evaporator inlet</P>
+<P>USOMN1T1 --UA-- GAS TEMPERATURE AT THE EVAPORATOR INLET</P>
+<P>IN_1N1T1 --IN-- GAS TEMPERATURE AT THE EVAPORATOR INLET</P>
+<P>****</P>
+<P>****</P>
+<P>VALVTURB BL.-TURB- **** MODULO VALV - outlet steam valve</P>
+<P>WVALTURB --UA-- OUTLET STEAM FLOW RATE</P>
+<P>PCAVS101 --IN-- #PIVATURB#....................&lt;===CLAVS101 BL.-S101-</P>
+<P>PUVATURB --IN-- STEAM PRESSURE DOWNSTREAM OUTLET STEAM VALVE</P>
+<P>HVCAS101 --IN-- #HVALTURB#....................&lt;===CLAVS101 BL.-S101-</P>
+<P>ALZATURB --IN-- STEAM VALVE LIFT</P>
+<P>****</P>
+<P>**** &gt;&gt;&gt;&gt;&gt;&gt;INGRESSI DI TUTTI I MODULI&lt;&lt;&lt;&lt;&lt;&lt;</P>
+<P>WAICS101 --IN-- FEEDWATER FLOW RATE</P>
+<P>HAICS101 --IN-- ENTALPY OF THE FEEDWATER</P>
+<P>ALZSS101 --IN--</P>
+<P>PVVSS101 --IN--</P>
+<P>TAISS101 --IN--</P>
+<P>FSFUF112 --IN--</P>
+<P>FSFUF122 --IN--</P>
+<P>FSFUF132 --IN--</P>
+<P>FSFUF142 --IN--</P>
+<P>FSFUF152 --IN--</P>
+<P>FSFUF162 --IN--</P>
+<P>IN_1N1W2 --IN-- GAS FLOW RATE</P>
+<P>IN_1N1CA --IN-- CO2 PARTIAL PRESSURE IN THE GAS</P>
+<P>IN_1N1HA --IN-- H2O PARTIAL PRESSURE IN THE GAS</P>
+<P>IN_1N1MA --IN-- O2 PERCENTAGE IN THE GAS</P>
+<P>ATTRE102 --IN-- FRICTION COEFFICIENT IN THE PIPES</P>
+<P>QE_1X102 --IN--</P>
+<P>QE_8X102 --IN--</P>
+<P>ALZAV132 --IN-- VALVE V132 LIFT</P>
+<P>IN_1N1T1 --IN-- GAS TEMPERATURE AT THE EVAPORATOR INLET</P>
+<P>PUVATURB --IN-- STEAM PRESSURE DOWNSTREAM OUTLET STEAM VALVE</P>
+<P>ALZATURB --IN-- STEAM VALVE LIFT</P>
+<P>****</P>
+<P>WMICS101 --CO--</P>
+<P>HMICS101 --CO--</P>
+<P>WVCAS101 --CO--</P>
+<P>WAUCS101 --CO--</P>
+<P>TMFTF112 --CO--</P>
+<P>TFICF112 --CO--</P>
+<P>WFUMF112 --CO--</P>
+<P>%PCOF112 --CO--</P>
+<P>%PHOF112 --CO--</P>
+<P>%O2FF112 --CO--</P>
+<P>TMFTF122 --CO--</P>
+<P>TFICF122 --CO--</P>
+<P>WFUMF122 --CO--</P>
+<P>%PCOF122 --CO--</P>
+<P>%PHOF122 --CO--</P>
+<P>%O2FF122 --CO--</P>
+<P>TMFTF132 --CO--</P>
+<P>TFICF132 --CO--</P>
+<P>WFUMF132 --CO--</P>
+<P>%PCOF132 --CO--</P>
+<P>%PHOF132 --CO--</P>
+<P>%O2FF132 --CO--</P>
+<P>TMFTF142 --CO--</P>
+<P>TFICF142 --CO--</P>
+<P>WFUMF142 --CO--</P>
+<P>%PCOF142 --CO--</P>
+<P>%PHOF142 --CO--</P>
+<P>%O2FF142 --CO--</P>
+<P>TMFTF152 --CO--</P>
+<P>TFICF152 --CO--</P>
+<P>WFUMF152 --CO--</P>
+<P>%PCOF152 --CO--</P>
+<P>%PHOF152 --CO--</P>
+<P>%O2FF152 --CO--</P>
+<P>TMFTF162 --CO--</P>
+<P>TFICF162 --CO--</P>
+<P>WFUMF162 --CO--</P>
+<P>%PCOF162 --CO--</P>
+<P>%PHOF162 --CO--</P>
+<P>%O2FF162 --CO--</P>
+<P>IN_1N1T2 --CO--</P>
+<P>IN_2N1T2 --CO--</P>
+<P>IN_3N1T2 --CO--</P>
+<P>IN_4N1T2 --CO--</P>
+<P>IN_5N1T2 --CO--</P>
+<P>IN_6N1T2 --CO--</P>
+<P>HITUE102 --CO--</P>
+<P>PITUE102 --CO--</P>
+<P>WUTUE102 --CO--</P>
+<P>HVALE102 --CO--</P>
+<P>T1_1E102 --CO--</P>
+<P>T1_2E102 --CO--</P>
+<P>T1_3E102 --CO--</P>
+<P>T1_4E102 --CO--</P>
+<P>T1_5E102 --CO--</P>
+<P>T1_6E102 --CO--</P>
+<P>T1_7E102 --CO--</P>
+<P>T1_8E102 --CO--</P>
+<P>QI_1X102 --CO--</P>
+<P>QI_2X102 --CO--</P>
+<P>QI_3X102 --CO--</P>
+<P>QI_4X102 --CO--</P>
+<P>QI_5X102 --CO--</P>
+<P>QI_6X102 --CO--</P>
+<P>QI_7X102 --CO--</P>
+<P>QI_8X102 --CO--</P>
+<P>QE_2X102 --CO--</P>
+<P>QE_3X102 --CO--</P>
+<P>QE_4X102 --CO--</P>
+<P>QE_5X102 --CO--</P>
+<P>QE_6X102 --CO--</P>
+<P>QE_7X102 --CO--</P>
+<P>PIVAV132 --CO--</P>
+<P>PUVAV132 --CO--</P>
+<P>HVALV132 --CO--</P>
+<P>PIVATURB --CO--</P>
+<P>HVALTURB --CO--</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test1_c"></A>Test case 1: geometrical and physical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Geometrical and physical data of the model:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">1.&#9;<U>Block drum</P>
+</U><P ALIGN="JUSTIFY">Geometrical model of the cavity:&#9;default (TYPE_CAV=0)</P>
+<P ALIGN="JUSTIFY">Internal volume of the cavity:&#9;8.553&#9;m³</P>
+<P ALIGN="JUSTIFY">Difference in height between the zero level point</P>
+<P ALIGN="JUSTIFY">of measure and the outlet water pipe:&#9;0.825&#9;m</P>
+<P ALIGN="JUSTIFY">Maximum range of level measurement:&#9;1.1&#9;m</P>
+<P ALIGN="JUSTIFY">Horizontal section area of the cavity:&#9;5.184&#9;m²</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">2.&#9;<U>Blocks downcomers, evaporator pipes, return pipes to drum (fluid, metal wall and exhaust gas)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</U><I><P ALIGN="JUSTIFY">General data</I>:</P>
+<U><P ALIGN="JUSTIFY">&nbsp;</P>
+</U><P ALIGN="JUSTIFY">Cells number:&#9;8</P>
+<P ALIGN="JUSTIFY">Metal density:&#9;7900&#9;kg/m³</P>
+<P ALIGN="JUSTIFY">Metal specific heat:&#9;570&#9;J/kg/K</P>
+<P ALIGN="JUSTIFY">Metal conductivity:&#9;43&#9;W/m/K</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">Cells data:</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 1 (downcomers)</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;2</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.2954&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes wall thickness:&#9;0.01427&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;19.71&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;-15.69&#9;m</P>
+<P ALIGN="JUSTIFY">Inside pipes surface:&#9;43.02&#9;m²</P>
+<P ALIGN="JUSTIFY">Outside pipes surface:&#9;47.85&#9;m²</P>
+<P ALIGN="JUSTIFY">Metal pipes volume:&#9;0.606&#9;m³</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cells 2, 3, 4, 5, 6, 7 (evaporator pipes)</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;360</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0448&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes wall thickness:&#9;0.003&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;2.38&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;2.38&#9;m</P>
+<P ALIGN="JUSTIFY">Inside pipes surface:&#9;120.59&#9;m²</P>
+<P ALIGN="JUSTIFY">Outside pipes surface (finned surface)&#9;1741.7&#9;m²</P>
+<P ALIGN="JUSTIFY">Metal pipes volume:&#9;1.431&#9;m³</P>
+<P ALIGN="JUSTIFY">Transversal pitch:&#9;0.114&#9;m</P>
+<P ALIGN="JUSTIFY">Longitudinal pitch:&#9;0.12&#9;m</P>
+<P ALIGN="JUSTIFY">Gas cross section area:&#9;6.2567&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 8 (return pipes to the drum)</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;19</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.10226&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes wall thickness:&#9;0.01204&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;4.424&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;1.8&#9;m</P>
+<P ALIGN="JUSTIFY">Inside pipes surface:&#9;22.544&#9;m²</P>
+<P ALIGN="JUSTIFY">Outside pipes surface:&#9;25.53&#9;m²</P>
+<P ALIGN="JUSTIFY">Metal pipes volume:&#9;0.231&#9;m³</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">3.&#9;<U>Block steam traps of the drum</P>
+</U><P ALIGN="JUSTIFY">Valve model (with a check valve)&#9;CADIPO&#9;(COD.=1)</P>
+<P ALIGN="JUSTIFY">Opening valve characteristic:&#9;linear&#9;(ALFA=1)</P>
+<P ALIGN="JUSTIFY">Nominal condition:</P>
+<P ALIGN="JUSTIFY">Fluid flow rate:&#9;200&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Inlet pressure:&#9;46&#9;bar</P>
+<P ALIGN="JUSTIFY">Outlet pressure:&#9;45.6&#9;bar</P>
+<P ALIGN="JUSTIFY">Inlet fluid enthalpy:&#9;1232&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Valve lift:&#9;1</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">4.&#9;<U>Block outlet steam valve</P>
+</U><P ALIGN="JUSTIFY">Valve model:&#9;CADIPO&#9;(COD=0)</P>
+<P ALIGN="JUSTIFY">Opening valve characteristic:&#9;linear&#9;(ALFA=1)</P>
+<P ALIGN="JUSTIFY">Nominal condition:</P>
+<P ALIGN="JUSTIFY">Fluid flow rate:&#9;12.7&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Inlet pressure:&#9;45.5&#9;bar</P>
+<P ALIGN="JUSTIFY">Outlet pressure:&#9;1&#9;bar</P>
+<P ALIGN="JUSTIFY">Inlet fluid enthalpy:&#9;2880&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Valve lift:&#9;0.6</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">Main data for the calculation of a steady state condition:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Pressure in the drum:&#9;45.636&#9;bar</P>
+<P ALIGN="JUSTIFY">Feedwater flow rate:&#9;15.69&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Feedwater enthalpy:&#9;1095.7&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Circulating steam/water mixture flow rate:&#9;200&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Exhaust gas flow rate:&#9;123.2&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Inlet gas temperature:&#9;697.76&#9;K</P>
+<P ALIGN="JUSTIFY">CO2 partial pressure in the exhaust gas:&#9;3.1&#9;%</P>
+<P ALIGN="JUSTIFY">H2O partial pressure in the exhaust gas:&#9;6.8&#9;%</P>
+<P ALIGN="JUSTIFY">O2 percentage in the exhaust gas:&#9;4.33&#9;%</P>
+<P ALIGN="JUSTIFY">Steam pressure downstream steam valve:&#9;1&#9;bar</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test1_e"></A>Test case 1: steady state condition</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the data file (F14.DAT) of the "ANELLO" model.</P>
+<P ALIGN="JUSTIFY">File F14.DAT is written by LEGOCAD System data assignment activity. Steady states evaluation activity rewrites (only for unknown variables) the values obtained for the calculated steady state condition:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>*LG*NOME IMPIANTO =ANELLO</P>
+<P>*LG*DATI DI NORMALIZZAZIONE P0=100.e5*H0=1.E+06*W0=100. *T0=1.E+03*R0=1.E+02*</P>
+<P>*LG* L0=1.E+01*V0=5.E+01*DP0=1.E+05*</P>
+<P>*LG*CONDIZIONI INIZIALI VARIABILI DEL SISTEMA (MKS)</P>
+<P>1 LIVCS101 =50.000 *BL.(CLAVS101)=NOTO* WATER LEVEL INSIDE HP DRUM</P>
+<P>2 PFCAS101 =.45636E+07*BL.(CLAVS101)= * PRESSURE AT THE BOTTOM OF THE CAVIT</P>
+<P>3 PPVCS101 =.45530E+07*BL.(CLAVS101)= *</P>
+<P>4 WVUSS101 =.00000E+00*BL.(CLAVS101)= *</P>
+<P>5 WASCS101 =.00000E+00*BL.(CLAVS101)= *</P>
+<P>6 PPACS101 =.00000E+00*BL.(CLAVS101)= *</P>
+<P>7 WCESS101 =32.762 *BL.(CLAVS101)= *</P>
+<P>8 QSCAF112 =.44564E+07*BL.(FUMBF112)= *</P>
+<P>9 TFUCF112 =502.79 *BL.(FUMBF112)= *</P>
+<P>10 QSCAF122 =.44543E+07*BL.(FUMBF122)= *</P>
+<P>11 TFUCF122 =502.88 *BL.(FUMBF122)= *</P>
+<P>12 QSCAF132 =.44519E+07*BL.(FUMBF132)= *</P>
+<P>13 TFUCF132 =502.99 *BL.(FUMBF132)= *</P>
+<P>14 QSCAF142 =.44491E+07*BL.(FUMBF142)= *</P>
+<P>15 TFUCF142 =503.12 *BL.(FUMBF142)= *</P>
+<P>16 QSCAF152 =.44458E+07*BL.(FUMBF152)= *</P>
+<P>17 TFUCF152 =503.26 *BL.(FUMBF152)= *</P>
+<P>18 QSCAF162 =.44416E+07*BL.(FUMBF162)= *</P>
+<P>19 TFUCF162 =503.45 *BL.(FUMBF162)= *</P>
+<P>20 TSOMN1T2 =503.09 *BL.(NODON1T2)= * GAS TEMPERATURE AT THE EVAPORATOR O</P>
+<P>21 WSOMN1W2 =20.534 *BL.(NODON1W2)= * GAS FLOW RATE</P>
+<P>22 USOMN1CA =3.1000 *BL.(NODON1CA)= * CO2 PARTIAL PRESSURE IN THE GAS</P>
+<P>23 USOMN1HA =6.8000 *BL.(NODON1HA)= * H2O PARTIAL PRESSURE IN THE GAS</P>
+<P>24 USOMN1MA =4.3300 *BL.(NODON1MA)= * O2 PERCENTAGE IN THE GAS</P>
+<P>25 HM_1E102 =.11234E+07*BL.(DRISE102)= *</P>
+<P>26 HM_2E102 =.11456E+07*BL.(DRISE102)= *</P>
+<P>27 HM_3E102 =.11678E+07*BL.(DRISE102)= *</P>
+<P>28 HM_4E102 =.11901E+07*BL.(DRISE102)= *</P>
+<P>29 HM_5E102 =.12124E+07*BL.(DRISE102)= *</P>
+<P>30 HM_6E102 =.12346E+07*BL.(DRISE102)= *</P>
+<P>31 HM_7E102 =.12569E+07*BL.(DRISE102)= *</P>
+<P>32 HM_8E102 =.12569E+07*BL.(DRISE102)= *</P>
+<P>33 PU_1E102 =.46807E+07*BL.(DRISE102)= *</P>
+<P>34 PU_2E102 =.46641E+07*BL.(DRISE102)= *</P>
+<P>35 PU_3E102 =.46512E+07*BL.(DRISE102)= *</P>
+<P>36 PU_4E102 =.46411E+07*BL.(DRISE102)= *</P>
+<P>37 PU_5E102 =.46327E+07*BL.(DRISE102)= *</P>
+<P>38 PU_6E102 =.46254E+07*BL.(DRISE102)= *</P>
+<P>39 PU_7E102 =.46189E+07*BL.(DRISE102)= *</P>
+<P>40 PUTUE102 =.46056E+07*BL.(DRISE102)= * FLUID PRESSURE AT THE EVAPORATOR OU</P>
+<P>41 WITUE102 =200.00 *BL.(DRISE102)= * WATER FLOW RATE AT THE DOWNCOMERS I</P>
+<P>42 WI_1E102 =200.00 *BL.(DRISE102)= *</P>
+<P>43 WI_2E102 =200.00 *BL.(DRISE102)= *</P>
+<P>44 WI_3E102 =200.00 *BL.(DRISE102)= *</P>
+<P>45 WI_4E102 =200.00 *BL.(DRISE102)= *</P>
+<P>46 WI_5E102 =200.00 *BL.(DRISE102)= *</P>
+<P>47 WI_6E102 =200.00 *BL.(DRISE102)= *</P>
+<P>48 WI_7E102 =200.00 *BL.(DRISE102)= *</P>
+<P>49 Q1_1E102 =.00000E+00*BL.(DRISE102)= *</P>
+<P>50 Q1_2E102 =.44416E+07*BL.(DRISE102)= *</P>
+<P>51 Q1_3E102 =.44458E+07*BL.(DRISE102)= *</P>
+<P>52 Q1_4E102 =.44491E+07*BL.(DRISE102)= *</P>
+<P>53 Q1_5E102 =.44519E+07*BL.(DRISE102)= *</P>
+<P>54 Q1_6E102 =.44543E+07*BL.(DRISE102)= *</P>
+<P>55 Q1_7E102 =.44564E+07*BL.(DRISE102)= *</P>
+<P>56 Q1_8E102 =.00000E+00*BL.(DRISE102)= *</P>
+<P>57 HU_1E102 =.11234E+07*BL.(DRISE102)= *</P>
+<P>58 HU_2E102 =.11456E+07*BL.(DRISE102)= *</P>
+<P>59 HU_3E102 =.11678E+07*BL.(DRISE102)= *</P>
+<P>60 HU_4E102 =.11901E+07*BL.(DRISE102)= *</P>
+<P>61 HU_5E102 =.12124E+07*BL.(DRISE102)= *</P>
+<P>62 HU_6E102 =.12346E+07*BL.(DRISE102)= *</P>
+<P>63 HU_7E102 =.12569E+07*BL.(DRISE102)= *</P>
+<P>64 HUTUE102 =.12569E+07*BL.(DRISE102)= * FLUID ENTHALPY AT THE EVAPORATOR OU</P>
+<P>65 TI_1X102 =530.83 *BL.(METPX102)= *</P>
+<P>66 TI_2X102 =533.49 *BL.(METPX102)= *</P>
+<P>67 TI_3X102 =533.32 *BL.(METPX102)= *</P>
+<P>68 TI_4X102 =533.19 *BL.(METPX102)= *</P>
+<P>69 TI_5X102 =533.08 *BL.(METPX102)= *</P>
+<P>70 TI_6X102 =532.98 *BL.(METPX102)= *</P>
+<P>71 TI_7X102 =532.89 *BL.(METPX102)= *</P>
+<P>72 TI_8X102 =531.98 *BL.(METPX102)= *</P>
+<P>73 TE_1X102 =530.83 *BL.(METPX102)= *</P>
+<P>74 TE_2X102 =534.86 *BL.(METPX102)= *</P>
+<P>75 TE_3X102 =534.69 *BL.(METPX102)= *</P>
+<P>76 TE_4X102 =534.56 *BL.(METPX102)= *</P>
+<P>77 TE_5X102 =534.45 *BL.(METPX102)= *</P>
+<P>78 TE_6X102 =534.36 *BL.(METPX102)= *</P>
+<P>79 TE_7X102 =534.27 *BL.(METPX102)= *</P>
+<P>80 TE_8X102 =531.98 *BL.(METPX102)= *</P>
+<P>81 WVALV132 =200.00 *BL.(VALVV132)=NOTO* STEAM/WATER FLOW RATE TO HP DRUM</P>
+<P>82 USOMN1T1 =697.76 *BL.(NODON1T1)= * GAS TEMPERATURE AT THE EVAPORATOR I</P>
+<P>83 WVALTURB =15.690 *BL.(VALVTURB)= * OUTLET STEAM FLOW RATE</P>
+<P>84 MASAS101 =.00000E+00*BL.(CLAVS101)= *</P>
+<P>85 PCAVS101 =.45530E+07*BL.(CLAVS101)=NOTO* PRESSURE IN HP DRUM</P>
+<P>86 HVCAS101 =.27974E+07*BL.(CLAVS101)= * ENTHALPY OF HP DRUM STEAM</P>
+<P>87 HLCAS101 =.11234E+07*BL.(CLAVS101)= * ENTHALPY OF HP WATER DRUM</P>
+<P>88 MLCAS101 =5613.7 *BL.(CLAVS101)= *</P>
+<P>89 TM_1X102 =530.83 *BL.(METPX102)= *</P>
+<P>90 TM_2X102 =534.77 *BL.(METPX102)= *</P>
+<P>91 TM_3X102 =534.61 *BL.(METPX102)= *</P>
+<P>92 TM_4X102 =534.47 *BL.(METPX102)= *</P>
+<P>93 TM_5X102 =534.36 *BL.(METPX102)= *</P>
+<P>94 TM_6X102 =534.27 *BL.(METPX102)= *</P>
+<P>95 TM_7X102 =534.18 *BL.(METPX102)= *</P>
+<P>96 TM_8X102 =531.98 *BL.(METPX102)= *</P>
+<P>*LG*CONDIZIONI INIZIALI VARIABILI DI INGRESSO</P>
+<P>1 WAICS101 =15.690 *BL.(CLAVS101)= * FEEDWATER FLOW RATE</P>
+<P>2 HAICS101 =.10957E+07*BL.(CLAVS101)=NOTO* ENTALPY OF THE FEEDWATER</P>
+<P>3 ALZSS101 =.00000E+00*BL.(CLAVS101)=NOTO*</P>
+<P>4 PVVSS101 =.10000E+06*BL.(CLAVS101)=NOTO*</P>
+<P>5 TAISS101 =288.15 *BL.(CLAVS101)=NOTO*</P>
+<P>6 FSFUF112 =.61653 *BL.(FUMBF112)=NOTO*</P>
+<P>7 FSFUF122 =.61653 *BL.(FUMBF122)=NOTO*</P>
+<P>8 FSFUF132 =.61653 *BL.(FUMBF132)=NOTO*</P>
+<P>9 FSFUF142 =.61653 *BL.(FUMBF142)=NOTO*</P>
+<P>10 FSFUF152 =.61653 *BL.(FUMBF152)=NOTO*</P>
+<P>11 FSFUF162 =.61653 *BL.(FUMBF162)=NOTO*</P>
+<P>12 IN_1N1W2 =123.20 *BL.(NODON1W2)=NOTO* GAS FLOW RATE</P>
+<P>13 IN_1N1CA =3.1000 *BL.(NODON1CA)=NOTO* CO2 PARTIAL PRESSURE IN THE GAS</P>
+<P>14 IN_1N1HA =6.8000 *BL.(NODON1HA)=NOTO* H2O PARTIAL PRESSURE IN THE GAS</P>
+<P>15 IN_1N1MA =4.3300 *BL.(NODON1MA)=NOTO* O2 PERCENTAGE IN THE GAS</P>
+<P>16 ATTRE102 =.10900E-01*BL.(DRISE102)=NOTO* FRICTION COEFFICIENT IN THE PIPES</P>
+<P>17 QE_1X102 =.00000E+00*BL.(METPX102)=NOTO*</P>
+<P>18 QE_8X102 =.00000E+00*BL.(METPX102)=NOTO*</P>
+<P>19 ALZAV132 =.93553 *BL.(VALVV132)= * VALVE V132 LIFT</P>
+<P>20 IN_1N1T1 =697.76 *BL.(NODON1T1)=NOTO* GAS TEMPERATURE AT THE EVAPORATOR I</P>
+<P>21 PUVATURB =.10000E+06*BL.(VALVTURB)=NOTO* STEAM PRESSURE DOWNSTREAM OUTLET ST</P>
+<P>22 ALZATURB =.72398 *BL.(VALVTURB)= * STEAM VALVE LIFT</P>
+<P>*LG*DATI FISICI E GEOMETRICI DEL SISTEMA SUDDIVISI A BLOCCHI</P>
+<P>*LG*DATI DEL BLOCCO CLAVS101 MODULO CLAV - HP drum</P>
+<P>TYPE_CAV =1. * VOL.CAV. =8.553 * MISURA_Y =-1. *</P>
+<P>X_OVER =100. * X_UNDER =0. * ZERO_Y =0.825 *</P>
+<P>VOL_Y =4.2765 * GAMMA_Y =1.1 * SEZ_Y =5.184 *</P>
+<P>CV_SF =1.E-4 *</P>
+<P>*LG*DATI DEL BLOCCO FUMBF112 MODULO FUMB - gas duct (cell 1)</P>
+<P>* WITH SIGN= 1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &lt; 0.</P>
+<P>* WITH SIGN=-1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &gt; 0.</P>
+<P>* (PER DEFAULT SIGN=1.)</P>
+<P>NTUB =4585. * DIAE =0.0508 * LUNG =2.38 *</P>
+<P>PASP =0.114 * PASL =0.12 * SCAN =6.2567 *</P>
+<P>SENC =0. * FA =1. * SIGN =1. *</P>
+<P>*LG*DATI DEL BLOCCO FUMBF122 MODULO FUMB - gas duct (cell 2)</P>
+<P>* WITH SIGN= 1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &lt; 0.</P>
+<P>* WITH SIGN=-1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &gt; 0.</P>
+<P>* (PER DEFAULT SIGN=1.)</P>
+<P>NTUB =4585. * DIAE =0.0508 * LUNG =2.38 *</P>
+<P>PASP =0.114 * PASL =0.12 * SCAN =6.2567 *</P>
+<P>SENC =0. * FA =1. * SIGN =1. *</P>
+<P>*LG*DATI DEL BLOCCO FUMBF132 MODULO FUMB - gas duct (cell 3)</P>
+<P>* WITH SIGN= 1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &lt; 0.</P>
+<P>* WITH SIGN=-1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &gt; 0.</P>
+<P>* (PER DEFAULT SIGN=1.)</P>
+<P>NTUB =4585. * DIAE =0.0508 * LUNG =2.38 *</P>
+<P>PASP =0.114 * PASL =0.12 * SCAN =6.2567 *</P>
+<P>SENC =0. * FA =1. * SIGN =1. *</P>
+<P>*LG*DATI DEL BLOCCO FUMBF142 MODULO FUMB - gas duct (cell 4)</P>
+<P>* WITH SIGN= 1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &lt; 0.</P>
+<P>* WITH SIGN=-1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &gt; 0.</P>
+<P>* (PER DEFAULT SIGN=1.)</P>
+<P>NTUB =4585. * DIAE =0.0508 * LUNG =2.38 *</P>
+<P>PASP =0.114 * PASL =0.12 * SCAN =6.2567 *</P>
+<P>SENC =0. * FA =1. * SIGN =1. *</P>
+<P>*LG*DATI DEL BLOCCO FUMBF152 MODULO FUMB - gas duct (cell 5)</P>
+<P>* WITH SIGN= 1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &lt; 0.</P>
+<P>* WITH SIGN=-1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &gt; 0.</P>
+<P>* (PER DEFAULT SIGN=1.)</P>
+<P>NTUB =4585. * DIAE =0.0508 * LUNG =2.38 *</P>
+<P>PASP =0.114 * PASL =0.12 * SCAN =6.2567 *</P>
+<P>SENC =0. * FA =1. * SIGN =1. *</P>
+<P>*LG*DATI DEL BLOCCO FUMBF162 MODULO FUMB - gas duct (cell 6)</P>
+<P>* WITH SIGN= 1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &lt; 0.</P>
+<P>* WITH SIGN=-1. THE POWER TRANSFERRED FROM THE FLUE GAS IS &gt; 0.</P>
+<P>* (PER DEFAULT SIGN=1.)</P>
+<P>NTUB =4585. * DIAE =0.0508 * LUNG =2.38 *</P>
+<P>PASP =0.114 * PASL =0.12 * SCAN =6.2567 *</P>
+<P>SENC =0. * FA =1. * SIGN =1. *</P>
+<P>*LG*DATI DEL BLOCCO NODON1T2 MODULO NODO - gas temperature at the evaporator ou</P>
+<P>NORMALIZ =T0 * NORMI_ 1 =T0 * NORMI_ 2 =T0 *</P>
+<P>NORMI_ 3 =T0 * NORMI_ 4 =T0 * NORMI_ 5 =T0 *</P>
+<P>NORMI_ 6 =T0 *</P>
+<P>TSOMN1T2 =-1. * TFUCF112 =0.16667 * TFUCF122 =0.16667 *</P>
+<P>TFUCF132 =0.16667 * TFUCF142 =0.16667 * TFUCF152 =0.16667 *</P>
+<P>TFUCF162 =0.16667 *</P>
+<P>*LG*DATI DEL BLOCCO NODON1W2 MODULO NODO - gas flow rate</P>
+<P>NORMALIZ =W0 * NORMI_ 1 =W0 *</P>
+<P>WSOMN1W2 =-1. * IN_1N1W2 =0.16667 *</P>
+<P>*LG*DATI DEL BLOCCO NODON1CA MODULO NODO - CO2 partial pressure in the gas</P>
+<P>NORMALIZ =1. * NORMI_ 1 = *</P>
+<P>USOMN1CA =-1. * IN_1N1CA =1. *</P>
+<P>*LG*DATI DEL BLOCCO NODON1HA MODULO NODO - H2O partial pressure in the gas</P>
+<P>NORMALIZ =1. * NORMI_ 1 = *</P>
+<P>USOMN1HA =-1. * IN_1N1HA =1. *</P>
+<P>*LG*DATI DEL BLOCCO NODON1MA MODULO NODO - O2 percentage in the gas</P>
+<P>NORMALIZ =1. * NORMI_ 1 = *</P>
+<P>USOMN1MA =-1. * IN_1N1MA =1. *</P>
+<P>*LG*DATI DEL BLOCCO DRISE102 MODULO DRIS - waste-heat boiler (downcomers+risers</P>
+<P>PACO =0. *</P>
+<P>* CELL DATA 1*</P>
+<P>NTUB 1 =2. * DIAI 1 =0.29536 * LUNG 1 =19.71 *</P>
+<P>DELZ 1 =-15.690 * CRIG 1 =20. * SUP1 1 =43.02 *</P>
+<P>* CELL DATA 2*</P>
+<P>NTUB 2 =360. * DIAI 2 =0.0448 * LUNG 2 =2.38 *</P>
+<P>DELZ 2 =2.38 * CRIG 2 =20. * SUP1 2 =120.59 *</P>
+<P>* CELL DATA 3*</P>
+<P>NTUB 3 =360. * DIAI 3 =0.0448 * LUNG 3 =2.38 *</P>
+<P>DELZ 3 =2.38 * CRIG 3 =20. * SUP1 3 =120.59 *</P>
+<P>* CELL DATA 4*</P>
+<P>NTUB 4 =360. * DIAI 4 =0.0448 * LUNG 4 =2.38 *</P>
+<P>DELZ 4 =2.38 * CRIG 4 =20. * SUP1 4 =120.59 *</P>
+<P>* CELL DATA 5*</P>
+<P>NTUB 5 = * DIAI 5 = * LUNG 5 = *</P>
+<P>DELZ 5 = * CRIG 5 = * SUP1 5 = *</P>
+<P>* CELL DATA 6*</P>
+<P>NTUB 6 = * DIAI 6 = * LUNG 6 = *</P>
+<P>DELZ 6 = * CRIG 6 = * SUP1 6 = *</P>
+<P>* CELL DATA 7*</P>
+<P>NTUB 7 = * DIAI 7 = * LUNG 7 = *</P>
+<P>DELZ 7 = * CRIG 7 = * SUP1 7 = *</P>
+<P>* CELL DATA 8*</P>
+<P>NTUB 8 =19. * DIAI 8 =0.10226 * LUNG 8 =4.424 *</P>
+<P>DELZ 8 =1.8 * CRIG 8 =20. * SUP1 8 =22.544 *</P>
+<P>*LG*DATI DEL BLOCCO METPX102 MODULO METP - metal wall of the evaporating pipes</P>
+<P>* IPO1/2=1. SIGN CONVENTION OF METP MODULE</P>
+<P>* IPO1=-1. ==&gt; WALL POW. 1 (INTERNAL) Q=K*S*(TF-TP)</P>
+<P>* IPO2=-1. ==&gt; WALL POW. 2 (EXTERNAL) Q=K*S*(TP-TF)</P>
+<P>* TO GET THE CONDUCIBILITY=F(TEMP) COND=-IND.NEGATIVE</P>
+<P>IPO1 = * IPO2 = *</P>
+<P>ROM =7900. * CM =570. * COND =43. *</P>
+<P>* CELLS DATA 1*</P>
+<P>VOLM 1 =0.606 * SUP1 1 =43.02 * SUP2 1 =47.847 *</P>
+<P>SPES 1 =0.01427 *</P>
+<P>* CELLS DATA 2*</P>
+<P>VOLM 2 =1.431 * SUP1 2 =120.59 * SUP2 2 =1741.67 *</P>
+<P>SPES 2 =0.003 *</P>
+<P>* CELLS DATA 3*</P>
+<P>VOLM 3 = * SUP1 3 = * SUP2 3 = *</P>
+<P>SPES 3 = *</P>
+<P>* CELLS DATA 4*</P>
+<P>VOLM 4 = * SUP1 4 = * SUP2 4 = *</P>
+<P>SPES 4 = *</P>
+<P>* CELLS DATA 5*</P>
+<P>VOLM 5 = * SUP1 5 = * SUP2 5 = *</P>
+<P>SPES 5 = *</P>
+<P>* CELLS DATA 6*</P>
+<P>VOLM 6 = * SUP1 6 = * SUP2 6 = *</P>
+<P>SPES 6 = *</P>
+<P>* CELLS DATA 7*</P>
+<P>VOLM 7 = * SUP1 7 = * SUP2 7 = *</P>
+<P>SPES 7 = *</P>
+<P>* CELLS DATA 8*</P>
+<P>VOLM 8 =0.231 * SUP1 8 =22.544 * SUP2 8 =25.53 *</P>
+<P>SPES 8 =0.01204 *</P>
+<P>*LG*DATI DEL BLOCCO VALVV132 MODULO VALV - condensate separators in HP drum</P>
+<P>* VALVE DATA (COD. = IDENTIFIER FOR MATHEMATICAL MODEL CHOICE)</P>
+<P>ALFA =1. * CFA = * COD. =1. *</P>
+<P>* DATA RELATED TO THE DISCHARGING CHARACTERISTIC</P>
+<P>CVA = * PORTATA =200. * P1 MONTE =46.e5 *</P>
+<P>P2 VALLE =45.6e5 * ENTALPIA =1232.E3 * CORSA =1. *</P>
+<P>* DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)</P>
+<P>DP. APER =2000. * DP. CHIU =1000. *</P>
+<P>*LG*DATI DEL BLOCCO NODON1T1 MODULO NODO - gas temperature at the evaporator in</P>
+<P>NORMALIZ =T0 * NORMI_ 1 = *</P>
+<P>USOMN1T1 =-1. * IN_1N1T1 =1. *</P>
+<P>*LG*DATI DEL BLOCCO VALVTURB MODULO VALV - outlet steam valve</P>
+<P>* VALVE DATA (COD. = IDENTIFIER FOR MATHEMATICAL MODEL CHOICE)</P>
+<P>ALFA =1. * CFA = * COD. =0. *</P>
+<P>* DATA RELATED TO THE DISCHARGING CHARACTERISTIC</P>
+<P>CVA = * PORTATA =12.7 * P1 MONTE =45.5E5 *</P>
+<P>P2 VALLE =1.E5 * ENTALPIA =2880.E3 * CORSA =0.6 *</P>
+<P>* DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)</P>
+<P>DP. APER = * DP. CHIU = *</P>
+<P>*LG*EOF</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test1_f"></A>Test case 1: transient simulation</P>
+</B></FONT><U><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Data for the simulation of a transient condition:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</U><P ALIGN="JUSTIFY">Simulation time:&#9;500&#9;s</P>
+<P ALIGN="JUSTIFY">Integration step:&#9;1&#9;s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">Perturbated variables:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</U><P ALIGN="JUSTIFY">WAICS101</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;10&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;11&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;16.5&#9;kg/s</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">HAICS101</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;10&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;11&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;1080&#9;kJ/kg</P><DIR>
+<DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><P ALIGN="CENTER"><IMG SRC="image26.gif" WIDTH=567 HEIGHT=189></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Perturbations: feed water flow rate and enthalpy</P>
+</FONT><FONT SIZE=2><P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image27.gif" WIDTH=567 HEIGHT=189></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Results: water level and steam pressure in the drum</P>
+</FONT><FONT SIZE=2><P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image28.gif" WIDTH=567 HEIGHT=189></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Results: steam flow rate and enthalpy at drum outlet</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P></BODY>
+</HTML>

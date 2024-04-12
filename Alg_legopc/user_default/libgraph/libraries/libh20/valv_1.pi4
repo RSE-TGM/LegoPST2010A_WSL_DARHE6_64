@@ -1,0 +1,27 @@
+VALV_1                                                                          
+VALV                                                                            
+VALV - Water/steam valve (Wout computed)                                        
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 4
+ 
+NCONF = 1
+ 
+WVAL      --UA-- FLUID FLOW RATE IN THE VALVE                                   
+PIVA      --IN-- FLUID PRESSURE AT THE VALVE INLET                              
+PUVA      --IN-- FLUID PRESSURE AT THE VALVE OUTLET                             
+HVAL      --IN-- VALVE INLET-OUTLET FLUID ENTHALPY                              
+ALZA      --IN-- VALVE LIFT                                                     
+==============================                                                  
+EOF                                                                             
+3
+t0 0
+INGRESSO IDRAULICO
+WVAL PIVA ____ ____ ____ HVAL ____ ____
+t1 1
+USCITA IDRAULICA
+WVAL PUVA ____ ____ ____ HVAL ____ ____
+t2 6
+INGRESSO ATTUAZIONE
+ALZA

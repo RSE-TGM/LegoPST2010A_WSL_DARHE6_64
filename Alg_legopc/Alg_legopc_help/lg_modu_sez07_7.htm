@@ -1,0 +1,259 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">The &quot;xxxxI2&quot; subroutine for configurable LEGO
+modules (the CPOM example)</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">For configurable and/or cellized
+modules, the subroutine &quot;xxxxI2&quot; must also check the configuration
+informations. The source code of CPOMI2 follows (comment line has been added for
+legibility reasons).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Note that this kind of module cannot be
+build using only the automatic code generation utility. While the computation of
+internal quantities can be performed using the dedicated &quot;user-code&quot;
+areas during automatic building activity, the allocation of extra elements in
+DATI vector for the storage of these quantities must be performed modifying the
+auto-produced code.&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><span style="mso-spacerun: yes">&nbsp;<b><font face="Courier New" size="2">&nbsp;&nbsp;&nbsp;&nbsp;
+</font></b>
+</span><b><font face="Courier New" size="2">SUBROUTINE CPOMI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$ IBLOC1,IBLOC2,IER,CNXYU,TOL)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---CENTRIFUGAL PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>INTEGER VAR(MX1,2)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DIMENSION XYU(*),DATI(*),CNXYU(*),TOL(*)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CHARACTER*1 CWP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON/AUSIL1/NSTATI,NUSCIT,NINGRE</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATA PI/3.141592/,G/9.81/</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>GO TO(1,10),IFUN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---WRITING DATA SYMBOLS</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>1 WRITE(14,1000)'TYP<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>','INER<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>','QVNOM<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WRITE(14,1000)'OMNOM<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>','DPNOM<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>','POTN<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WRITE(14,1000)'DENS.<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>','N.GIRAN.','VALV
+INT'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;</span>1000
+FORMAT(3(4X,A8,' =',10X,'*'))</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---DATA READING AND STORING</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>10 READ(14,1002)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>READ(14,1002)TYP,HIN,QNOM,OMNOM,DPNOM,PNOM,RO,GIRAN,VALV</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;</span>1002
+FORMAT(3(14X,F10.0,1X))</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---PUMP TYPE DECODING:</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (NSTATI .GT. 0) THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IHI=2</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IHI=1</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ENDIF</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WRITE(CWP,3000)IBLOC1</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;</span>3000
+FORMAT (A1)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (CWP.EQ.'+') THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IWP=0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE IF (CWP.EQ.'-') THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IWP=1</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IWP=2</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ENDIF</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(IHI.EQ.1)WRITE(6,502)'*** IMPOSED SPEED PUMP ***'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(IHI.EQ.2)WRITE(6,502)'*** IMPOSED POWER PUMP ***'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(IWP.EQ.0)WRITE(6,502)'*** INLET PRESSURE AS OUTPUT ***'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(IWP.EQ.1)WRITE(6,502)'*** OUTLET PRESSURE AS OUTPUT ***'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;</span>IF(IWP.EQ.2)WRITE(6,502)'*** FLOW RATE AS OUTPUT ***'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp; </span>502
+FORMAT(/14X,A)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---WORK DATA COMPUTATION</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(GIRAN.LE.0.)GIRAN=1.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---VALV = 1 MEANS THAT THE PUMP INCLUDES
+AN UPSTREAM VALVE.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(VALV.NE.0.)VALV=1.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ETANOM=0.85</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(PNOM.GT.0.)ETANOM=QNOM*DPNOM/PNOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(RO.EQ.0.) RO=1000.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DH=DPNOM/RO/G/GIRAN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ECINOM=HIN*OMNOM**2.*.5</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>GIRI=OMNOM/2./PI*60.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>GCAR=3.65*GIRI*QNOM**.5/(DH**(3./4.))</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AMPMP=2000.*QNOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WRITE(6,1021) GCAR</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;</span>1021
+FORMAT(/14X,'*** SPECIFIC SPEED: ',F8.2,' ***'/)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNOM=PNOM/OMNOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(PNOM.NE.0.)GO TO 167</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNOM=QNOM*DPNOM/(OMNOM*ETANOM)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;</span>167<span style="mso-spacerun: yes">&nbsp; </span>CONTINUE</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---DATA STORAGE</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2)=IHI</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+1)=IWP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+2)=TYP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+3)=HIN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+4)=QNOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+5)=OMNOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+6)=DPNOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+7)=PNOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+8)=ETANOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+9)=ECINOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+10)=GCAR</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+11)=AMPMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+12)=CNOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+16)=.004*CNOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+17)=VALV</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ID2=ID2+17</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---NORMALIZATION FACTORS</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>OM0=PI*2.*50.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>GO TO (50,60), IHI</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>50 CNXYU(IV1)=H0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+1)=P0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(IWP.EQ.2)CNXYU(IV1+1)=W0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+2)=P0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+3)=W0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(IWP.EQ.2)CNXYU(IV1+3)=P0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+4)=H0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+5)=OM0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+6)=1.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>GO TO 70</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>60 CNXYU(IV1)=1.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+1)=OM0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+2)=H0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+3)=P0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(IWP.EQ.2) CNXYU(IV1+3)=W0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+4)=P0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+5)=W0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(IWP.EQ.2) CNXYU(IV1+5)=P0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+6)=H0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+7)=H0*W0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+8)=1.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---STANDARD TOLERANCE TRESHOLDS (1.E-4)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>70 RETURN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END</b></font></span></p>
+
+<!--mstheme--></font></body>
+
+</html>

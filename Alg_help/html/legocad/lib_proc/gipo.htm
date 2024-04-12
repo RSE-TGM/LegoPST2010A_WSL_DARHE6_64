@@ -1,0 +1,238 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE GIPO</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GIPO_summ"></A>MODULE GIPO&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_GIPO_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_GIPO_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_GIPO_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_GIPO_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_GIPO_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_GIPO_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_GIPO_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_GIPO_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GIPO_A"></A>MODULE GIPO&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">HYDROMECHANIC COUPLING</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The GIPO module simulates the coupling between a motor and a machine tool. It is used together with the MAS3 module (asynchronous motor) and to modules simulating the operation of machine tools: typically CPOM (centrifugal pump) and VENT (fan).</P>
+<P ALIGN="JUSTIFY">The GIPO module considers three typical coupling cases:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Case (A)&#9;Motor coupled with machine tool through an HYDRAULIC JOINT and directly coupled at the same time with another machine &#9;&#9;&#9;tool (it is the case of the PUMP BOOSTER+MOTOR+SUPPLY PUMP assembly).</P>
+<P ALIGN="JUSTIFY">The booster pump rotates at the motor speed while the supply pump can vary its speed according to the value assumed by the input variable ALSC simulating the operation of the pump "soop".</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Case (B)&#9;Motor coupled with pump through a speed multiplier (reducing gear).</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Case (C)&#9;Motor coupled with fan through a speed multiplier (reducing gear).</P>
+<P ALIGN="JUSTIFY">With respect to Case (B) the resisting power expression depending on the ALSC input variable changes. It represents the position of gates on suction.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In the cases concerning pumps the RESISTING POWER is assumed to be a function of SPEED and FLOW RATE acording to an imposed law.</P>
+<P ALIGN="JUSTIFY">For fans, the RESISTING POWER is assumed to be a function of SPEED, FLOW RATE, OPENING of gates according to an imposed law.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module receives at input:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">- the active power QASS supplied on axis by motor</P>
+<P ALIGN="JUSTIFY">- the mass capacity WPOM of the machine tool</P>
+<P ALIGN="JUSTIFY">- the machine tool fluid density DENS</P>
+<P ALIGN="JUSTIFY">- the ALSC position(of scoop if pump, of gates if fan)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module supplies at output:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">- the angular speed OMMO of the electric motor</P>
+<P ALIGN="JUSTIFY">- the angular speed OMPM of the machine tool</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In the mathematical model adopted the following hypothesys are assumed:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">it is assumed that power dissipated for mechanical losses is directly proportional to the speed, in particular at rated speed that is 1 % of the rated power</P>
+<P ALIGN="JUSTIFY">in steady state the speed at the joint output has a linear trend as the scoop varies</P>
+<P ALIGN="JUSTIFY">in Case (A) the ideal joint is assumed, in all the case it the ideal multiplier/reducing gear (unit yield) is assumed </P>
+<P ALIGN="JUSTIFY">it is assumed that the motor dynamics reflects on the dynamics of the machine tools, passing thouth the multiplier in directly proportional manner</P>
+<P ALIGN="JUSTIFY">it is assumed that the motor dynamics reflects on the dynamics of the machine tools, passing thouth the hydraulic joint in directly proportional manner (IRREALISTIC HYPOTHESIS TO BE CANCELLED).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module is based on the following equations:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[1]&#9;equation describing the variation of rotation kinetic energy of a system according to the motive and resisting power applied. It is a &#9;differential equation solved in the algebraic mode, considering in the transient state of the value of speed at the previous time step.</P><DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+
+<P ALIGN="JUSTIFY">[2]&#9;equation expressing the link between the speed of the machine tool and the speed of the electric motor (algebraic equation).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GIPO_B"></A>MODULE GIPO&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;<IMG SRC="Image316.gif" WIDTH=382 HEIGHT=130></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT - OUTPUT VARIABLES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>[W]&#9;&#9;QASS&#9;&#9;power supplied by motor</P>
+<P>[kg/s]&#9;&#9;WPOM&#9;mass flow rate of machine tool</P>
+<P>[kg/m³]&#9;DENS&#9;&#9;density of machine tool fluid </P>
+<P>[p.u.]&#9;&#9;ALSC&#9;&#9;Case (A) position of supply pump scoop</P>
+<P>Case (B) uninfluent input<BR>
+Case (C) opening position of gates on the suction of a fan </P>
+<P>[rad/s] &#9;OMMO&#9;Motor mechanical angular speed</P>
+<P>[rad/s]&#9;&#9;OMPM&#9;machine tool angular speed</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GIPO_C"></A>MODULE GIPO&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In addition to the initial values of input and output variables of the GIPO module, whose meaning has been defined in card B1, the user must assign the following set of data to complete the input required by the module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">DATA COMMON TO THE THREE CHARACTERIC CASES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>[ ]&#9;&#9;TIPO&#9;&#9;to be assigned to select the coupling type.</P>
+<P>TYPE = 1&#9;Case (A): BOOSTER + MOTOR + JOINT + SU.PUMP</P>
+<P>TYPE = 2&#9;Case (B): MOTOR + MULTIPLIER + PUMP</P>
+<P>TYPE = 3&#9;Case (C): MOTOR + MULTIPLIER + FAN</P>
+<P>[W]&#9;&#9;QBASE_W&#9;power value used to normalize powers appearing inside the module</P>
+<P>[W]&#9;&#9;OMBA_r/s&#9;angular speed value used to normalize angular speeds appearing inside the &#9;module</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">CASE (A): BOOSTER PUMP + MOTOR + JOINT + SUPPLY PUMP</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">MOTOR AND BOOSTER PUMP DATA</P>
+<P>[rpm]&#9;&#9;VELNOM1&#9;rated speed of motor and of booster pump</P>
+<P>[W]&#9;&#9;POTNOM1&#9;rated power of booster pump</P>
+<P>[p.u.]&#9;&#9;DPX/DPN1&#9;coefficient of booster pump (*)</P>
+<P>[m³/s]&#9;&#9;QVLNOM1&#9;rated displacement flow rate of booster pump</P>
+<P>[kg*m²]&#9;FINERZ1&#9;global moment of inertia of motor + booster pump</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">JOINT AND MULTIPLIER DATA</P>
+<P>[rpm]&#9;&#9;VELZERO&#9;no-load joint output speed (scoop=0)</P>
+<P>[rpm]&#9;&#9;VELCENT&#9;full load output joint speed (scoop=1)</P>
+<P>[ ]&#9;&#9;FATMOL&#9;drive ratio</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">SUPPLY PUMP DATA</P>
+<P>[rpm]&#9;&#9;VELNOM2&#9;supply pump rated speed</P>
+<P>[W]&#9;&#9;POTNOM2&#9;supple pump rated power</P>
+<P>[p.u.]&#9;&#9;DPX/DPN2&#9;coefficient of supply pump (*)</P>
+<P>[m³/s]&#9;&#9;QVLNOM2&#9;supply pump rated displacement flow rate</P>
+<P>[kg*m²]&#9;FINERZ2&#9;moment of inertia of supply pump</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">(*)&#9;Ratio of pressure difference between upstream and downstream of pump in closed delivery and rated conditions.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">CASE (B): MOTOR + MULTIPLIER + PUMP</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>[ ]&#9;&#9;VELNOM1 &#9;UNINFLUENT datum</P>
+<P>[ ]&#9;&#9;POTNOM1 &#9;UNINFLUENT datum</P>
+<P>[ ]&#9;&#9;DPX/DPN1 &#9;UNINFLUENT datum</P>
+<P>[ ]&#9;&#9;QVLNOM1 &#9;UNINFLUENT datum</P>
+<P>[kg*m²]&#9;FINERZ1&#9;moment of inertia of motor</P>
+<P>[ ]&#9;&#9;VELZERO&#9;UNINFLUENT datum</P>
+<P>[ ]&#9;&#9;VELCENT&#9;UNINFLUENT datum</P>
+<P>[ ]&#9;&#9;FATMOL&#9;drive ratio</P>
+<P>[rpm]&#9;&#9;VELNOM2&#9;pump rated speed</P>
+<P>[W]&#9;&#9;POTNOM2&#9;pump rate power</P>
+<P>[ ]&#9;&#9;DPX/DPN2&#9;pump coefficient (*)</P>
+<P>[m³/s]&#9;&#9;QVLNOM2&#9;pump rated displacement flow rate</P>
+<P>[kg*m²]&#9;FINERZ2&#9;moment of inertia of pump</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">(*)&#9;Ratio of pressure difference between upstream and downstream of pump in closed delivery and rated conditions.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">CASE (C): MOTOR + MULTIPLIER + FAN</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>[ ]&#9;&#9;VELNOM1 &#9;UNINFLUENT datum</P>
+<P>[ ]&#9;&#9;POTNOM1 &#9;UNINFLUENT datum</P>
+<P>[ ]&#9;&#9;DPX/DPN1 &#9;UNINFLUENT datum</P>
+<P>[ ]&#9;&#9;QVLNOM1 &#9;UNINFLUENT datum</P>
+<P>[kg*m²]&#9;FINERZ1&#9;moment of inertia of motor</P>
+<P>[ ]&#9;&#9;VELZERO&#9;UNINFLUENT datum</P>
+<P>[ ]&#9;&#9;VELCENT&#9;UNINFLUENT datum</P>
+<P>[ ]&#9;&#9;FATMOL&#9;drive ratio</P>
+<P>[rpm]&#9;&#9;VELNOM2&#9;fan rated speed</P>
+<P>[W]&#9;&#9;POTNOM2&#9;fan rate power</P>
+<P>[ ]&#9;&#9;DPX/DPN2&#9;fan coefficient (*)</P>
+<P>[m³/s]&#9;&#9;QVLNOM2&#9;rated volumetric flow rate</P>
+<P>[kg*m²]&#9;FINERZ2&#9;moment of inertia of the fan</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">(*)&#9;Ratio of pressure difference between upstream and downstream of fan in closed delivery and rated conditions.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">RELATIONS USED INSIDE THE MODULE</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>OMRIF&#9;= &#9;OMBA (reference angular speed in rad/s)</P>
+<P>GFUN&#9;&#9;= &#9;FATMOL*VELZERO/VELNOM1*(1 + ALSC*(VELCENT/VELZERO - 1))</P>
+<P>GFUN is the ratio between the supply pump speed and the motor one.</P>
+<P>GIN&#9;&#9;= &#9;OMRIF*OMRIF*(FINERZ2 + FINERZ1/(GFUN**2))</P>
+<P>GIN is the equivalent inertia referred to the speed of the machine tool.</P>
+<P>&nbsp;</P>
+<P>Note 1&#9;in the case of coupling with MULTIPLIER: ===&gt; GFUN = FATMOL</P>
+<P>&nbsp;</P>
+<P>The following is determined for the different cases, on the basis of data and inputs:</P>
+<P>QRES&#9;&#9;(resisting power)</P>
+<P>QPERD&#9;(dissipated power)</P>
+<P>&nbsp;</P>
+<P>and from these:</P>
+<P>QRESTOT = QRES + QPERD</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_GIPO_D"></A>MODULE GIPO&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module variables initialization</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GIPO_E"></A>MODULE GIPO&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The GIPO module does not require any user subprogram.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GIPO_F"></A>MODULE GIPO&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The equations forming the module mathematical model provide the following residuals (the first one applicable to transient state):</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(1)&#9;=&#9;(GIN*ABS(OMPM)*(OMPM-OMPMN1) -</P>
+<P ALIGN="JUSTIFY">DTINT*(QASS*W0*H0 -QRESTOT))/POTNOM</P><DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">RNI(2) = &#9;OMPM - GFUN*OMMO</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Where OMPMN1 indicates the speed at the previous iteration and DTINT indicates the integration interval; while the remaining variables have the physical meaning already defined in cards B and C.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Note 1&#9;When the system is in steady state:</P>
+<P ALIGN="JUSTIFY">if OMPM &lt;= 0&#9;RNI(1) = OMPM</P>
+<P ALIGN="JUSTIFY">if OMPM &gt; 0&#9;&#9;RNI(1) = (QIPM*W0*H0 - QRESTOT)/POTNOM</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GIPO_G"></A>MODULE GIPO&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</I><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GIPO_H"></A>MODULE GIPO&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P></B></I></FONT></BODY>
+</HTML>

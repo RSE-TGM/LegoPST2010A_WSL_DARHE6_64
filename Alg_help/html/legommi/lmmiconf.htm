@@ -1,0 +1,719 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGOMMI HELP</TITLE>
+<META NAME="subject" CONTENT="Documentazione LEGOMMI">
+<META NAME="doccomm" CONTENT="LMMIHELP configuration phase">
+<META NAME="Template" CONTENT="C:\PROGRAMMI\MICROSOFT OFFICE\OFFICE\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="Config"></A>LEGOMMI: Configuration</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The configuration phase consists in the creation and construction of a page. The user can create and modify a page calling the tool named "<B>config</B>" both for synoptic and regulation scheme. A number of Editors are available.</P>
+</FONT><B><P ALIGN="JUSTIFY">&nbsp;</P>
+</B><P ALIGN="JUSTIFY"><IMG SRC="Image81.gif" WIDTH=801 HEIGHT=896></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Creation</P>
+</B><P ALIGN="JUSTIFY">The user can create a new page selecting "Page" or "Regulation" on the Create pulldown menu. MMI will then display a window where basic information on the page geometry can be inserted. With the first choice MMI creates a synoptic and with the second a regulation page.</P>
+</FONT><P ALIGN="JUSTIFY">For regulation schemes management every page is associated with a progressive number, formed by numbers and characters, i.e.:</P>
+<P ALIGN="JUSTIFY">00,01, ... , 0A, 0B, ... , 0Z,10,11, ... , ZZ</P>
+<P ALIGN="JUSTIFY">These numbers are not re-computed after deleting a page.</P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Construction</P>
+</B><P ALIGN="JUSTIFY">First, the user must instantiate one or more objects retrieved from a library and then select a graphic object to assign the resources using the attributes configurator named Resource Editor.</P>
+<P ALIGN="JUSTIFY">Furthermore the user can complete the page with the background by using the Draw Editor. </P>
+</FONT><P ALIGN="JUSTIFY">In construction of regulation schemes once instantiation has been completed the user has to connect the objects's ports. Snap is available to facility the building of connections<FONT FACE="Arial, helvetica"> .</P>
+<P ALIGN="JUSTIFY">The following figure shows a schematic example of configuration:</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image82.gif" WIDTH=507 HEIGHT=447></P>
+<B><I><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">HOW TO USE</P>
+</I></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#ResEditor"><U><FONT COLOR="#0000ff">Resource Editor</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">2 </B></FONT><A HREF="#VarEditor"><U><FONT COLOR="#0000ff">Variable Editor</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">3 </B></FONT><A HREF="#ColorEditor"><U><FONT COLOR="#0000ff">Color Editor</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">4 </B></FONT><A HREF="#FontEditor"><U><FONT COLOR="#0000ff">Font Editor</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">5 </B></FONT><A HREF="#DrawEditor"><U><FONT COLOR="#0000ff">Draw Editor</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">6 </B></FONT><A HREF="#BitmapEditor"><U><FONT COLOR="#0000ff">Bitmap Editor</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">7 </B></FONT><A HREF="#Zoom"><U><FONT COLOR="#0000ff">Zoom and Snap</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#Connection"><U><FONT COLOR="#0000ff">8 Connection</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#InputValue"><U><FONT COLOR="#0000ff">9 Data input</U></FONT></A></P>
+<B><I><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER">LAYOUT</P>
+</I></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#PageLayout"><U><FONT COLOR="#0000ff">Config's Page layout</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">2 </B></FONT><A HREF="#PageDefinitionLayout"><U><FONT COLOR="#0000ff">Page or Regulation definition window layout</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">3 </B></FONT><A HREF="#VarEditLayout"><U><FONT COLOR="#0000ff">Variable Editor layout</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">4 </B></FONT><A HREF="#ColorEditorLayout"><U><FONT COLOR="#0000ff">Color Editor layout</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">5 </B></FONT><A HREF="#FontEditorLayout"><U><FONT COLOR="#0000ff">Font layout</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">6 </B></FONT><A HREF="#DrawEdityorLayout"><U><FONT COLOR="#0000ff">Draw Editor layout</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ResEditor"></A></P>
+<P>Configuration: Resource Editor</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The Resource Editor allows to view and to edit the resources of every object both in the page and in the library.</P>
+</FONT><B><P ALIGN="JUSTIFY">&nbsp;<IMG SRC="Image83.gif" WIDTH=482 HEIGHT=469></P>
+</B><P ALIGN="JUSTIFY">Not editable resources are also displayed but specified buttons and text fields are insensitive, as some resources are editable in libraries but not on page.</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The Resource Editor is called by the user once the object has been <U><STRIKE>selected</STRIKE>!</U>PopupId(`gloshelp.hlp',`<U>lgc_gl_gph_select</U>') by choosing Resource on Edit's pulldown menu or Resource on the pop-up menu (which is recalled from the third mouse button pressed on page/library). </P>
+<P ALIGN="JUSTIFY">LEGOMMI displays a window containing the page name and class of the parent, a pulldown menu, the name of the object being edited, an option menu to choose the resource class, the list of the selected resources and the "Apply" and "Load" (Resources) buttons.</P>
+<P ALIGN="JUSTIFY">Available resource classes are:</P>
+<P ALIGN="JUSTIFY">Geometric</P>
+<P ALIGN="JUSTIFY">Specific</P>
+<P ALIGN="JUSTIFY">Color attributes</P>
+<P ALIGN="JUSTIFY">Change color var. 1</P>
+<P ALIGN="JUSTIFY">Change color var. 2</P>
+<P ALIGN="JUSTIFY">Change color var. 3</P>
+<P ALIGN="JUSTIFY">Change color var. 4</P>
+<P ALIGN="JUSTIFY">"Geometric" are standard resources that define all the geometrical characteristics of the object (X, Y, Width, High, Rotate, Transparent) and some colors.</P>
+<P ALIGN="JUSTIFY">"Specific" are typical of every kind of object and contain resources like the object type (i.e. pointer, bar for an indicator etc.).</P>
+<P ALIGN="JUSTIFY">"Color attributes" define the object's typical colors.</P>
+<P ALIGN="JUSTIFY">The other four ones, if available for the object, allow to associate an object portion with different colors depending on the values taken on by the variable chosen.</P>
+<P ALIGN="JUSTIFY">Every group is set by selecting an option on the option menu and displayed inside a scrolled window. The above figure displays the "Specific" resources group of the icon.</P>
+<P ALIGN="JUSTIFY">Every row contains a resource but there are different displaying modalities. </P>
+<P ALIGN="JUSTIFY">The button and text field are available when an Editor is necessary (Color, Font, Bitmap) to insert the modification. The button, featuring a label with the resources name, activates the editor while the text fields display the resource.</P>
+<P ALIGN="JUSTIFY">The label features the name and the text field when the user can directly insert the resource value.</P>
+<P ALIGN="JUSTIFY">The label features the name and the option menu to ascribe the resource value (i.e. a type or a rotation).</P>
+<P ALIGN="JUSTIFY">Once a resource has been modified to the right of the text field a little line is displayed.</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image84.gif" WIDTH=480 HEIGHT=34></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Through the "Apply" push button the Resource Editor sets the current resource directly on the object. Through "Load" (Resources) push button the resources of the currently-selected object are loaded on the same window. The same operation is available also through the File's pulldown menu with "Load Resources". The other options, -"Reset resources" and "Close"-, restore the condition prior to the editing of the individual resources and close the page.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="VarEditor"></A>Configuration: Variable editor</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Through the Variable Editor the user can select a variable from the set data base (simulator label on the config main window). The Editor reaches the variable by selecting first the module and the module block and then the block variable. </P>
+<P ALIGN="JUSTIFY">Variable Editor main window:</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image85.gif" WIDTH=478 HEIGHT=414></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The three selections above can be made by pressing the "List" push buttons. Once the List push buttons have been clicked, selection windows will be displayed. They contain respectively the list of models, the list of blocks of the selected model and the variable of the selected block.</P>
+<P ALIGN="JUSTIFY">First the user must choose the Model and the block then, by clicking the second "List" push button. The window which will be displayed features two lists containing the modules (and also the "All" choice) and the blocks respectively. If the user selects a particular module and then clicks "Filter" the block list will be updated only with the blocks of that module; if "All" has been selected, all the model blocks will be displayed.</P>
+</FONT><P ALIGN="JUSTIFY">In the regulation model construction regulation scheme is like a module and coincides with a model block.</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">After the model and the block have been selected the user can choose the variable.</P>
+<P ALIGN="JUSTIFY">In order to easily configure a desired variable a number of filters are available.</P>
+<P ALIGN="JUSTIFY">The filters "Component" and "Sub System" can be activate through an option menu and "All" will deselect filters. These filters, if activated, reduce the number of elements displayed inside model and block lists, according to the Component or Sub System chosen.</P>
+<P ALIGN="JUSTIFY">Variable Editor allows to load configuration information on a variable related to an object of the drawing area which has already been selected by pressing the "Grab Selected Widget" push button.</P>
+<P ALIGN="JUSTIFY">When the editor is called during the configuration of an interactive object such as a button it is possible to assign a perturbation. Available perturbations are Not, Step, Pulse, Ramp, UpDown.</P>
+<P ALIGN="JUSTIFY">A view of Variable Editor windows is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#VarEditLayout"><U><FONT COLOR="#0000ff">Variable Editor layout</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P>Configuration: Color editor</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The Color Editor is called every time colors are assigned and displays a window named "Resource Color Viewer" which contains 12 (max) configured colors.</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image86.gif" WIDTH=427 HEIGHT=375></P>
+<B><P ALIGN="JUSTIFY">{bmc mi_cores.bmp}</P>
+</B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Every color can be selected by clicking on the button which contains the desired color; the adjacent text field contains the string defining the color.</P>
+<P ALIGN="JUSTIFY">Through the Edit pulldown menu the user can call the "Color Editor" to build a new color, to display the active Colormap or by selecting "Grab color" to import a new one (for example from the color map).</P>
+<P ALIGN="JUSTIFY">It is possible to change a default color from the default palette by following these steps:</P>
+<P ALIGN="JUSTIFY">1) select the desired color on the default palette;</P>
+<P ALIGN="JUSTIFY">2) modify the color either through the Color Editor or by writing the color string in the text field or grabbing a color;</P>
+<P ALIGN="JUSTIFY">3) press the "Apply" push button;</P>
+<P ALIGN="JUSTIFY">4) select a second time the button color of the palette;</P>
+<P ALIGN="JUSTIFY">The new default color palette will be saved in a local file named FileColoriDefault after pressing "OK". This file will be loaded every time the Color viewer is used.</P>
+<P ALIGN="JUSTIFY">The definition of a new color by the Color Editor is made by dragging the mouse on the red, green and blue scrolling bars. Once the user has pressed "OK" the new color will be exported in the Color Viewer, the display will be possible after pressing "Apply" in the "Color Viewer".</P>
+<P ALIGN="JUSTIFY">After pressing a color inside an application windows the user can select "Grab color" to capture the color of the point and load it in the Color Viewer.</P>
+<P ALIGN="JUSTIFY">The Color Map displays the available color of the active colormap. Every color can be captured by using "Grab Color".</P>
+<P ALIGN="JUSTIFY">The Color Editor and the Color Map windows are available in:</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#ColorEditorLayout"><U><FONT COLOR="#0000ff">ColorEditorLayout</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="FontEditor"></A>Configuration: Font editor</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">When the user has to assign a text inside a resource, he can change the font by calling the Font Editor.</P>
+<P ALIGN="JUSTIFY">LEGOMMI displays a window named "Font Viewer" featuring a number of default font which can be selected by the user clicking a push button, a text field which contains the font define string and three confirm-action push button.</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image87.gif" WIDTH=277 HEIGHT=533></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The user can edit a new font by using the "Edit Font" on the Edit pulldown menu.</P>
+<P ALIGN="JUSTIFY">It is possible to change a default font by following these steps:</P>
+<P ALIGN="JUSTIFY">1) select the default font which has to changed;</P>
+<P ALIGN="JUSTIFY">2) modify the Font through the Font Editor or writing the desire font string;</P>
+<P ALIGN="JUSTIFY">3) push the Apply push button of the Font Editor;</P>
+<P ALIGN="JUSTIFY">4) select a second time the push button of the changed font.</P>
+<P ALIGN="JUSTIFY">By clicking the OK push button of the Font Viewer the default font will be saved in the <I>FileFontDefault</I> file which is red at every recall of this editor.</P>
+<P ALIGN="JUSTIFY">The Font Editor shows all the Font available.</P>
+<P ALIGN="JUSTIFY">The font will be results of 3 choices between these groups:</P>
+<P ALIGN="JUSTIFY">"Family or Short name", </P>
+<P ALIGN="JUSTIFY">"Font", </P>
+<P ALIGN="JUSTIFY">"Size and Charset"</P>
+<P ALIGN="JUSTIFY">During font selection, an example of the selected font is displayed and once "OK" push button is clicked, Font Editor exports to the Font Viewer the new font which can be shown only after the user has pressed the Font Viewer "Apply" push button.</P>
+<P ALIGN="JUSTIFY">The Font Editors window layout is available in:</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#FontEditorLayout"><U><FONT COLOR="#0000ff">FontEditorLayout</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="DrawEditor"></A>Configuration: Draw editor</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The Draw editor is used in two different cases: during page for background editing or during icon construction to build animated icon drawing. </P>
+<P ALIGN="JUSTIFY">Functionality provided are the same except for case of enumerated animated colors that are allowed only for animated icon draw editing.</P>
+<P ALIGN="JUSTIFY">A title on the Draw main window is displayed: "Draw on Page XXXX" or "Draw on animated icon". This editor is called from the "Background Draw" pulldown menu of the page (first modality) or during an icon configuration, in particular by assigning the "Filename" resource which will display a page containing the list of the available (and amendable) icon files; by choosing Edit (or Create for a new file) on the File pulldown menu of this window the editor working with the selected file is called.</P>
+<P ALIGN="JUSTIFY">In general through this editor the user can draw lines, circles, squares polygons, and every other free line with the mouse or he can modify already objects drawn (dimension, colour, filling).</P>
+<P ALIGN="JUSTIFY">The kind of object which will be instantiate can be chosen through a series of push buttons, the same applies to fill and line color. Four push buttons (displaying four grey color) are dedicated to set color change variables during icon draw configuration.</P>
+<P ALIGN="JUSTIFY">Utilities such as Zoom, Snap, Group, Ungroup, are also, provided.</P>
+<P ALIGN="JUSTIFY">More information on Draw Editor commands and window layouts is available in:</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#DrawEdityorLayout"><U><FONT COLOR="#0000ff">DrawEdityorLayout</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="BitmapEditor"></A>Configuration: Bitmap editor</P>
+</B></FONT><P ALIGN="JUSTIFY">When an object uses the bitmap format its drawing is built through the standard Bitmap Editor.</P>
+<P ALIGN="JUSTIFY">An example of bitmap file is displayed in the following figure.</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image88.gif" WIDTH=478 HEIGHT=599></P>
+<P ALIGN="JUSTIFY">The Bitmap Editor is called to modify an already existing file, which is chosen by the user from the bitmap files contained in the active icon directory, or to create a new one. </P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image89.gif" WIDTH=262 HEIGHT=206></P>
+<P ALIGN="JUSTIFY">In this second case the user has to define first of all the dimension of the drawing: width and height.</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image90.gif" WIDTH=382 HEIGHT=398></P>
+<P ALIGN="JUSTIFY">After file selection the filename will be exported to the text field of the relevant resource .</P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="Zoom"></A>Configuration: zoom and snap</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">SNAP</P>
+</B></I><P ALIGN="JUSTIFY">By pressing "Set Snap" on the Option pulldown menu of the page, the user can fix a grid where to draw the line and obtain linear connections.</P>
+<P ALIGN="JUSTIFY">This option allows to build a linear connection between ports.</P>
+<P ALIGN="JUSTIFY">The user can set the snap value in pixels.</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image91.gif" WIDTH=349 HEIGHT=338></P>
+<B><I><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">ZOOM</P>
+</B></I><P ALIGN="JUSTIFY">In order to facilitate page construction, LEGOMMI has a Zoom function which can be activated from the Options pulldown menu in the Page window. Available Zoom options are 100% (the default value), 200%, 300%, 400%.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT SIZE=5><P><A NAME="Connection"></A>Configuration: connections</P>
+</B></FONT><P ALIGN="JUSTIFY">Two types of connection are provided: between Iconreg objects in a regulation page; between different regulation pages.</P>
+<B><P ALIGN="JUSTIFY">1. Connection between Iconreg object</P>
+</B><P ALIGN="JUSTIFY">This operation links variables of LEGO modules acting on the variable-associated port. Every port will store the name of the connected port.</P>
+<P ALIGN="JUSTIFY">The graphical look of a connection is a polyline which links ports.</P>
+<P ALIGN="JUSTIFY">In order to create a connection the user first select "Connect mode" on the Option's pulldown menu and then, click on the source port and draw the line on the target port. This operation is made by clicking the first mouse button on the first port and by moving the mouse (with mouse button release) on the second; an angle on the connection line can be obtained by clicking the first button. The user can abort the operation by clicking with second mouse button (the connection in creation is deleted). When the mouse is over a port, it displays the tag (2 character) of the associated variable.</P>
+<P ALIGN="JUSTIFY">MMI also maintains connections when the user moves objects that are already connected each other.</P>
+<P ALIGN="JUSTIFY">Particular connections:</P><DIR>
+<DIR>
+
+<B><P ALIGN="JUSTIFY">-</B>&#9;Branched connections are prevented except when a dedicated elementary-module named "dira" is used;</P>
+<B><P ALIGN="JUSTIFY">-</B>&#9;Loops inside a scheme are not accepted during compilation, and must be broken by the elementary-modules named "dtri", "dtrl".</P></DIR>
+</DIR>
+
+<B><P ALIGN="JUSTIFY">1. Connection between pages (interface connections)</P><DIR>
+<DIR>
+
+</B><P ALIGN="JUSTIFY">Connections between different regulation scheme require the following operations:</P>
+<P ALIGN="JUSTIFY">1)&#9;to close the pages</P>
+<P ALIGN="JUSTIFY">2)&#9;to click the "Interface Mode" on Interface Mode's pulldown menu</P>
+<P ALIGN="JUSTIFY">3)&#9;to open the interesting pages</P>
+<P>4)&#9;to build the connection by clicking the concerned ports with the first mouse button.</P>
+<P>5)&#9;to close the pages</P>
+<P>6)&#9;to click "Interface Mode" on Interface Mode's pulldown menu to unselect this modality</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">This kind of connection is possible only between two "interface ports".</P>
+<P ALIGN="JUSTIFY">The connection is shown inside the interface ports by a little red rectangle. This kind of connection can be delete trying to delete the interface iconreg.</P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="InputValue"></A>Configuration: data input</P>
+</B></FONT><P ALIGN="JUSTIFY">Every object has in the "Specific" a resource (named Input Value) containing all attempt variables and data values and descriptions of the associate module like an ASCII string. The characteristic of the form that will be used in I/O data values are retrieved from a file (form) which contains the list of tags and the description of all variables and data of the module. When the user works on a regulation scheme the form file is retrieved during the choice of the object (elementary regulation module).</P>
+<P ALIGN="JUSTIFY">The user can change the values by pressing "Input Value" and work on the window displayed. In fact, MMI displays two windows featuring the Tags of the block variable and the data retrieved once the user has chosen between variables or data on the a first dialog page.</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image92.gif" WIDTH=479 HEIGHT=373></P>
+<P ALIGN="JUSTIFY">Once the user has pressed "OK", MMI updates the values for the LEGO block associated which edited iconreg.</P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="PageLayout"><A NAME="Page"></A></A>Configuration layout: page</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">A config's page contains the following areas:</P>
+<B><P ALIGN="JUSTIFY">Pulldown menu area :</P></B></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=639>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial, helvetica" SIZE=2>File</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Save</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Saves the page</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Print</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Prints the page</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Print Setup</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Sets the print</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Close</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Closes the page</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Add icon</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<I><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">List of libraries</I></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Retrieves an icon from the selected chosen libraries</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Edit</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Duplicate</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Duplicates a selected object (both foreground and background objects are considered)</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Delete</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Deletes a selected object (as above)</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Cut</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Removes and stores in buffer a selected object (as above)</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Copy</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Copies from buffer a selected object (as above)</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Paste</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Instantiate in objects stored in buffer</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Foreground</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Edit operation on the foreground objects only</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Cut</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Copy</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Paste</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Background</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Operation on the background only</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Cut</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Copy</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Paste</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Put bottom</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Put top</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Group</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Ungroup</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Configure</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Resource editor</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Calls the Resource Editor for the selected object</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Draw Background</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Draw</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Calls the Draw Editor for background drawing</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Compile</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Page</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Compiles the page for animation</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Regulation</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Compiles the regulation page (topological elaboration)</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Page Error View</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Shows page's compilation errors </FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Regulation Error View </FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Shows regulation's page compilation errors </FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Option</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Grid</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Display/cancel background grid</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Zoom</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Selects zoom factor: 100,200,300,400 %</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Set SnapError</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Selects Snap value: 5,10,15,other,off</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Connect mode</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Sets the connect modality for regulation pages</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Set Visual Mode</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Sets the displaying modalities of Display reg, Port, Interface port</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Refresh window</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Refreshes the page</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The Edit pulldown menu is also available as a pop-up menu by pressing the third mouse button .</P>
+<P ALIGN="JUSTIFY">A foreground object can be selected by clicking the first mouse button on the unmanage rectangle which represents the selection area or by dragging the mouse. If the user has selected, with the second modality, both background and foreground objects he can do a selective copy operation by using the copy-cut-paste options of the Background (to work only on background objects) and the Foreground (to work only on foreground objects) Edit's pulldown menu.</P>
+<P ALIGN="JUSTIFY">On the page the following modalities of displaying are available:</P></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=403>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="27%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Display reg</B></FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Port</B></FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Interface Port</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Unmanage</B></FONT></TD>
+<TD WIDTH="27%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">X</B></FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">X</B></FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">X</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Manage</B></FONT></TD>
+<TD WIDTH="27%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">X</B></FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">X</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Tag</B></FONT></TD>
+<TD WIDTH="27%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">X</B></FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">X</B></FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">X</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Module</B></FONT></TD>
+<TD WIDTH="27%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">X</B></FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Value</B></FONT></TD>
+<TD WIDTH="27%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">X</B></FONT></TD>
+<TD WIDTH="15%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Drawing area:</P>
+</B><P ALIGN="JUSTIFY">where built the drawing</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="PageDefinitionLayout"><A NAME="PageDefinition"></A></A>Configuration layout: page or regulation definition window</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">When the creation of a page or scheme is required LEGOMMI displays a dialog page gathering geometrical and other information.</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image93.gif" WIDTH=480 HEIGHT=644></P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=568>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><FONT FACE="Arial, helvetica" SIZE=2>Page name</FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP" COLSPAN=5>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Page name</FONT></TD>
+</TR>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Description</FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP" COLSPAN=5>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Page description</FONT></TD>
+</TR>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Page type</FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP" COLSPAN=5>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">"Synoptic", "Station" or "Regulation" </FONT></TD>
+</TR>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Regulation scheme</FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP" COLSPAN=5>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">In use or not in use to avoid the insertion of the scheme in library (schemi_reg.a), in the file (lista_schemi.dat) and in the regulation task during construction.</FONT></TD>
+</TR>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Refresh frequency</FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP" COLSPAN=5>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Time internal (ms) between page refresh cycles</FONT></TD>
+</TR>
+<TR><TD WIDTH="70%" VALIGN="TOP" COLSPAN=4>
+<I><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Window size and position</I></FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP" COLSPAN=2>
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="47%" VALIGN="TOP" COLSPAN=2>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">X</FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP" COLSPAN=4>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Window upper left X coordinate</FONT></TD>
+</TR>
+<TR><TD WIDTH="47%" VALIGN="TOP" COLSPAN=2>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Y</FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP" COLSPAN=4>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Window upper left Y coordinate</FONT></TD>
+</TR>
+<TR><TD WIDTH="47%" VALIGN="TOP" COLSPAN=2>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Width</FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP" COLSPAN=4>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Width of the window</FONT></TD>
+</TR>
+<TR><TD WIDTH="47%" VALIGN="TOP" COLSPAN=2>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Height</FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP" COLSPAN=4>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Height of the window</FONT></TD>
+</TR>
+<TR><TD WIDTH="80%" VALIGN="TOP" COLSPAN=5>
+<I><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Drawing area size and color</I></FONT></TD>
+<TD WIDTH="20%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="59%" VALIGN="TOP" COLSPAN=3>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Width</FONT></TD>
+<TD WIDTH="41%" VALIGN="TOP" COLSPAN=3>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Width of the drawing area</FONT></TD>
+</TR>
+<TR><TD WIDTH="59%" VALIGN="TOP" COLSPAN=3>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Height</FONT></TD>
+<TD WIDTH="41%" VALIGN="TOP" COLSPAN=3>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Height of the drawing area</FONT></TD>
+</TR>
+<TR><TD WIDTH="59%" VALIGN="TOP" COLSPAN=3>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Background</FONT></TD>
+<TD WIDTH="41%" VALIGN="TOP" COLSPAN=3>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Background color</FONT></TD>
+</TR>
+</TABLE>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="VarEditLayout"><A NAME="VarEdit"></A></A>Configuration layout: Variable Editor</P>
+</B></FONT><P ALIGN="JUSTIFY">Model selection window:</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image85.gif" WIDTH=478 HEIGHT=414></P>
+<P ALIGN="JUSTIFY">Block selection window:</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image94.gif" WIDTH=425 HEIGHT=479></P>
+<P ALIGN="JUSTIFY">Variable selection window:</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image95.gif" WIDTH=406 HEIGHT=283></P>
+<P ALIGN="JUSTIFY">Perturbation configuration window:</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image95.gif" WIDTH=406 HEIGHT=283></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ColorEditorLayout"><A NAME="ColorEditor"></A></A>Configuration layout: Color Editor</P>
+</B></FONT><P ALIGN="JUSTIFY">The "Color Editor" window:</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image96.gif" WIDTH=412 HEIGHT=492></P>
+<P ALIGN="JUSTIFY">The "Color map" window:</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image97.gif" WIDTH=232 HEIGHT=295></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="FontEditorLayout"></A>Configuration layout: Font Editor</P>
+</B></FONT><P ALIGN="JUSTIFY">The Font Editor window is displayed in the following figure:</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image98.gif" WIDTH=477 HEIGHT=364></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="DrawEdityorLayout"></A>Configuration layout: Draw Editor</P>
+</B></FONT><P ALIGN="JUSTIFY">The Draw Editor window is displayed in the following figures:</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image99.gif" WIDTH=477 HEIGHT=178></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Fig. 1</P>
+</B><P ALIGN="JUSTIFY">Draw Editor pulldown menu:</P></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=424>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>File</B></FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Save</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Saves the file (only for "Draw on icon")</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Save as</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Saves the file with another name (only for "Draw on icon")</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Exit</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Exits Draw</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Edit</B></FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Actives only for "Draw on icon", analog operation for Draw on Page are available on Page pulldown menu.</I></FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Duplicate</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Cut</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Copy</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Paste</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Delete</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Select all</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Put top</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Put the selected object in foreground position in respect to the other</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Put Bottom</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Put the selected object in background position in respect to the other</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Group</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Groups selected objects in a single "group" obj; the resulted obj can be proportionally resized</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Ungroup</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Ungroups a "group" obj; components obj can be accessed one by one</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Modify obj</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">View</B></FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Zoom. Actives only for "Draw on icon", analog operation for Draw on Page are available on Page pulldown menu</I></FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Normal View</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">200%</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">400%</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">800%</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Grid</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Draw</B></FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Group</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Groups some select objects</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Ungroup</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Ungroups some select objects</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Filled</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Filles selected objects</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Line Stile</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Chooses from: <I>Solid</I>, <I>Dashed</I>, <I>Line dot</I></FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Line Width</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Chooses from: <I>Thin</I>, <I>D1,2,3,6, other</I> (pixel)</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Snap</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Chooses from: <I>5,10,15,other,Snap off</I></FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Color</B></FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Edit Color</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Calls the Color Editor</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></BODY>
+</HTML>

@@ -1,0 +1,10 @@
+mex LegoCli.c -DCLI0 -output LegoCli
+mex LegoCli.c -DCLI1 -output LegoCli1
+mex LegoCli.c -DCLI2 -output LegoCli2
+mex LegoCli.c -DCLI3 -output LegoCli3
+mex LegoCli.c -DCLI4 -output LegoCli4
+mex LegoCli.c -DCLI5 -output LegoCli5
+mex LegoCli.c -DCLI6 -output LegoCli6
+mex LegoCli.c -DCLI7 -output LegoCli7
+mex LegoCli.c -DCLI8 -output LegoCli8
+mex LegoCli.c -DCLI9 -output LegoCli9

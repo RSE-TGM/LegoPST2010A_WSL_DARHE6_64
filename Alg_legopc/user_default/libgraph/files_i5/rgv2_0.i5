@@ -1,0 +1,48 @@
+RGV2
+
+RGV2 - Automatic Voltage Regulator                                              
+2
+1
+
+t3
+VMMA FAMA QATT QREA IFLD ____ ____ ____ ____ ____ 
+1 1 1 1 1 0 0 0 0 0 
+t4
+VF00 
+1 
+
+3
+5
+7
+
+VOEX US
+STATO DEL LIMITATORE SOVRAECCITAZIONE                          
+VUEX US
+STATO DEL REGOLATORE SOTTOECCITAZIONE                          
+VF11 US
+STATO DEL REGOLATORE AUTOMATICO DI TENSIONE                    
+VOE1 UA
+SEGNALE POST CEILING LIMITATORE SOVRAECCITAZIONE               
+VUE1 UA
+SEGNALE POST CEILING LIMITATORE SOTTOECCITAZIONE               
+VRIF UA
+SEGNALE DI RIFERIMENTO POST LIMITATORI                         
+VFAC UA
+TENSIONE DI ECCITAZIONE ANTE CEILING                           
+VF00 UA
+TENSIONE DI ECCITAZIONE                                        
+VMMA IN
+MODULO TENSIONE GENERATORE                                     
+FAMA IN
+FASE TENSIONE GENERATORE                                       
+QATT IN
+POTENZA ATTIVA EROGATA DAL GENERATORE                          
+QREA IN
+POTENZA REATTIVA EROGATA DAL GENERATORE                        
+IFLD IN
+CORRENTE DI ECCITAZIONE                                        
+VRF0 IN
+TENSIONE DI RIFERIMENTO                                        
+VPS0 IN
+SEGNALE STABILIZZANTE                                          
+

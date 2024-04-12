@@ -1,0 +1,114 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_tg"></A>Turbogas plants and related modules</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>Abstracts of the user documentation of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_tg"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_tgascoaf"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The air compressor</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_tgascpaf"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The combustion chamber</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_tgastpaf"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The gas turbine</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_tgascoaf"></A>Turbogas plants and related modules: the air compressor</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The model simulates a gas turbine axial compressor with the following features:</P>
+<P ALIGN="JUSTIFY">the "choke flow" phenomenon is taken into account;</P>
+<P ALIGN="JUSTIFY">the "surge" conditions are identified;</P>
+<P ALIGN="JUSTIFY">the isentropic efficiency is depending on the compression ratio;</P>
+<P ALIGN="JUSTIFY">the model of a bypass valve is included to be used during the start up to reduce the delivery air flow rate and consequently keep lower the pressure inside the furnace.</P>
+<P ALIGN="JUSTIFY">The following three dimensionless quantities must be defined:</P>
+<P ALIGN="JUSTIFY">flow number:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image654.gif" WIDTH=90 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">compression ratio:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image655.gif" WIDTH=97 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">blade Mach number:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image656.gif" WIDTH=113 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The equations are:</P>
+<P ALIGN="JUSTIFY">1.&#9;total mass flow rate can be calculated from the following formula:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image657.gif" WIDTH=230 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">a)&#9;x</FONT><FONT FACE="Arial, helvetica" SIZE=1>0</FONT><FONT FACE="Arial, helvetica"> measures how much the value of x=b/b</FONT><FONT FACE="Arial, helvetica" SIZE=1>nom</FONT><FONT FACE="Arial, helvetica"> is greater than the choke flow value</P>
+<P ALIGN="JUSTIFY">b)&#9;A</FONT><FONT FACE="Arial, helvetica" SIZE=1>IGV</FONT><FONT FACE="Arial, helvetica"> is the inlet guide vanes cross-section area (function of servomotor position or of the inlet guide vanes rotation angle, &#9;depending on the compressor type)</P>
+<P ALIGN="JUSTIFY">2.&#9;the air entering the compressor</FONT> <FONT FACE="Symbol">G</FONT><FONT FACE="Arial, helvetica" SIZE=1>air</FONT><FONT FACE="Arial, helvetica"> is the total mass flow rate</FONT> <FONT FACE="Symbol">G</FONT><FONT SIZE=1>air,IN</FONT> <FONT FACE="Arial, helvetica">minus the bypass mass flow rate</FONT> <FONT FACE="Symbol">G</FONT><FONT SIZE=1>byp</FONT>:</P>
+<P ALIGN="CENTER"><IMG SRC="Image658.gif" WIDTH=130 HEIGHT=25></P><DIR>
+<DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where the bypass mass flow rate is calculated using the Stodola law:</P></DIR>
+</DIR>
+
+</FONT><P ALIGN="CENTER"><IMG SRC="Image659.gif" WIDTH=240 HEIGHT=54></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">3.&#9;the outlet temperature is function of the outlet enthalpy, which is, in turn, calculated from the isentropic efficiency parameter:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image660.gif" WIDTH=306 HEIGHT=60></P><DIR>
+<DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">relation depending on nominal efficiency and on two coefficients which depend on the characteristics of the used compressor</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">4.&#9;pressure and enthalpy of the bypass valve are calculated using simplified linear relationships:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image661.gif" WIDTH=172 HEIGHT=25>&#9;<IMG SRC="Image662.gif" WIDTH=188 HEIGHT=25></P><DIR>
+<DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the latter equation supposes that the isentropic efficiency of the first compressor stages (up to the bypass valve) is the same as the one of the entire compressor</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">5.&#9;mechanical absorbed power is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image663.gif" WIDTH=281 HEIGHT=25></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_tgascpaf"></A>Turbogas plants and related modules: the combustion chamber</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The main features of the model are:</P>
+<P ALIGN="JUSTIFY">two control volumes, related to the cold chamber and the combustion hot chamber, in which the energy and mass accumulation phenomena are neglected;</P>
+<P ALIGN="JUSTIFY">two pressure nodes corresponding to the control volumes;</P>
+<P ALIGN="JUSTIFY">the fuel feed system dynamics is represented through a zero / pole transfer function;</P>
+<P ALIGN="JUSTIFY">the combustion delay is taken into account by means of a first order transfer function;</P>
+<P ALIGN="JUSTIFY">the thermal exchange between the hot chamber walls and the internal flue gas, as well as that one with the external environment are represented.</P>
+<P ALIGN="JUSTIFY">The combustion chamber is constituted by two control volumes: a cold chamber receiving the compressor air and a hot chamber in which the combustion takes place. The compressed air flows from the former to the latter through a grid, modelled as a pressure drop.</P>
+<P ALIGN="JUSTIFY">The model equations are the following:</P>
+<P ALIGN="JUSTIFY">1.&#9;metal energy conservation</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image664.gif" WIDTH=357 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">2.&#9;pressure drop through the grid (Stodola’s law):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image665.gif" WIDTH=166 HEIGHT=46></P><DIR>
+<DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where p</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN</FONT><FONT FACE="Arial, helvetica"> is the cold chamber pressure and p</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX</FONT><FONT FACE="Arial, helvetica"> the hot chamber pressure</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">3.&#9;energy balance in the hot chamber:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image666.gif" WIDTH=348 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image667.gif" WIDTH=116 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image668.gif" WIDTH=168 HEIGHT=34></P>
+<P ALIGN="CENTER"><IMG SRC="Image669.gif" WIDTH=166 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">4.&#9;a delay time between fuel inlet and burning fuel is taken into account as a first order transfer function:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image670.gif" WIDTH=156 HEIGHT=44></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Moreover a combustion efficiency is considered. Finally, the effective burning fuel mass flow rate is obtained as the minimum between the so obtained mass flow rate and the stoichiometric flow rate.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_tgastpaf"></A>Turbogas plants and related modules: the gas turbine</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The main features of the model are:</P>
+<P ALIGN="JUSTIFY">the flow is evaluated by Stodola's law;</P>
+<P ALIGN="JUSTIFY">the isentropic efficiency is depending on the expansion ratio;</P>
+<P ALIGN="JUSTIFY">the thermal exchange between flue gas and metal of blades, rotor, stator and casing is supposed to be concentrated at the turbine inlet.</P>
+<P ALIGN="JUSTIFY">the thermal storage in the mechanical parts is not taken into account.</P>
+<P ALIGN="JUSTIFY">The equations are the following ones:</P>
+<P ALIGN="JUSTIFY">1.&#9;Stodola’s efflux law to calculate inlet pressure:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image671.gif" WIDTH=168 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where in case of sonic conditions, p</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX</FONT><FONT FACE="Arial, helvetica"> is substituted by the value provided by the sonic ratio</P>
+<P ALIGN="JUSTIFY">2.&#9;the thermal exchange between flue gas and casing (supposed to occur at turbine inlet for simplicity):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image672.gif" WIDTH=254 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the thermal exchange coefficient between walls and flue gas is calculated by means of the following formula:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image673.gif" WIDTH=138 HEIGHT=36></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">3.&#9;calculation of the turbine efficiency ratio:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image674.gif" WIDTH=357 HEIGHT=121></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">4.&#9;the generated mechanical power is calculated as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image675.gif" WIDTH=142 HEIGHT=25></P></BODY>
+</HTML>

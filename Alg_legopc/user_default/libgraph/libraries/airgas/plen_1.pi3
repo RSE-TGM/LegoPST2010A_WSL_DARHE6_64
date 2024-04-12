@@ -1,0 +1,23 @@
+PLEN_1                                                                          
+PLEN                                                                            
+PLEN - Air-gas manifold of a flue gas path                                      
+                                                                                
+NSTAT = 2
+NUSCI = 0
+NINGR = 9
+ 
+NCONF = 1
+ 
+PFPL      --US-- FLUID PRESSURE IN THE PLENUM                                   
+TFPL      --US-- FLUID TEMPERATURE AT THE PLENUM OUTLET                         
+WE_1      --IN-- FLUID FLOW RATE INTO THE PLENUM N.  1                          
+WE_2      --IN-- FLUID FLOW RATE INTO THE PLENUM N.  2                          
+WE_3      --IN-- FLUID FLOW RATE INTO THE PLENUM N.  3                          
+WU_1      --IN-- FLUID FLOW RATE FROM THE PLENUM N.  1                          
+WU_2      --IN-- FLUID FLOW RATE FROM THE PLENUM N.  2                          
+WU_3      --IN-- FLUID FLOW RATE FROM THE PLENUM N.  3                          
+TE_1      --IN-- TEMPERATURE OF THE FLUID ENTERING THE PLENUM N.  1             
+TE_2      --IN-- TEMPERATURE OF THE FLUID ENTERING THE PLENUM N.  2             
+TE_3      --IN-- TEMPERATURE OF THE FLUID ENTERING THE PLENUM N.  3             
+==============================                                                  
+EOF                                                                             

@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>States of the simulator</TITLE>
+<META NAME="subject" CONTENT="Documentazione BI Puertollano">
+<META NAME="doccomm" CONTENT="Documentazione relativa alla prima release, consegnata in aprile 96. Vedere sp_bist.doc per specifica completa.">
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_st_main"><A NAME="_Toc317929140"><A NAME="_Toc353674618"><A NAME="_Toc353686246"><A NAME="_Toc353756015"><A NAME="_Toc353769395"><A NAME="_Toc353775528"><A NAME="_Toc353787400"><A NAME="_Toc353787604"><A NAME="_Toc353789904"><A NAME="_Toc331818982"><A NAME="_Toc331993476"><A NAME="_Toc331993691"></A>States </A></A></A></A></A></A></A></A></A>of the simulator</P>
+<P>&nbsp;<IMG SRC="Image1307.gif" WIDTH=388 HEIGHT=313></P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>Stop</A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>This is the transitory state indicating that the simulator is initializing.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353686248"><A NAME="_Toc353756017"><A NAME="_Toc353769397"><A NAME="_Toc353775530"><A NAME="_Toc353787402"><A NAME="_Toc353787606"><A NAME="_Toc353789906"></P>
+<P>Freeze</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>In this state the simulator tasks are active but not running. The simulation time is not incremented and the automatic functions of the Instructor Station are not executed. </P>
+<P>It is possible to switch to a different state (but REPLAY).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353686249"><A NAME="_Toc353756018"><A NAME="_Toc353769398"><A NAME="_Toc353775531"><A NAME="_Toc353787403"><A NAME="_Toc353787607"><A NAME="_Toc353789907"></P>
+<P>Run</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The simulator tasks are running and the Instructor Station executes the automatic functions: backtrack snapshots, continuos recording, commands recording.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353686250"><A NAME="_Toc353756019"><A NAME="_Toc353769399"><A NAME="_Toc353775532"><A NAME="_Toc353787404"><A NAME="_Toc353787608"><A NAME="_Toc353789908"></P>
+<P>Backtrack</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The simulator tasks are not running and the Instructor Station does not execute the automatic functions. </P>
+<P>From BACKTRACK state it is possible to load the snapshots automatically recorded or initialize the replay function.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353686251"><A NAME="_Toc353756020"><A NAME="_Toc353769400"><A NAME="_Toc353775533"><A NAME="_Toc353787405"><A NAME="_Toc353787609"><A NAME="_Toc353789909"></P>
+<P>Replay</A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>In this state, reached from the BACKTRACK state, it’s possible to "replay" one of the recorded sessions or part of that. The models run like in the RUN state but the inputs coming from the operator are inhibited. Starting from the loaded backtrack snapshot, all of the actions previously recorded (of both the instructor and the operator) are proposed to the simulator at the appropriate time.</P>
+<P>&nbsp;</P></FONT></BODY>
+</HTML>

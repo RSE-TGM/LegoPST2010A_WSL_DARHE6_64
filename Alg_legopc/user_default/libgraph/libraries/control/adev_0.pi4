@@ -1,0 +1,29 @@
+ADEV_0                                                                          
+ADEV                                                                            
+ADEV - Signals switch                                                           
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 3
+ 
+NCONF = 1
+ 
+UDEV      --UA-- ANALOG SIGNAL DEFLECTOR OUTPUT                                 
+I1DE      --IN-- SIGNAL ONE DEFLECTOR INPUT                                     
+I2DE      --IN-- SIGNAL TWO DEFLECTOR INPUT                                     
+JDEV      --IN-- DEFLECTOR POSITION (0 = SIGNAL 1, 1 = SIGNAL 2)                
+==============================                                                  
+EOF                                                                             
+4
+t0 6
+INGRESSO ATTUAZIONE
+I1DE
+t1 6
+INGRESSO ATTUAZIONE
+I2DE
+t3 6
+INGRESSO ATTUAZIONE
+JDEV
+t2 7
+USCITA ATTUAZIONE
+UDEV

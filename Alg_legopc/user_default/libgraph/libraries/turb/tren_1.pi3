@@ -1,0 +1,25 @@
+TREN_1                                                                          
+TREN                                                                            
+TREN - Steam turbine stage                                                      
+                                                                                
+NSTAT = 0
+NUSCI = 6
+NINGR = 7
+ 
+NCONF = 1
+ 
+HUTZ      --UA-- FLUID ENTHALPY AT THE REACTION STAGE OUTLET                    
+WUTZ      --UA-- STEAM FLOW RATE AT THE REACTION STAGE OUTLET                   
+PITZ      --UA-- STEAM PRESSURE AT THE REACTION STAGE INLET                     
+QMEC      --UA-- MECHANICAL POWER OF THE REACTION TURBINE STAGE                 
+PSPZ      --UA-- STEAM PRESSURE AT BLEEDING OUTLET                              
+HSPZ      --UA-- STEAM ENTHALPY AT BLEEDING OUTLET                              
+WITZ      --IN-- STEAM FLOW RATE AT THE REACTION STAGE INLET                    
+WSPZ      --IN-- FLOW RATE OF STEAM BLED FROM THE REACTION TURB. STAGE          
+HITZ      --IN-- STEAM ENTHALPY AT THE REACTION STAGE INLET                     
+PUTZ      --IN-- STEAM PRESSURE AT THE REACTION STAGE OUTLET                    
+SERC      --IN-- LOAD REJECTION OR TRIP SIGNAL                                  
+SEAV      --IN-- STARTING BUTTON OF THE REACTION TURBINE                        
+RPMV      --IN-- ROTATIONAL SPEED OF THE REACTION TURBINE                       
+==============================                                                  
+EOF                                                                             

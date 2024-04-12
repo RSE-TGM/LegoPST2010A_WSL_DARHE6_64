@@ -1,0 +1,130 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE SERA</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERA_summ"></A>MODULE SERA&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I><P>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERA_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERA_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERA_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERA_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERA_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERA_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERA_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERA_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_SERA_A"></A>MODULE SERA&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">COMPRESSED AIR TANK</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The SERA module simulates a cavity where gas is let in from one or more ducts and exhausted to one or more other ducts. The number of inlet and outlet ducts is selected by the user. In this element, the mass accumulation phenomenon is prevailing.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Main module basic hypothesis are :</P>
+<P>-&#9;non adiabatic cavity walls</P>
+<P>-&#9;thermal accumulation inside cavity walls</P>
+<P>-&#9;gas inside the volume perfectly mixed, such to consider its temperature as uniform.</P>
+<P>-&#9;the perfect gas law applies to the fluid inside the cavity.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Equations used are:</P>
+<P>1)&#9;gas energy conservation equation</P>
+<P>2)&#9;gas mass conservation equation.</P>
+<P>3)&#9;energy balance of cavity metallic wall</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module maintains its validity in case of flow inversion in the inlet and/or outlet ducts.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERA_B"></A>MODULE SERA&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">i = 1, 2, ..., NE (number of inlet pipes)</P>
+<P ALIGN="JUSTIFY">j = 1, 2, ..., NU (number of outlet pipes)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image390.gif" WIDTH=376 HEIGHT=178></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>[kg/s]&#9;&#9;WI_i&#9;&#9;gas flow at tank inlet from i-th duct</P>
+<P>[K]&#9;&#9;TI_i&#9;&#9;gas temperature at tank inlet from i-th duct</P>
+<P>[kg/s]&#9;&#9;WU_j&#9;&#9;gas flow rate at ordinary outlet from tank to j-th duct</P>
+<P>[K]&#9;&#9;TU_j&#9;&#9;gas ordinary outlet temperature with flow inversion </P>
+<P>[K]&#9;&#9;TEST&#9;&#9;external temperature</P>
+<P>[W/m²K]&#9;XCSE&#9;&#9;tank - environment thermal exchange coefficient</P>
+<P>[Pa]&#9;&#9;PSER&#9;&#9;pressure in tank</P>
+<P>[K]&#9;&#9;TFPL &#9;&#9;tank metallic wall temperature</P>
+<P>[K]&#9;&#9;TSER&#9;&#9;gas temperature in the tank</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_SERA_C"></A>MODULE SERA&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In addition to initial values of input and output variables of the SERA module, whose meaning has been defined in Card B, the user must assign the following data to complete the input required by the module:</P>
+<P>[ ]&#9;&#9;N.TU.EN&#9;number of inlet ducts</P>
+<P>[ ]&#9;&#9;N.TU.US&#9;number of outlet ducts</P>
+<P>[m³]&#9;&#9;VolSer&#9;tank internal volume </P>
+<P>[m]&#9;&#9;DiamInt&#9;tank internal diameter</P>
+<P>[m] &#9;&#9;Spess&#9;&#9;tank wall thickness</P>
+<P>[kg/m³]&#9;DensMet&#9;density of tank wall material</P>
+<P>[J/kgK]&#9;CalSpMet&#9;specific heat of tank wall material</P>
+<P>[W/m²K]&#9;CoefScIn&#9;thermal exchange coefficient between tank wall and fluid contained in the tank itself (the default value is 300.)</P>
+<P>[ ]&#9;&#9;IGAS&#9;&#9;gas type: 1 for air, 2 for methane, 3 for hydrogen</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERA_D"></A>MODULE SERA&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>No particular prescription is required for initialization of SERA module variables.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERA_E"></A>MODULE SERA&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>No user’s subprograms are required for this module.</P>
+<P>The SERA module makes use of the procedures contained in the perfect gas thermodynamic tables (TAVGASPERF) which must be present in the user library.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERA_F"></A>MODULE SERA&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">To show the expressions of the solving residuals is not very enlightening; for that, it should need other explications, that should ask to go back in the mathematical model, but it goes beyond the scope of this document: for the user, it will be enough take note that the three residuals originated from the mathematical model, as already mentioned in Card A1, represent:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>-&#9;the time derivative of the gas pressure inside the tank;</P>
+<P>-&#9;the time derivative of the tank metal wall temperature;</P>
+<P>-&#9;the rime derivative of the gas temperature inside the tank.</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY">The evaluation of the 1st and the 3rd derivatives is performed inside the SERA module solving (internally) an algebraic system (obtained from the manipulation of the gas mass and energy conservation equations).</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERA_G"></A>MODULE SERA&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE SERAI3 (IFO,IOB,DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE SERAI4 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB, MOD, IBLOC, NE, NU)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE SERAI2 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE SERAC1 (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE SERA </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE SERAD1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERA_H"></A>MODULE SERA&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Test cases for SERA module are not yet defined.</P></FONT></BODY>
+</HTML>

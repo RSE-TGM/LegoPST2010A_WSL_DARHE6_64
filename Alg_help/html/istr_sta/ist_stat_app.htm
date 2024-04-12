@@ -1,0 +1,235 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Appendix</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Modelli\FBnew.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789954"><A NAME="_Toc353787702"><A NAME="_Toc353787498"><A NAME="_Toc353775626"><A NAME="ist_stat_app_main"></A>Appendix</A></A></A></A> </P>
+</B></FONT><P><A HREF="#ist_stat_app_envconf"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">User environment configuration</U></FONT></A></P>
+<P><A HREF="#ist_stat_app_intreset"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Interface resource settings</U></FONT></A></P>
+<P><A HREF="#ist_stat_app_mmiact"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">MMI activation</U></FONT></A></P>
+<P><A HREF="#ist_stat_app_manshut"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Manual shutdown</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789955"><A NAME="_Toc353787703"><A NAME="_Toc353787499"><A NAME="_Toc353775627"><A NAME="ist_stat_app_envconf"></A>User environment configuration</A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>The user environment is configured by executing the .profile file. The following is a sample of such a file.</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY"># modulo .profile </P>
+<P># tipo </P>
+<P># release 1.11</P>
+<P># data 94/12/23</P>
+<P># reserved @(#).profile&#9;1.11</P>
+<P>#</P>
+<P>#############################################################</P>
+<P>#</P>
+<P># Sezione dedicata alle variabili di LEGOCAD.</P>
+<P>#</P>
+<P>#############################################################</P>
+<P>#</P>
+<P># COMPLETARE !!!!!!!!!!!!!!!!!!!!!!!!!!! </P>
+<P>#</P>
+<P>export OLD_SKED="NO"</P>
+<P>export LEGOROOT="/usr/users/sked2"</P>
+<P>export LEGOSUP="."</P>
+<P>export EASEROOT=""</P>
+<P>export VERSIONE="-DENEL_CRA"</P>
+<P>export MOTIF_VER="11"</P>
+<P>export BANCO_FILES="." #directory per la memorizzazione files bi</P>
+<P>PS1='! $PWD&gt; '</P>
+<P>export PS1</P>
+<P>#</P>
+<P>#############################################################</P>
+<P>if [ -f /etc/scologin ]</P>
+<P>then</P>
+<P>export OS=SCO_UNIX</P>
+<P>fi</P>
+<P>if [ -d "$LEGOROOT" ]</P>
+<P>then </P>
+<P>if [ "$OS" != "SCO_UNIX" ]</P>
+<P>then</P>
+<P>&#9;echo DIRECTORY LEGOROOT: $LEGOROOT</P>
+<P>&#9;. $LEGOROOT/install/user.profile</P>
+<P>fi</P>
+<P>else</P>
+<P>&#9;echo DIRECTORY $LEGOROOT non ESISTENTE !!!!</P>
+<P>fi</P>
+<P>if [ -d "$LEGOSUP" ]</P>
+<P>then </P>
+<P>&#9;echo DIRECTORY LEGOSUP: $LEGOSUP</P>
+<P>&#9;export PATH=$PATH:$LEGOSUP/install</P>
+<P>else</P>
+<P>&#9;echo DIRECTORY $LEGOSUP non ESISTENTE !!!!</P>
+<P>fi</P>
+<P>if [ "$OS" = "AIX" ] </P>
+<P>then</P>
+<P>&#9;if [ -d "$EASEROOT" ]</P>
+<P>&#9;then </P>
+<P>&#9;&#9;echo DIRECTORY EASEROOT: $EASEROOT</P>
+<P>&#9;&#9;. $EASEROOT/install/user.profile</P>
+<P>&#9;else</P>
+<P>&#9;&#9;echo DIRECTORY $EASEROOT non ESISTENTE !!!!</P>
+<P>&#9;fi</P>
+<P>PATH=$PATH:$HOME/bin:.</P>
+<P>&#9;if [ $TERM = "hft" ]</P>
+<P>&nbsp;</P>
+<P>&#9;then</P>
+<P>&nbsp;</P>
+<P>&#9;open ksh</P>
+<P>&nbsp;</P>
+<P>&#9;open xinit # Lancio X_Window con parametri adeguati</P>
+<P>&nbsp;</P>
+<P>&#9;fi</P>
+<P>&nbsp;</P>
+<P>fi</P>
+<P>if [ "$OS" = "ULTRIX" ]</P>
+<P>then</P>
+<P>tty -s</P>
+<P>if test $? = 0</P>
+<P>then</P>
+<P>stty dec crt</P>
+<P>fi</P>
+<P>PATH=$PATH:$HOME/bin:/usr/ucb:/bin:/usr/bin:/usr/local/bin:/usr/new:/usr/hosts:.</P>
+<P>MAIL=/usr/spool/mail/$USER</P>
+<P>tset -n -I</P>
+<P>export TERM MAIL PATH</P>
+<P>biff n</P>
+<P>fi</P>
+<P>if [ "$OS" = SCO_UNIX ]</P>
+<P>then</P>
+<P>if [ -z "$LOGNAME" ]; then</P>
+<P>LOGNAME=`logname` # name of user who logged in</P>
+<P>export LOGNAME</P>
+<P>fi</P>
+<P>PATH=$PATH:/usr/bin/X11:.</P>
+<P>MAIL=/usr/spool/mail/$LOGNAME # mailbox location</P>
+<P>export MAIL</P>
+<P>if [ -z "$PWD" ]; then</P>
+<P>PWD=$HOME # assumes initial cwd is HOME</P>
+<P>export PWD</P>
+<P>fi</P>
+<P>&nbsp;</P>
+<P>if [ -f $HOME/.kshrc -a -r $HOME/.kshrc ]; then</P>
+<P>ENV=$HOME/.kshrc # set ENV if there is an rc file</P>
+<P>export ENV</P>
+<P>fi</P>
+<P>&nbsp;</P>
+<P># use default system file creation mask (umask)</P>
+<P>&nbsp;</P>
+<P>#eval `tset -m ansi:ansi -m $TERM:\?${TERM:-ansi} -r -s -Q`</P>
+<P>&nbsp;</P>
+<P># If job control is enabled, set the suspend character to ^Z (control-z):</P>
+<P>case $- in</P>
+<P>*m*) stty susp '^z'</P>
+<P>;;</P>
+<P>esac</P>
+<P>&nbsp;</P>
+<P>set -o ignoreeof # don't let control-d logout</P>
+<P>&nbsp;</P>
+<P>case $LOGNAME in # include command number in prompt</P>
+<P>root) PS1="uc15_root_!# " ;;</P>
+<P>*) PS1="un15_$LOGNAME&gt; " ;;</P>
+<P>esac</P>
+<P>export PS1</P>
+<P>&nbsp;</P>
+<P>/usr/bin/prwarn # issue a warning if password due to expire</P>
+<P>&nbsp;</P>
+<P>fi</P>
+<P>if [ "$OS" = VMS -o "$OS" = OSF1 ]</P>
+<P>then</P>
+<P>echo spazio per personalizzazioni</P>
+<P>fi</P>
+<P># Inserire dopo questa linea, le eventuali modifiche dell'utente</P>
+<P># fine modifiche utente</P>
+<P>if [ "$OS" = OSF1 ]</P>
+<P>then</P>
+<P>&#9;export PATH=/usr/opt/ultrix/usr/bin:/usr/local/bin:$PATH</P>
+<P>export F_FLAGS="$F_FLAGS -synchronous_exceptions -g"</P>
+<P>export LEGOCAD_EMM=YES</P>
+<P>fi</P>
+<P>if [ $OS = "ULTRIX" ]</P>
+<P>then</P>
+<P>echo csh </P>
+<P>fi</P>
+<P>if [ "$OS" = VMS -o "$OS" = SCO_UNIX -o "$OS" = OSF1 ]</P>
+<P>then</P>
+<P>echo spazio per personalizzazione</P>
+<P>export LEGO_BACK=/usr/users/puerback</P>
+<P>fi</P>
+<P>export DEBUG=YES</P>
+<P>PATH=$PATH:$HOME/bin:.</P>
+<P>alias sim="cd ~/legocad/hps100NG"</P>
+<P>if [ $OS = "AIX" ]</P>
+<P>then</P>
+<P>&#9;xrdb -load .Xdefaults</P>
+<P>fi</P>
+</FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P><A NAME="_Toc353789956"><A NAME="_Toc353787704"><A NAME="_Toc353787500"><A NAME="_Toc353775628"></P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_app_intreset"></A>Interface resource settings</A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>When the user logs into the Instructor Station machine, the graphical environment is set up by the directive contained the .Xdefaults file located in the user home directory.</P>
+<P>The contents of this file is listed here.</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY">!Start of the Instructor Station configuration </P>
+<P>banco*Background: DarkSeaGreen</P>
+<P>banco*fontList: -*-courier-bold-r-*-*-14-*</P>
+<P>banco*masterMenu*labelStatusHead*fontList: -*-courier-bold-o-*-*-12-*</P>
+<P>banco*masterMenu*tastieraMaster*fontList: -*-courier-bold-o-*-*-14-*</P>
+<P>banco*masterMenu*labelStatus*fontList: -*-courier-bold-o-*-*-18-*</P>
+<P>banco*areaMessaggi.fontList: -*-courier-medium-r-*-*-12-*</P>
+<P>banco*attenzioneDialog*fontList: -*-courier-bold-r-*-*-20-*</P>
+<P>banco*previewSnap*viewRc*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*topLevelShell1*bulletinBoard1*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*selVar*form40*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*selVar*selByModelForm1*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*selVarCr*panedWindow1*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*selVar*panedWindow2*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*statisticsDisplay*drawingArea1*fontList: -*-courier-medium-r-*-*-12-*</P>
+<P>banco*selezMalf*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*initialCondition*IcRc*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*backtrackManagement*BtRc*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*scenarioMalf*scenMalfRc*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*optionSet*optionSetForm*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*optionSet*optSelectionMenu*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>banco*programLauncher*rowColumn4*fontList: -*-courier-bold-r-*-*-12-*</P>
+<P>!End of the Instructor Station configuration</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="_Toc353775629"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789957"><A NAME="_Toc353787705"><A NAME="_Toc353787501"><A NAME="ist_stat_app_mmiact"></A>MMI activation</A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>To activate the <B>mmi</B> interface on the instructor station machine:</P>
+<P>&nbsp;</P>
+<P>log in whit the same account used to startup the simulator</P>
+<P>change directory to the location where the mmi pages are located (i.e. $HOME/sked/cc_puerto/globpages)</P>
+<P>type <B>mmi &amp;</P>
+</B><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>Alternatively, a command such the following can be configured with the options interface:</P>
+<P>&nbsp;</P>
+<P>cd $HOME/sked/cc_puerto/globpages ; mmi &amp;</P>
+<P>&nbsp;</P>
+<P>This command will have the same effect of the previous procedure.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>To activate the <B>mmi</B> interface on a machine other the instructor station:</P>
+<P>&nbsp;</P>
+<P>log in the machine with the correct account</P>
+<P>change directory to the location where the mmi pages are located (i.e. $HOME/sked/cc_puerto/globpages)</P>
+<P>type <B>mmi &amp;</P>
+</B><P>&nbsp;</P>
+<P>The Host field of the Context.ctx file located in the mmi directory should contain the name of the machine running the simulation.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789958"><A NAME="_Toc353787706"><A NAME="_Toc353787502"><A NAME="_Toc353775630"><A NAME="ist_stat_app_manshut"></A>Manual shutdown</A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>Should the normal procedure fail to shutdown the simulator (due to UNIX problems), follow this manual list:</P>
+<P>&nbsp;</P>
+<P>log in whit the same account used to startup the simulator</P>
+<P>execute the command <B>killsim</P>
+</B><P>check if there are simulation process still active; if any, kill them using the <B>kill</B> UNIX function</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></FONT></BODY>
+</HTML>

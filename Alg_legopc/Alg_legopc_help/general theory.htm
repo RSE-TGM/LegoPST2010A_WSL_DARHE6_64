@@ -1,0 +1,1487 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>GENERAL THEORY</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p align="center"><blink><font color="#800000" size="5"><sup>General Theory</sup></font></blink></p>
+<p align="left"><font FACE="Arial">This documentation section is devoted to the
+LEGO numerical methods (used to solve modules equations) and to other
+theoretical generalities on process modules: fluids behaviour and
+thermodynamical properties, head losses, heat exchanging and mathematical models
+symbology (click on an item to examine the related documentation section):</font></p>
+<font FACE="Arial"><u>
+<p ALIGN="left"><a href="#Numerical">Numerical methods</a></u></p>
+<u>
+<p ALIGN="left"><a href="#TwoPhase">Two-phase flow models</a></u></p>
+<u>
+<p ALIGN="left"><a href="#watersteam">Water-steam and other fluids properties</a></u></p>
+<u>
+<p ALIGN="left"><a href="#PressureDrop">Pressure drop and heat transfer correlations</a></u></p>
+<u>
+<p ALIGN="left"><a href="#Symbols">Symbology used in the theoretical documentation</a></u></p>
+</font>
+<p><font FACE="Arial"></p>
+<blockquote>
+  <blockquote>
+  </blockquote>
+</blockquote>
+</font>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp;</p>
+<p align="left"><a name="Numerical"></a></p>
+<p align="center">NUMERICAL METHODS</p>
+<p align="left"><font FACE="Arial">The mathematical models developed to
+characterise various physical processes such as transient fluid flow, heat
+conduction and component models are comprised of a coupled set of partial
+differential equations, ordinary differential equations and algebraical
+equations.</p>
+<p ALIGN="left">An analytical solution does not exist for this equation set and
+the use of a numerical solution method is required.</p>
+<p ALIGN="left">The main topics of numerical solution methods and attendant
+assumption are shortly presented.</p>
+<p ALIGN="left">The differential equations must be replaced by &quot;finite
+difference&quot; equations with respect to the time and to the space, which are
+algebraical equations.</p>
+<p ALIGN="left">The algebraical equations may be obtained by two different
+routes:</p>
+<div align="left">
+  <!--mstheme--></font><table border="0" width="100%">
+    <tr>
+      <td width="5%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+        <p align="left"><font FACE="Symbol">*</font></p>
+      <!--mstheme--></font></td>
+      <td width="95%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+        <p ALIGN="left">the first method uses finite difference
+        representations of the partial differential equations (distributed
+        parameters equations);</font><!--mstheme--></font></td>
+    </tr>
+    <tr>
+      <td width="5%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+        <p align="left"><font FACE="Symbol">*</font></p>
+      <!--mstheme--></font></td>
+      <td width="95%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+        <p align="left"><font FACE="Arial">the second method derives the equations
+        by integrating the differential equation terms on a finite number of
+        control volumes, called cells (lumped parameters equations).</font></p>
+      <!--mstheme--></font></td>
+    </tr>
+  </table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</div>
+<p ALIGN="left"><font FACE="Arial">&nbsp;</font>The resultant equations can
+be identical in both cases if conservation-law-form differential equations are
+used with the first method.</p>
+<p ALIGN="left">The independent variables, namely &quot;time&quot; and
+&quot;space&quot;, can assume only a discrete and finite sequence of values,
+that is to say a calculation grid must be set.</p>
+<p ALIGN="left">The dependent variables will be computed only for these
+points and for these instants, which can be equally spaced (constant time step)
+or unequally spaced (variable time step).</p>
+<p ALIGN="left">When the first method is used, the finite difference
+approximation of the space derivatives (backward, forward or central difference)
+must be chosen.</p>
+<p ALIGN="left">When the second method is used, a &quot;staggered mesh&quot;
+computation grid for the control volumes is often adopted.</p>
+<p ALIGN="left">Two finite difference approximation for the time derivatives
+(backward or forward difference) are possible.</p>
+<p ALIGN="left">With the forward difference approximation the solution method
+is explicit, that is to say the solution at every point of the given time
+depends on the values of the solution at several points of the preceding time
+step.</p>
+<p ALIGN="left">A stability condition (Courant's condition) must be
+respected:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image86.gif" width="63" height="53"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">where:</p>
+<p ALIGN="left">c = sound speed</p>
+<font FACE="Symbol">
+<p ALIGN="left">D</font><font FACE="Arial">x = space step</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">D</font><font FACE="Arial">t = time step</p>
+</font>
+<p ALIGN="left">with the backward difference approximation the solution
+method is implicit, that is to say the solution at every point of the given time
+depends on the values of the solution at several close points of the same time
+step.</p>
+<p ALIGN="left">A simultaneous solution of the equation set is needed, but
+the stability of the method is always assured.</p>
+<p ALIGN="left">The solution method is generally a recursive method: for an
+explicit method the variables values at time t</font><font FACE="Arial" SIZE="1">i+1</font><font FACE="Arial">
+are computed using the values at the preceding time steps (t</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial">,
+t</font><font FACE="Arial" SIZE="1">i-1</font><font FACE="Arial">, etc.,
+multi-step methods) or at time t</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial">
+(single-step method). The multi-step methods are not popular because they are
+not self-starting.</p>
+<p ALIGN="left">Once that a system involving only ODE and algebraical
+equations is obtained, that system can, at least logically, be written in normal
+form:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image87.gif" WIDTH="115" HEIGHT="76"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">where:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> x is the vector of state
+variables</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> y is the vector of algebraic
+output variables</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> u is the vector of input
+variables</p>
+</font>
+<p ALIGN="left">Given a generical ODE:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image88.gif" width="68" height="43"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">a choosing a one-step method, it can be written as:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image89.gif" width="300" height="53"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">If <font FACE="Symbol">e</font> = 0 we have an explicit method,
+while for 0 &lt; <font FACE="Symbol">e</font> </font><font FACE="Symbol">£</font><font FACE="Arial">
+1 the method is implicit.</p>
+<p ALIGN="left">The convergence condition for the generic one-step method
+applied to a linear Cauchy problem:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image90.gif" width="171" height="76"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">is:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image91.gif" width="211" height="53"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">It’s easy to observe that if </font><font FACE="Symbol">e</font><font FACE="Arial">
+</font><font FACE="Symbol">³</font><font FACE="Arial"> 0.5 the method is
+A-stable (that is: it converges for any value of <font FACE="Symbol">D</font>
+t).</p>
+<p ALIGN="left">So, the standard LEGO discretization method is the trapezoidal
+rule:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image92.gif" WIDTH="275" HEIGHT="53"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">By applying the trapezoidal rule to the algebraic-differential
+system as above described, one gets:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image93.gif" width="348" height="126"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">which is a (non linear) system in the unknowns x</font><font FACE="Arial" SIZE="1">n+1</font><font FACE="Arial">
+and y</font><font FACE="Arial" SIZE="1">n+1</font><font FACE="Arial">:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image94.gif" WIDTH="145" HEIGHT="28"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">that will be solved with the Newton-Raphson method.</p>
+<p ALIGN="left">This one is an iterative method that consists of a Taylor series
+development to the first order around the point calculated at the previous k-th
+iteration:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image95.gif" width="316" height="33"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">where z</font><font FACE="Arial" SIZE="1">n+1</font><font FACE="Arial">
+is the unknowns vector at the n+1-th time step (union of the vectors x</font><font FACE="Arial" SIZE="1">n+1</font><font FACE="Arial">
+and y</font><font FACE="Arial" SIZE="1">n+1</font><font FACE="Arial">) and <b>J</b>
+is the jacobian matrix (the one of the first derivatives) calculated with the
+values of the previous (k-th) iteration. Calculating that formula k+1 and
+remembering that it must be:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image96.gif" width="101" height="33"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">one gets:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image97.gif" width="248" height="38"></p>
+</font><font FACE="Arial">
+<p ALIGN="left">A stop rule for the iterations is set by fixing a tolerance.
+This tolerance can be one only for the whole system of equations as all the
+equations are normalised. Default value for the tolerance is 1e-6.</p>
+<p ALIGN="left">As the calculation of the jacobian matrix (which should occur at
+each iteration) is very time expensive, one calculation of <b>J</b> is kept
+valid for more iterations insofar as convergence is guaranteed.</p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/genera1.gif" width="48" height="20"></a></p>
+<p align="left">&nbsp;</p>
+<p align="left"><a name="TwoPhase"></a></p>
+<p align="center">TWO PHASE - FLOW MODELS</p>
+<p ALIGN="left">The following descriptions of two-phase flow are widely used:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> thermodynamic equilibrium models
+(the phases are always in thermodynamic equilibrium conditions), then:</p>
+<blockquote>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> liquid is always saturated,</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> vapour is always saturated.</p>
+</blockquote>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> non-equilibrium models (the
+phases can be, during the transients, in non-equilibrium conditions), then:</p>
+<blockquote>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> liquid can be saturated, non
+saturated or with bubbles;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> vapour can be saturated or
+superheated.</p>
+</blockquote>
+</font>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">Various two-phase flow models can be distinguished:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> the two-fluid models</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> models based on imposed velocity
+profiles, depending on the choice of kinematic properties; there are:</p>
+<blockquote>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> no local relative velocity
+(homogeneous model, Bankoff model),</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> correlation for the relative
+velocity given by means of a slip ratio v</font><font FACE="Arial" SIZE="1">g</font><font FACE="Arial">/v</font><font FACE="Arial" SIZE="1">l</font><font FACE="Arial">
+(as a function of pressure and equilibrium quality), a weighted drift velocity U</font><font FACE="Arial" SIZE="1">gj</font><font FACE="Arial">
+and a distribution coefficient C</font><font FACE="Arial" SIZE="1">0</font><font FACE="Arial">
+(as a function of pressure and of the physical properties of the fluid,
+drift-flux or Zuber and Findlay model), and a void fraction (as a function of
+pressure and equilibrium quality, Martinelli and Nelson).</p>
+</blockquote>
+</font>
+<p ALIGN="left">&nbsp;</p>
+<blockquote>
+  <blockquote>
+  </blockquote>
+</blockquote>
+<p ALIGN="left">For applications in the industrial processes the more used
+two-phase models are:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> homogeneous equilibrium model (<u><a href="HEM%20link.htm" target="_blank">HEM</a></u>)</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> thermal equilibrium slip or <u><a href="Drift%20flux%20link.htm" target="_blank">Drift
+flux</a></u> (natural circulation and low pressure)</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> thermal non-equilibrium models
+with interaction between the phases given by empirical correlations.</font></p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/genera1.gif" width="48" height="20"></a></p>
+<p align="center">&nbsp;</p>
+<p align="left"><a name="watersteam"></a></p>
+<p align="center">WATER-STEAM AND OTHER FLUIDS PROPERTIES</p>
+</font><p><font FACE="Arial">The thermodynamic state of a fluid is completely determined
+by two independent intensive properties (for instance specific enthalpy and
+pressure). The dependent properties can be calculated by means of tables or by
+an analytical formulation.</p>
+<p>It is worthwhile to note that the various thermodynamic
+properties are not independent of each other. For example, when the pressure p
+and the temperature T are chosen as the independent variables of the
+formulation, then expressions, called derived function, for the specific volume,
+entropy, enthalpy and all other thermodynamic properties may be derived directly
+by partial differentiation of the so-called canonical function <i>g</i> = <i>g</i>(p;T),
+where <i>g</i> is the specific free enthalpy (Gibbs function). If the analytical
+formulation is presented in terms of these canonical functions, the
+thermodynamic consistency is maintained.</p>
+<p ALIGN="left">The most useful properties of a fluid are:</p>
+<font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> density (</font><font FACE="Symbol">r</font><font FACE="Arial">)</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> specific enthalpy (h)</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> specific entropy (s)</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> temperature (T)</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> viscosity (</font><font FACE="Symbol">m</font><font FACE="Arial">)</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> thermal conductivity (</font><font FACE="Symbol">l</font><font FACE="Arial">)</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> specific heat at constant
+  pressure (C</font><font FACE="Arial" SIZE="1">p</font><font FACE="Arial">)</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> the partial derivative of
+  density with respect to pressure (at constant entropy)</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> the partial derivative of
+  density with respect to entropy (at constant pressure)</p>
+  <p ALIGN="JUSTIFY"><a href="Water_steam%20link.htm" target="_blank"> Water-steam tables</a></p>
+  <p ALIGN="JUSTIFY"><a href="other%20fluids%20link.htm" target="_blank"> Other fluids
+  properties</a></p>
+  </font>
+<blockquote>
+  <blockquote>
+  <p ALIGN="center">&nbsp;&nbsp;&nbsp; <a href="#Top"><img border="0" src="images/genera1.gif" width="48" height="20"></a></p>
+  </font>
+  </blockquote>
+  </blockquote>
+<p>&nbsp;</p>
+<p><font FACE="Arial"> <a name="PressureDrop"></a>
+  </font></p>
+<font FACE="Arial">
+<p align="center">PRESSURE DROP AND HEAT TRANSFER CORRELATIONS</p>
+</font><p align="left"><font FACE="Arial">The two main fields requiring the usage of empirical
+correlations are friction coefficient and heat transfer coefficient calculation:
+  </font></p>
+<font FACE="Arial">
+    <p ALIGN="left"><a href="pressure%20drop%20link1.htm" target="_blank"> Correlations on
+    friction pressure drops for single-phase fluids</a></p>
+    <p ALIGN="left"><a href="pressure%20drop%20link2.htm" target="_blank"> Correlations on
+    friction pressure drops for two-phase flow</a></p>
+    <p ALIGN="left"><a href="pressure%20drop%20link3.htm" target="_blank"> Heat transfer
+    correlations for water-steam</a></p>
+    <p ALIGN="left"><a href="pressure%20drop%20link4.htm" target="_blank"> Heat transfer
+    regions for water-steam</a></p>
+    <p ALIGN="left"><a href="pressure%20drop%20link5.htm" target="_blank"> Heat transfer
+    correlations for flue gas</a></p>
+  </font><font FACE="Arial">
+<blockquote>
+  <blockquote>
+<blockquote>
+  <blockquote>
+  <p ALIGN="center"><a href="#Top"><img border="0" src="images/genera1.gif" width="48" height="20"></a></p>
+  </blockquote>
+  </blockquote>
+    <p>&nbsp;</p>
+    <p><a name="Symbols"></a></p>
+<p align="center">LEGO MATHEMATICAL MODELS SYMBOLOGY</p>
+  </blockquote>
+  </blockquote>
+  </font><b><font FACE="Arial" SIZE="5">
+<p ALIGN="JUSTIFY">Symbols:</p>
+    </font></b>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  a</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ coefficient in pump, fan and compressor momentum equation</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  a</font><font FACE="Symbol" SIZE="1">h</font><font FACE="Arial" SIZE="1">
+  i</font><font FACE="Arial"> </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ coefficients in turbine stage efficiency equation</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  A</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ cross-section flow area</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  b</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ coefficient in fan momentum equation</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  B</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ body force</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  B</font><font FACE="Arial" SIZE="1">m</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  blade Mach number</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  c</font><font FACE="Arial" SIZE="1">v</font><font FACE="Arial">
+      </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  valve flow coefficient</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  C</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ torque</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  C</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ specific heat</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  C</font><font FACE="Arial" SIZE="1">L</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  longitudinal conductance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  C</font><font FACE="Arial" SIZE="1">p</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  specific heat at constant pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  C</font><font FACE="Arial" SIZE="1">T</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  thermal capacity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  C</font><font FACE="Arial" SIZE="1">V</font><font FACE="Arial">
+      </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  specific heat at constant volume</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  C</font><font FACE="Arial" SIZE="1">0</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  distribution coefficient (drift flux two-phase flow model)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  D</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  E</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ Young module</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  E</font><font FACE="Arial" SIZE="1">b</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  Total blackbody emitted flux</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  F</font><font FACE="Arial" SIZE="1">a</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  arrangement factor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  F</font><font FACE="Arial" SIZE="1">d</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  depth factor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  F</font><font FACE="Arial" SIZE="1">T</font><font FACE="Arial">
+      </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  temperature factor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  F</font><font FACE="Arial" SIZE="1">v</font><font FACE="Arial">
+      </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  view factor</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  g</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ gravity acceleration</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  <i>
+  g</i> </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ specific free enthalpy</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  G</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ specific mass flow rate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  h</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ specific enthalpy</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  h</font><font FACE="Arial" SIZE="1">LHV</font><font FACE="Arial">
+      </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  lower heating value of fuel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  H</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ head</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  i</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ index of cells or flows</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  j</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ index of cells or flows</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  j</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ velocity of the centre of volume (drift flux two-phase
+  flow model)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  k</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ coefficient</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  k</font><font FACE="Arial" SIZE="1">abs</font><font FACE="Arial">
+      </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  absorption coefficient (radiative heat transfer model)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  l</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ length</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  L</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ latent heat of vaporisation</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  m</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ molar mass</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  M</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ mass</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  n</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ exponent of isentropic expansion</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  N</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ number of cells or flows</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  <i>
+  N</i> </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ molar fraction</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  N</font><font FACE="Arial" SIZE="1">t</font><font FACE="Arial">
+      </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  number of parallel tubes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  Nu</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ Nusselt number</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  p</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  P</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ perimeter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  Pr</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ Prandtl number</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  q</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ volumetric flow rate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  Q</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ thermal power</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  Q</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ Imposed heat flux</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  r</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ radial coordinate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  R</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ universal gas constant</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  Re</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ Reynolds number</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  R</font><font FACE="Arial" SIZE="1">x</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  fractional reaction of a turbine stage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  s</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ specific entropy</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  S</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ thickness</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  S</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ radiative heat transfer area</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  S</font><font FACE="Arial" SIZE="1">d</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  direct exchange area</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  S</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial">S</font><font FACE="Arial" SIZE="1">j</font><font FACE="Arial">
+      </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  total exchange area</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  t</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ time</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  T</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ temperature</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  U</font><font FACE="Arial" SIZE="1">gj</font><font FACE="Arial">
+      </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  total drift velocity (drift flux two-phase flow model)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  v</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ speed</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  <i>
+  V</i> </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  mola</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  r</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ volume</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  V</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ volume</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  V</font><font FACE="Arial" SIZE="1">gj</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">local drift velocity (drift flux two-phase
+  flow model)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">x</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> axial abscissa</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">x</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> coordinate in a rectangular coordinates system</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  X</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ steam mass quality</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  X</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ mass fraction</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  X</font><font FACE="Arial" SIZE="1">V</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  volumetric quality</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  y</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ water level</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  y</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ coordinate in a rectangular coordinates system</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  z</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ elevation</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  z</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ coordinate in a rectangular coordinates system</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+  <blockquote>
+    <blockquote>
+    <font FACE="Arial">
+  </blockquote>
+</blockquote>
+</blockquote>
+</font><b><font FACE="Arial" SIZE="5">
+<p ALIGN="JUSTIFY">Greek letters:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  a</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> void fraction
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  a</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> exponent in the relationship
+  flow area vs. lift in the valve model
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  a</font><font FACE="Arial" SIZE="1">T</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  thermal dilatation coefficient
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  b</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> compression ratio
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  b</font><font FACE="Arial" SIZE="1">w</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  flat surface - real surface ratio
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  g</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> heat transfer coefficient
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  G</font><font FACE="Arial"> &nbsp;
+  </font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> mass flow rate
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  e</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> emissivity
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  e</font><font FACE="Arial" SIZE="1">z</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  axial dilatation for unit length
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  h</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> efficiency
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  J</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+  <p ALIGN="JUSTIFY"><font FACE="Arial"> valve lift (fraction of maximum
+  lift)</p>
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  l</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> thermal conductivity
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  l</font><font FACE="Arial" SIZE="1">opt</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  optical path length
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  m</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> dynamic viscosity
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  n</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> transverse contraction module
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  x</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> head loss coefficient
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  P</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> power
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  r</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> density
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  s</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> surface tension
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  s</font><font FACE="Arial" SIZE="1">rad</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  Stefan-Boltzmann constant
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  S</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> heat transfer surface area
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  t</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> time constant
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  t</font><font FACE="Arial" SIZE="1">sep</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  separation time
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  f</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> angular coordinate
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  F</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> compressor flow number
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  Y</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> internal power for unit volume
+  </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Symbol">
+  w</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"> rotational speed
+</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    </font></b><b><font FACE="Arial" SIZE="5">
+<p ALIGN="JUSTIFY">Subscripts:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  a
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ air
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  byp
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ bypass
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  comb
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ combustion
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  cond
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ condensation
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  cund
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ conduction
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  conv
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ convective
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  cool
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ cooling
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  csup
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ surface condensation
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  crit
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ critical
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  damp
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ damper
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  duct&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ duct
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  DR
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ drainage
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  DS
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ desuperheating
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  ext
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ external
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  EX
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ outlet
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  ev
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ evaporation
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  f
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ bottom
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  FILM
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ boundary layer
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  fl
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ fluid
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  frict
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ frictional
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  fr
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ friction
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  fuel
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ fuel
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  FW
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ feedwater
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  g
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ gas
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  h
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ hydraulic
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  IGV
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ inlet guide vanes
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  int
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ internal
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  IN
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ inlet
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  irr
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ irreversible
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  isl
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ steam-liquid interface
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  iso
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ isentropic
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  l
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ liquid
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  LO
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ liquid only
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  loss
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ local momentum losses
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  lum
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ luminous
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  m
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ mean
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  meas
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ measured
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  mec
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ mechanical
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  mix
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ mixing
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  mot
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ motive
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  nom
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ nominal working point
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  p
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ pump
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  r
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ reduced
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  rad
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ radiative
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  rec
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ recovery
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  recr&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ recirculation
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  res&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ resistance
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  rev
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ reversible
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  s
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ saturated
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  SB
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ subcooling
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  st
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ steam
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  sup
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ superheated
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  T&nbsp;
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ turbine
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  Tb
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ turbine stage bucket
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  Tn
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ turbine stage nozzle
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  th
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ throat
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  tr
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ transparent
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  uba
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ unburnt air
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  ubf
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ unburnt fuel
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  v
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ volumetric
+</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+  w
+</font><!--mstheme--></font></td>
+    <td width="91%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+ wall
+</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    </font></b>
+<blockquote>
+  <blockquote>
+    <blockquote>
+  </blockquote>
+</blockquote>
+</blockquote>
+<p align="center"><font FACE="Arial"><a href="#Top"><img border="0" src="images/genera1.gif" width="48" height="20"></a>
+  </font></p>
+<!--mstheme--></font></body>
+
+</html>

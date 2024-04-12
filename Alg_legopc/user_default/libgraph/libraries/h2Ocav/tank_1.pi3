@@ -1,0 +1,24 @@
+TANK_1                                                                          
+TANK                                                                            
+TANK - Water/steam drum boiler                                                  
+                                                                                
+NSTAT = 4
+NUSCI = 2
+NINGR = 6
+ 
+NCONF = 1
+ 
+PCAV      --US-- STEAM PRESSURE IN THE CAVITY                                   
+HVCA      --US-- STEAM ENTHALPY IN THE CAVITY                                   
+HLCA      --US-- WATER ENTHALPY IN THE CAVITY                                   
+MLCA      --US-- WATER MASS IN THE CAVITY                                       
+LIV%      --UA-- WATER LEVEL IN THE CAVITY                                      
+PFCA      --UA-- PRESSURE ON THE BOTTOM OF THE CAVITY                           
+WMIC      --IN-- FLOW RATE OF WATER-STEAM ON THE BOTTOM OF THE CAVITY           
+HMIC      --IN-- ENTHALPY OF WATER-STEAM AT THE INLET OF THE CAVITY             
+WAIC      --IN-- WATER FLOW RATE AT THE INLET OF THE CAVITY                     
+HAIC      --IN-- WATER ENTHALPY AT THE INLET OF THE CAVITY                      
+WVCA      --IN-- STEAM FLOW RATE AT THE OUTLET OF THE CAVITY                    
+WAUC      --IN-- WATER FLOW RATE AT THE OUTLET OF THE CAVITY                    
+==============================                                                  
+EOF                                                                             

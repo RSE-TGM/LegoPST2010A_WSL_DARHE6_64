@@ -1,0 +1,342 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>SENA</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE SENA</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE SENA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">OIL RESERVOIR</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">The SENA module simulates the behaviour of a cavity with free
+upper surface, where heavy or lubrificating oil is introduced from one or more
+inlet ducts and exhausted by one or more other ducts. In this element the
+thermal energy accumulation is taken into account.</p>
+<p ALIGN="left">Main module basic hypothesis are:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> fluid inside the volume perfectly
+mixed, such to consider as uniform the outlet temperature.</p>
+</font>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">Equations used are:</p>
+<p ALIGN="left">1) fluid energy conservation</p>
+<p ALIGN="left">2) fluid mass conservation</p>
+<p ALIGN="left">3) level equation, function of the constant section and of the
+volume of fluid</p>
+<p ALIGN="left">4) bottom pressure equation, function of fluid level and density</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE SENA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">NE = number of incoming ducts</p>
+<p ALIGN="JUSTIFY">NU = number of outgoing ducts</p>
+<p ALIGN="JUSTIFY">i = 1, ..., NE</p>
+<p ALIGN="JUSTIFY">j = 1, ..., NU</p>
+<p align="center"><img SRC="images/Image796.gif" width="374" height="178"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%" height="161">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WINi</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass flow rate from the i-th
+      inlet duct</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TINi</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid temperature at the i-th
+      inlet duct</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WUSj</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mass flow rate to the j-th
+      outlet duct</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PSUP</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">free surface pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="14"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="14"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TNAF</font><!--mstheme--></font></td>
+    <td width="72%" height="14"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid output temperature</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VOLF</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">volume of fluid in the tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LIVE</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid level</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PFON</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid pressure at the bottom</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE SENA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="left">In addition to the initial values of input and output variables
+of the SENA module, whose meaning has been defined in CARD B, the user must
+assign the following set of data:</p>
+<!--mstheme--></font><table border="0" width="100%" height="72">
+  <tr>
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TIPF</font><!--mstheme--></font></td>
+    <td width="72%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">index defining the type of oil
+      to be used</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">N.C.ENTR</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of inlet ducts</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SEZ</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cross section</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE SENA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">No particular prescription is required for initialization of
+SENA module variables.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE SENA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="left">No user’s subprograms are required for SENA module.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE SENA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">Residuals have the following expression:</p>
+<p ALIGN="left">RNI(1) = (SWHI - SWI*HU)/(MASS*CP*T0)</p>
+<p ALIGN="left">RNI(2) = (SWI - SWU)/(RO*VOL0)</p>
+<p ALIGN="left">RNI(3) = (LIVE - VOL/SEZ)/LIV0</p>
+<p ALIGN="left">RNI(4) = (PFON - PSUP - RO*9.81*LIVE)/DP0</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">where:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HU</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">oil enthalpy, determined by the
+      subprogram for the calculation of oil properties</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SWHI</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">sum of entering enthalpic flow rates</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SWI</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">sum of entering mass flow rate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SWU</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">sum of outlet mass flow rate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">MASS</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">oil mass in the tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RO</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">oil density</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LIVE</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">oil level in the tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VOL</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">oil volume in the tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SEZ</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cross (horizontal) section of the tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PFON</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">bottom pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PSUP</font><!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure at the free surface</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE SENA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">SUBROUTINE SENAI3(IFO,IOB,DEBL)</p>
+<p ALIGN="left">SUBROUTINE SENAI4(IOB,MOD)</p>
+<p ALIGN="left">SUBROUTINE SENAI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+<p ALIGN="left">$ IBL1,IBL2,IER,CNXYU,TOL)</p>
+<p ALIGN="left">SUBROUTINE SENAC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</p>
+<p ALIGN="left">SUBROUTINE SENA(IFUN,IXYU,XYU,IPD,DATI,RNI)</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE SENA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b>
+<font FACE="Arial">
+<p ALIGN="left">Reference test cases relevant to this module are in the manual
+section dedicated to examples carried out and marked with the tag:</p>
+<p ALIGN="center">&quot;HEAVY OIL CIRCUIT&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

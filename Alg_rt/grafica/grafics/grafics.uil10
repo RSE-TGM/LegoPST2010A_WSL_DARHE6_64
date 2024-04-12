@@ -1,0 +1,2185 @@
+!******************************************************************************
+! modulo grafics.uil10
+! tipo 
+! release 1.2
+! data 96/03/19
+! reserver @(#)grafics.uil10	1.2
+!******************************************************************************
+!*******************************************************************************
+! GRAFICS.UIL
+!     file .uil per l'applicativo graf:
+!******************************************************************************
+
+module grafici
+        version = 'v1.0'
+        names = case_sensitive
+
+include file 'XmAppl.uil';
+
+!
+! 	Callbacks functions utilizzate
+!
+
+procedure                                  
+        activate_proc (integer);
+	PostIt        (integer);
+        create_proc   (integer);
+        quit_proc     (string);
+	draw_proc     (integer);
+	resize_proc   (integer);
+	toggle_proc   (integer);
+	ok_proc       (integer);
+	cancel_proc   (integer);
+	apply_proc    (integer);
+	map_proc      (integer);
+	find_proc     (integer);
+        collima_proc  ();
+        secondi_proc();
+        zoomord_proc ();
+        memcollima_proc  ();
+        memzoomord_proc ();
+        memsecondi_proc();
+        zoom_proc     (integer);
+	HC_proc	      (integer);
+
+!
+!	Costanti per il riconoscimento delle window nelle callbacks
+! 	functions.
+!
+		
+value
+    k_form		    : 1;
+    k_popgraf               : 2;
+    k_popmis                : 3;
+    k_nyi                   : 4;
+    k_draw0                 : 5;  
+    k_draw1                 : 6;  
+    k_mis1                  : 7;  
+    k_tim1                  : 8;  
+    k_ord1                  : 9;  
+    k_draw2                 : 10;  
+    k_mis2                  : 11;  
+    k_tim2                  : 12;  
+    k_ord2                  : 13;  
+    k_val1                  : 14;
+    k_val2                  : 15;
+    k_tempo  		    : 16;
+    k_selmis_dialog			:20;	
+	k_toggle_mis1			:21;
+	k_toggle_mis2			:22;
+	k_toggle_mis3			:23;
+	k_toggle_mis4			:24;
+	k_selmis_box			:25;
+	k_selzoom_dialog		:26;
+	k_toggle_zoom1			:27;
+	k_toggle_zoom2			:28;
+	k_toggle_zoom3			:29;
+	k_toggle_zoom4			:30;
+	k_toggle_zoom5			:31;
+	k_umis_dialog			:32;
+	k_toggle_umis1			:33;
+	k_toggle_umis2			:34;
+	k_toggle_umis3			:35;
+	k_toggle_umis4			:36;
+	k_toggle2_mis1			:37;
+	k_toggle2_mis2			:38;
+	k_toggle2_mis3			:39;
+	k_toggle2_mis4			:40;
+	k_fsca_dialog			:41;
+	k_toggle3_mis1			:42;
+	k_toggle3_mis2			:43;
+	k_toggle3_mis3			:44;
+	k_toggle3_mis4			:45;
+	k_text_max			:46;
+	k_text_min			:47;
+	k_toggle_man                    :48;
+	k_toggle_auto                   :49;
+	k_selgr_dialog                  :50;
+	k_text_nomegr                   :51;
+	k_list_gr                       :52;
+	k_label_grmis1                  :53;
+	k_label_grmis2                  :54;
+	k_label_grmis3                  :55;
+	k_label_grmis4                  :56;
+	k_memgr_dialog 			:57;
+	k_list_memgr			:58;
+	k_text_memgr			:59;
+	k_find_text 			:65;
+	k_find_next			:66;
+	k_find_previous			:67;
+	k_selmis_elimina		:68;
+	k_defumis_dialog                :69;
+	k_list_defumis			:70;
+	k_toggle2_umis1			:71;
+	k_toggle2_umis2			:72;
+	k_toggle2_umis3			:73;
+	k_toggle2_umis4			:74;
+
+! solo per GRAFICS
+        k_dir_dialog                    :75;
+        k_text_dir1                     :76;
+        k_text_dir2                     :77;
+        k_text_dir3                     :78;
+        k_text_dir4                     :79;
+        k_toggle_dir1                   :80;
+        k_toggle_dir2                   :81;
+        k_toggle_dir3                   :82;
+        k_toggle_dir4                   :83;
+	k_grafici_menu_entry		:84;
+	k_misure_menu_entry		:85;
+!
+!   valori di flag per funzioni di zoom ( solo per GRAFICS)
+!
+        k_zoom_on                       :1;
+        k_zoom_off                      :0;
+value
+	kblank:				'                                ';
+        k_nyi_label_text                : 'Comando non ancora implementato';
+        k_file_label_text               : 'File';
+           k_dir_label_text            : 'Apertura file dati';
+           k_quit_label_text           : 'Quit';
+            k_HC_dot_label_text          : 'Hard Copy';
+		k_grafici_label_text     : 'Grafico';
+            k_zoom_dot_label_text        : 'Zoom';
+            k_nozoom_dot_label_text         : 'Ripristina';
+            k_scala_dot_label_text       : 'Scala Tempi';
+            k_selgra_dot_label_text      : 'Seleziona';
+            k_memgra_dot_label_text      : 'Memorizza';
+        k_misure_label_text              : 'Misura';
+            k_umis_dot_label_text        : 'Cambia U.Mis.';
+            k_fsca_dot_label_text        : 'Modifica fondo scala';
+            k_selmis_dot_label_text      : 'Seleziona';
+        k_def_label_text              : 'Defaults';
+            k_defumis_label_text              : 'Unita di misura';
+            k_collima_label_text             : 'Abilita collimazione';
+            k_zoomord_label_text              : 'Abilita zoom ordinate';
+            k_secondi_label_text              : 'Abilita tempo in secondi';
+
+
+! 
+!  stringhe di testo nelle dialog boxes
+!
+
+value
+	k_selmis_title		: 'Scelta singola variabile';
+	k_lista_mis_title	: 'Lista delle variabili';
+	k_text_mis_title	: 'Variabile scelta';
+	k_selgr_title		: 'Selezione gruppi';
+	k_defumis_title		: 'Defaults unita di misura';
+	k_fsca_title		: 'Modifica valori di fondo scala';
+	k_dir_title		: 'Selezione files dati';
+	k_label_next		: 'Prossima';
+	k_label_previous	: 'Precedente';
+	k_label_elimina		: 'Cancella';
+	k_apply_mis_title	: 'Inserisci';
+	k_selzoom_title		: 'Scelta intervallo visualizzato';
+	k_label_zoom1		: '30 minuti';
+	k_label_zoom2		: '15 minuti';
+	k_label_zoom3		: '6  minuti';
+	k_label_zoom4		: '2  minuti';
+	k_label_zoom5		: '1  minuto';
+	k_label_ok		: 'Ok';
+	k_label_conferma	: 'Conferma';
+	k_label_cancel		: 'Abbandona';
+	k_umis_title		: 'Scelta unita di misura';
+	k_selumis_label		: 'Unita di misura ammesse :';
+
+!
+!       Definizione fonts
+!
+value
+        bold : font('-ADOBE-Times-Bold-R-Normal--*-140-*-*-P-*-ISO8859-1');
+        normal : font ('-adobe-helvetica-medium-r-normal--17-120-100-100-p-88-iso8859-1');
+! Colors, color tables, and icons.
+
+value
+      white                           : color('white', background);
+      black                           : color('black', background);
+      blue                            : color('navy blue', background);
+      gray                            : color('light gray', background);
+
+! Colori per la visualizzazione delle misure
+
+value
+	mis1_color		: exported color ('light cyan',foreground);
+	mis2_color		: exported color ('yellow',foreground);
+	mis3_color		: exported color ('green',foreground);
+	mis4_color		: exported color ('white',foreground);
+
+!
+! Dimensionamenti delle windows utilizzate per la grafica
+!
+
+	value kx_main		: 10;
+	value ky_main		: 100;
+	value kw_main		: 1023;
+	value kh_main		: 455;
+
+	value ky_menu		: 50;
+
+	value ky_draw0	 	: 5;
+	value kw_draw0	 	: kw_main;
+	value kh_draw0		: 20;
+
+	value kx_draw1		: 10;
+	value ky_draw1		: (ky_draw0+kh_draw0+5);
+	value kw_draw1		: (720+180);
+	value kh_draw1		: 300;
+
+	value kx_ord1		: (kx_draw1+kw_draw1+20);
+	value ky_ord1		: (ky_draw1);
+	value kw_ord1		: (kw_main-kx_ord1-10);
+	value kh_ord1		: kh_draw1;
+	
+	value kx_tim1		: kx_draw1;
+	value ky_tim1		: (ky_draw1+kh_draw1);
+	value kw_tim1		: (kw_draw1);
+	value kh_tim1		: 25;
+
+	value kx_mis1		: kx_draw1;
+	value ky_mis1		: (ky_draw1+kh_draw1+kh_tim1);
+	value kw_mis1		: kw_draw1-150;
+	value kh_mis1		: 60;
+
+	value kx_val1		: (kx_draw1+kw_mis1);
+	value ky_val1		: (ky_draw1+kh_draw1+kh_tim1);
+	value kw_val1		: 150;
+	value kh_val1		: kh_mis1;
+
+	value kx_tempo 		: kx_ord1;
+	value ky_tempo		: ky_val1;
+	value kw_tempo		: kw_ord1;
+	value kh_tempo		: 20;
+
+
+!
+!       Posizioni relative nella Form della main window
+!
+
+        value k_horizontal_offset       : 15;
+        value k_vertical_offset         : 15;
+        value k_label_distance          : 20;
+        value k_button_distance         : 15;
+
+
+
+object                                  ! The main window widget.
+                                        ! This displays the current order
+                                        ! as it is taken.
+        S_MAIN_WINDOW : XmMainWindow {
+
+            arguments {
+                XmNx = kx_main;
+                XmNy = ky_main;
+                XmNwidth = kw_main;
+                XmNheight =kh_main;
+            };
+
+            controls {                  ! S_MAIN_WINDOW has two children.
+                XmMenuBar        s_menu_bar;
+		XmForm		 contenitore;
+            };
+	};
+!****************************************************************************
+!       Definizione Form e suoi controlli
+!
+object
+        contenitore  : XmForm
+        {
+           arguments {
+                       XmNhorizontalSpacing = k_horizontal_offset;
+                       XmNverticalSpacing   = k_vertical_offset;
+                       XmNwidth  = kw_main;
+                       XmNheight = kh_main;
+                       XmNbackground = gray;
+                      };
+             controls {
+                XmDrawingArea    draw0;
+                XmDrawingArea    draw1;
+                XmDrawingArea    mis1;
+                XmDrawingArea    ord1;
+                XmDrawingArea    tim1;
+                XmDrawingArea   tempo;
+                XmDrawingArea    val1;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_form);
+                };
+
+	};
+       
+
+object
+        draw0 : XmDrawingArea {
+
+                arguments {
+                XmNx = 0;
+                XmNy = ky_draw0;
+                XmNwidth = kw_draw0;
+                XmNheight =kh_draw0;
+                XmNbackground = blue;
+               XmNborderWidth = 0;
+               XmNmarginWidth = 0;
+               XmNmarginHeight = 0;
+		XmNrightAttachment= XmATTACH_FORM;
+		XmNrightOffset=kw_ord1+5+k_horizontal_offset;
+		XmNleftAttachment = XmATTACH_FORM;
+
+                        };
+        callbacks {
+            XmNexposeCallback = procedure draw_proc (k_draw0);
+            MrmNcreateCallback = procedure create_proc (k_draw0);
+                };
+        };
+!**********************************************************************
+!
+!  windows per il disegno dei grafici
+!
+
+
+object
+        draw1 : XmDrawingArea {
+                arguments {
+                XmNx = kx_draw1;
+                XmNy = ky_draw1;
+                XmNwidth = kw_draw1;
+                XmNheight =kh_draw1;
+		XmNleftAttachment = XmATTACH_FORM;
+		XmNtopAttachment= XmATTACH_WIDGET;
+		XmNtopOffset=5;
+		XmNtopWidget= XmDrawingArea draw0;
+		XmNbottomAttachment= XmATTACH_WIDGET;
+		XmNbottomOffset=1;
+		XmNbottomWidget= XmDrawingArea tim1;
+		XmNrightAttachment= XmATTACH_WIDGET;
+		XmNrightOffset=5;
+		XmNrightWidget= XmDrawingArea ord1;
+                XmNbackground = black; 
+                        };
+        callbacks {
+            XmNinputCallback = procedure PostIt(k_draw1);
+            XmNexposeCallback = procedure draw_proc (k_draw1);
+	    XmNresizeCallback = procedure resize_proc (k_draw1);
+            MrmNcreateCallback = procedure create_proc (k_draw1);
+                };
+        };
+
+
+object
+	tempo : XmDrawingArea {
+		arguments {
+                XmNx = kx_tempo;
+                XmNy = ky_tempo;
+                XmNwidth = kw_tempo;
+                XmNheight =kh_tempo;
+		XmNbackground= black;
+		XmNrightAttachment = XmATTACH_FORM;
+		XmNbottomAttachment= XmATTACH_FORM;
+		XmNbottomOffset = k_vertical_offset+kh_mis1-kh_tempo-5;
+			}; 
+        callbacks {
+            XmNexposeCallback = procedure draw_proc (k_tempo);
+            MrmNcreateCallback = procedure create_proc (k_tempo);
+        	};
+	};
+
+
+
+object
+        tim1 : XmDrawingArea {
+                arguments {
+                XmNx = kx_tim1;
+                XmNy = ky_tim1;
+                XmNwidth = kw_tim1;
+                XmNheight =kh_tim1;
+                XmNbackground = blue;
+		XmNleftAttachment= XmATTACH_FORM;
+		XmNbottomAttachment= XmATTACH_WIDGET;
+		XmNbottomOffset=1;
+		XmNbottomWidget= XmDrawingArea mis1;
+		XmNrightAttachment= XmATTACH_WIDGET;
+		XmNrightOffset=5;
+		XmNrightWidget= XmDrawingArea ord1;
+                       };
+        callbacks {
+            XmNexposeCallback = procedure draw_proc (k_tim1);
+            MrmNcreateCallback = procedure create_proc (k_tim1);
+	    XmNresizeCallback = procedure resize_proc (k_tim1);
+                };
+        };
+
+
+object
+        ord1 : XmDrawingArea {
+                arguments {
+                XmNx = kx_ord1;
+                XmNy = ky_ord1;
+                XmNwidth = kw_ord1;
+                XmNheight =kh_ord1;
+		XmNrightAttachment = XmATTACH_FORM;
+		XmNbottomAttachment= XmATTACH_WIDGET;
+		XmNbottomOffset=5;
+		XmNbottomWidget= XmDrawingArea tempo;
+		XmNtopAttachment= XmATTACH_FORM;
+		XmNtopOffset=5;
+                XmNbackground =black;
+                        };
+        callbacks {
+            XmNexposeCallback = procedure draw_proc (k_ord1);
+            MrmNcreateCallback = procedure create_proc (k_ord1);
+	    XmNresizeCallback = procedure resize_proc (k_ord1);
+                };
+        };
+
+
+
+object
+        mis1 : XmDrawingArea {
+                arguments {
+                XmNx = kx_mis1;
+                XmNy = ky_mis1;
+                XmNwidth = kw_mis1;
+                XmNheight =kh_mis1;
+                XmNbackground =black;
+		XmNleftAttachment = XmATTACH_FORM;
+		XmNbottomAttachment=XmATTACH_FORM;
+                       };
+		callbacks {
+            XmNexposeCallback = procedure draw_proc (k_mis1);
+            MrmNcreateCallback = procedure create_proc (k_mis1);
+                };
+        };
+
+
+object
+        val1 : XmDrawingArea {
+		arguments {
+                XmNx = kx_val1;
+                XmNy = ky_val1;
+                XmNwidth = kw_val1;
+                XmNheight =kh_val1;
+                XmNbackground = black;
+		XmNbottomAttachment=XmATTACH_FORM;
+		XmNrightAttachment= XmATTACH_WIDGET;
+		XmNrightOffset=5;
+		XmNrightWidget= XmDrawingArea ord1;
+		XmNleftAttachment= XmATTACH_WIDGET;
+		XmNleftOffset=1;
+		XmNleftWidget= XmDrawingArea mis1;
+			}; 
+        callbacks {
+            XmNexposeCallback = procedure draw_proc (k_val1);
+            MrmNcreateCallback = procedure create_proc (k_val1);
+        	};
+	};
+
+
+
+
+
+object                                  ! A popup dialog box, called by any
+        nyi : XmInformationDialog {     ! code that is not finished.  Useful
+                                        ! for prototyping.
+
+            arguments {
+                XmNmessageString = k_nyi_label_text;
+                XmNdefaultPosition = true;
+                XmNautoUnmanage = true;
+            };
+
+            callbacks {
+                MrmNcreateCallback = procedure create_proc (k_nyi);
+            };
+        };
+
+object
+	selmis_ok : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_ok;                                     
+            };
+        callbacks {
+	      XmNactivateCallback = procedure ok_proc (k_selmis_dialog);
+            };
+        };      
+
+object
+	selmis_cancel : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_cancel;                                     
+            };
+        callbacks {
+	      XmNactivateCallback = procedure cancel_proc (k_selmis_dialog);
+            };
+        };      
+
+object
+	selmis_dialog : XmBulletinBoardDialog {
+		arguments {
+			XmNdialogTitle=k_selmis_title;
+			XmNx = 200;
+                        XmNdialogStyle=XmDIALOG_APPLICATION_MODAL;
+			XmNmarginWidth=20;
+			XmNcancelButton= XmPushButton selmis_cancel;
+			XmNdefaultButton= XmPushButton find_next;
+			};
+		controls {			
+			XmRowColumn selmis_row;
+	!		XmText find_text;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_selmis_dialog);
+            XmNmapCallback = procedure map_proc (k_selmis_dialog);
+            };
+		}; 
+
+
+object
+        selmis_row : XmRowColumn {
+                arguments{
+                        XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+
+                        };
+                controls {
+                        XmRadioBox selmis_radio;
+                        XmScrolledList selmis_box;
+                        XmRowColumn selmis_button;
+			XmText find_text;
+                        };
+                };
+
+object
+	selmis_button : XmRowColumn {
+		arguments{
+			XmNorientation=XmHORIZONTAL;
+			XmNnumColumns=1;
+			XmNspacing = 10;
+			XmNunitType = XmPIXELS;
+			XmNborderWidth = 0;
+
+			};
+		controls {
+			XmPushButton selmis_ok;
+			XmPushButton selmis_cancel;
+			XmPushButton find_next;
+			XmPushButton find_previous;
+			XmPushButton selmis_elimina;
+			};
+		};
+
+
+object
+	selmis_radio : XmRadioBox {
+		arguments {
+			XmNspacing = 10;
+			};
+		controls {
+			XmToggleButton toggle_mis1;
+			XmToggleButton toggle_mis2;
+			XmToggleButton toggle_mis3;
+			XmToggleButton toggle_mis4;
+			};
+		};
+
+object
+	toggle_mis1 : XmToggleButton{
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_mis1);
+            XmNarmCallback = procedure toggle_proc (k_toggle_mis1);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_mis1);
+            };
+		};
+
+object
+	toggle_mis2 : XmToggleButton{
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_mis2);
+            XmNarmCallback = procedure toggle_proc (k_toggle_mis2);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_mis2);
+            };
+		};
+
+object
+	toggle_mis3 : XmToggleButton{
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_mis3);
+            XmNarmCallback = procedure toggle_proc (k_toggle_mis3);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_mis3);
+            };
+		};
+
+object
+	toggle_mis4 : XmToggleButton{
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_mis4);
+            XmNarmCallback = procedure toggle_proc (k_toggle_mis4);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_mis4);
+            };
+		};
+object
+	selmis_box: XmScrolledList {
+		arguments {
+			XmNvisibleItemCount=8;
+			XmNselectionPolicy=XmSINGLE_SELECT;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_selmis_box);
+            XmNsingleSelectionCallback= procedure apply_proc (k_selmis_box);
+            };
+		};
+
+object
+	find_text: XmText {
+	  arguments {
+		XmNcolumns =24;
+		XmNmaxLength=24;
+		};
+	  callbacks {
+		MrmNcreateCallback= procedure create_proc (k_find_text);
+		};
+	};
+	 
+
+
+object
+	find_next : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_next;      
+                XmNshowAsDefault = 1;
+            };
+        callbacks {
+	      XmNactivateCallback = procedure find_proc (k_find_next);
+            };
+        };      
+
+object
+	find_previous : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_previous;                                     
+            };
+        callbacks {
+	      XmNactivateCallback = procedure find_proc (k_find_previous);
+            };
+        };      
+
+object
+	selmis_elimina : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_elimina;                                     
+            };
+        callbacks {
+	      XmNactivateCallback = procedure apply_proc (k_selmis_elimina);
+            };
+        };      
+object
+	selzoom_dialog : XmBulletinBoardDialog {
+		arguments {
+			XmNallowOverlap=false;
+			XmNdialogTitle=k_selzoom_title;
+			XmNdialogStyle=XmDIALOG_APPLICATION_MODAL;
+			XmNmarginWidth=20;
+			XmNcancelButton= XmPushButton PCancel_button;
+			XmNdefaultButton= XmPushButton POK_button;
+			};
+		controls {
+			XmRowColumn selzoom_row;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_selzoom_dialog);
+            };
+		};
+
+
+
+object
+        selzoom_row : XmRowColumn {
+                arguments{
+                        XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+			XmNmarginWidth=80;
+			XmNradioBehavior=true;
+                        };
+                controls {
+			XmRadioBox selzoom_radio;
+			XmRowColumn button_box;
+                        };
+                };
+
+object
+	selzoom_radio : XmRadioBox {
+		arguments {
+			};
+		controls {
+			XmToggleButton toggle_zoom1;
+			XmToggleButton toggle_zoom2;
+			XmToggleButton toggle_zoom3;
+			XmToggleButton toggle_zoom4;
+			XmToggleButton toggle_zoom5;
+			};
+		};
+
+object
+	button_box : XmRowColumn {
+		arguments{
+			XmNorientation=XmHORIZONTAL;
+			XmNnumColumns=1;
+			XmNspacing = 10;
+			XmNunitType = XmPIXELS;
+			XmNborderWidth = 0;
+			};
+		controls {
+			XmPushButton POK_button;
+			XmPushButton PCancel_button;
+			};
+		};
+
+object
+	toggle_zoom1 : XmToggleButton {
+		arguments {
+			XmNlabelString=k_label_zoom1;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_zoom1);
+            XmNarmCallback = procedure toggle_proc (k_toggle_zoom1);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_zoom1);
+            };
+		};
+
+object
+	toggle_zoom2 : XmToggleButton {
+		arguments {
+			XmNlabelString=k_label_zoom2;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_zoom2);
+	    XmNarmCallback = procedure toggle_proc (k_toggle_zoom2);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_zoom2);
+            };
+		};
+
+object
+	toggle_zoom3 : XmToggleButton {
+		arguments {
+			XmNlabelString=k_label_zoom3;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_zoom3);
+	    XmNarmCallback = procedure toggle_proc (k_toggle_zoom3);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_zoom3);
+            };
+		};
+
+object
+	toggle_zoom4 : XmToggleButton {
+		arguments {
+			XmNlabelString=k_label_zoom4;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_zoom4);
+	    XmNarmCallback = procedure toggle_proc (k_toggle_zoom4);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_zoom4);
+            };
+		};
+
+object
+	toggle_zoom5 : XmToggleButton {
+		arguments {
+			XmNlabelString=k_label_zoom5;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_zoom5);
+	    XmNarmCallback = procedure toggle_proc (k_toggle_zoom5);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_zoom5);
+            };
+		};
+object
+	POK_button : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_ok;                                     
+	!   	XmNshowAsDefault = 1;
+            };
+        callbacks {
+	      XmNactivateCallback = procedure ok_proc (k_selzoom_dialog);
+            };
+        };      
+
+object
+	PCancel_button :  XmPushButton {
+   		arguments {
+        	XmNlabelString = k_label_cancel;                                   
+           };
+        callbacks {
+     	      XmNactivateCallback = procedure cancel_proc (k_selzoom_dialog);
+            };
+        };      
+
+object
+	umis_dialog : XmBulletinBoardDialog {
+		arguments {
+			XmNallowOverlap=false;
+			XmNdialogTitle=k_umis_title;
+			XmNdialogStyle=XmDIALOG_APPLICATION_MODAL;
+			XmNmarginWidth=20;
+			XmNcancelButton= XmPushButton umis_cancel;
+			XmNdefaultButton= XmPushButton umis_ok;
+			};
+		controls {
+			XmRowColumn umis_row;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_umis_dialog);
+            XmNmapCallback = procedure map_proc (k_umis_dialog);
+            };
+	};
+
+
+
+object
+       umis_row : XmRowColumn {
+                arguments{
+                        XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+                        };
+                controls {
+                        XmRadioBox selmis2_radio;
+                        XmSeparator { arguments {
+                                       XmNorientation=XmHORIZONTAL;
+                                        XmNheight=3;
+                                        XmNwidth=400;
+                                        };};
+                        XmLabel  umis_label;
+                        XmRadioBox selumis_radio;
+                        XmRowColumn umis_row1;
+                        };
+                };
+
+
+
+object
+        umis_label : XmLabel {
+                arguments {
+                        XmNlabelString=k_selumis_label;
+                        XmNalignment=XmALIGNMENT_BEGINNING;
+                        };
+                callbacks {
+                        };
+                };
+
+object
+        umis_row1 : XmRowColumn {
+                arguments{
+                        XmNorientation=XmHORIZONTAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+                        };
+                controls {
+                        XmPushButton umis_ok;
+                        XmPushButton umis_cancel;
+                        };
+                };
+
+
+object
+	selmis2_radio : XmRadioBox  {
+		arguments {
+			XmNorientation=XmVERTICAL;
+			XmNborderWidth=0;
+			};
+		controls {
+			XmToggleButton toggle2_mis1;
+			XmToggleButton toggle2_mis2;
+			XmToggleButton toggle2_mis3;
+			XmToggleButton toggle2_mis4;
+			};
+		};
+
+object
+	toggle2_mis1 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle2_mis1);
+            XmNarmCallback = procedure toggle_proc (k_toggle2_mis1);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle2_mis1);
+            };
+		};
+
+object
+	toggle2_mis2 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle2_mis2);
+            XmNarmCallback = procedure toggle_proc (k_toggle2_mis2);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle2_mis2);
+            };
+		};
+
+object
+	toggle2_mis3 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle2_mis3);
+            XmNarmCallback = procedure toggle_proc (k_toggle2_mis3);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle2_mis3);
+            };
+		};
+
+object
+	toggle2_mis4 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle2_mis4);
+            XmNarmCallback = procedure toggle_proc (k_toggle2_mis4);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle2_mis4);
+            };
+		};
+object
+	selumis_radio : XmRadioBox {
+		arguments {
+			XmNorientation=XmHORIZONTAL;
+			XmNborderWidth=0;
+			};
+		controls {
+			XmToggleButton toggle_umis1;
+			XmToggleButton toggle_umis2;
+			XmToggleButton toggle_umis3;
+			XmToggleButton toggle_umis4;
+			};
+		};
+
+
+object
+	toggle_umis1 : XmToggleButton {
+		arguments {
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_umis1);
+            XmNarmCallback = procedure toggle_proc (k_toggle_umis1);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_umis1);
+            };
+		};
+
+object
+	toggle_umis2 : XmToggleButton {
+		arguments {
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_umis2);
+            XmNarmCallback = procedure toggle_proc (k_toggle_umis2);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_umis2);
+            };
+		};
+
+object
+	toggle_umis3 : XmToggleButton {
+		arguments {
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_umis3);
+            XmNarmCallback = procedure toggle_proc (k_toggle_umis3);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_umis3);
+            };
+		};
+
+object
+	toggle_umis4 : XmToggleButton {
+		arguments {
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_umis4);
+            XmNarmCallback = procedure toggle_proc (k_toggle_umis4);
+	    XmNdisarmCallback = procedure toggle_proc (k_toggle_umis4);
+            };
+		};
+
+object
+	umis_ok : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_ok;   
+		XmNshowAsDefault = 1;
+            };
+        callbacks {
+	      XmNactivateCallback = procedure ok_proc(k_umis_dialog);
+            };
+        };      
+
+
+object
+	umis_cancel : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_cancel;                                     
+            };
+        callbacks {
+		   XmNactivateCallback = procedure cancel_proc(k_umis_dialog);
+            };
+        };      
+
+
+
+object
+	fsca_dialog : XmBulletinBoardDialog {
+		arguments {
+			XmNallowOverlap=false;
+			XmNautoUnmanage=true;
+			XmNdialogTitle=k_fsca_title;
+			XmNdialogStyle=XmDIALOG_APPLICATION_MODAL;
+			XmNmarginWidth=20;
+			XmNcancelButton= XmPushButton fsca_cancel;
+			XmNdefaultButton=XmPushButton fsca_ok;
+			};
+		controls {
+			XmRowColumn fsca_row;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_fsca_dialog);
+            XmNmapCallback = procedure map_proc (k_fsca_dialog);
+            };
+	};
+
+object
+      fsca_row : XmRowColumn {
+                arguments{
+                        XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 30;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+                        };
+                controls {
+                        XmRadioBox selmis3_radio;
+                        XmSeparator { arguments {
+                                        XmNorientation=XmHORIZONTAL;
+                                        };};
+			XmRowColumn fsca_row1;
+                        XmRowColumn fsca_row2;
+                        };
+                };
+
+
+object
+        fsca_row1: XmRowColumn {
+                arguments{
+                        XmNorientation=XmHORIZONTAL;
+                        XmNspacing = 50;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+                        };
+                controls {
+                        XmRadioBox scaling_radio;
+                        XmSeparator { arguments {
+                                        XmNorientation=XmVERTICAL;
+                                        };};
+			XmRowColumn label_row;
+			XmRowColumn text_row;
+                        };
+                };
+
+object
+       label_row: XmRowColumn {
+                arguments{
+                        XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 15;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+                        };
+                controls {
+                        XmLabel { arguments {
+                                   XmNlabelString='massimo :';
+				   XmNmarginLeft=30;
+				   XmNmarginTop=5;
+                                };};
+                        XmLabel { arguments {
+                                   XmNlabelString='minimo :';
+				   XmNmarginLeft=30;
+				   XmNmarginTop=5;
+                                };};
+                };
+                };
+
+object
+       text_row: XmRowColumn {
+                arguments{
+                        XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+
+                        };
+                controls {
+                        XmText text_max;
+                        XmText text_min;
+                };
+                };
+
+object
+        fsca_row2: XmRowColumn {
+                arguments{
+                        XmNorientation=XmHORIZONTAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+
+                        };
+                controls {
+			XmPushButton fsca_ok;
+			XmPushButton fsca_cancel;
+                        };
+                };
+
+object
+	scaling_radio : XmRadioBox {
+		arguments {
+			XmNorientation=XmVERTICAL;
+			XmNborderWidth=0;
+			};
+		controls {
+			XmToggleButton toggle_auto;
+			XmToggleButton toggle_man;
+			};
+		};
+
+object
+	selmis3_radio : XmRadioBox {
+		arguments {
+			XmNorientation=XmVERTICAL;
+			XmNborderWidth=0;
+			};
+		controls {
+			XmToggleButton toggle3_mis1;
+			XmToggleButton toggle3_mis2;
+			XmToggleButton toggle3_mis3;
+			XmToggleButton toggle3_mis4;
+			};
+		};
+
+object
+	toggle3_mis1 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle3_mis1);
+	    XmNvalueChangedCallback= procedure toggle_proc(k_toggle3_mis1);
+            };
+		};
+
+object
+	toggle3_mis2 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle3_mis2);
+	    XmNvalueChangedCallback= procedure toggle_proc(k_toggle3_mis2);
+            };
+		};
+
+object
+	toggle3_mis3 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle3_mis3);
+	    XmNvalueChangedCallback= procedure toggle_proc(k_toggle3_mis3);
+            };
+		};
+
+object
+	toggle3_mis4 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize =false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle3_mis4);
+	    XmNvalueChangedCallback= procedure toggle_proc(k_toggle3_mis4);
+            };
+		};
+
+object
+	toggle_auto : XmToggleButton {
+		arguments {
+			XmNlabelString='auto-scaling';
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_auto);
+	    XmNvalueChangedCallback= procedure toggle_proc(k_toggle_auto);
+            };
+		};
+
+object
+	toggle_man : XmToggleButton {
+		arguments {
+			XmNlabelString='scala fissa';
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_man);
+	    XmNvalueChangedCallback= procedure toggle_proc(k_toggle_man);
+            };
+		};
+object
+	text_max : XmText {
+	  arguments {
+		XmNcolumns =12;
+		XmNmaxLength=12;
+		};
+	callbacks {
+            MrmNcreateCallback = procedure create_proc (k_text_max);
+		};
+	};
+		
+object
+	text_min : XmText {
+	  arguments {
+		XmNcolumns =12;
+		XmNmaxLength=12;
+		};
+	callbacks {
+            MrmNcreateCallback = procedure create_proc (k_text_min);
+		};
+	};
+object
+	fsca_ok : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_ok;   
+		XmNshowAsDefault = 1;
+            };
+        callbacks {
+         	 XmNactivateCallback = procedure ok_proc (k_fsca_dialog);
+            };
+        };      
+
+object
+	fsca_cancel : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_cancel;                                     
+            };
+        callbacks {
+           XmNactivateCallback = procedure cancel_proc (k_fsca_dialog);
+            };
+        };      
+
+object 
+	selgr_dialog : XmBulletinBoardDialog {
+		arguments {
+			XmNdialogTitle=k_selgr_title;
+			XmNallowOverlap=false;
+			XmNdialogStyle=XmDIALOG_APPLICATION_MODAL;
+		        XmNdefaultButton= XmPushButton selgr_ok;
+			};
+		controls {
+			XmRowColumn selgr_row;
+			};
+		callbacks {
+	         MrmNcreateCallback = procedure create_proc (k_selgr_dialog);
+	         XmNmapCallback = procedure map_proc (k_selgr_dialog);
+			};
+		};
+
+
+object
+       selgr_row : XmRowColumn {
+                arguments{
+                        XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+                        };
+                controls {
+                                XmLabel label_grmis1;
+                                XmLabel label_grmis2;
+                                XmLabel label_grmis3;
+                                XmLabel label_grmis4;
+                                XmSeparator { arguments {
+                                       XmNorientation=XmHORIZONTAL;
+					XmNwidth=400;
+					XmNheight=3;
+                                        };};
+                                XmScrolledList list_gr;
+                                XmRowColumn selgr_row1;
+                        };
+                };
+
+
+object
+        selgr_row1 : XmRowColumn {
+                arguments{
+                        XmNorientation=XmHORIZONTAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+
+                        };
+                controls {
+                        XmPushButton selgr_ok;
+                        XmPushButton selgr_cancel;
+                        };
+                };
+
+
+object
+	list_gr: XmScrolledList {
+		arguments {
+			XmNvisibleItemCount = 8;
+			XmNselectionPolicy=XmSINGLE_SELECT;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_list_gr);
+            XmNsingleSelectionCallback = procedure apply_proc (k_list_gr);
+            };
+		};
+
+object
+	selgr_ok : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_ok; 
+		XmNshowAsDefault = 1;
+            };
+        callbacks {
+	      XmNactivateCallback  = procedure ok_proc (k_selgr_dialog);
+            };
+        };      
+
+object
+	selgr_cancel : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_cancel;                                     
+            };
+        callbacks {
+	      XmNactivateCallback  = procedure cancel_proc (k_selgr_dialog);
+            };
+        };      
+
+object
+	label_grmis1 : XmLabel {
+		arguments {
+			XmNalignment=XmALIGNMENT_BEGINNING;
+XmNwidth=800;
+			XmNrecomputeSize =false;
+			};
+		callbacks {
+         		MrmNcreateCallback = procedure create_proc (k_label_grmis1);
+			};
+		};
+object
+        label_grmis2 : XmLabel {
+		arguments {
+			XmNalignment=XmALIGNMENT_BEGINNING;
+			XmNrecomputeSize =false;
+			};
+		callbacks {
+         		MrmNcreateCallback = procedure create_proc (k_label_grmis2);
+			};
+		};
+
+object
+	label_grmis3 : XmLabel {
+		arguments {
+			XmNalignment=XmALIGNMENT_BEGINNING;
+			XmNrecomputeSize =false;
+			};
+		callbacks {
+         		MrmNcreateCallback = procedure create_proc (k_label_grmis3);
+			};
+		};
+
+object
+	label_grmis4 : XmLabel {
+		arguments {
+			XmNalignment=XmALIGNMENT_BEGINNING;
+			XmNrecomputeSize =false;
+			};
+		callbacks {
+         		MrmNcreateCallback = procedure create_proc (k_label_grmis4);
+			};
+		};
+
+
+
+
+object 
+	memgr_dialog : XmBulletinBoardDialog {
+			arguments {
+			        XmNdialogTitle='memorizza gruppi';
+				XmNallowOverlap=false;
+				XmNdialogStyle=XmDIALOG_MODELESS;
+			        XmNdefaultButton= XmPushButton memgr_ok;
+				};
+			controls {
+				XmRowColumn memgr_row;
+				};
+			callbacks {
+         		MrmNcreateCallback = procedure create_proc (k_memgr_dialog);
+				};
+				};
+
+
+object
+        memgr_row : XmRowColumn {
+                arguments{
+                        XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+
+                        };
+                controls {
+				XmScrolledList list_memgr;
+				XmText text_memgr;
+				XmRowColumn memgr_row1;
+                        };
+                };
+
+
+object
+        memgr_row1 : XmRowColumn {
+                arguments{
+                        XmNorientation=XmHORIZONTAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+
+                        };
+                controls {
+			XmPushButton memgr_ok;
+			XmPushButton memgr_cancel;
+                        };
+                };
+
+object
+	list_memgr: XmScrolledList {
+		arguments {
+			XmNvisibleItemCount=8;
+			XmNselectionPolicy=XmSINGLE_SELECT;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_list_memgr);
+            XmNsingleSelectionCallback= procedure apply_proc (k_list_memgr);
+            };
+		};
+
+object
+	text_memgr : XmText {
+	  arguments {
+		XmNcolumns =24;
+		XmNmaxLength=24;
+		};
+	callbacks {
+       		MrmNcreateCallback = procedure create_proc (k_text_memgr);
+		};
+	};
+		
+object
+	memgr_ok : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_ok;                                    
+		XmNshowAsDefault = 1;
+		};
+        callbacks {
+	      XmNactivateCallback  = procedure ok_proc (k_memgr_dialog);
+            };
+        };      
+
+object
+	memgr_cancel : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_cancel;                               
+            };
+        callbacks {
+      	          XmNactivateCallback= procedure cancel_proc (k_memgr_dialog);
+            };
+        };      
+
+
+object 
+	defumis_dialog : XmBulletinBoardDialog {
+			arguments {
+				XmNdialogTitle=k_defumis_title;
+				XmNallowOverlap=false;
+				XmNdialogStyle=XmDIALOG_APPLICATION_MODAL;
+			        XmNdefaultButton= XmPushButton defumis_ok;
+				};
+			controls {
+				XmRowColumn defumis_row;
+				};
+			callbacks {
+		            MrmNcreateCallback = procedure create_proc (k_defumis_dialog);
+		            XmNmapCallback = procedure map_proc (k_defumis_dialog);
+				};
+				};
+
+object
+        defumis_row : XmRowColumn {
+                arguments{
+                        XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+                        };
+                controls {
+				XmScrolledList list_defumis;
+				XmRadioBox defumis_radio;
+				XmRowColumn defumis_row1;
+                        };
+                };
+
+object
+        defumis_row1 : XmRowColumn {
+                arguments{
+                        XmNorientation=XmHORIZONTAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+
+                        };
+                controls {
+                        XmPushButton defumis_ok;
+                        XmPushButton defumis_cancel;
+                        };
+                };
+
+object
+	list_defumis: XmScrolledList {
+		arguments {
+			XmNvisibleItemCount=8;
+			XmNselectionPolicy=XmSINGLE_SELECT;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_list_defumis);
+            XmNsingleSelectionCallback= procedure apply_proc (k_list_defumis);
+            };
+	};
+
+object
+	defumis_radio : XmRadioBox {
+		arguments {
+			XmNorientation=XmHORIZONTAL;
+			XmNspacing = 10;
+			XmNborderWidth=0;
+			};
+		controls {
+			XmToggleButton toggle2_umis1;
+			XmToggleButton toggle2_umis2;
+			XmToggleButton toggle2_umis3;
+			XmToggleButton toggle2_umis4;
+			};
+		};
+
+
+object
+	toggle2_umis1 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize=false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle2_umis1);
+            XmNarmCallback = procedure toggle_proc (k_toggle2_umis1);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle2_umis1);
+            };
+		};
+
+object
+	toggle2_umis2 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize=false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle2_umis2);
+            XmNarmCallback = procedure toggle_proc (k_toggle2_umis2);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle2_umis2);
+            };
+		};
+
+object
+	toggle2_umis3 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize=false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle2_umis3);
+            XmNarmCallback = procedure toggle_proc (k_toggle2_umis3);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle2_umis3);
+            };
+		};
+
+object
+	toggle2_umis4 : XmToggleButton {
+		arguments {
+			XmNrecomputeSize=false;
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle2_umis4);
+            XmNarmCallback = procedure toggle_proc (k_toggle2_umis4);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle2_umis4);
+            };
+		};
+
+		
+object
+	defumis_ok : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_ok;  
+		XmNshowAsDefault = 1;
+            };
+        callbacks {
+	      XmNactivateCallback  = procedure ok_proc (k_defumis_dialog);
+            };
+        };      
+
+object
+	defumis_cancel : XmPushButton {
+    	arguments {
+        	XmNlabelString = k_label_cancel;                                     
+            };
+        callbacks {
+	      XmNactivateCallback  = procedure cancel_proc (k_defumis_dialog);
+            };
+        };      
+!
+! dialog box per selezione direttorio di lavoro (per GRAFICS)
+!
+
+object
+        dir_dialog : XmBulletinBoardDialog {
+                arguments {
+                        XmNdialogTitle=k_dir_title;
+                        XmNx = 200;
+                        XmNdialogStyle=XmDIALOG_APPLICATION_MODAL;
+                        XmNmarginWidth=20;
+                        XmNdefaultButton= XmPushButton dir_ok;
+                        };
+                controls {
+			XmRowColumn dir_row;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_dir_dialog);
+            XmNmapCallback = procedure map_proc (k_dir_dialog);
+            };
+                };
+
+object
+        dir_row : XmRowColumn {
+                arguments{
+                        XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+                        };
+                controls {
+			XmLabel dir_label;
+                        XmRowColumn dir_text;
+                        XmRowColumn dir_button;
+                        };
+                };
+object
+
+        dir_text : XmRowColumn {
+                arguments{
+                        XmNorientation=XmHORIZONTAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 2;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+                        };
+            controls {
+                        XmRadioBox dir_radio;
+                        XmRowColumn dir_text1;
+
+			};
+		};
+
+object
+        dir_text1 : XmRowColumn {
+                arguments{
+                        XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+                        };
+                controls {
+                        XmText text_dir1;
+                        XmText text_dir2;
+                        XmText text_dir3;
+                        XmText text_dir4;
+                        };
+                };
+
+object
+        dir_button : XmRowColumn {
+                arguments{
+                        XmNorientation=XmHORIZONTAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+                        };
+                controls {
+                        XmPushButton dir_ok;
+                        XmPushButton dir_cancel;
+                        };
+                };
+
+
+object
+        dir_label : XmLabel {
+                arguments {
+                        XmNlabelString=k_dir_label_text;
+                        XmNalignment=XmALIGNMENT_BEGINNING;
+                        };
+                callbacks {
+                        };
+                };
+
+object
+        text_dir1: XmText {
+          arguments {
+                XmNcolumns =50;
+                XmNmaxLength=100;
+                };
+          callbacks {
+                MrmNcreateCallback= procedure create_proc (k_text_dir1);
+                };
+        };
+
+object
+        text_dir2: XmText {
+          arguments {
+                XmNcolumns =50;
+                XmNmaxLength=100;
+                };
+          callbacks {
+                MrmNcreateCallback= procedure create_proc (k_text_dir2);
+                };
+        };
+
+object
+        text_dir3: XmText {
+          arguments {
+                XmNcolumns =50;
+                XmNmaxLength=100;
+                };
+          callbacks {
+                MrmNcreateCallback= procedure create_proc (k_text_dir3);
+                };
+        };
+
+object
+        text_dir4: XmText {
+          arguments {
+                XmNcolumns =50;
+                XmNmaxLength=100;
+                };
+          callbacks {
+                MrmNcreateCallback= procedure create_proc (k_text_dir4);
+                };
+        };
+
+
+object
+        dir_ok : XmPushButton {
+        arguments {
+                XmNlabelString = k_label_ok;
+                XmNshowAsDefault = 1;
+            };
+        callbacks {
+              XmNactivateCallback  = procedure ok_proc (k_dir_dialog);
+            };
+        };
+
+object
+        dir_cancel : XmPushButton {
+        arguments {
+                XmNlabelString = k_label_cancel;
+            };
+        callbacks {
+              XmNactivateCallback  = procedure cancel_proc (k_dir_dialog);
+            };
+        };
+
+
+object
+        dir_radio : XmRadioBox {
+                arguments {
+			XmNspacing=16;
+                        };
+                controls {
+                        XmToggleButton toggle_dir1;
+                        XmToggleButton toggle_dir2;
+                        XmToggleButton toggle_dir3;
+                        XmToggleButton toggle_dir4;
+                        };
+                };
+
+object
+        toggle_dir1 : XmToggleButton{
+                arguments {
+			XmNlabelString = "  ";
+                        XmNrecomputeSize =false;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_dir1);
+	 XmNvalueChangedCallback = procedure toggle_proc (k_toggle_dir1);
+            };
+                };
+
+
+object
+        toggle_dir2 : XmToggleButton{
+                arguments {
+			XmNlabelString = "  ";
+                        XmNrecomputeSize =false;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_dir2);
+            XmNvalueChangedCallback = procedure toggle_proc (k_toggle_dir2);
+            };
+                };
+
+object
+        toggle_dir3 : XmToggleButton{
+                arguments {
+			XmNlabelString = "  ";
+                        XmNrecomputeSize =false;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_dir3);
+            XmNvalueChangedCallback = procedure toggle_proc (k_toggle_dir3);
+            };
+                };
+
+object
+        toggle_dir4 : XmToggleButton{
+                arguments {
+			XmNlabelString = "  ";
+                        XmNrecomputeSize =false;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_dir4);
+            XmNvalueChangedCallback = procedure toggle_proc (k_toggle_dir4);
+            };
+                };
+
+!
+! Definizione della menu bar e relativi pulldown menu
+!
+
+object
+    s_menu_bar : XmMenuBar {
+        arguments {                                                                    
+            XmNorientation = XmHORIZONTAL;
+            XmNspacing     = 15;
+	    XmNwidth     = 5;		
+	    XmNheight    = 5;		
+        };
+
+        controls {                              
+            XmCascadeButton file_menu_entry;
+            XmCascadeButton def_menu_entry;
+	    XmCascadeButton grafici_menu_entry;
+	    XmCascadeButton misure_menu_entry;
+        };
+    };
+
+
+	 
+object
+        file_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString = k_file_label_text;
+!       		XmNmnemonic = keysym("F");
+		XmNfontList = bold;
+            };                                            
+
+            controls {
+                XmPulldownMenu file_menu;
+            };
+        };
+
+!  pulldown menu
+
+object
+        file_menu : XmPulldownMenu {
+            controls {
+                XmPushButton m_dir_button;
+                XmPushButton m_HC_button;
+                XmSeparator   {};
+                XmPushButton m_quit_button;
+        };
+        };
+
+        
+object
+        m_quit_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_quit_label_text;  
+            };
+            callbacks {
+	          XmNactivateCallback = procedure quit_proc ('Grafics terminato correttamente.');
+            };
+        };      
+
+
+       
+object
+        m_dir_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_dir_label_text;
+            };
+            callbacks {
+	      XmNactivateCallback = procedure activate_proc (k_dir_dialog);
+            };
+        };     
+
+
+object
+        def_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString = k_def_label_text;
+!                XmNmnemonic = keysym("D");
+		XmNfontList = bold;
+            };                                            
+            controls {
+                XmPulldownMenu def_menu;
+            };
+        };
+
+! The pulldown menu with the push buttons it controls.
+
+object
+        def_menu : XmPulldownMenu {
+            controls {
+                XmPushButton m_defumis_button;
+                XmPushButton m_collima_button;
+                XmPushButton m_zoomord_button;
+                XmPushButton m_secondi_button;
+        };
+        };
+
+object
+        m_defumis_button : XmPushButton {
+
+            arguments {
+                XmNlabelString = k_defumis_label_text;                                                    
+            };
+
+            callbacks {
+	      XmNactivateCallback = procedure activate_proc (k_defumis_dialog);
+            };
+        };      
+
+object
+        m_collima_button : XmPushButton {
+
+            arguments {
+                XmNlabelString = k_collima_label_text;
+            };
+            callbacks {
+            MrmNcreateCallback = procedure  memcollima_proc();
+              XmNactivateCallback = procedure collima_proc ();
+            };
+        };
+
+object
+        m_zoomord_button : XmPushButton {
+
+            arguments {
+                XmNlabelString = k_zoomord_label_text;
+            };
+            callbacks {
+            MrmNcreateCallback = procedure  memzoomord_proc();
+              XmNactivateCallback = procedure zoomord_proc ();
+            };
+        };
+
+
+object
+        m_secondi_button : XmPushButton {
+
+            arguments {
+                XmNlabelString = k_secondi_label_text;
+            };
+            callbacks {
+            MrmNcreateCallback = procedure  memsecondi_proc();
+              XmNactivateCallback = procedure secondi_proc ();
+            };
+        };
+
+! The edit pulldown entry and the associated pulldown menu.
+
+object
+    m_HC_button : XmPushButton {
+        arguments {
+            XmNlabelString = k_HC_dot_label_text;
+        };
+        callbacks {
+	      XmNactivateCallback = procedure HC_proc (k_nyi);
+        };
+    };  
+            
+            
+object
+    m_zoom_control_button : XmPushButton {
+        arguments {
+            XmNlabelString = k_zoom_dot_label_text;
+        };
+        callbacks {
+	      XmNactivateCallback = procedure zoom_proc (k_zoom_on);
+        };
+    };  
+           
+object
+    m_nozoom_control_button : XmPushButton {
+        arguments {
+            XmNlabelString = k_nozoom_dot_label_text;
+        };
+        callbacks {
+              XmNactivateCallback = procedure zoom_proc (k_zoom_off);
+        };
+    };
+ 
+object
+        grafici_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString = k_grafici_label_text;
+!                XmNmnemonic = keysym("G");
+		XmNfontList = bold;
+            };
+            controls {
+                XmPulldownMenu grafici_menu;
+            };
+	    callbacks {
+     MrmNcreateCallback = procedure create_proc(k_grafici_menu_entry);
+		};
+	};
+ 
+object
+        grafici_menu : XmPulldownMenu {
+        controls {
+            XmPushButton m_zoom_control_button;
+            XmPushButton m_nozoom_control_button;
+                        XmSeparator {};
+            XmPushButton m_selgra_control_button;
+            XmPushButton m_memgra_control_button;
+		};
+	};
+           
+object
+    m_selgra_control_button : XmPushButton {
+        arguments {
+            XmNlabelString = k_selgra_dot_label_text;
+        };
+        callbacks {
+	      XmNactivateCallback = procedure activate_proc (k_selgr_dialog);
+        };
+    };  
+           
+object
+    m_memgra_control_button : XmPushButton {
+        arguments {
+            XmNlabelString = k_memgra_dot_label_text;
+        };
+        callbacks {
+	      XmNactivateCallback = procedure activate_proc (k_memgr_dialog);
+        };
+    };  
+           
+object
+        misure_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString = k_misure_label_text;
+!                XmNmnemonic = keysym("M");
+		XmNfontList = bold;
+            };
+            controls {
+                XmPulldownMenu misure_menu;
+            };
+            callbacks {
+     MrmNcreateCallback = procedure create_proc(k_misure_menu_entry);
+                };
+        };
+
+object
+        misure_menu : XmPulldownMenu {
+        controls {
+            XmPushButton m_umis_control_button;
+            XmPushButton m_fsca_control_button;
+            XmSeparator   {};
+            XmPushButton m_selmis_control_button;
+        };
+                };
+            
+object
+    m_umis_control_button : XmPushButton {
+        arguments {
+            XmNlabelString = k_umis_dot_label_text;
+        };
+        callbacks {
+	      XmNactivateCallback = procedure activate_proc (k_umis_dialog);
+        };
+    };  
+           
+object
+    m_fsca_control_button : XmPushButton {
+        arguments {
+            XmNlabelString = k_fsca_dot_label_text;
+        };
+        callbacks {
+	      XmNactivateCallback = procedure activate_proc (k_fsca_dialog);
+        };
+    };  
+           
+object
+    m_selmis_control_button : XmPushButton {
+        arguments {
+            XmNlabelString = k_selmis_dot_label_text;
+        };
+        callbacks {
+		XmNactivateCallback = procedure activate_proc (k_selmis_dialog);
+        };
+    };  
+           
+
+
+
+end module;

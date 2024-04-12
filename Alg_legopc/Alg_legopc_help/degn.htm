@@ -1,0 +1,430 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>DEGN</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE DEGN</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">DEAERATOR WITH ONE PRESSURE NODE</p>
+<p>&nbsp;</p>
+<p align="left">The DEGN module simulates the dynamics of thermo-hydraulic
+phenomena which the liquid-steam mixture contained in a degasifier cavity is
+subjected to.</p>
+<p align="left">To define the module mathematical model, the volume engaged by
+the fluid is subdivided in the following zones:</p>
+<p ALIGN="left">- upper zone identified as &quot;steam zone&quot;</p>
+<p ALIGN="left">- lower zone identified as &quot;liquid zone&quot;</p>
+<p align="left">In these zones, that may not be in thermodynamic equilibrium,
+water can be present as a two-phase mixture. So, it is possible to consider:</p>
+<p ALIGN="left">- the condensation flow rate proportional to the mass of liquid
+present in the steam zone</p>
+<p ALIGN="left">- the evaporation flow rate proportional to the mass of steam
+present in the liquid zone</p>
+<p align="left">To take into account the power exchanged by degasifier feeding
+liquid with the steam present into the dome, it is supposed that (whatever the
+conditions are at the degasifier inlet), the feeding liquid exchanges with the
+steam inside dome the power needed to reach saturation conditions.</p>
+<p align="left">Further hypotheses introduced in the module are:</p>
+<p ALIGN="left">- absence of incondensable gas</p>
+<p ALIGN="left">- the thermal exchange between fluid and cavity walls is
+negligible</p>
+<p ALIGN="left">- the distribution of pressure and enthalpy in the steam zone is
+uniform</p>
+<p ALIGN="left">- the distribution of enthalpy in the liquid zone is uniform.</p>
+<p align="left">Hereinafter the utilized equations are indicated with the same
+programming order:</p>
+<p ALIGN="left">1) the conservation equation of energy in the liquid zone</p>
+<p ALIGN="left">2) the conservation equation of energy in the steam zone</p>
+<p ALIGN="left">3) the conservation equation of mass in the liquid zone</p>
+<p ALIGN="left">4) the conservation equation of mass in the steam zone</p>
+<p ALIGN="left">5) the equation for pressure calculation on the cavity bottom.</p>
+<p align="left">The first four equations are differential whereas the fifth one
+is algebraical.</p>
+<p align="left">The equation 5) (useful for a correct evaluation of NPSH
+concerning the liquid extraction pump) is formulated for a cylindrical cavity
+having horizontal axis, considering this geometry the most common one used in
+manufacturing of degasifier collecting tanks. User must supply the
+characteristic dimensions of the cavity among the input data required in the
+DEGN module (see below).</p>
+<p ALIGN="left">It is useful to note that it is possible to simulate both the
+heating phase of degasifier during start-up and pumps recirculation.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<blockquote>
+  <blockquote>
+  </font><font FACE="Arial" SIZE="2">
+  <p ALIGN="center"><img SRC="images/Image670.gif" width="492" height="350"></p>
+  </font><font FACE="Arial">
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  </blockquote>
+</blockquote>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WSPD</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of steam bled from the turbine
+      and supplied into the degasifier dome</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HSPD</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam bled from the turbine
+      and supplied into the degasifier dome</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WALI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of feedwater to the dome</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HALI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of feedwater to the dome</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WDRE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of drainages flowing into the
+      degasifier</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HDRE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of drainages flowing into the
+      degasifier</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WOUT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of liquid flowing out from the
+      tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WRIS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of steam flowing into the tank
+      during start-up phase</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HRIS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam flowing into the tank
+      during start-up phase</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WRIC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of liquid flowing into the tank
+      coming from the recirculation of boiler feed pumps</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HRIC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of liquid flowing into the tank
+      coming from the recirculation of boiler feed pumps</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PVDG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure of steam in the tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HVDG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam in the tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HLDG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of liquid in the tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LIVD</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">level of liquid inside the tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PLDG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure on the tank bottom (condensate
+      outlet)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p>In addition to the initial values of input and output variables (meanings
+defined above), user must assign the following data:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VOL.CAV.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">internal volume available for the fluid
+      (dome volume + tank volume - internal parts volume)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">D. SERB.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">tank internal diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">L. SERB.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">tank internal length.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p>To initialize the DEGN variables no particular prescription is required.</p>
+<p align="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In the DEGN module no user subprograms are foreseen.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The equations, mentioned above, give rise to the following
+residuals:</p>
+<p ALIGN="JUSTIFY">RNI(1) = WDRE*(HDRE-HLDG)+(QC+WALI)*(HLS-HLDG)-QEV*(HVS-HLDG)+</p>
+<p ALIGN="CENTER">+QSUP+WRIC*(HRIC-HLDG)-WOUT*(HLS-HL)</p>
+<p ALIGN="JUSTIFY">(normalization factor = W0*H0)</p>
+<p ALIGN="JUSTIFY">RNI(2) = WSPD*(HSPD-HVDG)+WRIS*(HRIS-HVDG)+QEV*(HVS-HVDG)+</p>
+<p ALIGN="CENTER">-QC*(HLS-HVDG)+QQ-QSUP</p>
+<p ALIGN="JUSTIFY">(normalization factor = W0*H0)</p>
+<p ALIGN="JUSTIFY">RNI(3) = WDRE+QC-WOUT-QEV+WRIC+WALI</p>
+<p ALIGN="JUSTIFY">(normalization factor = W0)</p>
+<p ALIGN="JUSTIFY">RNI(4) = WSPD+WRIS+QEV-QC</p>
+<p ALIGN="JUSTIFY">(normalization factor = W0)</p>
+<p ALIGN="JUSTIFY">RNI(5) = PLDG-PVDG-9.80665*ROWS*LIVD/P0</p>
+<p ALIGN="JUSTIFY">(normalization factor = P0)</p>
+<p>Where:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QC</font><!--mstheme--></font></td>
+    <td width="89%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the condensation flow rate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HLS</font><!--mstheme--></font></td>
+    <td width="89%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the enthalpy of saturated liquid</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QEV</font><!--mstheme--></font></td>
+    <td width="89%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the evaporation flow rate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HWS</font><!--mstheme--></font></td>
+    <td width="89%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the enthalpy of saturated steam</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QSUP</font><!--mstheme--></font></td>
+    <td width="89%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">is the thermal power exchanged through liquid-steam
+      separation surface</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QQ</font><!--mstheme--></font></td>
+    <td width="89%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the power given up from saturated
+      steam to the dome feed liquid</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ROWS</font><!--mstheme--></font></td>
+    <td width="89%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the density of saturated liquid</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">The physical meanings of remaining variables are defined above.</p>
+<p ALIGN="left">Further explanations about the quantities of above-mentioned
+meanings are available in the section concerning the DEGN module of the manual
+&quot;LEGOCAD - Modelling Library for Simulation of Power Generation Plants -
+Theory&quot;.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<blockquote>
+  <p align="left">SUBROUTINE DEGNI3(IFO, IOB, DEBL)</p>
+  <p align="left">SUBROUTINE DEGNI4(IOB, MOD)</p>
+  <p align="left">SUBROUTINE DEGNI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1,
+  ID2,</p>
+  <p align="left">$ IBL1, IBL2, IER, CNXYU, TOL)</p>
+  <p align="left">SUBROUTINE DEGNC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+  <p align="left">$ IBL1, IBL2)</p>
+  <p align="left">SUBROUTINE DGNDEC(P, HL, HV, Y, PF, QV, HVI, QCOND, HCOND, QDR,</p>
+  <p align="left">$ HDR, QEC, QVV, HVV, QWR, HWR, VCAV, RSERB,</p>
+  <p align="left">$ ALSERB, XYU, IXYU, DATI, IPD)</p>
+  <p align="left">SUBROUTINE DGNTAV(P, HL, HV, ROL, ROV, ROWS, BELI, BEVA, A2LI,</p>
+  <p align="left">$ A2VA, XL, XV, TLS, TV, HLS, HVS, PF)</p>
+  <p align="left">SUBROUTINE DGNTYP(Y, VL, DVLDY, RSERB, ALSERB)</p>
+  <p align="left">SUBROUTINE DGNTAU(A2LI, BELI, ROL, TLS, A2VA, BEVA, ROV, TV,
+  Y,</p>
+  <p align="left">$ VCAV, VL, DVLDY, TAU11, TAU14, TAU22, TAU24,</p>
+  <p align="left">$ TAU31, TAU33, TAU34, TAU42, TAU43, TAU44)</p>
+  <p align="left">SUBROUTINE DGNDER(P, HL, HV, Y, PF, QV, HVI, QCOND, HCOND, QDR,</p>
+  <p align="left">$ HDR, QEC, QVV, HVV, QWR, HWR, VCAV, RSERB,</p>
+  <p align="left">$ ALSERB, VL, DVLDY, ROL, ROV, ROWS, XL, XV,</p>
+  <p align="left">$ HLS, HVS, TLS, TV, IFUN, TAU11, TAU14, TAU22,</p>
+  <p align="left">$ TAU24, TAU31, TAU33, TAU34, TAU42, TAU43,</p>
+  <p align="left">$ TAU44, DATI, IPD, RNI)</p>
+  <p align="left">SUBROUTINE DGNSOL(A11, A14, A22, A24, A31, A33, A34, A42,</p>
+  <p align="left">$ A43, A44, B1, B2, B3, B4, X1, X2, X3, X4)</p>
+  <p align="left">SUBROUTINE DGNJAC(AJAC, MX5, IXYU, XYU, DATI, IPD, RNI, IFUN)</p>
+</blockquote>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases concerning this module are in the user
+manual section dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;DEG_S_L&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

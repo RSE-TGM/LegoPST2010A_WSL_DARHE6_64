@@ -1,0 +1,455 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>NUMERICAL METHODS</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_methods"></A>Numerical methods</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The mathematical models developed to characterise various physical processes such as transient fluid flow, heat conduction and component models are comprised of a coupled set of partial differential equations, ordinary differential equations and algebraical equations.</P>
+<P ALIGN="JUSTIFY">An analytical solution does not exist for this equation set and the use of a numerical solution method is required.</P>
+<P ALIGN="JUSTIFY">The main topics of numerical solution methods and attendant assumption are shortly presented.</P>
+<P ALIGN="JUSTIFY">The differential equations must be replaced by "finite difference" equations with respect to the time and to the space, which are algebraical equations.</P>
+<P ALIGN="JUSTIFY">The algebraical equations may be obtained by two different routes:</P>
+<P ALIGN="JUSTIFY">the first method uses finite difference representations of the partial differential equations (distributed parameters equations);</P>
+<P ALIGN="JUSTIFY">the second method derives the equations by integrating the differential equation terms on a finite number of control volumes, &#9;called &#9;cells (lumped parameters equations).</P>
+<P ALIGN="JUSTIFY">The resultant equations can be identical in both cases if conservation-law-form differential equations are used with the first method.</P>
+<P ALIGN="JUSTIFY">The independent variables, namely "time" and "space", can assume only a discrete and finite sequence of values, that is to say a calculation grid must be set.</P>
+<P ALIGN="JUSTIFY">The dependent variables will be computed only for these points and for these instants, which can be equally spaced (constant time step) or unequally spaced (variable time step).</P>
+<P ALIGN="JUSTIFY">When the first method is used, the finite difference approximation of the space derivatives (backward, forward or central difference) must be chosen.</P>
+<P ALIGN="JUSTIFY">When the second method is used, a "staggered mesh" computation grid for the control volumes is often adopted.</P>
+<P ALIGN="JUSTIFY">Two finite difference approximation for the time derivatives (backward or forward difference) are possible.</P>
+<P ALIGN="JUSTIFY">With the forward difference approximation the solution method is explicit, that is to say the solution at every point of the given time depends on the values of the solution at several points of the preceding time step.</P>
+<P ALIGN="JUSTIFY">A stability condition (Courant's condition) must be respected:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image827.gif" WIDTH=49 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">c &#9;=&#9;sound speed</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">D</FONT>x <FONT FACE="Arial, helvetica">&#9;=&#9;space step</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">D</FONT>t <FONT FACE="Arial, helvetica">&#9;=&#9;time step</P>
+<P ALIGN="JUSTIFY">with the backward difference approximation the solution method is implicit, that is to say the solution at every point of the given time depends on the values of the solution at several close points of the same time step.</P>
+<P ALIGN="JUSTIFY">A simultaneous solution of the equation set is needed, but the stability of the method is always assured.</P>
+<P ALIGN="JUSTIFY">The solution method is generally a recursive method: for an explicit method the variables values at time t</FONT><FONT FACE="Arial, helvetica" SIZE=1>i+1</FONT><FONT FACE="Arial, helvetica"> are computed using the values at the preceding time steps (t</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica">, t</FONT><FONT FACE="Arial, helvetica" SIZE=1>i-1</FONT><FONT FACE="Arial, helvetica">, etc., multi-step methods) or at time t</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> (single-step method). The multi-step methods are not popular because they are not self-starting.</P>
+<P ALIGN="JUSTIFY">Once that a system involving only ODE and algebraical equations is obtained, that system can, at least logically, be written in normal form:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image828.gif" WIDTH=92 HEIGHT=60></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">x is the vector of state variables</P>
+<P ALIGN="JUSTIFY">y is the vector of algebraic output variables</P>
+<P ALIGN="JUSTIFY">u is the vector of input variables</P>
+<P ALIGN="JUSTIFY">Given a generical ODE:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image829.gif" WIDTH=54 HEIGHT=34></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">a choosing a one-step method, it can be written as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image830.gif" WIDTH=240 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">If</FONT> <FONT FACE="Symbol">e</FONT> <FONT FACE="Arial, helvetica">= 0 we have an explicit method, while for 0 </FONT>&lt; <FONT FACE="Symbol">e</FONT> <FONT FACE="Symbol">£</FONT> <FONT FACE="Arial, helvetica">1 the method is implicit.</P>
+<P ALIGN="JUSTIFY">The convergence condition for the generic one-step method applied to a linear Cauchy problem:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image831.gif" WIDTH=137 HEIGHT=60></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image832.gif" WIDTH=169 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">It’s easy to observe that if</FONT> <FONT FACE="Symbol">e</FONT> <FONT FACE="Symbol">³</FONT> <FONT FACE="Arial, helvetica">0.5 the method is A-stable (that is: it converges for any value of</FONT> <FONT FACE="Symbol">D</FONT> t<FONT FACE="Arial, helvetica">).</P>
+<P ALIGN="JUSTIFY">So, the standard LEGO discretization method is the trapezoidal rule:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image833.gif" WIDTH=220 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">By applying the trapezoidal rule to the algebraic-differential system as above described, one gets:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image834.gif" WIDTH=278 HEIGHT=101></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">which is a (non linear) system in the unknowns x</FONT><FONT FACE="Arial, helvetica" SIZE=1>n+1</FONT><FONT FACE="Arial, helvetica"> and y</FONT><FONT FACE="Arial, helvetica" SIZE=1>n+1</FONT><FONT FACE="Arial, helvetica">:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image835.gif" WIDTH=116 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">that will be solved with the Newton-Raphson method.</P>
+<P ALIGN="JUSTIFY">This one is an iterative method that consists of a Taylor series development to the first order around the point calculated at the previous k-th iteration:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image836.gif" WIDTH=252 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where z</FONT><FONT FACE="Arial, helvetica" SIZE=1>n+1</FONT><FONT FACE="Arial, helvetica"> is the unknowns vector at the n+1-th time step (union of the vectors x</FONT><FONT FACE="Arial, helvetica" SIZE=1>n+1</FONT><FONT FACE="Arial, helvetica"> and y</FONT><FONT FACE="Arial, helvetica" SIZE=1>n+1</FONT><FONT FACE="Arial, helvetica">) and <B>J</B> is the jacobian matrix (the one of the first derivatives) calculated with the values of the previous (k-th) iteration. Calculating that formula k+1 and remembering that it must be:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image837.gif" WIDTH=81 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">one gets:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image838.gif" WIDTH=198 HEIGHT=30></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">A stop rule for the iterations is set by fixing a tolerance. This tolerance can be one only for the whole system of equations as all the equations are normalised. Default value for the tolerance is 1e-6.</P>
+<P ALIGN="JUSTIFY">As the calculation of the jacobian matrix (which should occur at each iteration) is very time expensive, one calculation of <B>J</B> is kept valid for more iterations insofar as convergence is guaranteed.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_twophase"></A>Two-phase flow models</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following descriptions of two-phase flow are widely used:</P>
+<P ALIGN="JUSTIFY">thermodynamic equilibrium models (the phases are always in thermodynamic equilibrium conditions), then:</P>
+<P ALIGN="JUSTIFY">liquid is always saturated,</P>
+<P ALIGN="JUSTIFY">vapour is always saturated.</P>
+<P ALIGN="JUSTIFY">non-equilibrium models (the phases can be, during the transients, in non-equilibrium conditions), then:</P>
+<P ALIGN="JUSTIFY">liquid can be saturated, non saturated or with bubbles;</P>
+<P ALIGN="JUSTIFY">vapour can be saturated or superheated.</P>
+<P ALIGN="JUSTIFY">Various two-phase flow models can be distinguished:</P>
+<P ALIGN="JUSTIFY">the two-fluid models</P>
+<P ALIGN="JUSTIFY">models based on imposed velocity profiles, depending on the choice of kinematic properties; there are:</P>
+<P ALIGN="JUSTIFY">no local relative velocity (homogeneous model, Bankoff model),</P>
+<P ALIGN="JUSTIFY">correlation for the relative velocity given by means of a slip ratio v</FONT><FONT FACE="Arial, helvetica" SIZE=1>g</FONT><FONT FACE="Arial, helvetica">/v</FONT><FONT FACE="Arial, helvetica" SIZE=1>l</FONT><FONT FACE="Arial, helvetica"> (as a function of pressure and equilibrium quality), a weighted drift velocity U</FONT><FONT FACE="Arial, helvetica" SIZE=1>gj</FONT><FONT FACE="Arial, helvetica"> and a distribution coefficient C</FONT><FONT FACE="Arial, helvetica" SIZE=1>0</FONT><FONT FACE="Arial, helvetica"> (as a function of pressure and of the physical properties of the fluid, &#9;drift-flux or Zuber and Findlay model), and a void fraction (as a function of pressure and equilibrium quality, Martinelli and Nelson).</P>
+<P ALIGN="JUSTIFY">For applications in the industrial processes the more used two-phase models are:</P>
+<P ALIGN="JUSTIFY">homogeneous equilibrium model (</FONT><A HREF="#lg_lptheo_hem"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">HEM</U></FONT></A><FONT FACE="Arial, helvetica">)</P>
+<P ALIGN="JUSTIFY">thermal equilibrium slip or </FONT><A HREF="#lg_lptheo_drift"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Drift flux</U></FONT></A><FONT FACE="Arial, helvetica"> models (natural circulation and low pressure)</P>
+<P ALIGN="JUSTIFY">thermal non-equilibrium models with interaction between the phases given by empirical correlations.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_hem"></A>Two-phase flow: homogeneous equilibrium model (HEM)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The assumptions are made:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image839.gif" WIDTH=52 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image840.gif" WIDTH=80 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The conservation equations have the same form as in the single phase flow models, provided the mixture density, the mixture specific enthalpy and the void fraction are defined as</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image841.gif" WIDTH=136 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image842.gif" WIDTH=129 HEIGHT=24></P>
+<P ALIGN="CENTER"><IMG SRC="Image843.gif" WIDTH=52 HEIGHT=49></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_drift"></A>Two-phase flow: drift flux model</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This is the classical formulation of Zuber and Findlay for the representation of a non-homogeneous two-phase flow.</P>
+<P ALIGN="JUSTIFY">This representation gives sufficient accuracy for moderate transients in which the mixture evolves in a quasi-steady-state fashion and even during fast transients it has not been shown to lead to great inaccuracies.</P>
+<P ALIGN="JUSTIFY">As well known, the drift between the phases causes energy and momentum to cross the mixture centre-of-mass plane and generates in the corresponding conservation equations additional terms depending both on the average void fraction a and the so-called "total drift velocity" U</FONT><FONT FACE="Arial, helvetica" SIZE=1>gj</FONT><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">Therefore a relationship between the void fraction and the drift velocity is necessary as well as the determination of the last one by means of adequate correlations. In the basic drift-flux approach a linkage is established between the average void fraction of the mixture and the two typical average parameters accounting for the local drift (V</FONT><FONT FACE="Arial, helvetica" SIZE=1>gj</FONT><FONT FACE="Arial, helvetica">) and the non-uniformity of the velocity and void fraction profiles across the duct cross-section (C</FONT><FONT FACE="Arial, helvetica" SIZE=1>0</FONT><FONT FACE="Arial, helvetica">):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image844.gif" WIDTH=152 HEIGHT=64></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where (&ntilde; means cross-sectional average of property n) X</FONT><FONT FACE="Arial, helvetica" SIZE=1>V</FONT><SUB><FONT FACE="Arial, helvetica"> </SUB>is the average volumetric quality:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image845.gif" WIDTH=53 HEIGHT=44></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">J is the cross-sectional averaged total volumetric flux (or velocity of the centre of volume)</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image846.gif" WIDTH=180 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">C</FONT><FONT FACE="Arial, helvetica" SIZE=1>0</FONT><FONT FACE="Arial, helvetica"> is the distribution coefficient</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image847.gif" WIDTH=58 HEIGHT=41></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and V</FONT><FONT FACE="Arial, helvetica" SIZE=1>gj</FONT><FONT FACE="Arial, helvetica"> is the average local drift velocity of the gas</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image848.gif" WIDTH=97 HEIGHT=44></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Finally</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image849.gif" WIDTH=180 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">is the average total drift velocity of the gas, appearing in the "drift" terms of the conservation equations.</P>
+<P ALIGN="JUSTIFY">One remarks that the "total drift" U</FONT><FONT FACE="Arial, helvetica" SIZE=1>gj</FONT><FONT FACE="Arial, helvetica"> includes contributions due to both the average local drift V</FONT><FONT FACE="Arial, helvetica" SIZE=1>gj</FONT><FONT FACE="Arial, helvetica"> and the velocity profile</FONT> <FONT FACE="Arial, helvetica">(the (</FONT>C<FONT SIZE=1>0</FONT> <FONT FACE="Symbol">-</FONT> 1<FONT FACE="Arial, helvetica">)J term).</P>
+<P ALIGN="JUSTIFY">It is evident that a proper evaluation of the two drift parameters C</FONT><FONT FACE="Arial, helvetica" SIZE=1>0</FONT><FONT FACE="Arial, helvetica"> and V</FONT><FONT FACE="Arial, helvetica" SIZE=1>gj</FONT><FONT FACE="Arial, helvetica"> becomes essential to obtain a realistic determination of the void fraction (i.e. of the density) of the two-phase flow.</P>
+<P ALIGN="JUSTIFY">To this aim several correlations are available, generally developed for specific applications and then strongly dependent on the considered geometrical and thermal-hydraulic conditions. But if the "drift-flux" model must be used in the simulation of the whole working situations of a plant system, considerable difficulties from the computational view-point could arise utilising different specifically flow-regime dependent correlations. To avoid this problem two empirical flow-regime independent "drift- flux" correlations have been considered and implemented in LEGOCAD models:</P>
+<P ALIGN="JUSTIFY">the </FONT><A HREF="#lg_lptheo_zuberdix"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Zuber-Dix correlation</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the </FONT><A HREF="#lg_lptheo_chexall"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Chexall-Lellouche correlation</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">covering the full range of pressures, flows and void fractions and qualified against several sets of steady-state test data coming from a wide range of initial conditions and geometries.</P>
+<P ALIGN="JUSTIFY">Of course for homogeneous mixtures, being identical the velocities of the two phases:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image850.gif" WIDTH=58 HEIGHT=21>&#9;<IMG SRC="Image851.gif" WIDTH=60 HEIGHT=24>&#9;<IMG SRC="Image852.gif" WIDTH=60 HEIGHT=24></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and the drift flux model turns into the HEM.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_zuberdix"></A>Zuber-Dix correlation</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The distribution coefficient C</FONT><FONT FACE="Arial, helvetica" SIZE=1>0</FONT><FONT FACE="Arial, helvetica"> and the average local drift velocity V</FONT><FONT FACE="Arial, helvetica" SIZE=1>gj</FONT><FONT FACE="Arial, helvetica"> are given by the following relations:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image853.gif" WIDTH=173 HEIGHT=60>&#9;<IMG SRC="Image854.gif" WIDTH=136 HEIGHT=56></P>
+<P ALIGN="CENTER"><IMG SRC="Image855.gif" WIDTH=180 HEIGHT=60></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The Mc Coy’s correction is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image856.gif" WIDTH=237 HEIGHT=60></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_chexall"></A>Chexall-Lellouche correlation</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This correlation covers a full range of pressures, diameters, flows, flow orientation and void fractions.</P>
+<P ALIGN="JUSTIFY">The evaluation of the distribution coefficient C</FONT><FONT FACE="Arial, helvetica" SIZE=1>0</FONT><FONT FACE="Arial, helvetica"> and the average local drift velocity V</FONT><FONT FACE="Arial, helvetica" SIZE=1>gj</FONT><FONT FACE="Arial, helvetica"> requires a lot of additional parameters to be determined. Their analytical formulations are not reported here.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_fluidprop"></A>Water-steam and other fluids properties</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The thermodynamic state of a fluid is completely determined by two independent intensive properties (for instance specific enthalpy and pressure). The dependent properties can be calculated by means of tables or by an analytical formulation.</P>
+<P ALIGN="JUSTIFY">It is worthwhile to note that the various thermodynamic properties are not independent of each other. For example, when the pressure p and the temperature T are chosen as the independent variables of the formulation, then expressions, called derived function, for the specific volume, entropy, enthalpy and all other thermodynamic properties may be derived directly by partial differentiation of the so-called canonical function <I>g</I> = <I>g</I>(p;T), where <I>g</I> is the specific free enthalpy (Gibbs function). If the analytical formulation is presented in terms of these canonical functions, the thermodynamic consistency is maintained.</P>
+<P ALIGN="JUSTIFY">The most useful properties of a fluid are:</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">*</FONT>&#9;<FONT FACE="Arial, helvetica">density</FONT> (<FONT FACE="Symbol">r</FONT>)</P>
+<FONT FACE="Symbol"><P ALIGN="JUSTIFY">*</FONT>&#9;<FONT FACE="Arial, helvetica">specific enthalpy</FONT> (h)</P>
+<FONT FACE="Symbol"><P ALIGN="JUSTIFY">*</FONT>&#9;<FONT FACE="Arial, helvetica">specific entropy</FONT> (s)</P>
+<FONT FACE="Symbol"><P ALIGN="JUSTIFY">*</FONT>&#9;<FONT FACE="Arial, helvetica">temperature </FONT>(T)</P>
+<FONT FACE="Symbol"><P ALIGN="JUSTIFY">*</FONT>&#9;<FONT FACE="Arial, helvetica">viscosity </FONT>(<FONT FACE="Symbol">m</FONT>)</P>
+<FONT FACE="Symbol"><P ALIGN="JUSTIFY">*</FONT>&#9;<FONT FACE="Arial, helvetica">thermal conductivity</FONT> (<FONT FACE="Symbol">l</FONT>)</P>
+<FONT FACE="Symbol"><P ALIGN="JUSTIFY">*</FONT>&#9;<FONT FACE="Arial, helvetica">specific heat at constant pressure</FONT> (C<FONT SIZE=1>p</FONT>)</P>
+<FONT FACE="Symbol"><P ALIGN="JUSTIFY">*</FONT>&#9;<FONT FACE="Arial, helvetica">the partial derivative of density with respect to pressure (at constant entropy)</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">*</FONT>&#9;<FONT FACE="Arial, helvetica">the partial derivative of density with respect to entropy (at constant pressure)</P>
+<STRIKE><P ALIGN="JUSTIFY">&nbsp;</P>
+</STRIKE></FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_tables"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Water-steam tables</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_otherfluid"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Other fluids properties</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_tables"></A>Water-steam tables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The subprograms now available in the LEGOCAD environment are valid in a range of pressures between 0.006108 bar and 400 bar in a region limited by the isothermal curves of 0 °C and 800 °C.</P>
+<P ALIGN="JUSTIFY">The couple of independent variables is constituted by pressure p and entropy s, but entropy is in turn calculable as a function of pressure and enthalpy. So, all properties are calculable from the couples p-s, p-h, p-T. </P>
+<P ALIGN="JUSTIFY">For two-phase mixtures the steam mass quality X is also available.</P>
+<P ALIGN="JUSTIFY">Moreover, saturation values are also available for temperature, enthalpy, entropy and density (the last three both for liquid and steam phase).</P>
+<P ALIGN="JUSTIFY">The calculation is accomplished by dividing the thermodynamical plane in a certain number of regions, limited by isobaric curves. Each region was in turn subdivided in regions delimited by isentropic curves. In each so delimited region, fluid properties are obtained with a parabolic interpolation method based on a network of precalculated values.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_otherfluid"></A>Other fluids properties</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">A great deal of fluids must be considered, such as air, oxygen, hydrogen, nitrogen, methane and other hydrocarbons, fuel oil, combustion products, etc...</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER">Density determination</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For real gases and vapours the perfect gas law:</P>
+</FONT><P ALIGN="CENTER">p<I>V</I> = RT</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">is often used.</P>
+<P ALIGN="JUSTIFY">This equation, which applies to both pure components and mixtures, is reasonably accurate, when the temperature is clearly higher than the critical temperature, up to a pressure of about 2 bar for most compounds and even higher for small, nonassociating molecules.</P>
+<P ALIGN="JUSTIFY">Leaving this zone this equation is no longer valid and other state equations with two parameters, such as the Van Der Walls equation and the often used Redlich and Kwong equation</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image857.gif" WIDTH=222 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">have been proposed.</P>
+<P ALIGN="JUSTIFY">The equation with two parameters have the advantage that the parameters can be expressed in terms of the critical coordinates p</FONT><FONT FACE="Arial, helvetica" SIZE=1>crit</FONT><FONT FACE="Arial, helvetica">, T</FONT><FONT FACE="Arial, helvetica" SIZE=1>crit</FONT><FONT FACE="Arial, helvetica"> and <I>V</I></FONT><FONT FACE="Arial, helvetica" SIZE=1>crit</FONT><FONT FACE="Arial, helvetica"> imposing that for the critical point two conditions are fulfilled:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image858.gif" WIDTH=54 HEIGHT=41>&#9;&#9;<IMG SRC="Image859.gif" WIDTH=64 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">which determine a</FONT><FONT FACE="Arial, helvetica" SIZE=1>1</FONT><FONT FACE="Arial, helvetica"> and a</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> as a function of p</FONT><FONT FACE="Arial, helvetica" SIZE=1>crit</FONT><FONT FACE="Arial, helvetica">, T</FONT><FONT FACE="Arial, helvetica" SIZE=1>crit</FONT><FONT FACE="Arial, helvetica"> and <I>V</I></FONT><FONT FACE="Arial, helvetica" SIZE=1>crit</FONT><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">These equations moreover can be expressed in terms of reduced variables</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image860.gif" WIDTH=104 HEIGHT=22>&#9;<IMG SRC="Image861.gif" WIDTH=106 HEIGHT=22>&#9;<IMG SRC="Image862.gif" WIDTH=108 HEIGHT=21></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">It results that if two reduced variables are known, the third one is defined whatever the fluid may be.</P>
+<P ALIGN="JUSTIFY">From these statements the law of corresponding states arises.</P>
+<P ALIGN="JUSTIFY">If there were equations of state with two parameters representing the behaviour of real fluids, it would be possible, even without knowing this law, to predict the properties of any fluid based on those of a known fluid, on condition that the critical state be known. Such an universal law does not exist, but there are equations of state which are somehow valid for groups of equivalent bodies, for instance series of hydrocarbons.</P>
+<P ALIGN="JUSTIFY">Another method of approach is the so-called virial method; it is based on the fact that at a given temperature the product p<I>V</I> tends toward RT when p tends toward zero. Therefore</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image863.gif" WIDTH=217 HEIGHT=41></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The virial coefficients a</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">, a</FONT><FONT FACE="Arial, helvetica" SIZE=1>3</FONT><FONT FACE="Arial, helvetica">, etc. are functions of T only.</P>
+<P ALIGN="JUSTIFY">For liquids empirical correlations are used.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER">Specific heat capacity determination</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">For gases the ideal gas heat capacity is computed, which is a function of temperature but not of pressure. The most common analytical equation relating the heat capacity to the temperature is a simple polynomial.</P>
+<P ALIGN="JUSTIFY">For liquids empirical correlations are used.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER">Other properties determination</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">All the other properties are estimated by empirical correlations. </P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_dphtcorr"></A>Pressure drop and heat transfer correlations</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The two main fields requiring the usage of empirical correlations are friction coefficient and heat transfer coefficient calculation:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Correlations on friction pressure drops for </FONT><A HREF="#lg_lptheo_onefrict"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">single-phase fluids</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Correlations on friction pressure drops for </FONT><A HREF="#lg_lptheo_twofrict"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">two-phase flow</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_heatws"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Heat transfer correlations</U></FONT></A><FONT FACE="Arial, helvetica"> for water-steam</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_regions"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Heat transfer regions</U></FONT></A><FONT FACE="Arial, helvetica"> for water-steam</P>
+<P ALIGN="JUSTIFY">Heat transfer correlations for </FONT><A HREF="#lg_lptheo_heatfg"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">flue gas</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_onefrict"></A>Correlations on friction pressure drops for single-phase fluids</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">By applying Buckingham theorem on a straight circular tube, having diameter D and length l &gt;&gt; D, in which a single-phase fluid flows, one can get the following formula:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image864.gif" WIDTH=154 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where the dependency of friction coefficient</FONT> <FONT FACE="Symbol">x</FONT><FONT SIZE=1>fr</FONT><SUB> </SUB><FONT FACE="Arial, helvetica">from the Reynolds number has been highlighted.</P>
+<P ALIGN="JUSTIFY">That very dependency may be written in many ways originating a great deal of correlations. Some of these are valid in laminar conditions. Other correlations are valid for turbulent motion, like Colburn’s, Drew’s, Blasius’s, Nikuradse’s or von Karman’s, which are valid in case of smooth tubes. If roughness becomes important, the ratio <I>e/D</I>, being <I>e</I> the average height of protuberances is introduced and two correlations (Nikuradse’s in the region of complete turbulence and Colebrook in the transition region) are currently used.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_twofrict"></A>Correlations on friction pressure drops for two-phase flow</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In the case of two-phase flow many correlations are based on the friction multiplier </FONT><FONT FACE="Symbol">F</FONT><FONT SIZE=1>LO</FONT>² <FONT FACE="Arial, helvetica">as defined by the relationship:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image865.gif" WIDTH=152 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where the derivative at the right side represents the pressure drop that there would be if only liquid flowed in the duct with a flow rate equal to the total mixture flow rate.</P>
+<P ALIGN="JUSTIFY">In some cases a different friction multiplier is used </FONT><FONT FACE="Symbol">F</FONT><FONT SIZE=1>l</FONT>²:</P>
+<P ALIGN="CENTER"><IMG SRC="Image866.gif" WIDTH=130 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where the derivative at the right side represents the pressure drop that there would be if only liquid flowed in the duct with its own flow rate.</P>
+<P ALIGN="JUSTIFY">Martinelli-Nelson’s correlation is based on</FONT> <FONT FACE="Symbol">F</FONT><FONT SIZE=1>LO</FONT>² <FONT FACE="Arial, helvetica">that can be practically expressed in function of quality and pressure. That correlation has the practical drawback not to consider dependency of the multiplier from specific flow rate. Jones corrects the correlation in:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image867.gif" WIDTH=161 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where </FONT><FONT FACE="Symbol">W</FONT> <FONT FACE="Arial, helvetica">is a function of pressure and specific flow rate.</P>
+<P ALIGN="JUSTIFY">Analogous to Jones’s correlation is Baroczy’s, while Chisolm’s utilises the parameter</FONT> <FONT FACE="Symbol">F</FONT><FONT SIZE=1>LO</FONT>². <FONT FACE="Arial, helvetica">Becker’s correlation is simpler but doesn’t consider specific flow rate and has a more limited application range.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_heatws"></A>Heat transfer correlations for water-steam</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">As far as the calculation of the convection heat transfer coefficient</FONT> <FONT FACE="Symbol">g</FONT> <FONT FACE="Arial, helvetica">is concerned, describing heat transfer between fluid and duct wall, by means of Buckingham theorem one can obtain:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image868.gif" WIDTH=121 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">which ties the dimensionless numbers of Reynolds, Nusselt and Prandtl and is the base of a family of correlations whose most famous example is Dittus-Boelter’s.</P>
+<P ALIGN="JUSTIFY">A wide spectrum of correlations able to calculate</FONT> <FONT FACE="Symbol">g</FONT> <FONT FACE="Arial, helvetica">in forced convection conditions is exploited by many LEGO modules. Those correlations consider ducts of whatsoever section (characterised by its hydraulic diameter) and for any given inclination with respect to the horizontal plane.</P>
+<P ALIGN="JUSTIFY">Those correlations don’t cover natural convection and pool boiling conditions.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_regions"></A>Heat transfer regions for water-steam</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The following table shows all the regions that were considered (on account of fluid status), their definition and the correspondent correlation. Great attention was also paid to interface regions so that when fluid conditions change, correlations change automatically.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><P>&#9;<FONT FACE="Arial, helvetica">REGION NAME&#9;THERMAL CONDITIONS&#9;CORRELATION</P>
+</B><P>forced convection with water&#9;pressures greater than 221.2 bar &#9;Swenson<BR>
+in supercritical conditions</P>
+<P>forced convection with &#9;water with quality&#9;Dittus-Boelter<BR>
+subcooled liquid &#9;less than zero</P>
+<P>subcooled boiling&#9;bulk fluid is subcooled but&#9;Chen (modified<BR>
+wall temperature is above the&#9;by Butterworth)<BR>
+saturation temperature and<BR>
+vapour formation takes place</P>
+<P>saturated boiling and forced&#9;two different regions: the first one&#9;Chen<BR>
+convection with liquid film&#9;with boiling and creation of bubbles<BR>
+migrating toward the duct centre,<BR>
+the second one referred to<BR>
+wall-liquid film heat transmission</P>
+<P>transition boiling&#9;after thermal crisis&#9;Bjonard-Griffith<BR>
+the wall is only partially wet</P>
+<P>forced convection with&#9;there is no more wall liquid film:&#9;Groeneveld-Delorme<BR>
+dispersed two-phases&#9;only liquid drops remain; they<BR>
+evaporate because of heat<BR>
+received by steam</P>
+<P>forced convection with &#9;having quality more than one:&#9;Hadaller<BR>
+superheated steam&#9;the steam flux drags liquid drops</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_heatfg"></A>Heat transfer correlations for flue gas</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The thermal power exchanged by flue gas along the boiler backpass is mainly yielded to the exchanger tubes by several banks of heaters. In consideration of their geometrical disposition, one can suppose that the heat transfer between water and flue gas is of crossflow type.</P>
+<P ALIGN="JUSTIFY">For convective heat transfer coefficient calculation one of the most complete correlations in literature, proposed by Babcock &amp; Wilcox Co, can be used:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image869.gif" WIDTH=224 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image870.gif" WIDTH=90 HEIGHT=42>&#9;<IMG SRC="Image871.gif" WIDTH=72 HEIGHT=45>&#9;<IMG SRC="Image872.gif" WIDTH=70 HEIGHT=45></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">being F</FONT><FONT FACE="Arial, helvetica" SIZE=1>d</FONT><FONT FACE="Arial, helvetica"> (depth factor) depending on the number of ranks of exchanging tubes and F</FONT><FONT FACE="Arial, helvetica" SIZE=1>a</FONT><FONT FACE="Arial, helvetica"> (arrangement factor) depending on gas motion and their geometrical disposition.</P>
+<P ALIGN="JUSTIFY">Still following a Babcock &amp; Wilcox metodology also radiative heat transfer coefficient </FONT><FONT FACE="Symbol">g</FONT><FONT SIZE=1>rad</FONT> <FONT FACE="Arial, helvetica">can be taken into account.</P>
+<P ALIGN="JUSTIFY">It can be expressed as a product of two terms, the first one depending on the temperature difference between walls and gas and the wall temperature, the second one depending on the partial pressure of triatomic gases (only CO</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> and H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O are considered) and the radiating thickness, which on its turn depends on the tubes arrangement. The two terms are reported as charts and are not shown here.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_symbols"></A>LEGO mathematical models symbology</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">Symbols:</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">a&#9;&#9;coefficient in pump, fan and compressor momentum equation</P>
+<P ALIGN="JUSTIFY">a</FONT><FONT FACE="Symbol" SIZE=1>h</FONT><FONT SIZE=1> </FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica">&#9;&#9;coefficients in turbine stage efficiency equation</P>
+<P ALIGN="JUSTIFY">A&#9;&#9;cross-section flow area</P>
+<P ALIGN="JUSTIFY">b&#9;&#9;coefficient in fan momentum equation</P>
+<P ALIGN="JUSTIFY">B&#9;&#9;body force</P>
+<P ALIGN="JUSTIFY">B</FONT><FONT FACE="Arial, helvetica" SIZE=1>m</FONT><FONT FACE="Arial, helvetica">&#9;&#9;blade Mach number</P>
+<P ALIGN="JUSTIFY">c</FONT><FONT FACE="Arial, helvetica" SIZE=1>v</FONT><FONT FACE="Arial, helvetica">&#9;&#9;valve flow coefficient </P>
+<P ALIGN="JUSTIFY">C&#9;&#9;torque</P>
+<P ALIGN="JUSTIFY">C&#9;&#9;specific heat</P>
+<P ALIGN="JUSTIFY">C</FONT><FONT FACE="Arial, helvetica" SIZE=1>L</FONT><FONT FACE="Arial, helvetica">&#9;&#9;longitudinal conductance</P>
+<P ALIGN="JUSTIFY">C</FONT><FONT FACE="Arial, helvetica" SIZE=1>p</FONT><FONT FACE="Arial, helvetica">&#9;&#9;specific heat at constant pressure</P>
+<P ALIGN="JUSTIFY">C</FONT><FONT FACE="Arial, helvetica" SIZE=1>T</FONT><FONT FACE="Arial, helvetica">&#9;&#9;thermal capacity</P>
+<P ALIGN="JUSTIFY">C</FONT><FONT FACE="Arial, helvetica" SIZE=1>V</FONT><FONT FACE="Arial, helvetica">&#9;&#9;specific heat at constant volume</P>
+<P ALIGN="JUSTIFY">C</FONT><FONT FACE="Arial, helvetica" SIZE=1>0</FONT><FONT FACE="Arial, helvetica">&#9;&#9;distribution coefficient (drift flux two-phase flow model)</P>
+<P ALIGN="JUSTIFY">D&#9;&#9;diameter</P>
+<P ALIGN="JUSTIFY">E&#9;&#9;Young module</P>
+<P ALIGN="JUSTIFY">E</FONT><FONT FACE="Arial, helvetica" SIZE=1>b</FONT><FONT FACE="Arial, helvetica">&#9;&#9;Total blackbody emitted flux</P>
+<P ALIGN="JUSTIFY">F</FONT><FONT FACE="Arial, helvetica" SIZE=1>a</FONT><FONT FACE="Arial, helvetica">&#9;&#9;arrangement factor</P>
+<P ALIGN="JUSTIFY">F</FONT><FONT FACE="Arial, helvetica" SIZE=1>d</FONT><FONT FACE="Arial, helvetica">&#9;&#9;depth factor</P>
+<P ALIGN="JUSTIFY">F</FONT><FONT FACE="Arial, helvetica" SIZE=1>T</FONT><FONT FACE="Arial, helvetica">&#9;&#9;temperature factor</P>
+<P ALIGN="JUSTIFY">F</FONT><FONT FACE="Arial, helvetica" SIZE=1>v</FONT><FONT FACE="Arial, helvetica">&#9;&#9;view factor</P>
+<P ALIGN="JUSTIFY">g&#9;&#9;gravity acceleration</P>
+<I><P ALIGN="JUSTIFY">g</I>&#9;&#9;specific free enthalpy</P>
+<P ALIGN="JUSTIFY">G&#9;&#9;specific mass flow rate</P>
+<P ALIGN="JUSTIFY">h&#9;&#9;specific enthalpy</P>
+<P ALIGN="JUSTIFY">h</FONT><FONT FACE="Arial, helvetica" SIZE=1>LHV</FONT><FONT FACE="Arial, helvetica">&#9;&#9;lower heating value of fuel</P>
+<P ALIGN="JUSTIFY">H&#9;&#9;head</P>
+<P ALIGN="JUSTIFY">i&#9;&#9;index of cells or flows</P>
+<P ALIGN="JUSTIFY">j&#9;&#9;index of cells or flows</P>
+<P ALIGN="JUSTIFY">j&#9;&#9;velocity of the centre of volume (drift flux two-phase flow model)</P>
+<P ALIGN="JUSTIFY">k&#9;&#9;coefficient</P>
+<P ALIGN="JUSTIFY">k</FONT><FONT FACE="Arial, helvetica" SIZE=1>abs</FONT><FONT FACE="Arial, helvetica">&#9;&#9;absorption coefficient (radiative heat transfer model)</P>
+<P ALIGN="JUSTIFY">l&#9;&#9;length</P>
+<P ALIGN="JUSTIFY">L&#9;&#9;latent heat of vaporisation</P>
+<P ALIGN="JUSTIFY">m&#9;&#9;molar mass</P>
+<P ALIGN="JUSTIFY">M&#9;&#9;mass</P>
+<P ALIGN="JUSTIFY">n&#9;&#9;exponent of isentropic expansion</P>
+<P ALIGN="JUSTIFY">N&#9;&#9;number of cells or flows</P>
+<I><P ALIGN="JUSTIFY">N</I>&#9;&#9;molar fraction</P>
+<P ALIGN="JUSTIFY">N</FONT><FONT FACE="Arial, helvetica" SIZE=1>t</FONT><FONT FACE="Arial, helvetica">&#9;&#9;number of parallel tubes</P>
+<P ALIGN="JUSTIFY">Nu&#9;&#9;Nusselt number</P>
+<P ALIGN="JUSTIFY">p&#9;&#9;pressure</P>
+<P ALIGN="JUSTIFY">P&#9;&#9;perimeter</P>
+<P ALIGN="JUSTIFY">Pr&#9;&#9;Prandtl number</P>
+<P ALIGN="JUSTIFY">q&#9;&#9;volumetric flow rate</P>
+<P ALIGN="JUSTIFY">Q&#9;&#9;thermal power</P>
+<P ALIGN="JUSTIFY">Q&#9;&#9;Imposed heat flux</P>
+<P ALIGN="JUSTIFY">r&#9;&#9;radial coordinate</P>
+<P ALIGN="JUSTIFY">R&#9;&#9;universal gas constant</P>
+<P ALIGN="JUSTIFY">Re&#9;&#9;Reynolds number</P>
+<P ALIGN="JUSTIFY">R</FONT><FONT FACE="Arial, helvetica" SIZE=1>x</FONT><FONT FACE="Arial, helvetica">&#9;&#9;fractional reaction of a turbine stage</P>
+<P ALIGN="JUSTIFY">s&#9;&#9;specific entropy</P>
+<P ALIGN="JUSTIFY">S&#9;&#9;thickness</P>
+<P ALIGN="JUSTIFY">S&#9;&#9;radiative heat transfer area</P>
+<P ALIGN="JUSTIFY">S</FONT><FONT FACE="Arial, helvetica" SIZE=1>d</FONT><FONT FACE="Arial, helvetica">&#9;&#9;direct exchange area</P>
+<P ALIGN="JUSTIFY">S</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica">S</FONT><FONT FACE="Arial, helvetica" SIZE=1>j</FONT><FONT FACE="Arial, helvetica">&#9;&#9;total exchange area</P>
+<P ALIGN="JUSTIFY">t&#9;&#9;time</P>
+<P ALIGN="JUSTIFY">T&#9;&#9;temperature</P>
+<P ALIGN="JUSTIFY">U</FONT><FONT FACE="Arial, helvetica" SIZE=1>gj</FONT><FONT FACE="Arial, helvetica">&#9;&#9;total drift velocity (drift flux two-phase flow model)</P>
+<P ALIGN="JUSTIFY">v&#9;&#9;speed</P>
+<I><P ALIGN="JUSTIFY">V</I>&#9;&#9;molar volume</P>
+<P ALIGN="JUSTIFY">V&#9;&#9;volume</P>
+<P ALIGN="JUSTIFY">V</FONT><FONT FACE="Arial, helvetica" SIZE=1>gj</FONT><SUB><FONT FACE="Arial, helvetica">&#9;</SUB>&#9;local drift velocity (drift flux two-phase flow model)</P>
+<P ALIGN="JUSTIFY">x&#9;&#9;axial abscissa</P>
+<P ALIGN="JUSTIFY">x&#9;&#9;coordinate in a rectangular coordinates system</P>
+<P ALIGN="JUSTIFY">X&#9;&#9;steam mass quality</P>
+<P ALIGN="JUSTIFY">X&#9;&#9;mass fraction</P>
+<P ALIGN="JUSTIFY">X</FONT><FONT FACE="Arial, helvetica" SIZE=1>V</FONT><FONT FACE="Arial, helvetica">&#9;&#9;volumetric quality</P>
+<P ALIGN="JUSTIFY">y&#9;&#9;water level</P>
+<P ALIGN="JUSTIFY">y&#9;&#9;coordinate in a rectangular coordinates system</P>
+<P ALIGN="JUSTIFY">z&#9;&#9;elevation</P>
+<P ALIGN="JUSTIFY">z&#9;&#9;coordinate in a rectangular coordinates system</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">Greek letters:</P>
+</B></FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">a</FONT><FONT FACE="Arial, helvetica">&#9;&#9;void fraction</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">a</FONT><FONT FACE="Arial, helvetica">&#9;&#9;exponent in the relationship flow area vs. lift in the valve model</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">a</FONT><FONT SIZE=1>T</FONT><FONT FACE="Arial, helvetica">&#9;&#9;thermal dilatation coefficient</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">b</FONT><FONT FACE="Arial, helvetica">&#9;&#9;compression ratio</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">b</FONT><FONT SIZE=1>w</FONT><FONT FACE="Arial, helvetica">&#9;&#9;flat surface - real surface ratio</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">g</FONT><FONT FACE="Arial, helvetica">&#9;&#9;heat transfer coefficient</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">G</FONT><FONT FACE="Arial, helvetica">&#9;&#9;mass flow rate</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">e</FONT><FONT FACE="Arial, helvetica">&#9;&#9;emissivity</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">e</FONT><FONT SIZE=1>z</FONT><FONT FACE="Arial, helvetica">&#9;&#9;axial dilatation for unit length</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">h</FONT><FONT FACE="Arial, helvetica">&#9;&#9;efficiency</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">J</FONT><FONT FACE="Arial, helvetica">&#9;&#9;valve lift (fraction of maximum lift)</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">l</FONT><FONT FACE="Arial, helvetica">&#9;&#9;thermal conductivity</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">l</FONT><FONT SIZE=1>opt</FONT><FONT FACE="Arial, helvetica">&#9;&#9;optical path length</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">m</FONT><FONT FACE="Arial, helvetica">&#9;&#9;dynamic viscosity</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">n</FONT><FONT FACE="Arial, helvetica">&#9;&#9;transverse contraction module</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">x</FONT><FONT FACE="Arial, helvetica">&#9;&#9;head loss coefficient</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">P</FONT><FONT FACE="Arial, helvetica">&#9;&#9;power</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">r</FONT><FONT FACE="Arial, helvetica">&#9;&#9;density</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">s</FONT><FONT FACE="Arial, helvetica">&#9;&#9;surface tension</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">s</FONT><FONT SIZE=1>rad</FONT><FONT FACE="Arial, helvetica">&#9;&#9;Stefan-Boltzmann constant</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">S</FONT><FONT FACE="Arial, helvetica">&#9;&#9;heat transfer surface area</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">t</FONT><FONT FACE="Arial, helvetica">&#9;&#9;time constant</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">t</FONT><FONT SIZE=1>sep</FONT><FONT FACE="Arial, helvetica">&#9;&#9;separation time</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">f</FONT><FONT FACE="Arial, helvetica">&#9;&#9;angular coordinate</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">F</FONT><FONT FACE="Arial, helvetica">&#9;&#9;compressor flow number</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">Y</FONT><FONT FACE="Arial, helvetica">&#9;&#9;internal power for unit volume</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="JUSTIFY">w</FONT><FONT FACE="Arial, helvetica">&#9;&#9;rotational speed</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">Subscripts:</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">a&#9;&#9;air</P>
+<P ALIGN="JUSTIFY">byp&#9;&#9;bypass</P>
+<P ALIGN="JUSTIFY">comb&#9;&#9;combustion</P>
+<P ALIGN="JUSTIFY">cond&#9;&#9;condensation</P>
+<P ALIGN="JUSTIFY">cund&#9;&#9;conduction</P>
+<P ALIGN="JUSTIFY">conv&#9;&#9;convective</P>
+<P ALIGN="JUSTIFY">cool&#9;&#9;cooling</P>
+<P ALIGN="JUSTIFY">csup&#9;&#9;surface condensation</P>
+<P ALIGN="JUSTIFY">crit&#9;&#9;critical</P>
+<P ALIGN="JUSTIFY">damp&#9;&#9;damper</P>
+<P ALIGN="JUSTIFY">duct&#9;&#9;duct</P>
+<P ALIGN="JUSTIFY">DR&#9;&#9;drainage</P>
+<P ALIGN="JUSTIFY">DS&#9;&#9;desuperheating</P>
+<P ALIGN="JUSTIFY">ext&#9;&#9;external</P>
+<P ALIGN="JUSTIFY">EX&#9;&#9;outlet</P>
+<P ALIGN="JUSTIFY">ev&#9;&#9;evaporation</P>
+<P ALIGN="JUSTIFY">f&#9;&#9;bottom</P>
+<P ALIGN="JUSTIFY">FILM&#9;&#9;boundary layer</P>
+<P ALIGN="JUSTIFY">fl&#9;&#9;fluid</P>
+<P ALIGN="JUSTIFY">frict&#9;&#9;frictional</P>
+<P ALIGN="JUSTIFY">fr&#9;&#9;friction</P>
+<P ALIGN="JUSTIFY">fuel&#9;&#9;fuel</P>
+<P ALIGN="JUSTIFY">FW&#9;&#9;feedwater</P>
+<P ALIGN="JUSTIFY">g&#9;&#9;gas</P>
+<P ALIGN="JUSTIFY">h&#9;&#9;hydraulic</P>
+<P ALIGN="JUSTIFY">IGV&#9;&#9;inlet guide vanes</P>
+<P ALIGN="JUSTIFY">int&#9;&#9;internal</P>
+<P ALIGN="JUSTIFY">IN&#9;&#9;inlet</P>
+<P ALIGN="JUSTIFY">irr&#9;&#9;irreversible</P>
+<P ALIGN="JUSTIFY">isl&#9;&#9;steam-liquid interface</P>
+<P ALIGN="JUSTIFY">iso&#9;&#9;isentropic</P>
+<P ALIGN="JUSTIFY">l&#9;&#9;liquid</P>
+<P ALIGN="JUSTIFY">LO&#9;&#9;liquid only</P>
+<P ALIGN="JUSTIFY">loss&#9;&#9;local momentum losses</P>
+<P ALIGN="JUSTIFY">lum&#9;&#9;luminous</P>
+<P ALIGN="JUSTIFY">m&#9;&#9;mean</P>
+<P ALIGN="JUSTIFY">meas&#9;&#9;measured</P>
+<P ALIGN="JUSTIFY">mec&#9;&#9;mechanical</P>
+<P ALIGN="JUSTIFY">mix&#9;&#9;mixing</P>
+<P ALIGN="JUSTIFY">mot&#9;&#9;motive</P>
+<P ALIGN="JUSTIFY">nom&#9;&#9;nominal working point</P>
+<P ALIGN="JUSTIFY">p&#9;&#9;pump</P>
+<P ALIGN="JUSTIFY">r&#9;&#9;reduced</P>
+<P ALIGN="JUSTIFY">rad&#9;&#9;radiative</P>
+<P ALIGN="JUSTIFY">rec&#9;&#9;recovery</P>
+<P ALIGN="JUSTIFY">recr&#9;&#9;recirculation</P>
+<P ALIGN="JUSTIFY">res&#9;&#9;resistance</P>
+<P ALIGN="JUSTIFY">rev&#9;&#9;reversible</P>
+<P ALIGN="JUSTIFY">s&#9;&#9;saturated</P>
+<P ALIGN="JUSTIFY">SB&#9;&#9;subcooling </P>
+<P ALIGN="JUSTIFY">st&#9;&#9;steam</P>
+<P ALIGN="JUSTIFY">sup&#9;&#9;superheated</P>
+<P ALIGN="JUSTIFY">T&#9;&#9;turbine</P>
+<P ALIGN="JUSTIFY">Tb&#9;&#9;turbine stage bucket</P>
+<P ALIGN="JUSTIFY">Tn&#9;&#9;turbine stage nozzle</P>
+<P ALIGN="JUSTIFY">th&#9;&#9;throat</P>
+<P ALIGN="JUSTIFY">tr&#9;&#9;transparent</P>
+<P ALIGN="JUSTIFY">uba&#9;&#9;unburnt air</P>
+<P ALIGN="JUSTIFY">ubf&#9;&#9;unburnt fuel</P>
+<P ALIGN="JUSTIFY">v&#9;&#9;volumetric</P>
+<P ALIGN="JUSTIFY">w&#9;&#9;wall</P></FONT></BODY>
+</HTML>

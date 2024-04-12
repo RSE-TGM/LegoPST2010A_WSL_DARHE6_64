@@ -1,0 +1,184 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><i><b><font size="5">An example of the usage of the FORAUS utility
+(CPOM)</font></b></i></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">The standard library module simulating a
+centrifugal pump (CPOM) uses the FORAUS utility for the characteristic curves of
+non standard pumps. The model of pump is distinguished by an user assigned code
+(COD), which is zero for standard pumps. If the value of COD is positive, the
+pump is a non standard one, and the user routine DPU is invoked:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---residuals evaluation</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (TYP .LE. 0.) THEN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C-------standard model for pump
+characteristic curve</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CALL PMPDPC(GCAR,QNOM,OMNOM,DPNOM,CNOM,Q1PV,OM,DP,CRES)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C-------invoke FORAUS routine for pump
+characteristic curve</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CALL DPU(TYP,QNOM,OMNOM,DPNOM,CNOM,ETANOM,Q1PV,RO,OM,DP,CRES)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ENDIF</font></b></span></p>
+<p class="MsoNormal"><span lang="EN-GB">The source code of developer written DPU
+and of the related FORAUS section follows (comments have been translated for
+legibility reasons):&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C~FORAUS_CPOM~C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C AUXILIARY FORTRAN OF CONTRIFUGAL PUMP
+MODULE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C FOR ITS DEFINITION SEE THE USER MANUAL
+OR</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C USE THE RELATED COMMANDS OF LEGOCAD
+SYSTEM.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C************ QUICK REFERENCE ON CALLING
+PARAMETERS ***********</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SUBROUTINE DPU(TYP,QVNOM,OMNOM,DPNOM,CNOM,ETANOM,Q,RO,OM,DP,CRES)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp; </span>Input
+parameters: TYP,QVNOM,OMNOM,DPNOM,CNOM,ETANOM,Q,RO,OM</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp; </span>Output
+parameters: DP,CRES</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>USER SUBROUTINE: MUST COMPUTE THE VALUE OF DP AND CRES</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DEPENDING ON THE OTHER VARIABLES VALUES.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>MEANING OF THE INPUT AND OUTPUT VARIABLES:</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>TYP = DATUM (USER PROVIDED) WHICH CAN BE USED TO DISTINGUISH</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DIFFERENT KIND OF PUMP CHARACTERISTIC CURVES</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CONTAINED IN THIS SUBROUTINE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>QVNOM<span style="mso-spacerun: yes">&nbsp; </span>= NOMINAL VOLUMETRIC
+FLOW RATE (M**3/S)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>OMNOM<span style="mso-spacerun: yes">&nbsp; </span>= NOMINAL ROTATIONAL
+SPEED (RAD/S)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DPNOM<span style="mso-spacerun: yes">&nbsp; </span>= NOMINAL PUMP HEAD
+(PA)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNOM<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>= NOMINAL
+RESISTANT TORQUE (N*M)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ETANOM = NOMINAL EFFICIENCY</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Q<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>=
+ACTUAL FLOW RATE (M**3/S)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RO<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>=
+ACTUAL FLUID DENSITY (KG/M**3)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>OM<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>=
+ACTUAL PUMP SPEED (RAD/S)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DP<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>=
+ACTUAL PUMP HEAD (PA)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CRES<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>= ACTUAL
+RESISTANT TORQUE (KG*M)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SUBROUTINE EXAMPLE:</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C**************** PUMP CHARACTERISTIC
+*********************</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>A=1.22</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>OMS=OM/OMNOM</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>QS=Q/QVNOM</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DP=DPNOM*(A*OMS**2-(A-1.)*QS*ABS(QS))</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WHEN THE PUMP WORKS IN &quot;CLOSED INLET&quot; CONDITION (Q=0)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AND AT NOMINAL SPEED (OM=OMNOM), DP=DPNOM*A.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SO &quot;A&quot; IS THE VALUE OF THE &quot;CLOSED INLET&quot; PUMP HEAD</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C*************** EFFICIENCY EVALUATION
+******************</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(OMS.LT.1.E-4)GO TO 125</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RID=QS/OMS</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ETA=ETANOM*(-RID**2+2.*RID)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C**************** RESISTANT TORQUE
+**********************</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(ETA.LT.1.E-4)GO TO 125</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>OME=OM</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(OME.LE.1.E-3)OME=1.E-3</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CRES=Q*DP/OME/ETA</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>GO TO 130</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC125<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CRES=0.5*DP/DPNOM*CNOM</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC130<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">CC<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>EXAMPLE END.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C************ BEGINNING OF FORTRAN SOURCE
+CODE TO BE WRITTEN ************</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SUBROUTINE DPU(TYP,QVNOM,OMNOM,DPNOM,CNOM,ETANOM,Q,RO,OM,DP,CRES)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<b><font size="2" face="Courier New">
+<span lang="EN-GB" style="mso-bidi-font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-bidi-font-family: Times New Roman; mso-ansi-language: EN-GB; mso-fareast-language: IT; mso-bidi-language: AR-SA">C~FORAUS_CPOM~C</span>
+
+</font></b><!--mstheme--></font></body>
+
+</html>

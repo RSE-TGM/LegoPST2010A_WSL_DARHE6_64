@@ -1,0 +1,331 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>lgmodsa3</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample3_a"></A>Example 3 - pump and valves simulation models</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The model maker can't have any doubt about the modules to be used to simulate the pump and the valve: the librarian module for the pump is CPOM and the librarian module for the valve is VALV.</P>
+<P ALIGN="JUSTIFY">But these modules can be istanciated in several different configurartions.</P>
+<P ALIGN="JUSTIFY">For the pump, the first selection is between an imposed-speed pump and a motor-power-imposed pump. Assuming we are not interested in the simulation of the dynamic behaviour of the pump rotational speed, the imposed-speed model will be choosen.</P>
+<P ALIGN="JUSTIFY">Both for the PUMP and the VALV modules, the model maker must also select the hydraulical output variable: fluid flow rate, inlet pressure or outlet pressure. This choice can be made only after the selection of the module (or the modules) used for the water/flue gas heat exchanger. Note that for these kind of modules, the better choice, which may not cause numerical problems to the simulator in every working condition, is always the "flow-rate-output" choice. So we will try to build the rest of the model in order to allow the pump and the valve evaluate their throwing fluid flow rate.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample3_b"></A>Example 3 - exchanger modelization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">First of all the check of the LEGO libraries easily make the model-maker realize that in this case is not possible to simulate this plant component with only one LEGO module, as no library module can simulate every hydraulical and thermo-dynamical phenomena of such kind of exchangers. Actually a module able to simulate a whole boiling exchanger will be a very complicated and a very inconvenient to be used.</P>
+<P ALIGN="JUSTIFY">The exchanger can be divided into file sub-components:</P>
+<P ALIGN="JUSTIFY">the water inlet manifold;</P>
+<P ALIGN="JUSTIFY">the exchanger pipe bundle (water side);</P>
+<P ALIGN="JUSTIFY">the metal walls of the pipe bundle;</P>
+<P ALIGN="JUSTIFY">the external side of the pipe bundle (flue gases side);</P>
+<P ALIGN="JUSTIFY">the steam outlet manifold.</P>
+<P ALIGN="JUSTIFY">In the LEGO libraries one can find the LEGO module which simulates both the water side and the metal walls of the pipe bundle (the EXCH module) and the LEGO module which simulates the thermo-dynamical behaviour of the flue gases side (the FUMN module). Obviously the EXCH and the FUMN modules have been developed in order to easily allow their direct connection (no auxiliary module is so required to build the model of the exchanger).</P>
+<P ALIGN="JUSTIFY">Using the FUMN module, one does not simulate the hydraulical model of the flue gas duct, as usually in LEGO models the hydraylical and the termal behaviour of the flue gas ducts are simulated separately. In the building of the topology of this example we will neglect the hydraulical behaviour of the flue gas duct.</P>
+<P ALIGN="JUSTIFY">The EXCH and the FUMN modules are "cellized" modules. A cellized module is a module which allows the user to select (inside a certain range) the number of "lumped parameters" cells in order to better approximate the actual behaviour of the exchanger.</P>
+<P ALIGN="JUSTIFY">For a four-passes exchanger (like the one drawed in the previous picture) the most obvious choice is to select exactly four cells both for the EXCH and for the FUMN module. But if we better look at the EXCH module, we can see that the main hydraulical output variables are the inlet flow rate and the outlet pressure, while the inlet pressure and the outlet flow rate are input variables. In order to allow both the inlet pump and the outlet valve to evaluate their fluid flow rate as output variables, the VALV module could be directly connected to the downstream side of the EXCH, while an intermediate manifold must be placed between the pump and the upstream side of the exchanger.</P>
+<P ALIGN="JUSTIFY">In this case, the outlet manifold can be simulated simply adding a cell to the EXCH module. This cell will not exchange heat with the flue gas duct, but with the environment; the extrenal side (air side) thermal exchanging coefficient must be imposed by the model maker depending on the manifold size and the kind of cohibentation. On the contrary, for the inlet manifold the model maker will use the COLT module, like in the first example: in this case, one inlet branch and one outlet brach are present.</P>
+<P ALIGN="JUSTIFY">In order to obtain the described model for the exchanger, the FUMN module will be instanciated selecting four cells and the EXCH module with five cells (the last one representing the outlet manifold).</P>
+<P ALIGN="JUSTIFY">The EXCH and the FUMN module also allows the user to let every cell exchange heat with more different cells on the other side, belonging or not belonging to the same block. It means that one cell of an EXCH module may exchange heat with more FUMN cells, and one FUMN cell may exchange heat with more EXCH cells. In this example, this feature of the EXCH and FUMN module will not be used, so the model maker will impose only one exchanging zone (EXCH) or surface (FUMN) for each cell.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample3_c"></A>Example 3 - scheme of the LEGO model</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The model will be composed of five blocks (three of them simulating the heat exchanger):</P>
+<P ALIGN="JUSTIFY">the feeding pump (CPOM module - FEED block);</P>
+<P ALIGN="JUSTIFY">the pump outlet (and exchanger inlet) water manifold (COLT module - COLL block);</P>
+<P ALIGN="JUSTIFY">the exchanger water side, metal wall and outlet (EXCH module - EXCH block);</P>
+<P ALIGN="JUSTIFY">the exchanger flue gases side (FUMN module - FLUE block);</P>
+<P ALIGN="JUSTIFY">the steam outlet valve (VALV module - VOUT block).</P>
+<P ALIGN="JUSTIFY">The following picture represents the drawing of the LEGO model built, which is very interesting in comparison with the plant scheme:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image21.gif" WIDTH=588 HEIGHT=259></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample3_d"></A>Example 3 - variables of the EXCH block</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The complete connection scheme of this model is too complicated to be explained and drawed all together. So we will divide the description in two parts: the connections between the water side and the flue gas side of the exchanger and the connections inside the water/steam line.</P>
+<P ALIGN="JUSTIFY">First of all one can look at the list of the variables of the EXCH block:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P><DIR>
+
+<P>EXCHEXCH BL.-EXCH- **** MODULO EXCH - boiler</P>
+<P>HM_1EXCH --UA-- AVERAGE FLUID ENTHALPY CELL 1</P>
+<P>HM_2EXCH --UA-- AVERAGE FLUID ENTHALPY CELL 2</P>
+<P>HM_3EXCH --UA-- AVERAGE FLUID ENTHALPY CELL 3</P>
+<P>HM_4EXCH --UA-- AVERAGE FLUID ENTHALPY CELL 4</P>
+<P>HM_5EXCH --UA-- AVERAGE FLUID ENTHALPY CELL 5</P>
+<P>PU_1EXCH --UA-- FLUID PRESSURE AT CELL 1 OUTLET</P>
+<P>PU_2EXCH --UA-- FLUID PRESSURE AT CELL 2 OUTLET</P>
+<P>PU_3EXCH --UA-- FLUID PRESSURE AT CELL 3 OUTLET</P>
+<P>PU_4EXCH --UA-- FLUID PRESSURE AT CELL 4 OUTLET</P>
+<P>PUTUEXCH --UA-- TUBE OUTLET FLUID PRESSURE</P>
+<P>WITUEXCH --UA-- TUBE INLET MASS FLOW</P>
+<P>WI_1EXCH --UA-- FLUID MASS FLOW AT CELL 1 INLET</P>
+<P>WI_2EXCH --UA-- FLUID MASS FLOW AT CELL 2 INLET</P>
+<P>WI_3EXCH --UA-- FLUID MASS FLOW AT CELL 3 INLET</P>
+<P>WI_4EXCH --UA-- FLUID MASS FLOW AT CELL 4 INLET</P>
+<P>QTI1EXCH --UA-- POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL 1</P>
+<P>QTI2EXCH --UA-- POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL 2</P>
+<P>QTI3EXCH --UA-- POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL 3</P>
+<P>QTI4EXCH --UA-- POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL 4</P>
+<P>QTI5EXCH --UA-- POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL 5</P>
+<P>HU_1EXCH --UA-- TOTAL ENTHALPY AT CELL 1 OUTLET</P>
+<P>HU_2EXCH --UA-- TOTAL ENTHALPY AT CELL 2 OUTLET</P>
+<P>HU_3EXCH --UA-- TOTAL ENTHALPY AT CELL 3 OUTLET</P>
+<P>HU_4EXCH --UA-- TOTAL ENTHALPY AT CELL 4 OUTLET</P>
+<P>HUTUEXCH --UA-- TUBE OUTLET TOTAL ENTHALPY</P>
+<P>TPE1EXCH --UA-- EXTERNAL WALL TEMPERATURE AT CELL 1</P>
+<P>TPE2EXCH --UA-- EXTERNAL WALL TEMPERATURE AT CELL 2</P>
+<P>TPE3EXCH --UA-- EXTERNAL WALL TEMPERATURE AT CELL 3</P>
+<P>TPE4EXCH --UA-- EXTERNAL WALL TEMPERATURE AT CELL 4</P>
+<P>TPE5EXCH --UA-- EXTERNAL WALL TEMPERATURE AT CELL 5</P>
+<P>HITUEXCH --IN-- TUBE INLET TOTAL ENTHALPY</P>
+<P>PITUEXCH --IN-- TUBE INLET FLUID PRESSURE</P>
+<P>WUTUEXCH --IN-- TUBE OUTPUT MASS FLOW</P>
+<P>HVALEXCH --IN-- TUBE OUTLET FLUID ENTHALPY (FLOW INVERSION)</P>
+<P>ATTREXCH --IN-- TUBE FRICTION COEFFICIENT</P>
+<P>TF11EXCH --IN-- EXTERNAL FLUID TEMPERATURE CELL 1 ZONE 1</P>
+<P>TF21EXCH --IN-- EXTERNAL FLUID TEMPERATURE CELL 2 ZONE 1</P>
+<P>TF31EXCH --IN-- EXTERNAL FLUID TEMPERATURE CELL 3 ZONE 1</P>
+<P>TF41EXCH --IN-- EXTERNAL FLUID TEMPERATURE CELL 4 ZONE 1</P>
+<P>TF51EXCH --IN-- EXTERNAL FLUID TEMPERATURE CELL 5 ZONE 1</P>
+<P>GE11EXCH --IN-- CONVECTIVE COEFF. EXTERNAL FLUID CELL 1 ZONE 1</P>
+<P>GE21EXCH --IN-- CONVECTIVE COEFF. EXTERNAL FLUID CELL 2 ZONE 1</P>
+<P>GE31EXCH --IN-- CONVECTIVE COEFF. EXTERNAL FLUID CELL 3 ZONE 1</P>
+<P>GE41EXCH --IN-- CONVECTIVE COEFF. EXTERNAL FLUID CELL 4 ZONE 1</P>
+<P>GE51EXCH --IN-- CONVECTIVE COEFF. EXTERNAL FLUID CELL 5 ZONE 1</P></DIR>
+
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In the list one can easily recognize the "external" variables, to be used for the connections with the rest of the water/steam line (inlet and outlet fluid pressure, entalpy and flow rate) and the cells variables, to be used for the connection with the flue gas side of the exchanger.</P>
+<P ALIGN="JUSTIFY">Only one external variable is not present: the entalpy of the fluid coming out from the pipe inlet in case of reversed flow. This value, asked by the inlet mainfold simulation module, may be substituted with the mean fluid entalpy inside the first cell.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample3_e"></A>Example 3 - connections inside the water/steam line</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The connections inside the water/steam line are very similar to the connections made in the other examples previously described.</P>
+<P ALIGN="JUSTIFY">The variables of the other water/steam blocks are the following:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P><DIR>
+
+<P>CPOMFEED BL.-FEED- **** MODULO CPOM - feed water pump</P>
+<P>HUPMFEED --UA-- FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>WPOMFEED --UA-- FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>PUPMFEED --IN-- PRESSURE AT THE PUMP OUTLET</P>
+<P>PIPMFEED --IN-- PRESSURE AT THE PUMP INLET</P>
+<P>HIPMFEED --IN-- FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>OMPMFEED --IN-- ROTATIONAL SPEED OF THE PUMP</P>
+<P>NPOMFEED --IN-- NUMBER OF PUMPS IN PARALLEL</P>
+<P>&nbsp;</P>
+<P>COLTCOLL BL.-COLL- **** MODULO COLT - inlet manifold</P>
+<P>HCOLCOLL --UA-- FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>PCOLCOLL --UA-- FLUID PRESSURE IN THE MANIFOLD</P>
+<P>TCOLCOLL --UA-- METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>WE_1COLL --IN-- FLOW RATE IN THE ENTERING BRANCH N. 1</P>
+<P>HE_1COLL --IN-- ENTHALPY IN THE ENTERING BRANCH N. 1</P>
+<P>WU_1COLL --IN-- FLOW RATE IN THE COMING OUT BRANCH N. 1</P>
+<P>HU_1COLL --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>TESTCOLL --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTCOLL --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>&nbsp;</P>
+<P>VALVVOUT BL.-VOUT- **** MODULO VALV - outlet valve</P>
+<P>WVALVOUT --UA-- FLUID FLOW RATE IN THE VALVE</P>
+<P>PIVAVOUT --IN-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>PUVAVOUT --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HVALVOUT --IN-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>ALZAVOUT --IN-- VALVE LIFT</P></DIR>
+
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The flow rate and the entalpy of the fluid though the one manifold incoming branch have to be connected to the water flow rate and entalpy at pump outlet. The pressure at the pump outlet and the pressure at the exchanger inlet has to be connected to the fluid pressure inside the manifold.</P>
+<P ALIGN="JUSTIFY">The flow rate through the one manifold outcoming branch has to be connected to the fluid flow rate at the exchanger inlet. As previously said, the entalpy of the fluid entering through the outlet branch of the manifold in case of reverted fluid has to be connected to the mean entalpy of the fluid inside the first cell of the exchanger.</P>
+<P ALIGN="JUSTIFY">At last, the flow rate at the exchanger outlet has to be connected to the fluid flow rate through the valve, and the entalpy of the fluid throwing the valve has to be connected to the entalpy at the exchanger outlet.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample3_f"></A>Example 3 - connections scheme (water/steam line)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The connections inside the water/steam line are shown in the following scheme (the variables scheme of the EXCHEXCH block has been simplified):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image22.gif" WIDTH=617 HEIGHT=405></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample3_g"></A>Example 3 -connections inside the exchanger</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The variables of the FLUE block, which represents the flue gas side of the exchanger, are the following:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P><DIR>
+
+<P>FUMNFLUE BL.-FLUE- **** MODULO FUMN - flue gas duct</P>
+<P>TUF_FLUE --UA-- OUTLET FLUE GAS TEMPERATURE</P>
+<P>TF_1FLUE --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 1</P>
+<P>TF_2FLUE --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 2</P>
+<P>TF_3FLUE --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 3</P>
+<P>TF_4FLUE --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 4</P>
+<P>GF_1FLUE --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 1</P>
+<P>GF_2FLUE --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 2</P>
+<P>GF_3FLUE --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 3</P>
+<P>GF_4FLUE --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 4</P>
+<P>WIF_FLUE --IN-- INLET FLOW RATE OF FLUE GAS</P>
+<P>TIF_FLUE --IN-- INLET FLUE GAS TEMPERATURE</P>
+<P>FAS_FLUE --IN-- GRITNESS FACTOR OF THE TUBES</P>
+<P>%CO2FLUE --IN-- PARTIAL PRESSURE OF CO2 IN FLUE GAS (IN PERCENT)</P>
+<P>%PH2FLUE --IN-- PARTIAL PRESSURE OF H2O IN FLUE GAS (IN PERCENT)</P>
+<P>%H2OFLUE --IN-- MASSIC FRACTION OF H2O IN FLUE GAS (IN PERCENT)</P>
+<P>TM11FLUE --IN-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 1</P>
+<P>TM12FLUE --IN-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 2</P>
+<P>TM13FLUE --IN-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 3</P>
+<P>TM14FLUE --IN-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 4</P></DIR>
+
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The connections between the water side and the flue gas side of the exchanger has to be performed "cell-by-cell".</P>
+<P ALIGN="JUSTIFY">As the exchanger has been set in a counter-flow arrangement, the first cell of the water and metal side (EXCH block) will exchange heat with the fourth and last cell of the flue gas side (FLUE block), the second cell of the EXCH block will exchange with the third cell of FLUE and so on, up to the fourth cell of EXCH which will exchange heat with the first cell of FLUE. As previously said, the fifth cell of EXCH will not exchange heat with the flue gases because it represents the outlet manifold.</P>
+<P ALIGN="JUSTIFY">For each cell, the external fluid temperature and the external heat exchange coefficient of the EXCH block must be connected to the same quantity computed by the FLUE block for the related exchanging cell. On the contrary, the metal wall temperature of each cell of the FLUE block has to be connected to the external wall temperature evaluated by the EXCH block for the related exchanging cell.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample3_h"></A>Example 3 - connections scheme (heat exchange)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The connections to be performed to simulate the heat exchange inside the exchanger are shown in the following scheme (the variables scheme of the EXCHEXCH block has been simplified):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image23.gif" WIDTH=622 HEIGHT=361></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample3_i"></A>Example 3 - topological diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following picture represents the topological diagram of the model:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image24.gif" WIDTH=459 HEIGHT=201></P>
+<P>&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample3_j"></A>Example 3 - resulting topological file</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In order to complete the model topology building, the last action to be performed is to modify the descriptions of the most important variables to allow the user more easily understand the variable meaning inside the plant.</P>
+<P ALIGN="JUSTIFY">The resulting topological file (F01.DAT) of the model is the following one:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P><DIR>
+
+<P>****</P>
+<P>CPOM BLOCCO (FEED) - feed water pump</P>
+<P>COLT BLOCCO (COLL) - inlet manifold</P>
+<P>EXCH BLOCCO (EXCH) - boiler</P>
+<P>FUMN BLOCCO (FLUE) - flue gas duct</P>
+<P>VALV BLOCCO (VOUT) - outlet valve</P>
+<P>****</P>
+<P>EXAMPLE3</P>
+<P>****</P>
+<P>CPOMFEED BL.-FEED- **** MODULO CPOM - feed water pump</P>
+<P>HUPMFEED --UA-- WATER ENTHALPY AT FEED PUMP OUTLET</P>
+<P>WPOMFEED --UA-- WATER FLOW RATE THROUGH FEED PUMP</P>
+<P>PCOLCOLL --IN-- #PUPMFEED#....................&lt;===COLTCOLL BL.-COLL-</P>
+<P>PIPMFEED --IN-- WATER PRESSURE AT FEED PUMP INLET</P>
+<P>HIPMFEED --IN-- WATER ENTHALPY AT FEED PUMP INLET</P>
+<P>OMPMFEED --IN-- ROTATIONAL SPEED OF THE FEED PUMP</P>
+<P>NPOMFEED --IN-- NUMBER OF FEED PUMPS IN PARALLEL</P>
+<P>****</P>
+<P>****</P>
+<P>COLTCOLL BL.-COLL- **** MODULO COLT - inlet manifold</P>
+<P>HCOLCOLL --UA-- WATER ENTHALPY IN BOILER INLET MANIFOLD</P>
+<P>PCOLCOLL --UA-- WATER PRESSURE IN BOILER INLET MANIFOLD</P>
+<P>TCOLCOLL --UA-- METAL TEMPERATURE IN BOILER INLET MANIFOLD</P>
+<P>WPOMFEED --IN-- #WE_1COLL#....................&lt;===CPOMFEED BL.-FEED-</P>
+<P>HUPMFEED --IN-- #HE_1COLL#....................&lt;===CPOMFEED BL.-FEED-</P>
+<P>WITUEXCH --IN-- #WU_1COLL#....................&lt;===EXCHEXCH BL.-EXCH-</P>
+<P>HM_1EXCH --IN-- #HU_1COLL#....................&lt;===EXCHEXCH BL.-EXCH-</P>
+<P>TESTCOLL --IN-- AMBIENT TEMPERATURE (OUTSIDE INLET MANIFOLD)</P>
+<P>GESTCOLL --IN-- INLET MANIFOLD EXTERNAL THERMAL EXCHANGE COEFF.</P>
+<P>****</P>
+<P>****</P>
+<P>EXCHEXCH BL.-EXCH- **** MODULO EXCH - boiler</P>
+<P>HM_1EXCH --UA-- AVERAGE FLUID ENTHALPY CELL 1</P>
+<P>HM_2EXCH --UA-- AVERAGE FLUID ENTHALPY CELL 2</P>
+<P>HM_3EXCH --UA-- AVERAGE FLUID ENTHALPY CELL 3</P>
+<P>HM_4EXCH --UA-- AVERAGE FLUID ENTHALPY CELL 4</P>
+<P>HM_5EXCH --UA-- OUTLET MANIFOLD AVERAGE FLUID ENTHALPY</P>
+<P>PU_1EXCH --UA-- FLUID PRESSURE AT BOILER CELL 1 OUTLET</P>
+<P>PU_2EXCH --UA-- FLUID PRESSURE AT BOILER CELL 2 OUTLET</P>
+<P>PU_3EXCH --UA-- FLUID PRESSURE AT BOILER CELL 3 OUTLET</P>
+<P>PU_4EXCH --UA-- FLUID PRESSURE AT BOILER CELL 4 OUTLET</P>
+<P>PUTUEXCH --UA-- BOILER OUTLET FLUID PRESSURE</P>
+<P>WITUEXCH --UA-- BOILER INLET MASS FLOW</P>
+<P>WI_1EXCH --UA-- FLUID MASS FLOW AT BOILER CELL 1 INLET</P>
+<P>WI_2EXCH --UA-- FLUID MASS FLOW AT BOILER CELL 2 INLET</P>
+<P>WI_3EXCH --UA-- FLUID MASS FLOW AT BOILER CELL 3 INLET</P>
+<P>WI_4EXCH --UA-- FLUID MASS FLOW AT BOILER CELL 4 INLET</P>
+<P>QTI1EXCH --UA-- POWER EXCH. BETWEEN METAL AND FLUID IN CELL 1</P>
+<P>QTI2EXCH --UA-- POWER EXCH. BETWEEN METAL AND FLUID IN CELL 2</P>
+<P>QTI3EXCH --UA-- POWER EXCH. BETWEEN METAL AND FLUID IN CELL 3</P>
+<P>QTI4EXCH --UA-- POWER EXCH. BETWEEN METAL AND FLUID IN CELL 4</P>
+<P>QTI5EXCH --UA-- POWER EXCH. BETWEEN OUTLET MAN. METAL AND FLUID</P>
+<P>HU_1EXCH --UA-- TOTAL ENTHALPY AT BOILER CELL 1 OUTLET</P>
+<P>HU_2EXCH --UA-- TOTAL ENTHALPY AT BOILER CELL 2 OUTLET</P>
+<P>HU_3EXCH --UA-- TOTAL ENTHALPY AT BOILER CELL 3 OUTLET</P>
+<P>HU_4EXCH --UA-- TOTAL ENTHALPY AT BOILER CELL 4 OUTLET</P>
+<P>HUTUEXCH --UA-- BOILER OUTLET TOTAL ENTHALPY</P>
+<P>TPE1EXCH --UA-- EXTERNAL WALL TEMPERATURE AT CELL 1</P>
+<P>TPE2EXCH --UA-- EXTERNAL WALL TEMPERATURE AT CELL 2</P>
+<P>TPE3EXCH --UA-- EXTERNAL WALL TEMPERATURE AT CELL 3</P>
+<P>TPE4EXCH --UA-- EXTERNAL WALL TEMPERATURE AT CELL 4</P>
+<P>TPE5EXCH --UA-- OUTLET MANIFOLD EXTERNAL WALL TEMPERATURE</P>
+<P>HCOLCOLL --IN-- #HITUEXCH#....................&lt;===COLTCOLL BL.-COLL-</P>
+<P>PCOLCOLL --IN-- #PITUEXCH#....................&lt;===COLTCOLL BL.-COLL-</P>
+<P>WVALVOUT --IN-- #WUTUEXCH#....................&lt;===VALVVOUT BL.-VOUT-</P>
+<P>HVALEXCH --IN-- BOILER OUTLET FLUID ENTHALPY (FLOW INVERSION)</P>
+<P>ATTREXCH --IN-- MEAN FRICTION COEFFICIENT IN BOILER TUBES</P>
+<P>TF_4FLUE --IN-- #TF11EXCH#....................&lt;===FUMNFLUE BL.-FLUE-</P>
+<P>TF_3FLUE --IN-- #TF21EXCH#....................&lt;===FUMNFLUE BL.-FLUE-</P>
+<P>TF_2FLUE --IN-- #TF31EXCH#....................&lt;===FUMNFLUE BL.-FLUE-</P>
+<P>TF_1FLUE --IN-- #TF41EXCH#....................&lt;===FUMNFLUE BL.-FLUE-</P>
+<P>TF51EXCH --IN-- AMBIENT TEMPERATURE (OUTSIDE OUTLET MANIFOLD)</P>
+<P>GF_4FLUE --IN-- #GE11EXCH#....................&lt;===FUMNFLUE BL.-FLUE-</P>
+<P>GF_3FLUE --IN-- #GE21EXCH#....................&lt;===FUMNFLUE BL.-FLUE-</P>
+<P>GF_2FLUE --IN-- #GE31EXCH#....................&lt;===FUMNFLUE BL.-FLUE-</P>
+<P>GF_1FLUE --IN-- #GE41EXCH#....................&lt;===FUMNFLUE BL.-FLUE-</P>
+<P>GE51EXCH --IN-- OUTLET MANIFOLD EXTERNAL THERMAL EXCHANGE COEFF.</P>
+<P>****</P>
+<P>****</P>
+<P>FUMNFLUE BL.-FLUE- **** MODULO FUMN - flue gas duct</P>
+<P>TUF_FLUE --UA-- OUTLET FLUE GAS TEMPERATURE</P>
+<P>TF_1FLUE --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 1</P>
+<P>TF_2FLUE --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 2</P>
+<P>TF_3FLUE --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 3</P>
+<P>TF_4FLUE --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 4</P>
+<P>GF_1FLUE --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 1</P>
+<P>GF_2FLUE --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 2</P>
+<P>GF_3FLUE --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 3</P>
+<P>GF_4FLUE --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 4</P>
+<P>WIF_FLUE --IN-- INLET FLOW RATE OF FLUE GAS</P>
+<P>TIF_FLUE --IN-- INLET FLUE GAS TEMPERATURE</P>
+<P>FAS_FLUE --IN-- GRITNESS FACTOR OF THE TUBES</P>
+<P>%CO2FLUE --IN-- PARTIAL PRESSURE OF CO2 IN FLUE GAS (IN PERCENT)</P>
+<P>%PH2FLUE --IN-- PARTIAL PRESSURE OF H2O IN FLUE GAS (IN PERCENT)</P>
+<P>%H2OFLUE --IN-- MASSIC FRACTION OF H2O IN FLUE GAS (IN PERCENT)</P>
+<P>TPE4EXCH --IN-- #TM11FLUE#....................&lt;===EXCHEXCH BL.-EXCH-</P>
+<P>TPE3EXCH --IN-- #TM12FLUE#....................&lt;===EXCHEXCH BL.-EXCH-</P>
+<P>TPE2EXCH --IN-- #TM13FLUE#....................&lt;===EXCHEXCH BL.-EXCH-</P>
+<P>TPE1EXCH --IN-- #TM14FLUE#....................&lt;===EXCHEXCH BL.-EXCH-</P>
+<P>****</P>
+<P>****</P>
+<P>VALVVOUT BL.-VOUT- **** MODULO VALV - outlet valve</P>
+<P>WVALVOUT --UA-- STEAM FLOW RATE IN THE OUTLET VALVE</P>
+<P>PUTUEXCH --IN-- #PIVAVOUT#....................&lt;===EXCHEXCH BL.-EXCH-</P>
+<P>PUVAVOUT --IN-- STEAM PRESSURE DOWNSTREAM OUTLET VALVE</P>
+<P>HUTUEXCH --IN-- #HVALVOUT#....................&lt;===EXCHEXCH BL.-EXCH-</P>
+<P>ALZAVOUT --IN-- OUTLET VALVE LIFT</P>
+<P>****</P>
+<P>**** &gt;&gt;&gt;&gt;&gt;&gt;INGRESSI DI TUTTI I MODULI&lt;&lt;&lt;&lt;&lt;&lt;</P>
+<P>PIPMFEED --IN-- WATER PRESSURE AT FEED PUMP INLET</P>
+<P>HIPMFEED --IN-- WATER ENTHALPY AT FEED PUMP INLET</P>
+<P>OMPMFEED --IN-- ROTATIONAL SPEED OF THE FEED PUMP</P>
+<P>NPOMFEED --IN-- NUMBER OF FEED PUMPS IN PARALLEL</P>
+<P>TESTCOLL --IN-- AMBIENT TEMPERATURE (OUTSIDE INLET MANIFOLD)</P>
+<P>GESTCOLL --IN-- INLET MANIFOLD EXTERNAL THERMAL EXCHANGE COEFF.</P>
+<P>HVALEXCH --IN-- BOILER OUTLET FLUID ENTHALPY (FLOW INVERSION)</P>
+<P>ATTREXCH --IN-- MEAN FRICTION COEFFICIENT IN BOILER TUBES</P>
+<P>TF51EXCH --IN-- AMBIENT TEMPERATURE (OUTSIDE OUTLET MANIFOLD)</P>
+<P>GE51EXCH --IN-- OUTLET MANIFOLD EXTERNAL THERMAL EXCHANGE COEFF.</P>
+<P>WIF_FLUE --IN-- INLET FLOW RATE OF FLUE GAS</P>
+<P>TIF_FLUE --IN-- INLET FLUE GAS TEMPERATURE</P>
+<P>FAS_FLUE --IN-- GRITNESS FACTOR OF THE TUBES</P>
+<P>%CO2FLUE --IN-- PARTIAL PRESSURE OF CO2 IN FLUE GAS (IN PERCENT)</P>
+<P>%PH2FLUE --IN-- PARTIAL PRESSURE OF H2O IN FLUE GAS (IN PERCENT)</P>
+<P>%H2OFLUE --IN-- MASSIC FRACTION OF H2O IN FLUE GAS (IN PERCENT)</P>
+<P>PUVAVOUT --IN-- STEAM PRESSURE DOWNSTREAM OUTLET VALVE</P>
+<P>ALZAVOUT --IN-- OUTLET VALVE LIFT</P>
+<P>****</P>
+<P>PUPMFEED --CO-- PRESSURE AT THE PUMP OUTLET</P>
+<P>WE_1COLL --CO-- FLOW RATE IN THE ENTERING BRANCH N. 1</P>
+<P>HE_1COLL --CO-- ENTHALPY IN THE ENTERING BRANCH N. 1</P>
+<P>WU_1COLL --CO-- FLOW RATE IN THE COMING OUT BRANCH N. 1</P>
+<P>HU_1COLL --CO-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>HITUEXCH --CO-- TUBE INLET TOTAL ENTHALPY</P>
+<P>PITUEXCH --CO-- TUBE INLET FLUID PRESSURE</P>
+<P>WUTUEXCH --CO-- TUBE OUTPUT MASS FLOW</P>
+<P>TF11EXCH --CO-- EXTERNAL FLUID TEMPERATURE CELL 1 ZONE 1</P>
+<P>TF21EXCH --CO-- EXTERNAL FLUID TEMPERATURE CELL 2 ZONE 1</P>
+<P>TF31EXCH --CO-- EXTERNAL FLUID TEMPERATURE CELL 3 ZONE 1</P>
+<P>TF41EXCH --CO-- EXTERNAL FLUID TEMPERATURE CELL 4 ZONE 1</P>
+<P>GE11EXCH --CO-- CONVECTIVE COEFF. EXTERNAL FLUID CELL 1 ZONE 1</P>
+<P>GE21EXCH --CO-- CONVECTIVE COEFF. EXTERNAL FLUID CELL 2 ZONE 1</P>
+<P>GE31EXCH --CO-- CONVECTIVE COEFF. EXTERNAL FLUID CELL 3 ZONE 1</P>
+<P>GE41EXCH --CO-- CONVECTIVE COEFF. EXTERNAL FLUID CELL 4 ZONE 1</P>
+<P>TM11FLUE --CO-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 1</P>
+<P>TM12FLUE --CO-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 2</P>
+<P>TM13FLUE --CO-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 3</P>
+<P>TM14FLUE --CO-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 4</P>
+<P>PIVAVOUT --CO-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>HVALVOUT --CO-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</FONT></BODY>
+</HTML>

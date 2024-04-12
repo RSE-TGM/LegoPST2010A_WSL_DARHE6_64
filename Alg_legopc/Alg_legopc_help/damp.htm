@@ -1,0 +1,454 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>DAMP</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE DAMP</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DAMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">AIR-GAS CIRCUIT DAMPER</p>
+<p>&nbsp;</p>
+<p align="left">The DAMP module simulates a plant air-gas circuit damper. The
+mathematical model consists of only one algebraical equation deriving from the
+momentum conservation equation which puts in relation the delta P pressure on
+both sides of the damper and the fluid flow rate flowing through it.</p>
+<p align="left">Such delta P pressure is subdivided in two terms. One of them
+takes into account the pressure drop on the concerned circuit ducts whereas the
+second one is related to the losses that the damper actually has.</p>
+<p align="left">The model main hypotheses are:</p>
+<p ALIGN="left">- the thermal capacity of damper metal is negligible;</p>
+<p ALIGN="left">- the isoenthalpic thermodynamic transformation of fluid in the
+damper;</p>
+<p ALIGN="left">- the absence of fluid accumulation in the damper</p>
+<p ALIGN="left">- the validity of perfect gas law;</p>
+<p ALIGN="left">- the head losses related to the duct are expressed as a
+function of one quadratic and one linear term in the flow rate.</p>
+<p ALIGN="left">The module is also applicable in case of back-flow.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DAMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p>&nbsp;</p>
+<p align="left">The module can be interconnected with other ones according to
+the following two methods:</p>
+<p ALIGN="left">1) output in flow rate</p>
+<p ALIGN="left">prescription about block name: none</p>
+<p ALIGN="center"><font FACE="Arial" SIZE="2"><img SRC="images/Image64.gif" width="474" height="242"></font></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">2) output in outlet pressure</p>
+<p ALIGN="JUSTIFY">prescription about block name: preceded by '-' sign</p>
+</font>
+<blockquote>
+  <blockquote>
+    <font FACE="Arial" SIZE="2">
+    <p ALIGN="JUSTIFY">&nbsp;</p>
+    <p ALIGN="center"><img SRC="images/Image65.gif" width="474" height="242"></p>
+    </font><font FACE="Arial">
+    <p ALIGN="JUSTIFY">&nbsp;</p>
+    </blockquote>
+  </blockquote>
+  <p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+  <!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PFSV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid pressure at the damper outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PFSM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid pressure at the damper inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WFSR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of fluid flowing through the
+      damper</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TFSI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid temperature at the damper inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TFSU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid temperature at the damper outlet
+      (used in case of back-flow)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALZS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">damper opening degree</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AKCO</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">head loss corrective on the duct</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DAMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to the initial values of input and output variables
+(meanings defined above), user must assign the following data:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WNOM&nbsp;</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal flow rate of fluid flowing
+      through the damper</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[C]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal temperature of fluid flowing
+      through the damper</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg*K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RGAS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">constant used in the perfect gas law or,
+      as alternative, index defining the default value used for air and flue gas
+      respectively (see note).</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b>
+<p ALIGN="RIGHT">Data related to the damper</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DP S NOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure drop on the damper under nominal
+      conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AREA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cross section area with fully opened
+      damper</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALFA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">coefficient used to define the damper
+      characteristic, that is the variation law of SEZ cross section area as a
+      function of the ALZS opening degree following the formula:</font>
+      <p align="center"><font FACE="Arial">SEZ = AREA*ALZS**ALFA.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></b>
+<p align="left">If user knows the characteristic of the damper supplied by the
+manufacturer, this can be assigned through the FUNCTION ADNS10(ALZS, ALFA) (see
+below). In this case to ALFA is assigned any value &gt;10.</p>
+<p align="left">NB: at present for ALFA = 11 the equipercentage characteristic
+is available.</p>
+<b>
+<p ALIGN="RIGHT">Data related to the duct</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[C]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DP C NOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure drop on the duct under nominal
+      conditions</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="RIGHT">Note</p>
+</b>
+<p align="left">The perfect gas law is expressed by the state equation:</p>
+<p ALIGN="CENTER">P*V = n*R*T</p>
+<p>where:</p>
+<p ALIGN="JUSTIFY">P is the gas pressure</p>
+<p ALIGN="JUSTIFY">V is the gas volume</p>
+<p ALIGN="JUSTIFY">T is the gas temperature</p>
+<p ALIGN="JUSTIFY">R is the universal constant</p>
+<p ALIGN="JUSTIFY">n is the mole number of considered gas</p>
+<p>&nbsp;</p>
+<p>Dividing for the gas mass M we obtain:</p>
+<p ALIGN="CENTER">P/RO = (n*R/M)*T</p>
+<p ALIGN="left">where RO is the gas density.</p>
+<p ALIGN="left">Assuming</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image66.gif" width="231" height="53"></p>
+</font>
+<p ALIGN="JUSTIFY"><font face="Arial">where M/n is the gas molecular mass, we
+obtain:</font></p>
+<blockquote>
+  <blockquote>
+  </blockquote>
+</blockquote>
+<font FACE="Arial">
+<p ALIGN="CENTER">P/RO = RGAS*T</p>
+<p align="left">The above indicated relation is used to determine the RO gas
+density as a function of the temperature only, assigning to the pressure a
+constant value P = 101300. Pa.</p>
+<p align="left">For the RGAS datum a default value is foreseen, precisely
+assuming RGAS = 1, the value RGAS = 287 (air) is used. For RGAS = 2 the value
+RGAS = 274 (flue gas) is used.</p>
+<p ALIGN="left">In the DP C NOM are summarized all head losses distributed on
+the line between two dampers under nominal conditions, whereas DP S NOM provides
+the pressure drop on the damper when it is fully opened.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DAMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the DAMP module variables no particular
+prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DAMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">To assign damper characteristic, when user knows those provided
+by the manufacturer, a user subprogram is needed. Its declarative statement is:</p>
+<p align="left">FUNCTION ADNS10(ALZS, ALFA)</p>
+<p ALIGN="left">Input parameters: ALZS, ALFA</p>
+<p ALIGN="left">Output parameters: ADNS10</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALZS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">damper opening degree</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALFA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(&gt;10) parameter, coming from the input
+      data; it can be used as choosing index whether different standard
+      characteristic have to be introduced by one only FUNCTION ADNS10(ALZAS,
+      ALFA).</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ADNS10</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">calculated value of the cross section
+      area. Such value has to be normalized as regards to the cross section area
+      when the damper is fully opened.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">Hereinafter the function related to the module equipercentage
+characteristic is indicated, as example:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<blockquote>
+  <p align="left">FUNCTION ADNS10(Z,ALFA)</p>
+  <p align="left">DIMENSION X1(12),Y1(12)</p>
+  <p align="left">LOGICAL IS</p>
+  <p align="left">DATA X1/0.,.1,.2,.3,.4,.5,.6,.7,.8,.9,1.,1.2/</p>
+  <p align="left">DATA Y1/0.,.055,.085,.125,.17,.22,.28,.35,.43,.55,.7,1./</p>
+  <p align="left">DATA IS/.TRUE./ C</p>
+  <p align="left">IF (IS) THEN</p>
+  <p align="left">WRITE(6,*)' '</p>
+  <p align="left">WRITE(6,*)' '</p>
+  <p align="left">WRITE(6,*)'*** Warning!!! ',</p>
+  <p align="left">$ ' ***'</p>
+  <p align="left">WRITE(6,*)'*** Damper characteristic: tabulated ',</p>
+  <p align="left">$ 'equipercentage ***'</p>
+  <p align="left">WRITE(6,*)' '</p>
+  <p align="left">WRITE(6,*)' '</p>
+  <p align="left">IS=.FALSE.</p>
+  <p align="left">END IF</p>
+  <p align="left">CALL ADNSIN(Z,X1,Y1,12,A)</p>
+  <p align="left">ADNS10=A</p>
+  <p align="left">RETURN</p>
+  <p align="left">END</p>
+  <p align="left">SUBROUTINE ADNSIN(Z,X,Y,NP,A)</p>
+  <p align="left">DIMENSION X(1),Y(1)</p>
+  <p align="left">A=0.</p>
+  <p align="left">IF(Z.LE.X(1))RETURN</p>
+  <p align="left">A=1.</p>
+  <p align="left">IF(Z.GE.X(NP))RETURN</p>
+  <p align="left">DO I=1,NP-1</p>
+  <p align="left">J=I</p>
+  <p align="left">IF(Z.GE.X(J).AND.Z.LE.X(J+1))GO TO 15</p>
+  <p align="left">END DO</p>
+  <p align="left">15 A=Y(J)+(Z-X(J))*(Y(J+1)-Y(J))/(X(J+1)-X(J))</p>
+  <p align="left">RETURN</p>
+  <p align="left">END</p>
+</blockquote>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DAMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In the module only one residual is present related to the
+algebraical equation deriving from the fluid momentum conservation equation,
+putting in relation the delta P pressure on the two damper sides, with the flow
+rate flowing through it.</p>
+<p align="left">Its expression is:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image67.gif" width="761" height="196"></p>
+</font></b><font FACE="Arial">
+<p align="left">where WNOM, TNOM, RO, DP S NOM, DP C NOM, SEZ, have the physical
+meaning defined in the section on module's data, whereas remaining variables
+have that defined in module's variables.</p>
+<p align="left">W0 and DP0 are normalization constants.</p>
+<p align="left">The residual is normalized as regards to the delta P pressure
+DP0.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DAMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<blockquote>
+  <blockquote>
+    <p align="left">SUBROUTINE DAMPI3(IFO, IOB, DEBL)</p>
+    <p align="left">SUBROUTINE DAMPI4(IOB, MOD)</p>
+    <p align="left">SUBROUTINE DAMPI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1,
+    ID2,</p>
+    <p align="left">SUBROUTINE DAMPC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+    <p align="left">$ IBL1, IBL2)</p>
+    <p align="left">SUBROUTINE DAMP(IFUN, IXYU, XYU, IPD, DATI, RNI)</p>
+    <p align="left">FUNCTION ADAM10(Z, ALFA)</p>
+    <p align="left">FUNCTION ADNS10(Z, ALFA)</p>
+    <p align="left">SUBROUTINE ADNSIN(Z, X, Y, NP, A)</p>
+  </blockquote>
+</blockquote>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DAMP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are in the manual
+section dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;ARIAGAS&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

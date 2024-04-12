@@ -1,0 +1,447 @@
+C******************************************************************************
+C modulo lego34.pf
+C tipo 
+C release 2.1
+C data 7/10/95
+C reserver @(#)lego34.pf	2.1
+C******************************************************************************
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C                                                                      C
+C           LEGO unificato per singola / doppia precisione             C
+C                 e per diverse piattaforme operative                  C
+C                                                                      C
+C   Attivata versione singola precisione per sistema operativo Unix    C
+C                                                                      C
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+      SUBROUTINE  LEGO34()
+C
+C      PROGRAMMA  L E G O 3 4
+C
+C      INCLUDE 'LG3_PARAMETER.F'
+C**   Descrizione delle parameter di LG3
+C**
+C**   N000= MOLTIPLICATORE
+C**
+C**   N001= N. MODULI
+C**   N002= N. BLOCCHI
+C**   N003= N.STATI+ALG. = ORDINE MASSIMO SISTEMA ALGEBRICO
+C**   N004= N. INGRESSI
+C**   N005= N. VARIABILI
+C**   N006= N. VAR. DI 1 BLOCCO (moduli di processo)
+C**   NT006= N. VAR. DI 1 BLOCCO (moduli di regolazione)
+C**   N007= N. DI DATI
+C**   N008= N. DI EQUAZIONI DI UN BLOCCO
+C**   NR00= N. DI TERMINI #0 PER OGNI EQUAZIONE
+C**   NP00= N. DI PERTURBAZIONI
+C
+      PARAMETER (N000=70, N001=N000*10, N002=N000*25, N003=N000*50,
+     $           N004=N000*25, N005=N000*100, N006=100, NT006=N003+N004,
+     $           N007=N000*500, N008=40, NR00=12, NR01=70, NR02=18, 
+     $           NP00=10)
+C
+C**   M001= N. TOTALE INGRESSI =N005-N003
+C**   M002= N. INGRESSI = USCITE  =M001-N004
+C
+      PARAMETER (M001=N005-N003, M002=M001-N004, M003=N002+1,
+     $           M004=N003+1, M005=N004+1, M009=N005+1)
+C
+C         M006=N.TERMINI # 0 DELLO JACOBIANO DEL SISTEMA
+C         M007=N.TERMINI # 0 DELLO JACOBIANO FATTORIZZATO (MA28)
+C         NZP0=N.TERMINI # 0 DELLO JAC.FATT. P (GRAM SCHMIDT)
+C         NZG0=N.TERMINI # 0 DELLO JAC.FATT. G (GRAM SCHMIDT)
+C
+      PARAMETER (M006=N003*NR00, M007=2*M006, M008=8*N003)
+      PARAMETER (NZP0=N003*NR01,NZG0=N003*NR02)
+C
+      PARAMETER (MAXSENS=200)
+C
+C     Le variabili CH2,IPVRS2,XYO2 servono solo per la REC24 che 
+C     scrive il file f24.dat. Eliminando questa scrittura, si 
+C     possono anche eliminare queste tre variabili.
+C
+      DIMENSION NOSL(N001),NOSUB(N002),NOBLC(N002,2),
+     $          NUSTA(N002),NUSCI(N002),NINGR(N002),ISLB(N002),
+     $          IP(M003),IPVRS(N005),IPVRS2(N005),
+     $          IPS(M009),IPVRT(N005),IPI(M009),IPVRI(M001)
+      DIMENSION XY(N005),UU(N005),XYU(N005),DATI(N007),         
+     $          CNXYU(N005),TOLO(N003),RN(N003),RNO(N003),TOLL(N003),
+     $          XYO(N005),TN(N005),RIGA(N003),AJAC(N008,N006),RNI(N003),
+     $          ICONV(N003),FJ(M007),IRJ(M007),ICJ(M007),
+     $          PESI(N005),IPDATI(M003),XYO2(N005)
+      CHARACTER*8 VARI(N005),VAR(N005),SIVAR(N005),CH2
+C
+      DIMENSION CNXY(N005),CNUU(N005)
+C
+      CHARACTER*80   NMBLOC(N002)
+C   
+      INTEGER SENSINDX(MAXSENS) !variabili per riconciliazione dati   
+C      
+      CHARACTER*4 CHPCEN
+      INTEGER IPN(M004),IPNA(M004),IPNB(M004),IPNP(M009),IPNG(M004)
+      INTEGER IPNR(N003),INDP(NZP0),INDG(NZG0),IEQ(M004)	
+      REAL*8 FJD(M006),PD(NZP0),GD(NZG0)
+      REAL*8 D1(N003),D2(N005),D3(N005),WD(N005)  
+C
+C______ FILES DI LAVORO DI LG3
+C
+      CHARACTER*32 F14DAT,F03DAT,F04DAT,F24DAT,LG3ERR
+C
+      COMMON/LG3FLS/ F14DAT,F03DAT,F04DAT,F24DAT,LG3ERR
+C
+      COMMON/CHISQUARE/NGDL,XCHI,IWZERO
+      COMMON/CFOR2/TEMPO,NEQSIS,NU,XY,UU
+      COMMON/CFOR3/CNXY,CNUU
+      REAL TEMPO  
+C
+      COMMON/SENS/SENSNUM,NOTAVAIL,SENSVALUE,SENSORSON
+      INTEGER SENSNUM,NOTAVAIL
+      REAL    SENSVALUE(MAXSENS)
+      INTEGER SENSORSON(MAXSENS)
+C
+      COMMON/ALARM/ALARMNUM,ALARMIND,ALARMVAL
+      INTEGER ALARMNUM
+      INTEGER ALARMIND(MAXSENS)
+      REAL    ALARMVAL(MAXSENS)
+C
+      CHARACTER*2 IACC, SI, SIP
+C
+      COMMON/NORM/P0,H0,T0,Q0,R0,AL0,V0,DP0
+      COMMON/DIMAJA/NRXJC,NCXJC
+      COMMON/REGIME/KREGIM
+      LOGICAL KREGIM
+
+C
+      COMMON/SSTCH/KSW(6)
+      COMMON/BLOSE/NBLSE
+C_____ NBLSE = NUMERO DI BLOCCHI (I PRIMI) CHE NON HANNO EQUAZIONI
+C
+C******************* TAVOLE *****************************************
+C       ILEGO = INDICATORE DEL PROGRAMMA CHIAMANTE LE TAVOLE
+C             =1 LEGO E` IL PROGRAMMA CHIAMANTE
+C             =0 NON E` IL LEGO IL PROGRAMMA CHIAMANTE
+C
+C       ICNTMX = CONTATORE STABILITO DAL PROGRAMMA CHIAMANTE LE TAVOLE
+C                  SUPERATO IL QUALE VIENE DECRETATO LO STOP .
+C
+      COMMON/LGTV01/LGTEMP,ILEGO,ICOUNT,ICNTMX
+      COMMON/LGTV02/LGMODU,LGBLOC
+      CHARACTER*8 LGMODU,LGBLOC
+      REAL LGTEMP
+      CHARACTER*8 VAVA
+C
+      CHARACTER*6 STAMPE
+      INTEGER SMORZ
+      REAL TOLLER, PESO0, TOLGS   
+      COMMON/SETTINGS/TOLLER,SMORZ,PESO0,TOLGS,STAMPE
+C
+      DATA SI/'SI'/,SIP/'si'/
+      DATA IBLK/' '/,NOT/'NO'/,BLK/' '/,ISSO/'SI'/,ISTAR/'****'/,
+     $     STAR/'****'/
+      DATA PZERO/20000000./,HZERO/1000000. /,QZERO/1000./
+      DATA TZERO/1000./,ROZERO/100./
+      DATA LG/'LG'/,IS/'SI'/
+C
+C  Legge dal file settings.dat i settaggi di LEGO_WGS
+C
+      OPEN(UNIT=99,FILE='settings.dat',STATUS='OLD',FORM='FORMATTED')
+      READ(99,'(A)') ! Salta il path del file sensors.dat
+      READ(99,'(F)') ! Salta il setting del DT di riconciliazione
+      READ(99,'(F)') ! Salta la banda in p.u. del controllo di stazionarietà
+      READ(99,'(F)') ! Salta l'area della coda destra della distribuzione chi-square
+      READ(99,'(A)') STAMPE
+      READ(99,'(F)') TOLLER
+      READ(99,'(I2)') SMORZ
+      IF (SMORZ.EQ.1.OR.SMORZ.EQ.2) THEN
+       	READ(99,'(A)') CHPCEN
+        READ(CHPCEN,'(F)')PCEN
+        IF(PCEN.LE.0.)PCEN=0.1   
+      ENDIF    
+      READ(99,'(G8.0)') PESO0
+      READ(99,'(G8.0)') TOLGS
+      CLOSE(99)
+C
+C  Setta il contatore errori tavole ad un valore che eviti l'uscita
+C  immediata (il processo server morirebbe senza dare spiegazioni)
+C
+      ILEGO  = 1
+      LGTEMP = 0.
+      ICOUNT = 0
+      ICNTMX = 1000
+C******************* TAVOLE *****************************************
+      NX1=N001
+      NX2=N002
+      NX3=N003
+      NX4=N004
+      NX5=N005
+      NX6=NT006
+      NX8=N008
+      NRXJC=NX8
+      NCXJC=N006
+      MX1=M001
+      MX2=M002
+      NZMAX=M006
+      MXCOL=M007
+      MXROW=M007
+      NZPMX=NZP0
+      NZGMX=NZG0
+C
+      NITERJ=5
+      NJACMX=10
+      KREGIM=.TRUE.
+C 
+      WRITE(90,999)
+  999 FORMAT(//'***********************************************')
+      WRITE(90,1000) TEMPO
+ 1000 FORMAT(/,'PROGRAMMA LEGO - RICONCILIAZIONE AL TEMPO', F8.2)
+C
+C     LETTURA DATI DA FILE 04 DI LEGO3
+C
+      REWIND 4
+      READ(4)NBL,NEQAL,NBL1,NVART,NEQSIS,NEQS1,NPVRT,NU,NU1,NVRI
+      READ(4)ISSIS,NBTRI,NST,SIGLA,(NOSL(I),I=1,NST)
+      READ(4)(NOSUB(I),NOBLC(I,1),NOBLC(I,2),NUSTA(I),NUSCI(I),
+     $       NINGR(I),ISLB(I),NMBLOC(I),I=1,NBL)
+      READ(4)(IP(I),I=1,NBL1),(VAR(I),IPVRS(I),I=1,NVART)
+      READ(4)
+      READ(4)
+      READ(4)P0,H0,T0,Q0,R0,AL0,V0,DP0
+      READ(4)(FUF,I=1,NEQSIS),(FUF,I=1,NU),(XYU(I),I=1,NVART)
+      READ(4)NDATI,(IPDATI(I),I=1,NBL1),(DATI(I),I=1,NDATI),
+     $             (CNXYU(I),I=1,NVART),(TOLO(I),I=1,NEQSIS)
+      READ(4)IREGIM
+      READ(4) NOTO,(VARI(I),UU(I),I=1,NOTO),
+     $        NNOTO,(SIVAR(I),XY(I),PESI(I),I=1,NNOTO)
+      READ(4) NSENS,(SENSINDX(I),I=1,NSENS)
+C
+      KS=9
+      CALL SSWTCH(KS,LL)
+      IF(KS.EQ.9)GO TO 798
+C
+      CALL SSWTCH(KS,LL)
+  798 CONTINUE
+C
+C     ASSEGNAZIONE DELLA TOLLERANZA PER IL CALCOLO.
+C
+      FATOLL=TOLLER
+  800 IF(FATOLL.LT.1.E-6)FATOLL=1.E-6
+      DO 301 I=1,NEQSIS
+      	TOLL(I)=FATOLL
+  301 CONTINUE
+C
+C      DEFINIZIONE DELLE MATRICI DI COLLEGAMENTO/
+C
+      DO 140 J=1,NVART
+      VAVA=VAR(J)
+      DO 135 K=1,NNOTO
+      IF(VAVA.EQ.SIVAR(K))GO TO 136
+  135 CONTINUE
+      DO 145 K=1,NOTO
+      IF(VAVA.EQ.VARI(K))GO TO 146
+  145 CONTINUE
+      IER=1
+      WRITE(90,3313)VAVA
+ 3313 FORMAT(//10X,'ER- SUB. LEGO 2. ERRORE DURANTE DEF.PUNT.',
+     $   'INGR.BLOCC.'/10X,'VAR = ',A8 /)
+      GO TO 140
+  136 IPVRS(J)=K
+      GO TO 140
+  146 IPVRS(J)=-K
+  140 CONTINUE
+  150 CONTINUE
+      IF(IER.EQ.1)RETURN
+C
+C     DEFINIZIONE DEL PUNTATORE DELLE VARIABILI DEL SISTEMA (SIVAR)
+C     VERSO LE VARIABILI DI OGNI BLOCCO
+C
+      N=0
+      IPS(1)=0
+      DO 200 I=1,NNOTO 
+      VAVA=SIVAR(I)
+      DO 180 J=1,NVART
+      IF(VAVA.NE.VAR(J))GO TO 180
+      N=N+1
+      IPVRT(N)=J
+  180 CONTINUE
+      IPS(I)=IPS(I)+1
+      IPS(I+1)=N
+  200 CONTINUE
+      IPS(NNOTO+1)=N+1
+C
+C     DEFINIZIONE DEL PUNTATORE DEGLI INGRESSI DEL SISTEMA VERSO
+C     IL VETTORE VAR (VARIABILI DI OGNI BLOCCO)
+C
+      N=0
+      IPI(1)=0
+      DO 220 I=1,NOTO
+      VAVA=VARI(I)
+      DO 210 J=1,NVART
+      IF(VAVA.NE.VAR(J))GO TO 210
+      N=N+1
+      IPVRI(N)=J
+  210 CONTINUE
+      IPI(I)=IPI(I)+1
+      IPI(I+1)=N
+  220 CONTINUE
+      IPI(NOTO+1)=N+1
+C
+C     STAMPE OPZIONALI
+C
+      CALL SSWTCH(4,LL)
+      IF(LL.NE.1)GO TO 231
+      WRITE(90,2000)
+ 2000 FORMAT(1H1//10X,'STAMPE DA SSWTCH 4   '//)
+      DO 230 I=1,NBL
+      WRITE(90,2001) NOSUB(I),NOBLC(I,1),NOBLC(I,2),NUSTA(I),NUSCI(I),
+     $              NINGR(I),ISLB(I),IP(I)
+ 2001 FORMAT(10X,A4,2X,2A4,5I6)
+  230 CONTINUE
+      WRITE(90,2002)IP(NBL+1)
+ 2002 FORMAT(48X,I6)
+C
+      WRITE(90,2003) (I,VAR(I),IPVRS(I),I=1,NVART)
+ 2003 FORMAT(10X,I6,2X,A8,I6)
+      DO 240 J=1,NNOTO
+      I1=IPS(J)
+      I2=IPS(J+1)-1
+      WRITE(90,2005) J,(IPVRT(I),I=I1,I2)
+ 2005 FORMAT(10X,I5,5X,20I3)
+  240 CONTINUE
+C
+      DO 241 J=1,NOTO
+      I1=IPI(J)
+      I2=IPI(J+1)-1
+      WRITE(90,2005) J,(IPVRI(I),I=I1,I2)
+  241 CONTINUE
+C
+  231 CALL SSWTCH(1,LL)
+      IF(LL.NE.1) GO TO 300
+      WRITE(90,3002)
+ 3002 FORMAT(//10X,'ORDINE DELLE EQUAZIONI'//)
+      I2=0
+      DO 235 I=1,NBL
+      NY=NUSTA(I)+NUSCI(I)
+      I1=I2+1
+      I2=I1+NY-1
+      K1=IP(I)
+      K2=K1+NY-1
+      WRITE(90,3003) NOBLC(I,1),NOBLC(I,2),NOSUB(I),
+     $              NUSTA(I),NUSCI(I),(K,VAR(K1+K-I1),K=I1,I2)
+ 3003 FORMAT(2X,2A4,' (',A4,') ',2I3,6X,6(2X,I5,1X,A8)/
+     $       (30X,6(2X,I5,1X,A8)))
+  235 CONTINUE
+      WRITE(90,3004)
+ 3004 FORMAT(//10X,'ORDINE DELLE INCOGNITE'//)
+      WRITE(90,3005) (K,SIVAR(K),K=1,NNOTO)
+ 3005 FORMAT(8(2X,I5,1X,A8))
+C
+  300 CONTINUE
+C 
+C     ACQUISIZIONE SENSORI            
+C 
+      IF (TEMPO.GT.0.AND.SENSNUM.GT.0) THEN
+          NOTAVAIL = 0
+          DO I=1,SENSNUM
+             IF (SENSORSON(I).NE.0) THEN !se il sensore è disponibile
+                IF (SENSINDX(I).GT.0) THEN
+                   XY(SENSINDX(I))=SENSVALUE(I)/CNXY(SENSINDX(I))
+                ELSE
+                   UU(-SENSINDX(I))=SENSVALUE(I)/CNUU(-SENSINDX(I))
+                ENDIF
+             ELSE IF (SENSINDX(I).GT.0) THEN !sensore non noto indisponibile
+                NOTAVAIL=NOTAVAIL+1
+             ENDIF
+          ENDDO
+      	  CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+          CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+      ENDIF
+C
+      DO 40 I=1,NVART
+      FJ(I)=XYU(I)*CNXYU(I)
+   40 CONTINUE
+C
+C     RISOLUZIONE DEL SISTEMA ALGEBRICO DI REGIME
+C  
+      CALL PRECOND(XY,UU) !Routine opzionale di preconditioning 
+C        
+      CALL WGSREG(NOTO,NNOTO,IGO,NEQSIS, NBL,ISLB,
+     $      NUSTA,NUSCI,IPDATI,DATI,IP,TN,CDT,XYU,RN,ICONV,
+     $      SIVAR,NX3,IPVRS,TOLL,RNO,XYO,JACYES,NITERJ,NJACMX,IPS,IPVRT,
+     $      XY,UU,NU,IPI,IPVRI,FJ,RIGA, NEQAL,TEMPO,AJAC,NX8,NOBLC,
+     $      NX2,RNI,IRJ,ICJ,NZMAX,MXCOL,MXROW,NOSUB,PESI,SENSINDX,
+     $      NZPMX,NZGMX,IPN,IPNA,IPNB,IPNP,IPNG,IPNR,INDP,INDG,IEQ,	
+     $      FJD,PD,GD,D1,D2,D3,WD,NUMS,PCEN,stampa1,stampa2)
+C
+      IF(IGO.NE.1) WRITE (90,8562)
+ 8562 FORMAT('IL REGIME INIZIALE NON SODDISFA LA PRECISIONE',/,
+     $       'DI CALCOLO IMPOSTA - VIENE COMUNQUE ACCETTATO')
+      IACC = 'SI'
+      IF((IACC.NE.SI).AND.(IACC.NE.SIP)) RETURN
+C
+      REWIND  4
+C
+      READ(4)
+      READ(4)
+      READ(4)
+      READ(4)(NFUF,I=1,NBL1),(CH2,IPVRS2(I),I=1,NVART)
+      READ(4)
+      READ(4)
+      READ(4)
+C
+C______ SE NEL MODELLO ESISTONO BLOCCHI SENZA EQUAZIONI (REGOLATORI)
+C       VENGONO RICHIAMATI AFFINCHE` CALCOLINO LE CONDIZIONI INIZIALI
+C       DELLE LORO VARIABILI INTERNE
+C
+      IF(NBLSE.GT.0) THEN
+C
+      CALL INIZBL(ISLB,IPDATI,DATI,IP,XYU,IPVRS2,NOBLC,NX2,
+     $               NUSTA,NUSCI,NVART)
+      ENDIF
+C
+      DO 400 I=1,NVART
+      J=IPVRS2(I)
+      IF(J.LT.0)GO TO 399
+      XYO2(J)=XYU(I)*CNXYU(I)
+      GO TO 400
+  399 J=-J
+      TN(J)=XYU(I)*CNXYU(I)
+  400 CONTINUE
+      WRITE(4)(FUF,I=1,NEQSIS),(FUF,I=1,NU),(XYU(I),I=1,NVART) 
+      			! FUF sta per XX e UU con l'ordinamento del transitorio      							       
+      IREGIM=0
+      WRITE(4)NDATI,(IPDATI(I),I=1,NBL1),(DATI(I),I=1,NDATI),
+     $              (CNXYU(I),I=1,NVART),(TOLO(I),I=1,NEQSIS)
+C
+      WRITE(4)IREGIM
+C
+      WRITE(4) NOTO,(VARI(I),UU(I),I=1,NOTO),
+     $        NNOTO,(SIVAR(I),XY(I),PESI(I),I=1,NNOTO)
+      WRITE(4) NSENS,(SENSINDX(I),I=1,NSENS)
+C
+C  REGISTRAZIONE SU FILE 24 DEL REGIME CALCOLATO
+C
+      CALL REC24(NEQSIS,XYO2,NU,TN)
+C
+C  CALCOLO XCHI PER CHI SQUARE E SEGNALAZIONE ANOMALIE SENSORI
+C
+      XCHI = 0.
+      ALARMNUM = 0
+      DO I=1,SENSNUM
+      	 IF (SENSINDX(I).GT.0.AND.SENSORSON(I).EQ.1) THEN !sensori non noti e disponibili
+       	    DELTA=(SENSVALUE(I)/CNXY(SENSINDX(I)))-XY(SENSINDX(I))
+      	    SIGMEN1=PESI(SENSINDX(I)) !il peso sostituisce l'inverso della varianza
+      	    IF (SIGMEN1.EQ.0) SIGMEN1=PESO0
+      	    XCHI=XCHI+DELTA*DELTA*SIGMEN1
+            TEMP = ABS(DELTA)*SQRT(SIGMEN1)
+      	    IF (TEMP > 3.)  THEN !messaggi anomalie sensori
+               WRITE(90,500) SIVAR(SENSINDX(I)),TEMP
+     	       ALARMNUM = ALARMNUM + 1
+     	       ALARMIND(ALARMNUM) = I-1 !modificato per indicizzazione C
+     	       ALARMVAL(ALARMNUM) = TEMP
+            ENDIF
+         ENDIF
+      ENDDO
+  500 FORMAT('ANOMALIA SU SENSORE ',A8,': DELTA/SIGMA = ',F8.4)
+C
+      RETURN
+      END

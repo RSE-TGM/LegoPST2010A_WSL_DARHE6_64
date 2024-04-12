@@ -1,0 +1,55 @@
+CNDN_0                                                                          
+CNDN                                                                            
+CNDN - Steam condenser (water cooled)                                           
+                                                                                
+NSTAT = 2
+NUSCI = 5
+NINGR =14
+ 
+NCONF = 1
+ 
+PCND      --US-- STEAM PRESSURE IN THE CONDENSER                                
+LCND      --US-- LEVEL OF LIQUID IN THE CONDENSER                               
+TMFT      --UA-- MEAN TEMPERATURE OF METAL AT TUBE BUNDLE OUTLET                
+HUFT      --UA-- COOLER ENTHALPY AT THE TUBE BUNDLE OUTLET                      
+HLCN      --UA-- ENTHALPY OF THE CONDENSATE LIQUID                              
+PFCN      --UA-- PRESSURE IN THE CONDENSER BOTTOM                               
+%LCN      --UA-- MEASURED LIQUID LEVEL                                          
+WTUR      --IN-- FLOW RATE OF MAIN TURBINE BLOW-OFF STEAM                       
+HTUR      --IN-- ENTHALPY OF MAIN TURBINE BLOW-OFF STEAM                        
+WEXT      --IN-- FLOW RATE OF STEAM FROM SECONDARY CONDENSER INLET              
+HEXT      --IN-- ENTHALPY OF STEAM AT SECONDARY CONDENSER INLET                 
+WLCP      --IN-- CONDENSATE EXTRACTION FLOW RATE                                
+WDRE      --IN-- DRAINS FLOW RATE AT THE CONDENSER INLET                        
+HDRE      --IN-- DRAINS ENTHALPY AT THE CONDENSER INLET                         
+WLCX      --IN-- LEVEL CONTROL EXTRACTED (SUPPL.) LIQUID FLOW RATE              
+WVCN      --IN-- FLOW RATE OF STEAM EXTRACTED FOR CONDENSER VACUUM              
+WRIC      --IN-- FLOW RATE OF LIQUID RECIRCULATED BY EXTR. PUMPS                
+HRIC      --IN-- ENTHALPY OF LIQUID RECIRCULATED BY EXTR. PUMPS                 
+WRFT      --IN-- COOLING WATER FLOW RATE INTO THE TUBE BUNDLE                   
+HIFT      --IN-- COOLING WATER ENTHALPY AT THE TUBE BUNDLE INLET                
+CORR      --IN-- THERMAL EXCHANGE CORRECTION COEFFICIENT                        
+==============================                                                  
+EOF                                                                             
+7
+t5 0
+INGRESSO IDRAULICO
+WTUR PCND ____ ____ ____ HTUR ____ ____
+t0 0
+INGRESSO IDRAULICO
+WEXT PCND ____ ____ ____ HEXT ____ HLCN
+t1 0
+INGRESSO IDRAULICO
+WDRE PCND ____ ____ ____ HDRE ____ HLCN
+t2 0
+INGRESSO IDRAULICO
+WRIC PCND ____ ____ ____ HRIC ____ HLCN
+t6 1
+USCITA IDRAULICA
+WLCP PFCN ____ ____ ____ HLCN ____ ____
+t3 1
+USCITA IDRAULICA
+WRFT ____ ____ ____ ____ HUFT ____ ____
+t4 0
+INGRESSO IDRAULICO
+WRFT ____ ____ ____ ____ HIFT ____ ____

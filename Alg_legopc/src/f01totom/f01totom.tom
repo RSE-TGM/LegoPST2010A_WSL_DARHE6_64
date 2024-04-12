@@ -1,0 +1,246 @@
+# this file created with LEGOPHI rel. 0.2
+1200 600
+gen5_0
+n
+0___
+100.0 100.0
+Elettra
+rgv2_0
+n
+10__
+200.0 100.0
+Elettra
+zavo_0
+n
+11__
+300.0 100.0
+Elettra
+rgv2_0
+n
+12__
+400.0 100.0
+Elettra
+traf_0
+n
+13__
+500.0 100.0
+Elettra
+sble_0
+n
+14__
+600.0 100.0
+Elettra
+car1_0
+n
+15__
+700.0 100.0
+Elettra
+traf_0
+n
+16__
+800.0 100.0
+Elettra
+sble_0
+n
+17__
+900.0 100.0
+Elettra
+line_0
+n
+1___
+1000.0 100.0
+Elettra
+sble_0
+n
+2___
+1100.0 100.0
+Elettra
+sble_0
+n
+3___
+100.0 200.0
+Elettra
+line_0
+n
+5___
+200.0 200.0
+Elettra
+gen5_0
+n
+6___
+300.0 200.0
+Elettra
+car1_0
+n
+8___
+400.0 200.0
+Elettra
+sble_0
+n
+9___
+500.0 200.0
+Elettra
+****
+gen5_0
+0___
+port0
+busy port0 2___
+port1
+busy port3 10__
+port2
+busy port5 6___
+port4
+free
+port5
+free
+port6
+busy port4 10__
+port7
+free
+port8
+free
+++++
+rgv2_0
+10__
+port3
+busy port1 0___
+port4
+busy port6 0___
+++++
+zavo_0
+11__
+port0
+busy port2 9___
+port1
+free
+++++
+rgv2_0
+12__
+port3
+busy port1 6___
+port4
+busy port6 6___
+++++
+traf_0
+13__
+port0
+busy port1 2___
+port1
+free
+port3
+free
+port2
+busy port0 14__
+++++
+sble_0
+14__
+port0
+busy port2 13__
+port1
+busy port0 1___
+port2
+free
+++++
+car1_0
+15__
+port1
+free
+port0
+busy port2 2___
+++++
+traf_0
+16__
+port0
+busy port1 17__
+port1
+free
+port3
+free
+port2
+busy port0 9___
+++++
+sble_0
+17__
+port0
+busy port0 6___
+port1
+busy port0 16__
+port2
+free
+++++
+line_0
+1___
+port0
+busy port1 14__
+port1
+busy port0 3___
+port3
+free
+port2
+free
+++++
+sble_0
+2___
+port0
+busy port0 0___
+port1
+busy port0 13__
+port2
+busy port0 15__
+++++
+sble_0
+3___
+port0
+busy port1 1___
+port1
+busy port1 5___
+port2
+busy port0 8___
+++++
+line_0
+5___
+port0
+busy port1 9___
+port1
+busy port1 3___
+port3
+free
+port2
+free
+++++
+gen5_0
+6___
+port0
+busy port0 17__
+port1
+busy port3 12__
+port2
+free
+port4
+free
+port5
+busy port2 0___
+port6
+busy port4 12__
+port7
+free
+port8
+free
+++++
+car1_0
+8___
+port1
+free
+port0
+busy port2 3___
+++++
+sble_0
+9___
+port0
+busy port2 16__
+port1
+busy port0 5___
+port2
+busy port0 11__
+++++
+****

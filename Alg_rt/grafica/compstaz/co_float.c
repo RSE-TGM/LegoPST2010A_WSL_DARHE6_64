@@ -1,0 +1,59 @@
+/**********************************************************************
+*
+*       C Source:               %name%
+*       Subsystem:              %subsystem%
+*       Description:
+*       %created_by:    %
+*       %date_created:  %
+*
+**********************************************************************/
+#ifndef lint
+static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
+#endif
+/*
+	Variabile per identificazione della versione
+*/
+static char SccsID[] = "@(#)co_float.c	1.3\t3/23/95";
+/*
+   modulo co_float.c
+   tipo 
+   release 1.3
+   data 3/23/95
+   reserved @(#)co_float.c	1.3
+*/
+#include <stdio.h>
+#include <string.h>
+
+#include "sim_param.h"
+#include "sim_types.h"
+#include "compstaz.inc"
+
+/*
+        conv_float
+*/
+co_float(lmax,ldec,str,val)
+int lmax,ldec;
+STRIN_ST *str;
+float *val;
+{
+char *px;
+int ndec;
+
+/*printf("\n stringa %s  lung %d ",str->stringa,str->lun_stringa);*/
+if (str->lun_stringa > lmax) return(1);
+px=strchr(str->stringa,'.');
+if (px == NULL) return(1);
+px++;
+ndec=0;
+for (;;)
+{
+	if (*px == 0) break;
+	px++;
+	ndec++;
+}
+/*printf("\n lmax %d  ldec %d  ndec %d",lmax,ldec,ndec);*/
+if (ndec > ldec) return(1);
+if (!sscanf(str->stringa,"%f",val)) return(1);
+return(0);
+}
+

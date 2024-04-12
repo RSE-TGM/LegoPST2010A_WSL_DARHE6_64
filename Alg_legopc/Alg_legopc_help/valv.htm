@@ -1,0 +1,562 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>VALV</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE VALV</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE VALV</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">STEAM-WATER VALVE</p>
+<p>&nbsp;</p>
+<p align="left">The VALV module simulates different types of valve which can be
+present in a plant.</p>
+<p align="left">The following mathematical models, mentioned in a decreasing
+order of complexity, are included in the module:</p>
+<p ALIGN="left">1) Moody-Morris based on Moody correlation (critical flowing)
+and Morris correlation (sub-critical flowing)</p>
+<p ALIGN="left">2) CADIPO deriving from dimensioning equations of valves
+proposed by ISA</p>
+<p ALIGN="left">3) Simplified model merely assumes a quadratic relation between
+delta pressure at the valve inlet and outlet sides and the flow rate flowing
+through it. In case the outlet actual pressure is lower than the critical one
+(sonic valves), in the flow rate calculation the critical pressure is used as
+outlet pressure.</p>
+<p align="left">With the models 2) and 3) also check valves are representable.
+They allow to nullify the flow rate when, on the two sides of the valve, it is
+lower than DP.CHIU prefixed value included in the data (see below). They allow
+again the flow when the delta pressure is higher than DP.APER.</p>
+<p align="left">These models are based on the following main hypotheses:</p>
+<p ALIGN="left">- thermal capacity of valve metal is negligible</p>
+<p ALIGN="left">- isenthalpic thermodynamic transformation of fluid inside the
+valve</p>
+<p ALIGN="left">- absence of fluid accumulation inside the valve.</p>
+<p align="left">It is useful to note that also back-flow can be represented.
+Nevertheless, since fluid enthalpy is always considered by module on the inlet
+side, it is possible that the obtained results do not correspond to the physical
+reality.</p>
+<p align="left">Choice of one module rather than another is made assigning a
+suitable value to the COD. parameter required in input (see below).</p>
+<p align="left">In order to choose the most adequate model for user's needs and
+to allow its more correct use, some suggestions are given:</p>
+<p ALIGN="left">- The simplified model requires a shorter calculation time than
+other ones, but it is less sophisticated. Its use is advisable in simulating
+regulating valves since, because of control system feedback, possible
+inaccuracies on flow rate calculation particularly affect the valve opening
+degree. On the contrary, these inaccuracies have a limited influence on the
+plant thermohydraulic variables tendencies. Utilization of this module is
+inadvisable in safety valves simulation. In fact, without regulation 2feedback,
+these valves cause a possible error on flow calculation to affect the whole
+plant.</p>
+<p ALIGN="left">- The CADIPO model is able to cover, with a good precision
+degree, a very wide part of the VALV module application including safety valves
+simulation.</p>
+<p ALIGN="left">- The Moody-Morris model has a higher precision degree than the
+CADIPO model. It is particularly suitable to represent flows caused by little or
+big pipe burst.</p>
+<p ALIGN="left">- All models are able to deal with both single-phase and
+two-phase liquids. Nevertheless for a two phase liquid it is advisable the
+Moody-Morris model which is more precise.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE VALV</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p>&nbsp;</p>
+<p align="left">The module can be interconnected to other ones following three
+methods:</p>
+<p ALIGN="left">1) output in flow rate</p>
+<p ALIGN="left">prescription about block name: none</p>
+<p align="center"><font FACE="Arial" SIZE="2"><img SRC="images/Image742.gif" width="379" height="114"></font></p>
+<p ALIGN="left">2) output in inlet pressure</p>
+<p ALIGN="left">prescription about block name: preceded by '+' sign</p>
+<p ALIGN="center"><font FACE="Arial" SIZE="2"><img SRC="images/Image743.gif" width="379" height="114"></font></p>
+<p ALIGN="JUSTIFY">3) output in outlet pressure</p>
+<p ALIGN="JUSTIFY">prescription about block name: preceded by '-' sign</p>
+<p ALIGN="center"><font FACE="Arial" SIZE="2"><img SRC="images/Image744.gif" width="379" height="114"></font></p>
+<p ALIGN="center">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PIVA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">valve inlet pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PUVA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">valve outlet pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HVAL</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid enthalpy at the valve inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALZA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">valve opening degree</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WVAL</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid flow rate</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE VALV</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">Meanings of the required data in VALV module input:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALFA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">coefficient used to define the valve
+      characteristic, that is the cross section area variation law as a function
+      of ALZA opening degree following the formula:<br>
+      AREA = ALZA**ALFA<br>
+      AREA is normalized as regards to the valve cross section area when the
+      valve is fully opened. If user knows the manufacturer valve
+      characteristic, this can be assigned through the function AVNS10(ALZA,
+      ALFA) (see below). In this case to ALFA must be assigned any value &gt;
+      10.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CFA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">valve recovery coefficient with fully
+      opened valve (ALZA = 1). Typical value CFA = 0.85. This coefficient is
+      calculated as a function of ALZA and CFA following the law:<br>
+      CF(ALZA) = CFA+(1.-CFA)*(1.-A(ALZA))²<br>
+      where A(ALZA) is the normalized cross section area. For CFA &gt; 10 the CF
+      variation law is assigned by user through the function CFNS10(ALZA, A,
+      CFA) (see below).</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COD.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">parameter for selection of mathematical
+      model to use and type of valve to simulate. Depending on the value
+      assigned to this parameter, several options in accordance with below
+      mentioned scheme are:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COD. &lt; 0.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">the valve is simulated through the
+      Moody-Morris model using the valve calculated by the CADIPO model as cross
+      section area</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">0. &lt; COD. &lt; 1.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">the valve is simulated through the
+      Moody-Morris model giving the COD value to the normalized cross section
+      area</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COD. = 0.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">the valve is simulated through the CADIPO
+      model</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COD. = 1.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">the valve is simulated through the CADIPO
+      model with check valve positioned downstream</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COD. = 2.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">the valve is simulated through the not
+      sonic simplified model</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COD. = 3.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">the valve is simulated through the not
+      sonic simplified model with check valve positioned downstream</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COD. = 4.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">the valve is simulated through the sonic
+      simplified model</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COD. = 5.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">the valve is simulated through the sonic
+      simplified model with check valve positioned downstream</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[gal/min*psi^½]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CVA&nbsp;</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">identification coefficient of valve
+      working point</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">If this datum is not available, user leaves the related space
+blank and provides the following data referred to a known valve functioning
+point:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PORTATA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">P1 MONTE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">valve inlet pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">P2 VALLE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">valve outlet pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ENTALPIA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">valve inlet enthalpy</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CORSA&nbsp;</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALZA value related to the assigned
+      working point.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">If chosen valve admits the presence of a check valve downstream
+it, user must provide the DP values which provoke valve closing and opening.</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DP.APER</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">differential pressure provoking valve
+      opening</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DP.CHIU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">differential pressure provoking valve
+      opening.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE </font></b><font FACE="Arial" SIZE="4"><b><font SIZE="4">VALV</font>
+</b>
+          </font>
+    <!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the VALV module variables no particular
+prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE </font></b><font FACE="Arial" SIZE="4"><b><font SIZE="4">VALV</font>
+</b>
+          </font>
+    <!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p>&nbsp;</p>
+<p align="left">To assign valve characteristic (if user knows its data provided
+by the manufacturer) it is necessary a subprogram whose declarative statement
+is:</p>
+<p align="left">FUNCTION AVNS10(ALZA, ALFA)</p>
+<p ALIGN="left">Input parameters: ALZA, ALFA</p>
+<p ALIGN="left">Output parameters: AVNS10</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALZA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">valve opening degree</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALFA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(&gt; 10) parameter, coming from input
+      data. It can be used as choice index in case user has to introduce several
+      characteristics through the only one function:</font><font FACE="Arial">
+      <p ALIGN="CENTER">AVNS10(ALZA, ALFA)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AVNS10</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">value of calculation cross section area.
+      This value has to be normalized as regards to the cross section area of a
+      fully opened valve.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">Example of characteristic assigned in points:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p align="left">FUNCTION AVNS10(Z,ALFA)</p>
+<p align="left">DIMENSION X1(12),Y1(12)</p>
+<p align="left">DATA X1/0.,.1,.2,.3,.4,.5,.6,.7,.8,.9,1.,1.2/</p>
+<p align="left">DATA Y1/.0,.035,.085,.13,.18,.24,..32,.42,.55,.7,1.,1./</p>
+<p align="left">C</p>
+<p align="left">C CHARACTERISTICS CV=FUNCTION OF VALVE OPENING DEGREE</p>
+<p align="left">C</p>
+<p align="left">IALF=ALFA-10.</p>
+<p align="left">GO TO (1,100),IALF</p>
+<p align="left">C</p>
+<p align="left">C CHARACTERISTIC FCV OF RECIRCULATION</p>
+<p align="left">C</p>
+<p align="left">1 CALL AVNSIN(Z,X1,Y1,12,A)</p>
+<p align="left">AVNS10=A</p>
+<p align="left">GO TO 500</p>
+<p align="left">C</p>
+<p align="left">100 CONTINUE</p>
+<p align="left">500 RETURN</p>
+<p align="left">END</p>
+<p align="left">SUBROUTINE AVNSIN(Z,X,Y,NP,A)</p>
+<p align="left">DIMENSION X(1),Y(1)</p>
+<p align="left">C</p>
+<p align="left">C INTERPOLATION</p>
+<p align="left">C</p>
+<p align="left">DO 10 I=1,NP-1</p>
+<p align="left">J=I</p>
+<p align="left">IF(Z.GE.X(J).AND.Z.LE.X(J+1))GO TO 15</p>
+<p align="left">10 CONTINUE</p>
+<p align="left">A=0.</p>
+<p align="left">GO TO 20</p>
+<p align="left">15 A=Y(J)+(Z-X(J))*(Y(J+1)-Y(J))/(X(J+1)-X(J))</p>
+<p align="left">20 RETURN</p>
+<p align="left">END</p>
+</font></b><font FACE="Arial">
+<p align="left">User has also the possibility to assign the variation law of
+valve recovery coefficient through the user subprogram:</p>
+<p align="left">FUNCTION CFNS10(ALZA, A, CFA)</p>
+<p ALIGN="left">Input parameters: ALZA, A, CFA</p>
+<p ALIGN="left">Output parameters: CFNS10</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALZA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">valve opening degree</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">A</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">normalized cross section area</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CFA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(&gt;10) parameter coming from input
+      data. It can be used as choice index in case user has to assign several
+      variation laws of recovery coefficient through the only one function:</font><font FACE="Arial">
+      <p ALIGN="CENTER">CFNS10(ALZA, A, CFA).</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CFNS10</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">value of calculated recovery coefficient.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">Example of recovery coefficient assigned through the function:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p align="left">FUNCTION CFNS10(Z, A, CFA)</p>
+<p align="left">C IMPLICIT REAL*8 (A-H, O-Z)</p>
+<p align="left">CFNS = 0.95</p>
+<p align="left">RETURN</p>
+<p ALIGN="left">END</p>
+<p ALIGN="center"></font><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE </font></b><font FACE="Arial" SIZE="4"><b><font SIZE="4">VALV</font>
+</b>
+          </font>
+    <!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The module has only one residual related to the calculation of
+the flow rate flowing through the valve. It can be formally written as:</p>
+<p align="left">RNI(1) = f(WVAL, PIVA, PUVA, ALZA)</p>
+<p align="left">The variables which appear at the second member have physical
+meaning already defined in the related section on topological data.</p>
+<p ALIGN="left">The residual is normalized as regards to the flow rate W0.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE </font></b><font FACE="Arial" SIZE="4"><b><font SIZE="4">VALV</font>
+</b>
+          </font>
+    <!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p align="left">SUBROUTINE VALVI3(IFO, IOB, DEBL)</p>
+<p align="left">SUBROUTINE VALVI4(IOB, MOD)</p>
+<p align="left">SUBROUTINE VALVI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</p>
+<p align="left">$ IBLOC1, IBLOC2, IER, CNXYU, TOL)</p>
+<p align="left">SUBROUTINE VALVC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+<p align="left">$ IBLOC1, IBLOC2)</p>
+<p align="left">FUNCTION CA10(W, P1, P2, H, Z, ALFA, CFA)</p>
+<p align="left">FUNCTION CADI10(P1, H1, P2, Z, CA, ALFA, CFA)</p>
+<p align="left">FUNCTION R1VL10(R2, R3, R4, CF, CA)</p>
+<p align="left">FUNCTION R1WT10(R2, R3, R4, CF, CA)</p>
+<p align="left">FUNCTION R1VP10(R2, R3, R4, CF, CA)</p>
+<p align="left">FUNCTION AVAL10(Z, ALFA)</p>
+<p align="left">FUNCTION CFNS10(Z, A, CFA)</p>
+<p align="left">FUNCTION CFVA10(Z, A, CFA)</p>
+<p align="left">FUNCTION R1CISE(P1, H1, P2, CA, A, CF)</p>
+<p align="left">FUNCTION MOODY(P1, H1)</p>
+<p align="left">FUNCTION MORRIS(P1, H1, P2, CA, A)</p>
+<p align="left">FUNCTION AEFFL(CA, CFA)</p>
+<p align="left">FUNCTION AVNS10(Z, ALFA)</p>
+<p align="left">SUBROUTINE AVNSIN(Z, X, Y, NP, A)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE </font></b><font FACE="Arial" SIZE="4"><b><font SIZE="4">VALV</font>
+</b>
+          </font>
+    <!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are in the user
+manual section dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;CONDENSA&quot;</p>
+<p ALIGN="CENTER">&quot;CODEQUI&quot;</p>
+<p ALIGN="CENTER">&quot;MOTORE&quot;</p>
+<p ALIGN="CENTER">&quot;POMPE&quot;</p>
+<p ALIGN="CENTER">&quot;TURBINA&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

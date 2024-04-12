@@ -1,0 +1,191 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><i><font size="5">The output of the CPOMI3 subroutine of CPOM module</font></i></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">The CPOM module can be set in six
+different configurations:</span></p>
+<p class="MsoNormal" style="margin-left:21.3pt;text-indent:-21.3pt"><span lang="EN-GB">1.<span style="mso-tab-count:1">&nbsp;&nbsp;
+</span>speed imposed - flow rate output</span></p>
+<p class="MsoNormal" style="margin-left:21.3pt;text-indent:-21.3pt"><span lang="EN-GB">2.<span style="mso-tab-count:1">&nbsp;&nbsp;
+</span>speed imposed - inlet pressure output</span></p>
+<p class="MsoNormal" style="margin-left:21.3pt;text-indent:-21.3pt"><span lang="EN-GB">3.<span style="mso-tab-count:1">&nbsp;&nbsp;
+</span>speed imposed - outlet pressure output</span></p>
+<p class="MsoNormal" style="margin-left:21.3pt;text-indent:-21.3pt"><span lang="EN-GB">4.<span style="mso-tab-count:1">&nbsp;&nbsp;
+</span>power imposed - flow rate output</span></p>
+<p class="MsoNormal" style="margin-left:21.3pt;text-indent:-21.3pt"><span lang="EN-GB">5.<span style="mso-tab-count:1">&nbsp;&nbsp;
+</span>power imposed - inlet pressure output</span></p>
+<p class="MsoNormal" style="margin-left:21.3pt;text-indent:-21.3pt"><span lang="EN-GB">6.<span style="mso-tab-count:1">&nbsp;&nbsp;
+</span>power imposed - outlet pressure output</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The following examples represent the
+output produced in all these cases (the block name is always &quot;PUMP&quot;
+and the description is always &quot;Water pump&quot;):</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco1"><span lang="EN-GB">case 1 (speed imposed - flow rate output):</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>CPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>BL.-PUMP- **** MODULO CPOM - Water pump</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>HUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- FLUID ENTHALPY AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>WPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- FLUID FLOW RATE THROUGH THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>PUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- PRESSURE AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>PIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- PRESSURE AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>HIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- FLUID ENTHALPY AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>OMPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- ROTATIONAL SPEED OF THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>NPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- NUMBER OF PUMPS IN PARALLEL</b></font></span></p>
+</blockquote>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco1"><span lang="EN-GB">case 2 (speed imposed - inlet pressure output):</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+<p class="elenco3" align="left"><span lang="EN-GB"><b><font size="2" face="Courier New">+CPOPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>BL.-PUMP- **** MODULO CPOM - Water pump</font></b>
+</span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><b><font size="2" face="Courier New">HUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- FLUID ENTHALPY AT THE PUMP OUTLET</font></b></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><b><font size="2" face="Courier New">PIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- PRESSURE AT THE PUMP INLET</font></b></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><b><font size="2" face="Courier New">PUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- PRESSURE AT THE PUMP OUTLET</font></b></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><b><font size="2" face="Courier New">WPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- FLUID FLOW RATE THROUGH THE PUMP</font></b></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><b><font size="2" face="Courier New">HIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- FLUID ENTHALPY AT THE PUMP INLET</font></b></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><b><font size="2" face="Courier New">OMPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- ROTATIONAL SPEED OF THE PUMP</font></b></span></p>
+<p class="elenco3" align="left"><span lang="EN-GB"><b><font size="2" face="Courier New">NPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- NUMBER OF PUMPS IN PARALLEL</font></b></span></p>
+</blockquote>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco1"><span lang="EN-GB">case 3 (speed imposed - outlet pressure output):</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>-CPOPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>BL.-PUMP- **** MODULO CPOM - Water pump</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>HUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- FLUID ENTHALPY AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>PUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- PRESSURE AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>PIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- PRESSURE AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>WPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- FLUID FLOW RATE THROUGH THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>HIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- FLUID ENTHALPY AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>OMPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- ROTATIONAL SPEED OF THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>NPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- NUMBER OF PUMPS IN PARALLEL</b></font></span></p>
+</blockquote>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco1"><span lang="EN-GB">case 4 (power imposed - flow rate output):</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>CPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>BL.-PUMP- **** MODULO CPOM - Water pump</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>ECINPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--US-- KINETIC ENERGY OF THE ROTATING MASSES</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>OMPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- ROTATIONAL SPEED OF THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>HUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- FLUID ENTHALPY AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>WPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- FLUID FLOW RATE THROUGH THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>PUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- PRESSURE AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>PIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- PRESSURE AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>HIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- FLUID ENTHALPY AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>QIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- POWER ABSORBED BY THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>NPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- NUMBER OF PUMPS IN PARALLEL</b></font></span></p>
+</blockquote>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco1"><span lang="EN-GB">case 5 (power imposed - inlet pressure output):</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>+CPOPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>BL.-PUMP- **** MODULO CPOM - Water pump</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>ECINPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--US-- KINETIC ENERGY OF THE ROTATING MASSES</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>OMPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- ROTATIONAL SPEED OF THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>HUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- FLUID ENTHALPY AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>PIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- PRESSURE AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>PUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- PRESSURE AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>WPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- FLUID FLOW RATE THROUGH THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>HIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- FLUID ENTHALPY AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>QIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- POWER ABSORBED BY THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>NPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- NUMBER OF PUMPS IN PARALLEL</b></font></span></p>
+</blockquote>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco1"><span lang="EN-GB">case 6 (power imposed - outlet pressure output):</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>-CPOPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>BL.-PUMP- **** MODULO CPOM - Water pump</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>ECINPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--US-- KINETIC ENERGY OF THE ROTATING MASSES</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>OMPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- ROTATIONAL SPEED OF THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>HUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- FLUID ENTHALPY AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>PUPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--UA-- PRESSURE AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>PIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- PRESSURE AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>WPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- FLUID FLOW RATE THROUGH THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>HIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- FLUID ENTHALPY AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>QIPMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- POWER ABSORBED BY THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>NPOMPUMP<span style="mso-spacerun: yes">&nbsp;
+</span>--IN-- NUMBER OF PUMPS IN PARALLEL</b></font></span></p>
+</blockquote>
+<span lang="EN-GB" style="font-size:12.0pt;mso-bidi-font-size:10.0pt;font-family:
+Arial;mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-ansi-language:EN-GB;mso-fareast-language:IT;mso-bidi-language:AR-SA">As one
+can see, the complete block name is changed due to the pressure and flow rate
+input/output configuration (which otherwise couldn't be recognized by the
+following LEGO activities), but not due to the speed or power input choice
+(which can easily recognized using the numbers of block variables).</span>
+<p>&nbsp;</p>
+
+<!--mstheme--></font></body>
+
+</html>

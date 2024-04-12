@@ -1,0 +1,111 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE SERB</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERB_summ"></A>MODULE SERB&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERB_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERB_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERB_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERB_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERB_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERB_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERB_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_SERB_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERB_A"></A>MODULE SERB&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial"><P ALIGN="CENTER">WATER RESERVOIR</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module SERB simulates the behavior of a water reservoir. </P>
+<P ALIGN="JUSTIFY">Environment pressure is imposed (input variable) and bottom pressure is calculated taking into account a gravitational term. </P>
+<P ALIGN="JUSTIFY">Evaporation is considered too when the enthalpy of the entering liquid is greater than the saturation enthalpy. In this case an evaporation time constant (fixed inside the module code as 10 s) is considered. </P>
+<P ALIGN="JUSTIFY">The level is kept in any case under a overflow value defined as a datum.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The three balance equations are used for the calculations:</P>
+<P ALIGN="JUSTIFY">MASS CONSERVATION – to calculate the level of the reservoir</P>
+<P ALIGN="JUSTIFY">MOMENTUM CONSERVATION – to calculate bottom pressure</P>
+<P ALIGN="JUSTIFY">ENERGY EQUATION – to calcuate average enthalpy in the reservoir</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module SERB can be easily coupled with COEX . They simulate respectively the water and the steam part of a biphase cavity: COEX provides SERB with actual environment pressure and a condensation mass flow rate. SERB, in its turn, calculates an evaporation mass flow rate to be sent to the COEX.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERB_B"></A>MODULE SERB&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1292.gif" WIDTH=398 HEIGHT=263></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[m]&#9;LIVS&#9;&#9;water level</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PFSE&#9;&#9;pressure on bottom</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HSER&#9;&#9;average enthalpy</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WVAP&#9;evaporation mass flow rate</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HVAP&#9;&#9;evaporation enthalpy</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WING&#9;&#9;input mass flow rate</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HING&#9;&#9;input enthalpy</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WOUT&#9;output mass flow rate</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PSER&#9;&#9;reservoir environment pressure</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_SERB_C"></A>MODULE SERB&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables, user must assign the following data:</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY">[m<SUP>2</SUP>]&#9;SEZ&#9;reservoir horizontal section (supposed constant)</P>
+<P ALIGN="JUSTIFY">[m]&#9;LMAX&#9;maximum allowed level</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERB_D"></A>MODULE SERB&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the SERB module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERB_E"></A>MODULE SERB&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">SERB doesn’t prescribe any FORAUS subroutine.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERB_F"></A>MODULE SERB&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P>&nbsp;</P>
+<P>Five residuals are written:</P>
+<P>Mass conservation (level calcualation): ODE seen by LEGO as algebraic equation</P>
+<P>Momentum conservation: algebraic equation calculating bottom pressure</P>
+<P>Energy conservation (enthalpy calculation): ODE seen by LEGO as algebraic</P>
+<P>Evaporation mass flow rate calculation: algebraic equation</P>
+<P>Evaporation enthalpy: algebraic equation</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERB_G"></A>MODULE SERB&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>SUBROUTINE SERBI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>SUBROUTINE SERBI3(IFO,IOB,DEBL)</P>
+<P>SUBROUTINE SERBI4(IOB,MOD)</P>
+<P>SUBROUTINE SERBC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE SERBJAC(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE SERB(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>SUBROUTINE SERBD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SERB_H"></A>MODULE SERB&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module aren’t yet available.</P></FONT></BODY>
+</HTML>

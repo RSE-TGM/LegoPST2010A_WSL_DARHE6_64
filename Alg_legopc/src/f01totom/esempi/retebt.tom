@@ -1,0 +1,100 @@
+# this file created with LEGOPHI rel. 0.2
+800 600
+sble_0
+n
+0___
+302.0 61.999998
+D:/legopc/Lavoro/Libgraph/Libraries/Elettra
+line_0
+n
+1___
+180.0 72.999998
+D:/legopc/Lavoro/Libgraph/Libraries/Elettra
+line_0
+n
+2___
+371.0 192.999998
+D:/legopc/Lavoro/Libgraph/Libraries/Elettra
+remt_0
+n
+3___
+551.0 260.999998
+D:/legopc/Lavoro/Libgraph/Libraries/Elettra
+sble_0
+n
+4___
+473.0 261.999998
+D:/legopc/Lavoro/Libgraph/Libraries/Elettra
+sble_0
+n
+5___
+58.0 60.999998
+D:/legopc/Lavoro/Libgraph/Libraries/Elettra
+car1_0
+n
+7___
+59.0 177.999998
+D:/legopc/Lavoro/Libgraph/Libraries/Elettra
+****
+sble_0
+0___
+port0
+busy port1 1___
+port1
+busy port0 2___
+port2
+free
+++++
+line_0
+1___
+port0
+busy port1 5___
+port1
+busy port0 0___
+port3
+free
+port2
+free
+++++
+line_0
+2___
+port0
+busy port1 0___
+port1
+busy port0 4___
+port3
+free
+port2
+free
+++++
+remt_0
+3___
+port0
+busy port1 4___
+++++
+sble_0
+4___
+port0
+busy port1 2___
+port1
+busy port0 3___
+port2
+free
+++++
+sble_0
+5___
+port0
+free
+port1
+busy port0 1___
+port2
+busy port0 7___
+++++
+car1_0
+7___
+port1
+free
+port0
+busy port2 5___
+++++
+****

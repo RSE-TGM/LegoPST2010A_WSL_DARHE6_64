@@ -1,0 +1,60 @@
+GEN5_0                                                                          
+GEN5                                                                            
+GEN5 - 5th order synchronous machine                                            
+                                                                                
+NSTAT = 4
+NUSCI = 9
+NINGR =10
+ 
+NCONF = 1
+ 
+OMGA      --US-- VELOCITA' ANGOLARE                                             
+E1Q0      --US-- TENSIONE TRANSITORIA ASSE Q                                    
+E2Q0      --US-- TENSIONE SUBTRANSITORIA ASSE Q                                 
+E2D0      --US-- TENSIONE SUBTRANSITORIA ASSE D                                 
+DE00      --UA-- ANGOLO DELL'ASSE D DEL ROTORE RIFERITO (RAD)                   
+UMMA      --UA-- MODULO TENSIONE MORSETTI MACCHINA [V]                          
+FAMA      --UA-- FASE TENSIONE MORSETTI MACCHINA [rad]                          
+QATT      --UA-- POTENZA ELETTRICA ATTIVA [W]                                   
+QREA      --UA-- POTENZA ELETTRICA REATTIVA [VAR]                               
+IR00      --UA-- CORRENTE ATTIVA EROGATA                                        
+IX00      --UA-- CORRENTE REATTIVA EROGATA                                      
+FREQ      --UA-- FREQUENZA [Hz]                                                 
+IFLD      --UA-- CORRENTE DI ECCITAZIONE                                        
+ORIN      --IN-- VELOCITA ANGOLARE DEL SISTEMA DI RIFERIMENTO                   
+DRIN      --IN-- ANGOLO DEL ROTORE DEL SISTEMA DI RIFERIMENTO                   
+UR00      --IN-- TENSIONE ATTIVA AI MORSETTI DI RETE                            
+UX00      --IN-- TENSIONE REATTIVA AI MORSETTI DI RETE                          
+UF00      --IN-- TENSIONE DI ECCITAZIONE                                        
+QMEC      --IN-- POTENZA MECCANICA                                              
+SINT      --IN-- VARIABILE LOGICA MACCHINA CONNESSA IN RETE                     
+SFER      --IN-- VARIABILE LOGICA MACCHINA ARRESTATA                            
+SMRI      --IN-- VARIABILE LOGICA MACCHINA AUTORIFERITA                         
+OMRI      --IN-- VELOCITA ANGOLARE PER MACCHINA AUTORIFERITA                    
+==============================                                                  
+EOF                                                                             
+8
+t0 9
+USCITA ELETTRICA
+UR00 UX00 IR00 IX00
+t1 11
+USCITA GENERICA
+UMMA FAMA QATT QREA IFLD ____ ____ ____ ____ ____
+t2 11
+USCITA GENERICA
+OMGA DE00 ____ ____ ____ ____ ____ ____ ____ ____
+t4 7
+USCITA ATTUAZIONE
+FREQ
+t5 10
+INGRESSO GENERICO
+ORIN DRIN ____ ____ ____ ____ ____ ____ ____ ____
+t6 6
+INGRESSO ATTUAZIONE
+UF00
+t7 6
+INGRESSO ATTUAZIONE
+QMEC
+t8 6
+INGRESSO ATTUAZIONE
+SINT

@@ -1,0 +1,3367 @@
+!******************************************************************************
+! modulo mandb.uil11
+! tipo 
+! release 5.1
+! data 96/03/18
+! reserver @(#)mandb.uil11	5.1
+!******************************************************************************
+/*********
+mandb.uil 
+file uil di definizione degli oggetti grafici dell' utility mandb
+*********/
+
+module mandb
+version = 'v1.0'
+names = case_sensitive
+
+
+!
+!       Callbacks functions utilizzate
+!
+
+include file 'XmAppl.uil';
+
+procedure
+create_proc   (integer);
+activate_proc   (integer);
+toggle_proc   (integer);
+quit_proc     (string);
+ok_proc       (integer);
+apply_proc    (integer);
+find_proc    (integer);
+cancel_proc  (integer);
+map_proc     (integer);
+modify_proc   (integer);
+focus_proc    (integer);
+
+!
+! Costanti per compatibilita' MOTIF
+!
+value
+XmALIGNMENT_LEFT : XmALIGNMENT_BEGINNING;
+XmALIGNMENT_RIGHT : XmALIGNMENT_END;
+
+value
+normal : font('fixed');
+big : font('newcenturyschlbk_roman12');
+!
+!       Costanti per il riconoscimento delle window nelle callbacks
+!       functions.
+!
+
+value
+k_start 	: 1;
+k_stop	 	: 2;
+k_select_button	: 3;
+k_vispage_list	: 4;
+k_selpag_dialog : 5;
+k_bull_main     : 6;
+k_list_selpag           :7;
+k_selpag_button	        :8;
+k_selpag_ok	        :9;
+k_selmis_dialog 	:10;
+k_selmis_box            :11;
+k_find_text             :12;
+k_find_next             :13;
+k_find_previous         :14;
+k_selmis_elimina        :15;
+k_appoggio_dialog      :16;
+k_singlevar_dialog      :17;
+
+k_toggle_var1	: 20;
+k_toggle_var2	: 21;
+k_toggle_var3 	: 22;
+k_toggle_var4	: 23;
+k_toggle_var5	: 24;
+k_toggle_var6	: 25;
+k_toggle_var7	: 26;
+k_toggle_var8	: 27;
+k_toggle_var9	: 28;
+k_toggle_var10	: 29;
+k_toggle_var11	: 30;
+k_toggle_var12	: 31;
+k_toggle_var13 	: 32;
+k_toggle_var14	: 33;
+k_toggle_var15	: 34;
+k_toggle_var16	: 35;
+k_toggle_var17	: 36;
+k_toggle_var18	: 37;
+k_toggle_var19	: 38;
+k_toggle_var20  : 39;
+
+k_valore_var1   : 40;
+k_valore_var2   : 41;
+k_valore_var3   : 42;
+k_valore_var4   : 43;
+k_valore_var5   : 44;
+k_valore_var6   : 45;
+k_valore_var7   : 46;
+k_valore_var8   : 47;
+k_valore_var9   : 48;
+k_valore_var10  : 49;
+k_valore_var11  : 50;
+k_valore_var12  : 51;
+k_valore_var13  : 52;
+k_valore_var14  : 53;
+k_valore_var15  : 54;
+k_valore_var16  : 55;
+k_valore_var17  : 56;
+k_valore_var18  : 57;
+k_valore_var19  : 58;
+k_valore_var20  : 59;
+
+k_descr_var1   : 60;
+k_descr_var2   : 61;
+k_descr_var3   : 62;
+k_descr_var4   : 63;
+k_descr_var5   : 64;
+k_descr_var6   : 65;
+k_descr_var7   : 66;
+k_descr_var8   : 67;
+k_descr_var9   : 68;
+k_descr_var10  : 69;
+k_descr_var11  : 70;
+k_descr_var12  : 71;
+k_descr_var13  : 72;
+k_descr_var14  : 73;
+k_descr_var15  : 74;
+k_descr_var16  : 75;
+k_descr_var17  : 76;
+k_descr_var18  : 77;
+k_descr_var19  : 78;
+k_descr_var20  : 79;
+
+k_valore_sp1   : 80;
+k_valore_sp2   : 81;
+k_valore_sp3   : 82;
+k_valore_sp4   : 83;
+k_valore_sp5   : 84;
+k_valore_sp6   : 85;
+k_valore_sp7   : 86;
+k_valore_sp8   : 87;
+k_valore_sp9   : 88;
+k_valore_sp10  : 89;
+k_valore_sp11  : 90;
+k_valore_sp12  : 91;
+k_valore_sp13  : 92;
+k_valore_sp14  : 93;
+k_valore_sp15  : 94;
+k_valore_sp16  : 95;
+k_valore_sp17  : 96;
+k_valore_sp18  : 97;
+k_valore_sp19  : 98;
+k_valore_sp20  : 99;
+
+k_tempo_sp1   : 100;
+k_tempo_sp2   : 101;
+k_tempo_sp3   : 102;
+k_tempo_sp4   : 103;
+k_tempo_sp5   : 104;
+k_tempo_sp6   : 105;
+k_tempo_sp7   : 106;
+k_tempo_sp8   : 107;
+k_tempo_sp9   : 108;
+k_tempo_sp10  : 109;
+k_tempo_sp11  : 110;
+k_tempo_sp12  : 111;
+k_tempo_sp13  : 112;
+k_tempo_sp14  : 113;
+k_tempo_sp15  : 114;
+k_tempo_sp16  : 115;
+k_tempo_sp17  : 116;
+k_tempo_sp18  : 117;
+k_tempo_sp19  : 118;
+k_tempo_sp20  : 119;
+
+k_toggle_sp1   : 120;
+k_toggle_sp2   : 121;
+k_toggle_sp3   : 122;
+k_toggle_sp4   : 123;
+k_toggle_sp5   : 124;
+k_toggle_sp6   : 125;
+k_toggle_sp7   : 126;
+k_toggle_sp8   : 127;
+k_toggle_sp9   : 128;
+k_toggle_sp10  : 129;
+k_toggle_sp11  : 130;
+k_toggle_sp12  : 131;
+k_toggle_sp13  : 132;
+k_toggle_sp14  : 133;
+k_toggle_sp15  : 134;
+k_toggle_sp16  : 135;
+k_toggle_sp17  : 136;
+k_toggle_sp18  : 137;
+k_toggle_sp19  : 138;
+k_toggle_sp20  : 139;
+
+k_descr_mempag          :140;
+k_text_mempag           :141;
+k_list_history          :142;
+k_name_history		:143;
+k_cancel_history	:144;
+k_cut_button	        :145;
+k_paste_button		:146;
+k_clear_page		:147;
+k_close_page		:148;
+k_mempag_dialog	 	:149;
+k_list_mempag	        :150;
+k_history_dialog 	:151;
+k_err_dialog 		:152;
+
+! stringhe di testo della menu bar e popup menu
+
+
+value
+k_val_iniz_text             : '             ';
+k_val_iniz_descr            : 
+'                                             ';
+k_label_init_text             : '           ';
+k_label_init_tempo             : '         ';
+kblank:                     '                                ';
+k_nyi_label_text            : 'Comando non ancora implementato';
+k_file_label_text           : 'File';
+   k_quit_label_text           : 'Quit';
+k_page_label_text            : 'Page';
+    k_selpag_label_text        : 'Load';
+    k_mempag_label_text        : 'Store';
+k_edit_label_text           : 'Select';
+    k_select_alllabel_text     : 'All';
+    k_select_onelabel_text     : 'Single';
+    k_modify_label_text        : 'Modify';
+    k_history_label_text       : 'History';
+
+!  stringhe di testo nelle dialog boxes
+
+
+value
+k_selmis_title          : 'Scelta singola variabile';
+k_lista_mis_title       : 'Lista delle variabili';
+k_text_mis_title        : 'Variabile scelta';
+k_label_next            : 'Prossima';
+k_label_previous        : 'Precedente';
+k_label_elimina         : 'Cancella';
+k_apply_mis_title       : 'Inserisci';
+k_start_label_text	: 'Start';
+k_stop_label_text	: 'Stop';
+
+k_label_ok              : 'Ok';
+k_label_conferma        : 'Conferma';
+k_label_cancel          : 'Abbandona';
+
+
+! Colors, color tables, and icons.
+
+value
+white                     : color('white', background);
+black                     : color('black', background);
+blue                      : color('blue', foreground);
+gray                      : color('light gray', background);
+cyan                      : color('light blue', background);
+yellow                    : color('yellow', background);
+rred                      : color('red',background);
+red                       : exported color('red',background);
+!green                     : exported color('lime green', background);
+green                     : color('lime green', background);
+
+!
+! Dimensionamenti delle windows utilizzate per la grafica
+!
+
+value kx_main           : 10;
+value ky_main           : 10;
+value kw_main           : 750;
+value kh_main           : 880;
+value k_x_toggle        : 10;
+	value k_x_valore        : 120;
+	value k_x_descr         : 220;
+	value k_x_toggle_sp	: 500;
+	value k_x_sp		: 530;
+	value k_x_tempo		: 630;
+
+	value k_y_delta : 35;
+	value k_y_iniz : 80;
+
+object
+        S_MAIN_WINDOW : XmMainWindow {
+            arguments {
+                XmNx = kx_main;
+                XmNy = ky_main;
+            };
+		controls {
+		XmBulletinBoardDialog appoggio;
+            };
+        };
+
+object	
+	appoggio:     XmBulletinBoardDialog {
+            arguments {
+                XmNwidth = 300;
+                XmNheight =300;
+		XmNautoUnmanage=false;
+               XmNbackground = gray;
+               XmNdialogTitle= " MANDB ";
+                XmNmarginWidth=0;
+                XmNmarginHeight=0;
+            };
+                controls {
+                XmMenuBar       s_menu_bar;
+		XmLabel label_pagevis;
+                XmScrolledList vispage_list;
+                XmPushButton start_mandb;
+                XmPushButton stop_mandb;
+            };
+        callbacks {
+                MrmNcreateCallback = procedure create_proc(k_appoggio_dialog);
+                };
+        };
+
+object
+        label_pagevis: XmLabel {
+                arguments {
+                        XmNx = 30;
+                        XmNy = 45;
+                        XmNlabelString="Pagine visualizzate ";
+                        XmNbackground = yellow;
+                        };
+            callbacks {
+            };
+        };
+
+
+object
+        vispage_list: XmScrolledList {
+                arguments {
+                        XmNvisibleItemCount=10;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                        XmNx = 30;
+                        XmNy = 70;
+                        XmNwidth = 300;
+                        XmNfontList = normal;
+                        };
+        callbacks {
+                MrmNcreateCallback = procedure create_proc(k_vispage_list);
+                };
+	};
+
+object
+        start_mandb : XmPushButton {
+            arguments {
+                XmNlabelString = k_start_label_text;
+                XmNbackground = white;
+                XmNx = 30;
+                XmNy = 250;
+            };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_start);
+                XmNactivateCallback=procedure activate_proc(k_start);
+            };
+        };
+
+object
+
+        stop_mandb : XmPushButton {
+            arguments {
+                XmNx = 100;
+                XmNy = 250;
+                XmNlabelString = k_stop_label_text;
+                XmNbackground = white;
+            };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_stop);
+                XmNactivateCallback = procedure activate_proc(k_stop);
+            };
+        };
+
+
+
+
+object
+        page_dialog : XmBulletinBoardDialog {
+                arguments {
+                XmNmarginWidth=0;
+                XmNmarginHeight=0;
+                XmNbackground = cyan;
+                XmNlabelFontList = normal;
+		XmNdefaultPosition =false;
+		XmNautoUnmanage =false;
+
+                        };
+	controls {
+		XmMenuBar page_menu_bar;
+		XmLabel	d1;
+		XmLabel	d2;
+		XmLabel	d3;
+		XmLabel	d4;
+		XmLabel	d5;
+		XmRadioBox mandb_radio;
+		XmLabel	valore_var1;
+		XmLabel	valore_var2;
+		XmLabel	valore_var3;
+		XmLabel	valore_var4;
+		XmLabel	valore_var5;
+		XmLabel	valore_var6;
+		XmLabel	valore_var7;
+		XmLabel	valore_var8;
+		XmLabel	valore_var9;
+		XmLabel	valore_var10;
+		XmLabel	valore_var11;
+		XmLabel	valore_var12;
+		XmLabel	valore_var13;
+		XmLabel	valore_var14;
+		XmLabel	valore_var15;
+		XmLabel	valore_var16;
+		XmLabel	valore_var17;
+		XmLabel	valore_var18;
+		XmLabel	valore_var19;
+		XmLabel	valore_var20;
+		XmLabel	descr_var1;
+		XmLabel	descr_var2;
+		XmLabel	descr_var3;
+		XmLabel	descr_var4;
+		XmLabel	descr_var5;
+		XmLabel	descr_var6;
+		XmLabel	descr_var7;
+		XmLabel	descr_var8;
+		XmLabel	descr_var9;
+		XmLabel	descr_var10;
+		XmLabel	descr_var11;
+		XmLabel	descr_var12;
+		XmLabel	descr_var13;
+		XmLabel	descr_var14;
+		XmLabel	descr_var15;
+		XmLabel	descr_var16;
+		XmLabel	descr_var17;
+		XmLabel	descr_var18;
+		XmLabel	descr_var19;
+		XmLabel	descr_var20;
+		XmToggleButton toggle_sp1;
+		XmToggleButton toggle_sp2;
+		XmToggleButton toggle_sp3;
+		XmToggleButton toggle_sp4;
+		XmToggleButton toggle_sp5;
+		XmToggleButton toggle_sp6;
+		XmToggleButton toggle_sp7;
+		XmToggleButton toggle_sp8;
+		XmToggleButton toggle_sp9;
+		XmToggleButton toggle_sp10;
+		XmToggleButton toggle_sp11;
+		XmToggleButton toggle_sp12;
+		XmToggleButton toggle_sp13;
+		XmToggleButton toggle_sp14;
+		XmToggleButton toggle_sp15;
+		XmToggleButton toggle_sp16;
+		XmToggleButton toggle_sp17;
+		XmToggleButton toggle_sp18;
+		XmToggleButton toggle_sp19;
+		XmToggleButton toggle_sp20;
+		XmText	valore_sp1;
+		XmText	valore_sp2;
+		XmText	valore_sp3;
+		XmText	valore_sp4;
+		XmText	valore_sp5;
+		XmText	valore_sp6;
+		XmText	valore_sp7;
+		XmText	valore_sp8;
+		XmText	valore_sp9;
+		XmText	valore_sp10;
+		XmText	valore_sp11;
+		XmText	valore_sp12;
+		XmText	valore_sp13;
+		XmText	valore_sp14;
+		XmText	valore_sp15;
+		XmText	valore_sp16;
+		XmText	valore_sp17;
+		XmText	valore_sp18;
+		XmText	valore_sp19;
+		XmText	valore_sp20;
+		XmLabel	tempo_sp1;
+		XmLabel	tempo_sp2;
+		XmLabel	tempo_sp3;
+		XmLabel	tempo_sp4;
+		XmLabel	tempo_sp5;
+		XmLabel	tempo_sp6;
+		XmLabel	tempo_sp7;
+		XmLabel	tempo_sp8;
+		XmLabel	tempo_sp9;
+		XmLabel	tempo_sp10;
+		XmLabel	tempo_sp11;
+		XmLabel	tempo_sp12;
+		XmLabel	tempo_sp13;
+		XmLabel	tempo_sp14;
+		XmLabel	tempo_sp15;
+		XmLabel	tempo_sp16;
+		XmLabel	tempo_sp17;
+		XmLabel	tempo_sp18;
+		XmLabel	tempo_sp19;
+		XmLabel	tempo_sp20;
+		};
+          callbacks {
+!            MrmNcreateCallback = procedure create_proc(k_bull_main);
+            XmNmapCallback = procedure map_proc (k_bull_main);
+            XmNfocusCallback = procedure focus_proc (k_bull_main);
+		};
+	};
+
+object
+        mandb_radio : XmRadioBox {
+                arguments {
+                        XmNspacing = 0;
+			XmNx = 10;
+			XmNy = k_y_iniz-3;
+			XmNbackground = cyan;
+			XmNpacking=XmPACK_NONE;
+                        };
+                controls {
+                        XmToggleButton toggle_var1;
+                        XmToggleButton toggle_var2;
+                        XmToggleButton toggle_var3;
+                        XmToggleButton toggle_var4;
+                        XmToggleButton toggle_var5;
+                        XmToggleButton toggle_var6;
+                        XmToggleButton toggle_var7;
+                        XmToggleButton toggle_var8;
+                        XmToggleButton toggle_var9;
+                        XmToggleButton toggle_var10;
+                        XmToggleButton toggle_var11;
+                        XmToggleButton toggle_var12;
+                        XmToggleButton toggle_var13;
+                        XmToggleButton toggle_var14;
+                        XmToggleButton toggle_var15;
+                        XmToggleButton toggle_var16;
+                        XmToggleButton toggle_var17;
+                        XmToggleButton toggle_var18;
+                        XmToggleButton toggle_var19;
+                        XmToggleButton toggle_var20;
+                        };
+                };
+
+object
+        toggle_var1 : XmToggleButton{
+                arguments {
+                        XmNrecomputeSize =false;
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+			XmNselectColor = blue;
+                        XmNfontList = normal;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var1);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var1);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var1);
+
+            };
+        };
+
+
+object
+        toggle_var2 : XmToggleButton{
+                arguments {
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNy = k_y_delta*1;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var2);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var2);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var2);
+
+            };
+        };
+
+object
+        toggle_var3 : XmToggleButton{
+                arguments {
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNy = k_y_delta*2;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var3);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var3);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var3);
+
+            };
+        };
+
+object
+        toggle_var4 : XmToggleButton{
+                arguments {
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNy = k_y_delta*3;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var4);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var4);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var4);
+
+            };
+        };
+
+object
+        toggle_var5 : XmToggleButton{
+                arguments {
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNy = k_y_delta*4;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var5);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var5);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var5);
+
+            };
+        };
+
+object
+        toggle_var6 : XmToggleButton{
+                arguments {
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNy = k_y_delta*5;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var6);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var6);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var6);
+
+            };
+        };
+
+object
+        toggle_var7 : XmToggleButton{
+                arguments {
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNy = k_y_delta*6;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var7);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var7);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var7);
+
+            };
+        };
+
+object
+        toggle_var8 : XmToggleButton{
+                arguments {
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNy = k_y_delta*7;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var8);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var8);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var8);
+
+            };
+        };
+
+object
+        toggle_var9 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*8;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var9);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var9);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var9);
+
+            };
+        };
+
+object
+        toggle_var10 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*9;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var10);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var10);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var10);
+
+            };
+        };
+
+object
+        toggle_var11 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*10;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var11);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var11);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var11);
+
+            };
+        };
+
+
+object
+        toggle_var12 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*11;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var12);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var12);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var12);
+
+            };
+        };
+
+
+object
+        toggle_var13 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*12;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var13);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var13);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var13);
+
+            };
+        };
+
+
+object
+        toggle_var14 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*13;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var14);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var14);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var14);
+
+            };
+        };
+
+
+object
+        toggle_var15 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*14;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var15);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var15);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var15);
+
+            };
+        };
+
+
+object
+        toggle_var16 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*15;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var16);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var16);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var16);
+
+            };
+        };
+
+
+object
+        toggle_var17 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*16;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var17);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var17);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var17);
+
+            };
+        };
+
+
+object
+        toggle_var18 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*17;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var18);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var18);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var18);
+
+            };
+        };
+
+
+object
+        toggle_var19 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*18;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var19);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var19);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var19);
+
+            };
+        };
+
+
+object
+        toggle_var20 : XmToggleButton{
+                arguments {
+                        XmNlabelString = k_label_init_text;
+			XmNbackground = cyan;
+                        XmNfontList = normal;
+                        XmNrecomputeSize =false;
+			XmNselectColor = blue;
+                        XmNy = k_y_delta*19;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_var20);
+            XmNdisarmCallback = procedure toggle_proc (k_toggle_var20);
+            XmNarmCallback = procedure toggle_proc (k_toggle_var20);
+
+            };
+       };
+
+
+object
+        d1 : XmLabel {
+                arguments {
+                        XmNx = k_x_toggle;
+                        XmNy = 50;
+                        XmNlabelString="Variabile";
+			XmNbackground = yellow;
+                        };
+            callbacks {
+            };
+        };
+
+object
+        d2 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = 50;
+                        XmNlabelString="Valore Attuale";
+			XmNbackground = yellow;
+                        };
+            callbacks {
+            };
+        };
+
+object
+        d3 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = 50;
+         XmNlabelString='             Descrizione                     ';
+			XmNbackground = yellow;
+                        };                                  
+            callbacks {
+            };
+        };
+
+object
+        d4 : XmLabel {
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = 50;
+                        XmNlabelString="  Valore forzato ";
+			XmNbackground = yellow;
+                        };                                  
+            callbacks {
+            };
+        };
+
+object
+        d5 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = 50;
+                        XmNlabelString="   Tempo  ";
+			XmNbackground = yellow;
+                        };                                  
+            callbacks {
+            };
+        };
+
+
+object
+        valore_var1 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz;
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_val_iniz_text;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var1);
+            };
+        };  
+
+object
+        valore_var2 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+k_y_delta*1;
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_val_iniz_text;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var2);
+            };
+        };
+
+
+object
+        valore_var3 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+k_y_delta*2;
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var3);
+            };
+        };
+
+object
+        valore_var4 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*3);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var4);
+            };
+        };
+
+object
+        valore_var5 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*4);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var5);
+            };
+        };
+
+object
+        valore_var6 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*5);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var6);
+            };
+        };
+
+object
+        valore_var7 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*6);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var7);
+            };
+        };
+
+object
+        valore_var8 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*7);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var8);
+            };
+        };
+
+object
+        valore_var9 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*8);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var9);
+            };
+        };
+
+object
+        valore_var10 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*9);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var10);
+            };
+        };
+
+object
+        valore_var11 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*10);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+              MrmNcreateCallback = procedure create_proc(k_valore_var11);
+            };
+        };
+
+
+object
+        valore_var12 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*11);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var12);
+            };
+        };
+object
+        valore_var13 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*12);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var13);
+            };
+        };
+
+object
+        valore_var14 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*13);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var14);
+            };
+        };
+object
+        valore_var15 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*14);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var15);
+            };
+        };
+object
+        valore_var16 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                     XmNy = k_y_iniz+(k_y_delta*15);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var16);
+            };
+        };
+object
+        valore_var17 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*16);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var17);
+            };
+        };
+object
+        valore_var18 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*17);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var18);
+            };
+        };
+object
+        valore_var19 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*18);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var19);
+            };
+        };
+object
+        valore_var20 : XmLabel {
+                arguments {
+                        XmNx = k_x_valore;
+                        XmNy = k_y_iniz+(k_y_delta*19);
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        XmNlabelString=k_val_iniz_text;
+			XmNalignment = XmALIGNMENT_RIGHT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_var20);
+            };
+        };
+
+object
+        descr_var1 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz;
+                        XmNrecomputeSize=false;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        XmNlabelString=k_val_iniz_descr;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var1);
+            };
+        };  
+
+object
+        descr_var2 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*1);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var2);
+            };
+        };
+
+
+object
+        descr_var3 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*2);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+			XmNbackground= white;
+			XmNborderWidth = 1;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var3);
+            };
+        };
+
+object
+        descr_var4 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*3);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var4);
+            };
+        };
+
+object
+        descr_var5 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*4);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var5);
+            };
+        };
+
+object
+        descr_var6 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*5);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var6);
+            };
+        };
+
+object
+        descr_var7 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*6);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var7);
+            };
+        };
+
+object
+        descr_var8 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*7);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var8);
+            };
+        };
+
+object
+        descr_var9 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*8);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var9);
+            };
+        };
+
+object
+        descr_var10 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*9);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var10);
+            };
+        };
+
+object
+        descr_var11 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*10);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+              MrmNcreateCallback = procedure create_proc(k_descr_var11);
+            };
+        };
+
+
+object
+        descr_var12 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*11);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var12);
+            };
+        };
+object
+        descr_var13 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*12);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var13);
+            };
+        };
+
+object
+        descr_var14 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*13);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var14);
+            };
+        };
+object
+        descr_var15 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*14);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var15);
+            };
+        };
+object
+        descr_var16 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                     XmNy = k_y_iniz+(k_y_delta*15);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var16);
+            };
+        };
+object
+        descr_var17 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*16);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var17);
+            };
+        };
+object
+        descr_var18 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*17);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var18);
+            };
+        };
+object
+        descr_var19 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*18);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var19);
+            };
+        };
+object
+        descr_var20 : XmLabel {
+                arguments {
+                        XmNx = k_x_descr;
+                        XmNy = k_y_iniz+(k_y_delta*19);
+                        XmNrecomputeSize=false;
+			XmNborderWidth = 1;
+                        XmNbackground= white;
+                        XmNlabelString=k_val_iniz_descr;
+			XmNalignment = XmALIGNMENT_LEFT;
+                        XmNfontList = normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_descr_var20);
+            };
+        };
+
+
+object
+        toggle_sp1 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz;
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp1);
+	    XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp1);
+
+            };
+        };
+
+
+object
+        toggle_sp2 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz + (k_y_delta*1);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp2);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp2);
+
+            };
+        };
+
+
+object
+        toggle_sp3 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz + (k_y_delta*2);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp3);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp3);
+
+            };
+        };
+
+
+object
+        toggle_sp4 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz + (k_y_delta*3);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp4);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp4);
+
+            };
+        };
+
+
+object
+        toggle_sp5 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz + (k_y_delta*4);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp5);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp5);
+
+            };
+        };
+
+
+object
+        toggle_sp6 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz + (k_y_delta*5);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp6);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp6);
+
+            };
+        };
+
+
+object
+        toggle_sp7 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz+ (k_y_delta*6);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp7);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp7);
+
+            };
+        };
+
+
+object
+        toggle_sp8 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz+ (k_y_delta*7);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp8);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp8);
+
+            };
+        };
+
+
+object
+        toggle_sp9 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz+ (k_y_delta*8);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp9);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp9);
+
+            };
+        };
+
+
+object
+        toggle_sp10 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz+ (k_y_delta*9);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp10);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp10);
+
+            };
+        };
+
+object
+        toggle_sp11 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNbackground = cyan;
+                        XmNy = k_y_iniz+ (k_y_delta*10);
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp11);
+	    XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp11);
+
+            };
+        };
+
+
+object
+        toggle_sp12 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz + (k_y_delta*11);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp12);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp12);
+
+            };
+        };
+
+
+object
+        toggle_sp13 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz + (k_y_delta*12);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp13);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp13);
+
+            };
+        };
+
+
+object
+        toggle_sp14 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz + (k_y_delta*13);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp14);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp14);
+
+            };
+        };
+
+
+object
+        toggle_sp15 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz + (k_y_delta*14);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp15);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp15);
+
+            };
+        };
+
+
+object
+        toggle_sp16 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz + (k_y_delta*15);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp16);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp16);
+
+            };
+        };
+
+
+object
+        toggle_sp17 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz+ (k_y_delta*16);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp17);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp17);
+
+            };
+        };
+
+
+object
+        toggle_sp18 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz+ (k_y_delta*17);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp18);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp18);
+
+            };
+        };
+
+
+object
+        toggle_sp19 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz+ (k_y_delta*18);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp19);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp19);
+
+            };
+        };
+
+object
+        toggle_sp20 : XmToggleButton{
+                arguments {
+                        XmNx = k_x_toggle_sp;
+                        XmNy = k_y_iniz+ (k_y_delta*19);
+                        XmNbackground = cyan;
+                        XmNselectColor = green;
+                        XmNfontList = normal;
+                        XmNlabelString=" ";
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_toggle_sp20);
+            XmNvalueChangedCallback = procedure modify_proc (k_toggle_sp20);
+
+            };
+        };
+
+
+object
+        valore_sp1 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz;
+	                XmNmaxLength=12;
+                        XmNcolumns =12;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+			XmNeditable= false;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp1);
+            };
+        };  
+
+object
+        valore_sp2 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+k_y_delta*1;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp2);
+            };
+        };
+
+
+object
+        valore_sp3 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+k_y_delta*2;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp3);
+            };
+        };
+
+object
+        valore_sp4 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*3);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp4);
+            };
+        };
+
+object
+        valore_sp5 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*4);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp5);
+            };
+        };
+
+object
+        valore_sp6 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*5);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp6);
+            };
+        };
+
+object
+        valore_sp7 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*6);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp7);
+            };
+        };
+
+object
+        valore_sp8 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*7);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp8);
+            };
+        };
+
+object
+        valore_sp9 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*8);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp9);
+            };
+        };
+
+object
+        valore_sp10 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*9);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp10);
+            };
+        };
+
+object
+        valore_sp11 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*10);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp11);
+            };
+        };
+
+
+object
+        valore_sp12 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*11);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp12);
+            };
+        };
+object
+        valore_sp13 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*12);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp13);
+            };
+        };
+
+object
+        valore_sp14 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*13);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp14);
+            };
+        };
+object
+        valore_sp15 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*14);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp15);
+            };
+        };
+object
+        valore_sp16 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                     XmNy = k_y_iniz+(k_y_delta*15);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp16);
+            };
+        };
+object
+        valore_sp17 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*16);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp17);
+            };
+        };
+object
+        valore_sp18 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*17);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp18);
+            };
+        };
+object
+        valore_sp19 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*18);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp19);
+            };
+        };
+object
+        valore_sp20 : XmText {
+                arguments {
+                        XmNx = k_x_sp;
+                        XmNy = k_y_iniz+(k_y_delta*19);
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+	                XmNcolumns =12;
+	                XmNmaxLength=12;
+			XmNeditable= false;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_valore_sp20);
+            };
+        };
+
+
+object
+        tempo_sp1 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz;
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp1);
+            };
+        };  
+
+object
+        tempo_sp2 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+k_y_delta*1;
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp2);
+            };
+        };
+
+
+object
+        tempo_sp3 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+k_y_delta*2;
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp3);
+            };
+        };
+
+object
+        tempo_sp4 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*3);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp4);
+            };
+        };
+
+object
+        tempo_sp5 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*4);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp5);
+            };
+        };
+
+object
+        tempo_sp6 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*5);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp6);
+            };
+        };
+
+object
+        tempo_sp7 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*6);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp7);
+            };
+        };
+
+object
+        tempo_sp8 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*7);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp8);
+            };
+        };
+
+object
+        tempo_sp9 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*8);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp9);
+            };
+        };
+
+object
+        tempo_sp10 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*9);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp10);
+            };
+        };
+
+object
+        tempo_sp11 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*10);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp11);
+            };
+        };
+
+
+object
+        tempo_sp12 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*11);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp12);
+            };
+        };
+object
+        tempo_sp13 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*12);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp13);
+            };
+        };
+
+object
+        tempo_sp14 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*13);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp14);
+            };
+        };
+object
+        tempo_sp15 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*14);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp15);
+            };
+        };
+object
+        tempo_sp16 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                     XmNy = k_y_iniz+(k_y_delta*15);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp16);
+            };
+        };
+object
+        tempo_sp17 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*16);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp17);
+            };
+        };
+object
+        tempo_sp18 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*17);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp18);
+            };
+        };
+object
+        tempo_sp19 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*18);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp19);
+            };
+        };
+object
+        tempo_sp20 : XmLabel {
+                arguments {
+                        XmNx = k_x_tempo;
+                        XmNy = k_y_iniz+(k_y_delta*19);
+                        XmNrecomputeSize=false;
+                        XmNlabelString=k_label_init_tempo;
+                        XmNbackground= cyan;
+                        XmNforeground= blue;
+                        XmNalignment = XmALIGNMENT_RIGHT;
+			XmNfontList= normal;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sp20);
+            };
+        };
+
+
+!
+! Definizione della Bulletin Board per la selezione delle variabili
+!
+
+object
+        selmis_dialog : XmBulletinBoardDialog {
+                arguments {
+			XmNautoUnmanage = false;
+                        XmNdialogTitle=k_selmis_title;
+                        XmNx = 200;
+                        XmNdialogStyle=XmDIALOG_MODELESS;
+                        XmNmarginWidth=20;
+                        XmNcancelButton= XmPushButton selmis_cancel;
+                        XmNdefaultButton= XmPushButton find_next;
+                        XmNlabelFontList = normal;
+                        };
+                controls {
+                        XmScrolledList selmis_box;
+	                XmText find_text;
+                        XmPushButton selmis_ok;
+                        XmPushButton selmis_cancel;
+                        XmPushButton find_next;
+                        XmPushButton find_previous;
+                        XmPushButton selmis_elimina;
+                        };
+        callbacks {
+            XmNmapCallback = procedure map_proc (k_selmis_dialog);
+            };
+                };
+
+
+object
+        selmis_box: XmScrolledList {
+                arguments {
+      	               XmNx=30;
+	               XmNy=20;
+                        XmNvisibleItemCount=16;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                        XmNfontList = normal;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_selmis_box);
+            XmNsingleSelectionCallback= procedure apply_proc (k_selmis_box);
+            };
+                };
+
+object
+        find_text: XmText {
+          arguments {
+               XmNx=30;
+              XmNy=300;
+                XmNcolumns =24;
+                XmNmaxLength=24;
+                        XmNfontList = normal;
+                };
+          callbacks {
+                MrmNcreateCallback= procedure create_proc (k_find_text);
+                };
+        };
+
+
+object
+        selmis_ok : XmPushButton {
+        arguments {
+               XmNx=30;
+               XmNy=360;
+                XmNlabelString = k_label_ok;
+            };
+        callbacks {
+              XmNactivateCallback = procedure ok_proc (k_selmis_dialog);
+            };
+        };
+
+object
+        selmis_cancel : XmPushButton {
+        arguments {
+               XmNx=80;
+               XmNy=360;
+                XmNlabelString = k_label_cancel;
+            };
+        callbacks {
+              XmNactivateCallback = procedure cancel_proc (k_selmis_dialog);
+            };
+        };
+
+
+object
+        find_next : XmPushButton {
+        arguments {
+              XmNx=200;
+              XmNy=360;
+                XmNlabelString = k_label_next;
+                XmNshowAsDefault = 1;
+            };
+        callbacks {
+              XmNactivateCallback = procedure find_proc (k_find_next);
+            };
+        };     
+
+object
+        find_previous : XmPushButton {
+        arguments {
+                XmNlabelString = k_label_previous;
+               XmNx=300;
+               XmNy=360;
+            };
+        callbacks {
+              XmNactivateCallback = procedure find_proc (k_find_previous);
+            };
+        };     
+
+object
+        selmis_elimina : XmPushButton {
+        arguments {
+               XmNx=420;
+               XmNy=360;
+                XmNlabelString = k_label_elimina;
+            };
+        callbacks {
+              XmNactivateCallback = procedure activate_proc (k_selmis_elimina);
+            };
+        };
+
+
+!
+! definizione oggetti per la box di memorizzazione pagine
+!
+object
+        mempag_dialog : XmBulletinBoardDialog {
+                        arguments {
+                                XmNx = 200;
+                                XmNdialogTitle='Memorizzazione pagine';
+!!!!!!                        	XmNdialogStyle=XmDIALOG_SYSTEM_MODAL;
+                        	XmNdialogStyle=XmDIALOG_APPLICATION_MODAL;
+                                XmNdefaultButton= XmPushButton mempag_ok;
+	                        XmNmarginWidth=20;
+	                        XmNlabelFontList = normal;
+				XmNautoUnmanage = false;
+                                };
+                        controls {
+				XmLabel mempag_descr;
+				XmScrolledList mempag_list;
+                                XmText text_mempag;
+                        	XmPushButton mempag_ok;
+	                        XmPushButton mempag_cancel;
+                                };
+                        callbacks {
+                        MrmNcreateCallback = procedure create_proc (k_mempag_dialog);
+                        };
+                                };
+
+
+object
+        mempag_list: XmScrolledList {
+                arguments {
+                        XmNvisibleItemCount=10;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                        XmNx = 30;
+                        XmNy = 30;
+                        XmNwidth = 300;
+                        XmNfontList = normal;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_list_mempag);
+            XmNsingleSelectionCallback= procedure apply_proc (k_list_mempag);
+            };
+                };
+
+object
+        mempag_descr : XmLabel {
+                arguments {
+                        XmNx = 30;
+                        XmNy = 230;
+                        XmNlabelString=k_val_iniz_descr;
+                        XmNbackground= white;
+                        XmNborderWidth = 1;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc (k_descr_mempag);
+            };
+        };
+object
+        text_mempag : XmText {
+          arguments {
+               XmNx=30;
+               XmNy=300;
+                XmNcolumns =35;
+                XmNmaxLength=35;
+                };
+        callbacks {
+                MrmNcreateCallback = procedure create_proc (k_text_mempag);
+                };
+        };
+
+object
+        mempag_ok : XmPushButton {
+        arguments {
+                XmNlabelString = k_label_ok;
+                XmNshowAsDefault = 1;
+		XmNx = 30;
+		XmNy =350;
+            };
+        callbacks {
+              XmNactivateCallback  = procedure ok_proc (k_mempag_dialog);
+            };
+        };
+
+object
+        mempag_cancel : XmPushButton {
+        arguments {
+                XmNlabelString = k_label_cancel;
+		XmNx = 120;
+		XmNy =350;
+            };
+        callbacks {
+              XmNactivateCallback  = procedure cancel_proc (k_mempag_dialog);
+            };
+        };
+
+!
+! definizione degli oggetti per la box di selezione pagine
+
+object
+        selpag_dialog : XmBulletinBoardDialog {
+                        arguments {
+                                XmNdialogTitle='selezione pagine';
+                                XmNdialogStyle=XmDIALOG_MODELESS;
+                                XmNdefaultButton= XmPushButton selpag_ok;
+                                XmNmarginWidth=20;
+				XmNx = 200;
+				XmNautoUnmanage =false;
+                        	XmNlabelFontList = normal;
+                                };
+                        controls {
+                                XmScrolledList list_pag;
+                        	XmPushButton selpag_ok;
+	                        XmPushButton selpag_cancel;
+                                };
+                        callbacks {
+                            MrmNcreateCallback = procedure create_proc (k_selpag_dialog);
+                                };
+                                };
+
+
+object
+        list_pag: XmScrolledList {
+                arguments {
+                        XmNvisibleItemCount=10;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+			XmNx = 30;
+			XmNy = 30;
+			XmNwidth = 300;
+                        XmNfontList = normal;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_list_selpag);
+            XmNsingleSelectionCallback= procedure apply_proc (k_list_selpag);
+            };
+                };
+
+
+object
+        selpag_ok : XmPushButton {
+        arguments {
+                XmNlabelString = k_label_ok;
+                XmNshowAsDefault = 1;
+			XmNx = 30;
+			XmNy = 230;
+            };
+        callbacks {
+              MrmNcreateCallback = procedure create_proc (k_selpag_ok);
+              XmNactivateCallback  = procedure ok_proc (k_selpag_ok);
+            };
+        };
+
+object
+        selpag_cancel : XmPushButton {
+        arguments {
+                XmNlabelString =k_label_cancel;
+                       XmNx = 120;
+                        XmNy = 230;
+            };
+        callbacks {
+              XmNactivateCallback = procedure cancel_proc (k_selpag_dialog);
+            };
+        };
+
+!
+! Dialogs box per history valori
+!
+
+object
+        history_dialog : XmBulletinBoardDialog {
+                        arguments {
+	                        XmNautoUnmanage = false;
+                                XmNallowOverlap=false;
+                                XmNdialogStyle=XmDIALOG_MODELESS;
+                                XmNdialogTitle='  Valori storici ';
+                                XmNdefaultButton= XmPushButton history_cancel;
+                                XmNdefaultPosition= false;
+                        XmNlabelFontList = normal;
+                                };
+                        controls {
+				XmLabel name_history;
+				XmLabel descr_history;
+                                XmScrolledList list_history;
+	                        XmPushButton history_cancel;
+                                };
+                        callbacks {
+               MrmNcreateCallback = procedure create_proc (k_history_dialog);
+                                };
+                                };
+
+object
+        descr_history : XmLabel {
+                arguments {
+                        XmNx = 30;
+                        XmNy = 75;
+           XmNlabelString="N. campione      Valore              Tempo ";
+                        };
+            callbacks {
+            };
+        };
+
+object
+        name_history : XmLabel {
+                arguments {
+                        XmNx = 30;
+                        XmNy = 30;
+                        XmNlabelString=k_val_iniz_descr;
+                        XmNbackground= white;
+                        XmNborderWidth = 1;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_name_history);
+            };
+	};
+
+object
+        list_history: XmScrolledList {
+                arguments {
+                        XmNvisibleItemCount=25;
+			XmNx = 30;
+			XmNy = 100;
+                        XmNfontList = normal;
+                        };
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_list_history);
+!	    XmNsingleSelectionCallback= procedure apply_proc (k_list_history);
+            };
+                };
+
+object
+        history_cancel : XmPushButton {
+        arguments {
+                      XmNlabelString =k_label_cancel;
+                       XmNx = 30;
+                       XmNy = 550;
+            };
+        callbacks {
+              XmNactivateCallback = procedure cancel_proc (k_history_dialog);
+            };
+        };
+
+object
+	err_dialog :  XmWarningDialog {
+		arguments {
+			XmNautoUnmanage=true;
+			XmNdialogTitle=" ATTENZIONE !!!!!!";
+			};
+        callbacks {
+            MrmNcreateCallback = procedure create_proc (k_err_dialog);
+            };
+                };
+
+object
+        singlevar_dialog : XmBulletinBoardDialog {
+                        arguments {
+                                XmNx = 200;
+                                XmNdialogTitle='Selezione singola variabile';
+                                 XmNdialogStyle=XmDIALOG_MODELESS;
+                                XmNdefaultButton= XmPushButton singlevar_ok;
+                                XmNmarginWidth=20;
+                                XmNlabelFontList = normal;
+                                XmNautoUnmanage = false;
+                                };
+                        controls {
+                                XmText text_singlevar;
+                                XmPushButton singlevar_ok;
+                                XmPushButton singlevar_cancel;
+                                };
+                        callbacks {
+                        MrmNcreateCallback = procedure create_proc (k_singlevar_dialog);
+                        };
+                                };
+
+object
+        text_singlevar : XmText {
+          arguments {
+               XmNx=30;
+               XmNy=30;
+                XmNcolumns =12;
+                XmNmaxLength=12;
+                };
+        callbacks {
+                };
+        };
+
+object
+        singlevar_ok : XmPushButton {
+        arguments {
+                XmNlabelString = k_label_ok;
+                XmNshowAsDefault = 1;
+                XmNx = 30;
+                XmNy =100;
+            };
+        callbacks {
+              XmNactivateCallback  = procedure ok_proc (k_singlevar_dialog);
+            };
+
+        };
+
+object
+        singlevar_cancel : XmPushButton {
+        arguments {
+                XmNlabelString = k_label_cancel;
+                XmNx = 150;
+                XmNy =100;
+            };
+        callbacks {
+              XmNactivateCallback  = procedure cancel_proc (k_singlevar_dialog);
+            };
+        };
+
+
+
+	
+
+! Definizione della menu bar e relativi pulldown menu della MAIN_WINDOW
+!
+
+object
+   s_menu_bar : XmMenuBar {
+        arguments {
+            XmNorientation = XmHORIZONTAL;
+            XmNspacing     = 15;
+        };
+        controls {
+            XmCascadeButton file_menu_entry;
+            XmCascadeButton edit_menu_entry;
+            XmCascadeButton page_menu_entry;
+        };
+    };
+
+object
+        file_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString = k_file_label_text;
+            };
+           controls {
+                XmPulldownMenu file_menu;
+            };
+        };
+
+object
+        file_menu : XmPulldownMenu {
+            controls {
+                XmPushButton m_quit_button;
+        };
+        };
+
+object
+        m_quit_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_quit_label_text;
+            };
+            callbacks {
+		  XmNactivateCallback = procedure quit_proc ('Mandb terminato correttamente.');
+            };
+	};
+
+
+object
+        edit_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString = k_edit_label_text;
+            };
+            controls {
+                XmPulldownMenu edit_menu;
+            };
+        };
+
+object
+        edit_menu : XmPulldownMenu {
+            controls {
+                XmPushButton m_selectall_button;
+                XmPushButton m_selectone_button;
+        };
+        };
+
+object
+        m_selectall_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_select_alllabel_text;
+            };
+            callbacks {
+                XmNactivateCallback=procedure activate_proc(k_selmis_dialog);
+            };
+        };
+
+object
+        m_selectone_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_select_onelabel_text;
+            };
+            callbacks {
+                XmNactivateCallback=procedure activate_proc(k_singlevar_dialog);
+            };
+        };
+
+
+
+object
+        page_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString = k_page_label_text;
+            };
+            controls {
+                XmPulldownMenu load_menu;
+            };
+        };
+
+object
+        load_menu : XmPulldownMenu {
+            controls {
+                XmPushButton m_selpag_button;
+        };
+        };
+
+object
+        m_selpag_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_selpag_label_text;
+            };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc (k_selpag_button);
+                XmNactivateCallback=procedure activate_proc(k_selpag_dialog);
+            };
+        };
+
+! menu di ogni pagina di mandb
+
+
+object
+   page_menu_bar : XmMenuBar {
+        arguments {
+            XmNorientation = XmHORIZONTAL;
+            XmNspacing     = 15;
+        };
+        controls {
+            XmCascadeButton file_page_entry;
+            XmCascadeButton edit_page_entry;
+        };
+    };
+
+object
+        file_page_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString = k_file_label_text;
+            };
+           controls {
+                XmPulldownMenu page_menu;
+            };
+        };
+
+
+object
+        page_menu : XmPulldownMenu {
+            controls {
+                XmPushButton page_save_button;
+                XmSeparator {};
+                XmPushButton page_clear_button;
+                XmSeparator {};
+                XmPushButton page_close_button;
+        };
+        };
+
+object
+        page_save_button : XmPushButton {
+            arguments {
+                XmNlabelString = "Save";
+            };
+            callbacks {
+		  XmNactivateCallback = procedure activate_proc(k_mempag_dialog);
+            };
+        };
+
+object
+        page_clear_button : XmPushButton {
+            arguments {
+                XmNlabelString = "Clear";
+            };
+            callbacks {
+                  XmNactivateCallback = procedure activate_proc(k_clear_page)
+;
+            };
+        };
+
+object
+        page_close_button : XmPushButton {
+            arguments {
+                XmNlabelString = "Close";
+            };
+            callbacks {
+                  MrmNcreateCallback = procedure create_proc (k_close_page);
+                  XmNactivateCallback = procedure activate_proc(k_close_page)
+;
+            };
+        };
+
+
+
+object
+        edit_page_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString = k_edit_label_text;
+            };
+            controls {
+                XmPulldownMenu page1_menu;
+            };
+        };
+
+
+object
+        page1_menu : XmPulldownMenu {
+            controls {
+                XmPushButton m_history_button;
+                XmSeparator {};
+                XmPushButton cut_button;
+                XmSeparator {};
+                XmPushButton paste_button;
+        };
+        };
+
+
+object
+        m_history_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_history_label_text;
+            };
+            callbacks {
+                XmNactivateCallback=procedure activate_proc(k_history_dialog);
+            };
+        };
+
+
+
+object
+        cut_button : XmPushButton {
+            arguments {
+                XmNlabelString = "Cut";
+            };
+            callbacks {
+                  MrmNcreateCallback = procedure create_proc (k_cut_button);
+                XmNactivateCallback=procedure activate_proc(k_cut_button);
+            };
+        };
+
+object
+        paste_button : XmPushButton {
+            arguments {
+                XmNlabelString = "Paste";
+            };
+            callbacks {
+                  MrmNcreateCallback = procedure create_proc (k_paste_button);
+                XmNactivateCallback=procedure activate_proc(k_paste_button);
+            };
+        };
+
+
+end module;

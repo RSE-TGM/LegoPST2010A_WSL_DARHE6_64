@@ -1,0 +1,78 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><b><i><font size="5"><span lang="EN-GB" class="MsoFootnoteReference">What</span><span lang="EN-GB">
+does &quot;xxxx&quot; have to do when it is called for Jacobian matrix
+computation?</span></font></i></b><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">When IFUN is 3 &quot;xxxx&quot; is
+called by NAJAC to compute the Jacobian matrix of the block equations (both
+differential and algebraic ones).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Nevertheless, &quot;xxxx&quot; has
+always to compute the residuals of the block equations: the only difference is
+that the values of the variables passed (as elements of the XYU vector) are not
+the actual one, as they are modified by NAJAC to computes the incremental ratios
+of the residuals:</span></p>
+<p class="centrato" align="center"><span lang="EN-GB"><span style="mso-text-raise:-15.0pt"><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:168pt;
+ height:37.8pt' o:ole="">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image001.wmz" o:title=""/>
+</v:shape><![endif]-->
+</span><img border="0" src="images/lg_mod23.gif" width="195" height="42"><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1025"
+  DrawAspect="Content" ObjectID="_1067255623">
+ </o:OLEObject>
+</xml><![endif]-->
+</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Note that <span style="mso-text-raise:-7.0pt"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1026" type="#_x0000_t75" style='width:33pt;height:19.8pt' o:ole="">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image003.wmz" o:title=""/>
+</v:shape><![endif]-->
+</span><img border="0" src="images/lg_mod24.gif" width="38" height="21"><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1026"
+  DrawAspect="Content" ObjectID="_1067255626">
+ </o:OLEObject>
+</xml><![endif]-->
+<span style="mso-spacerun: yes">&nbsp;</span>and <span style="mso-text-raise:-7.0pt"><!--[if gte vml 1]><v:shape id="_x0000_i1027"
+ type="#_x0000_t75" style='width:61.8pt;height:19.8pt' o:ole="">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image005.wmz" o:title=""/>
+</v:shape><![endif]-->
+</span><img border="0" src="images/lg_mod25.gif" width="72" height="21"><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="Equation.3" ShapeID="_x0000_i1027"
+  DrawAspect="Content" ObjectID="_1067255630">
+ </o:OLEObject>
+</xml><![endif]-->
+<span style="mso-spacerun: yes">&nbsp;</span>are the value of the i-th residual
+computed on the original and the modified values of the j-th variable (when all
+the variables but the j-th do have their original values).</span></p>
+
+<!--mstheme--></font></body>
+
+</html>

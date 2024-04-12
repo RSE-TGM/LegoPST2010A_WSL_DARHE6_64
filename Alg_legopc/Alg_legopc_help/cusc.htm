@@ -1,0 +1,391 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>CUSC</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE CUSC</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CUSC</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">JOURNAL BEARINGS</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">The CUSC module simulates the behaviour of a group of journal
+bearings, the number of which can be selected by the user. All of these bearings
+act in indipendent way, also for their input variables, except for the rotation
+speed that is unique. All of these bearings have a metallic mass, that absorbs
+the production of thermal power related to the friction. Each of these bearings
+can take into account also a vibrational behaviour part: in this case the module
+calculates the oscillating amplitude and eventually a surplus of heat production
+related to an eventually settable &quot;bad work state&quot;.</p>
+<p ALIGN="left">The complete bearing, with vibrations computation included, is
+called &quot;radial bearing&quot;, the one with only thermal behaviour
+&quot;axial bearing&quot;.</p>
+<p ALIGN="left">In any way, each bearing can be easily connected to heat &quot;semiexchanger&quot;
+(i.e. PORE) or some other module capable of an heat exchange.</p>
+<p ALIGN="left">Main hypothesis in CUSC module are, for each bearing:</p>
+<p ALIGN="left">- Heat rate production is proportional to rotation speed</p>
+<p ALIGN="left">- Heat rate production is homogeneous in metallic mass</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">Equations used to build the model are:</p>
+<p ALIGN="left">for all bearings:</p>
+<p ALIGN="left">- equation of conservation of energy</p>
+<p ALIGN="left">- equation of friction heat production</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">only for radial bearings:</p>
+<p ALIGN="left">- characteristics curves of vibrations</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CUSC</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT -OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">NCUSC = total number of bearings</p>
+<p ALIGN="left">NRAD = number of radial bearings (0 </font><font FACE="Symbol">£</font><font FACE="Arial">
+NRAD </font><font FACE="Symbol">£</font><font FACE="Arial"> NCUSC)</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">i = 1, NCUSC</p>
+<p ALIGN="left">j = 1, NRAD</p>
+</font><font SIZE="2">
+<p ALIGN="center"><img SRC="images/Image63.gif" width="478" height="183"></p>
+</font><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">Note: ADIj variables are present only if NRAD &gt; 0</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="center">PHYSICAL MEANING OF MODULE INPUT - OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QREi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Outgoing power from the i-th bearing</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RPMT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Rotational speed</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[</font><font FACE="Symbol">m</font><font FACE="Arial">m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SUOi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Imposed anomaly of vibration amplitude</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TMAi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Metal temperature of i-th bearing</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[</font><font FACE="Symbol">m</font><font FACE="Arial">m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ADIj</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Vibration amplitude of j-th radial
+      bearing</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CUSC</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="left">In addition to the initial values of input and output variables
+of CUSC module, whose meaning has been defined in CARD B, the user must assign
+the following set of data:</p>
+<p ALIGN="left">Generally:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[RPM]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RPMNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Rated rotational speed (default = 3000.)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/rad]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">KROTOLAM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Linear coefficient putting into relation
+      heat production [W] and rotational speed (rad/s) (default = 711.)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[1/</font><font FACE="Symbol">m</font><font FACE="Arial">m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">%POT/AMP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Percentage of heat overproduction related
+      to bad working condition (default = 1.) (see Note 1)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="JUSTIFY">All of this data have a default value: putting a negative
+value, the value between parenthesis is taken.</p>
+<p ALIGN="JUSTIFY">For each bearings:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RIPATTi&nbsp;</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Fraction of total heat production
+      absorbed by i-th bearing.<br>
+      WARNING: the user must control that the sum is one; the module doesn’t
+      check it as some applications can require a different sum of fraction.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">MASSAi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Mass of i-th bearing</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg/K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CALSPE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Specific heat of material of i-th bearing
+      (default = 500.)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left">Only for radial ones:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[</font><font FACE="Symbol">m</font><font FACE="Arial">m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VIBRISj</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Oscillating amplitude at the critical
+      rotational speed</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[RPM]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RPMCRIj</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Critical rotational speed</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[</font><font FACE="Symbol">m</font><font FACE="Arial">m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VIBREGj</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Oscillating amplitude at rated rotational
+      speed</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left">With these three informations, for each bearing the oscillating
+amplitude can be calculated: the curve of its value will intersecate zero for
+RPM=0, VIBRISi for RPM = RPMCRIi and VIBREGi for RPM = RPMNOM.</p>
+<p ALIGN="left">Note 1: For example, the value 2. means that, if an oscillating
+anomaly of 15 micron is imposed on i-th bearing, the heat produced becomes (1 +
+2 X 15/100) times greater than the normal amount.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CUSC</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p ALIGN="left">The QREi are input of the module, if they are not connected with
+a model of cooling system, in steady state the user must impose the temperatures
+of material. In transient state indeed, if QREi does not equal the heat
+production, the TMAi will not join a steady temperature.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CUSC</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="left">The CUSC module does not require use of user’s subprograms.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CUSC</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="JUSTIFY">Residuals have the following expression:</p>
+<b><font FACE="Courier New" SIZE="2">
+<blockquote>
+  <blockquote>
+    <p align="left">RNI(I) = (Y(I) * QROT * (1. + SN * SAMP(I)) + QREF(I)) /
+    CT(I) / T0</p>
+    <p align="left">(norm. factor T0) (for all the bearings)</p>
+    <p align="left">RNI(NCUSC + J) = (AMP(J) + SAMP(J) - ADIN(J) ) / A0</p>
+    <p align="left">(norm. factor A0 = 10000.) (for radial bearings)</p>
+  </blockquote>
+</blockquote>
+</font></b>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">where</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AMP (J)</font><!--mstheme--></font></td>
+    <td width="88%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">= oscillating amplitude calculated by the
+      curve vibration vs. RPM</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SAMP (J)</font><!--mstheme--></font></td>
+    <td width="88%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">= additional amplitude imposed as input</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ADIN (J)&nbsp;</font><!--mstheme--></font></td>
+    <td width="88%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">=total amplitude, as read in XYU vector</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Y(I)</font><!--mstheme--></font></td>
+    <td width="88%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">= the same of RIPATTRi, from DATI</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SN</font><!--mstheme--></font></td>
+    <td width="88%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">= the same of %POT/AMP from DATI, divided
+      by 100</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QROT</font><!--mstheme--></font></td>
+    <td width="88%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">= total heat production</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QREF (I)</font><!--mstheme--></font></td>
+    <td width="88%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">= the same of QREi, from variables</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CT (I)</font><!--mstheme--></font></td>
+    <td width="88%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">= thermal capacity of i-th bearing</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CUSC</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font></b><font FACE="Arial"><b><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<blockquote>
+  <p align="left">SUBROUTINE CUSCI3(IFO,IOB,DEBL)</p>
+  <p align="left">SUBROUTINE CUSC4(IOB,MOD)</p>
+  <p align="left">SUBROUTINE CUSCI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+  <p align="left">$ IBL1,IBL2,IER,CNXYU,TOL)</p>
+  <p align="left">SUBROUTINE
+  CUSCC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</p>
+  <p align="left">SUBROUTINE CUSC(IFUN,IXYU,XYU,IPD,DATI,RNI)</p>
+</blockquote>
+</font></b></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CUSC</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b>
+<font FACE="Arial">
+<p ALIGN="JUSTIFY">Test cases for this module are not yet available.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

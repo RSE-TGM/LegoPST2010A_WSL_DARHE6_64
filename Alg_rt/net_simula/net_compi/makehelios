@@ -1,0 +1,39 @@
+#   modulo makehelios
+#   tipo 
+#   release 5.1
+#   data 96/03/18
+#   reserved @(#)makehelios	5.1
+#
+.suffixes:
+.suffixes: .c .o
+
+
+SORGENTI =check_dt.c check_i.c check_m.c check_o.c co_legge.c co_len04.c\
+co_main.c co_n04_s.c co_sep_s.c co_snap.c f04_s04.c tabella.c\
+tabelle_net.c co_varlego.c co_main.o
+
+
+OGGETTI  =check_dt.o check_i.o check_m.o check_o.o co_legge.o co_len04.o\
+co_n04_s.o co_sep_s.o co_snap.o f04_s04.o tabella.o\
+tabelle_net.o co_varlego.o co_main.o co_helios.o
+
+CFLAGS = -I$(LEGORT_INCLUDE) -D$(OS) 
+
+LIBUTIL = -L$(LEGORT_LIB) -llibsim -lliblegocad -llibnet -D_BSD
+
+
+.c.o:
+	c  -T8 -c $(CFLAGS) -wAafv $*.c
+
+default: remove $(LEGORT_BIN)/net_compi
+
+
+remove: $(OGGETTI)
+	if (test -f $(LEGORT_BIN)/net_compi) rm $(LEGORT_BIN)/net_compi
+
+$(LEGORT_BIN)/net_compi : $(OGGETTI) 
+	c -o $@ -O $(CFLAGS) -h200000 -s700000 $(LIBUTIL) $(OGGETTI) 
+
+#check_dt.c check_i.c check_m.c check_o.c co_legge.c co_len04.c
+#co_main.c co_n04_s.c co_sep_s.c co_snap.c f04_s04.c tabella.c
+#tabelle_net.c

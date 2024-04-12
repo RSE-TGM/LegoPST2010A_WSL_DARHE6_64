@@ -1,0 +1,34 @@
+BHD0_0                                                                          
+BHD0                                                                            
+Brine header (1 input 1 output)                                                 
+                                                                                
+NSTAT = 0
+NUSCI = 4
+NINGR = 8
+ 
+NCONF = 1
+ 
+HCOL      --UA-- FLUID ENTHALPY IN THE MANIFOLD                                 
+PCOL      --UA-- FLUID PRESSURE IN THE MANIFOLD                                 
+TCOL      --UA-- MANIFOLD METAL TEMPERATURE                                     
+FNAC      --UA-- NaCl mass fr. in the manifold                                  
+WE_1      --IN-- FLOW RATE IN THE ENTERING BRANCH N. 1                          
+HE_1      --IN-- ENTHALPY IN THE ENTERING BRANCH N. 1                           
+FE_1      --IN-- NaCl mass fr. IN THE ENTERING BRANCH N. 1                      
+WU_1      --IN-- FLOW RATE IN THE COMING OUT BRANCH N. 1                        
+HU_1      --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W<0)                   
+FU_1      --IN-- NaCl mass fr. IN THE COMING OUT BRANCH N. 1 (W<0)              
+TEST      --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD                         
+GEST      --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD                   
+==============================                                                  
+EOF                                                                             
+3
+t0 2
+Termic input
+TEST TCOL GEST ____
+t2 10
+Generical input
+WE_1 PCOL ____ FE_1 HE_1 FNAC HCOL ____ ____ ____
+t1 11
+Generical output
+WU_1 PCOL ____ FNAC HCOL FU_1 HU_1 ____ ____ ____

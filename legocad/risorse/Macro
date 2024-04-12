@@ -1,0 +1,25 @@
+! SOTTOAPPLICATIVO ***MACRO***
+macro*fontList:-adobe-helvetica-bold-r-normal--14-100-100-100-p-82-iso8859-1
+
+macro*icon_label*fontList:		fixed
+macro*Macro_label*fontList:		Rom14
+macro*Remark_label*fontList:		TimBI14
+macro*Lista_moduli*fontList:		9x15
+macro*Text*fontList:			Rom14
+
+macro*background:			orange
+!macro*background:			#1996ab6de646
+!macro*foreground:			black
+
+macro*Pagina_indice*background:		#1996ab6de646
+macro*Scroll_index*background:		#1996ab6de646
+macro*Finestra_blocchi*background:	#1996ab6de646
+macro*Simboli*background:		#1996ab6de646
+macro*Scroll_simboli*background:	#1996ab6de646
+macro*Text*background:			white
+
+macro*menuCursor:			hand1
+macro*buttonBindings:        		DefaultButtonBindings
+macro*keyBindings:           		DefaultKeyBindings
+
+macro*geometry:				+10+10

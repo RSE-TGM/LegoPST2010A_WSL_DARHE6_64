@@ -1,0 +1,9 @@
+NN to NN 1 0 
+°K to °C 1 -273.15 °C
+°C to °K 1 273.15 °K
+P to bar 10E-05 0 bar
+bar to P 10E+05 0 P
+p.u. to % 100 0 %
+% to p.u. 0.01 0 p.u.
+Kg/s to t/h 0.277777777778 0 t/h
+t/h to Kg/s 3.6 0 Kg/s

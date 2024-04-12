@@ -1,0 +1,18 @@
+edicole*fontList:			HelvB14
+edicole*icon_label*fontList:		Rom14
+edicole*module_p_list*fontList:		9x15
+edicole*module_np_list*fontList:	9x15
+edicole*icon_files_list*fontList:	9x15
+edicole*background:			green yellow
+edicole*foreground:			black
+edicole*menuCursor:			hand1
+edicole*buttonBindings:        		DefaultButtonBindings
+edicole*keyBindings:           		DefaultKeyBindings
+edicole*geometry:			+50+150
+edicole*module_name_iniz*foreground:	blue
+edicole*module_description_iniz*foreground:	blue
+edicole*icon_module_label*foreground:	blue
+edicole*file_bitmap_label*foreground:	blue
+edicole*order_of_icons_label*background:	white
+edicole*icons_of_module_label*background:	white
+edicole*window_bboard*background:	forest green

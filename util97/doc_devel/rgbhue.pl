@@ -1,0 +1,51 @@
+#@(#)rgbhue.pl	Ordina i colori in base alla distanza ...
+#
+
+if( $#ARGV < 0 )
+{
+	printf	"Uso:   perl  rgbhue.pl  <colore>\n";
+	exit( 1 );
+}
+
+$tcol	= $ARGV[0];			# Target color
+$tcol	=~ tr/[A-Z]/[a-z]/ ;
+
+open( IFILE, "rgb.col" );
+while( <IFILE> )
+{
+	chop;
+	$line	= $_;
+	$line	=~ tr/[A-Z]/[a-z]/ ;
+	if( $line =~ /$tcol/ )
+	{
+		$rcol	= substr( $_, 0, 24 );
+		$rrgb	= substr( $_, 24, 16 );
+		(@rrr)	= split( / /, $rrgb );
+		printf	"% 4d> $rcol $rrr[0] / $rrr[1] / $rrr[2] \n", $.;
+		last;		# Per ora ..
+	}
+}
+close( IFILE );
+if( "$rcol" eq "" )
+{
+	printf	"Colore '$tcol' NON trovato\n";
+	exit( 2 );
+}
+
+
+open( IFILE, "rgb.nogray" );
+while( <IFILE> )
+{
+	chop;
+	$line	= $_;
+	$xcol	= substr( $_, 0, 24 );
+	$xrgb	= substr( $_, 24, 16 );
+	(@xxx)	= split( / /, $xrgb );
+	printf	"% 4d) $xcol $xxx[0] / $xxx[1] / $xxx[2] ", $.;
+	$dist2	= ($xxx[0] - $rrr[0]) * ($xxx[0] - $rrr[0]);
+	$dist2	+= ($xxx[1] - $rrr[1]) * ($xxx[1] - $rrr[1]);
+	$dist2	+= ($xxx[2] - $rrr[2]) * ($xxx[2] - $rrr[2]);
+	$dist	= sqrt $dist2;
+	printf	" >>> % 8d.  % 7.1f\n", $dist2, $dist;
+}
+close( IFILE );

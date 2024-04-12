@@ -1,0 +1,6 @@
+Tcl 8.3.5 with Tix 8.1.4 Setup
+**********************************
+Original size: 6763854 bytes
+ Install size: 2050640 bytes
+   Disk files: 1
+**********************************

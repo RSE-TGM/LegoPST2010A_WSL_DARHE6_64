@@ -1,0 +1,42 @@
+CAR1
+
+CAR1 - Elettrical load                                                          
+2
+1
+
+t1
+SISC 
+1 
+t0
+VR00 VX00 IR00 IX00 
+1 1 -1 -1 
+
+0
+7
+5
+
+IR00 UA
+CORRENTE REALE DI CARICO [A]                                   
+IX00 UA
+CORRENTE IMMAG. DI CARICO [A]                                  
+QATT UA
+POTENZA ATTIVA DI CARICO [W]                                   
+QREA UA
+POTENZA REATTIVA DI CARICO [W]                                 
+IM00 UA
+MODULO CORRENTE DI CARICO [A]                                  
+VM00 UA
+MODULO TENSIONE DI CARICO [V]                                  
+FDIP UA
+FATTORE DI POTENZA DEL CARICO                                  
+VR00 IN
+TENSIONE REALE DEL CARICO [V]                                  
+VX00 IN
+TENSIONE IMMAG. DEL CARICO [V]                                 
+FG00 IN
+MOLTIPLICATORE DI CONDUTTANZA                                  
+FB00 IN
+MOLTIPLICATORE DI SUSCETTANZA                                  
+SISC IN
+STATO INTERRUTTORE CARICO (1=on)                               
+

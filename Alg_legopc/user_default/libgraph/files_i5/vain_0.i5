@@ -1,0 +1,84 @@
+VAIN
+
+VAIN - Air-gas valve                                                            
+3
+3
+
+t2
+ALZV 
+1 
+1 
+1 
+1 
+t3
+WVAL PMON TMON TMI_ ____ ____ ____ ____ 
+3 3 1 -1 0 0 0 0 
+-1 1 1 -1 0 0 0 0 
+2 -1 1 -1 0 0 0 0 
+2 1 1 -1 0 0 0 0 
+t4
+WVAL PVAL TVAL TVI_ ____ ____ ____ ____ 
+3 3 1 -1 0 0 0 0 
+1 -1 1 -1 0 0 0 0 
+2 -1 1 -1 0 0 0 0 
+2 1 1 -1 0 0 0 0 
+
+0
+3
+5
+
+no comment
+no comment
+no comment
+
+WVAL UA
+GAS FLOW RATE THROUGH THE VALVE                                
+TVAL UA
+GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_ UA
+GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PMON IN
+GAS PRESSURE AT VALVE INLET                                    
+PVAL IN
+GAS PRESSURE AT VALVE OUTLET                                   
+TMON IN
+GAS TEMPERATURE AT VALVE INLET                                 
+TVI_ IN
+GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZV IN
+GAS VALVE LIFT                                                 
+
+PMON UA
+GAS PRESSURE AT VALVE INLET                                    
+TVAL UA
+GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_ UA
+GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+WVAL IN
+GAS FLOW RATE THROUGH THE VALVE                                
+PVAL IN
+GAS PRESSURE AT VALVE OUTLET                                   
+TMON IN
+GAS TEMPERATURE AT VALVE INLET                                 
+TVI_ IN
+GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZV IN
+GAS VALVE LIFT                                                 
+
+PVAL UA
+GAS PRESSURE AT VALVE OUTLET                                   
+TVAL UA
+GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_ UA
+GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+WVAL IN
+GAS FLOW RATE THROUGH THE VALVE                                
+PMON IN
+GAS PRESSURE AT VALVE INLET                                    
+TMON IN
+GAS TEMPERATURE AT VALVE INLET                                 
+TVI_ IN
+GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZV IN
+GAS VALVE LIFT                                                 
+

@@ -1,0 +1,30 @@
+CALT_0                                                                          
+CALT                                                                            
+Condensatore ad aria ( 4 ing 1 usc )                                            
+                                                                                
+NSTAT = 0
+NUSCI = 5
+NINGR =13
+ 
+NCONF = 1
+ 
+HCOL      --UA-- ENTALPIA FLUIDO NEL COLLETTORE                                 
+PCOL      --UA-- PRESSIONE FLUIDO NEL COLLETTORE                                
+TCOL      --UA-- TEMPERATURA METALLO DEL COLLETTORE                             
+WSPU      --UA-- PORTATA DI SPURGO DEL COLLETTORE                               
+HSPU      --UA-- ENTALPIA DELLO SPURGO DEL COLLETTORE                           
+WE_1      --IN-- PORTATA RAMO ENTRANTE  N. 1                                    
+HE_1      --IN-- ENTALPIA RAMO ENTRANTE N. 1                                    
+WE_2      --IN-- PORTATA RAMO ENTRANTE  N. 2                                    
+HE_2      --IN-- ENTALPIA RAMO ENTRANTE N. 2                                    
+WE_3      --IN-- PORTATA RAMO ENTRANTE  N. 3                                    
+HE_3      --IN-- ENTALPIA RAMO ENTRANTE N. 3                                    
+WE_4      --IN-- PORTATA RAMO ENTRANTE  N. 4                                    
+HE_4      --IN-- ENTALPIA RAMO ENTRANTE N. 4                                    
+WU_1      --IN-- PORTATA RAMO USCENTE N. 1                                      
+HU_1      --IN-- ENTALPIA RAMO USCENTE N. 1 (W<0)                               
+TEST      --IN-- TEMPERATURA FLUIDO ESTERNO COLLETT.                            
+GEST      --IN-- COEFF. SCAMBIO ESTERNO COLLETTORE                              
+ALZA      --IN-- POSIZIONE VALVOLA SPURGO COLLETTORE                            
+==============================                                                  
+EOF                                                                             

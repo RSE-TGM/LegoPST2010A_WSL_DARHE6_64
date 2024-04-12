@@ -1,0 +1,60 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">When the module configuration requires user instructions
+for the following activities?</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">As we sad, the only way to let the
+following activities directly recognize the module configuration involves the
+following four quantities:</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">the complete block name;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">the number of state output variables;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">the number of algebraic output variables;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">the number of input variables.</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p class="MsoNormal"><span lang="EN-GB">Sometimes, these informations are not
+enough!</span></p>
+<p class="MsoNormal"><span lang="EN-GB">If one takes as an example the case of a
+header (like the COLT module), the output variables are represented by
+temperature of the header metal wall and by the pressure and the enthalpy of
+the fluid inside the header (assumed as outlet conditions).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The input variables are represented by
+the flow rate and the enthalpy of the fluid coming from every inlet pipe, and by
+the flow rate of the fluid drawn by every outlet pipe. Assuming that the fluid
+flow through the pipes may be inverted, also the enthalpy of the fluid coming
+from the outlet pipes (in case of flow inversion) will be input variable.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">So, the number of input variables will
+be twice the sum of the numbers of inlet and outlet pipes: the following
+activity can only evaluate the sum of these numbers, but not the numbers
+themselves!</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Actually, in the COLT module the number
+of inlet (or outlet) pipes could be encoded in the block name, but this in not
+done, and it is not usual in LEGO modules (no library module does it). In some
+modules this will not be sufficient the same (e.g., in EVAP module, simulating a
+cellized boiling channel, there are many cells and a variable number of metal
+walls for each cell).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">In these cases, the module must ask to
+the user inside physical and geometrical data section (subroutine
+&quot;xxxxI2&quot;) the actual number of inlet and outlet pipes (or the number
+of metal wall for each cell, and so on).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Skilled modules developers always insert
+in &quot;xxxxI2&quot; subroutine a checking algorithm, to ensure, at least, that
+the sum of the two numbers assigned by the user is the right one.</span></p>
+<p>&nbsp;</p>
+
+<!--mstheme--></font></body>
+
+</html>

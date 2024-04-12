@@ -1,0 +1,482 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>ZAVO</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE ZAVO</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ZAVO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">&quot;BALLAST&quot; LOAD</p>
+<p>&nbsp;</p>
+<p align="left">The ZAVO module simulates the typical behaviour of an aggregate
+load when reenergized, shown in fig.1 and fig.2 (active and reactive output
+respectively):</p>
+<p align="center"><img border="0" src="images/zavo.h9.gif" width="643" height="255"></p>
+<p>&nbsp;</p>
+<p align="left">By feeding a load, active output experimental profiles show
+generally a very short peak (P1 is the amplitude, T1 the duration), with a final
+value (P2), which can be bigger or lower than the rated one (PNOM). This depends
+of the former deenergization interval duration: if it was short (matter of
+seconds), P2 appears lower (as in fig.1); otherwise, it shall be bigger.</p>
+<p align="left">After that, the load returns to the normal value PNOM in matter
+of minutes (T2).</p>
+<p align="left">An exponential profile has been taken on for describing the
+reactive output, according to experimental results (fig.2), where T3 lasts a few
+seconds as well as T1.</p>
+<p align="left">Active and reactive output dependence on voltage module is
+exponential:</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="CENTER"><img SRC="images/Image768.gif" width="97" height="53"> <img SRC="images/Image769.gif" width="101" height="53"></p>
+</font><font FACE="Arial">
+<p align="left">where <i>V<sub>0</sub> </i>is the load rated voltage, and <i>P<sub>0</sub>
+</i>and <i>Q<sub>0</sub> </i>are referred to <i>V</i>=<i>V<sub>0</sub>.</p>
+</i>
+<p align="left">Other parameters, like P1 and T1, depend of the deenergization
+time. So it is worth noting that very different behaviours can be expected for
+the same load area. Then, it is essential to have at disposal exaustive
+experimental data.</p>
+<p align="left">However, user is requested to introduce at least the following
+data: PU, PNOM, QNOM; concerning the remaining ones, default values are already
+present.</p>
+<p align="left">Notice that peak amplitudes are input variables, not data (then,
+there are no defaults for them).</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ZAVO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p align="center"><img border="0" src="images/zavo.h10.gif" width="417" height="485"></p>
+<p>&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IR00</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">current real component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IX00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">imaginary component current</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QATT</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">active output</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[VAR]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QREA</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">reactive output</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IM00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">current module</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VM00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">voltage module (at the
+      terminals)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VR00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">voltage real component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VX00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">voltage imaginary component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">P100</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">active output peak amplitude</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[VAR]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Q100</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">reactive output peak
+      amplitude</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FP00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">active output coefficient</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FQ00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">reactive output coefficient</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SISC</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">breaker state (1=closed,
+      0=open)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ZAVO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i>
+</b>
+          </font>
+<font FACE="Arial">
+<p align="left">The data of the module are:</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VNOM</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">rated voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PNOM</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">active rated output</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[VAR]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QNOM</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">reactive rated output</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">P2</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">final value of the active
+      output peak</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T1</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">time corresponding to P2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T2</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">time to active rated output</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T3</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">time to reactive rated output</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">KPV</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">exponent of active output
+      dependence on voltage module</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">KQV</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">exponent of reactive output
+      dependence on voltage module</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">p.u./absolute values option
+      (1<font FACE="Wingdings">à</font> in p.u.; 0<font FACE="Wingdings">à</font>
+      absolute)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p>The default values are the following:</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="5%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">P2</font><!--mstheme--></font></td>
+    <td width="45%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">1.2*PNOM</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T1</font><!--mstheme--></font></td>
+    <td width="45%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">.5</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T2</font><!--mstheme--></font></td>
+    <td width="45%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">900.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T3</font><!--mstheme--></font></td>
+    <td width="45%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">.5</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">KPV</font><!--mstheme--></font></td>
+    <td width="45%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">1.25</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="5%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">KQV</font><!--mstheme--></font></td>
+    <td width="45%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">2.5</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ZAVO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i></b></font><font FACE="Arial">
+<p align="left">No particular prescription is required for the ZAVO module
+initialization.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ZAVO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></b></font><font FACE="Arial">
+<p align="left">No user’s subprogram is required in the ZAVO module.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ZAVO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></b></font><font FACE="Arial">
+<p>&nbsp;</p>
+<p align="left">The equations of the mathematical model are translated in the
+following residuals:</p>
+<u>
+<p align="left">If the load is energized,</p>
+</u>
+<p style="margin-top: 2; margin-bottom: 2">RNI(1) =
+IR00+(PASS*VR00+QASS*VX00)/(VR00*VR00+VX00*VX00)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(2) =
+IX00+(PASS*VX00-QASS*VR00)/(VR00*VR00+VX00*VX00)</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; during
+steady-state calculations (KREGIM =.TRUE.)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(3) = -QATT+VR00*IR00+VX00*IX00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(4) = -QREA+VX00*IR00+VR00*IX00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(5) =
+-IM00+SQRT(IR00*IR00+IX00*IX00)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(6) =
+-VM00+SQRT(VR00*VR00+VX00*VX00)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(7) = -FDIP+FDP0,</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+where, if complex power output QAPP is not zero,</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FDP0 = -QATT/QAPP</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+otherwise</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FDP0 = 0</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; in transient
+simulations (KREGIM = .FALSE.)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(3) = VR00*IR00+VX00*IX00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(4) = VX00*IR00+VR00*IX00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(5) = SQRT(IR00*IR00+IX00*IX00)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(6) = SQRT(VR00*VR00+VX00*VX00)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(7) = FDP0,</p>
+<p style="margin-top: 2; margin-bottom: 2">where, if QAPP is not zero,</p>
+<p style="margin-top: 2; margin-bottom: 2">FDP0 = -QATT/QAPP</p>
+<p style="margin-top: 2; margin-bottom: 2">otherwise</p>
+<p style="margin-top: 2; margin-bottom: 2">FDP0 = 0</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;</p>
+<p style="margin-top: 2; margin-bottom: 2"><u>If the load is not energized,</u></p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(1) = IR00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(2) = IX00</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; steady-state
+calculations (KREGIM =.TRUE.)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(3) = -QATT</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(4) = -QREA</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(5) = -IM00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(6) = -VM00</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(7) = -FDIP</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; transient
+simulations (KREGIM = .FALSE.)</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(3) = 0</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(4) = 0</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(5) = 0</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(6) = 0</p>
+<p style="margin-top: 2; margin-bottom: 2">RNI(7) = 0</p>
+<p>where:</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">VV = SQRT(VR00*VR00+VX00*VX00)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">QBASE = H0*W0</p>
+<p align="left">&nbsp;</p>
+<p align="left">STATO logical variable is .TRUE. if the load breaker is closed,
+and if supplying voltage module is greater than 65% of the rated one. STATO_PREC
+variable keeps the previous integration step value of STATO.</p>
+<p align="left">Through a comparison between STATO and STATO_PREC, the last
+temporal step (registered in the TEMPO_CAMBIO variable) in which the load,
+during a transient, has changed its state (connected or disconnected), is
+recognized: whenever the load begins to be supplied, the TEMPO_ATTUALE variable
+is set to zero (TEMPO_ATTUALE = TEMPO-TEMPO_CAMBIO).</p>
+<p align="left">Active and reactive output expressions (identified, in the
+program, in PASS and QASS variables) are assigned in the following way:</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">Disconnected load (STATO
+=.FALSE.),</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">PASS = 0.</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">QASS = 0.</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">Connected load (STATO =.TRUE.),</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">IF (TEMPO_ATTUALE.GE.T2)
+THEN</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">&nbsp;&nbsp;&nbsp; PASS
+= FP00*(PNOM/QBASE)*VV**KPV</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">ELSE IF</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">&nbsp;&nbsp;&nbsp; PASS
+= FP00*(P2/QBASE)+((PNOM/QBASE)-(P2/QBASE))*(TEMPO_ATTUALE-T1)/(T2-T1))*VV**KPV</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">ELSE</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">&nbsp;&nbsp;&nbsp; =
+FP00*(P100-(P100-(P2-QBASE))*TEMPO_ATTUALE/T1)*VV**KPV</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">END IF</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">IF (TEMPO_ATTUALE.GE.T3)
+THEN</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">&nbsp;&nbsp;&nbsp; QASS
+= FQ00*(QNOM/QBASE)*VV**KQV</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">ELSE</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">&nbsp;&nbsp;&nbsp; QASS
+= FQ00*(Q100-(Q100-(QNOM/QBASE))*(1-EXP(-TEMPO_ATTUALE/(T3/3)))/(1-EXP(-3.)))*VV***KQV</p>
+<p style="margin-top: 2; margin-bottom: 2" align="left">END IF</p>
+<p style="margin-top: 2; margin-bottom: 2" align="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ZAVO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Module subprograms</p>
+<p ALIGN="CENTER">&nbsp;</p>
+</i></b></font>
+<p><font face="Arial">SUBROUTINE ZAVOI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</font></p>
+<p><font face="Arial">IBL1,IBL2,IER,CNXYU,TOL)</font></p>
+<p><font face="Arial">SUBROUTINE ZAVOC1 (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></p>
+<p><font face="Arial">SUBROUTINE ZAVOJC (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></p>
+<p><font face="Arial">SUBROUTINE ZAVOJAC (AJAC,MX5,IXYU,IPD,DATI,RN,NRIG,NCOL,NSTATI,</font></p>
+<p><font face="Arial">EPS,EPSLIM,RESIDUI)</font></p>
+<p><font face="Arial">SUBROUTINE ZAVO (IFUN,IXYU,XYU,IPD,DATI,RNI)</font></p>
+<p><font face="Arial">SUBROUTINE ZAVOI3 (IFO,IOB,DEBL)</font></p>
+<p><font face="Arial">SUBROUTINE ZAVOI4 (IOB,MOD)</font></p>
+<p><font face="Arial">SUBROUTINE ZAVOD1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</font></p>
+<p><font face="Arial">IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</font></p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ZAVO</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Test cases</p>
+</i></b></font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

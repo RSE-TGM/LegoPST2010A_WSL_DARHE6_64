@@ -1,0 +1,130 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE SBAR</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SBAR_summ"></A>MODULE SBAR&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I><P>&nbsp;</P>
+</FONT><P><A HREF="#lg_libproc_SBAR_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P><A HREF="#lg_libproc_SBAR_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_SBAR_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical</U></FONT></A></P>
+<P><A HREF="#lg_libproc_SBAR_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P><A HREF="#lg_libproc_SBAR_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_SBAR_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P><A HREF="#lg_libproc_SBAR_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_SBAR_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SBAR_A"></A>MODULE SBAR&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P>&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">CONNECTION BUS BARS</P>
+<P>&nbsp;</P>
+<P>The SBAR module simulates the operation of a bus bar having N branches connected.</P>
+<P>&nbsp;</P>
+<P>Equations used are:</P>
+<P>&nbsp;</P>
+<P>1)&#9;Kirchoff equation at branching points</P>
+<P>2) &#9;Voltage module equation</P>
+<P>3) &#9;Current module equation</P>
+<P>&nbsp;</P>
+<P>The equations of the SBAR module are written according to the coding of users, that is considering arriving currents as positive. </P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SBAR_B"></A>MODULE SBAR&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P>&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT - OUTPUT SCHEME</P>
+<P>&nbsp;</P>
+<P>N = number of branches connected to the bus bar (maximum 40)</P>
+<P>&nbsp;</P>
+<P>i = 1,2, ... N</P>
+<P>&nbsp;</P>
+</FONT><P><IMG SRC="Image386.gif" WIDTH=382 HEIGHT=178></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><P>&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>[V]&#9;VR00&#9;&#9;real phase voltage at bus bar</P>
+<P>[V]&#9;VX00&#9;&#9;imaginary phase voltage at bus bar</P>
+<P>[V]&#9;VMOD&#9;voltage between lines at bus bar in module</P>
+<P>[A]&#9;IM_i&#9;&#9;current of branch i in module</P>
+<P>[A]&#9;IR_i&#9;&#9;real current of branch i</P>
+<P>[A]&#9;IX_i&#9;&#9;imaginary current of branch i</P>
+<P>[ ]&#9;SCTO&#9;&#9;short circuit condition:<BR>
+SCTO = 1&#9;bars in short-circuit,<BR>
+SCTO = 0&#9;bars in normal operation conditions</P>
+<P>[ohm]&#9;ZRCT&#9;&#9;short circuit resistance</P>
+<P>[ohm]&#9;ZXCT&#9;&#9;short circuit reactance</P>
+<P>[ ]&#9;SISO&#9;&#9;isolated bars state:<BR>
+SISO = 1&#9;isolated bars<BR>
+SISO = 0&#9;connected bars</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SBAR_C"></A>MODULE SBAR&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P>&nbsp;</P>
+<P>In addition to the initial values of input and output variables of the SBAR module, whose meaning has been defined in card B, the user must assign the following set of data to complete the input required by the module:</P>
+<P>[V]&#9;VBASE&#9;basic voltage between lines of system in p.u.</P>
+<P>[W]&#9;QBASE&#9;basic power of system in p.u.</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SBAR_D"></A>MODULE SBAR&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P>&nbsp;</P>
+<P>The Jacobian matrix is completely initialized to avoid numeric errors during transient states.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SBAR_E"></A>MODULE SBAR&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P>&nbsp;</P>
+<P>No user’s subprogram is required in the SBAR module.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SBAR_F"></A>MODULE SBAR&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P>&nbsp;</P>
+<P>The equations of the mathematic model, mentioned in Card A, give the following residuals:</P>
+<P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image387.gif" WIDTH=136 HEIGHT=48></P>
+<P ALIGN="CENTER"><IMG SRC="Image388.gif" WIDTH=136 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>These residuals are used in case of normal operation, that is without short-circuits or isolated bars. In presence of short-circuits or of isolated bars the two residuals vary and the different cases are indicated in the module FORTRAN.</P>
+<P>&nbsp;</P>
+<P>In addition to the two above mentioned residuals there are residuals giving the module of the bus bar voltage between lines and the current modules of each different branch.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_SBAR_G"></A>MODULE SBAR&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+<P>SUBROUTINE SBARI2&#9;(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2, IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>SUBROUTINE SBARC1 &#9;(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE SBARJC&#9;(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE SBAR &#9;(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>SUBROUTINE SBARI3 &#9;(IFO,IOB,DEBL)</P>
+<P>SUBROUTINE SBARI4 &#9;(IOB,MOD)</P>
+<P>SUBROUTINE SBARD1 &#9;(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P>&#9;&#9;&#9;&#9;IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P>&nbsp;</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<B><P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_SBAR_H"></A>MODULE SBAR&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P></B></I></FONT></BODY>
+</HTML>

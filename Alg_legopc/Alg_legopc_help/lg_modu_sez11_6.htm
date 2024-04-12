@@ -1,0 +1,252 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">An example of LEGO module with less equations than output
+values (MIXN)</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">The MIXN module simulates the mixing of
+many flows of water and/or steam. The mass and energy storage are neglected, as
+the module simulates a zero-dimensional confluence. The equations involved in
+the module are two: the sum of incoming mass flow rates and the thermal
+equilibrium of the mixture.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">During transient simulation, the thermal
+equilibrium equation is computed with a non-equation. The list of the variables
+of the MIXN module is the following (three inlet pipes have been selected):&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">WMIX (UA) FLUID FLOW RATE AT THE MIXER
+OUTLET</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">HMIX (UA) FLUID ENTHALPY AT THE MIXER
+OUTLET</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">WE_1 (IN) FLUID FLOW RATE AT THE INLET
+PIPE N. 1</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">HE_1 (IN) FLUID ENTHALPY AT THE INLET PIPE
+N. 1</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">WE_2 (IN) FLUID FLOW RATE AT THE INLET
+PIPE N. 2</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">HE_2 (IN) FLUID ENTHALPY AT THE INLET PIPE
+N. 2</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">WE_3 (IN) FLUID FLOW RATE AT THE INLET
+PIPE N. 3</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">HE_3 (IN) FLUID ENTHALPY AT THE INLET PIPE
+N. 3</font></b></span></p>
+<p class="MsoNormal"><span lang="EN-GB">The source code of MIXNC1 is the
+following (source code is a bit modified and comment line has been added or
+translated for legibility reasons):&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SUBROUTINE MIXNC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON/INTEGR/TSTOP,TEMPO,DTINT,NPAS,CDT</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>LOGICAL KREGIM</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON/REGIME/KREGIM</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON/NEQUAZ/NEQMOD</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PARAMETER (MAX=10)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DIMENSION WE(MAX),HE(MAX)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---numbers of inlet pipes and block
+variables</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>NE = DATI(IPD)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>NVAR = 2*NE+2</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>GO TO(100,200,200),IFUN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---Jacobian matrix topology</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp; </span>100
+NEQMOD = 1</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(1,1) = 1.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DO J = 3, NVAR, 2</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(1,J) = 1.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END DO</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---residuals or Jacobian matrix
+computation</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp; </span>200
+CONTINUE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---variables decoding</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WNODO = XYU(IXYU<span style="mso-spacerun: yes">&nbsp; </span>)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>HNODO = XYU(IXYU+1)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>I0 = IXYU+1</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DO J = 1, NE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>JW = 2*J-1</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>JH = JW+1</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WE(J) = XYU(I0+JW)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>HE(J) = XYU(I0+JH)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END DO</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---enthalpic balance</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SUME = 0.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SUMHE = 0.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DO J= 1, NE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (WE(J) .GT. 0.) THEN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---------normal flow</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SUME = SUME+WE(J)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SUMHE = SUMHE+WE(J)*HE(J)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ENDIF</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END DO</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---first residual (always iterative) -
+flow rates sum</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RNI(1) = WNODO-SUME</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---second residual (non-iterative in
+transient simulation)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>outlet enthalpy is assumed as non-varying if flow rate is null</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF(KREGIM) THEN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C-------steady state (iterative residual)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>NEQMOD = 2</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (ABS(SUME) .LT. 1.E-5) THEN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RNI(2) = 0.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RNI(2) = HNODO*WNODO-SUMHE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ENDIF</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C-------transient (not iterative residual)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>NEQMOD = 1</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (ABS(SUME) .LT. 1.E-5) THEN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RNI(2) = HNODO</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RNI(2) = SUMHE/SUME</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ENDIF</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ENDIF</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---returns control if called for
+residuals evaluation</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (IFUN .EQ. 2) RETURN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---analytical computation of Jacobian
+matrix</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---derivatives of first residual (always
+present)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(1,1) = -1.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>K=2</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DO J = 1,2*NE,2</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C-------flow rates derivatives</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(1,K+J) = 1.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END DO</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---returns control if called for
+transient (one residual only)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (.NOT. KREGIM) RETURN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---derivatives of second residual (only
+for steady state)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (ABS(SUME) .LT. 1.E-5) THEN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C-------no flow (simplified residual)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(2,2) = -1.</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C-------normal working conditions</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(2,2) = -WNODO</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(2,1) = -HNODO</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>K=2</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DO J = 1,NE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C-------flow rates derivatives</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>K=K+1</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(2,K) = HE(J)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C-------enthalpies derivatives</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>K=K+1</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(2,K) = WE(J)</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END DO</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<b><font size="2" face="Courier New">
+<span lang="EN-GB" style="mso-bidi-font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-bidi-font-family: Times New Roman; mso-ansi-language: EN-GB; mso-fareast-language: IT; mso-bidi-language: AR-SA"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END</span>
+
+</font></b><!--mstheme--></font></body>
+
+</html>

@@ -1,0 +1,60 @@
+TUBO
+
+TUBO - Perdita di carico di una tubazione                                       
+2
+3
+
+t0
+WTUB PITU ____ ____ ____ HTUB ____ XXXX 
+3 3 0 0 0 2 0 2 
+-1 1 0 0 0 2 0 2 
+2 -1 0 0 0 2 0 2 
+2 1 0 0 0 2 0 2 
+t1
+WTUB PUTU ____ ____ ____ HTUB ____ XXXX 
+3 3 0 0 0 2 0 2 
+1 -1 0 0 0 2 0 2 
+2 -1 0 0 0 2 0 2 
+2 1 0 0 0 2 0 2 
+
+0
+1
+4
+
+no comment
+no comment
+no comment
+
+WTUB UA
+FLOW RATE THROUGH THE HEAD LOSS                                
+PITU IN
+PRESSURE AT THE HEAD LOSS INLET                                
+PUTU IN
+PRESSURE AT THE HEAD LOSS OUTLET                               
+HTUB IN
+ENTHALPY AT HEAD LOSS INLET AND OUTLET                         
+AKTB IN
+CORRECTOR COEFFICIENT OF THE HEAD LOSS                         
+
+PITU UA
+PRESSURE AT THE HEAD LOSS INLET                                
+WTUB IN
+FLOW RATE THROUGH THE HEAD LOSS                                
+PUTU IN
+PRESSURE AT THE HEAD LOSS OUTLET                               
+HTUB IN
+ENTHALPY AT HEAD LOSS INLET AND OUTLET                         
+AKTB IN
+CORRECTOR COEFFICIENT OF THE HEAD LOSS                         
+
+PUTU UA
+PRESSURE AT THE HEAD LOSS OUTLET                               
+PITU IN
+PRESSURE AT THE HEAD LOSS INLET                                
+WTUB IN
+FLOW RATE THROUGH THE HEAD LOSS                                
+HTUB IN
+ENTHALPY AT HEAD LOSS INLET AND OUTLET                         
+AKTB IN
+CORRECTOR COEFFICIENT OF THE HEAD LOSS                         
+

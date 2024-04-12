@@ -1,0 +1,68 @@
+C~FORAUS_CNDN~C
+      SUBROUTINE CNDLIV(TYP,Y,VL,DVLDY,YPER)
+      WRITE(6,*) 'ATTENZIONE: fornire routine CNDLIV!!'  
+      STOP
+      END
+C~FORAUS_CNDN~C
+C~FORAUS_EXCH~C
+      SUBROUTINE EXCHGAMUT(PMI,HM,SM,TF,ROM,TITOL, 
+     $                     TPI,DIAI,CRIG,G,QTI,SS,GAMMA)        
+      WRITE(6,*) 'ATTENZIONE: fornire routine EXCHGAMUT!!'  
+      STOP
+      END
+C~FORAUS_EXCH~C
+C~FORAUS_EXCY~C
+      SUBROUTINE EXCYGAMUT(PMI,HM,SM,TF,ROM,TITOL, 
+     $                     TPI,DIAI,CRIG,G,QTI,SS,GAMMA)        
+      WRITE(6,*) 'ATTENZIONE: fornire routine EXCHGAMUT!!'  
+      STOP
+      END
+C~FORAUS_EXCY~C
+C~FORAUS_VALV~C
+      REAL FUNCTION AVNS10(Z,ALFA)
+      WRITE(6,*) 'ATTENZIONE: fornire routine AVNS10!!' 
+      STOP
+      END
+C
+      REAL FUNCTION CFNS10(Z,A,CFA)
+      WRITE(6,*) 'ATTENZIONE: fornire routine CFNS10!!'
+      STOP
+      END
+C~FORAUS_VALV~C
+C~FORAUS_CPOM~C
+      SUBROUTINE DPU(TYP,QVNOM,OMNOM,DPNOM,CNOM,ETANOM,Q,RO,OM,DP,CRES)
+      WRITE(6,*) 'ATTENZIONE: fornire routine DPU!!'
+      STOP
+      END
+C
+C~FORAUS_CPOM~C
+C~FORAUS_TANK~C
+      SUBROUTINE TANKLIV(TYP,VLIV,Y,YTOT,AREA)
+      WRITE(6,*) 'ATTENZIONE: fornire routine TANKLIV!!'  
+      STOP
+      END
+C~FORAUS_TANK~C
+C~FORAUS_TURG~C
+      REAL FUNCTION TGXUTXFU10(QTGP,FTAMB)
+      WRITE(6,*) 'ATTENZIONE: fornire routine TGXUTXFU10!!' 
+      STOP
+      END
+C
+      REAL FUNCTION TGXUTXFF14(POYX,FTAMB)          
+      WRITE(6,*) 'ATTENZIONE: fornire routine TGXUTXFF14!!'
+      STOP
+      END
+C~FORAUS_TURG~C
+C~FORAUS_BPM0~C
+      SUBROUTINE DPU_B0(TYP,QVNOM,OMNOM,DPNOM,CNOM,ETANOM,
+     $                  Q,RO,OM,DP,CRES)
+      WRITE(6,*) 'ATTENZIONE: fornire routine DPU_B0!!'
+      STOP
+      END
+C~FORAUS_BPM0~C
+C~FORAUS_BCN0~C
+      SUBROUTINE BCNLIV(TYP,Y,VL,DVLDY,YPER)
+      WRITE(6,*) 'ATTENZIONE: fornire routine BCNLIV!!'
+      STOP
+      END
+C~FORAUS_BCN0~C

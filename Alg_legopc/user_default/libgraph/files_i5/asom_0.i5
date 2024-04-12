@@ -1,0 +1,27 @@
+ASOM
+
+ASOM - Two signals algebraic sum                                                
+3
+1
+
+t0
+I1SO 
+1 
+t1
+I2SO 
+1 
+t2
+USOM 
+1 
+
+0
+1
+2
+
+USOM UA
+ANALOG OUTPUT SIGNAL FROM THE ADDER                            
+I1SO IN
+INPUT SIGNAL 1 TO THE ADDER                                    
+I2SO IN
+INPUT SIGNAL 2 TO THE ADDER                                    
+

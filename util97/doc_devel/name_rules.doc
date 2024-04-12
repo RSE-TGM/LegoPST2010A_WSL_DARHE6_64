@@ -1,0 +1,20 @@
+		VARIABLE NAME'S RULES
+
+  The name's first character is choosen by the kind of variable
+
+	U ------------> linkable analog output
+        I ------------> linkable analog input
+	J ------------> linkable binary output
+        W ------------> linkable binary input
+	X,Y,Z --------> not linkable analog output  
+	A,B,C --------> not linkable analog input
+        M,N ----------> not linkable binary output
+	L ------------> not linkable binary input
+	K,H ----------> variables "DATI"
+	V,P,Q,R ------>	MACRO internal analog variables
+	D,E,F,G,O ----> MACRO internal binary variables
+	S ------------> Hybrid input 
+	T ------------> Hybrid output
+
+  The name's second character is choosen as ordinal (?) (base 36) from A toZ, 
+from 0 to 9.

@@ -1,0 +1,568 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>TTGS</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE TTGS</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">GAS TURBINE FOR SYNGAS-FED TURBOGAS GROUP</p>
+<p>&nbsp;</p>
+<p align="left">The TTGS module simulates an axial turbine for turbogas; the
+physical-mathematical model used is based on the actual discharge
+characteristics of the machine, analyzed stage by stage or by groups of stages
+(delimited by the air injections present on the machine). Certain
+characteristics of the machine are instead simulated in ground of the global
+behaviour of the turbine.</p>
+<p align="left">The TTGS module allows the correct simulation of the cooling air
+injections present on the real turbines. It doesn't instead simulate the effect
+of the turbine metals, which must be simulated in the inlet and/or outlet
+headers.</p>
+<p align="left">The global characteristic parameters of the machine (of the
+whole turbine, and not stage by stage) have to be imposed by the user, assigning
+(using the related activity) data like the nominal inlet and outlet pressures,
+the nominal inlet flow rate and temperature and the chemical composition of the
+flue gases (the one related to the nominal conditions assigned).</p>
+<p align="left">The coefficients that define the flowing characteristics of the
+single stages of the machine and the parameters which define the efficiency
+variation curves, are instead definite directly inside the Fortran source code
+of the module for two standard types of turbogas group (the Fiat TG50D and the
+Siemens V94.3). For other types of group it is possible to define such data
+using the related routine of the &quot;auxiliary Fortran&quot; (Foraus).</p>
+<p align="left">Note that for the Siemens V94.3 group (type 2) the module has
+been fully tested and validated as regards to the characteristics of the machine
+supplied by the manufacturer, while for the Fiat TG50D group (type 1) could be
+required a futher refining of the parameters.</p>
+<p align="left">For the evaluation and the conversion of the thermodynamical
+properties of the air and of the flue gases that flows through the turbine it is
+used the functions library related to the properties of gas mixtures (TAVSYNGAS
+library).</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">NSTADI = number of compressor stages</p>
+<p ALIGN="left">NINJEC = number of air injections</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">i = 1, NSTADI - 1</p>
+<p ALIGN="left">j = 1, NINJEC</p>
+<p ALIGN="center"><font FACE="Arial" SIZE="2"><img SRC="images/Image732.gif" width="390" height="274"></font></p>
+<p ALIGN="left">Note: the flow rate in the first stage is called WAMM instead of
+WST1 (the variable is present only for multi-stage turbines)</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<div align="left">
+  <!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PAMM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Flue gas pressure at the turbine inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TAMM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Flue gas temperature at the turbine inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PSCA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Flue gas pressure at the turbine outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[RPM]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RPMC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Rotational speed of the turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FCO2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Mass fraction of CO</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">
+      in the flue gas at the turbine inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FH2O</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Mass fraction of H</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">O
+      in the flue gas at the turbine inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FFO2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Mass fraction of O</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">
+      in the flue gas at the turbine inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FFAR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Mass fraction of Ar in the flue gas at
+      the turbine inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WINj</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Air flow rate through the j-th injection
+      of the turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TINj</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Temperature of the air incoming from the
+      j-th injection</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WSCA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Flue gas flow rate at the turbine outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TSCA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Flue gas temperature at the turbine
+      outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QTUR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Mechanical power produced by the turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WSTi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Flue gas flow rate in the i-th stage of
+      the turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PCAi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Flue gas pressure in the i-th cavity of
+      the turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TCAi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Flue gas temperature at the i-th cavity
+      inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TMXi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Flue gas temperature at the i-th cavity
+      outlet</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</div>
+<p ALIGN="left">Note: the flow rate in the first stage is called WAMM instead of
+WST1 (the variable is present only for multi-stage turbines)</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="CENTER">INPUT-OUTPUT VARIABLES NORMALIZATION FACTORS</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Variables</font><!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Normalization</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PAMM, PSCA, PCAi</font><!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">P0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TAMM, TINj, TSCA, TCAi, TMXi</font><!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WINj, WSCA, WAMM, WSTi</font><!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">W0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RPMC</font><!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">300.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QTUR</font><!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">W0 * H0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="38%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FCO2, FH2O, FFO2, FFAR</font><!--mstheme--></font></td>
+    <td width="62%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">0.1</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to initial values of TTGS module input and output
+variables, user must assign the following data set to complete the module input
+on the file F14:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">type Type of Turbogas group:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">1 = Fiat TG50D</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">2 = Siemens V94.3</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Pamm</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nom Inlet flue gas pressure in nominal
+      conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Psca</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nom Outlet flue gas pressure in nominal
+      conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Wfum</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nom Inlet flue gas flow rate in nominal
+      conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Tamm</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nom Inlet flue gas temperature nominal
+      conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">EtaS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nom Turbine isoentropic efficiency in
+      nominal conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FCO2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nom Mass fraction of CO</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">
+      in inlet flue gas in nominal conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">FH2O</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nom Mass fraction of H</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">O
+      in inlet flue gas in nominal conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">F O2 nom</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Mass fraction of O</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">
+      in inlet flue gas in nominal conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">F Ar nom</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Mass fraction of Ar in inlet flue gas in
+      nominal conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Injecn.j</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Number of the cavity of the j-th air
+      injection (j = 1, NINJEC)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">Note: there can’t be more than one air injection in each
+cavity; also the injections must be sorted in increasing order to respect to the
+number of the related cavities (therefore the Injecn.j values must be in a
+strictly increasing order).</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the TTGS module variables on the file F14, no
+particular prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In the auxiliary Fortran (Foraus) of the TTGS module there is
+only one routine, called TTGSDU, whose declaratory instructions are the
+followings:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<blockquote>
+  <p align="left">SUBROUTINE TTGSDU (ITIPO, IER, NSTADI, CB, CE)</p>
+  <p align="left">DIMENSION CB(9), CE(4)</p>
+</blockquote>
+</font></b><font FACE="Arial">
+<p align="left">The parameters have the following meanings:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Symbol">*</font><font FACE="Arial"> ITIPO
+      [read-only]</font><!--mstheme--></font></td>
+    <td width="75%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">type of turbine (turbogas group)
+      assigned by the user</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Symbol">*</font><font FACE="Arial"> IER
+      [write-only]</font><!--mstheme--></font></td>
+    <td width="75%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">IER parameter of the TTGSI2 subroutine
+      - to be set to 1 in case of errors, in order to abort the data acquisition
+      activity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Symbol">*</font><font FACE="Arial"> NSTADI
+      [read-only]</font><!--mstheme--></font></td>
+    <td width="75%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">number of stages of the turbine (to be
+      used for the check of the coherence between the value assigned in the
+      present routine for the selected type of turbine and the value assigned by
+      the user during topology building phase)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Symbol">*</font><font FACE="Arial"> CB
+      [write-only]</font><!--mstheme--></font></td>
+    <td width="75%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">vector of the multiplying factors for
+      the efflux coefficients of the single stages (the number of elements to
+      assign is equal to the number of stages; see theoretical related
+      description)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="25%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Symbol">*</font><font FACE="Arial"> CE
+      [write-only]</font><!--mstheme--></font></td>
+    <td width="75%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">coefficients k</font><font FACE="Arial" SIZE="1">1</font><font FACE="Arial">,
+      k</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">, k</font><font FACE="Arial" SIZE="1">eta</font><font FACE="Arial">
+      and k</font><font FACE="Arial" SIZE="1">pot</font><font FACE="Arial"> for
+      the definition of the efficiency variation curves and corrective
+      correlated factors (see theoretical related description)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">Also the TTGS module makes use of the procedures contained in
+the syngas thermodynamic tables (TAVSYNGAS) which must be present in the user
+library.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The equations forming the TTGS module mathematical model
+(mentioned above) give rise to a set of residuals. Here only their
+correspondences with the output variables equations have been indicated, also
+mentioning the respective normalization factors. Further explanations are given
+in the related theoretical description.</p>
+<p ALIGN="left">1) RNI(1) - normalization factor = W0</p>
+<blockquote>
+  <p ALIGN="left">related to the air flow rate at the turbine outlet</p>
+</blockquote>
+<p ALIGN="left">2) RNI(2) - normalization factor = T0</p>
+<blockquote>
+  <p ALIGN="left">related to the air temperature at the turbine outlet</p>
+</blockquote>
+<p ALIGN="left">3) RNI(3) - normalization factor = W0 * H0</p>
+<blockquote>
+  <p ALIGN="left">related to the mechanical power produced by the turbine</p>
+</blockquote>
+<p ALIGN="left">do i = 1, NSTADI - 1</p>
+<blockquote>
+  <p ALIGN="left">4) RNI(4*i) - normalization factor = W0</p>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="left">related to the air flow rate in the i-th stage</p>
+    </blockquote>
+  </blockquote>
+  <p ALIGN="left">5) RNI(4*i+1) - normalization factor = P0</p>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="left">related to the air pressure inside the i-th cavity</p>
+    </blockquote>
+  </blockquote>
+  <p ALIGN="left">6) RNI(4*i+2) - normalization factor = T0</p>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="left">related to the air temperature inside the i-th cavity
+      before injection mixing</p>
+    </blockquote>
+  </blockquote>
+  <p ALIGN="left">7) RNI(4*i+3) - normalization factor = T0</p>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="left">related to the air temperature inside the i-th cavity
+      after injection mixing</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p ALIGN="left">enddo</p>
+<p ALIGN="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<p align="left">SUBROUTINE TTGSI3 (IFO,IOB,DEBL)</p>
+<p align="left">SUBROUTINE TTGSI4 (NSTADI,NINJEC)</p>
+<p align="left">SUBROUTINE TTGSI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+<p align="left">$ IBL1,IBL2,IER,CNXYU,TOL)</p>
+<p align="left">SUBROUTINE TTGSC1
+(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</p>
+<p align="left">SUBROUTINE TTGS (IFUN,IXYU,XYU,IPD,DATI,RNI)</p>
+<p align="left">FUNCTION TTGSPV (PM, TM, PV)</p>
+<p align="left">SUBROUTINE TTGSDT (ITIPO, IER, NSTADI, CB, CE)</p>
+<p align="left">SUBROUTINE TTGSD1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</p>
+<p align="left">$ IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are reported in the
+user manual section devoted to the examples developed under the abbreviation:</p>
+<p ALIGN="CENTER">&quot;.........&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

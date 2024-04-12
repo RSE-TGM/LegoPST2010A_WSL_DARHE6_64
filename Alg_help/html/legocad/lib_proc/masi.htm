@@ -1,0 +1,439 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE MASI</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MASI_summ"></A>MODULE MASI&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MASI_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MASI_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MASI_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MASI_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MASI_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MASI_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MASI_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MASI_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MASI_A"></A>MODULE MASI&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">ASYNCHRONOUS MOTOR</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The MASI module simulates the operation of an asynchronous motor.</P>
+<P ALIGN="JUSTIFY">The module employs the representation of the asynchronous equipment according to Park.</P>
+<P ALIGN="JUSTIFY">It can simulate a motor of any power and having any type of stator and rotor winding, since it refers to an equivalent equipment with both star windings.</P>
+<P ALIGN="JUSTIFY">The electrical parameters of the equivalent circuit used for the module solution are determined as follows:</P>
+<P ALIGN="JUSTIFY">1.&#9;set by the operator on the basis of experience</P>
+<P ALIGN="JUSTIFY">2.&#9;calculated from nameplate data and magnitudes relevant to the operation condition at rated mechanical load</P>
+<P ALIGN="JUSTIFY">3.&#9;if the operator has not the availability of the equipment nameplate data, these parameters are automatically assigned by the program on the basis of the equipment power.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">As for the use of MASI there is no particular recommendation except for the basic voltage of the transformer side it is connected with, which must be equal to the rated voltage of the motor itself.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The following hypothesis are assumed in the mathematical model adopted:</P>
+<P ALIGN="JUSTIFY">stator and rotor windings are symmetrical;</P>
+<P ALIGN="JUSTIFY">it is considered the two pole equivanent machine with rotor and stator star connected winding;</P>
+<P ALIGN="JUSTIFY">the rotor is isotropic, therefore self- and mutual induction coefficients do not depend on the angular position;</P>
+<P ALIGN="JUSTIFY">mutual induction coefficients between stator and rotor windings vary with the co-synusoidal law according to the electrical angle among the axis of the corresponding windings;</P>
+<P ALIGN="JUSTIFY">magnetic circuits are linear and losses in iron during the Park transformation can be neglected. These are then considered introducing an equivalent resistance connected in parallel to input terminals in the equivalent circuit according to Park; </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The equations describing the equivalent circuit are used in the mathematical model of the asynchronous motor. To render this model consistent with its utilization inside the simulator: </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">the derivative in time of the statoric flow is neglected. This is equal to neglect the unidirectional component of the current appearing at the first instants of a transient state.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RESIDUALS</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If the equipment switch is closed and the supply frequency is higher than zero, then:</P>
+<P ALIGN="JUSTIFY">1.&#9;State equation describing the derivative in time of the transient emf along the direct axis according to: the direct transient and emf in quadrature of the imaginary auxiliary current</P>
+<P ALIGN="JUSTIFY">2.&#9;State equation describing the derivative in time of the transient emf along the axis in quadrature according to: the direct transient and emf in quadrature of the real auxiliary current</P>
+<P ALIGN="JUSTIFY">3.&#9;Equation determining the real current output by the equipment written for the equivalent circuit consisting of: the stator resistance in series with the transient inductance, in series with the transient emf. In parallel to input terminals there is the equivalent resistance for losses in iron.</P>
+<P ALIGN="JUSTIFY">4.&#9;Equation determining the imaginary current output by the equipment written for the equivalent circuit consisting of: the stator resistance in series with the transient inductance, in series with the transient emf. In parallel to input terminals there is the equivalent resistance for losses in iron.</P>
+<P ALIGN="JUSTIFY">5.&#9;Equation determining the electromagnetic torque available at the shaft according to absorbed power and to the transient emf. The torque is increased by the torque relevant to mechanical losses.</P>
+<P ALIGN="JUSTIFY">6.&#9;Equation supplying the mechanical power output as torque for angular speed. It is increased by mechanical losses.</P>
+<P ALIGN="JUSTIFY">7.&#9;Equation determining the power factor.</P>
+<P ALIGN="JUSTIFY">8.&#9;Equation determining the slip value.</P>
+<P ALIGN="JUSTIFY">9.&#9;Equation determining the value of active power output. It contains also additional losses.</P>
+<P ALIGN="JUSTIFY">10.&#9;Equation determining the value of reactive power output.</P>
+<P ALIGN="JUSTIFY">11.&#9;Equation determining the percent value of the absorbed current module relevant to the equipment rated current.</P>
+<P ALIGN="JUSTIFY">12.&#9;Equation required to introduce the real voltage at the equipment terminals, different from the one of bus bars should the equipment switch be open.</P>
+<P ALIGN="JUSTIFY">13.&#9;Equation required to introduce the imaginary voltage at the equipment terminals, different from the one of bus bars should the equipment switch be open.</P>
+<P ALIGN="JUSTIFY">14.&#9;Equation determining the stator joule losses.</P>
+<P ALIGN="JUSTIFY">15.&#9;Equation determining the rotor joule losses.</P>
+<P ALIGN="JUSTIFY">16.&#9;Equation determining the losses in iron calculated through an equivalent resistance to which the voltage at the equipment terminals is applied.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In the case the equipment switch is open or the frequency is lower than 0.1 rad/s then:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If we are in transient state:</P>
+<P ALIGN="JUSTIFY">1.&#9;State equation of transient emf according to the direct axis of the asynchronous equipment during the operation from generator.</P>
+<P ALIGN="JUSTIFY">2.&#9;State equation of transient emf according to the axis in quadrature of the asynchronous equipment during the operation from generator.</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">If the equipment switch is closed and the mechanical speed is different from zero:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">3.&#9;Equation of the real current output by the asynchronous equipment during the generator operation transient state, during which it supplies circuits left connected upstream at mechanical frequency multiplied by the number of pole pairs.</P>
+<P ALIGN="JUSTIFY">4.&#9;Equation of the imaginary current output by the asynchronous equipment during the generator operation transient state, during which it supplies circuits left connected upstream at mechanical frequency multiplied by the number of pole pairs.</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Or if the equipment switch is open or the equipment is stopped:</P>
+<P ALIGN="JUSTIFY">5. &#9;Equation nullifying the real current output. This is equal to consider an equipment supplying only the equivalent resistance for losses in iron.</P>
+<P ALIGN="JUSTIFY">6. &#9;Equation nullifying the imaginary current output. This is equal to consider an equipment supplying only the equivalent resistance for losses in iron.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Otherwise, if we are in steady conditions:</P>
+<P ALIGN="JUSTIFY">1.&#9;Equation nullifying the direct transient emf.</P>
+<P ALIGN="JUSTIFY">2.&#9;Equation nullifying the transient emf in quadrature.</P>
+<P ALIGN="JUSTIFY">3.&#9;Equation nullifying the real current output.</P>
+<P ALIGN="JUSTIFY">4.&#9;Equation nullifying the imaginary current output.</P>
+<P ALIGN="JUSTIFY">5.&#9;Equation calculating the electromagnetic torque. The torque value is not nullified since it is necessary for the calculation of mechanical power absorbed in the operation phase from generator.</P>
+<P ALIGN="JUSTIFY">6.&#9;Equation calculating the mechanical power absorbed in the generator operation phase.</P>
+<P ALIGN="JUSTIFY">7.&#9;Equation nullifying the power factor.</P>
+<P ALIGN="JUSTIFY">8.&#9;Equation nullifying the slip value.</P>
+<P ALIGN="JUSTIFY">9.&#9;Equation nullifying the value of active power output.</P>
+<P ALIGN="JUSTIFY">10.&#9;Equation nullifying the value of reactive power output.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Equations 7, 8, 9, 10 mullify the power factor, the slip, the active and reactive power output, respectively, which values are not interesting during the transient operation from generator.</P>
+<P ALIGN="JUSTIFY">&nbsp;11.&#9;Equation calculation the module of percent current relevant to the rated current of the morot itself.</P>
+<P ALIGN="JUSTIFY">12.&#9;Equation determining the value of the real voltage at equipment terminals in case the internal switch is open. This voltage is equal to the direct transient emf.</P>
+<P ALIGN="JUSTIFY">13.&#9;Equation determining the value of the imaginary voltage at equipment terminals in case the internal switch is open. This voltage is equal to the transient emf in quadrature.</P>
+<P ALIGN="JUSTIFY">14.&#9;Equation nullifying the stator joule losses</P>
+<P ALIGN="JUSTIFY">15.&#9;Equation nullifying the rotor joule losses.</P>
+<P ALIGN="JUSTIFY">16.&#9;Equation nullifying the losses in iron calculated through an equqivalent resistance.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The equations 14, 15, 16 nullify joule losses of stator, rotor and in iron, respectively.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MASI_B"></A>MODULE MASI&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1296.gif" WIDTH=382 HEIGHT=446></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT - OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[V]&#9;UR00&#9;supply phase real voltage</P>
+<P ALIGN="JUSTIFY">[V]&#9;UX00&#9;supply phase imaginary voltage</P>
+<P ALIGN="JUSTIFY">[rad/s]&#9;OMST&#9;stator electric frequency</P>
+<P ALIGN="JUSTIFY">[rad/s]&#9;OMMA&#9;shaft mechanical frequency</P>
+<P ALIGN="JUSTIFY">[ ]&#9;STIN&#9;switch status (1 = on)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;SMAS&#9;SMAS=0 </FONT><FONT FACE="Wingdings">&agrave;</FONT><FONT FACE="Arial, helvetica"> motor not isolated; SMAS=1 </FONT><FONT FACE="Wingdings">&agrave;</FONT><FONT FACE="Arial, helvetica"> motor isolated</P>
+<P ALIGN="JUSTIFY">[ ]&#9;SMAL&#9;malfunction index. For SMAL=0 </FONT><FONT FACE="Wingdings">&agrave;</FONT><FONT FACE="Arial, helvetica"> motor ok; for SMAL=1 </FONT><FONT FACE="Wingdings">&agrave;</FONT><FONT FACE="Arial, helvetica"> overcurrent absorption; for SMAL=2 </FONT><FONT FACE="Wingdings">&agrave;</FONT><FONT FACE="Arial, helvetica"> switch malfunction causes switch opening</P>
+<P ALIGN="JUSTIFY">[ ]&#9;XMDE&#9;for XMDE=0 malfunction diagnostic to the automation is disabled; for XMDE=1 it is enabled</P>
+<P ALIGN="JUSTIFY">[rad/s]&#9;OMRI&#9;frequency reference</P>
+<P ALIGN="JUSTIFY">[puM]&#9;ED00&#9;direct axis transient emf </P>
+<P ALIGN="JUSTIFY">[puM]&#9;EQ00&#9;axis transient emf in quadrature</P>
+<P ALIGN="JUSTIFY">[A]&#9;IR00&#9;outgoing real current</P>
+<P ALIGN="JUSTIFY">[A]&#9;IX00&#9;outgoing imaginary current</P>
+<P ALIGN="JUSTIFY">[Nm]&#9;KE00&#9;electromagnetic torque increased by the torque relevant to mechanical losses</P>
+<P ALIGN="JUSTIFY">[W]&#9;QM00&#9;shaft mechanical power increased by mechanical losses</P>
+<P ALIGN="JUSTIFY">[ ]&#9;FDP0&#9;power factor</P>
+<P ALIGN="JUSTIFY">[%]&#9;SCOR&#9;percent slip</P>
+<P ALIGN="JUSTIFY">[W]&#9;QPE0&#9;active output power. It contains also additional losses.</P>
+<P ALIGN="JUSTIFY">[VAR]&#9;QQE0&#9;reactive output power</P>
+<P ALIGN="JUSTIFY">[%]&#9;IMMA&#9;percent module of absorbed current relevant to rated current</P>
+<P ALIGN="JUSTIFY">[V]&#9;URM0&#9;phase real voltage at terminals</P>
+<P ALIGN="JUSTIFY">[V]&#9;UXM0&#9;phase imaginary voltage at terminals</P>
+<P ALIGN="JUSTIFY">[W]&#9;QPST&#9;stator joule losses </P>
+<P ALIGN="JUSTIFY">[W]&#9;QPRO&#9;rotor joule losses</P>
+<P ALIGN="JUSTIFY">[W]&#9;QPFE&#9;losses in iron</P>
+<P ALIGN="JUSTIFY">[ ]&#9;XCSO&#9;controller staus word. This variable indicates to the automation task the motor status (on, off or malfunction).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MASI_C"></A>MODULE MASI&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P ALIGN="JUSTIFY">In addition to the initial values of input and output variables of the MASI module, whose meaning has been defined in card B2, the user must assign the following set of data to complete the input required by the module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Parameters absolutely necessary for the solution</P>
+<P ALIGN="JUSTIFY">[ ]&#9;S.DATI&#9;if S.DATI=1 the operator must assign parameters obtained by experimental tests: as a consequence the module MASI calculates the characteristic parameters of the motor. If S.DATI=2 the characteristic parameters of the motor are directly assigned by the operator</P>
+<P ALIGN="JUSTIFY">[ ]&#9;N_POLI&#9;number of poles (note 3)</P>
+<P ALIGN="JUSTIFY">[rad/s]&#9;OMBA&#9;network basic frequency </P>
+<P ALIGN="JUSTIFY">[W]&#9;QPN_W&#9;equipment rated power (note 3)</P>
+<P ALIGN="JUSTIFY">[W]&#9;QBASE&#9;network basic power (note 3)</P>
+<P ALIGN="JUSTIFY">[V]&#9;VBASE&#9;basic voltage, equal to rated voltage transformer side supplying the motor (note 3 and 3bis)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;EPSILOM</P>
+<P ALIGN="JUSTIFY">[W]&#9;QPFER&#9;rated losses in iron in the idle test (note 4)</P>
+<P ALIGN="JUSTIFY">[ohm]&#9;RS&#9;&#9;phase resistance equivalent to stator star (note 4)</P>
+<P ALIGN="JUSTIFY">[A]&#9;INM&#9;&#9;equipment rated current (note 6) </P>
+<P ALIGN="JUSTIFY">[%]&#9;SCORN&#9;rated slip, relevant to rated r.p.m. (note 6)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Parameters which can be set by the operator </P>
+<P ALIGN="JUSTIFY">[puM]&#9;XM&#9;magnetization reactance of Park equivalent circuit (note 1, 2 and 5)</P>
+<P ALIGN="JUSTIFY">[puM]&#9;XDS&#9;stator dispersion reactance (note 1, 2 and 7)</P>
+<P ALIGN="JUSTIFY">[puM]&#9;XDR&#9;rotor dispersion reactance (note 1, 2 and 7)</P>
+<P ALIGN="JUSTIFY">[puM]&#9;RRSN&#9;resistance of a rotoric phase at rated slip (note 2 and 6)</P>
+<P ALIGN="JUSTIFY">[puM]&#9;RR10&#9;resistance of a rotoric phase at slip=100% (note 2 and 6)&nbsp;</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Parameters obtained by experimental data</P>
+<P ALIGN="JUSTIFY">[A]&#9;I0&#9;&#9;idle current (note 5)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;COSFI0&#9;power factor in idle conditions (note 5)</P>
+<P ALIGN="JUSTIFY">[ohm]&#9;RS&#9;&#9;phase resistance equivalent to stator star (note 4)</P>
+<P ALIGN="JUSTIFY">[A]&#9;ICC_A_VN&#9;current with rotor locked with reference to rated voltage (note 6 and 7)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;COSFICC&#9;short circuit power factor or with rotor locked (note 6 and 7)</P>
+<P ALIGN="JUSTIFY">[W]&#9;QPERD&#9;mechanical losses determined through the idle test (note 6) </P>
+<P ALIGN="JUSTIFY">[ ]&#9;COSFIN&#9;rated power factor (note 6)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Note 1&nbsp;</P>
+<P ALIGN="JUSTIFY">The operator can set XM, XDS, XDR, RR on the basis of experience or for particular calculation requirements. In the case anyone of these 4 parameters is assumed diffferent from zero, this is used during simulations for any other value of nameplate data supplied. On the contrary for parameters assumed as equal to zero it is necessary to supply nameplate data necessary for their calculation according to the methods indicated in notes 5,6,7. If the motor nameplate data are not available, calculations can be made with the electrical parameters set by the program on the basis of the equipment power according to the methods indicated in note 3.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Note 2&nbsp;</P>
+<P ALIGN="JUSTIFY">In the case XM,XDS,XDR,RR are different from zero they are considered constant and are used in simulations for any value of nameplate data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Note 3 </P>
+<P ALIGN="JUSTIFY">QNMA, QBASE, POLI, VBASE values are absolutely necessary for the use of the MASI module in a simulation.</P>
+<P ALIGN="JUSTIFY">The simulation can be made without knowing any nameplate datum using electrical parameters of the equivalent circuit, set by the program on the basis of the equipment power.</P>
+<P ALIGN="JUSTIFY">To have this case it is necessary to place ALL the following magnitudes =:</P>
+<P ALIGN="JUSTIFY">XM XDS XDR RR QPFER ICC I0 RS.</P>
+<P ALIGN="JUSTIFY">It is not possible to set only some electrical parameters according to the methods described in notes 5,6,7 and obtain the other ones from the program- Program values are listed below.</P>
+<P ALIGN="JUSTIFY">If QNMA is higher than 200 kW then:</P>
+<P ALIGN="JUSTIFY">XM&#9;= 4.5</P>
+<P ALIGN="JUSTIFY">XDS&#9;= 0.1</P>
+<P ALIGN="JUSTIFY">XDR&#9;= 0.1 </P>
+<P ALIGN="JUSTIFY">RR&#9;= 0.004</P>
+<P ALIGN="JUSTIFY">RS&#9;= 0.005</P>
+<P ALIGN="JUSTIFY">QPFER&#9;= 0.01</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If QNMA is lower than 200 kW then:</P>
+<P ALIGN="JUSTIFY">XM&#9;= 3.5</P>
+<P ALIGN="JUSTIFY">XDS&#9;= 0.1</P>
+<P ALIGN="JUSTIFY">XDR&#9;= 0.1 </P>
+<P ALIGN="JUSTIFY">RR&#9;= 0.015</P>
+<P ALIGN="JUSTIFY">RS&#9;= 0.02</P>
+<P ALIGN="JUSTIFY">QPFER&#9;= 0.015</P>
+<P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P ALIGN="JUSTIFY">Note 3bis</P>
+<P ALIGN="JUSTIFY">The basic voltage must be equal to the rated voltage of the motor and equal to the rated voltage, therefore basic one, of the transformer side supplying the motor itself.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Note 4</P>
+<P ALIGN="JUSTIFY">The values of the resistance of a statoric star phase (RS) and of losses in iron (QPFER) are not absolutely necessary for the module solution.</P>
+<P ALIGN="JUSTIFY">In case RS or QPFER values are put equal to zero then the corresponding losses are neglected.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Note 5&nbsp;</P>
+<P ALIGN="JUSTIFY">I0 and COSFI0 values are used for XM calculation in the case the XM value of data is equal to zero. The calculation is made as follows:</P>
+<P ALIGN="JUSTIFY">ZBASE&#9;= (VBASE**2)/QNMA</P>
+<P ALIGN="JUSTIFY">XD2&#9;= XDS*ZBASE</P>
+<P ALIGN="JUSTIFY">FI0&#9;= ACOS(COSFI0)</P>
+<P ALIGN="JUSTIFY">QQ0&#9;= SQRT(3)*VBASE*I0*SIN(FI0)- 3*XD2*(I0**2)</P>
+<P ALIGN="JUSTIFY">XM&#9;= 3/2*(VBASE**2)/(QQ0*ZBASE)</P>
+<P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P ALIGN="JUSTIFY">Note: coefficient 3/2 is used to transform the phase magnetization reactance into that relevant to the equivalent circuit according to Park.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If XM is different from zero then this value is used in simulations. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Note 6</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In case RR=0 and ICC and COSFICC and SCORN are different from 0 then the rotor resistance is considered variable linearly to the slip variation. The function combining rotor resistance and slip in shown in the figure:</P>
+<P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+</FONT><B><FONT FACE="Courier New"><P ALIGN="JUSTIFY">RR [puM] ^</P>
+<P ALIGN="JUSTIFY">|</P>
+<P ALIGN="JUSTIFY">|</P>
+<P ALIGN="JUSTIFY">RR100 |......./------</P>
+<P ALIGN="JUSTIFY">| / .</P>
+<P ALIGN="JUSTIFY">| / .</P>
+<P ALIGN="JUSTIFY">| / .</P>
+<P ALIGN="JUSTIFY">| / .</P>
+<P ALIGN="JUSTIFY">RRSN |../ .</P>
+<P ALIGN="JUSTIFY">| . .</P>
+<P ALIGN="JUSTIFY">--+--+-----+-----&gt;</P>
+<P ALIGN="JUSTIFY">SCORN 90 SCOR [%]</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The value of rotor resistance at 100% slip (RR100) that is with rotor locked is calculated from data relevant to test with rotor locked or short-circuited (cto-cto).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">QPCC &#9;= SQRT(3)*VBASE*ICC*COSFICC</P>
+<P ALIGN="JUSTIFY">QRCC &#9;= QPCC - 3*RS*ICC</P>
+<P ALIGN="JUSTIFY">RR100&#9;= QRCC/(3*ICC**2*ZBASE)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The value of the rotor resistance at rated value (RRSN) is calculated from some magnitudes relevant to the rated operation condition as follows:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">QRCC1 = (SCORN/100)/(1 - SCORN/100)*(QNMA+QPERD)</P>
+<P ALIGN="JUSTIFY">rotor joule losses at rated slip </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">IFE = QPFER*QNMA/(SQRT(3)VBASE)</P>
+<P ALIGN="JUSTIFY">current obtained from the equivalent resistance for losses in iron.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">FIN = ACOS(COSFIN)</P>
+<P ALIGN="JUSTIFY">I1 = SQRT( INM*COSFIN-IFE)**2 - (INM*SIN(FIN)-I0*SIN(ACOS(COSFI0)) )**2 )</P>
+<P ALIGN="JUSTIFY">current crossing the rotor resistance in the phase equivalent circuit</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RRSN = QRCC1/(3*I1**2*ZBASE)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If RR=0 and SCORN=0 and ICC and COSFICC are different from 0 then the rotor resistance is considered constant equal to the value RR100.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If RR is different from 0, for any value of ICC, COSFICC and SCORN the rotor resistance is considered constant equal to the value of RR.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Note 7&nbsp;</P>
+<P ALIGN="JUSTIFY">Should the value of XDS=0 and XDR=0 then we assume that XDS=XDR and the value is calculated as follows:</P>
+<P ALIGN="JUSTIFY">&nbsp;FICC &#9;= ACOS(COSFICC)</P>
+<P ALIGN="JUSTIFY">QQCC &#9;= SQRT(3)*VBASE*ICC*SIN(FICC)</P>
+<P ALIGN="JUSTIFY">XDS &#9;= XDR = QQCC/(6*(ICC**2)*ZBASE)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If XDS different from 0 and XDR=0, for any value of ICC and COSFICC: XDR = XDS.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If XDS=0 and XDR different from zero, for any value of ICC and COSFICC: XDS = XDR.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MASI_D"></A>MODULE MASI&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">For the calculation of the steady condition of the model containing only the module MASI it is necessary to make known all the module inputs except for an input voltage, for instance VX00, and the real current coming out (IR00). Attention has to be paid to the sign of the current in relation to the sign of the real voltage set (VR00) having selected the generator convention for currents. It is not recommended to put variables QPE0, QQE0, IMMA, FDP0, SCOR clearing some inputs of the model when the desired steady condition is far.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The numeric value of transient emfs results being approximately equal to:&nbsp;</P>
+<P ALIGN="JUSTIFY">ED00 = VR00[V]/(VBASE[V]*sqrt(3))</P>
+<P ALIGN="JUSTIFY">EQ00 = VX00[V]/(VBASE[V]*sqrt(3))</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Active (QPE0) and reactive (QQE0) electric powers have always NEGATIVE value since the generators convention has been selected for currents and therefore for powers.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MASI_E"></A>MODULE MASI&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="CENTER">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MASI_F"></A>MODULE MASI&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The equations forming the mathematical model of the module, given in card A, provide the following residuals:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>IF (LSTIN .AND. OMST .GT. .1) THEN</P>
+<P>EPSILOM=0.</P>
+<P>IF (OMMA .LT. .001 .AND. OMMA .GT. -.001) EPSILOM=.01</P>
+<P>RNI(1) = -(ED00-(XS-XS1)*IAUX/CM)/T01+EQ00*DELTOM</P>
+<P>RNI(2) = -(EQ00+(XS-XS1)*IAUR/CM)/T01-ED00*DELTOM</P>
+<P>RNI(3) = -IAUR-(VX00/(OMST*XS1)-</P>
+<P>$ EQ00/XS1+RS*IAUX/(OMST*XS1*CM))*CM</P>
+<P>RNI(4) = -IAUX-(-VR00/(OMST*XS1)+ED00/XS1-</P>
+<P>$ RS*IAUR/(OMST*XS1*CM))*CM</P>
+<P>RNI(5) = KE00+ED00*IAUR+EQ00*IAUX </P>
+<P>RNI(6) = QM00-KE00*(OMMA+EPSILOM)</P>
+<P>QSE1 = SQRT(QPE1*QPE1+QQE1*QQE1)</P>
+<P>IF (QSE1 .GT. 0.05) THEN</P>
+<P>FDP1 = QPE1/QSE1</P>
+<P>ELSE</P>
+<P>FDP1 = 0.</P>
+<P>ENDIF</P>
+<P>RNI(7) = FDP0-FDP1</P>
+<P>RNI(8) = SCOR-DELTOM/(OMBA*OMST)</P>
+<P>RNI(9) = QPE0 - VR00*IR00 - VX00*IX00</P>
+<P>RNI(10) = QQE0 -VX00*IR00+VR00*IX00</P>
+<P>RNI(11) = IMMA-SQRT(3.*((IR00/CM*IN1/INM)**2.+</P>
+<P>$ (IX00/CM*IN1/INM)**2.))</P>
+<P>RNI(12) = VRM0-VR00</P>
+<P>RNI(13) = VXM0-VX00</P>
+<P>RNI(14) = QPST-RS/CM*(IAUR**2.+IAUX**2.)</P>
+<P>RNI(15) = QPRO-(-QPE0-QPFE-QPST)*SCOR</P>
+<P>RNI(16) = QPFE-(VR00**2.+VX00**2.)*QPFER*CM</P>
+<P>ELSE</P>
+<P>IF (.NOT. KREGIM) THEN</P>
+<P>RNI(1) = -(ED00-(XS-XS1)*IAUX/CM)/T01</P>
+<P>RNI(2) = -(EQ00+(XS-XS1)*IAUR/CM)/T01</P>
+<P>IF (OMMA .GT. 0.1 .AND. LSTIN) THEN</P>
+<P>RNI(3) = -IAUR-(VX00/(OMMA*XS1)-EQ00/XS1+</P>
+<P>$ RS*IAUX/(OMMA*XS1*CM))*CM</P>
+<P>RNI(4) = -IAUX-(-VR00/(OMMA*XS1)+ED00/XS1-</P>
+<P>$ RS*IAUR/(OMMA*XS1*CM))*CM</P>
+<P>ELSE</P>
+<P>RNI(3) = -IR00</P>
+<P>RNI(4) = -IX00</P>
+<P>ENDIF</P>
+<P>ELSE</P>
+<P>RNI(1) = -ED00</P>
+<P>RNI(2) = -EQ00</P>
+<P>RNI(3) = -IR00</P>
+<P>RNI(4) = -IX00</P>
+<P>ENDIF</P>
+<P>RNI(5) = KE00+EDOO*IAUR+EQ00*IAUX </P>
+<P>RNI(6) = QM00-KE00*OMMA</P>
+<P>RNI(7) = -FDP0</P>
+<P>RNI(8) = -SCOR</P>
+<P>RNI(9) = -QPE0</P>
+<P>RNI(10) = -QQE0</P>
+<P>RNI(11) = IMMA-SQRT(3.*((IR00/CM*IN1/INM)**2.+</P>
+<P>$ (IX00/CM*IN1/INM)**2.))</P>
+<P>RNI(12) = -VRM0 + OMMA*ED00</P>
+<P>RNI(13) = -VXM0 + OMMA*EQ00</P>
+<P>RNI(14) = -QPST</P>
+<P>RNI(15) = -QPRO</P>
+<P>RNI(16) = -QPFE</P>
+<P>ENDIF</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MASI_G"></A>MODULE MASI&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P ALIGN="JUSTIFY">SUBROUTINE MASII2&#9;(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,IBL1,IBL2,</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">IER,CNXYU,TOL)&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">SUBROUTINE MASIC1&#9;(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE MASIJC&#9;(AJAC,MX5,IXYU,XYU,DATI,RNI,IBL1,IBL2)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE MASI&#9;(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE MASII3&#9;(IFO,IOB,DEBL)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE MASII4&#9;(IOB,MOD)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE MASID1&#9;(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MASI_H"></A>MODULE MASI&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Reference test cases relevant to this module are in the model library under the tags:</P>
+<P ALIGN="CENTER">"MASI"</P>
+<P ALIGN="CENTER">"TAVA5"</P>
+<P ALIGN="CENTER">"TAVAMOTO"</P>
+<P ALIGN="CENTER">"PALTAV"</P></FONT></BODY>
+</HTML>

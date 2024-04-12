@@ -1,0 +1,128 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">An example of the &quot;xxxxI2&quot; subroutine in a
+standard process module (RAVA)</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">An example of the output produced by the
+&quot;xxxxI2&quot; subroutine of a LEGO standard module is the following:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3" style="margin-left:0in"><span lang="EN-GB"><b><font size="2" face="Courier New">*LG*DATI DEL
+BLOCCO RAVACAPH<span style="mso-spacerun: yes">&nbsp; </span>MODULO RAVA -
+Comburent air preheater</font></b></span></p>
+<p class="elenco3" style="margin-left:0in"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>SUSCA<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>=<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>*<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>CAPPA<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>=<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>*<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>ALFA<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>=<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>*</font></b></span></p>
+<p class="MsoNormal"><span lang="EN-GB">This output has been produced
+instanciating the RAVA module (which simulates the behaviour of a air/steam heat
+exchanger) choosing &quot;CAPH&quot; as block name and &quot;Comburent air
+preheater&quot; as block description.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The source code of RAVAI2 follows
+(comment line has been added or translated for legibility reasons).<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier New">
+</font>
+</span><font face="Courier New">SUBROUTINE RAVAI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</font></b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>IBL1,IBL2,IER,CNXYU,TOL)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>INTEGER VAR</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DIMENSION VAR(MX1,*),XYU(*),DATI(*),CNXYU(*),TOL(*)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C--- MODULE RAVA: AIR-STEAM PREHEATER</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>GO TO(100,200),IFUN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C------- IFUN = 1 -------</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C--- data symbols writing</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp; </span>100
+WRITE(14,500) 'SUSCA<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>','CAPPA<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>','ALFA<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C------- IFUN = 2 -------</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C--- data reading and storing</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp; </span>200
+READ(14,501)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>READ(14,501) SUSCA,CAPPA,ALFA</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp; </span>500
+FORMAT(3(4X,A8,' =',10X,'*'))</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp; </span>501
+FORMAT(3(14X,F10.0,1X))</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2<span style="mso-spacerun: yes">&nbsp; </span>) = SUSCA</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+1) = CAPPA</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DATI(ID2+2) = ALFA</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C--- three free data are left for the
+storage of the flow rate</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>and the temperature in the previous integration pass:</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ID2 = ID2+5</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C--- normalization factors assignment</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1<span style="mso-spacerun: yes">&nbsp; </span>) = T0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+1) = T0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+2) = T0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+3) = 1.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+4) = W0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;</span>CNXYU(IV1+5) = T0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+6) = T0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+7) = T0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>CNXYU(IV1+8) = 1.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C--- tolerance thresholds not assigned
+(default value is used)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">Note that the allocation of extra
+elements in the DATI vector cannot be done using only the automatic code
+generation utility: the source code produced by this utility must be modified to
+allow extra elements allocation. As the RAVA module has three physical or
+geometrical data (SUSCA, CAPPA and ALFA), the auto-produced instruction for ID2
+variable increasing was: ID2 = ID2+2.</span></p>
+
+<!--mstheme--></font></body>
+
+</html>

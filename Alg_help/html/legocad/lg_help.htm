@@ -1,0 +1,411 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGOHELP</TITLE>
+<META NAME="subject" CONTENT="File Unificato Documentazione/Iperhelp">
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lgc_summary"></A>LEGOCAD TOOL</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">LEGOCAD is an interactive tool that allows LEGO developer to create and manage dynamic models.</P>
+<P ALIGN="JUSTIFY">It handles all phases of model development (described in </FONT><A HREF="#lgc_mw_costruction"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Model construction area</U></FONT></A><FONT FACE="Arial, helvetica"> of LEGOCAD main window) from model topological definition to dynamic simulations analysis.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER">HOW TO</P>
+</B></I></FONT><P ALIGN="JUSTIFY"><A HREF="#lgc_set_up"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Set up LEGOCAD</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="lg_libra.htm#lgc_librarian"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Librarian</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lgc_display"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Select operating mode</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lgc_new_model"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Open/Create a model</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="lg_topol.htm#lgc_topology"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Define model's Topology</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="lg_edata.htm#lgc_edata"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Insert numeric data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lgc_edi14"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Recover numeric data (edi14)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="lg_stead.htm#lgc_steady_state"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Calculate Steady State</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="lg_simu2.htm#lgc_simulation"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Run simulations (Transient Calc)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="lg_grafi.htm#lgc_graphics"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">View Graphical results (Trends)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lgc_H2O_tables"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Use water-steam tables</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="lg_docum.htm#lgc_documentation"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Documentation</U></FONT></A></P>
+<U><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</U></FONT><B><I><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER">LEGOCAD MAIN WINDOW LAYOUT</P>
+</B></I></FONT><P ALIGN="JUSTIFY"><A HREF="#lgc_mw_pulldown"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Pulldown menu</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lgc_mw_environment"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Legocad environment area</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lgc_new_model"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Model construction area</U></FONT></A><FONT FACE="Arial, helvetica"> </P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lgc_mw_utilities"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Utilities area</U></FONT></A><FONT FACE="Arial, helvetica"> </P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lgc_mw_messages"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Message area</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_set_up"></A>LEGOCAD: set-up</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Definition of some environment variables is needed for correct use of LEGOCAD tool. A sample <B>.profile </B>file is provided for LEGOCAD users.</P>
+<B><P ALIGN="JUSTIFY">LEGOROOT </B>environment variable contains legocad installation directory's path name; this variable can be modified accordingly to the particular LEGOCAD installation.</P>
+<B><P ALIGN="JUSTIFY">LEGOCAD_USER</B> environment variable contains </FONT><A HREF="lg_gloss.htm#lgc_gl_lg_usr_dir"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">LEGOCAD user directory</U></FONT></A><FONT FACE="Arial, helvetica">'s path name; it defaults to HOME variable. In this way legocad user directory is the user login directory.</P>
+<P ALIGN="JUSTIFY">You can override this default setting redefining in <B>.profile</B> LEGOCAD_USER variable (N.B. definition must be inserted after the $LEGOROOT/install/user.profile call).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">N.B.<I> Modification of .profile file is suggested only if you are familiar with system management otherwise contact system manager.</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Next step in LEGOCAD set-up consists of the use of </FONT><A HREF="lg_libra.htm#lgc_librarian"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">LIBRARIAN</U></FONT></A><FONT FACE="Arial, helvetica"> utility for the creation or copy from standard ones of the following libraries :</P>
+<P ALIGN="JUSTIFY">1. process modules library (for process modelling)</P>
+<P ALIGN="JUSTIFY">2. control modules library (for control modelling)</P>
+<P ALIGN="JUSTIFY">3. graphic icons (for diagram interface use).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_display"></A>LEGOCAD: operating mode</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">LEGOCAD provides two different operating mode: <I>symbolic diagram</I> and <I>only by lists</I>. </P>
+<P ALIGN="JUSTIFY">Symbolic diagram operating mode allows the use of a schematic representation (diagram) of the model internal structure. All user operations are accessed by selection of model components on the diagram. Typical windows displayed are </FONT><A HREF="lg_gloss.htm#lgc_gl_model_index_pg"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">diagram page's index</U></FONT></A><FONT FACE="Arial, helvetica"> and </FONT><A HREF="lg_gloss.htm#lgc_gl_model_diag_pg"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">model diagram page</U></FONT></A><FONT FACE="Arial, helvetica"> (with the diagram).</P>
+<P ALIGN="JUSTIFY">Use of LEGOCAD by lists is provided for compatibility with models developed with previous versions of LEGOCAD: user operations on models are accessed via selections on scrolled lists. </P>
+<P ALIGN="JUSTIFY">You can set Operating Mode selecting from LEGOCAD main window's pull down menu (Display button) one of the following options :</P>
+<P ALIGN="JUSTIFY">Symbolic diagram</P>
+<P ALIGN="JUSTIFY">Only by list</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_new_model"></A>LEGOCAD: open &amp; create a model</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">To create/open a new model select <B>process modelling</B>, <B>control system modelling</B> or <B>mixed system modelling</B> from File pulldown menu depending on model type you have to build (or modify).</P>
+<P ALIGN="JUSTIFY">A list of all legocad models owned by the user (i.e. created in </FONT><A HREF="lg_gloss.htm#lgc_gl_lg_usr_dir"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">LEGOCAD user directory</U></FONT></A><FONT FACE="Arial, helvetica">) is displayed.</P>
+<P ALIGN="JUSTIFY">You can select one of the models listed or specify a new model name in the text field below.</P>
+<P ALIGN="JUSTIFY">Additional information on models listed (model description, list of LEGO modules used, auxiliary fortran file </FONT><A HREF="lg_gloss.htm#lgc_gl_FORAUS"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FORAUS.FOR</U></FONT></A><FONT FACE="Arial, helvetica"> for the LEGO model ) are available selecting a model in the list and activating View button.</P>
+<P ALIGN="JUSTIFY">Model opened (or created) is loaded in LEGOCAD main window, model construction activities buttons are enabled according to the step of development reached. If the model is newly created you are prompted for model description.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lgc_edi14"></A>LEGOCAD: edi14</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Edi14 is useful for recovering variables and data values from other data files in </FONT><A HREF="lg_gloss.htm#lgc_gl_F14"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">F14</U></FONT></A><FONT FACE="Arial, helvetica"> format.</P>
+<P ALIGN="JUSTIFY">A source data file specified by the user is merged with the actual f14 model file; the produced file is named edi14.out.</P>
+<P ALIGN="JUSTIFY">Merge performed preserves actual f14 model file structure (i.e. variable, blocks and data names) and assigns values of variables having same names or data values of blocks with same names from source file to newly created file (edi14.out).</P>
+<P ALIGN="JUSTIFY">User can rename edi14.out file as needed, eventually substituting original f14 file.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lgc_H2O_tables"></A>LEGOCAD: WATER STEAM TABLES</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Water steam tables provide an interface to Mollier diagram for H2O properties.</P>
+<P ALIGN="JUSTIFY">Water steam tables utility provides a series of predefined functions whose input values may be entered by the user; calculated value is displayed. Tables used are the same mapped for LEGO blocks calculation. Values between two tables points are calculated by interpolation. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER">HOW TO</P>
+</I></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">1</B>&#9;</FONT><A HREF="#lgc_h2o_calculate"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Calculate water steam property</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER">H2O TABLES LAYOUT</P>
+</I></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">1</B>&#9;</FONT><A HREF="#lgc_h2o_ly"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Displayed window</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lgc_mw_pulldown"></A>LEGOCAD main window layout: pulldown menu</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">LEGOCAD main window contains the following pull-down menu :</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=556>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial, helvetica" SIZE=2>File</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Process modelling...</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">The first three options allow to load</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Control system modelling</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">an already existent model (process, control</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Mixed system modelling</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">or mixed) from a list or to create a new one.</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">General management...</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Delete models, modify models' description or auxiliary fortran.</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Quit</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Exit the system</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Edit</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Copies model</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Copy a model.</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Copies training examples</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Copy one of the standard training examples provided with </P>
+<P ALIGN="JUSTIFY">the LEGOCAD tool.</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Option</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Display</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Select legocad operating mode (default: Symbolic diagram)</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Symbolic diagram</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">LEGOCAD shows a symbolic plant's representation.</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Only by list</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">LEGOCAD only displays editors by lists.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lgc_mw_environment"></A>LEGOCAD main window layout: environment area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In this area is displayed the directories' tree for legocad developer (defined by means of </FONT><A HREF="lg_gloss.htm#lgc_gl_lg_usr_dir"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">LEGOCAD_USER</U></FONT></A><FONT FACE="Arial, helvetica"> environment variable):</P>
+<P ALIGN="JUSTIFY">•.&#9;the development root directory path name;</P>
+<P ALIGN="JUSTIFY">•&#9;the path of process modules library</P>
+<P ALIGN="JUSTIFY">•&#9;the path of control modules library </P>
+<P ALIGN="JUSTIFY">If a directory needed for libraries doesn't exist, its path name is followed by the label: <I>Not Defined</I> (red coloured); if the directory exists but the library is not found, the label is: <I>Not Present</I> (red coloured); if the library exists but recompilation of new modules (created or copied) is needed, the label is <I>Not Compiled</I>.</P>
+<P ALIGN="JUSTIFY">Correct environment creation (directories needed), libraries creation or copy are provided using librarian utility.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lgc_mw_costruction"></A>LEGOCAD main window layout: model construction area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Model construction is the outcome of several subsequent steps which are activated by two kinds of push buttons.</P>
+<P ALIGN="JUSTIFY">1)&#9;"Activity push buttons"</P>
+<P ALIGN="JUSTIFY">they are inserted in specific icons representing steps in model development:</P>
+<P ALIGN="JUSTIFY">2)&#9;"Link arrows buttons"</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Type 1 buttons run some interactive edit activities required to build up model and to carry out the simulation. </P>
+<P ALIGN="JUSTIFY">Type 2 buttons generate and run some executable files (lg1, lg2...) which complete the user's interactive activity, while allowing him to access to the next modelling phases. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The push button of every activity has two possible colour to indicate whether execution is enabled or not (if execution is not allowed buttons are also insensitive preventing activation). The user can thus start his work from one of the activity enabled.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The following picture shows a logical scheme of model construction phases; most important files produced (or used) during model development are also shown. From the file </FONT><A HREF="lg_gloss.htm#lgc_gl_F01"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">f01.dat</U></FONT></A><FONT FACE="Arial, helvetica"> that contains topological data, through the creation of a switch fortran file (ltm.f) is obtained a data and variable values file (</FONT><A HREF="lg_gloss.htm#lgc_gl_F14"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">f14.dat</U></FONT></A><FONT FACE="Arial, helvetica">). Steady state calculation produce a f14-like file (f24.dat) containing steady state calculated values and a binary file (f04.dat) containing the same data plus topological information. F04 is used for start-up of transient calculation. During transient calculation (simulation) values of some user-selected variables at each simulation step time are saved on </FONT><A HREF="lg_gloss.htm#lgc_gl_F22"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">f22.dat</U></FONT></A><FONT FACE="Arial, helvetica"> file.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1313.gif" WIDTH=582 HEIGHT=453></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image1314.gif" WIDTH=580 HEIGHT=339></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image1315.gif" WIDTH=581 HEIGHT=453></P>
+<B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lgc_mw_utilities"></A>LEGOCAD main window layout: utilities area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This area of the LEGOCAD main window contains four push buttons to choose the following functions : </P>
+<B><I><P ALIGN="JUSTIFY">Librarian</B>, </I>edit, view LEGO libraries.</P>
+<B><I><P ALIGN="JUSTIFY">Graphics</B>, </I>display graphical trends from simulation f22 files.</P>
+<B><I><P ALIGN="JUSTIFY">H2O</B> <B>Table</B>, </I>look up at water steam tables via predefined functions.</P>
+<B><I><P ALIGN="JUSTIFY">Documentation</B></I> edit, view model documentation</P>
+<P ALIGN="JUSTIFY">The first three functions are always enabled while documentation is enabled only if model has been loaded.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lgc_mw_messages"></A>LEGOCAD main window layout: messages area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This area of the LEGOCAD main window is available for output messages such as logging during link arrow buttons activities. Problems in LEGO modules or incorrect environment may cause errors during these activities that are reported in the messages window.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lgc_h2o_calculate"></A>H2O TABLES: calculate water steam property</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">When the tables are activated the following pre-defined functions are available:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=438>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial, helvetica" SIZE=2>Function</B></FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Output m.u.</B></FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Input m.u.</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">T(P,S)</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Temperature</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">^C</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar KJ/Kg/^C</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">S(P,H)</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Entropy</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">KJ/Kg/^C</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar KJ/Kg</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">H(P,T,Y)</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Entalpy</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">KJ/Kg</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar ^C</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">CP(P,T,Y)</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Specific heat capacity</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">KJ/Kg/^C</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar ^C</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">R0* R0**</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Density of water </P>
+<P ALIGN="JUSTIFY">and saturated steam</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Kg/m3</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">T(P,H)</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Temperature</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">^C</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar KJ/Kg</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">S(P,T,Y)</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Entropy</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">KJ/Kg/^C</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar ^C</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">R0(P,H)</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Kg/m3</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar KJ/Kg</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">H* H**</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Entalpy of water </P>
+<P ALIGN="JUSTIFY">and saturated steam</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">KJ/Kg</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Y(P,H)</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Steam ratio</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar KJ/Kg</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">TSAT(P)</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Temperature</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">^C</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">H(P,S)</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Entalpy</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">KJ/Kg</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar KJ/Kg/^C</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">R0(P,T,Y)</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Density</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Kg/m3</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar ^C</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">S* S**</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Entropy of water </P>
+<P ALIGN="JUSTIFY">and saturated steam</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">KJ/Kg/^C</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">bar</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Every function can be activate clicking on its push buttons; below will appear the input and output areas with their text fields for the input and output values. Every text field has a label with the unit of measurements. </P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lgc_h2o_ly"></A>H2O TABLES layout: tables page</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The page displays a pulldown menu to use the tables. The area under the pulldown menu is available for the use of the tables functions. </P>
+<P ALIGN="JUSTIFY">Tables page's pulldown menu :</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=432>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial, helvetica" SIZE=2>File</B></FONT></TD>
+<TD WIDTH="84%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Quit</FONT></TD>
+<TD WIDTH="84%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Exits from the tables</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Select</B></FONT></TD>
+<TD WIDTH="84%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">H2O</FONT></TD>
+<TD WIDTH="84%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Selects the H2O tables and shows the usable functions</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">History</B></FONT></TD>
+<TD WIDTH="84%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Show</FONT></TD>
+<TD WIDTH="84%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Shows a window displaying the previous operations performed and values calculated using tables</FONT></TD>
+</TR>
+<TR><TD WIDTH="16%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Clear</FONT></TD>
+<TD WIDTH="84%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Clears the history window </FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If H20 Select's pulldown menu is chosen, LEGOCAD displays fifteen option buttons, one for every function available. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The area below the push buttons is reserved for the input and the output of the functions. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

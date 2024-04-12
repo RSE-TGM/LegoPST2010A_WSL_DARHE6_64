@@ -1,0 +1,37 @@
+DAMP_0                                                                          
+DAMP                                                                            
+DAMP - Air lock of air-fluegas duct.                                            
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 6
+ 
+NCONF = 2
+ 
+WFSR      --UA-- FLUID FLOW RATE INTO THE REGISTER                              
+PFSV      --IN-- FLUID PRESSURE AT THE REGISTER OUTLET                          
+PFSM      --IN-- FLUID PRESSURE AT THE REGISTER INLET                           
+TFSI      --IN-- FLUID TEMPERATURE AT THE REGISTER INLET                        
+TFSU      --IN-- FLUID TEMP. AT THE REGISTER OUTLET (INV. FLOW)                 
+ALZS      --IN-- REGISTER OPENING                                               
+AKCO      --IN-- CORRECTIVE COEFF. HEAD LOSS IN THE DUCT                        
+==============================                                                  
+PFSV      --UA-- FLUID PRESSURE AT THE REGISTER OUTLET                          
+WFSR      --IN-- FLUID FLOW RATE INTO THE REGISTER                              
+PFSM      --IN-- FLUID PRESSURE AT THE REGISTER INLET                           
+TFSI      --IN-- FLUID TEMPERATURE AT THE REGISTER INLET                        
+TFSU      --IN-- FLUID TEMP. AT THE REGISTER OUTLET (INV. FLOW)                 
+ALZS      --IN-- REGISTER OPENING                                               
+AKCO      --IN-- CORRECTIVE COEFF. HEAD LOSS IN THE DUCT                        
+==============================                                                  
+EOF                                                                             
+3
+t0 4
+INGRESSO IDR. FUMI
+WFSR PFSM TFSI TFSU ____ ____ ____ ____
+t1 5
+USCITA IDR. FUMI
+WFSR PFSV TFSU TFSI ____ ____ ____ ____
+t2 6
+INGRESSO ATTUAZIONE
+ALZS

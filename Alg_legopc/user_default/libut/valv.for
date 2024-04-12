@@ -1,0 +1,1396 @@
+C**********************************************************************
+C modulo valv.f
+C tipo 
+C release 5.8
+C data 11/19/97
+C reserver @(#)valv.f	5.8
+C**********************************************************************
+      SUBROUTINE VALVI3(IFO,IOB,DEBL)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/VALV00/IBLOC
+      CHARACTER*80 DEBL
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MOD
+      DATA MOD/'VALV'/
+C
+      CALL VALVI4(IOB,MOD)
+C
+      NSTATI=0
+      NUSCIT=1
+      NINGRE=4
+C
+      IWP=0
+      IF(IBLOC(1:1).EQ.'+')IWP=1
+      IF(IBLOC(1:1).EQ.'-')IWP=2
+C
+      WRITE(IFO,2999)IBLOC,IOB,MOD,DEBL
+ 2999 FORMAT(A,2X,'BL.-',A4,'- **** MODULO ',A4,' - ',A)
+C
+      IF(IWP.EQ.2)WRITE(IFO,3001)IOB
+      IF(IWP.EQ.1)WRITE(IFO,3002)IOB
+      IF(IWP.EQ.0)WRITE(IFO,3007)IOB
+ 3001 FORMAT('PUVA',A4,2X,
+     $  '--UA-- FLUID PRESSURE AT THE VALVE OUTLET')
+ 3002 FORMAT('PIVA',A4,2X,
+     $  '--UA-- FLUID PRESSURE AT THE VALVE INLET')
+ 3007 FORMAT('WVAL',A4,2X,
+     $  '--UA-- FLUID FLOW RATE IN THE VALVE')
+C
+      IF(IWP.EQ.2.OR.IWP.EQ.0)WRITE(IFO,3013)IOB
+      IF(IWP.EQ.1)WRITE(IFO,3011)IOB
+ 3011 FORMAT('WVAL',A4,2X,'--IN-- FLUID FLOW RATE IN THE VALVE')
+ 3012 FORMAT('PUVA',A4,2X,'--IN-- FLUID PRESSURE AT THE VALVE OUTLET')
+C
+      IF(IWP.EQ.1.OR.IWP.EQ.0)WRITE(IFO,3012)IOB
+      IF(IWP.EQ.2)WRITE(IFO,3011)IOB
+ 3013 FORMAT('PIVA',A4,2X,'--IN-- FLUID PRESSURE AT THE VALVE INLET')
+C
+      WRITE(IFO,3005)IOB
+ 3005 FORMAT('HVAL',A4,2X,
+     $  '--IN-- VALVE INLET-OUTLET FLUID ENTHALPY')
+C
+      WRITE(IFO,3010)IOB
+ 3010 FORMAT('ALZA',A4,2X,'--IN-- VALVE LIFT')
+C
+      RETURN
+      END
+      SUBROUTINE VALVI4(IOB,MOD)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/VALV00/IBLOC
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MODU
+      CHARACTER*1 ICA,IMEN,IPIU
+      CHARACTER*1 IBL
+      CHARACTER*4 MOD
+      DATA IBL/' '/
+      DATA IPIU/'+'/
+      DATA IMEN/'-'/
+C
+    2 CONTINUE
+      WRITE(6,2999)
+ 2999 FORMAT(/5X,'GIVE A CHARACTER'
+     $ /5X,' - FLOW RATE AS OUTPUT =========> BLANK'
+     $ /5X,' - INLET PRESSURE AS OUTPUT ====>   +'
+     $ /5X,' - OUTLET PRESSURE AS OUTPUT ===>   -')
+      READ(5,3001)ICA
+      IF(ICA.EQ.IPIU)GO TO 1
+      IF(ICA.EQ.IMEN)GO TO 1
+      IF(ICA.EQ.IBL)GO TO 1
+      GO TO 2
+ 3001 FORMAT(A)
+    1 CONTINUE
+C
+      WRITE(MODU,'(A1,A3)')ICA,MOD
+      IF(ICA.EQ.IBL)MODU=MOD
+      WRITE(IBLOC,'(2A4)')MODU,IOB
+C
+      RETURN
+      END
+      SUBROUTINE VALVI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,NOM1,NOM2,
+     $ IER,CNXYU,TOL)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      INTEGER VAR
+      DIMENSION VAR(MX1,2),XYU(*),DATI(*),CNXYU(*),TOL(*)
+      COMMON / NORM / P0,H0,T0,Q0,R0,AL0,V0,DP0
+      COMMON / MOVA / DUMMY1,DUMMY2,DUMMY3,IAREA,IMOVAL
+      CHARACTER*4 NOMCAR,AZ,CF,WL1,P1L1,P1L2,P2L1,P2L2,HL1,HL2
+     $,ZL1,DPAPE1,DPAPE2,DPCLO1,AR,WL2,ICV1,ZL2
+      CHARACTER*1 ICV2
+      DATA AZ/'ALFA'/,CF/'CFA '/,WL1/'PORT'/,WL2/'ATA'/
+      DATA P1L1/'P1 M'/,P1L2/'ONTE'/,P2L1/'P2 V'/,P2L2/'ALLE'/
+      DATA HL1/'ENTA'/,HL2/'LPIA'/,ZL1/'CORS'/,ZL2/'A '/
+      DATA ICV1/'CVA'/,ICV2/' '/
+      DATA DPAPE1/'DP. '/,DPAPE2/'APER'/,DPCLO1/'CHIU'/
+      DATA AR/'COD.'/
+C
+C     MODELLI PREVISTI :
+C
+C         CADIPO  (0,1)
+C
+C         VALVOLA SEMPLIFICATA NON SONICA (2,3)
+C
+C         VALVOLA SEMPLIFICATA SONICA (4,5)
+C
+C         MODELLO MOODY-MORRIS (6)
+C
+C
+      GO TO (1,10),IFUN
+C
+C      SCRITTURA SUL FILE 14 DEI SIMBOLI DEI DATI DELLA VALVOLA
+C
+    1 WRITE(14,1010)
+ 1010 FORMAT('*   VALVE DATA (COD. = IDENTIFIER FOR MATHEMATICAL '
+     $,'MODEL CHOICE)')
+      WRITE(14,1020) AZ,CF,AR
+ 1020 FORMAT(3(4X,A4,4X,' =',10X,'*'),5X)
+      WRITE(14,1030)
+ 1030 FORMAT('*   DATA RELATED TO THE DISCHARGING CHARACTERISTIC')
+      WRITE(14,1040)ICV1,ICV2, WL1,WL2,P1L1,P1L2,P2L1,P2L2,HL1,HL2,
+     $             ZL1,ZL2
+      WRITE(14,1031)
+ 1031 FORMAT('*   DATA RELATED TO THE CHECK VALVE (IF PRESENT - '
+     $,'DEPENDING ON COD.)')
+      WRITE(14,1040)DPAPE1,DPAPE2,DPAPE1,DPCLO1
+ 1040 FORMAT(3(4X,2A4,' =',10X,'*'),5X)
+      RETURN
+C
+C      LETTURA DAL FILE 14 DEI DATI DELLA VALVOLA
+C
+   10 READ(14,1060)
+ 1060 FORMAT(1X)
+      READ(14,1060)
+      READ(14,1080) ALFA,CFA,PODEL
+      READ(14,1060)
+      READ(14,1080)CVA, WL,P1L,P2L,HL,ZL
+      READ(14,1060)
+      READ(14,1080)DPAP,DPCH
+ 1080 FORMAT(3(14X,F10.0,1X),5X)
+      AREA=0.
+C
+C
+C     CONTROLLI SUL MODELLO DI VALVOLA
+C
+C
+      IF(PODEL.GE.0)GO TO 19
+C
+C     MODELLO MOODY-MORRIS CON AREA DI PASSAGGIO CALCOLATA DA CADIPO
+C
+      MODEL=7
+      AREA=PODEL
+      GO TO 30
+C
+   19 IF(PODEL.GT.0.AND.PODEL.LT.1.)GO TO 21
+      GO TO 23
+C
+C     MODELLO MOODY-MORRIS A CUI E' STATA ASSEGNATA L'AREA
+C
+   21 MODEL=7
+      AREA=PODEL
+      GO TO 30
+C
+  23  MODEL=PODEL+1
+      IF(MODEL.LE.6)GO TO 20
+C
+      WRITE(6,4020)NOM1,NOM2,PODEL
+ 4020 FORMAT(//1X,'********DATA ERROR IN THE BLOCK ',2A4,
+     $/10X,'THE MARKER OF THE MODEL ',F6.3,' IS NOT CONTEMPLETED '/
+     $10X,'THE CODEX 0,1,2,3,4,5 ARE PERMITTED'
+     $//10X,'I TAKE MODEL CADIPO')
+      MODEL=1
+      GO TO 30
+C
+   20 DO 22 J=1,6
+      IF(MODEL.EQ.J)GO TO 30
+   22 CONTINUE
+      WRITE(6,4020)NOM1,NOM2,PODEL
+      MODEL=1
+   30 CONTINUE
+C
+C     CONTROLLO SUI DATI
+C
+      III=MOD(MODEL,2)
+      IF(III.GT.0) THEN
+	DPCH=0.
+	DPAP=0.
+      ENDIF
+      IF(III.EQ.0) THEN
+C
+C________ LA VALVOLA HA IL CLAPET
+C
+	 IF(DPCH.LT.0.)DPCH=0.
+	 IF(DPAP.LT.DPCH) DPAP=DPCH
+      ENDIF
+C
+C________ ALLA PRESSIONE A VALLE DEL PUNTO DI LAVORO
+C         SI AGGIUNGE IL PESO DEL CLAPET
+C
+      P2LL=P2L+DPCH
+C
+      IF(CFA.LE.0.)CFA=.9
+      IF(ALFA.LE.0.)ALFA=1.
+C
+      CAA=CVA*2.4E-5
+C
+      IF(CAA.GT.0.)GO TO 12
+C
+C   CALCOLO DI CA TRAMITE I DATI DEL PUNTO DI DIMENSIONAMENTO
+C
+      GO TO (50,50,52,52,54,54,50),MODEL
+C
+C     MODELLO DI VALVOLA CADIPO O MOODY-MORRIS
+C
+  50  CONTINUE
+C
+C     SE LA PRESSIONE A MONTE DELLA VALVOLA E` > 220.BAR
+C     IL MODELLO UTILIZZATO E` QUELLO DELLA VALVOLA SEMPLIFICATA
+C     DATO CHE IL MODELLO CADIPO NON E` VALIDO.
+C
+      IF(P1L.GT.220.E5) GO TO 52
+C
+      CAA=CA10C(WL,P1L,P2LL,HL,ZL,ALFA,CFA)
+      GO TO 12
+C
+C     MODELLO DI VALVOLA SEMPLIFICATA NON SONICA
+C
+  52  CONTINUE
+C
+      A=AVAL10(ZL,ALFA)
+      RAP=.25+(HL/1.E6 - .4)*.11666
+      IF(P1L.GT.P2LL)THEN
+         S=SHEV(P1L,HL,1)
+         R=ROEV(P1L,S,1)
+         PCR=P1L*RAP
+         IF(P2LL.LT.PCR)P2LL=PCR
+      ELSE
+         S=SHEV(P2LL,HL,1)
+         R=ROEV(P2LL,S,1)
+         PCR=P2LL*RAP
+         IF(P1L.LT.PCR)P1L=PCR
+      ENDIF
+C
+      DP=ABS(P1L-P2LL)
+      CAA= SQRT((WL*WL+ABS(WL)/10.)/(R*DP))/A
+      GO TO 12
+C
+C     MODELLO DI VALVOLA SEMPLIFICATA SONICA
+C
+  54  CONTINUE
+C
+      A=AVAL10(ZL,ALFA)
+
+
+      RAP=.25+(HL/1.E6 - .4)*.11666
+      IF(P1L.GT.P2LL)THEN
+         S=SHEV(P1L,HL,1)
+         RM=ROEV(P1L,S,1)
+         PCR=P1L*RAP
+         IF(P2LL.LT.PCR)P2LL=PCR
+      ELSE
+         S=SHEV(P2LL,HL,1)
+         RM=ROEV(P2LL,S,1)
+         PCR=P2LL*RAP
+         IF(P1L.LT.PCR)P1L=PCR
+      ENDIF
+      DP=ABS(P1L-P2LL)
+      CAA=WL/(A*SQRT(RM*DP))
+  12  CONTINUE
+C
+C   CALCOLO DELL'AREA DI EFFLUSSO
+C
+      IF(AREA .EQ. 0.0) THEN
+	 IMOVAL = 1
+C
+C**********  MODELLO CADIPO 3
+C
+      ELSEIF (AREA .LT. 0.0) THEN
+C        COEQ = 0.8*AEFFL(CAA, CFA )
+	 COEQ = AEFFL(CAA, CFA )
+C
+C**********  MODELLO MOODY-MORRIS
+C
+	 IMOVAL=2
+	 IAREA = 0
+      ELSEIF (AREA .GT. 0.0) THEN
+	 IMOVAL = 2
+	 COEQ = CFA*AREA
+	 IAREA=1
+C        COEQ = AREA
+      ENDIF
+C
+C
+C*******DECODIFICA DEL NOME DEL BLOCCO PER SAPERE QUALE E'
+C       LA VARIABILE DI USCITA
+C
+      WRITE(NOMCAR,'(A4)')NOM1
+      IWP=0
+      IF(NOMCAR(1:1).EQ.'+') IWP=1
+      IF(NOMCAR(1:1).EQ.'-') IWP=2
+C
+C       MEMORIZZAZIONE DATI
+C
+      DATI(ID1   ) = ALFA
+      DATI(ID1+ 1) = CFA
+      DATI(ID1+ 2) = CAA
+      DATI(ID1+ 3) = IWP
+      DATI(ID1+ 4) = COEQ
+      DATI(ID1+ 5) = IMOVAL
+      DATI(ID1+ 6) = MODEL
+      DATI(ID1+ 8) = DPAP
+      DATI(ID1+ 9) = DPCH
+      ID2 = ID2+ 9
+C
+C   COSTANTI DI NORMALIZZAZIONE
+C
+      CNXYU(IV1   ) = Q0
+      CNXYU(IV1+ 1) = P0
+      CNXYU(IV1+ 2) = P0
+      CNXYU(IV1+ 3) = H0
+      CNXYU(IV1+ 4) = 1.
+      IF(IWP.EQ.0)GO TO 25
+      CNXYU(IV1   ) = P0
+      CNXYU(IV1+ 1) = Q0
+      CNXYU(IV1+ 2) = P0
+      IF(IWP.EQ.1)GO TO 25
+      CNXYU(IV1   ) = P0
+      CNXYU(IV1+ 1) = P0
+      CNXYU(IV1+ 2) = Q0
+C
+C   TOLLERANZA PER LA SOLUZIONE DELL'EQUAZIONE
+C   PER I MODELLI 1,2  4,5,6 LA TOLLERANZA E` .0001*Q0
+
+C   PER I MODELLI 2,3 LA TOLLERANZA E` 1000. PASCAL
+C
+      IF(MODEL.EQ.2.OR.MODEL.EQ.3) TOL(1)=1000./P0
+C
+C   STAMPE DEI PARAMETRI
+C
+   25 CAA=CAA/2.4E-5
+C
+      IF(IWP.EQ.0)WRITE(6,502)'*** FLOW RATE AS OUTPUT ***'
+      IF(IWP.EQ.1)WRITE(6,502)'*** INLET PRESSURE AS OUTPUT ***'
+      IF(IWP.EQ.2)WRITE(6,502)'*** OUTLET PRESSURE AS OUTPUT ***'
+C
+      WRITE(6,3300)
+ 3300 FORMAT(//10X,'CHOICED MODEL OF VALVE')
+      GO TO (201,202,203,204,205,206,207),MODEL
+C
+  201 WRITE(6,3301)
+      GO TO 210
+  202 WRITE(6,3302)
+      GO TO 210
+  203 WRITE(6,3303)
+      GO TO 210
+  204 WRITE(6,3304)
+      GO TO 210
+  205 WRITE(6,3305)
+      GO TO 210
+  206 WRITE(6,3306)
+      GO TO 210
+  207 WRITE(6,3307)
+ 3301 FORMAT(10X,'CADIPO WITHOUT CLAPET')
+ 3302 FORMAT(10X,'CADIPO WITH CLAPET')
+ 3303 FORMAT(10X,'SIMPLYFIED NOT SONIC WITHOUT CLAPET')
+ 3304 FORMAT(10X,'SIMPLYFIED NOT SONIC WITH CLAPET')
+ 3305 FORMAT(10X,'SIMPLYFIED  SONIC')
+ 3306 FORMAT(10X,'SIMPLYFIED  SONIC WITH PROTECTION CLAPET')
+ 3307 FORMAT(10X,'MOODY-MORRIS')
+C
+ 210  CONTINUE
+  502 FORMAT(14X,A)
+      WRITE(6,1120) CAA
+ 1120 FORMAT(/10X,'EXHAUST COEFFICIENT WHEN THE VALVE'
+     $,/10X,'IS COMPLETELY OPENED CV =',F10.2/)
+      RETURN
+      END
+      SUBROUTINE VALVC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RN,NOM1,NOM2)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RN(*),CXY(4),CXYU(4)
+      COMMON/NORM/P0,H0,T0,Q0,R0,AL0,V0,DP0
+      COMMON/REGIME/KREGIM
+      COMMON/PARPAR/NUL(7),ITERT
+      COMMON/MOVA/COEQ,A1,CF1,IAREA,IMOVAL
+      COMMON/TOLEG00/TOLIN(100)
+      LOGICAL KREGIM
+C$$$$$
+C$$$$$-------- 29/10/90  LA VALVOLA SONICA O SUBSONICA SEMPLIFICATA NON
+C$$$$$                   CAMBIA IL SUO MODELLO NEL CORSO DEL TRANSITORIO
+C$$$$$
+      GO TO (1,10,10),IFUN
+C
+C   DEFINIZIONE DELLA TOPOLOGIA
+C
+    1 DO 5 I=1,5
+      AJAC(1,I)=1.
+    5 CONTINUE
+      RETURN
+C
+C   DECODIFICA DEI DATI
+C
+   10 ALFA  =DATI(IPD  )
+      CFA =DATI(IPD+1)
+      CAA =DATI(IPD+2)
+      IWP =DATI(IPD+3)
+      COEQ=DATI(IPD+4)
+      IMOVAL=DATI(IPD+5)
+      MODEL =DATI(IPD+6)
+      DPAP  =DATI(IPD+8)
+      DPCH  =DATI(IPD+9)
+C
+C   DECODIFICA DELLE VARIABILI
+C
+      W =XYU(IXYU  )*Q0
+      P1=XYU(IXYU+1)*P0
+      P2=XYU(IXYU+2)*P0
+      H1=XYU(IXYU+3)*H0
+      Z =XYU(IXYU+4)
+C
+C     DECODIFICA DELLE VARIABILI TENENDO CONTO
+C     DELLA VARIABILE DI USCITA DEL BLOCCO
+C
+      IF(IWP.EQ.0)GO TO 121
+      IF(IWP.EQ.2)GO TO 111
+      W =XYU(IXYU+1)*Q0
+      P1=XYU(IXYU  )*P0
+      P2=XYU(IXYU+2)*P0
+      GO TO 121
+  111 W =XYU(IXYU+2)*Q0
+      P1=XYU(IXYU+1)*P0
+      P2=XYU(IXYU  )*P0
+  121 CONTINUE
+C
+      ZX=Z
+      III=MOD(MODEL,2)
+      IF(III.GT.0) GO TO 115
+C
+C________ LA VALVOLA HA IL CLAPET
+C
+      IF(KREGIM) ITERT=0.
+      IF(ITERT.NE.0) THEN
+	CLAP=DATI(IPD+7)
+	ZX=Z*CLAP
+      ELSE
+C
+C___ IL TEST SUL CLAPET SI FA SOLO ALLA PRIMA ITERAZIONE
+C    E SI CALCOLA LA POSIZIONE DEL CLAPET (APERTO=1 ,CHIUSO=0)
+C
+	PCLOS=P2+DPCH
+	POPEN=P2+DPAP
+C
+	IF(P1.GE.POPEN) THEN
+	  CLAP=1.
+	ELSE IF(P1.LE.PCLOS) THEN
+	  CLAP=0.
+	ELSE
+	  CLAP= (P1-PCLOS)/(POPEN-PCLOS)
+	ENDIF
+	DATI(IPD+7)=CLAP
+C
+C_____ DEFINIZIONE DELLA POSIZIONE DELLA VALVOLA TENENDO CONTO DEL
+C       CLAPET   ZX
+C
+	ZX=CLAP*Z
+      ENDIF
+  115 CONTINUE
+C
+      IF(ZX.GT.1.E-6) GO TO 116
+      ZX=0.
+C
+C____ VALVOLA CHIUSA
+C
+      RN(1)=-W/Q0
+      IF(IFUN.EQ.3) THEN
+	 AJAC(1,IWP+1)=1.
+      ENDIF
+      RETURN
+C
+C____ VALVOLA APERTA
+C
+ 116  IF(ZX.LE.1.)GO TO 131
+C
+C_____ STELO >1.
+C
+      IF(.NOT.KREGIM)ZX=1.
+      IF(KREGIM)
+     $             WRITE(6,8787)NOM1,NOM2
+ 8787 FORMAT(//1X,'*************** WARNING ****************',
+     $/10X,'     VALVE LIFT > 1. ',
+     $/10X,'IN THE BLOCK ',2A4,' (MODULE VALV)'
+     $/1X,'*************** MUST BE = o < 1.  ***********')
+C
+  131 CONTINUE
+C
+C
+C    CALCOLO DEI RESIDUI SECONDO IL MODELLO DI VALVOLA SCELTA
+C
+      GO TO (50,50,52,52,54,54,50),MODEL
+C
+C     MODELLO DI VALVOLA CADIPO O MOODY-MORRIS
+C
+  50  CONTINUE
+C
+C____ SE IL DELTA P SULLA VALVOLA E` CONSIDERATO PICCOLO
+C     L'EQUAZIONE DIVENTA QUELLA DELLA VALVOLA SEMLPLIFICATA
+C
+      ABSDP= ABS(P1-P2)
+      ABSDP=ABSDP/P1
+      IF(ABSDP.LE.1.E-4) GO TO 52
+C
+      III=MOD(MODEL,2)
+      IF(III.EQ.0) THEN
+C____  LA VALVOLA HA UN CLAPET
+	PV=P2+DPCH
+	PM=P1
+	INV=1
+	IF(PV.GT.PM)PV=PM
+      ELSE
+C____ LA VALVOLA NON HA IL CLAPET
+C      SCELTA DELLA PRESSIONE A MONTE E A VALLE
+C      PER TENER CONTO DELL'EVENTUALE CASO IN CUI
+C      LA PORTATA SI INVERTE
+C
+	PV=P2
+	PM=P1
+	INV=1
+C
+	IF(P2.LE.P1)GO TO 11
+	PM=P2
+	PV=P1
+	INV=-1
+      ENDIF
+   11 CONTINUE
+C
+C     SE LA PRESSIONE A MONTE DELLA VALVOLA E` > 220.BAR
+C     IL MODELLO UTILIZZATO E` QUELLO DELLA VALVOLA SEMPLIFICATA
+C     DATO CHE IL MODELLO CADIPO NON E` VALIDO.
+C
+      IF(PM.GT.220.E5) GO TO 52
+C
+      RN(1)=(CADI10(PM,H1,PV,ZX,CAA,ALFA,CFA)*INV-W)/Q0
+      GO TO 12
+C
+C     MODELLO DI VALVOLA SEMPLIFICATA NON SONICA
+C
+  52  CONTINUE
+      III=MOD(MODEL,2)
+      IF(III.EQ.0) THEN
+C____  LA VALVOLA HA UN CLAPET
+	P2=P2+DPCH
+      ENDIF
+      A=AVAL10(ZX,ALFA)
+C
+      RAP=.25+(H1/1.E6 - .4)*.11666
+      IF(P1.GT.P2)THEN
+         S=SHEV(P1,H1,1)
+         R=ROEV(P1,S,1)
+         PCR=P1*RAP
+         IF(P2.LT.PCR)P2=PCR
+      ELSE
+         S=SHEV(P2,H1,1)
+         R=ROEV(P2,S,1)
+         PCR=P2*RAP
+         IF(P1.LT.PCR)P1=PCR
+      ENDIF
+      DDDP=(P1-P2)
+      EPST=1.E-04*A*A*P0
+      IF(EPST.LT.5.)EPST=5. 
+      TOLIN(1)=EPST/P0
+      COFF=CAA*CAA
+      RN(1)=(A*A*DDDP-W*ABS(W)/COFF/R-W/(CAA*CAA*R)/10.)/P0
+      GO TO 12
+C
+C     MODELLO DI VALVOLA SEMPLIFICATA SONICA
+C
+  54  CONTINUE
+      III=MOD(MODEL,2)
+      IF(III.EQ.0) THEN
+C____  LA VALVOLA HA UN CLAPET
+        P2=P2+DPCH
+      ENDIF
+      A=AVAL10(ZX,ALFA)
+      RAP=.25+(H1/1.E6 - .4)*.11666
+      IF(P1.GT.P2)THEN
+        S=SHEV(P1,H1,1)
+        R=ROEV(P1,S,1)
+        PCR=RAP*P1
+        IF(PCR.LT.P2) PCR = P2
+        DDDP=P1-PCR
+        SEGNO=1.
+      ELSE
+        S=SHEV(P2,H1,1)
+        R=ROEV(P2,S,1)
+        PCR=RAP*P2
+        IF(PCR.LT.P1) PCR = P1
+        DDDP=P2-PCR
+        SEGNO=-1.
+      ENDIF
+      RN(1)=(SEGNO*CAA*A*SQRT(ABS(DDDP)*R)-W)/Q0
+C
+   12 IF(IFUN.EQ.2) RETURN
+C
+C____   CALCOLO DELLO JACOBIANO
+C
+      GO TO (150,150,152,152,154,154,150),MODEL
+C
+C     MODELLO DI VALVOLA CADIPO O MOODY-MORRIS
+C
+  150 CONTINUE
+C
+C     SE LA PRESSIONE A MONTE DELLA VALVOLA E` > 220.BAR
+C     IL MODELLO UTILIZZATO E` QUELLO DELLA VALVOLA SEMPLIFICATA
+C     DATO CHE IL MODELLO CADIPO NON E` VALIDO.
+C
+      IF(P1.GT.220.E5.OR.P2.GT.220.E5) GO TO 152
+C
+C____ SE IL DELTA P SULLA VALVOLA E` CONSIDERATO PICCOLO
+C     L'EQUAZIONE DIVENTA QUELLA DELLA VALVOLA SEMLPLIFICATA
+C
+      ABSDP= ABS(P1-P2)
+      ABSDP= ABSDP/P1
+      IF(ABSDP.LT.1.E-4) GO TO 152
+C
+      F0=-RN(1)
+      AJAC(1,1)=1.
+C
+      CXY(1)=P1
+      CXY(2)=P2
+      CXY(3)=H1
+      CXY(4)=ZX
+      DX=0.01
+      EPSP=ABS(P1-P2)*DX
+      IF(EPSP.LT.10.) EPSP=10.
+
+      DO  I=1,4
+      EPS=CXY(I)*DX
+      IF(EPS.LT.1.E-4) EPS=DX
+C
+      IF(I.EQ.1) EPS=EPSP
+      IF(I.EQ.2) EPS=-EPSP
+C
+      DO  J=1,4
+       CXYU(J)=CXY(J)
+       IF(J.EQ.I) CXYU(J)=CXYU(J)+EPS
+      ENDDO
+C
+      IF(I.GT.2) GO TO 16
+      EPS=EPS/P0
+      GO TO 18
+   16 IF(I.EQ.4) GO TO 18
+      EPS=EPS/H0
+   18 CONTINUE
+      P1=CXYU(1)
+      P2=CXYU(2)
+      H1=CXYU(3)
+      ZX =CXYU(4)
+C
+      III=MOD(MODEL,2)
+      IF(III.EQ.0) THEN
+C____  LA VALVOLA HA UN CLAPET
+	P2=P2+DPCH
+	PV=P2
+	PM=P1
+	IF(PV.GT.PM)PV=PM
+	INV=1
+      ELSE
+C____ LA VALVOLA NON HA IL CLAPET
+C
+C      SCELTA DELLA PRESSIONE A MONTE E A VALLE
+C      PER TENER CONTO DELL'EVENTUALE CASO IN CUI
+C      LA PORTATA SI INVERTE
+C
+	PV=P2
+	PM=P1
+	INV=1
+	IF(P2.LE.P1)GO TO 19
+	PM=P2
+	PV=P1
+	INV=-1
+      ENDIF
+   19 CONTINUE
+C
+C
+      FX=(W-CADI10(PM,H1,PV,ZX,CAA,ALFA,CFA)*INV)/Q0
+C
+      AJAC(1,I+1)=(FX-F0)/EPS
+      ENDDO
+      IF(INV.LE.0) THEN
+	AX=AJAC(1,2)
+	AJAC(1,2)=AJAC(1,3)
+	AJAC(1,3)=AX
+      ENDIF
+      GO TO 31
+C
+C     MODELLO DI VALVOLA SEMPLIFICATA NON SONICA
+C
+ 152  CONTINUE
+      III=MOD(MODEL,2)
+      IF(III.EQ.0) THEN
+C____  LA VALVOLA HA UN CLAPET
+	P2=P2+DPCH
+      ENDIF
+      A=AVAL10(ZX,ALFA)
+C
+      RAP=.25+(H1/1.E6 - .4)*.11666
+      IF(P1.GT.P2)THEN
+        S=SHEV(P1,H1,1)
+        R=ROEV(P1,S,1)
+        PCR=P1*RAP
+        ICRIT=0
+        IF(P2.LT.PCR) THEN
+          ICRIT=1
+          P2=PCR
+        ENDIF
+      ELSE
+        S=SHEV(P2,H1,1)
+        R=ROEV(P2,S,1)
+        PCR=P2*RAP
+        ICRIT=0
+        IF(P1.LT.PCR) THEN
+          ICRIT=-1
+          P1=PCR
+        ENDIF
+      ENDIF
+      DDDP=(P1-P2)
+      COFF=CAA*CAA
+C
+      AJAC(1,1)=2.*ABS(W)*Q0/COFF/R/P0 + Q0/(CAA*CAA*R)/10./P0
+      AJAC(1,2)=-1.*A*A
+      AJAC(1,3)=1.*A*A
+      IF(ICRIT.EQ.1)THEN
+        AJAC(1,2)=-A*A*(1.-RAP)
+        AJAC(1,3)=0.
+      ENDIF
+      IF(ICRIT.EQ.-1)THEN
+        AJAC(1,2)=0.
+        AJAC(1,3)=A*A*(1.-RAP)
+      ENDIF
+      DZ=.01
+      F0=(-DDDP*A*A+W*ABS(W)/COFF/R+W/(CAA*CAA*R)/10.)/P0
+      ZZX=ZX+DZ
+      AA=AVAL10(ZZX,ALFA)
+      CCOFF=CAA*CAA
+      FX=(-DDDP*AA*AA+W*ABS(W)/CCOFF/R+W/(CAA*CAA*R)/10.)/P0
+C
+      AJAC(1,5)=(FX-F0)/DZ
+C
+      GO TO 31
+C
+C     MODELLO DI VALVOLA SEMPLIFICATA SONICA
+C
+ 154  F0=-RN(1)
+      AJAC(1,1)=1.
+C
+      CXY(1)=P1
+      CXY(2)=P2
+      CXY(3)=H1
+      CXY(4)=ZX
+      DX=0.01
+      EPSP=ABS(P1-P2)*DX
+      IF(EPSP.LT.10.) EPSP=10.
+      DO  I=1,4
+       EPS=CXY(I)*DX
+       IF(EPS.LT.1.E-4) EPS=DX
+       IF(I.LE.2) EPS=EPSP
+       DO J=1,4
+	CXYU(J)=CXY(J)
+	IF(J.EQ.I) CXYU(J)=CXYU(J)+EPS
+       ENDDO
+       IF(I.GT.2) GO TO 216
+       EPS=EPS/P0
+       GO TO 218
+ 216   IF(I.EQ.4) GO TO 218
+       EPS=EPS/H0
+ 218   CONTINUE
+       P1=CXYU(1)
+       P2=CXYU(2)
+       H1=CXYU(3)
+       ZX =CXYU(4)
+C
+       A=AVAL10(ZX,ALFA)
+C
+       RAP=.25+(H1/1.E6 - .4)*.11666
+C
+      IF(P1.GT.P2)THEN
+        S=SHEV(P1,H1,1)
+        R=ROEV(P1,S,1)
+        PCR=RAP*P1
+        IF(PCR.LT.P2) PCR = P2
+        DDDP=P1-PCR
+        SEGNO=1.
+      ELSE
+        S=SHEV(P2,H1,1)
+        R=ROEV(P2,S,1)
+        PCR=RAP*P2
+        IF(PCR.LT.P1) PCR = P1
+        DDDP=P2-PCR
+        SEGNO=-1.
+      ENDIF
+C
+       FX=(W-SEGNO*CAA*A*SQRT(ABS(DDDP)*R))/Q0
+       AJAC(1,I+1)=(FX-F0)/EPS
+      ENDDO
+C
+C
+C____   SISTEMAZIONE COEFFICIENTI JACOBIANO
+C       PER TENER CONTO DELL'ORDINAMENTO DELLE VARIABILI DEL MODULO
+C
+   31 CONTINUE
+      IF(IWP.EQ.0) RETURN
+      IF(IWP.EQ.1) THEN
+	 AX=AJAC(1,1)
+	 AJAC(1,1)=AJAC(1,2)
+	 AJAC(1,2)=AX
+       ELSE
+	 AX=AJAC(1,1)
+	 AJAC(1,1)=AJAC(1,3)
+	 AJAC(1,3)=AX
+       ENDIF
+      RETURN
+      END
+      REAL FUNCTION CA10C(W,P1,P2,H,Z,ALFA,CFA)                         !SNGL
+C      DOUBLE PRECISION FUNCTION CA10C(W,P1,P2,H,Z,ALFA,CFA)             !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C
+C   QUESTA FUNCTION CALCOLA LA CAPACITA' DI SCARICO SPECIFICA NOTO
+C   UN PUNTO DI FUNZIONAMENTO DELLA VALVOLA
+C
+      COMMON/MOVA/COEQ, A1, CF1, IAREA, IMOVAL
+      COMMON/MONTE/PMON,HMON
+      PMON = P1
+      HMON = H
+      N01FL=1
+      V1=.001
+      IF(P1.LT.2.E5)GO TO 1
+      S1=SHEV(P1,H,N01FL)
+      V1=1./ROEV(P1,S1,N01FL)
+    1 CONTINUE
+      CALL SATUR(P1,3,ROAS,ROVS,N01FL)
+      VAS=1./ROAS
+      VVS=1./ROVS
+      A=AVAL10(Z,ALFA)
+      CF=CFVA10(Z,A,CFA)
+      R2=(P1-P2)/P1
+      R3=(V1-VAS)/(VVS-VAS)
+      R4=P1/22.12E6
+C     WRITE(6,1000)W,P1,P2,H,Z,ALFA,CFA,A,CF,R3,R2
+ 1000 FORMAT(1X,10E12.5)
+      CA10C=W/(A*R1VL10(R2,R3,R4,CF,1.)*SQRT(ABS(P1/V1)))
+      RETURN
+      END
+      REAL FUNCTION CADI10(P1,H1,P2,Z,CA,ALFA,CFA)                      !SNGL
+C      DOUBLE PRECISION FUNCTION CADI10(P1,H1,P2,Z,CA,ALFA,CFA)          !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C
+C------CALCOLA LA PORTATA DELLA VALVOLA IN FUNZIONE DELLE
+C      PRESSIONI A MONTE E A VALLE P1 E P2, DELLA ENTALPIA
+C      A MONTE H1, DELLA AREA DI PASSAGGIO A E DEI
+C      COEFFICIENTI DI FORMA CA E CF
+C     CALCOLO VOLUMI SPECIFICI
+      COMMON/MOVA/ COEQ, A1, CF1, IAREA, IMOVAL
+      COMMON/MONTE/PMON,HMON
+      PMON = P1
+      HMON = H1
+C     CALCOLO COEFFICIENTE DI EFFLUSSO E COEFFICIENTE DI RECUPERO
+      A=AVAL10(Z,ALFA)
+      CF=CFVA10(Z,A,CFA)
+      IF(IMOVAL.EQ.2)THEN
+CCCCCCCC
+C     CALCOLO DELLA PORTATA CON IL MODELLO CISE-1
+CCCCCCCC
+	  A1 = AVAL10(1.,ALFA)
+	  CF1 = CFVA10(1.,A1,CFA)
+	  CADI10=R1CISE(P1,H1,P2,CA,A,CF)
+	  RETURN
+      ENDIF
+CCCCCCCC
+C     CALCOLO DELLA PORTATA CON IL MODELLO CADIPO-2
+CCCCCCCC
+      N01FL=1
+      SX=SHEV(P1,H1,N01FL)
+      V1=1./ROEV(P1,SX,N01FL)
+      CALL SATUR(P1,3,ROAS,ROVS,N01FL)
+      VAS=1./ROAS
+      VVS=1./ROVS
+C     CALCOLO PARAMETRI ADIMENSIONALI
+      R2=(P1-P2)/P1
+      R3=(V1-VAS)/(VVS-VAS)
+      R4=P1/22.12E06
+C     CALCOLO DELLA PORTATA
+      CADI10=R1VL10(R2,R3,R4,CF,CA)*A*SQRT(ABS(P1/V1))
+      RETURN
+      END
+      REAL FUNCTION R1VL10(R2,R3,R4,CF,CA)                              !SNGL
+C      DOUBLE PRECISION FUNCTION R1VL10(R2,R3,R4,CF,CA)                  !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      IF(R3.LT.0.)GO TO 10
+      IF(R3.GT.1.)GO TO 30
+C     CASO FLUIDO IN INGRESSO BIFASE
+      FWS=R1WT10(R2,0.,R4,CF,CA)
+C********** CORREZIONE CISE
+*     FW=FWS-(R1WT10(R2,-R3/1000.,R4,CF,CA)-FWS)*1000./(1.+100.*R3)
+      FW = FWS
+*     FW1=R1WT10(R2,R3,R4,CF,CA)
+      FV=R1VP10(R2,R3,R4,CF,CA)
+      ARG = 3.14159*R3*R3 - 1.57079
+      R1VL10=FW+(FV-FW)*0.5*(1.+SIN(ARG))
+      RETURN
+C     FLUIDO IN INGRESSO - ACQUA
+   10 R1VL10=R1WT10(R2,R3,R4,CF,CA)
+      RETURN
+C     FLUIDO IN INGRESSO - VAPORE
+   30 R1VL10=R1VP10(R2,R3,R4,CF,CA)
+      RETURN
+      END
+      REAL FUNCTION R1WT10(R2,R3,R4,CF,CA)                              !SNGL
+C      DOUBLE PRECISION FUNCTION R1WT10(R2,R3,R4,CF,CA)                  !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      PARAMETER ( ZERO=0. )
+      COMMON/MONTE/PMON,HMON
+C%%%
+      IF(HMON.GT.2.1E6) HMON=2.1E6
+      IF(HMON.LT.0.  ) HMON=0.
+C%%%
+      IF ( R3 .LT. 0.0 ) THEN 
+          PSAT = PHSAT(HMON)
+          IF ( PSAT.GT.PMON ) PSAT = PMON
+      ELSE 
+          PSAT = PMON
+      ENDIF
+      R1WT10 = CA * (MIN(R2, CF**2 *
+     1         (1 - (0.96 - 0.28 * (PSAT/PMON*R4)**0.5 )
+     2         * PSAT/PMON ) ) ) ** 0.5
+      RETURN
+      END
+      REAL FUNCTION R1VP10(R2,R3,R4,CF,CA)                              !SNGL
+C      DOUBLE PRECISION FUNCTION R1VP10(R2,R3,R4,CF,CA)                  !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      C=1.63*SQRT(ABS(R2))/CF
+      IF(C.LT.1.5) GO TO 8
+      FI2=1.
+      GO TO 10
+   8       FI2=C-0.14814*C**3
+   10 D=(25.-23.32*R4**0.4)*R3*R3
+      R1VP10=0.655*CF*CA*D*FI2/(1.+D)
+      RETURN
+      END
+      REAL FUNCTION AVAL10(Z,ALFA)                                      !SNGL
+C      DOUBLE PRECISION FUNCTION AVAL10(Z,ALFA)                          !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      IF(ALFA.GT.10.)GO TO 1
+      AVAL10=Z**ALFA
+      RETURN
+C
+C      CALCOLO DI AVAL10 CON UNA FUNCTION
+C      CREATA DALL'UTENTE
+C
+    1 AVAL10=AVNS10(Z,ALFA)
+      RETURN
+      END
+      REAL FUNCTION CFVA10(Z,A,CFA)                                     !SNGL
+C      DOUBLE PRECISION FUNCTION CFVA10(Z,A,CFA)                         !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      IF(CFA.GT.10.)GO TO 1
+      AA=A
+      IF(A.GE.0.)GO TO 2
+      AA=0.
+    2 IF(A.LE.1.)GO TO 3
+      AA=1.
+    3 CFVA10=CFA+(1.-CFA)*(1.-AA)**2
+      RETURN
+C
+C      CALCOLO DI CFVA10 CON UNA FUNCTION
+C      CREATA DALL'UTENTE
+C
+    1 CFVA10=CFNS10(Z,A,CFA)
+      RETURN
+      END
+
+C
+	REAL FUNCTION R1CISE(P1,H1,P2,CA,A,CF)                          !SNGL
+C        DOUBLE PRECISION FUNCTION R1CISE(P1,H1,P2,CA,A,CF)              !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+	REAL MORRIS,MOODY                                               !SNGL
+C        DOUBLE PRECISION MORRIS,MOODY                                   !DBLE
+	COMMON/MOVA/ COEQ, A1, CF1, IAREA, IMOVAL
+	WSUBCR = MORRIS(P1,H1,P2,CA,A)
+	IF (IAREA .EQ. 0) THEN
+	WCR = MOODY(P1,H1)*COEQ*A*CF/A1/CF1
+	ELSEIF (IAREA .EQ. 1) THEN
+	WCR = MOODY(P1,H1)*COEQ  *CF   /CF1
+	ENDIF
+	R1CISE = MIN(WSUBCR,WCR)
+	RETURN
+	END
+C
+C
+C
+	REAL FUNCTION MOODY(P1,H1)                                      !SNGL
+C        DOUBLE PRECISION FUNCTION MOODY(P1,H1)                          !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C
+C    CALCOLO DELLA PORTATA CRITICA CON LA CORRELAZIONE DI MOODY
+C
+	REAL  K1CR                                                      !SNGL
+C        DOUBLE PRECISION    K1CR                                        !DBLE
+C
+C    INIZIALIZZAZIONE PARAMETRI DI CALCOLO
+C
+	ITER = 0
+	L099 = 0
+	GCR = 0.0
+	HO = H1
+	PO = P1
+	POB = PO/1.E5
+	RPR = -7.326E-6*POB**2 + 2.985E-3*POB - 6.6E-2
+C
+C    CALCOLO TITOLO ED ENTROPIA DI STAGNAZIONE
+C
+	CALL SATUR ( PO, 2, HLO, HVO, 1 )
+	XO = (HO - HLO)/(HVO - HLO)
+	SO = SHEV(PO,HO,1)
+C
+C    INIZIO ITERAZIONI PER IL CALCOLO DELLA PRESSIONE CRITICA
+C
+	PCR = 0.85 * PO
+ 1      CONTINUE
+	GCRV = GCR
+	CALL SATUR (PCR, 1, SLCR, SVCR, 1)
+	CALL SATUR (PCR, 2, HLCR, HVCR, 1)
+	CALL SATUR (PCR, 3, RO1, RO2, 1)
+	VLCR = 1/RO1
+	VGCR = 1/RO2
+C
+C    CALCOLO TITOLO E VOLUME SPECIFICO NELLA SEZIONE DI EFFLUSSO
+C
+	XCR = (SO-SLCR)/(SVCR-SLCR)
+	HCR = HLCR + XCR * (HVCR - HLCR)
+C
+	IF ( XCR .LT. 0.0) THEN
+	  PCR = 0.95 * PCR
+	  GO TO 1
+C
+	   ELSEIF( XCR .LE. 1.0) THEN
+	     K1CR = (VGCR/VLCR)**0.333333333
+	     VMCR =  SQRT(XCR+(1-XCR)/K1CR**2)*(K1CR*(1-XCR)*VLCR+
+     1                     XCR*VGCR)
+C
+	       ELSEIF (XCR .GT. 1.0) THEN
+		 SX = SHEV(PCR,HCR,1)
+		 VMCR = 1/ROEV(PCR,SX,1)
+	END IF
+C
+C
+C    CALCOLO PORTATA SPECIFICA CRITICA
+C
+	IF (XO .GE. 0.0) THEN
+	     ARG = HO - HCR
+	     IF (ARG .LT. 0.0) THEN
+	     WRITE (6,*) ' HO ', HO , ' HCR ', HCR
+	     WRITE (6,*) ' ARGOMENTO  NEGATIVO XO.GE.0.0 '
+	     STOP
+	     ELSE
+	     GCR =  SQRT(2*(HO-HCR))/VMCR
+	     ENDIF
+	ELSEIF ( XO. LT. 0.0) THEN
+	     ARG = PO - PCR
+	     ARG =       2 *ARG     * VLCR**RPR/VMCR**(1+RPR)
+	     IF (ARG .LT. 0.0) THEN
+	       WRITE(6,*)'ARG = ', ARG,' PO = ', PO , ' PCR = ' , PCR
+     1         ,'VLCR ', VLCR, ' RPR = ', RPR , ' VMCR = ', VMCR
+	       WRITE (6,*) ' NEGATIVE ARGUMENT XO.LT.0.0 '
+	       STOP
+		 ELSE
+		   GCR =  SQRT(ARG     )
+	     ENDIF
+	ENDIF
+C
+C
+C    VERIFICA DI CONVERGENZA, CHE VIENE CONSIDERATA RAGGIUNTA PER IL
+C    VALORE DI PRESSIONE CRITICA CORRISPONDENTE AL MASSIMO DELLA
+C    PORTATA SPECIFICA CRITICA
+C
+	IF (L099 .EQ. 1  .AND.
+     1       (GCR - GCRV) .LT. 0.0) GO TO 3
+C
+	IF (L099 .EQ.0  .AND.
+     1       (GCR - GCRV) .GT. 0.0) THEN
+	PCR = 0.95 * PCR
+	ELSE
+	L099 = 1
+	PCR = PCR / 0.999
+	END IF
+C
+	ITER = ITER + 1
+	IF (  ITER .GT. 250 ) THEN
+	WRITE (6,*) ' CRITICAL PRESSURE COMPUTATION DOES NOT CONVERGE ',
+     1 ' PO = ', PO, 'PCR = ', PCR, ' ITER = ', ITER
+C-----  Uscita con valore fittizio di MOODY
+	MOODY = -1.E+10
+	RETURN
+	ENDIF
+C
+	GO TO 1
+   3    CONTINUE
+C
+C    CALCOLO DELLA PORTATA SPECIFICA CRITICA
+C
+	MOODY = GCR
+	RETURN
+	END
+C
+	REAL FUNCTION  MORRIS(P1,H1,P2,CA,A)                            !SNGL
+C        DOUBLE PRECISION FUNCTION  MORRIS(P1,H1,P2,CA,A)                !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C
+C    CALCOLO DELLA PORTATA DI ATTRAVERSO LA VALVOLA DI
+C    REGOLAZIONE PER EFFLUSSO SUB-CRITICO
+C
+	REAL  KAPPA                                                     !SNGL
+C        DOUBLE PRECISION   KAPPA                                        !DBLE
+	ZERO=0.
+C
+C    CALCOLO DEL TITOLO TERMODINAMICO IN INGRESSO ALLA VALVOLA
+C
+	CALL SATUR (P1, 2, HL, HV, 1)
+	X1 = (H1 - HL) / (HV - HL)
+C
+C    CALCOLO DELLA DENSITA' DEL FLUIDO IN INGRESSO
+C
+	IF ( X1 .LT. 0.0 .OR. X1 .GT. 1.0 ) THEN
+	   SX = SHEV(P1, H1, 1)
+	   RO = ROEV(P1, SX, 1)
+C
+	     ELSE
+	       CALL SATUR ( P1, 3, ROL, ROV, 1)
+C    CALCOLO DEL MOLTIPLICATORE BIFASE FI2
+	       KAPPA =  SQRT((X1/ROV + (1 - X1)/ROL)*ROL)
+	       FI2 = ( X1 * ROL / ROV + KAPPA * (1 - X1) ) *
+     1           ( X1 + (1 - X1 ) / KAPPA *
+     2             ( 1 + (KAPPA - 1 ) ** 2 / ((ROL/ROV)**0.5 -1)))
+	       RO = ROL / FI2
+C
+	ENDIF
+C
+C    CALCOLO DELLA PORTATA DI EFFLUSSO
+C
+C       MORRIS = CA * A *  SQRT (RO * (P1 - P2))
+C <<<<<<<<<<<<<<<<<<< CORREZIONE 2/12/87 <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	IF((P1-P2).LT.0.) THEN
+	     WRITE(6,*) 'P1 MINUS THAN P2 IN THE "MORRIS"'
+	ENDIF
+	MORRIS = CA * A *  SQRT (MAX(RO * (P1 - P2),ZERO))
+C <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	RETURN
+	END
+	 REAL FUNCTION AEFFL(CA,CFA)                                    !SNGL
+C         DOUBLE PRECISION FUNCTION AEFFL(CA,CFA)                        !DBLE
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+	 REAL MOODY                                                     !SNGL
+C         DOUBLE PRECISION  MOODY                                        !DBLE
+	 COMMON/MOVA/QQQQ,A1,CF1,IAREA,IMOVAL
+	 IMOVAL = 3
+	 P1RIF=100.E5
+	 H1RIF=1300.E3
+	 P2RIF = 10.E5
+	 WCRCA2=CADI10(P1RIF, H1RIF, P2RIF, 1., CA, 1., CFA)
+	 IMOVAL= 2
+	 GCRCI = MOODY(P1RIF ,H1RIF  )
+	 AEFFL = WCRCA2/GCRCI
+	 RETURN
+	 END
+C
+      SUBROUTINE VALVD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,
+     $ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)
+C
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C-----SIGNIFICATO DELLE VARIABILI DI USCITA
+C     SIGNEQ = Descrizione dell'equazione  (in stazionario) - 50 car.
+C     UNITEQ = Unita' di misura del residuo - 10 car.
+C     COSNOR = Costante di normalizzazione del residuo in stazionario
+C     ITOPVA = Topologia dello jacobiano di regime - matrice di INTEGER
+C
+C
+C-----VALVOLA
+C
+      CHARACTER*8 BLOCCO, SYMVAR(*), UNITEQ(*)*10, SIGNEQ(*)*50
+      DIMENSION XYU(*), DATI(*), COSNOR(*), ITOPVA(MXT,*)
+C
+      COMMON/NORM/P0,H0,T0,W0,R0,AL0,V0,DP0
+C
+      IWP   = DATI(IPD+3)
+      MODEL = DATI(IPD+6)
+      CLAP  = DATI(IPD+7)
+      DPAP  = DATI(IPD+8)
+      DPCH  = DATI(IPD+9)
+      Z     = XYU(IXYU+4)
+C
+      IF (IWP.EQ.0) THEN
+	P1 = XYU(IXYU+1)*P0
+	P2 = XYU(IXYU+2)*P0
+      ELSE IF (IWP.EQ.1) THEN
+	P1 = XYU(IXYU  )*P0
+	P2 = XYU(IXYU+2)*P0
+      ELSE
+	P1 = XYU(IXYU+1)*P0
+	P2 = XYU(IXYU  )*P0
+      ENDIF
+C
+      III=MOD(MODEL,2)
+      IF(III.GT.0) GO TO 2
+C
+C--- LA VALVOLA HA IL CLAPET
+C    SI CALCOLA LA POSIZIONE DEL CLAPET (APERTO=1 ,CHIUSO=0)
+C
+      PCLOS=P2+DPCH
+      POPEN=P2+DPAP
+C
+      IF(P1.GE.POPEN) THEN
+	CLAP=1.
+      ELSE IF(P1.LE.PCLOS) THEN
+	CLAP=0.
+      ELSE
+	CLAP= (P1-PCLOS)/(POPEN-PCLOS)
+      ENDIF
+C
+C--- DEFINIZIONE DELLA POSIZIONE VALVOLA + CLAPET
+C
+      ZX = Z*CLAP
+      IF(ZX .GT. 1.E-06) GO TO 2
+      SIGNEQ(1) = 'CHECK VALVE FLOW INTERCEPTION EQUATION'
+      UNITEQ(1) = 'kg/s'
+      COSNOR(1) = W0
+C
+      IF(IWP.EQ.0) ITOPVA(1,1) = 1
+      IF(IWP.EQ.1) ITOPVA(1,2) = 1
+      IF(IWP.EQ.2) ITOPVA(1,3) = 1
+      GO TO 100
+C
+    2 CONTINUE
+C
+      SIGNEQ(1) = 'VALVE FLUID FLOW RATE COMPUTATION EQUATION'
+      IF (MODEL.EQ.2 .OR. MODEL.EQ.3) THEN
+C
+C---MODELLO DI VALVOLA SEMPLIFICATA NON SONICA
+C
+	UNITEQ(1) = 'Pa'
+	COSNOR(1) = P0
+      ELSE
+C
+C---VALVOLA MODELLO CADIPO O MOODY-MORRIS O SEMPLIFICATA SONICA
+C
+	UNITEQ(1) = 'kg/s'
+	COSNOR(1) = W0
+      ENDIF
+C
+      DO I = 1,5
+	ITOPVA(1,I) = 1
+      ENDDO
+C
+  100 RETURN
+      END
+C
+C
+C~FORAUS_VALV~C
+C
+C FORTRAN AUSILIARIO DEL MODULO VALVOLA
+C PER LA SUA SCRITTURA VEDERE MANUALE D'USO O
+C UTILIZZARE L'APPOSITO COMANDO DI LEGOCAD.
+C
+C
+C                       FUNCTION AVNS10(ALZA, ALFA)
+C
+C  Function per l'assegnazione della caratteristica della valvola
+C
+C  Parametri d'ingresso: ALZA,ALFA
+C  Parametri d'uscita  : AVNS10
+C
+C************* BREVE SPIEGAZIONE DEI PARAMETRI DELLA FUNCTION ************
+C
+C [p.u.]  ALZA   -  grado di apetura della valvola.
+C
+C [ ]     ALFA   -  (>10) parametro,  proveniente  dai  dati  in input, che puo`
+C                   essere utilizzato come indice  di  scelta nel caso in cui si
+C                   vogliano introdurre diverse caratteristiche standard tramite
+C                   un'unica FUNCTION AVNS10(ALZA,ALFA).
+C
+C [p.u.]  AVNS10 -  valore dell'area  di  passaggio  calcolata. Tale valore deve
+C                   essere normalizzato rispetto all'area di passaggio a valvola
+C                   completamente aperta.
+C
+C
+C  Esempio di caratteristica assegnata per punti:
+C
+C
+CC      REAL FUNCTION AVNS10(Z,ALFA)                                      !SNGL
+CC      DOUBLE PRECISION FUNCTION AVNS10(Z,ALFA)                          !DBLE
+CC      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C      DIMENSION X1(12),Y1(12)
+C      DATA X1/0.,.1,.2,.3,.4,.5,.6,.7,.8,.9,1.,1.2/
+C      DATA Y1/.055,.085,.125,.17,.22,.28,.35,.43,.55,.7,1.,1./
+CC
+CC     CARATTERISTICHE CV=FUNZIONE DI ALZATA VALVOLA
+CC
+C      IALF=ALFA-10.
+C      GO TO (1,100),IALF
+CC
+CC     CARATTERISTICA DELLA FCV DEL RICIRCOLO
+CC
+C    1 CALL AVNSIN(Z,X1,Y1,12,A)
+C      AVNS10=A
+C      GO TO 500
+CC
+C 100  CONTINUE
+C 500  RETURN
+C      END
+C      SUBROUTINE AVNSIN(Z,X,Y,NP,A)
+CC      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C      DIMENSION X(*),Y(*)
+CC
+CC     INTERPOLAZIONE
+CC
+C      DO 10 I=1,NP-1
+C      J=I
+C      IF(Z.GE.X(J).AND.Z.LE.X(J+1))GO TO 15
+C   10 CONTINUE
+C      A=0.
+C      GO TO 20
+C   15 A=Y(J)+(Z-X(J))*(Y(J+1)-Y(J))/(X(J+1)-X(J))
+C   20 RETURN
+C      END
+C
+C************** INIZIO DEL TESTO FORTRAN DA SCRIVERE ********************
+C
+CC      REAL FUNCTION AVNS10(Z,ALFA)                                      !SNGL
+CC      DOUBLE PRECISION  FUNCTION AVNS10(Z,ALFA)                         !DBLE
+CC      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C      RETURN
+C      END
+C
+C************** FINE FUNCTION AVNS10 ********************
+C
+C
+C
+C                FUNCTION CFNS10(ALZA,A,CFA)
+C
+C     Function per l'assegnazione della legge di variazione
+C     del coefficiente di recupero della valvola
+C
+C  Parametri d'ingresso: ALZA, A, CFA
+C  Parametri d'uscita  : CFNS10
+C
+C
+C************* BREVE SPIEGAZIONE DEI PARAMETRI DELLA FUNCTION ************
+C
+C [p.u.]  ALZA   -  grado di apetura della valvola.
+C
+C [p.u.]  A      -  area di passaggio normalizzata.
+C
+C [ ]     CFA    -  (>10) parametro,  proveniente dai  dati  in input, che  puo`
+C                   essere  utilizzato come indice di scelta qualora si vogliano
+C                   assegnare  diverse  leggi  di variazione del coefficiente di
+C                   recuperdetramite un'unica FUNCTION CFNS10(ALZA,A,CFA).
+C
+C [ ]     CFNS10 -  valore del coefficiente di recupero calcolato.
+C
+C
+C
+C   Esempio di coefficiente di recupero assegnato tramite function:
+C
+CC      REAL FUNCTION CFNS10(Z,A,CFA)                                     !SNGL
+CC      DOUBLE PRECISION FUNCTION CFNS10(Z,A,CFA)                         !DBLE
+CC      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C      CFNS=0.95
+C      RETURN
+C      END
+C
+C
+C************** INIZIO DEL TESTO FORTRAN DA SCRIVERE ********************
+C
+CC      REAL FUNCTION CFNS10(Z,A,CFA)                                     !SNGL
+CC      DOUBLE PRECISION FUNCTION CFNS10(Z,A,CFA)                         !DBLE
+CC      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+C      RETURN
+C      END
+C
+C~FORAUS_VALV~C

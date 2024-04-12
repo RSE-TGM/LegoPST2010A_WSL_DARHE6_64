@@ -1,0 +1,41 @@
+BEV0_0                                                                          
+BEV0                                                                            
+Brine evaporator (3 cells)                                                      
+                                                                                
+NSTAT = 5
+NUSCI =11
+NINGR =13
+ 
+NCONF = 1
+ 
+PRES      --US-- BRINE/STEAM PRESSURE IN CAVITY                                 
+LEVB      --US-- BRINE LEVEL IN CAVITY                                          
+LEVD      --US-- DISTILLATE LEVEL IN CAVITY                                     
+FNAC      --US-- BRINE RESIDENT MASS FRACTION                                   
+TMEC      --US-- CASING METAL TEMPERATURE                                       
+HBRN      --UA-- BRINE RESIDENT ENTHALPY                                        
+TEMP      --UA-- BRINE/STEAM TEMPERATURE                                        
+HDIS      --UA-- DISTILLATE ENTHALPY                                            
+TDIS      --UA-- DISTILLATE TEMPERATURE                                         
+WEVA      --UA-- BRINE EVAPORATION MASS FLOW                                    
+WFLA      --UA-- DISTILLATE FLASH MASS FLOW                                     
+WCON      --UA-- DISTILLATE CONDENSING MASS FLOW                                
+PFBR      --UA-- PRESSURE AT BRINE BOTTOM                                       
+PFDS      --UA-- PRESSURE AT DISTILLATE BOTTOM                                  
+HSTE      --UA-- ENTHALPY OF STEAM FOR STRIPPING                                
+GATU      --UA-- TUBES EXCHANGING COEFFICIENT                                   
+WBRI      --IN-- BRINE INLET MASS FLOW RATE                                     
+WBRO      --IN-- BRINE OUTLET MASS FLOW RATE                                    
+FNAI      --IN-- BRINE INLET MASS FRACTION                                      
+HBRI      --IN-- BRINE INLET ENTHALPY                                           
+WDSI      --IN-- DISTILLATE INLET MASS FLOW RATE                                
+WDSO      --IN-- DISTILLATE OUTLET MASS FLOW RATE                               
+HDSI      --IN-- DISTILLATE INLET ENTHALPY                                      
+WSTP      --IN-- STEAM EXTRACTED FOR STRIPPING                                  
+TMI1      --IN-- TUBES METAL TEMPERATURE CELL 1                                 
+TMI2      --IN-- TUBES METAL TEMPERATURE CELL 2                                 
+TMI3      --IN-- TUBES METAL TEMPERATURE CELL 3                                 
+TEXT      --IN-- EXTERNAL TEMPERATURE                                           
+AGAM      --IN-- TUBES-STEAM EXCH.COEFF.CORRECTOR                               
+==============================                                                  
+EOF                                                                             

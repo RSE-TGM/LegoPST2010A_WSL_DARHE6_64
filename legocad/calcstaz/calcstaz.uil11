@@ -1,0 +1,3704 @@
+!****************************************************************************
+! CALCSTAZ.UIL		versione 0.9		11.6.92
+!	file .uil per l'applicativo CALCSTAZ per il calcolo
+!	del regime stazionario
+!
+! Buffo Massimo, Calleri Nicola 11/06/1992
+!****************************************************************************
+
+module calcstaz
+	version = 'v0.9'
+	names = case_sensitive
+
+objects = {
+	  XmSeparator = gadget;
+	  }
+ 
+!	Per IBM/RISC 6000....
+!include file '/usr/include/uil/XmAppl.uil';
+ 
+!	Per Vax/Ciofeca 3100 et alium fimum seu rumentam...
+ include file 'XmAppl.uil';
+
+ 
+!	Callback functions utilizzate
+!
+
+procedure
+	create_proc		(integer);
+	cancel_proc		(integer);
+	ok_proc			(integer);
+	dialog_proc		(integer);
+	activate_proc		(integer);
+	block_selection		(integer);
+	show_results		(integer);
+	selez_proc		(integer);
+	start_proc		(integer);
+	find_proc		(integer);
+ 	show_jacobian		(integer);
+ 	selez_jac_proc		(integer);
+	edit_proc		(integer);
+
+!
+! Titoli da visualizzare nelle intestazioni delle dialog box
+!
+value
+	k_tolerance_dialog_title	: 'CHANGE TOLERANCE VALUE';
+	k_steady_state_results_title	: 'STEADY STATE RESULTS';
+	k_equation_window_title		: 'UNSATISFIED EQUATIONS LIST';
+!	  k_iteration_equation_title : 'RESIDUAL HISTORY';
+	k_iteration_window_title	: 'ITERATIONS HISTORY';
+	  k_equation_iteration_title : 'UNSATISFIED RESIDUALS LIST';
+	k_jacobian_window_title		: 'JACOBIAN MATRIX ANALYSIS';
+!	  k_jacobian_blocks_title    : 'BLOCK BY BLOCK JACOBIAN MATRIX';
+!	  k_jacobian_variables_title : 'JACOBIAN VALUES OF SYSTEM VARIABLES';
+!	  k_jacobian_sing_row_title  : 'NULL ROWS LIST';
+!	  k_jacobian_sing_col_title  : 'NULL COLUMNS LIST';
+
+
+!
+!	Stringhe di testo per visualizzazione voci nella MenuBar
+!	e PulldownMenu discendenti  (MAIN WINDOW)
+!
+value
+	k_file_label_text		: 'File';
+	  k_model_selection_label_text	:    'Select model';
+	  k_exit_label_text		:    'Exit';
+	k_options_label_text		: 'Options';
+	  k_tolerance_label_text	:    'Tolerance';
+	  k_mode_label_text		:    'Mode';
+	    k_direct_label_text		:       'Direct';
+	    k_interactive_label_text	:	'Interactive';
+!	  k_diagn_opt_label_text	:    'Diagnostics';
+!	    k_free_label_text		:	'Free';
+!	    k_guided_label_text		:	'Guided';
+	  k_current_setting_label_text	:    'Save current settings';
+	  k_default_setting_label_text	:    'Set default settings';
+	k_actions_label_text		: 'Actions';
+	  k_unk_variable_label_text	:    'Select unknown variables';
+	  k_data_modify_label_text	:    'Modify system data';
+	  k_load_prev_data_label_text	:    'Load initial system data';
+	  k_load_last_data_label_text	:    'Load last computed data';
+	k_reports_label_text		: 'Reports';
+	  k_results_label_text		:    'Results';
+	  k_diagnostics_label_text	:    'Diagnostics';
+	    k_equation_label_text	:       'Unsatisfied equations';
+	    k_iteration_label_text	:	'Iterations history';
+	    k_jacobian_label_text	:	'Jacobian matrix analysis';
+	k_print_label_text		: 'Print';	
+	  k_sys_result_label_text	:    'System results';
+	  k_calc_report_label_text	:    'Computing reports';
+
+
+!
+!	Stringhe di testo per visualizzazione voci negli widget 
+!	contenuti nella Form ('contenitore')
+!
+value
+	k_status_window_label_text	: 'Status Window';
+	k_start_label_text		: 'Start';
+	k_step_label_text		: 'Step';
+
+!
+!	Stringhe di testo per visualizzazione dei valori correnti
+!
+value
+	k_model_name_text		: 'Model name: ';
+	k_model_name_val_iniz_text	: '<No model selected>';
+	k_direct_computing_text		: '     Direct computing mode';
+	k_free_diagnostics_text		: '  Free diagnostics';
+	k_tolerance_text		: 'Tolerance: ';
+	k_tolerance_val_iniz_text	: '0.00001 ';
+
+!
+!	Costanti per il riconoscimento delle XmLabel della MenuBar :
+!	vengono utilizzate per attivare/disattivare le voci dei
+!	menu stessi
+!
+value
+	k_model_selection		: 1;
+	k_exit_program			: 2;
+	k_tolerance			: 3;
+	k_direct_mode			: 4;
+	k_interactive_mode		: 5;
+!	DISABILITATE...	
+	k_free_diagnostics		: 6;
+	k_guided_diagnostics		: 7;
+!
+	k_save_current_setting		: 8;
+	k_set_default_setting		: 9;
+	k_unknown_var_selection		:10;
+	k_system_data_modify		:11;
+	k_load_previous_data		:12;
+	k_load_last_data		:13;
+        k_results			:14;
+        k_equation_diagnostics			:115;
+        k_iteration_diagnostics			:116;
+        k_jacobian_diagnostics			:117;
+	k_system_results		:16;
+!	k_blocks_results		:17;
+	k_computing_reports		:18;
+
+!	Costanti per la memorizzazione dei push button per
+!	attivare/disabilitare i buttons
+!
+	k_start				:19;
+	k_step				:20;
+
+!	Costanti per la memorizzazione degli WidgetID relativi alle
+!	labels il cui contenuto viene modificato
+!
+
+	k_model_name			:21; 
+	k_computing_mode		:22;
+	k_diagnostics_choice		:23;
+	k_tolerance_value		:24;
+
+
+!
+!	Costante per memorizzazione WdigetID della finestra di stato
+!
+
+	k_status_window			:25;
+
+!
+!	Costanti utilizzate per i BulletinBoardDialog
+!
+	k_tolerance_dialog		:26;
+	  k_tolerance_dialog_text	:27;  ! ID del Text widget
+
+
+!
+!	Costante per memorizzazione WdigetID all'interno della window
+!	STEADY STATE RESULTS e della window stessa
+!
+	k_steady_state_results_dialog	:28;
+
+	k_block_list_results		:30;
+	k_results_list			:31;
+	k_exit_results			:32;
+
+!	Costante per commutare la visualizzazione dei risultati:
+!	VARIABLES oppure SYSTEM DATA 
+	display_variable	:0;
+	display_data		:1;
+!	Costante per la memorizzazione dello WidgetID relativo alla
+!	label della Results ScrolledList, il cui contenuto viene modificato
+
+	k_display_results_label		:33; 
+
+!       Costanti per la ricerca di stringhe nelle varie Scrolled List
+        k_find_block                    :34;
+        k_find_data                     :133;
+        k_find_next_block                       :134;
+        k_find_previous_block                   :135;
+        k_find_next_data                        :136;
+        k_find_previous_data                    :137;
+        k_block_found                           :138;
+        k_data_found                            :139;
+!
+!	Costante per memorizzazione WdigetID all'interno della window
+! 	UNSATISFIED EQUATIONS LIST
+!	e windows da essa discendenti
+value
+	k_equation_window		:35;
+	k_iteration_equation_window	:36;
+	k_variable_equation_window	:37;
+
+	k_equation_list			:38;
+	k_iteration_equation_list	:39;
+	k_variable_equation_list	:40;
+	
+	k_block_value_iter_eq_label	:41;
+	k_module_value_iter_eq_label	:42;
+	k_descript_value_iter_eq_label	:43;
+	k_numeq_value_iter_eq_label	:44;
+	k_meaning_value_iter_eq_label	:45;
+	k_unit_value_iter_eq_label	:46;
+
+	k_block_value_var_eq_label	:47;
+	k_module_value_var_eq_label	:48;
+	k_descript_value_var_eq_label	:49;
+!
+!	Costante per memorizzazione WdigetID all'interno della window
+! 	COMPUTING ITERATIONS LIST
+!	e windows da essa discendenti
+
+	k_iteration_window		:50;
+	k_equation_iteration_window	:51;
+
+	k_iteration_list		:52;
+	k_equation_iteration_list	:53;
+
+	k_iteration_label		:54;
+	k_neqsis_label			:55;
+!	k_numiter_value_label		:56;   VIENE COMPRESA MEL TITOLO...
+
+!	Costante per memorizzazione WdigetID all'interno della window
+! 	JACOBIAN ANALYSIS
+!	e windows da essa discendenti
+
+	k_jacobian_window		:60;
+	k_jacobian_list			:61;
+!	ID  delle  voci  del  Menu...
+	k_display_variables			: 161;
+	k_display_blocks			: 162;
+	k_info_button				: 164;
+	k_row_button				: 165;
+	k_column_button				: 166;
+
+!	Costante per memorizzazione WdigetID all'interno della window
+!	JACOBIAN BLOCKS
+	k_jacobian_blocks_window	:62;
+	k_jacobian_blocks_list		:63;
+	k_jacobian_rows_list		:64;
+	k_jacobian_cols_list		:65;
+	k_jacobian_values_list		:66;
+
+!	Costante per memorizzazione WdigetID all'interno delle 3 window
+!	sulla SINGOLARITA'
+	k_jac_sing_info_window	:70;   !creata da C...
+
+	k_jac_sing_row_window	:71;
+	k_jac_sing_row_list	:72;
+	k_jac_sing_row_var_list	:73;
+	k_jac_sing_row_reason  	:74;  ! ATTENDERE LA FINE SUL CAMPO DI COLOMBI
+
+	k_jac_sing_col_window	:75;
+	k_jac_sing_col_list	:76;
+	k_jac_sing_col_reason_1	:77;
+	k_jac_sing_col_reason_2	:78;
+
+!	Costante per memorizzazione WdigetID all'interno della window
+!	JACOBIAN VARIABLES
+	k_jacobian_variables_window	:80;
+	k_jacobian_variables_var_list	:81;
+	k_jacobian_variables_eq_list	:82;
+!****************************************************************************
+!
+!	Stringhe utilizzate per i BulletinBoardDialog
+!
+	k_dialog_ok_s			:'Ok';
+	k_dialog_cancel_s		:'Cancel';
+
+!****************************************************************************
+!
+!	Stringhe di testo per visualizzazione voci degli Widget
+!	nella window STEADY STATE RESULTS	
+!
+value
+	k_block_label_text		: ' BLOCK  ';
+	k_variable_toggle_text		: 'Variables';
+	k_data_toggle_text		: 'System data';
+	k_display_variable_label_text	: 
+ '  VARIABLE      FINAL VALUE      INITIAL VALUE       DESCRIPTION ';
+	k_exit_results_label		: 'Done';
+
+!****************************************************************************
+!
+!	Stringhe di testo per visualizzazione voci degli Widget
+!	nella window UNSATISFIED EQUATION LIST
+!	e nelle window da essa discendenti
+value
+	k_equation_list_label_text	: 
+  'EQUATION     BLOCK        NUMBER OF TIMES';
+	k_iteration_equation_label_text	: 'ITERATION          NORMALIZED ';
+	k_variable_equation_label_text	: 
+  '  VARIABLE       VALUE        JACOBIAN VALUE     DESCRIPTION';
+
+	k_blockname_label_text		: 'Block :';
+	k_module_label_text		: 'Module :';
+	k_description_label_text	: 'Descr. :';
+	k_numeq_label_text		: 'Equation  #';
+	k_meaning_label_text		: 'Meaning :';
+!****************************************************************************
+!
+!	Stringhe di testo per visualizzazione voci degli Widget
+!	nella window COMPUTING ITERATION LIST
+!	e nella window da essa discendente
+value
+	k_eq_iter_list_label_text	: 
+'EQUATION    BLOCK         NORMALIZED             ( MKS )              UNIT';
+
+!****************************************************************************
+!
+!	Stringhe di testo per visualizzazione voci degli Widget
+!	nella window JACOBIAN MATRIX ANALYSIS
+!	e nelle window da essa discendenti 
+value
+	k_jacobian_list_label_text   :'ITERATION     COMPUTED     SINGULARITY';
+	k_show_jacobian_text		: 'INVESTIGATE JACOBIAN MATRIX';
+	k_singular_toggle_text		: 'Singularity';
+	k_blocks_toggle_text		: 'Blocks';
+	k_variables_toggle_text		: 'Unknown variables';
+	k_info_text			: 'Information';
+	k_row_text			: 'Null rows';
+	k_column_text			: 'Null columns';
+
+	k_jac_block_text		: '    BLOCK ';
+	k_jac_block_eq_text		: 'Equation';
+	k_jac_block_var_text		: '    Variable';
+
+	k_jac_reason_row_text		: 'Reason:  NULL ROWS  (if any)';
+	k_jac_reason_col_text		: 'Reason:  NULL COLUMNS  (if any)';
+	k_jac_sing_row_text		: 'EQUATION    BLOCK';
+	k_jac_sing_col_text		: 'VARIABLE ';
+
+	k_jac_variables_eq_text: 
+		'EQUATION            BLOCK                  JACOBIAN VALUE';
+!****************************************************************************
+!
+!	Definizione fonts
+!
+value
+      bold : font('-ADOBE-Times-Bold-R-Normal--*-140-*-*-P-*-ISO8859-1');
+     normal: font('-ADOBE-Helvetica-Bold-R-Normal--*-140-*-*-P-*-ISO8859-1');
+        big: font('-ADOBE-Helvetica-Bold-R-Normal--*-180-*-*-P-*-ISO8859-1');
+      fixed: font('8x13');
+      title: font('Rom14');
+!
+!	Colori, color tables, icone
+!
+value
+	white		: color ('white', background);
+	black		: color ('black', background);
+	grey		: color ('light grey', background);
+	blue		: color ('navy blue', foreground);
+	gray		: color ('light gray', background);
+	cyan		: color ('cyan', background);
+	rred		: color ('red', background);
+	red		: exported color ('red', background);
+	green		: exported color ('lime green', background);
+	yellow		: exported color ('yellow', background);
+!
+	selez_shadow	: 1;
+
+!	Mnemonics
+value
+	file		: 70;
+	options		: 79;
+	actions		: 65;
+	reports		: 82;
+	print		: 80;
+	investigate	: 73;
+	exit		: 69; 
+!
+	k_invitation_label   :'Select an item in the list';
+	k_invit_twice_label  :'Select an item in the list (double click)';
+!****************************************************************************
+!
+!	Dimensionamenti delle windows utilizzate 
+!
+	value kx_main	: 10;
+	value ky_main	: 10;
+	value kw_main	: 600;
+	value kh_main	: 400;
+
+	value kh_menubar: 30;
+
+!	value kw_steady_state	: 600;   /* old value */
+!	value kh_steady_state	: 400;
+       value kw_steady_state   : 800;    /* new value */
+       value kh_steady_state   : 600;
+
+!	Posizioni relative nelle Form 
+!
+	value k_horizontal_offset	: 10;
+	value k_vertical_offset		: 10;
+!----------------------------------------------------------------------------
+!	(nella main window)
+	value k_label_distance		: 20;
+	value k_button_distance		: 15;
+
+!****************************************************************************
+!****************************************************************************
+!	Definizioni di tutti gli WIDGET
+!
+
+object
+	MAIN_WINDOW : XmMainWindow 
+	{
+	  arguments {
+		      XmNx =  kx_main;
+		      XmNy =  ky_main;
+		      XmNunitType = Xm100TH_FONT_UNITS;
+		    };
+	   controls {
+		      XmForm	 contenitore;
+		      XmMenuBar      menubar;
+		    };
+	};
+
+
+!****************************************************************************
+!	Definizione Form e suoi controlli
+!
+object
+	contenitore  : XmForm
+	{
+	   arguments {
+		       XmNhorizontalSpacing = k_horizontal_offset + 5;
+		       XmNverticalSpacing   = k_vertical_offset + 5;
+		       XmNwidth  = kw_main;
+		       XmNheight = kh_main - kh_menubar;
+		      };
+	     controls {
+		       XmLabel		model_name;	
+		       XmLabel		   model_name_val_iniz;
+		       XmLabel		computing_mode;
+!	DISABILITATA...
+!       XmLabel		diagnostics_mode;
+		       XmLabel		tolerance_label;
+		       XmLabel		   tolerance_val_iniz;
+		       XmFrame		status_window_frame;  
+		       XmScrolledList	status_window;
+		       XmPushButton 	m_start_button;
+		       XmPushButton 	m_step_button;
+        	      };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Model name'
+object
+	model_name    : XmLabel
+	{
+	   arguments {
+		       XmNx = k_horizontal_offset;
+		       XmNy = 10;
+		       XmNlabelString = k_model_name_text;
+		       !XmNfontList = normal;
+		       XmNforeground = blue;
+		      };
+	};
+
+! Initial value 'Model name'
+object
+	model_name_val_iniz : XmLabel
+	{
+	   arguments {
+		       XmNx = 90;
+		       XmNy = 10;
+		       XmNheight = 20;
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmLabel model_name;
+		       XmNleftOffset = 5;
+		       XmNlabelString = k_model_name_val_iniz_text;
+		       !XmNfontList = normal;
+		       XmNalignment = XmALIGNMENT_BEGINNING;
+		     };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_model_name); 
+		     };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Label 'Computing mode' (default: Direct)
+object
+	computing_mode : XmLabel
+	{
+	   arguments {
+		       XmNx = 400;
+		       XmNy = 10;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmLabel model_name_val_iniz;
+		       XmNlabelString = k_direct_computing_text;
+		       XmNalignment = XmALIGNMENT_END;
+		       XmNrecomputeSize = true;
+		       !XmNfontList = normal;
+		       XmNforeground = blue;
+	             };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_computing_mode); 
+		     };
+	};
+
+!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+! 	DISABILITATA...
+! Label 'Diagnostics mode' (default : Free)
+!object
+!	diagnostics_mode : XmLabel
+!	{
+!	   arguments {
+!		       XmNx = 400;
+!		       XmNy = 40;
+!		       XmNrightAttachment = XmATTACH_FORM;
+!		       XmNlabelString = k_free_diagnostics_text;
+!		       !XmNfontList = normal;
+!		       XmNalignment = XmALIGNMENT_END;
+!		       XmNrecomputeSize = true;
+!		       XmNforeground = blue;
+!		     };
+!	   callbacks {
+! MrmNcreateCallback  = procedure create_proc(k_diagnostics_choice); 
+!		     };
+!	};
+!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Tolerance'
+
+object
+	tolerance_label      : XmLabel
+	{
+	   arguments {
+		       XmNx = k_horizontal_offset;
+		       XmNy = 40;
+		       XmNforeground = blue;
+		       XmNlabelString = k_tolerance_text;
+		       !XmNfontList = normal;
+		      };
+	};
+
+! Initial value 'Tolerance'
+ 
+object
+	tolerance_val_iniz : XmLabel
+	{
+	   arguments {
+		       XmNx = 110;
+		       XmNy = 40;
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmLabel tolerance_label;
+		       XmNleftOffset = 5;
+		       XmNlabelString = k_tolerance_val_iniz_text;
+		       !XmNfontList = normal;
+		       XmNalignment = XmALIGNMENT_BEGINNING;
+		       XmNrecomputeSize = true;
+		      };
+	   callbacks  {
+	       MrmNcreateCallback  = procedure create_proc(k_tolerance_value); 
+		      };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+! Frame of Label 'Status window'
+object
+	status_window_frame  : XmFrame
+	{
+	   arguments {
+		       XmNx = 260;
+		       XmNy = 70;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNleftAttachment = XmATTACH_FORM;
+		      };
+	   controls  {
+                       XmLabel status_window_label;
+		     };
+	};
+
+! Label 'Status window'
+object
+	status_window_label  : XmLabel
+	{
+	   arguments {
+		       XmNlabelString = k_status_window_label_text;
+		       !XmNfontList = bold;
+		      };
+	};
+
+
+object
+	status_window  : XmScrolledList
+	{
+	   arguments {
+		       XmNx = 10;
+		       XmNy = 100;
+		       XmNtopAttachment = XmATTACH_FORM;
+                       XmNtopOffset = 105;
+		       XmNbottomAttachment = XmATTACH_FORM;
+                       XmNbottomOffset = 70;
+		       XmNvisibleItemCount = 11;
+		       XmNhighlightThickness = 1;
+!		       XmNtraversalOn = false;
+                       XmNlistSizePolicy   = XmRESIZE_IF_POSSIBLE;
+!                      XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNwidth  = kw_main - k_horizontal_offset;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_status_window); 
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Start
+object
+	m_start_button : XmPushButton
+	{
+	   arguments {
+		       XmNx = 500;
+		       XmNy = 330;
+		       XmNbottomAttachment = XmATTACH_FORM;
+                       XmNbottomOffset = 20;
+		       XmNrightAttachment = XmATTACH_WIDGET;
+		       XmNrightWidget = m_step_button;
+		       XmNrightOffset = k_button_distance;
+		       XmNlabelString = k_start_label_text;
+		       !XmNfontList = bold;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_start); 
+	       XmNactivateCallback = procedure start_proc(k_start);
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Step
+object
+	m_step_button : XmPushButton
+	{
+	   arguments {
+		       XmNy = 330;
+		       XmNbottomAttachment = XmATTACH_FORM;
+                       XmNbottomOffset = 20;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNlabelString = k_step_label_text;
+		       !XmNfontList = bold; 
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_step); 
+!	       XmNactivateCallback = procedure start_proc(k_step);
+		      };
+	};
+
+
+!****************************************************************************
+!	Definizione MenuBar e suoi controlli
+!
+object
+	menubar      : XmMenuBar
+	{
+	   arguments {
+		       XmNheight      = kh_menubar;
+		       XmNorientation = XmHORIZONTAL;
+		       XmNspacing     = 30;          !distanza fra le voci
+		      };
+	     controls {
+		       XmCascadeButton	file_menu_entry;
+		       XmCascadeButton	options_menu_entry;
+		       XmCascadeButton	actions_menu_entry;
+		       XmCascadeButton	reports_menu_entry;
+		       XmCascadeButton	print_menu_entry;
+		      };
+	};
+
+!----------------------------------------------------------------------------
+!	Definizione del CascadeButton e relativo Pulldown : FILE
+!
+object
+	file_menu_entry : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_file_label_text;
+		       !XmNfontList = bold;
+		       XmNtraversalOn = true;
+		       XmNmnemonic    = file;
+		      };
+	     controls {
+		       XmPulldownMenu file_menu;
+		      };
+	};
+
+object
+	file_menu    : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton  m_model_selection_button;
+		       XmPushButton  m_exit_button;
+		      };
+	};
+	
+! Model Selection
+object
+	m_model_selection_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_model_selection_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_model_selection);
+!		       XmNactivateCallback = procedure ...
+		      };
+	};
+
+! Exit
+object
+	m_exit_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_exit_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure  create_proc(k_exit_program);
+	       XmNactivateCallback = procedure  activate_proc (k_exit_program);
+		      };
+	};
+
+
+!----------------------------------------------------------------------------
+!	Definizione del CascadeButton e relativi Pulldown : OPTIONS 
+!							    ->  Mode
+!							    ->  Diagnostics
+!
+object
+	options_menu_entry : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_options_label_text;
+		       !XmNfontList = bold;
+		       XmNtraversalOn = true;
+		       XmNmnemonic    = options;
+		      };
+	    controls {
+		       XmPulldownMenu options_menu;
+		      };
+	};
+
+object
+	options_menu  : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton     m_tolerance_button;
+		       XmCascadeButton  m_mode_button;
+!	DISABILITATO...
+!		       XmCascadeButton  m_diagn_opt_button;
+		       XmPushButton     m_current_set_button;
+		       XmPushButton     m_default_set_button;
+		      };
+	};
+
+! Tolerance
+object
+	m_tolerance_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_tolerance_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_tolerance); 
+	       XmNactivateCallback = procedure dialog_proc(k_tolerance_dialog); 
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Mode choice: Direct / Interactive
+object
+	m_mode_button : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_mode_label_text;
+		       !XmNfontList = normal;
+		      };
+	     controls {
+		       XmPulldownMenu mode_menu;
+		      };
+	};
+
+object
+	mode_menu     : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton  m_direct_button;
+		       XmPushButton  m_interactive_button;
+		      };
+	};
+
+! Mode ----> Direct
+object
+      m_direct_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_direct_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_direct_mode); 
+	       XmNactivateCallback = procedure activate_proc(k_direct_mode);
+		      };
+	};
+
+! Mode ----> Interactive 
+object
+	m_interactive_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_interactive_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_interactive_mode); 
+	     XmNactivateCallback = procedure activate_proc(k_interactive_mode);
+		      };
+	};
+
+!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+! 	DISABILITATA...
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Diagnostics choice: Free / Guided
+!object
+!	m_diagn_opt_button : XmCascadeButton
+!	{
+!	   arguments {
+!		       XmNlabelString = k_diagn_opt_label_text;
+!		       XmNfontList = normal;
+!		      };
+!	     controls {
+!		       XmPulldownMenu diagn_opt_menu;
+!		      };
+!	};
+!
+!object
+!	diagn_opt_menu : XmPulldownMenu
+!	{
+!	    controls {
+!		       XmPushButton  m_free_button;
+!		       XmPushButton  m_guided_button;
+!		      };
+!	};
+!
+! Diagnostics ----> Free
+!object
+!      m_free_button   : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = k_free_label_text;
+!		       XmNfontList = normal;
+!		      };
+!	   callbacks {
+!   MrmNcreateCallback  = procedure create_proc(k_free_diagnostics); 
+!   XmNactivateCallback = procedure activate_proc(k_free_diagnostics);
+!		      };
+!	};
+!
+! Diagnostics ----> Guided
+!object
+!      m_guided_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = k_guided_label_text;
+!		       XmNfontList = normal;
+!		      };
+!	   callbacks {
+!   MrmNcreateCallback  = procedure create_proc(k_guided_diagnostics); 
+!   XmNactivateCallback = procedure activate_proc(k_guided_diagnostics);
+!		      };
+!	};
+!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Current Setting
+object
+	m_current_set_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_current_setting_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+       MrmNcreateCallback  = procedure create_proc(k_save_current_setting); 
+       XmNactivateCallback = procedure activate_proc(k_save_current_setting); 
+		      };
+	};
+
+
+! Default Setting
+object
+	m_default_set_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_default_setting_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	 MrmNcreateCallback  = procedure create_proc(k_set_default_setting); 
+	 XmNactivateCallback = procedure activate_proc(k_set_default_setting); 
+		      };
+	};
+
+!----------------------------------------------------------------------------
+!	Definizione del CascadeButton e relativo Pulldown : ACTIONS 
+!
+object
+	actions_menu_entry: XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_actions_label_text;
+		       !XmNfontList = bold;
+		       XmNtraversalOn = true;
+		       XmNmnemonic    = actions;
+		      };
+	     controls {
+		       XmPulldownMenu actions_menu;
+		      };
+	};
+
+object
+	actions_menu  : XmPulldownMenu
+	{
+	     controls {
+		       XmPushButton  m_unk_variable_button;
+		       XmPushButton  m_data_modify_button;
+		       XmPushButton  m_load_prev_data_button;
+		       XmPushButton  m_load_last_data_button;
+		      };
+	};
+	
+object
+	m_unk_variable_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_unk_variable_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc(k_unknown_var_selection);
+           XmNactivateCallback = procedure activate_proc(k_unknown_var_selection);
+		      };
+	};
+
+object
+	m_data_modify_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_data_modify_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc(k_system_data_modify);
+           XmNactivateCallback = procedure activate_proc(k_system_data_modify);
+		      };
+	};
+
+object
+	m_load_prev_data_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_load_prev_data_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc(k_load_previous_data); 
+	   XmNactivateCallback = procedure activate_proc(k_load_previous_data);
+		      };
+	};
+
+object
+	m_load_last_data_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_load_last_data_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_load_last_data);
+	       XmNactivateCallback = procedure activate_proc(k_load_last_data);
+		      };
+	};
+
+
+!----------------------------------------------------------------------------
+!	Definizione del CascadeButton e relativo Pulldown : REPORTS 
+!
+!						       / Equations
+!					-> Diagnostics - Iterations
+!						       \ Jacobian
+!
+object
+	reports_menu_entry : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_reports_label_text;
+		       !XmNfontList = bold;
+		       XmNtraversalOn = true;
+		       XmNmnemonic    = reports;
+		      };
+	     controls {
+		       XmPulldownMenu reports_menu;
+		      };
+	};
+
+object
+	reports_menu  : XmPulldownMenu
+	{
+	     controls {
+		       XmPushButton  m_results_button;
+		       XmCascadeButton  m_diagnostics_button;
+		      };
+	};
+	
+object
+	m_results_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_results_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_results); 
+	       XmNactivateCallback = procedure 
+				   dialog_proc(k_steady_state_results_dialog);
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+object
+	m_diagnostics_button : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_diagnostics_label_text;
+		       !XmNfontList = normal;
+		      };
+	     controls {
+		       XmPulldownMenu   diagnostics_menu;
+		      };
+	};
+
+
+object
+	diagnostics_menu : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton  m_equation_button;
+		       XmPushButton  m_iteration_button;
+		       XmPushButton  m_jacobian_button;
+		      };
+	};
+
+! Diagnostics ----> Unsatisfied equations
+object
+      m_equation_button   : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_equation_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	 MrmNcreateCallback  = procedure create_proc(k_equation_diagnostics);
+	 XmNactivateCallback = procedure dialog_proc(k_equation_window);
+		      };
+	};
+
+! Diagnostics ----> Iterations list
+object
+      m_iteration_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_iteration_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+       MrmNcreateCallback  = procedure create_proc(k_iteration_diagnostics); 
+       XmNactivateCallback = procedure dialog_proc(k_iteration_window);
+		      };
+	};
+
+! Diagnostics ----> Jacobian matrix analysis
+object
+      m_jacobian_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_jacobian_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	 MrmNcreateCallback  = procedure create_proc(k_jacobian_diagnostics); 
+	 XmNactivateCallback = procedure dialog_proc(k_jacobian_window);
+		      };
+	};
+
+!----------------------------------------------------------------------------
+!	Definizione del CascadeButton e relativo Pulldown : PRINT 
+!
+object
+	print_menu_entry : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_print_label_text;
+		       !XmNfontList = bold;
+		       XmNtraversalOn = true;
+		       XmNmnemonic    = print;
+		      };
+	     controls {
+		       XmPulldownMenu  print_menu;
+		      };
+	};
+
+object
+	print_menu    : XmPulldownMenu
+	{
+	     controls {
+		       XmPushButton  m_sys_result_button;
+		       XmPushButton  m_calc_report_button;
+		      };
+	};
+	
+object
+	m_sys_result_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_sys_result_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_system_results);
+	       XmNactivateCallback = procedure activate_proc(k_system_results);
+		      };
+	};
+
+object
+	m_calc_report_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_calc_report_label_text;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	    MrmNcreateCallback  = procedure create_proc(k_computing_reports);
+	    XmNactivateCallback = procedure activate_proc(k_computing_reports);
+		      };
+	};
+
+!----------------------------------------------------------------------------
+!****************************************************************************
+!		Definizione di tutte i Bulletin Board
+!****************************************************************************
+!****************************************************************************
+!	Definizione del Bulletin Board Dialog TOLERANCE
+!
+object
+	tolerance_dialog: XmBulletinBoardDialog
+	{
+	   arguments {
+		     XmNwidth         = 300;
+		     XmNnoResize      = true;
+		     XmNdialogTitle   = k_tolerance_dialog_title;
+		     XmNmarginWidth   = 40;
+                     XmNdefaultButton = XmPushButton m_tolerance_ok_button;
+                     XmNcancelButton  = XmPushButton m_tolerance_cancel_button;
+		     XmNdialogStyle   = XmDIALOG_MODELESS;
+		     XmNunitType      = Xm100TH_FONT_UNITS;
+		     };
+	   controls {
+		       XmRowColumn	row_col_tolerance;
+        	      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc (k_tolerance_dialog);
+		      };
+	};
+		  
+object
+	row_col_tolerance : XmRowColumn
+	{
+	   arguments {
+			XmNorientation=XmVERTICAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 6;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+		     };
+	   controls {
+		       XmRowColumn	row_tolerance_text;
+		       XmSeparator	{};
+		       XmRowColumn	row_tolerance_button;
+        	      };
+	};
+
+object
+	row_tolerance_text : XmRowColumn
+	{
+	   arguments {
+			XmNorientation=XmHORIZONTAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 2;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+		     };
+	   controls {
+		       XmLabel		tolerance_text;	
+		       XmText		new_tolerance_value;
+        	      };
+	};
+ 
+object
+	tolerance_text : XmLabel
+	{
+	   arguments {
+		       XmNx = 10;
+		       XmNy = 10;
+		       XmNlabelString = k_tolerance_text;
+		       !XmNfontList = normal;
+		      };
+	};
+
+object
+	new_tolerance_value : XmText
+	{
+	   arguments {
+		       XmNx = 90;
+		       XmNy = 10;
+		       XmNeditable = true;
+		       XmNeditMode = XmSINGLE_LINE_EDIT;
+		       XmNmaxLength  = 10;
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc(k_tolerance_dialog_text);
+		      };
+	};
+
+object
+	row_tolerance_button : XmRowColumn
+	{
+	   arguments {
+			XmNorientation=XmHORIZONTAL;
+                        XmNnumColumns=1;
+                        XmNspacing = 10;
+                        XmNunitType = XmPIXELS;
+                        XmNborderWidth = 0;
+		     };
+	   controls {
+		       XmPushButton 	m_tolerance_ok_button;
+		       XmPushButton 	m_tolerance_cancel_button;
+        	      };
+	};
+
+object
+	m_tolerance_ok_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_dialog_ok_s;
+		       !XmNfontList = bold;
+		      };
+	   callbacks {
+                  XmNactivateCallback = procedure ok_proc (k_tolerance_dialog); 
+		      };
+	};
+
+object
+	m_tolerance_cancel_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_dialog_cancel_s;
+		       !XmNfontList = bold;
+		      };
+	   callbacks {
+	   XmNactivateCallback = procedure cancel_proc (k_tolerance_dialog); 
+		      };
+	};
+
+!
+!****************************************************************************
+!			STEADY   STATE   RESULTS
+!****************************************************************************
+!	Definizione DialogBox 'Steady state results'  e suoi controlli
+!
+object
+	steady_state_results_dialog : XmBulletinBoardDialog
+	{
+	   arguments {
+		       XmNdefaultPosition = false;
+		       XmNx = kh_main + 85;
+		       XmNy = 45;
+		       XmNnoResize      = true;
+		       XmNmarginWidth   = k_horizontal_offset;
+		       XmNmarginHeight  = k_vertical_offset;
+		       XmNdialogStyle   = XmDIALOG_MODELESS;
+		       XmNdialogTitle   = k_steady_state_results_title;
+ 		       XmNwidth  = kw_steady_state;
+ 		       XmNheight = kh_steady_state;
+		       XmNunitType      = Xm100TH_FONT_UNITS;
+		      };
+	     controls {
+		       XmForm		form_result;
+        	      };
+	   callbacks {
+   MrmNcreateCallback  = procedure create_proc(k_steady_state_results_dialog); 
+		      };
+	};
+
+!	Definizione Form e suoi controlli
+!
+object
+	form_result: XmForm
+	{
+	   arguments {
+!		       XmNhorizontalSpacing = 5;
+!		       XmNverticalSpacing   = 5;
+		       XmNwidth  = 780;
+		       XmNheight = 530;
+		      };
+	     controls {
+		       XmLabel		block;	
+		       XmScrolledList 	block_list;
+		       XmRowColumn	radio_toggle;
+		       XmRowColumn	find_blocks;
+                       XmLabel          block_found_label;
+ 		       XmSeparator     { arguments {
+                                        XmNorientation=XmHORIZONTAL;
+                                        XmNheight=3;
+		       			XmNleftAttachment = XmATTACH_FORM;
+		       			XmNrightAttachment = XmATTACH_FORM;
+		       			XmNtopAttachment = XmATTACH_FORM;
+		       			XmNtopOffset = 265;
+                                        };};
+		       XmLabel		results;	
+		       XmScrolledList 	results_list;
+		       XmRowColumn	find_datas;
+                       XmLabel          data_found_label;
+		       XmPushButton 	exit_dialog_results;
+        	      };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+! Label 'Block selected'
+object
+	block : XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNlabelString = k_block_label_text;
+		       !XmNfontList   = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+! Scrolled List 'Block selected'
+object
+	block_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 640;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNrightOffset = 150;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel block;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 315;
+		       XmNvisibleItemCount = 12;
+                       XmNlistSizePolicy   = XmCONSTANT;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+!		       XmNlistMarginWidth = 4;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure 
+					create_proc(k_block_list_results); 
+ 	       XmNsingleSelectionCallback = procedure
+ 					 selez_proc(k_block_list_results);
+		      };
+	};
+            
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+! Container for toggle buttons 
+object
+	radio_toggle : XmRowColumn
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 50;
+		       XmNorientation = XmVERTICAL;
+		       XmNradioBehavior = true;
+                       XmNnumColumns =1;
+                       XmNspacing = 10;
+                       XmNunitType = XmPIXELS;
+                       XmNborderWidth = 0;
+		     };
+	   controls {
+		        XmToggleButton  variable_toggle;
+		        XmToggleButton  system_data_toggle;
+        	      };
+	};
+
+! Toggle button 'Variable'
+object
+	variable_toggle : XmToggleButton
+	{
+	   arguments {
+		       XmNselectColor = blue;
+		       XmNset = true;
+		       XmNlabelString = k_variable_toggle_text;
+		       !XmNfontList = bold;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+          XmNarmCallback = procedure show_results(display_variable); 
+		      };
+	};
+
+! Toggle button 'System data'
+object
+	system_data_toggle : XmToggleButton
+	{
+	   arguments {
+		       XmNselectColor = blue;
+		       XmNset = false;
+		       XmNlabelString = k_data_toggle_text;
+		       !XmNfontList = bold;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+          XmNarmCallback = procedure show_results(display_data); 
+		      };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Container for find block 
+object
+	find_blocks : XmRowColumn
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 270;
+		       XmNorientation = XmHORIZONTAL;
+                       XmNspacing = 10;
+                       XmNunitType = XmPIXELS;
+                       XmNborderWidth = 0;
+		     };
+	    controls {
+		      XmLabel	      find_block_label;
+		      XmText	      find_block;
+		      XmArrowButton   find_previous_block;
+		      XmArrowButton   find_next_block;
+        	     };
+	};
+
+object
+	find_block_label : XmLabel
+	{
+	   arguments {
+		       XmNlabelString = 'FIND :';
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+object
+	find_previous_block : XmArrowButton
+	{
+	   arguments {
+		      XmNarrowDirection = XmARROW_UP;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+           XmNactivateCallback = procedure find_proc (k_find_previous_block); 
+		      };
+	};
+
+object
+	find_block : XmText
+	{
+	   arguments {
+		       XmNeditMode = XmSINGLE_LINE_EDIT;
+		       XmNmaxLength  = 50;
+		       XmNcolumns    = 20;
+		       !XmNfontList = bold;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc(k_find_block);
+           XmNfocusCallback = procedure find_proc(k_find_block);
+		      };
+	};
+
+object
+	find_next_block : XmArrowButton
+	{
+	   arguments {
+		      XmNarrowDirection = XmARROW_DOWN;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc(k_find_next_block);
+           XmNactivateCallback = procedure find_proc (k_find_next_block); 
+		      };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+object
+        block_found_label : XmLabel
+        {
+           arguments {
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmRowColumn find_blocks;
+		       XmNleftOffset = 50;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 275;
+                       XmNlabelString = '';
+                       !XmNfontList = bold;
+                       XmNforeground = blue;
+                      };
+           callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_block_found);
+                      };
+        };
+
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Results label: if VARIABLES ... or DATA
+object
+	results : XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 237;
+		       XmNlabelString = k_display_variable_label_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	   callbacks {
+	 MrmNcreateCallback  = procedure create_proc(k_display_results_label); 
+		     };
+	};
+
+! Scrolled List 'Results'
+object
+	results_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 750;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+!		       XmNtopAttachment = XmATTACH_WIDGET;
+!		       XmNtopWidget = XmLabel results;
+!		       XmNtopOffset = 5;
+
+!		       XmNtopAttachment = XmATTACH_FORM;
+!		       XmNtopOffset = 350;
+		       
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 50;
+		       XmNvisibleItemCount = 12;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+                       XmNlistSizePolicy   = XmCONSTANT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+!XmNscrollBarDisplayPolicy = XmSTATIC;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_results_list); 
+	XmNsingleSelectionCallback = procedure selez_proc( k_results_list);
+		      };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Container for find data 
+object
+	find_datas : XmRowColumn
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 10;
+		       XmNorientation = XmHORIZONTAL;
+                       XmNspacing = 10;
+                       XmNunitType = XmPIXELS;
+                       XmNborderWidth = 0;
+		     };
+	    controls {
+		      XmLabel	      find_data_label;
+		      XmText	      find_data;
+		      XmArrowButton   find_previous_data;
+		      XmArrowButton   find_next_data;
+        	     };
+	};
+
+object
+	find_data_label : XmLabel
+	{
+	   arguments {
+		       XmNlabelString = 'FIND :';
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+object
+	find_previous_data : XmArrowButton
+	{
+	   arguments {
+		      XmNarrowDirection = XmARROW_UP;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+           XmNactivateCallback = procedure find_proc (k_find_previous_data); 
+		      };
+	};
+
+object
+	find_data : XmText
+	{
+	   arguments {
+		       XmNeditMode = XmSINGLE_LINE_EDIT;
+		       XmNmaxLength  = 50;
+		       XmNcolumns    = 20;
+		       !XmNfontList = bold;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc(k_find_data);
+           XmNfocusCallback = procedure find_proc(k_find_data);
+		      };
+	};
+
+object
+	find_next_data : XmArrowButton
+	{
+	   arguments {
+		      XmNarrowDirection = XmARROW_DOWN;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc(k_find_next_data);
+           XmNactivateCallback = procedure find_proc (k_find_next_data); 
+		      };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+object
+        data_found_label : XmLabel
+        {
+           arguments {
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmRowColumn find_datas;
+		       XmNleftOffset = 50;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 15;
+                       XmNlabelString = '';
+                       !XmNfontList = bold;
+                       XmNforeground = blue;
+                      };
+           callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_data_found);
+                      };
+        };
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Exit ('Done')
+object
+	exit_dialog_results : XmPushButton
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 0;
+		       XmNlabelString = k_exit_results_label;
+		       !XmNfontList = bold; 
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+   XmNactivateCallback = procedure cancel_proc(k_steady_state_results_dialog); 
+		      };
+	};
+!****************************************************************************
+
+!****************************************************************************
+!	Definizione del Bulletin Board Dialog UNSATISFIED EQUATIONS LIST 
+!	e finestre discendenti
+!
+object
+	equation_dialog : XmBulletinBoardDialog
+	{
+	   arguments {
+		       XmNdefaultPosition = false;
+		       XmNx = 10;
+		       XmNy = kh_main - 60 ;
+		       XmNnoResize      = true;
+!		       XmNmarginWidth   = k_horizontal_offset ;
+!		       XmNmarginHeight  = k_vertical_offset- 5;
+		       XmNdialogStyle   = XmDIALOG_MODELESS;
+		       XmNdialogTitle   = k_equation_window_title;
+		       XmNunitType      = Xm100TH_FONT_UNITS;
+                       XmNdefaultButton = XmPushButton exit_dialog_equation;
+		      };
+	     controls {
+		       XmForm		form_eq_1;
+        	      };
+	   callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_equation_window); 
+		      };
+	};
+
+!	Definizione Form e suoi controlli
+!
+object
+	form_eq_1: XmForm
+	{
+	   arguments {
+!		       XmNhorizontalSpacing = 5;
+!		       XmNverticalSpacing   = 5;
+!		       XmNwidth  = 380;
+		       XmNheight = 240;
+		      };
+	     controls {
+		       XmLabel	        equation_label;
+		       XmScrolledList   equation_list;
+		       XmLabel		invitation_label;
+		       XmPushButton     exit_dialog_equation;
+        	      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Equations label
+object
+	equation_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNlabelString = k_equation_list_label_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Unsatisfied equation'
+object
+	equation_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 340;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel equation_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 40;
+		       XmNvisibleItemCount = 12;
+                       XmNlistSizePolicy   = XmCONSTANT;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_equation_list); 
+ 	  XmNdefaultActionCallback = procedure selez_proc( k_equation_list);
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Invitation label
+object
+	invitation_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 10;
+		       XmNlabelString = k_invit_twice_label;
+		       !XmNfontList = bold;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Exit ('Done')
+object
+	exit_dialog_equation : XmPushButton
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+!		       XmNbottomOffset = 1;
+		       XmNlabelString = k_exit_results_label;
+		       !XmNfontList = bold; 
+		      };
+	   callbacks {
+           XmNactivateCallback  = procedure cancel_proc(k_equation_window); 
+		      };
+	};
+
+!****************************************************************************
+!	Prima finestra discendente da UNSATISFIED EQUATION LIST:
+!	ITERATION EQUATION WINDOW
+!
+object
+	iteration_equation_dialog : XmBulletinBoardDialog
+	{
+	   arguments {
+		       XmNdefaultPosition = false;
+		       XmNx = 10;
+		       XmNy = kh_main + 235;
+		       XmNnoResize      = true;
+!		       XmNmarginWidth   = k_horizontal_offset;
+!		       XmNmarginHeight  = k_vertical_offset;
+		       XmNdialogStyle   = XmDIALOG_MODELESS;
+		       XmNunitType      = Xm100TH_FONT_UNITS;
+                       XmNdefaultButton =XmPushButton exit_dialog_iter_equation;
+		      };
+	     controls {
+		       XmForm		form_eq_2;
+        	      };
+	   callbacks {
+    MrmNcreateCallback  = procedure create_proc(k_iteration_equation_window); 
+		      };
+	};
+
+!	Definizione Form e suoi controlli
+!
+object
+	form_eq_2: XmForm
+	{
+	   arguments {
+!		       XmNhorizontalSpacing = 5;
+!		       XmNverticalSpacing   = 5;
+!		       XmNwidth  = 380;
+		       XmNheight = 330;
+		      };
+	     controls {
+		       XmLabel	        block_label;
+		       XmLabel	        block_value_label;
+!		       XmLabel	        module_label;
+!		       XmLabel	        module_value_label;
+		       XmLabel	        description_label;
+		       XmLabel	        description_value_label;
+		       XmLabel	        numeq_label;
+		       XmLabel	        numeq_value_label;
+		       XmLabel	        meaning_label;
+		       XmLabel	        meaning_value_label;
+ 		       XmSeparator     { arguments {
+                                        XmNorientation=XmHORIZONTAL;
+                                        XmNheight=3;
+		       			XmNtopAttachment = XmATTACH_FORM;
+		       			XmNtopOffset = 105;
+		       			XmNleftAttachment = XmATTACH_FORM;
+		       			XmNrightAttachment= XmATTACH_FORM;
+                                       };};
+		       XmLabel		iteration_equation_label;
+		       XmLabel 		unit_value_label;  
+		       XmScrolledList   iteration_equation_list;
+		       XmLabel		invitation_label_2;
+		       XmPushButton 	exit_dialog_iter_equation; 
+        	      };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Block'
+object
+	block_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNlabelString = k_blockname_label_text;
+		       !XmNfontList = normal;
+		       XmNforeground = blue;
+		      };
+	};
+
+! Actual value of 'Block'
+object
+	block_value_label : XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmLabel block_label;
+		       XmNleftOffset = 10;
+		       !XmNfontList = normal;
+		     };
+	   callbacks {
+      MrmNcreateCallback  = procedure create_proc(k_block_value_iter_eq_label); 
+		     };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Module'
+object
+	module_label: XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNrightAttachment = XmATTACH_WIDGET;
+		       XmNrightWidget = XmLabel module_value_label;
+		       XmNrightOffset = 10;
+		       XmNlabelString = k_module_label_text;
+		       !XmNfontList = normal;
+		       XmNforeground = blue;
+		      };
+	};
+
+! Actual value of 'Module'
+object
+	module_value_label : XmLabel
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNrightOffset = 0;
+		       XmNalignment = XmALIGNMENT_END;
+		       !XmNfontList = normal;
+		     };
+	   callbacks {
+    MrmNcreateCallback  = procedure create_proc(k_module_value_iter_eq_label); 
+		     };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Description'
+object
+	description_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 25;
+		       XmNlabelString = k_description_label_text;
+		       !XmNfontList = normal;
+		       XmNforeground = blue;
+		      };
+	};
+
+! Actual value of 'Description'
+object
+	description_value_label : XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 25;
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmLabel description_label;
+		       XmNleftOffset = 10;
+		       !XmNfontList = normal;
+		     };
+	   callbacks {
+  MrmNcreateCallback  = procedure create_proc(k_descript_value_iter_eq_label); 
+		     };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Equation #'
+object
+	numeq_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 50;
+		       XmNlabelString = k_numeq_label_text;
+		       !XmNfontList = normal;
+		       XmNforeground = blue;
+		      };
+	};
+
+! Actual value of 'Equation #'
+object
+	numeq_value_label : XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 50;
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmLabel numeq_label;
+		       XmNleftOffset = 10;
+		       !XmNfontList = normal;
+		     };
+	   callbacks {
+      MrmNcreateCallback  = procedure create_proc(k_numeq_value_iter_eq_label); 
+		     };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Meaning'
+object
+	meaning_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 75;
+		       XmNlabelString = k_meaning_label_text;
+		       !XmNfontList = normal;
+		       XmNforeground = blue;
+		      };
+	};
+
+! Actual value of 'Meaning'
+object
+	meaning_value_label : XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 75;
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmLabel meaning_label;
+		       XmNleftOffset = 10;
+		       !XmNfontList = normal;
+		     };
+	   callbacks {
+    MrmNcreateCallback  = procedure create_proc(k_meaning_value_iter_eq_label); 
+		     };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! iteration label
+object
+	iteration_equation_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 115;
+		       XmNlabelString = k_iteration_equation_label_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Measure unit label (sent from C)
+object
+	unit_value_label : XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 115;
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmLabel iteration_equation_label;
+		       XmNleftOffset = 50;
+		       !XmNfontList = normal;
+		     };
+	   callbacks {
+     MrmNcreateCallback  = procedure create_proc(k_unit_value_iter_eq_label); 
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Unsatisfied equation rediduals history'
+object
+	iteration_equation_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 400;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel iteration_equation_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 40;
+		       XmNvisibleItemCount = 10;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+                       XmNlistSizePolicy   = XmCONSTANT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+        MrmNcreateCallback  = procedure create_proc(k_iteration_equation_list); 
+ 	XmNdefaultActionCallback = procedure
+                                     selez_proc( k_iteration_equation_list);
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Invitation label
+object
+	invitation_label_2: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 10;
+		       XmNlabelString = k_invit_twice_label;
+		       !XmNfontList = bold;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Exit ('Done')
+object
+	exit_dialog_iter_equation : XmPushButton
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 0;
+		       XmNlabelString = k_exit_results_label;
+		       !XmNfontList = bold; 
+		      };
+	   callbacks {
+    XmNactivateCallback  = procedure cancel_proc(k_iteration_equation_window); 
+		      };
+	};
+
+!****************************************************************************
+!****************************************************************************
+!	Seconda finestra discendente da UNSATISFIED EQUATION LIST:
+!	VARIABLE EQUATION WINDOW
+!
+object
+	variable_equation_dialog : XmBulletinBoardDialog
+	{
+	   arguments {
+		       XmNdefaultPosition = false;
+		       XmNx = 430;
+		       XmNy = kh_main + 310;
+		       XmNnoResize      = true;
+!		       XmNmarginWidth   = 5;
+!		       XmNmarginHeight  = k_vertical_offset;
+		       XmNdialogStyle   = XmDIALOG_MODELESS;
+		       XmNunitType      = Xm100TH_FONT_UNITS;
+                       XmNdefaultButton = XmPushButton exit_dialog_var_equation;
+		      };
+	     controls {
+		       XmForm		form_eq_3;
+        	      };
+	   callbacks {
+      MrmNcreateCallback  = procedure create_proc(k_variable_equation_window); 
+		      };
+	};
+
+!	Definizione Form e suoi controlli
+!
+object
+	form_eq_3: XmForm
+	{
+	   arguments {
+!		       XmNhorizontalSpacing = 5;
+!		       XmNverticalSpacing   = 5;
+		       XmNwidth  = 750;
+		       XmNheight = 255;
+		      };
+	     controls {
+		       XmLabel	        block_var_label;
+		       XmLabel	        block_value_var_label;
+!XmLabel	        module_var_label;
+!XmLabel	        module_value_var_label;
+		       XmLabel	        description_var_label;
+		       XmLabel	        description_value_var_label;
+ 		       XmSeparator     { arguments {
+                                        XmNorientation=XmHORIZONTAL;
+                                        XmNheight=3;
+		       			XmNtopAttachment = XmATTACH_FORM;
+		       			XmNtopOffset = 30;
+		       			XmNleftAttachment = XmATTACH_FORM;
+		       			XmNrightAttachment= XmATTACH_FORM;
+                                        };};
+		       XmLabel	        variable_equation_label;
+		       XmScrolledList   variable_equation_list;
+		       XmPushButton	exit_dialog_var_equation;
+        	      };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Block'
+object
+	block_var_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNlabelString = k_blockname_label_text;
+		       !XmNfontList = normal;
+		       XmNforeground = blue;
+		      };
+	};
+
+! Actual value of 'Block'
+object
+	block_value_var_label : XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmLabel block_var_label;
+		       XmNleftOffset = 5;
+		       !XmNfontList = normal;
+		     };
+	   callbacks {
+      MrmNcreateCallback  = procedure create_proc(k_block_value_var_eq_label); 
+		     };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Module'
+object
+	module_var_label: XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+!		       XmNx = 180;
+		       XmNleftAttachment = XmATTACH_POSITION;
+		       XmNleftPosition = 25;
+		       XmNlabelString = k_module_label_text;
+		       !XmNfontList = normal;
+		       XmNforeground = blue;
+		      };
+	};
+
+! Actual value of 'Module'
+object
+	module_value_var_label : XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmLabel module_var_label;
+		       XmNleftOffset = 5;
+		       !XmNfontList = normal;
+		       XmNalignment = XmALIGNMENT_BEGINNING;
+		     };
+	   callbacks {
+    MrmNcreateCallback  = procedure create_proc(k_module_value_var_eq_label); 
+		     };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Description'
+object
+	description_var_label: XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNrightAttachment = XmATTACH_WIDGET;
+		       XmNrightWidget = XmLabel description_value_var_label;
+		       XmNrightOffset = 5;
+		       XmNlabelString = k_description_label_text;
+		       !XmNfontList = normal;
+		       XmNforeground = blue;
+		      };
+	};
+
+! Actual value of 'Descritpion'
+object
+	description_value_var_label : XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+!		       XmNrightAttachment = XmATTACH_FORM;
+!		       XmNrightOffset = 0;
+		       XmNrightAttachment = XmATTACH_POSITION;
+		       XmNrightPosition = 100;
+		       XmNalignment = XmALIGNMENT_END;
+		       !XmNfontList = normal;
+		     };
+	   callbacks {
+  MrmNcreateCallback  = procedure create_proc(k_descript_value_var_eq_label); 
+		     };
+	};
+
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! variable label
+object
+	variable_equation_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 40;
+		       XmNlabelString = k_variable_equation_label_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Variables value'
+object
+	variable_equation_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 765;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel variable_equation_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 40;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+         MrmNcreateCallback  = procedure create_proc(k_variable_equation_list); 
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Exit ('Done')
+object
+	exit_dialog_var_equation : XmPushButton
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 0;
+		       XmNlabelString = k_exit_results_label;
+		       !XmNfontList = bold; 
+		      };
+	   callbacks {
+    XmNactivateCallback  = procedure cancel_proc(k_variable_equation_window); 
+		      };
+	};
+
+!****************************************************************************
+
+!****************************************************************************
+!	Definizione del Bulletin Board Dialog ITERATIONS HISTORY
+!
+object
+	iteration_dialog : XmBulletinBoardDialog
+	{
+	   arguments {
+		       XmNdefaultPosition = false;
+		       XmNx = 430;
+		       XmNy = 155;
+		       XmNnoResize      = true;
+!		       XmNmarginWidth   = k_horizontal_offset;
+!		       XmNmarginHeight  = k_vertical_offset -5;
+		       XmNdialogStyle   = XmDIALOG_MODELESS;
+		       XmNdialogTitle   = k_iteration_window_title;
+		       XmNunitType      = Xm100TH_FONT_UNITS;
+                       XmNdefaultButton = XmPushButton exit_dialog_iteration;
+		      };
+	     controls {
+		       XmForm		form_iter_1;
+        	      };
+	   callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_iteration_window); 
+		      };
+	};
+
+!	Definizione Form e suoi controlli
+!
+object
+	form_iter_1: XmForm
+	{
+	   arguments {
+!		       XmNhorizontalSpacing = 5;
+!		       XmNverticalSpacing   = 5;
+		       XmNwidth  = 580;
+		       XmNheight = 230;
+		      };
+	     controls {
+		       XmLabel		iteration_label;
+		       XmLabel		neqsis_label;
+		       XmScrolledList	iteration_list;
+		       XmLabel		invitation_label_3;
+		       XmPushButton     exit_dialog_iteration;
+        	      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Iterations label
+object
+	iteration_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		       XmNrecomputeSize = true;
+		      };
+	   callbacks {
+	 MrmNcreateCallback  = procedure create_proc(k_iteration_label); 
+		     };
+	};
+
+! Number of system equations label   (passato da C)
+object
+	neqsis_label: XmLabel
+	{
+	   arguments {
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 15;
+		       XmNleftAttachment = XmATTACH_WIDGET;
+		       XmNleftWidget = XmLabel iteration_label;
+		       XmNleftOffset = 5;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       !XmNfontList    = bold;
+		       XmNbackground  = grey;
+		      };
+	   callbacks {
+	 MrmNcreateCallback  = procedure create_proc(k_neqsis_label); 
+		     };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Iteration history'
+object
+	iteration_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 520;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel iteration_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 40;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_iteration_list); 
+          XmNdefaultActionCallback = procedure selez_proc( k_iteration_list);
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Invitation label
+object
+	invitation_label_3: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 10;
+		       XmNlabelString = k_invit_twice_label;
+		       !XmNfontList = bold;
+		      };
+	};
+
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Exit ('Done')
+object
+	exit_dialog_iteration : XmPushButton
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 0;
+		       XmNlabelString = k_exit_results_label;
+		       !XmNfontList = bold; 
+		      };
+	   callbacks {
+           XmNactivateCallback  = procedure cancel_proc(k_iteration_window); 
+		      };
+	};
+
+!****************************************************************************
+!****************************************************************************
+!	Finestra discendente da COMPUTING ITERATION LIST:
+!	EQUATION ITERATION WINDOW
+!
+object
+	equation_iteration_dialog : XmBulletinBoardDialog
+	{
+	   arguments {
+		       XmNdefaultPosition = false;
+		       XmNx = 430;
+		       XmNy = kh_main + 40;
+		       XmNnoResize      = true;
+!		       XmNmarginWidth   = k_horizontal_offset;
+!		       XmNmarginHeight  = k_vertical_offset;
+		       XmNdialogStyle   = XmDIALOG_MODELESS;
+		       XmNdialogTitle   = k_equation_iteration_title;
+		       XmNunitType      = Xm100TH_FONT_UNITS;
+                       XmNdefaultButton =XmPushButton exit_dialog_eq_iteration;
+		      };
+	     controls {
+		       XmForm		form_iter_2;
+        	      };
+	   callbacks  {
+      MrmNcreateCallback  = procedure create_proc(k_equation_iteration_window); 
+		      };
+	};
+
+!	Definizione Form e suoi controlli
+!
+object
+	form_iter_2: XmForm
+	{
+	   arguments {
+!		       XmNhorizontalSpacing = 5;
+!		       XmNverticalSpacing   = 5;
+		       XmNwidth  = 530;
+		       XmNheight = 215;
+		      };
+	     controls {
+		       XmLabel	        equation_iteration_label;
+		       XmScrolledList   equation_iteration_list;
+		       XmLabel		invitation_label_4;
+		       XmPushButton 	exit_dialog_eq_iteration; 
+        	      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! equation per iteration label
+object
+	equation_iteration_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNlabelString = k_eq_iter_list_label_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Unsatisfied equation per iteration'
+object
+	equation_iteration_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 530;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel equation_iteration_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 40;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+        MrmNcreateCallback  = procedure create_proc(k_equation_iteration_list); 
+ 	XmNdefaultActionCallback = procedure
+                                     selez_proc( k_equation_iteration_list);
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Invitation label
+object
+	invitation_label_4: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 10;
+		       XmNx = k_horizontal_offset;
+		       XmNy = 205;
+		       XmNlabelString = k_invit_twice_label;
+		       !XmNfontList = bold;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Exit ('Done')
+object
+	exit_dialog_eq_iteration : XmPushButton
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 0;
+		       XmNlabelString = k_exit_results_label;
+		       !XmNfontList = bold; 
+		      };
+	   callbacks {
+    XmNactivateCallback  = procedure cancel_proc(k_equation_iteration_window); 
+		      };
+	};
+
+!****************************************************************************
+
+!****************************************************************************
+!	Definizione del Bulletin Board Dialog JACOBIAN MATRIX ANALYSIS
+!
+object
+	jacobian_dialog : XmBulletinBoardDialog
+	{
+	   arguments {
+		       XmNdefaultPosition = false;
+		       XmNx = 910;
+		       XmNy = kh_main + 210;
+		       XmNnoResize      = true;
+		       XmNmarginWidth   = 0;
+		       XmNmarginHeight  = 0;
+		       XmNdialogStyle   = XmDIALOG_MODELESS;
+		       XmNdialogTitle   = k_jacobian_window_title;
+		       XmNunitType      = Xm100TH_FONT_UNITS;
+		      };
+	     controls {
+		       XmForm		form_jac_1;
+        	      };
+	   callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_jacobian_window); 
+		      };
+	};
+
+!	Definizione Form e suoi controlli
+!
+object
+	form_jac_1: XmForm
+	{
+	   arguments {
+!		       XmNhorizontalSpacing = 5;
+!		       XmNverticalSpacing   = 5;
+!		       XmNwidth  = 360;
+		       XmNheight = 255;
+		      };
+	     controls {
+		       XmMenuBar	jacobian_menu;	
+		       XmLabel		jacobian_label;
+		       XmScrolledList	jacobian_list;
+		       XmLabel		invi_label;
+        	      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+object
+	jacobian_menu : XmMenuBar
+	{
+ 	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNheight = kh_menubar;
+		       XmNspacing = 80;
+		      };
+	     controls {
+		       XmCascadeButton	jacobian_cascade;
+		       XmCascadeButton  exit_jacobian;
+		      };
+	};
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+object
+	jacobian_cascade : XmCascadeButton
+	{
+ 	   arguments {
+	       	       XmNlabelString = 'Investigation';
+		       !XmNfontList = bold;
+		       XmNtraversalOn = true;
+		       XmNmnemonic    = investigate;
+		      };
+	    controls {
+		        XmPulldownMenu   jacobian_pulldown;
+		      };
+	};
+
+object
+	jacobian_pulldown : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton     blocks_toggle;
+		       XmPushButton     variables_toggle;
+		       XmCascadeButton  singular_cascade;
+		      };
+	};
+	
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+object
+	singular_cascade : XmCascadeButton
+	{
+ 	   arguments {
+	       	       XmNlabelString = k_singular_toggle_text;
+		       !XmNfontList = bold;
+		      };
+	    controls {
+		        XmPulldownMenu   singular_menu;
+		      };
+	};
+
+object
+	singular_menu    : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton  info_button;
+		       XmPushButton  row_button;
+		       XmPushButton  column_button;
+		      };
+	};
+	
+
+! 'Information'
+object
+	info_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_info_text;
+		       !XmNfontList = bold;
+		      };
+	   callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_info_button); 
+	       XmNactivateCallback = procedure 
+                          show_jacobian(k_jac_sing_info_window);	
+		      };
+	};
+
+! 'Row'
+object
+	row_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_row_text;
+		       !XmNfontList = bold;
+		      };
+	   callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_row_button); 
+ 	       XmNactivateCallback = procedure 
+                          show_jacobian(k_jac_sing_row_window);
+		      };
+	};
+
+! 'Column'
+object
+	column_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_column_text;
+		       !XmNfontList = bold;
+		      };
+	   callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_column_button); 
+ 	    XmNactivateCallback = procedure 
+                       show_jacobian(k_jac_sing_col_window);
+		      };
+	};
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Push button 'blocks'
+object
+	blocks_toggle : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_blocks_toggle_text;
+		       !XmNfontList = bold;
+		      };
+	   callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_display_blocks); 
+	   XmNactivateCallback = procedure 
+                                 show_jacobian(k_jacobian_blocks_window); 
+		      };
+	};
+
+! Push button 'Variables'
+object
+	variables_toggle : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_variables_toggle_text;
+		       !XmNfontList = bold;
+		      };
+	   callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_display_variables); 
+	   XmNactivateCallback = procedure 
+                                 show_jacobian(k_jacobian_variables_window); 
+		      };
+	};
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+object
+	exit_jacobian: XmCascadeButton
+	{
+ 	   arguments {
+	       	       XmNlabelString = 'End of session';
+		       !XmNfontList = bold;
+		       XmNtraversalOn = true;
+		       XmNmnemonic    = exit;
+		      };
+	    controls {
+		       XmPulldownMenu   exit_pulldown;
+		      };
+	};
+
+object
+	exit_pulldown : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton     exit_dialog_jacobian;
+		      };
+	};
+	
+! Exit ('Done')
+object
+	exit_dialog_jacobian : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_exit_results_label;
+		       !XmNfontList = bold; 
+		      };
+	   callbacks {
+           XmNactivateCallback  = procedure cancel_proc(k_jacobian_window); 
+		      };
+	};
+
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Jacobian label
+object
+	jacobian_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNleftOffset = 10;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmMenuBar jacobian_menu;
+		       XmNtopOffset = 10;
+		       XmNlabelString = k_jacobian_list_label_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Jacobian analysis'
+object
+	jacobian_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 320;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNleftOffset = 10;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNrightOffset = 10;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel jacobian_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 35;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_jacobian_list); 
+        XmNsingleSelectionCallback = procedure selez_jac_proc(k_jacobian_list);
+!         XmNdefaultActionCallback = procedure selez_jac_proc(k_jacobian_list);
+		      };
+	};
+
+! invitation label
+object
+	invi_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNleftOffset = 10;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 10;
+		       XmNlabelString = 
+			"Select an item in the list,   then go into the menu.";
+		       !XmNfontList = bold;
+		      };
+	};
+
+
+!****************************************************************************
+!****************************************************************************
+!	1^ Finestra discendente da JACOBIAN MATRIX ANALYSIS:
+!	JACOBIAN BLOCKS WINDOW
+!
+object
+	jacobian_blocks_dialog: XmBulletinBoardDialog
+	{
+	   arguments {
+		       XmNdefaultPosition = false;
+		       XmNx = 555;
+		       XmNy = 40;
+		       XmNnoResize      = true;
+!		       XmNmarginWidth   = k_horizontal_offset;
+!		       XmNmarginHeight  = k_vertical_offset;
+		       XmNdialogStyle   = XmDIALOG_MODELESS;
+		       XmNunitType      = Xm100TH_FONT_UNITS;
+                       XmNdefaultButton = XmPushButton exit_jacobian_blocks;
+		      };
+	     controls {
+		       XmForm		form_jac_2;
+        	      };
+	   callbacks  {
+      MrmNcreateCallback  = procedure create_proc(k_jacobian_blocks_window); 
+		      };
+	};
+
+!	Definizione Form e suoi controlli
+!
+object
+	form_jac_2: XmForm
+	{
+	   arguments {
+!		       XmNhorizontalSpacing = 5;
+!		       XmNverticalSpacing   = 5;
+		       XmNwidth  = 685;
+		       XmNheight = 515;
+		      };
+	     controls {
+		       XmLabel	        jac_block_label;
+		       XmScrolledList	jacobian_blocks_list;
+		       XmLabel		invi_block_label;
+ 		       XmSeparator     { arguments {
+                                        XmNorientation=XmHORIZONTAL;
+                                        XmNheight=3;
+		       			XmNtopAttachment = XmATTACH_FORM;
+		       			XmNtopOffset = 205;
+		       			XmNleftAttachment = XmATTACH_FORM;
+		       			XmNrightAttachment= XmATTACH_FORM;
+                                        };};
+		       XmLabel	        jac_block_var_label;
+		       XmScrolledList	jacobian_cols_list;
+		       XmLabel	        jac_block_eq_label;
+		       XmScrolledList	jacobian_rows_list;
+		       XmScrolledList	jacobian_values_list;
+		       XmPushButton	exit_jacobian_blocks;
+        	      };
+	};
+
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! label 'BLOCK      DESCRIPTION'
+object
+	jac_block_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNlabelString = k_jac_block_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Blocks to select'
+object
+	jacobian_blocks_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 650;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel jac_block_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 335;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+	      MrmNcreateCallback  = procedure 
+                                    create_proc(k_jacobian_blocks_list); 
+              XmNsingleSelectionCallback = procedure 
+                                    selez_jac_proc( k_jacobian_blocks_list);
+		      };
+	};
+
+! invitation label
+object
+	invi_block_label : XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 310;
+		       XmNlabelString = k_invitation_label;
+		       !XmNfontList = bold;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! label 'VARIABLE'
+object
+	jac_block_var_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNleftOffset = 90;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 280;
+		       XmNlabelString = k_jac_block_var_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Variables' (= colonne dello jacobiano)
+object
+	jacobian_cols_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 575;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNleftOffset = 90;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel jac_block_var_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 235;
+		       XmNvisibleItemCount = 1;
+                       XmNlistSizePolicy   = XmCONSTANT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmSTATIC;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc(k_jacobian_cols_list); 
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! label 'EQUATION'
+object
+	jac_block_eq_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 240;
+		       XmNlabelString = k_jac_block_eq_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Equations' (= righe dello jacobiano)
+object
+	jacobian_rows_list : XmScrolledList
+	{
+	   arguments {
+		       XmNwidth = 65;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel jac_block_eq_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 40;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmSTATIC;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc(k_jacobian_rows_list); 
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Values' (= valori dello jacobiano)
+object
+	jacobian_values_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 575;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNleftOffset = 90;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel jac_block_eq_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 40;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmSTATIC;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+    MrmNcreateCallback  = procedure create_proc(k_jacobian_values_list); 
+		      };
+	};
+
+! 'Done'
+object
+	exit_jacobian_blocks: XmPushButton
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_POSITION;
+		       XmNbottomPosition = 99;  ! ESPRIME UNA % RISPETTO
+						! ALL'ALTEZZA DELLA FORM
+!		       XmNbottomAttachment = XmATTACH_FORM;
+!		       XmNbottomOffset = 0;
+		       XmNlabelString = k_exit_results_label;
+		       !XmNfontList = bold; 
+		      };
+	   callbacks {
+       XmNactivateCallback  = procedure cancel_proc(k_jacobian_blocks_window); 
+		      };
+	};
+
+!****************************************************************************
+!****************************************************************************
+!	2^ Finestra discendente da JACOBIAN MATRIX ANALYSIS:
+!	JACOBIAN VARIABLES WINDOW
+!
+object
+	jacobian_variables_dialog: XmBulletinBoardDialog
+	{
+	   arguments {
+		       XmNdefaultPosition = false;
+		       XmNx = 350;
+		       XmNy = kh_main + 175;
+		       XmNnoResize      = true;
+!		       XmNmarginWidth   = k_horizontal_offset;
+!		       XmNmarginHeight  = k_vertical_offset;
+		       XmNdialogStyle   = XmDIALOG_MODELESS;
+		       XmNunitType      = Xm100TH_FONT_UNITS;
+                       XmNdefaultButton = XmPushButton exit_jacobian_variables;
+		      };
+	     controls {
+		       XmForm		form_jac_3;
+        	      };
+	   callbacks  {
+  MrmNcreateCallback  = procedure create_proc(k_jacobian_variables_window); 
+		      };
+	};
+
+!	Definizione Form e suoi controlli
+!
+object
+	form_jac_3: XmForm
+	{
+	   arguments {
+!		       XmNhorizontalSpacing = 5;
+!		       XmNverticalSpacing   = 5;
+		       XmNwidth  = 530;
+		       XmNheight = 390;
+		      };
+	     controls {
+		       XmLabel	        jac_variables_var_label;
+		       XmScrolledList	jacobian_variables_var_list;
+		       XmLabel		invi_variable_label;
+ 		       XmSeparator     { arguments {
+                                        XmNorientation=XmHORIZONTAL;
+                                        XmNheight=3;
+		       			XmNtopAttachment = XmATTACH_FORM;
+		       			XmNtopOffset = 225;
+		       			XmNleftAttachment = XmATTACH_FORM;
+		       			XmNrightAttachment= XmATTACH_FORM;
+                                        };};
+		       XmLabel	        jac_variables_eq_label;
+		       XmScrolledList	jacobian_variables_eq_list;
+		       XmPushButton	exit_jacobian_variables;
+        	      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! label 'VARIABLE    DESCRIPTION'
+object
+	jac_variables_var_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNlabelString = k_jac_sing_col_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Variable   Description'
+object
+	jacobian_variables_var_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 500;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel jac_variables_var_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 195;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+  MrmNcreateCallback  = procedure create_proc(k_jacobian_variables_var_list); 
+  XmNsingleSelectionCallback = procedure 
+                               selez_jac_proc( k_jacobian_variables_var_list);
+		      };
+	};
+
+
+! invitation label
+object
+	invi_variable_label : XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 170;
+		       XmNlabelString = k_invitation_label;
+		       !XmNfontList = bold;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! label 'EQUATION   BLOCK     JACOBIAN VALUE'
+object
+	jac_variables_eq_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 140;
+		       XmNlabelString = k_jac_variables_eq_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Equation     Block     JACOBIAN VALUE'
+object
+	jacobian_variables_eq_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 420;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNrightOffset = 100;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel jac_variables_eq_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 0;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+  MrmNcreateCallback  = procedure create_proc(k_jacobian_variables_eq_list); 
+		      };
+	};
+
+! 'Done'
+object
+	exit_jacobian_variables: XmPushButton
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 0;
+		       XmNlabelString = k_exit_results_label;
+		       !XmNfontList = bold; 
+		      };
+	   callbacks {
+    XmNactivateCallback  = procedure cancel_proc(k_jacobian_variables_window); 
+		      };
+	};
+
+
+!****************************************************************************
+!****************************************************************************
+!	3^ Finestra discendente da JACOBIAN MATRIX ANALYSIS:
+!	NULL ROWS WINDOW
+!
+object
+	jacobian_sing_row_dialog: XmBulletinBoardDialog
+	{
+	   arguments {
+		       XmNdefaultPosition = false;
+		       XmNx = 10;
+		       XmNy = 200;
+		       XmNnoResize      = true;
+		       XmNmarginWidth   = k_horizontal_offset;
+		       XmNmarginHeight  = k_vertical_offset;
+		       XmNdialogStyle   = XmDIALOG_MODELESS;
+		       XmNunitType      = Xm100TH_FONT_UNITS;
+                       XmNdefaultButton = XmPushButton exit_jacobian_rows;
+		      };
+	     controls {
+		       XmForm		form_jac_4;
+        	      };
+	   callbacks  {
+           MrmNcreateCallback  = procedure create_proc(k_jac_sing_row_window); 
+		      };
+	};
+
+!	Definizione Form e suoi controlli
+!
+object
+	form_jac_4: XmForm
+	{
+	   arguments {
+!		       XmNhorizontalSpacing = 5;
+!		       XmNverticalSpacing   = 5;
+		       XmNwidth  = 655;
+		       XmNheight = 445;
+		      };
+	     controls {
+		       XmLabel	        jac_sing_row_label;
+		       XmScrolledList	jac_sing_row_list;
+		       XmLabel		invi_row_label;
+ 		       XmSeparator     { arguments {
+                                        XmNorientation=XmHORIZONTAL;
+                                        XmNheight=3;
+		       			XmNleftAttachment = XmATTACH_FORM;
+		       			XmNrightAttachment = XmATTACH_FORM;
+		       			XmNtopAttachment = XmATTACH_FORM;
+		       			XmNtopOffset = 225;
+                                        };};
+		       XmLabel	        jac_sing_row_var_label;
+		       XmScrolledList	jac_sing_row_var_list;
+		       XmLabel		jac_sing_row_reason_label;
+	 	       XmPushButton	exit_jacobian_rows;
+        	      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! label 'EQUATION   BLOCK'
+object
+	jac_sing_row_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNlabelString = k_jac_sing_row_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Equation     Block'
+object
+	jac_sing_row_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 630;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel jac_sing_row_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 250;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+		      };
+	   callbacks {
+          MrmNcreateCallback  = procedure create_proc(k_jac_sing_row_list); 
+   XmNsingleSelectionCallback = procedure selez_jac_proc(k_jac_sing_row_list);
+		      };
+	};
+
+! invitation label
+object
+	invi_row_label : XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 225;
+		       XmNlabelString = k_invitation_label;
+		       !XmNfontList = bold;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! label ' *  VARIABLES INVOLVED IN EVERY EQUATION '
+object
+	jac_sing_row_var_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 195;
+		       XmNlabelString = 
+				' VARIABLES involved in the selected equation';
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'Variable   Description'
+object
+	jac_sing_row_var_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 610;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel jac_sing_row_var_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 45;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+  MrmNcreateCallback  = procedure create_proc(k_jac_sing_row_var_list); 
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! label 'At least one of the above equations...'
+object
+	jac_sing_row_reason_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 15;
+		       XmNlabelString = ' ';   !passata da C
+		       !XmNfontList = normal;
+		       XmNalignment = XmALIGNMENT_BEGINNING;
+		      };
+	   callbacks {
+  MrmNcreateCallback  = procedure create_proc(k_jac_sing_row_reason); 
+		      };
+	};
+
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! 'Done'
+object
+	exit_jacobian_rows: XmPushButton
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 0;
+		       XmNlabelString = k_exit_results_label;
+		       !XmNfontList = bold; 
+		      };
+	   callbacks {
+    XmNactivateCallback  = procedure cancel_proc(k_jac_sing_row_window); 
+		      };
+	};
+
+
+!****************************************************************************
+!****************************************************************************
+!	4^ Finestra discendente da JACOBIAN MATRIX ANALYSIS:
+!	NULL COLUMNS WINDOW
+!
+object
+	jacobian_sing_col_dialog: XmBulletinBoardDialog
+	{
+	   arguments {
+		       XmNdefaultPosition = false;
+		       XmNx = 10;
+		       XmNy = 700;
+		       XmNnoResize      = true;
+		       XmNmarginWidth   = k_horizontal_offset;
+		       XmNmarginHeight  = k_vertical_offset;
+		       XmNdialogStyle   = XmDIALOG_MODELESS;
+		       XmNunitType      = Xm100TH_FONT_UNITS;
+                       XmNdefaultButton = XmPushButton exit_jacobian_columns;
+		      };
+	     controls {
+		       XmForm		form_jac_5;
+        	      };
+	   callbacks  {
+           MrmNcreateCallback  = procedure create_proc(k_jac_sing_col_window); 
+		      };
+	};
+
+!	Definizione Form e suoi controlli
+!
+object
+	form_jac_5: XmForm
+	{
+	   arguments {
+!		       XmNhorizontalSpacing = 5;
+!		       XmNverticalSpacing   = 5;
+		       XmNwidth  = 595;
+		       XmNheight = 265;
+		      };
+	     controls {
+		       XmLabel	        jac_sing_col_label;
+		       XmScrolledList	jac_sing_col_list;
+		       XmLabel	        jac_sing_col_reason_label_1;
+		       XmLabel	        jac_sing_col_reason_label_2;
+	 	       XmPushButton	exit_jacobian_columns;
+        	      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! label 'VARIABLE   DESCRIPTION'
+object
+	jac_sing_col_label: XmLabel
+	{
+	   arguments {
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNtopOffset = 0;
+		       XmNlabelString = k_jac_sing_col_text;
+		       !XmNfontList = bold;
+		       XmNforeground = blue;
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! Scrolled List 'VARIABLE   DESCRIPTION'
+object
+	jac_sing_col_list : XmScrolledList
+	{
+	   arguments {
+!		       XmNwidth = 570;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_WIDGET;
+		       XmNtopWidget = XmLabel jac_sing_col_label;
+		       XmNtopOffset = 5;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 90;
+		       XmNvisibleItemCount = 10;
+                       XmNlistSizePolicy   = XmCONSTANT;
+		       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+		       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+		       XmNfontList = fixed;
+		       XmNhighlightThickness = selez_shadow;
+		       XmNtraversalOn = true;
+		      };
+	   callbacks {
+  MrmNcreateCallback  = procedure create_proc(k_jac_sing_col_list); 
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! label 'There are no equations...'
+object
+	jac_sing_col_reason_label_1: XmLabel
+	{
+	   arguments {
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 40;
+		       XmNlabelString = ' ';   !passata da C
+		       !XmNfontList = normal;
+		       XmNalignment = XmALIGNMENT_BEGINNING;
+		      };
+	   callbacks {
+  MrmNcreateCallback  = procedure create_proc(k_jac_sing_col_reason_1); 
+		      };
+	};
+
+! label 'Such variables are likely...'
+object
+	jac_sing_col_reason_label_2: XmLabel
+	{
+	   arguments {
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 15;
+		       XmNlabelString = ' ';   !passata da C
+		       !XmNfontList = normal;
+		      };
+	   callbacks {
+  MrmNcreateCallback  = procedure create_proc(k_jac_sing_col_reason_2); 
+		      };
+	};
+
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+! 'Done'
+object
+	exit_jacobian_columns: XmPushButton
+	{
+	   arguments {
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+		       XmNbottomOffset = 0;
+		       XmNlabelString = k_exit_results_label;
+		       !XmNfontList = bold; 
+		      };
+	   callbacks {
+    XmNactivateCallback  = procedure cancel_proc(k_jac_sing_col_window); 
+		      };
+	};
+!****************************************************************************
+!****************************************************************************
+
+
+end module;
+!****************************************************************************
+!****************************************************************************
+!*** FINE FILE CALCSTAZ.UIL ***

@@ -1,0 +1,1090 @@
+****
+COLN      BLOCCO (CUTP) - COLLETTORE USCITA TURBOPOMPA ALIMENTO                
+COLN      BLOCCO (CUPA) - COLLETTORE USCITA MOTOPOMPA ALIMENTO - A -           
+COLN      BLOCCO (CUPB) - COLLETTORE USCITA MOTOPOMPA ALIMENTO - B -           
+VALV      BLOCCO (TUTP) - TUBAZIONE USCITA TURBOPOMPA ALIMENTO                 
+VALV      BLOCCO (TUPA) - TUBAZIONE USCITA MOTOPOMPA ALIMENTO - A -            
+VALV      BLOCCO (TUPB) - TUBAZIONE USCITA MOTOPOMPA ALIMENTO - B -            
+COLN      BLOCCO (CIRA) - COLLETTORE INGRESSO RISCALDATORI ALIMENTO            
+TUBO      BLOCCO (TUDG) - TUBAZIONE USCITA DAL DEGASATORE                      
+COLN      BLOCCO (CITP) - COLLETTORE INGRESSO POMPE ALIMENTO                   
+DEGN      BLOCCO (DEGA) - DEGASATORE                                           
+VALV      BLOCCO (TRTP) - LINEA RICIRCOLO TURBOPOMPA ALIMENTO                  
+VALV      BLOCCO (TRPA) - LINEA RICIRCOLO MOTOPOMPA ALIMENTO A                 
+VALV      BLOCCO (TRPB) - LINEA RICIRCOLO MOTOPOMPA ALIMENTO B                 
+VALV      BLOCCO (FX52) - VALVOLA FX52                                         
+RSCD      BLOCCO (R4A ) - RISCALDATORE R4A BRINDISI                            
+RSCD      BLOCCO (R5A ) - RISCALDATORE R5A BRINDISI                            
+RSCD      BLOCCO (R6A ) - RISCALDATORE R6A BRINDISI                            
+VALV      BLOCCO (F01A) - LINEA DRENAGGIO INGRESSO AL RISCALDATORE R5A         
+VALV      BLOCCO (F02A) - LINEA DRENAGGIO INGRESSO AL RISCALDATORE R4A         
+VALV      BLOCCO (F1AC) - DRENAGGIO RISCALDATORE R6A A CONDENSATORE            
+VALV      BLOCCO (F2AC) - DRENAGGIO RISCALDATORE R5A A CONDENSATORE            
+VALV      BLOCCO (F3AC) - DRENAGGIO RISCALDATORE R4A A CONDENSATORE            
+VALV      BLOCCO (F03A) - DRENAGGIO RISCALDATORE R4A A MIX CONDENSATO          
+VALV      BLOCCO (TIRA) - TUBAZIONE INGRESSO RISCALDATORI FILA A               
+COLN      BLOCCO (CIAR) - COLLETTORE INGRESSO RISCALDATORI FILA A              
+COLN      BLOCCO (CURA) - COLLETTORE USCITA RISCALDATORI FILA A                
+VALV      BLOCCO (TURA) - LINEA USCITA RISCALDATORI FILA A                     
+RSCD      BLOCCO (R4B ) - RISCALDATORE R4B BRINDISI                            
+RSCD      BLOCCO (R5B ) - RISCALDATORE R5B BRINDISI                            
+RSCD      BLOCCO (R6B ) - RISCALDATORE R6B BRINDISI                            
+VALV      BLOCCO (F01B) - LINEA DRENAGGIO INGRESSO AL RISCALDATORE R5B         
+VALV      BLOCCO (F02B) - LINEA DRENAGGIO INGRESSO AL RISCALDATORE R4B         
+VALV      BLOCCO (F1BC) - DRENAGGIO RISCALDATORE R6B A CONDENSATORE            
+VALV      BLOCCO (F2BC) - DRENAGGIO RISCALDATORE R5B A CONDENSATORE            
+VALV      BLOCCO (F3BC) - DRENAGGIO RISCALDATORE R4B A CONDENSATORE            
+VALV      BLOCCO (F03B) - DRENAGGIO RISCALDATORE R4B A MIX CONDENSATO          
+VALV      BLOCCO (TIRB) - TUBAZIONE INGRESSO RISCALDATORI FILA B               
+COLN      BLOCCO (CIBR) - COLLETTORE INGRESSO RISCALDATORI FILA B              
+COLN      BLOCCO (CURB) - COLLETTORE USCITA RISCALDATORI FILA B                
+VALV      BLOCCO (TURB) - LINEA USCITA RISCALDATORI FILA B                     
+VALV      BLOCCO (TBRA) - LINEA DI BYPASS DEI RISCALDATORI                     
+COLN      BLOCCO (CURE) - COLLETTORE USCITA ALIMENTO RISCALDATORI              
+NODO      BLOCCO (CD6B) - SOMMA PORTATA DREN. R6B                              
+NODO      BLOCCO (CD5B) - SOMMA PORTATE DREN. R5B                              
+NODO      BLOCCO (CD4B) - SOMMA PORTATE DREN. R4B                              
+NODO      BLOCCO (CD6A) - SOMMA PORTATE DREN. R6A                              
+NODO      BLOCCO (CD5A) - SOMMA PORTATE DREN. R5A                              
+NODO      BLOCCO (CD4A) - SOMMA PORTATE DREN. R4A                              
+MIXN      BLOCCO (MR6A) - MISCELATORE INGRESSO R6A                             
+MIXN      BLOCCO (MR6B) - MISCELATORE INGRESSO R6B                             
+MIXN      BLOCCO (MR4A) - MISCELATORE INGRESSO R4A                             
+MIXN      BLOCCO (MR4B) - MISCELATORE INGRESSO R4B                             
+CPOM      BLOCCO (TPOM) - TURBOPOMPA ALIMENTO                                  
+CPOM      BLOCCO (PALA) - ELETTROPOMPA A ALIMENTO                              
+CPOM      BLOCCO (PALB) - ELETTROPOMPA B ALIMENTO                              
+MIXN      BLOCCO (MIRD) - MISCELATORE RIENTRO DRENAGGI                         
+MIXN      BLOCCO (MIAB) - MIXER DRENAGGI INGRESSO CONDENSATO                   
+MIXN      BLOCCO (MIDG) - MIXER VAPORE INGRESSO DEGASATORE                     
+DISN      BLOCCO (DFX5) - DISTRIBUTORE ENT. ING. FX52                          
+VALV      BLOCCO (ATRA) - VALVOLA A ATTEMP. RH AD ACQUA                        
+VALV      BLOCCO (ATRB) - VALVOLA B ATTEMP. RH AD ACQUA                        
+NODO      BLOCCO (SWDG) - SOMMA LE PORTATE USCENTI DAL DEGASATORE              
+TUBO      BLOCCO (TIEC) - TUBAZIONE DAL COLLETTORE ALIMENTO ALL'ECONOMIZZ.     
+COLN      BLOCCO (MIRI) - collettore dei ricircoli pompe alimento              
+TUBO      BLOCCO (TIDG) - tubazione di scarico al degasatore ricircoli pompe   
+****
+ALALI100                                                        
+****
+COLNCUTP  BL.-CUTP- **** MODULO COLN - COLLETTORE USCITA TURBOPOMPA ALIMENTO   
+HCOLCUTP  --UA-- ENTALPIA MEDIA DEL FLUIDO NEL COLLETTORE                      
+PCOLCUTP  --UA-- PRESSIONE NEL COLLETTORE                                      
+WPOMTPOM  --IN-- #WE_1CUTP#....................<===CPOMTPOM  BL.-TPOM-         
+HUPMTPOM  --IN-- #HE_1CUTP#....................<===CPOMTPOM  BL.-TPOM-         
+WVALTUTP  --IN-- #WU_1CUTP#....................<===VALVTUTP  BL.-TUTP-         
+HCOLCIRA  --IN-- #HU_1CUTP#....................<===COLNCIRA  BL.-CIRA-         
+WVALTRTP  --IN-- #WU_2CUTP#....................<===VALVTRTP  BL.-TRTP-         
+HLDGDEGA  --IN-- #HU_2CUTP#....................<===DEGNDEGA  BL.-DEGA-         
+****                                                                           
+****                                                                           
+COLNCUPA  BL.-CUPA- **** MODULO COLN - COLLETTORE USCITA MOTOPOMPA ALIMENTO - A
+HCOLCUPA  --UA-- ENTALPIA MEDIA DEL FLUIDO NEL COLLETTORE                      
+PCOLCUPA  --UA-- PRESSIONE NEL COLLETTORE                                      
+WPOMPALA  --IN-- #WE_1CUPA#....................<===CPOMPALA  BL.-PALA-         
+HUPMPALA  --IN-- #HE_1CUPA#....................<===CPOMPALA  BL.-PALA-         
+WVALTUPA  --IN-- #WU_1CUPA#....................<===VALVTUPA  BL.-TUPA-         
+HCOLCIRA  --IN-- #HU_1CUPA#....................<===COLNCIRA  BL.-CIRA-         
+WVALTRPA  --IN-- #WU_2CUPA#....................<===VALVTRPA  BL.-TRPA-         
+HLDGDEGA  --IN-- #HU_2CUPA#....................<===DEGNDEGA  BL.-DEGA-         
+****                                                                           
+****                                                                           
+COLNCUPB  BL.-CUPB- **** MODULO COLN - COLLETTORE USCITA MOTOPOMPA ALIMENTO - B
+HCOLCUPB  --UA-- ENTALPIA MEDIA DEL FLUIDO NEL COLLETTORE                      
+PCOLCUPB  --UA-- PRESSIONE NEL COLLETTORE                                      
+WPOMPALB  --IN-- #WE_1CUPB#....................<===CPOMPALB  BL.-PALB-         
+HUPMPALB  --IN-- #HE_1CUPB#....................<===CPOMPALB  BL.-PALB-         
+WVALTUPB  --IN-- #WU_1CUPB#....................<===VALVTUPB  BL.-TUPB-         
+HCOLCIRA  --IN-- #HU_1CUPB#....................<===COLNCIRA  BL.-CIRA-         
+WVALTRPB  --IN-- #WU_2CUPB#....................<===VALVTRPB  BL.-TRPB-         
+HLDGDEGA  --IN-- #HU_2CUPB#....................<===DEGNDEGA  BL.-DEGA-         
+****                                                                           
+****                                                                           
+VALVTUTP  BL.-TUTP- **** MODULO VALV - TUBAZIONE USCITA TURBOPOMPA ALIMENTO    
+WVALTUTP  --UA-- PORTATA                                                       
+PCOLCUTP  --IN-- #PIVATUTP#....................<===COLNCUTP  BL.-CUTP-         
+PCOLCIRA  --IN-- #PUVATUTP#....................<===COLNCIRA  BL.-CIRA-         
+HCOLCUTP  --IN-- #HVALTUTP#....................<===COLNCUTP  BL.-CUTP-         
+ALZATUTP  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+VALVTUPA  BL.-TUPA- **** MODULO VALV - TUBAZIONE USCITA MOTOPOMPA ALIMENTO - A 
+WVALTUPA  --UA-- PORTATA                                                       
+PCOLCUPA  --IN-- #PIVATUPA#....................<===COLNCUPA  BL.-CUPA-         
+PCOLCIRA  --IN-- #PUVATUPA#....................<===COLNCIRA  BL.-CIRA-         
+HCOLCUPA  --IN-- #HVALTUPA#....................<===COLNCUPA  BL.-CUPA-         
+ALZATUPA  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+VALVTUPB  BL.-TUPB- **** MODULO VALV - TUBAZIONE USCITA MOTOPOMPA ALIMENTO - B 
+WVALTUPB  --UA-- PORTATA                                                       
+PCOLCUPB  --IN-- #PIVATUPB#....................<===COLNCUPB  BL.-CUPB-         
+PCOLCIRA  --IN-- #PUVATUPB#....................<===COLNCIRA  BL.-CIRA-         
+HCOLCUPB  --IN-- #HVALTUPB#....................<===COLNCUPB  BL.-CUPB-         
+ALZATUPB  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+COLNCIRA  BL.-CIRA- **** MODULO COLN - COLLETTORE INGRESSO RISCALDATORI ALIMENT
+HCOLCIRA  --UA-- ENTALPIA MEDIA DEL FLUIDO NEL COLLETTORE                      
+PCOLCIRA  --UA-- PRESSIONE NEL COLLETTORE                                      
+WVALTUTP  --IN-- #WE_1CIRA#....................<===VALVTUTP  BL.-TUTP-         
+HCOLCUTP  --IN-- #HE_1CIRA#....................<===COLNCUTP  BL.-CUTP-         
+WVALTUPA  --IN-- #WE_2CIRA#....................<===VALVTUPA  BL.-TUPA-         
+HCOLCUPA  --IN-- #HE_2CIRA#....................<===COLNCUPA  BL.-CUPA-         
+WVALTUPB  --IN-- #WE_3CIRA#....................<===VALVTUPB  BL.-TUPB-         
+HCOLCUPB  --IN-- #HE_3CIRA#....................<===COLNCUPB  BL.-CUPB-         
+WE_4CIRA  --IN-- PORTATA TUBO ENTRANTE  N.  4                                  
+HE_4CIRA  --IN-- ENTALPIA TUBO ENTRANTE N.  4                                  
+WVALATRA  --IN-- #WU_1CIRA#....................<===VALVATRA  BL.-ATRA-         
+HU_1CIRA  --IN-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+WVALATRB  --IN-- #WU_2CIRA#....................<===VALVATRB  BL.-ATRB-         
+HU_2CIRA  --IN-- ENTALPIA TUBO USCENTE N.  2 (SE INVERSIONE DI PORTATA)        
+WVALTIRA  --IN-- #WU_3CIRA#....................<===VALVTIRA  BL.-TIRA-         
+HCOLCIAR  --IN-- #HU_3CIRA#....................<===COLNCIAR  BL.-CIAR-         
+WVALTBRA  --IN-- #WU_4CIRA#....................<===VALVTBRA  BL.-TBRA-         
+HCOLCURE  --IN-- #HU_4CIRA#....................<===COLNCURE  BL.-CURE-         
+WVALTIRB  --IN-- #WU_5CIRA#....................<===VALVTIRB  BL.-TIRB-         
+HCOLCIBR  --IN-- #HU_5CIRA#....................<===COLNCIBR  BL.-CIBR-         
+****                                                                           
+****                                                                           
+TUBOTUDG  BL.-TUDG- **** MODULO TUBO - TUBAZIONE USCITA DAL DEGASATORE         
+WTUBTUDG  --UA-- PORTATA                                                       
+PLDGDEGA  --IN-- #PITUTUDG#....................<===DEGNDEGA  BL.-DEGA-         
+PCOLCITP  --IN-- #PUTUTUDG#....................<===COLNCITP  BL.-CITP-         
+HLDGDEGA  --IN-- #HTUBTUDG#....................<===DEGNDEGA  BL.-DEGA-         
+AKTBTUDG  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+****                                                                           
+****                                                                           
+COLNCITP  BL.-CITP- **** MODULO COLN - COLLETTORE INGRESSO POMPE ALIMENTO      
+HCOLCITP  --UA-- ENTALPIA MEDIA DEL FLUIDO NEL COLLETTORE                      
+PCOLCITP  --UA-- PRESSIONE NEL COLLETTORE                                      
+WTUBTUDG  --IN-- #WE_1CITP#....................<===TUBOTUDG  BL.-TUDG-         
+HLDGDEGA  --IN-- #HE_1CITP#....................<===DEGNDEGA  BL.-DEGA-         
+WPOMTPOM  --IN-- #WU_1CITP#....................<===CPOMTPOM  BL.-TPOM-         
+HUPMTPOM  --IN-- #HU_1CITP#....................<===CPOMTPOM  BL.-TPOM-         
+WPOMPALA  --IN-- #WU_2CITP#....................<===CPOMPALA  BL.-PALA-         
+HUPMPALA  --IN-- #HU_2CITP#....................<===CPOMPALA  BL.-PALA-         
+WPOMPALB  --IN-- #WU_3CITP#....................<===CPOMPALB  BL.-PALB-         
+HUPMPALB  --IN-- #HU_3CITP#....................<===CPOMPALB  BL.-PALB-         
+****                                                                           
+****                                                                           
+DEGNDEGA  BL.-DEGA- **** MODULO DEGN - DEGASATORE                              
+HLDGDEGA  --US-- ENTALPIA ACQUA USCITA SERBATOIO DEGASATORE                    
+HVDGDEGA  --US-- ENTALPIA MEDIA VAPORE NEL DEGASATORE                          
+LIVDDEGA  --US-- LIVELLO D'ACQUA NEL SERBATOIO DEL DEGASATORE                  
+PVDGDEGA  --US-- PRESSIONE MEDIA VAPORE DEGASATORE                             
+PLDGDEGA  --UA-- PRESSIONE SUL FONDO DEL SERBATOIO DEGASATORE                  
+WMIXMIDG  --IN-- #WSPDDEGA#....................<===MIXNMIDG  BL.-MIDG-         
+HMIXMIDG  --IN-- #HSPDDEGA#....................<===MIXNMIDG  BL.-MIDG-         
+WALIDEGA  --IN-- PORTATA ACQUA ALIMENTO INGRESSO TORRETTA                      
+HALIDEGA  --IN-- ENTALPIA ACQUA ALIMENTO INGRESSO TORRETTA                     
+WDREDEGA  --IN-- PORTATA DRENAGGI INGRESSO TORRETTA                            
+HDREDEGA  --IN-- ENTALPIA DRENAGGI INGRESSO TORRETTA                           
+USOMSWDG  --IN-- #WOUTDEGA#....................<===NODOSWDG  BL.-SWDG-         
+WRISDEGA  --IN-- PORTATA VAPORE DI AVVIAMENTO NEL SERBATOIO                    
+HRISDEGA  --IN-- ENTALPIA VAPORE DI AVVIAMENTO NEL SERBATOIO                   
+WTUBTIDG  --IN-- #WRICDEGA#....................<===TUBOTIDG  BL.-TIDG-         
+HCOLMIRI  --IN-- #HRICDEGA#....................<===COLNMIRI  BL.-MIRI-         
+****                                                                           
+****                                                                           
+VALVTRTP  BL.-TRTP- **** MODULO VALV - LINEA RICIRCOLO TURBOPOMPA ALIMENTO     
+WVALTRTP  --UA-- PORTATA TUBO-VALVOLA                                          
+PCOLCUTP  --IN-- #PIVATRTP#....................<===COLNCUTP  BL.-CUTP-         
+PCOLMIRI  --IN-- #PUVATRTP#....................<===COLNMIRI  BL.-MIRI-         
+HCOLCUTP  --IN-- #HVALTRTP#....................<===COLNCUTP  BL.-CUTP-         
+ALZATRTP  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVTRPA  BL.-TRPA- **** MODULO VALV - LINEA RICIRCOLO MOTOPOMPA ALIMENTO A    
+WVALTRPA  --UA-- PORTATA TUBO-VALVOLA                                          
+PCOLCUPA  --IN-- #PIVATRPA#....................<===COLNCUPA  BL.-CUPA-         
+PCOLMIRI  --IN-- #PUVATRPA#....................<===COLNMIRI  BL.-MIRI-         
+HCOLCUPA  --IN-- #HVALTRPA#....................<===COLNCUPA  BL.-CUPA-         
+ALZATRPA  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVTRPB  BL.-TRPB- **** MODULO VALV - LINEA RICIRCOLO MOTOPOMPA ALIMENTO B    
+WVALTRPB  --UA-- PORTATA TUBO-VALVOLA                                          
+PCOLCUPB  --IN-- #PIVATRPB#....................<===COLNCUPB  BL.-CUPB-         
+PCOLMIRI  --IN-- #PUVATRPB#....................<===COLNMIRI  BL.-MIRI-         
+HCOLCUPB  --IN-- #HVALTRPB#....................<===COLNCUPB  BL.-CUPB-         
+ALZATRPB  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVFX52  BL.-FX52- **** MODULO VALV - VALVOLA FX52                            
+WVALFX52  --UA-- PORTATA TUBO-VALVOLA                                          
+PIVAFX52  --IN-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PVDGDEGA  --IN-- #PUVAFX52#....................<===DEGNDEGA  BL.-DEGA-         
+H_1_DFX5  --IN-- #HVALFX52#....................<===DISNDFX5  BL.-DFX5-         
+ALZAFX52  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+RSCDR4A   BL.-R4A - **** MODULO RSCD - RISCALDATORE R4A BRINDISI               
+LIV_R4A   --US-- LIVELLO DELL'ACQUA DI CONDENSAZIONE                           
+P___R4A   --US-- PRESSIONE NELLA CAVITA'                                       
+HDU_R4A   --US-- ENTALPIA DI USCITA ACQUA DRENAGGIO                            
+HALUR4A   --US-- ENTALPIA ACQUA ALIM. USCITA RISCALDATORE                      
+TMD_R4A   --US-- TEMPERATURA MEDIA METALLO VALV ZONA DESURR.                   
+HALCR4A   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA COND.                        
+TMC_R4A   --US-- TEMPERATURA MEDIA METALLO VALV ZONA COND.                     
+HALFR4A   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA SOTTORAFF.                   
+TMF_R4A   --US-- TEMPERATURA MEDIA METALLO VALV ZONA SOTTORAFF.                
+WAL_R4A   --UA-- PORTATA ACQUA ALIMENTO                                        
+PCOLCIAR  --IN-- #PALIR4A #....................<===COLNCIAR  BL.-CIAR-         
+PALIR5A   --IN-- #PALUR4A #....................<===+RSCR5A   BL.-R5A -         
+HCOLCIAR  --IN-- #HALIR4A #....................<===COLNCIAR  BL.-CIAR-         
+WVALF02A  --IN-- #WDI_R4A #....................<===VALVF02A  BL.-F02A-         
+HDU_R5A   --IN-- #HDI_R4A #....................<===+RSCR5A   BL.-R5A -         
+USOMCD4A  --IN-- #WDU_R4A #....................<===NODOCD4A  BL.-CD4A-         
+WMIXMR4A  --IN-- #WV__R4A #....................<===MIXNMR4A  BL.-MR4A-         
+HMIXMR4A  --IN-- #HV__R4A #....................<===MIXNMR4A  BL.-MR4A-         
+GAMVR4A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR4A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR4A   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+****                                                                           
+****                                                                           
++RSCR5A   BL.-R5A - **** MODULO RSCD - RISCALDATORE R5A BRINDISI               
+LIV_R5A   --US-- LIVELLO DELL'ACQUA DI CONDENSAZIONE                           
+P___R5A   --US-- PRESSIONE NELLA CAVITA'                                       
+HDU_R5A   --US-- ENTALPIA DI USCITA ACQUA DRENAGGIO                            
+HALUR5A   --US-- ENTALPIA ACQUA ALIM. USCITA RISCALDATORE                      
+TMD_R5A   --US-- TEMPERATURA MEDIA METALLO VALV ZONA DESURR.                   
+HALCR5A   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA COND.                        
+TMC_R5A   --US-- TEMPERATURA MEDIA METALLO VALV ZONA COND.                     
+HALFR5A   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA SOTTORAFF.                   
+TMF_R5A   --US-- TEMPERATURA MEDIA METALLO VALV ZONA SOTTORAFF.                
+PALIR5A   --UA-- PRESSIONE ACQUA ALIM. INGRESSO RISCALDATORE                   
+PALIR6A   --IN-- #PALUR5A #....................<===+RSCR6A   BL.-R6A -         
+WAL_R4A   --IN-- #WAL_R5A #....................<===RSCDR4A   BL.-R4A -         
+HALUR4A   --IN-- #HALIR5A #....................<===RSCDR4A   BL.-R4A -         
+WVALF01A  --IN-- #WDI_R5A #....................<===VALVF01A  BL.-F01A-         
+HDU_R6A   --IN-- #HDI_R5A #....................<===+RSCR6A   BL.-R6A -         
+USOMCD5A  --IN-- #WDU_R5A #....................<===NODOCD5A  BL.-CD5A-         
+WV__R5A   --IN-- PORTATA SPILLAMENTO ENTRANTE NEL RISCALD.                     
+HV__R5A   --IN-- ENTALPIA SPILLAMENTO ENTRANTE NEL RISCALD.                    
+GAMVR5A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR5A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR5A   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+****                                                                           
+****                                                                           
++RSCR6A   BL.-R6A - **** MODULO RSCD - RISCALDATORE R6A BRINDISI               
+LIV_R6A   --US-- LIVELLO DELL'ACQUA DI CONDENSAZIONE                           
+P___R6A   --US-- PRESSIONE NELLA CAVITA'                                       
+HDU_R6A   --US-- ENTALPIA DI USCITA ACQUA DRENAGGIO                            
+HALUR6A   --US-- ENTALPIA ACQUA ALIM. USCITA RISCALDATORE                      
+TMD_R6A   --US-- TEMPERATURA MEDIA METALLO VALV ZONA DESURR.                   
+HALCR6A   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA COND.                        
+TMC_R6A   --US-- TEMPERATURA MEDIA METALLO VALV ZONA COND.                     
+HALFR6A   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA SOTTORAFF.                   
+TMF_R6A   --US-- TEMPERATURA MEDIA METALLO VALV ZONA SOTTORAFF.                
+PALIR6A   --UA-- PRESSIONE ACQUA ALIM. INGRESSO RISCALDATORE                   
+PCOLCURA  --IN-- #PALUR6A #....................<===COLNCURA  BL.-CURA-         
+WAL_R4A   --IN-- #WAL_R6A #....................<===RSCDR4A   BL.-R4A -         
+HALUR5A   --IN-- #HALIR6A #....................<===+RSCR5A   BL.-R5A -         
+WDI_R6A   --IN-- PORTATA DRENAGGIO ENTRANTE NEL RISCALD.                       
+HDI_R6A   --IN-- ENTALPIA DRENAGGIO ENTRANTE NEL RISCALD.                      
+USOMCD6A  --IN-- #WDU_R6A #....................<===NODOCD6A  BL.-CD6A-         
+WMIXMR6A  --IN-- #WV__R6A #....................<===MIXNMR6A  BL.-MR6A-         
+HMIXMR6A  --IN-- #HV__R6A #....................<===MIXNMR6A  BL.-MR6A-         
+GAMVR6A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR6A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR6A   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+****                                                                           
+****                                                                           
+VALVF01A  BL.-F01A- **** MODULO VALV - LINEA DRENAGGIO INGRESSO AL RISCALDATORE
+WVALF01A  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R6A   --IN-- #PIVAF01A#....................<===+RSCR6A   BL.-R6A -         
+P___R5A   --IN-- #PUVAF01A#....................<===+RSCR5A   BL.-R5A -         
+HDU_R6A   --IN-- #HVALF01A#....................<===+RSCR6A   BL.-R6A -         
+ALZAF01A  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVF02A  BL.-F02A- **** MODULO VALV - LINEA DRENAGGIO INGRESSO AL RISCALDATORE
+WVALF02A  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R5A   --IN-- #PIVAF02A#....................<===+RSCR5A   BL.-R5A -         
+P___R4A   --IN-- #PUVAF02A#....................<===RSCDR4A   BL.-R4A -         
+HDU_R5A   --IN-- #HVALF02A#....................<===+RSCR5A   BL.-R5A -         
+ALZAF02A  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVF1AC  BL.-F1AC- **** MODULO VALV - DRENAGGIO RISCALDATORE R6A A CONDENSATOR
+WVALF1AC  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R6A   --IN-- #PIVAF1AC#....................<===+RSCR6A   BL.-R6A -         
+PUVAF1AC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HDU_R6A   --IN-- #HVALF1AC#....................<===+RSCR6A   BL.-R6A -         
+ALZAF1AC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVF2AC  BL.-F2AC- **** MODULO VALV - DRENAGGIO RISCALDATORE R5A A CONDENSATOR
+WVALF2AC  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R5A   --IN-- #PIVAF2AC#....................<===+RSCR5A   BL.-R5A -         
+PUVAF2AC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HDU_R5A   --IN-- #HVALF2AC#....................<===+RSCR5A   BL.-R5A -         
+ALZAF2AC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVF3AC  BL.-F3AC- **** MODULO VALV - DRENAGGIO RISCALDATORE R4A A CONDENSATOR
+WVALF3AC  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R4A   --IN-- #PIVAF3AC#....................<===RSCDR4A   BL.-R4A -         
+PUVAF3AC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HDU_R4A   --IN-- #HVALF3AC#....................<===RSCDR4A   BL.-R4A -         
+ALZAF3AC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVF03A  BL.-F03A- **** MODULO VALV - DRENAGGIO RISCALDATORE R4A A MIX CONDENS
+WVALF03A  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R4A   --IN-- #PIVAF03A#....................<===RSCDR4A   BL.-R4A -         
+PUVAF03A  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HDU_R4A   --IN-- #HVALF03A#....................<===RSCDR4A   BL.-R4A -         
+ALZAF03A  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVTIRA  BL.-TIRA- **** MODULO VALV - TUBAZIONE INGRESSO RISCALDATORI FILA A  
+WVALTIRA  --UA-- PORTATA TUBO-VALVOLA                                          
+PCOLCIRA  --IN-- #PIVATIRA#....................<===COLNCIRA  BL.-CIRA-         
+PCOLCIAR  --IN-- #PUVATIRA#....................<===COLNCIAR  BL.-CIAR-         
+HCOLCIRA  --IN-- #HVALTIRA#....................<===COLNCIRA  BL.-CIRA-         
+ALZATIRA  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+COLNCIAR  BL.-CIAR- **** MODULO COLN - COLLETTORE INGRESSO RISCALDATORI FILA A 
+HCOLCIAR  --UA-- ENTALPIA MEDIA DEL FLUIDO NEL COLLETTORE                      
+PCOLCIAR  --UA-- PRESSIONE NEL COLLETTORE                                      
+WVALTIRA  --IN-- #WE_1CIAR#....................<===VALVTIRA  BL.-TIRA-         
+HCOLCIRA  --IN-- #HE_1CIAR#....................<===COLNCIRA  BL.-CIRA-         
+WAL_R4A   --IN-- #WU_1CIAR#....................<===RSCDR4A   BL.-R4A -         
+HALUR4A   --IN-- #HU_1CIAR#....................<===RSCDR4A   BL.-R4A -         
+****                                                                           
+****                                                                           
+COLNCURA  BL.-CURA- **** MODULO COLN - COLLETTORE USCITA RISCALDATORI FILA A   
+HCOLCURA  --UA-- ENTALPIA MEDIA DEL FLUIDO NEL COLLETTORE                      
+PCOLCURA  --UA-- PRESSIONE NEL COLLETTORE                                      
+WAL_R4A   --IN-- #WE_1CURA#....................<===RSCDR4A   BL.-R4A -         
+HALUR6A   --IN-- #HE_1CURA#....................<===+RSCR6A   BL.-R6A -         
+WVALTURA  --IN-- #WU_1CURA#....................<===VALVTURA  BL.-TURA-         
+HCOLCURE  --IN-- #HU_1CURA#....................<===COLNCURE  BL.-CURE-         
+****                                                                           
+****                                                                           
+VALVTURA  BL.-TURA- **** MODULO VALV - LINEA USCITA RISCALDATORI FILA A        
+WVALTURA  --UA-- PORTATA TUBO-VALVOLA                                          
+PCOLCURA  --IN-- #PIVATURA#....................<===COLNCURA  BL.-CURA-         
+PCOLCURE  --IN-- #PUVATURA#....................<===COLNCURE  BL.-CURE-         
+HCOLCURA  --IN-- #HVALTURA#....................<===COLNCURA  BL.-CURA-         
+ALZATURA  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+RSCDR4B   BL.-R4B - **** MODULO RSCD - RISCALDATORE R4B BRINDISI               
+LIV_R4B   --US-- LIVELLO DELL'ACQUA DI CONDENSAZIONE                           
+P___R4B   --US-- PRESSIONE NELLA CAVITA'                                       
+HDU_R4B   --US-- ENTALPIA DI USCITA ACQUA DRENAGGIO                            
+HALUR4B   --US-- ENTALPIA ACQUA ALIM. USCITA RISCALDATORE                      
+TMD_R4B   --US-- TEMPERATURA MEDIA METALLO VALV ZONA DESURR.                   
+HALCR4B   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA COND.                        
+TMC_R4B   --US-- TEMPERATURA MEDIA METALLO VALV ZONA COND.                     
+HALFR4B   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA SOTTORAFF.                   
+TMF_R4B   --US-- TEMPERATURA MEDIA METALLO VALV ZONA SOTTORAFF.                
+WAL_R4B   --UA-- PORTATA ACQUA ALIMENTO                                        
+PCOLCIBR  --IN-- #PALIR4B #....................<===COLNCIBR  BL.-CIBR-         
+PALIR5B   --IN-- #PALUR4B #....................<===+RSCR5B   BL.-R5B -         
+HCOLCIBR  --IN-- #HALIR4B #....................<===COLNCIBR  BL.-CIBR-         
+WVALF02B  --IN-- #WDI_R4B #....................<===VALVF02B  BL.-F02B-         
+HDU_R5B   --IN-- #HDI_R4B #....................<===+RSCR5B   BL.-R5B -         
+USOMCD4B  --IN-- #WDU_R4B #....................<===NODOCD4B  BL.-CD4B-         
+WMIXMR4B  --IN-- #WV__R4B #....................<===MIXNMR4B  BL.-MR4B-         
+HMIXMR4B  --IN-- #HV__R4B #....................<===MIXNMR4B  BL.-MR4B-         
+GAMVR4B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR4B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR4B   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+****                                                                           
+****                                                                           
++RSCR5B   BL.-R5B - **** MODULO RSCD - RISCALDATORE R5B BRINDISI               
+LIV_R5B   --US-- LIVELLO DELL'ACQUA DI CONDENSAZIONE                           
+P___R5B   --US-- PRESSIONE NELLA CAVITA'                                       
+HDU_R5B   --US-- ENTALPIA DI USCITA ACQUA DRENAGGIO                            
+HALUR5B   --US-- ENTALPIA ACQUA ALIM. USCITA RISCALDATORE                      
+TMD_R5B   --US-- TEMPERATURA MEDIA METALLO VALV ZONA DESURR.                   
+HALCR5B   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA COND.                        
+TMC_R5B   --US-- TEMPERATURA MEDIA METALLO VALV ZONA COND.                     
+HALFR5B   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA SOTTORAFF.                   
+TMF_R5B   --US-- TEMPERATURA MEDIA METALLO VALV ZONA SOTTORAFF.                
+PALIR5B   --UA-- PRESSIONE ACQUA ALIM. INGRESSO RISCALDATORE                   
+PALIR6B   --IN-- #PALUR5B #....................<===+RSCR6B   BL.-R6B -         
+WAL_R4B   --IN-- #WAL_R5B #....................<===RSCDR4B   BL.-R4B -         
+HALUR4B   --IN-- #HALIR5B #....................<===RSCDR4B   BL.-R4B -         
+WVALF01B  --IN-- #WDI_R5B #....................<===VALVF01B  BL.-F01B-         
+HDU_R6B   --IN-- #HDI_R5B #....................<===+RSCR6B   BL.-R6B -         
+USOMCD5B  --IN-- #WDU_R5B #....................<===NODOCD5B  BL.-CD5B-         
+WV__R5B   --IN-- PORTATA SPILLAMENTO ENTRANTE NEL RISCALD.                     
+HV__R5B   --IN-- ENTALPIA SPILLAMENTO ENTRANTE NEL RISCALD.                    
+GAMVR5B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR5B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR5B   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+****                                                                           
+****                                                                           
++RSCR6B   BL.-R6B - **** MODULO RSCD - RISCALDATORE R6B BRINDISI               
+LIV_R6B   --US-- LIVELLO DELL'ACQUA DI CONDENSAZIONE                           
+P___R6B   --US-- PRESSIONE NELLA CAVITA'                                       
+HDU_R6B   --US-- ENTALPIA DI USCITA ACQUA DRENAGGIO                            
+HALUR6B   --US-- ENTALPIA ACQUA ALIM. USCITA RISCALDATORE                      
+TMD_R6B   --US-- TEMPERATURA MEDIA METALLO VALV ZONA DESURR.                   
+HALCR6B   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA COND.                        
+TMC_R6B   --US-- TEMPERATURA MEDIA METALLO VALV ZONA COND.                     
+HALFR6B   --US-- ENTALPIA ACQUA ALIM. USCITA ZONA SOTTORAFF.                   
+TMF_R6B   --US-- TEMPERATURA MEDIA METALLO VALV ZONA SOTTORAFF.                
+PALIR6B   --UA-- PRESSIONE ACQUA ALIM. INGRESSO RISCALDATORE                   
+PCOLCURB  --IN-- #PALUR6B #....................<===COLNCURB  BL.-CURB-         
+WAL_R4B   --IN-- #WAL_R6B #....................<===RSCDR4B   BL.-R4B -         
+HALUR5B   --IN-- #HALIR6B #....................<===+RSCR5B   BL.-R5B -         
+WDI_R6B   --IN-- PORTATA DRENAGGIO ENTRANTE NEL RISCALD.                       
+HDI_R6B   --IN-- ENTALPIA DRENAGGIO ENTRANTE NEL RISCALD.                      
+USOMCD6B  --IN-- #WDU_R6B #....................<===NODOCD6B  BL.-CD6B-         
+WMIXMR6B  --IN-- #WV__R6B #....................<===MIXNMR6B  BL.-MR6B-         
+HMIXMR6B  --IN-- #HV__R6B #....................<===MIXNMR6B  BL.-MR6B-         
+GAMVR6B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR6B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR6B   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+****                                                                           
+****                                                                           
+VALVF01B  BL.-F01B- **** MODULO VALV - LINEA DRENAGGIO INGRESSO AL RISCALDATORE
+WVALF01B  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R6B   --IN-- #PIVAF01B#....................<===+RSCR6B   BL.-R6B -         
+P___R5B   --IN-- #PUVAF01B#....................<===+RSCR5B   BL.-R5B -         
+HDU_R6B   --IN-- #HVALF01B#....................<===+RSCR6B   BL.-R6B -         
+ALZAF01B  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVF02B  BL.-F02B- **** MODULO VALV - LINEA DRENAGGIO INGRESSO AL RISCALDATORE
+WVALF02B  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R5B   --IN-- #PIVAF02B#....................<===+RSCR5B   BL.-R5B -         
+P___R4B   --IN-- #PUVAF02B#....................<===RSCDR4B   BL.-R4B -         
+HDU_R5B   --IN-- #HVALF02B#....................<===+RSCR5B   BL.-R5B -         
+ALZAF02B  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVF1BC  BL.-F1BC- **** MODULO VALV - DRENAGGIO RISCALDATORE R6B A CONDENSATOR
+WVALF1BC  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R6B   --IN-- #PIVAF1BC#....................<===+RSCR6B   BL.-R6B -         
+PUVAF1BC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HDU_R6B   --IN-- #HVALF1BC#....................<===+RSCR6B   BL.-R6B -         
+ALZAF1BC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVF2BC  BL.-F2BC- **** MODULO VALV - DRENAGGIO RISCALDATORE R5B A CONDENSATOR
+WVALF2BC  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R5B   --IN-- #PIVAF2BC#....................<===+RSCR5B   BL.-R5B -         
+PUVAF2BC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HDU_R5B   --IN-- #HVALF2BC#....................<===+RSCR5B   BL.-R5B -         
+ALZAF2BC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVF3BC  BL.-F3BC- **** MODULO VALV - DRENAGGIO RISCALDATORE R4B A CONDENSATOR
+WVALF3BC  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R4B   --IN-- #PIVAF3BC#....................<===RSCDR4B   BL.-R4B -         
+PUVAF3BC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HDU_R4B   --IN-- #HVALF3BC#....................<===RSCDR4B   BL.-R4B -         
+ALZAF3BC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVF03B  BL.-F03B- **** MODULO VALV - DRENAGGIO RISCALDATORE R4B A MIX CONDENS
+WVALF03B  --UA-- PORTATA TUBO-VALVOLA                                          
+P___R4B   --IN-- #PIVAF03B#....................<===RSCDR4B   BL.-R4B -         
+PUVAF03B  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HDU_R4B   --IN-- #HVALF03B#....................<===RSCDR4B   BL.-R4B -         
+ALZAF03B  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVTIRB  BL.-TIRB- **** MODULO VALV - TUBAZIONE INGRESSO RISCALDATORI FILA B  
+WVALTIRB  --UA-- PORTATA TUBO-VALVOLA                                          
+PCOLCIRA  --IN-- #PIVATIRB#....................<===COLNCIRA  BL.-CIRA-         
+PCOLCIBR  --IN-- #PUVATIRB#....................<===COLNCIBR  BL.-CIBR-         
+HCOLCIRA  --IN-- #HVALTIRB#....................<===COLNCIRA  BL.-CIRA-         
+ALZATIRB  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+COLNCIBR  BL.-CIBR- **** MODULO COLN - COLLETTORE INGRESSO RISCALDATORI FILA B 
+HCOLCIBR  --UA-- ENTALPIA MEDIA DEL FLUIDO NEL COLLETTORE                      
+PCOLCIBR  --UA-- PRESSIONE NEL COLLETTORE                                      
+WVALTIRB  --IN-- #WE_1CIBR#....................<===VALVTIRB  BL.-TIRB-         
+HCOLCIRA  --IN-- #HE_1CIBR#....................<===COLNCIRA  BL.-CIRA-         
+WAL_R4B   --IN-- #WU_1CIBR#....................<===RSCDR4B   BL.-R4B -         
+HALUR4B   --IN-- #HU_1CIBR#....................<===RSCDR4B   BL.-R4B -         
+****                                                                           
+****                                                                           
+COLNCURB  BL.-CURB- **** MODULO COLN - COLLETTORE USCITA RISCALDATORI FILA B   
+HCOLCURB  --UA-- ENTALPIA MEDIA DEL FLUIDO NEL COLLETTORE                      
+PCOLCURB  --UA-- PRESSIONE NEL COLLETTORE                                      
+WAL_R4B   --IN-- #WE_1CURB#....................<===RSCDR4B   BL.-R4B -         
+HALUR6B   --IN-- #HE_1CURB#....................<===+RSCR6B   BL.-R6B -         
+WVALTURB  --IN-- #WU_1CURB#....................<===VALVTURB  BL.-TURB-         
+HCOLCURE  --IN-- #HU_1CURB#....................<===COLNCURE  BL.-CURE-         
+****                                                                           
+****                                                                           
+VALVTURB  BL.-TURB- **** MODULO VALV - LINEA USCITA RISCALDATORI FILA B        
+WVALTURB  --UA-- PORTATA TUBO-VALVOLA                                          
+PCOLCURB  --IN-- #PIVATURB#....................<===COLNCURB  BL.-CURB-         
+PCOLCURE  --IN-- #PUVATURB#....................<===COLNCURE  BL.-CURE-         
+HCOLCURB  --IN-- #HVALTURB#....................<===COLNCURB  BL.-CURB-         
+ALZATURB  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+VALVTBRA  BL.-TBRA- **** MODULO VALV - LINEA DI BYPASS DEI RISCALDATORI        
+WVALTBRA  --UA-- PORTATA TUBO-VALVOLA                                          
+PCOLCIRA  --IN-- #PIVATBRA#....................<===COLNCIRA  BL.-CIRA-         
+PCOLCURE  --IN-- #PUVATBRA#....................<===COLNCURE  BL.-CURE-         
+HCOLCIRA  --IN-- #HVALTBRA#....................<===COLNCIRA  BL.-CIRA-         
+ALZATBRA  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+****                                                                           
+****                                                                           
+COLNCURE  BL.-CURE- **** MODULO COLN - COLLETTORE USCITA ALIMENTO RISCALDATORI 
+HCOLCURE  --UA-- ENTALPIA MEDIA DEL FLUIDO NEL COLLETTORE                      
+PCOLCURE  --UA-- PRESSIONE NEL COLLETTORE                                      
+WVALTURA  --IN-- #WE_1CURE#....................<===VALVTURA  BL.-TURA-         
+HCOLCURA  --IN-- #HE_1CURE#....................<===COLNCURA  BL.-CURA-         
+WVALTBRA  --IN-- #WE_2CURE#....................<===VALVTBRA  BL.-TBRA-         
+HCOLCIRA  --IN-- #HE_2CURE#....................<===COLNCIRA  BL.-CIRA-         
+WVALTURB  --IN-- #WE_3CURE#....................<===VALVTURB  BL.-TURB-         
+HCOLCURB  --IN-- #HE_3CURE#....................<===COLNCURB  BL.-CURB-         
+WTUBTIEC  --IN-- #WU_1CURE#....................<===TUBOTIEC  BL.-TIEC-         
+HU_1CURE  --IN-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+****                                                                           
+****                                                                           
+NODOCD6B  BL.-CD6B- **** MODULO NODO - SOMMA PORTATA DREN. R6B                 
+USOMCD6B  --UA-- SOMMATORE : VARIABILE DI USCITA                               
+WVALF01B  --IN-- #IN_1CD6B#....................<===VALVF01B  BL.-F01B-         
+WVALF1BC  --IN-- #IN_2CD6B#....................<===VALVF1BC  BL.-F1BC-         
+****                                                                           
+****                                                                           
+NODOCD5B  BL.-CD5B- **** MODULO NODO - SOMMA PORTATE DREN. R5B                 
+USOMCD5B  --UA-- SOMMATORE : VARIABILE DI USCITA                               
+WVALF02B  --IN-- #IN_1CD5B#....................<===VALVF02B  BL.-F02B-         
+WVALF2BC  --IN-- #IN_2CD5B#....................<===VALVF2BC  BL.-F2BC-         
+****                                                                           
+****                                                                           
+NODOCD4B  BL.-CD4B- **** MODULO NODO - SOMMA PORTATE DREN. R4B                 
+USOMCD4B  --UA-- SOMMATORE : VARIABILE DI USCITA                               
+WVALF03B  --IN-- #IN_1CD4B#....................<===VALVF03B  BL.-F03B-         
+WVALF3BC  --IN-- #IN_2CD4B#....................<===VALVF3BC  BL.-F3BC-         
+****                                                                           
+****                                                                           
+NODOCD6A  BL.-CD6A- **** MODULO NODO - SOMMA PORTATE DREN. R6A                 
+USOMCD6A  --UA-- SOMMATORE : VARIABILE DI USCITA                               
+WVALF01A  --IN-- #IN_1CD6A#....................<===VALVF01A  BL.-F01A-         
+WVALF1AC  --IN-- #IN_2CD6A#....................<===VALVF1AC  BL.-F1AC-         
+****                                                                           
+****                                                                           
+NODOCD5A  BL.-CD5A- **** MODULO NODO - SOMMA PORTATE DREN. R5A                 
+USOMCD5A  --UA-- SOMMATORE : VARIABILE DI USCITA                               
+WVALF02A  --IN-- #IN_1CD5A#....................<===VALVF02A  BL.-F02A-         
+WVALF2AC  --IN-- #IN_2CD5A#....................<===VALVF2AC  BL.-F2AC-         
+****                                                                           
+****                                                                           
+NODOCD4A  BL.-CD4A- **** MODULO NODO - SOMMA PORTATE DREN. R4A                 
+USOMCD4A  --UA-- SOMMATORE : VARIABILE DI USCITA                               
+WVALF03A  --IN-- #IN_1CD4A#....................<===VALVF03A  BL.-F03A-         
+WVALF3AC  --IN-- #IN_2CD4A#....................<===VALVF3AC  BL.-F3AC-         
+****                                                                           
+****                                                                           
+MIXNMR6A  BL.-MR6A- **** MODULO MIXN - MISCELATORE INGRESSO R6A                
+HMIXMR6A  --UA-- ENTALPIA USCENTE DAL MISCELATORE ENTALPICO                    
+WMIXMR6A  --UA-- PORTATA USCENTE DAL MISCELATORE ENTALPICO                     
+WE_1MR6A  --IN-- PORTATA INGRESSO 1 DEL MISCELATORE ENTALPICO                  
+HE_1MR6A  --IN-- ENTALPIA INGRESSO 1 DEL MISCELATORE ENTALPICO                 
+WE_2MR6A  --IN-- PORTATA INGRESSO 2 DEL MISCELATORE ENTALPICO                  
+HE_2MR6A  --IN-- ENTALPIA INGRESSO 2 DEL MISCELATORE ENTALPICO                 
+****                                                                           
+****                                                                           
+MIXNMR6B  BL.-MR6B- **** MODULO MIXN - MISCELATORE INGRESSO R6B                
+HMIXMR6B  --UA-- ENTALPIA USCENTE DAL MISCELATORE ENTALPICO                    
+WMIXMR6B  --UA-- PORTATA USCENTE DAL MISCELATORE ENTALPICO                     
+WE_1MR6B  --IN-- PORTATA INGRESSO 1 DEL MISCELATORE ENTALPICO                  
+HE_1MR6B  --IN-- ENTALPIA INGRESSO 1 DEL MISCELATORE ENTALPICO                 
+WE_2MR6B  --IN-- PORTATA INGRESSO 2 DEL MISCELATORE ENTALPICO                  
+HE_2MR6B  --IN-- ENTALPIA INGRESSO 2 DEL MISCELATORE ENTALPICO                 
+****                                                                           
+****                                                                           
+MIXNMR4A  BL.-MR4A- **** MODULO MIXN - MISCELATORE INGRESSO R4A                
+HMIXMR4A  --UA-- ENTALPIA USCENTE DAL MISCELATORE ENTALPICO                    
+WMIXMR4A  --UA-- PORTATA USCENTE DAL MISCELATORE ENTALPICO                     
+WE_1MR4A  --IN-- PORTATA INGRESSO 1 DEL MISCELATORE ENTALPICO                  
+HE_1MR4A  --IN-- ENTALPIA INGRESSO 1 DEL MISCELATORE ENTALPICO                 
+WE_2MR4A  --IN-- PORTATA INGRESSO 2 DEL MISCELATORE ENTALPICO                  
+HE_2MR4A  --IN-- ENTALPIA INGRESSO 2 DEL MISCELATORE ENTALPICO                 
+****                                                                           
+****                                                                           
+MIXNMR4B  BL.-MR4B- **** MODULO MIXN - MISCELATORE INGRESSO R4B                
+HMIXMR4B  --UA-- ENTALPIA USCENTE DAL MISCELATORE ENTALPICO                    
+WMIXMR4B  --UA-- PORTATA USCENTE DAL MISCELATORE ENTALPICO                     
+WE_1MR4B  --IN-- PORTATA INGRESSO 1 DEL MISCELATORE ENTALPICO                  
+HE_1MR4B  --IN-- ENTALPIA INGRESSO 1 DEL MISCELATORE ENTALPICO                 
+WE_2MR4B  --IN-- PORTATA INGRESSO 2 DEL MISCELATORE ENTALPICO                  
+HE_2MR4B  --IN-- ENTALPIA INGRESSO 2 DEL MISCELATORE ENTALPICO                 
+****                                                                           
+****                                                                           
+CPOMTPOM  BL.-TPOM- **** MODULO CPOM - TURBOPOMPA ALIMENTO                     
+ECINTPOM  --US-- ENERGIA CINETICA DELLE MASSE ROTANTI                          
+OMPMTPOM  --UA-- VELOCITA' ANGOLARE POMPA                                      
+HUPMTPOM  --UA-- ENTALPIA FLUIDO MANDATA POMPA                                 
+WPOMTPOM  --UA-- PORTATA POMPA                                                 
+PCOLCUTP  --IN-- #PUPMTPOM#....................<===COLNCUTP  BL.-CUTP-         
+PCOLCITP  --IN-- #PIPMTPOM#....................<===COLNCITP  BL.-CITP-         
+HCOLCITP  --IN-- #HIPMTPOM#....................<===COLNCITP  BL.-CITP-         
+QIPMTPOM  --IN-- POTENZA ASSORBITA DALLA POMPA                                 
+NPOMTPOM  --IN-- NUMERO DI POMPE IN PARALLELO                                  
+****                                                                           
+****                                                                           
+CPOMPALA  BL.-PALA- **** MODULO CPOM - ELETTROPOMPA A ALIMENTO                 
+HUPMPALA  --UA-- ENTALPIA FLUIDO MANDATA POMPA                                 
+WPOMPALA  --UA-- PORTATA POMPA                                                 
+PCOLCUPA  --IN-- #PUPMPALA#....................<===COLNCUPA  BL.-CUPA-         
+PCOLCITP  --IN-- #PIPMPALA#....................<===COLNCITP  BL.-CITP-         
+HCOLCITP  --IN-- #HIPMPALA#....................<===COLNCITP  BL.-CITP-         
+OMPMPALA  --IN-- VELOCITA' ANGOLARE DELLA POMPA                                
+NPOMPALA  --IN-- NUMERO DI POMPE IN PARALLELO                                  
+****                                                                           
+****                                                                           
+CPOMPALB  BL.-PALB- **** MODULO CPOM - ELETTROPOMPA B ALIMENTO                 
+HUPMPALB  --UA-- ENTALPIA FLUIDO MANDATA POMPA                                 
+WPOMPALB  --UA-- PORTATA POMPA                                                 
+PCOLCUPB  --IN-- #PUPMPALB#....................<===COLNCUPB  BL.-CUPB-         
+PCOLCITP  --IN-- #PIPMPALB#....................<===COLNCITP  BL.-CITP-         
+HCOLCITP  --IN-- #HIPMPALB#....................<===COLNCITP  BL.-CITP-         
+OMPMPALB  --IN-- VELOCITA' ANGOLARE DELLA POMPA                                
+NPOMPALB  --IN-- NUMERO DI POMPE IN PARALLELO                                  
+****                                                                           
+****                                                                           
+MIXNMIRD  BL.-MIRD- **** MODULO MIXN - MISCELATORE RIENTRO DRENAGGI            
+HMIXMIRD  --UA-- ENTALPIA USCENTE DAL MISCELATORE                              
+WMIXMIRD  --UA-- PORTATA USCENTE DAL MISCELATORE                               
+WVALF03A  --IN-- #WE_1MIRD#....................<===VALVF03A  BL.-F03A-         
+HDU_R4A   --IN-- #HE_1MIRD#....................<===RSCDR4A   BL.-R4A -         
+WVALF03B  --IN-- #WE_2MIRD#....................<===VALVF03B  BL.-F03B-         
+HDU_R4B   --IN-- #HE_2MIRD#....................<===RSCDR4B   BL.-R4B -         
+****                                                                           
+****                                                                           
+MIXNMIAB  BL.-MIAB- **** MODULO MIXN - MIXER DRENAGGI INGRESSO CONDENSATO      
+HMIXMIAB  --UA-- ENTALPIA USCENTE DAL MISCELATORE                              
+WMIXMIAB  --UA-- PORTATA USCENTE DAL MISCELATORE                               
+WVALF3AC  --IN-- #WE_1MIAB#....................<===VALVF3AC  BL.-F3AC-         
+HDU_R4A   --IN-- #HE_1MIAB#....................<===RSCDR4A   BL.-R4A -         
+WVALF2AC  --IN-- #WE_2MIAB#....................<===VALVF2AC  BL.-F2AC-         
+HDU_R5A   --IN-- #HE_2MIAB#....................<===+RSCR5A   BL.-R5A -         
+WVALF1AC  --IN-- #WE_3MIAB#....................<===VALVF1AC  BL.-F1AC-         
+HDU_R6A   --IN-- #HE_3MIAB#....................<===+RSCR6A   BL.-R6A -         
+WVALF3BC  --IN-- #WE_4MIAB#....................<===VALVF3BC  BL.-F3BC-         
+HDU_R4B   --IN-- #HE_4MIAB#....................<===RSCDR4B   BL.-R4B -         
+WVALF2BC  --IN-- #WE_5MIAB#....................<===VALVF2BC  BL.-F2BC-         
+HDU_R5B   --IN-- #HE_5MIAB#....................<===+RSCR5B   BL.-R5B -         
+WVALF1BC  --IN-- #WE_6MIAB#....................<===VALVF1BC  BL.-F1BC-         
+HDU_R6B   --IN-- #HE_6MIAB#....................<===+RSCR6B   BL.-R6B -         
+****                                                                           
+****                                                                           
+MIXNMIDG  BL.-MIDG- **** MODULO MIXN - MIXER VAPORE INGRESSO DEGASATORE        
+HMIXMIDG  --UA-- ENTALPIA USCENTE DAL MISCELATORE                              
+WMIXMIDG  --UA-- PORTATA USCENTE DAL MISCELATORE                               
+WE_1MIDG  --IN-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1MIDG  --IN-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WE_2MIDG  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2MIDG  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WVALFX52  --IN-- #WE_3MIDG#....................<===VALVFX52  BL.-FX52-         
+H_1_DFX5  --IN-- #HE_3MIDG#....................<===DISNDFX5  BL.-DFX5-         
+WE_4MIDG  --IN-- PORTATA RAMO ENTRANTE  N. 4                                   
+HE_4MIDG  --IN-- ENTALPIA RAMO ENTRANTE N. 4                                   
+****                                                                           
+****                                                                           
+DISNDFX5  BL.-DFX5- **** MODULO DISN - DISTRIBUTORE ENT. ING. FX52             
+H_1_DFX5  --UA--     USCITA  1                                                 
+H_2_DFX5  --UA--     USCITA  2                                                 
+AINGDFX5  --IN--     INGRESSO                                                  
+****                                                                           
+****                                                                           
+VALVATRA  BL.-ATRA- **** MODULO VALV - VALVOLA A ATTEMP. RH AD ACQUA           
+WVALATRA  --UA-- PORTATA FLUIDO NELLA VALVOLA                                  
+PCOLCIRA  --IN-- #PIVAATRA#....................<===COLNCIRA  BL.-CIRA-         
+PUVAATRA  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+HCOLCIRA  --IN-- #HVALATRA#....................<===COLNCIRA  BL.-CIRA-         
+ALZAATRA  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+VALVATRB  BL.-ATRB- **** MODULO VALV - VALVOLA B ATTEMP. RH AD ACQUA           
+WVALATRB  --UA-- PORTATA FLUIDO NELLA VALVOLA                                  
+PCOLCIRA  --IN-- #PIVAATRB#....................<===COLNCIRA  BL.-CIRA-         
+PUVAATRB  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+HCOLCIRA  --IN-- #HVALATRB#....................<===COLNCIRA  BL.-CIRA-         
+ALZAATRB  --IN-- ALZATA VALVOLA                                                
+****                                                                           
+****                                                                           
+NODOSWDG  BL.-SWDG- **** MODULO NODO - SOMMA LE PORTATE USCENTI DAL DEGASATORE 
+USOMSWDG  --UA-- RELAZIONE LINEARE : VARIABILE DI USCITA                       
+WTUBTUDG  --IN-- #IN_1SWDG#....................<===TUBOTUDG  BL.-TUDG-         
+IN_2SWDG  --IN-- RELAZIONE LINEARE : INGRESSO N.  2                            
+****                                                                           
+****                                                                           
+TUBOTIEC  BL.-TIEC- **** MODULO TUBO - TUBAZIONE DAL COLLETTORE ALIMENTO ALL'EC
+WTUBTIEC  --UA-- PORTATA MONTE-VALLE PERDITA DI CARICO                         
+PCOLCURE  --IN-- #PITUTIEC#....................<===COLNCURE  BL.-CURE-         
+PUTUTIEC  --IN-- PRESSIONE A VALLE PERDITA DI CARICO                           
+HCOLCURE  --IN-- #HTUBTIEC#....................<===COLNCURE  BL.-CURE-         
+AKTBTIEC  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+****                                                                           
+****                                                                           
+COLNMIRI  BL.-MIRI- **** MODULO COLN - collettore dei ricircoli pompe alimento 
+HCOLMIRI  --UA-- ENTALPIA MEDIA DEL NODO                                       
+PCOLMIRI  --UA-- PRESSIONE NEL NODO                                            
+WVALTRTP  --IN-- #WE_1MIRI#....................<===VALVTRTP  BL.-TRTP-         
+HCOLCUTP  --IN-- #HE_1MIRI#....................<===COLNCUTP  BL.-CUTP-         
+WVALTRPA  --IN-- #WE_2MIRI#....................<===VALVTRPA  BL.-TRPA-         
+HCOLCUPA  --IN-- #HE_2MIRI#....................<===COLNCUPA  BL.-CUPA-         
+WVALTRPB  --IN-- #WE_3MIRI#....................<===VALVTRPB  BL.-TRPB-         
+HCOLCUPB  --IN-- #HE_3MIRI#....................<===COLNCUPB  BL.-CUPB-         
+WTUBTIDG  --IN-- #WU_1MIRI#....................<===TUBOTIDG  BL.-TIDG-         
+HLDGDEGA  --IN-- #HU_1MIRI#....................<===DEGNDEGA  BL.-DEGA-         
+****                                                                           
+****                                                                           
+TUBOTIDG  BL.-TIDG- **** MODULO TUBO - tubazione di scarico al degasatore ricir
+WTUBTIDG  --UA-- PORTATA MONTE-VALLE PERDITA DI CARICO                         
+PCOLMIRI  --IN-- #PITUTIDG#....................<===COLNMIRI  BL.-MIRI-         
+PLDGDEGA  --IN-- #PUTUTIDG#....................<===DEGNDEGA  BL.-DEGA-         
+HCOLMIRI  --IN-- #HTUBTIDG#....................<===COLNMIRI  BL.-MIRI-         
+AKTBTIDG  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+****                                                                           
+****      >>>>>>INGRESSI DI TUTTI I MODULI<<<<<<
+ALZATUTP  --IN-- ALZATA VALVOLA                                                
+ALZATUPA  --IN-- ALZATA VALVOLA                                                
+ALZATUPB  --IN-- ALZATA VALVOLA                                                
+WE_4CIRA  --IN-- PORTATA TUBO ENTRANTE  N.  4                                  
+HE_4CIRA  --IN-- ENTALPIA TUBO ENTRANTE N.  4                                  
+HU_1CIRA  --IN-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+HU_2CIRA  --IN-- ENTALPIA TUBO USCENTE N.  2 (SE INVERSIONE DI PORTATA)        
+AKTBTUDG  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+WALIDEGA  --IN-- PORTATA ACQUA ALIMENTO INGRESSO TORRETTA                      
+HALIDEGA  --IN-- ENTALPIA ACQUA ALIMENTO INGRESSO TORRETTA                     
+WDREDEGA  --IN-- PORTATA DRENAGGI INGRESSO TORRETTA                            
+HDREDEGA  --IN-- ENTALPIA DRENAGGI INGRESSO TORRETTA                           
+WRISDEGA  --IN-- PORTATA VAPORE DI AVVIAMENTO NEL SERBATOIO                    
+HRISDEGA  --IN-- ENTALPIA VAPORE DI AVVIAMENTO NEL SERBATOIO                   
+ALZATRTP  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+ALZATRPA  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+ALZATRPB  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+PIVAFX52  --IN-- PRESSIONE A MONTE TUBO-VALVOLA                                
+ALZAFX52  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+GAMVR4A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR4A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR4A   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+WV__R5A   --IN-- PORTATA SPILLAMENTO ENTRANTE NEL RISCALD.                     
+HV__R5A   --IN-- ENTALPIA SPILLAMENTO ENTRANTE NEL RISCALD.                    
+GAMVR5A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR5A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR5A   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+WDI_R6A   --IN-- PORTATA DRENAGGIO ENTRANTE NEL RISCALD.                       
+HDI_R6A   --IN-- ENTALPIA DRENAGGIO ENTRANTE NEL RISCALD.                      
+GAMVR6A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR6A   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR6A   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+ALZAF01A  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+ALZAF02A  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+PUVAF1AC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+ALZAF1AC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+PUVAF2AC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+ALZAF2AC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+PUVAF3AC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+ALZAF3AC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+PUVAF03A  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+ALZAF03A  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+ALZATIRA  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+ALZATURA  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+GAMVR4B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR4B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR4B   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+WV__R5B   --IN-- PORTATA SPILLAMENTO ENTRANTE NEL RISCALD.                     
+HV__R5B   --IN-- ENTALPIA SPILLAMENTO ENTRANTE NEL RISCALD.                    
+GAMVR5B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR5B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR5B   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+WDI_R6B   --IN-- PORTATA DRENAGGIO ENTRANTE NEL RISCALD.                       
+HDI_R6B   --IN-- ENTALPIA DRENAGGIO ENTRANTE NEL RISCALD.                      
+GAMVR6B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E VAPORE                       
+GAMWR6B   --IN-- CORRETTIVO COEFF. SCAMBIO VALV E DRENAGGIO                    
+ATTRR6B   --IN-- COEFF. DI ATTRITO VALV ALIMENTO                               
+ALZAF01B  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+ALZAF02B  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+PUVAF1BC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+ALZAF1BC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+PUVAF2BC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+ALZAF2BC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+PUVAF3BC  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+ALZAF3BC  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+PUVAF03B  --IN-- PRESSIONE A VALLE TUBO-VALVOLA                                
+ALZAF03B  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+ALZATIRB  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+ALZATURB  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+ALZATBRA  --IN-- ALZATA VALVOLA (SE ESISTE) NEL TUBO-VALVOLA                   
+HU_1CURE  --IN-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+WE_1MR6A  --IN-- PORTATA INGRESSO 1 DEL MISCELATORE ENTALPICO                  
+HE_1MR6A  --IN-- ENTALPIA INGRESSO 1 DEL MISCELATORE ENTALPICO                 
+WE_2MR6A  --IN-- PORTATA INGRESSO 2 DEL MISCELATORE ENTALPICO                  
+HE_2MR6A  --IN-- ENTALPIA INGRESSO 2 DEL MISCELATORE ENTALPICO                 
+WE_1MR6B  --IN-- PORTATA INGRESSO 1 DEL MISCELATORE ENTALPICO                  
+HE_1MR6B  --IN-- ENTALPIA INGRESSO 1 DEL MISCELATORE ENTALPICO                 
+WE_2MR6B  --IN-- PORTATA INGRESSO 2 DEL MISCELATORE ENTALPICO                  
+HE_2MR6B  --IN-- ENTALPIA INGRESSO 2 DEL MISCELATORE ENTALPICO                 
+WE_1MR4A  --IN-- PORTATA INGRESSO 1 DEL MISCELATORE ENTALPICO                  
+HE_1MR4A  --IN-- ENTALPIA INGRESSO 1 DEL MISCELATORE ENTALPICO                 
+WE_2MR4A  --IN-- PORTATA INGRESSO 2 DEL MISCELATORE ENTALPICO                  
+HE_2MR4A  --IN-- ENTALPIA INGRESSO 2 DEL MISCELATORE ENTALPICO                 
+WE_1MR4B  --IN-- PORTATA INGRESSO 1 DEL MISCELATORE ENTALPICO                  
+HE_1MR4B  --IN-- ENTALPIA INGRESSO 1 DEL MISCELATORE ENTALPICO                 
+WE_2MR4B  --IN-- PORTATA INGRESSO 2 DEL MISCELATORE ENTALPICO                  
+HE_2MR4B  --IN-- ENTALPIA INGRESSO 2 DEL MISCELATORE ENTALPICO                 
+QIPMTPOM  --IN-- POTENZA ASSORBITA DALLA POMPA                                 
+NPOMTPOM  --IN-- NUMERO DI POMPE IN PARALLELO                                  
+OMPMPALA  --IN-- VELOCITA' ANGOLARE DELLA POMPA                                
+NPOMPALA  --IN-- NUMERO DI POMPE IN PARALLELO                                  
+OMPMPALB  --IN-- VELOCITA' ANGOLARE DELLA POMPA                                
+NPOMPALB  --IN-- NUMERO DI POMPE IN PARALLELO                                  
+WE_1MIDG  --IN-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1MIDG  --IN-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WE_2MIDG  --IN-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2MIDG  --IN-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WE_4MIDG  --IN-- PORTATA RAMO ENTRANTE  N. 4                                   
+HE_4MIDG  --IN-- ENTALPIA RAMO ENTRANTE N. 4                                   
+AINGDFX5  --IN--     INGRESSO                                                  
+PUVAATRA  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+ALZAATRA  --IN-- ALZATA VALVOLA                                                
+PUVAATRB  --IN-- PRESSIONE FLUIDO VALLE VALVOLA                                
+ALZAATRB  --IN-- ALZATA VALVOLA                                                
+IN_2SWDG  --IN-- RELAZIONE LINEARE : INGRESSO N.  2                            
+PUTUTIEC  --IN-- PRESSIONE A VALLE PERDITA DI CARICO                           
+AKTBTIEC  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+AKTBTIDG  --IN-- CORRETTIVO PERDITA DI CARICO                                  
+****
+WE_1CUTP  --CO-- PORTATA TUBO ENTRANTE  N.  1                                  
+HE_1CUTP  --CO-- ENTALPIA TUBO ENTRANTE N.  1                                  
+WU_1CUTP  --CO-- PORTATA TUBO USCENTE N.  1                                    
+HU_1CUTP  --CO-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+WU_2CUTP  --CO-- PORTATA TUBO USCENTE N.  2                                    
+HU_2CUTP  --CO-- ENTALPIA TUBO USCENTE N.  2 (SE INVERSIONE DI PORTATA)        
+WE_1CUPA  --CO-- PORTATA TUBO ENTRANTE  N.  1                                  
+HE_1CUPA  --CO-- ENTALPIA TUBO ENTRANTE N.  1                                  
+WU_1CUPA  --CO-- PORTATA TUBO USCENTE N.  1                                    
+HU_1CUPA  --CO-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+WU_2CUPA  --CO-- PORTATA TUBO USCENTE N.  2                                    
+HU_2CUPA  --CO-- ENTALPIA TUBO USCENTE N.  2 (SE INVERSIONE DI PORTATA)        
+WE_1CUPB  --CO-- PORTATA TUBO ENTRANTE  N.  1                                  
+HE_1CUPB  --CO-- ENTALPIA TUBO ENTRANTE N.  1                                  
+WU_1CUPB  --CO-- PORTATA TUBO USCENTE N.  1                                    
+HU_1CUPB  --CO-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+WU_2CUPB  --CO-- PORTATA TUBO USCENTE N.  2                                    
+HU_2CUPB  --CO-- ENTALPIA TUBO USCENTE N.  2 (SE INVERSIONE DI PORTATA)        
+PIVATUTP  --CO-- PRESSIONE A MONTE                                             
+PUVATUTP  --CO-- PRESSIONE A VALLE                                             
+HVALTUTP  --CO-- ENTALPIA MONTE-VALLE                                          
+PIVATUPA  --CO-- PRESSIONE A MONTE                                             
+PUVATUPA  --CO-- PRESSIONE A VALLE                                             
+HVALTUPA  --CO-- ENTALPIA MONTE-VALLE                                          
+PIVATUPB  --CO-- PRESSIONE A MONTE                                             
+PUVATUPB  --CO-- PRESSIONE A VALLE                                             
+HVALTUPB  --CO-- ENTALPIA MONTE-VALLE                                          
+WE_1CIRA  --CO-- PORTATA TUBO ENTRANTE  N.  1                                  
+HE_1CIRA  --CO-- ENTALPIA TUBO ENTRANTE N.  1                                  
+WE_2CIRA  --CO-- PORTATA TUBO ENTRANTE  N.  2                                  
+HE_2CIRA  --CO-- ENTALPIA TUBO ENTRANTE N.  2                                  
+WE_3CIRA  --CO-- PORTATA TUBO ENTRANTE  N.  3                                  
+HE_3CIRA  --CO-- ENTALPIA TUBO ENTRANTE N.  3                                  
+WU_1CIRA  --CO-- PORTATA TUBO USCENTE N.  1                                    
+WU_2CIRA  --CO-- PORTATA TUBO USCENTE N.  2                                    
+WU_3CIRA  --CO-- PORTATA TUBO USCENTE N.  3                                    
+HU_3CIRA  --CO-- ENTALPIA TUBO USCENTE N.  3 (SE INVERSIONE DI PORTATA)        
+WU_4CIRA  --CO-- PORTATA TUBO USCENTE N.  4                                    
+HU_4CIRA  --CO-- ENTALPIA TUBO USCENTE N.  4 (SE INVERSIONE DI PORTATA)        
+WU_5CIRA  --CO-- PORTATA TUBO USCENTE N.  5                                    
+HU_5CIRA  --CO-- ENTALPIA TUBO USCENTE N.  5 (SE INVERSIONE DI PORTATA)        
+PITUTUDG  --CO-- PRESSIONE A MONTE                                             
+PUTUTUDG  --CO-- PRESSIONE A VALLE                                             
+HTUBTUDG  --CO-- ENTALPIA MONTE-VALLE                                          
+WE_1CITP  --CO-- PORTATA TUBO ENTRANTE  N.  1                                  
+HE_1CITP  --CO-- ENTALPIA TUBO ENTRANTE N.  1                                  
+WU_1CITP  --CO-- PORTATA TUBO USCENTE N.  1                                    
+HU_1CITP  --CO-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+WU_2CITP  --CO-- PORTATA TUBO USCENTE N.  2                                    
+HU_2CITP  --CO-- ENTALPIA TUBO USCENTE N.  2 (SE INVERSIONE DI PORTATA)        
+WU_3CITP  --CO-- PORTATA TUBO USCENTE N.  3                                    
+HU_3CITP  --CO-- ENTALPIA TUBO USCENTE N.  3 (SE INVERSIONE DI PORTATA)        
+WSPDDEGA  --CO-- PORTATA SPILLAMENTO DEGASATORE                                
+HSPDDEGA  --CO-- ENTALPIA SPILLAMENTO DEGASATORE                               
+WOUTDEGA  --CO-- PORTATA ACQUA USCITA SERBATOIO DEGASATORE                     
+WRICDEGA  --CO-- PORTATA RICIRCOLO POMPA ALIMENTO                              
+HRICDEGA  --CO-- ENTALPIA RICIRCOLO POMPA ALIMENTO                             
+PIVATRTP  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVATRTP  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALTRTP  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVATRPA  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVATRPA  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALTRPA  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVATRPB  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVATRPB  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALTRPB  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PUVAFX52  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALFX52  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PALIR4A   --CO-- PRESSIONE ACQUA ALIM. INGRESSO RISCALDATORE                   
+PALUR4A   --CO-- PRESSIONE ACQUA ALIM. USCITA RISCALDATORE                     
+HALIR4A   --CO-- ENTALPIA ACQUA ALIM. INGRESSO RISCALD.                        
+WDI_R4A   --CO-- PORTATA DRENAGGIO ENTRANTE NEL RISCALD.                       
+HDI_R4A   --CO-- ENTALPIA DRENAGGIO ENTRANTE NEL RISCALD.                      
+WDU_R4A   --CO-- PORTATA DRENAGGIO USCENTE DAL RISCALD.                        
+WV__R4A   --CO-- PORTATA SPILLAMENTO ENTRANTE NEL RISCALD.                     
+HV__R4A   --CO-- ENTALPIA SPILLAMENTO ENTRANTE NEL RISCALD.                    
+PALUR5A   --CO-- PRESSIONE ACQUA ALIM. USCITA RISCALDATORE                     
+WAL_R5A   --CO-- PORTATA ACQUA ALIMENTO                                        
+HALIR5A   --CO-- ENTALPIA ACQUA ALIM. INGRESSO RISCALD.                        
+WDI_R5A   --CO-- PORTATA DRENAGGIO ENTRANTE NEL RISCALD.                       
+HDI_R5A   --CO-- ENTALPIA DRENAGGIO ENTRANTE NEL RISCALD.                      
+WDU_R5A   --CO-- PORTATA DRENAGGIO USCENTE DAL RISCALD.                        
+PALUR6A   --CO-- PRESSIONE ACQUA ALIM. USCITA RISCALDATORE                     
+WAL_R6A   --CO-- PORTATA ACQUA ALIMENTO                                        
+HALIR6A   --CO-- ENTALPIA ACQUA ALIM. INGRESSO RISCALD.                        
+WDU_R6A   --CO-- PORTATA DRENAGGIO USCENTE DAL RISCALD.                        
+WV__R6A   --CO-- PORTATA SPILLAMENTO ENTRANTE NEL RISCALD.                     
+HV__R6A   --CO-- ENTALPIA SPILLAMENTO ENTRANTE NEL RISCALD.                    
+PIVAF01A  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVAF01A  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALF01A  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVAF02A  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVAF02A  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALF02A  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVAF1AC  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+HVALF1AC  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVAF2AC  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+HVALF2AC  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVAF3AC  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+HVALF3AC  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVAF03A  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+HVALF03A  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVATIRA  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVATIRA  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALTIRA  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+WE_1CIAR  --CO-- PORTATA TUBO ENTRANTE  N.  1                                  
+HE_1CIAR  --CO-- ENTALPIA TUBO ENTRANTE N.  1                                  
+WU_1CIAR  --CO-- PORTATA TUBO USCENTE N.  1                                    
+HU_1CIAR  --CO-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+WE_1CURA  --CO-- PORTATA TUBO ENTRANTE  N.  1                                  
+HE_1CURA  --CO-- ENTALPIA TUBO ENTRANTE N.  1                                  
+WU_1CURA  --CO-- PORTATA TUBO USCENTE N.  1                                    
+HU_1CURA  --CO-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+PIVATURA  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVATURA  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALTURA  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PALIR4B   --CO-- PRESSIONE ACQUA ALIM. INGRESSO RISCALDATORE                   
+PALUR4B   --CO-- PRESSIONE ACQUA ALIM. USCITA RISCALDATORE                     
+HALIR4B   --CO-- ENTALPIA ACQUA ALIM. INGRESSO RISCALD.                        
+WDI_R4B   --CO-- PORTATA DRENAGGIO ENTRANTE NEL RISCALD.                       
+HDI_R4B   --CO-- ENTALPIA DRENAGGIO ENTRANTE NEL RISCALD.                      
+WDU_R4B   --CO-- PORTATA DRENAGGIO USCENTE DAL RISCALD.                        
+WV__R4B   --CO-- PORTATA SPILLAMENTO ENTRANTE NEL RISCALD.                     
+HV__R4B   --CO-- ENTALPIA SPILLAMENTO ENTRANTE NEL RISCALD.                    
+PALUR5B   --CO-- PRESSIONE ACQUA ALIM. USCITA RISCALDATORE                     
+WAL_R5B   --CO-- PORTATA ACQUA ALIMENTO                                        
+HALIR5B   --CO-- ENTALPIA ACQUA ALIM. INGRESSO RISCALD.                        
+WDI_R5B   --CO-- PORTATA DRENAGGIO ENTRANTE NEL RISCALD.                       
+HDI_R5B   --CO-- ENTALPIA DRENAGGIO ENTRANTE NEL RISCALD.                      
+WDU_R5B   --CO-- PORTATA DRENAGGIO USCENTE DAL RISCALD.                        
+PALUR6B   --CO-- PRESSIONE ACQUA ALIM. USCITA RISCALDATORE                     
+WAL_R6B   --CO-- PORTATA ACQUA ALIMENTO                                        
+HALIR6B   --CO-- ENTALPIA ACQUA ALIM. INGRESSO RISCALD.                        
+WDU_R6B   --CO-- PORTATA DRENAGGIO USCENTE DAL RISCALD.                        
+WV__R6B   --CO-- PORTATA SPILLAMENTO ENTRANTE NEL RISCALD.                     
+HV__R6B   --CO-- ENTALPIA SPILLAMENTO ENTRANTE NEL RISCALD.                    
+PIVAF01B  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVAF01B  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALF01B  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVAF02B  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVAF02B  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALF02B  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVAF1BC  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+HVALF1BC  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVAF2BC  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+HVALF2BC  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVAF3BC  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+HVALF3BC  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVAF03B  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+HVALF03B  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVATIRB  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVATIRB  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALTIRB  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+WE_1CIBR  --CO-- PORTATA TUBO ENTRANTE  N.  1                                  
+HE_1CIBR  --CO-- ENTALPIA TUBO ENTRANTE N.  1                                  
+WU_1CIBR  --CO-- PORTATA TUBO USCENTE N.  1                                    
+HU_1CIBR  --CO-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+WE_1CURB  --CO-- PORTATA TUBO ENTRANTE  N.  1                                  
+HE_1CURB  --CO-- ENTALPIA TUBO ENTRANTE N.  1                                  
+WU_1CURB  --CO-- PORTATA TUBO USCENTE N.  1                                    
+HU_1CURB  --CO-- ENTALPIA TUBO USCENTE N.  1 (SE INVERSIONE DI PORTATA)        
+PIVATURB  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVATURB  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALTURB  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+PIVATBRA  --CO-- PRESSIONE A MONTE TUBO-VALVOLA                                
+PUVATBRA  --CO-- PRESSIONE A VALLE TUBO-VALVOLA                                
+HVALTBRA  --CO-- ENTALPIA MONTE-VALLE FLUIDO TUBO-VALVOLA                      
+WE_1CURE  --CO-- PORTATA TUBO ENTRANTE  N.  1                                  
+HE_1CURE  --CO-- ENTALPIA TUBO ENTRANTE N.  1                                  
+WE_2CURE  --CO-- PORTATA TUBO ENTRANTE  N.  2                                  
+HE_2CURE  --CO-- ENTALPIA TUBO ENTRANTE N.  2                                  
+WE_3CURE  --CO-- PORTATA TUBO ENTRANTE  N.  3                                  
+HE_3CURE  --CO-- ENTALPIA TUBO ENTRANTE N.  3                                  
+WU_1CURE  --CO-- PORTATA TUBO USCENTE N.  1                                    
+IN_1CD6B  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  1                       
+IN_2CD6B  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  2                       
+IN_1CD5B  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  1                       
+IN_2CD5B  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  2                       
+IN_1CD4B  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  1                       
+IN_2CD4B  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  2                       
+IN_1CD6A  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  1                       
+IN_2CD6A  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  2                       
+IN_1CD5A  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  1                       
+IN_2CD5A  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  2                       
+IN_1CD4A  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  1                       
+IN_2CD4A  --CO-- SOMMATORE : VARIABILE DI INGRESSO N.  2                       
+PUPMTPOM  --CO-- PRESSIONE MANDATA POMPA                                       
+PIPMTPOM  --CO-- PRESSIONE ASPIRAZIONE POMPA                                   
+HIPMTPOM  --CO-- ENTALPIA FLUIDO ASPIRAZIONE POMPA                             
+PUPMPALA  --CO-- PRESSIONE MANDATA POMPA                                       
+PIPMPALA  --CO-- PRESSIONE ASPIRAZIONE POMPA                                   
+HIPMPALA  --CO-- ENTALPIA FLUIDO ASPIRAZIONE POMPA                             
+PUPMPALB  --CO-- PRESSIONE MANDATA POMPA                                       
+PIPMPALB  --CO-- PRESSIONE ASPIRAZIONE POMPA                                   
+HIPMPALB  --CO-- ENTALPIA FLUIDO ASPIRAZIONE POMPA                             
+WE_1MIRD  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1MIRD  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WE_2MIRD  --CO-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2MIRD  --CO-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WE_1MIAB  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1MIAB  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WE_2MIAB  --CO-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2MIAB  --CO-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WE_3MIAB  --CO-- PORTATA RAMO ENTRANTE  N. 3                                   
+HE_3MIAB  --CO-- ENTALPIA RAMO ENTRANTE N. 3                                   
+WE_4MIAB  --CO-- PORTATA RAMO ENTRANTE  N. 4                                   
+HE_4MIAB  --CO-- ENTALPIA RAMO ENTRANTE N. 4                                   
+WE_5MIAB  --CO-- PORTATA RAMO ENTRANTE  N. 5                                   
+HE_5MIAB  --CO-- ENTALPIA RAMO ENTRANTE N. 5                                   
+WE_6MIAB  --CO-- PORTATA RAMO ENTRANTE  N. 6                                   
+HE_6MIAB  --CO-- ENTALPIA RAMO ENTRANTE N. 6                                   
+WE_3MIDG  --CO-- PORTATA RAMO ENTRANTE  N. 3                                   
+HE_3MIDG  --CO-- ENTALPIA RAMO ENTRANTE N. 3                                   
+PIVAATRA  --CO-- PRESSIONE FLUIDO MONTE VALVOLA                                
+HVALATRA  --CO-- ENTALPIA FLUIDO MONTE-VALLE VALVOLA                           
+PIVAATRB  --CO-- PRESSIONE FLUIDO MONTE VALVOLA                                
+HVALATRB  --CO-- ENTALPIA FLUIDO MONTE-VALLE VALVOLA                           
+IN_1SWDG  --CO-- RELAZIONE LINEARE : INGRESSO N.  1                            
+PITUTIEC  --CO-- PRESSIONE A MONTE PERDITA DI CARICO                           
+HTUBTIEC  --CO-- ENTALPIA MONTE-VALLE PERDITA DI CARICO                        
+WE_1MIRI  --CO-- PORTATA RAMO ENTRANTE  N. 1                                   
+HE_1MIRI  --CO-- ENTALPIA RAMO ENTRANTE N. 1                                   
+WE_2MIRI  --CO-- PORTATA RAMO ENTRANTE  N. 2                                   
+HE_2MIRI  --CO-- ENTALPIA RAMO ENTRANTE N. 2                                   
+WE_3MIRI  --CO-- PORTATA RAMO ENTRANTE  N. 3                                   
+HE_3MIRI  --CO-- ENTALPIA RAMO ENTRANTE N. 3                                   
+WU_1MIRI  --CO-- PORTATA RAMO USCENTE N. 1                                     
+HU_1MIRI  --CO-- ENTALPIA RAMO USCENTE N. 1 (W<0)                              
+PITUTIDG  --CO-- PRESSIONE A MONTE PERDITA DI CARICO                           
+PUTUTIDG  --CO-- PRESSIONE A VALLE PERDITA DI CARICO                           
+HTUBTIDG  --CO-- ENTALPIA MONTE-VALLE PERDITA DI CARICO                        

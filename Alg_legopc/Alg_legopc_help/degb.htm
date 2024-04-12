@@ -1,0 +1,501 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>DEGB</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE DEGB</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGB</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">DEGASSING UNIT</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">The DEGB module simulates the dynamics of thermo-hydraulic
+phenomena to which the liquid-steam mix contained in the cavity of a counterflow
+degassing unit of the &quot;SPRAY-TRAY&quot; type is subjected. This type of
+degassing unit consists of a large horizontal cylindrical tank, acting as
+collection basin of the degassed liquid, with a second horizontal cylindrical
+element (deaerator reservoir) where gas elimination from the liquid takes place.</p>
+<p ALIGN="JUSTIFY">The operation principle is the following: the condensate to
+be degassed is sprayed in the upper part of the deaerator reservoir and falls on
+a set of &quot;U&quot; section bars, generally known as &quot;basins&quot;.</p>
+<p ALIGN="JUSTIFY">When basins are full, the liquid in excess overflows and is
+collected by a second set of basins, placed under the first one and shifted with
+respect to the same. The liquid in excess newly overflows from there towards a
+further set of basins until it reaches the deaerator reservoir bottom. During
+the descent from the deaerator reservoir top to down, the liquid exchanges heat
+in countercurrent with the spilling steam let into the lower part of the
+deaerator reservoir.</p>
+<p ALIGN="JUSTIFY">The liquid collected on the deaerator reservoir bottom, falls
+through two appropriate pipes, in the collecting tank underneath. The deaerator
+reservoir and the collecting tank are also connected between them through two
+additional pipes, called &quot;venting tubes&quot; whose function is that to
+equalise the pressure in the two vessels in any operation condition.</p>
+<p ALIGN="JUSTIFY">To obtain the mathematical model simulating the degassing
+unit as a whole the deaerator reservoir and the tank have been considered as two
+separate cavities. A different mathematical model has been adopted for each
+cavity, and the two different models have been put in relation between them
+through an additional model simulating the function of venting tubes.</p>
+<p ALIGN="JUSTIFY">This allows a more realistic determination of pressure, to
+adjustment purposes and the simulation of phenomena such as steam recall from
+tank to the deaerator reservoir in case of violent depressurization.</p>
+<p ALIGN="JUSTIFY">The mathematical model used to simulate the deaerator
+reservoir is essentially that of a cavity in which the phases (liquid, steam)
+are in equilibrium. Main hypothesis assumed are the following:</p>
+<p>- absence of non condensable gas.</p>
+<p>- phases of the liquid-steam mix in thermodynamic equilibrium between them
+also during a transient state;</p>
+<p>- uniform distribution of pressure and enthalpy;</p>
+<p>- thermal equilibrium between the fluid and the basins steel;</p>
+<p>- adiabatic cavity walls;</p>
+<p>- thermal exchange between steam and basin steel neglectable;</p>
+<p>- all the liquid present in the cavity in excess with respect to the basins
+capacity, overflows and reaches the collection tank.</p>
+<p ALIGN="JUSTIFY">Equations used, both differential, are:</p>
+<ol>
+  <li>
+    <p ALIGN="JUSTIFY">mass conservation equation in the deaerator reservoir;</li>
+  <li>
+    <p ALIGN="JUSTIFY">energy conservation equation in the deaerator reservoir.</li>
+</ol>
+<p ALIGN="JUSTIFY">The mathematical model relevant to venting tubes essentially
+consists of a unique algebraic equation putting the steam flow rate flowing
+through the pipes in relation with the pressure difference between tank and
+deaerator reservoir. This equation is obtained applying the conservation
+equation of motion quantity to venting tubes.</p>
+<p ALIGN="JUSTIFY">The mathematical model used for the tank, contrarily to what
+has been made for the deaerator reservoir, is that of a cavity in which the two
+phases, liquid and steam, can be in non thermodynamic equilibrium between them.
+In particular the tank volume is divided into two areas having variable limits:
+an upper area identified as &quot;steam area&quot;, and a lower area identified
+as &quot;liquid area&quot;. In both the areas, which can be in non thermodynamic
+equilibrium between them, water can be present as biphase mix. This enables to
+consider the condensation rate proportional to the mass of liquid present in the
+steam area, and the evaporation rate proportional to the steam mass present in
+the liquid area.</p>
+<p ALIGN="JUSTIFY">This model allows to simulate liquid expansion phenomena and
+the flashing deriving from a quick depressurization.</p>
+<p ALIGN="JUSTIFY">Further hypothesis included in the model are:</p>
+<p>- uniform distribution of pressure and enthalpy in the steam area;</p>
+<p>- uniform distribution of enthalpy in the liquid area;</p>
+<p>- linear pressure distribution, with respect to height in the liquid area;</p>
+<p>- thermal exchange between fluid and cavity walls neglactable.</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">Equations used are:</p>
+<p ALIGN="JUSTIFY">3) conservation equation of mass in the steam area;</p>
+<p ALIGN="JUSTIFY">4) conservation equation of energy in the steam area ;</p>
+<p ALIGN="JUSTIFY">5) conservation equation of mass in the liquid area;</p>
+<p ALIGN="JUSTIFY">6) conservation equation of mass in the liquid area;</p>
+<p ALIGN="JUSTIFY">7) equation for liquid level calculation in the tank;</p>
+<p ALIGN="JUSTIFY">8) equation for the calculation of pressure on the cavity
+bottom.</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">The first four, out of these ones are differential equations
+while the remaining ones are algebraic.</p>
+<p ALIGN="JUSTIFY">The equation 8) useful to the purposes of a correct
+evaluation of NPSH of the liquid extraction pump, has been formulated for an
+horizontal axis, cilindrycal cavity. Characteristic dimensions of this cavity
+must be supplied in data required by the input module.</p>
+<p ALIGN="JUSTIFY">Finally it must be noticed that it is possible to simulate
+both the heating phase of the degassing unit during starting, and the pump
+recycle.</p>
+<p ALIGN="JUSTIFY">For sake of clarity on input and output variables involved in
+the above mentioned balance equations, following is a diagram highlighting the
+magnitudes put into the deaerator reservoir, those put into the tank and those
+extracted from the tank.</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image68.gif" width="704" height="578"></p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGB</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+</font><font SIZE="2">
+<p>&nbsp;</p>
+<p align="center"><img SRC="images/Image69.gif" width="488" height="403"></p>
+</font><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT - OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WVIT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of steam spilled from the
+      turbine and sent to the degassing unit deaerator reservoir</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HVIT&nbsp;</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam spilled from the
+      turbine and sent to the degassing unit deaerator reservoir</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAIT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of deaerator reservoir supply
+      liquid (supply water)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HAIT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of deaerator reservoir supply
+      liquid</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WDIT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of drains run into the
+      degassing unit</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HDIT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of drains run into the degassing
+      unit</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WFSR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of liquid extracted from tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WVIS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of steam run into the tank
+      during the starting phase</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HVIS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam run into the tank
+      during the starting phase</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WAIS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of liquid run into the tank by
+      recycle of boiler supply pumps</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HAIS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of liquid run into the tank by
+      recycle of boiler supply pumps</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DPST</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure difference between tank and
+      deaerator reservoir</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HTOR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">average enthalpy in deaerator reservoir</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PSER</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam pressure in tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HVSR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam enthalpy in tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HLSR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">liquid enthalpy in tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">MLSR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">liquid mass in tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PTOR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure in deaerator reservoir</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LIVD</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">liquid level in tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PFSR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure on tank bottom (condensate
+      output)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HFSR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of liquid extracted from tank</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGB</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i>
+</b>
+          </font>
+<font FACE="Arial">
+<p ALIGN="left">In addition to the initial values of input and output variables
+of the DEGB module, whose meaning has been defined in card B, the user must
+assign the following set of data to complete the input required by the module:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">V.TORRET</font><!--mstheme--></font></td>
+    <td width="75%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">deaerator reservoir internal volume,
+      available for the fluid (deaerator reservoir vol. - internal overall
+      dimensions vol.)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">V.BAC</font><!--mstheme--></font></td>
+    <td width="75%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">total capacity of basis (volume of liquid
+      collected by basins in case the same are all full)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/K]</font><!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CTM BAC</font><!--mstheme--></font></td>
+    <td width="75%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">thermal capacity of the basin steel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VOL.SERB</font><!--mstheme--></font></td>
+    <td width="75%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">tank internal volume, available for the
+      fluid (tank vol. overall dimensions vol.)<br>
+      If this datum is not assigned, it is calculated using the diameter &quot;DIA.SERB.&quot;
+      and the length &quot;LUN.SERB&quot;</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DIA.SERB</font><!--mstheme--></font></td>
+    <td width="75%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">tank internal diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LUN.SERB</font><!--mstheme--></font></td>
+    <td width="75%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">tank internal length</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGB</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="left">In the search of the steady condition, the initial value of
+average enthalpy HTOR is calculated inside the module using the tentative values
+assigned to the remaining variables. Theferore, initialization by the user is
+not required.</p>
+<p ALIGN="left">For the initialization of the remaining variables no special
+prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGB</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="left">No user’s subprogram is required in the DEGB module.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGB</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="left">The equations forming the module mathematic model, indicated in
+cards A1 and A2, respectively, provide a set of residuals, which expression,
+both extended and formal would require a number of comments beyond the scope of
+this manual. We therefore prefer to indicate consistancies between residuals and
+equations, mentioning also the relevant normalization factors and make reference
+to the manual section, relevant to the module: &quot;Model library of the LEGO
+code for the simulation of power generation plants - Theory&quot;</p>
+<p ALIGN="left">for additional details.</p>
+<p>RNI(1) - normalization factor DP0<br>
+originated by the conservation equation of motion quantity applied to balancing</p>
+<p>RNI(2) - normalization factor W0*H0<br>
+relevant to the conservation equation of energy in the deaerator reservoir</p>
+<p>RNI(3) - normalization factor W0<br>
+relevant to the mass conservation equation applied to the whole degassing unit</p>
+<p>RNI(4) - normalization factor W0*H0<br>
+relevant to the conservation equation of energy in the steam area</p>
+<p>RNI(5) - normalization factor W0*H0<br>
+relevant to the conservation equation of energy in the liquid area</p>
+<p>RNI(6) - normalization factor W0<br>
+relevant to the conservation equation of mass in the liquid area</p>
+<p>RNI(7) - normalization factor P0<br>
+relevant to the equation for the calculation of pressure in the deaerator
+reservoir</p>
+<p>RNI(8) - normalization factor L0<br>
+represents an implicit equation for the calculation of the LIVD level</p>
+<p>RNI(9) - normalization factor P0<br>
+relevant to the equation for the calculation of pressure on tank bottom</p>
+<p>RNI(10) - normalization factor H0<br>
+relevant to assigning of enthalpy of the liquid extracted from the tank</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGB</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></b></font><b><font FACE="Courier New" SIZE="2">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<blockquote>
+  <p ALIGN="left">SUBROUTINE DEGBI3 (IFO,IOB,DEBL)</p>
+  <p ALIGN="left">SUBROUTINE DEGBI4 (IOB,MOD)</p>
+  <p ALIGN="left">SUBROUTINE DEGBI1 (IFUN,K,IBLOK1,IBLOK2,NSTATI,NUSCIT,NINGRE)</p>
+  <p ALIGN="left">SUBROUTINE DEGBI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+  <p ALIGN="left">&amp; IBLOC1,IBLOC2,IER,CNXYU,TOL)</p>
+  <p ALIGN="left">SUBROUTINE DEGBC1 (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,</p>
+  <p ALIGN="left">&amp; IBLOC1,IBLOC2)</p>
+  <p ALIGN="left">SUBROUTINE DEGB20 (IFUN,IXYU,XYU,IPD,DATI,RN)</p>
+  <p ALIGN="left">SUBROUTINE TAU20 (IFUN,PZE,PL,ZL,H,ROML,ROMV,</p>
+  <p ALIGN="left">&amp; DRPMV,DRHMV,XROMV,VOL,VIN,DIA,ALU)</p>
+  <p ALIGN="left">SUBROUTINE PARA20 (T1,TG,TL,BETA,ALFA,AKS,AKSUP,AK2,P)</p>
+  <p ALIGN="left">SUBROUTINE PPHSAT (HWS,P,PS)</p>
+  <p ALIGN="left">SUBROUTINE DDROPH (P,NCAL,RES1,RES2,RES3)</p>
+  <p ALIGN="left">FUNCTION DTDP (P)</p>
+  <p ALIGN="left">FUNCTION VOL20 (D,AL,Z)</p>
+</blockquote>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE DEGB</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Test cases</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="left">Reference test cases relevant to this module are in the manual
+section dedicated to the examples carried out and marked with the tag:</p>
+<p ALIGN="CENTER">&quot;DEGBSL&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

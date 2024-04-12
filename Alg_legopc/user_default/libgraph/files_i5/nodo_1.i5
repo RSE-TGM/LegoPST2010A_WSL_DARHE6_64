@@ -1,0 +1,22 @@
+NODO
+
+NODO - Pressure measure                                                         
+2
+1
+
+t0
+____ IN_1 ____ ____ ____ ____ ____ ____ 
+0 1 0 0 0 0 0 0 
+t1
+USOM 
+1 
+
+0
+1
+1
+
+USOM UA
+LINEAR RELATION : OUTPUT VARIABLE                              
+IN_1 IN
+LINEAR RELATION : INPUT N.  1                                  
+

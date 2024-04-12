@@ -1,0 +1,92 @@
+BCN0_0                                                                          
+BCN0                                                                            
+Brine condenser                                                                 
+                                                                                
+NSTAT = 2
+NUSCI = 7
+NINGR =17
+ 
+NCONF = 3
+ 
+PCND      --US-- STEAM PRESSURE IN THE CONDENSER                                
+LCND      --US-- LEVEL OF LIQUID IN THE CONDENSER                               
+TMFT      --UA-- MEAN TEMPERATURE OF METAL AT TUBE BUNDLE OUTLET                
+HUFT      --UA-- COOLER ENTHALPY AT THE TUBE BUNDLE OUTLET                      
+HLCN      --UA-- ENTHALPY OF THE CONDENSATE LIQUID                              
+HVCN      --UA-- ENTHALPY OF THE SATURATE STEAM                                 
+PFCN      --UA-- PRESSURE IN THE CONDENSER BOTTOM                               
+%LCN      --UA-- MEASURED LIQUID LEVEL                                          
+WRFT      --UA-- COOLING BRINE FLOW RATE                                        
+WTUR      --IN-- FLOW RATE OF MAIN TURBINE BLOW-OFF STEAM                       
+HTUR      --IN-- ENTHALPY OF MAIN TURBINE BLOW-OFF STEAM                        
+WEXT      --IN-- FLOW RATE OF STEAM FROM SECONDARY CONDENSER INLET              
+HEXT      --IN-- ENTHALPY OF STEAM AT SECONDARY CONDENSER INLET                 
+WLCP      --IN-- CONDENSATE EXTRACTION FLOW RATE                                
+WDRE      --IN-- DRAINS FLOW RATE AT THE CONDENSER INLET                        
+HDRE      --IN-- DRAINS ENTHALPY AT THE CONDENSER INLET                         
+WLCX      --IN-- LEVEL CONTROL EXTRACTED (SUPPL.) LIQUID FLOW RATE              
+WVCN      --IN-- FLOW RATE OF STEAM EXTRACTED FOR CONDENSER VACUUM              
+WRIC      --IN-- FLOW RATE OF LIQUID RECIRCULATED BY EXTR. PUMPS                
+HRIC      --IN-- ENTHALPY OF LIQUID RECIRCULATED BY EXTR. PUMPS                 
+PMON      --IN-- COOLING BRINE UPSTREAM PRESSURE                                
+PVAL      --IN-- COOLING BRINE DOWNSTREAM PRESSURE                              
+HIFT      --IN-- COOLING BRINE ENTHALPY AT THE TUBE BUNDLE INLET                
+CORR      --IN-- THERMAL EXCHANGE CORRECTION COEFFICIENT                        
+FNAC      --IN-- NACL MASS FRACTION IN BRINE                                    
+AKTB      --IN-- CORRECTION COEFF. FOR COOLING BRINE HEAD LOSS                  
+==============================                                                  
+PCND      --US-- STEAM PRESSURE IN THE CONDENSER                                
+LCND      --US-- LEVEL OF LIQUID IN THE CONDENSER                               
+TMFT      --UA-- MEAN TEMPERATURE OF METAL AT TUBE BUNDLE OUTLET                
+HUFT      --UA-- COOLER ENTHALPY AT THE TUBE BUNDLE OUTLET                      
+HLCN      --UA-- ENTHALPY OF THE CONDENSATE LIQUID                              
+HVCN      --UA-- ENTHALPY OF THE SATURATE STEAM                                 
+PFCN      --UA-- PRESSURE IN THE CONDENSER BOTTOM                               
+%LCN      --UA-- MEASURED LIQUID LEVEL                                          
+PMON      --UA-- COOLING BRINE UPSTREAM PRESSURE                                
+WTUR      --IN-- FLOW RATE OF MAIN TURBINE BLOW-OFF STEAM                       
+HTUR      --IN-- ENTHALPY OF MAIN TURBINE BLOW-OFF STEAM                        
+WEXT      --IN-- FLOW RATE OF STEAM FROM SECONDARY CONDENSER INLET              
+HEXT      --IN-- ENTHALPY OF STEAM AT SECONDARY CONDENSER INLET                 
+WLCP      --IN-- CONDENSATE EXTRACTION FLOW RATE                                
+WDRE      --IN-- DRAINS FLOW RATE AT THE CONDENSER INLET                        
+HDRE      --IN-- DRAINS ENTHALPY AT THE CONDENSER INLET                         
+WLCX      --IN-- LEVEL CONTROL EXTRACTED (SUPPL.) LIQUID FLOW RATE              
+WVCN      --IN-- FLOW RATE OF STEAM EXTRACTED FOR CONDENSER VACUUM              
+WRIC      --IN-- FLOW RATE OF LIQUID RECIRCULATED BY EXTR. PUMPS                
+HRIC      --IN-- ENTHALPY OF LIQUID RECIRCULATED BY EXTR. PUMPS                 
+WRFT      --IN-- COOLING BRINE FLOW RATE                                        
+PVAL      --IN-- COOLING BRINE DOWNSTREAM PRESSURE                              
+HIFT      --IN-- COOLING BRINE ENTHALPY AT THE TUBE BUNDLE INLET                
+CORR      --IN-- THERMAL EXCHANGE CORRECTION COEFFICIENT                        
+FNAC      --IN-- NACL MASS FRACTION IN BRINE                                    
+AKTB      --IN-- CORRECTION COEFF. FOR COOLING BRINE HEAD LOSS                  
+==============================                                                  
+PCND      --US-- STEAM PRESSURE IN THE CONDENSER                                
+LCND      --US-- LEVEL OF LIQUID IN THE CONDENSER                               
+TMFT      --UA-- MEAN TEMPERATURE OF METAL AT TUBE BUNDLE OUTLET                
+HUFT      --UA-- COOLER ENTHALPY AT THE TUBE BUNDLE OUTLET                      
+HLCN      --UA-- ENTHALPY OF THE CONDENSATE LIQUID                              
+HVCN      --UA-- ENTHALPY OF THE SATURATE STEAM                                 
+PFCN      --UA-- PRESSURE IN THE CONDENSER BOTTOM                               
+%LCN      --UA-- MEASURED LIQUID LEVEL                                          
+PVAL      --UA-- COOLING BRINE DOWNSTREAM PRESSURE                              
+WTUR      --IN-- FLOW RATE OF MAIN TURBINE BLOW-OFF STEAM                       
+HTUR      --IN-- ENTHALPY OF MAIN TURBINE BLOW-OFF STEAM                        
+WEXT      --IN-- FLOW RATE OF STEAM FROM SECONDARY CONDENSER INLET              
+HEXT      --IN-- ENTHALPY OF STEAM AT SECONDARY CONDENSER INLET                 
+WLCP      --IN-- CONDENSATE EXTRACTION FLOW RATE                                
+WDRE      --IN-- DRAINS FLOW RATE AT THE CONDENSER INLET                        
+HDRE      --IN-- DRAINS ENTHALPY AT THE CONDENSER INLET                         
+WLCX      --IN-- LEVEL CONTROL EXTRACTED (SUPPL.) LIQUID FLOW RATE              
+WVCN      --IN-- FLOW RATE OF STEAM EXTRACTED FOR CONDENSER VACUUM              
+WRIC      --IN-- FLOW RATE OF LIQUID RECIRCULATED BY EXTR. PUMPS                
+HRIC      --IN-- ENTHALPY OF LIQUID RECIRCULATED BY EXTR. PUMPS                 
+WRFT      --IN-- COOLING BRINE FLOW RATE                                        
+PMON      --IN-- COOLING BRINE UPSTREAM PRESSURE                                
+HIFT      --IN-- COOLING BRINE ENTHALPY AT THE TUBE BUNDLE INLET                
+CORR      --IN-- THERMAL EXCHANGE CORRECTION COEFFICIENT                        
+FNAC      --IN-- NACL MASS FRACTION IN BRINE                                    
+AKTB      --IN-- CORRECTION COEFF. FOR COOLING BRINE HEAD LOSS                  
+==============================                                                  
+EOF                                                                             

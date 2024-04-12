@@ -1,0 +1,43 @@
+SERA
+
+SERA GAS manifold                                                               
+3
+1
+
+t0
+WI_1 PSER TI_1 TSER ____ ____ ____ ____ 
+1 -1 1 -1 0 0 0 0 
+t1
+WI_2 PSER TI_2 TSER ____ ____ ____ ____ 
+1 -1 1 -1 0 0 0 0 
+t2
+WU_1 PSER TSER TU_1 ____ ____ ____ ____ 
+-1 1 1 -1 0 0 0 0 
+
+3
+0
+8
+
+PSER US
+AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMET US
+TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSER US
+AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WI_1 IN
+AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1 IN
+AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WI_2 IN
+AIR/GAS FLOW RATE THROUGH INLET PIPE N.  2                     
+TI_2 IN
+AIR/GAS TEMPERATURE IN INLET PIPE N.  2                        
+WU_1 IN
+AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1 IN
+AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+TEST IN
+EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE IN
+THERMAL EXTERNAL EXCHANGING COEFF.                             
+

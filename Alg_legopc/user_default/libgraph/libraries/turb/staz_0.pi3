@@ -1,0 +1,40 @@
+STAZ_0                                                                          
+STAZ                                                                            
+STAZ - Steam turbine impulse stage                                              
+                                                                                
+NSTAT = 0
+NUSCI =13
+NINGR =15
+ 
+NCONF = 1
+ 
+WAMM      --UA-- STEAM TOTAL FLOW RATE INTO THE TURBINE                         
+HCRT      --UA-- ENTHALPY OF STEAM IN THE WHEEL CHAMBER                         
+QMEC      --UA-- MECHANICAL POWER                                               
+WAM1      --UA-- STEAM FLOW RATE AT VALVE 1 INLET                               
+WAM2      --UA-- STEAM FLOW RATE AT VALVE 2 INLET                               
+AR_1      --UA-- LIFT OF THE REGULATING VALVE  1                                
+AR_2      --UA-- LIFT OF THE REGULATING VALVE  2                                
+AR_3      --UA-- LIFT OF THE REGULATING VALVE  3                                
+AR_4      --UA-- LIFT OF THE REGULATING VALVE  4                                
+PU_1      --UA-- PRESSURE UPSTREAM THE NOZZLES  1                               
+PU_2      --UA-- PRESSURE UPSTREAM THE NOZZLES  2                               
+PU_3      --UA-- PRESSURE UPSTREAM THE NOZZLES  3                               
+PU_4      --UA-- PRESSURE UPSTREAM THE NOZZLES  4                               
+ZVA1      --IN-- POSITION OF INLET VALVE 1                                      
+ZVA2      --IN-- POSITION OF INLET VALVE 2                                      
+PAM1      --IN-- PRESSURE UPSTREAM INLET VALVE 1                                
+PAM2      --IN-- PRESSURE UPSTREAM INLET VALVE 2                                
+HAM1      --IN-- STEAM ENTHALPY UPSTREAM INLET VALVE 1                          
+HAM2      --IN-- STEAM ENTHALPY UPSTREAM INLET VALVE 2                          
+PCRT      --IN-- STEAM PRESSURE IN THE WHEEL CHAMBER                            
+SEAV      --IN-- TURBINE START BUTTON                                           
+ALZS      --IN-- SERVOMOTOR POSITION OF THE REGULATING VALVES                   
+RPMT      --IN-- TURBINE ROTATIONAL VELOCITY                                    
+FARC      --IN-- PARTIAL ARC (0) OR FULL ARC (1)                                
+AT_1      --IN-- POSITION OF THE REGULATING VALVE TESTER 1                      
+AT_2      --IN-- POSITION OF THE REGULATING VALVE TESTER 2                      
+AT_3      --IN-- POSITION OF THE REGULATING VALVE TESTER 3                      
+AT_4      --IN-- POSITION OF THE REGULATING VALVE TESTER 4                      
+==============================                                                  
+EOF                                                                             

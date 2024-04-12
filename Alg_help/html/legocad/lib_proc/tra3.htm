@@ -1,0 +1,149 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE TRA3</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TRA3_summ"></A>MODULE TRA3&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff"><P ALIGN="JUSTIFY">model generalities</P>
+<P ALIGN="JUSTIFY">topological data</P>
+<P ALIGN="JUSTIFY">physical and geometrical data</P>
+<P ALIGN="JUSTIFY">module variables initialization</P>
+<P ALIGN="JUSTIFY">user's subprograms</P>
+<P ALIGN="JUSTIFY">residuals</P>
+<P ALIGN="JUSTIFY">module subprograms</P>
+<P ALIGN="JUSTIFY">test cases</P><DIR>
+
+</U></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TRA3_A"></A>MODULE TRA3&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">THREE-PHASE THREE COILS TRANSFORMER</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module TRA3 simulates the behavior of a three coils transformer, allowing simulating typical maneuvers such as insertion and shutdown, variation of the transforming ratio in working conditions, etc.</P>
+<P ALIGN="JUSTIFY">All module equations are written internally using the users sign convention, whilst externally the generators convention is used, so to allow connection between TRA3 and SBAR. </P>
+<P ALIGN="JUSTIFY">The module is built on the following hypothesis and simplifications:</P>
+<P ALIGN="JUSTIFY">the transformer is supposed to function in alternate sinusoidal conditions: any transient phenomenon bound to magnetic field variations in the inductors is omitted. So, electrical quantities can be seen as rotating phasors and currents and tensions can be individuated by means of their real and imaginary parts.</P>
+<P ALIGN="JUSTIFY">the three-phase system is supposed symmetric and equilibrated. So we can study one only phase, the other two beeng characterized by quantities having the same module and a phase difference of 120°</P>
+<P ALIGN="JUSTIFY">effects of mutual inductance between the coils have not been considered</P>
+<P ALIGN="JUSTIFY">the primary and the secondary coils are supposed star-connected in such a manner that no phase displacement is introduced by the transformer.</P>
+<P ALIGN="JUSTIFY">non linearities caused by the hysteretic behavior of iron are left out</P>
+<P ALIGN="JUSTIFY">impedence with respect to ground is considered much greater than the ones of each coil.</P>
+<P ALIGN="JUSTIFY">transformation ratio can be changed in working conditions by modifying the number of turns at the primary coil. The number of turns of the two secondary coils remains unchanged.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TRA3_B"></A>MODULE TRA3&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1261.gif" WIDTH=398 HEIGHT=263></P>
+<FONT FACE="Arial"><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[V]&#9;VFR1&#9;real component of first coil phase tension&#9;</P>
+<P ALIGN="JUSTIFY">[V]&#9;VFX1&#9;imaginary component of first coil phase tension</P>
+<P ALIGN="JUSTIFY">[V]&#9;VFR2&#9;real component of second coil phase tension&#9;</P>
+<P ALIGN="JUSTIFY">[V]&#9;VFX2&#9;imaginary component of second coil phase tension&#9;</P>
+<P ALIGN="JUSTIFY">[V]&#9;VFR3&#9;real component of third coil phase tension&#9;</P>
+<P ALIGN="JUSTIFY">[V]&#9;VFX3&#9;imaginary component of third coil phase tension&#9;</P>
+<P ALIGN="JUSTIFY">[-]&#9;SW1&#9;state of switch on first coil (1 = on)</P>
+<P ALIGN="JUSTIFY">[-]&#9;SW2&#9;state of switch on second coil (1 = on)</P>
+<P ALIGN="JUSTIFY">[-]&#9;SW3&#9;state of switch on third coil (1 = on)</P>
+<P ALIGN="JUSTIFY">[%]&#9;ETA0&#9;tension variation on coils 2-3 in percentage with respect to maximum value of tension variation</P>
+<P ALIGN="JUSTIFY">[rad/s]&#9;OMT&#9;input electrical duty pulse factor&nbsp;</P>
+<P ALIGN="JUSTIFY">[-]&#9;MLF1&#9;malfunctions switch on/off:</P>
+<P ALIGN="JUSTIFY">0 = no malfunctions</P>
+<P ALIGN="JUSTIFY">1 = opening of SW1</P>
+<P ALIGN="JUSTIFY">2 = short circuit on 40% of primary turns</P>
+<P ALIGN="JUSTIFY">[A]&#9;IR1&#9;real component of first coil current</P>
+<P ALIGN="JUSTIFY">[A]&#9;IX1&#9;imaginary component of first coil current</P>
+<P ALIGN="JUSTIFY">[A]&#9;IR2&#9;real component of second coil current</P>
+<P ALIGN="JUSTIFY">[A]&#9;IX2&#9;imaginary component of second coil current</P>
+<P ALIGN="JUSTIFY">[A]&#9;IR3&#9;real component of third coil current</P>
+<P ALIGN="JUSTIFY">[A]&#9;IX3&#9;imaginary component of third coil current</P>
+<P ALIGN="JUSTIFY">[W]&#9;P1&#9;active power on first coil</P>
+<P ALIGN="JUSTIFY">[VAR]&#9;Q1&#9;reactive power on first coil</P>
+<P ALIGN="JUSTIFY">[W]&#9;P2&#9;active power on second coil</P>
+<P ALIGN="JUSTIFY">[VAR]&#9;Q2&#9;reactive power on second coil</P>
+<P ALIGN="JUSTIFY">[W]&#9;P3&#9;active power on third coil</P>
+<P ALIGN="JUSTIFY">[VAR]&#9;Q3&#9;reactive power on third coil</P>
+<P ALIGN="JUSTIFY">[V]&#9;VMR1&#9;real component of tension as measured at first coil terminal (which can differ from the one measured on primary terminal &#9;&#9;&#9;because of the state of switch SW1)&#9;</P>
+<P ALIGN="JUSTIFY">[V]&#9;VMX1&#9;imaginary component of tension as measured at first coil terminal (which can differ from the one measured on primary terminal &#9;&#9;because of the state of switch SW1)&#9;</P>
+<P ALIGN="JUSTIFY">[V]&#9;VMR2&#9;real component of tension as measured at second coil terminal (which can differ from the one measured on secondary &#9;&#9;&#9;&#9;terminal because of the state of switch SW2)</P>
+<P ALIGN="JUSTIFY">[V]&#9;VMX2&#9;imaginary component of tension as measured at second coil terminal (which can differ from the one measured on secondary &#9;&#9;&#9;terminal because of the state of switch SW2)</P>
+<P ALIGN="JUSTIFY">[V]&#9;VMR3&#9;real component of tension as measured at third coil terminal (which can differ from the one measured on third terminal &#9;&#9;&#9;&#9;because of the state of switch SW3)</P>
+<P ALIGN="JUSTIFY">[V]&#9;VMX3&#9;imaginary component of tension as measured at third coil terminal (which can differ from the one measured on third terminal &#9;&#9;&#9;because of the state of switch SW3)</P>
+<P ALIGN="JUSTIFY">[rad/s]&#9;OMTU&#9;output electrical duty pulse factor</P>
+<B><U><P ALIGN="JUSTIFY">&nbsp;</P>
+</U></FONT><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_TRA3_C"></A>MODULE TRA3&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables, user must assign the following data (see note 2):</P>
+<P ALIGN="JUSTIFY">[V]&#9;V1N&#9;primary nominal tension</P>
+<P ALIGN="JUSTIFY">[V]&#9;V2N&#9;second coil nominal tension</P>
+<P ALIGN="JUSTIFY">[V]&#9;V3N&#9;third coil nominal tension</P>
+<P ALIGN="JUSTIFY">[W]&#9;P1N&#9;primary nominal power</P>
+<P ALIGN="JUSTIFY">[W]&#9;P2N&#9;second coil nominal power</P>
+<P ALIGN="JUSTIFY">[W]&#9;P3N&#9;third coil nominal power</P>
+<P ALIGN="JUSTIFY">[VA]&#9;AN&#9;base power</P>
+<P ALIGN="JUSTIFY">[rad/s]&#9;OMN&#9;base electrical duty-pulse factor</P>
+<P ALIGN="JUSTIFY">[%]&#9;PCC12&#9;power at first coil short-circuiting the second with third loadless (in percent of first coil nominal power)</P>
+<P ALIGN="JUSTIFY">[%]&#9;PCC23&#9;power at second coil short-circuiting the third with first loadless (in percent of second coil nominal power)</P>
+<P ALIGN="JUSTIFY">[%]&#9;PCC31&#9;power at third coil short-circuiting the first with second loadless (in percent of third coil nominal power)</P>
+<P ALIGN="JUSTIFY">[%]&#9;VCC12&#9;tension at first coil short-circuiting the second with third loadless (in percent of first coil nominal tension)</P>
+<P ALIGN="JUSTIFY">[%]&#9;VCC23&#9;tension at second coil short-circuiting the third with first loadless (in percent of second coil nominal tension)</P>
+<P ALIGN="JUSTIFY">[%]&#9;VCC31&#9;tension at third coil short-circuiting the first with second loadless (in percent of third coil nominal tension)</P>
+<P ALIGN="JUSTIFY">[%]&#9;PVIDE&#9;power at first coil with second and third loadless (in percent of first coil nominal power)</P>
+<P ALIGN="JUSTIFY">[%]&#9;IVIDE&#9;current at first coil with second and third loadless (in percent of first coil nominal current)</P>
+<P ALIGN="JUSTIFY">[-]&#9;NL&#9;lowest number of turns at first coil</P>
+<P ALIGN="JUSTIFY">[-]&#9;NM&#9;highest number of turns at first coil</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TRA3_D"></A>MODULE TRA3&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the TRA3 module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TRA3_E"></A>MODULE TRA3&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">TRA3 doesn’t prescribe any FORAUS subroutine.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TRA3_F"></A>MODULE TRA3&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P>&nbsp;</P>
+<P>Equations 1-6 are the ties current/tension at each coil: each coil has two equations for real and imaginary part respectively.</P>
+<P>Equations 7-12 calculate active and reactive power at each coil.</P>
+<P>Equations 13-18 bind terminal and coil tensions (real and imaginary) keeping into account the state of the three switches SW1, SW2 and SW3.</P>
+<P>Equation 19 sets output electrical duty pulse factor equal to the input one (supposing that the transformer causes no phase displacement).</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TRA3_G"></A>MODULE TRA3&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Courier New"><P>SUBROUTINE TRA3I2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>SUBROUTINE TRA3I3(IFO,IOB,DEBL)</P>
+<P>SUBROUTINE TRA3I4(IOB,MOD)</P>
+<P>SUBROUTINE TRA3C1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE TRA3RES(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>SUBROUTINE TRA3D1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TRA3_H"></A>MODULE TRA3&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module aren’t yet available.</P></FONT></BODY>
+</HTML>

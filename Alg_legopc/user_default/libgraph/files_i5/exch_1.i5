@@ -1,0 +1,85 @@
+EXCH
+
+EXCH - Heat exchanger 3 cells 1 wall per cell                         
+5
+1
+
+t4
+WUTU PUTU ____ ____ ____ HUTU ____ HVAL 
+-1 1 0 0 0 1 0 -1 
+t0
+TPE1 TF11 GE11 ____ 
+-1 1 1 0 
+t1
+TPE2 TF21 GE21 ____ 
+-1 1 1 0 
+t2
+TPE3 TF31 GE31 ____ 
+-1 1 1 0 
+t3
+WITU PITU ____ ____ ____ HITU ____ HM_1 
+-1 1 0 0 0 1 0 -1 
+
+0
+18
+11
+
+HM_1 UA
+AVERAGE FLUID ENTHALPY CELL  1                                 
+HM_2 UA
+AVERAGE FLUID ENTHALPY CELL  2                                 
+HM_3 UA
+AVERAGE FLUID ENTHALPY CELL  3                                 
+PU_1 UA
+FLUID PRESSURE AT CELL  1 OUTLET                               
+PU_2 UA
+FLUID PRESSURE AT CELL  2 OUTLET                               
+PUTU UA
+TUBE OUTLET FLUID PRESSURE                                     
+WITU UA
+TUBE INLET MASS FLOW                                           
+WI_1 UA
+FLUID MASS FLOW AT CELL  1 INLET                               
+WI_2 UA
+FLUID MASS FLOW AT CELL  2 INLET                               
+QTI1 UA
+POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL  1         
+QTI2 UA
+POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL  2         
+QTI3 UA
+POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL  3         
+HU_1 UA
+TOTAL ENTHALPY AT CELL  1 OUTLET                               
+HU_2 UA
+TOTAL ENTHALPY AT CELL  2 OUTLET                               
+HUTU UA
+TUBE OUTLET TOTAL ENTHALPY                                     
+TPE1 UA
+EXTERNAL WALL TEMPERATURE AT CELL  1                           
+TPE2 UA
+EXTERNAL WALL TEMPERATURE AT CELL  2                           
+TPE3 UA
+EXTERNAL WALL TEMPERATURE AT CELL  3                           
+HITU IN
+TUBE INLET TOTAL ENTHALPY                                      
+PITU IN
+TUBE INLET FLUID PRESSURE                                      
+WUTU IN
+TUBE OUTPUT MASS FLOW                                          
+HVAL IN
+TUBE OUTLET FLUID ENTHALPY (FLOW INVERSION)                    
+ATTR IN
+TUBE FRICTION COEFFICIENT                                      
+TF11 IN
+EXTERNAL FLUID TEMPERATURE CELL 1 ZONE 1                       
+TF21 IN
+EXTERNAL FLUID TEMPERATURE CELL 2 ZONE 1                       
+TF31 IN
+EXTERNAL FLUID TEMPERATURE CELL 3 ZONE 1                       
+GE11 IN
+CONVECTIVE COEFF. EXTERNAL FLUID CELL 1 ZONE 1                 
+GE21 IN
+CONVECTIVE COEFF. EXTERNAL FLUID CELL 2 ZONE 1                 
+GE31 IN
+CONVECTIVE COEFF. EXTERNAL FLUID CELL 3 ZONE 1                 
+

@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_impreg"></A>Implicit regulators</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_impreg"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The theoretical documentation of these modules is not yet ready.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_auxmod"></A>Auxiliary modules (used to connect other modules)</P>
+</B></FONT><STRIKE><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</STRIKE><P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_auxmod"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_auxmejec"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Air ejector or vacuum pump</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_auxmther"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Thermocouple wit heat exchange and thermal inertia</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_auxmejec"></A>Auxiliary modules: air ejector or vacuum pump</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/aext.htm#lg_libproc_AEXT_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">AEXT</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">The model deals with the problem of calculating the mass flow rate in a plant component such as an air ejector or a vacuum pump.</P>
+<P ALIGN="JUSTIFY">The reference component for modelling is the air ejector.</P>
+<P ALIGN="JUSTIFY">The working fluid is air.</P>
+<P ALIGN="JUSTIFY">The mathematical model is a semi-empirical one.</P>
+<P ALIGN="JUSTIFY">It is based on a simplified momentum equation in which the inertial term, the flux term and the gravitational term are neglected.</P>
+<P ALIGN="JUSTIFY">The downstream pressure is reduced depending on the value of a control parameter, the driving flow for an air ejector, in order to have the right pressure difference between the inlet of the driven flow and the mixing chamber.</P>
+<P ALIGN="JUSTIFY">If the downstream pressure changes, the reduced pressure too varies affecting the driven mass flow rate.</P>
+<P ALIGN="JUSTIFY">Data of a working point allow to determine the internal data, namely the driven flow pressure loss coefficient and the downstream pressure reduction coefficient, to match the component performances.</P>
+<P ALIGN="JUSTIFY">The main simplifications are:</P>
+<P ALIGN="JUSTIFY">no mass storage in the component is considered;</P>
+<P ALIGN="JUSTIFY">the drive flow is not taken into account in the computation of the mass flow rate, that is the outlet mass flow is equal to the driven mass flow;</P>
+<P ALIGN="JUSTIFY">no heat balance is performed, therefore the outlet flow temperature is not calculated.</P>
+<P ALIGN="JUSTIFY">The basic relationship is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image820.gif" WIDTH=180 HEIGHT=29></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where k is a coefficient and p</FONT><FONT FACE="Arial, helvetica" SIZE=1>app</FONT><FONT FACE="Arial, helvetica"> is the reduced downstream pressure, both dependent on the nominal working point. Also p</FONT><FONT FACE="Arial, helvetica" SIZE=1>app</FONT><FONT FACE="Arial, helvetica"> depends on the actual drive flow rate and downstream pressure too.</P>
+<P ALIGN="JUSTIFY">The module can simulate a vacuum pump, making use of the rotational speed as control parameter.</P>
+<P ALIGN="JUSTIFY">Of course, in this case the reduced downstream pressure has no physical meaning.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_auxmther"></A>Auxiliary modules: thermocouple wit heat exchange and thermal inertia</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The model simulates the behaviour of a thermocouple for steam temperature measurement, influenced by all the real conditionings on its measurement, beyond the thermal exchange with the fluid, it measures the temperature of.</P>
+<P ALIGN="JUSTIFY">So it takes into account:</P>
+<P ALIGN="JUSTIFY">effects of thermal inertia due to the thermal capacity of the protection sheath: in facts the hot junction "feels" fluid temperature &#9;variations only through the sheath and a time of response to fluid temperature variations must be considered;</P>
+<P ALIGN="JUSTIFY">thermal exchange coefficient between sheath and fluid is not infinite.</P>
+<P ALIGN="JUSTIFY">So, sheath and fluid are not at the same temperature. Between thermocouple and metal basis there is a conduction thermal exchange . Finally there is a radiative exchange between the thermocouple itself and the metal walls of the enclosure.</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image821.gif" WIDTH=323 HEIGHT=293></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">As the figure shows the thermocouple is constituted by a protection sheath, coming out of the mounting surface for a length l and inserted in such surface for a length l</FONT><FONT FACE="Arial, helvetica" SIZE=1>BA</FONT><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">The sheath has circular shape, having external diameter D</FONT><FONT FACE="Arial, helvetica" SIZE=1>ext</FONT><FONT FACE="Arial, helvetica"> and inner diameter D</FONT><FONT FACE="Arial, helvetica" SIZE=1>int</FONT><FONT FACE="Arial, helvetica">. Inside it, there is the hot junction, from which the electrical contacts come out.</P>
+<P ALIGN="JUSTIFY">The measured temperature is the one of sheath tip and is determined on the basis of a balance equation considering:</P>
+<P ALIGN="JUSTIFY">1.&#9;convection thermal exchange with steam along the sheath portion that is not sunk down;</P>
+<P ALIGN="JUSTIFY">2.&#9;conduction exchange along the basis adjoining the bulk;</P>
+<P ALIGN="JUSTIFY">3.&#9;radiative exchange with the portion of the enclosure "seeing" the thermocouple walls (schematised as an equivalent wall having an &#9;average temperature between all the surfaces faced to the thermocouple).</P>
+<P ALIGN="JUSTIFY">The thermal balance can be written:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image822.gif" WIDTH=221 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>conv</FONT><FONT FACE="Arial, helvetica">, Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>cduc</FONT><FONT FACE="Arial, helvetica">, Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>rad</FONT><FONT FACE="Arial, helvetica"> are exchanged powers for convection, conduction and radiation:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image823.gif" WIDTH=177 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image824.gif" WIDTH=161 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image825.gif" WIDTH=189 HEIGHT=34></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where T</FONT><FONT FACE="Arial, helvetica" SIZE=1>st</FONT><FONT FACE="Arial, helvetica"> is the steam temperature, T is the wall temperature, C</FONT><FONT FACE="Arial, helvetica" SIZE=1>T</FONT><FONT FACE="Arial, helvetica"> the thermocouple thermal capacity, C</FONT><FONT FACE="Arial, helvetica" SIZE=1>L</FONT><FONT FACE="Arial, helvetica"> the thermocouple longitudinal conductance and T</FONT><FONT FACE="Arial, helvetica" SIZE=1>meas</FONT><FONT FACE="Arial, helvetica"> the measured temperature.</P>
+<P ALIGN="JUSTIFY">Convection exchange coefficient with the fluid is supposed zero if the fluid flow rate is zero, but rapidly tending to an asintotical value when fluid flow rate</FONT> <FONT FACE="Symbol">G</FONT> <FONT FACE="Arial, helvetica">grows, with an exponential law:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image826.gif" WIDTH=158 HEIGHT=69></P></BODY>
+</HTML>

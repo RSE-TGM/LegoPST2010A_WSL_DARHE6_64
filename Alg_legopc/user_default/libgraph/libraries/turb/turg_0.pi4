@@ -1,0 +1,51 @@
+TURG_0                                                                          
+TURG                                                                            
+TURG - Gas turbine simplified model                                             
+                                                                                
+NSTAT = 1
+NUSCI = 9
+NINGR = 7
+ 
+NCONF = 1
+ 
+QTG_      --US-- POWER PRODUCED BY THE TURBOGAS GROUP                           
+WFU_      --UA-- FLUE GAS FLOW RATE INTO THE TG                                 
+TFU_      --UA-- FLUE GAS TEMPERATURE AT THE TG OUTLET                          
+TTER      --UA-- MEASURED FLUE GAS TEMPERATURE IN THE TG                        
+TTRX      --UA-- REFERENCE FLUE GAS TEMPERATURE TG                              
+PCD_      --UA-- EXHAUST PRESSURE OF THE TG COMPRESSOR                          
+PDIF      --UA-- PRESSURE DIFF. SUCTION FILTER OF THE TG                        
+RVEL      --UA-- MONITORED ROTATIONAL SPEED OF THE TG ROTOR                     
+ZWMC      --UA-- MONITORED FUEL FLOW RATE OF THE TG                             
+ZMIG      --UA-- MONITORED IGV POSITION IN THE TG                               
+ZIGV      --IN-- REQUESTED IGV POSITION OF THE TG                               
+ZWCO      --IN-- REQUESTED FUEL FLOW RATE IN THE TG                             
+TAMB      --IN-- EXTERNAL AMBIENT TEMPERATURE AT THE SUCTION OF THE TG          
+RPM_      --IN-- ROTATIONAL SPEED OF THE TG SHUFFLE                             
+ALAV      --IN-- STARTING BUTTON OF THE TG                                      
+ALSC      --IN-- TRIP BUTTON OF THE TG                                          
+ALSH      --IN-- SHUT DOWN BUTTON OF THE TG                                     
+==============================                                                  
+EOF                                                                             
+7
+t1 5
+USCITA IDR. FUMI
+WFU_ ____ TFU_ ____ ____ ____ ____ ____
+t2 6
+INGRESSO ATTUAZIONE
+ZIGV
+t3 6
+INGRESSO ATTUAZIONE
+ZWCO
+t4 6
+INGRESSO ATTUAZIONE
+TAMB
+t5 6
+INGRESSO ATTUAZIONE
+ALAV
+t6 6
+INGRESSO ATTUAZIONE
+ALSC
+t7 6
+INGRESSO ATTUAZIONE
+ALSH

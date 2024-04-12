@@ -1,0 +1,18 @@
+DROM_0                                                                          
+DROM                                                                            
+DROM - Branch for Rotor pulsation and angle                                     
+                                                                                
+NSTAT = 0
+NUSCI = 4
+NINGR = 2
+ 
+NCONF = 1
+ 
+OME1      --UA-- rotor pulsation reference (1)                                  
+DEL1      --UA-- rotor angle reference (1)                                      
+OME2      --UA-- rotor pulsation reference (2)                                  
+DEL2      --UA-- rotor angle reference (2)                                      
+OMEG      --IN-- rotor reference pulsation                                      
+DELT      --IN-- rotor reference angle                                          
+==============================                                                  
+EOF                                                                             

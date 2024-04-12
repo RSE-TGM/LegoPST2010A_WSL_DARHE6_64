@@ -1,0 +1,281 @@
+C*********************************************************************
+C Fortran PreCompile: legreg.pf
+C Subsystem: 1
+C Description:
+C %created_by: lomgr %
+C %date_created: Thu May 13 10:34:23 2004 %
+C
+C**********************************************************************
+
+
+C
+C Procedura contenete la variabile per l identificazione della versione
+C
+      BLOCK DATA BDD_legreg_pf
+      CHARACTER*80 RepoID
+      COMMON /CM_legreg_pf / RepoID
+      DATA RepoID/'@(#)1,pfsrc,legreg.pf,2'/
+      END
+C**********************************************************************
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C C
+C LEGO unificato per singola / doppia precisione C
+C e per diverse piattaforme operative C
+C C
+C Attivata versione singola precisione per sistema operativo Unix C
+C C
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+      SUBROUTINE LEGREG(IGO,NEQSIS,NBL,ISLB,NUSTA,NUSCI,IPDATI,DATI,
+     $ IP,TN,CDT,XYU,RN,ICONV,SIVAR,MX1,IPVRS,TOLL,RNO,XYO,JACYES,
+     $ NITERJ,NJACMX,IPS,IPVRT,
+
+
+
+     $ XY,UU,NU,IPI,IPVRI,FJ,RIGA, NEQAL,TEMPO,AJAC,MX5,NOBLC,
+C*********************** TAVOLE ***************************************
+     $ MX3,RNI,IRJ,ICJ,IKMA28,IWMA28,WMA28,NZMAX,MXCOL,
+     $ MXROW,NOSUB)
+C*********************** TAVOLE ***************************************
+      CHARACTER*8 SIVAR(MX1)
+      DIMENSION ISLB(*),NUSTA(*),NUSCI(*),IPDATI(*),DATI(*),IP(*),
+     $ TN(*),XYU(*),RN(*),ICONV(*),IPVRS(*),TOLL(*),
+     $ RNO(*),XYO(*),IPS(*),IPVRT(*),XY(*),UU(*),IPI(*),IPVRI(*),
+
+
+
+     $ FJ(*),RIGA(*), AJAC(MX5,MX5),NOBLC(MX3,2),
+     $ RNI(*),IRJ(*),ICJ(*),IKMA28(*),IWMA28(*),WMA28(*)
+C*********************** TAVOLE ***************************************
+      DIMENSION NOSUB(*)
+C*********************** TAVOLE ***************************************
+C
+
+
+
+
+
+C RISOLVE IL SISTEMA ALGEBRICO COL METODO DI NEWTON-RAPHSON SMORZ.
+C
+C IGO=1 SISTEMA RISOLTO
+C IGO=-1 SISTEMA NON RISOLTO
+C
+C DESCRIZIONE DEI VETTORI
+C - MATRICE JACOBIANA - FJ,IRJ,ICJ
+C - RESIDUI-SOLUZIONI - TN, RN ,RNO, XY ,XYO
+C - INGRESSI - UU
+C - TOLLERANZE - TOLL
+C - MATRICE COLLEG. DIRETTA - IPVRS
+C - MATRICI COLLEG. INVERSE - IPS,IPVRT , IPI,IPVRI
+C - VETTORI IN INGRESSO TIPICI- ISLB,NUSTA,NUSCI,IP,XYU,
+C IPDATI,DATI,SIVAR
+C - VETTORI DI COMODO - RIGA,ICONV,AJAC(MX5,MX5)
+C - IKMA28,IWMA28,WMA28
+C
+C
+C
+      MMX1=MX1
+      MMX3=MX3
+      MMX5=MX5
+      UPIV=.1
+      MTMA28=1
+      CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+      CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+      IGO=1
+C
+C
+C
+C
+  999 ITERT=0
+      JACYES=1
+      ITER=0
+      JAC=0
+      BETA=.5
+      IBETA=0
+      VARR=0.
+      IVAR=0
+C*** CALCOLO RESIDUI
+    1 ICONVE=1
+      CALL RESREG(NBL,ISLB,NUSTA,NUSCI,IPDATI,DATI,IP,TN,CDT,XYU,
+     $ RN,ICONV,SIVAR,MMX1,NEQSIS,IPVRS,TOLL,ICONVE,NOBLC,MMX3,
+C*********************** TAVOLE ***************************************
+     $ RNI,NOSUB)
+C*********************** TAVOLE ***************************************
+C Calcolo della norma.
+      VAR=0.
+      DO 10 I=1,NEQSIS
+      VAR=VAR + RN (I)*RN (I)
+   10 CONTINUE
+      VAR=SQRT(VAR)
+      VAR=VAR/NEQSIS
+      IF(ICONVE.EQ.1)GO TO 100
+      IF(ITERT.EQ.0)GO TO 15
+      IF(IVAR.EQ.1)GO TO 15
+C
+      IF(VAR.GT.VARR)GO TO 65
+C
+   15 KBETA=0
+      DO 20 I=1,NEQSIS
+      RNO(I)=RN(I)
+      XYO(I)=XY(I)
+   20 CONTINUE
+C
+      VARR=VAR
+      JOK=0
+C
+      IF(IVAR.EQ.1)GO TO 31
+      IF(JACYES.EQ.0)GO TO 30
+      JACYES=0
+      GO TO 35
+   30 IF(ITER.LT.NITERJ)GO TO 45
+   31 IF(JAC.GE.NJACMX)GO TO 150
+      ITER=0
+   35 JAC=JAC+1
+      JOK=1
+C*** CALCOLO JACOBIANO
+      CALL LEGBL1(NEQSIS,IPS,IPVRT,XYO,XYU)
+      CALL LEGBL1(NU ,IPI,IPVRI,UU,XYU)
+      CALL JACREG(NBL,ISLB,IPDATI,IP,XYU,DATI,IPVRS,NUSCI,NUSTA,
+     $ NZMAX,NZTER,IRJ,ICJ, FJ,NEQSIS, RIGA,AJAC,
+C*********************** TAVOLE ***************************************
+     $ MMX5,NOBLC,MMX3,RNI,NOSUB)
+C*********************** TAVOLE ***************************************
+C
+C FATTORIZZAZIONE
+C
+      CALL MA28A(NEQSIS,NZTER,FJ,MXCOL,IRJ,MXROW,ICJ,UPIV,
+     $ IKMA28,IWMA28,WMA28,IFLAG)
+      IF(IFLAG.EQ.0)GO TO 45
+      CALL ER28A(IFLAG)
+      IF(IFLAG.LE.2)GOTO 45
+   44 WRITE(6,3528)
+ 3528 FORMAT(10X,'ESECUZIONE INTERROTTA'/10X,'SI CONSIGLIA DI ',
+     $ 'CONTROLLARE LA SCELTA DELLE VARIABILI NOTE E DI QUELLE ',
+     $ 'INCOGNITE',/,10X,
+     $ 'TENENDO CONTO DELLE EQUAZIONI DEL MODELLO',/,10X,
+     $ 'RILANCIARE IL PROGRAMMA ASSEGNANDO TUTTI GLI SSWTCH',/,/)
+      CALL LGABRT
+C
+   45 ITER=ITER+1
+      ITERT=ITERT+1
+C
+C RISOLUZIONE A/I SISTEMA
+C
+      DO 47 I=1,NEQSIS
+      TN(I)=RN(I)
+   47 CONTINUE
+      CALL MA28C(NEQSIS,FJ,MXCOL,ICJ,IKMA28,TN,WMA28,MTMA28)
+C
+   50 CONTINUE
+      CALL SSWTCH(5,LL)
+      IF(LL.NE.1)GO TO 51
+      WRITE(6,4501)
+ 4501 FORMAT(/,/,10X,'SOLUZIONI DEL SISTEMA LINEARE')
+ 3901 FORMAT(/,/,10X,'SOLUZIONI NULLE DEL SISTEMA LINEARE')
+ 3900 FORMAT(10X,I6)
+      WRITE(6,4500)(TN(I),I=1,NEQSIS)
+      WRITE(6,3901)
+      DO 93 I=1,NEQSIS
+      DEX=ABS(TN(I))
+      IF(DEX.GT.0.)GO TO 93
+      WRITE(6,3900)I
+   93 CONTINUE
+   51 DO 60 I=1,NEQSIS
+      XY(I)=XY(I)+TN(I)
+   60 CONTINUE
+      CALL SSWTCH(5,LL)
+      IF(LL.NE.1)GO TO 61
+      WRITE(6,4502)
+ 4502 FORMAT(/,/,10X,'SOLUZIONI DEL SISTEMA NON-LINEARE')
+      WRITE(6,4500)(XY(I),I=1,NEQSIS)
+ 4500 FORMAT(10(1X,E12.5))
+C
+   61 CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+      CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+      IVAR=0
+      GO TO 1
+C
+C DIFFICOLTA DI CONVERGENZA
+C
+   65 CALL SSWTCH(2,LL)
+      IF(LL.NE.1)GO TO 70
+C
+      WRITE(6,1000)VAR,VARR
+ 1000 FORMAT(///10X,'DIFFICOLTA DI CONVERGENZA N(I)= ',E15.8,1X,
+     $ '  N(I-1) =',E15.8)
+   70 DO 80 I=1,NEQSIS
+      RN(I)= RNO(I)
+C$$$$$$$$$$$$$$$$$$$$$
+      XY(I)=XYO(I)
+C$$$$$$$$$$$$$$$$$$$$$
+   80 CONTINUE
+      IF(JOK.EQ.0)GO TO 31
+      KBETA=KBETA+1
+C
+C CORREZIONI DELLE SOLUZIONI CON BETA
+C
+      DO 90 I=1,NEQSIS
+      XY(I)= XYO(I) +BETA*(XY(I)-XYO(I))
+   90 CONTINUE
+      CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+      CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+C
+      IF(KBETA.LE.5)GO TO 1
+      IVAR=1
+      IBETA=IBETA+1
+C IF(IBETA.LE.2)GO TO 1
+C
+      IGO=-1
+C
+   99 CONTINUE
+      WRITE(6,1003)
+      WRITE(6,7656)VAR
+ 7656 FORMAT(10X,'NORMA RESIDUI= ',E15.8,/,/)
+      ICEF=ICONV(1)
+      IRX=1
+      RMAX=ABS(RN(1))
+      DO 95 I=2,NEQSIS
+      ICEF=ICEF+ICONV(I)
+      RA=ABS(RN(I))
+      IF(RMAX.GE.RA)GO TO 95
+      IRX=I
+      RMAX=RA
+   95 CONTINUE
+      WRITE(6,1028)RN(IRX),IRX,TOLL(IRX)
+ 1028 FORMAT(/,/,10X,'RESIDUO MASSIMO ',E12.5,' NELL EQUAZIONE',
+     $ I4,/,10X,'TOLLERANZA ',E12.5,/,/)
+      WRITE(6,1030)ICEF
+ 1030 FORMAT(/,10X,I4,' EQUAZIONI NON SONO VERIFICATE ',/,/)
+      WRITE(6,1029)
+ 1029 FORMAT(/,/,10X,'PER CAPIRE L ANDAMENTO ITERATIVO DELLA SOLUZIONE'
+     $ ,/,10X,'RIPETERE L ESECUZIONE ASSEGNANDO I SSWTCH'
+     $ ,/,10X,' 1  -STAMPA DELLA TOPOLOGIA '
+     $ ,/,10X,' 2  -STAMPA DEI RESIDUI ',/,10X,' 3  -STAMPA JACOBIANI'
+     $ ,/,10X,' 5  -SOLUZIONI DEL SISTEMA',/,/)
+      GO TO 100
+ 1003 FORMAT(/,/,10X,'NON RIESCO A RISOLVERE IL SISTEMA DI REGIME ')
+ 1001 FORMAT(10X,2I5,E15.8/(1X,I5,E15.8,I5,1X,E15.8))
+C_____________________________________________________________________
+C
+C IL SISTEMA EST RISOLTO
+C
+  100 CONTINUE
+      CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+      CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+      WRITE(6,3152)TEMPO,ITERT,JAC
+ 3152 FORMAT(/,/,10X,'SOL.SIS.ALG.-DIFF. AL TEMPO  ',F8.2,
+     $ /,10X,'ITER.SOL.-RES.  ',I6,/,10X,'JACOBIANI',I6,/,/)
+      RETURN
+C
+C SUPERAMENTO NUM.MAX.JACOB.
+C
+  150 CONTINUE
+      WRITE(6,1005)TEMPO
+ 1005 FORMAT(/,/,/,10X,
+     $ 'SUPERATO IL NUMERO MASSIMO DI JACOBIANI DURANTE ',
+     $ 'LA SOLUZIONE ',
+     $ /,10X,'DEL SISTEMA ALG-DIFF AL TEMPO ', F8.3,/,/)
+      IGO=-1
+      GO TO 99
+      END
+C

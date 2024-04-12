@@ -1,0 +1,77 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><i><b><font size="5">LEGO modules with no equation (regulators)</font></b></i></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">Usually in LEGO code the regulation
+model behaviour is not resolved at each iteration of transients simulation, but
+only at the first iteration of each integration step. Regulation schemes are
+LEGO modules whose FORTRAN code is automatically written by regulation and
+automation building activities of LEGOCAD system, and they have no iterative
+equation (both in steady state and transient simulation activity).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The word &quot;regulator&quot; is so
+used to classify LEGO modules with no iterative equation, also if they are
+process modules. The direct assignment of an output variable value (without
+solving a LEGO equation) is called a &quot;non-equation&quot;.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Regulators don't participate in steady
+state system solution, but only after the end of the solution. So the output
+values computed by regulators are not known by standard modules during this
+phase (output values of regulators are only exchanged between regulators during
+steady state computation). This may cause some problems if the output of a
+regulator is an input variable of a process module, as the input values of the
+module may be changed <u>after</u> the steady state computation (invalidating
+the steady state obtained).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The &quot;xxxxI2&quot; subroutine is not
+affected by this feature: it must be exactly like the &quot;xxxxI2&quot; of a
+standard module (same features and same prescriptions).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The &quot;xxxxI3&quot; subroutine is
+only a bit affected by this feature: all the output variables of the module must
+be defined as algebraic outputs (&quot;UA&quot;).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The &quot;xxxxD1&quot; subroutine is
+more affected by this feature: as the module has no equation, there is no
+residual to be documented (the &quot;xxxxD1&quot; will be an empty skeleton).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The &quot;xxxxC1&quot; subroutine is the
+one actually affected by this feature, as the actions to be performed by this
+subroutine are very different.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">First of all, in the &quot;xxxxC1&quot;
+subroutine must be present the NEQUAZ and the REGIME common areas:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;<font size="2" face="Courier New"><b>&nbsp;
+</b></font>
+</span><font size="2" face="Courier New"><b>LOGICAL KREGIM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON /REGIME/ KREGIM</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COMMON /NEQUAZ/ NEQMOD</font></b></span></p>
+<p class="MsoNormal"><span lang="EN-GB">The value of NEQMOD must be set to zero
+at every call of &quot;xxxxC1&quot; (independently of the value of IFUN and
+KREGIM).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">When called for Jacobian matrix
+computation (IFUN = 3) or for Jacobian matrix topology (IFUN = 1) the
+&quot;xxxxC1&quot; subroutine has nothing to do but assigning the value of
+NEQMOD.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">When called for residuals computation,
+the action to be performed is different during steady state and transient
+computation:</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">during steady state computation (KREGIM = .TRUE.) the values of the
+output variables must be assigned DIRECTLY to the same variables (in the related
+elements of the XYU vector, as normalized values);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">during transients simulation (KREGIM = .FALSE.) the values of the output
+variables must be assigned DIRECTLY to the related elements of the RNI vector
+(as normalized values).</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<!--mstheme--></font></body>
+
+</html>

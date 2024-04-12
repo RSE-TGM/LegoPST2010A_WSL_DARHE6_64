@@ -1,0 +1,14 @@
+ATTU_0                                                                          
+ATTU                                                                            
+ATTU - Time constant transfer function                                          
+                                                                                
+NSTAT = 1
+NUSCI = 0
+NINGR = 1
+ 
+NCONF = 1
+ 
+AV_1      --US-- ACTUATOR: VALUE OF ACTUATED VARIABLE N. 1                      
+AS_1      --IN-- ACTUATOR: SET POINT OF ACTUATED VARIABLE N. 1                  
+==============================                                                  
+EOF                                                                             

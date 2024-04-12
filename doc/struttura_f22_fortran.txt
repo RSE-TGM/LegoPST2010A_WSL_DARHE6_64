@@ -1,0 +1,26 @@
+Il file f22.dat prodotto dal programma fortran proc/lg5
+ha la seguente struttura:
+
+4  Byte inizio record fortran (ignorare)
+80 Byte titolo simulazione (stringa senza terminatore)
+4  Byte fine record fortran (ignorare)
+4  Byte inizio record fortran (ignorare)
+4  Byte numero variabili memorizzate (intero) = NVAR
+8  Byte nome variabile (stringa senza terminatore) RIPETUTO NVAR volte
+8  Byte nome modello (stringa senza terminatore) di solito vuota
+4  Byte numero variabili con descrizione  memorizzate (intero) = NVARDESC sempre uguale a NVAR
+80 Byte nome variabile con descrizione (stringa senza terminatore) RIPETUTO NVARDESC volte
+4  Byte fine record fortran (ignorare)
+4  Byte inizio record fortran (ignorare)
+4  Byte valore del tempo nel primo record (float) 
+4  Byte valore della prima variabile registrata nel primo record (float) 
+   .......... ripetizioni di strutture simili
+4  Byte valore della NVAR-esima variabile registrata nel primo record (float) 
+4  Byte fine record fortran (ignorare)
+   .......... ripetizioni di strutture simili
+4  Byte inizio record fortran (ignorare)
+4  Byte valore del tempo nell'ultimo record (float) 
+4  Byte valore della prima variabile registrata nell'ultimo record (float) 
+   .......... ripetizioni di strutture simili
+4  Byte valore della NVAR-esima variabile registrata nell'ultimo record (float) 
+4  Byte fine record fortran (ignorare)

@@ -1,0 +1,212 @@
+C*********************************************************************
+C       Fortran Source:             topsis.f
+C       Subsystem:              1
+C       Description:
+C       %created_by:    lomgr %
+C       %date_created:  Tue Aug 21 10:30:09 2001 %
+C
+C**********************************************************************
+
+
+C
+C Procedura contenete la variabile per l'identificazione della versione
+C
+      BLOCK DATA BDD_topsis_f
+      CHARACTER*80  RepoID
+      COMMON /CM_topsis_f / RepoID
+      DATA RepoID/'@(#)1,fsrc,topsis.f,2'/
+      END
+C**********************************************************************
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C                                                                      C
+C           LEGO unificato per singola / doppia precisione             C
+C                 e per diverse piattaforme operative                  C
+C                                                                      C
+C   Attivata versione singola precisione per sistema operativo Unix    C
+C                                                                      C
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+      SUBROUTINE TOPSIS(IRA,IRD,JAC,MMX5,NBL,ISLB,NUSTA,NUSCI,NINGR,
+     $                  IPVRS,ICDS,ICDB,ICAS,ICAB,NEQAL,NEQSIS,
+     $                  IPCJ,ICJ,ICBJ,FJ,RIGA,IDJ,NOBLC,MX3,IP,
+     $                  IPDATI,DATI,XYU,RNI,NQMODU)
+      DIMENSION IRA(*),IRD(*),JAC(MMX5,*),ISLB(*),NUSTA(*),NUSCI(*),
+     $   NINGR(*),IPVRS(*),ICDS(*),ICDB(*),ICAS(*),ICAB(*),IPCJ(*),
+     $   ICJ(*),ICBJ(*),FJ(*),RIGA(*),IDJ(*),NOBLC(MX3,2),IP(*),
+     $   IPDATI(*),DATI(*),XYU(*),RNI(*),NQMODU(*)
+      COMMON/NORM/P0,H0,T0,Q0,RO0,AL0,V0,DP0
+
+      COMMON/DIMAJA/NRXJC,NCXJC
+C
+C     VETTORI APPOGGIO   IRA,IRD,ICDS,ICDB,ICAS,ICAB,FJ,RIGA
+C
+      REAL JAC
+C
+C     PROVVEDE ALLA COSTRUZIONE DELLA TOPOLOGIA DELLA MATRICE JACOBIANA
+C     DEL SISTEMA ALGEBRICO-DIFFERENZIALE
+C     LA TOPOLOGIA VIENE DEFINITA DAI VETTORI (NR=NUM.EQU. ,NT=NUM.TER.)
+C
+C     IPCJ(NR+1) ,IDJ(NR) , ICJ(NT) ,ICBJ(NT)
+C
+      MX5=MMX5
+      IRA(1)=0
+      IRD(1)=0
+      KCD=0
+      KCA=0
+      NED=0
+      NEA=0
+C
+C     PRIMA FASE -
+C
+      IFUN=1
+      DO 200 I=1,NBL
+C     WRITE(6,5600)I
+ 5600 FORMAT(10X,'TOPSIS - DO 200  ',I6)
+      DO 5 J=1,NRXJC
+      DO 5 JL=1,NCXJC
+      JAC(J,JL)=0
+    5 CONTINUE
+      K=ISLB(I)
+C
+      IBLOC1=NOBLC(I,1)
+      IBLOC2=NOBLC(I,2)
+      IPD=IPDATI(I)
+      IXYU=IP(I)
+C
+      CALL MODC1(K,IFUN,JAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBLOC1,IBLOC2)
+C
+ 6000 FORMAT(20F3.0)
+C      WRITE(6,5604)
+C 5604 FORMAT(10X,'TOPSIS - 180 CONTINUE')
+      NS=NUSTA(I)
+      NY=NUSCI(I)
+C
+      NYV=NQMODU(I)
+      NE=NS+NYV
+C
+      NI=NINGR(I)
+      NT=NS+NY+NI
+      I1=IP (I)
+      IF(NS.EQ.0)GO TO 190
+C
+C     EQUAZ. DIFFER.
+C
+      DO 185 J=1,NS
+      NED=NED+1
+      JAC(J,J)=1.
+      DO 183 K=1,NT
+      I0=I1-1+K
+      IF(JAC(J,K).EQ.0.)GO TO 183
+      IF(IPVRS(I0).LT.0)GO TO 183
+      KCD=KCD+1
+      ICDS(KCD)=IPVRS(I0)
+      ICDB(KCD)=K
+  183 CONTINUE
+      IRD(NED)=IRD(NED)+1
+      IRD(NED+1)=KCD
+  185 CONTINUE
+C      WRITE(6,5605)
+C 5605 FORMAT(10X,'TOPSIS - 185 CONTINUE')
+C
+C     EQUAZ.ALGEBRICHE
+C
+  190 IF(NY.EQ.0)GO TO  196
+      J1=NS+1
+      DO 195 J=J1,NE
+      NEA=NEA+1
+      DO 193 K=1,NT
+      I0=I1-1+K
+      IF(JAC(J,K).EQ.0.)GO TO 193
+      IF(IPVRS(I0).LT.0)GO TO 193
+      KCA=KCA+1
+      ICAS(KCA)=IPVRS(I0)
+      ICAB(KCA)=K
+  193 CONTINUE
+      IRA(NEA)=IRA(NEA)+1
+      IRA(NEA+1)=KCA
+  195 CONTINUE
+  196 I0=I1-1
+C      WRITE(6,5606)
+C 5606 FORMAT(10X,'TOPSIS - 199 CONTINUE')
+  200 CONTINUE
+      IRA(NEA+1)=IRA(NEA+1)+1
+      IRD(NED+1)=IRD(NED+1)+1
+C
+C     CONTROLLI SUL PROGR.
+C
+      IFER=0
+      IF(NEA.EQ.NEQAL)GO TO 210
+      WRITE(6,3311)NEA,NEQAL
+ 3311 FORMAT(//10X,'SUB-TOPSIS PROGR.-ERROR NEA =',I6,2X,'NEQAL=',I6//)
+      IFER=1
+  210 NEQD=NEQSIS-NEQAL
+      IF(NEQD.EQ.NED)GO TO 220
+      WRITE(6,3312)NED,NEQD
+ 3312 FORMAT(//10X,'SUB-TOPSIS PROG.-ERROR NED =',I6,2X,'NEQD =',I6//)
+      IFER=1
+  220 IF (IFER.EQ.1) CALL LGABRT
+C
+C     SECONDA FASE
+C
+C      WRITE(6,5601)
+C 5601 FORMAT(10X,'TOPSIS - DO 230 ')
+      DO 230 I=1,NEA
+      IPCJ(I)=IRA(I)
+  230 CONTINUE
+      NTO=IRA(NEA+1)-1
+      DO 240 I=1,NTO
+      ICJ(I)=ICAS(I)
+      ICBJ(I)=ICAB(I)
+  240 CONTINUE
+      NED1=NED+1
+      DO 250 I=1,NED1
+      IPCJ(NEA+I)=IRD(I)+NTO
+  250 CONTINUE
+      NTO1=IRD(NED+1)-1
+      DO 260 I=1,NTO1
+      ICJ(NTO+I)=ICDS(I)
+      ICBJ(NTO+I)=ICDB(I)
+  260 CONTINUE
+C
+C     ORDINAMENTO DEI TERMINI PER EFFETTUARE LA SCANSIONE PER RIGHE
+C     DELLA MATRICE DEL SYSTEMA (PER LA SSLS) E CREAZ. VETTORE IDJ
+C     SI SCAMBIANO SOLO I TERMINI NEI VETTORI ICBJ E ICJ
+C     IDJ CONTIENE,PER OGNI EQ. IL N. DI TERM. FINO AL DIAGON. COMPRESO
+C
+C      WRITE(6,5602)
+C 5602 FORMAT(10X,'TOPSIS - DO 300')
+      DO 300 I=1,NEQSIS
+      IDJ(I)=0
+      K1=IPCJ(I)
+      K2=IPCJ(I+1)-1
+      K=0
+      DO 280 J=K1,K2
+      K=K+1
+      IRA(K)=ICJ(J)
+      IRD(K)=ICBJ(J)
+  280 CONTINUE
+      CALL ORDIN(IRA,IRD,ICAS,ICAB,K)
+      K=0
+      DO 285 J=K1,K2
+      K=K+1
+      ICJ(J)=ICAS(K)
+      ICBJ(J)=ICAB(K)
+      IF(ICJ(J).GT.I)GO TO 285
+      IDJ(I)=IDJ(I)+1
+  285 CONTINUE
+  300 CONTINUE
+C
+C     TERZA FASE -OPZIONALE
+C     SI SIMULANO LE OPERAZIONI DA FARE PER COSTRUIRE LA MATRICE
+C     JACOBIANA DEL SISTEMA E SI STAMPA LA SUA TOPOLOGIA.
+C
+      CALL SSWTCH(4,LL)
+      IF(LL.NE.1)RETURN
+C      WRITE(6,5603)
+C 5603 FORMAT(10X,'TOPSIS - STAJAC')
+C
+      CALL STAJAC(NBL,NUSTA,NQMODU,IPVRS,IPCJ,ICBJ,FJ,ICJ,
+     $            NEQSIS,RIGA,IP)
+      RETURN
+      END
+C            

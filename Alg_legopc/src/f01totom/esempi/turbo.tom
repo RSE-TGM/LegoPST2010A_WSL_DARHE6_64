@@ -1,0 +1,48 @@
+# this file created with LEGOPHI rel. 0.2
+800 600
+valv_1
+n
+0___
+247.0 166.999998
+d:/Legopak_NEW/Public/LegoPc/user/Libgraph/Libraries/LibH20
+colt_0
+n
+13__
+129.0 123.999998
+d:/Legopak_NEW/Public/LegoPc/user/Libgraph/Libraries/LibH20
+tren_0
+n
+2___
+415.0 174.999998
+d:/Legopak_NEW/Public/LegoPc/user/Libgraph/Libraries/Turb
+****
+valv_1
+0___
+port0
+busy port1 13__
+port1
+busy port0 2___
+port2
+free
+++++
+colt_0
+13__
+port0
+free
+port1
+busy port0 0___
+++++
+tren_0
+2___
+port0
+busy port1 0___
+port2
+free
+port1
+free
+port3
+free
+port4
+free
+++++
+****

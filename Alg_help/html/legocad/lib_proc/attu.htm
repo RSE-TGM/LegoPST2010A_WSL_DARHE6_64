@@ -1,0 +1,173 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE ATTU</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_ATTU_summ"></A>MODULE ATTU&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I><P>&nbsp;</P>
+</FONT><P><A HREF="#lg_libproc_ATTU_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_ATTU_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_ATTU_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_ATTU_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_ATTU_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_ATTU_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_ATTU_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_ATTU_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_ATTU_A"></A>MODULE ATTU&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">SIMPLIFIED ACTUATORS</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module ATTU belongs to the thermodinamic base library. It simulates the behaviour of a group of simplified actuators (maximum 7).</P>
+<P>Each actuator is modelized as a simple first-order filter (with an user-assigned time constant) between the actuated variable and its set-point (e.g.: the stem position of a valve an tre position set-point evaluated by the control system).</P>
+<P>&nbsp;</P>
+<P>In order to allow the correct connection with other LEGO modules (avoiding the emission of program warnings) the first character of the input and output variables can be choosen by the user.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_ATTU_B"></A>MODULE ATTU&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY">User-defined variables first character (which takes places of the "a"):</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image267.gif" WIDTH=360 HEIGHT=145></P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Defult variables names:</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY"><IMG SRC="Image268.gif" WIDTH=360 HEIGHT=145></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY">The first character of the input and output variables can be choosen by the user. In this case the name of the input and output variables are the following (where the "a" is replaced with the character assigned by the user):</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[ ]&#9;aS_1, ... aS_n&#9;set-point of the variable to be actuated</P>
+<P ALIGN="JUSTIFY">[ ]&#9;aV_1, ... aV_n&#9;value set-point of the variable to be actuated</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">If the user doesn’t assign the initial character, the default names are used for input and output variables:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[ ]&#9;ST_1, ... ST_n&#9;set-point of the variable to be actuated</P>
+<P ALIGN="JUSTIFY">[ ]&#9;VV_1, ... VV_n&#9;value set-point of the variable to be actuated</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_ATTU_C"></A>MODULE ATTU&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P>&nbsp;</P>
+<P>In addition to initial values of TPAF module input and output variables, user must assign the following data set to complete the module input on the file F14:</P>
+<P ALIGN="JUSTIFY">[s]&#9;TAU1...TAUn&#9;&#9;actuators time constants</P>
+<P ALIGN="JUSTIFY">[ ]&#9;GAIN1...GAINn&#9;scale factors (filter gains)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;VMAX1...VMAXn&#9;maximum variation speed of the outputs</P>
+<P ALIGN="JUSTIFY">[ ]&#9;NORU1...NORUn&#9;normalization factors for the input variables</P>
+<P ALIGN="JUSTIFY">[ ]&#9;NORX1...NORXn&#9;normalization factors for the output variables</P>
+<P>&nbsp;</P>
+<P>In order to assign the normalization factors, both for the input and the output variables of the ATTU module (required by LEGO for the normalization of the equations) the user must assign in the F14 file the following alphanumeric data:</P>
+<P ALIGN="JUSTIFY">P0&#9;for pressures</P>
+<P ALIGN="JUSTIFY">H0&#9;for enthalpies</P>
+<P ALIGN="JUSTIFY">T0&#9;for temperatures</P>
+<P ALIGN="JUSTIFY">W0&#9;for flow rates</P>
+<P ALIGN="JUSTIFY">RO0&#9;for densities</P>
+<P ALIGN="JUSTIFY">AL0&#9;for lenghts</P>
+<P ALIGN="JUSTIFY">V0&#9;for volumes</P>
+<P ALIGN="JUSTIFY">DP0&#9;for differential pressures</P>
+<P ALIGN="JUSTIFY">blank&#9;value = 1. (e.g: for valve stem positions)</P><DIR>
+<DIR>
+<DIR>
+
+<P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+
+<P>The maximum variation speeds are assigned in the same measurement units of the related variable divided by the default time measurement unit (second).</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_ATTU_D"></A>MODULE ATTU&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">To initialize the ATTU module variables on the file F14, no particular prescription is required.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_ATTU_E"></A>MODULE ATTU&#9;CARD E</P>
+</FONT><I><FONT SIZE=4><P ALIGN="CENTER">User's Subprograms</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In the ATTU module no user subprogram is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_ATTU_F"></A>MODULE ATTU&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>DO I = 1,NVARX</P>
+<P>RN(I) = -X(I)/TAU(I)+U(I)/TAU(I)*GAIN(I)</P>
+<P>ENDDO</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_ATTU_G"></A>MODULE ATTU&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE ATTUI3</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFO,IOB,DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE ATTUI4</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IOB,MOD,IBLOC,NCEL,INIZ)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE ATTUI2</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN,SYMB,MX,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE ATTUC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RN,IBL1,IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE ATTUD1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_ATTU_H"></A>MODULE ATTU&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Reference test cases related to this module are reported in the user manual section devoted to the examples developed under the abbreviation:</P>
+<P ALIGN="CENTER">"........."</P></FONT></BODY>
+</HTML>

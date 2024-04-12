@@ -1,0 +1,24 @@
+PLEN_0                                                                          
+PLEN                                                                            
+PLEN - Air-gas volume of a flue-gas path                                        
+                                                                                
+NSTAT = 2
+NUSCI = 0
+NINGR = 3
+ 
+NCONF = 1
+ 
+PFPL      --US-- FLUID PRESSURE IN THE PLENUM                                   
+TFPL      --US-- FLUID TEMPERATURE AT THE PLENUM OUTLET                         
+WE_1      --IN-- FLUID FLOW RATE INTO THE PLENUM N.  1                          
+WU_1      --IN-- FLUID FLOW RATE FROM THE PLENUM N.  1                          
+TE_1      --IN-- TEMPERATURE OF THE FLUID ENTERING THE PLENUM N.  1             
+==============================                                                  
+EOF                                                                             
+2
+t0 4
+INGRESSO IDR. FUMI
+WE_1 PFPL TE_1 TFPL ____ ____ ____ ____
+t1 5
+USCITA IDR. FUMI
+WU_1 PFPL TFPL ____ ____ ____ ____ ____

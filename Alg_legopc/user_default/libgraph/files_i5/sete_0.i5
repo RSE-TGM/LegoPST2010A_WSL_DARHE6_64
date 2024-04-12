@@ -1,0 +1,26 @@
+SETE
+
+Sensore di temperatura                                                          
+2
+1
+
+t0
+____ PRES ____ ____ ____ HENT ____ ____ 
+0 2 0 0 0 2 0 0 
+t1
+____ PRES ____ ____ ____ ____ ____ HENT 
+0 2 0 0 0 0 0 2 
+
+0
+1
+3
+
+TEMP UA
+    TEMPERATURA DI USCITA                                      
+PRES IN
+    PRESSIONE DI INGRESSO                                      
+HENT IN
+    ENTALPIA DI INGRESSO                                       
+RPVP IN
+    RAPPORTO PRESS. VAP./PRESS. TOT.                           
+

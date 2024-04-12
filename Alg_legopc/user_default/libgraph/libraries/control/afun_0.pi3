@@ -1,0 +1,14 @@
+AFUN_0                                                                          
+AFUN                                                                            
+AFUN - Function generator                                                       
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 1
+ 
+NCONF = 1
+ 
+UFUN      --UA-- FUNCTION GENERATOR OUTPUT VARIABLE                             
+IFUN      --IN-- FUNCTION GENERATOR INPUT VARIABLE                              
+==============================                                                  
+EOF                                                                             

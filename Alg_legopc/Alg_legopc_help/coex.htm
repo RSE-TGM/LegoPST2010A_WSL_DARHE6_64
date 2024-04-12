@@ -1,0 +1,551 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>COEX</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE COEX</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COEX</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i>
+</font></b>
+<p ALIGN="CENTER">CONDENSATION CAVITY</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p align="left">The COEX module simulates the dynamic behavior of a control
+volume with several inlet and outlet branches, whose metal shell exchanges heat
+with the external environment.</p>
+<p align="left">A tube bundle crosses the volume horizontally or vertically
+exchanging heat with it. The tubes bundle is modellized as constituted by a
+certain number of lumped longitudinal units (cells). This allows interfacing
+COEX with a whatsoever cellized module (e.g. EXCH) representing water side and
+metal wall of a heat exchanger.</p>
+<p align="left">The fluid contained in the control volume may be:</p>
+<ol>
+  <li>
+    <p align="left">Steam: in this way COEX represents a steam heater</li>
+  <li>
+    <p align="left">Mixture without gravitational separation of the two phases
+    (i.e. without creation of a liquid level): thus COEX modellizes a mixture
+    heater and, more generally, the steam part of a cavity and is thought to be
+    coupled with SERB representing the condensated part of the same cavity</li>
+  <li>
+    <p align="left">Water: hence, COEX represents a cell of a water heater and,
+    more generally, of a water-water heat exchanger</li>
+</ol>
+<p align="left">In the saturated case, water dropdown is explicitly considered.
+A semplified valve model allows regulating dropdown water removal.</p>
+<p align="left">An average temperature between inlet and outlet is considered
+for thermal exchanges with the tube bundle.</p>
+<p align="left">The resulting dynamic model is able to simulate time evolution
+of enthalpy, temperature and pressure inside the control volume as well as the
+temperature of the metal shell.</p>
+<p align="left">The model uses the following balance equations:</p>
+<p ALIGN="JUSTIFY">1) fluid energy conservation inside cavity</p>
+<p ALIGN="JUSTIFY">2) fluid mass conservation inside cavity</p>
+<p ALIGN="JUSTIFY">3) metal energy conservation for metal shell</p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COEX</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b>
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">Ne = number of inlet branches (max.40)</p>
+<p ALIGN="JUSTIFY">Nu = number of outlet branches (max.40)</p>
+<p ALIGN="JUSTIFY">Ncel = number of tubes bundle cells</p>
+<p ALIGN="JUSTIFY">i = 1, 2, ... Ne</p>
+<p ALIGN="JUSTIFY">j = 1, 2, ... Nu</p>
+<p ALIGN="JUSTIFY">k= 1,2, ... Ncel</p>
+<font SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image47.gif" WIDTH="584" HEIGHT="459"></p>
+</font>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <font FACE="Arial">
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+[J/kg]
+</font>
+    <!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">HFLU<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">mean enthalpy of fluid in the control volume<!--mstheme--></font></td>
+</font>
+  </tr>
+  <tr>
+    <font FACE="Arial">
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[Pa]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">PFLU<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">mean pressure of fluid in the control volume<!--mstheme--></font></td>
+</font>
+  </tr>
+  <tr>
+    <font FACE="Arial">
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[K]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">TAVE<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">fluid average temperature in the control volume<!--mstheme--></font></td>
+</font>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[W/m<sup>2</sup>/K]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">GAM_k<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">(k = 1, 2, ... Ncel) convective exchange coefficient between
+      fluid inside control volume and tubes bundle<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[K]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">TSHE&nbsp;<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">temperature of metal enclosure shell<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[kg/s]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">WSPU<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">dropdown water mass flow rate<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[J/kg]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">HSPU<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">dropdown water enthalpy<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[kg/s]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">WE_i<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">(i = 1, 2,..., Ne) mass flow rate through i-th inlet branch<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[J/kg]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">HE_i<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">(i = 1, 2,..., Ne) enthalpy of fluid in the i-th inlet
+      branch<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[kg/s]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">WU_j<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">(j = 1, 2,..., Nu) mass flow rate through j-th outlet branch<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[J/kg]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">HU_j<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left">(j = 1, 2,..., Nu) enthalpy of fluid in the j-th outlet
+      branch</p>
+      <p align="left">(used in case of back-flow)<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[K]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">TEST<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">external environment temperature<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[W/m<sup>2</sup>/K]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">GEST<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">convective thermal exchange coefficient with external
+      environment<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[-]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">ALZA<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">dropdown water pipe stem position<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[K]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">TMI_k<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">(k = 1, 2, ... Ncel) temperature at k-th cell of tubes
+      bundle metal<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[-]<!--mstheme--></font></td>
+    <td width="15%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">CORR<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">thermal exchange correction coefficient between control
+      volume and tubes bundle<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COEX</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b>
+<p align="left">In addition to initial values of input and output variables
+(defined above) the following data must be assigned:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <font FACE="Arial">
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[ ]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">NU.TU.EN<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">number of inlet branches (max.40)<!--mstheme--></font></td>
+</font>
+  </tr>
+  <tr>
+    <font FACE="Arial">
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[ ]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">NU.TU.US<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">number of outlet branches (max.40)<!--mstheme--></font></td>
+</font>
+  </tr>
+  <tr>
+    <font FACE="Arial">
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[m³]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">INT.VOL<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">cavity volume<!--mstheme--></font></td>
+</font>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[m<sup>2</sup>]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">AV.SECT<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p ALIGN="JUSTIFY">average section (for fluid speed evaluation) inside
+      cavity.</p>
+      <p ALIGN="JUSTIFY">If blank, COEXTERT (see note 1) assumes a default
+      value, equal to net inner cavity section, supposed cylindric shaped</p>
+      <p>&nbsp;<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[kg]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">SH.MASS<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">enclosure shell metal mass<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[J/k*kg]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">SH.CP<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">enclosure shell specific heat<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[W/m*k]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">SH.COND<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">enclosure shell thermal conductivity<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[m]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">SH.THICK<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">enclosure shell thickness<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[m<sup>2</sup>]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">SH.EX.S<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">enclosure shell external surface<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[m<sup>2</sup>]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">SH.IN.S<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">enclosure shell internal surface<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[-]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">TUB.NCEL<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">number of cells of tubes bundle<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[-]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">TUB.NUMB<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">number of tubes in parallel belonging to the bundle<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[m]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">TUB.DEXT<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">external diameter of the pipes belonging to tube bundle<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[m]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">TUB.LENG<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">length of the pipes belonging to tube bundle<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[m<sup>2</sup>]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">TUB.SURF<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">overall exchange surface of tubes bundle<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[-]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">TUB.H/V<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">tubes bundle disposition (0 = horizontal; 1 = vertical)<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">[-]<!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">TUB.FORS<!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">if this parameter is not negative the convective thermal
+      exchange coefficient between control volume and tubes bundle is calculated
+      by routine COEXTERT (see note 1). Else, an auxiliary user routine
+      COEXGAMUT is used, instead.<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="center"><b>NOTE 1
+                </b>
+</p>
+<p ALIGN="left">COEXTERT implements standard correlations for calculating the
+convection thermal exchange coefficient between control volume and tubes bundle.
+For fluid speed evaluation (used in Reynold number) the datum AV.SECT is used
+or, if lacking, a default value of net section inside cavity is taken supposing
+the cavity cylindric shaped.</p>
+<i>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">If </i>TUB.FORS =0</p>
+<i>
+<p align="left">then</i> a constant exchange coefficient is taken (<font FACE="Symbol">g</font>
+=10000 W/m<sup>2</sup> K, typical value for condensation)</p>
+<i>
+<p ALIGN="JUSTIFY">else</p>
+</i>
+<blockquote>
+  <p ALIGN="JUSTIFY"><i>if </i>fluid title is negative</p>
+  <p ALIGN="JUSTIFY"><i>then</i> a Dittus-Boelter correlation is calculated</p>
+  <p ALIGN="JUSTIFY"><i>else if</i> fluid title is between 0.1 and 0.9 a
+  condensation correlation is used (typical for either horizontal pipes or
+  vertical pipes in dependence of parameter H/V)</p>
+  <p ALIGN="JUSTIFY"><i>else if</i> fluid title is greater than 1 Hadaller
+  correlation is used</p>
+  <p ALIGN="JUSTIFY"><i>else</i> a linear interpolation is performed between the
+  values calculated with the two adjoining correlations</p>
+</blockquote>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COEX</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font><font SIZE="4"><i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i></font></b>
+<p align="left">To initialize the COEX module variables no particular
+prescription is required.</p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COEX</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b>
+<p align="left">If a negative value is placed in TUB.FORS a user’s routine
+COEXGAMUT is used instead of the standard one (COEXTERT). COEXGAMUT takes the
+following parameters list:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">1) P<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">fluid pressure [Pa]<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">2) H<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">fluid entalpy [J/kg]<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">3) S<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">fluid entropy [J/kg/K]<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">4) T<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">fluid temperature [K]<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">5) RO<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">fluid density [kg/m<sup>3</sup>]<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">6) Y<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">fluid title<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">7) TMI(I)<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">metal temperature for the current cell of tubes bundle [K]<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">8) DEQ<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">tubes hydraulic equivalent diameter [m]<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">9) VERT<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">tubes bundle horizontal or vertical setting (0=horiz; 1=vert)<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">10) SUME<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">sum of all the inlet mass flow rates [kg/s]<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">11) AVSE<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">average section (for fluid speed evaluation) inside cavity
+      [m<sup>2</sup>]<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">12) SEZC<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">free cross section (useful to calculate fluid speed inside
+      control volume) [m<sup>2</sup>]<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">13) SCEL<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">exchange surface of one cell of tubes bundle<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">14) LTUB<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">tubes length<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">15) DETB<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">tubes external diameter<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">16) FORS<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">index (negative if this routine is active) identifying
+      eventually one among many available user’s correlations<!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="16%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">17) GTUB(I)<!--mstheme--></font></td>
+    <td width="84%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p ALIGN="JUSTIFY">routine output parameter, providing a calculation of
+      the convective thermal exchange for the current cell<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COEX</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b>
+<p align="left">COEX calculates the following residuals:</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">energy conservation inside control volume (entropic form)<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">mass conservation inside control volume<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">control volume average temperature calculation<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">control volume-tubes bundle exchange coefficient calculation for each cell<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">energy conservation for the enclosure shell<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">dropdown water mass flow rate calculation<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">dropdown water enthalpy calculation<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COEX</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><i><font SIZE="4">
+<p ALIGN="CENTER">Module subprograms</p>
+</font></i><font FACE="Courier New" SIZE="2">
+<p align="left">SUBROUTINE COEXI3(IFO, IOB, DEBL)</p>
+<p align="left">SUBROUTINE COEXI4(IOB, MOD)</p>
+<p align="left">SUBROUTINE COEXI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</p>
+<p align="left">$ IBL1, IBL2, IER, CNXYU, TOL)</p>
+<p align="left">SUBROUTINE COEXC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+<p align="left">$ IBL1, IBL2)</p>
+<p align="left">SUBROUTINE COEX(IFUN, IXYU, XYU, IPD, DATI, RNI)</p>
+<p align="left">SUBROUTINE COEXD1(BLOCCO, NEQUAZ, NSTATI, NUSCIT, NINGRE, SYMVAR,
+XYU,</p>
+<p align="left">$ IXYU, DATI, IPD, SIGNEQ, UNITEQ, COSNOR, ITOPVA, MXT)</p>
+<p align="left">SUBROUTINE
+COEXTERT(P,H,S,T,RO,TIT,TP,D,VERT,W,AVSE,SEZ,SUP,LTUB,DETB,FORS,HT)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE COEX</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font SIZE="4"><i>
+<p ALIGN="CENTER">Test cases</p>
+</i></font></b>
+<p ALIGN="left">Test case COEX_T is provided, described in a separate document.</p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

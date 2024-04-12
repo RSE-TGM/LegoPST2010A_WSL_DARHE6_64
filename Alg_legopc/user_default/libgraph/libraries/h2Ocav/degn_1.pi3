@@ -1,0 +1,28 @@
+DEGN_1                                                                          
+DEGN                                                                            
+DEGN - Water/steam deaerator and tank                                           
+                                                                                
+NSTAT = 4
+NUSCI = 1
+NINGR =11
+ 
+NCONF = 1
+ 
+HLDG      --US-- WATER ENTH. AT THE OUTLET OF DEGASIFIER TANK                   
+HVDG      --US-- STEAM MEAN ENTH. INSIDE THE DEGASIFIER                         
+LIVD      --US-- WATER LEVEL INSIDE THE DEGASIFIER TANK                         
+PVDG      --US-- STEAM MEAN PRESSURE INSIDE THE DEGASIFIER                      
+PLDG      --UA-- PRESSURE ON THE BOTTOM OF DEGASIFIER TANK                      
+WSPD      --IN-- BLEEDING FLOW RATE FROM THE DEGASIFIER                         
+HSPD      --IN-- ENTHALPY OF STEAM BLED FROM THE DEGASIFIER                     
+WALI      --IN-- FEEDWATER FLOW RATE AT THE DOME INLET                          
+HALI      --IN-- FEEDWATER ENTHALPY AT THE DOME INLET                           
+WDRE      --IN-- DRAINAGES FLOW RATE AT THE DOME INLET                          
+HDRE      --IN-- DRAINAGES WATER ENTHALPY AT THE DOME INLET                     
+WOUT      --IN-- WATER FLOW RATE AT THE DEGASIFIER TANK OUTLET                  
+WRIS      --IN-- STEAM FLOW RATE AT THE START TROUGH THE TANK                   
+HRIS      --IN-- STEAM ENTHALPY AT THE START INSIDE THE TANK                    
+WRIC      --IN-- RECIRCULATING FLOW RATE OF THE FEEDWATER PUMP                  
+HRIC      --IN-- RECIRC. LIQUID ENTH. OF THE FEEDWATER PUMP                     
+==============================                                                  
+EOF                                                                             

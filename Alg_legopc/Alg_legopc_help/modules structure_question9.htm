@@ -1,0 +1,52 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>USE OF &quot;xxxx&quot; AND NAJAC SUBROUTINES</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"></font>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#99CCFF" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">
+      <font FACE="Arial">Use of &quot;xxxx&quot; and NAJAC subroutines in a LEGOPC module</font>
+    </font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+<font SIZE="3">
+<p align="left">The &quot;xxxx&quot; subroutine of a LEGO module is not present in all LEGO 
+process modules, as it isn't one of the four standard subroutines actually needed in every module: 
+&quot;xxxxI3&quot;, &quot;xxxxI2&quot;, &quot;xxxxC1&quot; and &quot;xxxxD1&quot;.</p>
+<p align="left">The &quot;xxxx&quot; subroutine must compute the residuals of all the module 
+equations (both differential and algebraic ones). Like in the &quot;xxxxC1&quot; subroutine, 
+the residuals have to be normalized using the normalization factors related to the quantities
+involved in the equations.</p>
+<p align="left">As we sad, it is only needed to allow the module to perform the numerical 
+computation of its Jacobian matrix using the NAJAC standard routine. Obviously, the &quot;xxxx&quot; 
+subroutine is not needed if the Jacobian matrix is computed analytically. Note that, obviously, the
+developer can also choose to realize this subroutine also when it is not needed: this is automatically 
+inserted in the auto-produced code if he uses the standard module building activity.</p>
+<p align="left">This doesn't mean that every module which computes numerically the Jacobian matrix 
+must have the &quot;xxxx&quot; subroutine: it must have this subroutine only if it uses the NAJAC routine. 
+On the contrary, a LEGO process module can compute numerically the Jacobian matrix in a different way, 
+e.g. using another ad-hoc algorithm (like some library modules do).</p>
+<center>
+<p><a href="lg_modu_sez09_1.htm">When is the &quot;xxxx&quot; subroutine called?</a></p>
+<p><a href="lg_modu_sez09_2.htm">
+	What does &quot;xxxx&quot; have to do when it is called for residuals computation?</a></p>
+<p><a href="lg_modu_sez09_3.htm">
+	What does &quot;xxxx&quot; have to do when it is called for Jacobian matrix computation?</a></p>
+<p><a href="lg_modu_sez09_4.htm">FORTRAN prescriptions for &quot;xxxx&quot; subroutines</a></p>
+<p><a href="lg_modu_sez09_5.htm">
+	An example of the &quot;xxxx&quot; subroutine in a standard process module (RAVA)</a></p>
+<p><a href="lg_modu_sez09_6.htm">Calling parameters of the NAJAC subroutines</a></p>
+<p><a href="lg_modu_sez09_7.htm">
+	How to compute Jacobian matrix as double side incremental ratios (using BNAJAC)</a></p>
+</center>
+</font><!--mstheme--></font></body>
+
+</html>

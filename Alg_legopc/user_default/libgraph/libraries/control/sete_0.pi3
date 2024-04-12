@@ -1,0 +1,16 @@
+SETE_0                                                                          
+SETE                                                                            
+Sensore di temperatura                                                          
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 3
+ 
+NCONF = 1
+ 
+TEMP      --UA--     TEMPERATURA DI USCITA                                      
+PRES      --IN--     PRESSIONE DI INGRESSO                                      
+HENT      --IN--     ENTALPIA DI INGRESSO                                       
+RPVP      --IN--     RAPPORTO PRESS. VAP./PRESS. TOT.                           
+==============================                                                  
+EOF                                                                             

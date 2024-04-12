@@ -1,0 +1,6 @@
+CREATAV    crea il file binario TAVOLE.DAT a partire dai dati di LECT.DAT
+TAVOLE.BAT crea la libreria vapo.lib a partire dal file vapo.for
+INITSM     (subroutine contenuta in VAPO.FOR) legge in memoria TAVOLE.DAT
+VAPO.FOR   contiene tutte le routines delle tavole
+VAPO.LIB   libreria contenente VAPO.FOR
+PROVATAV   semplice main di prova delle tavole

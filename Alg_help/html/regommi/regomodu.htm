@@ -1,0 +1,581 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>regomodu</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_rego_main"></A>LEGO regulation modules</P>
+</B></FONT><STRIKE><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</STRIKE></FONT><P ALIGN="JUSTIFY"><A HREF="lg_libr.htm#lg_libproc_main"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Regulation modules libraries</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez01"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Why should one realize a new LEGO regulation module?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez02"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Which kind of function can be simulated by a LEGO regulation module?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez03"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Equations and variables order in a LEGO regulation module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez04"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Variables normalization factors in LEGO regulation modules</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez05"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Standard subroutines in a LEGO regulation module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez06"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxxI3" subroutine of a LEGO regulation module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez07"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxx$I" subroutine of a LEGO regulation module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez08"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxx$R" subroutine of a LEGO regulation module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez09"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Conversion between boolean and floating point quantities in LEGO regulation modules</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez01"></A>Why should one realize a new LEGO regulation module?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">LEGO regulation modules has to perform only base regulation functions, as the actual regulators are the regulation schemes (which are build connecting many regulation modules).</P>
+<P ALIGN="JUSTIFY">The LEGO standard regulation library includes a lot of modules (logical operators, mathematical operators, tabular functions, regulators, operating stations, logical and analogue interfaces, ...).</P>
+<P ALIGN="JUSTIFY">Also, complex functions may be realized (as single regulation block) building a "macromodule" (a regulation module automatically realized condensing a complete regulation scheme); macromodules may be used in regulation schemes exactly like standard regulation library modules (only, macromodules may not be nested into other macromodules).</P>
+<P ALIGN="JUSTIFY">So there is no reason for LEGO users to realize a new LEGO regulation module. Nevertheless, the way to do it is furthermore described.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez02"></A>Which kind of function can be simulated by a LEGO regulation module?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">A LEGO regulation module is a set of </FONT><A HREF="#rego_FORTRAN"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FORTRAN</U></FONT></A><FONT FACE="Arial, helvetica"> subroutines, which contains a (simple) regulation function.</P>
+<P ALIGN="JUSTIFY">Only algebraic explicit equations may be included in regulation modules; ordinary differential equations may be discretized and explicitly integrated in the module to be transformed in algebraic equations.</P>
+<P ALIGN="JUSTIFY">The regulation model must be formalized in a set of explicit algebraic equations:</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1179.gif" WIDTH=162 HEIGHT=73></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1180.gif" WIDTH=62 HEIGHT=18><FONT FACE="Arial, helvetica">&#9;are the output variables</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1181.gif" WIDTH=66 HEIGHT=18><FONT FACE="Arial, helvetica">&#9;are the input variables</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1182.gif" WIDTH=11 HEIGHT=12><FONT FACE="Arial, helvetica">&#9;&#9;is the simulation time</P>
+<P ALIGN="JUSTIFY">Both the output and the input variables may be analogue or boolean (no prescription on their mutual order inside output and input lists).</P>
+<P ALIGN="JUSTIFY">The mathematical expressions of <IMG SRC="Image1183.gif" WIDTH=62 HEIGHT=18>(for analogue outputs) can be linear or non-linear, and they may be formalized in analytical form, in tabular form or using logical functions. They also may change during simulation (due to simulation time and/or input variables values), but all these features must be managed internally inside the FORTRAN code of the module.</P>
+<P ALIGN="JUSTIFY">The mathematical expressions of <IMG SRC="Image1183.gif" WIDTH=62 HEIGHT=18>(for boolean outputs) must be logical (obtained using logical and relational operators). They also may change during simulation, like analogue outputs ones.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</B><P ALIGN="JUSTIFY"><A NAME="rego_FORTRAN"></A>This documentation assumes user is at least a medium FORTRAN programmer; as special regulation modules (cellized, configurable, etc...) cannot be realized, skilled programmers are never required. Reference text for all module developers is: ANSI X3.9-1978 Standard FORTRAN by American National Standard Institute, New York NY (USA), 1978.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez03"></A>Equations and variables order in a LEGO regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">As in LEGO regulation modules only algebraic equations may be encoded, and no difference is made between analogue and boolean equations, no particular order is required.</P>
+<P ALIGN="JUSTIFY">Module input variables must follow all output variables. Since each equation gives the actual value of the related output variable, the order of the output variables (analogue and boolean ones) must exactly match the order of the equations.</P>
+<P ALIGN="JUSTIFY">Input variables are divided into two different types: connectable and non connectable inputs. Non connectable inputs are analogue input whose value must be assigned by the user and may be changed during the simulation, but it may not be connected with the output value of another block. Non connectable inputs must follow connectable ones. No prescription is given for connectable input variables order (analogue and boolean ones).</P>
+<P ALIGN="JUSTIFY">Obviously, module equations and variables schemes shall be chosen during module development, and they can't be changed during simulation.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez04"></A>Variables normalization factors in LEGO regulation modules</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In process modules no normalization factor is used by LEGO code. Both input and output values are given and have to be assigned with their actual value.</P>
+<P ALIGN="JUSTIFY">In some modules, like regulators, the input value is scaled (by an user set factor) to make its value varying in the range [0,1] (or [-1,1], depending on the variable type). The regulation library DIRA module is provided for measurement unit conversions and input or output variables scaling.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez05"></A>Standard subroutines in a LEGO regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Every LEGO module must contain at least 3 standard subroutines, whose names must be "xxxxI3", "xxxx$I", and "xxxx$R", where "xxxx" is the module name.</P>
+<P ALIGN="JUSTIFY">Obviously, this also means that the name of every module must be <B>exactly four character long</B> a it must be <B>a valid FORTRAN identifier</B> (its first character must be alphabetical, and the following three can must be alphabetical or numerical).</P>
+<P ALIGN="JUSTIFY">A LEGO process module can also contain other routines (subroutines and / or functions), called by the standard ones. Most modules calls the semi-standard "xxxxI4" subroutine to build the complete block name.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez06"></A>The "xxxxI3" subroutine of a LEGO regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Module standard "xxxxI3" subroutine is called by the topology building activity. It must set the complete block name and the block variables set and names, writing the module header and the list of the block variables on the topological data file.</P>
+<P ALIGN="JUSTIFY">The complete name of the block must be 8 character long, and it must be formed collating the module name (4 characters), the block identifier (2 characters) and two trailing blanks. The semi-standard "xxxxI4" subroutine is usually called to perform this action. The complete block name cannot be modified for module configurability reasons, as configurable regulation modules are not allowed.</P>
+<P ALIGN="JUSTIFY">The names of the block variables must be 8 character long, and they should be formed collating an unique variable identifier (2 characters), the block identifier (2 characters) and the scheme name (4 characters). The variable set must be always the same for that module as it cannot be changed depending on configurability reasons.</P>
+<P ALIGN="JUSTIFY">Note that particular prescription are given for variables number (no more than 30, including both inputs and outputs) and variable name initials:</P>
+<P ALIGN="JUSTIFY">U&#9;for analogue output variables</P>
+<P ALIGN="JUSTIFY">J&#9;for boolean variables (both for input and output ones)</P>
+<P ALIGN="JUSTIFY">I&#9;for analogue input variables (connectable)</P>
+<P ALIGN="JUSTIFY">K&#9;for non-connectable input variables (analogue)</P>
+<P ALIGN="JUSTIFY">(no other initial is allowed for variable names in LEGO regulation modules, as the initial is used to identify the variable kind).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez06_01"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The output which an "xxxxI3" regulation subroutine must produce</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez06_02"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FORTRAN prescriptions for "xxxxI3" regulation subroutines</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez06_3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The NOMXREG common area</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez06_4"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxx00" common area</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez06_5"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The first character of a LEGO regulation variable name</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez06_6"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">An example of the "xxxxI3" subroutine in a regulation module (SWTC)</U></FONT></A></P>
+<P><A HREF="#lg_rego_sez06_7"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxx$I" subroutine of a LEGO regulation module</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez06_01"></A>The output which an "xxxxI3" regulation subroutine must produce</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The "xxxxI3" subroutine of every LEGO regulation module must set the complete block name and the block variables set and names, writing the module header and the list of the block variables on the topological data file.</P>
+<P ALIGN="JUSTIFY">The module header must be written in the following format:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>CCCCCCCC BL.-BB - ***** MODREG AAAA - ddd ddd ddd</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">-&#9;"AAAA" is the module name, set once by the module developer (exactly 4 characters);</P>
+<P ALIGN="JUSTIFY">-&#9;"BB" is the block identifier, automatically set when the user creates an instance of AAAA module (exactly 2 characters);</P>
+<P ALIGN="JUSTIFY">-&#9;"CCCCCCCC" is the complete block name, set by the module (CCCCCCCC must be equal to AAAABB plus two trailing blanks);</P>
+<P ALIGN="JUSTIFY">-&#9;"ddd ddd ddd" is the block description, set by the user (no more than 45 characters)</P>
+<P ALIGN="JUSTIFY">The variable list must be written in the following format:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>V1BBSSSS --XX-- V1descr</P>
+<P>V2BBSSSS --XX-- V2descr</P>
+<P>...</P>
+<P>VnBBSSSS --XX-- Vndescr</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">-&#9;"V1BBSSSS", "V2BBSSSS", ..., "VnBBSSSS" are the complete name of the module variables (exactly 8 characters);</P>
+<P ALIGN="JUSTIFY">-&#9;"XX" defines the variable type (exactly 2 characters):</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">"UA" for outputs;</P>
+<P ALIGN="JUSTIFY">"IN" for inputs;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">-&#9;"V1descr", "V2descr", ..., "Vndescr" are the original description of the module variables (not more than 50 characters).</P>
+<P ALIGN="JUSTIFY">Note that:</P>
+<P ALIGN="JUSTIFY">-&#9;all outputs ("UA") must precede all inputs ("IN"), and non connectable must follow connectable inputs: no other type is allowed;</P>
+<P ALIGN="JUSTIFY">-&#9;the total number of module variables (inputs + outputs) must not exceed 30;</P>
+<P ALIGN="JUSTIFY">-&#9;the complete variables names must be formed collating the variable identifiers ("V1", "V2", ..., "Vn"), the block identifier ("BB")&#9;and the scheme name ("SSSS");</P>
+<P ALIGN="JUSTIFY">-&#9;the variable identifiers ("V1", "V2", ..., "Vn") which must be unique inside the module and must conceal with the prescriptions for &#9;variable initials;</P>
+<P ALIGN="JUSTIFY">-&#9;the scheme name "SSSS" has to be read from the SIMBXREG variable of the NOMXREG common area;</P>
+<P ALIGN="JUSTIFY">the original descriptions shall be written by the module, but they can be furthermore modified by the user (description fields are also automatically modified for connected input variables).</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</STRIKE><P><A NAME="lg_rego_sez06_02"></A>FORTRAN prescriptions for "xxxxI3" regulation subroutines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The calling parameters, common areas and called routines of "xxxxI3" subroutines are the following:</P>
+<B><P>Calling parameters:</P>
+</B><P ALIGN="JUSTIFY">IFO&#9;[integer]&#9;&#9;logical unit of topological file (I)</P>
+<P ALIGN="JUSTIFY">IOB&#9;[character * 4]&#9;block identifier (only the 2 beginning character have to be used as identifier) (I)</P>
+<P ALIGN="JUSTIFY">DEBL&#9;[character * 80]&#9;block description (I)</P>
+<B><P>Common areas:</P>
+</B><P ALIGN="JUSTIFY">NOMXREG</P>
+<P ALIGN="JUSTIFY">xxxx00&#9;&#9;(only if "xxxxI4" subroutine is present)</P>
+<P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+<B><P>Called routines:</P>
+</B><P ALIGN="JUSTIFY">xxxxI4&#9;&#9;(user to build the complete block name: see SWTC example)</P>
+<P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</STRIKE><P><A NAME="lg_rego_sez06_3"></A>The NOMXREG common area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The NOMXREG common area contains the name of the regulation scheme where the instanciated block is going to be inserted. Its value has to be considered "real-only" by the "xxxxI3" subroutine.</P>
+<B><P>List of common area variables:</P>
+</B><P ALIGN="JUSTIFY">SIMBXREG&#9;[character * 4]&#9;name of the regulation scheme</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</STRIKE><P><A NAME="lg_rego_sez06_4"></A>The "xxxx00" common area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The "xxxx00" common must be present only if the "xxxxI4" subroutine is used to build the complete block name. Its value has to be considered "real-only" by the "xxxxI3" subroutine but "write-only" by the "xxxxI4" subroutine.</P>
+<B><P>List of common area variables:</P>
+</B><P ALIGN="JUSTIFY">IBLOC&#9;[character * 8]&#9;complete block name</P>
+<P ALIGN="JUSTIFY">NCEL&#9;&#9;[integer]&#9;&#9;not used</P>
+<P ALIGN="JUSTIFY">NPAR&#9;&#9;[integer]&#9;&#9;not used</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</STRIKE><P><A NAME="lg_rego_sez06_5"></A>The first character of a LEGO regulation variable name</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The first character of every variable name is used to identify the kind of variable. So the first character of the variable identifier must be chosen complying with the following prescription:</P>
+<P ALIGN="JUSTIFY">U)&#9;analogue output variables</P>
+<P ALIGN="JUSTIFY">J)&#9;boolean variables (both for input and output ones)</P>
+<P ALIGN="JUSTIFY">I)&#9;analogue input variables (connectable)</P>
+<P ALIGN="JUSTIFY">K)&#9;non-connectable input variables (analogue)</P>
+<P ALIGN="JUSTIFY">No other initial is allowed for variable names in LEGO regulation modules.</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez06_6"></A></P>
+</STRIKE><P>An example of the "xxxxI3" subroutine in a regulation module (SWTC)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">An example of the output produced by the "xxxxI3" subroutine of a LEGO regulation module is the following:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SWTC0A BL.-0A - **** MODULO SWTC - Two inputs switch</P>
+<P>UI0ASCHE --UA-- SWITCH ANALOGICAL OUTPUT SIGNAL</P>
+<P>I10ASCHE --IN-- SWITCH ANALOGICAL INPUT SIGNAL NUM. 1</P>
+<P>I20ASCHE --IN-- SWITCH ANALOGICAL INPUT SIGNAL NUM. 2</P>
+<P>JJ0ASCHE --IN-- SWITCH COMMUTATION LOGICAL BUTTON</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">This output has been produced instanciating the SWTC module (which simulates a switch) and choosing "Two inputs switch" as block description ("0A" is the automatically chosen block identifier, and "SCHE" is the scheme name).</P>
+<P ALIGN="JUSTIFY">As one can see, the SWTC modules has 1 output (analogue) and 3 inputs (two of them are analogue, while the other one is boolean; no "non-connectable" input is present).</P>
+<P ALIGN="JUSTIFY">The source code of SWTCI3 and SWTCI4 follows (comments and variable names have been translated for legibility reasons).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>C**********************************************************************</P>
+<P>C* *</P>
+<P>C* ANALOGICAL INPUTS SWITCH *</P>
+<P>C* *</P>
+<P>C**********************************************************************</P>
+<P>C</P>
+<P>SUBROUTINE SWTCI3(IFO,IOB,DEBL)</P>
+<P>COMMON/NOMXREG/SIMBXREG</P>
+<P>CHARACTER*4 SIMBXREG</P>
+<P>C</P>
+<P>COMMON/SWTC00/IBLOC,NCEL,NPAR</P>
+<P>CHARACTER*80 DEBL</P>
+<P>CHARACTER*8 IBLOC</P>
+<P>CHARACTER*4 IOB</P>
+<P>CHARACTER*4 MOD</P>
+<P>DATA MOD/'SWTC'/</P>
+<P>C</P>
+<P>CALL SWTCI4(IOB,MOD)</P>
+<P>NSTATI = 0</P>
+<P>NUSCIT = 1</P>
+<P>NINGRE = 3</P>
+<P>C</P>
+<P>C</P>
+<P>WRITE(IFO,2999)IBLOC,IOB,MOD,DEBL</P>
+<P>2999 FORMAT(A,2X,'BL.-',A2,2X,'- **** MODREG ',A4,' - ',A)</P>
+<P>C</P>
+<P>C</P>
+<P>WRITE(IFO,3001)IOB,SIMBXREG</P>
+<P>3001 FORMAT('UI',A2,A4,2X,</P>
+<P>$ '--UA-- SWITCH ANALOGICAL OUTPUT SIGNAL')</P>
+<P>WRITE(IFO,3002)IOB,SIMBXREG</P>
+<P>3002 FORMAT('I1',A2,A4,2X,</P>
+<P>$ '--IN-- SWITCH ANALOGICAL INPUT SIGNAL NUM. 1')</P>
+<P>WRITE(IFO,3003)IOB,SIMBXREG</P>
+<P>3003 FORMAT('I2',A2,A4,2X,</P>
+<P>$ '--IN-- SWITCH ANALOGICAL INPUT SIGNAL NUM. 2')</P>
+<P>WRITE(IFO,3004)IOB,SIMBXREG</P>
+<P>3004 FORMAT('JJ',A2,A4,2X,</P>
+<P>$ '--IN-- SWITCH COMMUTATION LOGICAL BUTTON')</P>
+<P>C</P>
+<P>RETURN</P>
+<P>END</P>
+<P>C</P>
+<P>C</P>
+<P>C</P>
+<P>SUBROUTINE SWTCI4(IOB,MOD)</P>
+<P>COMMON/SWTC00/IBLOC,NCEL,NPAR</P>
+<P>CHARACTER*8 IBLOC</P>
+<P>CHARACTER*4 IOB</P>
+<P>CHARACTER*4 MOD</P>
+<P>C</P>
+<P>C</P>
+<P>WRITE(IBLOC,1000)MOD,IOB</P>
+<P>1000 FORMAT(A4,A2,2X)</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Note that the only calling parameters of RAVAI4 subroutine are IOB and MOD; IBLOC is passed via the "xxxx00" common areas.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez07"><A NAME="lg_rego_sez06_7"></A></A>The "xxxx$I" subroutine of a LEGO regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The "xxxx$I" subroutine of a LEGO module is called twice during a simulation: the first time it is called by LG2 activity (topology acceptance and data editor activation) and the second one by LG3 activity (steady state computation).</P>
+<P ALIGN="JUSTIFY">These two cases can be recognized by the subroutine checking the actual value of the IFUN parameter: it is 1 in LG2 program, and it is 2 in LG3. If the module is present more than once in the plant model, then "xxxx$I" will be called (in each activity) as many times as the module is used (so it won't be called by models not using the module).</P>
+<P ALIGN="JUSTIFY">The action performed by subroutine "xxxx$I" must be different in these cases.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez07_1"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">What does "xxxx$I" have to do when it is called by the LG2 activity?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez07_2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">What does "xxxx$I" have to do when it is called by the LG3 activity?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez07_3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FORTRAN prescriptions for "xxxx$I" subroutines</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez07_4"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">An example of the "xxxx$I" subroutine in a regulation module (SOM4)</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez07_1"></A>What does "xxxx$I" have to do when it is called by the LG2 activity?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">When "xxxx$I" subroutine is called by LG2 program (when IFUN is 1) it must write on F14.DAT file the data section for the related block. The first line of the header of the block data section is automatically written by the regulation scheme auto-produced code, so the module doesn't have to write it. If the block has no data, only the second heading line has to be written, using the following format:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>*...BLOCCO.AAAABBnnnn.DDDDDDDDD*</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">-&#9;"*...BLOCCO " (an asterisk, three blanks, the word BLOCCO and another blank) is a fixed string (11 characters long);</P>
+<P ALIGN="JUSTIFY">-&#9;"AAAABB" is the block name (module name + block identifier) (6 characters long);</P>
+<P ALIGN="JUSTIFY">-&#9;"nnnn" the block sequence number in the scheme (4 characters long);</P>
+<P ALIGN="JUSTIFY">-&#9;".DDDDDDDD" is the module meaning, preceded by a leading blank (no more than 46 characters).</P>
+<P ALIGN="JUSTIFY">The format of the F14.DAT area for a datum must be exactly 25 character, and it have the following format (where blanks have been replaced with dots "." for legibility reasons):</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>....AAAAAABB.=..........*</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">-&#9;"...." are four leading blanks (they must be exactly 4);</P>
+<P ALIGN="JUSTIFY">-&#9;"AAAAAA" is the datum code (it must be exactly 6 characters long, and it must be unique inside the module);</P>
+<P ALIGN="JUSTIFY">-&#9;"BB" is the block identifier (2 characters long);</P>
+<P ALIGN="JUSTIFY">-&#9;".=" is a standard string (one blank and an equal sign);</P>
+<P ALIGN="JUSTIFY">-&#9;"..........*" are the value field (exactly 10 blanks) and the ending character (an asterisk).</P>
+<P ALIGN="JUSTIFY">As usually the F14.DAT file for regulation models is automatically written by regulation schemes building activities, the format of the data section of each block must conceal with some prescriptions:</P>
+<P ALIGN="JUSTIFY">-&#9;the total number of data must not exceed 30 (for each block);</P>
+<P ALIGN="JUSTIFY">-&#9;exactly two data must be written in each data section line: this means that every line may be 50 character long (if number of data is &#9;odd, the last line will contain only one datum, and it will be 25 characters long);</P>
+<P ALIGN="JUSTIFY">-&#9;comment lines are not allowed.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez07_2"></A></P>
+<P>What does "xxxx$I" have to do when it is called by the LG3 activity?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">When the "xxxx$I" subroutine is called by LG3 activity (steady state computation), it must perform the following actions:</P>
+<P ALIGN="JUSTIFY">1.&#9;read the second line of the data area header to check that no sequence mismatch occurs;</P>
+<P ALIGN="JUSTIFY">2.&#9;read the data area of the block and assign the data to the DATI vector;</P>
+<P ALIGN="JUSTIFY">3.&#9;reassign the pointer to the first free element of DATI vector (allocating the elements used by the block).</P>
+<P ALIGN="JUSTIFY">The data area to be read includes also the second heading line (the first one is read by the scheme auto-produced code). The second heading line must always be read, also if the block has no data (it must move the file pointer to the beginning of the area related to the following block).</P>
+<P ALIGN="JUSTIFY">The sequence number of the block in the scheme must be read from the second heading line and it must be compared with the incoming value passed from the scheme auto-produced code. If the values don't match, the IER flag must be set to one (this makes the program skip the following blocks), an error message must be printed and the control must be returned to the calling routine.</P>
+<P ALIGN="JUSTIFY">Data values must be read from the value fields of the data area, which is 10 character long for each datum: a FORTRAN format '(2(14X,F10.0,1X))' is always used for reading data (only floating point data are allowed). Note that no error occurs if this format is used to read less than two data, and it may also be used to read more than two data (from more than one line) if every line (except the last) is used for two data.</P>
+<P ALIGN="JUSTIFY">Data values has to be recorded into DATI vector, starting with the ID position. Into the DATI vector the module must also record every data which has to be used in steady state and transients computation. For instance, DATI vector may also contain temporary variables and internal states (input variables or quantities computed in the module, whose values has to be recorded during the simulation).</P>
+<P ALIGN="JUSTIFY">So the "xxxx$I" subroutine has to evaluate the total size of the DATI vector section which will be used by the following activities, and change the value of the ID pointer to the first free element of DATI vector. As the incoming value of ID points is the previous index of the first not-allocated element, its value must be increased by N, where N is the total number of elements allocated. If the module has no data, the value of ID must not be modified.</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</STRIKE><P><A NAME="lg_rego_sez07_3"></A>FORTRAN prescriptions for "xxxx$I" subroutines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The calling parameters, common areas and called routines of "xxxx$I" subroutines are the following:</P>
+<B><P>Calling parameters:</P>
+</B><P ALIGN="JUSTIFY">IFUN&#9;&#9;&#9; [integer]&#9;&#9;flag of required actions (I)</P>
+<P ALIGN="JUSTIFY">NOMXBLOC&#9;&#9; [character * 6]&#9;complete block name (the last two characters of the name are the block identifier) (I)</P>
+<P ALIGN="JUSTIFY">NBLOC&#9;&#9; [integer]&#9;&#9;sequence number of the block in the regulation scheme (I)</P>
+<P ALIGN="JUSTIFY">DATI&#9;&#9;&#9; [real (*)]&#9;&#9;all blocks data vector (I/O)</P>
+<P ALIGN="JUSTIFY">ID&#9;&#9; &#9; [integer]&#9;&#9;index of the first not-allocated element in DATI vector (incoming value: begin of block data area; &#9;&#9;&#9;&#9;&#9;&#9;&#9;exiting value: begin of data area of the following block) (I/O)</P>
+<P ALIGN="JUSTIFY">IER&#9;&#9; &#9; [integer]&#9;&#9;exiting or error code (O)</P>
+<B><P>Common areas:</P>
+</B><P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+<B><P>Called routines:</P>
+</B><P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez07_4"></A></P>
+</STRIKE><P>An example of the "xxxx$I" subroutine in a regulation module (SOM4)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following data section is an example of the one of the SOM4 module (four inputs adder). The SOM4 module has 4 data (the first heading line is not written by SOM4 module, but by the regulation scheme auto-produced code).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>* - Signal adder</P>
+<P>* BLOCCO SOM40B 12 FOUR INPUTS ADDER</P>
+<P>GUAD1 0B = * GUAD2 0B = *</P>
+<P>GUAD3 0B = * GUAD4 0B = *</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Note that:</P>
+<P ALIGN="JUSTIFY">-&#9;"Signal adder" is the block description, chosen by the user;</P>
+<P ALIGN="JUSTIFY">-&#9;"0B" and " 12" are the block identifier and the block sequence number in the scheme (automatically generated);</P>
+<P ALIGN="JUSTIFY">-&#9;the block identifier has to be read form the fifth and sixth characters of the block name;</P>
+<P ALIGN="JUSTIFY">-&#9;"FOUR INPUTS ADDER" is the meaning of SOM4 module (written by module SOM4 itself).</P>
+<P ALIGN="JUSTIFY">The source code of SOM4$I follows (comment line has been added or translated for legibility reasons).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE SOM4$I(IFUN,NOMXBLOC,NBLOC,DATI,ID,IER)</P>
+<P>C</P>
+<P>DIMENSION DATI(*)</P>
+<P>CHARACTER*6 NOMXBLOC&#9;</P>
+<P>C</P>
+<P>GO TO (100,200),IFUN&#9;</P>
+<P>C</P>
+<P>C---WRITING ON FILE 14 THE DATA OF SOM4</P>
+<P>C</P>
+<P>100 WRITE(14,500)NOMXBLOC,NBLOC</P>
+<P>500 FORMAT('* BLOCCO ',A,I4,' FOUR INPUTS ADDER')</P>
+<P>WRITE(14,501)NOMXBLOC(5:6),NOMXBLOC(5:6)</P>
+<P>501 FORMAT(</P>
+<P>$ ' GUAD1 ',A,' = * GUAD2 ',A,' = *')</P>
+<P>WRITE(14,504)NOMXBLOC(5:6),NOMXBLOC(5:6)</P>
+<P>504 FORMAT(</P>
+<P>$ ' GUAD3 ',A,' = * GUAD4 ',A,' = *')</P>
+<P>RETURN</P>
+<P>C</P>
+<P>C---READING FROM FILE 14 THE DATA OF SOM4</P>
+<P>C</P>
+<P>200 READ(14,502)NOMXBLOC,NBL</P>
+<P>502 FORMAT(11X,A,I4)</P>
+<P>C</P>
+<P>IF(NBL.NE.NBLOC) THEN</P>
+<P>WRITE(6,3000)NOMXBLOC</P>
+<P>3000 FORMAT(1X,</P>
+<P>$ '****ERROR: THE SOM4$I SUBROUTINE READS FROM FILE 14'</P>
+<P>$ /10X,'DATA OF ANOTHER REGULATION BLOCK'</P>
+<P>$ /10X,'CHECK THE DATA RELATED TO THE BLOCK ',A)</P>
+<P>IER=1</P>
+<P>C</P>
+<P>ELSE</P>
+<P>READ(14,503)G1,G2,G3,G4</P>
+<P>503 FORMAT(2(14X,F10.0,1X))</P>
+<P>DATI(ID )=G1</P>
+<P>DATI(ID+1)=G2</P>
+<P>DATI(ID+2)=G3</P>
+<P>DATI(ID+3)=G4</P>
+<P>ID=ID+4</P>
+<P>ENDIF</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez08"></A>The "xxxx$R" subroutine of a LEGO regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The "xxxx$R" subroutine of a LEGO module is called both by LG3 activity (steady state computation) and LG5 activity (transients simulation); in both the activities, "xxxx$R" is called to compute the exiting values of the output variables:</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1184.gif" WIDTH=154 HEIGHT=70></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1180.gif" WIDTH=62 HEIGHT=18><FONT FACE="Arial, helvetica">&#9;are the output variables</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1181.gif" WIDTH=66 HEIGHT=18><FONT FACE="Arial, helvetica">&#9;are the input variables</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1182.gif" WIDTH=11 HEIGHT=12><FONT FACE="Arial, helvetica">&#9;&#9;is the simulation time</P>
+<P ALIGN="JUSTIFY">Both the output and the input variables may be analogue or boolean.</P>
+<P ALIGN="JUSTIFY">The mathematical expressions of <IMG SRC="Image1183.gif" WIDTH=62 HEIGHT=18>(for analogue outputs) can be linear or non-linear, and they may be formalized in analytical form, in tabular form or using logical functions. They also may change during simulation (due to simulation time and/or input variables values), but all these features must be managed internally inside the FORTRAN code of the module.</P>
+<P ALIGN="JUSTIFY">The mathematical expressions of <IMG SRC="Image1185.gif" WIDTH=62 HEIGHT=18>(for boolean outputs) must be logical (obtained using logical and relational operators). They also may change during simulation, like analogue outputs ones.</P>
+<P ALIGN="JUSTIFY">If the module has any data, the value of the ID pointer to the elements of DATI vector must be reassigned, adding exactly the same number of elements as set in the "xxxx$I" subroutine of the same module (this action should be the last one in the subroutine, to ensure that ID is not modified while its previous value should still be used :-).</P>
+<P ALIGN="JUSTIFY">The "xxxx$R" may also recognize if it has been called by LG3 or by LG5 activity checking the value of the KREGIM logical variable: KREGIM is .TRUE. when "xxxx$R" is called by LG3 activity (steady state computation), and it is .FALSE. when "xxxx$R" is called by LG5 activity (transients simulation).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez08_1"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FORTRAN prescriptions for "xxxx$R" subroutines</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez08_2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The INTEGR common area (for regulation modules)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez08_3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The REGIME common area (for regulation modules)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez08_4"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Examples of the "xxxx$R" subroutine in a library regulation modules (SOM4 and SWTC)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez08_5"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Storage of variables previous step values in regulation modules</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez08_6"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">An example of storage of variables values in regulation modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez08_1"></A>FORTRAN prescriptions for "xxxx$R" subroutines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The calling parameter list of the "xxxx$R" subroutine depends on the list of the module variables. The type of the variables may be real or logical, depending of the type of the block variables.</P>
+<P ALIGN="JUSTIFY">The calling parameters, common areas and called routines of "xxxx$R" subroutines are the following:</P>
+<B><P>Calling parameters:</P>
+</B><P ALIGN="JUSTIFY">"V1"&#9;&#9; [real or logical]&#9;first block variable (I or O)</P>
+<P ALIGN="JUSTIFY">. . .</P>
+<P ALIGN="JUSTIFY">"Vn"&#9;&#9; [real or logical]&#9;last block variable (I or O)</P>
+<P ALIGN="JUSTIFY">ID&#9;&#9; [integer]&#9;&#9;index of the first not-allocated element in DATI vector (incoming value: begin &#9;of block data area; exiting &#9;&#9;&#9;&#9;&#9;&#9;value: begin of data area of the following block) (I/O)</P>
+<P ALIGN="JUSTIFY">DATI&#9;&#9; [real (*)]&#9;&#9;all blocks data vector (I/O)</P>
+<B><P>Common areas:</P>
+</B><P ALIGN="JUSTIFY">INTEGR&#9;(if needed)</P>
+<P ALIGN="JUSTIFY">REGIME</P>
+<P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+<B><P>Called routines:</P>
+</B><P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+<P ALIGN="JUSTIFY">As ID is a valid name for regulation module variables, the name of the ID parameter must be changed if an ID variable is present in the module (obviously, the new name of the pointer must be used instead of ID inside the module :-).</P>
+<P ALIGN="JUSTIFY">Note that the input variable must be considered as "read-only", and the output variables should be considered "write-only". In the following cases, the incoming value of outputs variables can be used:</P>
+<P ALIGN="JUSTIFY">-&#9;during steady state computation, if the incoming value of an output variable is used for module initialization;</P>
+<P ALIGN="JUSTIFY">-&#9;during transients simulation, if case the value has not to be modified.</P>
+<P ALIGN="JUSTIFY">The usage of the unmodified value of output variables is called "memory effect"; it must be used carefully, as the value could be modified during other iterations in the same time step. So it may not be used as "previous step" value of output variables; previous step values recording must be performed using the DATI vector.</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</STRIKE><P><A NAME="lg_rego_sez08_2"></A>The INTEGR common area (for regulation modules)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The INTEGR common area contains some informations about the transient simulation and the actual integration step. Its values must absolutely be considered "real-only" by the "xxxx$R" subroutine.</P>
+<B><P>List of common area variables:</P>
+</B><P ALIGN="JUSTIFY">TLEGO1&#9;[real]&#9;&#9;ending time of current simulation (in s)</P>
+<P ALIGN="JUSTIFY">TLEGO2&#9;[real]&#9;&#9;actual simulation time (in s)</P>
+<P ALIGN="JUSTIFY">DTRE&#9;&#9;[real]&#9;&#9;actual integration step (in s)</P>
+<P ALIGN="JUSTIFY">NLEGO1&#9;[integer]&#9;number of integration steps performed</P>
+<P ALIGN="JUSTIFY">TLEGO3&#9;[real]&#9;&#9;no meaning for regulation models</P>
+<P ALIGN="JUSTIFY">TLEGO4&#9;[real]&#9;&#9;no meaning for regulation models</P>
+<P ALIGN="JUSTIFY">The DTRE variable (whose name is usually DTINT in process modules) is particularly used in modules which compute integrals, derivatives, ramps, time filtering and so on.</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</STRIKE><P><A NAME="lg_rego_sez08_3"></A>The REGIME common area (for regulation modules)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The REGIME common area contains only the KREGIM variable (the steady state computation flag). KREGIM is .TRUE. in LG3 activity (steady state computation) and .FALSE. in LG5 activity (transients simulation). Its value has to be checked by "xxxx$R" subroutine everywhere is useful to distinguish between steady state and transients computation. Its values must absolutely be considered "real-only" by the "xxxx$R" subroutine.</P>
+<B><P>List of common area variables:</P>
+</B><P ALIGN="JUSTIFY">KREGIM&#9;[logical]&#9;steady state computation flag</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</STRIKE><P><A NAME="lg_rego_sez08_4"></A>Examples of the "xxxx$R" subroutine in a library regulation modules (SOM4 and SWTC)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The SOM4 module is a four inputs adder. The list its variables is the following:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>UA (UA) OUTPUT VARIABLE OF THE 4 INPUTS ADDER</P>
+<P>I1 (IN) INPUT VARIABLE N. 1 OF THE 4 INPUTS ADDER</P>
+<P>I2 (IN) INPUT VARIABLE N. 2 OF THE 4 INPUTS ADDER</P>
+<P>I3 (IN) INPUT VARIABLE N. 3 OF THE 4 INPUTS ADDER</P>
+<P>I4 (IN) INPUT VARIABLE N. 4 OF THE 4 INPUTS ADDER</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The source code of SOM4$R follows:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE SOM4$R(UA,I1,I2,I3,I4,ID,DATI)</P>
+<P>REAL UA, I1, I2, I3, I4</P>
+<P>C</P>
+<P>DIMENSION DATI(*)</P>
+<P>C</P>
+<P>G1=DATI(ID )</P>
+<P>G2=DATI(ID+1)</P>
+<P>G3=DATI(ID+2)</P>
+<P>G4=DATI(ID+3)</P>
+<P>ID=ID+4</P>
+<P>C</P>
+<P>UA = G1 * I1 + G2 * I2 + G3 * I3 + G4 * I4</P>
+<P>C</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The SWTC module is a switch. The list its variables is the following:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>UI (UA) SWITCH ANALOGICAL OUTPUT SIGNAL</P>
+<P>I1 (IN) SWITCH ANALOGICAL INPUT SIGNAL NUM. 1</P>
+<P>I2 (IN) SWITCH ANALOGICAL INPUT SIGNAL NUM. 2</P>
+<P>JJ (IN) SWITCH COMMUTATION LOGICAL BUTTON</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The source code of SWTC$R follows:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE SWTC$R(UI,I1,I2,JJ,ID,DATI)</P>
+<P>REAL UI, I1, I2</P>
+<P>LOGICAL JJ</P>
+<P>C</P>
+<P>DIMENSION DATI(*)</P>
+<P>C</P>
+<P>IF (JJ) THEN</P>
+<P>UI = I2</P>
+<P>ELSE</P>
+<P>UI = I1</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Note that the SWTC$R subroutine doesn't modify the value of the ID pointer, as the SWTC module has no data.</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</STRIKE><P><A NAME="lg_rego_sez08_5"></A>Storage of variables previous step values in regulation modules</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Storage of variables values may be needed in LEGO regulation modules to evaluate the time trend of a variable.</P>
+<P ALIGN="JUSTIFY">First of all, in the "xxxx$R" subroutine must be present the REGIME common area:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>LOGICAL KREGIM</P>
+<P>COMMON /REGIME/ KREGIM</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The storage of previous step values requires <B>one</B> free elements in DATI vector (for each variable stored) which has to be used inside the module.</P>
+<P ALIGN="JUSTIFY">If the expression of the equations for both steady state and transient computation are the same, the valued stored in the memory has to be initialized during steady state computation (when KREGIM is .TRUE.), using the incoming value of the output variable.</P>
+<P ALIGN="JUSTIFY">Assuming that the "xxxx$I2 subroutine has allocated ID+2 element of DATI vector for the previous value of the output variable UA, the following instruction shall be present:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>IF (KREGIM) DATI(ID+2) = UA</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Then the stored value can be read (for instance, assume that UAP variable is used to store the previous value of UA):</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>UAP = DATI(ID+2)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and used in the module to compute the exiting value of UA, which will be stored in the related element of DATI vector:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>UA = ... (function of UAP)</P>
+<P>DATI(ID+2) = UA</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">If the expressions of the steady state equations are different from the transient ones, the module doesn't need to initialize the stored value:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>IF (KREGIM) THEN</P>
+<P>UA = ... (not function of UA or UAP)</P>
+<P>ELSE</P>
+<P>UAP = DATI(ID+2)</P>
+<P>UA = ... (function of UAP)</P>
+<P>ENDIF</P>
+<P>DATI(ID+2) = UA</P>
+</FONT><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</STRIKE><P><A NAME="lg_rego_sez08_6"></A>An example of storage of variables values in regulation modules</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">An example of storage of variables values is present in FILT module, which simulates a first-order filter. As the element of DATI vector used for flow rate storage is the ID-th, the source code of FILT$R is the following (comment lines have been added or translated for legibility reasons):</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE FILT$R(UA,IN,KG,KT,ID,DATI)</P>
+<P>C</P>
+<P>COMMON/INTEGR/TLEGO1,TLEGO2,DTRE,NLEGO1,TLEGO3,TLEGO4</P>
+<P>COMMON/REGIME/KREGIM</P>
+<P>LOGICAL KREGIM</P>
+<P>DIMENSION DATI(*)</P>
+<P>REAL UA,IN,KG,KT</P>
+<P>C</P>
+<P>C---FIRST ORDER FILTER</P>
+<P>C</P>
+<P>C Analogue variables:</P>
+<P>C</P>
+<P>C IN input (actual dimensional value)</P>
+<P>C UA output (actual dimensional value)</P>
+<P>C UAP previous state of output variable</P>
+<P>C KG filter gain</P>
+<P>C KT filter time constant (s)</P>
+<P>C</P>
+<P>IF (.NOT. KREGIM) THEN</P>
+<P>UAP = DATI(ID)</P>
+<P>UA = UAP * (KT/(KT+DTRE)) + IN * (KG*DTRE/(KT+DTRE))</P>
+<P>ELSE</P>
+<P>C</P>
+<P>C---steady state output computation</P>
+<P>C</P>
+<P>UA = KG * IN</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>C---output value storage</P>
+<P>C</P>
+<P>DATI(ID) = UA</P>
+<P>ID = ID + 1</P>
+<P>C</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_rego_sez09"></A>Conversion between boolean and floating point quantities in LEGO regulation modules</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">LEGO process modules may only contain floating point (REAL) variables. As regulation modules are used to build regulation schemes, which are used in the same way as process modules by LEGO code, also regulation schemes must contain only floating point variables.</P>
+<P ALIGN="JUSTIFY">LEGO regulation modules need to contain also boolean (LOGICAL) variables: so the boolean variables used in regulation modules are automatically converted into and from the related floating point variables of the regulation scheme.</P>
+<P ALIGN="JUSTIFY">The boolean value "true" is converted into the floating point value 1. (one) and vice versa; likewise "false" is converted into 0. (zero) and vice versa. As the FORTRAN source code of the regulation schemes is automatically written by the scheme building activity, no action is required by the user to perform this conversion.</P>
+<P ALIGN="JUSTIFY">When the user needs to store boolean values in the DATI vector (which is a floating point vector) or to convert its elements to boolean values, he may use the standard functions JFLOLOG and JLOGFLO to perform the conversion.</P>
+<P ALIGN="JUSTIFY">The JFLOLOG function converts <B>from</B> a floating point value <B>to</B> a boolean (logical) value; on the contrary, the JLOGFLO function converts <B>from</B> a boolean (logical) value <B>to</B> a floating point value. They also may be used everywhere a conversion between boolean and floating point quantities.</P>
+<P ALIGN="JUSTIFY">As the names of these functions don't define implicitly the correct data type for the returned value, the related types <B>must be defined</B> in the calling routine in the following way (these FORTRAN instructions must be included in the declaration section of the calling routine):</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>LOGICAL JFLOLOG</P>
+<P>REAL JLOGFLO</P>
+</B></FONT><STRIKE><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</STRIKE></FONT><P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez09_1"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Calling parameters and returned values for JFLOLOG and JLOGFLO functions</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_rego_sez09_2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Example of the usage of JFLOLOG and JLOGFLO functions</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_rego_sez09_1"></A>Calling parameters and returned values for JFLOLOG and JLOGFLO functions</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The JFLOLOG functions converts a floating point value into the corresponding boolean value:</P>
+<B><P>Returned value:</P>
+</B><P ALIGN="JUSTIFY">JFLOLOG&#9;&#9; [logical]&#9;boolean output value (O)</P>
+<B><P>Calling parameter:</P>
+</B><P ALIGN="JUSTIFY">A&#9;&#9; &#9; [real]&#9;&#9;floating point input value (I)</P>
+<P ALIGN="JUSTIFY">The "LOGICAL JFLOLOG" type definition must be present in the calling routine, as the default FORTRAN data type for J initial is integer.</P>
+<P ALIGN="JUSTIFY">The JLOGFLO functions converts a boolean value into the corresponding floating point value:</P>
+<B><P>Returned value:</P>
+</B><P ALIGN="JUSTIFY">JLOGFLO&#9;&#9; [real]&#9;&#9;floating point output value (O)</P>
+<B><P>Calling parameter:</P>
+</B><P ALIGN="JUSTIFY">J&#9;&#9; &#9; [logical]&#9;boolean input value (I)</P>
+<P ALIGN="JUSTIFY">The "REAL JLOGFLO" type definition must be present in the calling routine, as the default FORTRAN data type for J initial is integer.</P>
+</FONT><B><STRIKE><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</STRIKE><P><A NAME="lg_rego_sez09_2"></A>Example of the usage of JFLOLOG and JLOGFLO functions</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following example is used in the RICO module (commutation delay), to detect raise and descend fronts of the JI input variable.</P>
+<P ALIGN="JUSTIFY">The JIP logical variable is used to store the previous value of JI; the output variable is JU. A "raise front" is detected when the input previous value JIP is "false" and the actual value JI is "true"; a "descend front" is detected when JIP is "true" and JI is "false".</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>LOGICAL JI, JIP, JU, JFLOLOG</P>
+<P>REAL JLOGFLO</P>
+<P>C</P>
+<P>C---detection of previous value of JI (using JFLOLOG)</P>
+<P>C</P>
+<P>JIP = JFLOLOG(DATI(ID+4))</P>
+<P>C</P>
+<P>IF (KREGIM) THEN</P>
+<P>C</P>
+<P>C---steady state (JIP is not used)</P>
+<P>C</P>
+<P>JU = JI</P>
+<P>C</P>
+<P>C---transient</P>
+<P>C</P>
+<P>ELSE IF (JI .AND. (.NOT. JIP)) THEN</P>
+<P>C</P>
+<P>C---raise front detected</P>
+<P>C</P>
+<P>... (actions related to raise fronts)</P>
+<P>C</P>
+<P>ELSE IF (JIP .AND. (.NOT. JI)) THEN</P>
+<P>C</P>
+<P>C---descend front detected</P>
+<P>C</P>
+<P>... (actions related to descend fronts)</P>
+<P>C</P>
+<P>ELSE</P>
+<P>C</P>
+<P>C---no raise or descend front</P>
+<P>C</P>
+<P>... (actions to be performed when no front detected)</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>C---storage of the actual value of JI (using JLOGFLO)</P>
+<P>C</P>
+<P>DATI(ID+4) = JLOGFLO(JI)</P>
+<P>ID = ID + 5</P>
+<P>RETURN</P>
+<P>END</P></B></FONT></BODY>
+</HTML>

@@ -1,0 +1,21 @@
+SERA_0                                                                          
+SERA                                                                            
+SERA - GAS reservoir                                                            
+                                                                                
+NSTAT = 3
+NUSCI = 0
+NINGR = 6
+ 
+NCONF = 1
+ 
+PSER      --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMET      --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSER      --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WI_1      --IN-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1      --IN-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_1      --IN-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1      --IN-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+TEST      --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE      --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+==============================                                                  
+EOF                                                                             

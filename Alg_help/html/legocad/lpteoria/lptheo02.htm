@@ -1,0 +1,225 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_wscavi"></A>Water and steam cavities, manifolds and mixers</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> on </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_wscavi"><U><FONT FACE="Arial" COLOR="#0000ff">manifolds, mixers and cavities</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> on </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_conds"><U><FONT FACE="Arial" COLOR="#0000ff">deareators</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_wcavgen"><U><FONT FACE="Arial" COLOR="#0000ff">Generalities (on these modules)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_wcavman"><U><FONT FACE="Arial" COLOR="#0000ff">Manifolds</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_wcavmix"><U><FONT FACE="Arial" COLOR="#0000ff">Mixers</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Water and steam cavities:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_wcavcav"><U><FONT FACE="Arial" COLOR="#0000ff">Equilibrium cavities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_wcavtan"><U><FONT FACE="Arial" COLOR="#0000ff">Non-equilibrium cavities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_wcavcla"><U><FONT FACE="Arial" COLOR="#0000ff">Non-equilibrium cavities with air (uncondensable gas)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_wcavdeg"><U><FONT FACE="Arial" COLOR="#0000ff">Deareator (one pressure node)</U></FONT></A></P>
+<FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_wcavgen"></A>Water and steam cavities, manifolds and mixers: generalities</P>
+</B></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">The main hypotheses used in the modelization of these modules are:</P>
+<P ALIGN="JUSTIFY">constant cavity volume</P>
+<P ALIGN="JUSTIFY">perfect mixing of the fluid in the cavity for manifolds and mixers or in the liquid and gas zone separately for tanks and mixture &#9;reservoirs</P>
+<P ALIGN="JUSTIFY">fluid properties are computed at the mean fluid pressure value</P>
+<P ALIGN="JUSTIFY">no friction losses are taken into account.</P>
+<P ALIGN="JUSTIFY">The momentum equation takes the form:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image448.gif" WIDTH=49 HEIGHT=42><FONT FACE="Arial">&#9;<IMG SRC="Image449.gif" WIDTH=49 HEIGHT=45>&#9;<IMG SRC="Image450.gif" WIDTH=49 HEIGHT=42></P>
+<P ALIGN="JUSTIFY">for manifolds and mixers, and the form:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image451.gif" WIDTH=49 HEIGHT=42><FONT FACE="Arial">&#9;<IMG SRC="Image452.gif" WIDTH=49 HEIGHT=45>&#9;<IMG SRC="Image453.gif" WIDTH=106 HEIGHT=46></P>
+<P ALIGN="JUSTIFY">for water and steam cavities.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT SIZE=5 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_wcavman"></A>Water and steam cavities, manifolds and mixers: manifolds</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/colt.htm#lg_libproc_COLT_summ"><U><FONT FACE="Arial" COLOR="#0000ff">COLT</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Additional hypothesis:</P>
+<P ALIGN="JUSTIFY">No separation between gas and liquid phases</P>
+<P ALIGN="JUSTIFY">The continuity equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image454.gif" WIDTH=174 HEIGHT=42></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">which becomes, assuming s and p as state variables:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image455.gif" WIDTH=269 HEIGHT=48></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">and the fluid energy conservation equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image456.gif" WIDTH=212 HEIGHT=42></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">where h is the specific enthalpy of the internal fluid, namely h = h(p,s) and Q is the heat transfer between the internal fluid and the wall:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image457.gif" WIDTH=154 HEIGHT=25></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">In the previous relation T is the internal fluid temperature, namely T = T(p,s), and:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image458.gif" WIDTH=125 HEIGHT=68></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">At last defining:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image459.gif" WIDTH=132 HEIGHT=68></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">the wall energy conservation equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image460.gif" WIDTH=401 HEIGHT=42></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">where T</FONT><FONT FACE="Arial" SIZE=1>ext</FONT><FONT FACE="Arial"> is the temperature of the external fluid or the ambient temperature.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT SIZE=5 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_wcavmix"></A>Water and steam cavities, manifolds and mixers: mixers</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/mixn.htm"><U><FONT FACE="Arial" COLOR="#0000ff">MIXN</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Additional hypotheses:</P>
+<P ALIGN="JUSTIFY">no separation between gas and liquid phases</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no heat storage</P>
+<P ALIGN="JUSTIFY">no heat transfer between fluid and mixer walls</P>
+<P ALIGN="JUSTIFY">one outlet flow</P>
+<P ALIGN="JUSTIFY">The mass and energy conservation equations become:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image461.gif" WIDTH=121 HEIGHT=28></P>
+<P ALIGN="CENTER"><IMG SRC="Image462.gif" WIDTH=153 HEIGHT=28></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">When there is no flow in the mixer the exit enthalpy must be forced.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT SIZE=5 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_wcavcav"></A>Water and steam cavities, manifolds and mixers: equilibrium cavities</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/cave.htm#lg_libproc_CAVE_summ"><U><FONT FACE="Arial" COLOR="#0000ff">CAVE</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Main hypotheses:</P>
+<P ALIGN="JUSTIFY">instantaneous and complete separation between gas and liquid phases</P>
+<P ALIGN="JUSTIFY">thermal equilibrium between gas and liquid phases</P>
+<P ALIGN="JUSTIFY">no heat transfer between fluid and cavity walls</P>
+<P ALIGN="JUSTIFY">Pressure p and enthalpy h are assumed as state variables.</P>
+<P ALIGN="JUSTIFY">When liquid phase and gas phase contemporaneously exist it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image463.gif" WIDTH=60 HEIGHT=49></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">The continuity equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image464.gif" WIDTH=364 HEIGHT=49></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">and the fluid energy conservation equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image465.gif" WIDTH=529 HEIGHT=42></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">where the former N</FONT><FONT FACE="Arial" SIZE=1>l</FONT><FONT FACE="Arial"> outlet mass flow rates G</FONT><FONT FACE="Arial" SIZE=1>EX,j</FONT><FONT FACE="Arial"> exit a liquid zone, the latter N</FONT><FONT FACE="Arial" SIZE=1>g</FONT><FONT FACE="Arial">- N</FONT><FONT FACE="Arial" SIZE=1>l+1</FONT><FONT FACE="Arial"> outlet mass flow rates G</FONT><FONT FACE="Arial" SIZE=1>EX,j</FONT><FONT FACE="Arial"> exit a gas zone. Substituting in the energy conservation equation the continuity equation it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image466.gif" WIDTH=516 HEIGHT=42></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">The steam quality and the mass of liquid are:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image467.gif" WIDTH=97 HEIGHT=48></P>
+<FONT FACE="Arial"><P ALIGN="CENTER">M<SUB>l</SUB> = V (1-X) r</P>
+<P ALIGN="JUSTIFY">from which the liquid level can be computed, depending on the geometrical characteristics of the cavity.</P>
+<P ALIGN="JUSTIFY">Sometimes pressure p and liquid level y are preferred as state variables.</P>
+<P ALIGN="JUSTIFY">Let it be A the cavity horizontal cross section at level y, that is A = A(y), and l the cavity height.</P>
+<P ALIGN="JUSTIFY">Remembering that:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image468.gif" WIDTH=80 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image469.gif" WIDTH=93 HEIGHT=56><FONT FACE="Arial">&#9;<IMG SRC="Image470.gif" WIDTH=97 HEIGHT=57></P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image471.gif" WIDTH=192 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image472.gif" WIDTH=126 HEIGHT=45></P>
+<P ALIGN="CENTER"><IMG SRC="Image473.gif" WIDTH=108 HEIGHT=45><FONT FACE="Arial">&#9;<IMG SRC="Image474.gif" WIDTH=116 HEIGHT=46></P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image475.gif" WIDTH=108 HEIGHT=45><FONT FACE="Arial">&#9;<IMG SRC="Image476.gif" WIDTH=116 HEIGHT=46></P>
+<P ALIGN="JUSTIFY">the continuity equation becomes:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image477.gif" WIDTH=545 HEIGHT=52></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Being:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image478.gif" WIDTH=289 HEIGHT=45></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">the energy conservation equation becomes:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image479.gif" WIDTH=540 HEIGHT=96></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">From the set of conservation equations dp/dt and dy/dt can be obtained.</P>
+<P ALIGN="JUSTIFY">If the cavity horizontal cross section is constant the conservation equations can be written as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image480.gif" WIDTH=429 HEIGHT=54></P>
+<P ALIGN="CENTER"><IMG SRC="Image481.gif" WIDTH=534 HEIGHT=96></P>
+<FONT FACE="Arial"><P ALIGN="CENTER">&nbsp;</P>
+</FONT><B><FONT SIZE=5 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_wcavtan"></A>Water and steam cavities, manifolds and mixers: non-equilibrium cavities</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Main hypotheses:</P>
+<P ALIGN="JUSTIFY">the cavity is split in two zones: the lower zone, named liquid zone, contains liquid or low quality mixture, and the upper one, named gas zone, contains gas or high quality mixture</P>
+<P ALIGN="JUSTIFY">no heat transfer occurs between fluid and the cavity wall</P>
+<P ALIGN="JUSTIFY">The continuity and energy conservation equations are:</P>
+<P ALIGN="JUSTIFY">liquid zone:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image482.gif" WIDTH=385 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image483.gif" WIDTH=576 HEIGHT=42></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">gas zone:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image484.gif" WIDTH=414 HEIGHT=45></P>
+<P ALIGN="CENTER"><IMG SRC="Image485.gif" WIDTH=617 HEIGHT=45></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">and, of course:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image486.gif" WIDTH=160 HEIGHT=49></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">therefore:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image487.gif" WIDTH=89 HEIGHT=45></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">The condensation mass flow rate G</FONT><FONT FACE="Arial" SIZE=1>cond</FONT><FONT FACE="Arial"> and evaporation mass flow rate G</FONT><FONT FACE="Arial" SIZE=1>ev</FONT><FONT FACE="Arial"> evaluations are based on the liquid or steam masses which are present in the gas and liquid zones and an estimated separation time t</FONT><FONT FACE="Arial" SIZE=1>sep</FONT><FONT FACE="Arial">.</P>
+<P ALIGN="JUSTIFY">Defining the steam quality in the gas zone X</FONT><FONT FACE="Arial" SIZE=1>g</FONT><FONT FACE="Arial"> and in liquid zone X</FONT><FONT FACE="Arial" SIZE=1>l</FONT><FONT FACE="Arial"> as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image488.gif" WIDTH=104 HEIGHT=49><FONT FACE="Arial">&#9;<IMG SRC="Image489.gif" WIDTH=100 HEIGHT=48></P>
+<P ALIGN="JUSTIFY">it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image490.gif" WIDTH=134 HEIGHT=49><FONT FACE="Arial">&#9;<IMG SRC="Image491.gif" WIDTH=97 HEIGHT=49></P>
+<P ALIGN="JUSTIFY">In the balance equations the surface condensation mass flow rate G</FONT><FONT FACE="Arial" SIZE=1>csup</FONT><FONT FACE="Arial"> and the zones interface heat transfer Q must be evaluated.</P>
+<P ALIGN="JUSTIFY">Mynkowycz and Sparrow have shown the interface heat transfer in presence of superheated steam and subcooled liquid at the steam-liquid interface is a little greater than in presence of saturated steam and liquid and it is nearly independent on the liquid subcooling. It can considered as the sum of a term Q</FONT><FONT FACE="Arial" SIZE=1>sur</FONT><FONT FACE="Arial"> depending on the steam superheating:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image492.gif" WIDTH=177 HEIGHT=25></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">and a term Q</FONT><FONT FACE="Arial" SIZE=1>s</FONT><FONT FACE="Arial"> due to the saturated steam and liquid heat transfer, which is associated to a mass transfer (see </FONT><A HREF="#lg_lptheo_wcavnot1t"><U><FONT FACE="Arial" COLOR="#0000ff">note</U></FONT></A><FONT FACE="Arial">). Of course in the energy conservation equations only Q</FONT><FONT FACE="Arial" SIZE=1>sur</FONT><FONT FACE="Arial"> appears as a source term, that is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image493.gif" WIDTH=65 HEIGHT=22></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">because Q</FONT><FONT FACE="Arial" SIZE=1>s</FONT><FONT FACE="Arial"> is included in the enthalpy transport terms related to the G</FONT><FONT FACE="Arial" SIZE=1>csup</FONT><FONT FACE="Arial"> surface condensation mass flow rate.</P>
+<P ALIGN="JUSTIFY">Among the many relationships developed to evaluate g</FONT><FONT FACE="Arial" SIZE=1>sur</FONT><FONT FACE="Arial"> and Q</FONT><FONT FACE="Arial" SIZE=1>s</FONT><FONT FACE="Arial">, those used in module TANK are reported here.</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image494.gif" WIDTH=230 HEIGHT=32></P>
+<P ALIGN="CENTER"><IMG SRC="Image495.gif" WIDTH=176 HEIGHT=29></P>
+<P ALIGN="CENTER"><IMG SRC="Image496.gif" WIDTH=121 HEIGHT=48></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image497.gif" WIDTH=69 HEIGHT=21><FONT FACE="Arial">&#9;<IMG SRC="Image498.gif" WIDTH=69 HEIGHT=21></P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image499.gif" WIDTH=134 HEIGHT=42><FONT FACE="Arial">&#9;<IMG SRC="Image500.gif" WIDTH=144 HEIGHT=42></P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><A NAME="lg_lptheo_wcavnot1t"></A>Note:</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">A pure saturated steam is considered at a pressure p</FONT><FONT FACE="Arial" SIZE=1>g</FONT><FONT FACE="Arial"> and a temperature T</FONT><FONT FACE="Arial" SIZE=1>g</FONT><FONT FACE="Arial"> condensing on its own liquid phase whose surface temperature is T</FONT><FONT FACE="Arial" SIZE=1>l</FONT><FONT FACE="Arial">. From the standpoint of kinetic theory, the phenomenon of such an interface mass transfer can be viewed as a difference between a rate of arrival of molecules from the gas space towards the interface and a rate of departure of molecules from the surface of the liquid to the gas space. When condensation takes place the arrival rate exceeds the departure rate and during evaporation the reverse occurs. In a stationary container the mass rate of flow passing in either direction is given by:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image501.gif" WIDTH=101 HEIGHT=46></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">therefore the net mass flux through a gas-liquid interface is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image502.gif" WIDTH=169 HEIGHT=60></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Since the condition close to the surface is not one of thermal equilibrium, for any significant rate of evaporation or condensation, it is really not meaningful to make use of the thermostatic pressure and temperature on each side of the interface. However, good results have been achieved by using simplified kinetic theory techniques and applying correction factors to the resulting predictions. A lot of relationships have been developed to this aim.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT SIZE=5 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_wcavcla"></A>Water and steam cavities, manifolds and mixers: non-equilibrium cavities with air (uncondensable gas)</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/clav.htm#lg_libproc_CLAV_summ"><U><FONT FACE="Arial" COLOR="#0000ff">CLAV</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">The main hypotheses are the same as for the other non-equilibrium cavities, namely:</P>
+<P ALIGN="JUSTIFY">the cavity is split in two zones: the lower zone, named liquid zone, contains liquid or low quality mixture, and the upper one, named gas zone, contains gas or high quality mixture</P>
+<P ALIGN="JUSTIFY">the two zones can be in thermal non-equilibrium</P>
+<P ALIGN="JUSTIFY">no heat transfer occurs between fluid and the cavity wall.</P>
+<P ALIGN="JUSTIFY">The additional hypotheses are:</P>
+<P ALIGN="JUSTIFY">steam and air occupy the same volume</P>
+<P ALIGN="JUSTIFY">steam and air have the same temperature</P>
+<P ALIGN="JUSTIFY">no heat transfer between air and liquid zone fluid</P>
+<P ALIGN="JUSTIFY">the total pressure is the sum of air and steam partial pressures</P>
+<P ALIGN="JUSTIFY">air is a perfect gas</P>
+<P ALIGN="JUSTIFY">air is not soluble in water</P>
+<P ALIGN="JUSTIFY">Two components, steam and air, are present in the gas zone.</P>
+<P ALIGN="JUSTIFY">The steam conservation equations are:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image503.gif" WIDTH=432 HEIGHT=45></P>
+<P ALIGN="CENTER"><IMG SRC="Image504.gif" WIDTH=522 HEIGHT=69></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">The air conservation equations are:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image505.gif" WIDTH=137 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image506.gif" WIDTH=248 HEIGHT=42></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Remembering that:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image507.gif" WIDTH=97 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image508.gif" WIDTH=94 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image509.gif" WIDTH=120 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image510.gif" WIDTH=130 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image511.gif" WIDTH=312 HEIGHT=48></P>
+<P ALIGN="CENTER"><IMG SRC="Image512.gif" WIDTH=110 HEIGHT=22></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">the energy conservation equation for the gas zone, obtained by summing the gas energy equation and the steam energy equation, is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image513.gif" WIDTH=444 HEIGHT=108></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">In the liquid region air is not present.</P>
+<P ALIGN="JUSTIFY">The conservation equations are:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image482.gif" WIDTH=385 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image483.gif" WIDTH=576 HEIGHT=42></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">With regard to the interface heat transfer Q evaluation the same considerations hold as in the case with no presence of a non-condensable component. It must be noted that the presence of even a small quantity of non-condensable gas in the condensing vapour has a great influence on the resistance to heat transfer in the region of the liquid-vapour interface. The non-condensable gas is carried with the vapour towards the interface where it accumulates, and the partial pressure of the gas at the interface increases above that in the bulk of the mixture. Since the total pressure remains constant the partial pressure of vapour at the interface is lower that in the bulk mixture.</P>
+</FONT><B><FONT SIZE=5 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_wcavdeg"></A>Water and steam cavities, manifolds and mixers: deaerators (one pressure node)</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/degn.htm#lg_libproc_DEGN_summ"><U><FONT FACE="Arial" COLOR="#0000ff">DEGN</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">The uncondensable gas separation is not simulated in the model.</P>
+<P ALIGN="JUSTIFY">The upper and lower tank of the deaerator are considered as a single non-equilibrium cavity without presence of uncondensable gas.</P>
+<P ALIGN="JUSTIFY">With reference to the non-equilibrium cavities model, the following additional hypotheses are made:</P>
+<P ALIGN="JUSTIFY">in the liquid zone the term:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image514.gif" WIDTH=49 HEIGHT=45></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">is negligible with respect to the other ones</P>
+<P ALIGN="JUSTIFY">in the gas zone the feedwater flow G</FONT><FONT FACE="Arial" SIZE=1>FW</FONT><SUB><FONT FACE="Arial"> </SUB>moves across the gas zone and warms up to reach the saturated liquid enthalpy h</FONT><FONT FACE="Arial" SIZE=1>ls</FONT><FONT FACE="Arial">.</P>
+<P ALIGN="JUSTIFY">There are some inconsistencies.</P>
+<P ALIGN="JUSTIFY">At first two hypotheses are chosen:</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no heat storage</P>
+<P ALIGN="JUSTIFY">The resulting equations are:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image515.gif" WIDTH=128 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image516.gif" WIDTH=368 HEIGHT=25></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Multiplying the first equation by h</FONT><FONT FACE="Arial" SIZE=1>g</FONT><FONT FACE="Arial"> and subtracting it from the second one it is obtained:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image517.gif" WIDTH=422 HEIGHT=49></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Afterwards the above mentioned hypotheses are dropped and substituted by:</P>
+<P ALIGN="JUSTIFY">the gas density derivative can be always considered as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image518.gif" WIDTH=108 HEIGHT=48></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">the continuity equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image519.gif" WIDTH=293 HEIGHT=48></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">the energy equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image520.gif" WIDTH=116 HEIGHT=45></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">where t is assigned.</P></FONT></BODY>
+</HTML>

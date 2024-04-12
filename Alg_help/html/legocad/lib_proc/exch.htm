@@ -1,0 +1,391 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE EXCH</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_EXCH_summ"></A>MODULE EXCH&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+</FONT><P><A HREF="#lg_libproc_EXCH_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_EXCH_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_EXCH_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_EXCH_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_EXCH_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_EXCH_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_EXCH_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_EXCH_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=6><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_EXCH_A"></A>MODULE EXCH&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">TWO PHASES (steam-water) EXCHANGER - DRIFT FLUX MODEL</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The EXCH module simulates the thermodynamic behavior of a metal pipe and the fluid flowing inside it. It takes into account also a thermal exchange between fluid and metal wall. It is possible to represent the functioning of several piping, either in series or in parallel configuration, of which a hydraulic equivalent is considered. The EXCH module can also be used in a profitable manner to simulate the functioning of a heat exchanger or a steam generator.</P>
+<P>The module mathematical model is based on the following hypotheses:</P>
+<P ALIGN="JUSTIFY">- conservation equation of mass, energy and momentum using concentrated parameters monodimensional approximation (mass, momentum and energy balances are carried out for each single cell)</P>
+<P ALIGN="JUSTIFY">- the piping is subdivided, along his main axis, in an arbitrary number of cells (from 2 to 6) which may or not exchange heat with outside</P>
+<P ALIGN="JUSTIFY">- up to a maximum of 6 external fluids can exchange heat with the duct metal wall</P>
+<P ALIGN="JUSTIFY">- water flowing through the piping is considered as a compressible fluid able to undergo some phase transition. So, fluid may be present at liquid or steam state or as two phase mixture liquid-steam</P>
+<P ALIGN="JUSTIFY">- in case of two phase mixture, to represent its thermo-fluid dynamic behaviour, both usual homogeneous model (without slip between the phases) and the more sophisticated two velocities "DRIFT" model, are available</P>
+<P ALIGN="JUSTIFY">- steam and liquid phases are supposed to be in thermodynamic equilibrium on general piping transverse cross section area (at constant pressure)</P>
+<P ALIGN="JUSTIFY">- in the momentum conservation equation, water inertia is considered as negligible</P>
+<P ALIGN="JUSTIFY">- friction flow resistances consist of two terms in the momentum equation one of which linear and one considering a quadratic dependency on flow rate. They are connected to fluid laminar and turbulent flow respectively whose coefficients are considered constant under a single phase condition</P>
+<P ALIGN="JUSTIFY">- phenomenon concerning the heat longitudinal conductivity in the fluid and in the metal wall is not considered.</P>
+<P>The module is conceived to deal with fluid dynamic of water ad steam in the piping.</P>
+<P>It is also possible to simulate the dynamics of other fluids (e.g. different types of freon) appropriately modifying the used tables.</P>
+<P>The subdivision in axial cells allows to simulate the transfer phenomena (e.g. enthalpy) with a suitable time constant. It also allows to define, cell by cell, different physical properties (e.g. friction coefficient discontinuity, number of pipes in parallel configuration, etc.).</P>
+<P>During definition phase of the model topology, the user can chose the number of axial cells and thermal exchange zones.</P>
+<P>By the EXCH module it is possible to deal with zero flow rate situations and natural circulation cases (so that gravitational term in momentum conservation equation is correctly calculated). Also back-flow event is foreseen, at least for the homogeneous model and the enthalpy at the piping downstream is included among the module input variables.</P>
+<P>To calculate the fluid-wall convective thermal exchange coefficient (see below) into the module a general subroutine (GAM01) is called but it’s also possible to use simplified correlations in routine EXCHGTERT. All this is managed through an input parameter (CRIG) modifiable by the user.</P>
+<P>The fluid friction coefficient (EXCH input variable) is increased under a two phase condition by the Martinelli-Nelson's multiplier evaluated with the Becker's correlation.</P>
+<P>If the piping to simulate has concentrated head losses (e.g. elbows or reducing fittings) they have to be incorporated in an equivalent friction coefficient.</P>
+<P>The linear term of head losses (effective at low flow rates) is a function of fluid temperature. In fact it linearly increases when temperature decreases.</P>
+<P>The EXCH module takes into account the uneven radial distribution of empties and velocities as well as the two phases local slip (through the known mean parameters CO and Vgj). In presence of a two phase fluid, the module provides a more precise mixture representation (particularly at low values of pressure and specific flow rate) as regards to an homogeneous description with only one velocity of same. Besides to the known homogeneous model without slip between the phases, at present, are implemented the following DRIFT correlations selected by input (see below):</P>
+<P ALIGN="JUSTIFY">1) Zuber-Dix</P>
+<P ALIGN="JUSTIFY">2) Bankoff</P>
+<P ALIGN="JUSTIFY">3) Chexal-Lellouche</P>
+<P ALIGN="JUSTIFY">4) Zuber-Rouhany</P>
+<P>Through these correlations the DRIFT CO parameters (velocities and empties distribution coefficient) are calculated. So, vacuum degree of mixture, following the Zuber-Findlay's formulation, is, ultimately the mixture density.</P>
+<P>All above mentioned correlations (with the exception of the 2) that is rather approximate and not really of DRIFT) are considered full-range and characterized by similar accuracy levels also whether the correlation 3) is slightly preferable for its quite recent formulation.</P>
+<P>Under a single phase condition the DRIFT and homogeneous models provide quite equivalent results so, use of the homogeneous one has not contraindication.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_EXCH_B"></A>MODULE EXCH&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">NCEL = number of axial cells (NCEL = 2, ... NCELMAX)</P>
+<P ALIGN="JUSTIFY">NZON = number of thermal exchange walls (NZON = 1, ... , NZFMAX with a global maximum of NZTMAX zones)</P>
+<P ALIGN="JUSTIFY">Actually: NCELMAX=6; NZFMAX=6; NZTMAX=32</P>
+<P ALIGN="JUSTIFY">In the following scheme:</P>
+<P ALIGN="JUSTIFY">- i = 1, ... NZON</P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>j = 1, ... NCEL (if not otherwise specified)</LI></P></UL>
+
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1257.gif" WIDTH=409 HEIGHT=213></P></DIR>
+</DIR>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HITU&#9;total enthalpy of fluid at the piping inlet</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PITU&#9;fluid pressure at the piping inlet</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WUTU&#9;fluid flow rate at the piping outlet</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HVAL&#9;fluid total enthalpy at the piping outlet (if back-flow event occurs)</P>
+<P ALIGN="JUSTIFY">[-]&#9;ATTR&#9;piping friction coefficient (see note 1)</P>
+<P ALIGN="JUSTIFY">[K]&#9;T F ji&#9;(i = 1, NZON) (j = 1, NCEL) i-th external fluid temperature related to the i-th exchange zone of the j-th cell</P>
+<P ALIGN="JUSTIFY">[W/(m<SUP>2 </SUP>K)]&#9;GEji&#9;(i = 1, NZON) (j = 1, NCEL) convective exchange coefficient between the i-th external fluid of the j-th cell and the j-th cell &#9;&#9;&#9;&#9;itself</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HM j&#9;(j = 1, NCEL) mean enthalpy (static) of fluid in the cell j</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PU j&#9;(j = 1, NCEL-1) outlet pressure of fluid from the cell j</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PUTU&#9;outlet pressure of fluid from the tube</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WITU&#9;inlet flow rate of fluid into the tube</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WI j&#9;(j = 2, NCEL) inlet flow rate of fluid into the cell j</P>
+<P ALIGN="JUSTIFY">[W]&#9;QTI j&#9;(j = 1, NCEL) thermal power exchanged between the j-th cell metal wall and the inner fluid</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HU j&#9;(j = 1, NCEL) total enthalpy of fluid at the cell j outlet</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HUTU&#9;total enthalpy of fluid at the tube outlet</P>
+<P ALIGN="JUSTIFY">[K]&#9;TPE&#9;(j= 1, NCEL) j-th cell wall external temperature</P>
+<B><P>Note 1</P>
+</B><P>The module refers to the Fanning's friction coefficient which has the following formula:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1258.gif" WIDTH=260 HEIGHT=49></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">RO&#9;is the fluid density</P>
+<P ALIGN="JUSTIFY">&lt;V&gt;&#9;is the fluid mean velocity.</P>
+<P>The physical meanings concerning the other variables are defined below.</P>
+<P>This constant friction coefficient (input to the EXCH module used both for linear and quadratic head losses in flow rate) (see below) is successively, respectively, modified by the Martinelli-Nelson's friction multiplier.</P>
+<P>This multiplier is calculated following the Becker's correlation concerning the head losses under a two phase condition proportional to the square of the flow rate:</P>
+<P ALIGN="CENTER">FIQLO = 1 + 10 * (Pcrit / P) * Xp</P>
+<P ALIGN="CENTER">Pcrit = 221.2 bar = critical pressure</P>
+<P>and also by a similar multiplier (of empirical nature) linearly dependent on the fluid temperature for linear head losses:</P>
+<P ALIGN="CENTER">CMOLT2 = 10.397 - 0.058 * TF</P>
+<P>It is useful to note that the first friction multiplier is proportional to the flow rate ratio 'Xp' of the mixture (FIQLO = 1 &lt;==&gt; Xp = 0) and inversely proportional to the pressure 'P'. The second one is effective only when the fluid temperature 'TF' decreases below 170 °C (CMOLT2 = 1 &lt;==&gt; TF &gt; 170 °C).</P>
+<B><P>Note 2</P>
+</B><P>The thermal power which fluid exchange through the i-th external fluid of the j-th cell is determined by the following relation:</P>
+<P ALIGN="CENTER">Q(i, j) = GE(j,i) * SUP ( j,i) * [TF(j,i) - TPE (j)]</P>
+<P ALIGN="CENTER">(j = 1, ... NCEL)</P>
+<P ALIGN="CENTER">(i = 1, ... NZON)</P>
+<P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">SUP(j,i)&#9;is the exchange surface related to the i-th external fluid of the j-th cell</P>
+<P ALIGN="JUSTIFY">GE(j,i)&#9;&#9;is the fluid-wall convective thermal exchange coefficient (see below)</P>
+<P ALIGN="JUSTIFY">TPE(j)&#9;&#9;is the metallic wall external temperature</P>
+<P ALIGN="JUSTIFY">TF(j,i)&#9;&#9;is the i-th external fluid temperature</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Such thermal power value is positive when the fluid takes heat from outside.</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_EXCH_C"></A>MODULE EXCH&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to initial values of input and output variables (meanings defined above) user must assign the following data:</P>
+<I><U><P>1. general data</P>
+</I></U><P ALIGN="JUSTIFY">[-]&#9;PACO&#9;choose parameter of correlation to ease in describing fluid in the whole piping (see note 1)</P>
+<P ALIGN="JUSTIFY">[kg/m<SUP>3</SUP>]&#9;ROM&#9;&#9;metal wall density</P>
+<P ALIGN="JUSTIFY">[W/(kg K)]&#9;CM&#9;&#9;metal wall specific heat</P>
+<P ALIGN="JUSTIFY">[W/(m K)]&#9;COND&#9;metal wall thermal conductivity</P>
+<I><U><P ALIGN="JUSTIFY">2. cell data</P>
+</I></U><P ALIGN="JUSTIFY">[-]&#9;NTUB&#9;number of pipes in parallel configuration for each cell</P>
+<P ALIGN="JUSTIFY">[m]&#9;DIAI&#9;pipes internal diameter (or hydraulic) for each cell</P>
+<P ALIGN="JUSTIFY">[m]&#9;DIAE&#9;pipes external diameter</P>
+<P ALIGN="JUSTIFY">[m]&#9;LUNG&#9;pipes length for each cell</P>
+<P ALIGN="JUSTIFY">[m]&#9;DELZ&#9;level gap between inlet and outlet of single cell</P>
+<P ALIGN="JUSTIFY">[-]&#9;CRIG&#9;parameter available for the user to allow selecting how to calculate the fluid-wall internal exchange coefficient for each cell &#9; &#9; &#9; (see note 2)</P>
+<P ALIGN="JUSTIFY">[m<SUP>3</SUP>]&#9;VOL.M&#9;cell metal volume (if a zero value is indicated, a value is calculated assuming cylindrical geometry with current cell &#9;&#9;&#9;&#9;dimensioning)</P>
+<P ALIGN="JUSTIFY">[-]&#9;DRN_FLG&#9;flag for eventual condensate draining (see not 3)</P>
+<P ALIGN="JUSTIFY">[m²]&#9;SUPi&#9;i-th external exchange surface of the current cell (if the value of SUP1 for the current cell is zero, one only zone is supposed for &#9;&#9;&#9;that very cell and a value is calculated assuming cylindrical geometry with current cell dimensioning)</P>
+<P>&nbsp;</P>
+<P>When the data related to consecutive cells are the same, it is enough to assign them to the first cell leaving blank the data sections of the other ones. In this way, automatically the following cells are assigned the same data as the previous ones.</P>
+<P>The value of NTUB and DIAI are utilized for the calculation of the friction and thermal exchange coefficients. When there are several pipes in parallel configuration, their number must be indicated and their DIAI values must be calculated.</P>
+<P>For instance, when pipes are externally licked by fluid, DIAI is the equivalent diameter calculated as four times the cross section area divided for the wet perimeter. In this case the length indicated in the LUNG datum of the pipes must be such to provide the correct value for its exchange surface using the value calculated for DIAI.</P>
+<P>In addition to the above mentioned data, the model needs of the thermal exchange coefficient value between wall and fluid for each cell. It is obtained through the CRIG parameter following the methods hereinafter indicated (see note 2 and below).</P>
+<B><P>Note 1</P>
+</B><P>The PACO parameter allows the user in choosing the model by which fluid in the</P>
+<P>whole piping can be described. So, it has to be indicated only one time for each modelled block by the EXCH module whatever be the number of axial cells used in piping schematization.</P>
+<P>The following possibilities of choice are given:</P>
+<P ALIGN="JUSTIFY">PACO = 0 ==&gt; homogeneous model (without slip between the phases)</P>
+<P ALIGN="JUSTIFY">PACO &gt; 0 ==&gt; DRIFT model (with two velocity profiles).</P>
+<P>For the calculation of DRIFT parameter the following four correlations are available:</P>
+<P ALIGN="JUSTIFY">1) PACO = 1 ==&gt; Zuber-Dix's correlation</P>
+<P ALIGN="JUSTIFY">2) PACO = 2 ==&gt; Bankoff's correlation</P>
+<P ALIGN="JUSTIFY">3) PACO = 3 ==&gt; Chexal-Lellouche's correlation</P>
+<P ALIGN="JUSTIFY">4) PACO = 4 ==&gt; Zuber-Rouhany's correlation</P>
+<P>The carried out experimentation suggests to use the correlations 1) (with simple structure and widely tested) or 3) (more complex but more recent).</P>
+<P>They are both given "full range", when it is evaluated that functioning conditions are such as to consider unsuited the use of the model homogeneous in describing a two phase mixture. The correlation 2) (not exactly of DRIFT) provides results intermediate among those of the homogeneous and DRIFT models. the last correlation has not big differences as regards to the 1).</P>
+<P>As remembered before, through the above mentioned correlations are calculated the known parameters of DRIFT CO (distribution coefficients on the cross section area of empties and velocities) and Vgj (steam drift mean velocity weighted on empty radial profile) then the cell vacuum degree of mixture following the Zuber-Findlay's formulation:</P>
+<P ALIGN="CENTER">ALF(I) = Xv / (CO + Vg J/&lt;J&gt;)</P>
+<P ALIGN="CENTER">I = 1, NCEL</P>
+<P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">Xv = &lt;Jg&gt;/&lt;J&gt; = mixture mean volumetric drift</P>
+<P ALIGN="JUSTIFY">&lt;J&gt; = &lt;Jg&gt;+&lt;J1&gt; = mixture mean total volumetric flow.</P>
+<P>Knowing the cell empty degree, the mixture density is obtained from the following correlation:</P>
+<P ALIGN="CENTER">RO(j) = ALF(j)*ROVS(j) + [1 - ALF(j)]*ROLS(j)</P>
+<P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">ROVS(j) = saturated density of steam in the cell j</P>
+<P ALIGN="JUSTIFY">ROLS(j) = saturated density of liquid in the cell j</P>
+<P>It is known that a two phase mixture density calculated in this manner is more faithful to physical reality whereas with the model homogeneous tends to be undervalued (sometimes even considerably), above all when there are low value of flow rate and pressure.</P>
+<B><P>Note 2</P>
+</B><P>A user is free to choose arbitrarily the best suited value for CRIG as a function of the calculation type of the fluid-wall convective thermal exchange coefficient to be carried out. It can be used as pointer inside the GAM01 subroutine which through an adequate correlation set (well experimented) provides to determine the value of above thermal coefficient as a function of both fluid state and metallic wall temperature. For particular value of CRIG, user can resort to own specific correlations (subroutine EXCHGAMUT) or even to a constant thermal exchange coefficient whether this is useful to his requirements.</P>
+<P>Depending on the value assigned to such parameter, several operating options are adopted according to the following scheme:</P>
+<B><P>CRIG &lt; 0</P>
+</B><P>correlation for calculation of the thermal exchange coefficient has to be provided by the user through the subroutine EXCHGAMUT (see below)</P>
+<B><P>CRIG &gt; 0</P>
+</B><P>correlations used for calculation of the exchange coefficient are encoded in the library subroutine of GAM01 (see below). They take into account both the thermodynamic state of fluid flowing in the piping and its wall temperature. A further distinction is carried out between pipes having smooth or rough surface. Selection between the two type of pipes is made as a function of the value assigned to the CRIG parameter which, in this case, identifies also a multiplier coefficient "MOLT" modifying the thermal exchange coefficient calculated through the related correlations:</P>
+<B><P ALIGN="JUSTIFY">0 &lt; CRIG &lt; 10</B> ==&gt; smooth pipes</P>
+<P ALIGN="JUSTIFY">if CRIG = 0, 1 ==&gt; MOLT = 1</P>
+<P ALIGN="JUSTIFY">otherwise ==&gt; MOLT = CRIG</P>
+<B><P ALIGN="JUSTIFY">10 &lt; CRIG &lt; 20</B> ==&gt; rough pipes</P>
+<P ALIGN="JUSTIFY">if CRIG = 10, 11 ==&gt; MOLT = 1</P>
+<P ALIGN="JUSTIFY">otherwise ==&gt; MOLT = CRIG - 10</P>
+<P>Putting <B>CRIG = 0</B> allows the use of the simplified routine EXCHGTERT using essentially a Dittus-Boelter correlation in liquid phase, a constant value in evaporating zone and a Hadaller correlation in steam phase. The three zones are linearly connected.</P>
+<B><P ALIGN="JUSTIFY">CRIG = 20</B>: a constant thermal exchange coefficient is used (at present equal to 50000 W/m²/°C) whatever the fluid and wall state are.</P>
+<B><P ALIGN="JUSTIFY">CRIG = 30</B>:<B> </B>a convection exchange is assumed and Dittus-Boelter correlation is used for steady state calculation. The w<SUP>0.8</SUP> dependency is isolated and all the rest is saved as a contant value to be retrived during transient calculations. In fact, during transient calculations only the dependency upon w<SUP>0.8</SUP> is retained (the others parameters are kept constant). This allows not only to spare calculation time but also to make the trends of the exchange coefficient less nervous.</P>
+<B><P ALIGN="JUSTIFY">CRIG &gt; 30</B>: the indicated value is retained as the (contant) value of the exchange coefficient</P>
+<P>The user has to consider that the more accurate the utilized subroutine for the exchange coefficient is, the heaviest is the computational time burden. In fact, calculation times using GAM01 are usually quite higher than those required by a simplified or a user routine, which is relatively simpler. Further numerical problems can derive, during the calculation phase, by the usage of the GAM01 if the fluid state is at the end of use zones of the two different correlations. In this case alternately small variations of the state quantities provoke a jump from a correlation to another with strong oscillations of calculated exchange coefficient. Further informations related to use method of the subroutine GAM01 are available in section concerning utility subprograms of the manual: "LEGOCAD - Modelling Library for Simulation of Power Generation Plant - Modules Description".</P>
+<B><P ALIGN="JUSTIFY">&nbsp;Note 3</P>
+</B><P ALIGN="JUSTIFY">If draining flag is active, during transient calculation a condensating flow rate is considered following the formula:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1259.gif" WIDTH=156 HEIGHT=55></P>
+<FONT FACE="Arial"><P>where X is the title of the mixture and tau is a time constant, set to the symbolic value of 5s. Such draining water flow rate is not an output variable. Therefore, considering the flow rates related to input-output variables maybe that mass conservation is not respected.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_EXCH_D"></A>MODULE EXCH&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the EXCH module variables, no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_EXCH_E"></A>MODULE EXCH&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>A user can introduce a particular correlation into the module to evaluate the fluid-wall convective thermal exchange coefficient, by assigning a negative value to the CRIG parameter (see above) and writing an user subprogram whose declarative statement is:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE EXCHGAMUT (P, H, S, T, RO, TIT, TP, DIAI, CRIG, G, CAL,</P>
+<P>$ SUP, GAMMA)</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">Input parameters: P, H, S, T, RO, TIT, TP, DIAI, CRIG, G, CAL, SUP</P>
+<P ALIGN="JUSTIFY">Output parameters: GAMMA</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;&#9;P&#9;pressure of fluid flowing through the piping</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;&#9;H&#9;specific enthalpy of fluid flowing through the piping</P>
+<P ALIGN="JUSTIFY">[J/kg/K]&#9;S&#9;specific entropy of fluid flowing through the piping</P>
+<P ALIGN="JUSTIFY">[K]&#9;&#9;T&#9;temperature of fluid flowing through the piping</P>
+<P ALIGN="JUSTIFY">[kg/m³]&#9;RO&#9;density of fluid flowing through the piping</P>
+<P ALIGN="JUSTIFY">[-]&#9;&#9;TIT&#9;thermodynamic drift of fluid flowing through the piping</P>
+<P ALIGN="JUSTIFY">[K]&#9;&#9;TP&#9;temperature of piping metallic wall</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;DIAI&#9;piping internal diameter (or hydraulic)</P>
+<P ALIGN="JUSTIFY">[-]&#9;&#9;CRIG&#9;parameter corresponding to the CRIG data as described above. It can be used as selection index of the correlation to &#9;&#9;&#9;&#9;adopt for convective exchange coefficient between fluid and metal whether user wants include more correlations in only &#9;&#9;&#9;one subroutine.</P>
+<P ALIGN="JUSTIFY">[kg/m²/s]&#9;G&#9;specific flow rate of fluid flowing through the piping</P>
+<P ALIGN="JUSTIFY">[W]&#9;&#9;CAL&#9;thermal power exchanged between wall metal and fluid flowing through the piping</P>
+<P ALIGN="JUSTIFY">[m²]&#9;&#9;SUP&#9;exchange surface area between wall metal and fluid flowing through the piping</P>
+<P ALIGN="JUSTIFY">[W/m²/K]&#9;GAMMA&#9;convective thermal exchange coefficient between wall metal and fluid flowing through the piping (output of &#9;&#9;&#9;&#9;&#9;GAMUT).</P>
+<P>To obtain the exchange coefficient of a considered cell, the user must call the EXCHGAMUT user subprogram by input parameter values typical for each piping axial cell. Hereinafter is represented an example of the GAMUT subroutine related to the assignment of a constant value to the GAMMA exchange coefficient and to its calculation through the Dittus-B&ouml;lter's correlation depending an the values assigned to CRIG.</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE EXCHGAMUT(P,H,S,T,RO,TIT,TP,DIAI,CRIG,G,CAL,SUP,GAMMA)</P>
+<P>C</P>
+<P>REAL P,H,S,T,RO,TIT,TP,DIAI,CRIG,G,CAL,SUP,GAMMA</P>
+<P>C</P>
+<P>INTEGER ICO</P>
+<P>C</P>
+<P>ICO=-CRIG</P>
+<P>GO TO (1,2) ICO</P>
+<P>C</P>
+<P>C*************************** COSTANTE **********************************</P>
+<P>C</P>
+<P>1 GAMMA = 65000.</P>
+<P>RETURN</P>
+<P>C</P>
+<P>2 CONTINUE</P>
+<P>C</P>
+<P>GAMMA = DITBOE (G,DIAI,P,T,S,RO,TIT)</P>
+<P>C</P>
+<P>RETURN</P>
+<P>END</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>FUNCTION DITBOE (G,D,P,T,S,RO,TIT)</P>
+<P>REAL MU,K</P>
+<P>C</P>
+<P>C LETTURA DA TAVOLE DI PROPRIETA' DI INTERESSE</P>
+<P>C</P>
+<P>CALL SATUR(P,3,ROLS,ROVS,1)</P>
+<P>C</P>
+<P>ROLG=ROLS/ROVS</P>
+<P>C</P>
+<P>CP=CPEV(P,S,TIT,1.,1.)</P>
+<P>MU=ETEV(P,T,RO,ROLG,TIT,1.,1.)</P>
+<P>K=ALEV(P,T,RO,ROLG,TIT,1.,1.)</P>
+<P>C</P>
+<P>C NUMERO DI REYNOLDS</P>
+<P>C</P>
+<P>RE=G*D/MU</P>
+<P>IF(RE.LT.10000.) RE=10000.</P>
+<P>C</P>
+<P>C NUMERO DI PRANDTL</P>
+<P>C</P>
+<P>PR=CP*MU/K</P>
+<P>C</P>
+<P>C CALCOLO DEL COEFFICIENTE DI SCAMBIO TERMICO</P>
+<P>C</P>
+<P>DITBOE = 0.023*(K/D)*RE**0.8*PR**0.4</P>
+<P>C</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial"><P>As already seen, the thermal exchange coefficient (expressed in W/(m²K)) between metallic wall and fluid, is not provided to the EXCH module by a data written directly in the file F14. It is done by an user routine (EXCHGAMUT) or by the GAM01 subroutine to which the module gives the variable values defining the fluid or metallic wall state.</P>
+<P>In this manner the user avoids to utilize a constant value as thermal coefficient, on the contrary strongly dependent on the downflow range and fluid thermodynamic state as well as temperature.</P>
+<P>The GAM01 subroutine already exists in the library and includes a set of classic correlations widely used and validated. Nevertheless, the user can introduce other exchange coefficients (constant or as a result of alternative correlations) substituting to the GAM01 subroutine another one having the same name an calling parameters.</P>
+<P>It is useful to note that the GAM01 subroutine (whose listing is available in the TUBS module documentation) can be called by several EXCH block whether coexisting in a given model.</P>
+<P>The subroutine calling parameters are the following:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE GAM01 (P, H, S, TF, RO, TITOL, TP, DIA, CRIG, G, Q,</P>
+<P>$ SUP, HTC)</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">whose symbol meaning is:</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;&#9;P&#9;fluid pressure</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;&#9;H&#9;fluid specific enthalpy</P>
+<P ALIGN="JUSTIFY">[J/kg/°C]&#9;S&#9;fluid specific entropy</P>
+<P ALIGN="JUSTIFY">[°C]&#9;&#9;TF&#9;fluid temperature</P>
+<P ALIGN="JUSTIFY">[kg/m³]&#9;RO&#9;fluid density</P>
+<P ALIGN="JUSTIFY">[-]&#9;&#9;TITOL&#9;mixture drift</P>
+<P ALIGN="JUSTIFY">[°C]&#9;&#9;TP&#9;wall temperature</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;DIA&#9;piping hydraulic diameter</P>
+<P ALIGN="JUSTIFY">[-]&#9;&#9;CRIG&#9;coefficient available for user (see above)</P>
+<P ALIGN="JUSTIFY">[kg/m²/s]&#9;G&#9;fluid specific flow rate</P>
+<P ALIGN="JUSTIFY">[W]&#9;&#9;Q&#9;total power exchanged with the wall</P>
+<P ALIGN="JUSTIFY">[m²]&#9;&#9;SUP&#9;exchange surface</P>
+<P ALIGN="JUSTIFY">[W/m²/°C]&#9;HTC&#9;thermal exchange coefficient (output of GAM01)</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_EXCH_F"></A>MODULE EXCH&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P>Besides fluid homogeneous description and several DRIFT correlations concerning a two phase mixture (see above) the piping mathematical model of the EXCH module consists of the following already mentioned equations:</P>
+<P ALIGN="JUSTIFY">1) conservation equation of fluid energy</P>
+<P ALIGN="JUSTIFY">2) conservation equation of fluid momentum</P>
+<P ALIGN="JUSTIFY">3) conservation equation of fluid mass</P>
+<P ALIGN="JUSTIFY">4) conservation equation of metal energy</P>
+<P ALIGN="JUSTIFY">5) as many fluid-wall convective thermal exchange equations as the number of zones</P>
+<P ALIGN="JUSTIFY">6) one equation which allows to calculate the outlet total enthalpy of fluid from each cell.</P>
+<P>All above mentioned equations (written for each axial cell) are algebraical including the 1), 2) and 4) which, even if represent system states, are formally presented as algebraical to the module.</P>
+<P>The module calculates the following output variables:</P>
+<P ALIGN="JUSTIFY">1) mean enthalpies (static) of fluid (HM) (algeb.var.)</P>
+<P ALIGN="JUSTIFY">2) outlet pressure of fluid from the cells (PU) (algeb.var.)</P>
+<P ALIGN="JUSTIFY">3) inlet flow rate of fluid into the cells (WI) (algeb.var.)</P>
+<P ALIGN="JUSTIFY">4) thermal powers exchanged between fluid inside the tube and surrounding walls (QTI) (algeb.var.)</P>
+<P ALIGN="JUSTIFY">5) outlet total enthalpies of fluid from the cells (HU) (algeb.var.)</P>
+<P ALIGN="JUSTIFY">6) cell metal temperatures on the external surface (TPE) </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">It is useful to remember that the algebraical-differential system representing the EXCH module is formally turned in a system consisting of algebraical equations expressing the states temporal derivative (HM and PU) as finite differences, so in the module output only algebraical variables are available.</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_EXCH_G"></A>MODULE EXCH&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>SUBROUTINE EXCHI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,IBLOC1,</P>
+<P>$ IBLOC2,IER,CNXYU,TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHI3(IFO,IOB,DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHI4(IOB,MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBLOC1,</P>
+<P>$ IBLOC2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHJC(AJAC,MX5,IXYU,XYU,DATI,IPD,RNI,IFUN)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHRES (IFUN,RNI,DATI,IPD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHDEC(XYU,IXYU,DATI,IPD,IFUN)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHTAU(IFUN,DATI,IPD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHMET(TM,TMN,TPI,QTE,FM,DATI,IPD,IFUN,DELTAT)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHGTERT(P, H, S, T, RO, TIT, TP, DIAI, CRIG, G, CAL,</P>
+<P>$ SUP, GAMMA)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P>$ IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P>&nbsp;</P>
+<P>FUNCTION EXCHISTA09(IFUN)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHTA(ISTA)</P>
+<P>&nbsp;</P>
+<P>FUNCTION EXCHG9(IFUN)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHNOM(TIF,AREA,DIAH,IFUN,PACO,QQI,HHI,PPI,HTI,</P>
+<P>$ RM,DRD,DHD,ALFN,SLN,C0,VGJ,FL,I,FIQLOJ,RL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHZD(RL,RV,XV,FL,SIG,AREA,UGJ,ALFN,C0,VGJ,XP)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHBKO(P,XV,FL,UGJ,ALFN,C0,VGJ)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHCHELEL(PPI,XV,FL,ALF,SIG,RV,RL,TIF,</P>
+<P>$ DIAH,UGJ,ALFN,C0,VGJ)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHUGJALF(C0,FL,VGJ,XV,UGJ,ALF)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHC0CHEX (RE,RA,P,ALF,B1,C0)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHRECHEX(RL,RV,VG,VL,DIAH,UL,UV,REG,REL,RE)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHVISCO(TK,UL,UV)</P>
+<P>&nbsp;</P>
+<P>FUNCTION EXCHTENSUP(T)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHZUBROU(RL,RV,FL,XV,SIG,G,DE,UGJ,ALFN,C0,VGJ,XP)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE EXCHGAMUT(P,H,S,T,RO,TIT,TP,DIAI,CRIG,G,CAL,SUP,GAMMA)</P>
+<P>&nbsp;&nbsp;</P>
+</B></FONT><FONT FACE="Arial"><P>The listing of the library GAM01 subroutine for calculation of the fluid-wall exchange coefficient is available in the TUBS user documentation.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_EXCH_H"></A>MODULE EXCH&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>No test case involving the module EXCH has yet been implemented.</P></FONT></BODY>
+</HTML>

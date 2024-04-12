@@ -1,0 +1,253 @@
+: file "nn.hit"
+: aiuti in linea per le pagine "nn*"
+
+
+:page		nnEdit
+  La pagina 'nnEdit' opera nell' ambito della fase "calcstaz" del sistema
+di calcolo LEGOCAD.  Essa utilizza dati letti dai file "f03.dat" e "f14.dat"
+del modello in esame a cura del programma principale della fase,
+e controlla il salvataggio dei dati modificati sul file "f14.tmp".
+
+  Nota:  la pagina e' mono-sessione: una volta aperta, non se ne possono
+aprire altri esemplari prima della chiusura.  La pagina controlla propri
+dialoghi modali per la conferma delle proprie operazioni.
+:d		Aspetto
+  La pagina si articola, dall'alto in basso, nelle seguenti parti:
+o  una barra di menu principale;
+o  alcune didascalie (nome del modello, variabili in gioco, etc);
+o  un pulsante, un' area messaggi, uno scorrevole;
+o  l' area di lavoro principale.
+:d		Menu
+  Il menu contiene le seguenti voci:
+-  File - apre una tendina con le voci seguenti:
+   .  Load - carica le variabili dell' area di lavoro alla situazione
+      dell' ultimo salvataggio (o all' apertura della pagina);
+   .  Save - trascrive nella memoria della fase "calcstaz" e sui files
+      "f14.tmp" e/o "fpp.dat" i dati modificati.
+   .  Close - chiude la pagina.  Se vi sono modifiche in corso, appare un
+      avviso che segnala la possibile perdita di dati e chiede conferma.
+-  Mode - apre una tendina con due sotto-voci alternative:
+   .  Normal - si possono marcare le variabili come "note" o "non-note"
+      (modo assunto all' apertura della pagina);
+   .  Pair - si possono amministrare abbinamenti, o "paia", tra variabili
+      di uscita "note" e di ingresso "non-note";
+-  Options - apre una tendina con le voci seguenti:
+   .  Filter - apre la pagina ancillare "nnFilter" (per cui si rimanda
+      al paragrafo 2.);
+   .  Setup - (opzione utile all' inizio dell' attivita' su un modello)
+      marca tutte le variabili di ingresso "note" e tutte le variabili
+      di uscita "non-note".  Viene richiesta conferma, e viene salvato
+      immediatamente il file "f14.dat".
+   .  Values - apre la pagina ancillare "nnValues" (per cui si rimanda
+      al paragrafo 3.);
+:d		didascalie
+  Le didascalie riflettono lo stato corrente del modello in esame, e il
+numero delle variabili in gioco.  Un eventuale squilibrio tra variabili
+"note" e variabili di ingresso viene segnalato.
+:d		pulsante 'Vars'
+  Il pulsante 'Vars' apre una tendina con le voci seguenti:
+-  All - carica l'area principale di lavoro con 'tutte' le variabili
+      del modello.
+-  Filter - apre la pagina ancillare "nnFilter" per selezionare
+      un sottoinsieme delle variabili del modello.
+:d		area messaggi
+  Nell' area messaggi possono comparire (con avviso sonoro, in colore,
+e per pochi secondi) brevi avvisi all'operatore, concernenti selezioni
+intraprese, comandi contraddittori, salvataggi effettuati, etc.
+:d		scorrevole
+  Lo scorrevole consente di dosare, nell'area di lavoro principale, la
+percentuale di ingombro relativo tra le aree a sinistra e a destra.
+:d		area di lavoro
+  L' area di lavoro principale si articola in due sezioni sovrapposte,
+estensibili verticalmente: la soprastante riservata alle variabili di
+uscita, e la sottostante alle variabili di ingresso.  Ciascuna sezione si
+articola in due aree scorribili: quella a sinistra, piu' larga, riporta
+un elenco di nomi "lunghi" delle variabili in elaborazione, quella di
+destra riporta i nomi "brevi" delle sole variabili marcate "note" (sezione
+uscite) o "non-note" (sezione ingressi).  Ogni sezione ha in alto un titolo,
+ed ogni area scorribile ha una didascalia aggiornata.  I nomi "lunghi" di
+variabili nelle aree di sinistra possono essere prefissati con un '*' se
+"note".  I nomi "brevi" di variabili nelle aree di destra possono essere
+prefissati con un '-' ed essere seguiti da '-' ed un altro nome "breve"
+se "Paiate".  Ogni sezione presenta in basso tre bottoni, due centrali
+ed uno a destra: nel Modo Normal, sono attivabili i 4 bottoni centrali,
+denominati [Add] e [Del], e bianchi e inattivi i 2 di destra; nel
+Modo Pair sono bianchi e inattivi i 4 bottoni centrali, e attivabili
+i 2 di destra, denominati rispettivamente [Add] e [Del].
+
+  Nota 1:  si puo' regolare la proporzione tra le aree di destra e di
+sinistra agendo sul reostato in alto sopra l' area di lavoro principale.
+  Nota 2:  commutando tra i due Modi, vengono annullate le modifiche
+apportate.
+:d		Comportamento.
+
+  Nella pagina "nnEdit" vale il principio di separazione: dapprima si
+effettuano selezioni dalle aree scorribili, poi si azionano bottoni per
+le azioni consentite.  I bottoni sono attivi o meno (e visivamente
+grigi) a fronte di selezioni valide, e a seconda del Modo vigente.
+
+  Nel Modo Normal, selezioni da un'area a sinistra annullano eventuali
+selezioni dall'area a destra della stessa sezione, mentre convivono
+selezioni in entrambe le sezioni.  Se si seleziona una o piu' voci da
+un'area di sinistra si attiva il bottone [Add], mentre se si seleziona
+una o piu' voci da un'area di destra si attiva il bottone [Del].  Se si
+fa clic su [Add], le voci selezionate verranno marcate (variabili di
+uscita "note", variabili di ingresso "non-note"), e aggiunte all'area
+di destra.  Se si fa clic su [Del], le voci selezionate verranno smarcate,
+e cancellate dall'area di destra.
+
+  Nota 1: ogni clic su [Add] o su [Del] provoca uno squilibrio, selezioni
+appropriate e clic su [Del] o su [Add] riequilibreranno le marcature.
+  Nota 2: selezioni a sinistra di variabili gia' marcate provocano un
+messaggio, un clic sul bottone [Add] le lascia intatte.
+  Nota 3: selezioni a destra di voci paiate provocano un messaggio, un clic
+su [Del] smarca la variabile, distrugge il paio, e seleziona nell'altra
+sezione la variabile ex-paiata, pronta per la smarcatura.
+
+   Nel Modo Pairs le aree a sinistra si svuotano, e restano attive solo le
+aree a destra, dove compaiono tutte le variabili marcate, selezionabili
+solo singolarmente.  Si puo' solo aggiungere un nuovo paio, o cancellarne
+uno esistente.  Per aggiungere: si seleziona 1 uscita e 1 ingresso non
+gia' paiate, si attiva automaticamente il bottone [Add]; un clic aggiunge
+il nuovo paio.  Per cancellare: si seleziona 1 uscita o 1 ingresso gia'
+paiate, si attiva automaticamente il bottone [Del]; un clic cancella.
+
+  Nota:  selezioni contraddittorie provocano un messaggio, i bottoni si
+disattivano.
+:epage
+
+
+:page		nnFilter
+
+  Questa pagina serve a selezionare un sotto-insieme di variabili da
+manipolare nella pagina "nnEdit".  Il sotto-insieme viene individuato
+combinando una selezione di blocchi del modello con un riconoscimento
+del nome di variabili rispondenti a chiavi di ricerca.
+  La pagina "nnFilter" viene aperta dalla pagina "nnEdit" agendo sul
+pulsante  Vars->Filter.  E' mono-sessione e modale, conserva propri
+dati tra la prima creazione e successive riaperture, e viene distrutta
+solo alla chiusura di "nnEdit".  Alla prima apertura mostra selezionati
+tutti i blocchi e tutte le variabili (la situazione iniziale assunta
+da "nnEdit").
+
+
+:d		Aspetto
+
+  Nella pagina sono presenti le seguenti parti:
+o  un'area scorribile Blocchi;
+o  un'area scorribile Variabili;
+o  bottoni di decisione, denominati [Ok] e [Cancel].
+
+  L'area scorribile Blocchi presenta un elenco con i nomi "lunghi" di
+tutti i blocchi del modello, sovrastata da una didascalia che mostra quanti
+di essi sono corrententemente selezionati.
+
+  L'area scorribile Variabili presenta un elenco con i nomi "lunghi"
+di tutte le variabili del modello, sovrastata da una didascalia che mostra
+quante di esse sono corrententemente selezionate.
+
+  Tra le due aree scorribili vi sono due bottoni "a freccia":
+-  un bottone [All];
+-  un bottone [Filter], affiancato da un campo di immissione di chiavi di
+   ricerca.
+
+
+:d		Comportamento.
+
+  Anche per questa pagina vale il principio di separazione: dapprima si
+effettuano selezioni, dopodiche' si agisce su [Ok] per confermare, o su
+[Cancel] per rinunciare.
+
+  L'operatore effettua selezioni in tre fasi distinte:
+
+o  seleziona una o piu' voci dall'area Blocchi (vengono annullate
+   eventuali selezioni di variabili, si disattiva [Ok]);
+
+o  aziona un bottone a freccia: [All] seleziona tutte le variabili dei
+   blocchi selezionati, [Filter] solo quelle rispondenti alle chiavi di
+   ricerca specificate (vedi Nota); si attiva [Ok];
+
+o  eventualmente, aggiunge o annulla selezioni di singole variabili
+   dall'area scorribile Variabili.
+
+  L'operatore poi decide se confermare la selezione effettuata facendo
+clic su [Ok], oppure rinunciare facendo clic su [Cancel] (o anche agendo
+sui controlli di cornice della pagina).  In caso di conferma, le aree
+della pagina "nnEdit" rifletteranno il nuovo stato di selezione.  In
+caso di rinuncia la pagina "nnEdit" rimane invariata.  In ogni caso la
+pagina "nnFilter" scompare, e se richiamata ripresenta lo stato di
+selezione conseguente all' ultimo [Ok].
+
+  Nota:  il campo di immissione a fianco del bottone a freccia [Filter]
+accetta fino a 20 caratteri arbitrari.  Caratteri alfabetici vengono
+automaticamente maiuscolizzati.  Le chiavi di ricerca vengono determinate
+secondo i seguenti criteri:
+-  caratteri bianchi separano singole chiavi;
+-  di ogni chiave sono considerati al piu' i primi 4 caratteri;
+-  i seguenti caratteri assumono un significato speciale:
+   .  '*' sta per 'qualsiasi carattere da qui in poi';
+   .  '?' sta per 'qualsiasi carattere qui';
+-  se una chiave e' lunga meno di 4 caratteri, viene implicitamente
+   "allungata" con un carattere '*'.
+  Il valore iniziale e' un solo carattere, pari a '*'.  Occorre specificare
+la chiave prima di agire sul pulsante a freccia "Filter".  Il campo chiave
+si conserva tra chiamate successive.
+:epage
+
+
+:page		nnValues
+
+  Questa pagina serve a modificare il valore numerico assegnato a singole
+variabili, e in nessun caso intende sostituire altre pagine specializzate
+del sistema "LEGOCAD".
+  La pagina viene aperta dalla pagina "nnEdit" agendo sulla voce di menu
+Options->Values, previa selezione di  una o piu' voci da una o entrambe
+le aree a sinistra.  E' mono-sessione e modale, e viene distrutta alla
+chiusura.
+
+
+:d		Aspetto
+
+  Nella pagina sono presenti le seguenti parti:
+o  un'area scorribile Variabili;
+o  un campo di immissione per il Valore numerico, affiancato dalla Unita'
+   di misura corrente;
+o  bottoni di decisione, denominati [Ok] e [Cancel].
+
+  L'area Variabili presenta un elenco con i nomi "lunghi" delle variabili
+selezionate dalla pagina "nnEdit",  e' scorribile ciclicamente, ed e'
+sovrastata da una didascalia che mostra la variabile correntemente
+modificabile.  Scorrendo quest'area sono aggiornati automaticamente i
+dati del campo Valore e Unita' di misura.
+
+  Facendo clic su Unita' di misura si apre una tendina che mostra l'elenco
+delle Unita' di misura ammesse per quella variabile, oltre alla voce
+"restore" che serve a ripristinare il Valore e Unita' di misura iniziali.
+ corrententemente selezionate.
+
+
+:d		Comportamento.
+
+  Anche per questa pagina vale il principio di separazione: dapprima si
+effettuano selezioni, dopodiche' si agisce su [Ok] per confermare, o su
+[Cancel] per rinunciare.
+
+  L'operatore effettua selezioni in due fasi distinte:
+
+o  scorre l'area Variabili fino alla voce da modificare;
+
+o  immette nel campo Valore il nuovo dato, scegliendo eventualmente una
+   nuova Unita' di misura.
+
+  L' operatore ripete le operazioni precedenti per ciascuna variabile
+di cui vuole modificare il dato numerico.
+
+  L'operatore poi decide se confermare le modifiche effettuate facendo
+clic su [Ok], oppure rinunciare facendo clic su [Cancel] (o anche agendo
+sui controlli di cornice della pagina).  In caso di conferma, il file
+"f14.dat" viene immediatamente aggiornato con i nuovi dati.  Nulla
+accade in caso di rinuncia.  In ogni caso la pagina scompare.
+
+  Nota:  in caso di conferma, non sono coinvolte le modifiche correnti
+della pagina "nnEdit".
+:epage

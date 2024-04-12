@@ -1,0 +1,212 @@
+*********************************************************************
+C       Fortran PreCompile:             main_lg1.pf
+C       Subsystem:              1
+C       Description:
+C       %created_by:    famgr %
+C       %date_created:  Tue Apr 30 10:04:44 1996 %
+C
+C**********************************************************************
+
+
+C
+C Procedura contenete la variabile per l'identificazione della versione
+C
+      BLOCK DATA BDD_main_lg1_pf
+      CHARACTER*80  RepoID
+      COMMON /CM_main_lg1_pf / RepoID
+      DATA RepoID/'@(#)1,pfsrc,main_lg1.pf,3'/
+      END
+
+C******************************************************************************
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C                                                                      C
+C           LEGO unificato per singola / doppia precisione             C
+C                 e per diverse piattaforme operative                  C
+C                                                                      C
+C   Attivata versione singola precisione per sistema operativo Unix    C
+C                                                                      C
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+      PROGRAM LG1
+C
+C               PROGRAMMA   L G 1
+C
+C      INCLUDE 'LG1_PARAMETER.F'
+C**   Descrizione delle parameter di LG1
+C**
+C**   N000= MOLTIPLICATORE
+C**
+C**   N001= N. MODULI
+C**   N002= N. BLOCCHI
+C**   N003= N.STATI+ALG. = ORDINE MASSIMO SISTEMA ALGEBRICO
+C**   N004= N. INGRESSI
+C**   N005= N. VARIABILI
+C**   N006= N. VAR. DI 1 BLOCCO (di processo)
+C**   NT006= N. VAR. DI 1 BLOCCO (di regolazione)
+C**   N007= N. DI DATI
+C**   N008= N. DI EQUAZIONI DI UN BLOCCO
+C**   NR00= N. DI TERMINI #0 PER OGNI EQUAZIONE
+C**   NP00= N. DI PERTURBAZIONI
+C
+      PARAMETER (N000=70,
+     $           N001=N000*10, N002=N000*25, N003=N000*50,
+     $           N004=N000*25, N005=N000*100, N006=100, NT006=N003+N004,
+     $           N007=N000*500, N008=40, NR00=12, NP00=10)
+C
+C**   M001= N. TOTALE INGRESSI    =N005-N003
+C**   M002= N. INGRESSI = USCITE  =M001-N004
+C
+      PARAMETER (M001=N005-N003, M002=M001-N004, M003=N002+1,
+     $           M004=N003+1, M005=N004+1)
+C
+      PARAMETER (MN005=2*N005)
+      PARAMETER (MAXCAR=80)
+      DIMENSION NOSL(N001)
+      DIMENSION NOSCHE(N001)
+      DIMENSION NASL(N002),ISL(N002)
+      CHARACTER*(MAXCAR) LIMODU(N001)
+      CHARACTER*(MAXCAR) LISCHE(N001)
+      INTEGER      IPUNB(N002)
+      CHARACTER*80 FIL01(MN005)
+      CHARACTER*100 MMI_LISTA_SCHEMI
+C
+C______ FILES DI LAVORO DI LG1
+C
+      CHARACTER*32 LMODUL,F01DAT,F02DAT,LTMFOR,CLTMDA,LG1ERR,LSCHEM
+C
+      COMMON/LG1FLS/LMODUL,F01DAT,F02DAT,LTMFOR,CLTMDA,LG1ERR,LSCHEM
+C
+      CHARACTER*8 MODEL
+      CHARACTER FLAG_MMI
+C
+      DATA IFO/7/
+      DATA IF01/1/
+C
+
+      MAXMOD=N001
+      MAXBLO=N002
+C
+C______ DEFINIZIONE DEI FILES DI LAVORO DI LG1
+C
+C______ ARGOMENTO PER CHIAMATA DA PARTE DI L(R)EGOMMI : "L"
+        CALL GETARG(1,FLAG_MMI)
+        CALL GETARG(2,MMI_LISTA_SCHEMI)
+C
+      CALL LG1FIL
+C
+C     APERTURA DEI FILES DI LAVORO
+      OPEN(UNIT=04,FILE=LMODUL,STATUS='OLD')
+      IF ( FLAG_MMI.EQ.'L' ) THEN
+         OPEN(UNIT=8,FILE=MMI_LISTA_SCHEMI,STATUS='OLD')
+      ELSE
+         OPEN(UNIT=8,FILE=LSCHEM,STATUS='OLD')
+      ENDIF
+      OPEN(UNIT=IF01,FILE=F01DAT,STATUS='OLD')
+#ifndef SCO_UNIX
+      OPEN(UNIT=2,FILE=F02DAT,STATUS='UNKNOWN',FORM='UNFORMATTED')
+#else
+      OPEN(UNIT=2,FILE=F02DAT,STATUS='UNKNOWN',FORM='UNFORMATTED',
+     1     ORGANIZATION='DYNAMIC')
+#endif
+      OPEN(UNIT=35,FILE=LTMFOR,STATUS='UNKNOWN')
+      OPEN(UNIT=34,FILE=CLTMDA,STATUS='UNKNOWN')
+C
+C  LETTURA ELENCO DEI MODULI DA FILE LMODUL.DAT
+C  LETTURA ELENCO DEGLI SCHEMI DI REGOLAZIONE DA FILE LSCHEM.DAT
+C
+      CALL LISMOD(LIMODU,NOSL,NST,LISCHE,NOSCHE,NSCHE,
+     $            MAXMOD,LG1ERR,FIL01,IER)
+      IF (IER.EQ.1) THEN
+        WRITE (6,*) 'SI VOGLIONO USARE PIU` DI 300 MODULI'
+        CALL LGABRT
+      ENDIF
+C
+      ICON=0
+C
+C     LETTURA DEI NOMI DEI BLOCCHI DA FILE F01DAT
+C
+      CALL LETF01(IF01,ICON,ISL,NASL,NST,NOSL,MAXBLO,
+     $            IPUNB,FIL01,IER,LG1ERR,MODEL,IPUNIN,
+     $            NLF01,NSCHE,NOSCHE,LISCHE)
+C
+      CLOSE (01)
+      CLOSE (04)
+      CLOSE (08)
+C
+      IF (IER.NE.0) THEN
+        WRITE (6,*) 'ESECUZIONE INTERROTTA PER ERRORI'
+        CALL LGABRT
+      ENDIF
+      IF (ICON.LE.0) THEN
+        WRITE (6,*)
+     $     'ESECUZIONE INTERROTTA - FILE TOPOLOGICO SENZA BLOCCHI'
+        CALL LGABRT
+      ENDIF
+C
+      ITIMOD=1
+#ifdef LEGOCAD
+C
+C____ SE LEGOCAD ,VERIFICA SE IL MODELLO E` DI PROCESSO O DI REGOLAZIONE
+C
+      IF(ISL(1).LT.0) THEN
+C_____MODELLO DI REGOLAZIONE
+         KK=1
+      ELSE
+C_____MODELLO DI PROCESSO
+         KK=0
+      ENDIF
+      DO 600 I=1,ICON
+       WRITE (6,*) 'valore isl =',ISL(I)
+       IF(ISL(I).LT.0.AND.KK.EQ.0)GO TO 650
+       IF(ISL(I).GT.0.AND.KK.EQ.1)GO TO 650
+ 600  CONTINUE
+      ITIMOD=KK
+      GO TO 670
+C
+C_____ERRORE :CASO IN CUI UN MODELLO TRATTA SIA MODULI DI PROCESSO CHE
+C     DI REGOLAZIONE
+C
+ 650  WRITE(6,7682)
+ 7682 FORMAT(///10X,'**** ERRORE : IL MODELLO NON PUO` CONTENERE CONTEMP
+     $ORANEAMENTE '/25X,'MODULI DI PROCESSO E MODULI DI REGOLAZIONE'//)
+      CALL LGABRT
+C
+ 670  CONTINUE
+#endif
+C
+C_________ SI COSTRUISCE UNA LISTA UNICA DI MODULI
+C          AGGIUNGENDO ALLA LISTA DEI MODULI DI PROCESSO
+C          LA LISTA DEGLI SCHEMI DI REGOLAZIONE
+C          (TUTTI GLI ISL(I)<0 DEVONO ESSERE CAMBIATI
+C
+      DO 700 I=1,NSCHE
+      LIMODU(I+NST)=LISCHE(I)
+      NOSL(I+NST)=NOSCHE(I)
+  700 CONTINUE
+      DO 701 I=1,ICON
+      IF(ISL(I).LT.0)ISL(I)=-(ISL(I)-NST)
+  701 CONTINUE
+C
+      NST=NST+NSCHE
+C
+C___________ CONTROLLI SUI DATI TOPOLOGICI
+C
+      CALL LEGO1(MODEL,FIL01,ISL,IPUNB,NOSL,LIMODU,
+     $           ICON,IPUNIN,NLF01,ITIMOD,IERTOP)
+C
+      CLOSE (02)
+      CLOSE (34)
+      CLOSE (35)
+C
+      IF(IERTOP.NE.0) CALL LGABRT
+      CALL LGSTOP
+      STOP
+      END
+C            
+C            
+C Procedura contenete la variabile per l'identificazione della versione
+C        
+      SUBROUTINE SCCS_main_lg1
+      CHARACTER*80 SccsID
+      DATA SccsId/'@(#)main_lg1.pf	2.2\t1/24/96'/
+      END

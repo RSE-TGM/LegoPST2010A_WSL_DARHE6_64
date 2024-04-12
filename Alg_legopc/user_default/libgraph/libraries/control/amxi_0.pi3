@@ -1,0 +1,15 @@
+AMXI_0                                                                          
+AMXI                                                                            
+AMXI - Min/MAX selector                                                         
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 2
+ 
+NCONF = 1
+ 
+UMXI      --UA-- OUTPUT ANALOG SIGNAL MIN/MAX                                   
+I1MX      --IN-- INPUT SIGNAL ONE TO MIN/MAX                                    
+I2MX      --IN-- INPUT SIGNAL TWO TO MIN/MAX                                    
+==============================                                                  
+EOF                                                                             

@@ -1,0 +1,35 @@
+VENS
+
+Fan ambient air                                                                 
+3
+1
+
+t1
+OMPV 
+1 
+t0
+TFME TMET GAMM ____ 
+1 -1 1 0 
+t4
+WARI TFME GAMM ____ ____ ____ ____ ____ ____ ____ 
+1 1 1 0 0 0 0 0 0 0 
+
+0
+3
+4
+
+WARI UA
+PORTATA FLUIDO VENTILATORE                                     
+GAMM UA
+COEFF. SCAMBIO CONVETTIVO                                      
+TFME UA
+TEMPERATURA MEDIA FLUIDO                                       
+OMPV IN
+VELOCITA' DI ROTAZIONE                                         
+TING IN
+TEMPERATURA INGRESSO FLUIDO                                    
+CGAM IN
+CORRETTIVO COEFF. DI SCAMBIO                                   
+TMET IN
+TEMPERATURA PARETE METALLICA                                   
+

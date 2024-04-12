@@ -1,0 +1,188 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE MART</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MART_summ"></A>MODULE MART CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MART_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MART_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MART_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MART_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MART_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MART_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MART_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MART_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_MART_A"></A>MODULE MART CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">TURBINE SHAFT ROTATION SPEED MODEL</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>When generation units forming an electric power production plant, supplies the central station auxiliaries, unit itself becomes a limited power network (insulated network). Such a situation occurs during a load reject transient.</P>
+<P>It began when main switch gear connecting the a.c. generator to external main network cuts off. So, in this case, resisting load consists of central station auxiliaries keeping connected, through an auxiliary transformer, with the a.c. bus-bars. Unbalance which occurs between fed mechanical power and required power, considerably lower (for a steam plant about 5% of the nominal power), causes a quick increasing in rotational speed that has to be controlled and limited.</P>
+<P>Rotational speed successively decreases because of power dissipated through steam turbines in lamination, ventilation (both of turbine and a.c. generator), friction and, in case of gas-turbine units, the power absorbed by compressors. In fact during this type of transient gas-turbine units are supplied with a fuel flow rate such as to guarantee flame keeping in th e combustion furnace but not the unit self- maintenance. So power absorbed by compressor is higher than power supplied by the turbine determining a gas-turbine deceleration.</P>
+<P>For gas turbine units, it is present an "external starting torque" input variable, to allow the simulation of the related starter subsystem (mechanical or electrical).</P>
+<P>Referred to an electric power production unit, consisting of 'n' (max.9) generation units (both steam turbines or gas-turbines units), the MART module simulates the dynamics of rotational speed in unit machines. In the module is assumed that electromechanical oscillations of machine shafts, integral each other, is negligible.</P>
+<P>The mathematical model through the simulation is carried out, essentially consists of rotating mass equation repeated for 'n' generation units:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image333.gif" WIDTH=282 HEIGHT=38><FONT FACE="Arial, helvetica">+ QAVV(i)&#9; i = 1, ... n &#9; (1)</P>
+<P>where:</P>
+<P ALIGN="JUSTIFY">E(i) &#9;&#9;= total kinetic energy of the i-th generation unit</P>
+<P ALIGN="JUSTIFY">Q(i) &#9;&#9;= total power supplied by the i-th unit</P>
+<P ALIGN="JUSTIFY">QAC(i) &#9;= coupling power related to the i-th turbine (see note 1)</P>
+<P ALIGN="JUSTIFY">QUAS(i) &#9;= power utilized in supplying the part of auxiliaries related to the i-th unit (see note 2)</P>
+<P ALIGN="JUSTIFY">Qd(i) &#9;&#9;= total power dissipated by the i-th unit (see note 3)</P>
+<P ALIGN="JUSTIFY">QAVV(i) &#9;= power given by the external starter to the i-th unit (see note 4)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>Note 1</P>
+</B><P>QAC(i) is a coupling term of several turbines installed in a power production unit. It takes into account the transferred or absorbed power by the i-th turbine because of the different rotational speed acquired as regards to average speed of remaining n-1 turbines.</P>
+<P>In the module the encoded expression of QAC(i) term is:</P>
+<P ALIGN="CENTER">QAC(i) = COP * (OM(i) - OMRET(i)) &#9; i = 1, ... n&#9; (2)</P>
+<P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">- COP = coupling coefficient</P>
+<P ALIGN="JUSTIFY">- OM(i) = speed of the i-th turbine</P>
+<P ALIGN="JUSTIFY">- OMRET(i) = mean speed of remaining n-1 turbines</P>
+<P>To the coupling coefficient COP, having torque dimensions, no analytical expression is given. It is assumed as constant and equal to 10 MW/(runs per minute). Such value is obtained so that, during the more significant transients, speed curves referred to the single units meet the actual ones. In particular is imposed that in case of load rejection (the most significant transient), curves speed referred to different units are identical.</P>
+<P>OMRET(i) mean speed would have to be correctly evaluated by the following relation (3) in which the moments of inertia I(j) (j = 1, ..., i-1, i+1, ..., n), related to the remaining n-1 turbines, appear.</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image334.gif" WIDTH=585 HEIGHT=49><FONT FACE="Arial, helvetica">&#9;(3)</P>
+<P>Nevertheless, in order to obtain saving in calculation time (against an insignificant error in regular use of the module) it is preferred to determine the mean speed OMRET(i) as simple arithmetical mean by using the relation (4):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image335.gif" WIDTH=569 HEIGHT=41><FONT FACE="Arial, helvetica">&#9;(4)</P>
+<P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">- p(j) = 1. if the j-th turbine is connected (j = 1, ... i-1, i+1, ... n)</P>
+<P ALIGN="JUSTIFY">- p(j) = 0. if the j-th turbine is tripped (j = 1, ... i-1, i+1, ... n)</P>
+<B><P>Note 2</P>
+</B><P>Defined QISO the total power needing in supplying the auxiliaries related to the whole plant, it is equitably distributed on all the NFUNZ functioning units (NFUNZ = n - number of tripped units).</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image336.gif" WIDTH=145 HEIGHT=38><FONT FACE="Arial, helvetica">&#9;(5)</P>
+<B><P>Note 3</P>
+</B><P>If the i-th turbine as a steam turbine, the total dissipated power Qd(i) is given by addition of the following:</P>
+<P ALIGN="JUSTIFY">- total power Qa(i) dissipated through friction; such power is proportional to the rotational speed.</P>
+<P ALIGN="CENTER">Qa(i) = Ka(i) * RPM(i) &#9; (6)</P>
+<P ALIGN="JUSTIFY">- total power Ql(i) dissipated through lamination: such power is proportional to the square of rotational speed.</P>
+<P ALIGN="CENTER">Ql(i) = Kl(i) * RPM(i)² &#9; (7)</P>
+<P ALIGN="JUSTIFY">- total power Qv(i) dissipated through ventilation; such power is proportional to the cube of rotational speed.</P>
+<P ALIGN="CENTER">Qv(i) = Kv(i) * RPM(i)³ &#9; (8)</P>
+<P>Once assigned the ratio between dissipated and supplied powers, constants appearing in the above mentioned relations can be determined under normal conditions. As example, once indicated Pn(i) as nominal power supplied to the i-th turbine and OMNOM(i) as its rotational speed, for the constant Ka(i) we have:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image337.gif" WIDTH=312 HEIGHT=41><FONT FACE="Arial, helvetica">&#9;(9)</P>
+<P ALIGN="JUSTIFY">from which:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image338.gif" WIDTH=192 HEIGHT=41><FONT FACE="Arial, helvetica">&#9;(10)</P>
+<P>In a similar way, regarding to the remaining constants we arrive to the following expressions:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image339.gif" WIDTH=196 HEIGHT=44><FONT FACE="Arial, helvetica">&#9;(11)</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image340.gif" WIDTH=201 HEIGHT=44><FONT FACE="Arial, helvetica">&#9;(12)</P>
+<P ALIGN="JUSTIFY">If the i-th turbine is a gas turbine, losses are taken into account inside the module TURG which calculates the correct turbine speed (RVEL). Consequently the speed calculated by the module MART has no significance. This is the reason why (in case of the i-th is a gas-turbine), in the MART module the losses are in any case calculated as for steam turbine. User must subsequently assign the correct meanings to the calculated speeds (in this way no discriminating tests between gas and steam turbines are needed).</P>
+<B><P>Note 4</P>
+</B><P ALIGN="JUSTIFY">QAVV(i) takes into account the power given by the external starting unit of the single turbine. It has to be used for gas-turbine units to allow the beginning of shaft rotation when the machine is halted. The QAVV(i) term is taken into account only when the i-th unit is in starting state [when AVV(i) = 1.].</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MART_B"></A>MODULE MART CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">N = number of turbine units</P>
+<P ALIGN="JUSTIFY">i = 1, ..., N</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image341.gif" WIDTH=398 HEIGHT=210></P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[rpm]&#9;RPMi&#9;rotational speed of the i-th turbine</P>
+<P ALIGN="JUSTIFY">[W]&#9;QTUi&#9;power supplied by the i-th turbine</P>
+<P ALIGN="JUSTIFY">[ ]&#9;ASCi&#9;trip button for the i-th turbine (see note 2)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;AAVi&#9;start button for the i-th turbine (see note 2)</P>
+<P ALIGN="JUSTIFY">[N]&#9;STTi&#9;torque given to the i-th unit by the external starter (see note 1)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;ARIF&#9;load rejection button (see note 2)</P>
+<P ALIGN="JUSTIFY">[W]&#9;QAUS&#9;power absorbed by the auxiliary systems</P>
+<P ALIGN="JUSTIFY">[rpm]&#9;RPMI&#9;main frequency of network which unit is connected (see note 2)</P>
+<P>&nbsp;</P>
+<B><P>Note 1</P>
+</B><P>If AAVi &lt; 0.9 (i-th turbine is not in starting state) the external torque (STTi value) is neglected.</P>
+<P>&nbsp;</P>
+<B><P>Note 2</P>
+</B><P>If RIFC &lt; 0.1 and simultaneously for all turbines SCA(i) &lt; 0.9 (i = 1, ..., n) (load rejection occurs and none turbine is tripped) no calculation is made and to the rotational speed ROM(i) (i = 1, ..., n) the value of network main frequency RPMI [RPM(j) = RPMI j = 1, ..., 1-1, i+1, ..., n] is assigned.</P>
+<P>It is useful to note there is no restriction about the number of turbines which may trip. So, as extreme possibility, simultaneous tripping of all the 'n' turbines can be simulated.</P>
+<P ALIGN="JUSTIFY">Where RIFC &gt; 0.1 (load rejection condition), the rotational speeds RPM(i) are determined through the solution of rotating masses equations mentioned above.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_MART_C"></A>MODULE MART CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to initial values of the MART module input-output variables (meanings defined above), user must assign the following data:</P>
+<P ALIGN="JUSTIFY">[s]&#9;TAVVIA(i)&#9;starting time of the i-th turbine (i = 1, ..., n) (see note 1)</P>
+<P ALIGN="JUSTIFY">[W]&#9;POTNOM(i)&#9;nominal power supplied by the i-th turbine</P>
+<P ALIGN="JUSTIFY">[rpm]&#9;OMNOMI(i)&#9;nominal rotational speed of the i-th turbine</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;QVENTI(i)&#9;ratio (under nominal conditions) between power dissipated through ventilation and power supplied by the i-th turbine &#9; &#9; &#9; &#9; (see note 2)</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;QLAMIN(i)&#9;ratio (in nominal conditions) between power dissipated through lamination and power supplied by the i-th turbine (see &#9;&#9;&#9;&#9;note 2)</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;QATTRI(i)&#9;ratio (under nominal conditions) between power dissipated through friction and power supplied by the i-th turbine (see &#9;&#9;&#9;&#9;note 2)</P>
+<P ALIGN="JUSTIFY">[s]&#9;TLOAD&#9;closing mean time of the valves feeding plant turbines (usual TLOAD = 0.3 s).</P>
+<B><P>Note 1</P>
+</B><P>Time taken by a turbine coupled with an a.c. generator in increasing its rotational speed from zero to nominal one (in absence of load and providing a constant torque equal to the nominal one) is defined as starting time.</P>
+<P>By means of the following relation starting time TAVVIA(i) can be put in relation with the moment of inertia I(i), nominal rotational speed OMNOMI(i) and nominal power PTNOM(i):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image342.gif" WIDTH=233 HEIGHT=46></P>
+<B><FONT FACE="Arial, helvetica"><P>Note 2</P>
+</B><P>If user does not specify the values of the ratio QVENTI(i), QLAMIN(i) and QATTRI(i) (e.g. because a gas-turbine is considered and consequently these quantities have no sense), the following values are assigned to them:</P>
+<P ALIGN="JUSTIFY">QVENTI(i) = 0.0125 p.u.</P>
+<P ALIGN="JUSTIFY">QLAMIN(i) = 0.0015625 p.u.</P>
+<P ALIGN="JUSTIFY">QATTRI(i) = 0.0006375 p.u.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MART_D"></A>MODULE MART CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the MART module variables, no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MART_E"></A>MODULE MART CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In the module no user subprograms are foreseen.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MART_F"></A>MODULE MART CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module mathematical model consisting of the equation mentioned in first paragraph gives rise to the following residuals:</P>
+<P>RNI(i) = RPM(i) - OMEGC(i) &#9; i = 1, ..., n</P>
+<P>where OMEGC(i) assumes different expressions in accordance with the following possibilities:</P>
+<P ALIGN="JUSTIFY">1) if neither load rejection nor turbine tripping occur:</P>
+<P>OMEGC(i) = RPMI i = 1, ..., n</P>
+<P ALIGN="JUSTIFY">2) if there is not load rejection but the i-th turbine is tripping, for the last the OMEGC(i) is deduced through kinetic energy expression:</P>
+<P>E(i) = ½ * I(i) * OMEGC(i)² &#9; i = 1, ..., n</P>
+<P>while for the remaining ones:</P>
+<P>OMEGC(j) = RPMI &#9; j = 1,... i-1, i+1, ..., n</P>
+<P ALIGN="JUSTIFY">3) if there is load rejection, OMEGC(i) is deduced through kinetic energy expression:</P>
+<P>E(i) = ½ * I(i) * OMEGC(i)² &#9; i = 1, ..., n</P>
+<P ALIGN="JUSTIFY">The residual is normalized as regards to an angular speed of 300 runs per minute.</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MART_G"></A>MODULE MART CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE MARTI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MARTI4</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MARTI2</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBLOC1, IBLOC2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MARTC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBLOC1, IBLOC2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MART</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, IXYU, XYU, IPD, DATI, RNI)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MART_H"></A>MODULE MART CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the manual section dedicated to the examples developed under the abbreviations:</P>
+<P ALIGN="CENTER">"TURBOGAS"</P></FONT></BODY>
+</HTML>

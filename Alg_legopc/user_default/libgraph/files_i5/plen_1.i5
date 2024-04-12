@@ -1,0 +1,52 @@
+PLEN
+
+PLEN - Air-gas manifold of a flue gas path                                      
+6
+1
+
+t0
+WE_1 PFPL TE_1 TFPL ____ ____ ____ ____ 
+1 -1 1 -1 0 0 0 0 
+t1
+WE_2 PFPL TE_2 TFPL ____ ____ ____ ____ 
+1 -1 1 -1 0 0 0 0 
+t2
+WU_3 PFPL TE_3 TFPL ____ ____ ____ ____ 
+2 -1 1 -1 0 0 0 0 
+t3
+WU_1 PFPL TFPL ____ ____ ____ ____ ____ 
+-1 1 1 0 0 0 0 0 
+t4
+WU_2 PFPL TFPL ____ ____ ____ ____ ____ 
+-1 1 1 0 0 0 0 0 
+t5
+WU_3 PFPL TFPL ____ ____ ____ ____ ____ 
+2 1 1 0 0 0 0 0 
+
+2
+0
+9
+
+PFPL US
+FLUID PRESSURE IN THE PLENUM                                   
+TFPL US
+FLUID TEMPERATURE AT THE PLENUM OUTLET                         
+WE_1 IN
+FLUID FLOW RATE INTO THE PLENUM N.  1                          
+WE_2 IN
+FLUID FLOW RATE INTO THE PLENUM N.  2                          
+WE_3 IN
+FLUID FLOW RATE INTO THE PLENUM N.  3                          
+WU_1 IN
+FLUID FLOW RATE FROM THE PLENUM N.  1                          
+WU_2 IN
+FLUID FLOW RATE FROM THE PLENUM N.  2                          
+WU_3 IN
+FLUID FLOW RATE FROM THE PLENUM N.  3                          
+TE_1 IN
+TEMPERATURE OF THE FLUID ENTERING THE PLENUM N.  1             
+TE_2 IN
+TEMPERATURE OF THE FLUID ENTERING THE PLENUM N.  2             
+TE_3 IN
+TEMPERATURE OF THE FLUID ENTERING THE PLENUM N.  3             
+

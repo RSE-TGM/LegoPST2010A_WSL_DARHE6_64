@@ -1,0 +1,45 @@
+BVL0_0                                                                          
+BVL0                                                                            
+Brine valve                                                                     
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 7
+ 
+NCONF = 3
+ 
+WVAL      --UA-- FLUID FLOW RATE IN THE VALVE                                   
+PIVA      --IN-- FLUID PRESSURE AT THE VALVE INLET                              
+PUVA      --IN-- FLUID PRESSURE AT THE VALVE OUTLET                             
+HVAL      --IN-- VALVE INLET FLUID ENTHALPY                                     
+FNAC      --IN-- VALVE INLET NaCl mass fraction                                 
+ALZA      --IN-- VALVE LIFT                                                     
+HINV      --IN-- VALVE outlet FLUID ENTHALPY ( W<0 )                            
+FINV      --IN-- VALVE outlet NaCl mass fraction ( W<0 )                        
+==============================                                                  
+PIVA      --UA-- FLUID PRESSURE AT THE VALVE INLET                              
+WVAL      --IN-- FLUID FLOW RATE IN THE VALVE                                   
+PUVA      --IN-- FLUID PRESSURE AT THE VALVE OUTLET                             
+HVAL      --IN-- VALVE INLET FLUID ENTHALPY                                     
+FNAC      --IN-- VALVE INLET NaCl mass fraction                                 
+ALZA      --IN-- VALVE LIFT                                                     
+HINV      --IN-- VALVE outlet FLUID ENTHALPY ( W<0 )                            
+FINV      --IN-- VALVE outlet NaCl mass fraction ( W<0 )                        
+==============================                                                  
+PUVA      --UA-- FLUID PRESSURE AT THE VALVE OUTLET                             
+PIVA      --IN-- FLUID PRESSURE AT THE VALVE INLET                              
+WVAL      --IN-- FLUID FLOW RATE IN THE VALVE                                   
+HVAL      --IN-- VALVE INLET FLUID ENTHALPY                                     
+FNAC      --IN-- VALVE INLET NaCl mass fraction                                 
+ALZA      --IN-- VALVE LIFT                                                     
+HINV      --IN-- VALVE outlet FLUID ENTHALPY ( W<0 )                            
+FINV      --IN-- VALVE outlet NaCl mass fraction ( W<0 )                        
+==============================                                                  
+EOF                                                                             
+2
+t0 10
+Generical input
+WVAL PIVA ____ FNAC HVAL FINV HINV ____ ____ ____
+t1 11
+Generical output
+WVAL PUVA ____ FNAC HVAL FINV HINV ____ ____ ____

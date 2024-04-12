@@ -1,0 +1,20 @@
+# include <sys/utsname.h>
+
+# define ENELINFO_LEN 81
+
+struct CAPinfo {
+  struct utsname Utsname ;
+  char Hostid [ 8 ] ;
+  char EnelInfo [ ENELINFO_LEN ] ;
+  char nil ;
+} ;
+
+#define  _SYS_NMLN           32     /* Important: do not change this value ! */
+
+struct utsname {
+	char    sysname[_SYS_NMLN];
+	char    nodename[_SYS_NMLN];
+	char    release[_SYS_NMLN];
+	char    version[_SYS_NMLN];
+	char    machine[_SYS_NMLN];
+};

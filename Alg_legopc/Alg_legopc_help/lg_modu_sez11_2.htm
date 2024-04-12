@@ -1,0 +1,182 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">Examples of storage of variables values (at the end or
+the beginning of each time step)</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">An example of storage of variables
+values at the beginning of each time step is present in RAVA module. As the
+element of DATI vector used for flow rate storage is the (IPD+3)-th, the
+following instructions are used:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---variables decoding</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>W = XYU(IXYU+4)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>...</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---denormalization and storage of
+incoming value of W</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (ITERT .EQ. 0 .AND. IFUN .EQ. 2) THEN</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">DATI(IPD+3) = W * W0<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">END IF</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WPRE = DATI(IPD+3)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>...</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---selection of working conditions</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (WPRE .GE. 0.) THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C-------residuals computation in case
+normal flow</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>...</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C-------residuals computation in case
+inverted flow</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>...</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END IF</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">An example of storage of variables
+values at the end of the previous step is present in COLT module (simulating a
+header).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">As the elements of DATI vector used for
+the storage of TMK (the previous step metal temperature) are the (IPD+9)-th and
+the (IPD+12)-th, the following instructions are present:</span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---steady state or transient?</font></b>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (KREGIM) GO TO 1000</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---transient</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (ITERT .LE. 0 .AND. IFUN .EQ. 2) THEN</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C-------previous step metal temperature</font></b></span></p>
+<p class="elenco3"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">DATI(IPD+12) = DATI(IPD+9)<o:p>
+</o:p>
+</span></font></b></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><b><font size="2" face="Courier New"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ENDIF<o:p>
+</o:p>
+</font></b>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><b><font size="2" face="Courier New"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>TMK = DATI(IPD+12)<o:p>
+</o:p>
+</font></b>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">...</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---TM is a value computed inside the
+module</font></b></span></p>
+<p class="elenco3"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">TM = ....<o:p>
+</o:p>
+</span></font></b></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><b><font size="2" face="Courier New">...<o:p>
+</o:p>
+</font></b>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><b><font size="2" face="Courier New"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>DATI(IPD+9) = TM<o:p>
+</o:p>
+</font></b>
+</span></p>
+<p class="elenco3"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">RETURN</span></font></b></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes">&nbsp;</span>1000
+CONTINUE</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C---steady state</font></b></span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><b><font size="2" face="Courier New">...<o:p>
+</o:p>
+</font></b>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><b><font size="2" face="Courier New"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>TM = ....<o:p>
+</o:p>
+</font></b>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><b><font size="2" face="Courier New">...<o:p>
+</o:p>
+</font></b>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><b><font size="2" face="Courier New"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>DATI(IPD+9) = TM<o:p>
+</o:p>
+</font></b>
+</span></p>
+<p class="elenco3"><b><font size="2" face="Courier New"><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">RETURN</span></font></b></p>
+<p class="MsoNormal"><span lang="EN-GB">If the expression of the residuals were
+the same, the following instructions (or some equivalent) should have been used:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---steady state initialization of TMK</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (KREGIM) THEN</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">TM = ....<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>DATI(IPD+9) = TM<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">ENDIF</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (ITERT .LE. 0 .AND. IFUN .EQ. 2) THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C-------stored value of metal temperature</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">DATI(IPD+12) = DATI(IPD+9)<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ENDIF<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>TMK = DATI(IPD+12)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>...</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---TM is a value computed inside the
+module</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">TM = ....<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b>...<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp; </span><span style="mso-spacerun: yes">&nbsp;&nbsp;</span>DATI(IPD+9)
+= TM<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">RETURN</span></b></font></p>
+
+<!--mstheme--></font></body>
+
+</html>

@@ -1,0 +1,1195 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>testcase3</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test3_a"></A>Test case 3: general description</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following test case represents the combustion chamber of a "once through" boiler of a 320 MW thermo-electrical power plant.</P>
+<P ALIGN="JUSTIFY">The physical phenomena simulated by this model are:</P>
+<P ALIGN="JUSTIFY">1.&#9;combustion of the fuel oil delivered by six groups of burners to the furnace</P>
+<P ALIGN="JUSTIFY">2.&#9;radiative and convective heat exchange between the hot gas and the furnace walls</P>
+<P ALIGN="JUSTIFY">3.&#9;steam production in the walls of the combustion chamber</P>
+<P ALIGN="JUSTIFY">The combustion chamber is represented by the block CCOM; this block is connected with the blocks PA12 and PA34 (evaporator walls) to simulate the heat transfer from the hot gas to the water circulating in the evaporator walls.</P>
+<P ALIGN="JUSTIFY">The cell 2 of the block PA12 and the cell 3 of the block PA34, which are not exchanging heat with the flue gas contained in the combustion chamber, represent two intermediate manifolds in the pipe bundles.</P>
+<P ALIGN="JUSTIFY">The inlet and outlet valves don't represent physical plant components: they are used to simply simulate boundary conditions of the combustion chamber subsystem. In the plant, these conditions are imposed by the feed water subsystem (at the inlet side) and the rest of the boiler and the turbine group (at the outlet side).</P>
+<P ALIGN="JUSTIFY">The dynamical behaviour of this model has been studied in a case of a 10% reduction of the fuel oil flow rate to the burners.</P>
+<P ALIGN="JUSTIFY">The following figure shows the block diagram of the simulated system.</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image33.gif" WIDTH=569 HEIGHT=699></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test3_m"></A>Test case 3: topological diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following picture represents the topological diagram of the "CCOMB" model:</P>
+</FONT><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="image58.gif" WIDTH=478 HEIGHT=477></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="JUSTIFY">The following list represents the related topological description file, automatically written by LEGOCAD System (MACROBLOCKS.DAT):</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>****</P>
+<P>CCOMB</P>
+<P>****</P>
+<P>Comb 0000 0000</P>
+<P>****</P>
+<P>0 EVAPPA12 EVAP 0 565 345 1</P>
+<P>0 COLTCP23 COLT 0 665 290 2</P>
+<P>0 EVAPPA34 EVAP 0 565 200 0</P>
+<P>0 CCCMCCOM CCCM 0 405 235 0</P>
+<P>0 DISNDS34 DISN 0 505 160 0</P>
+<P>0 DISNDP34 DISN 0 505 240 0</P>
+<P>0 COLTC4PC COLT 0 630 110 0</P>
+<P>0 COLTCUEC COLT 0 630 460 0</P>
+<P>0 VALVVOUT VALV 0 690 105 0</P>
+<P>0 VALVVING VALV 0 690 455 0</P>
+<P>1 *REMARK* 760 460 Feedwater</P>
+<P>1 *REMARK* 770 110 Steam</P>
+<P>1 *REMARK* 725 305 Intermediate</P>
+<P>1 *REMARK* 730 325 manifold</P>
+<P>3 *GLINES* 2 4 12 6 1 5</P>
+<P>(590,195)</P>
+<P>(590,135)</P>
+<P>(590,135)</P>
+<P>(618,135)</P>
+<P>(630,135)</P>
+<P>3 *GLINES* 2 4 12 6 1 3</P>
+<P>(745,135)</P>
+<P>(803,135)</P>
+<P>(815,135)</P>
+<P>3 *GLINES* 2 5 12 6 1 11</P>
+<P>(590,340)</P>
+<P>(590,330)</P>
+<P>(590,330)</P>
+<P>(630,330)</P>
+<P>(630,330)</P>
+<P>(630,390)</P>
+<P>(630,390)</P>
+<P>(690,390)</P>
+<P>(690,390)</P>
+<P>(690,377)</P>
+<P>(690,365)</P>
+<P>3 *GLINES* 2 5 12 6 1 11</P>
+<P>(690,285)</P>
+<P>(690,260)</P>
+<P>(690,260)</P>
+<P>(630,260)</P>
+<P>(630,260)</P>
+<P>(630,320)</P>
+<P>(630,320)</P>
+<P>(590,320)</P>
+<P>(590,320)</P>
+<P>(590,312)</P>
+<P>(590,300)</P>
+<P>3 *GLINES* 2 5 12 6 1 3</P>
+<P>(815,485)</P>
+<P>(757,485)</P>
+<P>(745,485)</P>
+<P>3 *GLINES* 2 5 12 6 1 5</P>
+<P>(625,485)</P>
+<P>(590,485)</P>
+<P>(590,485)</P>
+<P>(590,457)</P>
+<P>(590,445)</P>
+<P>****</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test3_b"></A>Test case 3: model topology</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the topological file (F01.DAT) of the "CCOMB" model, which is produced by LEGOCAD System topology building activity:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>****</P>
+<P>EVAP BLOCCO (PA12) - boiler walls (part 1)</P>
+<P>COLT BLOCCO (CP23) - boiler walls intermediate manifold</P>
+<P>EVAP BLOCCO (PA34) - boiler walls (part 2)</P>
+<P>CCCM BLOCCO (CCOM) - combustion chamber</P>
+<P>DISN BLOCCO (DS34) - cell 10 gas temperature uncoupler</P>
+<P>DISN BLOCCO (DP34) - cell 9 gas temperature uncoupler</P>
+<P>COLT BLOCCO (C4PC) - outlet boiler walls manifold</P>
+<P>COLT BLOCCO (CUEC) - inlet boiler walls manifold</P>
+<P>VALV BLOCCO (VOUT) - outlet valve</P>
+<P>VALV BLOCCO (VING) - inlet valve</P>
+<P>****</P>
+<P>CCOMB</P>
+<P>****</P>
+<P>-EVAPA12 BL.-PA12- **** MODULO EVAP - boiler walls (part 1)</P>
+<P>PC1_PA12 --US-- MEAN PRESSURE INSIDE THE CELL 1 OF THE TUBE</P>
+<P>PC2_PA12 --US-- MEAN PRESSURE INSIDE THE CELL 2 OF THE TUBE</P>
+<P>PC3_PA12 --US-- MEAN PRESSURE INSIDE THE CELL 3 OF THE TUBE</P>
+<P>PC4_PA12 --US-- MEAN PRESSURE INSIDE THE CELL 4 OF THE TUBE</P>
+<P>PC5_PA12 --US-- MEAN PRESSURE INSIDE THE CELL 5 OF THE TUBE</P>
+<P>PC6_PA12 --US-- MEAN PRESSURE INSIDE THE CELL 6 OF THE TUBE</P>
+<P>PC7_PA12 --US-- MEAN PRESSURE INSIDE THE CELL 7 OF THE TUBE</P>
+<P>PC8_PA12 --US-- MEAN PRESSURE INSIDE THE CELL 8 OF THE TUBE</P>
+<P>PC9_PA12 --US-- MEAN PRESSURE INSIDE THE CELL 9 OF THE TUBE</P>
+<P>WG1_PA12 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 1 OF THE TUBE</P>
+<P>WG2_PA12 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 2 OF THE TUBE</P>
+<P>WG3_PA12 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 3 OF THE TUBE</P>
+<P>WG4_PA12 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 4 OF THE TUBE</P>
+<P>WG5_PA12 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 5 OF THE TUBE</P>
+<P>WG6_PA12 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 6 OF THE TUBE</P>
+<P>WG7_PA12 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 7 OF THE TUBE</P>
+<P>WG8_PA12 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 8 OF THE TUBE</P>
+<P>WUTUPA12 --UA-- FLUID FLOW RATE AT THE TUBE OUTLET</P>
+<P>WITUPA12 --UA-- FLUID FLOW RATE AT THE TUBE INLET</P>
+<P>TM1_PA12 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 1 OF THE TUBE</P>
+<P>TM2_PA12 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 2 OF THE TUBE</P>
+<P>TM3_PA12 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 3 OF THE TUBE</P>
+<P>TM4_PA12 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 4 OF THE TUBE</P>
+<P>TM5_PA12 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 5 OF THE TUBE</P>
+<P>TM6_PA12 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 6 OF THE TUBE</P>
+<P>TM7_PA12 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 7 OF THE TUBE</P>
+<P>TM8_PA12 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 8 OF THE TUBE</P>
+<P>TM9_PA12 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 9 OF THE TUBE</P>
+<P>QT1_PA12 --UA-- POWER ENTERING THE CELL 1 OF THE TUBE</P>
+<P>QT2_PA12 --UA-- POWER ENTERING THE CELL 2 OF THE TUBE</P>
+<P>QT3_PA12 --UA-- POWER ENTERING THE CELL 3 OF THE TUBE</P>
+<P>QT4_PA12 --UA-- POWER ENTERING THE CELL 4 OF THE TUBE</P>
+<P>QT5_PA12 --UA-- POWER ENTERING THE CELL 5 OF THE TUBE</P>
+<P>QT6_PA12 --UA-- POWER ENTERING THE CELL 6 OF THE TUBE</P>
+<P>QT7_PA12 --UA-- POWER ENTERING THE CELL 7 OF THE TUBE</P>
+<P>QT8_PA12 --UA-- POWER ENTERING THE CELL 8 OF THE TUBE</P>
+<P>QT9_PA12 --UA-- POWER ENTERING THE CELL 9 OF THE TUBE</P>
+<P>HUTUPA12 --UA-- FLUID ENTHALPY AT THE TUBE OUTLET</P>
+<P>HIITPA12 --UA-- FLUID ENTHALPY AT THE TUBE INLET (FLOW RATE REV.)</P>
+<P>HCOLCUEC --IN-- #HITUPA12#....................&lt;===COLTCUEC BL.-CUEC-</P>
+<P>HCOLCP23 --IN-- #HUITPA12#....................&lt;===COLTCP23 BL.-CP23-</P>
+<P>PCOLCP23 --IN-- #PUTUPA12#....................&lt;===COLTCP23 BL.-CP23-</P>
+<P>PCOLCUEC --IN-- #PITUPA12#....................&lt;===COLTCUEC BL.-CUEC-</P>
+<P>TF_1CCOM --IN-- #TF11PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>TF21PA12 --IN-- CELL 2 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>TF_2CCOM --IN-- #TF31PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>TF_3CCOM --IN-- #TF41PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>TF_4CCOM --IN-- #TF51PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>TF_5CCOM --IN-- #TF61PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>TF_6CCOM --IN-- #TF71PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>TF_7CCOM --IN-- #TF81PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>TF_8CCOM --IN-- #TF91PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>GC11CCOM --IN-- #GF11PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>GF21PA12 --IN-- CELL2 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GC12CCOM --IN-- #GF31PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>GC13CCOM --IN-- #GF41PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>GC14CCOM --IN-- #GF51PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>GC15CCOM --IN-- #GF61PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>GC16CCOM --IN-- #GF71PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>GC17CCOM --IN-- #GF81PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>GC18CCOM --IN-- #GF91PA12#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>ATTRPA12 --IN-- FRICTION COEFFICIENT OF THE TUBE</P>
+<P>****</P>
+<P>****</P>
+<P>COLTCP23 BL.-CP23- **** MODULO COLT - boiler walls intermediate manifold</P>
+<P>HCOLCP23 --UA-- FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>PCOLCP23 --UA-- FLUID PRESSURE IN THE MANIFOLD</P>
+<P>TCOLCP23 --UA-- METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>WUTUPA12 --IN-- #WE_1CP23#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>HUTUPA12 --IN-- #HE_1CP23#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>WITUPA34 --IN-- #WU_1CP23#....................&lt;===-EVAPA34 BL.-PA34-</P>
+<P>HIITPA34 --IN-- #HU_1CP23#....................&lt;===-EVAPA34 BL.-PA34-</P>
+<P>TESTCP23 --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTCP23 --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>****</P>
+<P>****</P>
+<P>-EVAPA34 BL.-PA34- **** MODULO EVAP - boiler walls (part 2)</P>
+<P>PC1_PA34 --US-- MEAN PRESSURE INSIDE THE CELL 1 OF THE TUBE</P>
+<P>PC2_PA34 --US-- MEAN PRESSURE INSIDE THE CELL 2 OF THE TUBE</P>
+<P>PC3_PA34 --US-- MEAN PRESSURE INSIDE THE CELL 3 OF THE TUBE</P>
+<P>PC4_PA34 --US-- MEAN PRESSURE INSIDE THE CELL 4 OF THE TUBE</P>
+<P>PC5_PA34 --US-- MEAN PRESSURE INSIDE THE CELL 5 OF THE TUBE</P>
+<P>WG1_PA34 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 1 OF THE TUBE</P>
+<P>WG2_PA34 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 2 OF THE TUBE</P>
+<P>WG3_PA34 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 3 OF THE TUBE</P>
+<P>WG4_PA34 --UA-- FLUID FLOW RATE AT THE OUTLET CELL 4 OF THE TUBE</P>
+<P>WUTUPA34 --UA-- FLUID FLOW RATE AT THE TUBE OUTLET</P>
+<P>WITUPA34 --UA-- FLUID FLOW RATE AT THE TUBE INLET</P>
+<P>TM1_PA34 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 1 OF THE TUBE</P>
+<P>TM2_PA34 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 2 OF THE TUBE</P>
+<P>TM3_PA34 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 3 OF THE TUBE</P>
+<P>TM4_PA34 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 4 OF THE TUBE</P>
+<P>TM5_PA34 --UA-- EXTERNAL METAL SURFACE TEMP. CELL 5 OF THE TUBE</P>
+<P>QT1_PA34 --UA-- POWER ENTERING THE CELL 1 OF THE TUBE</P>
+<P>QT2_PA34 --UA-- POWER ENTERING THE CELL 2 OF THE TUBE</P>
+<P>QT3_PA34 --UA-- POWER ENTERING THE CELL 3 OF THE TUBE</P>
+<P>QT4_PA34 --UA-- POWER ENTERING THE CELL 4 OF THE TUBE</P>
+<P>QT5_PA34 --UA-- POWER ENTERING THE CELL 5 OF THE TUBE</P>
+<P>HUTUPA34 --UA-- FLUID ENTHALPY AT THE TUBE OUTLET</P>
+<P>HIITPA34 --UA-- FLUID ENTHALPY AT THE TUBE INLET (FLOW RATE REV.)</P>
+<P>HCOLCP23 --IN-- #HITUPA34#....................&lt;===COLTCP23 BL.-CP23-</P>
+<P>HCOLC4PC --IN-- #HUITPA34#....................&lt;===COLTC4PC BL.-C4PC-</P>
+<P>PCOLC4PC --IN-- #PUTUPA34#....................&lt;===COLTC4PC BL.-C4PC-</P>
+<P>PCOLCP23 --IN-- #PITUPA34#....................&lt;===COLTCP23 BL.-CP23-</P>
+<P>T_1_DP34 --IN-- #TF11PA34#....................&lt;===DISNDP34 BL.-DP34-</P>
+<P>T_2_DP34 --IN-- #TF21PA34#....................&lt;===DISNDP34 BL.-DP34-</P>
+<P>TF31PA34 --IN-- CELL 3 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>T_1_DS34 --IN-- #TF41PA34#....................&lt;===DISNDS34 BL.-DS34-</P>
+<P>T_2_DS34 --IN-- #TF51PA34#....................&lt;===DISNDS34 BL.-DS34-</P>
+<P>GC19CCOM --IN-- #GF11PA34#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>GC29CCOM --IN-- #GF21PA34#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>GF31PA34 --IN-- CELL3 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GC1*CCOM --IN-- #GF41PA34#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>GC2*CCOM --IN-- #GF51PA34#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>ATTRPA34 --IN-- FRICTION COEFFICIENT OF THE TUBE</P>
+<P>****</P>
+<P>****</P>
+<P>CCCMCCOM BL.-CCOM- **** MODULO CCCM - combustion chamber</P>
+<P>TF_1CCOM --UA-- FLUE GAS TEMPERATURE C.C. CELL 1</P>
+<P>TF_2CCOM --UA-- FLUE GAS TEMPERATURE C.C. CELL 2</P>
+<P>TF_3CCOM --UA-- FLUE GAS TEMPERATURE C.C. CELL 3</P>
+<P>TF_4CCOM --UA-- FLUE GAS TEMPERATURE C.C. CELL 4</P>
+<P>TF_5CCOM --UA-- FLUE GAS TEMPERATURE C.C. CELL 5</P>
+<P>TF_6CCOM --UA-- FLUE GAS TEMPERATURE C.C. CELL 6</P>
+<P>TF_7CCOM --UA-- FLUE GAS TEMPERATURE C.C. CELL 7</P>
+<P>TF_8CCOM --UA-- FLUE GAS TEMPERATURE C.C. CELL 8</P>
+<P>TF_9CCOM --UA-- FLUE GAS TEMPERATURE C.C. CELL 9</P>
+<P>TF10CCOM --UA-- FLUE GAS TEMPERATURE C.C. CELL 10</P>
+<P>GC11CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 1 CELL 1</P>
+<P>GC12CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 1 CELL 2</P>
+<P>GC13CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 1 CELL 3</P>
+<P>GC14CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 1 CELL 4</P>
+<P>GC15CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 1 CELL 5</P>
+<P>GC16CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 1 CELL 6</P>
+<P>GC17CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 1 CELL 7</P>
+<P>GC18CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 1 CELL 8</P>
+<P>GC19CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 1 CELL 9</P>
+<P>GC29CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 2 CELL 9</P>
+<P>GC1*CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 1 CELL 10</P>
+<P>GC2*CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 2 CELL 10</P>
+<P>GC3*CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 3 CELL 10</P>
+<P>GC4*CCOM --UA-- GLOBAL EXCHANGE COEFFICENT WALL 4 CELL 10</P>
+<P>WFCCCCOM --UA-- FLUE GAS GLOBAL FLOW RATE C.C.</P>
+<P>%O2_CCOM --UA-- PARTIAL PRESSURE O2 IN %</P>
+<P>%CO2CCOM --UA-- PARTIAL PRESSURE CO2 IN %</P>
+<P>%H2OCCOM --UA-- PARTIAL PRESSURE H2O IN %</P>
+<P>%FMACCOM --UA-- MASS FRACTION H2O (IN %) IN THE FLUE GAS</P>
+<P>TM1_PA12 --IN-- #TM11CCOM#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>TM3_PA12 --IN-- #TM12CCOM#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>TM4_PA12 --IN-- #TM13CCOM#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>TM5_PA12 --IN-- #TM14CCOM#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>TM6_PA12 --IN-- #TM15CCOM#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>TM7_PA12 --IN-- #TM16CCOM#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>TM8_PA12 --IN-- #TM17CCOM#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>TM9_PA12 --IN-- #TM18CCOM#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>TM1_PA34 --IN-- #TM19CCOM#....................&lt;===-EVAPA34 BL.-PA34-</P>
+<P>TM2_PA34 --IN-- #TM29CCOM#....................&lt;===-EVAPA34 BL.-PA34-</P>
+<P>TM4_PA34 --IN-- #TM1*CCOM#....................&lt;===-EVAPA34 BL.-PA34-</P>
+<P>TM5_PA34 --IN-- #TM2*CCOM#....................&lt;===-EVAPA34 BL.-PA34-</P>
+<P>TM3*CCOM --IN-- MET. TEMP. 3 FLUE GAS SIDE CELL 10</P>
+<P>TM4*CCOM --IN-- MET. TEMP. 4 FLUE GAS SIDE CELL 10</P>
+<P>WCO1CCOM --IN-- FUEL FLOW RATE TO THE BURNER 1</P>
+<P>ICO1CCOM --IN-- KIND OF FUEL IN THE BURNER 1</P>
+<P>WCO2CCOM --IN-- FUEL FLOW RATE TO THE BURNER 2</P>
+<P>ICO2CCOM --IN-- KIND OF FUEL IN THE BURNER 2</P>
+<P>WCO3CCOM --IN-- FUEL FLOW RATE TO THE BURNER 3</P>
+<P>ICO3CCOM --IN-- KIND OF FUEL IN THE BURNER 3</P>
+<P>WCO4CCOM --IN-- FUEL FLOW RATE TO THE BURNER 4</P>
+<P>ICO4CCOM --IN-- KIND OF FUEL IN THE BURNER 4</P>
+<P>WCO5CCOM --IN-- FUEL FLOW RATE TO THE BURNER 5</P>
+<P>ICO5CCOM --IN-- KIND OF FUEL IN THE BURNER 5</P>
+<P>WCO6CCOM --IN-- FUEL FLOW RATE TO THE BURNER 6</P>
+<P>ICO6CCOM --IN-- KIND OF FUEL IN THE BURNER 6</P>
+<P>WAR1CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 1</P>
+<P>WAR2CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 2</P>
+<P>WAR3CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 3</P>
+<P>WAR4CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 4</P>
+<P>WAR5CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 5</P>
+<P>WAR6CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 6</P>
+<P>ABR1CCOM --IN-- TRAVERSE DEGREE BURNER 1</P>
+<P>ABR2CCOM --IN-- TRAVERSE DEGREE BURNER 2</P>
+<P>ABR3CCOM --IN-- TRAVERSE DEGREE BURNER 3</P>
+<P>ABR4CCOM --IN-- TRAVERSE DEGREE BURNER 4</P>
+<P>ABR5CCOM --IN-- TRAVERSE DEGREE BURNER 5</P>
+<P>ABR6CCOM --IN-- TRAVERSE DEGREE BURNER 6</P>
+<P>WRIFCCOM --IN-- RECIRCULATING FLOW RATE TO THE HOPPER</P>
+<P>TRIFCCOM --IN-- FLUE GAS TEMPERATURE OF HOPPER AND TEMPERING</P>
+<P>WARCCCOM --IN-- TOTAL COMBURENT AIR FLOW RATE</P>
+<P>TACOCCOM --IN-- COMBURENT AIR TEMPERATURE</P>
+<P>FACCCCOM --IN-- CORRECTIVE FACTOR OF THERMAL CONVECTIVE EXCHANGE</P>
+<P>FACRCCOM --IN-- CORRECTIVE FACTOR OF THERMAL RADIATIVE EXCHANGE</P>
+<P>AKFLCCOM --IN-- CORRECTIVE FACTOR OF FLAME LENGHT</P>
+<P>WGATCCOM --IN-- TEMPERING GAS FLOW RATE</P>
+<P>****</P>
+<P>****</P>
+<P>DISNDS34 BL.-DS34- **** MODULO DISN - cell 10 gas temperature uncoupler</P>
+<P>T_1_DS34 --UA-- DISN: OUTPUT VARIABLE NUM. 1</P>
+<P>T_2_DS34 --UA-- DISN: OUTPUT VARIABLE NUM. 2</P>
+<P>TF_9CCOM --IN-- #AINGDS34#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>****</P>
+<P>****</P>
+<P>DISNDP34 BL.-DP34- **** MODULO DISN - cell 9 gas temperature uncoupler</P>
+<P>T_1_DP34 --UA-- DISN: OUTPUT VARIABLE NUM. 1</P>
+<P>T_2_DP34 --UA-- DISN: OUTPUT VARIABLE NUM. 2</P>
+<P>TF10CCOM --IN-- #AINGDP34#....................&lt;===CCCMCCOM BL.-CCOM-</P>
+<P>****</P>
+<P>****</P>
+<P>COLTC4PC BL.-C4PC- **** MODULO COLT - outlet boiler walls manifold</P>
+<P>HCOLC4PC --UA-- FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>PCOLC4PC --UA-- FLUID PRESSURE IN THE MANIFOLD</P>
+<P>TCOLC4PC --UA-- METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>WUTUPA34 --IN-- #WE_1C4PC#....................&lt;===-EVAPA34 BL.-PA34-</P>
+<P>HUTUPA34 --IN-- #HE_1C4PC#....................&lt;===-EVAPA34 BL.-PA34-</P>
+<P>WVALVOUT --IN-- #WU_1C4PC#....................&lt;===VALVVOUT BL.-VOUT-</P>
+<P>HU_1C4PC --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>TESTC4PC --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTC4PC --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>****</P>
+<P>****</P>
+<P>COLTCUEC BL.-CUEC- **** MODULO COLT - inlet boiler walls manifold</P>
+<P>HCOLCUEC --UA-- FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>PCOLCUEC --UA-- FLUID PRESSURE IN THE MANIFOLD</P>
+<P>TCOLCUEC --UA-- METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>WVALVING --IN-- #WE_1CUEC#....................&lt;===VALVVING BL.-VING-</P>
+<P>HE_1CUEC --IN-- ENTHALPY IN THE ENTERING BRANCH N. 1</P>
+<P>WITUPA12 --IN-- #WU_1CUEC#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>HIITPA12 --IN-- #HU_1CUEC#....................&lt;===-EVAPA12 BL.-PA12-</P>
+<P>TESTCUEC --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTCUEC --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>****</P>
+<P>****</P>
+<P>VALVVOUT BL.-VOUT- **** MODULO VALV - outlet valve</P>
+<P>WVALVOUT --UA-- FLUID FLOW RATE IN THE VALVE</P>
+<P>PCOLC4PC --IN-- #PIVAVOUT#....................&lt;===COLTC4PC BL.-C4PC-</P>
+<P>PUVAVOUT --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HCOLC4PC --IN-- #HVALVOUT#....................&lt;===COLTC4PC BL.-C4PC-</P>
+<P>ALZAVOUT --IN-- VALVE LIFT</P>
+<P>****</P>
+<P>****</P>
+<P>VALVVING BL.-VING- **** MODULO VALV - inlet valve</P>
+<P>WVALVING --UA-- FLUID FLOW RATE IN THE VALVE</P>
+<P>PIVAVING --IN-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>PCOLCUEC --IN-- #PUVAVING#....................&lt;===COLTCUEC BL.-CUEC-</P>
+<P>HVALVING --IN-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>ALZAVING --IN-- VALVE LIFT</P>
+<P>****</P>
+<P>**** &gt;&gt;&gt;&gt;&gt;&gt;INGRESSI DI TUTTI I MODULI&lt;&lt;&lt;&lt;&lt;&lt;</P>
+<P>TF21PA12 --IN-- CELL 2 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>GF21PA12 --IN-- CELL2 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>ATTRPA12 --IN-- FRICTION COEFFICIENT OF THE TUBE</P>
+<P>TESTCP23 --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTCP23 --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>TF31PA34 --IN-- CELL 3 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>GF31PA34 --IN-- CELL3 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>ATTRPA34 --IN-- FRICTION COEFFICIENT OF THE TUBE</P>
+<P>TM3*CCOM --IN-- MET. TEMP. 3 FLUE GAS SIDE CELL 10</P>
+<P>TM4*CCOM --IN-- MET. TEMP. 4 FLUE GAS SIDE CELL 10</P>
+<P>WCO1CCOM --IN-- FUEL FLOW RATE TO THE BURNER 1</P>
+<P>ICO1CCOM --IN-- KIND OF FUEL IN THE BURNER 1</P>
+<P>WCO2CCOM --IN-- FUEL FLOW RATE TO THE BURNER 2</P>
+<P>ICO2CCOM --IN-- KIND OF FUEL IN THE BURNER 2</P>
+<P>WCO3CCOM --IN-- FUEL FLOW RATE TO THE BURNER 3</P>
+<P>ICO3CCOM --IN-- KIND OF FUEL IN THE BURNER 3</P>
+<P>WCO4CCOM --IN-- FUEL FLOW RATE TO THE BURNER 4</P>
+<P>ICO4CCOM --IN-- KIND OF FUEL IN THE BURNER 4</P>
+<P>WCO5CCOM --IN-- FUEL FLOW RATE TO THE BURNER 5</P>
+<P>ICO5CCOM --IN-- KIND OF FUEL IN THE BURNER 5</P>
+<P>WCO6CCOM --IN-- FUEL FLOW RATE TO THE BURNER 6</P>
+<P>ICO6CCOM --IN-- KIND OF FUEL IN THE BURNER 6</P>
+<P>WAR1CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 1</P>
+<P>WAR2CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 2</P>
+<P>WAR3CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 3</P>
+<P>WAR4CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 4</P>
+<P>WAR5CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 5</P>
+<P>WAR6CCOM --IN-- AIR-FLUE GAS MIXTURE FLOW RATE BURNER 6</P>
+<P>ABR1CCOM --IN-- TRAVERSE DEGREE BURNER 1</P>
+<P>ABR2CCOM --IN-- TRAVERSE DEGREE BURNER 2</P>
+<P>ABR3CCOM --IN-- TRAVERSE DEGREE BURNER 3</P>
+<P>ABR4CCOM --IN-- TRAVERSE DEGREE BURNER 4</P>
+<P>ABR5CCOM --IN-- TRAVERSE DEGREE BURNER 5</P>
+<P>ABR6CCOM --IN-- TRAVERSE DEGREE BURNER 6</P>
+<P>WRIFCCOM --IN-- RECIRCULATING FLOW RATE TO THE HOPPER</P>
+<P>TRIFCCOM --IN-- FLUE GAS TEMPERATURE OF HOPPER AND TEMPERING</P>
+<P>WARCCCOM --IN-- TOTAL COMBURENT AIR FLOW RATE</P>
+<P>TACOCCOM --IN-- COMBURENT AIR TEMPERATURE</P>
+<P>FACCCCOM --IN-- CORRECTIVE FACTOR OF THERMAL CONVECTIVE EXCHANGE</P>
+<P>FACRCCOM --IN-- CORRECTIVE FACTOR OF THERMAL RADIATIVE EXCHANGE</P>
+<P>AKFLCCOM --IN-- CORRECTIVE FACTOR OF FLAME LENGHT ACTIVE EXCHANGE</P>
+<P>WGATCCOM --IN-- TEMPERING GAS FLOW RATE ME LENGHT ACTIVE EXCHANGE</P>
+<P>HU_1C4PC --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>TESTC4PC --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD (W&lt;0)</P>
+<P>GESTC4PC --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>HE_1CUEC --IN-- ENTHALPY IN THE ENTERING BRANCH N. 1</P>
+<P>TESTCUEC --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTCUEC --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>PUVAVOUT --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>ALZAVOUT --IN-- VALVE LIFT</P>
+<P>PIVAVING --IN-- FLUID PRESSURE AT THE VALVE INLET </P>
+<P>HVALVING --IN-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>ALZAVING --IN-- VALVE LIFT</P>
+<P>****</P>
+<P>HITUPA12 --CO-- FLUID ENTHALPY AT THE TUBE INLET</P>
+<P>HUITPA12 --CO-- FLUID ENTHALPY AT THE TUBE OUTLET (FLOW RATE REV.)</P>
+<P>PUTUPA12 --CO-- FLUID PRESSURE AT THE TUBE OUTLET</P>
+<P>PITUPA12 --CO-- FLUID PRESSURE AT THE TUBE INLET</P>
+<P>TF11PA12 --CO-- CELL 1 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>TF31PA12 --CO-- CELL 3 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>TF41PA12 --CO-- CELL 4 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>TF51PA12 --CO-- CELL 5 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>TF61PA12 --CO-- CELL 6 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>TF71PA12 --CO-- CELL 7 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>TF81PA12 --CO-- CELL 8 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>TF91PA12 --CO-- CELL 9 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>GF11PA12 --CO-- CELL1 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GF31PA12 --CO-- CELL3 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GF41PA12 --CO-- CELL4 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GF51PA12 --CO-- CELL5 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GF61PA12 --CO-- CELL6 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GF71PA12 --CO-- CELL7 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GF81PA12 --CO-- CELL8 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GF91PA12 --CO-- CELL9 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>WE_1CP23 --CO-- FLOW RATE IN THE ENTERING BRANCH N. 1</P>
+<P>HE_1CP23 --CO-- ENTHALPY IN THE ENTERING BRANCH N. 1</P>
+<P>WU_1CP23 --CO-- FLOW RATE IN THE COMING OUT BRANCH N. 1</P>
+<P>HU_1CP23 --CO-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>HITUPA34 --CO-- FLUID ENTHALPY AT THE TUBE INLET</P>
+<P>HUITPA34 --CO-- FLUID ENTHALPY AT THE TUBE OUTLET (FLOW RATE REV.)</P>
+<P>PUTUPA34 --CO-- FLUID PRESSURE AT THE TUBE OUTLET</P>
+<P>PITUPA34 --CO-- FLUID PRESSURE AT THE TUBE INLET</P>
+<P>TF11PA34 --CO-- CELL 1 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>TF21PA34 --CO-- CELL 2 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>TF41PA34 --CO-- CELL 4 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>TF51PA34 --CO-- CELL 5 FLUID MEAN TEMP. IN EXTERNAL ZONE 1</P>
+<P>GF11PA34 --CO-- CELL1 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GF21PA34 --CO-- CELL2 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GF41PA34 --CO-- CELL4 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>GF51PA34 --CO-- CELL5 EXCHANGE COEFF. FLUID - EXT. SURF. ZONE 1</P>
+<P>TM11CCOM --CO-- MET. TEMP. 1 FLUE GAS SIDE CELL 1</P>
+<P>TM12CCOM --CO-- MET. TEMP. 1 FLUE GAS SIDE CELL 2</P>
+<P>TM13CCOM --CO-- MET. TEMP. 1 FLUE GAS SIDE CELL 3</P>
+<P>TM14CCOM --CO-- MET. TEMP. 1 FLUE GAS SIDE CELL 4</P>
+<P>TM15CCOM --CO-- MET. TEMP. 1 FLUE GAS SIDE CELL 5</P>
+<P>TM16CCOM --CO-- MET. TEMP. 1 FLUE GAS SIDE CELL 6</P>
+<P>TM17CCOM --CO-- MET. TEMP. 1 FLUE GAS SIDE CELL 7</P>
+<P>TM18CCOM --CO-- MET. TEMP. 1 FLUE GAS SIDE CELL 8</P>
+<P>TM19CCOM --CO-- MET. TEMP. 1 FLUE GAS SIDE CELL 9</P>
+<P>TM29CCOM --CO-- MET. TEMP. 2 FLUE GAS SIDE CELL 9</P>
+<P>TM1*CCOM --CO-- MET. TEMP. 1 FLUE GAS SIDE CELL 10</P>
+<P>TM2*CCOM --CO-- MET. TEMP. 2 FLUE GAS SIDE CELL 10</P>
+<P>AINGDS34 --CO-- DISN: INPUT VARIABLE</P>
+<P>AINGDP34 --CO-- DISN: INPUT VARIABLE</P>
+<P>WE_1C4PC --CO-- FLOW RATE IN THE ENTERING BRANCH N. 1</P>
+<P>HE_1C4PC --CO-- ENTHALPY IN THE ENTERING BRANCH N. 1</P>
+<P>WU_1C4PC --CO-- FLOW RATE IN THE COMING OUT BRANCH N. 1</P>
+<P>WE_1CUEC --CO-- FLOW RATE IN THE ENTERING BRANCH N. 1</P>
+<P>WU_1CUEC --CO-- FLOW RATE IN THE COMING OUT BRANCH N. 1</P>
+<P>HU_1CUEC --CO-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>PIVAVOUT --CO-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>HVALVOUT --CO-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>PUVAVING --CO-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test3_c"></A>Test case 3: geometrical and physical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Geometrical and physical data of the model:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">1.&#9;<U>Block combustion chamber</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">General data</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Number of cells:&#9;10</P>
+<P ALIGN="JUSTIFY">Number of cells with burners:&#9;6</P>
+<P ALIGN="JUSTIFY">Walls emissivity:&#9;0.95</P>
+<P ALIGN="JUSTIFY">Air umidity:&#9;0.012</P>
+<P ALIGN="JUSTIFY">Nominal fuel oil flow rate for each burner:&#9;3.01&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Fuel oil umidity:&#9;0.1</P>
+<P ALIGN="JUSTIFY">Carbon mass fraction in dry fuel:&#9;0.84</P>
+<P ALIGN="JUSTIFY">Hydrogen mass fraction in dry fuel:&#9;0.115</P>
+<P ALIGN="JUSTIFY">Sulfur mass fraction in dry fuel:&#9;0.035</P>
+<P ALIGN="JUSTIFY">Net heat value of the fuel oil:&#9;40800&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Ratio between the exchange surface and</P>
+<P ALIGN="JUSTIFY">its plain projection:&#9;1.57</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">Cells data</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 1</P>
+<P ALIGN="JUSTIFY">Lenght:&#9;7&#9;m</P>
+<P ALIGN="JUSTIFY">Gas cross section area:&#9;121.25&#9;m²</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;198.82&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 2</P>
+<P ALIGN="JUSTIFY">Lenght:&#9;1.74&#9;m</P>
+<P ALIGN="JUSTIFY">Gas cross section area:&#9;121.25&#9;m²</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;45.936&#9;m²</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Cell 3</P>
+<P ALIGN="JUSTIFY">Lenght:&#9;1.74&#9;m</P>
+<P ALIGN="JUSTIFY">Gas cross section area:&#9;121.25&#9;m²</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;45.936&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 4</P>
+<P ALIGN="JUSTIFY">Lenght:&#9;1.74&#9;m</P>
+<P ALIGN="JUSTIFY">Gas cross section area:&#9;121.25&#9;m²</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;36.649&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 5</P>
+<P ALIGN="JUSTIFY">Lenght:&#9;1.392&#9;m</P>
+<P ALIGN="JUSTIFY">Gas cross section area:&#9;121.25&#9;m²</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;52.061&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 6</P>
+<P ALIGN="JUSTIFY">Lenght:&#9;1.972&#9;m</P>
+<P ALIGN="JUSTIFY">Gas cross section area:&#9;121.25&#9;m²</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;52.061&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 7</P>
+<P ALIGN="JUSTIFY">Lenght:&#9;1.392&#9;m</P>
+<P ALIGN="JUSTIFY">Gas cross section area:&#9;121.25&#9;m²</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;36.749&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 8</P>
+<P ALIGN="JUSTIFY">Lenght:&#9;4.871&#9;m</P>
+<P ALIGN="JUSTIFY">Gas cross section area:&#9;121.25&#9;m²</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;128.59&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 9</P>
+<P ALIGN="JUSTIFY">Lenght:&#9;10.4&#9;m</P>
+<P ALIGN="JUSTIFY">Gas cross section area:&#9;121.25&#9;m²</P>
+<P ALIGN="JUSTIFY">1</FONT><FONT FACE="Arial, helvetica" SIZE=1>st </FONT><FONT FACE="Arial, helvetica">heat exchange surface:&#9;138.4&#9;m²</P>
+<P ALIGN="JUSTIFY">2</FONT><FONT FACE="Arial, helvetica" SIZE=1>nd </FONT><FONT FACE="Arial, helvetica">heat exchange surface:&#9;138.5&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 10</P>
+<P ALIGN="JUSTIFY">Lenght:&#9;14.&#9;m</P>
+<P ALIGN="JUSTIFY">Gas cross section area:&#9;83.75&#9;m²</P>
+<P ALIGN="JUSTIFY">1</FONT><FONT FACE="Arial, helvetica" SIZE=1>st</FONT><FONT FACE="Arial, helvetica"> heat exchange surface:&#9;491.71&#9;m²</P>
+<P ALIGN="JUSTIFY">2</FONT><FONT FACE="Arial, helvetica" SIZE=1>nd</FONT><FONT FACE="Arial, helvetica"> heat exchange surface:&#9;491.71&#9;m²</P>
+<P ALIGN="JUSTIFY">3</FONT><FONT FACE="Arial, helvetica" SIZE=1>rd</FONT><FONT FACE="Arial, helvetica"> heat exchange surface:&#9;74.673&#9;m²</P>
+<P ALIGN="JUSTIFY">4</FONT><FONT FACE="Arial, helvetica" SIZE=1>th</FONT><FONT FACE="Arial, helvetica"> heat exchange surface:&#9;17.213&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">2.&#9;<U>Block evaporator walls (section 1):</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">General data</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Number of cells:&#9;9</P>
+<P ALIGN="JUSTIFY">Metal density:&#9;7900&#9;kg/m³</P>
+<P ALIGN="JUSTIFY">Metal specific heat:&#9;578&#9;J/kg/K</P>
+<P ALIGN="JUSTIFY">Metal conductivity:&#9;43&#9;W/m/K</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">Cells data</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 1</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;672</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0163&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.0254&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;11&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;5.5&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;198.82&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 2</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;36</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.1127&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.1937&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;2.556&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;0&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;17.283&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 3</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;1200</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0138&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.022&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;1.74&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;1.5&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;45.936&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 4</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;1200</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0138&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.022&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;1.74&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;1.5&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;45.936&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 5</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;1200</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0138&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.022&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;1.392&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;1.2&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;36.749&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 6</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;1200</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0138&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.022&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;1.972&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;1.7&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;52.061&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 7</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;1200</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0138&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.022&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;1.972&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;1.7&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;52.061&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 8</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;1200</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0138&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.022&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;1.392&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;1.2&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;36.749&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 9</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;1200</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0138&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.022&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;4.871&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;4.2&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;128.59&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">3.&#9;<U>Block evaporator walls (section 2):</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">General data</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Number of cells:&#9;5</P>
+<P ALIGN="JUSTIFY">Metal density:&#9;7900&#9;kg/m³</P>
+<P ALIGN="JUSTIFY">Metal specific heat:&#9;585&#9;J/kg/K</P>
+<P ALIGN="JUSTIFY">Metal conductivity:&#9;43&#9;W/m/K</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">Cells data</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 1</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;1200</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0131&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.0222&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;5.2&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;3.75&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;138.5&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 2&#9;</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;1200</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0131&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.0222&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;5.2&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;3.75&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;138.5&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 3</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;26</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0699&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.109&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;20.741&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;0&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;45.936&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 4</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;1097</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0131&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.0222&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;7.378&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;6.5&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;491.97&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cell 5</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;1097</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.0131&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.0222&#9;m</P>
+<P ALIGN="JUSTIFY">Pipes lenght:&#9;7.378&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;6.5&#9;m</P>
+<P ALIGN="JUSTIFY">Heat exchange surface:&#9;491.97&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">4.&#9;<U>Block intermediate manifold:</P>
+</U><P ALIGN="JUSTIFY">Number of inlet pipes:&#9;1</P>
+<P ALIGN="JUSTIFY">Number of outlet pipes:&#9;1</P>
+<P ALIGN="JUSTIFY">Internal volume:&#9;2&#9;m³</P>
+<P ALIGN="JUSTIFY">Mass of the manifold (empty):&#9;780&#9;kg</P>
+<P ALIGN="JUSTIFY">Metal specific heat:&#9;630&#9;J/kg/K</P>
+<P ALIGN="JUSTIFY">Metal conductivity:&#9;35&#9;W/m/K</P>
+<P ALIGN="JUSTIFY">Thickness:&#9;0.01&#9;m</P>
+<P ALIGN="JUSTIFY">Outside surface:&#9;10.1&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">5.&#9;<U>Block inlet manifold:</P>
+</U><P ALIGN="JUSTIFY">Number of inlet pipes:&#9;1</P>
+<P ALIGN="JUSTIFY">Number of outlet pipes:&#9;1</P>
+<P ALIGN="JUSTIFY">Internal volume:&#9;2&#9;m³</P>
+<P ALIGN="JUSTIFY">Mass of the manifold (empty):&#9;780&#9;kg</P>
+<P ALIGN="JUSTIFY">Metal specific heat:&#9;630&#9;J/kg/K</P>
+<P ALIGN="JUSTIFY">Metal conductivity:&#9;35&#9;W/m/K</P>
+<P ALIGN="JUSTIFY">Thickness:&#9;0.01&#9;m</P>
+<P ALIGN="JUSTIFY">Outside surface:&#9;10.1&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">6.&#9;<U>Block outlet manifold:</P>
+</U><P ALIGN="JUSTIFY">Number of inlet pipes:&#9;1</P>
+<P ALIGN="JUSTIFY">Number of outlet pipes:&#9;1</P>
+<P ALIGN="JUSTIFY">Internal volume:&#9;2&#9;m³</P>
+<P ALIGN="JUSTIFY">Mass of the manifold (empty):&#9;780&#9;kg</P>
+<P ALIGN="JUSTIFY">Metal specific heat:&#9;630&#9;J/kg/K</P>
+<P ALIGN="JUSTIFY">Metal conductivity:&#9;35&#9;W/m/K</P>
+<P ALIGN="JUSTIFY">Thickness:&#9;0.01&#9;m</P>
+<P ALIGN="JUSTIFY">Outside surface:&#9;10.1&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">7.&#9;<U>Block inlet valve:</P>
+</U><P ALIGN="JUSTIFY">Valve model:&#9;CADIPO&#9;(COD=0)</P>
+<P ALIGN="JUSTIFY">Opening characteristic:&#9;linear&#9;(ALFA=1)</P>
+<P ALIGN="JUSTIFY">Nominal conditions:</P>
+<P ALIGN="JUSTIFY">Fluid flow rate:&#9;285&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Inlet pressure:&#9;236&#9;bar</P>
+<P ALIGN="JUSTIFY">Outlet pressure:&#9;233.8&#9;bar</P>
+<P ALIGN="JUSTIFY">Inlet fluid enthalpy:&#9;1395&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Valve lift:&#9;0.8</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">8.&#9;<U>Block outlet valve:</P>
+</U><P ALIGN="JUSTIFY">Valve model:&#9;CADIPO&#9;(COD=0)</P>
+<P ALIGN="JUSTIFY">Opening characteristic:&#9;linear&#9;(ALFA=1)</P>
+<P ALIGN="JUSTIFY">Nominal conditions:</P>
+<P ALIGN="JUSTIFY">Fluid flow rate:&#9;285&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Inlet pressure:&#9;194&#9;bar</P>
+<P ALIGN="JUSTIFY">Outlet pressure:&#9;1&#9;bar</P>
+<P ALIGN="JUSTIFY">Inlet fluid enthalpy:&#9;2409&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Valve lift:&#9;0.8</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">Main data for the calculation of a steady state condition:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Fuel flow rate to the burner 1:&#9;5.436&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Fuel flow rate to the burner 2:&#9;5.436&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Fuel flow rate to the burner 3:&#9;0&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Fuel flow rate to the burner 4:&#9;3.624&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Fuel flow rate to the burner 5:&#9;3.624&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Fuel flow rate to the burner 6:&#9;0&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Comburent air flow rate to the burner 1:&#9;85.45&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Comburent air flow rate to the burner 2:&#9;85.45&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Comburent air flow rate to the burner 3:&#9;0&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Comburent air flow rate to the burner 4:&#9;56.96&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Comburent air flow rate to the burner 5:&#9;56.96&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Comburent air flow rate to the burner 6:&#9;0&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Comburent air temperature:&#9;568.4&#9;K</P>
+<P ALIGN="JUSTIFY">Circulating gas flow rate:&#9;41.8&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Circulating gas temperature:&#9;630.5&#9;K</P>
+<P ALIGN="JUSTIFY">Feedwater flow rate:&#9;284.9&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Feedwater enthalpy:&#9;1394.6&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Inlet valve lift:&#9;0.79602</P>
+<P ALIGN="JUSTIFY">Outlet valve lift:&#9;0.79725</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test3_e"></A>Test case 3: steady state condition</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the data file (F14.DAT) of the "CCOMB" model.</P>
+<P ALIGN="JUSTIFY">File F14.DAT is written by LEGOCAD System data assignment activity. Steady states evaluation activity rewrites (only for unknown variables) the values obtained for the calculated steady state condition:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>*LG*NOME IMPIANTO =CCOMB</P>
+<P>*LG*DATI DI NORMALIZZAZIONE P0=2.E+07*H0=1.E+06*W0=1.E+03*T0=1.E+03*R0=1.E+02*</P>
+<P>*LG* L0=1.E+01*V0=5.E+01*DP0=1.E+05*</P>
+<P>*LG*CONDIZIONI INIZIALI VARIABILI DEL SISTEMA (MKS)</P>
+<P>1 WG1_PA12 =284.90 *BL.(-EVAPA12)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>2 WG2_PA12 =284.90 *BL.(-EVAPA12)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>3 WG3_PA12 =284.90 *BL.(-EVAPA12)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>4 WG4_PA12 =284.90 *BL.(-EVAPA12)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>5 WG5_PA12 =284.90 *BL.(-EVAPA12)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>6 WG6_PA12 =284.90 *BL.(-EVAPA12)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>7 WG7_PA12 =284.90 *BL.(-EVAPA12)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>8 WG8_PA12 =284.90 *BL.(-EVAPA12)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>9 WUTUPA12 =284.90 *BL.(-EVAPA12)= * FLUID FLOW RATE AT THE TUBE OUTLET</P>
+<P>10 WITUPA12 =284.90 *BL.(-EVAPA12)= * FLUID FLOW RATE AT THE TUBE INLET</P>
+<P>11 TM1_PA12 =603.46 *BL.(-EVAPA12)= * EXTERNAL METAL SURFACE TEMP. CELL 1</P>
+<P>12 TM2_PA12 =602.04 *BL.(-EVAPA12)= * EXTERNAL METAL SURFACE TEMP. CELL 2</P>
+<P>13 TM3_PA12 =620.62 *BL.(-EVAPA12)= * EXTERNAL METAL SURFACE TEMP. CELL 3</P>
+<P>14 TM4_PA12 =629.29 *BL.(-EVAPA12)= * EXTERNAL METAL SURFACE TEMP. CELL 4</P>
+<P>15 TM5_PA12 =635.34 *BL.(-EVAPA12)= * EXTERNAL METAL SURFACE TEMP. CELL 5</P>
+<P>16 TM6_PA12 =640.31 *BL.(-EVAPA12)= * EXTERNAL METAL SURFACE TEMP. CELL 6</P>
+<P>17 TM7_PA12 =649.22 *BL.(-EVAPA12)= * EXTERNAL METAL SURFACE TEMP. CELL 7</P>
+<P>18 TM8_PA12 =650.47 *BL.(-EVAPA12)= * EXTERNAL METAL SURFACE TEMP. CELL 8</P>
+<P>19 TM9_PA12 =658.84 *BL.(-EVAPA12)= * EXTERNAL METAL SURFACE TEMP. CELL 9</P>
+<P>20 QT1_PA12 =.28469E+08*BL.(-EVAPA12)= * POWER ENTERING THE CELL 1 OF THE TU</P>
+<P>21 QT2_PA12 =-2823. *BL.(-EVAPA12)= * POWER ENTERING THE CELL 2 OF THE TU</P>
+<P>22 QT3_PA12 =.10924E+08*BL.(-EVAPA12)= * POWER ENTERING THE CELL 3 OF THE TU</P>
+<P>23 QT4_PA12 =.12563E+08*BL.(-EVAPA12)= * POWER ENTERING THE CELL 4 OF THE TU</P>
+<P>24 QT5_PA12 =.10164E+08*BL.(-EVAPA12)= * POWER ENTERING THE CELL 5 OF THE TU</P>
+<P>25 QT6_PA12 =.13859E+08*BL.(-EVAPA12)= * POWER ENTERING THE CELL 6 OF THE TU</P>
+<P>26 QT7_PA12 =.15958E+08*BL.(-EVAPA12)= * POWER ENTERING THE CELL 7 OF THE TU</P>
+<P>27 QT8_PA12 =.92511E+07*BL.(-EVAPA12)= * POWER ENTERING THE CELL 8 OF THE TU</P>
+<P>28 QT9_PA12 =.41217E+08*BL.(-EVAPA12)= * POWER ENTERING THE CELL 9 OF THE TU</P>
+<P>29 HUTUPA12 =.18944E+07*BL.(-EVAPA12)= * FLUID ENTHALPY AT THE TUBE OUTLET</P>
+<P>30 HIITPA12 =.13946E+07*BL.(-EVAPA12)= * FLUID ENTHALPY AT THE TUBE INLET (F</P>
+<P>31 HCOLCP23 =.18944E+07*BL.(COLTCP23)= * FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>32 PCOLCP23 =.21782E+08*BL.(COLTCP23)= * FLUID PRESSURE IN THE MANIFOLD</P>
+<P>33 TCOLCP23 =644.86 *BL.(COLTCP23)= * METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>34 WG1_PA34 =284.90 *BL.(-EVAPA34)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>35 WG2_PA34 =284.90 *BL.(-EVAPA34)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>36 WG3_PA34 =284.90 *BL.(-EVAPA34)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>37 WG4_PA34 =284.90 *BL.(-EVAPA34)= * FLUID FLOW RATE AT THE OUTLET CELL</P>
+<P>38 WUTUPA34 =284.90 *BL.(-EVAPA34)= * FLUID FLOW RATE AT THE TUBE OUTLET</P>
+<P>39 WITUPA34 =284.90 *BL.(-EVAPA34)=NOTO* FLUID FLOW RATE AT THE TUBE INLET</P>
+<P>40 TM1_PA34 =655.78 *BL.(-EVAPA34)= * EXTERNAL METAL SURFACE TEMP. CELL 1</P>
+<P>41 TM2_PA34 =655.17 *BL.(-EVAPA34)= * EXTERNAL METAL SURFACE TEMP. CELL 2</P>
+<P>42 TM3_PA34 =643.06 *BL.(-EVAPA34)= * EXTERNAL METAL SURFACE TEMP. CELL 3</P>
+<P>43 TM4_PA34 =673.55 *BL.(-EVAPA34)= * EXTERNAL METAL SURFACE TEMP. CELL 4</P>
+<P>44 TM5_PA34 =694.48 *BL.(-EVAPA34)= * EXTERNAL METAL SURFACE TEMP. CELL 5</P>
+<P>45 QT1_PA34 =.27198E+08*BL.(-EVAPA34)= * POWER ENTERING THE CELL 1 OF THE TU</P>
+<P>46 QT2_PA34 =.27206E+08*BL.(-EVAPA34)= * POWER ENTERING THE CELL 2 OF THE TU</P>
+<P>47 QT3_PA34 =-.5605E+05*BL.(-EVAPA34)= * POWER ENTERING THE CELL 3 OF THE TU</P>
+<P>48 QT4_PA34 =.89077E+08*BL.(-EVAPA34)= * POWER ENTERING THE CELL 4 OF THE TU</P>
+<P>49 QT5_PA34 =.88929E+08*BL.(-EVAPA34)= * POWER ENTERING THE CELL 5 OF THE TU</P>
+<P>50 HUTUPA34 =.27100E+07*BL.(-EVAPA34)= * FLUID ENTHALPY AT THE TUBE OUTLET</P>
+<P>51 HIITPA34 =.18944E+07*BL.(-EVAPA34)= * FLUID ENTHALPY AT THE TUBE INLET (F</P>
+<P>52 TF_1CCOM =1719.0 *BL.(CCCMCCOM)= * FLUE GAS TEMPERATURE C.C. CELL 1</P>
+<P>53 TF_2CCOM =1863.8 *BL.(CCCMCCOM)= * FLUE GAS TEMPERATURE C.C. CELL 2</P>
+<P>54 TF_3CCOM =1924.5 *BL.(CCCMCCOM)= * FLUE GAS TEMPERATURE C.C. CELL 3</P>
+<P>55 TF_4CCOM =1930.3 *BL.(CCCMCCOM)= * FLUE GAS TEMPERATURE C.C. CELL 4</P>
+<P>56 TF_5CCOM =1951.5 *BL.(CCCMCCOM)= * FLUE GAS TEMPERATURE C.C. CELL 5</P>
+<P>57 TF_6CCOM =1950.8 *BL.(CCCMCCOM)= * FLUE GAS TEMPERATURE C.C. CELL 6</P>
+<P>58 TF_7CCOM =1919.6 *BL.(CCCMCCOM)= * FLUE GAS TEMPERATURE C.C. CELL 7</P>
+<P>59 TF_8CCOM =1847.5 *BL.(CCCMCCOM)= * FLUE GAS TEMPERATURE C.C. CELL 8</P>
+<P>60 TF_9CCOM =1704.8 *BL.(CCCMCCOM)= * FLUE GAS TEMPERATURE C.C. CELL 9</P>
+<P>61 TF10CCOM =1443.1 *BL.(CCCMCCOM)= * FLUE GAS TEMPERATURE C.C. CELL 10</P>
+<P>62 GC11CCOM =128.36 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 1</P>
+<P>63 GC12CCOM =191.29 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 1</P>
+<P>64 GC13CCOM =211.17 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 1</P>
+<P>65 GC14CCOM =213.58 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 1</P>
+<P>66 GC15CCOM =203.04 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 1</P>
+<P>67 GC16CCOM =235.49 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 1</P>
+<P>68 GC17CCOM =198.35 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 1</P>
+<P>69 GC18CCOM =269.64 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 1</P>
+<P>70 GC19CCOM =249.40 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 1</P>
+<P>71 GC29CCOM =249.29 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 2</P>
+<P>72 GC1*CCOM =175.58 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 1</P>
+<P>73 GC2*CCOM =178.92 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 2</P>
+<P>74 GC3*CCOM =171.65 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 3</P>
+<P>75 GC4*CCOM =169.79 *BL.(CCCMCCOM)= * GLOBAL EXCHANGE COEFFICENT WALL 4</P>
+<P>76 WFCCCCOM =344.74 *BL.(CCCMCCOM)= * FLUE GAS GLOBAL FLOW RATE C.C.</P>
+<P>77 %O2_CCOM =3.9005 *BL.(CCCMCCOM)= * PARTIAL PRESSURE O2 IN %</P>
+<P>78 %CO2CCOM =11.013 *BL.(CCCMCCOM)= * PARTIAL PRESSURE CO2 IN %</P>
+<P>79 %H2OCCOM =11.599 *BL.(CCCMCCOM)= * PARTIAL PRESSURE H2O IN %</P>
+<P>80 %FMACCOM =7.2542 *BL.(CCCMCCOM)= * MASS FRACTION H2O (IN %) IN THE FLU</P>
+<P>81 T_1_DS34 =1704.8 *BL.(DISNDS34)= * DISN: OUTPUT VARIABLE NUM. 1</P>
+<P>82 T_2_DS34 =1704.8 *BL.(DISNDS34)= * DISN: OUTPUT VARIABLE NUM. 2</P>
+<P>83 T_1_DP34 =1443.1 *BL.(DISNDP34)= * DISN: OUTPUT VARIABLE NUM. 1</P>
+<P>84 T_2_DP34 =1443.1 *BL.(DISNDP34)= * DISN: OUTPUT VARIABLE NUM. 2</P>
+<P>85 HCOLC4PC =.27100E+07*BL.(COLTC4PC)= * FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>86 PCOLC4PC =.19387E+08*BL.(COLTC4PC)= * FLUID PRESSURE IN THE MANIFOLD</P>
+<P>87 TCOLC4PC =654.74 *BL.(COLTC4PC)= * METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>88 HCOLCUEC =.13946E+07*BL.(COLTCUEC)= * FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>89 PCOLCUEC =.23378E+08*BL.(COLTCUEC)= * FLUID PRESSURE IN THE MANIFOLD</P>
+<P>90 TCOLCUEC =584.83 *BL.(COLTCUEC)= * METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>91 WVALVOUT =284.90 *BL.(VALVVOUT)= * FLUID FLOW RATE IN THE VALVE</P>
+<P>92 WVALVING =284.90 *BL.(VALVVING)= * FLUID FLOW RATE IN THE VALVE</P>
+<P>93 PC1_PA12 =.22968E+08*BL.(-EVAPA12)= * MEAN PRESSURE INSIDE THE CELL 1 OF</P>
+<P>94 PC2_PA12 =.22747E+08*BL.(-EVAPA12)= * MEAN PRESSURE INSIDE THE CELL 2 OF</P>
+<P>95 PC3_PA12 =.22726E+08*BL.(-EVAPA12)= * MEAN PRESSURE INSIDE THE CELL 3 OF</P>
+<P>96 PC4_PA12 =.22622E+08*BL.(-EVAPA12)= * MEAN PRESSURE INSIDE THE CELL 4 OF</P>
+<P>97 PC5_PA12 =.22527E+08*BL.(-EVAPA12)= * MEAN PRESSURE INSIDE THE CELL 5 OF</P>
+<P>98 PC6_PA12 =.22422E+08*BL.(-EVAPA12)= * MEAN PRESSURE INSIDE THE CELL 6 OF</P>
+<P>99 PC7_PA12 =.22296E+08*BL.(-EVAPA12)= * MEAN PRESSURE INSIDE THE CELL 7 OF</P>
+<P>0 PC8_PA12 =.22184E+08*BL.(-EVAPA12)= * MEAN PRESSURE INSIDE THE CELL 8 OF</P>
+<P>1 PC9_PA12 =.21962E+08*BL.(-EVAPA12)= * MEAN PRESSURE INSIDE THE CELL 9 OF</P>
+<P>2 PC1_PA34 =.21701E+08*BL.(-EVAPA34)= * MEAN PRESSURE INSIDE THE CELL 1 OF</P>
+<P>3 PC2_PA34 =.21516E+08*BL.(-EVAPA34)= * MEAN PRESSURE INSIDE THE CELL 2 OF</P>
+<P>4 PC3_PA34 =.21076E+08*BL.(-EVAPA34)= * MEAN PRESSURE INSIDE THE CELL 3 OF</P>
+<P>5 PC4_PA34 =.20418E+08*BL.(-EVAPA34)= * MEAN PRESSURE INSIDE THE CELL 4 OF</P>
+<P>6 PC5_PA34 =.19777E+08*BL.(-EVAPA34)= * MEAN PRESSURE INSIDE THE CELL 5 OF</P>
+<P>*LG*CONDIZIONI INIZIALI VARIABILI DI INGRESSO</P>
+<P>1 TF21PA12 =599.40 *BL.(-EVAPA12)=NOTO* CELL 2 FLUID MEAN TEMP. IN EXTERNAL</P>
+<P>2 GF21PA12 =60.000 *BL.(-EVAPA12)=NOTO* CELL2 EXCHANGE COEFF. FLUID - EXT.</P>
+<P>3 ATTRPA12 =.94861E-01*BL.(-EVAPA12)=NOTO* FRICTION COEFFICIENT OF THE TUBE</P>
+<P>4 TESTCP23 =288.15 *BL.(COLTCP23)=NOTO* FLUID TEMPERATURE OUTSIDE THE MANIF</P>
+<P>5 GESTCP23 =1.0000 *BL.(COLTCP23)=NOTO* THERMAL EXCHANGE COEFF. OUTSIDE THE</P>
+<P>6 TF31PA34 =636.30 *BL.(-EVAPA34)=NOTO* CELL 3 FLUID MEAN TEMP. IN EXTERNAL</P>
+<P>7 GF31PA34 =60.000 *BL.(-EVAPA34)=NOTO* CELL3 EXCHANGE COEFF. FLUID - EXT.</P>
+<P>8 ATTRPA34 =.24897E-01*BL.(-EVAPA34)= * FRICTION COEFFICIENT OF THE TUBE</P>
+<P>9 TM3*CCOM =648.10 *BL.(CCCMCCOM)=NOTO* MET. TEMP. 3 FLUE GAS SIDE CELL 10</P>
+<P>10 TM4*CCOM =635.80 *BL.(CCCMCCOM)=NOTO* MET. TEMP. 4 FLUE GAS SIDE CELL 10</P>
+<P>11 WCO1CCOM =5.4360 *BL.(CCCMCCOM)=NOTO* FUEL FLOW RATE TO THE BURNER 1</P>
+<P>12 ICO1CCOM =2.0000 *BL.(CCCMCCOM)=NOTO* KIND OF FUEL IN THE BURNER 1</P>
+<P>13 WCO2CCOM =5.4360 *BL.(CCCMCCOM)=NOTO* FUEL FLOW RATE TO THE BURNER 2</P>
+<P>14 ICO2CCOM =2.0000 *BL.(CCCMCCOM)=NOTO* KIND OF FUEL IN THE BURNER 2</P>
+<P>15 WCO3CCOM =.00000E+00*BL.(CCCMCCOM)=NOTO* FUEL FLOW RATE TO THE BURNER 3</P>
+<P>16 ICO3CCOM =2.0000 *BL.(CCCMCCOM)=NOTO* KIND OF FUEL IN THE BURNER 3</P>
+<P>17 WCO4CCOM =3.6240 *BL.(CCCMCCOM)=NOTO* FUEL FLOW RATE TO THE BURNER 4</P>
+<P>18 ICO4CCOM =2.0000 *BL.(CCCMCCOM)=NOTO* KIND OF FUEL IN THE BURNER 4</P>
+<P>19 WCO5CCOM =3.6240 *BL.(CCCMCCOM)=NOTO* FUEL FLOW RATE TO THE BURNER 5</P>
+<P>20 ICO5CCOM =2.0000 *BL.(CCCMCCOM)=NOTO* KIND OF FUEL IN THE BURNER 5</P>
+<P>21 WCO6CCOM =.00000E+00*BL.(CCCMCCOM)=NOTO* FUEL FLOW RATE TO THE BURNER 6</P>
+<P>22 ICO6CCOM =2.0000 *BL.(CCCMCCOM)=NOTO* KIND OF FUEL IN THE BURNER 6</P>
+<P>23 WAR1CCOM =85.450 *BL.(CCCMCCOM)=NOTO* AIR-FLUE GAS MIXTURE FLOW RATE BURN</P>
+<P>24 WAR2CCOM =85.450 *BL.(CCCMCCOM)=NOTO* AIR-FLUE GAS MIXTURE FLOW RATE BURN</P>
+<P>25 WAR3CCOM =.00000E+00*BL.(CCCMCCOM)=NOTO* AIR-FLUE GAS MIXTURE FLOW RATE BURN</P>
+<P>26 WAR4CCOM =56.960 *BL.(CCCMCCOM)=NOTO* AIR-FLUE GAS MIXTURE FLOW RATE BURN</P>
+<P>27 WAR5CCOM =56.960 *BL.(CCCMCCOM)=NOTO* AIR-FLUE GAS MIXTURE FLOW RATE BURN</P>
+<P>28 WAR6CCOM =.00000E+00*BL.(CCCMCCOM)=NOTO* AIR-FLUE GAS MIXTURE FLOW RATE BURN</P>
+<P>29 ABR1CCOM =.00000E+00*BL.(CCCMCCOM)=NOTO* TRAVERSE DEGREE BURNER 1</P>
+<P>30 ABR2CCOM =.00000E+00*BL.(CCCMCCOM)=NOTO* TRAVERSE DEGREE BURNER 2</P>
+<P>31 ABR3CCOM =.00000E+00*BL.(CCCMCCOM)=NOTO* TRAVERSE DEGREE BURNER 3</P>
+<P>32 ABR4CCOM =.00000E+00*BL.(CCCMCCOM)=NOTO* TRAVERSE DEGREE BURNER 4</P>
+<P>33 ABR5CCOM =.00000E+00*BL.(CCCMCCOM)=NOTO* TRAVERSE DEGREE BURNER 5</P>
+<P>34 ABR6CCOM =.00000E+00*BL.(CCCMCCOM)=NOTO* TRAVERSE DEGREE BURNER 6</P>
+<P>35 WRIFCCOM =41.800 *BL.(CCCMCCOM)=NOTO* RECIRCULATING FLOW RATE FROM THE HO</P>
+<P>36 TRIFCCOM =630.50 *BL.(CCCMCCOM)=NOTO* FLUE GAS TEMPERATURE OF HOPPER AND</P>
+<P>37 WARCCCOM =284.80 *BL.(CCCMCCOM)=NOTO* TOTAL COMBURENT AIR FLOW RATE</P>
+<P>38 TACOCCOM =568.40 *BL.(CCCMCCOM)=NOTO* COMBURENT AIR TEMPERATURE</P>
+<P>39 FACCCCOM =.79110 *BL.(CCCMCCOM)=NOTO* CORRECTIVE FACTOR OF THERMAL CONVEC</P>
+<P>40 FACRCCOM =.79110 *BL.(CCCMCCOM)=NOTO* CORRECTIVE FACTOR OF THERMAL RADIOA</P>
+<P>41 AKFLCCOM =1.0000 *BL.(CCCMCCOM)=NOTO* CORRECTIVE FACTOR OF FLAME LENGHT</P>
+<P>42 WGATCCOM =.00000E+00*BL.(CCCMCCOM)=NOTO* TEMPERING GAS FLOW RATE</P>
+<P>43 HU_1C4PC =.24089E+07*BL.(COLTC4PC)=NOTO* ENTHALPY IN THE COMING OUT BRANCH N</P>
+<P>44 TESTC4PC =288.15 *BL.(COLTC4PC)=NOTO* FLUID TEMPERATURE OUTSIDE THE MANIF</P>
+<P>45 GESTC4PC =1.0000 *BL.(COLTC4PC)=NOTO* THERMAL EXCHANGE COEFF. OUTSIDE THE</P>
+<P>46 HE_1CUEC =.13946E+07*BL.(COLTCUEC)=NOTO* ENTHALPY IN THE ENTERING BRANCH N.</P>
+<P>47 TESTCUEC =288.15 *BL.(COLTCUEC)=NOTO* FLUID TEMPERATURE OUTSIDE THE MANIF</P>
+<P>48 GESTCUEC =1.0000 *BL.(COLTCUEC)=NOTO* THERMAL EXCHANGE COEFF. OUTSIDE THE</P>
+<P>49 PUVAVOUT =.10000E+06*BL.(VALVVOUT)=NOTO* FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>50 ALZAVOUT =.79725 *BL.(VALVVOUT)=NOTO* VALVE LIFT</P>
+<P>51 PIVAVING =.23600E+08*BL.(VALVVING)=NOTO* FLUID PRESSURE AT THE VALVE INLET</P>
+<P>52 HVALVING =.13946E+07*BL.(VALVVING)=NOTO* VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>53 ALZAVING =.79602 *BL.(VALVVING)=NOTO* VALVE LIFT</P>
+<P>*LG*DATI FISICI E GEOMETRICI DEL SISTEMA SUDDIVISI A BLOCCHI</P>
+<P>*LG*DATI DEL BLOCCO -EVAPA12 MODULO EVAP - boiler walls (part 1)</P>
+<P>* METAL DATA</P>
+<P>ROM =7900. * CM =578. * COND =43. *</P>
+<P>* DATA FOR CELL 1*</P>
+<P>NTUB 1 =672. * DIAI 1 =0.01626 * DIAE 1 =0.0254 *</P>
+<P>LUNG 1 =11. * DELZ 1 =5.5 * CRIG 1 =0. *</P>
+<P>VOL.M.C1 = *</P>
+<P>SUP.1 C1 =198.82 * SUP.2 C1 = * SUP.3 C1 = *</P>
+<P>SUP.4 C1 = * SUP.5 C1 = * SUP.6 C1 = *</P>
+<P>* DATA FOR CELL 2*</P>
+<P>NTUB 2 =36. * DIAI 2 =0.1127 * DIAE 2 =0.1937 *</P>
+<P>LUNG 2 =2.556 * DELZ 2 = * CRIG 2 =0. *</P>
+<P>VOL.M.C2 = *</P>
+<P>SUP.1 C2 =17.823 * SUP.2 C2 = * SUP.3 C2 = *</P>
+<P>SUP.4 C2 = * SUP.5 C2 = * SUP.6 C2 = *</P>
+<P>* DATA FOR CELL 3*</P>
+<P>NTUB 3 =1200. * DIAI 3 =0.01384. * DIAE 3 =0.022 *</P>
+<P>LUNG 3 =1.74 * DELZ 3 =1.5 * CRIG 3 =0. *</P>
+<P>VOL.M.C3 = *</P>
+<P>SUP.1 C3 =45.936 * SUP.2 C3 = * SUP.3 C3 = *</P>
+<P>SUP.4 C3 = * SUP.5 C3 = * SUP.6 C3 = *</P>
+<P>* DATA FOR CELL 4*</P>
+<P>NTUB 4 =1200. * DIAI 4 =0.01384 * DIAE 4 =0.022 *</P>
+<P>LUNG 4 =1.74 * DELZ 4 =1.5 * CRIG 4 =0. *</P>
+<P>VOL.M.C4 = *</P>
+<P>SUP.1 C4 =45.936 * SUP.2 C4 = * SUP.3 C4 = *</P>
+<P>SUP.4 C4 = * SUP.5 C4 = * SUP.6 C4 = *</P>
+<P>* DATA FOR CELL 5*</P>
+<P>NTUB 5 =1200. * DIAI 5 =0.01384 * DIAE 5 =0.022 *</P>
+<P>LUNG 5 =1.392 * DELZ 5 =1.2 * CRIG 5 =0. *</P>
+<P>VOL.M.C5 = *</P>
+<P>SUP.1 C5 =36.7488 * SUP.2 C5 = * SUP.3 C5 = *</P>
+<P>SUP.4 C5 = * SUP.5 C5 = * SUP.6 C5 = *</P>
+<P>* DATA FOR CELL 6*</P>
+<P>NTUB 6 =1200. * DIAI 6 =0.01384 * DIAE 6 =0.022 *</P>
+<P>LUNG 6 =1.972 * DELZ 6 =1.7 * CRIG 6 =0. *</P>
+<P>VOL.M.C6 = *</P>
+<P>SUP.1 C6 =52.0608 * SUP.2 C6 = * SUP.3 C6 = *</P>
+<P>SUP.4 C6 = * SUP.5 C6 = * SUP.6 C6 = *</P>
+<P>* DATA FOR CELL 7*</P>
+<P>NTUB 7 =1200. * DIAI 7 =0.01384 * DIAE 7 =0.022 *</P>
+<P>LUNG 7 =1.972 * DELZ 7 =1.7 * CRIG 7 =0. *</P>
+<P>VOL.M.C7 = *</P>
+<P>SUP.1 C7 =52.0608 * SUP.2 C7 = * SUP.3 C7 = *</P>
+<P>SUP.4 C7 = * SUP.5 C7 = * SUP.6 C7 = *</P>
+<P>* DATA FOR CELL 8*</P>
+<P>NTUB 8 =1200. * DIAI 8 =0.01384 * DIAE 8 =0.022 *</P>
+<P>LUNG 8 =1.392 * DELZ 8 =1.2 * CRIG 8 =0. *</P>
+<P>VOL.M.C8 = *</P>
+<P>SUP.1 C8 =36.7488 * SUP.2 C8 = * SUP.3 C8 = *</P>
+<P>SUP.4 C8 = * SUP.5 C8 = * SUP.6 C8 = *</P>
+<P>* DATA FOR CELL 9*</P>
+<P>NTUB 9 =1200. * DIAI 9 =0.01384 * DIAE 9 =0.022 *</P>
+<P>LUNG 9 =4.871 * DELZ 9 =4.2 * CRIG 9 =0. *</P>
+<P>VOL.M.C9 = *</P>
+<P>SUP.1 C9 =128.5944 * SUP.2 C9 = * SUP.3 C9 = *</P>
+<P>SUP.4 C9 = * SUP.5 C9 = * SUP.6 C9 = *</P>
+<P>*LG*DATI DEL BLOCCO COLTCP23 MODULO COLT - boiler walls intermediate manifold</P>
+<P>NU.TU.EN =1. * NU.TU.US =1. * VOLUME =2. *</P>
+<P>MASSA ME =780. * CP MET. =630. * COND MET =35. *</P>
+<P>SPESSORE =0.01 * SUP. ES =10.1 *</P>
+<P>*LG*DATI DEL BLOCCO -EVAPA34 MODULO EVAP - boiler walls (part 2)</P>
+<P>* METAL DATA</P>
+<P>ROM =7900. * CM =585. * COND =43. *</P>
+<P>* DATA FOR CELL 1*</P>
+<P>NTUB 1 =1200. * DIAI 1 =0.01306 * DIAE 1 =0.0222 *</P>
+<P>LUNG 1 =5.2 * DELZ 1 =3.75 * CRIG 1 =0. *</P>
+<P>VOL.M.C1 = *</P>
+<P>SUP.1 C1 =138.5 * SUP.2 C1 = * SUP.3 C1 = *</P>
+<P>SUP.4 C1 = * SUP.5 C1 = * SUP.6 C1 = *</P>
+<P>* DATA FOR CELL 2*</P>
+<P>NTUB 2 =1200. * DIAI 2 =0.01306 * DIAE 2 =0.0222 *</P>
+<P>LUNG 2 =5.2 * DELZ 2 =3.75 * CRIG 2 =0. *</P>
+<P>VOL.M.C2 = *</P>
+<P>SUP.1 C2 =138.5 * SUP.2 C2 = * SUP.3 C2 = *</P>
+<P>SUP.4 C2 = * SUP.5 C2 = * SUP.6 C2 = *</P>
+<P>* DATA FOR CELL 3*</P>
+<P>NTUB 3 =26. * DIAI 3 =0.0699 * DIAE 3 =0.109 *</P>
+<P>LUNG 3 =20.741 * DELZ 3 = * CRIG 3 =0. *</P>
+<P>VOL.M.C3 =2.974 *</P>
+<P>SUP.1 C3 =138.211 * SUP.2 C3 = * SUP.3 C3 = *</P>
+<P>SUP.4 C3 = * SUP.5 C3 = * SUP.6 C3 = *</P>
+<P>* DATA FOR CELL 4*</P>
+<P>NTUB 4 =1097. * DIAI 4 =0.01306 * DIAE 4 =0.0222 *</P>
+<P>LUNG 4 =7.378 * DELZ 4 =6.5 * CRIG 4 =0. *</P>
+<P>VOL.M.C4 =2.262 *</P>
+<P>SUP.1 C4 =491.971 * SUP.2 C4 = * SUP.3 C4 = *</P>
+<P>SUP.4 C4 = * SUP.5 C4 = * SUP.6 C4 = *</P>
+<P>* DATA FOR CELL 5*</P>
+<P>NTUB 5 =1097. * DIAI 5 =0.01306 * DIAE 5 =0.0222 *</P>
+<P>LUNG 5 =7.378 * DELZ 5 =6.5 * CRIG 5 =0. *</P>
+<P>VOL.M.C5 =2.262 *</P>
+<P>SUP.1 C5 =491.971 * SUP.2 C5 = * SUP.3 C5 = *</P>
+<P>SUP.4 C5 = * SUP.5 C5 = * SUP.6 C5 = *</P>
+<P>*LG*DATI DEL BLOCCO CCCMCCOM MODULO CCCM - combustion chamber</P>
+<P>NCEL =10. * NBRUC =6. *</P>
+<P>EMISPAR =0.95 * ITMPRING =8. * UMIDARIA =0.0120 *</P>
+<P>IBRUC 1 =2. * IBRUC 2 =3. * IBRUC 3 =4. *</P>
+<P>IBRUC 4 =5. * IBRUC 5 =6. * IBRUC 6 =7. *</P>
+<P>WNCOGAS = * WNCONAFT =3.01 * WNCOCARB = *</P>
+<P>CARBGAS = * HYDRGAS = * SULFGAS = *</P>
+<P>NITRGAS = * OXYGGAS = * UMIDGAS = *</P>
+<P>ELUMGAS = * ENT GAS = * PCI GAS = *</P>
+<P>CARBNAFT =.84 * HYDRNAFT =.115 * SULFNAFT =0.035 *</P>
+<P>NITRNAFT =0. * OXYGNAFT =0. * UMIDNAFT =0.1 *</P>
+<P>ENT NAFT =0. * PCI NAFT =4.08e7 *</P>
+<P>SOOTC 1 = * SOOTC 2 = * SOOTC 3 = *</P>
+<P>SOOTC 4 = * SOOTC 5 = * SOOTC 6 = *</P>
+<P>SOOTC 7 = * SOOTC 8 = * SOOTC 9 = *</P>
+<P>SOOTC 10 = *</P>
+<P>COMBTIME = * ROCARB = * DIAMPART = *</P>
+<P>ASHCARB = * ENT CARB = * PCI CARB = *</P>
+<P>CARBCARB = * HYDRCARB = * SULFCARB = *</P>
+<P>NITRCARB = * OXYGCARB = * UMIDCARB = *</P>
+<P>* CELLS DATA 1*</P>
+<P>LUNG 1 =7. * SEZ 1 =121.25 *</P>
+<P>SUP1 C 1 =198.82 * SUP2 C 1 = * SUP3 C 1 = *</P>
+<P>SUP4 C 1 = * SUP5 C 1 = * SUP6 C 1 = *</P>
+<P>SUP7 C 1 = * SUP8 C 1 = * SUP9 C 1 = *</P>
+<P>FCO1 C 1 =1.57 * FCO2 C 1 = * FCO3 C 1 = *</P>
+<P>FCO4 C 1 = * FCO5 C 1 = * FCO6 C 1 = *</P>
+<P>FCO7 C 1 = * FCO8 C 1 = * FCO9 C 1 = *</P>
+<P>* CELLS DATA 2*</P>
+<P>LUNG 2 =1.74 * SEZ 2 =121.25 *</P>
+<P>SUP1 C 2 =45.936 * SUP2 C 2 = * SUP3 C 2 = *</P>
+<P>SUP4 C 2 = * SUP5 C 2 = * SUP6 C 2 = *</P>
+<P>SUP7 C 2 = * SUP8 C 2 = * SUP9 C 2 = *</P>
+<P>FCO1 C 2 =1.57 * FCO2 C 2 = * FCO3 C 2 = *</P>
+<P>FCO4 C 2 = * FCO5 C 2 = * FCO6 C 2 = *</P>
+<P>FCO7 C 2 = * FCO8 C 2 = * FCO9 C 2 = *</P>
+<P>* CELLS DATA 3*</P>
+<P>LUNG 3 =1.74 * SEZ 3 =121.25 *</P>
+<P>SUP1 C 3 =45.936 * SUP2 C 3 = * SUP3 C 3 = *</P>
+<P>SUP4 C 3 = * SUP5 C 3 = * SUP6 C 3 = *</P>
+<P>SUP7 C 3 = * SUP8 C 3 = * SUP9 C 3 = *</P>
+<P>FCO1 C 3 =1.57 * FCO2 C 3 = * FCO3 C 3 = *</P>
+<P>FCO4 C 3 = * FCO5 C 3 = * FCO6 C 3 = *</P>
+<P>FCO7 C 3 = * FCO8 C 3 = * FCO9 C 3 = *</P>
+<P>* CELLS DATA 4*</P>
+<P>LUNG 4 =1.74 * SEZ 4 =121.25 *</P>
+<P>SUP1 C 4 =36.6488 * SUP2 C 4 = * SUP3 C 4 = *</P>
+<P>SUP4 C 4 = * SUP5 C 4 = * SUP6 C 4 = *</P>
+<P>SUP7 C 4 = * SUP8 C 4 = * SUP9 C 4 = *</P>
+<P>FCO1 C 4 =1.57 * FCO2 C 4 = * FCO3 C 4 = *</P>
+<P>FCO4 C 4 = * FCO5 C 4 = * FCO6 C 4 = *</P>
+<P>FCO7 C 4 = * FCO8 C 4 = * FCO9 C 4 = *</P>
+<P>* CELLS DATA 5*</P>
+<P>LUNG 5 =1.392 * SEZ 5 =121.25 *</P>
+<P>SUP1 C 5 =52.0608 * SUP2 C 5 = * SUP3 C 5 = *</P>
+<P>SUP4 C 5 = * SUP5 C 5 = * SUP6 C 5 = *</P>
+<P>SUP7 C 5 = * SUP8 C 5 = * SUP9 C 5 = *</P>
+<P>FCO1 C 5 =1.57 * FCO2 C 5 = * FCO3 C 5 = *</P>
+<P>FCO4 C 5 = * FCO5 C 5 = * FCO6 C 5 = *</P>
+<P>FCO7 C 5 = * FCO8 C 5 = * FCO9 C 5 = *</P>
+<P>* CELLS DATA 6*</P>
+<P>LUNG 6 =1.972 * SEZ 6 =121.25 *</P>
+<P>SUP1 C 6 =52.0608 * SUP2 C 6 = * SUP3 C 6 = *</P>
+<P>SUP4 C 6 = * SUP5 C 6 = * SUP6 C 6 = *</P>
+<P>SUP7 C 6 = * SUP8 C 6 = * SUP9 C 6 = *</P>
+<P>FCO1 C 6 =1.57 * FCO2 C 6 = * FCO3 C 6 = *</P>
+<P>FCO4 C 6 = * FCO5 C 6 = * FCO6 C 6 = *</P>
+<P>FCO7 C 6 = * FCO8 C 6 = * FCO9 C 6 = *</P>
+<P>* CELLS DATA 7*</P>
+<P>LUNG 7 =1.392 * SEZ 7 =121.25 *</P>
+<P>SUP1 C 7 =36.7488 * SUP2 C 7 = * SUP3 C 7 = *</P>
+<P>SUP4 C 7 = * SUP5 C 7 = * SUP6 C 7 = *</P>
+<P>SUP7 C 7 = * SUP8 C 7 = * SUP9 C 7 = *</P>
+<P>FCO1 C 7 =1.57 * FCO2 C 7 = * FCO3 C 7 = *</P>
+<P>FCO4 C 7 = * FCO5 C 7 = * FCO6 C 7 = *</P>
+<P>FCO7 C 7 = * FCO8 C 7 = * FCO9 C 7 = *</P>
+<P>* CELLS DATA 8*</P>
+<P>LUNG 8 =4.871 * SEZ 8 =121.25 *</P>
+<P>SUP1 C 8 =128.5944 * SUP2 C 8 = * SUP3 C 8 = *</P>
+<P>SUP4 C 8 = * SUP5 C 8 = * SUP6 C 8 = *</P>
+<P>SUP7 C 8 = * SUP8 C 8 = * SUP9 C 8 = *</P>
+<P>FCO1 C 8 =1.57 * FCO2 C 8 = * FCO3 C 8 = *</P>
+<P>FCO4 C 8 = * FCO5 C 8 = * FCO6 C 8 = *</P>
+<P>FCO7 C 8 = * FCO8 C 8 = * FCO9 C 8 = *</P>
+<P>* CELLS DATA 9*</P>
+<P>LUNG 9 =10.4 * SEZ 9 =121.25 *</P>
+<P>SUP1 C 9 =138.5 * SUP2 C 9 =138.5 * SUP3 C 9 = *</P>
+<P>SUP4 C 9 = * SUP5 C 9 = * SUP6 C 9 = *</P>
+<P>SUP7 C 9 = * SUP8 C 9 = * SUP9 C 9 = *</P>
+<P>FCO1 C 9 =1.57 * FCO2 C 9 =1.57 * FCO3 C 9 = *</P>
+<P>FCO4 C 9 = * FCO5 C 9 = * FCO6 C 9 = *</P>
+<P>FCO7 C 9 = * FCO8 C 9 = * FCO9 C 9 = *</P>
+<P>* CELLS DATA 10*</P>
+<P>LUNG 10 =14.7 * SEZ 10 =83.75 *</P>
+<P>SUP1 C10 =491.71 * SUP2 C10 =491.71 * SUP3 C10 =74.673 *</P>
+<P>SUP4 C10 =17.213 * SUP5 C10 = * SUP6 C10 = *</P>
+<P>SUP7 C10 = * SUP8 C10 = * SUP9 C10 = *</P>
+<P>FCO1 C10 =1.57 * FCO2 C10 =1.57 * FCO3 C10 =1.57 *</P>
+<P>FCO4 C10 =1.57 * FCO5 C10 = * FCO6 C10 = *</P>
+<P>FCO7 C10 = * FCO8 C10 = * FCO9 C10 = *</P>
+<P>*LG*DATI DEL BLOCCO DISNDS34 MODULO DISN - cell 10 gas temperature uncoupler</P>
+<P>NORM =T0 * COEF =1. *</P>
+<P>*LG*DATI DEL BLOCCO DISNDP34 MODULO DISN - cell 9 gas temperature uncoupler</P>
+<P>NORM =T0 * COEF =1. *</P>
+<P>*LG*DATI DEL BLOCCO COLTC4PC MODULO COLT - outlet boiler walls manifold</P>
+<P>NU.TU.EN =1. * NU.TU.US =1. * VOLUME =2. *</P>
+<P>MASSA ME =780. * CP MET. =630. * COND MET =35. *</P>
+<P>SPESSORE =0.01 * SUP. ES =10.1 *</P>
+<P>*LG*DATI DEL BLOCCO COLTCUEC MODULO COLT - inlet boiler walls manifold</P>
+<P>NU.TU.EN =1. * NU.TU.US =1. * VOLUME =2. *</P>
+<P>MASSA ME =780. * CP MET. =630. * COND MET =35. *</P>
+<P>SPESSORE =0.01 * SUP. ES =10.1 *</P>
+<P>*LG*DATI DEL BLOCCO VALVVOUT MODULO VALV - outlet valve</P>
+<P>* VALVE DATA (COD. = IDENTIFIER FOR MATHEMATICAL MODEL CHOICE)</P>
+<P>ALFA =1. * CFA = * COD. =0. *</P>
+<P>* DATA RELATED TO THE DISCHARGING CHARACTERISTIC</P>
+<P>CVA = * PORTATA =285. * P1 MONTE =194.e5 *</P>
+<P>P2 VALLE =1.e5 * ENTALPIA =2409.e3 * CORSA =0.8 *</P>
+<P>* DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)</P>
+<P>DP. APER = * DP. CHIU = *</P>
+<P>*LG*DATI DEL BLOCCO VALVVING MODULO VALV - inlet valve</P>
+<P>* VALVE DATA (COD. = IDENTIFIER FOR MATHEMATICAL MODEL CHOICE)</P>
+<P>ALFA =1. * CFA = * COD. =0. *</P>
+<P>* DATA RELATED TO THE DISCHARGING CHARACTERISTIC</P>
+<P>CVA = * PORTATA =285. * P1 MONTE =236.e5 *</P>
+<P>P2 VALLE =233.8e5 * ENTALPIA =1395.e3 * CORSA =0.8 *</P>
+<P>* DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)</P>
+<P>DP. APER = * DP. CHIU = *</P>
+<P>*LG*EOF</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test3_f"></A>Test case 3: transient simulation</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<U><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Data for the simulation of a transient condition:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Simulation time:&#9;200&#9;s</P>
+<P ALIGN="JUSTIFY">Integration step:&#9;1&#9;s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">Perturbated variables:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">WCO1CCOM</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;10&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;30&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;4.892&#9;kg/s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">WCO2CCOM</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;10&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;30&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;4.892&#9;kg/s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">WCO4CCOM</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;10&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;30&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;3.262&#9;kg/s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">WCO5CCOM</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;10&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;30&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;3.262&#9;kg/s</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image34.gif" WIDTH=567 HEIGHT=237></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Perturbations: fuel oil flow rates in the burners</P>
+</FONT><FONT SIZE=2><P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image35.gif" WIDTH=567 HEIGHT=283></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Results: inlet manifold pressure and outlet manifold pressure and enthalpy</P>
+</FONT><FONT SIZE=2><P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image36.gif" WIDTH=567 HEIGHT=237></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Results: steam flow rate and flue gas temperature at combustion chamber outlet</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P></BODY>
+</HTML>

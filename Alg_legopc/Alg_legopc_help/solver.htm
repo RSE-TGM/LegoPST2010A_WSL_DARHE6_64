@@ -1,0 +1,312 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>SOLVER</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><p align="center"><blink><font color="#800000" size="5"><sup>Solver</sup></font></blink></p>
+<b>
+<p ALIGN="CENTER"><font size="3">THE WEIGHED GRAM-SCHMIDT METHOD</font></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left"></b>The present note deals with the usage of the Gram-Schmidt method
+for the resolution of systems of underdetermined equations. Particularly
+interesting is the variation of such a method associating a weight to each
+unknown. This weight define a level of confidence on the initialization value of
+the variable it’s associated to. The method will find at each iteration, among
+the infinite solutions of the underdetermined problem, the one minimizing the
+weighed norm two of the increments of each variable. In this way, one will get
+the nearest solution to the provided initialization (file f14.dat), giving a
+greater enphasis to the most safely known variables.</p>
+<p ALIGN="left">In order to understand better the Gram-Schmidt method, it’s
+necessary to recall the concepts of inner product, rank one projections,
+vectorial spaces and orthogonal matrices.</p>
+<b>
+<p ALIGN="left">1. Inner products</p>
+</b>
+<p ALIGN="left">Given two vectors a and b forming an angle <font FACE="Symbol">q</font>
+with each other, their inner product is defined as:</p>
+<p ALIGN="CENTER"><img SRC="images/Image188.gif" width="268" height="31"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">The orthogonality condition follows directly from the
+definition:</p>
+<font SIZE="3">
+<p ALIGN="CENTER"><img SRC="images/Image189.gif" WIDTH="258" HEIGHT="25"></p>
+</font><b>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="JUSTIFY">2. Rank one projections</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</b>
+<p ALIGN="CENTER"><img SRC="images/Image190.gif" width="531" height="191"></p>
+<b>
+<p ALIGN="CENTER">fig. 1</p>
+<p ALIGN="CENTER">&nbsp;</p>
+</b>
+<p ALIGN="left">Let’s suppose we want to project a given vector b on a second
+vector a. One could indicate the projection as <img SRC="images/Image191.gif" WIDTH="16" HEIGHT="20">a,
+being <img SRC="images/Image191.gif" WIDTH="16" HEIGHT="20"> a scalar to be
+calculated. From fig. 1 it’s evident that the condition to be satisfied so
+that <img SRC="images/Image191.gif" WIDTH="16" HEIGHT="20">a be projection of b
+on a is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image192.gif" WIDTH="431" HEIGHT="55"></p>
+<p ALIGN="left">In this way one can also define a projection matrix P as:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image193.gif" WIDTH="275" HEIGHT="55"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<b>
+<p ALIGN="left">3. Vector spaces</p>
+</b>
+<p ALIGN="left">A vector space is a family of &quot;objects&quot; (called
+vectors) closed with respect to the operations of addition and multiplcation by
+a scalar, which are defined in it. Algebra generally considers the family of
+vectors in R<sup>n</sup> with the usual definition for the operations.</p>
+<p ALIGN="left">Particularly important are the following four vector spaces:</p>
+<p ALIGN="left">a) <b>column space of a given matrix A</b> R(A): all the vectors
+that can be obtained as linear combination of the columns of A. If a linear
+system A x = b has solution, b must belong to the column space of A, so that: x<sub>1</sub>
+a<sub>1</sub> + x<sub>2</sub> a<sub>2</sub> + ... + x<sub>n</sub> a<sub>n</sub>
+= b</p>
+<p ALIGN="left">b) <b>row space of a matrix A</b> R(A<sup>T</sup>): all the
+vectors that can be obtained as linear combination of the rows of A</p>
+<p ALIGN="left">c) <b>null space of a matrix A</b> N(A): all the vectors x such
+that Ax=0</p>
+<p ALIGN="left">d) <b>left null space of a matrix A</b> N(A<sup>T</sup>): all
+the vectors y such that y<sup>T</sup>A=0</p>
+<p ALIGN="left">A vector space contained in a second is said to be a <b>subspace</b>
+of the second. Two subspaces of the same vector space are said to be <b>ortogonal
+complement</b> of each other when each vector of one space is orthogonal to each
+of the other and the sum of the two subspaces is the containing space itself.</p>
+<p ALIGN="left">One could demonstrate that:</p>
+<blockquote>
+  <p ALIGN="left">N(A) is orthogonal complement of R(A<sup>T</sup>)</p>
+  <p ALIGN="left">N(A<sup>T</sup>) is orthogonal complement of R(A)</p>
+</blockquote>
+<p ALIGN="left">Moreover, given a solution x<sub>p</sub> of an underdetermined
+system all the other can be found by adding an element whatsoever x<sub>n</sub>
+of the null space of the coefficient matrix A. In fact if x=x<sub>p</sub>+x<sub>n</sub>
+is a generic vector of R<sup>n</sup>, this will be transformed by A as A(x<sub>p</sub>+x<sub>n</sub>)=A
+x<sub>p</sub> +0. Therefore, if Ax<sub>p</sub>=b (x<sub>p</sub> is a system
+solution), then also x=x<sub>p</sub>+x<sub>n</sub> is a solution and, varying x<sub>n</sub>
+one finds all the system solutions.</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<b>
+<p ALIGN="JUSTIFY">4. Orthogonal matrices and QR factorization</p>
+</b>
+<p ALIGN="left">A square matrix Q is said to be orthogonal if:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image194.gif" width="203" height="30"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">If Q is rectangular, the same definition is valid but Q<sup>T</sup>
+is only a left inverse.</p>
+<p ALIGN="left">A square orthogonal matrix Q can be obtained by defining its
+columns q<sub>i</sub> as the ones constituting a orthonormal basis in a given
+space R<sup>n</sup>. An orthonormal basis is a basis (i.e. a minimal set of
+vectors generating the entire space R<sup>n</sup>) satisfying the following
+relationships:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image195.gif" width="148" height="91"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">Therefore, the projection of a generic vector b of R<sup>n</sup>
+on a vector q<sub>j</sub> belonging to an orthonormal basis is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image196.gif" width="180" height="33"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">One of the most known procedures to find an orthonormal basis in
+R<sup>n</sup> given a set of n independent vectors a<sub>1</sub>...a<sub>n</sub>
+is the Gram-Schmidt method. The first vector q<sub>1</sub> is the versor of a<sub>1</sub>
+(that is: a<sub>1 </sub>divided by its module). The second vector q<sub>2</sub>
+is obtained from a<sub>2</sub> by subtracting the projection of a<sub>2 </sub>on
+q<sub>1</sub> so to find a vector which is orthogonal to q<sub>1</sub> and
+dividing the resulting vector by ist module so to obtain a versor. The generic
+element q<sub>i </sub>is found with the formula:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image197.gif" WIDTH="315" HEIGHT="60"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p align="left">Supposing to dispose of an orthonormal basis of the columns
+space of a matrix A, a generic vector a<sub>i </sub>can be written as:</p>
+<p ALIGN="CENTER"><img SRC="images/Image198.gif" width="153" height="60"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">whence:</p>
+<p ALIGN="CENTER"><img SRC="images/Image199.gif" width="563" height="123"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">or, eqivalently:</p>
+<p ALIGN="CENTER"><img SRC="images/Image200.gif" width="96" height="30"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<b>
+<p ALIGN="left">5. The weighed Gram-Schmidt method</p>
+</b>
+<p ALIGN="left">The Gram-Schmidt method belongs to the family of those solving
+methods that are based on the factorization of the coefficients matrix A. The
+two best known factorizations are the LU (originating the Gauss elimination
+method, that can be rewritten in the form of the implicit LX) and the QR
+(originating the Gram-Schmidt method). The advantage to perform a factorization
+of the matrix A is that, as it’s evident beyonds, a system of equations can be
+split into two systems which are much simpler to solve. In the case of the LU
+one obtains two triangular systems that can be solved with a back solving,
+whilst the QR provides a decomposition in a triangular and an orthogonal system.</p>
+<p ALIGN="left">Both implicit LX and Gram-Schmidt, can be seen as particular
+cases inside the ABS class, but, as shown here the usage of the ABS theory is
+not needed (on the contrary showing the methods &quot;stand alone&quot; allows
+to highlight better the matrices properties they are based on).</p>
+<p ALIGN="left">The experience has shown to us that it’s better to choose the
+Gram-Schmidt than the LU (or LX) because, as it’s naturally tied to the
+concept of minimizing a norm (see proof later) as extention to the weighed case
+is easier and, examples have shown, stabler.</p>
+<p ALIGN="left">So, let’s show the weighed Gram-Schmidt method.</p>
+<p ALIGN="left">It can be divided into the following steps:</p>
+<b>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY">find a orthogonal basis {p<sub>k</sub>} in the row space
+    of A<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</b>
+<p ALIGN="left">First it’s necessary to introduce a modified (weighed)
+definition for the inner product of two vectors:</p>
+<p ALIGN="CENTER"><img SRC="images/Image201.gif" width="161" height="28"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">where W is a diagonal matrix having the weight for each variable
+on its diagonal.</p>
+<p ALIGN="left">Redefining in this way the condition of orthogonality and
+applying the Gram-Schmidt procedure to find an orthonormal basis yields:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image202.gif" WIDTH="455" HEIGHT="60"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">where a<sub>k</sub> is the k-th row of a.</p>
+<p ALIGN="left">In order to find an orthonormal basis one should also divide
+each vector by its module, but this is not necessary here. So, as the inner
+product of p<sub>i</sub> by itself is not 1, this is also present in the
+denominator of the formula.</p>
+<p ALIGN="left">If we define the orthogonal matrix P:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">P = [p<sub>1</sub> ... p<sub>n</sub>]</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">the previous formula can be rewritten as:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image203.gif" width="353" height="206"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">where H<sub>k</sub> is the abaffian matrix (if we see
+Gram-Schmidt inside the ABS methods).</p>
+<p ALIGN="left">&nbsp;</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY"><b>perform a QR factorization of A<sup>T</sup></b><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left">The usage of the modified definition of inner product has, as
+consequence, that P is no more an orthogonal matrix in the original (unweighed)
+vector space and, therefore, the inverse of P is not equivalent to the
+transpose. So, writing the QR decomposition of A<sup>T</sup>:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image204.gif" width="476" height="90"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">This allows us to break the sistem solution into two stages:</p>
+<p ALIGN="CENTER"><img SRC="images/Image205.gif" WIDTH="198" HEIGHT="95"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="JUSTIFY">where:</p>
+<p ALIGN="CENTER"><img SRC="images/Image206.gif" width="276" height="128"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">Developing R<sup>T</sup> y = b one gets:</p>
+<p ALIGN="CENTER"><img SRC="images/Image207.gif" WIDTH="313" HEIGHT="220"></p>
+<p ALIGN="JUSTIFY">Then:</p>
+<p ALIGN="CENTER"><img SRC="images/Image208.gif" WIDTH="225" HEIGHT="26"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">that can be rewritten as a sequence of n steps as:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image209.gif" WIDTH="745" HEIGHT="220"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">At the generic step:</p>
+<p ALIGN="CENTER"><img SRC="images/Image210.gif" WIDTH="250" HEIGHT="63"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">This formula breaks the problem of solving a linear system into
+n step (as many as the number of equations). The i-th step provides a solution
+of the first i equations. Contemporarily to the iteration on the solution
+vector, there is another iteration to calculate the basis vectors p<sub>i</sub>
+(see above the framed formula), providing at each step the displacement
+direction. If at the i-th iteration the vector p<sub>i</sub> turns up to be in
+norm less then a value <font FACE="Symbol">e</font> <sub>1</sub>, near to zero,
+the corresponding line a<sub>k</sub> of A is taken as a linear combination of
+the previous ones (the reason can be well understood examining the basis
+construction process) and the corresponding equation must be eliminated,
+displaying precise diagnostics on the equation affected by the singularity. In
+particular, if such an equation k provides a residuum a<sub>k</sub><sup>T</sup>x-b&lt;<font FACE="Symbol">e</font>
+<sub>2</sub>, then this equation is linear combination of the previous ones
+(singular but compatible), else the equation is incompatible with the previous
+(the b vector doesn’t show the same linear combination as the coefficient
+matrix and, so, the equation is in contrast with the previous ones: the system
+has mathematically no solution).</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">What remains to be done is to demonstrate that <i>the just
+defined method finds, among the infinite solutions, the one characterized by the
+least weighed two norm</i>.</p>
+<p ALIGN="left">Suppose to have a matrix N whose column space is the null space
+of A. We know that, given a vector x<sub>i</sub>° solution of the first i
+equations, another solution can be found by adding a whatsoever element s
+belonging to N(A):</p>
+<p ALIGN="CENTER"><img SRC="images/Image211.gif" width="108" height="30"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">Writing the weighed norm of x<sub>i</sub>:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<sub>
+<p ALIGN="CENTER"><img SRC="images/Image212.gif" width="438" height="30"></p>
+</sub>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">We must demonstrate that this expression is minimal when s = 0
+(that is: with the solution found with Gram-Schmidt).</p>
+<p ALIGN="left">The first part of the expression doesn’t depend on s, whilst
+the third is never negative. Let’s demonstrate that the second is always zero,
+that is:</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="CENTER">N<sup>T</sup> W x<sub>i</sub>° = 0.</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">As x<sub>i</sub>° = x<sub>i</sub>°(p<sub>j</sub>), this is
+equivalent to:</p>
+<p ALIGN="CENTER"><img SRC="images/Image213.gif" width="116" height="33"></p>
+<p ALIGN="left">With j = 1:</p>
+<p ALIGN="CENTER"><img SRC="images/Image214.gif" width="498" height="33"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">By induction, we demonstrate the expression with j+1, supposing
+it valid with j:</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image215.gif" width="371" height="56"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">Geometrically, the equations of an underdetermined system form
+an hyperplane of possible solutions in the n-dimensional space. The Gram-Schmidt
+method finds that very solution whose vector is orthogonal to the plane of the
+possible solutions (in the sense of the weighed inner product): see fig. 2.</p>
+<font SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image216.gif" WIDTH="478" HEIGHT="312"></p>
+</font><b>
+<p ALIGN="CENTER">fig. 2</p>
+</b>
+<p ALIGN="CENTER">&nbsp;</p>
+<b>
+<p ALIGN="left">6. Non-linear application of the weighed Gram-Schmidt method</p>
+</b>
+<p ALIGN="left">Using the Newton-Raphson method to linearize a non-linear system
+of equations, at each iteration a set of equations of the type:</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image217.gif" WIDTH="130" HEIGHT="26"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="left">where J is the jacobian matrix, <font FACE="Symbol">d</font> x
+the vector of increment to be given to the variables and RN the residuals
+vector, must be solved.</p>
+<p ALIGN="left">If the weighed Gram-Schmidt method is used for the solution, it
+calculates the solution of the linearized system that minimizes the norm:</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image218.gif" width="146" height="51"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">This <i>at each iteration</i>. The optimal solution would be the
+one minimizing <i>globally </i>(that is: considering the whole non linear
+procedure) the above written norm. Minimizing it at each iteration doesn’t
+assure &quot;a priori&quot; a global minimization of the norm, but provides a
+suboptimal choice that has proven very well in all the experimentations that
+have been carried out.</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<i>
+<p ALIGN="RIGHT">G. M., January 21th 1997</p>
+</i><!--mstheme--></font></body>
+
+</html>

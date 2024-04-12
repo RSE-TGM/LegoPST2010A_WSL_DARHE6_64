@@ -1,0 +1,54 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>CREATE A NEW MODULE</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"></font>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#99CCFF" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">
+      <font FACE="Arial">Why should one create a new LEGOPC module?</font>
+    </font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+<font SIZE="3">
+<p ALIGN="left">LEGO process modules has to simulate the
+physical or mathematical behaviour of a plant component, 
+or to realize some special function (like algebraic sums) 
+in a process simulator.&nbsp;</p>
+<p ALIGN="left">At the moment, a lot of LEGO standard
+modules (which can simulate every component in standard 
+thermoelectric and thermonuclear plants) has been developed 
+and tested. So, if the user has not to simulate a non-standard 
+size electrical power plant, he (almost surely) won't
+have any needing to realize new process modules.&nbsp;</p>
+<p ALIGN="left">But LEGOCAD system and LEGO code have
+been often used also to simulate non-electrical plants 
+(hot strip milling plants, robots, pipe nets, etc...): 
+if one has to simulate with LEGOCAD system a non-electrical 
+plant, he will have to realize his own library.&nbsp;</p>
+<p ALIGN="left">Besides, someone can also have to realize 
+a part of an electrical plant model with more or less accuracy than
+standard LEGO libraries do.&nbsp;</p>
+<p ALIGN="left">For example, if one has only to simulate
+an auxiliary subsystem, which takes water from the degasifier 
+of an electric plant, it's not a good idea to simulate the dynamic 
+behaviour of the degasifier, because he should have to simulate also 
+part of the condensate and the feed water subsystems and their regulation
+models: it's more easy to realize a very simple module which computes 
+the saturation enthalpy of water given the degasifier pressure! 
+Maybe enthalpy of water in the degasifier is not exactly
+equal to saturation enthalpy, but this effect is quite surely negligible 
+for the auxiliary subsystem to be simulated.&nbsp;</p>
+<p ALIGN="left">On the contrary, very fast transients in long water pipes 
+(when also water compressibility and pipe's metal deformation shall be 
+taken into account) can not be simulated with standard library modules.</p>
+</font><!--mstheme--></font></body>
+
+</html>

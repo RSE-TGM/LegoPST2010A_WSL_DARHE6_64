@@ -1,0 +1,244 @@
+C**********************************************************************
+C modulo apro.f
+C tipo 
+C release 5.2
+C data 4/12/95
+C reserver @(#)apro.f	5.2
+C**********************************************************************
+C
+      SUBROUTINE APROI3(IFO,IOB,DEBL)
+C*****************************************************************************
+C
+C
+C        BLOCCO PROPORZIONALE (GUADAGNO)
+C
+C
+C*****************************************************************************
+C
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/APRO01/IBLOC
+      COMMON/APRO02/NCEL,NPAR
+      CHARACTER*80 DEBL
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MOD
+      DATA MOD/'APRO'/
+C
+      CALL APROI4(IOB,MOD)
+      NSTATI = 0
+      NUSCIT = 1
+      NINGRE = 2
+C
+      WRITE(IFO,2999)IBLOC,IOB,MOD,DEBL
+ 2999 FORMAT(A,2X,'BL.-',A4,'- **** MODULO ',A4,' - ',A)
+C
+      WRITE(IFO,3001)IOB
+ 3001 FORMAT('UPRO',A4,2X,
+     & '--UA-- OUTPUT ANALOG SIGNAL FROM PROPORTIONAL BLOCK')
+      WRITE(IFO,3003)IOB
+ 3003 FORMAT('IPRO',A4,2X,
+     & '--IN-- INPUT ANALOG SIGNAL INTO PROPORTIONAL BLOCK')
+      WRITE(IFO,3004)IOB
+ 3004 FORMAT('KPRO',A4,2X,
+     & '--IN-- PROPORTIONAL BLOCK GAIN')
+C
+      RETURN
+      END
+      SUBROUTINE APROI4(IOB,MOD)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/APRO01/IBLOC
+      COMMON/APRO02/NCEL,NPAR
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MOD
+C
+      WRITE(IBLOC,1000)MOD,IOB
+ 1000 FORMAT(2A4)
+      RETURN
+      END
+      SUBROUTINE APROI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,
+     &  IBL1,IBL2,IER,CNXYU,TOL)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      INTEGER VAR
+      DIMENSION VAR(MX1,*),XYU(*),DATI(*),CNXYU(*),TOL(*)
+C*******************************************
+C
+C____ APRO - BLOCCO PROPORZIONALE CON LIMITAZIONE USCITA
+C
+C*********** INIZIO ISTRUZIONI ESECUTIVE
+C
+      GO TO(100,200), IFUN
+ 100  CONTINUE
+C
+C____ CHIAMATE AL MODULO PROP PER SCRIVERE I DATI
+C
+      IDP=ID1
+      CALL APROSI(IFUN,DATI,IDP)
+C
+      RETURN
+C
+C____ LETTURA DA FILE14 DEL NOME DEL BLOCCO
+C
+  200 READ(14,1000)
+ 1000 FORMAT(A)
+C
+C____ CHIAMATE AL MODULO APRO PER LEGGERE I DATI
+C
+      IDP=ID1
+      CALL APROSI(IFUN,DATI,IDP)
+C
+C____ RISERVO UNA POSIZIONE PER LO STATO "SATURAZIONE"
+      ID2=IDP+1
+C
+C____ COSTANTI DI NORMALIZZAZIONE
+C
+      CNXYU(IV1 )=1.
+      CNXYU(IV1+1)=1.
+      CNXYU(IV1+2)=1.
+C
+C____ TOLLERANZE 1 PER MILLE
+C
+      TOL(1)=1.E-3
+C
+      RETURN
+      END
+      SUBROUTINE APROSI(IFUN,DATI,ID)
+C
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      DIMENSION DATI(*)
+C
+      GO TO (100,200),IFUN
+C
+C____ SCRITTURA SUL FILE 14 DEI DATI DI APRO
+C
+  100 WRITE(14,500)
+  500 FORMAT('    U MAX    =          *    U MIN    =          *')
+      RETURN
+C
+C____ LETTURA DA FILE 14 DEI DATI DI PROP
+C
+  200 READ(14,502)UMAX,UMIN
+  502 FORMAT(2(14X,F10.0,1X))
+C
+      DATI(ID   )=UMAX
+      DATI(ID+1 )=UMIN
+      ID=ID+1
+      RETURN
+      END
+      SUBROUTINE APROC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)
+      LOGICAL KREGIM
+      COMMON/REGIME/KREGIM
+      COMMON/INTEGR/TSTOP,TEMPO,DTINT,NPAS,CDT                          !SNGL
+C      COMMON/INTEG1/TSTOP,TEMPO,DTINT,CDT,ALFADT,NPAS                   !DBLE
+      COMMON/PARPAR/NUL(7),ITERT
+C*******************************************
+C
+C____ REGOLATORE APRO - BLOCCO PROPORZIONALE CON LIMITAZIONE USCITA
+C
+C*********** INIZIO ISTRUZIONI DICHIARATIVE
+C
+C______ USCITE REGOLATORE
+C
+C      REAL UU01
+C
+C______ INGRESSI REGOLATORE
+C
+      REAL II01                                                         !SNGL
+      REAL KP01                                                         !SNGL
+C      DOUBLE PRECISION II01                                             !DBLE
+C      DOUBLE PRECISION KP01                                             !DBLE
+C
+C*********** INIZIO ISTRUZIONI ESECUTIVE
+C
+      GO TO (1,100,2),IFUN
+C
+C____ TOPOLOGIA JACOBIANO
+C
+ 1    AJAC(1,1)=1.
+      AJAC(1,2)=1.
+      AJAC(1,3)=1.
+      RETURN
+C
+C____ COEFFICIENTI JACOBIANO
+C
+ 2    CONTINUE
+C
+C____ DECODIFICA DELLE VARIABILI
+C
+      II01 = XYU(IXYU +  1)
+      KP01 = XYU(IXYU +  2)
+      FSAT=DATI(IPD+2)
+C
+      IF(FSAT.EQ.0.) THEN
+	 AJAC(1,1)=-1.
+	 AJAC(1,2)=KP01
+	 AJAC(1,3)=II01
+      ELSE
+	 AJAC(1,1)=-1.
+      ENDIF
+      RETURN
+C
+C____ CALCOLO DELLA RISPOSTA DEI REGOLATORI
+C
+ 100  CONTINUE
+C
+C____ DECODIFICA DELLE VARIABILI
+C
+      UU01 = XYU(IXYU +  0)
+      II01 = XYU(IXYU +  1)
+      KP01 = XYU(IXYU +  2)
+C
+C____ CHIAMATE AI**** MODULOTTI DI REGOLAZIONE
+C
+      IDD=IPD
+      CALL APROSR(UU01C,II01,KP01,IDD,DATI,FSAT,ITERT)
+C
+C____ RESIDUI
+C
+      RNI(  1) = UU01-UU01C
+      RETURN
+      END
+      SUBROUTINE APROSR(UU,II,KP,ID,DATI,FSAT,ITERT)
+C
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/REGIME/KREGIM
+      LOGICAL KREGIM
+      DIMENSION DATI(*)
+      REAL      UU, II, KP                                             !SNGL
+C       DOUBLE PRECISION      UU, II, KP                                 !DBLE
+C
+      UMAX=DATI(ID)
+      UMIN=DATI(ID+1)
+      FSAT=DATI(ID+2)
+C
+      UU = KP * II
+C
+       IF(ITERT.EQ.0.OR.KREGIM) THEN
+	 FSAT=0.
+	 DATI(ID+2)=FSAT
+	 IF(UU.LT.UMIN) THEN
+	    UU=UMIN
+	    FSAT=-1.
+	    DATI(ID+2)=FSAT
+	 ENDIF
+	 IF(UU.GT.UMAX) THEN
+	    UU=UMAX
+	    FSAT=1.
+	    DATI(ID+2)=FSAT
+	 ENDIF
+       ELSE
+	 IF(FSAT) 10,20,30
+ 10        UU=UMIN
+ 20        RETURN
+ 30        UU=UMAX
+       ENDIF
+C
+       RETURN
+       END
+CC
+      SUBROUTINE APROD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,
+     $    IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)
+      RETURN
+      END

@@ -1,0 +1,11 @@
+#
+# This makefile was expanded from Makefile.mk-2 by Telelogic.
+# Expanded macros and dependencies may be found at the
+# end of this file
+#
+
+all:
+	cd ./banner; $(MAKE) -f Makefile.mk
+	cd ./regopatch; $(MAKE) -f Makefile.mk
+	cd ./check_lego; $(MAKE) -f Makefile.mk
+# ******* Telelogic expanded section *******

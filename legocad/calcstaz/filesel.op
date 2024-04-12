@@ -1,0 +1,19 @@
+Aic.browserClasses: false
+Aic.browserOutlineSpacing: 10
+Aic.browserOutlineDepth: 6
+Aic.browserTreeSpacing: 10
+Aic.browserTreeDepth: 6
+Aic.browserView: tree
+Aic.defaultShell: topLevelShell
+Aic.editorHideDefault: false
+Aic.editorHideLocked: false
+Aic.editorHideNotEqual: false
+Aic.editorHideSource: false
+Aic.gridSize: 10
+Aic.gridActive: true
+Aic.gridVisible: false
+Aic.includeFile: false
+Aic.interfaceFunctionType: create
+Aic.textEditorGeometry: 80x24
+Aic.unitType: pixels
+Aic.writeCCode: Xt Code

@@ -1,0 +1,588 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>testcase5</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test5_a"></A>Test case 5: general description</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following test case represents the dynamical behaviour of two pumps in parallel (blocks PC1 and PC2) feeding a pipeline represented by the block TUBO (module TH2O). Downstream of each pump a check valve and a hand operated gate valve are installed. These valves are represented by a single block (block AL1 for PC1 pump, block AL2 for PC2 pump).</P>
+<P ALIGN="JUSTIFY">Two circulating valves (blocks RIC1 and RIC2) are provided to allow a minimum water flow rate in each pump.</P>
+<P ALIGN="JUSTIFY">The flow rate-head characteristic of the pumps is unknown, so the default characteristic is assumed by the blocks PC1 and PC2.</P>
+<P ALIGN="JUSTIFY">The opening characteristic of the circulating valves RIC1 and RIC2 is known and it is assigned in the auxiliary Fortran of the model.</P>
+<P ALIGN="JUSTIFY">The dynamical behaviour of the model has been studied in a case of trip of one of the pumps.</P>
+<P ALIGN="JUSTIFY">The following figure shows the block diagram of the simulated system.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image43.gif" WIDTH=543 HEIGHT=387></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test5_m"></A>Test case 5: topological diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following picture represents the topological diagram of the "POMPE" model:</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image60.gif" WIDTH=618 HEIGHT=412></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="JUSTIFY">The following list represents the related topological description file, automatically written by LEGOCAD System (MACROBLOCKS.DAT):</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>****</P>
+<P>POMPE</P>
+<P>****</P>
+<P>POMPE 0000 0000</P>
+<P>****</P>
+<P>0 CPOMPC1 CPOM 0 315 255 0</P>
+<P>0 VALVRIC1 VALV 0 280 165 0</P>
+<P>0 VALVAL1 VALV 0 435 255 0</P>
+<P>0 CPOMPC2 CPOM 0 315 380 0</P>
+<P>0 VALVRIC2 VALV 0 280 470 0</P>
+<P>0 VALVAL2 VALV 0 435 380 0</P>
+<P>0 TH2OTUBO TH2O 0 585 315 0</P>
+<P>0 VALVVSB VALV 0 670 315 0</P>
+<P>0 COLTODO1 COLT 0 375 255 0</P>
+<P>0 COLTODO2 COLT 0 375 380 0</P>
+<P>0 COLTODO3 COLT 0 525 315 0</P>
+<P>3 *GLINES* 2 1 12 6 1 3</P>
+<P>(220,280)</P>
+<P>(298,280)</P>
+<P>(310,280)</P>
+<P>3 *GLINES* 2 1 12 6 1 3</P>
+<P>(220,405)</P>
+<P>(298,405)</P>
+<P>(310,405)</P>
+<P>3 *GLINES* 2 1 12 6 1 5</P>
+<P>(400,250)</P>
+<P>(400,195)</P>
+<P>(400,195)</P>
+<P>(352,195)</P>
+<P>(340,195)</P>
+<P>3 *GLINES* 2 1 12 6 1 3</P>
+<P>(270,195)</P>
+<P>(232,195)</P>
+<P>(220,195)</P>
+<P>3 *GLINES* 2 1 12 6 1 3</P>
+<P>(275,500)</P>
+<P>(232,500)</P>
+<P>(220,500)</P>
+<P>3 *GLINES* 2 1 12 6 1 5</P>
+<P>(400,455)</P>
+<P>(400,500)</P>
+<P>(400,500)</P>
+<P>(347,500)</P>
+<P>(335,500)</P>
+<P>3 *GLINES* 2 1 12 6 1 5</P>
+<P>(490,285)</P>
+<P>(550,285)</P>
+<P>(550,285)</P>
+<P>(550,298)</P>
+<P>(550,310)</P>
+<P>3 *GLINES* 2 1 12 6 1 5</P>
+<P>(490,410)</P>
+<P>(550,410)</P>
+<P>(550,410)</P>
+<P>(550,402)</P>
+<P>(550,390)</P>
+<P>3 *GLINES* 2 1 12 6 1 3</P>
+<P>(725,345)</P>
+<P>(773,345)</P>
+<P>(785,345)</P>
+<P>****</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test5_b"></A>Test case 5: model topology</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the topological file (F01.DAT) of the "POMPE" model, which is produced by LEGOCAD System topology building activity:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>****</P>
+<P>CPOM BLOCCO (PC1 ) - centrifugal pump 1</P>
+<P>VALV BLOCCO (RIC1) - pump 1 circulating valve</P>
+<P>VALV BLOCCO (AL1 ) - pump 1 delivery hand-operated valve</P>
+<P>CPOM BLOCCO (PC2 ) - centrifugal pump 2</P>
+<P>VALV BLOCCO (RIC2) - pump 2 circulating valve</P>
+<P>VALV BLOCCO (AL2 ) - pump 2 delivery hand-operated valve</P>
+<P>TH2O BLOCCO (TUBO) - tube</P>
+<P>VALV BLOCCO (VSB ) - outlet water valve</P>
+<P>COLT BLOCCO (ODO1) - manifold 1</P>
+<P>COLT BLOCCO (ODO2) - manifold 2</P>
+<P>COLT BLOCCO (ODO3) - manifold 3</P>
+<P>****</P>
+<P>POMPE</P>
+<P>****</P>
+<P>CPOMPC1 BL.-PC1 - **** MODULO CPOM - centrifugal pump 1</P>
+<P>ECINPC1 --US-- KINETIC ENERGY OF THE ROTATING MASSES</P>
+<P>OMPMPC1 --UA-- ROTATIONAL SPEED OF THE PUMP</P>
+<P>HUPMPC1 --UA-- FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>WPOMPC1 --UA-- FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>PCOLODO1 --IN-- #PUPMPC1 #....................&lt;===COLTODO1 BL.-ODO1-</P>
+<P>PIPMPC1 --IN-- PRESSURE AT THE PUMP INLET</P>
+<P>HIPMPC1 --IN-- FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>QIPMPC1 --IN-- POWER ABSORBED BY THE PUMP</P>
+<P>NPOMPC1 --IN-- NUMBER OF PUMPS IN PARALLEL</P>
+<P>****</P>
+<P>****</P>
+<P>VALVRIC1 BL.-RIC1- **** MODULO VALV - pump 1 circulating valve</P>
+<P>WVALRIC1 --UA-- FLUID FLOW RATE IN THE VALVE</P>
+<P>PCOLODO1 --IN-- #PIVARIC1#....................&lt;===COLTODO1 BL.-ODO1-</P>
+<P>PUVARIC1 --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HCOLODO1 --IN-- #HVALRIC1#....................&lt;===COLTODO1 BL.-ODO1-</P>
+<P>ALZARIC1 --IN-- VALVE LIFT</P>
+<P>****</P>
+<P>****</P>
+<P>VALVAL1 BL.-AL1 - **** MODULO VALV - pump 1 delivery hand-operated valve</P>
+<P>WVALAL1 --UA-- FLUID FLOW RATE IN THE VALVE</P>
+<P>PCOLODO1 --IN-- #PIVAAL1 #....................&lt;===COLTODO1 BL.-ODO1-</P>
+<P>PCOLODO3 --IN-- #PUVAAL1 #....................&lt;===COLTODO3 BL.-ODO3-</P>
+<P>HCOLODO1 --IN-- #HVALAL1 #....................&lt;===COLTODO1 BL.-ODO1-</P>
+<P>ALZAAL1 --IN-- VALVE LIFT</P>
+<P>****</P>
+<P>****</P>
+<P>CPOMPC2 BL.-PC2 - **** MODULO CPOM - centrifugal pump 2</P>
+<P>ECINPC2 --US-- KINETIC ENERGY OF THE ROTATING MASSES</P>
+<P>OMPMPC2 --UA-- ROTATIONAL SPEED OF THE PUMP</P>
+<P>HUPMPC2 --UA-- FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>WPOMPC2 --UA-- FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>PCOLODO2 --IN-- #PUPMPC2 #....................&lt;===COLTODO2 BL.-ODO2-</P>
+<P>PIPMPC2 --IN-- PRESSURE AT THE PUMP INLET</P>
+<P>HIPMPC2 --IN-- FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>QIPMPC2 --IN-- POWER ABSORBED BY THE PUMP</P>
+<P>NPOMPC2 --IN-- NUMBER OF PUMPS IN PARALLEL</P>
+<P>****</P>
+<P>****</P>
+<P>VALVRIC2 BL.-RIC2- **** MODULO VALV - pump 2 circulating valve</P>
+<P>WVALRIC2 --UA-- FLUID FLOW RATE IN THE VALVE</P>
+<P>PCOLODO2 --IN-- #PIVARIC2#....................&lt;===COLTODO2 BL.-ODO2-</P>
+<P>PUVARIC2 --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HCOLODO2 --IN-- #HVALRIC2#....................&lt;===COLTODO2 BL.-ODO2-</P>
+<P>ALZARIC2 --IN-- VALVE LIFT</P>
+<P>****</P>
+<P>****</P>
+<P>VALVAL2 BL.-AL2 - **** MODULO VALV - pump 2 delivery hand-operated valve</P>
+<P>WVALAL2 --UA-- FLUID FLOW RATE IN THE VALVE</P>
+<P>PCOLODO2 --IN-- #PIVAAL2 #....................&lt;===COLTODO2 BL.-ODO2-</P>
+<P>PCOLODO3 --IN-- #PUVAAL2 #....................&lt;===COLTODO3 BL.-ODO3-</P>
+<P>HCOLODO2 --IN-- #HVALAL2 #....................&lt;===COLTODO2 BL.-ODO2-</P>
+<P>ALZAAL2 --IN-- VALVE LIFT</P>
+<P>****</P>
+<P>****</P>
+<P>TH2OTUBO BL.-TUBO- **** MODULO TH2O - tube</P>
+<P>HU_1TUBO --US-- FLUID ENTHALPY AT OUTLET OF THE CELL 1 TUBE</P>
+<P>HU_2TUBO --US-- FLUID ENTHALPY AT OUTLET OF THE CELL 2 TUBE</P>
+<P>HU_3TUBO --US-- FLUID ENTHALPY AT OUTLET OF THE CELL 3 TUBE</P>
+<P>HUTUTUBO --US-- FLUID ENTHALPY AT THE OUTLET OF THE TUBE</P>
+<P>TM_1TUBO --US-- MEAN TEMPERATURE OF METAL IN CELL 1 TUBE</P>
+<P>TM_2TUBO --US-- MEAN TEMPERATURE OF METAL IN CELL 2 TUBE</P>
+<P>TM_3TUBO --US-- MEAN TEMPERATURE OF METAL IN CELL 3 TUBE</P>
+<P>TM_4TUBO --US-- MEAN TEMPERATURE OF METAL IN CELL 4 TUBE</P>
+<P>WTUBTUBO --UA-- FLUID FLOW RATE INTO THE TUBE</P>
+<P>HCOLODO3 --IN-- #HITUTUBO#....................&lt;===COLTODO3 BL.-ODO3-</P>
+<P>PIVAVSB --IN-- #PUTUTUBO#....................&lt;===+VALVSB BL.-VSB -</P>
+<P>PCOLODO3 --IN-- #PITUTUBO#....................&lt;===COLTODO3 BL.-ODO3-</P>
+<P>ATTRTUBO --IN-- FRICTION COEFFICIENT IN THE TUBE</P>
+<P>****</P>
+<P>****</P>
+<P>+VALVSB BL.-VSB - **** MODULO VALV - outlet water valve</P>
+<P>PIVAVSB --UA-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>WTUBTUBO --IN-- #WVALVSB #....................&lt;===TH2OTUBO BL.-TUBO-</P>
+<P>PUVAVSB --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HUTUTUBO --IN-- #HVALVSB #....................&lt;===TH2OTUBO BL.-TUBO-</P>
+<P>ALZAVSB --IN-- VALVE LIFT</P>
+<P>****</P>
+<P>****</P>
+<P>COLTODO1 BL.-ODO1- **** MODULO COLT - manifold 1</P>
+<P>HCOLODO1 --UA-- FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>PCOLODO1 --UA-- FLUID PRESSURE IN THE MANIFOLD</P>
+<P>TCOLODO1 --UA-- METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>WPOMPC1 --IN-- #WE_1ODO1#....................&lt;===CPOMPC1 BL.-PC1 -</P>
+<P>HUPMPC1 --IN-- #HE_1ODO1#....................&lt;===CPOMPC1 BL.-PC1 -</P>
+<P>WVALRIC1 --IN-- #WU_1ODO1#....................&lt;===VALVRIC1 BL.-RIC1-</P>
+<P>HU_1ODO1 --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>WVALAL1 --IN-- #WU_2ODO1#....................&lt;===VALVAL1 BL.-AL1 -</P>
+<P>HCOLODO3 --IN-- #HU_2ODO1#....................&lt;===COLTODO3 BL.-ODO3-</P>
+<P>TESTODO1 --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTODO1 --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>****</P>
+<P>****</P>
+<P>COLTODO2 BL.-ODO2- **** MODULO COLT - manifold 2</P>
+<P>HCOLODO2 --UA-- FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>PCOLODO2 --UA-- FLUID PRESSURE IN THE MANIFOLD</P>
+<P>TCOLODO2 --UA-- METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>WPOMPC2 --IN-- #WE_1ODO2#....................&lt;===CPOMPC2 BL.-PC2 -</P>
+<P>HUPMPC2 --IN-- #HE_1ODO2#....................&lt;===CPOMPC2 BL.-PC2 -</P>
+<P>WVALRIC2 --IN-- #WU_1ODO2#....................&lt;===VALVRIC2 BL.-RIC2-</P>
+<P>HU_1ODO2 --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>WVALAL2 --IN-- #WU_2ODO2#....................&lt;===VALVAL2 BL.-AL2 -</P>
+<P>HCOLODO3 --IN-- #HU_2ODO2#....................&lt;===COLTODO3 BL.-ODO3-</P>
+<P>TESTODO2 --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTODO2 --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>****</P>
+<P>****</P>
+<P>COLTODO3 BL.-ODO3- **** MODULO COLT - manifold 3</P>
+<P>HCOLODO3 --UA-- FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>PCOLODO3 --UA-- FLUID PRESSURE IN THE MANIFOLD</P>
+<P>TCOLODO3 --UA-- METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>WVALAL1 --IN-- #WE_1ODO3#....................&lt;===VALVAL1 BL.-AL1 -</P>
+<P>HCOLODO1 --IN-- #HE_1ODO3#....................&lt;===COLTODO1 BL.-ODO1-</P>
+<P>WVALAL2 --IN-- #WE_2ODO3#....................&lt;===VALVAL2 BL.-AL2 -</P>
+<P>HCOLODO2 --IN-- #HE_2ODO3#....................&lt;===COLTODO2 BL.-ODO2-</P>
+<P>WTUBTUBO --IN-- #WU_1ODO3#....................&lt;===TH2OTUBO BL.-TUBO-</P>
+<P>HU_1TUBO --IN-- #HU_1ODO3#....................&lt;===TH2OTUBO BL.-TUBO-</P>
+<P>TESTODO3 --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTODO3 --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>****</P>
+<P>**** &gt;&gt;&gt;&gt;&gt;&gt;INGRESSI DI TUTTI I MODULI&lt;&lt;&lt;&lt;&lt;&lt;</P>
+<P>PIPMPC1 --IN-- PRESSURE AT THE PUMP INLET &lt;&lt;&lt;&lt;</P>
+<P>HIPMPC1 --IN-- FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>QIPMPC1 --IN-- POWER ABSORBED BY THE PUMP INLET</P>
+<P>NPOMPC1 --IN-- NUMBER OF PUMPS IN PARALLEL</P>
+<P>PUVARIC1 --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>ALZARIC1 --IN-- VALVE LIFT</P>
+<P>ALZAAL1 --IN-- VALVE LIFT</P>
+<P>PIPMPC2 --IN-- PRESSURE AT THE PUMP INLET</P>
+<P>HIPMPC2 --IN-- FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>QIPMPC2 --IN-- POWER ABSORBED BY THE PUMP</P>
+<P>NPOMPC2 --IN-- NUMBER OF PUMPS IN PARALLEL</P>
+<P>PUVARIC2 --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>ALZARIC2 --IN-- VALVE LIFT</P>
+<P>ALZAAL2 --IN-- VALVE LIFT</P>
+<P>ATTRTUBO --IN-- FRICTION COEFFICIENT IN THE TUBE</P>
+<P>PUVAVSB --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>ALZAVSB --IN-- VALVE LIFT</P>
+<P>HU_1ODO1 --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>TESTODO1 --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTODO1 --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>HU_1ODO2 --IN-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>TESTODO2 --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTODO2 --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>TESTODO3 --IN-- FLUID TEMPERATURE OUTSIDE THE MANIFOLD</P>
+<P>GESTODO3 --IN-- THERMAL EXCHANGE COEFF. OUTSIDE THE MANIFOLD</P>
+<P>****</P>
+<P>PUPMPC1 --CO-- PRESSURE AT THE PUMP OUTLET</P>
+<P>PIVARIC1 --CO-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>HVALRIC1 --CO-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>PIVAAL1 --CO-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>PUVAAL1 --CO-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HVALAL1 --CO-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>PUPMPC2 --CO-- PRESSURE AT THE PUMP OUTLET</P>
+<P>PIVARIC2 --CO-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>HVALRIC2 --CO-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>PIVAAL2 --CO-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>PUVAAL2 --CO-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HVALAL2 --CO-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>HITUTUBO --CO-- FLUID ENTHALPY AT THE INLET OF THE TUBE</P>
+<P>PUTUTUBO --CO-- FLUID PRESSURE AT THE OUTLET OF THE TUBE</P>
+<P>PITUTUBO --CO-- FLUID PRESSURE AT THE INLET OF THE TUBE</P>
+<P>WVALVSB --CO-- FLUID FLOW RATE IN THE VALVE</P>
+<P>HVALVSB --CO-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>WE_1ODO1 --CO-- FLOW RATE IN THE ENTERING BRANCH N. 1</P>
+<P>HE_1ODO1 --CO-- ENTHALPY IN THE ENTERING BRANCH N. 1</P>
+<P>WU_1ODO1 --CO-- FLOW RATE IN THE COMING OUT BRANCH N. 1</P>
+<P>WU_2ODO1 --CO-- FLOW RATE IN THE COMING OUT BRANCH N. 2</P>
+<P>HU_2ODO1 --CO-- ENTHALPY IN THE COMING OUT BRANCH N. 2 (W&lt;0)</P>
+<P>WE_1ODO2 --CO-- FLOW RATE IN THE ENTERING BRANCH N. 1</P>
+<P>HE_1ODO2 --CO-- ENTHALPY IN THE ENTERING BRANCH N. 1</P>
+<P>WU_1ODO2 --CO-- FLOW RATE IN THE COMING OUT BRANCH N. 1</P>
+<P>WU_2ODO2 --CO-- FLOW RATE IN THE COMING OUT BRANCH N. 2</P>
+<P>HU_2ODO2 --CO-- ENTHALPY IN THE COMING OUT BRANCH N. 2 (W&lt;0)</P>
+<P>WE_1ODO3 --CO-- FLOW RATE IN THE ENTERING BRANCH N. 1</P>
+<P>HE_1ODO3 --CO-- ENTHALPY IN THE ENTERING BRANCH N. 1</P>
+<P>WE_2ODO3 --CO-- FLOW RATE IN THE ENTERING BRANCH N. 2</P>
+<P>HE_2ODO3 --CO-- ENTHALPY IN THE ENTERING BRANCH N. 2</P>
+<P>WU_1ODO3 --CO-- FLOW RATE IN THE COMING OUT BRANCH N. 1</P>
+<P>HU_1ODO3 --CO-- ENTHALPY IN THE COMING OUT BRANCH N. 1 (W&lt;0)</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test5_c"></A>Test case 5: geometrical and physical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Geometrical and physical data of the model:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">1.&#9;<U>Blocks pumps 1-2:</P>
+</U><P ALIGN="JUSTIFY">Moment of inertia:&#9;230&#9;kg m²</P>
+<P ALIGN="JUSTIFY">Rated water flow rate:&#9;0.9&#9;m³/s</P>
+<P ALIGN="JUSTIFY">Rated rotational speed:&#9;469.6&#9;rad/s</P>
+<P ALIGN="JUSTIFY">Rated head:&#9;49.32&#9;bar</P>
+<P ALIGN="JUSTIFY">Mean fluid density:&#9;882&#9;kg/m³</P>
+<P ALIGN="JUSTIFY">Number of rotors:&#9;4</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">2.&#9;<U>Blocks circulating valves 1-2:</P>
+</U><P ALIGN="JUSTIFY">Valve model:&#9;simplified non-sonic model&#9;(COD.=2)</P>
+<P ALIGN="JUSTIFY">Opening valve characteristic:&#9;assigned in the aux. Fortran&#9;(ALFA=11)</P>
+<P ALIGN="JUSTIFY">Nominal conditions:</P>
+<P ALIGN="JUSTIFY">Fluid flow rate:&#9;80&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Inlet pressure:&#9;62.671&#9;bar</P>
+<P ALIGN="JUSTIFY">Outlet pressure:&#9;13&#9;bar</P>
+<P ALIGN="JUSTIFY">Inlet fluid enthalpy:&#9;650&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Valve lift:&#9;0.8</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">3.&#9;<U>Blocks manifolds 1-2:</P>
+</U><P ALIGN="JUSTIFY">Inlet pipes number:&#9;1</P>
+<P ALIGN="JUSTIFY">Outlet pipes number:&#9;2</P>
+<P ALIGN="JUSTIFY">Internal volume:&#9;1&#9;m³</P>
+<P ALIGN="JUSTIFY">Mass of the manifold (empty):&#9;634&#9;kg</P>
+<P ALIGN="JUSTIFY">Metal specific heat:&#9;460&#9;J/kg/K</P>
+<P ALIGN="JUSTIFY">Metal conductivity:&#9;35&#9;W/m/K</P>
+<P ALIGN="JUSTIFY">Thickness:&#9;0.008&#9;m</P>
+<P ALIGN="JUSTIFY">Outside surface:&#9;6.34&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">4.&#9;<U>Blocks gate-check valves 1-2:</P>
+</U><P ALIGN="JUSTIFY">Valve model:&#9;simplified non-sonic model with check valve&#9;(COD.=3)</P>
+<P ALIGN="JUSTIFY">Opening valve characteristic:&#9;linear&#9;(ALFA=1)</P>
+<P ALIGN="JUSTIFY">Nominal conditions:</P>
+<P ALIGN="JUSTIFY">Fluid flow rate:&#9;793&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Inlet pressure:&#9;62.32&#9;bar</P>
+<P ALIGN="JUSTIFY">Outlet pressure:&#9;61.32&#9;bar</P>
+<P ALIGN="JUSTIFY">Inlet fluid enthalpy:&#9;650&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Valve lift:&#9;0.8</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">5.&#9;<U>Block manifold 3:</P>
+</U><P ALIGN="JUSTIFY">Inlet pipes number:&#9;2</P>
+<P ALIGN="JUSTIFY">Outlet pipes number:&#9;1</P>
+<P ALIGN="JUSTIFY">Internal volume:&#9;2&#9;m³</P>
+<P ALIGN="JUSTIFY">Mass of the manifold (empty):&#9;780&#9;kg</P>
+<P ALIGN="JUSTIFY">Metal specific heat:&#9;460&#9;J/kg/K</P>
+<P ALIGN="JUSTIFY">Metal conductivity:&#9;35&#9;W/m/K</P>
+<P ALIGN="JUSTIFY">Thickness:&#9;0.01&#9;m</P>
+<P ALIGN="JUSTIFY">Outside surface:&#9;10.1&#9;m²</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">6.&#9;<U>Block pipeline:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">General data:</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cells number:&#9;4</P>
+<P ALIGN="JUSTIFY">Metal density:&#9;7900&#9;kg/m³</P>
+<P ALIGN="JUSTIFY">Metal specific heat:&#9;460&#9;J/kg/K</P>
+<P ALIGN="JUSTIFY">Metal conductivity:&#9;35&#9;W/m/K</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">Cells data:</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Cells 1, 2, 3, 4</P>
+<P ALIGN="JUSTIFY">Number of pipes:&#9;3</P>
+<P ALIGN="JUSTIFY">Inside diameter:&#9;0.4&#9;m</P>
+<P ALIGN="JUSTIFY">Outside diameter:&#9;0.43&#9;m</P>
+<P ALIGN="JUSTIFY">Lenght:&#9;10&#9;m</P>
+<P ALIGN="JUSTIFY">Difference in height:&#9;0&#9;m</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">7.&#9;<U>Block outlet valve:</P>
+</U><P ALIGN="JUSTIFY">Valve model:&#9;CADIPO&#9;(COD.=0)</P>
+<P ALIGN="JUSTIFY">Opening valve characteristic:&#9;linear&#9;(ALFA=1)</P>
+<P ALIGN="JUSTIFY">Nominal conditions:</P>
+<P ALIGN="JUSTIFY">Fluid flow rate:&#9;1593&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Inlet pressure:&#9;59&#9;bar</P>
+<P ALIGN="JUSTIFY">Outlet pressure:&#9;57&#9;bar</P>
+<P ALIGN="JUSTIFY">Inlet fluid enthalpy:&#9;650&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Valve lift:&#9;0.5</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">Main data for the calculation of a steady state condition:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</U><P ALIGN="JUSTIFY">Rotational speed of the pumps:&#9;469.6&#9;rad/s</P>
+<P ALIGN="JUSTIFY">Pumps suction pressure:&#9;13&#9;bar</P>
+<P ALIGN="JUSTIFY">Pumps suction fluid enthalpy:&#9;653&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Water flow rate in each pump:&#9;793.8&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Number of pumps for each circuit:&#9;1</P>
+<P ALIGN="JUSTIFY">Circulating valves lift:&#9;0</P>
+<P ALIGN="JUSTIFY">Friction coefficient in the pipes:&#9;0.059828</P>
+<P ALIGN="JUSTIFY">Water pressure downstream outlet valve:&#9;57&#9;bar</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test5_d"></A>Test case 5: auxiliary Fortran procedures</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the source code of the auxiliary Fortran procedures (FORAUS.FOR) of the "POMPE" model.</P>
+<P ALIGN="JUSTIFY">The "auxiliary Fortran procedures" are user-written functions and/or subroutines whose purpose is to perform non-standard computation for particular LEGO modules. The FORAUS.FOR file has to be written in accordance with "ANSI X3.9-1978 Standard Fortran" prescriptions.</P>
+<P ALIGN="JUSTIFY">In this model, auxiliary Fortran is used to define the relation between the stem position and the throwing area for the circulating valves 1 and 2 (RIC1 and RIC2).</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>FUNCTION AVNS10(Z,ALFA)</P>
+<P>DIMENSION X1(12),Y1(12)</P>
+<P>DATA X1/0.,.1,.2,.3,.4,.5,.6,.7,.8,.9,1.,1.2/</P>
+<P>DATA Y1/.0,.035,.085,.13,.18,.24,.32,.42,.55,.7,1.,1./</P>
+<P>C</P>
+<P>C CARATTERISTICHE CV=FUNZIONE DI ALZATA VALVOLA</P>
+<P>C</P>
+<P>IALF=ALFA-10.</P>
+<P>GO TO (1,100),IALF</P>
+<P>C</P>
+<P>C CARATTERISTICA DELLA FCV DEL RICIRCOLO</P>
+<P>C</P>
+<P>1 CALL AVNSIN(Z,X1,Y1,12,A)</P>
+<P>AVNS10=A</P>
+<P>GO TO 500</P>
+<P>C</P>
+<P>100 CONTINUE</P>
+<P>500 RETURN</P>
+<P>END</P>
+<P>C</P>
+<P>C</P>
+<P>C</P>
+<P>SUBROUTINE AVNSIN(Z,X,Y,NP,A)</P>
+<P>DIMENSION X(1),Y(1)</P>
+<P>C</P>
+<P>C INTERPOLAZIONE</P>
+<P>C</P>
+<P>DO 10 I=1,NP-1</P>
+<P>J=I</P>
+<P>IF(Z.GE.X(J).AND.Z.LE.X(J+1))GO TO 15</P>
+<P>10 CONTINUE</P>
+<P>A=0.</P>
+<P>GO TO 20</P>
+<P>15 A=Y(J)+(Z-X(J))*(Y(J+1)-Y(J))/(X(J+1)-X(J))</P>
+<P>20 RETURN</P>
+<P>END</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test5_e"></A>Test case 5: steady state condition</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the data file (F14.DAT) of the "POMPE" model.</P>
+<P ALIGN="JUSTIFY">File F14.DAT is written by LEGOCAD System data assignment activity. Steady states evaluation activity rewrites (only for unknown variables) the values obtained for the calculated steady state condition:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>*LG*NOME IMPIANTO =POMPE</P>
+<P>*LG*DATI DI NORMALIZZAZIONE P0=2.E+07*H0=1.E+06*W0=1.E+03*T0=1.E+03*R0=1.E+02*</P>
+<P>*LG* L0=1.E+01*V0=5.E+01*DP0=1.E+05*</P>
+<P>*LG*CONDIZIONI INIZIALI VARIABILI DEL SISTEMA (MKS)</P>
+<P>1 OMPMPC1 =469.60001 *BL.(CPOMPC1 )=NOTO* ROTATIONAL SPEED OF THE PUMP</P>
+<P>2 HUPMPC1 =6.5964E+05*BL.(CPOMPC1 )= * FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>3 WPOMPC1 =793.79999 *BL.(CPOMPC1 )=NOTO* FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>4 WVALRIC1 =0.000E+00 *BL.(VALVRIC1)= * FLUID FLOW RATE IN THE VALVE</P>
+<P>5 WVALAL1 =793.79999 *BL.(VALVAL1 )= * FLUID FLOW RATE IN THE VALVE</P>
+<P>6 OMPMPC2 =469.60001 *BL.(CPOMPC2 )=NOTO* ROTATIONAL SPEED OF THE PUMP</P>
+<P>7 HUPMPC2 =6.5964E+05*BL.(CPOMPC2 )= * FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>8 WPOMPC2 =793.79999 *BL.(CPOMPC2 )=NOTO* FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>9 WVALRIC2 =0.000E+00 *BL.(VALVRIC2)= * FLUID FLOW RATE IN THE VALVE</P>
+<P>10 WVALAL2 =793.79999 *BL.(VALVAL2 )= * FLUID FLOW RATE IN THE VALVE</P>
+<P>11 WTUBTUBO =1587.59998*BL.(TH2OTUBO)= * FLUID FLOW RATE INTO THE TUBE</P>
+<P>12 PIVAVSB =5.9000E+06*BL.(+VALVSB )=NOTO* FLUID PRESSURE AT THE VALVE INLET</P>
+<P>13 HCOLODO1 =6.5964E+05*BL.(COLTODO1)= * FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>14 PCOLODO1 =6.4209E+06*BL.(COLTODO1)= * FLUID PRESSURE IN THE MANIFOLD</P>
+<P>15 TCOLODO1 =428.67999 *BL.(COLTODO1)= * METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>16 HCOLODO2 =6.5964E+05*BL.(COLTODO2)= * FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>17 PCOLODO2 =6.4209E+06*BL.(COLTODO2)= * FLUID PRESSURE IN THE MANIFOLD</P>
+<P>18 TCOLODO2 =428.67999 *BL.(COLTODO2)= * METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>19 HCOLODO3 =6.5964E+05*BL.(COLTODO3)= * FLUID ENTHALPY IN THE MANIFOLD</P>
+<P>20 PCOLODO3 =6.1320E+06*BL.(COLTODO3)= * FLUID PRESSURE IN THE MANIFOLD</P>
+<P>21 TCOLODO3 =428.72000 *BL.(COLTODO3)= * METAL TEMPERATURE IN THE MANIFOLD</P>
+<P>22 ECINPC1 =1.00000 *BL.(CPOMPC1 )= * KINETIC ENERGY OF THE ROTATING MASS</P>
+<P>23 ECINPC2 =1.00000 *BL.(CPOMPC2 )= * KINETIC ENERGY OF THE ROTATING MASS</P>
+<P>24 HU_1TUBO =6.5964E+05*BL.(TH2OTUBO)= * FLUID ENTHALPY AT OUTLET OF THE CEL</P>
+<P>25 HU_2TUBO =6.5964E+05*BL.(TH2OTUBO)= * FLUID ENTHALPY AT OUTLET OF THE CEL</P>
+<P>26 HU_3TUBO =6.5964E+05*BL.(TH2OTUBO)= * FLUID ENTHALPY AT OUTLET OF THE CEL</P>
+<P>27 HUTUTUBO =6.5964E+05*BL.(TH2OTUBO)= * FLUID ENTHALPY AT THE OUTLET OF THE</P>
+<P>28 TM_1TUBO =428.76001 *BL.(TH2OTUBO)= * MEAN TEMPERATURE OF METAL IN CELL</P>
+<P>29 TM_2TUBO =428.76001 *BL.(TH2OTUBO)= * MEAN TEMPERATURE OF METAL IN CELL</P>
+<P>30 TM_3TUBO =428.76001 *BL.(TH2OTUBO)= * MEAN TEMPERATURE OF METAL IN CELL</P>
+<P>31 TM_4TUBO =428.76001 *BL.(TH2OTUBO)= * MEAN TEMPERATURE OF METAL IN CELL</P>
+<P>*LG*CONDIZIONI INIZIALI VARIABILI DI INGRESSO</P>
+<P>1 PIPMPC1 =1.3000E+06*BL.(CPOMPC1 )=NOTO* PRESSURE AT THE PUMP INLET</P>
+<P>2 HIPMPC1 =6.5300E+05*BL.(CPOMPC1 )=NOTO* FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>3 QIPMPC1 =5.2922E+06*BL.(CPOMPC1 )= * POWER ABSORBED BY THE PUMP</P>
+<P>4 NPOMPC1 =1.00000 *BL.(CPOMPC1 )=NOTO* NUMBER OF PUMPS IN PARALLEL</P>
+<P>5 PUVARIC1 =1.3000E+06*BL.(VALVRIC1)=NOTO* FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>6 ALZARIC1 =0.000E+00 *BL.(VALVRIC1)=NOTO* VALVE LIFT</P>
+<P>7 ALZAAL1 =0.47069 *BL.(VALVAL1 )= * VALVE LIFT</P>
+<P>8 PIPMPC2 =1.3000E+06*BL.(CPOMPC2 )=NOTO* PRESSURE AT THE PUMP INLET</P>
+<P>9 HIPMPC2 =6.5300E+05*BL.(CPOMPC2 )=NOTO* FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>10 QIPMPC2 =5.2922E+06*BL.(CPOMPC2 )= * POWER ABSORBED BY THE PUMP</P>
+<P>11 NPOMPC2 =1.00000 *BL.(CPOMPC2 )=NOTO* NUMBER OF PUMPS IN PARALLEL</P>
+<P>12 PUVARIC2 =1.3000E+06*BL.(VALVRIC2)=NOTO* FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>13 ALZARIC2 =0.000E+00 *BL.(VALVRIC2)=NOTO* VALVE LIFT</P>
+<P>14 ALZAAL2 =0.47069 *BL.(VALVAL2 )= * VALVE LIFT</P>
+<P>15 ATTRTUBO =5.9828E-02*BL.(TH2OTUBO)=NOTO* FRICTION COEFFICIENT IN THE TUBE</P>
+<P>16 PUVAVSB =5.7000E+06*BL.(+VALVSB )=NOTO* FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>17 ALZAVSB =0.49888 *BL.(+VALVSB )= * VALVE LIFT</P>
+<P>18 HU_1ODO1 =6.5300E+06*BL.(COLTODO1)=NOTO* ENTHALPY IN THE COMING OUT BRANCH N</P>
+<P>19 TESTODO1 =288.14999 *BL.(COLTODO1)=NOTO* FLUID TEMPERATURE OUTSIDE THE MANIF</P>
+<P>20 GESTODO1 =1.00000 *BL.(COLTODO1)=NOTO* THERMAL EXCHANGE COEFF. OUTSIDE THE</P>
+<P>21 HU_1ODO2 =6.5300E+05*BL.(COLTODO2)=NOTO* ENTHALPY IN THE COMING OUT BRANCH N</P>
+<P>22 TESTODO2 =288.14999 *BL.(COLTODO2)=NOTO* FLUID TEMPERATURE OUTSIDE THE MANIF</P>
+<P>23 GESTODO2 =1.00000 *BL.(COLTODO2)=NOTO* THERMAL EXCHANGE COEFF. OUTSIDE THE</P>
+<P>24 TESTODO3 =288.14999 *BL.(COLTODO3)=NOTO* FLUID TEMPERATURE OUTSIDE THE MANIF</P>
+<P>25 GESTODO3 =1.00000 *BL.(COLTODO3)=NOTO* THERMAL EXCHANGE COEFF. OUTSIDE THE</P>
+<P>*LG*DATI FISICI E GEOMETRICI DEL SISTEMA SUDDIVISI A BLOCCHI</P>
+<P>*LG*DATI DEL BLOCCO CPOMPC1 MODULO CPOM - centrifugal pump 1</P>
+<P>TYP =0. * INER =230. * QVNOM =.9 *</P>
+<P>OMNOM =469.6 * DPNOM =49.320E+05* POTN =5.2720E+06*</P>
+<P>DENS. =882. * N.GIRAN. =4. * VALV INT = *</P>
+<P>*LG*DATI DEL BLOCCO VALVRIC1 MODULO VALV - pump 1 circulating valve</P>
+<P>* VALVE DATA (COD. = IDENTIFIER FOR MATHEMATICAL MODEL CHOICE)</P>
+<P>ALFA =11. * CFA =.85 * COD. =2. *</P>
+<P>* DATA RELATED TO THE DISCHARGING CHARACTERISTIC</P>
+<P>CVA = * PORTATA =80. * P1 MONTE =.62671E+07*</P>
+<P>P2 VALLE =.13000E+07* ENTALPIA =.65000E+06* CORSA =.8 *</P>
+<P>* DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)</P>
+<P>DP. APER = * DP. CHIU = *</P>
+<P>*LG*DATI DEL BLOCCO VALVAL1 MODULO VALV - pump 1 delivery hand-operated valve</P>
+<P>* VALVE DATA (COD. = IDENTIFIER FOR MATHEMATICAL MODEL CHOICE)</P>
+<P>ALFA =1. * CFA =.85 * COD. =3. *</P>
+<P>* DATA RELATED TO THE DISCHARGING CHARACTERISTIC</P>
+<P>CVA = * PORTATA =793. * P1 MONTE =.62320E+07*</P>
+<P>P2 VALLE =.61320E+07* ENTALPIA =.65000E+06* CORSA =.8 *</P>
+<P>* DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)</P>
+<P>DP. APER = * DP. CHIU = *</P>
+<P>*LG*DATI DEL BLOCCO CPOMPC2 MODULO CPOM - centrifugal pump 2</P>
+<P>TYP =0. * INER =230. * QVNOM =.9 *</P>
+<P>OMNOM =469.6 * DPNOM =.49320E+07* POTN =.52720E+07*</P>
+<P>DENS. =882. * N.GIRAN. =4. * VALV INT = *</P>
+<P>*LG*DATI DEL BLOCCO VALVRIC2 MODULO VALV - pump 2 circulating valve</P>
+<P>* VALVE DATA (COD. = IDENTIFIER FOR MATHEMATICAL MODEL CHOICE)</P>
+<P>ALFA =11. * CFA =.85 * COD. =2. *</P>
+<P>* DATA RELATED TO THE DISCHARGING CHARACTERISTIC</P>
+<P>CVA = * PORTATA =80. * P1 MONTE =.62671E+07*</P>
+<P>P2 VALLE =.13000E+07* ENTALPIA =.65000E+06* CORSA =.8 *</P>
+<P>* DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)</P>
+<P>DP. APER = * DP. CHIU = *</P>
+<P>*LG*DATI DEL BLOCCO VALVAL2 MODULO VALV - pump 2 delivery hand-operated valve</P>
+<P>* VALVE DATA (COD. = IDENTIFIER FOR MATHEMATICAL MODEL CHOICE)</P>
+<P>ALFA =1. * CFA =.85 * COD. =3. *</P>
+<P>* DATA RELATED TO THE DISCHARGING CHARACTERISTIC</P>
+<P>CVA = * PORTATA =793. * P1 MONTE =.62320E+07*</P>
+<P>P2 VALLE =.61320E+07* ENTALPIA =.65000E+06* CORSA =.8 *</P>
+<P>* DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)</P>
+<P>DP. APER = * DP. CHIU = *</P>
+<P>*LG*DATI DEL BLOCCO TH2OTUBO MODULO TH2O - tube</P>
+<P>ROM =7900. * CP MET. =460. * COND.MET =35. *</P>
+<P>DELZ =0. *</P>
+<P>* CELL DATA 1</P>
+<P>NTUB 1 =3. * LUNG 1 =10. * DIAI 1 =.4 *</P>
+<P>DIAE 1 =.43 *</P>
+<P>* CELL DATA 2</P>
+<P>NTUB 2 = * LUNG 2 = * DIAI 2 = *</P>
+<P>DIAE 2 = *</P>
+<P>* CELL DATA 3</P>
+<P>NTUB 3 = * LUNG 3 = * DIAI 3 = *</P>
+<P>DIAE 3 = *</P>
+<P>* CELL DATA 4</P>
+<P>NTUB 4 = * LUNG 4 = * DIAI 4 = *</P>
+<P>DIAE 4 = *</P>
+<P>*LG*DATI DEL BLOCCO +VALVSB MODULO VALV - outlet water valve</P>
+<P>* VALVE DATA (COD. = IDENTIFIER FOR MATHEMATICAL MODEL CHOICE)</P>
+<P>ALFA =1. * CFA =.85 * COD. =0. *</P>
+<P>* DATA RELATED TO THE DISCHARGING CHARACTERISTIC</P>
+<P>CVA = * PORTATA =1593. * P1 MONTE =.59000E+07*</P>
+<P>P2 VALLE =.57000E+07* ENTALPIA =.65000E+06* CORSA =.5 *</P>
+<P>* DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)</P>
+<P>DP. APER = * DP. CHIU = *</P>
+<P>*LG*DATI DEL BLOCCO COLTODO1 MODULO COLT - manifold 1</P>
+<P>NU.TU.EN =1. * NU.TU.US =2. * VOLUME =1. *</P>
+<P>MASSA ME =634. * CP MET. =460. * COND MET =35. *</P>
+<P>SPESSORE =0.008 * SUP. ES =6.34 *</P>
+<P>*LG*DATI DEL BLOCCO COLTODO2 MODULO COLT - manifold 2</P>
+<P>NU.TU.EN =1. * NU.TU.US =2. * VOLUME =1. *</P>
+<P>MASSA ME =634. * CP MET. =460. * COND MET =35. *</P>
+<P>SPESSORE =0.008 * SUP. ES =6.34 *</P>
+<P>*LG*DATI DEL BLOCCO COLTODO3 MODULO COLT - manifold 3</P>
+<P>NU.TU.EN =2. * NU.TU.US =1. * VOLUME =2. *</P>
+<P>MASSA ME = 780. * CP MET. =460. * COND MET =35. *</P>
+<P>SPESSORE =0.01 * SUP. ES =10.1 *</P>
+<P>*LG*EOF</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test5_f"></A>Test case 5: transient simulation</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<U><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Data for the simulation of a transient condition:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Simulation time:&#9;80&#9;s</P>
+<P ALIGN="JUSTIFY">Integration step:&#9;1&#9;s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">Perturbated variable:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</U><P ALIGN="JUSTIFY">QIPMPC1</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;step</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;5&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;0&#9;W</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image44.gif" WIDTH=567 HEIGHT=189></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Pump PC1 applied power (perturbation) and speed (result)</P>
+</FONT><FONT SIZE=2><P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image45.gif" WIDTH=567 HEIGHT=189></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Results: pressures in the manifolds</P>
+</FONT><FONT SIZE=2><P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image46.gif" WIDTH=567 HEIGHT=189></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Results: water flow rates in the pump PC1 and in the tube TUBO</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P></BODY>
+</HTML>

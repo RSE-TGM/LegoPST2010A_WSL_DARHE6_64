@@ -1,0 +1,53 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>MODELS SIMULATED BY A LEGOPC MODULES</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"></font>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#99CCFF" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">
+      <font FACE="Arial">Which kind of models can be simulated by a LEGOPC module?</font>
+    </font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+<font SIZE="3">
+<p ALIGN="left">A LEGO module is a set of <u><a href="What_is_Fortran.htm">FORTRAN</a></u>
+subroutines, which contains a simulation model (no limit is set to component or
+function kind).
+<p ALIGN="left">A simulation model must be formalized in a set of ordinary differential 
+equations and algebraic equations: 
+<p ALIGN="center"><img border="0" src="images/module10.gif" width="236" height="124">
+<p ALIGN="left">where: </p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><img src="images/module11.gif" v:shapes="_x0000_i1025" width="64" height="18">&nbsp;&nbsp;&nbsp;
+are the state output variables<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<img src="images/module12.gif" v:shapes="_x0000_i1026" width="66" height="18">&nbsp;&nbsp;&nbsp; are the algebraic output variables<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<img src="images/module13.gif" v:shapes="_x0000_i1027" width="64" height="21">&nbsp;&nbsp;&nbsp;&nbsp;
+are the input variables<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">&nbsp;&nbsp;&nbsp;
+<img src="images/module14.gif" v:shapes="_x0000_i1028" width="11" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    is the simulation time<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left">The whole set of module output variable will so contain   
+<img src="images/module15.gif" v:shapes="_x0000_i1029" width="64" height="18">   and 
+<img src="images/module16.gif" v:shapes="_x0000_i1030" width="65" height="18">   (<i>n+m</i> 
+will be the total number of output variables).</p>
+<p ALIGN="left">The mathematical expression of    
+<img src="images/module17.gif" v:shapes="_x0000_i1031" width="62" height="18">&nbsp; and <img src="images/module18.gif" v:shapes="_x0000_i1032" width="68" height="18">      
+ can be linear or non-linear, and they may be formalized in analytical form, in tabular form 
+or using logical functions. They also may change during simulation (due to simulation time and/or
+input variables values), but all these features must be managed internally
+inside the FORTRAN code of the module. </p>
+</font></font> </font><!--mstheme--></font></body>
+
+</html>
+

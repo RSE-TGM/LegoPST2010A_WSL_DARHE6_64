@@ -1,0 +1,119 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE DISN</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DISN_summ"></A>MODULE DISN&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DISN_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DISN_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DISN_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DISN_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DISN_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DISN_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DISN_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DISN_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DISN_A"></A>MODULE DISN&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">LINEAR ALGEBRAIC EQUATIONS</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In the DISN module, differently from most of LEGOCAD library modules, the coded equations do not represent the physical-mathematical model of a given plant component, but a set of linear algebraical relations (max 30) of the following kind:</P>
+<P>Xu(j) = K * Xi (j = 1, 2, ..., n)</P>
+<P>Once the K coefficient and the Xi variable values have been assigned, the module determines the Xu(j) variables values.</P>
+<P>During the topology construction activity, the module requires an alphanumeric character that will be used as the initial character of the FORTRAN symbol adopted for the Xu(j) output variables.</P>
+<P>In the following paragraph the function of such a character is carried out by the letter "U".</P>
+<P>&nbsp;</P>
+</FONT><B><P>&nbsp;</P>
+<FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DISN_B"></A>MODULE DISN&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY"><IMG SRC="Image304.gif" WIDTH=393 HEIGHT=210></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">n = number of output variables (max 30)</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>[ ]&#9;U_1_, ..., U_n_&#9;variables to be calculated</P>
+<P>[ ]&#9;AING&#9;known variable</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DISN_C"></A>MODULE DISN&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to initial values of DISN module input and output variables (meanings defined above), user must assign the following data set to complete the module input on the file F14:</P>
+<P>[ ]&#9;NORM&#9;alphanumeric value identifying the normalization factor of the input variable (also used to &#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;normalize the output variables) according to the following rule:<BR>
+blank&#9;&#9;=&#9;1.<BR>
+W0&#9;&#9;=&#9;default value for flow rates<BR>
+H0&#9;&#9;=&#9;default value for enthalpies<BR>
+T0&#9;&#9;=&#9;default value for temperatures<BR>
+P0&#9;&#9;=&#9;default value for pressures<BR>
+Q0&#9;&#9;=&#9;default value for powers (= W0 * H0)<BR>
+RO0&#9;&#9;=&#9;default value for densities<BR>
+AL0&#9;&#9;=&#9;default value for lengths<BR>
+V0&#9;&#9;=&#9;default value for volumes<BR>
+DP0&#9;&#9;=&#9;default value for pressure differences<BR>
+numeric value = &#9;value to be used as normalization factor</P>
+<P ALIGN="JUSTIFY">[ ]&#9;COEF&#9;&#9;input variable coefficient.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DISN_D"></A>MODULE DISN&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">To initialize the DISN module variables on the file F14, no particular prescription is required.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DISN_E"></A>MODULE DISN&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>No user subprograms are present in the DISN module.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DISN_F"></A>MODULE DISN&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The linear algebraical equation, quoted in first paragraph, gives rise to the following residuals:</P>
+<P>RNI(j) = U_j_ - COEF * AING (j = 1, 2,..., n)</P>
+<P>(normalization factor = NORM)</P>
+<P>where U_j_ are the output variables to be calculated, AING is the known input variable, COEF and NORM are defined above.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DISN_G"></A>MODULE DISN&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE DISNI2</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DISNC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DISNJAC</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DISN</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DISNI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFO,IOB,DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DISNI4</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IOB,MOD)</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DISN_H"></A>MODULE DISN&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are reported in the user manual section devoted to the examples developed under the abbreviation:</P>
+<P ALIGN="CENTER">"ARIAGAS"</P></FONT></BODY>
+</HTML>

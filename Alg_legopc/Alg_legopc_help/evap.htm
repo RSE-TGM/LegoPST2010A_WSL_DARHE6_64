@@ -1,0 +1,842 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>EVAP</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><p align="center"><b><font SIZE="4">MODULE EVAP</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EVAP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">TWO PHASES (steam_water) EXCHANGER - HOMOGENEOUS MODEL</p>
+<p>&nbsp;</p>
+<p align="left">The EVAP module simulates the dynamics of thermo-hydraulic
+phenomena which water is subjected to, when it flows in a channel with metallic
+walls able to exchange heat with outside.</p>
+<p align="left">The module allows the simulation of one or more piping (in
+series or parallel configuration), or plant components whose geometry can be
+assimilated to an equivalent number of channels in parallel configuration.</p>
+<p align="left">It particularly meets the simulation of connection piping, heat
+exchanger tube bundles, or other components like steam generators in which
+compressible fluids flow through. In the latter case, besides simulating
+appropriately physical phenomena like the natural circulation, the module
+input-output scheme is compatible with those of the CCMP (combustion furnace)
+and FUMN (flue gas duct).</p>
+<p align="left">The module mathematical model is developed under the following
+hypotheses:</p>
+<p ALIGN="left">- for the mass, energy and momentum conservation equations, the
+monodimensional approximation with concentrated parameters is considered valid
+(the energy, mass and momentum balances are carried out for each single cell)</p>
+<p ALIGN="left">- the channel is subdivided, (along its axial direction), in an
+arbitrary number of cells (from 2 to 9) which can (or not) exchange heat with
+outside - the water flowing through the channel is considered as compressible
+fluid and can undergo some phase transitions. So, it can be in liquid state, or
+as steam as well as a liquid-steam two phase mixture</p>
+<p ALIGN="left">- in case of two phase mixture, as physic-mathematical model is
+adopted the homogeneous model without slip between the two phases - in the
+momentum conservation equation, the water inertia is considered as negligible</p>
+<p ALIGN="left">- it is assumed that the flow rate of water inside the channel
+can be inverted both on inlet and outlet sides - dealing with the thermal
+exchanges between the water flowing in the channel and the flue gas licking its
+external wall, the wall thickness is considered thin as regards to the diameter</p>
+<p ALIGN="left">- the temperature distribution on the external surface of each
+cell is assumed as uniform</p>
+<p ALIGN="left">- each cell is subdivided (along axial direction) in a certain
+number of thermal exchange zones (for each cell a maximum number of 6 zones is
+allowed with a further restriction concerning the total number of zones which
+must not exceed 32). In each zone the fluid licking the cell external surface is
+characterized by its own mean temperature</p>
+<p ALIGN="left">- the heat longitudinal conduction is considered as negligible.</p>
+<p align="left">The used equations are:</p>
+<p ALIGN="left">1) the conservation equation of water mass</p>
+<p ALIGN="left">2) the conservation equation of water momentum</p>
+<p ALIGN="left">3) the conservation equation of energy in the water</p>
+<p ALIGN="left">4) the conservation equation of energy in metallic walls</p>
+<p ALIGN="left">5) the thermal exchange equation between the channel external
+surface and the fluid licking it</p>
+<p ALIGN="left">6) the equation for enthalpy calculation of water at the channel
+outlet</p>
+<p ALIGN="left">7) the equation for enthalpy calculation of water at the channel
+inlet when back-flow occurs.</p>
+<p align="left">The conservation equation of energy in the channel metallic
+walls and the conservation equation of energy in the water flowing in the
+channel are integrated directly inside the module and formally presented as
+algebraical equations.</p>
+<p align="left">The external superficial thermal exchange coefficient between
+the metallic walls and the licking fluid is a module input variable. On the
+contrary, the internal exchange coefficient between the metallic walls and the
+water flowing through the channel is calculated by means of a correlation
+selected by the user in a suitable set (see below).</p>
+<p ALIGN="left">If the piping (or tube bundle) to simulate has concentrated head
+losses (as, for example, elbows or reducing fittings), they have to be
+distributed on the whole piping incorporating them in an equivalent friction
+coefficient. The value of such coefficient can be calculated, during stationary
+evaluation, assigning suitable boundary conditions.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EVAP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">NCEL = number of cells (NCEL = 2, ..., 9)</p>
+<p ALIGN="left">NZ(i) = number of thermal exchange zones in which the i-th cell
+is subdivided (i = 1, 2, ..., NCEL)</p>
+<p align="left">The module can be interconnected with other modules according to
+three methods:</p>
+<p>&nbsp;</p>
+<b>
+<p align="left">1) output in inlet and outlet pressure</p>
+</b>
+<p ALIGN="left">prescription about block name: none</p>
+<b>
+<p>&nbsp;</p>
+</b>
+<blockquote>
+  <blockquote>
+  </font><font FACE="Arial" SIZE="2">
+  <p ALIGN="center"><img SRC="images/Image813.gif" width="374" height="242"></p>
+  </font><font FACE="Arial">
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  </blockquote>
+</blockquote>
+<b>
+<p align="left">2) output in inlet flow rate and outlet pressure</p>
+</b>
+<p ALIGN="left">prescription about block name: preceded by '+' sign</p>
+<p ALIGN="center">&nbsp;</p>
+<blockquote>
+  <blockquote>
+  </font><font FACE="Arial" SIZE="2">
+  <p ALIGN="center"><img SRC="images/Image814.gif" width="374" height="242"></p>
+  </font><font FACE="Arial">
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  </blockquote>
+</blockquote>
+<b>
+<p align="left">3) output in inlet and outlet flow rate</p>
+</b>
+<p ALIGN="left">prescription about block name: preceded by '-' sign</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="center"><img SRC="images/Image815.gif" width="374" height="242"></p>
+</font><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PCi</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(i = 1, 2, ..., NCEL) mean
+      pressure of the fluid in the i-th channel cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WGi</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(i = 1, 2, ..., NCEL-1) flow
+      rate of the fluid flowing out from the i-th channel cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PUTU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">channel outlet pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PITU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">channel inlet pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TMi</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(i = 1, 2, ..., NCEL) metal
+      temperature on external surface of the i-th channel cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QTi</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(i = 1, 2, ..., NCEL) total
+      thermal power entering in the i-th channel cell (see note 1)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HUTU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid enthalpy at the channel
+      outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HIIT</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid enthalpy at the channel
+      inlet when back-flow occurs</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HITU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid enthalpy at the channel
+      inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HUIT</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid enthalpy at the channel
+      outlet when back-flow occurs</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WUTU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid flow rate at the
+      channel outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WITU</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid flow rate at the
+      channel inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TFij</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(i = 1, 2, ..., NCEL) (j = 1,
+      2, ...NZ(i)) temperature of the fluid licking the external surface of the
+      i-th cell in the j-th zone</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GFij</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(i = 1, 2, ..., NCEL) (j = 1,
+      2, ...NZ(i)) superficial thermal exchange coefficient between the fluid
+      licking the external surface of the i-th cell in the j-th zone and cell
+      wall metal</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ATTR</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">channel friction coefficient
+      (see note 2)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p align="left">The thermal power exchanged between the external surface of the
+i-th channel cell and the fluid licking it is determined by means of the
+following relation:</p>
+<p ALIGN="CENTER">QTi = &lt;GFi&gt;*Si*[&lt;TFi&gt; - TMi] [i = 1,..., NCEL]</p>
+<p ALIGN="JUSTIFY">where:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Si</font><!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the exchange total surface</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">&lt;GFi&gt;</font><!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the mean value of the superficial
+      thermal exchange coefficient between the fluid licking the cell external
+      surface and the surface itself</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">&lt;TFi&gt;</font><!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the temperature mean value of the
+      fluid in the cell.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">So the power QTi is positive when fluid gives up heat to the
+surface.</p>
+<b>
+<p ALIGN="RIGHT">Note 2</p>
+</b>
+<p align="left">The module refers to Fanning' s friction coefficient according
+to the formula:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image816.gif" width="253" height="46"></p>
+</font>
+<p ALIGN="JUSTIFY"><font face="Arial">where:</font></p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <font FACE="Arial">
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RO</font><!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the fluid density</font><!--mstheme--></font></td>
+    </font>
+  </tr>
+  <tr>
+    <font FACE="Arial">
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">&lt;V&gt;</font><!--mstheme--></font></td>
+    <td width="90%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the fluid mean velocity.</font><!--mstheme--></font></td>
+    </font>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+<p ALIGN="left">The physical meanings of the remaining variables are above and
+below.</p>
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EVAP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p>&nbsp;</p>
+<p align="left">In addition to the initial value of input and output variables (meanings
+defined above), user must assign the following data:</p>
+<p align="left">Data concerning the whole channel:</p>
+<!--mstheme--></font><table border="0" width="100%" height="67">
+  <tr>
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ROM</font><!--mstheme--></font></td>
+    <td width="72%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">density of channel metallic
+      wall</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg/K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CM</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">specific heat of channel
+      metallic wall</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/m/K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COND&nbsp;</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">&nbsp;thermal conductivity of channel metallic wall.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">Data concerning the single cells:</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NTUB</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of channels in
+      parallel configuration</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DIAI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">internal diameter of channels
+      in parallel configuration</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DIAE</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">external diameter of channels
+      in parallel configuration</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LUNG</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">length of channels in
+      parallel configuration</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DELZ</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">geodetic gap between the
+      channel inlet and outlet (positive when the channel outlet is at higher
+      level than inlet)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CRIG</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">selection parameter of
+      mathematical model to use in determining the convective thermal exchange
+      coefficient between the channel wall metal and the fluid flowing through
+      it. Depending from the assigned value to this parameter, several operative
+      options are carried out according to the following scheme:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"><b>CRIG &lt; 0.</b></font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">correlation for the exchange
+      coefficient calculation. It must be provided by user through the
+      subprogram SUBROUTINE GAMUTXE(PC, H, S, T, RO, TIT, TMC, DIAI, CRIG, G, QT,
+      SUP, GAMIN) (see below)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"><b>CRIG = 0.</b></font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">correlations used for the
+      exchange coefficient calculation. It only takes into account the
+      thermo-dynamic state of fluid flowing through the channel. Such
+      correlations are directly encoded inside the module in the subroutine
+      GAMTERT</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"><b>CRIG &gt; 0.</b></font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">correlations used for the
+      thermal coefficient calculation. They are encoded in the subprogram of
+      library SUBROUTINE GAM01. They take into account both thermo-dynamic state
+      of fluid flowing through the channel and channel wall temperature. Besides,
+      a distinction is made between channels having smooth or rough surfaces.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">The selection between the two different channels is carried out
+as a function of the value assigned to the CRIG parameter which, in this case,
+also identifies a multiplying coefficient &quot;MOLT&quot; which changes the
+value of exchange coefficient calculated by correlations:</p>
+<p ALIGN="left">0.&gt; CRIG &gt; 10. - smooth channels</p>
+<p ALIGN="CENTER">MOLT = CRIG</p>
+<p ALIGN="left">10.&gt; CRIG &gt; 20. - rough channels</p>
+<p ALIGN="CENTER">if CRIG = 10, 11 ==&gt; MOLT = 1.</p>
+<p ALIGN="left">otherwise MOLT = CRIG - 10.</p>
+<p align="left">User has to take into account that most accuracy as regards to
+the use of sub-routine GAMTERT (acquired in the exchange coefficient calculation
+using sub-routine GAM01) is to calculation time detriment. In fact, the
+calculation times for the GAM01 are more or less the double of those needed for
+GAMERT. Further informations about contents and use methods of the subroutine
+GAM01 are in the related section of the manual &quot;LEGOCAD - Modelling Library
+for Simulation of Power Generation Plants - Module Description&quot;.</p>
+<!--mstheme--></font><table border="0" width="100%" height="64">
+  <tr>
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]&nbsp;</font><!--mstheme--></font></td>
+    <td width="18%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VOL.M.Ci</font><!--mstheme--></font></td>
+    <td width="72%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">volume of metal forming the
+      i-th cell walls</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SUP.j Ci</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">exchange surface area between
+      external fluid and channel wall in the j-th zone of the i-th cell.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left">When several consecutive cells have the same geometrical data,
+it is enough to assign those related to the first cell. The same data are
+automatically assigned to the following cells.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EVAP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the EVAP module variables no particular
+prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EVAP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p>&nbsp;</p>
+<p align="left">To introduce in the module a correlation giving the convective
+thermal exchange coefficient between the channel internal wall and the fluid
+flowing through the channel, user must assign a negative value to CGIG (see
+above) and write a user subprogram whose declarative statement is:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; SUBROUTINE GAMUTXE(PC,
+H, S, T, RO, TIT, TMC, DIAI, CRIG, G, QT,</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; $ SUP, GAMIN)</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;</p>
+</font></b>
+<p ALIGN="JUSTIFY"><font face="Arial">Input parameters: PC, H, S, T, RO, TIT,
+TMC, DIAI, CRIG, G, QT, SUP</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">Output parameters: GAMIN</font></p>
+<font FACE="Arial">
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PC</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mean pressure of fluid
+      flowing through the channel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">H</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">specific enthalpy of fluid
+      flowing through the channel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg/K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">S</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">specific entropy of fluid
+      flowing through the channel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mean temperature of fluid
+      flowing through the channel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RO</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mean density of fluid flowing
+      through the channel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TIT</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">steam ratio of fluid flowing
+      through the channel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TMC</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mean temperature of channel
+      wall metal</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DIAI</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">channel internal diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CRIG</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">parameter corresponding to
+      the CRIG data described above. It can be used as selection index of the
+      correlation to use in the convective exchange coefficient calculation
+      between fluid and metal, when user has to include several correlations in
+      only one subroutine GAMUTXE</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m²/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">G</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">specific flow rate of the
+      fluid flowing through the channel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QT</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">thermal power exchanged
+      between the wall metal and the fluid flowing through the channel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SUP</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">exchange surface area between
+      the wall metal and the fluid flowing through the channel</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/m²/K]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GAMIN</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">convective thermal exchange
+      coefficient between the wall metal and the fluid flowing through the
+      channel.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">Hereinafter it is indicated an example of the subroutine GAMUTXE
+related to an assignment of a constant value to the GAMIN exchange coefficient
+and to its calculation by means of Dittus-Bölter's correlation as dependence of
+the value assigned to CRIG:</p>
+</font>
+<b><font FACE="Courier New" SIZE="2">
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+SUBROUTINE GAMUTXE(PC,H,S,T,RO,TIT,TMC,DIAI,CRIG,G,QT,SUP,GAMIN)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; REAL
+PC,H,S,T,RO,TIT,TMC,DIAI,CRIG,G,QT,SUP,GAMIN</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+INTEGER ICO</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; ICO=-CRIG</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; GO TO
+(1,2) ICO</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C***************************
+CONSTANT **********************************</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; 1
+GAMIN=65000.</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+RETURN</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; 2
+CONTINUE</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C***************************
+DITTUS ************************************</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; GAMIN=DITTUS
+(G,DIAI,PC,T,S,RO,TIT)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+RETURN</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; END</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+FUNCTION DITTUS (G,D,P,T,S,RO,TIT)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; REAL
+MU,K</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C&nbsp;&nbsp; READING
+FROM THERMODYNAMIC PROPERTIES TABLES</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; CALL
+SATUR(P,3,ROLS,ROVS,1)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; ROLG=ROLS/ROVS</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; CP=CPEV(P,S,TIT,1.,1.)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; MU=ETEV(P,T,RO,ROLG,TIT,1.,1.)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; K=ALEV(P,T,RO,ROLG,TIT,1.,1.)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C&nbsp;&nbsp; REYNOLDS'
+NUMBER</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+RE=G*D/MU</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+IF(RE.LT.10000.) RE=10000.</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C&nbsp;&nbsp; PRANDTL'S
+NUMBER</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+PR=CP*MU/K</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C&nbsp;&nbsp; EXCHANGE
+COEFFICIENT CALCULATION</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">C</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+DITTUS=0.023*(K/D)*RE**.8*PR**.4</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;
+RETURN</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; END</p>
+</font></b>
+<p ALIGN="left">&nbsp;</p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EVAP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The residuals present in the module directly correspond to the
+equations mentioned in the first paragraph. Here only the correspondences
+between residuals and equations are indicated, also mentioning their respective
+normalization factors. Further explanations are given in the related section of
+the manual: &quot;LEGOCAD - Modelling Library for Simulation of Power Generation
+Plants - Theory - Modules Description&quot;</p>
+<p align="left">I = 1, NCEL</p>
+<p ALIGN="left">1) RNI(I) - normalization factor = P0</p>
+<p ALIGN="left">are related, cell by cell, to the mass balance of the water
+flowing through the channel</p>
+<p align="left">J = 1, NCEL+1</p>
+<p ALIGN="left">2) RNI(NCEL+J) - normalization factor = DP0</p>
+<p ALIGN="left">are related, cell by cell, to the momentum balance of the water
+flowing through the</p>
+<p align="left">channel</p>
+<p align="left">K = 1, NCEL</p>
+<p ALIGN="left">3) RNI(2*NCEL+1+K) - normalization factor = T0</p>
+<p ALIGN="left">are related, cell by cell, to the energy balance in the channel
+metal wall</p>
+<p align="left">L = 1, NCEL</p>
+<p ALIGN="left">4) RNI(3*NCEL+1+L) - normalization factor = W0*H0</p>
+<p ALIGN="left">are related, cell by cell, to the thermal exchange equation
+between the external surface of channel wall and the fluid licking it</p>
+<p ALIGN="left">5) RNI(4*NCEL+2) - normalization factor = H0</p>
+<p ALIGN="left">is related to the enthalpy calculation equation of water at the
+channel outlet</p>
+<p ALIGN="left">6) RNI(4*NCEL+2) - normalization factor = W0*H0</p>
+<p ALIGN="left">is related to the enthalpy calculation equation of water at the
+channel inlet, when back-flow occurs</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EVAP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<p align="left">SUBROUTINE EVANI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</p>
+<p align="left">$ IBLOC1, IBLOC2, IER, CNXYU, TOL)</p>
+<p align="left">SUBROUTINE EVANI3(IFO, IOB, DEBL)</p>
+<p align="left">SUBROUTINE EVANI4(IOB, MOD)</p>
+<p align="left">SUBROUTINE EVANXINI(IFUN, XYU, DATI, IV, ID)</p>
+<p align="left">SUBROUTINE EVANXDEC(IFLA, XYU, DATI, IV, ID,</p>
+<p align="left">$ NCEL, IWP, VI, AL, SEZ, DELZ, GAMT, GAML,</p>
+<p align="left">$ SUPE, SUPI, TAUM0, D02, DIAI, CRIG,</p>
+<p align="left">$ P, W, TM, Q, TEX, GAMEX, PING, PUSC, HE1, HE2,</p>
+<p align="left">$ HU1, HU2, ATTR,H, HA, SA, TA, RA, DRODS,</p>
+<p align="left">$ DRODP, DSDT, ROING, ROUSC, WING, WUSC,</p>
+<p align="left">$ TMCA, QCA, HU1CA, HU2CA, DTPREC, GAMETI,</p>
+<p align="left">$ GAMETE, GAMIN)</p>
+<p align="left">SUBROUTINE EVANXMEM(NCEL, DATI, ID, ROING, ROUSC, WING, WUSC</p>
+<p align="left">$ H, HA, SA, TA, RA, DRODS, DRODP, DSDT, TMCA,</p>
+<p align="left">$ QCA, HU1CA, HU2CA, DTPREC, GAMIN)</p>
+<p align="left">SUBROUTINE EVANC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+<p align="left">$ IBLOC1, IBLOC2)</p>
+<p align="left">SUBROUTINE EVAN(IFUN, IXYU, XYU, IPD, DATI, RNI)</p>
+<p align="left">SUBROUTINE NAJAX(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RN,</p>
+<p align="left">$ NSTATI, NUSCIT, NINGRE, EPS, EPSLIM, RESIDUI)</p>
+<p align="left">SUBROUTINE XJTUBO(IFUN, NCEL, P, W, DRODP, DRODS, DSDT, ATTR,</p>
+<p align="left">$ PING, PUSC, ROING, ROUSC, RA, VI, AL, SEZ,</p>
+<p align="left">$ DELZ, GAMT, GAML, RW, DRWPI, DRWPU, DRWW, DRWAT,</p>
+<p align="left">$ RP, DRPWI, DRPWU, DRPP)</p>
+<p align="left">SUBROUTINE XJCELP(IFUN, W1, W2, DRODP, DRODS, DSDT, VOL,</p>
+<p align="left">$ R, DRW1, DRW2, DRP)</p>
+<p align="left">SUBROUTINE XJCELW(IFUN, W, P1, P2, RO1, RO2, AL, SEZ, DELZ, GAMT,</p>
+<p align="left">GAML, ATTR, R, DRW, DRP1, DRP2, DRAT)</p>
+<p align="left">SUBROUTINE EVANXTER(NCEL, P, SA, HA, TA, TM, H, W, HWI, HVI, HE1</p>
+<p align="left">$ HE2, HU1, HU2, ROING, ROUSC, QEX, GAMEX, TEX,</p>
+<p align="left">$ RA, CPA, DSDT, DIAI, SEZ, D02, SUPI, SUPE,</p>
+<p align="left">$ VI, TAUM0, TMCA, QCA, HU1CA, HU2CA, GAMETI,</p>
+<p align="left">$ GAMETE, Q, CRIG, AL)</p>
+<p align="left">SUBROUTINE Y1SORT(NCEL, MODO1, IND)</p>
+<p align="left">SUBROUTINE TERTUB(NCEL, W, H, SA, HA, TA, TM, CPA, P, DSA,</p>
+<p align="left">$ RA, SEZ, DTM, TEX, TMCA, QEX, GAMES, GAMIN,</p>
+<p align="left">$ TAUM, TAUF, MODO, IND, AL)</p>
+<p align="left">SUBROUTINE Y1CTER(WI, WU, HI, HU, DSA, HA, TA, TMCA, DTM, CPA,</p>
+<p align="left">$ TEX, QEX, GAMES, GAMIN, TAUF, TAUM, MODO, I)</p>
+<p align="left">SUBROUTINE PROPCEL(SA, P, RA, HWI, HVI, CPA, DRODS, DRODP, NCEL)</p>
+<p align="left">SUBROUTINE EVANXTER0(IFUN, NCEL, P, SA, HA, RA, TA, H, W, HWI,</p>
+<p align="left">$ HVI, HE1, HE2, ROING, ROUSC, QEX, GAMEX, TEX,</p>
+<p align="left">$ DIAI, SEZ, D02, SUPI, SUPE, TMCA, QCA,</p>
+<p align="left">$ HU1CA, HU2CA, GAMETI, GAMETE, GAMIN,</p>
+<p align="left">$ Q, TM, CRIG)</p>
+<p align="left">SUBROUTINE Y1CTER0(P, WI, HI, SA, HA, TA, TMCA, GAMIN,</p>
+<p align="left">$ QEX, GAMES, TEX, Q, RA, SEZ)</p>
+<p align="left">SUBROUTINE GAMTERT(P, TF, HW, HV, HI, HU, GAMMET, D02,</p>
+<p align="left">$ SUP, WJ, GAMF, CRIG)</p>
+<p align="left">SUBROUTINE GAMUTXE(P, HA, SA, TA, RA, TIT, TMCA, DIAI,</p>
+<p align="left">$ CRIG, G, Q, SUPI, GAMIN)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EVAP</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are in the manual
+section dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;ANELLO&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

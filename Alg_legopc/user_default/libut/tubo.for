@@ -1,0 +1,292 @@
+C**********************************************************************
+C modulo tubo.f
+C tipo 
+C release 1.2
+C data 10/23/95
+C Puertollano project libut reserver @(#)tubo.f	1.2
+C**********************************************************************
+C**********************************************************************
+C modulo tubo.f
+C tipo 
+C release 5.1  modificata
+C data 3/29/95
+C reserver @(#)tubo.f	5.1  modificata
+C**********************************************************************
+C
+      SUBROUTINE TUBOI3(IFO,IOB,DEBL)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/TUBO00/IBLOC
+      CHARACTER*80 DEBL
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 NOMAPP
+      CHARACTER*4 MOD
+      DATA MOD/'TUBO'/
+C
+C
+C
+      CALL TUBOI4(IOB,MOD)
+C
+C
+C
+      NSTATI=0
+      NUSCIT=1
+      NINGRE=4
+C
+      WRITE(NOMAPP,'(A1)')IBLOC
+      WP=0.
+      IF(NOMAPP(1:1).EQ.'+')WP=1.
+      IF(NOMAPP(1:1).EQ.'-')WP=2.
+C
+      WRITE(IFO,2999)IBLOC,IOB,MOD,DEBL
+ 2999 FORMAT(A,2X,'BL.-',A4,'- **** MODULO ',A4,' - ',A)
+      IF(WP.EQ.2.)WRITE(IFO,3001)IOB
+      IF(WP.EQ.1.)WRITE(IFO,3002)IOB
+      IF(WP.EQ.0.)WRITE(IFO,3007)IOB
+ 3001 FORMAT('PUTU',A4,2X,'--UA-- PRESSURE AT THE HEAD LOSS OUTLET')
+ 3002 FORMAT('PITU',A4,2X,'--UA-- PRESSURE AT THE HEAD LOSS INLET')
+ 3007 FORMAT('WTUB',A4,2X,'--UA-- FLOW RATE THROUGH THE HEAD LOSS')
+C
+      IF(WP.EQ.2..OR.WP.EQ.0.)WRITE(IFO,3013)IOB
+      IF(WP.EQ.1.)WRITE(IFO,3011)IOB
+ 3011 FORMAT('WTUB',A4,2X,'--IN-- FLOW RATE THROUGH THE HEAD LOSS')
+ 3012 FORMAT('PUTU',A4,2X,'--IN-- PRESSURE AT THE HEAD LOSS OUTLET')
+C
+      IF(WP.EQ.1..OR.WP.EQ.0.)WRITE(IFO,3012)IOB
+      IF(WP.EQ.2.)WRITE(IFO,3011)IOB
+ 3013 FORMAT('PITU',A4,2X,'--IN-- PRESSURE AT THE HEAD LOSS INLET')
+C
+      WRITE(IFO,3005)IOB
+ 3005 FORMAT('HTUB',A4,2X,
+     $'--IN-- ENTHALPY AT HEAD LOSS INLET AND OUTLET')
+C
+      WRITE(IFO,3010)IOB
+ 3010 FORMAT('AKTB',A4,2X,
+     $'--IN-- CORRECTOR COEFFICIENT OF THE HEAD LOSS')
+C
+      RETURN
+      END
+      SUBROUTINE TUBOI4(IOB,MOD)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/TUBO00/IBLOC
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MODU
+      CHARACTER*1 ICA,IMEN,IPIU
+      CHARACTER*1 IBL
+      CHARACTER*4 MOD
+      DATA IBL/' '/
+      DATA IPIU/'+'/
+      DATA IMEN/'-'/
+C
+    2 WRITE(6,2999)
+ 2999 FORMAT(//10X,'GIVE A CHARACTER'
+     $ /5X,' - FLOW RATE AS OUTPUT =========> BLANK'
+     $ /5X,' - INLET PRESSURE AS OUTPUT ====>   +'
+     $ /5X,' - OUTLET PRESSURE AS OUTPUT ===>   -')
+      READ(5,3001)ICA
+      IF(ICA.EQ.IPIU)GO TO 1
+      IF(ICA.EQ.IMEN)GO TO 1
+      IF(ICA.EQ.IBL)GO TO 1
+      GO TO 2
+ 3001 FORMAT(A)
+    1 CONTINUE
+C
+      WRITE(MODU,'(A1,A3)')ICA,MOD
+      IF(ICA.EQ.IBL)MODU=MOD
+      WRITE(IBLOC,'(2A4)')MODU,IOB
+C
+      RETURN
+      END
+      SUBROUTINE TUBOI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,NOM1,NOM2,
+     $ IER,CNXYU,TOL)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      CHARACTER*4 CS1,CS2,WL1,WL2,PM1,PM2,PV1
+     $,PV2,HM1,HM2,DZ1,DZ2
+      CHARACTER*4 NOMAPP
+      INTEGER VAR
+      DIMENSION VAR(MX1,2),XYU(*),DATI(*),CNXYU(*),TOL(*)
+      COMMON / NORM / P0,H0,T0,Q0,R0,AL0,V0,DP0
+      DATA CS1/'COEF'/,CS2/'F.  '/
+      DATA WL1/'PORT'/,WL2/'ATA'/,PM1/'P1 M'/,PM2/'ONTE'/
+      DATA PV1/'P2 V'/,PV2/'ALLE'/,HM1/'ENTA'/,HM2/'LPIA'/
+      DATA DZ1/'DISL'/,DZ2/'IV. '/
+C
+      GO TO (1,10),IFUN
+C
+C      SCRITTURA DEI SIMBOLI SUL FILE 14
+C
+    1 WRITE(14,1010)
+ 1010 FORMAT('*   DATA TO BE ASSIGNED TO DEFINE THE HEAD LOSS')
+      WRITE(14,1020)WL1,WL2,PM1,PM2,PV1,PV2,HM1,HM2,CS1,CS2
+      WRITE(14,1011)
+ 1011 FORMAT('*   SEAL ADDED TO THE HEAD LOSS')
+      WRITE(14,1020)DZ1,DZ2
+ 1020 FORMAT(3(4X,2A4,' =',10X,'*'),5X)
+      RETURN
+C
+C      LETTURA  DEI DATI DAL FILE 14
+C
+   10 READ(14,1070)
+      READ(14,1070)
+      READ(14,1070) WL,PM,PV,H,CS
+      READ(14,1070)
+      READ(14,1070) DZ
+ 1070 FORMAT(3(14X,F10.0,1X),5X)
+C
+C   CALCOLO DEL COEFFICIENTE DI PERDITA DI CARICO
+C
+C
+	RK0=0.
+        PMD=0.5*PM+0.5*PV
+C
+	IF(WL.GT.0.) THEN
+	  IFL=1
+C  S=SHEV(PM,H,IFL)
+C  RO=ROEV(PM,S,IFL)
+          S=SHEV(PMD,H,IFL)
+          RO=ROEV(PMD,S,IFL)
+	  RK0=2.*(PM-PV)*RO/(WL*WL+.1*WL)*Q0*Q0/P0
+	  GO TO 15
+	ENDIF
+	   RK0= CS/P0*Q0*Q0
+ 15   CONTINUE
+C
+C      DECODE(1,2222,NOM1)IWP
+C 2222 FORMAT(A1,3X)
+C
+C -----   inizio modifica istruzione di DECODE   -----
+      WRITE(NOMAPP,'(A1)')NOM1
+      IWP=0
+      IF(NOMAPP(1:1).EQ.'+')IWP=1
+      IF(NOMAPP(1:1).EQ.'-')IWP=2
+C -----    fine modifica istruzione di DECODE    -----
+C
+C       MEMORIZZAZIONE DATI
+C
+      RKK=RK0*P0/Q0/Q0
+      WRITE(6,3023)RKK
+ 3023 FORMAT(//10X,'HEAD LOSS COEFFICIENT = ',E12.5/)
+C
+      DATI(ID1)=RK0
+      DATI(ID1+1)=IWP
+      DATI(ID1+2)=DZ*9.81/P0
+      ID2=ID2+2
+C
+C   COSTANTI DI NORMALIZZAZIONE
+C
+      CNXYU(IV1)=Q0
+      CNXYU(IV1+1)=P0
+      CNXYU(IV1+2)=P0
+      CNXYU(IV1+3)=H0
+      CNXYU(IV1+4)=1.
+      IF(IWP.EQ.0)GO TO 25
+      CNXYU(IV1)=P0
+      CNXYU(IV1+1)=Q0
+      IF(IWP.EQ.1)GO TO 25
+      CNXYU(IV1+1)=P0
+      CNXYU(IV1+2)=Q0
+C
+C   TOLLERANZA PER LA SOLUZIONE DELL'EQUAZIONE
+C    viene posta 1000 pascal / P0
+C     se viene data la differenza di pressione nominale
+C     viene posta 1/100 di quest'ultima.
+C
+   25 TOL(1)=1000./P0
+C$$$
+C      IF(WL.GT.0.) TOL(1)=(PM-PV)/100./P0
+C$$$
+C
+      IF(IWP.EQ.0)WRITE(6,502)'*** FLOW RATE AS OUTPUT ***'
+      IF(IWP.EQ.1)WRITE(6,502)'*** INLET PRESSURE AS OUTPUT ***'
+      IF(IWP.EQ.2)WRITE(6,502)'*** OUTLET PRESSURE AS OUTPUT ***'
+  502 FORMAT(14X,A)
+      RETURN
+      END
+C
+      SUBROUTINE TUBOC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RN,NOM1,NOM2)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RN(*)
+      COMMON/NORM/P0,H0,T0,Q0,R0,AL0,V0,DP0
+      COMMON/TOLEG00/TOLIN(100)
+C
+      IFL=1
+      GO TO (1,10,10),IFUN
+C
+C   DEFINIZIONE DELLA TOPOLOGIA
+C
+    1 DO 5 I=1,5
+      AJAC(1,I)=1.
+    5 CONTINUE
+      RETURN
+C
+C   DECODIFICA DEI DATI
+C
+   10 RK0=DATI(IPD)
+      IWP=DATI(IPD+1)
+      RGZ=DATI(IPD+2)
+C
+C   DECODIFICA DELLE VARIABILI
+C
+      W=XYU(IXYU)
+      PM=XYU(IXYU+1)
+      PV=XYU(IXYU+2)
+      H=XYU(IXYU+3)
+      FC=XYU(IXYU+4)
+      IF(IWP.EQ.0)GO TO 35
+      PM=XYU(IXYU)
+      W=XYU(IXYU+1)
+      IF(IWP.EQ.1)GO TO 35
+      PV=XYU(IXYU)
+      PM=XYU(IXYU+1)
+      W=XYU(IXYU+2)
+C
+   35 DP = PM-PV
+C     PMED=PM*P0
+      PMED=(0.5*PM+0.5*PV)*P0
+      S=SHEV(PMED,H*H0,IFL)
+      RO=ROEV(PMED,S,IFL)
+C
+C
+      TOLIN(1)=50./P0
+C
+C   CALCOLO DEL RESIDUO
+C
+      IF(IFUN.EQ.3) GO TO 40
+      RN(1) = DP-FC*RK0/RO/2.*(W*ABS(W)+.1/Q0*W) - RGZ*RO
+      RETURN
+C
+C     CALCOLO DELLO JACOBIANO
+C
+   40 IWPP=IWP+1
+      GO TO (42,46,48),IWPP
+C
+C________ USCITA IN PORTATA
+C
+   42 AJAC(1,1) = FC*RK0/RO*(ABS(W)+.1/Q0)
+      AJAC(1,2) = -1.
+      AJAC(1,3) = 1.
+      AJAC(1,5) = RK0/RO/2.*(W*ABS(W)+.1/Q0*W)
+      GO TO 50
+C
+C________ USCITA IN PRESSIONE A MONTE
+C
+  46  AJAC(1,1) = -1.
+      AJAC(1,2) = FC*RK0/RO*(ABS(W)+.1/Q0)
+      AJAC(1,3) = 1.
+      AJAC(1,5) = RK0/RO/2.*(W*ABS(W)+.1/Q0*W)
+      GO TO 50
+C
+C________ USCITA IN PRESSIONE A VALLE
+C
+ 48   AJAC(1,1) = 1.
+      AJAC(1,2) = -1.
+      AJAC(1,3) = FC*RK0/RO*(ABS(W)+.1/Q0)
+      AJAC(1,5) = RK0/RO/2.*(W*ABS(W)+.1/Q0*W)
+ 50   RETURN
+      END
+CC
+      SUBROUTINE TUBOD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,
+     $ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)
+      RETURN
+      END

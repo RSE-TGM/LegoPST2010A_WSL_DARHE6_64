@@ -1,0 +1,302 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE CPOM</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CPOM_summ"></A>MODULE CPOM CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I><P>&nbsp;</P>
+</FONT><P><A HREF="#lg_libproc_CPOM_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CPOM_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CPOM_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CPOM_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CPOM_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CPOM_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CPOM_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CPOM_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CPOM_A"></A>MODULE CPOM CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">CENTRIFUGAL PUMP</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The CPOM module simulates the functioning of a centrifugal pump (or several identical centrifugal pumps in parallel configuration) having one or more impellers.</P>
+<P>In the CPOM module two different mathematical models are available which allow user to choose between two options:</P>
+<P ALIGN="JUSTIFY">1) providing input related to the horsepower applied to the pump shaft (also calculated by "electric motor module" or "turbine module" </FONT><A HREF="tren.htm#lg_libproc_TREN_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">TREN</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">2) providing input related to the pump speed if user knows its value under stationary and transient conditions also coming from experimental measuring.</P>
+<P>Concerning the data related to the calculation of pump characteristics (relations between flow rate, head, number of revolutions and resisting power) two different options are also available: </P>
+<P ALIGN="JUSTIFY">1) the introduction of pump characteristics (if available), provided from manufacturer, by using a subroutine written according to specific methods</P>
+<P ALIGN="JUSTIFY">2) introduction of few data which allow to calculate the characteristic index of the pump to simulate (see note 1 below). In this case the curve whose characteristic index is closer to the pump to simulate is selected (among some standard characteristics defined in the four quadrants). Beginning from this curve, the characteristic to use in the calculation is built by means of similarity laws (homologous curves). This second option can be particularly useful when the pump is not designed in a detailed manner yet.</P>
+<P>Regarding to complex pumps systems (series or parallel configuration) in the CPOM module the following possibilities are available: </P>
+<P ALIGN="JUSTIFY">1) several identical pumps in parallel configuration of which it is not interesting to study the dissymmetric transients. User provides the physical and geometrical data concerning only one pump specifying the number of pumps</P>
+<P ALIGN="JUSTIFY">2) several identical pumps in parallel configuration having the possibility to change the number of functioning pumps both under stationary and transient conditions. User provides the correct pumps head/capacity to the hydraulic system taking into account that it is not interesting to represent in a detailed manner the dynamics between the pumps in parallel configuration. User has only to change (at right time) the variable indicating the number of pumps in parallel configuration or also the provided horsepower if, respectively, "pumps with imposed speed" or "pumps with imposed power" are chosen</P>
+<P ALIGN="JUSTIFY">3) several identical (or not) pumps in parallel configuration of which is interesting to represent the dissymmetric transient in a detailed manner. User has to utilize as many CPOM modules as the pumps are</P>
+<P ALIGN="JUSTIFY">4) two or more pumps in series configuration have to be simulated interconnecting several CPOM modules in series. If it is enough to represent only one equivalent pump (only one CPOM module), user must provide consistent data for inertia, characteristic curves and rated data.</P>
+<P>User can also study the pump functioning with null number of revolutions in two different conditions: </P>
+<P ALIGN="JUSTIFY">1) excluding the circulation inside the pump, disconnecting upstream and downstream headers; in this case he has to put VALV = 1 in module's data</P>
+<P ALIGN="JUSTIFY">2) considering the circulation inside the pump, putting VALV = 0.</P>
+<P ALIGN="JUSTIFY">In the considered mathematical module the following hypotheses are assumed: </P>
+<P ALIGN="JUSTIFY">- it is presumed that there is no mass accumulation inside the pump, equating the inlet flow rate to the outlet one</P>
+<P ALIGN="JUSTIFY">- both thermal capacity of pump metal and thermal exchanges with the outside are not considered</P>
+<P ALIGN="JUSTIFY">- it is presumed that moment of inertia is the total one for the pump, motor and possible equipments (cooling fan, etc.)</P>
+<P ALIGN="JUSTIFY">- it is assumed that dissipated power or mechanical losses is 0, 4% of the nominal power.</P>
+<P>If user chooses to introduce the horsepower applied to the pump shaft among the input data (imposed power module), the module is based on the following equations which are indicated in the same programming order that the module has: </P>
+<P ALIGN="JUSTIFY">1) the equation describing the rotational kinetic energy of a pump as function of the applied horsepower and resisting power (differential equation). The kinetic energy is indicated in p.u. of nominal kinetic energy</P>
+<P ALIGN="JUSTIFY">2) the equation indicating the connection between the pump speed and its rotational kinetic energy (algebraic equation)</P>
+<P ALIGN="JUSTIFY">3) the energy balance equation of fluid between the pump inlet and outlet. The equation is differential and so is dealt with, but to avoid it participates to the resolution iterative process of other module equations, it is separately solved only once for each time step. The actual hydraulic variable values for the preceding time step are used. This method is justified from the weak connection between the energy equation and the others</P>
+<P ALIGN="JUSTIFY">4) the equation giving the connection among pump speed, delta pressure between the pump suction and discharge and flow rate passing through the pump.</P>
+<P>If user chooses the imposed speed condition, the mathematical model only consists of the equations 3) and 4).</P>
+<P>Among the output variables of CPOM module, user can optionally indicate the pump inlet or outlet pressure or capacity, both under power and speed imposed conditions.</P>
+<P ALIGN="JUSTIFY">User specifies the option adding to the chosen name for the pump block a suitable code.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CPOM_B"></A>MODULE CPOM CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>User chooses "pump with imposed speed" or "pump with imposed power" answering "YES" or "NO" during topological data assignment.</P>
+<P>&nbsp;</P>
+<B><P>Module with imposed speed</P>
+</B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module can be interconnected with other ones following three methods: </P>
+<P ALIGN="JUSTIFY">1) output in inlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block-name: preceded by '+' sign.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image288.gif" WIDTH=379 HEIGHT=162></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">2) output in outlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block-name: preceded by '-' sign.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image289.gif" WIDTH=379 HEIGHT=162></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">3) output in capacity</P>
+<P ALIGN="JUSTIFY">prescription about block-name: none</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image290.gif" WIDTH=379 HEIGHT=162></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<B><P>Module with imposed power</P>
+</B><P>&nbsp;</P>
+<P>The module can be interconnected with other ones following three methods: </P>
+<P ALIGN="JUSTIFY">1) output in inlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block-name: preceded by '+' sign</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image291.gif" WIDTH=387 HEIGHT=178></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">2) output in outlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block-name: preceded by '-' sign</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image292.gif" WIDTH=387 HEIGHT=178></P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">3) output in capacity</P>
+<P ALIGN="JUSTIFY">prescription about block-name: none</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image293.gif" WIDTH=387 HEIGHT=178></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">[Pa] &#9;&#9;PIPM&#9;&#9;pressure at the pumps suction</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;&#9;PUPM&#9;&#9;pressure at the pumps discharge</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;&#9;WPOM&#9;pumps total capacity</P>
+<P ALIGN="JUSTIFY">[W]&#9;&#9;QIPM&#9;&#9;total horsepower supplied to the pumps</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;NPOM&#9;number of identical pumps in parallel configuration</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;&#9;HIPM&#9;&#9;enthalpy of fluid at the pumps suction</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;&#9;HUPM&#9;&#9;enthalpy of fluid at the pumps discharge</P>
+<P ALIGN="JUSTIFY">[rad/s]&#9;&#9;OMPM&#9;angular velocity of each pump</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;&#9;ECIN&#9;&#9;rotational kinetic energy of each pump, in p.u. of nominal one.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_CPOM_C"></A>MODULE CPOM CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables (defined above), user must assign the following data: </P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;TYP&#9;&#9;to assign only if the DPU user subprogram is used (see note 1)</P>
+<P ALIGN="JUSTIFY">[kg*m²]&#9;INER&#9;&#9;moment of inertia for each pump (see note 2)</P>
+<P ALIGN="JUSTIFY">[m³/s]&#9;&#9;QVNOM&#9;volumetric capacity of each pump</P>
+<P ALIGN="JUSTIFY">[rad/s]&#9;&#9;OMNOM&#9;pumps nominal revolutions per minute</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;&#9;DPNOM&#9;pumps nominal head of pumps</P>
+<P ALIGN="JUSTIFY">[W]&#9;&#9;POTN&#9;&#9;nominal horsepower for each pump (see note 3)</P>
+<P ALIGN="JUSTIFY">[kg/m³]&#9;DENS.&#9;fluid density (see note 4)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;N.GIRAN.&#9;number of impellers (see note 5)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;VALV INT&#9;pump interception index (see note 6)</P>
+<B><P>Note 1</P>
+</B><P>The TYP datum has to be blank if only the pump nominal data are known by user. In this case the CPOM module automatically chooses the pump characteristics on the basis of the rated data or characteristic revolutions number.</P>
+<P>Inside the CPOM module five types of characteristics of pumps are available corresponding to 96, 142, 353, 380 and 447 characteristic revolution numbers. The characteristic is automatically chosen by the module calculating the characteristic revolutions number on the basis of the nominal values that user provides. From these data the CPOM module chooses the closer number among the available ones.</P>
+<P>To calculate the characteristic revolutions number the following formula is used: </P>
+<P ALIGN="CENTER">GCAR = 3.65*GIRI*QVNOM**.5/(DH**(3./4.))</P>
+<P ALIGN="JUSTIFY">where: </P>
+<P ALIGN="JUSTIFY">GCAR = characteristic revolutions number</P>
+<P ALIGN="JUSTIFY">GIRI = revolutions per minute</P>
+<P ALIGN="JUSTIFY">QVNOM = nominal capacity in volume (m³/s)</P>
+<P ALIGN="JUSTIFY">DH = head in meters of water column = DPNOM/DENS./9.81/N.GIRAN.</P>
+<P>If user wants to assign the characteristics of his pump or functions which define the connections between flow rate, speed, head and resisting torque, he must provide to TYP a value different from zero, and write a DPU user subroutine (see below). In this subroutine the FORTRAN's instructions to translate the above-mentioned functions are included. The DPU user subroutine can include several characteristics related to different pumps. The TYP data, provided in input and transferred to the DPU subroutine input, allow the user to choose the characteristic of his pump.</P>
+<B><P>Note 2</P>
+</B><P>Using the imposed speed module, the INER value is not used by code and can consequently be whatever user wants.</P>
+<B><P>Note 3</P>
+</B><P>The POTN value is linked to the DPNOM and QVNOM through the ETA efficiency following the relation POTN = QVNOM*DPNOM/ETA.</P>
+<P>If the POTN data is not provided, it is automatically calculated by the module on the basis of the compulsory data QVNOM and DPNOM and ETA =.85.</P>
+<B><P>Note 4</P>
+</B><P>The DENS. density value is only used to calculate characteristic revolutions number of pumps (to transform nominal head value from Pascal to meters of water column). If the related space is blank, the module automatically assumes DENS. = 1000.</P>
+<B><P>Note 5</P>
+</B><P>The value assigned to N.GIRAN. is only used for the head calculation (in meters of water column) that appears in the expression of the pump characteristic index.</P>
+<P>If this datum is not provided, it is assumed N.GIRAN. = 1.</P>
+<B><P>Note 6</P>
+</B><P ALIGN="JUSTIFY">The value assigned to VALV can be 0 (not intercepted flow rate) or 1 (intercepted flow rate). User must use the value 1 only if OMPM = 0 and no valve is foreseen upstream or downstream the pump.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CPOM_D"></A>MODULE CPOM CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The NPOM variable value must be equal to the number of identical pumps functioning in parallel configuration and stationary conditions. The variable initialization value must be consistent with such number. This means that the WPOM flow rate must be equal to the addition of the flow rates passing through the pumps functioning simultaneously. The same considerations have to be applied for power value in the "pump with imposed power" model.</P>
+<P>On the contrary, input about physical and geometrical data must be related to the single pump. Under transient condition, the NPOM input variable, can be modified by user to simulate the variation in number of pumps, functioning in parallel configuration. To simulate one or more pumps stopping, user decreases (in step) such input.</P>
+<P ALIGN="JUSTIFY">On the contrary to simulate one or more pumps starting, user has to increase it. It is necessary to remember that NPOM must never erase itself and in the "pump with imposed power" model, to a NPOM variation must correspond a consistent variation of the QIPM power.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CPOM_E"></A>MODULE CPOM CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I></FONT><P>&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>To define the characteristics of one pump, if manufacturer provides its functions or curves, a user subprogram has to be written.</P>
+<P>The declarative statement of this subprogram is: </P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE DPU</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(TYP, QVNOM, OMNOM, DPNOM, CNOM, ETANOM, Q, RO,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>OM, DP, CRES)</P>
+<P>&nbsp;</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>Such subroutine must calculate the DP head and the CRES resistant torque values as a function of the nominal data and pump work point which is defined by other calling parameters.</P>
+<P>User has to consider that all calling parameters are related to only one of the possible NPOM pumps in parallel configuration.</P>
+<P>Input parameters: TYP, QVNOM, OMNOM, DPNOM, CNOM, ETANOM, Q, RO, OM</P>
+<P>Output parameters: DP, CRES</P>
+<P>[ ]&#9;TYP&#9;corresponds to the TYP value required in input (see above). It can be used in writing the DPU subroutine to distinguish several &#9;&#9;pumps' characteristics. In this case such subprogram becomes a collection of characteristics. To attribute to a pump the &#9;&#9;&#9;related characteristics, it is enough to give to the TYP value (related to the considered pump) the value corresponding to a &#9;&#9;&#9;given index of characterics "menu" included in the DPU subroutine.</P>
+<P>[m³/s]&#9;&#9;QVNOM&#9;nominal capacity in volume</P>
+<P>[rad/s]&#9;&#9;OMNOM&#9;nominal speed</P>
+<P>[Pa]&#9;&#9;DPNOM&#9;nominal head</P>
+<P>[J]&#9;&#9;CNOM&#9;nominal resistant torque</P>
+<P>[ ]&#9;&#9;ETANOM&#9;nominal efficiency</P>
+<P>[m³/s]&#9;&#9;Q&#9;&#9;actual volumetric capacity</P>
+<P>[kg/m³]&#9;RO&#9;&#9;fluid actual density</P>
+<P>[rad/s]&#9;&#9;OM&#9;&#9;actual angular speed</P>
+<P>[Pa]&#9;&#9;DP&#9;&#9;actual head</P>
+<P>[J]&#9;&#9;CRES&#9;&#9;actual resistant torque</P>
+<P>&nbsp;</P>
+<P>As example, to approximate the pump head with a parabola aggregate, the DPU subroutine is: </P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE DPU(TYP,QVNOM,OMNOM,DPNOM,CNOM,ETANOM,Q,RO,OM,DP,CRES)</P>
+<P>C</P>
+<P>C****************PUMP CHARACTERISTIC*********************</P>
+<P>C</P>
+<P>A=1.22</P>
+<P>OMS=OM/OMNOM</P>
+<P>QS=Q/QVNOM</P>
+<P>DP=DPNOM*(A*OMS²-(A-1.)*QS*ABS(QS))</P>
+<P>C</P>
+<P>C WHEN PUMP IS FUNCTIONING WITH BLIND NOZZLE (Q=0) AND AT</P>
+<P>C NOMINAL SPEED (OM=OMNOM), DP=DPNOM*A.</P>
+<P>C THUS "A" DEFINES HEAD WITH BLIND NOZZLE</P>
+<P>C</P>
+<P>C****************EFFICIENCY FORMULA*******************</P>
+<P>C</P>
+<P>IF(OMS.LT.1.E-4)GO TO 125</P>
+<P>RID=QS/OMS</P>
+<P>ETA=ETANOM*(-RID²+2.*RID)</P>
+<P>C</P>
+<P>C****************RESISTENT TORQUE***********************</P>
+<P>C</P>
+<P>IF(ETA.LT.1.E-4)GO TO 125</P>
+<P>OME=OM</P>
+<P>IF(OME.LE.1.E-3)OME=1.E-3</P>
+<P>CRES=Q*DP/OME/ETA</P>
+<P>GO TO 130</P>
+<P>125 CRES=0.5*DP/DPNOM*CNOM</P>
+<P>130 CONTINUE</P>
+<P>WRITE(6,1000)</P>
+<P>1000 FORMAT(/10X,'*** PROVIDE PUMP CHARACTERISTIC'</P>
+<P>$ ' O TYP=0. IN FILE 14 ***'/)</P>
+<P>RETURN</P>
+<P>END</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CPOM_F"></A>MODULE CPOM CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The equations forming the module mathematical model give rise to the following residuals: </P>
+<P>RNI(1) = (QIPM-WR-WD)/ECINOM (not normalized)</P>
+<P>RNI(2) = (INER*OMPM*OMPM/2.-ECIN)/W0/H0 (normalization factor = W0*H0)</P>
+<P>RNI(3) = (WR-WPOM*(HUPM-HIPM))/W0/H0 (normalization factor = W0*H0)</P>
+<P>RNI(4) = (PUPM-PIPM-DP)/P0 (normalization factor = P0)</P>
+<P ALIGN="JUSTIFY">If OMPM &lt; 1.E-03 and VALV = 1</P>
+<P>RNI(4) = -WPOM/W0 (normalization factor = W0).</P>
+<P ALIGN="JUSTIFY">where: </P>
+<P>WR indicates the resisting power WD indicates the dissipated power for mechanical losses DP indicates the head.</P>
+<P ALIGN="JUSTIFY">The remaining variables have the same physical meanings defined above.</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CPOM_G"></A>MODULE CPOM CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</I></FONT><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE CPOMI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CPOMI31</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(WP, IFO, IOB)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CPOMI32</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(WP, IFO, IOB)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CPOMI4</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CPOMI2</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBLOC1, IBLOC2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CPOMC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBLOC1, IBLOC2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE PMPDEC</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(XYU, IXYU, ECIN, OM, HV, PM, PV, Q, HM, WM,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>DATI, IPD, IHI, IWP, TYP, HIN, NPO, IBL1, IBL2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>QNOM, OMNOM, DPNOM, CNOM, GCAR, ECINOM, ETANOM,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>PERD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE PMPDR</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(PMN, PVN, HMN, HVN, QN, OMN, ECINN, ETANOM,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>TYP, WMN, HIN, RNI, NPO, PERD, GCAR, QNOM, OMNOM,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>DPNOM, CNOM, IHI, ECINOM, DATI, IPD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE PMPJC</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(AJAC, MX5, IXYU, XYU, DATI, IPD, RNI, IFUN,</P>
+<P>$</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1, IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE PMPDPC</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(GCAR, QNOM, OMNOM, DPNOM, CNOM, Q, OM, DP, CRES)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DPU</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(TYP, QVNOM, OMNOM, DPNOM, CNOM, ETANOM, Q, RO, OM,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>DP, CRES)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CPOTER</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(DATI, IPD, Q, HM, HV, POT, PM, PV, HVT)</P>
+<P>&nbsp;</B></FONT><FONT FACE="Arial, helvetica">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CPOM_H"></A>MODULE CPOM CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the user manual section dedicated to the examples developed under the abbreviations: </P>
+<P ALIGN="CENTER">"CONDENSA"</P>
+<P ALIGN="CENTER">"CONDEQUI"</P>
+<P ALIGN="CENTER">"MOTORE"</P>
+<P ALIGN="CENTER">"POMPE"</P></FONT></BODY>
+</HTML>

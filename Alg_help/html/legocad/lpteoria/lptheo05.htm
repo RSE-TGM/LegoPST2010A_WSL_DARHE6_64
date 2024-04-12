@@ -1,0 +1,157 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_ccsteam"></A>Combustion chambers for steam generators</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_ccsteam"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_ccsggen"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Generalities (on these modules)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_ccsghydr"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Furnace fluid-dynamic model</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_ccsgterm"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Furnace thermal balance model:</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_ccsgmass"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">fluid mass conservation</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_ccsggener"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">fluid energy conservation</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_ccsgradi"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">radiative heat transfer</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_ccsgconv"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">convective heat transfer</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_ccsgcomb"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">combustion chemical reactions</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_ccsgtilt"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">burners tilt effect</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_ccsgcoal"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">coal combustion</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_ccsggen"></A>Combustion chambers for steam generators: generalities</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The model of the furnace is split in two partial models; one of them deals with the thermal balance of the fluid passing through the chamber, the other one is the fluid-dynamic model.</P>
+<P ALIGN="JUSTIFY">The module </FONT><A HREF="../lib_proc/exch.htm#lg_libproc_EXCH_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">EXCH</U></FONT></A><FONT FACE="Arial, helvetica"> can be used to build a model of the furnace walls.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_ccsghydr"></A>Combustion chambers for steam generators: furnace fluid-dynamic model</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The internal differences of pressure in the furnace are very small with respect to those along the air-gas path from air intake to the chimney. The internal pressure in the furnace can be therefore considered as spatially constant.</P>
+<P ALIGN="JUSTIFY">The furnace is modelled as a volume in which the gas has uniform pressure. The volume is split in so many cells as those of the thermal model of the furnace. For each cell the gas temperature T</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image564.gif" WIDTH=108 HEIGHT=44></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where T</FONT><FONT FACE="Arial, helvetica" SIZE=1>TM,i</FONT><FONT FACE="Arial, helvetica"> is the gas temperature in the corresponding cell of the thermal model.</P>
+<P ALIGN="JUSTIFY">Assuming the gas follows the perfect gas law it is for each cell:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image565.gif" WIDTH=80 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and the volume mean gas temperature T is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image566.gif" WIDTH=144 HEIGHT=53></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Assuming the molar mass m = 28.725 kg/kmole it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image567.gif" WIDTH=54 HEIGHT=42><FONT FACE="Arial, helvetica">&#9;<IMG SRC="Image568.gif" WIDTH=68 HEIGHT=42>&#9;<IMG SRC="Image569.gif" WIDTH=12 HEIGHT=22><IMG SRC="Image570.gif" WIDTH=52 HEIGHT=45></P>
+<P ALIGN="JUSTIFY">the continuity equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image571.gif" WIDTH=320 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The temperature changes are much slower than pressure changes and the term V </FONT>(<FONT FACE="Symbol">¶</FONT>r/<FONT FACE="Symbol">¶</FONT>p)(dT/dt) <FONT FACE="Arial, helvetica">can be dropped. It results:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image572.gif" WIDTH=186 HEIGHT=45></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where </FONT><FONT FACE="Symbol">G</FONT><FONT SIZE=1>IN,i</FONT> and <FONT FACE="Symbol">G</FONT><FONT SIZE=1>EX,j</FONT> <FONT FACE="Arial, helvetica">are the mass flow rates entering and leaving the furnace.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_ccsgterm"></A>Combustion chambers for steam generators: furnace thermal balance model</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The goal is the evaluation of radiation heat transfer as well as temperature and radiating species concentration distributions in the furnace. The furnace walls temperatures, the inlet and outlet flow rates are boundary conditions.</P>
+<P ALIGN="JUSTIFY">The models for analysing heat transfer in industrial furnaces are of three types:</P>
+<P ALIGN="JUSTIFY">the "stirred vessel" (zero-dimensional) model, which yields only the total heat transfer rate without providing information on the &#9;local heat flux distribution;</P>
+<P ALIGN="JUSTIFY">the "plug-flow" (one-dimensional) model, which is capable of predicting the local heat flux in the furnace along the flow &#9;direction;</P>
+<P ALIGN="JUSTIFY">the multidimensional model which can predict two-dimensional heat flux distribution at the load surface.</P>
+<P ALIGN="JUSTIFY">The first two models are being used routinely in engineering design calculations, and the one-dimensional model has been adopted as standard model in the LEGOCAD modules library and will be discussed in greater detail.</P>
+<P ALIGN="JUSTIFY">Various kinds of fuel are considered, such as natural gas, fuel oil and coal.</P>
+<P ALIGN="JUSTIFY">The burners tilting is taken into account.</P>
+<P ALIGN="JUSTIFY">The furnace is divided in control volumes, called cells, along the main gas path.</P>
+<P ALIGN="JUSTIFY">The simulated phenomena are:</P>
+<P ALIGN="JUSTIFY">fluid mass conservation</P>
+<P ALIGN="JUSTIFY">fluid energy conservation</P>
+<P ALIGN="JUSTIFY">radiative and convective heat transfer</P>
+<P ALIGN="JUSTIFY">combustion chemical reactions</P>
+<P ALIGN="JUSTIFY">The main hypotheses are:</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no heat storage</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_ccsgmass"></A>Combustion chambers for steam generators: fluid mass conservation</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For each cell the continuity equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image573.gif" WIDTH=149 HEIGHT=30></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The inlet flow rates </FONT><FONT FACE="Symbol">G</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN,i</FONT><FONT FACE="Arial, helvetica"> are comprised of fuel and comburent air from the cell burners, the exhaust gas, unburnt fuel and air from the preceding cell. The outlet flow rates </FONT><FONT FACE="Symbol">G</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX,j</FONT><FONT FACE="Arial, helvetica"> are comprised of exhaust gas, unburnt fuel and air.</P>
+<P ALIGN="JUSTIFY">The evaluation of the unburnt fuel </FONT><FONT FACE="Symbol">G</FONT><FONT FACE="Arial, helvetica" SIZE=1>ubf</FONT><FONT FACE="Arial, helvetica"> and air </FONT><FONT FACE="Symbol">G</FONT><FONT FACE="Arial, helvetica" SIZE=1>uba</FONT><FONT FACE="Arial, helvetica"> mass flow rates is based on the stoichiometric air-fuel ratio. When the actual ratio of the total entering air and the total entering fuel is greater than the stoichiometric ratio, the fuel entirely burns and an excess air flow rate </FONT><FONT FACE="Symbol">G</FONT><FONT FACE="Arial, helvetica" SIZE=1>uba</FONT><FONT FACE="Arial, helvetica"> leaves the cell; when the actual ratio is less than the stoichiometric one, an unburnt fuel flow rate </FONT><FONT FACE="Symbol">G</FONT><FONT FACE="Arial, helvetica" SIZE=1>ubf</FONT><FONT FACE="Arial, helvetica"> exits the cell. If the furnace is fed with a mixture of fuels, the assumption is that as first natural gas burns, as second fuel oil and finally coal.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_ccsggener"></A>Combustion chambers for steam generators: fluid energy conservation</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For each cell the fluid energy equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image574.gif" WIDTH=236 HEIGHT=30></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The power Q is the algebraical sum of all powers entering or leaving the cell without mass transfer. It includes the power Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>comb</FONT><FONT FACE="Arial, helvetica"> released by combustion of fuel, the radiative power Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>rad,w</FONT><FONT FACE="Arial, helvetica"> and the convective power Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>conv,w</FONT><FONT FACE="Arial, helvetica"> from furnace walls, the radiative power Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>rad,i-1,i</FONT><FONT FACE="Arial, helvetica"> and Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>rad,i+1,i</FONT><FONT FACE="Arial, helvetica"> from adjoining cells.</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image575.gif" WIDTH=356 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">All other power sources, that is to say the conduction heat transfer with the adjoining cells and the radiative heat transfer with the non-adjoining cells, are neglected.</P>
+<P ALIGN="JUSTIFY">It is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image576.gif" WIDTH=265 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Of course, if a mixture of fuels is used, this relationship is repeated for each fuel.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_ccsgradi"></A>Combustion chambers for steam generators: radiative heat transfer</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In industrial furnaces convective heat transfer usually accounts for a very small fraction of the total heat transfer to the load; therefore, more emphasis has been given to radiation in the model.</P>
+<P ALIGN="JUSTIFY">Two kinds of radiative heat transfer must be considered:</P>
+<P ALIGN="JUSTIFY">heat transfer among gas and furnace walls</P>
+<P ALIGN="JUSTIFY">heat transfer among gas and gas in the adjoining cells</P>
+<P ALIGN="JUSTIFY">The heat transfer among furnace walls and internal gas Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>rad,w</FONT><FONT FACE="Arial, helvetica"> is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image577.gif" WIDTH=217 HEIGHT=29></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where </FONT><FONT FACE="Symbol">g</FONT><FONT SIZE=1>rad,w</FONT><FONT FACE="Arial, helvetica" SIZE=1> </FONT><FONT FACE="Arial, helvetica">is the flat surface / real surface ratio and the radiative heat transfer coefficient </FONT>Q<FONT SIZE=1>rad,w</FONT> <FONT FACE="Arial, helvetica">is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image578.gif" WIDTH=144 HEIGHT=69></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The wall emissivity</FONT> <FONT FACE="Symbol">e</FONT><FONT SIZE=1>w</FONT> <FONT FACE="Arial, helvetica">value must be assigned. The gas emissivity </FONT><FONT FACE="Symbol">e</FONT><FONT SIZE=1>g</FONT> <FONT FACE="Arial, helvetica">is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image579.gif" WIDTH=172 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The transparent emissivity</FONT> <FONT FACE="Symbol">e</FONT><FONT SIZE=1>tr</FONT> <FONT FACE="Arial, helvetica">is a function of the gas temperature, the partial pressures of the gas components, mainly triatomic components such as steam and carbon dioxide, and the optical path length and it is usually obtained by means of tables.</P>
+<P ALIGN="JUSTIFY">The luminous emissivity</FONT> <FONT FACE="Symbol">e</FONT><FONT SIZE=1>lum</FONT> <FONT FACE="Arial, helvetica">is a function of the gas temperature, the optical path length and the presence of soot, solid and liquid particles and their diameter and it is strongly dependent on the kind of fuel. It is usually obtained by means of tables.</P>
+<P ALIGN="JUSTIFY">The heat transfer among gas and gas in the adjoining cells is for the preceding cell:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image580.gif" WIDTH=238 HEIGHT=29></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">An analogous relationship holds for the following cell.</P>
+<P ALIGN="JUSTIFY">The radiative heat transfer coefficient</FONT> <FONT FACE="Symbol">g</FONT><FONT SIZE=1>rad,i,i-1</FONT> <FONT FACE="Arial, helvetica">is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image581.gif" WIDTH=176 HEIGHT=73></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and the gas emissivity</FONT> <FONT FACE="Symbol">e</FONT><FONT SIZE=1>g</FONT> <FONT FACE="Arial, helvetica">is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image582.gif" WIDTH=108 HEIGHT=33></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where k</FONT><FONT FACE="Arial, helvetica" SIZE=1>abs</FONT><FONT FACE="Arial, helvetica"> is the absorption coefficient.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_ccsgconv"></A>Combustion chambers for steam generators: convective heat transfer</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The heat transfer among gas and furnace walls Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>conv,w</FONT><FONT FACE="Arial, helvetica"> is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image583.gif" WIDTH=206 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where the convective heat transfer coefficient</FONT> <FONT FACE="Symbol">g</FONT><FONT SIZE=1>conv,w</FONT> <FONT FACE="Arial, helvetica">is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image584.gif" WIDTH=249 HEIGHT=54></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The term:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image585.gif" WIDTH=65 HEIGHT=54></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">is approximated as a quadratic function of the boundary layer temperature T</FONT><FONT FACE="Arial, helvetica" SIZE=1>FILM</FONT><FONT FACE="Arial, helvetica">, defined as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image586.gif" WIDTH=108 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and the temperature factor F</FONT><FONT FACE="Arial, helvetica" SIZE=1>T</FONT><FONT FACE="Arial, helvetica"> is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image587.gif" WIDTH=113 HEIGHT=54></P>
+<B><FONT SIZE=5 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_ccsgcomb"></A>Combustion chambers for steam generators: combustion chemical reactions</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The considered chemical reactions are:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image588.gif" WIDTH=121 HEIGHT=72></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The stoichiometric oxygen mass for a unit fuel mass can be computed:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image589.gif" WIDTH=306 HEIGHT=52></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">from which the stoichiometric air / fuel mass ratio can be determined.</P>
+<P ALIGN="JUSTIFY">The combustion products masses are:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image590.gif" WIDTH=169 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image591.gif" WIDTH=165 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image592.gif" WIDTH=193 HEIGHT=68></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image593.gif" WIDTH=168 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">X</FONT><FONT FACE="Arial, helvetica" SIZE=1>ash</FONT><FONT FACE="Arial, helvetica"> is the ash / dry fuel ratio and X</FONT><FONT FACE="Arial, helvetica" SIZE=1>H2O</FONT><FONT FACE="Arial, helvetica"> is the fuel humidity.</P>
+<P ALIGN="JUSTIFY">When the excess air is known, the concentrations X</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica">, the molar fractions N</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> and the partial pressure p</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> of each species can be computed:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image594.gif" WIDTH=82 HEIGHT=53>&#9;<IMG SRC="Image595.gif" WIDTH=57 HEIGHT=46>&#9;<IMG SRC="Image596.gif" WIDTH=86 HEIGHT=53></P>
+<B><FONT SIZE=5 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_ccsgtilt"></A>Combustion chambers for steam generators: burners tilt effect</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The burners tilt shifts the flame upwards or downwards in the furnace. The effect rises when the fuel flow rate increases, because the flame length grows. The tilt effect is taken into account by partly shifting the inlet fuel flow rate upwards or downwards in proportion to the tilt angle.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_ccsgcoal"></A>Combustion chambers for steam generators: coal combustion</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The coal combustion has three main phases:</P>
+<P ALIGN="JUSTIFY">volatile matter release</P>
+<P ALIGN="JUSTIFY">volatile matter combustion</P>
+<P ALIGN="JUSTIFY">solid particles combustion</P>
+<P ALIGN="JUSTIFY">The volatile matter release and combustion is nearly instantaneous, whereas the solid particles combustion takes some time, that is to say solid particles do not completely burn in the same cell where they are injected.</P>
+<P ALIGN="JUSTIFY">Radiation heat transfer is due to gaseous contributions, mainly due to CO</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> and H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O, and particulate contributions, which usually result from coal (char), soot and fly-ash. Radiation from fly-ash particles exceeds substantially the contribution of both triatomic combustion gases, as well as char and soot particles.</P></FONT></BODY>
+</HTML>

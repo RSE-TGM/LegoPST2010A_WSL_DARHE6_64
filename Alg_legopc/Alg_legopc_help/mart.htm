@@ -1,0 +1,495 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title></title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE MART</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MART</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER">TURBINE SHAFT ROTATION SPEED MODEL</p>
+<p align="left">When generation units forming an electric power production
+plant, supplies the central station auxiliaries, unit itself becomes a limited
+power network (insulated network). Such a situation occurs during a load reject
+transient.</p>
+<p align="left">It began when main switch gear connecting the a.c. generator to
+external main network cuts off. So, in this case, resisting load consists of
+central station auxiliaries keeping connected, through an auxiliary transformer,
+with the a.c. bus-bars. Unbalance which occurs between fed mechanical power and
+required power, considerably lower (for a steam plant about 5% of the nominal
+power), causes a quick increasing in rotational speed that has to be controlled
+and limited.</p>
+<p align="left">Rotational speed successively decreases because of power
+dissipated through steam turbines in lamination, ventilation (both of turbine
+and a.c. generator), friction and, in case of gas-turbine units, the power
+absorbed by compressors. In fact during this type of transient gas-turbine units
+are supplied with a fuel flow rate such as to guarantee flame keeping in th e
+combustion furnace but not the unit self- maintenance. So power absorbed by
+compressor is higher than power supplied by the turbine determining a
+gas-turbine deceleration.</p>
+<p align="left">For gas turbine units, it is present an &quot;external starting
+torque&quot; input variable, to allow the simulation of the related starter
+subsystem (mechanical or electrical).</p>
+<p align="left">Referred to an electric power production unit, consisting of 'n'
+(max.9) generation units (both steam turbines or gas-turbines units), the MART
+module simulates the dynamics of rotational speed in unit machines. In the
+module is assumed that electromechanical oscillations of machine shafts,
+integral each other, is negligible.</p>
+<p align="left">The mathematical model through the simulation is carried out,
+essentially consists of rotating mass equation repeated for 'n' generation
+units:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image674.gif" width="282" height="38"></font><font FACE="Arial"> +
+QAVV(i) i = 1, ... n (1)</p>
+<p align="left">where:</p>
+<p ALIGN="left">E(i) = total kinetic energy of the i-th generation unit</p>
+<p ALIGN="left">Q(i) = total power supplied by the i-th unit</p>
+<p ALIGN="left">QAC(i) = coupling power related to the i-th turbine (see note 1)</p>
+<p ALIGN="left">QUAS(i) = power utilized in supplying the part of auxiliaries
+related to the i-th unit (see note 2)</p>
+<p ALIGN="left">Qd(i) = total power dissipated by the i-th unit (see note 3)</p>
+<p ALIGN="left">QAVV(i) = power given by the external starter to the i-th unit
+(see note 4)</p>
+<b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p align="left">QAC(i) is a coupling term of several turbines installed in a
+power production unit. It takes into account the transferred or absorbed power
+by the i-th turbine because of the different rotational speed acquired as
+regards to average speed of remaining n-1 turbines.</p>
+<p align="left">In the module the encoded expression of QAC(i) term is:</p>
+<p ALIGN="CENTER">QAC(i) = COP * (OM(i) - OMRET(i)) i = 1, ... n (2)</p>
+<p ALIGN="JUSTIFY">where:</p>
+<p ALIGN="JUSTIFY">- COP = coupling coefficient</p>
+<p ALIGN="JUSTIFY">- OM(i) = speed of the i-th turbine</p>
+<p ALIGN="JUSTIFY">- OMRET(i) = mean speed of remaining n-1 turbines</p>
+<p align="left">To the coupling coefficient COP, having torque dimensions, no
+analytical expression is given. It is assumed as constant and equal to 10
+MW/(runs per minute). Such value is obtained so that, during the more
+significant transients, speed curves referred to the single units meet the
+actual ones. In particular is imposed that in case of load rejection (the most
+significant transient), curves speed referred to different units are identical.</p>
+<p align="left">OMRET(i) mean speed would have to be correctly evaluated by the
+following relation (3) in which the moments of inertia I(j) (j = 1, ..., i-1,
+i+1, ..., n), related to the remaining n-1 turbines, appear.</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image675.gif" width="585" height="50"></font><font FACE="Arial"> (3)</p>
+<p align="left">Nevertheless, in order to obtain saving in calculation time
+(against an insignificant error in regular use of the module) it is preferred to
+determine the mean speed OMRET(i) as simple arithmetical mean by using the
+relation (4):</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image676.gif" width="569" height="41"></font><font FACE="Arial"> (4)</font></p>
+<font FACE="Arial">
+<p ALIGN="JUSTIFY">where:</p>
+<p ALIGN="JUSTIFY">- p(j) = 1. if the j-th turbine is connected (j = 1, ... i-1,
+i+1, ... n)</p>
+<p ALIGN="JUSTIFY">- p(j) = 0. if the j-th turbine is tripped (j = 1, ... i-1,
+i+1, ... n)</p>
+<b>
+<p ALIGN="RIGHT">Note 2</p>
+</b>
+<p align="left">Defined QISO the total power needing in supplying the
+auxiliaries related to the whole plant, it is equitably distributed on all the
+NFUNZ functioning units (NFUNZ = n - number of tripped units).</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image677.gif" width="146" height="38"></font><font FACE="Arial"> (5)</p>
+<b>
+<p ALIGN="RIGHT">Note 3</p>
+</b>
+<p align="left">If the i-th turbine as a steam turbine, the total dissipated
+power Qd(i) is given by addition of the following:</p>
+<p ALIGN="left">- total power Qa(i) dissipated through friction; such power is
+proportional to the rotational speed.</p>
+<p ALIGN="CENTER">Qa(i) = Ka(i) * RPM(i) (6)</p>
+<p ALIGN="left">- total power Ql(i) dissipated through lamination: such power is
+proportional to the square of rotational speed.</p>
+<p ALIGN="CENTER">Ql(i) = Kl(i) * RPM(i)² (7)</p>
+<p ALIGN="left">- total power Qv(i) dissipated through ventilation; such power
+is proportional to the cube of rotational speed.</p>
+<p ALIGN="CENTER">Qv(i) = Kv(i) * RPM(i)³ (8)</p>
+<p align="left">Once assigned the ratio between dissipated and supplied powers,
+constants appearing in the above mentioned relations can be determined under
+normal conditions. As example, once indicated Pn(i) as nominal power supplied to
+the i-th turbine and OMNOM(i) as its rotational speed, for the constant Ka(i) we
+have:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image678.gif" width="312" height="41"></font><font FACE="Arial"> (9)</font></p>
+<font FACE="Arial">
+<p ALIGN="JUSTIFY">from which:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image679.gif" width="192" height="41"></font><font FACE="Arial"> (10)</p>
+<p align="left">In a similar way, regarding to the remaining constants we arrive
+to the following expressions:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image680.gif" WIDTH="196" HEIGHT="44"></font><font FACE="Arial">
+(11)</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image681.gif" WIDTH="201" HEIGHT="44"></font><font FACE="Arial">
+(12)</p>
+<p ALIGN="left">If the i-th turbine is a gas turbine, losses are taken into
+account inside the module TURG which calculates the correct turbine speed (RVEL).
+Consequently the speed calculated by the module MART has no significance. This
+is the reason why (in case of the i-th is a gas-turbine), in the MART module the
+losses are in any case calculated as for steam turbine. User must subsequently
+assign the correct meanings to the calculated speeds (in this way no
+discriminating tests between gas and steam turbines are needed).</p>
+<b>
+<p ALIGN="RIGHT">Note 4</p>
+</b>
+<p ALIGN="left">QAVV(i) takes into account the power given by the external
+starting unit of the single turbine. It has to be used for gas-turbine units to
+allow the beginning of shaft rotation when the machine is halted. The QAVV(i)
+term is taken into account only when the i-th unit is in starting state [when
+AVV(i) = 1.].</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MART</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">N = number of turbine units</p>
+<p ALIGN="JUSTIFY">i = 1, ..., N</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<blockquote>
+  <blockquote>
+  </font><font FACE="Arial" SIZE="2">
+  <p ALIGN="center"><img SRC="images/Image682.gif" width="398" height="210"></p>
+  </font><font FACE="Arial">
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  </blockquote>
+</blockquote>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rpm]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RPMi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">rotational speed of the i-th turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QTUi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">power supplied by the i-th turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ASCi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">trip button for the i-th turbine (see
+      note 2)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AAVi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">start button for the i-th turbine (see
+      note 2)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[N]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">STTi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">torque given to the i-th unit by the
+      external starter (see note 1)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ARIF</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">load rejection button (see note 2)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QAUS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">power absorbed by the auxiliary systems</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rpm]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RPMI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">main frequency of network which unit is
+      connected (see note 2)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p align="left">If AAVi &lt; 0.9 (i-th turbine is not in starting state) the
+external torque (STTi value) is neglected.</p>
+<b>
+<p ALIGN="RIGHT">Note 2</p>
+</b>
+<p align="left">If RIFC &lt; 0.1 and simultaneously for all turbines SCA(i) &lt;
+0.9 (i = 1, ..., n) (load rejection occurs and none turbine is tripped) no
+calculation is made and to the rotational speed ROM(i) (i = 1, ..., n) the value
+of network main frequency RPMI [RPM(j) = RPMI j = 1, ..., 1-1, i+1, ..., n] is
+assigned.</p>
+<p align="left">It is useful to note there is no restriction about the number of
+turbines which may trip. So, as extreme possibility, simultaneous tripping of
+all the 'n' turbines can be simulated.</p>
+<p align="left">Where RIFC &gt; 0.1 (load rejection condition), the rotational
+speeds RPM(i) are determined through the solution of rotating masses equations
+mentioned above.</p>
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MART</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to initial values of the MART module input-output
+variables (meanings defined above), user must assign the following data:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TAVVIA(i)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">starting time of the i-th turbine (i = 1,
+      ..., n) (see note 1)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">POTNOM(i)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal power supplied by the i-th
+      turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rpm]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMNOMI(i)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal rotational speed of the i-th
+      turbine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QVENTI(i)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ratio (under nominal conditions) between
+      power dissipated through ventilation and power supplied by the i-th
+      turbine (see note 2)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QLAMIN(i)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ratio (in nominal conditions) between
+      power dissipated through lamination and power supplied by the i-th turbine
+      (see note 2)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QATTRI(i)</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ratio (under nominal conditions) between
+      power dissipated through friction and power supplied by the i-th turbine
+      (see note 2)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TLOAD</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">closing mean time of the valves feeding
+      plant turbines (usual TLOAD = 0.3 s).</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p align="left">Time taken by a turbine coupled with an a.c. generator in
+increasing its rotational speed from zero to nominal one (in absence of load and
+providing a constant torque equal to the nominal one) is defined as starting
+time.</p>
+<p align="left">By means of the following relation starting time TAVVIA(i) can
+be put in relation with the moment of inertia I(i), nominal rotational speed
+OMNOMI(i) and nominal power PTNOM(i):</p>
+</font><font FACE="Courier New" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image683.gif" width="233" height="46"></p>
+</font><b><font FACE="Arial">
+<p ALIGN="RIGHT">Note 2</p>
+</font></b><font FACE="Arial">
+<p align="left">If user does not specify the values of the ratio QVENTI(i),
+QLAMIN(i) and QATTRI(i) (e.g. because a gas-turbine is considered and
+consequently these quantities have no sense), the following values are assigned
+to them:</p>
+<p ALIGN="JUSTIFY">QVENTI(i) = 0.0125 p.u.</p>
+<p ALIGN="JUSTIFY">QLAMIN(i) = 0.0015625 p.u.</p>
+<p ALIGN="JUSTIFY">QATTRI(i) = 0.0006375 p.u.</p>
+<p ALIGN="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MART</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the MART module variables, no particular
+prescription is required.</p>
+<p align="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MART</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In the module no user subprograms are foreseen.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MART</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The module mathematical model consisting of the equation mentioned in first
+paragraph gives rise to the following residuals:</p>
+<p ALIGN="CENTER">RNI(i) = RPM(i) - OMEGC(i) i = 1, ..., n</p>
+<p align="left">where OMEGC(i) assumes different expressions in accordance with the following
+possibilities:</p>
+    <p ALIGN="left">1) if neither load rejection nor turbine tripping occur:</p>
+<p ALIGN="CENTER">OMEGC(i) = RPMI i = 1, ..., n</p>
+    <p ALIGN="left">2) if there is not load rejection but the i-th turbine is
+    tripping, for the last the OMEGC(i) is deduced through kinetic energy
+    expression:</p>
+<p ALIGN="CENTER">E(i) = ½ * I(i) * OMEGC(i)² i = 1, ..., n</p>
+<p align="left">while for the remaining ones:</p>
+<p ALIGN="CENTER">OMEGC(j) = RPMI j = 1,... i-1, i+1, ..., n</p>
+    <p ALIGN="left">3) if there is load rejection, OMEGC(i) is deduced
+    through kinetic energy expression:</p>
+<p ALIGN="CENTER">E(i) = ½ * I(i) * OMEGC(i)² i = 1, ..., n</p>
+<p ALIGN="left">The residual is normalized as regards to an angular speed of
+300 runs per minute.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MART</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p align="left">SUBROUTINE MARTI3(IFO, IOB, DEBL)</p>
+<p align="left">SUBROUTINE MARTI4(IOB, MOD)</p>
+<p align="left">SUBROUTINE MARTI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</p>
+<p align="left">$ IBLOC1, IBLOC2, IER, CNXYU, TOL)</p>
+<p align="left">SUBROUTINE MARTC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+<p align="left">$ IBLOC1, IBLOC2)</p>
+<p align="left">SUBROUTINE MART(IFUN, IXYU, XYU, IPD, DATI, RNI)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE MART</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are in the manual section
+dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;TURBOGAS&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

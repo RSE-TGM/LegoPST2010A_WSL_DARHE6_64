@@ -1,0 +1,39 @@
+SERB
+
+SERB - Water tank                                                               
+3
+1
+
+t2
+WOUT PFSE ____ ____ ____ HSER ____ ____ 
+-1 1 0 0 0 1 0 0 
+t1
+WVAP PSER ____ ____ ____ HVAP ____ ____ 
+1 -1 0 0 0 1 0 0 
+t3
+WING PFSE ____ ____ ____ HING ____ HSER 
+1 -1 0 0 0 1 0 -1 
+
+0
+5
+4
+
+LIVS UA
+    LIVELLO SERBATOIO                                          
+PFSE UA
+    PRESSIONE FONDO SERBATOIO                                  
+HSER UA
+    ENTALPIA SERBATOIO                                         
+WVAP UA
+    PORTATA VAPORE USCITA SERBATOIO                            
+HVAP UA
+    ENTALPIA VAPORE USCITA SERBATOIO                           
+WING IN
+    PORTATA INGRESSO                                           
+HING IN
+    ENTALPIA INGRESSO                                          
+WOUT IN
+    PORTATA LIQUIDO USCITA                                     
+PSER IN
+    PRESSIONE NEL SERBATOIO                                    
+

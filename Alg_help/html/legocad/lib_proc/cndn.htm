@@ -1,0 +1,231 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE CNDN</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CNDN_summ"></A>MODULE CNDN CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CNDN_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CNDN_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CNDN_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CNDN_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CNDN_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CNDN_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CNDN_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CNDN_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CNDN_A"></A>MODULE CNDN CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">STEAM CONDENSER</P>
+<P>&nbsp;</P>
+<P>The CNDN module simulates the dynamics of thermo-hydraulic phenomena which the fluid present in the condenser cavity is subjected to. The simulation includes the thermal exchanges between the fluid in the cavity and the cooling fluid flowing through a tube bundle subdivided in NCEL cells having the same surface.</P>
+<P>To define the cavity mathematical model the following simplifying hypotheses are considered: </P>
+<P ALIGN="JUSTIFY">- the thermal exchange with outside is negligible</P>
+<P ALIGN="JUSTIFY">- complete separation between steam and liquid phases</P>
+<P ALIGN="JUSTIFY">- thermodynamic equilibrium between the phases</P>
+<P ALIGN="JUSTIFY">- the pressure in the cavity is uniform</P>
+<P ALIGN="JUSTIFY">- the distribution of enthalpy in steam phase is uniform</P>
+<P ALIGN="JUSTIFY">- the distribution of enthalpy in liquid phase is uniform</P>
+<P ALIGN="JUSTIFY">- the exchange coefficient between the fluid and the tube bundle walls is constant</P>
+<P ALIGN="JUSTIFY">- absence of incondensable gas.</P>
+<P>The used equations are: </P>
+<P ALIGN="JUSTIFY">1) the energy conservation equation of fluid contained in the cavity</P>
+<P ALIGN="JUSTIFY">2) the mass conservation equation of fluid contained in the cavity</P>
+<P ALIGN="JUSTIFY">3) the equation for liquid level calculation</P>
+<P ALIGN="JUSTIFY">4) the equation for pressure calculation on the condenser bottom</P>
+<P ALIGN="JUSTIFY">5) the equation for liquid level calculation as percentage of the measuring instruments working range.</P>
+<P>To define the tube bundle mathematical model the following hypotheses are considered:</P>
+<P ALIGN="JUSTIFY">- the monodimensional approximation with concentrated parameters for energy conservation equation in the fluid</P>
+<P ALIGN="JUSTIFY">- the tube bundle discretized in NCEL axial cells having the same surface</P>
+<P ALIGN="JUSTIFY">- the liquid flowing through the subcooled tube bundle</P>
+<P ALIGN="JUSTIFY">- the pressure of fluid inside the tube bundle is constant</P>
+<P ALIGN="JUSTIFY">- the physical properties of tube bundle metal are constant</P>
+<P ALIGN="JUSTIFY">- the tube bundle pipes having thin thickness, so a discretization with only one radial cell is enough</P>
+<P ALIGN="JUSTIFY">- both in the metal and fluid the longitudinal conductivity of heat is negligible.</P>
+<P>The used equations are: </P>
+<P ALIGN="JUSTIFY">6) the energy conservation equation in the fluid</P>
+<P ALIGN="JUSTIFY">7) the energy conservation equation in the metal.</P>
+<P>The equation 5) can be defined both trough the data required by module and through the functions which user has to assign by an appropriate subprogram (see below).</P>
+<P>The equations 6) and 7) are separately integrated and do not participate to the iterative process of general algorithm for system equation solution.</P>
+<P>These equations contain inner module variables. Only two of them (respectively the fluid enthalpy and temperature at tube bundle outlet) are module output variables.</P>
+<P>The CNDN module itself forms a complete model of steam condenser, so it can be used in place of the interconnected COND and TH2O modules.</P>
+<P>Use of only one module in place of two, besides simplifying the achievement of a plant model, allows a saving in calculation time.</P>
+<P>Nevertheless, acquisition of similar advantages is cause of precision drop; in fact, the CNDN module in spite of the COND module, can not suitably simulate flashing events.</P>
+<P ALIGN="JUSTIFY">Further informations about the two different models and their comparison are available in the section concerning this module of the manual "LEGOCAD - Modelling Library for Simulation of Power Generation Plants - Theory".</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CNDN_B"></A>MODULE CNDN CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image281.gif" WIDTH=379 HEIGHT=337></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>[kg/s]&#9;WTUR&#9;&#9;flow rate of main turbine blow-off steam</P>
+<P>[J/kg]&#9;HTUR&#9;&#9;enthalpy of main turbine blow-off steam</P>
+<P>[kg/s]&#9;WEXT&#9;&#9;flow rate of steam at the condenser inlet, different from main turbine blow-off steam</P>
+<P>[J/kg]&#9;HEXT&#9;&#9;enthalpy of steam at the condenser inlet, different from main turbine blow off-steam</P>
+<P>[kg/s]&#9;WLCP&#9;condensate extraction flow rate</P>
+<P>[kg/s]&#9;WDRE&#9;drains flow rate at the condenser inlet</P>
+<P>[J/kg]&#9;HDRE&#9;&#9;drains enthalpy at the condenser inlet</P>
+<P>[kg/s]&#9;WLCX&#9;flow rate of extracted or supplied liquid for level control (positive value: extracted liquid; negative value: supplied liquid)</P>
+<P>[kg/s]&#9;WVCN&#9;flow rate of steam extracted for condenser vacuum</P>
+<P>[kg/s]&#9;WRIC&#9;&#9;flow rate of liquid recirculated by the condensate extraction pumps</P>
+<P>[J/kg]&#9;HRIC&#9;&#9;enthalpy of liquid recirculated by the condensate extraction pumps</P>
+<P>[kg/s]&#9;WRFT&#9;&#9;flow rate of cooler flowing through the tube bundle</P>
+<P>[J/kg]&#9;HIFT&#9;&#9;cooler enthalpy at the tube bundle inlet</P>
+<P>[Pa]&#9;PCND&#9;&#9;condensation pressure</P>
+<P>[m]&#9;LCND&#9;&#9;level of liquid in the condenser</P>
+<P>[K]&#9;TMFT&#9;&#9;metal temperature at the tube bundle outlet</P>
+<P>[J/kg]&#9;HUFT&#9;&#9;cooler enthalpy at the tube bundle outlet</P>
+<P>[J/kg]&#9;HLCN&#9;&#9;condensate enthalpy</P>
+<P>[Pa]&#9;PFCN&#9;&#9;pressure on the condenser bottom</P>
+<P>[%]&#9;%LCN&#9;&#9;liquid level, as percentage of the measuring instruments' working range.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT SIZE=4><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CNDN_C"></A>MODULE CNDN CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P>&nbsp;</P>
+<P>In addition to the initial values of input and output variables (meanings defined above), user must assign the following data:</P>
+<P>[ ]&#9;&#9;NTUB&#9;&#9;number of pipes in the cooling tube bundle</P>
+<P>[m]&#9;&#9;DIAE&#9;&#9;external diameter of cooling tube bundle pipes</P>
+<P>[m]&#9;&#9;DIAI&#9;&#9;internal diameter of cooling tube bundle pipes</P>
+<P>[m]&#9;&#9;LUNG&#9;&#9;length of cooling bundle pipes</P>
+<P>[ ]&#9;&#9;TYPE_CAV&#9;selection index of cavity type to deal with (its value is assigned to the TYP variable, input parameters of the user &#9;&#9;&#9;&#9;&#9;program CNDLIV)</P>
+<P>[m³]&#9;&#9;VOL.CAV.&#9;cavity internal volume (steam volume + liquid volume)</P>
+<P>[m]&#9;&#9;ZERO_Y&#9;elevation gap between the condensate level, corresponding to the zero of measuring instruments, and the &#9;&#9;&#9;&#9;&#9;condensate outlet pipe</P>
+<P>[m³]&#9;&#9;VOL_Y&#9;cavity volume between the zero of liquid level measuring instrument and the condensate outlet pipe</P>
+<P>[m]&#9;&#9;GAMMA_Y&#9;working range of level measuring instruments (max. level over ZERO_Y)</P>
+<P>[m²]&#9;&#9;SEZ_Y&#9;cavity horizontal cross section area</P>
+<P>[kg/m³]&#9;ROM&#9;&#9;density of tube bundle metal</P>
+<P>[J/kg/K]&#9;CP MET.&#9;specific heat of tube bundle metal</P>
+<P>[W/m/K]&#9;COND.MET&#9;thermal conductivity of tube bundle metal</P>
+<P>[ ]&#9;&#9;NCEL&#9;&#9;number of cells in which is discretized the tube bundle (max. 5).</P>
+<P>&nbsp;</P>
+<P>To determine the condensate level, the CNDN module refers to a cavity where the liquid volume below the measuring instruments is known and level variation is proportional to liquid volume variation. So, it is a cavity where, within the working level range, the horizontal cross section area is constant. If user needs to refer to a more complex geometry of collection basin, data related to the new geometry can be supplied through the user subprogram SUBROUTINE CNDLIV(TYP, Y, VL, DVLDY, YPER) (see below). With an assigned liquid level, the subprogram calculates: </P>
+<P ALIGN="JUSTIFY">- the volume engaged by liquid as a function of the cavity geometrical characteristics</P>
+<P ALIGN="JUSTIFY">- the partial derivative of volume engaged by liquid evaluated as regards to the level</P>
+<P ALIGN="JUSTIFY">- the liquid proportional level as a function of the measuring instruments characteristic.</P>
+<P>In this case, user has to assign to the SEZ_Y a negative or zero value. If this signal is found, the user subprogram is called and values of ZERO_Y, VOL_Y, GAMMA_Y, and SEZ_Y are not considered.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CNDN_D"></A>MODULE CNDN CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the input and output variables of CNDN module, it needs to consider that in thermodynamic equilibrium hypotheses, once fixed the condensation pressure, the enthalpies of two phases are fixed too and, consequently the condensate enthalpy. Besides, if enthalpies and flow rates input are all known, power to give up to the cooler is fixed too.</P>
+<P>On the basis of such considerations (beginning from the condensation pressure and presuming all enthalpies and flow rates at the cavity and tube bundle inlet are known) in the CNDNI2 subprogram are evaluated: -the two phase enthalpies -the pressure on the cavity bottom -the cooler enthalpy -the metal temperature at the tube bundle outlet.</P>
+<P>So, to avoid inconsistencies with the above-mentioned calculations, user must assign and impose NOTO the values of condensation pressure and liquid level.</P>
+<P>The remaining system values must not be imposed. To avoid the system to be over-constrained, user has to keep free two of the input variables and to impose NOTO to the remaining ones.</P>
+<P ALIGN="JUSTIFY">It is suggested to keep free the enthalpy of main turbine blow-off steam and condensate extraction flow rate.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CNDN_E"></A>MODULE CNDN CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>If the collection basin has a more complex geometry than the reference one, in providing the related data to the module, user has to assign a negative or zero value to the SEZ_Y and write a user subprogram whose declarative statement is: </P>
+<P>SUBROUTINE CNDLIV(TYP, Y, VL, DVLDY, YPER)</P>
+<P>As a function of the liquid level, such program calculates: </P>
+<P ALIGN="JUSTIFY">- the engaged volume of liquid as a function of the cavity geometrical characteristics</P>
+<P ALIGN="JUSTIFY">- the partial derivative of volume engaged by the liquid, calculated as regards to the level</P>
+<P ALIGN="JUSTIFY">- the liquid proportional level as a function of the measuring instruments characteristics.</P>
+<P ALIGN="JUSTIFY">Input parameters: TYP, Y</P>
+<P ALIGN="JUSTIFY">Output parameters: VL, DVLDY, YPER</P>
+<P>[ ]&#9;TYP&#9;&#9;corresponds to the TYPE_CAV datum required in input (see above). It can be used as pointer to select the required &#9;&#9;&#9;&#9;cavity geometry in case user has to introduce different models of cavities into only one user subprogram</P>
+<P>[m]&#9;Y&#9;&#9;liquid level inside the cavity</P>
+<P>[m³]&#9;VL&#9;&#9;volume engaged by liquid</P>
+<P>[m²]&#9;DVLDY&#9;derivative of volume engaged by liquid as regards to the level</P>
+<P>[%]&#9;YPER&#9;&#9;liquid level in percentage of the measuring instruments working range.</P>
+<P>Since cylindrical geometry having horizontal axis is one of the most usual geometry for drums, in the module the following user subprogram is available: </P>
+<P>SUBROUTINE CNDLIO(Y, RCAV, HLCAV, VL, DVLDY)</P>
+<P>which calculates (once assigned the level) the volume engaged by the liquid contained inside a cylinder having horizontal axis and the derivative of this volume as regards to the level.</P>
+<P>The meanings of calling parameters are: </P>
+<P>[m]&#9;Y&#9;&#9;level of liquid inside the cylinder</P>
+<P>[m]&#9;RCAV&#9;&#9;cylinder internal radius</P>
+<P>[m]&#9;HLCAV&#9;cylinder internal length</P>
+<P>[m³]&#9;VL&#9;&#9;volume engaged by the liquid present inside the cylinder</P>
+<P>[m²]&#9;DVLDY&#9;derivative of volume engaged by liquid as regards to the level</P>
+<P>Thereinafter a CNDLIV subroutine example is indicated, using the CNDLIO subroutine, related to a cylindrical drum having radius RCAV = 1 m and length HLCAV = 10 m, whose level YPER is given as percentage of a range GAM = 2m.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE CNDLIV(TYP, Y, VL, DVLDY, YPER)</P>
+<P>IF(TYP.NE.1.) RETURN</P>
+<P>RCAV=1.</P>
+<P>HLCAV=10.</P>
+<P>CALL CNDLIO(Y,RCAV,HLCAV,VL,DVLDY)</P>
+<P>GAM=RCAV*2.</P>
+<P>YPER=Y/GAM/100.</P>
+<P>RETURN</P>
+<P>END</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CNDLIO(Y, RCAV, HLCAV, VL, DVLDY)</P>
+<P>ALFA = ACOS((RCAV-Y)/RCAV)</P>
+<P>VL = RCAV².*(ALFA-COS(ALFA)*SIN(ALFA))*HLCAV</P>
+<P>DVLDY = 2.*RCAV*SIN(ALFA)*HLCAV</P>
+<P>IF(DVLDY.LT..1E-5)DVLDY = 0.</P>
+<P>RETURN</P>
+<P>END</P>
+<P>&nbsp;</P>
+</FONT><I><FONT SIZE=4><P>&nbsp;</P>
+</I></FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CNDN_F"></A>MODULE CNDN CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P>&nbsp;</P>
+<P>The residuals present in the module do not directly correspond to the equations mentioned above. Here only their respective normalization factors are indicated. Further explanations are given in the manual section "LEGOCAD - Modelling Library for Simulation of Power Generation Plants - Theory"</P>
+<P ALIGN="JUSTIFY">RNI(1) - normalization factor = P0</P>
+<P ALIGN="JUSTIFY">RNI(2) - normalization factor = 1.</P>
+<P ALIGN="JUSTIFY">RNI(3) - normalization factor = T0</P>
+<P ALIGN="JUSTIFY">RNI(4) - normalization factor = H0</P>
+<P ALIGN="JUSTIFY">RNI(5) - normalization factor = H0</P>
+<P ALIGN="JUSTIFY">RNI(6) - normalization factor = P0</P>
+<P ALIGN="JUSTIFY">RNI(7) - normalization factor = 1.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CNDN_G"></A>MODULE CNDN CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE CNDNI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO,IOB,DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CNDNI4</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB,MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CNDNI2</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1, IBL2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CNDNC1 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>DATI, RNI, IBLI, IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CNDN</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, IXYU, XYU, IPD, DATI, RNI)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE VSATR</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(P,HL,HV,ROL,ROV,TS,DRLDP,DRVDP,DHLDP,DHVDP)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CDTYP</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(TYP,SEZY,Y,ZERY,GY,VY,VL,DVLDY,YPER)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE GAM03</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(GAM,DGAM,W,A,D,P,T)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE NAJAC</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(AJAC,MX5,IXYU,XYU,IPD,DATI,RN,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>NSTATI,NUSCIT,NINGRE,EPS,EPSLIM,RESIDU)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CNDLIV</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (TYP,Y,VL,DVLDY,YPER)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CNDLIO</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (Y,RCAV,HLCAV,VL,DVLDY)</P>
+<P>&nbsp;</P>
+<P>FUNCTION DITBOE</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (G,D,CP,MU,LAM)</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CNDN_H"></A>MODULE CNDN CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the user manual section dedicated to the examples developed under the abbreviations: </P>
+<P ALIGN="CENTER">"CONDEQUI"</P>
+<P>Besides, in section dedicated to the COND module of manual "LEGOCAD - Modelling Library for Simulation of Power Generation Plants - Theory", it is indicated the comparison between the answers of COND and CNDN modules and the experimental results related to a transient concerning load rejection in the French power plant "St. Laurent B1".</P></FONT></BODY>
+</HTML>

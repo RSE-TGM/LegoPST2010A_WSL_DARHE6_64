@@ -1,0 +1,43 @@
+SEAP_0                                                                          
+SEAP                                                                            
+SEAP - Gas turbine combustor cold chamber                                       
+                                                                                
+NSTAT = 1
+NUSCI = 2
+NINGR =12
+ 
+NCONF = 1
+ 
+TMET      --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+PSER      --UA-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TSER      --UA-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WI_1      --IN-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1      --IN-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_1      --IN-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1      --IN-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WU_2      --IN-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  2                    
+TU_2      --IN-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  2 (INV. FLOW)           
+WU_3      --IN-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  3                    
+TU_3      --IN-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  3 (INV. FLOW)           
+WU_4      --IN-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  4                    
+TU_4      --IN-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  4 (INV. FLOW)           
+TEST      --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE      --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+==============================                                                  
+EOF                                                                             
+5
+t3 4
+INGRESSO IDR. FUMI
+WI_1 PSER TI_1 TSER ____ ____ ____ ____
+t0 5
+USCITA IDR. FUMI
+WU_1 PSER TSER TU_1 ____ ____ ____ ____
+t1 5
+USCITA IDR. FUMI
+WU_2 PSER TSER TU_2 ____ ____ ____ ____
+t2 5
+USCITA IDR. FUMI
+WU_3 PSER TSER TU_3 ____ ____ ____ ____
+t4 5
+USCITA IDR. FUMI
+WU_4 PSER TSER TU_4 ____ ____ ____ ____

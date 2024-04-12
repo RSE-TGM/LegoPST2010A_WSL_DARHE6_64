@@ -1,0 +1,72 @@
+TRAF
+
+TRAF - 2 coils trafo                                                            
+4
+1
+
+t0
+UR1T UX1T IRT1 IXT1 
+-1 -1 1 1 
+t1
+SIN1 
+1 
+t3
+SIN2 
+1 
+t2
+UR2T UX2T IRT2 IXT2 
+-1 -1 1 1 
+
+0
+14
+10
+
+IRT1 UA
+CORRENTE REALE USCENTE LATO 1  [A]                             
+IXT1 UA
+CORRENTE IMMAG USCENTE LATO 1  [A]                             
+IRT2 UA
+CORRENTE REALE USCENTE LATO 2  [A]                             
+IXT2 UA
+CORRENTE IMMAG USCENTE LATO 2  [A]                             
+QPTR UA
+POTENZA ATTIVA USCENTE LATO 2  [W]                             
+QQTR UA
+POTENZA REATTIVA USCENTE LATO 2 [W]                            
+IMT1 UA
+CORRENTE USCENTE (1)/CORRENTE NOMINALE (1) [%]                 
+IMT2 UA
+CORRENTE USCENTE (2)/CORRENTE NOMINALE (2) [%]                 
+QPCU UA
+PERDITE NEL RAME [w]                                           
+QPFE UA
+PERDITE NEL FERRO [w]                                          
+UR11 UA
+TENSIONE REALE AI MORSETTI LATO 1  [V]                         
+UX11 UA
+TENSIONE IMMAG AI MORSETTI LATO 1  [V]                         
+UR22 UA
+TENSIONE REALE AI MORSETTI LATO 2  [V]                         
+UX22 UA
+TENSIONE IMMAG AI MORSETTI LATO 2  [V]                         
+UR1T IN
+TENSIONE REALE LATO 1  [V]                                     
+UX1T IN
+TENSIONE IMMAG LATO 1  [V]                                     
+UR2T IN
+TENSIONE REALE LATO 2  [V]                                     
+UX2T IN
+TENSIONE IMMAG LATO 2  [V]                                     
+ETA0 IN
+PERCENTUALE VARIAZIONE DI TENSIONE BT VOLUTA [%]               
+SIN1 IN
+STATO INTERRUTTORE LATO 1 (1=CHIUSO)                           
+SIN2 IN
+STATO INTERRUTTORE LATO 2 (1=CHIUSO)                           
+OMTI IN
+PULSAZIONE INGRESSO TRASFORMATORE [rad/sec]                    
+STRA IN
+STATO DEL TRASFORMATORE (0-->isolato)                          
+XMAL IN
+Transformer malfunctions                                       
+

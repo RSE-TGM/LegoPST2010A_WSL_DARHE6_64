@@ -1,0 +1,39 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">Modules which are shells for non LEGO models</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">Sometimes one may need to insert in LEGO
+simulator a special component which has been modelled using a different
+simulation strategy.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">If the model is easy, the best way is to
+realize a LEGO process module whose equations are the same of the non LEGO model
+(obviously, this is not the most frequent case :-). If the model is very
+complicated, the best way is not to realize a LEGO module shell, but to link the
+non LEGO model as a separate task in the simulator: the LEGOCAD system allows
+the connection between LEGO and non LEGO tasks in the same simulator.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Only if the model is neither very easy
+nor very complicated, it may be convenient to realize a LEGO shell which calls
+the non LEGO model.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The LEGO shells (which should not have
+more than 40 outputs and 100 total variables) may uses iterative (state and/or
+algebraic) outputs and/or non iterative outputs (see also the related section).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The shell must also manage the exchange
+between LEGO and non LEGO variables, as in the LEGO environment the only
+recorded variables are the DATI and the XYU vector. The usage of common areas to
+store static variables are not allowed, as the values will be mutually modified
+between the different instances of the module (it is allowed only for modules
+which cannot be present more than once in the same LEGO model: it depends on the
+kind of component modelled).</span></p>
+
+<!--mstheme--></font></body>
+
+</html>

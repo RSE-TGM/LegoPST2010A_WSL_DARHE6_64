@@ -1,0 +1,38 @@
+VAIN_1                                                                          
+VAIN                                                                            
+VAIN - Air-gas valve                                                            
+                                                                                
+NSTAT = 0
+NUSCI = 3
+NINGR = 5
+ 
+NCONF = 3
+ 
+WVAL      --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVAL      --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_      --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PMON      --IN-- GAS PRESSURE AT VALVE INLET                                    
+PVAL      --IN-- GAS PRESSURE AT VALVE OUTLET                                   
+TMON      --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_      --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZV      --IN-- GAS VALVE LIFT                                                 
+==============================                                                  
+PMON      --UA-- GAS PRESSURE AT VALVE INLET                                    
+TVAL      --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_      --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+WVAL      --IN-- GAS FLOW RATE THROUGH THE VALVE                                
+PVAL      --IN-- GAS PRESSURE AT VALVE OUTLET                                   
+TMON      --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_      --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZV      --IN-- GAS VALVE LIFT                                                 
+==============================                                                  
+PVAL      --UA-- GAS PRESSURE AT VALVE OUTLET                                   
+TVAL      --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_      --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+WVAL      --IN-- GAS FLOW RATE THROUGH THE VALVE                                
+PMON      --IN-- GAS PRESSURE AT VALVE INLET                                    
+TMON      --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_      --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZV      --IN-- GAS VALVE LIFT                                                 
+==============================                                                  
+EOF                                                                             

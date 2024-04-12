@@ -1,0 +1,80 @@
+****
+ALCON100
+****
+condensa       0005 0055 Circuito condensatore e dren                      
+****
+0 TUBOTUCD TUBO  1  130  160 0
+0 COLNCIPE COLN  0  130  280 0
+0 CNDNCOND CNDN  0  120   65 0
+0 VALVTPCA VALV  2   50  465 0
+0 VALVTPCB VALV  2  125  465 0
+0 VALVTPCC VALV  2  195  465 0
+0 COLNCUPE COLN  0  130  565 0
+0 VALVTPWF VALV  0  265  540 0
+0 VALVBYPF VALV  0  265  605 0
+0 COLNCUPD COLN  0  360  580 0
+0 VALVTULM VALV  2  320  465 0
+0 VALVTBLM VALV  2  380  465 0
+0 VALVTUFL VALV  2  345  265 0
+0 VALVF27X VALV  2  435  465 0
+0 COLNCIRI COLN  0  450  220 0
+0 VALVTBYR VALV  0  535  215 0
+0 VALVTD1A VALV  0  520  675 0
+0 VALVDI1A VALV  0  665  460 0
+0 VALVTD1B VALV  0  520  545 0
+0 VALVDI1B VALV  0  665  165 0
+0 VALVTD2A VALV  0  520  740 0
+0 VALVTD2B VALV  0  520  610 0
+0 COLNCURI COLN  0  905  215 0
+0 VALVTIPC VALV  0  985  210 0
+0 COLNCIPC COLN  0 1025  305 0
+0 VALVTPWC VALV  2  985  400 0
+0 VALVBYPC VALV  2 1050  400 0
+0 COLNCUPC COLN  0 1030  500 0
+0 VALVBYDE VALV  2 1110  595 0
+0 COLNCULM COLN  0  355  360 0
+0 VALVF05X VALV  2  280  265 0
+0 VALVF17X VALV  0  300  765 0
+0 NODOCD2B NODO  0  745  170 0
+0 NODOCD2A NODO  0  745  465 0
+0 RSORR1A  RSOR  0  625  360 0
+0 RSORR2A  RSOR  0  760  360 0
+0 RSORR1B  RSOR  0  625   80 0
+0 RSORR2B  RSOR  0  760   80 0
+0 VALVTERA VALV  0  535  355 0
+0 VALVTSRA VALV  0  870  355 0
+0 VALVTERB VALV  0  535   75 0
+0 VALVTSRB VALV  0  865   70 0
+0 MIXNMICO MIXN  0  400  745 0
+0 CPOMPECA CPOM  3   60  375 0
+0 CPOMPECB CPOM  3  130  375 0
+0 CPOMPECC CPOM  3  200  375 0
+0 VALVVIDE VALV  2 1025  595 0
+0 COLNCIDE COLN  0 1030  680 0
+0 TUBOTIDE TUBO  0  925  680 0
+1 *REMARK*  855  770 al Degasatore                                     
+1 *REMARK* 1065  770 by-pass Degas.                                    
+1 *REMARK* 1065  205 dai drenaggi HP                                   
+1 *REMARK*  625  315 da turb. BP                                       
+1 *REMARK*  620   30 da turb. BP                                       
+1 *REMARK*  775  315 da turb. BP                                       
+1 *REMARK*  755   30 da turb. BP                                       
+1 *REMARK*  105  775 portata entrante                                  
+1 *REMARK*  105  795 regolazione                                       
+1 *REMARK*  655  800 dai Drenaggi HP                                   
+1 *REMARK*  165  745 da C.G.                                           
+1 *REMARK*   90  705 da circuito avviam.                               
+1 *REMARK*  260   55 raffred. Cond.                                    
+1 *REMARK*   25   25 Wturcond                                          
+1 *REMARK*  245   15 dalla turbopompa                                  
+1 *REMARK*  255   85 liv. Condens.                                     
+1 *REMARK*  705  640 modello drenaggi                                  
+1 *REMARK*  720  670 ALCON100                                          
+****
+default        0000 0000                                                   
+****
+0 VALVDSV1 VALV  0    5   10 0
+0 VALVDSV2 VALV  0   65   10 0
+0 MIXNDESS MIXN  0  125   10 0
+0 NODODSVV NODO  0  185   10 0
+****

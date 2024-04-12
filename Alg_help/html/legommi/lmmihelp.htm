@@ -1,0 +1,282 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGOMMI HELP</TITLE>
+<META NAME="subject" CONTENT="Documentazione LEGOMMI">
+<META NAME="doccomm" CONTENT="Main per LMMIHELP">
+<META NAME="Template" CONTENT="C:\PROGRAMMI\MICROSOFT OFFICE\OFFICE\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT SIZE=5><P><A NAME="Summary"></A>SUMMARY</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The MMI tool developed for the ENEL LEGOCAD environment is used to configure, display and manage plant animated synoptics.</P>
+<P ALIGN="JUSTIFY">MMI is available in two versions that differs in the way data collected and in data types representation.</P></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=478>
+<TR><TD WIDTH="52%" VALIGN="TOP">
+<P><FONT FACE="Arial, helvetica">LEGOMMI/simulator</FONT></TD>
+<TD WIDTH="48%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>MMI associated with a LEGOCAD simulator which sends data</FONT></TD>
+</TR>
+<TR><TD WIDTH="52%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>LEGOMMI/SCADA</FONT></TD>
+<TD WIDTH="48%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>MMI associated with a SCADA (PSCS 2000 S.d.I.) which sends data and variable flags</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In both versions data exchange between LEGOMMI and simulator or SCADA is structured using a client-server architecture where MMI is the client.</P>
+<P ALIGN="JUSTIFY">We consider three step in LEGOMMI use : <I>configuration</I>, <I>compilation</I> and <I>synoptic animation</I>. </P>
+<P ALIGN="JUSTIFY">The user may use two different executable tools:</P>
+<B><P ALIGN="JUSTIFY">config&#9;</B>to built up the pages</P>
+<B><P ALIGN="JUSTIFY">mmi</B> &#9;to use the animated pages during run-time</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY">LEGOMMI config tool can also be used to develop pages which represent regulation schemes in order to obtain a regulation LEGO module (block) and to connect pages (i.e. schemes) among each other so as to create a regulation task. In this modality LEGOMMI can manage specific graphical regulation objects that provide connection capabilities and memorization of topological information. The same regulation scheme can be used in run-time mode as a plant synoptic for debugging purposes or plant monitoring.</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><I><P ALIGN="JUSTIFY">About this help</P>
+</B></I><P ALIGN="JUSTIFY">Topics dedicated only to the regulation task builder use of LEGOMMI are written in a different font (</FONT>Times New Roman<FONT FACE="Arial, helvetica">) from the others (Arial).</P>
+</FONT><B><I><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER">HOW TO USE</P>
+</B></I></FONT><P ALIGN="JUSTIFY"><A HREF="#Versions"><U><FONT COLOR="#0000ff">LEGOMMI versions available</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#Variables"><U><FONT COLOR="#0000ff">Connection simulator or SCADA variables</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#Pages"><U><FONT COLOR="#0000ff">Page and library</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#Context"><U><FONT COLOR="#0000ff">Context files</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="lmmiobje.htm#Objects"><U><FONT COLOR="#0000ff">Active objects</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="lmmiconf.htm#Config"><U><FONT COLOR="#0000ff">Config configuration</U></FONT></A></P>
+<STRIKE><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">{bmc help.bmp}</STRIKE>lmi_con_config Configuration</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="lmmicomp.htm#MmiCompilation"><U><FONT COLOR="#0000ff">Compilation animated pages</U></FONT></A></P>
+<STRIKE><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">{bmc help.bmp}</STRIKE>lmi_cmp_anim Compilation for animated pages</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="lmmicomp.htm#MmiTags"><U><FONT COLOR="#0000ff">Regulation Page Tasks</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="lmmicomp.htm#CompRegTask"><U><FONT COLOR="#0000ff">Regulation Page Compilation</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="lmmicomp.htm#compRegSchem"><U><FONT COLOR="#0000ff">Regulation Task Compilation</U></FONT></A><FONT FACE="Arial, helvetica"> </P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="lmmilayo.htm#MmiSynopticPage"><U><FONT COLOR="#0000ff">Synoptic Animation</U></FONT></A></P>
+<I><STRIKE><P ALIGN="JUSTIFY">{bmc help.bmp}</STRIKE>lmi_tags Tags of a regulation page</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<STRIKE><P ALIGN="JUSTIFY">{bmc help.bmp}</STRIKE>lmi_cmp_reg Compilation of a regulation page</P>
+<STRIKE><P ALIGN="JUSTIFY">{bmc help.bmp}</STRIKE>lmi_cmp_task Compilation of a regulation task</P>
+</I><STRIKE><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">{bmc help.bmp}</STRIKE>lmi_sim_simulation Synoptic animation</P>
+</FONT><B><I><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER">LEGOMMI WINDOWS LAYOUT</P>
+</I></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="lmmilayo.htm#MmiconfigMainWindow"><U><FONT COLOR="#0000ff">Config Main Window Layout</U></FONT></A><B><FONT FACE="Arial, helvetica">   </P>
+<P ALIGN="JUSTIFY">2 </B></FONT><A HREF="lmmilayo.htm#MmiMainWindow"><U><FONT COLOR="#0000ff">MMI Main Window Layout</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">3 </B></FONT><A HREF="lmmilayo.htm#MmiSynopticPage"><U><FONT COLOR="#0000ff">MMI Synoptic Page Layout</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">4 </B></FONT><A HREF="lmmilayo.htm#MmiStationPage"><U><FONT COLOR="#0000ff">MMI Station Page Layout</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">5 </B></FONT><A HREF="lmmilayo.htm#MmiAingWindow"><U><FONT COLOR="#0000ff">MMI Xaing Window Layout</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="Versions"></A>LEGOMMI: versions available</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">MMI is available in two different versions depending on the data I/O software interface provided: the server from/to which LEGOMMI exchange data may be ENEL LEGO SIMULATOR or SCADA (actually S.d.I. SCADA PCS2000).</P>
+<P ALIGN="JUSTIFY">While in LEGOMMI/SCADA a specific composite object for alarm acknowledge and display is available in LEGOMMI/simulator alarm management is not provided.</P>
+<P ALIGN="JUSTIFY">The simulator sends all data as floating point variables, SCADA sends configured points data as floating point with some associated flags (for analog variables) or as status value with associated flags (for digital variables). In the LEGOMMI/simulator version, MMI flags manage additional information (such as limits thresholds surpass).</P>
+</FONT><P ALIGN="JUSTIFY">Information about connection simulator or SCADA variables is available in:</P>
+<B><P ALIGN="JUSTIFY">1 MMI-Simulator Variable Connections  </P>
+</B><STRIKE><P ALIGN="JUSTIFY">Connection simulator or SCADA variables</STRIKE><FONT FACE="Arial, helvetica">lmi_conn_variables</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="Variables"></A>LEGOMMI: connection simulator or SCADA variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The simulator sends all data as floating point variables, SCADA sends configured points data as floating point with some associated flags (for analog variables) or as status value with associated flags (for digital variables). In the LEGOMMI/simulator version, MMI flags manage additional information (such as limits thresholds surpass).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="CENTER">SCADA</P>
+</B><P ALIGN="JUSTIFY">MMI can receive digital or analogical data, both being associated with flags.</P></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=332>
+<TR><TD WIDTH="58%" VALIGN="TOP">
+<P><FONT FACE="Arial, helvetica">Analogical</FONT></TD>
+<TD WIDTH="42%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Value</FONT></TD>
+</TR>
+<TR><TD WIDTH="58%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="42%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Flags</FONT></TD>
+</TR>
+<TR><TD WIDTH="58%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="42%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="58%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Digital</FONT></TD>
+<TD WIDTH="42%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>State (0/1)</FONT></TD>
+</TR>
+<TR><TD WIDTH="58%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="42%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Flags</FONT></TD>
+</TR>
+<TR><TD WIDTH="58%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="42%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Flags consist of information, either on measure acceptability: out of scansion, out of reliability, forced; or warning flags, such as those concerning overcoming threshold or alarm acknowledge flag (RI).</P>
+<P ALIGN="JUSTIFY">Once an object has been linked with a simulator or SCADA variable, it receives the related data and the flags which causes modifications in objects colours and their aspect (i.e. color modification, displayed value modification etc.).</P>
+<P ALIGN="JUSTIFY">Object dynamic behaviour, due to linked variables values modification, depends on object type and user configured resources values. Colour change policy generally is the same for active objects: every flag set (on) is associated to a color defined by the user. The flags, RI and FZ, cause different behaviour on the object; RI causes color blinking between normal color and flag-on colour, FZ causes reverse representation realized using background color and flag-on colors.</P>
+<P ALIGN="JUSTIFY">A priority scale between flags effects is fixed; in fact, flags have not the same importance (for example "out of scansion" forces the related color regard less of the others). The priority scale of flags is the following:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">Flags associated with user defined colors (flag-on colors):</P>
+</U><B><I><P ALIGN="JUSTIFY">FS</B>&#9;</I>Out of scansion.</P>
+<B><I><P ALIGN="JUSTIFY">AU</B>&#9;</I>Automatic. Specify a particular status of out of reliability.</P>
+<B><I><P ALIGN="JUSTIFY">FA</B>&#9;</I>Out of reliability</P>
+<B><I><P ALIGN="JUSTIFY">ST</B>&#9;</I>Esteemed</P>
+<B><I><P ALIGN="JUSTIFY">LH</B>&#9;</I>Low security limit for the variable value</P>
+<B><I><P ALIGN="JUSTIFY">LC</B>&#9;</I>Low conduction limit for the variable value</P>
+<B><I><P ALIGN="JUSTIFY">HC</B>&#9;</I>High conduction limit for the variable value</P>
+<B><I><P ALIGN="JUSTIFY">HH</B>&#9;</I>High conduction limit for the variable value</P>
+<U><P ALIGN="JUSTIFY">Flags associated with object visualization:</P>
+</U><B><I><P ALIGN="JUSTIFY">RI</B>&#9;</I>Alarm to recognize. Causes blinking on</P>
+<B><I><P ALIGN="JUSTIFY">FZ</B>&#9;</I>Forced. Causes reverse display</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="CENTER">LEGOMMI/SIMULATOR</P>
+</B><P ALIGN="JUSTIFY">The simulator sends all data as floating point, so the user has to assign threshold values that causes color modifications inside the resources of the object. Naturally the user has also to assign alarm color.</P>
+<P ALIGN="JUSTIFY">No flags alarm management is provided.</P>
+<U><P ALIGN="JUSTIFY">Flags about overcoming threshold which define the areas of the variations' value:</P></U></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=637>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><I><FONT FACE="Arial, helvetica" SIZE=2>Limit value low security </I></FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Low security limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<I><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Limit value low conduction</I></FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Low conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<I><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Limit value high conduction</I></FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<I><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">Limit value high security</I></FONT></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+</TABLE>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="Pages"></A>LEGOMMI: page &amp; libraries</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">A plant representation is composed by a series of graphical pages representing data and other schematic information during run-time (animation). Every page must be configured by instantiating some active objects, (icons, numeric display trends, bar chart ecc.) and by defining the background draw (not animated). During instantiation the user establishes the links between graphical behaviour of the active objects in animation and the values assumed by the simulator or SCADA variables in the run-time phase. </P>
+<P ALIGN="JUSTIFY">During page definition, the user has to assign the page type and geometrical page's characteristic. Three types of pages are available:</P>
+<P ALIGN="JUSTIFY">Synoptic Page:</P>
+<P ALIGN="JUSTIFY">used for the presentation of a plant synoptic; is completed by a series of pre-defined buttons on the left side of the window. The functions available through the push buttons are </P></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=390>
+<TR><TD WIDTH="27%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial, helvetica">- </B>NOP</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">enables only the specific call-back of every object (i.e. buttons).</TD>
+</TR>
+<TR><TD WIDTH="27%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">- </B>INFO</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">info display on objects</FONT></TD>
+</TR>
+<TR><TD WIDTH="27%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">-</B> </FONT>XAING</TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">perturbation send (for simulator only)</FONT></TD>
+</TR>
+<TR><TD WIDTH="27%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">- </B>XSTAZ</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">rising of a station page associated with an icon.</TD>
+</TR>
+<TR><TD WIDTH="27%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">- </B>PLOT</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">plot (for trend display of the variable)</FONT></TD>
+</TR>
+<TR><TD WIDTH="27%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">- </B>CLOSE</FONT></TD>
+<TD WIDTH="73%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">closes the page</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Synoptic Page:</P>
+<P ALIGN="JUSTIFY">same as synoptic but pre-defined buttons are not present.</P>
+<P ALIGN="JUSTIFY">Regulation Page</P>
+<P ALIGN="JUSTIFY">used for the construction of pages describing regulation schemes; in this case instantiation of objects, oriented to topological information memorization such as iconreg is allowed. During run-time is the same as synoptic.</P>
+<P ALIGN="JUSTIFY">LEGOMMI supplies a series of basic graphical objects which can be retrieved and instantiated by the user; these objects are organized in the standard active objects library named std.lib. </P>
+<P ALIGN="JUSTIFY">An active objects library contains and organizes a series of active objects, retrieved and reused by the user. It acts as a user-defined "toolbox" containing custom graphical objects. Customization of objects includes also the creation of "composite objects". Furthermore the user will be able to create a private library featuring pre-configured objects for speedy use. For example, a library can be dedicated to a particular kind of synoptic depending on the part of the plant under consideration (i.e. superheater, evaporator etc.). </P>
+<P ALIGN="JUSTIFY">Libraries, similarly to pages, are created by the user by instantiating objects and assigning the related properties (resources). </P>
+<P ALIGN="JUSTIFY">Every page is completely defined by these files:</P></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=515>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><I><FONT FACE="Arial, helvetica" SIZE=2>&lt;page&gt;.pag</I></FONT></TD>
+<TD WIDTH="78%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">contains property for every instantiated object</FONT></TD>
+</TR>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<I><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">&lt;page&gt;.bkg</I></FONT></TD>
+<TD WIDTH="78%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">contains property for the background draw</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Every active objects library is defined by the file </P></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=515>
+<TR><TD WIDTH="22%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><I><FONT FACE="Arial, helvetica" SIZE=2>&lt;library&gt;.lib</I></FONT></TD>
+<TD WIDTH="78%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">All file produced are in ASCII format and so cross-platform portability is guaranteed.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="Context"></A>LEGOMMI: Context file</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In order to start-up the configuration and the simulation activities both <I>config</I> and <I>mmi</I> need a configuration file (called <I>Contex.ctx</I> by default or &lt;<I>name&gt;.ctx</I> if precisely).</P>
+<P ALIGN="JUSTIFY">This file contains a number of basic information such as the list of pages and libraries that constitute the project; the directories where specific project file resides etc.</P>
+<P ALIGN="JUSTIFY">Some context information (i.e. directories names) can be changed when the user starts <I>config</I> by choosing "Modify Context" on the Context pulldown menu inside the main window. When the user starts up animation through the <I>mmi</I>, the ".ctx" file is loaded and the list of available pages is shown.</P>
+<P ALIGN="JUSTIFY">List of context fields:</P></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=457>
+<TR><TD WIDTH="41%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><FONT SIZE=2>Project</FONT></TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Directory containing the Context file.</FONT></TD>
+</TR>
+<TR><TD WIDTH="41%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Description</FONT></TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Application description.</FONT></TD>
+</TR>
+<TR><TD WIDTH="41%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Pages</FONT></TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Directory containing the pages.</FONT></TD>
+</TR>
+<TR><TD WIDTH="41%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Object library</FONT></TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Directory containing the active objects libraries.</FONT></TD>
+</TR>
+<TR><TD WIDTH="41%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Active icon library</FONT></TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Directory containing the animated icon's file.</FONT></TD>
+</TR>
+<TR><TD WIDTH="41%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Simulator</FONT></TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Directory containing the variable.rtf file. This file contains the list of all available variables in run time database.</FONT></TD>
+</TR>
+<TR><TD WIDTH="41%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Display list</FONT></TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">List of LEGOMMI/simulator X-Server's display used in run time.</FONT></TD>
+</TR>
+<TR><TD WIDTH="41%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Scada Host name </FONT></TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Host from which Scada Will send data during the run-time phase. A number (the MMI progressive number connected with Scada) must follow the hostname.    </FONT></TD>
+</TR>
+<TR><TD WIDTH="41%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Simulator Host name</FONT></TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Host from which the simulator will send data during run-time, local if it is not set.</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">When using <I>mmi</I> an added binary context file, named <I>Context.ctx_rtf</I>, is produced. This file contains the background information of all pages and &#9;in particular gathers the contents of all the background ASCII files in binary format to have these information stored in the memory and obtains a quick page-loading without loading in the <I>page.bkg</I> files. During start up, <I>mmi</I> controls if the Context.ctx and all the page.bkg files are older than the Context.ctx_rtf and loads the latter or creates a new one depending on test results.</P></BODY>
+</HTML>

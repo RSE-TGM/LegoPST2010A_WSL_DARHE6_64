@@ -1,0 +1,22 @@
+[OPTIONS]
+ROOT=./rtf
+BMROOT=./bmp
+CONTENTS=lgc_gl_glossary
+TITLE=GLOSSARY
+COMPRESS=True
+ERRORLOG=gloshelp.err
+REPORT=ON
+COPYRIGHT=Copyright © ENEL/DSR/CRA 1995 
+
+WARNING=3
+
+[FILES]
+lg_gloss.rtf
+
+[CONFIG]
+BrowseButtons()
+CreateButton("button_up","&Up","JumpId(`legoroot.hlp',`lg_help_root')")
+CreateButton("button_exit","&Exit","Exit()")
+
+[WINDOWS]
+;main=,(20,20,630,1030),0,(253,255,228),(255,130,0)

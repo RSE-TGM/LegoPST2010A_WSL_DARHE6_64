@@ -1,0 +1,465 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>BTGS</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE </font></b>
+      <b><font size="4">BTGS</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE BTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">SYNGAS-FED TURBOGAS COMBUSTION CHAMBER</p>
+<p>The BTGS module simulates the thermal and chemical part of the combustion of
+natural gas mixed-syngas. It is devoted to the simulation of the combustion
+chamber of turbogas groups in turbogas plants, combined cycle plants and coal
+gasification plants.</p>
+<p>For the complete simulation of the combustion chamber is so needed the
+simulation of the other components and thermodynamical effects (head losses,
+pressure nodes and bypass and cooling channels) with the existing library
+modules for the simulation of compressed air subsystems (SERA, VAIN, CMSC, …).</p>
+<p>The module allows the simulation of the injection of steam in the combustion
+chamber (De-NOx steam) in case of natural gas functioning and the combustion of
+the coal gasification gas (mixed-syngas). Also it allows the correct simulation
+of the commutation transient from one kind of fuel to the other.</p>
+<p>The BTGS module performs the calculation of the flow rate, the temperature
+and the chemical composition of the flue gases at the combustion chamber outlet.
+In order to allow the correct simulation of the chemical composition, it is
+possible to mix to the flue gases air coming from bypass or cooling channels
+external to the chamber.</p>
+<p>The physical inlets of the BTGS module are five:</p>
+<blockquote>
+  <blockquote>
+  </font><font FACE="Symbol">
+  <p ALIGN="JUSTIFY">*</font><font FACE="Arial"> the combustive air;</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="JUSTIFY">*</font><font FACE="Arial"> the natural gas and steam
+  mixture (DeNOx steam);</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="JUSTIFY">*</font><font FACE="Arial"> a second inlet of auxiliary
+  natural gas;</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="JUSTIFY">*</font><font FACE="Arial"> the mixed-syngas;</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="JUSTIFY">*</font><font FACE="Arial"> the air coming from the bypass
+  channels.</p>
+  </blockquote>
+</blockquote>
+<p>For each of these physical inlets are required the values of flow rate and
+temperature; for the natural gas mixture and steam is required also the mass
+fraction of natural gas; for the mixed-syngas is instead required the chemical
+composition (given as mass fractions of CO, H</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">,
+CH</font><font FACE="Arial" SIZE="1">4</font><font FACE="Arial">, H</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">O
+and CO</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">: the mass
+fraction of N</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial"> is
+the complement to one).</p>
+<p>The physical outlet is one (corresponding to the turbine inlet). For this
+physical outlet the model supplies the flow rate, the temperature and the
+chemical composition of the flue gas. As in a turbogas there is always a
+considerable air excess, one may assume that the combustion is always complete.
+So the chemical composition of the flue gas is computed as mass fractions of CO</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">,
+H</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">O, O</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">
+and Ar (the mass fraction of N</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">
+is the complement to one).</p>
+<p>The module evaluates also the temperature before the bypass mixing, that
+should correspond to the maximum temperature in the combustion chamber. But the
+exact calculation of this quantity should take into account the kinetical-chemical
+effects of the combustion, which are not considered inside the BTGS module. Thus
+the supplied value must be intended in a qualitative manner.</p>
+<p>For the calculation and the conversion of the thermodynamical properties of
+all the fluids incoming and exiting is used the functions library devoted to the
+evaluation of the properties of gas mixtures (Tavsyngas library).</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE BTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<blockquote>
+  <blockquote>
+  </font><font FACE="Arial" SIZE="2">
+  <p ALIGN="center"><img SRC="images/Image17.gif" width="488" height="583"></p>
+  </font><font FACE="Arial">
+  </blockquote>
+</blockquote>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[kg/s] WAIR Flow rate of combustive air at the
+      comustion chamber inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[K] TAIR Temperature of combustive air at the
+      combustion chamber inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[kg/s] WGAS Flow rate of natural gas and steam mixture
+      at chamber inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[K] TGAS Temperature of natural gas and steam mixture
+      at chamber inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ] XGAS Mass fraction of natural gas in
+      the mixture</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s] WAUX Flow rate of the natural gas
+      through the auxiliary nozzles</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K] TAUX Temperature of the natural gas
+      through the auxiliary nozzles</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s] WBYP Flow rate of mixing air
+      through the chamber bypass</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[K] TBYP Temperature of mixing air through the chamber
+      bypass</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[kg/s] WMIX Flow rate of mixed-syngas at the combustion
+      chamber inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K] TMIX Temperature of mixed-syngas at
+      the combustion chamber inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[ ] FCOM Mass fraction from CO in the incoming mixed-syngas</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ] FH2M Mass fraction of H</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">
+      in the incoming mixed-syngas</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ] FCH4 Mass fraction of CH</font><font FACE="Arial" SIZE="1">4</font><font FACE="Arial">
+      in the incoming mixed-syngas</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ] FCO2 Mass fraction of CO</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">
+      in the incoming mixed-syngas</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ] FH2O Mass fraction of H</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">O
+      in the incoming mixed-syngas</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ] AUXN Corrective coefficient of the
+      thermal power for the natural gas</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ] AUXM Corrective coefficient of the
+      thermal power for the mixed-syngas</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[kg/s] WFUM Flow rate of flue gas at the combustion
+      chamber outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[K] TFUM Temperature of the flue gas at the comb.
+      chamber outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ] FFC2 Mass fraction of CO</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">
+      in the flue gas at the chamber outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[ ] FFH2 Mass fraction of H</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">O
+      in the flue gas at the chamber outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[ ] FFO2 Mass fraction of O</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">
+      in the flue gas at the chamber outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[ ] FFAR Mass fraction of Ar in the flue gas at the
+      chamber outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K] THOT Flue gases temperature before
+      bypass air mixing</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <blockquote>
+          <blockquote>
+            <p ALIGN="JUSTIFY">&nbsp;</p>
+          </blockquote>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p ALIGN="CENTER">INPUT-OUTPUT VARIABLES NORMALIZATION FACTORS</p>
+<p>Variables Normalization</p>
+<p>WAIR, WGAS, WAUX, WBYP, WMIX, WFUM W0</p>
+<p>TAIR, TGAS, TAUX, TBYP, TMIX, TFUM, THOT T0</p>
+<p>XGAS, AUXN, AUXM 1.</p>
+<p>FCOM, FH2M, FCH4, FCO2, FH2O, FFC2, FFH2, FFO2, FFAR 0.1</p>
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE BTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p>In addition to initial values of BTGS module input and output variables
+(meanings defined above), user must assign the following data set to complete
+the module input on the file F14:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[ ] ETA comb Combustion efficiency</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[J/kg] LHV met. LHV (low heat value) of the natural gas</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[ ] X CnHxn Mean molar ratio hydrogen/carbon in the
+      natural gas</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">[ ] Xm Inert Inerts mass fraction (assumed as N</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">)
+      in the natural gas</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE BTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p ALIGN="JUSTIFY">To initialize the BTGS module variables on the file F14, no
+particular prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE BTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p>No user subprograms are present in the BTGS module.</p>
+<p>The BTGS module makes use of the procedures contained in the syngas
+thermodynamic tables (TAVSYNGAS) which must be present in the user library.</p>
+<p align="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE BTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p>The equations forming the BTGS module mathematical model give rise to a set
+of residuals. Here only their correspondences with the output variables
+equations have been indicated, also mentioning the respective normalization
+factors. Further explanations are given in the related theoretical description.</p>
+<blockquote>
+  <blockquote>
+    <p ALIGN="JUSTIFY">1) RNI(1) - normalization factor = W0</p>
+    <blockquote>
+      <p ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas flow
+      rate;</p>
+    </blockquote>
+    <p ALIGN="JUSTIFY">2) RNI(2) - normalization factor = T0</p>
+    <blockquote>
+      <p ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas
+      temperature;</p>
+    </blockquote>
+    <p ALIGN="JUSTIFY">3) RNI(3) - normalization factor = 0.1</p>
+    <blockquote>
+      <p ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas
+      chemical composition;</p>
+    </blockquote>
+    <p ALIGN="JUSTIFY">4) RNI(4) - normalization factor = 0.1</p>
+    <blockquote>
+      <p ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas
+      chemical composition;</p>
+    </blockquote>
+    <p ALIGN="JUSTIFY">5) RNI(5) - normalization factor = 0.1</p>
+    <blockquote>
+      <p ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas
+      chemical composition;</p>
+    </blockquote>
+    <p ALIGN="JUSTIFY">6) RNI(6) - normalization factor = 0.1</p>
+    <blockquote>
+      <p ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas
+      chemical composition;</p>
+    </blockquote>
+    <p ALIGN="JUSTIFY">7) RNI(7) - normalization factor = T0</p>
+    <blockquote>
+      <p ALIGN="JUSTIFY">related to the maximum flue gas temperature inside the
+      chamber.</p>
+    </font><font FACE="Arial" SIZE="1">
+    </blockquote>
+  </blockquote>
+</blockquote>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE BTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>SUBROUTINE BTGSI3 (IFO,IOB,DEBL)</p>
+<p>SUBROUTINE BTGSI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+<p>$ IBL1,IBL2,IER,CNXYU,TOL)</p>
+<p>SUBROUTINE BTGSC1 (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</p>
+<p>SUBROUTINE BTGS (IFUN,IXYU,XYU,IPD,DATI,RNI)</p>
+<p>SUBROUTINE BTGSD1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</p>
+<p>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE BTGS</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p>Reference test cases related to this module are reported in the user manual
+section devoted to the examples developed under the abbreviation:</p>
+<p ALIGN="CENTER">&quot;.........&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+  <!--mstheme--></font></body>
+
+</html>

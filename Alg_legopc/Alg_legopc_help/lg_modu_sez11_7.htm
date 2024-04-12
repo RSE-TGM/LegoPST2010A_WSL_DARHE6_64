@@ -1,0 +1,77 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><i><b><font size="5">Usage of auxiliary FORTRAN utility
+(FORAUS)</font></b></i></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">Sometimes, the module developer may
+choose to let the user write an user routine to perform special actions or to
+assign particular data.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">For instance, in the LEGO standard
+library this feature is used for these kind of data:</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">assignment
+or usage of the characteristic curves of non standard valves, pumps, fans,
+compressors, turbines, ...</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">computing
+of the fluid level inside a tank with varying horizontal section (every tank
+which is not a vertical cylinder or a vertical prism);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">usage of non standard technical prescription for material properties or
+material behaviour.</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p class="MsoNormal"><span lang="EN-GB">Note that the word &quot;non
+standard&quot; used in the previous list has to be intended as &quot;everything
+else but those whose data have been coded in the LEGO library modules&quot;.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">In these cases, the routine computing
+the standard values checks the value of a quantity used as flag:</span></p>
+<p class="elenco"><span lang="EN-GB">in a module simulating a tank, the horizontal section may be used as
+flag: if negative, the level has to be computed by an user routine;</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">in a numbered list of standard components, an out-of-boundary index will
+point to a non standard component, whose data (or whose behaviour) will be
+provided (or computed) in an user routine.</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p class="MsoNormal"><span lang="EN-GB">The calling parameters and the other
+FORTRAN prescriptions for the user routine must be set by the module developer,
+and they may not be changed by the user.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">As the routine must always be linked by
+LEGO system, the module developer must also write a standard routine, which will
+be called only if the user sets the &quot;non standard&quot; values of the flags
+but he doesn't provide the user routine required. So the developer-written
+routine has to write a warning message to the user, as it should never be
+invoked.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">In some special cases, there is no flag
+(and no related check) to allow the module know if an user routine must be
+called. In these cases, the developer written routine is the standard working
+one, and the user written routine must perform the same action (obviously with
+its own algorithm). If the user routine is present, the standard one is no more
+linked (and invoked).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">To allow the user know how to realize
+the user routine, the module developer must write a skeleton or an example of
+the routine to be provided, which has to be inserted <b style="mso-bidi-font-weight:
+normal">wholly commented</b> between two standard comment lines:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C~FORAUS_xxxx~</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">...</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">...</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">...</font></b></span></p>
+<p class="elenco3"><span lang="EN-GB"><b><font size="2" face="Courier New">C~FORAUS_xxxx~</font></b></span></p>
+<p class="MsoNormal"><span lang="EN-GB">where, as usual, &quot;xxxx&quot;
+represents the name of the block.</span></p>
+
+<!--mstheme--></font></body>
+
+</html>

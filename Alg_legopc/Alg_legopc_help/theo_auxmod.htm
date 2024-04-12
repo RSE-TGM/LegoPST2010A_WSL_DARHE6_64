@@ -1,0 +1,158 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title></title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font size="4">AUXILIARY MODULES</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Arial"><a href="#parte1">Air ejector or vacuum
+  pump</a></p>
+  </font>
+  <p ALIGN="JUSTIFY"><font FACE="Arial"><a href="#parte2">Thermocouple wit heat
+  exchange and thermal inertia</a></p>
+  </font>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte1"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Air ejector or vacuum pump<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">Modules referred to: AEXT.</p>
+<p ALIGN="left">The model deals with the problem of calculating the mass flow
+rate in a plant component such as an air ejector or a vacuum pump.</p>
+<p ALIGN="left">The reference component for modelling is the air ejector.</p>
+<p ALIGN="left">The working fluid is air.</p>
+<p ALIGN="left">The mathematical model is a semi-empirical one.</p>
+<p ALIGN="left">It is based on a simplified momentum equation in which the
+inertial term, the flux term and the gravitational term are neglected.</p>
+<p ALIGN="left">The downstream pressure is reduced depending on the value of a
+control parameter, the driving flow for an air ejector, in order to have the
+right pressure difference between the inlet of the driven flow and the mixing
+chamber.</p>
+<p ALIGN="left">If the downstream pressure changes, the reduced pressure too
+varies affecting the driven mass flow rate.</p>
+<p ALIGN="left">Data of a working point allow to determine the internal data,
+namely the driven flow pressure loss coefficient and the downstream pressure
+reduction coefficient, to match the component performances.</p>
+<p ALIGN="left">The main simplifications are:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> no mass storage in the component is
+considered;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">the drive flow is not taken into
+account in the computation of the mass flow rate, that is the outlet mass flow
+is equal to the driven mass flow;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">no heat balance is performed,
+therefore the outlet flow temperature is not calculated.</font></p>
+<p ALIGN="left">The basic relationship is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image548.gif" WIDTH="225" HEIGHT="36"></p>
+<p ALIGN="left">where k is a coefficient and p</font><font FACE="Arial" SIZE="1">app</font><font FACE="Arial">
+is the reduced downstream pressure, both dependent on the nominal working point.
+Also p</font><font FACE="Arial" SIZE="1">app</font><font FACE="Arial"> depends
+on the actual drive flow rate and downstream pressure too.</p>
+<p ALIGN="left">The module can simulate a vacuum pump, making use of the
+rotational speed as control parameter.</p>
+<p ALIGN="left">Of course, in this case the reduced downstream pressure has no
+physical meaning.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte2"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Thermocouple wit heat exchange and thermal inertia<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">Modules referred to: <a href="trma.htm" target="_blank">TRMA</a></p>
+<p ALIGN="left">The model simulates the behaviour of a thermocouple for steam
+temperature measurement, influenced by all the real conditionings on its
+measurement, beyond the thermal exchange with the fluid, it measures the
+temperature of.</p>
+<p ALIGN="left">So it takes into account:</p>
+<font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">effects of thermal inertia due to
+the thermal capacity of the protection sheath: in facts the hot junction
+&quot;feels&quot; fluid temperature variations only through the sheath and a
+time of response to fluid temperature variations must be considered;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">* </font><font FACE="Arial">thermal exchange coefficient between
+sheath and fluid is not infinite.</p>
+</font>
+<blockquote>
+  <blockquote>
+  </blockquote>
+</blockquote>
+<p ALIGN="left">So, sheath and fluid are not at the same temperature. Between
+thermocouple and metal basis there is a conduction thermal exchange . Finally
+there is a radiative exchange between the thermocouple itself and the metal
+walls of the enclosure.</p>
+<p ALIGN="CENTER"><img SRC="images/Image549.gif" width="404" height="366"></p>
+<p ALIGN="left">As the figure shows the thermocouple is constituted by a
+protection sheath, coming out of the mounting surface for a length l and
+inserted in such surface for a length l</font><font FACE="Arial" SIZE="1">BA</font><font FACE="Arial">.</p>
+<p ALIGN="left">The sheath has circular shape, having external diameter D</font><font FACE="Arial" SIZE="1">ext</font><font FACE="Arial">
+and inner diameter D</font><font FACE="Arial" SIZE="1">int</font><font FACE="Arial">.
+Inside it, there is the hot junction, from which the electrical contacts come
+out.</p>
+<p ALIGN="left">The measured temperature is the one of sheath tip and is
+determined on the basis of a balance equation considering:</p>
+<p ALIGN="left">1. convection thermal exchange with steam along the sheath
+portion that is not sunk down;</p>
+<p ALIGN="left">2. conduction exchange along the basis adjoining the bulk;</p>
+<p ALIGN="left">3. radiative exchange with the portion of the enclosure
+&quot;seeing&quot; the thermocouple walls (schematised as an equivalent wall
+having an average temperature between all the surfaces faced to the
+thermocouple).</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">The thermal balance can be written:</p>
+<p ALIGN="CENTER"><img SRC="images/Image550.gif" width="276" height="58"></p>
+<p ALIGN="left">where Q</font><font FACE="Arial" SIZE="1">conv</font><font FACE="Arial">,
+Q</font><font FACE="Arial" SIZE="1">cduc</font><font FACE="Arial">, Q</font><font FACE="Arial" SIZE="1">rad</font><font FACE="Arial">
+are exchanged powers for convection, conduction and radiation:</p>
+<p ALIGN="CENTER"><img SRC="images/Image551.gif" width="221" height="33"></p>
+<p ALIGN="CENTER"><img SRC="images/Image552.gif" width="201" height="33"></p>
+<p ALIGN="CENTER"><img SRC="images/Image553.gif" width="236" height="43"></p>
+<p ALIGN="left">where T</font><font FACE="Arial" SIZE="1">st</font><font FACE="Arial">
+is the steam temperature, T is the wall temperature, C</font><font FACE="Arial" SIZE="1">T</font><font FACE="Arial">
+the thermocouple thermal capacity, C</font><font FACE="Arial" SIZE="1">L</font><font FACE="Arial">
+the thermocouple longitudinal conductance and T</font><font FACE="Arial" SIZE="1">meas</font><font FACE="Arial">
+the measured temperature.</p>
+<p ALIGN="left">Convection exchange coefficient with the fluid is supposed zero
+if the fluid flow rate is zero, but rapidly tending to an asintotical value when
+fluid flow rate </font><font FACE="Symbol">G</font><font FACE="Arial"> grows,
+with an exponential law:</p>
+<p ALIGN="CENTER"><img SRC="images/Image554.gif" width="198" height="86"></p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

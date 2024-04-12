@@ -1,0 +1,1907 @@
+!
+!   modulo edicole.uil
+!   tipo 
+!   release 1.3
+!   data 3/20/95
+!   reserved @(#)edicole.uil	1.3
+!
+!****************************************************************************
+! EDICOLE.UIL		versione 0.1		18.9.92
+!	file .uil per l'applicativo EDICOLE per l'editing di icone lego
+!
+! Buffo Massimo, Calleri Nicola 
+!****************************************************************************
+
+module edicole
+	version = 'v0.1'
+	names = case_sensitive
+
+objects = {
+	  XmSeparator = gadget;
+	  }
+ 
+!	Per IBM/RISC 6000....
+!include file '/usr/include/uil/XmAppl.uil';
+ 
+!	Per Vax/Ciofeca 3100 et alium fimum seu rumentam...
+include file 'XmAppl.uil';
+
+ 
+!	Callback functions utilizzate
+!
+procedure
+	create_proc		(integer);
+	cancel_proc		(integer);
+	ok_proc			(integer);
+	activate_proc		(integer);
+	dialog_proc		(integer);
+	drag_proc		(integer);
+	color_fg_proc		(integer);
+	cambio_dim		(integer);
+	select_icon		(integer);
+	select_modulo		(integer);
+
+!
+! Titoli da visualizzare nelle intestazioni delle dialog box
+!
+value
+	k_module_p_title		: 'PROCESS MODULES';
+	k_module_np_title		: 'SCHEME MODULES';
+	k_file_bitmap_title		: 'BITMAP FILE COPY';
+
+!
+!	Stringhe di testo per visualizzazione voci nella MenuBar
+!	e PulldownMenu discendenti  (MAIN WINDOW)
+!
+value
+	k_file_label_text		: 'File';
+	  k_quit_label_text		:   'Quit';
+	k_edit_label_text		: 'Edit';
+	  k_standard_label_text		:   'Standard';
+	    k_standard_p_label_text	:     'Process modules';
+	    k_standard_np_label_text	:     'Scheme  modules';
+	  k_module_label_text		:   'Modules';
+	    k_module_p_label_text	:     'Process modules';
+	    k_module_np_label_text	:     'Scheme  modules';
+	  k_symbol_label_text		:   'Symbols';
+	k_bitmap_label_text		: 'Bitmap';
+	  k_modify_label_text		:   'Modify';
+	  k_copy_label_text		:   'Copy';
+	  k_clear_label_text		:   'Clear';
+	k_icon_label_text		: 'Icon';
+	  k_new_label_text		:   'New';
+	  k_save_label_text		:   'Save';
+	  k_delete_label_text		:   'Delete';
+
+!
+!	Stringhe di label della main window
+value
+	k_module_name_text		: 'Module ';
+	k_module_name_iniz_text		: '<NOMOD>';
+	k_module_description_text	: 'Description';
+	k_module_description_iniz_text	: '<NODESCRIPT>';
+	k_icon_width_text		: 'Width ';
+	k_icon_height_text		: 'Height ';
+	k_color_fg_text			: 'Foreground ';
+	k_color_bg_text			: 'Background ';
+	k_font_size_text		: 'Font size ';
+!
+!	Costanti per il riconoscimento delle XmLabel della MenuBar :
+!
+value
+	k_quit_program		: 1;
+	k_module_p		: 2;
+	k_module_np		: 3;
+	k_modify		: 4;
+	k_clear			: 5;
+	k_new			: 6;
+	k_delete		: 7;
+	k_save			: 8;
+	k_std_module_p		: 9;
+	k_std_module_np		:10;
+	k_copy			:11;
+	k_symbol			:90;
+
+!	Costanti per la memorizzazione degli WidgetID relativi alle
+!	labels il cui contenuto viene modificato
+!
+value
+	k_module_name		: 12;
+	k_icon_module		: 13;
+	k_module_description	: 14;
+
+!	Costanti per gli altri widget della main window
+value
+	k_icon_width		: 15;
+	k_icon_height		: 16;
+	k_view_window		: 17;
+	k_bboard_window		: 18;
+	k_bboard_icon		: 19;
+	k_icon_pixmap		: 20;
+	k_icon_label		: 21;
+	k_order_of_icons	: 22;
+	k_icons_of_module	: 23;
+	k_next_icon		: 24;
+	k_previous_icon		: 25;
+	k_file_bitmap		: 26;
+!
+!	Costanti utilizzate per i BulletinBoardDialog
+!
+value
+	k_module_p_dialog	: 30;
+	k_module_np_dialog	: 31;
+	k_modify_dialog		: 32;
+
+	k_module_p_list		: 35;
+	k_module_np_list	: 36;
+	k_module_p_form		: 37;
+	k_module_np_form	: 38;
+
+	k_copy_dialog		: 40;
+	k_copy_text		: 42;
+
+!	Stringhe dei Bulletin Board
+value
+	k_module_p_list_label_text :   'MODULE   Icons   DESCRIPTION';
+	k_module_np_list_label_text :  'MODULE    DESCRIPTION';
+	k_copy_list_label_text : 'ICONS OF MODULE';
+	k_copy_label_string :      'File to be copied: ';
+!
+!	Costanti per le voci dei vari option menu
+!
+	k_white_fg		: 50;
+	k_black_fg		: 51;
+	k_yellow_fg		: 52;
+	k_green_fg		: 53;
+	k_red_fg		: 54;
+	k_blue_fg		: 55;
+
+!	k_white_bg		: 60;
+!	k_black_bg		: 61;
+!	k_yellow_bg		: 62;
+!	k_green_bg		: 63;
+!	k_red_bg		: 64;
+!	k_blue_bg		: 65;
+!	color_bg_proc		(integer);
+
+!	k_small_fn		: 70;
+!	k_small_plus_fn		: 71;
+!	k_medium_fn		: 72;
+!	k_medium_plus_fn	: 73;
+!	k_big_fn		: 74;
+
+	k_fg_menu		: 80;
+!	k_bg_menu		: 81;
+ 
+!	Costanti di definizione dei colori
+value
+	k_white			: 0;
+	k_black			: 1;
+	k_yellow		: 2;
+	k_green			: 3;
+	k_red			: 4;
+	k_blue			: 5;
+
+!****************************************************************************
+!
+!	Stringhe utilizzate per i BulletinBoardDialog
+!
+	k_dialog_ok_s			:'Ok';
+	k_dialog_cancel_s		:'Cancel';
+
+!****************************************************************************
+!
+!	Definizione fonts
+!
+value
+      bold : font('-ADOBE-Times-Bold-R-Normal--*-140-*-*-P-*-ISO8859-1');
+     normal: font('-ADOBE-Helvetica-Bold-R-Normal--*-140-*-*-P-*-ISO8859-1');
+        big: font('-ADOBE-Helvetica-Bold-R-Normal--*-180-*-*-P-*-ISO8859-1');
+      fixed: font('Rom14');
+      title: font('Rom14');
+!
+!	Colori, color tables, icone
+!
+value
+	white		: color ('white', background);
+	black		: color ('black', background);
+	grey		: color ('light grey', background);
+	blue		: color ('navy blue', foreground);
+	gray		: color ('light gray', background);
+	cyan		: color ('cyan', background);
+	rred		: color ('red', background);
+	red		: exported color ('red', background);
+	green		: exported color ('lime green', background);
+	yellow		: exported color ('yellow', background);
+!
+	selez_shadow	: 1;
+
+!	Mnemonics
+value
+        file            : 70;
+        edit            : 69;
+!       modules		: 77;
+!	standard	: 83;
+        bitmap          : 66;
+        icon            : 73;
+
+!
+	k_invitation_label   :'Select an item in the list';
+!****************************************************************************
+!
+!	Dimensionamenti delle windows utilizzate 
+!
+	value kw_form	: 840;
+	value kh_form	: 500;
+
+        value kh_menubar: 30;
+
+!	Posizioni relative nelle Form 
+!
+	value k_horizontal_offset	: 10;
+	value k_vertical_offset		: 10;
+!----------------------------------------------------------------------------
+!	(nella main window)
+	value k_label_distance		: 20;
+	value k_button_distance		: 15;
+
+!       ALtezza della label delle icone
+        value k_icon_label_height       : 0;
+!       Larghezza e altezza massima delle icone
+        value k_icon_max_dimension      : 300;
+!       Larghezza e altezza minima delle icone
+        value k_icon_min_dimension      : 300;
+!       Stepping per gli Scale widget
+        value k_stepping                : 5;
+
+
+!****************************************************************************
+!****************************************************************************
+!	Definizioni di tutti gli WIDGET
+!
+
+object
+	main_window : XmMainWindow 
+	{
+	  arguments {
+		      XmNunitType = Xm100TH_FONT_UNITS;
+		    };
+	   controls {
+		      XmMenuBar      menubar;
+		      XmForm	 contenitore;
+		    };
+	};
+
+
+!****************************************************************************
+!	Definizione MenuBar e suoi controlli
+!
+object
+	menubar      : XmMenuBar
+	{
+	   arguments {
+		       XmNheight      = kh_menubar;
+		       XmNorientation = XmHORIZONTAL;
+		       XmNspacing     = 60;          !distanza fra le voci
+		      };
+	     controls {
+		       XmCascadeButton	file_menu_entry;
+		       XmCascadeButton	edit_menu_entry;
+		       XmCascadeButton	bitmap_menu_entry;
+		       XmCascadeButton	icon_menu_entry;
+		      };
+	};
+
+!----------------------------------------------------------------------------
+!	Definizione del CascadeButton e relativo Pulldown : FILE
+!
+object
+	file_menu_entry : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_file_label_text;
+		       XmNtraversalOn = true;
+		       XmNmnemonic    = file;
+		      };
+	     controls {
+		       XmPulldownMenu file_menu;
+		      };
+	};
+
+object
+	file_menu    : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton  m_quit_button;
+		      };
+	};
+
+! Quit
+object
+	m_quit_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_quit_label_text;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure  create_proc(k_quit_program);
+	       XmNactivateCallback = procedure  activate_proc(k_quit_program);
+		      };
+	};
+
+
+!----------------------------------------------------------------------------
+!----------------------------------------------------------------------------
+!	Definizione del CascadeButton e relativo Pulldown : EDIT
+!
+object
+	edit_menu_entry : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_edit_label_text;
+		       XmNtraversalOn = true;
+		       XmNmnemonic    = edit;
+		      };
+	     controls {
+		       XmPulldownMenu edit_menu;
+		      };
+	};
+
+
+object
+	edit_menu    : XmPulldownMenu
+	{
+	    controls {
+		       XmCascadeButton  m_standard_button;
+		       XmCascadeButton  m_module_button;
+		       XmPushButton     m_symbol_button;
+		      };
+	};
+
+!----------------------------------------------------------------------------
+!	Sottomenu: EDIT > Standard
+!
+object
+	m_standard_button : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_standard_label_text;
+		      };
+	    controls {
+		       XmPulldownMenu standard_menu;
+		      };
+	};
+
+object
+	standard_menu  : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton     m_standard_p_button;
+		       XmPushButton  	m_standard_np_button;
+		      };
+	};
+
+! Process modules
+object
+	m_standard_p_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_standard_p_label_text;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_std_module_p); 
+	       XmNactivateCallback = procedure activate_proc(k_std_module_p); 
+		      };
+	};
+
+! Scheme modules
+object
+	m_standard_np_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_standard_np_label_text;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_std_module_np); 
+	       XmNactivateCallback = procedure activate_proc(k_std_module_np); 
+		      };
+	};
+
+
+!----------------------------------------------------------------------------
+!	Sottomenu: EDIT > Module
+!
+object
+	m_module_button : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_module_label_text;
+		      };
+	    controls {
+		       XmPulldownMenu module_menu;
+		      };
+	};
+
+object
+	module_menu  : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton     m_module_p_button;
+		       XmPushButton  	m_module_np_button;
+		      };
+	};
+
+! Process modules
+object
+	m_module_p_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_module_p_label_text;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_module_p); 
+	       XmNactivateCallback = procedure dialog_proc(k_module_p_dialog); 
+		      };
+	};
+
+! Scheme modules
+object
+	m_module_np_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_module_np_label_text;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_module_np); 
+	       XmNactivateCallback = procedure dialog_proc(k_module_np_dialog); 
+		      };
+	};
+
+
+!----------------------------------------------------------------------------
+! Symbols
+object
+	m_symbol_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_symbol_label_text;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_symbol); 
+	       XmNactivateCallback = procedure activate_proc(k_symbol); 
+		      };
+	};
+
+
+!----------------------------------------------------------------------------
+!----------------------------------------------------------------------------
+!	Definizione del CascadeButton e relativi Pulldown : BITMAP
+!
+object
+	bitmap_menu_entry : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_bitmap_label_text;
+		       XmNtraversalOn = true;
+		       XmNmnemonic    = bitmap;
+		      };
+	    controls {
+		       XmPulldownMenu bitmap_menu;
+		      };
+	};
+
+object
+	bitmap_menu  : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton     m_modify_button;
+		       XmPushButton     m_copy_button;
+		       XmPushButton  	m_clear_button;
+		      };
+	};
+
+! Modify bitmap
+object
+	m_modify_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_modify_label_text;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_modify); 
+	       XmNactivateCallback = procedure dialog_proc(k_modify_dialog); 
+		      };
+	};
+
+! Copy bitmap
+object
+	m_copy_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_copy_label_text;
+		      };
+	   callbacks {
+            MrmNcreateCallback  = procedure create_proc(k_copy); 
+            XmNactivateCallback = procedure dialog_proc(k_copy_dialog); 
+		      };
+	};
+
+! Clear bitmap
+object
+	m_clear_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_clear_label_text;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_clear); 
+	       XmNactivateCallback = procedure activate_proc(k_clear); 
+		      };
+	};
+
+
+!----------------------------------------------------------------------------
+!	Definizione del CascadeButton e relativi Pulldown : ICON
+!
+object
+	icon_menu_entry : XmCascadeButton
+	{
+	   arguments {
+		       XmNlabelString = k_icon_label_text;
+		       XmNtraversalOn = true;
+		       XmNmnemonic    = icon;
+		      };
+	    controls {
+		       XmPulldownMenu icon_menu;
+		      };
+	};
+
+object
+	icon_menu  : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton     m_new_button;
+		       XmPushButton     m_save_button;
+		       XmPushButton  	m_delete_button;
+		      };
+	};
+
+! New icon
+object
+	m_new_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_new_label_text;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_new); 
+	       XmNactivateCallback = procedure activate_proc(k_new); 
+		      };
+	};
+
+! Save icon
+object
+	m_save_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_save_label_text;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_save); 
+	       XmNactivateCallback = procedure activate_proc(k_save); 
+		      };
+	};
+
+! Delete icon
+object
+	m_delete_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = k_delete_label_text;
+		      };
+	   callbacks {
+	       MrmNcreateCallback  = procedure create_proc(k_delete); 
+	       XmNactivateCallback = procedure activate_proc(k_delete); 
+		      };
+	};
+
+!****************************************************************************
+!	Definizione della Form e dei suoi controlli
+!****************************************************************************
+!
+object
+        contenitore  : XmForm
+        {
+           arguments {
+                       XmNhorizontalSpacing = k_horizontal_offset + 5;
+                       XmNverticalSpacing   = k_vertical_offset + 5;
+                       XmNwidth  = kw_form;
+                       XmNheight = kh_form;
+                      };
+             controls {
+                       XmLabel          module_name;
+                       XmLabel             module_name_iniz;
+                       XmLabel          module_description;
+                       XmLabel             module_description_iniz;
+                       XmSeparator     { arguments {
+                                        XmNorientation=XmHORIZONTAL;
+                                        XmNheight=3;
+                                        XmNleftAttachment = XmATTACH_FORM;
+                                        XmNrightAttachment = XmATTACH_POSITION;
+                                        XmNrightPosition = 48;
+                                        XmNbottomAttachment= XmATTACH_POSITION;
+                                        XmNbottomPosition = 28;
+                                        };};
+                       XmLabel          icon_width_label;
+                       XmScale		icon_width;
+                       XmLabel          icon_height_label;
+                       XmScale		icon_height;
+                       XmLabel          color_fg_label;
+                       XmOptionMenu     color_fg_menu;
+!                       XmLabel          color_bg_label;
+!                       XmOptionMenu     color_bg_menu;
+		       XmArrowButton	previous_icon;
+		       XmArrowButton	next_icon;
+                       XmRowColumn      icon_counter;
+		       XmFrame		file_bitmap_frame;
+                       XmScrolledWindow view_window;
+                      };
+
+        };
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Module '
+object
+        module_name    : XmLabel
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment  = XmATTACH_POSITION;
+		       XmNbottomPosition  = 15;
+                       XmNlabelString = k_module_name_text;
+                      };
+        };
+
+! Initial value 'Module '
+object
+        module_name_iniz : XmLabel
+        {
+           arguments {
+                       XmNalignment = XmALIGNMENT_BEGINNING;
+                       XmNleftAttachment = XmATTACH_POSITION;
+                       XmNleftPosition = 15;
+                       XmNleftOffset = 15;
+		       XmNbottomAttachment  = XmATTACH_POSITION;
+		       XmNbottomPosition  = 15;
+                       XmNlabelString = k_module_name_iniz_text;
+                     };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_module_name);
+                     };
+        };
+
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Description '
+object
+        module_description    : XmLabel
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment  = XmATTACH_POSITION;
+		       XmNbottomPosition  = 23;
+                       XmNlabelString = k_module_description_text;
+                      };
+        };
+
+! Initial value 'Description '
+object
+        module_description_iniz : XmLabel
+        {
+           arguments {
+                       XmNalignment = XmALIGNMENT_BEGINNING;
+                       XmNleftAttachment = XmATTACH_POSITION;
+                       XmNleftPosition = 15;
+                       XmNleftOffset = 15;
+		       XmNrightAttachment  = XmATTACH_POSITION;
+		       XmNrightPosition  = 48;
+		       XmNbottomAttachment  = XmATTACH_POSITION;
+		       XmNbottomPosition  = 23;
+                       XmNlabelString = k_module_description_iniz_text;
+                     };
+           callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_module_description);
+                     };
+        };
+
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Width '
+object
+        icon_width_label : XmLabel
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment  = XmATTACH_POSITION;
+		       XmNbottomPosition  = 40;
+                       XmNlabelString = k_icon_width_text;
+                      };
+        };
+
+! Scale 'Width '
+object
+        icon_width : XmScale
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_POSITION;
+                       XmNleftPosition = 15;
+                       XmNleftOffset = 15;
+		       XmNbottomAttachment  = XmATTACH_POSITION;
+		       XmNbottomPosition  = 40;
+		       XmNdecimalPoints = 0;
+		       XmNmaximum = k_icon_max_dimension / k_stepping;
+		       XmNorientation = XmHORIZONTAL;
+		       XmNprocessingDirection = XmMAX_ON_RIGHT;
+		       XmNscaleHeight = 20;
+		       XmNscaleWidth = 200;
+		       XmNshowValue = true;
+                      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_icon_width);
+	          XmNdragCallback  = procedure drag_proc(k_icon_width);
+          XmNvalueChangedCallback  = procedure drag_proc(k_icon_width);
+                     };
+        };
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Height '
+object
+        icon_height_label : XmLabel
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment  = XmATTACH_POSITION;
+		       XmNbottomPosition  = 55;
+                       XmNlabelString = k_icon_height_text;
+                      };
+        };
+
+! Scale 'height '
+object
+        icon_height : XmScale
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_POSITION;
+                       XmNleftPosition = 15;
+                       XmNleftOffset = 15;
+		       XmNbottomAttachment  = XmATTACH_POSITION;
+		       XmNbottomPosition  = 55;
+		       XmNdecimalPoints = 0;
+		       XmNmaximum = k_icon_max_dimension / k_stepping;
+		       XmNorientation = XmHORIZONTAL;
+		       XmNprocessingDirection = XmMAX_ON_RIGHT;
+		       XmNscaleHeight = 20;
+		       XmNscaleWidth = 200;
+		       XmNshowValue = true;
+                      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_icon_height);
+	          XmNdragCallback  = procedure drag_proc(k_icon_height);
+	  XmNvalueChangedCallback  = procedure drag_proc(k_icon_height);
+                     };
+        };
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Color fg '
+object
+        color_fg_label : XmLabel
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment  = XmATTACH_POSITION;
+		       XmNbottomPosition  = 70;
+                       XmNlabelString = k_color_fg_text;
+                      };
+        };
+
+!**********************************
+! Option menu for foreground colors
+!**********************************
+object
+	color_fg_menu : XmOptionMenu
+	{
+           arguments {
+                       XmNleftAttachment = XmATTACH_POSITION;
+                       XmNleftPosition = 15;
+		       XmNbottomAttachment  = XmATTACH_POSITION;
+		       XmNbottomPosition  = 70;
+		       XmNmenuHistory = black_fg_button;
+                      };
+	     controls {
+		       XmPulldownMenu color_fg_opt_menu;
+		      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_fg_menu);
+                     };
+	};
+
+object
+	color_fg_opt_menu    : XmPulldownMenu
+	{
+	    controls {
+		       XmPushButton  white_fg_button;
+		       XmPushButton  black_fg_button;
+		       XmPushButton  yellow_fg_button;
+		       XmPushButton  green_fg_button;
+		       XmPushButton  red_fg_button;
+		       XmPushButton  blue_fg_button;
+		      };
+	};
+
+! Foreground color 'White'
+object
+	white_fg_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = 'White';
+		      };
+	   callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_white_fg);
+	       XmNactivateCallback = procedure  color_fg_proc(k_white);
+		      };
+	};
+
+! Foreground color 'Black'
+object
+	black_fg_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = 'Black';
+		      };
+	   callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_black_fg);
+	       XmNactivateCallback = procedure  color_fg_proc(k_black);
+		      };
+	};
+
+! Foreground color 'Yellow'
+object
+	yellow_fg_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = 'Yellow';
+		      };
+	   callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_yellow_fg);
+	       XmNactivateCallback = procedure  color_fg_proc(k_yellow);
+		      };
+	};
+
+! Foreground color 'Green'
+object
+	green_fg_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = 'Green';
+		      };
+	   callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_green_fg);
+	       XmNactivateCallback = procedure  color_fg_proc(k_green);
+		      };
+	};
+
+! Foreground color 'Red'
+object
+	red_fg_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = 'Red';
+		      };
+	   callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_red_fg);
+	       XmNactivateCallback = procedure  color_fg_proc(k_red);
+		      };
+	};
+
+! Foreground color 'Blue'
+object
+	blue_fg_button : XmPushButton
+	{
+	   arguments {
+		       XmNlabelString = 'Blue';
+		      };
+	   callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_blue_fg);
+	       XmNactivateCallback = procedure  color_fg_proc(k_blue);
+		      };
+	};
+
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!	MENU DISABILITATO IN PERPETUO
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Color bg '
+!object
+!        color_bg_label : XmLabel
+!        {
+!           arguments {
+!                       XmNleftAttachment = XmATTACH_FORM;
+!		       XmNbottomAttachment  = XmATTACH_POSITION;
+!		       XmNbottomPosition  = 85;
+!                       XmNlabelString = k_color_bg_text;
+!                      };
+!        };
+
+!**********************************
+! Option menu for background colors
+!**********************************
+!object
+!	color_bg_menu : XmOptionMenu
+!	{
+!           arguments {
+!                       XmNleftAttachment = XmATTACH_POSITION;
+!                       XmNleftPosition = 15;
+!		       XmNbottomAttachment  = XmATTACH_POSITION;
+!		       XmNbottomPosition  = 85;
+!		       XmNmenuHistory = white_bg_button;
+!                      };
+!	     controls {
+!		       XmPulldownMenu color_bg_opt_menu;
+!		      };
+!           callbacks {
+!               MrmNcreateCallback  = procedure create_proc(k_bg_menu);
+!                     };
+!	};
+
+!object
+!!!!	color_bg_opt_menu    : XmPulldownMenu
+!	{
+!	    controls {
+!		       XmPushButton  white_bg_button;
+!		       XmPushButton  black_bg_button;
+!		       XmPushButton  yellow_bg_button;
+!		       XmPushButton  green_bg_button;
+!		       XmPushButton  red_bg_button;
+!		       XmPushButton  blue_bg_button;
+!		      };
+!	};
+
+! Background color 'White'
+!object
+!	white_bg_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = 'White';
+!		      };
+!	   callbacks {
+!               MrmNcreateCallback  = procedure create_proc(k_white_bg);
+!	       XmNactivateCallback = procedure  color_bg_proc(k_white);
+!		      };
+!	};
+
+! Background color 'Black'
+!object
+!	black_bg_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = 'Black';
+!		      };
+!	   callbacks {
+!               MrmNcreateCallback  = procedure create_proc(k_black_bg);
+!	       XmNactivateCallback = procedure  color_bg_proc(k_black);
+!		      };
+!	};
+
+! Background color 'Yellow'
+!object
+!	yellow_bg_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = 'Yellow';
+!		      };
+!	   callbacks {
+!               MrmNcreateCallback  = procedure create_proc(k_yellow_bg);
+!	       XmNactivateCallback = procedure  color_bg_proc(k_yellow);
+!		      };
+!	};
+
+! Background color 'Green'
+!object
+!	green_bg_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = 'Green';
+!		      };
+!	   callbacks {
+!               MrmNcreateCallback  = procedure create_proc(k_green_bg);
+!	       XmNactivateCallback = procedure  color_bg_proc(k_green);
+!		      };
+!	};
+
+! Background color 'Red'
+!object
+!	red_bg_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = 'Red';
+!		      };
+!	   callbacks {
+!               MrmNcreateCallback  = procedure create_proc(k_red_bg);
+!	       XmNactivateCallback = procedure  color_bg_proc(k_red);
+!		      };
+!	};
+!
+! Background color 'Blue'
+!object
+!	blue_bg_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = 'Blue';
+!		      };
+!	   callbacks {
+!               MrmNcreateCallback  = procedure create_proc(k_blue_bg);
+!	       XmNactivateCallback = procedure  color_bg_proc(k_blue);
+!		      };
+!	};
+
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!	MENU DISABILITATO IN PERPETUO
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Label 'Font size '
+!object
+!        font_size_label    : XmLabel
+!        {
+!           arguments {
+!                       XmNleftAttachment = XmATTACH_FORM;
+!		       XmNbottomAttachment  = XmATTACH_POSITION;
+!		       XmNbottomPosition  = 90;
+!                       XmNlabelString = k_font_size_text;
+!                      };
+!        };
+
+
+!**********************************
+! Option menu for font size
+!**********************************
+!object
+!	font_size_menu : XmOptionMenu
+!	{
+!           arguments {
+!                       XmNleftAttachment = XmATTACH_POSITION;
+!                       XmNleftPosition = 15;
+!		       XmNbottomAttachment  = XmATTACH_POSITION;
+!		       XmNbottomPosition  = 90;
+!		       XmNmenuHistory = medium_fn_button;
+!                      };
+!	     controls {
+!		       XmPulldownMenu font_size_opt_menu;
+!		      };
+!	};
+
+!object
+!	font_size_opt_menu    : XmPulldownMenu
+!	{
+!	    controls {
+!		       XmPushButton  small_fn_button;
+!		       XmPushButton  small_plus_fn_button;
+!		       XmPushButton  medium_fn_button;
+!		       XmPushButton  medium_plus_fn_button;
+!		       XmPushButton  big_fn_button;
+!		      };
+!	};
+
+! Font size 'Small'
+!object
+!	small_fn_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = 'Small';
+!		      };
+!	   callbacks {
+!	       MrmNcreateCallback  = procedure  create_proc(k_small_fn);
+!	       XmNactivateCallback = procedure  font_proc(k_small_fn);
+!		      };
+!	};
+
+! Font size 'Small plus'
+!object
+!	small_plus_fn_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = 'Small plus';
+!		      };
+!	   callbacks {
+!	       MrmNcreateCallback  = procedure  create_proc(k_small_plus_fn);
+!	       XmNactivateCallback = procedure  font_proc(k_small_plus_fn);
+!		      };
+!	};
+!
+! Font size 'Medium '
+!object
+!	medium_fn_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = 'Medium';
+!		      };
+!	   callbacks {
+!	       MrmNcreateCallback  = procedure  create_proc(k_medium_fn);
+!	       XmNactivateCallback = procedure  font_proc(k_medium_fn);
+!		      };
+!	};
+
+! Font size 'Medium plus'
+!object
+!	medium_plus_fn_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = 'Medium plus';
+!		      };
+!	   callbacks {
+!	       MrmNcreateCallback  = procedure  create_proc(k_medium_plus_fn);
+!	       XmNactivateCallback = procedure  font_proc(k_medium_plus_fn);
+!		      };
+!	};
+
+! Font size 'Big'
+!object
+!	big_fn_button : XmPushButton
+!	{
+!	   arguments {
+!		       XmNlabelString = 'Large';
+!		      };
+!	   callbacks {
+!	       MrmNcreateCallback  = procedure  create_proc(k_big_fn);
+!	       XmNactivateCallback = procedure  font_proc(k_big_fn);
+!		      };
+!	};
+
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+object
+        view_window  : XmScrolledWindow
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_POSITION;
+                       XmNleftPosition = 50;
+                       XmNrightAttachment = XmATTACH_FORM;
+                       XmNrightOffset = 50;
+                       XmNtopAttachment = XmATTACH_POSITION;
+                       XmNtopPosition = 10;
+                       XmNbottomAttachment = XmATTACH_POSITION;
+                       XmNbottomPosition = 90;
+                       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+                       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+                       XmNscrollingPolicy = XmAUTOMATIC;
+                       XmNvisualPolicy = XmCONSTANT;
+                      };
+	   controls {
+		       XmBulletinBoard	window_bboard;
+        	      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_view_window);
+                      };
+        };
+
+object
+        window_bboard : XmBulletinBoard
+        {
+           arguments {
+		       XmNresizePolicy = XmRESIZE_GROW;
+		       XmNnoResize = false;
+                      };
+	   controls {
+		       XmForm	icon_bboard;
+        	      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_bboard_window);
+                      };
+        };
+
+object
+        icon_bboard : XmForm
+        {
+           arguments {
+		       XmNresizePolicy = XmRESIZE_GROW;
+		       XmNnoResize = false;
+                       XmNheight = 50 + k_icon_label_height;
+                       XmNwidth  = 50;
+                       XmNmarginWidth = 0;
+                       XmNmarginHeight = 0;
+                      };
+	   controls {
+!		       XmFrame	icon_pixmap_frame;
+!		       XmFrame	icon_label_frame;
+		       XmLabel	icon_pixmap;
+		       XmLabel	icon_label;
+        	      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_bboard_icon);
+                      };
+        };
+
+
+object
+        icon_pixmap : XmLabel
+        {
+           arguments {
+		       XmNlabelType = XmPIXMAP;
+                       XmNwidth = 50;    !N.B. width e height
+                       XmNheight = 50;   !stabilite nei 2 XmScale
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNtopAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_WIDGET;
+		       XmNbottomWidget = XmLabel icon_label;
+                       XmNmarginLeft = 0;
+                       XmNmarginRight = 0;
+                       XmNmarginTop = 0;
+                       XmNmarginBottom = 0;
+                       XmNmarginWidth = 0;
+                       XmNmarginHeight = 0;
+                     };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_icon_pixmap);
+                      };
+        };
+
+
+object
+        icon_label : XmLabel
+        {
+           arguments {
+		       XmNrecomputeSize = false;
+		       XmNlabelString = '';
+                       XmNheight = k_icon_label_height;
+		       XmNleftAttachment = XmATTACH_FORM;
+		       XmNrightAttachment = XmATTACH_FORM;
+		       XmNbottomAttachment = XmATTACH_FORM;
+                       XmNmarginLeft = 0;
+                       XmNmarginRight = 0;
+                       XmNmarginTop = 0;
+                       XmNmarginBottom = 0;
+                       XmNmarginWidth = 0;
+                       XmNmarginHeight = 0;
+                      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_icon_label);
+                      };
+         };
+
+
+!object
+!        icon_pixmap_frame : XmFrame
+!        {
+!           arguments {
+!                       XmNwidth = 50;    !N.B. width e height
+!                       XmNheight = 50;   !stabilite nei 2 XmScale
+!		       XmNleftAttachment = XmATTACH_FORM;
+!		       XmNrightAttachment = XmATTACH_FORM;
+!		       XmNtopAttachment = XmATTACH_FORM;
+!		       XmNbottomAttachment = XmATTACH_WIDGET;
+!		       XmNbottomWidget = XmFrame icon_label_frame;
+!		       XmNshadowType = XmSHADOW_ETCHED_IN;
+!		       XmNshadowThickness = 2;
+!                      };
+!	   controls {
+!		       XmLabel	icon_pixmap;
+!        	      };
+!        };
+
+!object
+!        icon_pixmap : XmLabel
+!        {
+!           arguments {
+!		       XmNlabelType = XmPIXMAP;
+!                      };
+!           callbacks {
+!               MrmNcreateCallback  = procedure create_proc(k_icon_pixmap);
+!                      };
+!        };
+
+!object
+!        icon_label_frame : XmFrame
+!        {
+!           arguments {
+!                       XmNwidth = 50;
+!                       XmNheight = k_icon_label_height;
+!		       XmNleftAttachment = XmATTACH_FORM;
+!		       XmNrightAttachment = XmATTACH_FORM;
+!		       XmNbottomAttachment = XmATTACH_FORM;
+!		       XmNshadowType = XmSHADOW_ETCHED_IN;
+!		       XmNshadowThickness = 2;
+!                      };
+!	   controls {
+!		       XmLabel	icon_label;
+!        	      };
+!        };
+
+!object
+!        icon_label : XmLabel
+!        {
+!           arguments {
+!                       XmNheight = k_icon_label_height;
+!		       XmNlabelString = '____';
+!                      };
+!           callbacks {
+!               MrmNcreateCallback  = procedure create_proc(k_icon_label);
+!                      };
+!        };
+
+!----------------------------------------------------------------------------
+! Row column dei pushB 'Next' e 'Previous'
+!object
+!        icon_stepping : XmRowColumn
+!        {
+!           arguments {
+!                       XmNleftAttachment = XmATTACH_POSITION;
+!                       XmNleftPosition = 50;
+!                       XmNtopAttachment = XmATTACH_POSITION;
+!                       XmNtopPosition = 2;
+!                       XmNrightAttachment = XmATTACH_WIDGET;
+!                       XmNrightWidget = XmRowColumn icon_counter;
+!                       XmNrightOffset = 20;
+!                       XmNbottomAttachment = XmATTACH_WIDGET;
+!                       XmNbottomWidget = XmScrolledWindow view_window;
+!                       XmNorientation = XmHORIZONTAL;
+!                      };
+!	   controls {
+!		       XmArrowButton	previous_icon;
+!		       XmArrowButton	next_icon;
+!        	      };
+!        };
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Arrow button 'Previous'
+object
+        previous_icon : XmArrowButton
+        {
+           arguments {
+                      XmNleftAttachment = XmATTACH_POSITION;
+                      XmNleftPosition = 50;
+                      XmNtopAttachment = XmATTACH_POSITION;
+                      XmNtopPosition = 2;
+                      XmNarrowDirection = XmARROW_UP;
+                      XmNwidth = 35;
+                      XmNheight = 25;
+                      };
+           callbacks {
+           MrmNcreateCallback  = procedure create_proc (k_previous_icon);
+           XmNactivateCallback = procedure select_icon (k_previous_icon);
+                      };
+        };
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+! Arrow button 'Next'
+object
+        next_icon : XmArrowButton
+        {
+           arguments {
+                      XmNtopAttachment = XmATTACH_POSITION;
+                      XmNtopPosition = 2;
+                      XmNleftAttachment = XmATTACH_WIDGET;
+                      XmNleftWidget = XmArrowButton previous_icon;
+                      XmNleftOffset = 10;
+                      XmNarrowDirection = XmARROW_DOWN;
+                      XmNwidth = 35;
+                      XmNheight = 25;
+                      };
+           callbacks {
+           MrmNcreateCallback  = procedure create_proc(k_next_icon);
+           XmNactivateCallback = procedure select_icon (k_next_icon);
+                      };
+        };
+
+!----------------------------------------------------------------------------
+! Row column delle label '1' of 'n' 
+object
+        icon_counter : XmRowColumn
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_WIDGET;
+                       XmNleftWidget = XmArrowButton next_icon;
+                       XmNleftOffset = 20;
+                       XmNtopAttachment = XmATTACH_POSITION;
+                       XmNtopPosition = 2;
+!                       XmNbottomAttachment = XmATTACH_WIDGET;
+!                       XmNbottomWidget = XmScrolledWindow view_window;
+                       XmNorientation = XmHORIZONTAL;
+                       XmNheight = 25;
+                      };
+	   controls {
+		       XmFrame	order_of_icons_frame;
+		       XmLabel	of_label;
+		       XmFrame	icons_of_module_frame;
+        	      };
+        };
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+object
+        order_of_icons_frame : XmFrame
+        {
+	   controls {
+		       XmLabel	order_of_icons_label;
+        	      };
+        };
+
+object
+        order_of_icons_label : XmLabel
+        {
+           arguments {
+		       XmNlabelString = ' 0';
+		       XmNwidth	      = 25 ;
+                      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_order_of_icons);
+                      };
+        };
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+object
+        of_label : XmLabel
+        {
+           arguments {
+		       XmNlabelString = ' of ';
+                      };
+        };
+
+!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+object
+        icons_of_module_frame : XmFrame
+        {
+	   controls {
+		       XmLabel	icons_of_module_label;
+        	      };
+        };
+
+object
+        icons_of_module_label : XmLabel
+        {
+           arguments {
+		       XmNlabelString = ' 0';
+		       XmNwidth	      = 25 ;
+                      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_icons_of_module);
+                      };
+        };
+
+!----------------------------------------------------------------------------
+! Row column del nome dell'icona
+!object
+!        icon_name : XmRowColumn
+!        {
+!           arguments {
+!                       XmNrightAttachment = XmATTACH_FORM;
+!                       XmNrightOffset = 50;
+!                       XmNtopAttachment = XmATTACH_POSITION;
+!                       XmNtopPosition = 2;
+!!                       XmNbottomAttachment = XmATTACH_WIDGET;
+!!                       XmNbottomWidget = XmScrolledWindow view_window;
+!                       XmNorientation = XmHORIZONTAL;
+!                      };
+!	   controls {
+!		       XmFrame	file_bitmap_frame;
+!        	      };
+!        };
+
+!--------------------------------------------------------------------
+!File bitmap label
+object
+        file_bitmap_frame : XmFrame
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_POSITION;
+                       XmNleftPosition = 75;
+                       XmNrightAttachment = XmATTACH_FORM;
+                       XmNrightOffset = 50;
+                       XmNtopAttachment = XmATTACH_POSITION;
+                       XmNtopPosition = 2;
+!                       XmNbottomAttachment = XmATTACH_WIDGET;
+!                       XmNbottomWidget = XmScrolledWindow view_window;
+                      };
+	   controls {
+		       XmLabel	file_bitmap_label;
+        	      };
+        };
+
+object
+        file_bitmap_label : XmLabel
+        {
+           arguments {
+		       XmNlabelString = '<NO ICON>';
+                      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_file_bitmap);
+                      };
+        };
+
+!****************************************************************************
+!		Definizione di tutti i Bulletin Board
+!****************************************************************************
+!
+!		Bulletin della lista di moduli di processo
+!
+!****************************************************************************
+!
+!object
+	module_p_dialog: XmBulletinBoardDialog
+	{
+	   arguments {
+		     XmNdefaultPosition = false;
+		     XmNx = 60;
+		     XmNy = 290;
+		     XmNautoUnmanage  = true;
+		     XmNnoResize      = true;
+		     XmNdialogTitle   = k_module_p_title;
+		     XmNmarginWidth   = 5;
+		     XmNmarginHeight  = 5;
+                     XmNdefaultButton = module_p_ok_button;
+                     XmNcancelButton  = module_p_cancel_button;
+!		     XmNdialogStyle   = XmDIALOG_APPLICATION_MODAL;
+		     XmNdialogStyle   = XmDIALOG_MODELESS;
+		     XmNunitType      = Xm100TH_FONT_UNITS;
+		     };
+	   controls {
+		     XmForm		module_p_form;
+       	      	     };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc (k_module_p_dialog);
+		      };
+	};
+
+object
+        module_p_form : XmForm
+        {
+           arguments {
+		       XmNresizePolicy = XmRESIZE_GROW;
+		       XmNnoResize = false;
+		       XmNwidth = 400;
+		       XmNheight = 400;
+                      };
+	   controls {
+		       XmLabel		module_p_label;
+		       XmScrolledList	module_p_list;
+                       XmSeparator     { arguments {
+                                        XmNorientation=XmHORIZONTAL;
+                                        XmNheight=3;
+                                        XmNleftAttachment = XmATTACH_FORM;
+                                        XmNrightAttachment = XmATTACH_FORM;
+                                        XmNbottomAttachment= XmATTACH_POSITION;
+                                        XmNbottomPosition = 92;
+                                        };};
+		       XmPushButton	module_p_ok_button;
+		       XmPushButton	module_p_cancel_button;
+        	      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc (k_module_p_form);
+		      };
+        };
+
+! Label 'MODULE		Number of Icons'
+object
+        module_p_label: XmLabel
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_FORM;
+                       XmNtopAttachment = XmATTACH_FORM;
+                       XmNtopOffset = 10;
+                       XmNlabelString = k_module_p_list_label_text;
+                      };
+        };
+
+! Scrolled list dei moduli di processo
+object
+        module_p_list : XmScrolledList
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_FORM;
+                       XmNrightAttachment = XmATTACH_FORM;
+                       XmNtopAttachment = XmATTACH_POSITION;
+                       XmNtopPosition = 10;
+                       XmNbottomAttachment = XmATTACH_POSITION;
+                       XmNbottomPosition = 80;
+                       XmNvisibleItemCount = 12;
+                       XmNlistSizePolicy   = XmCONSTANT;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+                       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+                       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+                       XmNhighlightThickness = selez_shadow;
+                       XmNtraversalOn = true;
+                      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_module_p_list);
+          XmNdefaultActionCallback = procedure select_modulo( k_module_p_list);
+                      };
+        };
+
+!Push button 'Ok'
+object
+        module_p_ok_button : XmPushButton
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_FORM;
+                       XmNbottomAttachment = XmATTACH_POSITION;
+                       XmNbottomPosition = 100;
+                       XmNlabelString = k_dialog_ok_s;
+                      };
+           callbacks {
+                  XmNactivateCallback = procedure ok_proc (k_module_p_dialog);
+                      };
+        };
+
+! Push button 'Cancel'
+object
+        module_p_cancel_button : XmPushButton
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_WIDGET;
+                       XmNleftWidget = XmPushButton module_p_ok_button;
+                       XmNleftOffset = 20;
+                       XmNbottomAttachment = XmATTACH_POSITION;
+                       XmNbottomPosition = 100;
+                       XmNlabelString = k_dialog_cancel_s;
+                      };
+           callbacks {
+           XmNactivateCallback = procedure cancel_proc (k_module_p_dialog);
+                      };
+        };
+
+!****************************************************************************
+!
+!		Bulletin della lista di moduli di schema
+!
+!****************************************************************************
+!
+!object
+	module_np_dialog: XmBulletinBoardDialog
+	{
+	   arguments {
+		     XmNdefaultPosition = false;
+		     XmNx = 440;
+		     XmNy = 290;
+		     XmNautoUnmanage  = true;
+		     XmNnoResize      = true;
+		     XmNdialogTitle   = k_module_np_title;
+		     XmNmarginWidth   = 5;
+		     XmNmarginHeight  = 5;
+                     XmNdefaultButton = module_np_ok_button;
+                     XmNcancelButton  = module_np_cancel_button;
+		     XmNdialogStyle   = XmDIALOG_APPLICATION_MODAL;
+		     XmNunitType      = Xm100TH_FONT_UNITS;
+		     };
+	   controls {
+		     XmForm		module_np_form;
+       	      	     };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc (k_module_np_dialog);
+		      };
+	};
+
+object
+        module_np_form : XmForm
+        {
+           arguments {
+		       XmNresizePolicy = XmRESIZE_GROW;
+		       XmNnoResize = false;
+		       XmNwidth = 400;
+		       XmNheight = 400;
+                      };
+	   controls {
+		       XmLabel		module_np_label;
+		       XmScrolledList	module_np_list;
+                       XmSeparator     { arguments {
+                                        XmNorientation=XmHORIZONTAL;
+                                        XmNheight=3;
+                                        XmNleftAttachment = XmATTACH_FORM;
+                                        XmNrightAttachment = XmATTACH_FORM;
+                                        XmNbottomAttachment= XmATTACH_POSITION;
+                                        XmNbottomPosition = 92;
+                                        };};
+		       XmPushButton	module_np_ok_button;
+		       XmPushButton	module_np_cancel_button;
+        	      };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc (k_module_np_form);
+		      };
+        };
+
+! Label 'MODULE		Number of Icons'
+object
+        module_np_label: XmLabel
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_FORM;
+                       XmNtopAttachment = XmATTACH_FORM;
+                       XmNtopOffset = 10;
+                       XmNlabelString = k_module_np_list_label_text;
+                      };
+        };
+
+! Scrolled list dei moduli di processo
+object
+        module_np_list : XmScrolledList
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_FORM;
+                       XmNrightAttachment = XmATTACH_FORM;
+                       XmNtopAttachment = XmATTACH_POSITION;
+                       XmNtopPosition = 10;
+                       XmNbottomAttachment = XmATTACH_POSITION;
+                       XmNbottomPosition = 80;
+                       XmNvisibleItemCount = 12;
+                       XmNlistSizePolicy   = XmCONSTANT;
+                       XmNselectionPolicy  = XmSINGLE_SELECT;
+                       XmNscrollBarPlacement = XmBOTTOM_RIGHT;
+                       XmNscrollBarDisplayPolicy = XmAS_NEEDED;
+                       XmNhighlightThickness = selez_shadow;
+                       XmNtraversalOn = true;
+                      };
+           callbacks {
+               MrmNcreateCallback  = procedure create_proc(k_module_np_list);
+          XmNdefaultActionCallback = procedure select_modulo(k_module_np_list);
+                      };
+        };
+
+! Push button 'Ok'
+object
+        module_np_ok_button : XmPushButton
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_FORM;
+                       XmNbottomAttachment = XmATTACH_POSITION;
+                       XmNbottomPosition = 100;
+                       XmNlabelString = k_dialog_ok_s;
+                      };
+           callbacks {
+                  XmNactivateCallback = procedure ok_proc (k_module_np_dialog);
+                      };
+        };
+
+! Push button 'Cancel'
+object
+        module_np_cancel_button : XmPushButton
+        {
+           arguments {
+                       XmNleftAttachment = XmATTACH_WIDGET;
+                       XmNleftWidget = XmPushButton module_np_ok_button;
+                       XmNleftOffset = 20;
+                       XmNbottomAttachment = XmATTACH_POSITION;
+                       XmNbottomPosition = 100;
+                       XmNlabelString = k_dialog_cancel_s;
+                      };
+           callbacks {
+           XmNactivateCallback = procedure cancel_proc (k_module_np_dialog);
+                      };
+        };
+
+!****************************************************************************
+!
+!		Bulletin del nome dei file bitmap da duplicare
+!
+!****************************************************************************
+!
+!object
+	copy_dialog: XmBulletinBoardDialog
+	{
+	   arguments {
+		     XmNdefaultPosition = false;
+		     XmNx = 470;
+		     XmNy = 220;
+	!	     XmNwidth = 150;
+		     XmNautoUnmanage  = true;
+		     XmNnoResize      = true;
+		     XmNdialogTitle   = k_file_bitmap_title;
+		     XmNmarginWidth   = 5;
+		     XmNmarginHeight  = 5;
+                     XmNdefaultButton = copy_ok_button;
+                     XmNcancelButton  = copy_cancel_button;
+		     XmNdialogStyle   = XmDIALOG_APPLICATION_MODAL;
+		     XmNunitType      = Xm100TH_FONT_UNITS;
+		     };
+	   controls {
+		     XmForm		copy_form;
+       	      	     };
+	   callbacks {
+	   MrmNcreateCallback  = procedure create_proc (k_copy_dialog);
+		      };
+	};
+
+object
+        copy_form : XmForm
+        {
+           arguments {
+		       XmNresizePolicy = XmRESIZE_GROW;
+		       XmNnoResize = false;
+		       XmNwidth = 270;
+		       XmNheight = 80;
+                      };
+	   controls {
+		       XmLabel		copy_label;
+		       XmText		copy_text;
+                       XmSeparator     { arguments {
+                                        XmNorientation=XmHORIZONTAL;
+                                        XmNheight=3;
+                                        XmNleftAttachment = XmATTACH_FORM;
+                                        XmNrightAttachment = XmATTACH_FORM;
+                                        XmNbottomAttachment= XmATTACH_POSITION;
+                                        XmNbottomPosition = 50;
+                                        };};
+		       XmPushButton	copy_ok_button;
+		       XmPushButton	copy_cancel_button;
+        	      };
+        };
+
+! Label 'File to copy'
+object
+copy_label: XmLabel
+{
+   arguments {
+	       XmNleftAttachment = XmATTACH_FORM;
+	       XmNtopAttachment = XmATTACH_POSITION;
+	       XmNtopPosition = 5;
+	       XmNlabelString = k_copy_label_string;
+	      };
+};
+
+! Text for filename input
+object
+copy_text : XmText
+{
+   arguments {
+	       XmNleftAttachment = XmATTACH_WIDGET;
+	       XmNleftWidget = XmLabel copy_label;
+	       XmNleftOffset = 5;
+	       XmNrightAttachment = XmATTACH_FORM;
+	       XmNtopAttachment = XmATTACH_POSITION;
+	       XmNtopPosition = 5;
+	       XmNeditable = true;
+	       XmNeditMode = XmSINGLE_LINE_EDIT;
+	       XmNmaxLength  = 50;
+	      };
+   callbacks {
+   MrmNcreateCallback  = procedure create_proc(k_copy_text);
+	      };
+};
+
+! Push button 'Ok'
+object
+copy_ok_button : XmPushButton
+{
+   arguments {
+	       XmNleftAttachment = XmATTACH_FORM;
+	       XmNbottomAttachment = XmATTACH_POSITION;
+	       XmNbottomPosition = 100;
+	       XmNlabelString = k_dialog_ok_s;
+	      };
+   callbacks {
+	  XmNactivateCallback = procedure ok_proc (k_copy_dialog);
+	      };
+};
+
+! Push button 'Cancel'
+object
+copy_cancel_button : XmPushButton
+{
+   arguments {
+	       XmNleftAttachment = XmATTACH_WIDGET;
+	       XmNleftWidget = XmPushButton copy_ok_button;
+	       XmNleftOffset = 20;
+	       XmNbottomAttachment = XmATTACH_POSITION;
+	       XmNbottomPosition = 100;
+	       XmNlabelString = k_dialog_cancel_s;
+	      };
+   callbacks {
+   XmNactivateCallback = procedure cancel_proc (k_copy_dialog);
+	      };
+};
+
+!****************************************************************************
+!****************************************************************************
+
+
+end module;
+!****************************************************************************
+!****************************************************************************
+!*** FINE FILE EDICOLE.UIL ***

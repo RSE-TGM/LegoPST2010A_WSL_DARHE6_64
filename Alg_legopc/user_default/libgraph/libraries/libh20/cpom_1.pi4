@@ -1,0 +1,51 @@
+CPOM_1                                                                          
+CPOM                                                                            
+CPOM - Centrifugal pump (power imposed)                                         
+                                                                                
+NSTAT = 1
+NUSCI = 3
+NINGR = 5
+ 
+NCONF = 3
+ 
+ECIN      --US-- KINETIC ENERGY OF THE ROTATING MASSES                          
+OMPM      --UA-- ROTATIONAL SPEED OF THE PUMP                                   
+HUPM      --UA-- FLUID ENTHALPY AT THE PUMP OUTLET                              
+WPOM      --UA-- FLUID FLOW RATE THROUGH THE PUMP                               
+PUPM      --IN-- PRESSURE AT THE PUMP OUTLET                                    
+PIPM      --IN-- PRESSURE AT THE PUMP INLET                                     
+HIPM      --IN-- FLUID ENTHALPY AT THE PUMP INLET                               
+QIPM      --IN-- POWER ABSORBED BY THE PUMP                                     
+NPOM      --IN-- NUMBER OF PUMPS IN PARALLEL                                    
+==============================                                                  
+ECIN      --US-- KINETIC ENERGY OF THE ROTATING MASSES                          
+OMPM      --UA-- ROTATIONAL SPEED OF THE PUMP                                   
+HUPM      --UA-- FLUID ENTHALPY AT THE PUMP OUTLET                              
+PIPM      --UA-- PRESSURE AT THE PUMP INLET                                     
+PUPM      --IN-- PRESSURE AT THE PUMP OUTLET                                    
+WPOM      --IN-- FLUID FLOW RATE THROUGH THE PUMP                               
+HIPM      --IN-- FLUID ENTHALPY AT THE PUMP INLET                               
+QIPM      --IN-- POWER ABSORBED BY THE PUMP                                     
+NPOM      --IN-- NUMBER OF PUMPS IN PARALLEL                                    
+==============================                                                  
+ECIN      --US-- KINETIC ENERGY OF THE ROTATING MASSES                          
+OMPM      --UA-- ROTATIONAL SPEED OF THE PUMP                                   
+HUPM      --UA-- FLUID ENTHALPY AT THE PUMP OUTLET                              
+PUPM      --UA-- PRESSURE AT THE PUMP OUTLET                                    
+PIPM      --IN-- PRESSURE AT THE PUMP INLET                                     
+WPOM      --IN-- FLUID FLOW RATE THROUGH THE PUMP                               
+HIPM      --IN-- FLUID ENTHALPY AT THE PUMP INLET                               
+QIPM      --IN-- POWER ABSORBED BY THE PUMP                                     
+NPOM      --IN-- NUMBER OF PUMPS IN PARALLEL                                    
+==============================                                                  
+EOF                                                                             
+3
+t0 0
+INGRESSO IDRAULICO
+WPOM PIPM ____ ____ ____ HIPM ____ HUPM
+t2 6
+INGRESSO ATTUAZIONE
+QIPM
+t1 1
+USCITA IDRAULICA
+WPOM PUPM ____ ____ ____ HUPM ____ ____

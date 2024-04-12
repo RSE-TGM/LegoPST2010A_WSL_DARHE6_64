@@ -1,0 +1,146 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE COLT</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_COLT_summ"></A>MODULE COLT CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</FONT><P><A HREF="#lg_libproc_COLT_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P><A HREF="#lg_libproc_COLT_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_COLT_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_COLT_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P><A HREF="#lg_libproc_COLT_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_COLT_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P><A HREF="#lg_libproc_COLT_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_COLT_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_COLT_A"></A>MODULE COLT CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">WATER-STEAM MANIFOLD</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The COLT module simulates the perfect mixing of "n" water flow rates (at liquid or steam state) flowing into a distribution header. It determines the enthalpy and pressure temporal evolution of fluid flowing through the header as well as the temperature of the metallic walls.</P>
+<P>In the physic-mathematical model the following simplifying hypotheses are adopted: </P>
+<P ALIGN="JUSTIFY">- it is admitted that fluid back-flow can occur inside one or more header branches (both at inlet and outlet)</P>
+<P ALIGN="JUSTIFY">- header metallic walls are able to exchange heat with the external environment</P>
+<P ALIGN="JUSTIFY">- only one temperature value identifies the thermal condition of metallic walls</P>
+<P ALIGN="JUSTIFY">- the exchange coefficient of fluid inside the header is admitted as a function of the fluid temperature and strenght (while the exchange coefficient at the header outside and in the metallic wall are provided by user: see below).</P>
+<P>&nbsp;</P>
+<P>The used equations are: </P>
+<P ALIGN="JUSTIFY">1) conservation equation of fluid energy</P>
+<P ALIGN="JUSTIFY">2) conservation equation of fluid mass</P>
+<P ALIGN="JUSTIFY">3) conservation equation of metal energy.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">They are integrated inside the module and give rise to some residuals which formally represent algebraical equations.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_COLT_B"></A>MODULE COLT CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P ALIGN="JUSTIFY">Ne = number of header inlet branches (max.40)</P>
+<P ALIGN="JUSTIFY">Nu = number of header outlet branches (max.40)</P>
+<P ALIGN="JUSTIFY">i = 1, 2, ... Ne</P>
+<P ALIGN="JUSTIFY">j = 1, 2, ... Nu</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image283.gif" WIDTH=387 HEIGHT=193></P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[J/kg] &#9;HCOL&#9;mean enthalpy of fluid in the header</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PCOL&#9;mean pressure of fluid in the header</P>
+<P ALIGN="JUSTIFY">[K]&#9;TCOL&#9;header metal temperature</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WE_i&#9;(i = 1, 2,..., Ne) flow rate of fluid flowing into the header coming through the i-th branch</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HE_i&#9;(i = 1, 2,..., Ne) enthalpy of fluid flowing into the header coming through the i-th branch</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WU_j&#9;(j = 1, 2,..., Ne) flow rate of fluid flowing out the header through the j-th branch</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HU_j&#9;(j = 1, 2,..., Ne) enthalpy of fluid flowing out the header through the j-th branch (in case of back-flow)</P>
+<B><P>Note 1</P>
+</B><P>During the model topology definition user is asked to indicate the number of inlet or outlet pipes in the header to simulate.</P>
+<P>In particular on screen the following string appears: </P>
+<P ALIGN="JUSTIFY">BRANCH POINT OF FLOW RATES</P>
+<P ALIGN="JUSTIFY">NUMBER OF ENTERING BRANCHES (01 - 40) ?</P>
+<P ALIGN="JUSTIFY">and when inserted numeric values out of the indicated range the following string appears:</P>
+<P ALIGN="JUSTIFY">ERROR - N.ENT. = </P>
+<P ALIGN="JUSTIFY">followed by wrong numerical value.</P>
+<P>In this case the first string is presented again so that user can insert the correct value.</P>
+<P>Afterwards the following string appears: </P>
+<P ALIGN="JUSTIFY">NUMBER OF COMING OUT BRANCHES (01 - 40) ?</P>
+<P ALIGN="JUSTIFY">and, in case, an error signal similar to the above mentioned one.</P>
+<P ALIGN="JUSTIFY">The information concerning the number of inlet and outlet pipes must be also inserted among the model geometrical data (see below).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_COLT_C"></A>MODULE COLT CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P>In addition to initial values of input and output variables (meaning defined above) user must assign the following data: </P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;NU.TU.EN&#9;number of header inlet branches (max.40)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;NU.TU.US&#9;number of header outlet branches (max.40)</P>
+<P ALIGN="JUSTIFY">[m³]&#9;&#9;VOLUME&#9;volume of fluid inside the header</P>
+<P ALIGN="JUSTIFY">[kg]&#9;&#9;MASSA ME&#9;header metallic mass</P>
+<P ALIGN="JUSTIFY">[J/k*kg]&#9;CP MET.&#9;metal specific heat</P>
+<P ALIGN="JUSTIFY">[W/m*k]&#9;COND MET.&#9;metal thermal conductivity</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;SPESSORE&#9;header walls thickness</P>
+<P ALIGN="JUSTIFY">[m²]&#9;&#9;SUP ES&#9;header external surface through which the header thermal exchange occurs</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_COLT_D"></A>MODULE COLT CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P>&nbsp;</P>
+<P>To initialize the COLT module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_COLT_E"></A>MODULE COLT CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In the COLT module no user subprograms are foreseen.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_COLT_F"></A>MODULE COLT CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module mathematical model consists of the equations which give rise to the following residuals:</P>
+<P ALIGN="JUSTIFY">- under stationary condition</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image284.gif" WIDTH=473 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P>(normalization factor = W0*H0)</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image285.gif" WIDTH=221 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P>(normalization factor = W0)</P>
+<P ALIGN="CENTER">RNI(3) = TCOL - (GAMINT*T + GAMEST*TEST) / (GAMINT + GAMEST)</P>
+<P>(normalization factor = T0)</P>
+<P>where T represents the temperature of fluid contained in the header whereas GAMINT and GAMEST represent the product of header exchange surface for the thermal exchange coefficient.</P>
+<P>For GAMINT, T represents the thermal exchange coefficient related to the fluid contained in the header and at half thickness of header wall.</P>
+<P ALIGN="JUSTIFY">For GAMEST, T represents the thermal exchange coefficient related to the external fluid and at the second half thickness of header wall.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_COLT_G"></A>MODULE COLT CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</I></FONT><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE COLTI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE COLTI4</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE COLTI2</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1, IBL2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE COLTC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1, IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE COLT</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, IXYU, XYU, IPD, DATI, RNI)</P>
+<P>&nbsp;</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_COLT_H"></A>MODULE COLT CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P>&nbsp;</P>
+<P>Reference test cases related to this module are in the manual section dedicated to the examples developed under the abbreviations: </P>
+<P ALIGN="CENTER">"POMPE"</P>
+<P ALIGN="CENTER">"RISC_VER"</P></FONT></BODY>
+</HTML>

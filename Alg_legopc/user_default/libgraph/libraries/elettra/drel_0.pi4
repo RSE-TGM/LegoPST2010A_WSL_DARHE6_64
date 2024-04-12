@@ -1,0 +1,37 @@
+DREL_0                                                                          
+DREL                                                                            
+DREL - Electrical signals branch                                                
+                                                                                
+NSTAT = 0
+NUSCI =10
+NINGR = 5
+ 
+NCONF = 1
+ 
+UMD1      --UA-- Voltage                                                        
+FAS1      --UA-- Voltage                                                        
+QAT1      --UA-- Active                                                         
+QRE1      --UA-- Reactive                                                       
+IFI1      --UA-- Field                                                          
+VMD2      --UA-- Voltage                                                        
+FAS2      --UA-- Voltage                                                        
+QAT2      --UA-- Active                                                         
+QRE2      --UA-- Reactive                                                       
+IFI2      --UA-- Field                                                          
+UMOD      --IN-- Voltage                                                        
+FASE      --IN-- Volktage                                                       
+QATT      --IN-- Active                                                         
+QREA      --IN-- Reactive                                                       
+IFIL      --IN-- Field                                                          
+==============================                                                  
+EOF                                                                             
+3
+t0 10
+INGRESSO GENERICO
+UMOD FASE QATT QREA IFIL ____ ____ ____ ____ ____
+t2 11
+USCITA GENERICA
+UMD1 FAS1 QAT1 QRE1 IFI1 ____ ____ ____ ____ ____
+t1 11
+USCITA GENERICA
+VMD2 FAS2 QAT2 QRE2 IFI2 ____ ____ ____ ____ ____

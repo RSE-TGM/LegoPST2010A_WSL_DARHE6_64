@@ -1,0 +1,27 @@
+AINT
+
+AINT - Time integrator                                                          
+3
+1
+
+t0
+IINT 
+1 
+t2
+KTIN 
+1 
+t1
+UINT 
+1 
+
+0
+1
+2
+
+UINT UA
+INTEGRATOR OUTPUT VARIABLE                                     
+IINT IN
+INTEGRATOR INPUT VARIABLE                                      
+KTIN IN
+INTEGRAL TIME OF THE INTEGRATOR                                
+

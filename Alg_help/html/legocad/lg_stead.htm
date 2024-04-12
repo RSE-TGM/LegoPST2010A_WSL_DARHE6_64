@@ -1,0 +1,489 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>STEADY STATE ACTIVITY</TITLE>
+<META NAME="subject" CONTENT="File Unificato Documentazione/Iperhelp">
+<META NAME="doccomm" CONTENT="Contiene la descrizione dell'attività steady state">
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_steady_state"></A>STEADY STATE ACTIVITY</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">The steady state activity calculates the steady state starting with values of variables and data defined in </FONT><A HREF="lg_gloss.htm#lgc_gl_F14"><U><FONT FACE="Arial" COLOR="#0000ff">F14</U></FONT></A><FONT FACE="Arial"> file and produces the steady state file f24.dat having the same structure of a f14.dat. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER">HOW TO</P>
+</I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#lgc_ss_set_calc"><U><FONT FACE="Arial" COLOR="#0000ff">Set steady state computation parameters</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2 </B></FONT><A HREF="#lgc_ss_run"><U><FONT FACE="Arial" COLOR="#0000ff">Run steady state calculation</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3 </B></FONT><A HREF="#lgc_ss_log"><U><FONT FACE="Arial" COLOR="#0000ff">View calculation log file (lg3.out)</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4 </B></FONT><A HREF="#lgc_ss_results"><U><FONT FACE="Arial" COLOR="#0000ff">Analyse calculation results</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">5 </B></FONT><A HREF="#lgc_ss_known"><U><FONT FACE="Arial" COLOR="#0000ff">Change known/unknown variable status</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">6 </B></FONT><A HREF="#lgc_ss_equations"><U><FONT FACE="Arial" COLOR="#0000ff">Analyse diagnostics: Unsatisfied equations</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">7 </B></FONT><A HREF="#lgc_ss_iterations"><U><FONT FACE="Arial" COLOR="#0000ff">Analyse diagnostics: Iterations history</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">8 </B></FONT><A HREF="#lgc_ss_jacobian"><U><FONT FACE="Arial" COLOR="#0000ff">Analyse diagnostics Jacobian matrix analysis</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER">STEADY STATE WINDOWS LAYOUT</P>
+</I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#lgc_ss_main_window_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Steady state main window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2 </B></FONT><A HREF="#lgc_ss_results_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Results window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3 </B></FONT><A HREF="#lgc_ss_known_mw_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Change known/unknown status, main page</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4 </B></FONT><A HREF="#lgc_ss_known_filter_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Change known/unknown status, filter page</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">5 </B></FONT><A HREF="#lgc_ss_known_aux_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Change known/unknown status, graphical auxiliary pages</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">6 </B></FONT><A HREF="#lgc_ss_known_val_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Change known/unknown status, value page</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">7 </B></FONT><A HREF="#lgc_ss_diagn_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Steady state diagnostic page</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_set_calc"></A>Steady state: set computation parameters</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The user can set the following parameters before calculating the steady state.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Tolerance:</P>
+</B><P ALIGN="JUSTIFY">Indicates a value for which the jacobian value is assumed as equal to 0 (steady state reached).</P>
+<P ALIGN="JUSTIFY">Default is 0.00001.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Mode:</P>
+</B><P ALIGN="JUSTIFY">Is the definition of the computation modality. In the "<I>Direct computation modality</I>" calculation stops automatically upon completion, while in the "<I>Interactive computing modality</I>" (not yet implemented) the steady state is calculated stopping at each iteration; next iteration is calculated when user press the step push button.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Initial system data/ Last computed data:</P>
+</B><P ALIGN="JUSTIFY">Specify where will be taken computation starting data, from the f14.dat or from f24.dat file (i.e. taken either from the edit data activity or from a previous steady state computation)</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_run"></A>Steady state: run steady state calculation</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Steady state calculation starts on activation of start push button. Information about jacobian calculations performed are displayed in the status window.</P>
+<P ALIGN="JUSTIFY">At calculation completion a message notify if steady state (accordingly with the tolerance value specified) has been reached.</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_log"></A>Steady state: view calculation log file (lg3.out)</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If convergence problems or errors due to starting values occurred an error message is displayed and the view of steady state log file (f03.out) is proposed: this file contains all messages written by write statements in LEGO modules' code and eventually error message written by H2O tables' functions (usually <I>out of tables</I> messages).</P>
+<P ALIGN="JUSTIFY">View of the log file is accessed also by selection of <I>Print | Computing results</I> on steady state main window.</P>
+<P ALIGN="JUSTIFY">From F03.out view window the user can print the file displayed (print push button).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_results"></A>Steady state: analyse calculation results</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The user can look at the computation steady state results by selecting the Results push button from the Report's pulldown menu.</P>
+<P ALIGN="JUSTIFY">He can compare initial with calculated final variable values for all blocks (selecting from block's list the ALL MODEL BLOCKS item) or for a single block at a time (selecting a single block in the list).</P>
+<P ALIGN="JUSTIFY">Also geometrical and physical data can be displayed (although they are computation independent).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_known"></A>Steady state: change known unknown variable status</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Known/Unknown editing allows users to manipulate the Known/Unknown status of model variables.</P>
+<P ALIGN="JUSTIFY">Users start the known/unknown edit program by activating the "Selecting unknown variables" choice from the "Actions" pulldown menu of the Steady state main window.</P>
+<P ALIGN="JUSTIFY">From the "nnEdit" main window users can operate in either of two modes: "Normal" and "Pairs." In "Normal" mode (the default) users manipulate variables - out-vars can be either marked or unmarked as known, and inp-vars can be either marked or unmarked as unknown. A star ('*') near variable long names indicates variable defined as known. In "Pairs" mode, users manage pairs - one known out-var and one unknown inp-var. A hyphen ('-') near variable short names indicates variable in a pair.</P>
+<P ALIGN="JUSTIFY">Above manipulations just enable a loop "edit known/unknown status" and "perform a steady state calculation".</P>
+<P ALIGN="JUSTIFY">Auxiliary dialogs are also available to:</P>
+<P ALIGN="JUSTIFY">a) filter a subset of model variables to operate on,</P>
+<P ALIGN="JUSTIFY">b) edit variable data,</P>
+<P ALIGN="JUSTIFY">c) graphically inspect current known/unknown status.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information on change status working pages is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#lgc_ss_known_mw_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Change known/unknown status, main page</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2 </B></FONT><A HREF="#lgc_ss_known_filter_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Change known/unknown status, filter page</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3 </B></FONT><A HREF="#lgc_ss_known_aux_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Change known/unknown status, graphical auxiliary pages</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4 </B></FONT><A HREF="#lgc_ss_known_val_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Change known/unknown status, value page</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_equations"></A>Steady state: analyse diagnostics - unsatisfied equations</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Analysis starts from (<B>step 1</B>) the view of the number of times each equation was unsatisfied. The list is ordered by decreasing no. of times the equation cannot satisfy tolerance value.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Selecting an equation a second dialog (<B>step 2</B>) is visualized: it contains: </P>
+<P ALIGN="JUSTIFY">a) additional equation information: block owning the equation, order number of the equation (block's relative), descriptions and units of measurements of the equation.</P>
+<P ALIGN="JUSTIFY">b) list of all iterations and corresponding residuals calculated for the specific equation.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Iteration selection from list leads to <B>step 3</B>: a further dialog displays block name and description; a list below displays variables' names, values and jacobian matrix values in the specific iteration and equation. A star ('*') near variable name indicates variable defined as known.</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_iterations"></A>Steady state: analyse diagnostics - iterations history</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Analysis starts from (<B>step 1</B>) the view of a summary of iteration history displaying for each iteration if there were jacobian matrix recalculation or convergence problems: a star ('*') in the relative column indicates a jacobian recalculation or convergence problem.</P>
+<P ALIGN="JUSTIFY">For each iteration are also displayed max. calculated residual, the norm , the no. of not satisfied equations.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">After iteration selection (<B>step 2</B>) a list of all not satisfied equations ordered by decreasing residuals, residuals (normalized and not normalized value), unit of measurement are shown for the specific iteration.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Equation selection leads to <B>step 3</B>: a further dialog displays block name and description; a list below displays variables' names, values and jacobian matrix values in the specific iteration and equation. A star ('*') near variable name indicates variable defined as known.</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_jacobian"></A>Steady state: analyse diagnostics: jacobian matrix analysis</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Analysis is based on the view (of all or part) of jacobian matrix at a chosen iteration.</P>
+<P ALIGN="JUSTIFY">User first select iteration no. from a list showing jacobian matrix recalculation and/or singular matrix (<B>step1</B>): the following dialog pulldown menu selections are enabled (N.B. all information displayed <I>refers to selected iteration</I>):</P>
+<B><P ALIGN="JUSTIFY">Investigation | Blocks</B>: generates a dialog displaying the model block list and a scrolled window containing part (or all) the jacobian matrix. Setting a block, jacobian matrix rows and column belonging to block selected are shown; if 'ALL MODEL BLOCKS' item is selected from list the whole jacobian matrix is displayed.</P>
+<B><P ALIGN="JUSTIFY">Investigation | Unknown variables</B>: generates a dialog containing two lists: Unknown variables list and jacobian matrix column list. Selecting a variable in the first list, the corresponding jacobian matrix column is shown in the second list.</P>
+<B><P ALIGN="JUSTIFY">Investigation | Singularity</B>: the submenu is enabled only if at the iteration selected jacobian matrix is singular.</P>
+<B><P ALIGN="JUSTIFY">Investigation | Singularity | Information</B>: displays information about the type of singularity (structural or due to coefficients).</P>
+<B><P ALIGN="JUSTIFY">Investigation | Singularity | Null rows</B>: displays all null rows at iteration selected. Suggestions for problem solution are proposed.</P>
+<B><P ALIGN="JUSTIFY">Investigation | Singularity | Null columns</B>: display unknown variables which correspond to null columns of jacobian matrix. Suggestions for problem solution are proposed.</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_main_window_ly"></A>Steady state layout: main window</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">The steady state main window has the following areas:</P>
+<B><P ALIGN="JUSTIFY">Pulldown menu area:</P></B></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=415>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial" SIZE=2>File</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Select model</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Selects the model when the activity</P>
+<P ALIGN="JUSTIFY">is used out of LEGOCAD</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Exit</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Exits</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Options</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Tolerance</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Sets computation tolerance</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Mode</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Sets the computation mode </FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Direct</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">qualifies the direct modality</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Interactive</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">qualifies the step-by-step </P>
+<P ALIGN="JUSTIFY">computation by using the step </P>
+<P ALIGN="JUSTIFY">push button</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Save current settings</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Saves current options settings</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Set default settings</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Sets default option settings ( i.e. Tolerance = 0.00001 Mode= Direct.</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Actions</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Load initial data</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Load data from f14.dat</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Load last computed data</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Load data from f24.dat</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Reports</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Results<B> (*)</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Compare initial with calculated final variable values</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Diagnostic<B> (*)</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Analyse calculations history</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Unsatisfied equations</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Analysis starts from the view of the number of times each equation was unsatisfied.</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Iterations history</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Analysis starts from the view of a summary displaying jacobian matrix recalculation or convergence problems at each iteration</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Jacobian matrix analysis</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Analysis is based on the view (of all or part) of jacobian matrix at a chosen iteration.</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Print </B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">System -Result <B>(*)</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">View (Print) F24 result file.</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Computing reports <B>(*)</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">View (Print) steady state log file (lg3.out).</FONT></TD>
+</TR>
+</TABLE>
+
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">(*)&#9;</B></FONT><FONT FACE="Arial">these choice are available only when the steady state has already been calculated. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Information area :</P>
+</B><P ALIGN="JUSTIFY">featuring the following label:</P>
+<P ALIGN="JUSTIFY">Model name</P>
+<P ALIGN="JUSTIFY">Tolerance</P>
+<P ALIGN="JUSTIFY">"Direct" or "Interactive" computing modality</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Message area</P>
+</B><P ALIGN="JUSTIFY">featuring a scrolled window for output computation messages</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Activation area</P>
+</B><P ALIGN="JUSTIFY">featuring two push buttons ("Start" and "Step") to start computation in the chosen modality. These push buttons are not simultaneously available. </P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_results_pg_ly"></A>Steady state layout: results page</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">The steady state main window has the following areas:</P>
+<B><P ALIGN="JUSTIFY">Block list area</P>
+</B><P ALIGN="JUSTIFY">featuring the list of the model blocks. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="lg_gloss.htm#lgc_gl_find"><U><FONT FACE="Arial" COLOR="#0000ff">Find area</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Variables area </P>
+</B><P ALIGN="JUSTIFY">featuring variables information on a selected block. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="lg_gloss.htm#lgc_gl_find"><U><FONT FACE="Arial" COLOR="#0000ff">Find area</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Selection area</P>
+</B><P ALIGN="JUSTIFY">featuring two toggle buttons to choose the kind of data displayed: variables or data. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_known_mw_ly"></A>Steady state layout: known unknown main window</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The known/unknown "nnEdit" main page shows the following areas:</P>
+<B><P ALIGN="JUSTIFY">Pulldown menu area:</P></B></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=336>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><FONT FACE="Arial" SIZE=2>File</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Load</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">(re)load data in work areas as of last save operation</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Save</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">write current status onto files "f14.dat" and "fpp.dat"</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Close</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">close the page (confirming or discarding changes, if any)</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Mode</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Normal</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">(default) manipulate variables</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Pairs</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">manage pairs</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Options</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Graph</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">open the "nnGraph" auxiliary page</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Values</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">open the "nnValues" auxiliary page</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">All var Setup</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">mark all inp-vars as known and all out-vars as unknown (upon confirmation, since a "Save" will also be performed)</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Help</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">on Page</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">(also F1 key) access help information</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Information area:</P>
+</B><P ALIGN="JUSTIFY">featuring the following labels:</P>
+<P ALIGN="JUSTIFY">a) the current model name;</P>
+<P ALIGN="JUSTIFY">b) the current model variable status:</P>
+<P ALIGN="JUSTIFY">&#9;number of equations,</P>
+<P ALIGN="JUSTIFY">&#9;number of unknown variables,</P>
+<P ALIGN="JUSTIFY">&#9;number of input variables,</P>
+<P ALIGN="JUSTIFY">&#9;number of known variables.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Command area:</P>
+</B><P ALIGN="JUSTIFY">featuring the following areas:</P>
+<P ALIGN="JUSTIFY">a) a "Vars" option-menu, with two choices:</P>
+<P ALIGN="JUSTIFY">&#9;"All" - work on all variables,</P>
+<P ALIGN="JUSTIFY">&#9;"Filter" - open the "nnFilter" auxiliary page;</P>
+<P ALIGN="JUSTIFY">b) a "Message area" (clicking on it re-displays last message);</P>
+<P ALIGN="JUSTIFY">c) a "Scale" to horizontally resize both working areas below.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Working areas:</P>
+</B><P ALIGN="JUSTIFY">featuring the following areas:</P>
+<P ALIGN="JUSTIFY">a) a distinctive label (i.e. "output" and "input" variables respectively);</P>
+<P ALIGN="JUSTIFY">b) two scroll lists (each bearing a top caption);</P>
+<P ALIGN="JUSTIFY">c) a bottom row of buttons, as follows:</P>
+<P ALIGN="JUSTIFY">&#9;two buttons (labelled "Mark" and "Unmark" respectively);</P>
+<P ALIGN="JUSTIFY">&#9;a "FIND:" area;</P>
+<P ALIGN="JUSTIFY">&#9;a button (labelled "Pcreate" on top work area and "Pdestroy" on bottom work area respectively).</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_known_filter_ly"></A>Steady state layout: known unknown filter page</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The known/unknown "nnFilter" page opens when users hit the "Filter" choice from the "Vars" option-menu in the known/unknown "nnEdit" main page. The "nnFilter" page shows the following areas:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Block selection area:</P>
+</B><P ALIGN="JUSTIFY">featuring the following areas:</P>
+<P ALIGN="JUSTIFY">a) the current model name;</P>
+<P ALIGN="JUSTIFY">b) a "Modules" scroll list (with a status caption on top);</P>
+<P ALIGN="JUSTIFY">c) a rightwards arrow-button, to "explode" selected modules above into blocks below;</P>
+<P ALIGN="JUSTIFY">d) a "Blocks" scroll list (with a status caption on top).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Variable selection area:</P>
+</B><P ALIGN="JUSTIFY">featuring the following areas:</P>
+<P ALIGN="JUSTIFY">a) a "Filter" text-input field, to specify search keys;</P>
+<P ALIGN="JUSTIFY">b) a downwards arrow-button, to apply search keys above into filtered variables below;</P>
+<P ALIGN="JUSTIFY">c) a "Vars" scroll list of filtered variables(with a status caption on top);</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Decision area:</P>
+</B><P ALIGN="JUSTIFY">featuring the following buttons:</P>
+<P ALIGN="JUSTIFY">"OK" - accept current filtered variables, update "nnEdit" page;</P>
+<P ALIGN="JUSTIFY">"Cancel" - close this page, "nnEdit" unchanged;</P>
+<P ALIGN="JUSTIFY">"Help" (also "F1" key) - access help information.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_known_aux_ly"></A>Steady state layout: known unknown graphical auxiliary pages</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The known/unknown "nnGraph" hierarchical graphical page subsystem has:</P>
+<P ALIGN="JUSTIFY">- a main INDEX page,</P>
+<P ALIGN="JUSTIFY">- MACROBLOCK pages (opened from INDEX page), and</P>
+<P ALIGN="JUSTIFY">- MINILIST pages (opened from MACROBLOCK pages).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The INDEX page shows the following areas:</P>
+<B><P ALIGN="JUSTIFY">pulldown menu area:</P></B></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=411>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial" SIZE=2>Edit</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Open (*)</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">open selected graphical objects</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">(*) this choice is available only when objects are selected.</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">scrollable work area:</P>
+</B><P ALIGN="JUSTIFY">shows graphical objects - boxes which represent selectable model macroblocks.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">popup menu area:</P>
+</B><P ALIGN="JUSTIFY">it contains the same choices as the INDEX "Edit" pulldown menu area above and operates the same way.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">For each object opened from the INDEX page a MACROBLOCK graphical page shows the following areas:</P>
+<B><P ALIGN="JUSTIFY">pulldown menu area:</P></B></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=411>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial" SIZE=2>File</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Quit</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">close this page</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Edit</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Open (*)</FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">open MINILISTs for selected objects ("block"-type only)</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">(*) this choice is available only when objects are selected.</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">scrollable work area:</P>
+</B><P ALIGN="JUSTIFY">shows graphical objects - icons which represent selectable blocks in the current macroblock.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">popup menu area:</P>
+</B><P ALIGN="JUSTIFY">it contains the same choices as the MACROBLOCK "Edit" pulldown menu area above and operates the same way.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">MINILISTs:</P>
+</B><P ALIGN="JUSTIFY">For each ("block"-type) object opened from a MACROBLOCK page a MINILIST page shows the following areas:</P>
+<P ALIGN="JUSTIFY">a) the block short name on the frame;</P>
+<P ALIGN="JUSTIFY">b) a scrollable list of short names of block variables;</P>
+<P ALIGN="JUSTIFY">c) a "Close" button.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_known_val_ly"></A>Steady state layout: known unknown values page</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The known/unknown "nnValues" page opens when users hit the "Values" choice from the "Options" pulldown-menu in the known/unknown "nnEdit" main page. The "nn Values" page shows the following areas:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Variable selection area:</P>
+</B><P ALIGN="JUSTIFY">featuring the following areas:</P>
+<P ALIGN="JUSTIFY">a) the current model name;</P>
+<P ALIGN="JUSTIFY">b) a "Variables" scroll list of selectable variable long names.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Working area:</P>
+</B><P ALIGN="JUSTIFY">featuring the main operating areas:</P>
+<P ALIGN="JUSTIFY">a) a label, showing the type of current selected variable;</P>
+<P ALIGN="JUSTIFY">b) a numeric input field, to digit the new variable value;</P>
+<P ALIGN="JUSTIFY">c) an option-menu, showing a list of supported units for the variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Decision area:</P>
+</B><P ALIGN="JUSTIFY">featuring the following buttons:</P>
+<P ALIGN="JUSTIFY">a) "OK" - accept current changed values;</P>
+<P ALIGN="JUSTIFY">b) "Cancel" - close this page, values left unchanged;</P>
+<P ALIGN="JUSTIFY">c) "Help" (also "F1" key) - access to help information.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_ss_diagn_pg_ly"></A>Steady state layout: diagnostics pages</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Layout of diagnostic pages is based on scrolled lists displaying iteration, equations and jacobian matrix related information. See how to section for a functional description.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Navigation into different diagnostic pages is allowed by item selection. Sometimes selection is obtained with double clocking (however a message specify that double clicking is needed).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">Done</I> push button cancels current dialog window.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

@@ -1,0 +1,748 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>LIBRARY MANAGER</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><p align="center"><blink><font color="#800000" size="5"><sup>Modules
+instancing</sup></font></blink></p>
+<p align="center">&nbsp;</p>
+<p align="center" style="text-align:center"><b><span style="mso-bidi-font-style: normal; text-decoration: none; text-underline: none"><font color="#000000"><span style="text-decoration: none; text-underline: none; mso-bidi-font-style: normal"><i style="mso-bidi-font-style: normal; text-decoration: none; text-underline: none">HOW
+TO INCLUDE A LEGO MODULE INTO A COMPONENT LIBRARY</i></span></font><span style="text-decoration: none; text-underline: none; mso-bidi-font-style: normal"><i style="mso-bidi-font-style: normal; text-decoration: none; text-underline: none"></o:p>
+</i></span></span></b></p>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<div style="border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
+background:#F2F2F2;mso-shading:white;mso-pattern:gray-5 auto">
+  <p class="MsoNormal" style="text-align:justify;line-height:150%;border:none;
+mso-border-alt:solid windowtext .5pt;padding:0in;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Arial">Introduction:
+  what is a module instance?<o:p>
+  </o:p>
+  </span></p>
+</div>
+<p class="MsoBodyText" style="line-height:150%">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoBodyText" style="line-height:150%">A newly created module requires,
+before it can be used inside LegoPC, a certain amount of operations. These
+operations take the name of <i style="mso-bidi-font-style:normal">instantiation</i>
+and allow:</p>
+<p class="MsoBodyText" style="line-height:150%">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoBodyText" style="margin-left:.25in;text-indent:-.25in;line-height:
+150%;mso-list:l13 level1 lfo9;tab-stops:list .25in"><span style="font-family:Wingdings">ü<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>associating the module with one or more icons, collected in
+graphical libraries,</p>
+<p class="MsoBodyText" style="line-height:150%">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoBodyText" style="margin-left:.25in;text-indent:-.25in;line-height:
+150%;mso-list:l13 level1 lfo9;tab-stops:list .25in"><span style="font-family:Wingdings">ü<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>associating a certain number of physical ports to each icon,</p>
+<p class="MsoBodyText" style="line-height:150%">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoBodyText" style="margin-left:.25in;text-indent:-.25in;line-height:
+150%;mso-list:l13 level1 lfo9;tab-stops:list .25in"><span style="font-family:Wingdings">ü<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>matching each physical port with the corresponding module
+variables.</p>
+<p class="MsoBodyText" style="line-height:150%">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoBodyText" style="line-height:150%">Even already existing library
+modules may need extra instantiations. In facts, library modules may be
+extremely generical. For instance, a heat exchanger (i.e. module EXCH) can be
+divided into a number of longitudinal cells ranging between 2 and 6, and the
+wall of each cell can be in contact with one or more flue gas sections, each one
+having a different temperature. If this approach is very flexible in
+consideration of the often not simple topology of the heat exchangers in real
+power plants, the CAD-like approach used by LegoPC (based on a topological
+connection by physical ports) needs to define before using the module, how many
+variables it contains. So we need an EXCH instance with two cells, one with
+three, etc. The standard graphical libraries provided with LegoPC cope with the
+most common usages of the module. Suppose, however, you need using an EXCH with
+four cells and the second cell exchanging with two sections of the flue gas duct
+at different temperatures. In that case you’ll have to make an “ad hoc”
+instance of EXCH.</p>
+<p class="MsoBodyText" style="line-height:150%">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoBodyText" align="center" style="text-align:center;line-height:150%"><!--[if gte vml 1]><v:shapetype
+ id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+ path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:251.4pt;
+ height:192pt' fillcolor="window">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image001.jpg" o:title="exch"/>
+</v:shape><![endif]-->
+<img width="335" height="256" src="librar1.jpg" v:shapes="_x0000_i1025"></p>
+<p class="MsoCaption" align="center"><b style="font-family: Arial"><span style="font-family: Arial">Fig. 1 – EXCH instances with three and four cells<o:p>
+</span></b><span style="font-size:10.0pt;font-family:
+Arial"><b style="mso-bidi-font-weight:normal">
+</o:p>
+</b>
+</span></p>
+<p class="MsoBodyText" style="line-height:150%">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoBodyText" style="line-height:150%">The present notes show all the
+steps to be accomplished for instancing a LegoPC module.</p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Provided
+you want to make an instance of a module that is already present in the modules
+library (either a standard one or one you have added), four steps must be
+accomplished:<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l14 level1 lfo1;tab-stops:list .25in"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">1.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Add <i style="mso-bidi-font-style:normal">icons</i> of components to be
+instanced<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l14 level1 lfo1;tab-stops:list .25in"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">2.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Make the so-called <i style="mso-bidi-font-style:normal">instantiation
+first phase</i>, associating your instance with a fixed set of variables<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l14 level1 lfo1;tab-stops:list .25in"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">3.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Define (if needed) new <i style="mso-bidi-font-style:normal">connectors</i>
+to be subsequently associated to the component <o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l14 level1 lfo1;tab-stops:list .25in"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Arial">4.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Make the
+so-called <i style="mso-bidi-font-style:normal">instantiation second phase</i>,
+setting up physical ports and associating each of them with a set of variables.</span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Arial"><o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Arial">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoBodyText" style="line-height:150%">All these phases are integrated
+in a unified interface, allowing to perform the right phase at the right time.</p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Arial">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" align="center" style="text-align:center;line-height:150%"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1026" type="#_x0000_t75" style='width:322.8pt;height:340.8pt'
+ fillcolor="window">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image003.jpg" o:title="librarian"/>
+</v:shape><![endif]-->
+<img width="430" height="454" src="librar2.jpg" v:shapes="_x0000_i1026"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt"><o:p>
+</o:p>
+</span></p>
+<p class="MsoCaption" align="center"><span style="font-family:Arial"><b>Fig. 2 – Librarian
+application: main window<o:p>
+</o:p>
+</b>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoBodyText" style="line-height:150%">The interface for creating
+modules instances can be called from the <i style="mso-bidi-font-style:normal">Module</i>
+menu of the librarian application (fig. 2) after selecting the listbox item
+corresponding to the considered module. Supposing you want to create a new
+instance for the module EXCH, the window shown in fig 3 appears.</p>
+<p class="MsoBodyText" style="line-height:150%">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoNormal" align="center" style="text-align:center;line-height:150%"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1027" type="#_x0000_t75" style='width:285pt;height:190.2pt'
+ fillcolor="window">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image005.jpg" o:title="preinst1"/>
+</v:shape><![endif]-->
+<img width="380" height="253" src="librar3.jpg" v:shapes="_x0000_i1027"><o:p>
+</o:p>
+</p>
+<p class="MsoCaption" align="center"><span style="font-family:Arial"><b>Fig. 3 – preinst main
+window<o:p>
+</o:p>
+</b>
+</span></p>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoNormal" style="line-height:150%"><span style="font-size:11.0pt;
+mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="line-height:150%"><span style="font-size:11.0pt;
+mso-bidi-font-size:10.0pt">You can recognize the following elements inside the
+window:<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l12 level1 lfo18;tab-stops:list .25in"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">A void <i style="mso-bidi-font-style:normal">Library</i>
+entry that will contain the name of the instanced graphic objects library, your
+instance is going to be part of. Don’t insert the name by typing directly in
+the entry widget: you can use either the button Choose (to select an existing
+library) or the button <i style="mso-bidi-font-style:normal">New Library</i> to
+create a new one. The latter is abilitated only for new instances. All the
+libraries are subdirectories of the directory pointed by the LG_LIBRARIES
+environment variable.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l12 level1 lfo18;tab-stops:list .25in"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">A default
+<i style="mso-bidi-font-style:normal">image</i>, that will be associated
+automatically to the component if you don’t provide it with an icon.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l2 level1 lfo19;tab-stops:list .25in"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">A combo
+box <i style="mso-bidi-font-style:normal">Instance</i>, allowing you to select a
+already existing instance. Whatever their objects library is, all existing
+instances appear listed by increasing module instance name. A “<i style="mso-bidi-font-style:normal">module
+instantiation name</i>” is an alpha-numeric tag constituted by the four
+letters of the module name followed by a two-digit number identifying the
+current instantiation (e.g. exch_0, exch99, etc).<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l12 level1 lfo18;tab-stops:list .25in"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">A <i style="mso-bidi-font-style:normal">comment</i>
+entry giving a short identification of the characteristics of the current
+instance.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l12 level1 lfo18;tab-stops:list .25in"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Four
+buttons at the bottom allowing to modify the current instance (<i style="mso-bidi-font-style:normal">Edit</i>),
+to exit the instantiation (<i style="mso-bidi-font-style:normal">Cancel</i>), to
+copy icons and instantiation information up to the first phase of the current
+instance on another graphical library (<i style="mso-bidi-font-style:normal">Copy
+To</i>) and to create a new instance (<i style="mso-bidi-font-style:normal">New
+Instance</i>). Both <i style="mso-bidi-font-style:normal">Copy to</i> <i style="mso-bidi-font-style:
+normal">and New Instance</i> generate automatically the new instantiation name
+by searching the first available. Beware not to mix the <i style="mso-bidi-font-style:
+normal">Copy to</i> with <i style="mso-bidi-font-style:normal">New Instance</i>
+operations because in some cases the generated instance name is not unique.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">So,
+if you want to modify an existent instance, the first operation is to chose the
+instance to be modified with the combo box <i style="mso-bidi-font-style:normal">Instance</i>.
+The result is shown in fig. 4. The fields <i style="mso-bidi-font-style:normal">Library</i>
+and <i style="mso-bidi-font-style:normal">Comment</i> are automatically filled
+up and the component icon is shown.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" align="center" style="text-align:center;line-height:150%"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1028" type="#_x0000_t75" style='width:267.6pt;height:196.8pt'
+ fillcolor="window">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image007.jpg" o:title="preinst2"/>
+</v:shape><![endif]-->
+<img width="357" height="263" src="librar4.jpg" v:shapes="_x0000_i1028"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt"><o:p>
+</o:p>
+</span></p>
+<p class="MsoCaption" align="center"><span style="font-family:Arial"><b>Fig. 4 – loading an
+existent instance<o:p>
+</o:p>
+</b>
+</span></p>
+<p class="MsoNormal" style="text-align:justify">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">If
+you want, instead, to create a new instance, press the button <i style="mso-bidi-font-style:normal">New
+Instance</i>. In this case only a new unique instance name will be provided.
+Thereafter, you must type in the comment and associate the new instance to an
+existent library or create a new one. <o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Both
+modifying old instances or creating new ones, at the end the button <i style="mso-bidi-font-style:normal">Edit</i>
+becomes active. By selecting it, you obtain the Edit interface, shown in fig. 5.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" align="center" style="text-align:center;line-height:150%"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1029" type="#_x0000_t75" style='width:150.6pt;height:210.6pt'
+ fillcolor="window">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image009.jpg" o:title="phases"/>
+</v:shape><![endif]-->
+<img width="201" height="281" src="librar5.jpg" v:shapes="_x0000_i1029"><o:p>
+</o:p>
+</p>
+<p class="MsoCaption" align="center"><span style="font-family:Arial"><b>Fig. 5 – the Edit
+interface<o:p>
+</o:p>
+</b>
+</span></p>
+<p class="MsoNormal"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">The
+Edit interface lists all the important phases of a module instancing. For each
+phase, the button <i style="mso-bidi-font-style:normal">Help</i> gives a short
+explication, the <i style="mso-bidi-font-style:normal">central button</i>
+activates it and the <i style="mso-bidi-font-style:normal">checkbutton on the
+left</i> shows whether this phase has already been performed.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="line-height:150%"><span style="font-size:11.0pt;
+mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="line-height:150%"><span style="font-size:11.0pt;
+mso-bidi-font-size:10.0pt">Let’s see the meanings of each phase.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="line-height:150%"><span style="font-size:11.0pt;
+mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<div style="border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
+background:#D9D9D9;mso-shading:white;mso-pattern:gray-15 auto">
+  <p class="MsoNormal" style="margin-left:.25in;text-indent:-.25in;line-height:
+150%;mso-list:l11 level1 lfo20;tab-stops:list .25in;border:none;mso-border-alt:
+solid windowtext .5pt;padding:0in;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><b style="mso-bidi-font-weight:normal"><span style="font-size:11.0pt;mso-bidi-font-size:
+10.0pt">1.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Icon
+  editing<o:p>
+  </o:p>
+  </span></b></p>
+</div>
+<p class="MsoNormal" style="line-height:150%"><b style="mso-bidi-font-weight:
+normal"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></b></p>
+<p class="MsoBodyText" style="line-height:150%">Each instance is associated with
+one or more icons. This can be made with many commercial programs (e.g.
+PaintShop PRO). When you press the button Icon Editing the program pointed to by
+the LG_ICONEDITOR environment variable is called. Whichever program you want to
+use there are some standards you must comply with:</p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:42.5pt;text-align:justify;text-indent:
+-17.85pt;line-height:150%;mso-list:l16 level1 lfo12;tab-stops:list 42.55pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Icons
+must be in gif-compuserve format (version 89a- non interlaced) and you must set
+the transparency flag. With PaintShop PRO this option is named: “set the
+transparency value to the background color” and means that when you fill an
+area with the background color, that area will be visualized to be transparent.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:42.55pt;text-align:justify;text-indent:
+-17.85pt;line-height:150%;mso-list:l19 level1 lfo13;tab-stops:list 42.55pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">At least
+one icon must exist, named as the module instantiation name followed by the
+orientation attribute “n” (as “nord”), e.g. exch_0n.gif, exch99n.gif.
+This icon must be placed in the graphical library (subdirectory of LG_LIBRARIES),
+which your new instance must belong to.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:42.55pt;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l1 level1 lfo14;tab-stops:list 42.55pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">To be
+able to exploit the possibility to rotate the drawing during topology
+construction, you must provide three other files with the same name but
+orientation attribute “w”,”s” and “e”: the contained image must be
+the original one (“n”) rotated for multiples of 90°.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left:42.55pt;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l1 level1 lfo14;tab-stops:list 42.55pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">If you
+don’t create at least a “nord” icon for the current instance, a default
+icon (a white filled rectangle) will be automatically associated at the end of
+the first instancing fase.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="line-height:150%"><span style="font-size:11.0pt;
+mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="line-height:150%"><span style="font-size:11.0pt;
+mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<div style="border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
+background:#D9D9D9;mso-shading:white;mso-pattern:gray-15 auto">
+  <p class="MsoNormal" style="margin-left:.25in;text-indent:-.25in;line-height:
+150%;mso-list:l11 level1 lfo20;tab-stops:list .25in;border:none;mso-border-alt:
+solid windowtext .5pt;padding:0in;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><b style="mso-bidi-font-weight:normal"><span style="font-size:11.0pt;mso-bidi-font-size:
+10.0pt">2.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">New
+  Connectors<o:p>
+  </o:p>
+  </span></b></p>
+</div>
+<p class="MsoNormal" style="line-height:150%"><b style="mso-bidi-font-weight:
+normal"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></b></p>
+<p class="MsoBodyText2" style="text-align:justify">Connectors (physical ports)
+are arrow symbols containing an array of slots associated each with a module
+variable. When you create a model with the LegoPc topology manager, you connect
+two modules by drawing a line binding two connectors. The module variables are
+automatically connected<span style="mso-spacerun: yes">&nbsp; </span>slot by
+slot making use of their positional correspondence.</p>
+<p class="MsoBodyText2" style="text-align:justify">Connectors are normally
+associated one to each homogeneous group of variables: hydraulic variables,
+thermic variables, electrical variables and so on.</p>
+<p class="MsoBodyText2" style="text-align:justify">For new applications you can
+need to create new connectors. By pressing on the corresponding button, the
+interface shown in fig. 6 is visualized. You must type:</p>
+<p class="MsoBodyText2" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;mso-list:l7 level1 lfo21;tab-stops:list .25in"><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>A <i style="mso-bidi-font-style:normal">Name</i> specifying a
+(long) connector description that will appear as help on the connector itself by
+right-clicking on the connector symbol in the toolbox during the second
+instantiation phase.</p>
+<p class="MsoBodyText2" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;mso-list:l7 level1 lfo21;tab-stops:list .25in"><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>A 4-chars-long <i style="mso-bidi-font-style:normal">Short Name</i>
+identifying all the files associated to the connector</p>
+<p class="MsoBodyText2" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;mso-list:l7 level1 lfo21;tab-stops:list .25in"><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>A <i style="mso-bidi-font-style:normal">Line color</i> to be used
+by the LegoPc topology manager to draw lines connecting this connector type</p>
+<p class="MsoBodyText2" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;mso-list:l7 level1 lfo21;tab-stops:list .25in"><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Whether the line of the previous point must be <i style="mso-bidi-font-style:normal">dashed</i></p>
+<p class="MsoBodyText2" style="margin-left:.25in;text-align:justify;text-indent:
+-.25in;mso-list:l7 level1 lfo21;tab-stops:list .25in"><span style="font-family:Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>How many <i style="mso-bidi-font-style:normal">slots</i> the new
+connector must have.</p>
+<p class="MsoBodyText2" style="text-align:justify">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoBodyText2" align="center" style="text-align:center"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1030" type="#_x0000_t75" style='width:159.6pt;height:228.6pt'
+ fillcolor="window">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image011.jpg" o:title="newcon1"/>
+</v:shape><![endif]-->
+<img width="213" height="305" src="librar6.jpg" v:shapes="_x0000_i1030"></p>
+<p class="MsoCaption" align="center"><span style="font-family:Arial"><b>Fig. 6 – New Connectors
+interface<o:p>
+</o:p>
+</b>
+</span></p>
+<p class="MsoNormal" style="line-height:150%"><b style="mso-bidi-font-weight:
+normal"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></b></p>
+<p class="MsoNormal" style="line-height:150%"><span style="font-size:11.0pt;
+mso-bidi-font-size:10.0pt">Provided this information, you have to press on the <i style="mso-bidi-font-style:normal">Insert</i>
+button. The interface in fig. 7 is shown, allowing to specify for each slot a
+string identifying the type of variable associated.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="line-height:150%"><span style="font-size:11.0pt;
+mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" align="center" style="text-align:center;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1031" type="#_x0000_t75" style='width:204pt;height:146.4pt'
+ fillcolor="window">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image013.jpg" o:title="newcon2"/>
+</v:shape><![endif]-->
+<img width="272" height="195" src="librar7.jpg" v:shapes="_x0000_i1031"><o:p>
+</o:p>
+</span></p>
+<p class="MsoCaption" align="center"><span style="font-family:Arial"><b>Fig. 7 – New Connectors
+slots definition<o:p>
+</o:p>
+</b>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">By
+pressing on <i style="mso-bidi-font-style:normal">Insert</i>, the new connector
+is created.<span style="mso-spacerun: yes">&nbsp; </span>Moreover, 12 graphical
+files associated to the connector are automatically placed in the LG_PIXMAPS
+location. In these files the connector is white-filled. To change the filling
+color, edit the files with a normal icons editor<span style="mso-spacerun:
+yes">&nbsp; </span>(e.g. the same used for the instance gifs).<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">For
+details on the files created by connectors definition phase, see section
+“Adding new ports” of the LegoPc hyperhelp.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><b style="mso-bidi-font-weight:normal"><span style="font-size:11.0pt;mso-bidi-font-size:
+10.0pt">&nbsp;<o:p>
+</o:p>
+</span></b></p>
+<div style="border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
+background:#D9D9D9;mso-shading:white;mso-pattern:gray-15 auto">
+  <p class="MsoNormal" style="margin-left:.25in;text-indent:-.25in;line-height:
+150%;mso-list:l11 level1 lfo20;tab-stops:list .25in;border:none;mso-border-alt:
+solid windowtext .5pt;padding:0in;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><b style="mso-bidi-font-weight:normal"><span style="font-size:11.0pt;mso-bidi-font-size:
+10.0pt">3.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">First
+  Phase<o:p>
+  </o:p>
+  </span></b></p>
+</div>
+<p class="MsoNormal" style="line-height:150%"><b style="mso-bidi-font-weight:
+normal"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></b></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">The
+first instantiation phase associates a set of variables to the module instance.
+By pressing on the corresponding button, an interface appears (fig. 8). Some
+questions to be answered are shown, the same posed by the I3-I4 routines of the
+module to be instanced.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" align="center" style="text-align:center;line-height:150%"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1032" type="#_x0000_t75" style='width:332.4pt;height:180pt'
+ fillcolor="window">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image015.jpg" o:title="first"/>
+</v:shape><![endif]-->
+<img width="443" height="240" src="librar8.jpg" v:shapes="_x0000_i1032"><o:p>
+</o:p>
+</p>
+<p class="MsoCaption" align="center"><span style="font-family:Arial"><b>Fig. 8 – Interface of
+the first instantiation phase<o:p>
+</o:p>
+</b>
+</span></p>
+<p class="MsoNormal" align="center" style="text-align:center;line-height:150%">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoBodyText" style="line-height:150%">The button<i style="mso-bidi-font-style:
+normal"> Send</i> validates the answer typed in the entry, while <i style="mso-bidi-font-style:normal">Cancel
+</i>quits the first instantiation phase.</p>
+<p class="MsoBodyText" style="line-height:150%">The questions shown are:</p>
+<p class="MsoBodyText" style="line-height:150%">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoNormal" style="margin-left:35.45pt;text-align:justify;text-indent:
+-.25in;line-height:150%;mso-list:l6 level1 lfo15;tab-stops:list 35.45pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Wingdings">ü<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Some
+specific questions posed by the module (routine I4) in order to define a unique
+set of states, algebraic outputs and input variables. Among these: the number of
+cells and the number of exchanging surfaces for each cell.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoBodyText" style="margin-left:35.45pt;text-indent:-.25in;line-height:
+150%;mso-list:l4 level1 lfo16;tab-stops:list 35.45pt"><span style="font-family:Wingdings">ü<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style="font-size:10.0pt;font-family:&quot;Courier New&quot;">ALTRE
+CONFIGURAZIONI DA PREINSTANZIARE [S/N]</span>: you can answer S (yes) or N<span style="mso-spacerun: yes">&nbsp;
+</span>(no). You answer yes only if your module has multiple configurations.
+Modules with multiple configurations contain one algebraic relationship that can
+be used to calculate more than one algebraic output variable. For instance, the
+library module VALV has an algebric relationship binding mass flow rate,
+upstream pressure and downstream pressure. As there is no causality among the
+three variables, each one can be considered as the associated output variable.
+So, VALV (as some other library modules) allows you to chose what variable must
+be considered as output. During FORTRAN instantiation you can leave this choice
+undefined: the module topology constructor will decide the best configuration
+for you. In this case you can answer S (yes) and the module questions are
+repeated again and again till you answer N (no). Each time you’ll answer the
+questions with a different topological possibility (mass flow rate, upstream
+pressure or downstream pressure).</p>
+<p class="MsoBodyText" style="line-height:150%">&nbsp;<o:p>
+</o:p>
+</p>
+<div style="border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
+background:#D9D9D9;mso-shading:white;mso-pattern:gray-15 auto">
+  <p class="MsoNormal" style="margin-left:.25in;text-indent:-.25in;line-height:
+150%;mso-list:l11 level1 lfo20;tab-stops:list .25in;border:none;mso-border-alt:
+solid windowtext .5pt;padding:0in;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><b style="mso-bidi-font-weight:normal"><span style="font-size:11.0pt;mso-bidi-font-size:
+10.0pt">4.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Second
+  Phase<o:p>
+  </o:p>
+  </span></b></p>
+</div>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Arial">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt;font-family:Arial">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" align="center" style="text-align:center;line-height:150%"><!--[if gte vml 1]><v:shape
+ id="_x0000_i1033" type="#_x0000_t75" style='width:350.4pt;height:271.2pt'
+ fillcolor="window">
+ <v:imagedata src="file:///C:/TEMP/msoclip1/01/clip_image017.png" o:title=""/>
+</v:shape><![endif]-->
+<img width="467" height="362" src="librar9.jpg" v:shapes="_x0000_i1033"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt"><o:p>
+</o:p>
+</span></p>
+<p class="MsoCaption" align="center"><span style="font-family:Arial"><b>Fig. 9 – The “Module
+inst” application<o:p>
+</o:p>
+</b>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">The
+last phase allows matching the “nord” orientation gif with physical ports
+and, for each physical port, to match the corresponding slots with LegoPC
+variables. <o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Selecting
+the “second-phase” button, a graphical application constituted by two
+windows will appear: the first shows the drawing of the instance “nord”,
+while the other (“toolbox”) contains the connectors palette.<o:p>
+</o:p>
+</span></p>
+<p class="MsoBodyText" style="line-height:150%">You can select a connector type
+(port) inside the toolbox window. Standard coding for ports colors is:</p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%;tab-stops:42.55pt 56.7pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">yellow<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>=<span style="mso-tab-count:1">&nbsp;&nbsp; </span>water fluidodinamic
+port<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%;tab-stops:42.55pt 56.7pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">gray
+<span style="mso-tab-count:
+1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>=<span style="mso-tab-count:1">&nbsp;&nbsp;
+</span>flue gas fluidodynamic port<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%;tab-stops:42.55pt 56.7pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">green<span style="mso-tab-count:
+1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>= <span style="mso-tab-count:1">&nbsp; </span>thermic
+exchange port<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%;tab-stops:42.55pt 56.7pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">cyan<span style="mso-tab-count:
+1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>= <span style="mso-tab-count:1">&nbsp;
+</span>command port <o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%;tab-stops:42.55pt 56.7pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">magenta<span style="mso-tab-count:1">&nbsp;
+</span>= <span style="mso-tab-count:1">&nbsp; </span>electrical port<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%;tab-stops:42.55pt 56.7pt"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">orange<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>= <span style="mso-tab-count:1">&nbsp; </span>generical port (a slot with
+ten variables)<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Chose
+right port and orientation by clicking on it in the “toolbox” window, then
+paste it upon the drawing with a mouse CTRL + Left click.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">In
+case of wrong orientation select an arrow in the toolbox and then CTRL + Left
+click on the port to be rotated. To clear a not needed port select the “X”
+tool and CTRL + Left click on the port to be erased.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Ports
+can be dragged at will on the drawing. <o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">To
+match a port with variables, double-click the port. A new window will appear
+with a list of slots for each slot to be matched with a variable. You need to
+select the slot and then search the corresponding variable inside the list-box
+on the window right.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">To
+save all the information, select File/Save.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">If
+the second phase for the current preinstantiation has been already performed,
+the modifications begin from the last saved situation.<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-align:justify;line-height:150%"><span style="font-size:11.0pt;mso-bidi-font-size:10.0pt">Right-clicking
+on a connector in the toolbox window visualizes its long name as a help facility
+on the connector itself.<o:p>
+</o:p>
+</span></p>
+<!--mstheme--></font></body>
+
+</html>

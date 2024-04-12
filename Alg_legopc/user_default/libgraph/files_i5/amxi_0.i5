@@ -1,0 +1,30 @@
+AMXI
+
+AMXI - Min/MAX selector                                                         
+4
+1
+
+t0
+I1MX 
+1 
+t1
+I2MX 
+1 
+t2
+UMXI 
+1 
+t3
+____ 
+0 
+
+0
+1
+2
+
+UMXI UA
+OUTPUT ANALOG SIGNAL MIN/MAX                                   
+I1MX IN
+INPUT SIGNAL ONE TO MIN/MAX                                    
+I2MX IN
+INPUT SIGNAL TWO TO MIN/MAX                                    
+

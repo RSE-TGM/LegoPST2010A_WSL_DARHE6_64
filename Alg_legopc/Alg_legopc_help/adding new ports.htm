@@ -1,0 +1,87 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>ADDING NEW PORTS</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><p align="center"><blink><font color="#800000" size="5"><sup>Adding new
+ports</sup></font></blink></p>
+<blockquote>
+  <b><font SIZE="4">
+  <p ALIGN="CENTER">PROCEDURE TO DEFINE PORTS SETTINGS</p>
+  </font></b><font SIZE="2">
+  </blockquote>
+  <p>&nbsp;</p>
+  <p align="left">The directory containing sources Tcl-Tk-Tix (p.es. c:\LegoPC\Lavoro\Bin\Tix)
+  includes also the file connect.dat.</p>
+  <p align="left">This file allows redefining the settings of existing
+  connectors and defining new ones.</p>
+  <p align="left">The file connect.dat uses the following syntax:</p>
+  <p>&nbsp;</p>
+</font><font FACE="Courier New" SIZE="2">
+<p align="left">term Termic</p>
+<p align="left">LineColor red</p>
+<p align="left">LineWidth 4</p>
+<p align="left">LineBitmap None</p>
+<p align="left">00tempEsterna</p>
+<p align="left">01tempMedia</p>
+<p align="left">02coeffScambio</p>
+<p align="left">03potenza</p>
+<p align="left">****</p>
+<p align="left">flue FlueGas</p>
+<p align="left">LineColor black</p>
+<p align="left">LineWidth 4</p>
+<p align="left">LineBitmap None</p>
+<p align="left">00portata</p>
+<p align="left">01pressione</p>
+<p align="left">02temperatura</p>
+<p align="left">03tempInvers</p>
+<p align="left">04frMolO2</p>
+<p align="left">05frMolCO2</p>
+<p align="left">06frMolH2O</p>
+<p align="left">07frMasH2O</p>
+<p align="left">****</p>
+<p align="left">****</p>
+</font><font SIZE="2">
+<p align="left">Each connector type is defined by a certain number of lines.
+Sections regarding different types of connectors are spearated by a line with
+four stars: &quot;****&quot;. Two such lines conclude the file.</p>
+<p align="left">Each connector is defined by:</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">First line defining a short name (four characters) and a descriptor (free
+    length);<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">Second line with the key word LineColor followed by the color of the lines
+    connecting two ports of the current type;<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">Third line containing the key word LineWidth followed by a number
+    identifying the thickness of the lines connecting two ports of the current
+    type;<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">Fourth line with the key word LineBitmap followed by Yes (or None) if the
+    line is dashed (or not);<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">As many lines as the number of variables slots of the connector. Each line
+    is described by a progressive two-digits-number followed (without spaces) by
+    the identifier of the slot (type of the associated variable).<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table msthemelist><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">&nbsp;</p>
+<p align="left">A new connector can be defined doing the following operations:</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">Adding a new section to the file connect.dat<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">Adding in the directory Pixmaps (e.g. c:\LegoPC\Lavoro\Bin\Pixmaps):<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">Four files gif (one for each orientation)<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">Four files xbm (one for each orientation)<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">Four files ppm (one for each orientation)<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table msthemelist><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p>&nbsp;</p>
+<p>The files must be given the short name already used in the first definition
+line inside the file connect.dat, followed by the orientation identifier (n,s,w,e).</p>
+<blockquote>
+  <p>&nbsp;</p>
+</blockquote>
+</font>
+<p align="left">&nbsp;</p>
+<!--mstheme--></font></body>
+
+</html>

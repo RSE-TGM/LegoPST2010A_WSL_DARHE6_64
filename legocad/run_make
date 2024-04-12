@@ -1,0 +1,82 @@
+#!/bin/sh
+#
+#  Script:			run_make
+#  Instance:		4
+#  %version:		1 %
+#  Description:		
+#  %created_by:		famgr %
+#  %date_created:	Tue Oct 15 17:36:26 1996 %
+
+echo "Shell provvisoria per la compilazione ricorsiva"
+if [ $# -eq 0 ]
+then
+        echo "inserire  flags tra apici"
+else
+OPTION=$1
+echo "Sto per compilare"
+echo "Flag usati: " $OPTION
+cd ./lib/libicofile
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./liblegocad
+ccm make $OPTION -f Makefile.mk
+cd ../macro
+ccm make $OPTION -f mkMacroTopol.mk
+ccm make $OPTION -f mkMacroDati.mk
+ccm make $OPTION -f mkMacro.mk
+cd ../../legoserver
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./autodoc
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./bitmap
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./calcstaz
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./dati
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./edicole
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./editf01
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./filtri
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./iconvert
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./info
+ccm make $OPTION -f Makefile.mk
+cd ..
+
+cd ./librarian
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./main
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./menugraf
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./tavole
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./topologia
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./topsim
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./know
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./utility
+ccm make $OPTION -f Makefile.mk
+cd ..
+fi

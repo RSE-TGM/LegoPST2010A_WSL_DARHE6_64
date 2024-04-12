@@ -1,0 +1,418 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>META</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE META</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE META</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">CYLINDRICAL THIN METAL WALL</p>
+<p>&nbsp;</p>
+<p align="left">In the META module is represented the dynamics of the
+temperature in a thin metallic wall with cylindrical geometry, as a function of
+the exchanged thermal power at the boundary surfaces (internal and external).</p>
+<p align="left">The metallic wall whose behaviour has to be simulate, is
+subdivided in an arbitrary number of cells. Each of them is characterized by a
+given exchange surface and a certain volume of metal. Inside the cell heat
+transfer occurs by conduction in radial sense. The longitudinal conduction
+phenomenon is not considered. As hypothesis it is assumed that the wall has a
+thin thickness in order to adopt a representation in single radial cells.</p>
+<p align="left">For each cell the following equations are written:</p>
+<p ALIGN="left">1) conservation equation of metal energy</p>
+<p ALIGN="left">2) equation defining the dependence between the metal external
+wall temperature and the mean temperature</p>
+<p ALIGN="left">3) equation defining the dependence between the metal internal
+wall temperature and the mean temperature.</p>
+<p align="left">The first equation is differential and defines (along the time)
+the variation of metal mean temperature as a function of exchange thermal
+powers. The equation 2) and 3) are algebraical and represent (under stationary
+condition) the solution of the Fourier's equation for the considered geometry.</p>
+<p align="left">For each cell the module calculates the following variables:</p>
+<p ALIGN="left">1) metal medium temperature</p>
+<p ALIGN="left">2) external wall temperature</p>
+<p ALIGN="left">3) internal wall temperature.</p>
+<p align="left">The META module can be easily be used (together other ones
+included in the LEGO library) in building mathematical models related to plants
+components.</p>
+<p align="left">As example, an evaporator for fossil fuel boiler can be built
+utilizing the following modules:</p>
+<p ALIGN="left">CCMB or CCDY + META + EVAF ==&gt; combustion furnace + walls +
+fluid</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE META</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER"><font FACE="Arial" SIZE="2"><img SRC="images/Image684.gif" width="371" height="162"></font></p>
+<p ALIGN="left">with i = 1, ... NCEL</p>
+<p ALIGN="left">being NCEL = number of cells (max. 12)</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TM(i)</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">i = 1, NCEL mean temperature of metal
+      cells</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">&nbsp;TI(i)</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">i = 1, NCEL temperature of metal cells
+      internal wall</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TE(i)</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">i = 1, NCEL temperature of metal cells external wall</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QI(i)</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">i = 1, NCEL powers exchanged between
+      internal fluid and metal internal wall for each cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="9%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QE(i)</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">i = 1, NCEL powers exchanged between
+      external fluid and metal external wall for each cell</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE META</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p>In addition to initial values of META module input and output variables
+(meanings defined above), user must assign the following data to complete the
+file F14:</p>
+<p><b>Data needed to define which sign is used to calculate the modules
+exchanged powers having in common the metallic wall.</b></p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="6%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="94%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IPO1<br>
+      if <b>no data</b> is written ==&gt; power exchanged with internal side of
+      the cylindrical wall is calculated in accordance with the expression:<br>
+      Qi = K*S*(TPi-TFi)<br>
+      that is &gt; 0. if internal fluid takes heat</font>
+      <p><font FACE="Arial">else if <b>IPO1 -1.</b> ==&gt; power exchanged with
+      internal side of the cylindrical wall is calculated in accordance with the
+      expression:<br>
+      Qi = K*S*(TFi-TPi)<br>
+      that is &gt; 0. if internal fluid gives up heat</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="6%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="94%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IPO2<br>
+      if <b>no data</b> is written ==&gt; power exchanged with external side of
+      the cylindrical wall is calculated in accordance with the expression:<br>
+      Qe = K*S*(TFe-TPe)<br>
+      that is &gt; 0. if internal fluid gives up heat</font>
+      <p><font FACE="Arial">else if <b>IPO2 -1.</b> ==&gt; power exchanged with
+      external side of the cylindrical wall is calculated in accordance with the
+      expression:<br>
+      Qe = K*S*(TPe-TFe)<br>
+      that is &gt; 0. if internal fluid takes heat</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ROM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">metal density</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K/kg/C]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">metal specific heat</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/m/C]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COND</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">metal conductivity</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></b>
+<p align="left">If metal conductivity depends on temperature, it needs to define
+the subroutine COMETA(ICO, TM, CON) (see the section regarding user
+subprograms).</p>
+<b>
+<p ALIGN="RIGHT">Data needed to define the cylindrical wall geometry</p>
+</b>
+<p align="left">Each cell is defined through the following data:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">NTUB</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">number of cylindrical metal pipes in
+      parallel configuration</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">DIAI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">internal diameter of single pipe</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">DIAE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">external diameter of single pipe</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">LUNG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">cell length.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left">When geometrical data concerning several cells are equal, it is
+enough to assign this data to the first cell leaving blank the fields related to
+other cells.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE META</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the file F14 of META module, no particular
+prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE META</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">If metal conductivity depends on temperature, user must provide
+the following subroutine:</p>
+<p align="left">SUBROUTINE COMETA(ICO, T, COND)</p>
+<p align="left">Meaning of FORTRAN's symbols:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">ICO</font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">pointer (integer value) in input to the
+      subroutine which user can utilize to chose the function COND = F(T) among
+      a &quot;menu&quot; of funtions assembled in the subroutine itself</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">T</font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">wall temperature provided in input to
+      the subroutine</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[W/m/C]</font><!--mstheme--></font></td>
+    <td width="12%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">COND</font><!--mstheme--></font></td>
+    <td width="78%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">conductivity calculated by the
+      subroutine COMETA</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">E.g.: To assign the steel conductivity defined in the user
+subroutine COMETA, the following data has to be assigned in the file F14 for
+META module which deals with the steel wall:</p>
+<p align="left">COND = -2.</p>
+<p align="left">User subroutine including correlations &quot;menu&quot; which
+provide conductivity for several metals can be written in the following way:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p>SUBROUTINE COMETA(ICO,T,COND)</p>
+<p>C**** ico=1 ==&gt;inconel</p>
+<p>C**** ico=2 ==&gt;steel</p>
+<p>C**** correlation selection for the considered metal</p>
+<p>GO TO(10,20),ICO</p>
+<p>C**** inconel conductivity</p>
+<p>10 COND=9.872+.0153*T</p>
+<p>RETURN</p>
+<p>C****steel conductivity</p>
+<p>20 COND=10.+.011*T</p>
+<p>RETURN</p>
+<p>END</p>
+</font></b><font FACE="Arial">
+<p ALIGN="left">To obtain that ICO assumes the right value, user must assign it
+to the COND variable preceded by the sign '-' in the file F14.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE META</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The metallic wall whose model is included in META module, is
+subdivided in axial cells following the fluid flow coordinate.</p>
+<p ALIGN="left">For a number NCEL of cells, the first NCEL residuals associated
+to this module are referred to the energy balance in the metal. On the contrary,
+residuals from NCEL+1 to 2*NCEL are referred to heat conduction in the radial
+half-cell towards internal side of cylindrical wall. Last NCEL residuals are
+referred to heat conduction towards external side of the wall. All META
+residuals are normalized in temperature.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE META</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p align="left">SUBROUTINE METAI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</p>
+<p align="left">$ IBLOC1, IBLOC2, IER, CNXYU, TOL)</p>
+<p align="left">SUBROUTINE METAC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+<p align="left">$ IBLOC1, IBLOC2)</p>
+<p align="left">SUBROUTINE COMETA(ICO, TM, CON)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE META</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

@@ -1,0 +1,1798 @@
+proc setta {item} {
+
+# COSTRUISCE LA MASCHERA PRINCIPALE DELLA NEWMOD. A SECONDA DEL VALORE DI "ITEM"
+# MOSTRA LE VARIABILI O I DATI
+
+catch {destroy .c}
+catch {destroy .d}
+catch {destroy .e}
+
+global descr varfor norm numsta numusc numing numdat modo
+global dsymb vardat
+
+set modo $item
+
+if {$item == "All variables"} {
+
+frame .c
+pack .c -side top -anchor w -padx 2m
+label .c.descr -text "Description"
+label .c.fortr -text "  FORTRAN Symbol"
+label .c.norma -text "Normalized Value"
+pack .c.descr -side left -padx 2m
+pack .c.fortr -side left -padx 2.2c
+pack .c.norma -side left
+
+frame .d
+pack .d -side top -anchor w	
+
+
+tixScrolledWindow .d.input -scrollbar auto -height 290 -width 520
+set f [.d.input subwidget window]
+frame $f.stat
+pack  $f.stat -side top -anchor w -padx 2m -pady 2m
+label $f.stat.lab -text "STATE OUTPUT VARIABLES"
+pack $f.stat.lab -side left
+
+frame $f.fr1
+pack $f.fr1 -side top
+
+for {set x 1} {$x < 4} {incr x} {
+ frame $f.fr1.f$x
+ pack $f.fr1.f$x -side left
+}
+ for {set y 1} {$y <= $numsta} {incr y} {
+  entry $f.fr1.f1.e$y -width 30 -textvariable descr(1,$y)
+  pack $f.fr1.f1.e$y -side top -padx 1m
+ }
+
+for {set y 1} {$y <= $numsta} {incr y} {
+  entry $f.fr1.f2.e$y -width 6 -textvariable varfor(1,$y)
+  pack $f.fr1.f2.e$y -side top -padx 1m
+ }
+for {set y 1} {$y <= $numsta} {incr y} {
+  entry $f.fr1.f3.e$y -width 10 -textvariable norm(1,$y)
+  pack $f.fr1.f3.e$y -side top -padx 25m
+ }
+
+frame $f.uscal
+pack  $f.uscal -side top -anchor w -padx 2m -pady 2m
+label $f.uscal.lab -text "ALGEBRAIC OUTPUT VARIABLES"
+pack $f.uscal.lab -side left
+
+frame $f.fr2
+pack $f.fr2 -side top
+
+for {set x 1} {$x < 4} {incr x} {
+ frame $f.fr2.f$x
+ pack $f.fr2.f$x -side left
+}
+ for {set y 1} {$y <= $numusc} {incr y} {
+  entry $f.fr2.f1.e$y -width 30 -textvariable descr(2,$y)
+  pack $f.fr2.f1.e$y -side top -padx 1m
+ }
+
+for {set y 1} {$y <= $numusc} {incr y} {
+  entry $f.fr2.f2.e$y -width 6 -textvariable varfor(2,$y)
+  pack $f.fr2.f2.e$y -side top -padx 1m
+ }
+
+for {set y 1} {$y <= $numusc} {incr y} {
+  entry $f.fr2.f3.e$y -width 10 -textvariable norm(2,$y)
+  pack $f.fr2.f3.e$y -side top -padx 25m
+ }
+
+
+frame $f.ingr
+pack  $f.ingr -side top -anchor w -padx 2m -pady 2m
+label $f.ingr.lab -text "INPUT VARIABLES"
+pack $f.ingr.lab -side left
+
+frame $f.fr3
+pack $f.fr3 -side top
+
+for {set x 1} {$x < 4} {incr x} {
+ frame $f.fr3.f$x
+ pack $f.fr3.f$x -side left
+}
+ for {set y 1} {$y <= $numing} {incr y} {
+  entry $f.fr3.f1.e$y -width 30 -textvariable descr(3,$y)
+  pack $f.fr3.f1.e$y -side top -padx 1m
+ }
+
+for {set y 1} {$y <= $numing} {incr y} {
+  entry $f.fr3.f2.e$y -width 6 -textvariable varfor(3,$y)
+  pack $f.fr3.f2.e$y -side top -padx 1m
+ }
+
+for {set y 1} {$y <= $numing} {incr y} {
+  entry $f.fr3.f3.e$y -width 10 -textvariable norm(3,$y)
+  pack $f.fr3.f3.e$y -side top -padx 25m
+}
+
+trace variable varfor w forcewidth
+trace variable descr w forcewidth
+trace variable norm w forcewidth
+
+pack .d.input -side left -fill x -padx 3m -pady 3m
+
+frame .e
+pack .e -side top -anchor w -padx 2m -pady 2m
+button .e.okbut -width 6 -text OK -command checkmod
+pack .e.okbut -side left
+
+} else {
+
+frame .c
+pack .c -side top -anchor w -padx 2m
+label .c.descr -text "Data Symbol"
+label .c.fortr -text "Fortran Variable"
+label .c.norma -text "         "
+pack .c.descr -side left -padx 3m
+pack .c.fortr -side left -padx 3c
+pack .c.norma -side left
+
+frame .d
+pack .d -side top -anchor w	
+
+
+tixScrolledWindow .d.input -scrollbar auto -height 290 -width 520
+set f [.d.input subwidget window]
+
+frame $f.fr4
+pack $f.fr4 -side top
+
+for {set x 1} {$x < 3} {incr x} {
+ frame $f.fr4.f$x
+ pack $f.fr4.f$x -side left -pady 2m
+ }
+
+frame $f.fr4.f3
+pack $f.fr4.f3 -side right -pady 2m -padx 3.4c
+
+ for {set y 1} {$y <= $numdat} {incr y} {
+  entry $f.fr4.f1.e$y -width 30 -textvariable dsymb($y)
+  pack $f.fr4.f1.e$y -side top
+ }
+
+for {set y 1} {$y <= $numdat} {incr y} {
+  entry $f.fr4.f2.e$y -width 6 -textvariable vardat($y)
+  pack $f.fr4.f2.e$y -side top -padx 2m
+ }
+
+trace variable dsymb w forcewidth
+trace variable vardat w forcewidth
+		 
+pack .d.input -side left -fill x -padx 3m -pady 3m
+
+frame .e
+pack .e -side top -anchor w -padx 2m -pady 2m
+button .e.okbut -width 6 -text OK -command checkmod
+pack .e.okbut -side left
+
+}
+}
+
+# 
+# MAIN PROGRAM
+#
+
+wm maxsize . 540 500
+wm minsize . 540 500
+wm title . "NEWMOD - NEW MODULE DEFINITION"
+frame .a
+pack .a -side top -anchor w -pady 5m -padx 2m
+label .a.mod -text "Module name:"
+entry .a.modname -textvariable modulo -relief sunken -width 8
+label .a.desc -text "Description:"
+entry .a.description -textvariable descrmod -relief sunken -width 45
+pack .a.mod -side left
+pack .a.modname -side left -padx 2m
+trace variable modulo w forcewidth
+trace variable descrmod w forcewidth
+pack .a.desc -side left -padx 2m
+pack .a.description -side left
+frame .sepa1 -relief ridge -bd 1 -height 2
+pack .sepa1 -side top -fill x -pady .3c
+frame .b
+pack .b -side top -anchor w
+tixComboBox .b.opt -editable false -browsecmd setta -value "All variables"
+.b.opt insert 1 "All variables"
+.b.opt insert 2 "Geometrical data"
+.b.opt configure -value "All variables" 
+.b.opt subwidget entry configure -background #fff -font "Arial 8 bold"
+.b.opt subwidget listbox configure -height 1 -font "Arial 8 bold"
+pack .b.opt -side left -padx 1c	
+frame .sepa2 -relief ridge -bd 1 -height 2
+pack .sepa2 -side top -fill x -pady .3c
+
+set maxequa 99
+set numing 5
+set numsta 5
+set numusc 5
+set numdat 5
+set jactip Analytical
+set jreset 0
+set ireset 0
+set i2decl {}
+set i2uscod {}
+set jcdecl {}
+set jctext {}
+set rndecl {}
+set rntext {}
+
+# set EDITOR "notepad"
+set EDITOR $env(LG_LEGO)/edita.bat
+
+
+set numrow [expr $numsta+$numusc]
+set numcol [expr $numsta+$numusc+$numing]
+
+cd $env(LG_LIBUT)
+
+for {set i 1} {$i <= $maxequa} {incr i} {
+ set rni($i) {}
+ set equdescr($i) {}
+ set equnit($i) {}
+ set equnorm($i) {}
+ for {set j 1} {$j <= $numcol} {incr j} {
+   set ajac($i,$j) {}
+ }
+}
+
+set modo {All variables}
+setta {All variables}
+
+for {set y 1} {$y <= $numdat} {incr y} {
+ set vardat($y) ""
+ set dsymb($y) ""
+}
+
+
+menu .topmenu -tearoff 0
+
+set m .topmenu.file
+menu $m -tearoff 0 -activebackground darkblue -activeforeground white
+.topmenu add cascade -label "File" -menu $m -underline 0
+$m add command -label {Save and Generate FTN} -state disabled -command {genefrt}
+$m add command -label Quit -command {delall}
+
+set m .topmenu.config
+menu $m -tearoff 0 -activebackground darkblue -activeforeground white
+.topmenu add cascade -label "Module configuration" -menu $m -underline 0
+$m add command -label {I/O variables setup} -command {iosetup}
+$m add command -label {Jacobian matrix topology} -state disabled -command {jactopo}
+
+set m .topmenu.user
+menu $m -tearoff 0 -activebackground darkblue -activeforeground white
+.topmenu add cascade -label "User" -menu $m -underline 0
+$m add command -label {Data Section (I2)} -state disabled -command {datasec}
+$m add command -label {Jacobian Section (JC)} -state disabled -command {jacsec}
+$m add command -label {Residual Section} -state disabled -command {resec}
+$m add command -label {Equation Section (D1)} -state disabled -command {equsec}
+
+set m .topmenu.view
+menu $m -tearoff 0 -activebackground darkblue -activeforeground white
+.topmenu add cascade -label "View code" -menu $m -underline 0
+$m add command -label {Edit code} -state disabled -command {exec $EDITOR [string tolower "$modulo\.for"] &}
+
+. configure -menu .topmenu
+
+#
+# TERMINE DEL MAIN PROGRAM
+#
+
+
+proc loadint {intfile} {
+
+# LEGGE IL FILE "MODULO.I" E CARICA TUTTO
+# NELLE VARIABILI GLOBALI
+
+
+global modulo descrmod numsta numusc numing numdat
+global varfor norm descr dsymb vardat jactip jacto
+global i2decl i2uscod jcdecl jctext ajac
+global rndecl rntext rni equdescr equnit equnorm
+global ireset modo jreset
+
+
+set ifile [open $intfile r]
+
+# Legge nome modulo e descrizione
+
+scan [gets $ifile] "%s  %s" modulo descrmod
+
+# Legge il numero di variabili e dati
+
+gets $ifile
+
+gets $ifile numsta
+gets $ifile numusc
+gets $ifile numing
+gets $ifile numdat
+
+set numrow [expr $numsta+$numusc]
+set numcol [expr $numsta+$numusc+$numing]
+
+# Legge nome variabile, normalizzazione, descrizione
+# per le variabili di stato
+
+gets $ifile
+
+for {set i 1} {$i <= $numsta} {incr i} {
+ scan [gets $ifile] "%s %s     %s" varfor(1,$i) norm(1,$i) descr(1,$i)
+}
+
+# Legge nome variabile, normalizzazione, descrizione
+# per le variabili di uscita algebrica
+
+gets $ifile
+
+for {set i 1} {$i <= $numusc} {incr i} {
+ scan [gets $ifile] "%s %s     %s" varfor(2,$i) norm(2,$i) descr(2,$i)
+}
+
+# Legge nome variabile, normalizzazione, descrizione
+# per le variabili di ingresso
+
+gets $ifile
+
+for {set i 1} {$i <= $numing} {incr i} {
+ scan [gets $ifile] "%s %s     %s" varfor(3,$i) norm(3,$i) descr(3,$i)
+}
+
+# Legge nome variabile, e simbolo
+# per i dati geometrici e fisici
+
+gets $ifile
+
+for {set i 1} {$i <= $numdat} {incr i} {
+ scan [gets $ifile] "%s  %s" dsymb($i) vardat($i)
+}
+
+# Legge 0 per jacobiano analitico
+# Legge 1 per jacobiano numerico
+    
+gets $ifile
+
+if {[gets $ifile] == "0"} {
+ set jactip Analytical
+} else {
+ set jactip Numerical
+}
+
+gets $ifile
+
+# Azzera la matrice JACTO e AJAC
+ 
+for {set i 1} {$i <= $numrow} {incr i} {
+ for {set j 1} {$j <= $numcol} {incr j} {
+  set jacto($i,$j) 0
+  set ajac($i,$j) {}
+ } 
+}
+
+# Costruisce la topologia della matrice jacobiana 
+
+set numel [expr $numrow*$numcol+1]
+for {set i 1} {$i <= $numel} {incr i} {
+ set buff [gets $ifile]
+ if {$buff == "****   DATA SECTION I2: Declarations"} {
+  break
+ }
+ scan $buff "%3d %3d" k1 k2
+ set jacto([expr $k1+1],[expr $k2+1]) 1
+}
+
+  
+# Legge la sezione I2 del modulo
+
+set i2decl [gets $ifile]
+while {[set buff [gets $ifile]] != "****   DATA SECTION I2: Code"} {
+ append i2decl "\n$buff"
+}
+
+set i2uscod [gets $ifile]
+while {[set buff [gets $ifile]] != "****   JACOBIAN SECTION JC: Declarations"} {
+ append i2uscod "\n$buff"
+}
+
+
+# Legge la sezione JACOBIANO ANALITICO del modulo
+
+set jcdecl [gets $ifile]
+while {[set buff [gets $ifile]] != "****   SECTION JC: Text"} {
+ append jcdecl "\n$buff"
+}
+
+set jctext [gets $ifile]
+while {[set buff [gets $ifile]] != "****   SECTION JC: Coefficients"} {
+ append jctext "\n$buff"
+}
+
+
+gets $ifile
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ for {set j 1} {$j <= $numcol} {incr j} {
+  if {$jacto($i,$j) == 1} {
+   set ajac($i,$j) [gets $ifile]
+   while {[string range [set buff [gets $ifile]] 0 3] != "++++"} {
+    if {$buff == "****   RESIDUALS SECTION: Declarations"} {
+     break
+    } 
+    append ajac($i,$j) "\n$buff"
+   }
+  }   
+ }  
+}
+
+
+# Legge la sezione RESIDUI del modulo
+
+set rndecl [gets $ifile]
+while {[set buff [gets $ifile]] != "****   RESIDUALS SECTION: Code"} {
+ append rndecl "\n$buff"
+}
+
+set rntext [gets $ifile]
+while {[set buff [gets $ifile]] != "****   RESIDUALS SECTION: Residuals"} {
+ append rntext "\n$buff"
+}
+
+gets $ifile
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ set rni($i) [gets $ifile]
+ while {[string range [set buff [gets $ifile]] 0 3] != "++++"} {
+  if {$buff == "****   EQUATIONS SECTION (Description,Unit,Norm. constant)"} {
+   break
+  }
+  append rni($i) "\n$buff"
+ }
+}
+
+# Legge la sezione D1 del modulo
+
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ set buff [gets $ifile]
+ set equdescr($i) [string trimright [string range $buff 0 49]]
+ set equnit($i) [string trimright [string range $buff 51 56]]
+ set equnorm($i) [string trimright [string range $buff 58 end]] 
+}                 
+
+close $ifile
+
+setta $modo
+
+.topmenu.file entryconfigure 0 -state normal
+.topmenu.config entryconfigure 1 -state normal
+.topmenu.user entryconfigure 0 -state normal
+.topmenu.user entryconfigure 2 -state normal
+.topmenu.user entryconfigure 3 -state normal
+.topmenu.view entryconfigure 0 -state normal
+
+
+set jreset 1
+set ireset 1
+
+if {$jactip == "Analytical"} {
+ .topmenu.user entryconfigure 1 -state normal
+}
+
+
+}
+
+																							
+proc forcewidth {name el op} {
+
+# LIMITA IL NUMERO DI CARATTERI DI VARIE ENTRY
+
+global $name ${name}_wid
+global modulo env tcl_platform
+
+set fileint {}
+set filefor {}
+
+
+if [string comp {} $el] {
+ set old ${name}_wid\($el)
+ set name ${name}\($el)
+} else {
+set old ${name}_wid
+}
+if {$name == "modulo"} {
+ set maxchar 4
+ set $name [string toupper [set $name]]
+ set fileint [string tolower "[set $name]\.i"]
+ set filefor [string tolower "[set $name]\.for"]
+ set fileobj [string tolower "[set $name]\.obj"]
+} elseif {$name == "descrmod"} {
+ set maxchar 50
+} elseif [string match varfor(* $name] {
+ set maxchar 4
+ set $name [string toupper [set $name]]
+} elseif [string match descr(* $name] {
+ set maxchar 50
+} elseif [string match norm(* $name] {
+ set maxchar 6
+ set $name [string toupper [set $name]]
+} elseif [string match dsymb(* $name] {
+ set maxchar 8
+} elseif [string match vardat(* $name] {
+ set maxchar 6
+ set $name [string toupper [set $name]]
+} elseif [string match equdescr1(* $name] {
+ set maxchar 50
+ set $name [string toupper [set $name]]
+} elseif [string match equnit1(* $name] {
+ set maxchar 6
+ set $name [string toupper [set $name]]
+} elseif [string match equnorm1(* $name] {
+ set maxchar 8
+ set $name [string toupper [set $name]]
+}
+ 
+if {[string length [set $name]] > $maxchar} {
+  set $name [set $old]
+  bell; return
+}
+
+if [file exists $filefor] {
+ set mex [tk_messageBox -icon question -type yesno \
+             -title Question -parent . -message "The module [set $name] already \
+             exists in library. LOAD IT?"]
+ if {$mex == "no"} {
+   set mex [tk_messageBox -icon question -type yesno \
+             -title Question -parent . -message "A new module [set $name] will be \
+             created overwriting the old one. Are you sure to continue?"]
+   if {$mex == "no"} {
+    set modulo {}
+    return
+   }
+   catch {file delete $fileint -force}
+   file delete $filefor -force
+   puts [set $name]
+
+# Aggiorna la lista moduli
+
+   set lismod [open $env(LG_LIBUT)/L_MODULI.dat r]
+   set temp [open lmod.tmp w]
+   
+   puts [set $name]
+   while {[string range [set buff [gets $lismod]] 0 3] != [set $name]} {
+   puts $temp $buff
+   } 
+
+   while {[eof $lismod] != 1} {
+   puts $temp [gets $lismod]
+   }
+ 
+   close $lismod
+   close $temp
+
+   file delete $env(LG_LIBUT)/L_MODULI.DAT -force
+
+   file copy lmod.tmp $env(LG_LIBUT)/L_MODULI.DAT
+
+   file delete lmod.tmp -force
+   
+   cd $env(LG_LIBUT)
+   exec rmobj.bat $fileobj &
+
+ } else {
+  if [file exists $fileint] {
+   set mex1 [tk_messageBox -icon info -type ok \
+              -title Notice -parent . -message "The old module [set $name] will be \
+               loaded"]
+   if {$mex1 == "ok"} {
+    loadint $fileint
+   }
+  } else {
+   set mex1 [tk_messageBox -icon info -type ok \
+              -title Notice -parent . -message "The module [set $name] can't be \
+               loaded because it has not been created by NEWMOD"]
+  }              
+ }           
+}
+
+set $old [set $name]
+}
+
+proc forcewich {name el op} {
+
+# LIMITA IL NUMERO DI CARATTERI DI VARIE ENTRY
+
+global $name ${name}_wid
+set old ${name}_wid
+if {[string length [set $name]] > 3 || ![regexp {^[0-9]*$} [set $name]]} {
+  set $name [set $old]
+  bell; return
+}
+set $old [set $name]
+}
+
+
+proc iosetup {} {
+
+# COSTRUISCE LA MASCHERA CHE DEFINISCE IL NUMERO DI VARIABILI DI I/O,
+# IL NUMERO DI DATI E IL TIPO DI JACOBIANO
+
+global numsta numusc numing numdat jactip modo
+global numsta1 numusc1 numing1 numdat1 jactip1
+global jreset ireset
+
+if {$jreset == 1} {
+ set question [tk_messageBox -icon question -type yesno \
+         -title Warning -parent . -message "WARNING:\
+         Modifications to module setup will result \n\
+          in resetting jacobian topology. Continue anyway?"]
+ if {$question == "no"} {
+  return
+ } else {
+  .topmenu.file entryconfigure 0 -state disabled
+ .topmenu.config entryconfigure 1 -state disabled
+ .topmenu.user entryconfigure 0 -state disabled
+ .topmenu.user entryconfigure 1 -state disabled
+ .topmenu.user entryconfigure 2 -state disabled
+ .topmenu.user entryconfigure 3 -state disabled
+ set jreset 0
+ set ireset 0
+ }  
+}
+ 
+
+
+
+toplevel .iosetup
+wm maxsize .iosetup 328 285
+wm minsize .iosetup 328 285
+wm title .iosetup "NEWMOD - INPUT/OUTPUT VARIABLES SETUP"
+
+set numsta1 $numsta
+set numusc1 $numusc
+set numing1 $numing
+set numdat1 $numdat
+set jactip1 $jactip
+
+frame .iosetup.a
+pack .iosetup.a -side top
+
+frame .iosetup.a.lab
+frame .iosetup.a.ent
+pack .iosetup.a.lab -side left -anchor w -padx 2m
+pack .iosetup.a.ent -side left -anchor w -padx 1m -pady 3m
+
+label .iosetup.a.lab.lab1 -text {Number of state output variables:}
+label .iosetup.a.lab.lab2 -text {Number of algebraic output variables:}
+label .iosetup.a.lab.lab3 -text {Number of input variables:}
+label .iosetup.a.lab.lab4 -text {Number of geometrical data:}
+label .iosetup.a.lab.lab5 -text {Jacobian computation:}		
+
+pack .iosetup.a.lab.lab1 -side top -anchor w -pady 11
+pack .iosetup.a.lab.lab2 -side top -anchor w -pady 11
+pack .iosetup.a.lab.lab3 -side top -anchor w -pady 11
+pack .iosetup.a.lab.lab4 -side top -anchor w -pady 11
+pack .iosetup.a.lab.lab5 -side top -anchor w -pady 11
+
+
+entry .iosetup.a.ent.en1 -width 6 -textvariable numsta1  
+entry .iosetup.a.ent.en2 -width 6 -textvariable numusc1
+entry .iosetup.a.ent.en3 -width 6 -textvariable numing1
+entry .iosetup.a.ent.en4 -width 6 -textvariable numdat1
+tk_optionMenu .iosetup.a.ent.menu jactip1 Analytical Numerical
+
+trace variable numsta1 w forcewich
+trace variable numusc1 w forcewich
+trace variable numing1 w forcewich
+trace variable numdat1 w forcewich
+
+pack .iosetup.a.ent.en1 -side top -pady 9
+pack .iosetup.a.ent.en2 -side top -pady 9
+pack .iosetup.a.ent.en3 -side top -pady 9
+pack .iosetup.a.ent.en4 -side top -pady 9
+pack .iosetup.a.ent.menu -side top -pady 6
+
+frame .iosetup.sepa1 -relief ridge -bd 1 -height 2
+pack .iosetup.sepa1 -side top -fill x -pady .2c
+
+frame .iosetup.b
+pack .iosetup.b -side top -anchor w -pady 1m
+
+button .iosetup.b.bu1 -text Ok -width 6 -command {checkio}
+button .iosetup.b.bu2 -text Cancel -width 6 -command {destroy .iosetup}
+pack .iosetup.b.bu1 -side left -anchor w -padx 2m
+pack .iosetup.b.bu2 -side left -anchor w -padx 2m
+}
+
+proc checkio {} {
+
+# SVOLGE UNA SERIE DI CONTROLLI SUL NUMERO DI VARIABILI E DATI
+# ASSEGNATI DALL'UTENTE NELLA MASCHERA DI I/O
+
+global numsta numusc numing numdat jactip modo
+global numsta1 numusc1 numing1 numdat1 jactip1 jreset
+
+if {$numsta1 > 100 || $numusc1 > 100} {
+ set button [tk_messageBox -icon warning -type ok \
+         -title Notice -parent .iosetup -message {The number of\
+         output variables must be less or equal than 100. Modify to continue}]
+} elseif {$numing1 > 200} {
+ set button [tk_messageBox -icon warning -type ok \
+         -title Notice -parent .iosetup -message {The number of\
+         input variables must be less or equal than 200. Modify to continue}]
+} elseif {$numdat1 > 100} {
+ set button [tk_messageBox -icon warning -type ok \
+         -title Notice -parent .iosetup -message {The number of\
+         geometrical data must be less or equal than 100. Modify to continue}]
+} else {
+ set numsta $numsta1
+ set numusc $numusc1
+ set numing $numing1
+ set numdat $numdat1
+ set jactip $jactip1
+
+ destroy .iosetup
+ setta $modo
+}
+}   
+
+
+proc checkmod {} {
+
+# SVOLGE UNA SERIE DI CONTROLLI SULLE VARIABILI E I DATI ASSEGNATI
+# DALL'UTENTE
+
+global descr varfor norm numsta numusc numing numdat modo 
+global dsymb vardat modulo descrmod jactip jacto jreset ireset
+
+if {![regexp -nocase {[a-z]} [string range $modulo 0 0]] || [string length $modulo] < 4} {
+ set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message {Invalid module name. Modify to continue}]
+ return
+}
+  for {set y 1} {$y <= $numsta} {incr y} {
+  if ![regexp -nocase {[a-z]} [string range $varfor(1,$y) 0 0]] {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Invalid state output\
+           variable symbol: ($varfor(1,$y)). Modify to continue"]
+   return
+  }
+  if {[string length $varfor(1,$y)] < 4} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "The length of the symbol\
+           $varfor(1,$y) is less than 4 (state variable). Modify to continue"]
+   return
+  }
+  if {[string range $norm(1,$y) 0 0] == "" || [string range $norm(1,$y) 0 0] == " "} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Invalid norm. value ($norm(1,$y))\
+            of state output variable $varfor(1,$y). Modify to continue"]
+   return
+}
+}
+for {set y 1} {$y <= $numusc} {incr y} {
+  if ![regexp -nocase {[a-z]} [string range $varfor(2,$y) 0 0]] {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Invalid algebr. output\
+           variable symbol: ($varfor(2,$y)). Modify to continue"]
+   return
+  }
+  if {[string length $varfor(2,$y)] < 4} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "The length of the symbol\
+           $varfor(2,$y) is less than 4 (alg. variable). Modify to continue"]
+   return
+  }
+  if {[string range $norm(2,$y) 0 0] == "" || [string range $norm(2,$y) 0 0] == " "} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Invalid norm. value ($norm(2,$y))\
+            of algebr. output variable $varfor(2,$y). Modify to continue"]
+   return
+}
+}
+for {set y 1} {$y <= $numing} {incr y} {
+  if ![regexp -nocase {[a-z]} [string range $varfor(3,$y) 0 0]] {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Invalid input\
+           variable symbol: ($varfor(3,$y)). Modify to continue"]
+   return
+  }
+  if {[string length $varfor(3,$y)] < 4} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "The length of the symbol\
+           $varfor(3,$y) is less than 4 (input variable). Modify to continue"]
+   return
+  }
+  if {[string range $norm(3,$y) 0 0] == "" || [string range $norm(3,$y) 0 0] == " "} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Invalid norm. value ($norm(3,$y))\
+            of input variable $varfor(3,$y). Modify to continue"]
+   return
+}
+}
+for {set y 1} {$y <= $numdat} {incr y} {
+  if ![regexp -nocase {[a-z]} [string range $vardat($y) 0 0]] {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Invalid fortran variable of geometrical data n. $y.\
+           Modify to continue"]
+   return
+  }
+  if {$dsymb($y) == ""} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Invalid data symbol ( ). Modify to continue"]
+   return
+  }
+  if {$vardat($y) == $modulo} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Illegal identity between geom. data fortr. \
+           variable $vardat($y) and module name. Modify to continue"]
+   return
+  }
+}
+for {set y 1} {$y <= $numsta} {incr y} {
+ if {$varfor(1,$y) == $modulo} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Illegal identity between variable symbol\
+           $varfor(1,$y) and module name. Modify to continue"]
+   return
+} 
+ for {set z [expr $y+1]} {$z <= $numsta} {incr z} {
+  if {$varfor(1,$y) == $varfor(1,$z)} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Illegal identity between variable symbols\
+           $varfor(1,$y). Modify to continue"]
+   return
+}
+}
+}
+for {set y 1} {$y <= $numusc} {incr y} {
+ if {$varfor(2,$y) == $modulo} {
+  set button [tk_messageBox -icon warning -type ok \
+         -title Notice -parent . -message "Illegal identity between variable symbol\
+          $varfor(2,$y) and module name. Modify to continue"]
+  return
+}
+ for {set z [expr $y+1]} {$z <= $numusc} {incr z} {
+  if {$varfor(2,$y) == $varfor(2,$z)} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Illegal identity between variable symbols\
+           $varfor(2,$y). Modify to continue"]
+   return
+}
+}
+}
+for {set y 1} {$y <= $numing} {incr y} {
+ if {$varfor(3,$y) == $modulo} {
+  set button [tk_messageBox -icon warning -type ok \
+         -title Notice -parent . -message "Illegal identity between variable symbol\
+          $varfor(3,$y) and module name. Modify to continue"]
+  return
+}
+ for {set z [expr $y+1]} {$z <= $numing} {incr z} {
+  if {$varfor(3,$y) == $varfor(3,$z)} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Illegal identity between variable symbols\
+           $varfor(3,$y). Modify to continue"]
+   return
+}
+}					
+}
+for {set y 1} {$y <= $numsta} {incr y} {
+ for {set z 1} {$z <= $numusc} {incr z} {
+  if {$varfor(1,$y) == $varfor(2,$z)} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Illegal identity between variable symbols\
+           $varfor(1,$y). Modify to continue"]
+   return
+}
+}
+}
+for {set y 1} {$y <= $numsta} {incr y} {
+ for {set z 1} {$z <= $numing} {incr z} {
+  if {$varfor(1,$y) == $varfor(3,$z)} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Illegal identity between variable symbols\
+           $varfor(1,$y). Modify to continue"]
+   return
+}
+}
+}
+for {set y 1} {$y <= $numusc} {incr y} {
+ for {set z 1} {$z <= $numing} {incr z} {
+  if {$varfor(2,$y) == $varfor(3,$z)} {
+   set button [tk_messageBox -icon warning -type ok \
+          -title Notice -parent . -message "Illegal identity between variable symbols\
+           $varfor(2,$y). Modify to continue"]
+   return
+}
+}
+}
+
+set button [tk_messageBox -icon info -type ok \
+          -title Notice -parent . -message "Ok. New module definitions correct"]
+.topmenu.file entryconfigure 0 -state normal
+.topmenu.config entryconfigure 1 -state normal
+.topmenu.user entryconfigure 0 -state normal
+.topmenu.user entryconfigure 2 -state normal
+.topmenu.user entryconfigure 3 -state normal
+
+set jreset 1
+set ireset 1
+
+if {$jactip == "Analytical"} {
+ .topmenu.user entryconfigure 1 -state normal
+}
+
+set toprow [expr $numusc+$numsta]
+set topcol [expr $numusc+$numsta+$numing]
+for {set x 1} {$x <= $toprow} {incr x} {
+ for {set y 1} {$y <= $topcol} {incr y} {
+  set jacto($x,$y) 1
+ }
+}
+}
+
+
+proc jactopo {} {
+
+# COSTRUISCE LA MASCHERA DI VISUALIZZAZIONE E ASSEGNAZIONE DELLA
+# TOPOLOGIA DELLO JACOBIANO
+
+global descr varfor norm numsta numusc numing numdat modo
+global dsymb vardat modulo descrmod jactip jacto jacto1 jreset
+
+toplevel .jacmat
+wm maxsize .jacmat 520 350
+wm minsize .jacmat 520 350
+wm title .jacmat "NEWMOD - JACOBIAN MATRIX TOPOLOGY"
+
+.topmenu.config entryconfigure 0 -state disabled
+
+if {$jactip == "Analytical"} {
+ .topmenu.user entryconfigure 1 -state disabled
+}
+
+set numrow [expr $numsta+$numusc]
+set numcol [expr $numsta+$numusc+$numing]
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ for {set j 1} {$j <= $numcol} {incr j} {
+  set jacto1($i,$j) $jacto($i,$j)
+ }
+}
+
+frame .jacmat.a
+pack .jacmat.a -side top -anchor w
+
+label .jacmat.a.lab1 -text Equations
+label .jacmat.a.lab2 -text Variables
+pack .jacmat.a.lab1 -side left -anchor w -pady 2m -padx 1m
+pack .jacmat.a.lab2 -side left -anchor w -padx 45m -pady 2m
+
+frame .jacmat.b
+pack .jacmat.b -side top -anchor w	
+
+tixScrolledWindow .jacmat.b.topo -scrollbar auto -height 250 -width 495
+set f [.jacmat.b.topo subwidget window]
+pack .jacmat.b.topo -side left -fill x -padx 3m -pady 1m
+
+frame $f.colonna0
+pack  $f.colonna0 -side left -anchor n -padx 5m -pady 2m
+label $f.colonna0.top -text "****" -font {Courier 8}
+pack  $f.colonna0.top -side top -anchor w -pady 2m
+
+for {set i 1} {$i <= [expr $numsta+$numusc]} {incr i} {
+ label $f.colonna0.lab$i -font {Courier 8} -text $i
+ pack $f.colonna0.lab$i -side top -anchor w -pady 3m
+}  
+
+for {set i 1} {$i <= $numsta} {incr i} {
+ frame $f.colonnas$i
+ pack  $f.colonnas$i -side left -anchor n -padx 5m -pady 2m
+ label $f.colonnas$i.lab -text $varfor(1,$i) -font {Courier 8}
+ pack $f.colonnas$i.lab -side top -anchor w -pady 2m
+ for {set j 1} {$j <= $numrow} {incr j} {
+  checkbutton $f.colonnas$i.ch$j -relief flat -variable jacto1($j,$i)
+  pack $f.colonnas$i.ch$j -side top -anchor w -pady 5
+ }
+}
+for {set i 1} {$i <= $numusc} {incr i} {
+ frame $f.colonnau$i
+ pack  $f.colonnau$i -side left -anchor n -padx 5m -pady 2m
+ set k [expr $numsta+$i]
+ label $f.colonnau$i.lab -text $varfor(2,$i) -font {Courier 8}
+ pack $f.colonnau$i.lab -side top -anchor w -pady 2m
+ for {set j 1} {$j <= $numrow} {incr j} {
+  checkbutton $f.colonnau$i.ch$j -relief flat -variable jacto1($j,$k)
+  pack $f.colonnau$i.ch$j -side top -anchor w -pady 5
+ }
+}
+for {set i 1} {$i <= $numing} {incr i} {
+ frame $f.colonnai$i
+ pack  $f.colonnai$i -side left -anchor n -padx 5m -pady 2m
+ set k [expr $numsta+$numusc+$i]
+ label $f.colonnai$i.lab -text $varfor(3,$i) -font {Courier 8}
+ pack $f.colonnai$i.lab -side top -anchor w -pady 2m
+ for {set j 1} {$j <= $numrow} {incr j} {
+  checkbutton $f.colonnai$i.ch$j -relief flat -variable jacto1($j,$k)					
+  pack $f.colonnai$i.ch$j -side top -anchor w -pady 5
+ }
+}
+
+frame .jacmat.sepa1 -relief ridge -bd 1 -height 2
+pack .jacmat.sepa1 -side top -fill x -pady .2c
+
+frame .jacmat.c
+pack .jacmat.c -side top -anchor w -pady 1m
+
+button .jacmat.c.bu1 -text Ok -width 6 -command {upjac; checksetup}
+button .jacmat.c.bu2 -text Cancel -width 6 -command {\
+                       if {$jactip == "Analytical"} {
+                          .topmenu.user entryconfigure 1 -state normal
+                        }
+                        destroy .jacmat; checksetup}
+
+pack .jacmat.c.bu1 -side left -anchor w -padx 2m
+pack .jacmat.c.bu2 -side left -anchor w -padx 2m
+
+}
+
+proc upjac {} {
+
+# ESEGUE L'UPDATE DELLA TOPOLOGIA DELLO JACOBIANO QUANDO
+# RICHIESTO DALL'UTENTE MEDIANTE BOTTONE
+
+global descr varfor norm numsta numusc numing numdat modo
+global dsymb vardat modulo descrmod jactip jacto jacto1
+
+set numrow [expr $numsta+$numusc]
+set numcol [expr $numsta+$numusc+$numing]
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ for {set j 1} {$j <= $numcol} {incr j} {
+  set jacto($i,$j) $jacto1($i,$j)
+ }
+}
+
+if {$jactip == "Analytical"} {
+ .topmenu.user entryconfigure 1 -state normal
+}
+destroy .jacmat
+}
+
+
+proc datasec {} {
+
+# CREA LA MASCHERA PER L'INPUT DELLA SEZIONE DATI DEL MODULO
+# (SUBROUTINE I2)
+
+global i2decl i2uscod
+
+.topmenu.config entryconfigure 0 -state disabled
+
+toplevel .datai2
+wm title .datai2 "NEWMOD - I2 DATA SECTION"
+
+frame .datai2.a
+pack .datai2.a -side top -anchor w -padx 3m -pady 2m
+
+label .datai2.a.decl -text Declarations
+pack .datai2.a.decl -side top -anchor w -padx 1m -pady 1m
+
+set w .datai2.a
+text $w.text -relief sunken -bd 2 -yscrollcommand "$w.yscroll set" \
+             -xscrollcommand "$w.xscroll set" -setgrid 1 -height 8
+scrollbar $w.yscroll -command "$w.text yview"
+scrollbar $w.xscroll -command "$w.text xview" -orient horizontal
+pack $w.yscroll -side right -fill y
+pack $w.text -side top -anchor w -padx 1m -pady 1m
+pack $w.xscroll -side bottom -fill x
+$w.text insert 0.0 $i2decl
+
+frame .datai2.sepa1 -relief ridge -bd 1 -height 2
+pack .datai2.sepa1 -side top -fill x -pady .3c
+
+frame .datai2.b
+pack .datai2.b -side top -anchor w -padx 3m -pady 2m
+
+label .datai2.b.decl -text "User code"
+pack .datai2.b.decl -side top -anchor w -padx 1m -pady 1m
+
+set w .datai2.b
+text $w.text -relief sunken -bd 2 -yscrollcommand "$w.yscroll set" \
+             -xscrollcommand "$w.xscroll set" -setgrid 1 -height 10
+scrollbar $w.yscroll -command "$w.text yview"
+scrollbar $w.xscroll -command "$w.text xview" -orient horizontal
+pack $w.yscroll -side right -fill y
+pack $w.text -side top -anchor w -padx 1m -pady 1m
+pack $w.xscroll -side bottom -fill x
+$w.text insert 0.0 $i2uscod
+
+frame .datai2.sepa2 -relief ridge -bd 1 -height 2
+pack .datai2.sepa2 -side top -fill x -pady .3c
+
+frame .datai2.c
+pack .datai2.c -side top -anchor w -padx 3m -pady 2m
+
+button .datai2.c.bu1 -text Ok -width 6 -command {set i2decl [.datai2.a.text get 1.0 "end-1 chars"]; \
+                       set i2uscod [.datai2.b.text get 1.0 "end-1 chars"]; destroy .datai2; checksetup}
+button .datai2.c.bu2 -text Apply -width 6 -command {set i2decl [.datai2.a.text get 1.0 "end-1 chars"]; \
+                       set i2uscod [.datai2.b.text get 1.0 "end-1 chars"]}
+button .datai2.c.bu3 -text Cancel -width 6 -command {destroy .datai2; checksetup}
+
+pack .datai2.c.bu1 -side left -anchor w -padx 1m -pady 1m
+pack .datai2.c.bu2 -side left -anchor w -padx 2m -pady 1m	
+pack .datai2.c.bu3 -side left -anchor w -padx 1m -pady 1m
+
+}
+
+proc jacsec {} {
+
+# CREA LA MASCHERA PER L'INPUT DELLO JACOBIANO
+# ANALITICO DEL MODULO
+
+global numsta numusc numing varfor jacto
+global jcdecl jctext ajac
+
+.topmenu.config entryconfigure 0 -state disabled
+
+toplevel .jacoba
+wm title .jacoba "NEWMOD - JC JACOBIAN MATRIX"
+
+frame .jacoba.a
+pack .jacoba.a -side top -anchor w -padx 3m -pady 2m
+
+label .jacoba.a.decl -text Declarations
+pack .jacoba.a.decl -side top -anchor w -padx 1m -pady 1m
+
+set w .jacoba.a
+text $w.text -relief sunken -bd 2 -yscrollcommand "$w.yscroll set" \
+             -xscrollcommand "$w.xscroll set" -setgrid 1 -height 5
+scrollbar $w.yscroll -command "$w.text yview"
+scrollbar $w.xscroll -command "$w.text xview" -orient horizontal
+pack $w.yscroll -side right -fill y
+pack $w.text -side top -anchor w -padx 1m -pady 1m
+pack $w.xscroll -side bottom -fill x
+$w.text insert 0.0 $jcdecl
+
+frame .jacoba.sepa1 -relief ridge -bd 1 -height 2
+pack .jacoba.sepa1 -side top -fill x -pady .1c
+
+frame .jacoba.b
+pack .jacoba.b -side top -anchor w -padx 3m -pady 2m
+
+label .jacoba.b.decl -text "Text"
+pack .jacoba.b.decl -side top -anchor w -padx 1m -pady 1m
+
+set w .jacoba.b
+text $w.text -relief sunken -bd 2 -yscrollcommand "$w.yscroll set" \
+             -xscrollcommand "$w.xscroll set" -setgrid 1 -height 5
+scrollbar $w.yscroll -command "$w.text yview"
+scrollbar $w.xscroll -command "$w.text xview" -orient horizontal
+pack $w.yscroll -side right -fill y
+pack $w.text -side top -anchor w -padx 1m -pady 1m
+pack $w.xscroll -side bottom -fill x
+$w.text insert 0.0 $jctext
+
+frame .jacoba.sepa2 -relief ridge -bd 1 -height 2
+pack .jacoba.sepa2 -side top -fill x -pady .1c
+
+frame .jacoba.c
+pack .jacoba.c -side top -anchor w -padx 3m -pady 2m
+
+label .jacoba.c.decl -text "Jacobian Matrix Coefficients"
+pack .jacoba.c.decl -side top -anchor w -padx 1m -pady 1m
+
+tixScrolledWindow .jacoba.c.ajac -scrollbar auto -height 100 -width 500
+set f [.jacoba.c.ajac subwidget window]
+
+set numrow [expr $numusc+$numsta]
+set numcol [expr $numusc+$numsta+$numing]
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ for {set j 1} {$j <= $numcol} {incr j} {
+  
+  set ij "$i\_$j"
+  
+  if {$jacto($i,$j) == 1} {
+  
+   frame $f.$ij
+   pack  $f.$ij -side top -anchor w -padx 1m -pady 1m
+   if {$i <= $numsta} {
+    set k 1
+    set z $i
+   } else {
+    set k 2
+    set z [expr $i-$numsta]
+   }
+   label $f.$ij.lab -text "Residual # $i - Variable $varfor($k,$z) ($j)"
+   pack  $f.$ij.lab -side top -anchor w
+ 
+   frame $f.b$ij
+   pack  $f.b$ij -side top -anchor w -padx 1m -pady 1m
+
+   frame $f.b$ij.left
+   pack  $f.b$ij.left -side left -anchor nw
+  
+   label $f.b$ij.left.lab -text "AJAC ($i,$j) = "
+   pack  $f.b$ij.left.lab -side left -anchor nw
+
+   frame $f.b$ij.right
+   pack  $f.b$ij.right -side left -anchor w
+
+   set w $f.b$ij.right
+
+   text $w.text -relief sunken -bd 2 -yscrollcommand "$w.yscroll set" \
+              -xscrollcommand "$w.xscroll set" -setgrid 1 -height 2 -width 60
+   scrollbar $w.yscroll -command "$w.text yview"
+   scrollbar $w.xscroll -command "$w.text xview" -orient horizontal
+   pack $w.yscroll -side right -fill y
+   pack $w.text -side top -anchor w -padx 1m
+   pack $w.xscroll -side bottom -fill x
+  
+   set ijsum [expr $i+$j]
+  
+   if [info exists ajac($i,$j)] {
+    $w.text insert 0.0 $ajac($i,$j)
+   }
+  }
+ }
+}
+
+pack .jacoba.c.ajac -side left -fill x -padx 2m -pady 1m
+
+frame .jacoba.d
+pack .jacoba.d -side top -anchor w -padx 3m -pady 2m
+
+button .jacoba.d.bu1 -text Ok -width 6 -command {readajac; destroy .jacoba; checksetup} 
+button .jacoba.d.bu2 -text Apply -width 6 -command {readajac}
+button .jacoba.d.bu3 -text Cancel -width 6 -command {destroy .jacoba; checksetup}
+
+pack .jacoba.d.bu1 -side left -anchor w -padx 1m -pady 1m
+pack .jacoba.d.bu2 -side left -anchor w -padx 2m -pady 1m	
+pack .jacoba.d.bu3 -side left -anchor w -padx 1m -pady 1m
+
+}
+
+proc readajac {} {
+
+# LEGGE DALLA MASCHERA I DATI (DECLARATION, TEXT E 
+# MATRICE) RELATIVI ALLO JACOBIANO ANALITICO
+
+global numsta numusc numing jacto
+global jcdecl jctext ajac
+
+set jcdecl [.jacoba.a.text get 1.0 "end-1 chars"]
+
+set jctext [.jacoba.b.text get 1.0 "end-1 chars"]
+
+set numrow [expr $numsta+$numusc]
+set numcol [expr $numsta+$numusc+$numing]
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ for {set j 1} {$j <= $numcol} {incr j} {
+  set ij "$i\_$j"
+  if {$jacto($i,$j) == 1} {
+   set ajac($i,$j) [.jacoba.c.ajac.f2.window.b$ij.right.text get 1.0 "end-1 chars"]
+  }
+ }  
+}
+}
+
+
+proc resec {} {
+
+# CREA LA MASCHERA PER L'INPUT DELLA SEZIONE
+# RESIDUI DEL MODULO
+
+global numsta numusc numing
+global rndecl rntext rni
+
+.topmenu.config entryconfigure 0 -state disabled
+
+toplevel .residui
+wm title .residui "NEWMOD - RESIDUAL SECTION"
+
+frame .residui.a
+pack .residui.a -side top -anchor w -padx 3m -pady 2m
+
+label .residui.a.decl -text Declarations
+pack .residui.a.decl -side top -anchor w -padx 1m -pady 1m
+
+set w .residui.a
+text $w.text -relief sunken -bd 2 -yscrollcommand "$w.yscroll set" \
+             -xscrollcommand "$w.xscroll set" -setgrid 1 -height 5
+scrollbar $w.yscroll -command "$w.text yview"
+scrollbar $w.xscroll -command "$w.text xview" -orient horizontal
+pack $w.yscroll -side right -fill y
+pack $w.text -side top -anchor w -padx 1m -pady 1m
+pack $w.xscroll -side bottom -fill x
+$w.text insert 0.0 $rndecl
+
+frame .residui.sepa1 -relief ridge -bd 1 -height 2
+pack .residui.sepa1 -side top -fill x -pady .1c
+
+frame .residui.b
+pack .residui.b -side top -anchor w -padx 3m -pady 2m
+
+label .residui.b.decl -text "User code"
+pack .residui.b.decl -side top -anchor w -padx 1m -pady 1m
+
+set w .residui.b
+text $w.text -relief sunken -bd 2 -yscrollcommand "$w.yscroll set" \
+             -xscrollcommand "$w.xscroll set" -setgrid 1 -height 5
+scrollbar $w.yscroll -command "$w.text yview"
+scrollbar $w.xscroll -command "$w.text xview" -orient horizontal
+pack $w.yscroll -side right -fill y
+pack $w.text -side top -anchor w -padx 1m -pady 1m
+pack $w.xscroll -side bottom -fill x
+$w.text insert 0.0 $rntext
+
+frame .residui.sepa2 -relief ridge -bd 1 -height 2
+pack .residui.sepa2 -side top -fill x -pady .1c
+
+frame .residui.c
+pack .residui.c -side top -anchor w -padx 3m -pady 2m
+
+label .residui.c.decl -text "Residuals"
+pack .residui.c.decl -side top -anchor w -padx 1m -pady 1m
+
+tixScrolledWindow .residui.c.ajac -scrollbar auto -height 100 -width 500
+set f [.residui.c.ajac subwidget window]
+
+set numrow [expr $numusc+$numsta]
+
+for {set i 1} {$i <= $numrow} {incr i} {
+  
+  frame $f.b$i
+  pack  $f.b$i -side top -anchor w -padx 1m -pady 1m
+
+  frame $f.b$i.left
+  pack  $f.b$i.left -side left -anchor nw
+  
+  label $f.b$i.left.lab -text "RNI ($i)  = "
+  pack  $f.b$i.left.lab -side left -anchor nw
+
+  frame $f.b$i.right
+  pack  $f.b$i.right -side left -anchor w
+
+  set w $f.b$i.right
+
+  text $w.text -relief sunken -bd 2 -yscrollcommand "$w.yscroll set" \
+             -xscrollcommand "$w.xscroll set" -setgrid 1 -height 3 -width 65
+  scrollbar $w.yscroll -command "$w.text yview"
+  scrollbar $w.xscroll -command "$w.text xview" -orient horizontal
+  pack $w.yscroll -side right -fill y
+  pack $w.text -side top -anchor w -padx 1m
+  pack $w.xscroll -side bottom -fill x
+  if [info exists rni($i)] {
+   $w.text insert 0.0 $rni($i)
+  }
+}
+
+pack .residui.c.ajac -side left -fill x -padx 2m -pady 1m
+
+frame .residui.d
+pack .residui.d -side top -anchor w -padx 3m -pady 2m
+
+button .residui.d.bu1 -text Ok -width 6 -command {readres; destroy .residui; checksetup} 
+button .residui.d.bu2 -text Apply -width 6 -command {readres}
+button .residui.d.bu3 -text Cancel -width 6 -command {destroy .residui; checksetup}
+
+pack .residui.d.bu1 -side left -anchor w -padx 1m -pady 1m
+pack .residui.d.bu2 -side left -anchor w -padx 2m -pady 1m	
+pack .residui.d.bu3 -side left -anchor w -padx 1m -pady 1m
+
+}
+
+
+
+proc readres {} {
+
+# LEGGE DALLA MASCHERA I DATI (DECLARATION, USER CODE 
+# E RESIDUI) RELATIVI ALLA SEZIONE RESIDUI
+
+global numsta numusc numing
+global rndecl rntext rni
+
+set rndecl [.residui.a.text get 1.0 "end-1 chars"]
+
+set rntext [.residui.b.text get 1.0 "end-1 chars"]
+
+set numrow [expr $numsta+$numusc]
+
+for {set i 1} {$i <= $numrow} {incr i} {
+  set rni($i) [.residui.c.ajac.f2.window.b$i.right.text get 1.0 "end-1 chars"]
+}
+}
+
+
+proc equsec {} {
+
+# CREA LA MASCHERA CONTENENTE I DATI 
+# RELATIVI ALLA SUBROUTINE D1
+
+global numsta numusc numing varfor
+global equdescr equnit equnorm
+global equdescr1 equnit1 equnorm1
+
+.topmenu.config entryconfigure 0 -state disabled
+
+toplevel .equa
+wm title .equa "NEWMOD - D1 EQUATIONS SECTION"
+
+frame .equa.a
+pack .equa.a -side top -anchor w -padx 3m -pady 2m
+
+label .equa.a.lab1 -text "\ \ \ \ \ \ \ \ Description"
+label .equa.a.lab2 -text "Unit\ \ \ \ \ \ \ \ \ \ \ \ \ \ "
+label .equa.a.lab3 -text "Norm. Const."
+
+pack .equa.a.lab1 -side left -anchor w -padx 4c -pady 1m
+pack .equa.a.lab2 -side left -anchor w -pady 1m
+pack .equa.a.lab3 -side right -anchor e -padx 1m -pady 1m
+
+frame .equa.b
+pack .equa.b -side top -anchor w -padx 3m -pady 2m
+
+tixScrolledWindow .equa.b.equaz -scrollbar auto -height 350 -width 550
+set f [.equa.b.equaz subwidget window]
+
+ frame $f.fr1
+ pack $f.fr1 -side left -anchor nw -padx 3m -pady 1m
+
+ frame $f.fr2
+ pack $f.fr2 -side left -anchor nw -padx 1m -pady 1m
+
+ frame $f.fr3
+ pack $f.fr3 -side left -anchor nw -padx 1m -pady 1m
+
+ frame $f.fr4
+ pack $f.fr4 -side left -anchor nw -padx 1m -pady 1m
+
+
+set numrow [expr $numsta+$numusc]
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ 
+ if {$i <= $numsta} {
+  set labequ "STATE EQUATION # $i\ \ \ \ \ \ \ \ \ "
+ } else {
+  set labequ "ALGEBRAIC EQUATION # $i"
+ }
+
+ set equdescr1($i) $equdescr($i)
+ set equnit1($i) $equnit($i)
+ set equnorm1($i) $equnorm($i)
+ 
+ label $f.fr1.lab$i -text $labequ
+ pack $f.fr1.lab$i -side top -anchor nw -pady 6
+
+ entry $f.fr2.ent$i -textvariable equdescr1($i) -relief sunken -width 32
+ pack  $f.fr2.ent$i -side top -anchor nw -padx 1m -pady 1m
+
+ entry $f.fr3.ent$i -textvariable equnit1($i) -relief sunken -width 8
+ pack  $f.fr3.ent$i -side top -anchor nw -padx 1m -pady 1m
+
+ entry $f.fr4.ent$i -textvariable equnorm1($i) -relief sunken -width 12
+ pack  $f.fr4.ent$i -side top -anchor nw -padx 1m -pady 1m
+}
+
+trace variable equdescr1 w forcewidth
+trace variable equnit1 w forcewidth
+trace variable equnorm1 w forcewidth
+
+pack .equa.b.equaz -side left -fill x
+
+frame .equa.c
+pack .equa.c -side top -anchor w -padx 3m -pady 2m
+
+button .equa.c.bu1 -text Ok -width 6 -command {readequa; destroy .equa; checksetup}
+button .equa.c.bu2 -text Apply -width 6 -command {readequa}
+button .equa.c.bu3 -text Cancel -width 6 -command {destroy .equa; checksetup}
+
+pack .equa.c.bu1 -side left -anchor w -padx 1m -pady 1m
+pack .equa.c.bu2 -side left -anchor w -padx 2m -pady 1m	
+pack .equa.c.bu3 -side left -anchor w -padx 1m -pady 1m
+
+}
+
+
+proc readequa {} {
+
+# LEGGE DALLA MASCHERA I DATI 
+# RELATIVI ALLA SUBROUTINE D1
+
+global numsta numusc numing varfor
+global equdescr equnit equnorm
+global equdescr1 equnit1 equnorm1
+
+set numrow [expr $numsta+$numusc]
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ 
+ set equdescr($i) $equdescr1($i)
+ set equnit($i) $equnit1($i)
+ set equnorm($i) $equnorm1($i)
+}
+}
+
+
+proc checksetup {} {
+
+# CONTROLLA CHE NON CI SIANO FINESTRE APERTE
+# PRIMA DI ABILITARE LA VOCE DI MENU I/O SETUP
+
+if {![winfo exists .datai2] && ![winfo exists .jacoba] \
+   && ![winfo exists .residui] && ![winfo exists .equa] \
+   && ![winfo exists .jacmat]} {
+ .topmenu.config entryconfigure 0 -state normal
+}
+}
+ 
+
+proc genefrt {} {
+
+# GENERA IL FILE "MODULO.I" CHE VERRA' LETTO DAL PROGRAMMA IN C
+# CHE GENERA IL FORTRAN DEL MODULO
+
+
+global modulo descrmod numsta numusc numing numdat
+global varfor norm descr dsymb vardat jactip jacto
+global i2decl i2uscod jcdecl jctext ajac
+global rndecl rntext rni equdescr equnit equnorm
+global ireset env
+
+set numrow [expr $numsta+$numusc]
+set numcol [expr $numsta+$numusc+$numing]
+
+set nomefile [string tolower "$modulo\.i"]
+
+if [file exists $nomefile] {
+ file delete $nomefile -force
+}
+
+set ifile [open $nomefile w]
+
+# Scrive nome modulo e descrizione
+
+puts $ifile [format "%s  %s" $modulo $descrmod]
+
+# Scrive il numero di variabili e dati
+
+puts $ifile {****   NUM VAR (st,alg,in,data)}
+
+puts $ifile $numsta
+puts $ifile $numusc
+puts $ifile $numing
+puts $ifile $numdat
+
+# Scrive nome variabile, normalizzazione, descrizione
+# per le variabili di stato
+
+puts $ifile {****   STATE VARIABLES}
+
+for {set i 1} {$i <= $numsta} {incr i} {
+ puts $ifile [format "%s %s     %s" $varfor(1,$i) \
+              $norm(1,$i) $descr(1,$i)]
+}
+
+# Scrive nome variabile, normalizzazione, descrizione
+# per le variabili di uscita algebrica
+
+puts $ifile {****   ALGEBRAIC VARIABLES}
+
+for {set i 1} {$i <= $numusc} {incr i} {
+ puts $ifile [format "%s %s     %s" $varfor(2,$i) \
+              $norm(2,$i) $descr(2,$i)] 
+}
+
+# Scrive nome variabile, normalizzazione, descrizione
+# per le variabili di ingresso
+
+puts $ifile {****   INPUT VARIABLES}
+
+for {set i 1} {$i <= $numing} {incr i} {
+ puts $ifile [format "%s %s     %s" $varfor(3,$i) \
+              $norm(3,$i) $descr(3,$i)] 
+}
+
+# Scrive nome variabile, e simbolo
+# per i dati geometrici e fisici
+
+puts $ifile {****   GEOMETRICAL DATA}
+
+for {set i 1} {$i <= $numdat} {incr i} {
+ puts $ifile [format "%-8s  %s" $dsymb($i) $vardat($i)]
+}
+
+# Scrive 0 per jacobiano analitico
+# Scrive 1 per jacobiano numerico
+    
+puts $ifile {****   JACOBIAN TYPE (0 analytical  -  1 numerical)}
+
+if {$jactip == "Analytical"} {
+ puts $ifile 0
+} else {
+ puts $ifile 1
+}
+
+# Definizione della topologia della matrice jacobiana 
+
+puts $ifile {****   JACOBIAN DIPENDENCE COORDINATES (row,col)}
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ for {set j 1} {$j <= $numcol} {incr j} {
+  if {$jacto($i,$j) == 1} {
+    puts $ifile [format "%3d %3d" [expr $i-1] [expr $j-1]]
+  }
+ }
+}
+
+# Definizione della sezione I2 del modulo
+
+puts $ifile {****   DATA SECTION I2: Declarations}
+
+puts $ifile $i2decl
+
+puts $ifile {****   DATA SECTION I2: Code}
+
+puts $ifile $i2uscod 
+
+# Definizione della sezione JACOBIANO ANALITICO del modulo
+
+puts $ifile {****   JACOBIAN SECTION JC: Declarations}
+
+puts $ifile $jcdecl
+
+puts $ifile {****   SECTION JC: Text}
+
+puts $ifile $jctext
+
+puts $ifile {****   SECTION JC: Coefficients}
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ for {set j 1} {$j <= $numcol} {incr j} {
+  if {$jacto($i,$j) == 1} {
+   if {$i <= $numsta} {
+    set k 1
+    set z $i
+   } else {
+    set k 2
+    set z [expr $i-$numsta]
+   }
+
+   puts $ifile [format "++++   Residual %3d - Variable %s\
+                (%3d)" $i $varfor($k,$z) $j]
+   
+   puts $ifile $ajac($i,$j)
+  } 
+ }             
+}
+
+# Definizione della sezione RESIDUI del modulo
+
+puts $ifile {****   RESIDUALS SECTION: Declarations}
+
+puts $ifile $rndecl
+
+puts $ifile {****   RESIDUALS SECTION: Code}
+
+puts $ifile $rntext
+
+puts $ifile {****   RESIDUALS SECTION: Residuals}
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ puts $ifile [format "++++   RESIDUALS EQUATIONS %d" [expr $i-1]]
+ puts $ifile $rni($i)
+} 
+
+# Definizione della sezione D1 del modulo
+
+puts $ifile {****   EQUATIONS SECTION (Description,Unit,Norm. constant)}
+
+for {set i 1} {$i <= $numrow} {incr i} {
+ puts $ifile [format "%-50s %-6s %-8s"\
+              $equdescr($i) $equnit($i) $equnorm($i)]
+}              
+
+# Chiude il file e genera il fortran del modulo
+
+close $ifile
+set ireset 0
+exec $env(LG_NEWMOD)/genera_ftn $modulo
+
+# Aggiorna la lista moduli
+
+set lismod [open $env(LG_LIBUT)/L_MODULI.DAT r]
+set temp [open lmod.tmp w]
+
+while {[string compare $modulo [string range [set buff [gets $lismod]] 0 3]] == 1} {
+ if {[eof $lismod] == 1} {
+  break
+ }
+ puts $temp $buff
+}
+
+if {$modulo == [string range $buff 0 3]} {
+  set mex [tk_messageBox -icon warning -type ok \
+          -title Warning -parent . -message "The module $modulo already exists in\
+           L_MODULI.DAT"]
+  close $lismod
+  close $temp
+  file delete lmod.tmp -force
+  return
+ }
+
+
+puts $temp [format "%s  %s" $modulo $descrmod]
+puts $temp $buff
+
+while {[eof $lismod] != 1} {
+ puts $temp [gets $lismod]
+}
+
+close $lismod
+close $temp
+
+file delete $env(LG_LIBUT)/L_MODULI.DAT -force
+
+file copy lmod.tmp $env(LG_LIBUT)/L_MODULI.DAT
+
+file delete lmod.tmp -force 
+
+
+set question [tk_messageBox -icon info  -type ok \
+          -title Notice -parent . -message "Module $modulo has \
+           been succesfully created"]
+
+
+.topmenu.view entryconfigure 0 -state normal
+
+}
+
+proc lancialibr {} {
+
+# LANCIA IL PROGRAMMA LIBRARIAN
+
+global env
+set comm1 [info nameofexecutable]
+set comm2 "$env(LG_TIX)/libraria.tix"
+exec $comm1 -f $comm2 &
+destroy .
+}
+
+
+
+proc delall {} {
+
+# ESEGUE IL CHECK PRIMA DI CHIUDERE 
+# LA NEWMOD
+
+global ireset
+
+if {$ireset == 1} {
+ set question [tk_messageBox -icon question -type yesnocancel \
+          -title Warning -parent . -message "You have made changes. \n\
+           Do you want to save information ?"]
+ if {$question == "no"} {
+  destroy .
+ } elseif {$question == "cancel"} {
+  return
+ } else {
+  genefrt
+  lancialibr
+ }   
+           
+} else {
+
+ lancialibr           
+ 
+} 
+}
+
+
+
+

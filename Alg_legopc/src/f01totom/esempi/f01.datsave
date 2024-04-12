@@ -1,0 +1,338 @@
+****
+GEN5      BLOCCO (0___) - GEN5 - 5th order synchronous machine
+RGV2      BLOCCO (10__) - RGV2 - Automatic Voltage Regulator
+ZAVO      BLOCCO (11__) - ZAVO - Ballast load
+RGV2      BLOCCO (12__) - RGV2 - Automatic Voltage Regulator
+LINE      BLOCCO (1___) - LINE - Electrical line
+DREL      BLOCCO (29__) - DREL - Electrical signals branch
+SBLE      BLOCCO (2___) - SBLE - Electrical bus (for LINEs interco
+NODO      BLOCCO (32__) - NODO - Active power mesure
+SBLE      BLOCCO (3___) - SBLE - Electrical bus (for LINEs interco
+LINE      BLOCCO (5___) - LINE - Electrical line
+GEN5      BLOCCO (6___) - GEN5 - 5th order synchronous machine
+CAR1      BLOCCO (8___) - CAR1 - Elettrical load
+SBLE      BLOCCO (9___) - SBLE - Electrical bus (for LINEs interco
+****
+DUEGEN
+****
+GEN50___  BL.-0___- **** MODULO GEN5 - GEN5 - 5th order synchronous machine
+OMGA0___  --US-- VELOCITA' ANGOLARE
+E1Q00___  --US-- TENSIONE TRANSITORIA ASSE Q
+E2Q00___  --US-- TENSIONE SUBTRANSITORIA ASSE Q
+E2D00___  --US-- TENSIONE SUBTRANSITORIA ASSE D
+DE000___  --UA-- ANGOLO DELL'ASSE D DEL ROTORE RIFERITO (RAD)
+UMMA0___  --UA-- MODULO TENSIONE MORSETTI MACCHINA [V]
+FAMA0___  --UA-- FASE TENSIONE MORSETTI MACCHINA [rad]
+QATT0___  --UA-- POTENZA ELETTRICA ATTIVA [W]
+QREA0___  --UA-- POTENZA ELETTRICA REATTIVA [VAR]
+IR000___  --UA-- CORRENTE ATTIVA EROGATA
+IX000___  --UA-- CORRENTE REATTIVA EROGATA
+FREQ0___  --UA-- FREQUENZA [Hz]
+IFLD0___  --UA-- CORRENTE DI ECCITAZIONE
+ORIN0___  --IN-- VELOCITA ANGOLARE DEL SISTEMA DI RIFERIMENTO
+DRIN0___  --IN-- ANGOLO DEL ROTORE DEL SISTEMA DI RIFERIMENTO
+V1RE2___  --IN-- #UR000___#....................<===SBLE2___  BL.-2___-
+V1IM2___  --IN-- #UX000___#....................<===SBLE2___  BL.-2___-
+VF0010__  --IN-- #UF000___#....................<===RGV210__  BL.-10__-
+QMEC0___  --IN-- POTENZA MECCANICA
+SINT0___  --IN-- VARIABILE LOGICA MACCHINA CONNESSA IN RETE
+SFER0___  --IN-- VARIABILE LOGICA MACCHINA ARRESTATA
+SMRI0___  --IN-- VARIABILE LOGICA MACCHINA AUTORIFERITA
+OMRI0___  --IN-- VELOCITA ANGOLARE PER MACCHINA AUTORIFERITA
+****
+****
+RGV210__  BL.-10__- **** MODULO RGV2 - RGV2 - Automatic Voltage Regulator
+VOEX10__  --US-- STATO DEL LIMITATORE SOVRAECCITAZIONE
+VUEX10__  --US-- STATO DEL REGOLATORE SOTTOECCITAZIONE
+VF1110__  --US-- STATO DEL REGOLATORE AUTOMATICO DI TENSIONE
+VOE110__  --UA-- SEGNALE POST CEILING LIMITATORE SOVRAECCITAZIONE
+VUE110__  --UA-- SEGNALE POST CEILING LIMITATORE SOTTOECCITAZIONE
+VRIF10__  --UA-- SEGNALE DI RIFERIMENTO POST LIMITATORI
+VFAC10__  --UA-- TENSIONE DI ECCITAZIONE ANTE CEILING
+VF0010__  --UA-- TENSIONE DI ECCITAZIONE
+VMD229__  --IN-- #VMMA10__#....................<===DREL29__  BL.-29__-
+FAS229__  --IN-- #FAMA10__#....................<===DREL29__  BL.-29__-
+QAT229__  --IN-- #QATT10__#....................<===DREL29__  BL.-29__-
+QRE229__  --IN-- #QREA10__#....................<===DREL29__  BL.-29__-
+IFI229__  --IN-- #IFLD10__#....................<===DREL29__  BL.-29__-
+VRF010__  --IN-- TENSIONE DI RIFERIMENTO
+VPS010__  --IN-- SEGNALE STABILIZZANTE
+****
+****
+ZAVO11__  BL.-11__- **** MODULO ZAVO - ZAVO - Ballast load
+IR0011__  --UA-- CORRENTE REALE DI CARICO
+IX0011__  --UA-- CORRENTE IMMAG. DI CARICO
+QATT11__  --UA-- POTENZA ATTIVA DI CARICO
+QREA11__  --UA-- POTENZA REATTIVA DI CARICO
+IM0011__  --UA-- MODULO CORRENTE DI CARICO
+VM0011__  --UA-- MODULO TENSIONE AI MORSETTI
+FDIP11__  --UA-- FATTORE DI POTENZA
+V1RE9___  --IN-- #VR0011__#....................<===SBLE9___  BL.-9___-
+V1IM9___  --IN-- #VX0011__#....................<===SBLE9___  BL.-9___-
+P10011__  --IN-- PICCO DI POTENZA ATTIVA
+Q10011__  --IN-- PICCO DI POTENZA REATTIVA
+FP0011__  --IN-- MOLTIPLICATORE DI POTENZA ATTIVA
+FQ0011__  --IN-- MOLTIPLICATORE DI POTENZA REATTIVA
+SISC11__  --IN-- STATO INTERRUTTORE CARICO (1=on)
+****
+****
+RGV212__  BL.-12__- **** MODULO RGV2 - RGV2 - Automatic Voltage Regulator
+VOEX12__  --US-- STATO DEL LIMITATORE SOVRAECCITAZIONE
+VUEX12__  --US-- STATO DEL REGOLATORE SOTTOECCITAZIONE
+VF1112__  --US-- STATO DEL REGOLATORE AUTOMATICO DI TENSIONE
+VOE112__  --UA-- SEGNALE POST CEILING LIMITATORE SOVRAECCITAZIONE
+VUE112__  --UA-- SEGNALE POST CEILING LIMITATORE SOTTOECCITAZIONE
+VRIF12__  --UA-- SEGNALE DI RIFERIMENTO POST LIMITATORI
+VFAC12__  --UA-- TENSIONE DI ECCITAZIONE ANTE CEILING
+VF0012__  --UA-- TENSIONE DI ECCITAZIONE
+UMMA6___  --IN-- #VMMA12__#....................<===GEN56___  BL.-6___-
+FAMA6___  --IN-- #FAMA12__#....................<===GEN56___  BL.-6___-
+QATT6___  --IN-- #QATT12__#....................<===GEN56___  BL.-6___-
+QREA6___  --IN-- #QREA12__#....................<===GEN56___  BL.-6___-
+IFLD6___  --IN-- #IFLD12__#....................<===GEN56___  BL.-6___-
+VRF012__  --IN-- TENSIONE DI RIFERIMENTO
+VPS012__  --IN-- SEGNALE STABILIZZANTE
+****
+****
+LINE1___  BL.-1___- **** MODULO LINE - LINE - Electrical line
+IR011___  --UA-- CORRENTE REALE LATO 1 [A]
+IX011___  --UA-- CORRENTE IMMAGINARIA LATO 1 [A]
+IR021___  --UA-- CORRENTE REALE LATO 2 [A]
+IX021___  --UA-- CORRENTE IMMAGINARIA LATO 2  [A]
+URL11___  --UA-- TENSIONE REALE AI MORSETTI LATO 1 [V]
+UXL11___  --UA-- TENSIONE IMMAGINARIA AI MORSETTI LATO 1 [V]
+URL21___  --UA-- TENSIONE REALE AI MORSETTI LATO 2 [V]
+UXL21___  --UA-- TENSIONE IMMAGINARIA AI MORSETTI LATO 2 [V]
+UULM1___  --UA-- MODULO DELLA CADUTA DI TENSIONE IN LINEA [V]
+QP011___  --UA-- POTENZA ATTIVA LATO 1 [w]
+QQ011___  --UA-- POTENZA REATTIVA LATO 1 [w]
+QP021___  --UA-- POTENZA ATTIVA LATO 2 [w]
+QQ021___  --UA-- POTENZA REATTIVA LATO 2 [w]
+V1RE2___  --IN-- #UR011___#....................<===SBLE2___  BL.-2___-
+V1IM2___  --IN-- #UX011___#....................<===SBLE2___  BL.-2___-
+V1RE3___  --IN-- #UR021___#....................<===SBLE3___  BL.-3___-
+V1IM3___  --IN-- #UX021___#....................<===SBLE3___  BL.-3___-
+STL11___  --IN-- STATO INTERRUTTORE LATO 1 (STL1=1-->INT CHIUSO)
+STL21___  --IN-- STATO INTERRUTTORE LATO 2 (STL2=1-->INT CHIUSO)
+KLIN1___  --IN-- LUNGHEZZA DELLA LINEA [m]
+OMLI1___  --IN-- PULSAZIONE INGRESSO LINEA [rad/sec]
+SLIN1___  --IN-- CONDIZIONE DEL BLOCCO LINEA
+****
+****
+DREL29__  BL.-29__- **** MODULO DREL - DREL - Electrical signals branch
+UMD129__  --UA-- Voltage
+FAS129__  --UA-- Voltage
+QAT129__  --UA-- Active
+QRE129__  --UA-- Reactive
+IFI129__  --UA-- Field
+VMD229__  --UA-- Voltage
+FAS229__  --UA-- Voltage
+QAT229__  --UA-- Active
+QRE229__  --UA-- Reactive
+IFI229__  --UA-- Field
+UMMA0___  --IN-- #UMOD29__#....................<===GEN50___  BL.-0___-
+FAMA0___  --IN-- #FASE29__#....................<===GEN50___  BL.-0___-
+QATT0___  --IN-- #QATT29__#....................<===GEN50___  BL.-0___-
+QREA0___  --IN-- #QREA29__#....................<===GEN50___  BL.-0___-
+IFLD0___  --IN-- #IFIL29__#....................<===GEN50___  BL.-0___-
+****
+****
+SBLE2___  BL.-2___- **** MODULO SBLE - SBLE - Electrical bus (for LINEs interco
+V1RE2___  --UA-- Tensione reale di sbarra
+V1IM2___  --UA-- Tensione immaginaria di sbarra
+IR000___  --IN-- #I1RE2___#....................<===GEN50___  BL.-0___-
+IX000___  --IN-- #I1IM2___#....................<===GEN50___  BL.-0___-
+IR011___  --IN-- #I2RE2___#....................<===LINE1___  BL.-1___-
+IX011___  --IN-- #I2IM2___#....................<===LINE1___  BL.-1___-
+ICRE2___  --IN-- Corrente reale carico
+ICIM2___  --IN-- Corrente immaginaria carico
+SBIS2___  --IN-- Logica di sbarra isolata
+****
+****
+NODO32__  BL.-32__- **** MODULO NODO - NODO - Active power mesure
+USOM32__  --UA-- LINEAR RELATION : OUTPUT VARIABLE
+QAT129__  --IN-- #IN_132__#....................<===DREL29__  BL.-29__-
+****
+****
+SBLE3___  BL.-3___- **** MODULO SBLE - SBLE - Electrical bus (for LINEs interco
+V1RE3___  --UA-- Tensione reale di sbarra
+V1IM3___  --UA-- Tensione immaginaria di sbarra
+IR021___  --IN-- #I1RE3___#....................<===LINE1___  BL.-1___-
+IX021___  --IN-- #I1IM3___#....................<===LINE1___  BL.-1___-
+IR025___  --IN-- #I2RE3___#....................<===LINE5___  BL.-5___-
+IX025___  --IN-- #I2IM3___#....................<===LINE5___  BL.-5___-
+IR008___  --IN-- #ICRE3___#....................<===CAR18___  BL.-8___-
+IX008___  --IN-- #ICIM3___#....................<===CAR18___  BL.-8___-
+SBIS3___  --IN-- Logica di sbarra isolata
+****
+****
+LINE5___  BL.-5___- **** MODULO LINE - LINE - Electrical line
+IR015___  --UA-- CORRENTE REALE LATO 1 [A]
+IX015___  --UA-- CORRENTE IMMAGINARIA LATO 1 [A]
+IR025___  --UA-- CORRENTE REALE LATO 2 [A]
+IX025___  --UA-- CORRENTE IMMAGINARIA LATO 2  [A]
+URL15___  --UA-- TENSIONE REALE AI MORSETTI LATO 1 [V]
+UXL15___  --UA-- TENSIONE IMMAGINARIA AI MORSETTI LATO 1 [V]
+URL25___  --UA-- TENSIONE REALE AI MORSETTI LATO 2 [V]
+UXL25___  --UA-- TENSIONE IMMAGINARIA AI MORSETTI LATO 2 [V]
+UULM5___  --UA-- MODULO DELLA CADUTA DI TENSIONE IN LINEA [V]
+QP015___  --UA-- POTENZA ATTIVA LATO 1 [w]
+QQ015___  --UA-- POTENZA REATTIVA LATO 1 [w]
+QP025___  --UA-- POTENZA ATTIVA LATO 2 [w]
+QQ025___  --UA-- POTENZA REATTIVA LATO 2 [w]
+V1RE9___  --IN-- #UR015___#....................<===SBLE9___  BL.-9___-
+V1IM9___  --IN-- #UX015___#....................<===SBLE9___  BL.-9___-
+V1RE3___  --IN-- #UR025___#....................<===SBLE3___  BL.-3___-
+V1IM3___  --IN-- #UX025___#....................<===SBLE3___  BL.-3___-
+STL15___  --IN-- STATO INTERRUTTORE LATO 1 (STL1=1-->INT CHIUSO)
+STL25___  --IN-- STATO INTERRUTTORE LATO 2 (STL2=1-->INT CHIUSO)
+KLIN5___  --IN-- LUNGHEZZA DELLA LINEA [m]
+OMLI5___  --IN-- PULSAZIONE INGRESSO LINEA [rad/sec]
+SLIN5___  --IN-- CONDIZIONE DEL BLOCCO LINEA
+****
+****
+GEN56___  BL.-6___- **** MODULO GEN5 - GEN5 - 5th order synchronous machine
+OMGA6___  --US-- VELOCITA' ANGOLARE
+E1Q06___  --US-- TENSIONE TRANSITORIA ASSE Q
+E2Q06___  --US-- TENSIONE SUBTRANSITORIA ASSE Q
+E2D06___  --US-- TENSIONE SUBTRANSITORIA ASSE D
+DE006___  --UA-- ANGOLO DELL'ASSE D DEL ROTORE RIFERITO (RAD)
+UMMA6___  --UA-- MODULO TENSIONE MORSETTI MACCHINA [V]
+FAMA6___  --UA-- FASE TENSIONE MORSETTI MACCHINA [rad]
+QATT6___  --UA-- POTENZA ELETTRICA ATTIVA [W]
+QREA6___  --UA-- POTENZA ELETTRICA REATTIVA [VAR]
+IR006___  --UA-- CORRENTE ATTIVA EROGATA
+IX006___  --UA-- CORRENTE REATTIVA EROGATA
+FREQ6___  --UA-- FREQUENZA [Hz]
+IFLD6___  --UA-- CORRENTE DI ECCITAZIONE
+OMGA0___  --IN-- #ORIN6___#....................<===GEN50___  BL.-0___-
+DE000___  --IN-- #DRIN6___#....................<===GEN50___  BL.-0___-
+V1RE9___  --IN-- #UR006___#....................<===SBLE9___  BL.-9___-
+V1IM9___  --IN-- #UX006___#....................<===SBLE9___  BL.-9___-
+VF0012__  --IN-- #UF006___#....................<===RGV212__  BL.-12__-
+QMEC6___  --IN-- POTENZA MECCANICA
+SINT6___  --IN-- VARIABILE LOGICA MACCHINA CONNESSA IN RETE
+SFER6___  --IN-- VARIABILE LOGICA MACCHINA ARRESTATA
+SMRI6___  --IN-- VARIABILE LOGICA MACCHINA AUTORIFERITA
+OMRI6___  --IN-- VELOCITA ANGOLARE PER MACCHINA AUTORIFERITA
+****
+****
+CAR18___  BL.-8___- **** MODULO CAR1 - CAR1 - Elettrical load
+IR008___  --UA-- CORRENTE REALE DI CARICO [A]
+IX008___  --UA-- CORRENTE IMMAG. DI CARICO [A]
+QATT8___  --UA-- POTENZA ATTIVA DI CARICO [W]
+QREA8___  --UA-- POTENZA REATTIVA DI CARICO [W]
+IM008___  --UA-- MODULO CORRENTE DI CARICO [A]
+VM008___  --UA-- MODULO TENSIONE DI CARICO [V]
+FDIP8___  --UA-- FATTORE DI POTENZA DEL CARICO
+V1RE3___  --IN-- #VR008___#....................<===SBLE3___  BL.-3___-
+V1IM3___  --IN-- #VX008___#....................<===SBLE3___  BL.-3___-
+FG008___  --IN-- MOLTIPLICATORE DI CONDUTTANZA
+FB008___  --IN-- MOLTIPLICATORE DI SUSCETTANZA
+SISC8___  --IN-- STATO INTERRUTTORE CARICO (1=on)
+****
+****
+SBLE9___  BL.-9___- **** MODULO SBLE - SBLE - Electrical bus (for LINEs interco
+V1RE9___  --UA-- Tensione reale di sbarra
+V1IM9___  --UA-- Tensione immaginaria di sbarra
+IR006___  --IN-- #I1RE9___#....................<===GEN56___  BL.-6___-
+IX006___  --IN-- #I1IM9___#....................<===GEN56___  BL.-6___-
+IR015___  --IN-- #I2RE9___#....................<===LINE5___  BL.-5___-
+IX015___  --IN-- #I2IM9___#....................<===LINE5___  BL.-5___-
+IR0011__  --IN-- #ICRE9___#....................<===ZAVO11__  BL.-11__-
+IX0011__  --IN-- #ICIM9___#....................<===ZAVO11__  BL.-11__-
+SBIS9___  --IN-- Logica di sbarra isolata
+****
+****      >>>>>>INGRESSI DI TUTTI I MODULI<<<<<<
+ORIN0___  --IN-- VELOCITA ANGOLARE DEL SISTEMA DI RIFERIMENTO
+DRIN0___  --IN-- ANGOLO DEL ROTORE DEL SISTEMA DI RIFERIMENTO
+QMEC0___  --IN-- POTENZA MECCANICA
+SINT0___  --IN-- VARIABILE LOGICA MACCHINA CONNESSA IN RETE
+SFER0___  --IN-- VARIABILE LOGICA MACCHINA ARRESTATA
+SMRI0___  --IN-- VARIABILE LOGICA MACCHINA AUTORIFERITA
+OMRI0___  --IN-- VELOCITA ANGOLARE PER MACCHINA AUTORIFERITA
+VRF010__  --IN-- TENSIONE DI RIFERIMENTO
+VPS010__  --IN-- SEGNALE STABILIZZANTE
+P10011__  --IN-- PICCO DI POTENZA ATTIVA
+Q10011__  --IN-- PICCO DI POTENZA REATTIVA
+FP0011__  --IN-- MOLTIPLICATORE DI POTENZA ATTIVA
+FQ0011__  --IN-- MOLTIPLICATORE DI POTENZA REATTIVA
+SISC11__  --IN-- STATO INTERRUTTORE CARICO (1=on)
+VRF012__  --IN-- TENSIONE DI RIFERIMENTO
+VPS012__  --IN-- SEGNALE STABILIZZANTE
+STL11___  --IN-- STATO INTERRUTTORE LATO 1 (STL1=1-->INT CHIUSO)
+STL21___  --IN-- STATO INTERRUTTORE LATO 2 (STL2=1-->INT CHIUSO)
+KLIN1___  --IN-- LUNGHEZZA DELLA LINEA [m]
+OMLI1___  --IN-- PULSAZIONE INGRESSO LINEA [rad/sec]
+SLIN1___  --IN-- CONDIZIONE DEL BLOCCO LINEA
+ICRE2___  --IN-- Corrente reale carico
+ICIM2___  --IN-- Corrente immaginaria carico
+SBIS2___  --IN-- Logica di sbarra isolata
+SBIS3___  --IN-- Logica di sbarra isolata
+STL15___  --IN-- STATO INTERRUTTORE LATO 1 (STL1=1-->INT CHIUSO)
+STL25___  --IN-- STATO INTERRUTTORE LATO 2 (STL2=1-->INT CHIUSO)
+KLIN5___  --IN-- LUNGHEZZA DELLA LINEA [m]
+OMLI5___  --IN-- PULSAZIONE INGRESSO LINEA [rad/sec]
+SLIN5___  --IN-- CONDIZIONE DEL BLOCCO LINEA
+QMEC6___  --IN-- POTENZA MECCANICA
+SINT6___  --IN-- VARIABILE LOGICA MACCHINA CONNESSA IN RETE
+SFER6___  --IN-- VARIABILE LOGICA MACCHINA ARRESTATA
+SMRI6___  --IN-- VARIABILE LOGICA MACCHINA AUTORIFERITA
+OMRI6___  --IN-- VELOCITA ANGOLARE PER MACCHINA AUTORIFERITA
+FG008___  --IN-- MOLTIPLICATORE DI CONDUTTANZA
+FB008___  --IN-- MOLTIPLICATORE DI SUSCETTANZA
+SISC8___  --IN-- STATO INTERRUTTORE CARICO (1=on)
+SBIS9___  --IN-- Logica di sbarra isolata
+****
+UR000___  --CO-- TENSIONE ATTIVA AI MORSETTI DI RETE
+UX000___  --CO-- TENSIONE REATTIVA AI MORSETTI DI RETE
+UF000___  --CO-- TENSIONE DI ECCITAZIONE
+VMMA10__  --CO-- MODULO TENSIONE GENERATORE
+FAMA10__  --CO-- FASE TENSIONE GENERATORE
+QATT10__  --CO-- POTENZA ATTIVA EROGATA DAL GENERATORE
+QREA10__  --CO-- POTENZA REATTIVA EROGATA DAL GENERATORE
+IFLD10__  --CO-- CORRENTE DI ECCITAZIONE
+VR0011__  --CO-- TENSIONE REALE DEL CARICO
+VX0011__  --CO-- TENSIONE IMMAG. DEL CARICO
+VMMA12__  --CO-- MODULO TENSIONE GENERATORE
+FAMA12__  --CO-- FASE TENSIONE GENERATORE
+QATT12__  --CO-- POTENZA ATTIVA EROGATA DAL GENERATORE
+QREA12__  --CO-- POTENZA REATTIVA EROGATA DAL GENERATORE
+IFLD12__  --CO-- CORRENTE DI ECCITAZIONE
+UR011___  --CO-- TENSIONE REALE LATO 1 [V]
+UX011___  --CO-- TENSIONE IMMAGINARIA LATO 1 [V]
+UR021___  --CO-- TENSIONE REALE LATO 2 [V]
+UX021___  --CO-- TENSIONE IMMAGINARIA LATO 2 [V]
+UMOD29__  --CO-- Voltage
+FASE29__  --CO-- Volktage
+QATT29__  --CO-- Active
+QREA29__  --CO-- Reactive
+IFIL29__  --CO-- Field
+I1RE2___  --CO-- Corrente reale linea 1
+I1IM2___  --CO-- Corrente immaginaria linea 1
+I2RE2___  --CO-- Corrente reale linea 2
+I2IM2___  --CO-- Corrente immaginaria linea 2
+IN_132__  --CO-- LINEAR RELATION : INPUT N.  1
+I1RE3___  --CO-- Corrente reale linea 1
+I1IM3___  --CO-- Corrente immaginaria linea 1
+I2RE3___  --CO-- Corrente reale linea 2
+I2IM3___  --CO-- Corrente immaginaria linea 2
+ICRE3___  --CO-- Corrente reale carico
+ICIM3___  --CO-- Corrente immaginaria carico
+UR015___  --CO-- TENSIONE REALE LATO 1 [V]
+UX015___  --CO-- TENSIONE IMMAGINARIA LATO 1 [V]
+UR025___  --CO-- TENSIONE REALE LATO 2 [V]
+UX025___  --CO-- TENSIONE IMMAGINARIA LATO 2 [V]
+ORIN6___  --CO-- VELOCITA ANGOLARE DEL SISTEMA DI RIFERIMENTO
+DRIN6___  --CO-- ANGOLO DEL ROTORE DEL SISTEMA DI RIFERIMENTO
+UR006___  --CO-- TENSIONE ATTIVA AI MORSETTI DI RETE
+UX006___  --CO-- TENSIONE REATTIVA AI MORSETTI DI RETE
+UF006___  --CO-- TENSIONE DI ECCITAZIONE
+VR008___  --CO-- TENSIONE REALE DEL CARICO [V]
+VX008___  --CO-- TENSIONE IMMAG. DEL CARICO [V]
+I1RE9___  --CO-- Corrente reale linea 1
+I1IM9___  --CO-- Corrente immaginaria linea 1
+I2RE9___  --CO-- Corrente reale linea 2
+I2IM9___  --CO-- Corrente immaginaria linea 2
+ICRE9___  --CO-- Corrente reale carico
+ICIM9___  --CO-- Corrente immaginaria carico

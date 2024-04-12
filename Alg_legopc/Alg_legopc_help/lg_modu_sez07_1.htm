@@ -1,0 +1,117 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><i><font size="5">What does &quot;xxxxI2&quot; have to do when it is called
+by the LG2 activity?</font></i></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">When &quot;xxxxI2&quot; subroutine is
+called by LG2 program (when IFUN is 1) it must write on F14.DAT file the
+physical and geometrical data section for the related block. The header of the
+block data section is automatically written by LG2 program, so the module
+doesn't have to write it. If the block has no physical or geometrical data, no
+action has to be performed.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The format of the F14.DAT area for a
+physical or geometrical datum must be exactly 25 character, and it have the
+following format (where blanks have been replaced with dots &quot;.&quot; for
+legibility reasons):</span></p>
+<p class="elenco3" align="center"><span lang="EN-GB"><font face="Courier New" size="2"><b>....AAAAAAAA.=..........*</b></font>
+</span></p>
+<p class="MsoNormal"><span lang="EN-GB">where:</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">&quot;....&quot; are four leading blanks (they must be exactly 4);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">&quot;AAAAAAAA&quot;
+is the datum code (it must be exactly 8 characters long, and it must be unique
+inside the module);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">&quot;.=&quot; is a standard string (one blank and an equal sign);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">&quot;..........*&quot;
+are the value field (exactly 10 blanks) and the ending character (an asterisk).</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p class="MsoNormal"><span lang="EN-GB">Up to three data can be collected on
+each line: this means that every line may be 25, 50 or 75 character long as it
+may contain one, two or three data. Obviously, every datum area must have the
+prescript format, including the four leading blanks and the ending asterisk. If
+the module has more than three data, then more than one line must be written.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Inside the module data section, also
+comment line can be inserted before, after or between data lines. A comment line
+must have the following format:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3" align="center"><span lang="EN-GB"><font face="Courier New" size="2"><b>*<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>Comment comment comment ...</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">(an asterisk, exactly three blanks and
+the comment text).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The total length of a comment line must
+not exceed 132 characters (for legibility reasons, the length of a comment line
+should not exceed 80 characters, so the comment text should not exceed 76
+characters).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The following physical and geometrical
+data section is the one of the VALV module (water and steam pump, where &quot;WSVA&quot;
+and &quot;Water/steam valve&quot; are the block name and description chosen by
+the user). The VALV module has 11 physical/geometrical data; the VALV module
+also writes three comment lines (the heading line is not written by VALV module,
+but by LG2 program).&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3" style="margin-left:0in"><span lang="EN-GB"><font face="Courier New" size="2"><b>*LG*DATI DEL
+BLOCCO VALVWSVA<span style="mso-spacerun: yes">&nbsp; </span>MODULO VALV -
+Water/steam valve</b></font></span></p>
+<p class="elenco3" style="margin-left:0in"><span lang="EN-GB"><font face="Courier New" size="2"><b>*<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>VALVE DATA (COD. = IDENTIFIER FOR MATEMATHICAL MODEL CHOICE)</b></font></span></p>
+<p class="elenco3" style="margin-left:0in"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>ALFA<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>=<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>*<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>CFA<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>=<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>*<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>COD.<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>=<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>*</b></font></span></p>
+<p class="elenco3" style="margin-left:0in"><span lang="EN-GB"><font face="Courier New" size="2"><b>*<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>DATA RELATED TO THE DISCHARGING CHARACTERISTIC</b></font></span></p>
+<p class="elenco3" style="margin-left:0in"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>CVA<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>=<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>*<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>PORTATA<span style="mso-spacerun: yes">&nbsp;
+</span>=<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>*<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>P1 MONTE =<span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>*</b></font></span></p>
+<p class="elenco3" style="margin-left:0in"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>P2 VALLE =<span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>*<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>ENTALPIA =<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>*<span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp; </span>CORSA<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>=<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>*</b></font></span></p>
+<p class="elenco3" style="margin-left:0in"><span lang="EN-GB"><font face="Courier New" size="2"><b>*<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)</b></font></span></p>
+<p class="elenco3" style="margin-left:0in"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>DP. APER =<span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>*<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>DP. CHIU =<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>*</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">As the block variables names are passed
+to the &quot;xxxxI2&quot; (inside the VAR array, from IV1 to IV2 rows), they may
+be used to build the data codes.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">On the contrary, they cannot be used to
+recognize module configuration, as they may be freely changed by the user for
+topology connection (connecting an input variable to an output one causes the
+name of the input variable to be set equal to the name of the connected output;
+in old LEGO versions, setting the same name for two different input variables in
+two different modules was used to force their values to be everywhen equal),
+first character modification (for variable measurement units identification) or
+other less frequent reasons (how can the module builder be sure that all his
+module's future users will actually like the names he had set? :-).</span></p>
+
+<!--mstheme--></font></body>
+
+</html>

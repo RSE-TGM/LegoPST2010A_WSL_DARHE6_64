@@ -1,0 +1,32 @@
+ADEV
+
+ADEV - Signals switch                                                           
+4
+1
+
+t0
+I1DE 
+1 
+t1
+I2DE 
+1 
+t3
+JDEV 
+1 
+t2
+UDEV 
+1 
+
+0
+1
+3
+
+UDEV UA
+ANALOG SIGNAL DEFLECTOR OUTPUT                                 
+I1DE IN
+SIGNAL ONE DEFLECTOR INPUT                                     
+I2DE IN
+SIGNAL TWO DEFLECTOR INPUT                                     
+JDEV IN
+DEFLECTOR POSITION (0 = SIGNAL 1, 1 = SIGNAL 2)                
+

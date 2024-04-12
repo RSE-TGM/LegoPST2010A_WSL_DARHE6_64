@@ -1,0 +1,31 @@
+SERB_0                                                                          
+SERB                                                                            
+SERB - Water tank                                                               
+                                                                                
+NSTAT = 0
+NUSCI = 5
+NINGR = 4
+ 
+NCONF = 1
+ 
+LIVS      --UA--     LIVELLO SERBATOIO                                          
+PFSE      --UA--     PRESSIONE FONDO SERBATOIO                                  
+HSER      --UA--     ENTALPIA SERBATOIO                                         
+WVAP      --UA--     PORTATA VAPORE USCITA SERBATOIO                            
+HVAP      --UA--     ENTALPIA VAPORE USCITA SERBATOIO                           
+WING      --IN--     PORTATA INGRESSO                                           
+HING      --IN--     ENTALPIA INGRESSO                                          
+WOUT      --IN--     PORTATA LIQUIDO USCITA                                     
+PSER      --IN--     PRESSIONE NEL SERBATOIO                                    
+==============================                                                  
+EOF                                                                             
+3
+t2 1
+Hydraulic output
+WOUT PFSE ____ ____ ____ HSER ____ ____
+t1 1
+Hydraulic output
+WVAP PSER ____ ____ ____ HVAP ____ ____
+t4 0
+Hydraulic input
+WING PFSE ____ ____ ____ HING ____ HSER

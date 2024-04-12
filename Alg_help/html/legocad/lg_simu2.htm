@@ -1,0 +1,436 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>SIMULATION ACTIVITY</TITLE>
+<META NAME="subject" CONTENT="File Unificato Documentazione/Iperhelp">
+<META NAME="doccomm" CONTENT="Tutto quanto riguarda la fase di trainsient calculation, la simulazione della singola task.">
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_simulation"></A>SIMULATION ACTIVITY</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The simulation activity allows the user to manage the models under exam interactively through net_monit process. </P>
+<P ALIGN="JUSTIFY">Although net_monit allows the simulation of many models simultaneously - its typical use -, some applications may use net_monit with one task only. LEGOCAD for example, tests exclusively the model being developed. The following description is generally referred to the typical use of net_monit. </P>
+<P ALIGN="JUSTIFY">The models can be synchronised according to absolute time and simulated in real, accelerated and delayed time (the simulation speed can be varied at any time). Besides starting and stopping the simulation, the simulator can freeze or awaken it as well as perform a snapshot (saving information allowing the user to continue a simulation from the stage previously reached) and obtain information on the simulation development (CPU charge, simulation time, accrued delay, etc.). </P>
+<P ALIGN="JUSTIFY">Automatic start-up of the simulator follows the activation of the net_monit process. An interactive window will appear to carry out the simulation. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER">HOW TO</P>
+</I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_sm_net_monit"><U><FONT FACE="Arial" COLOR="#0000ff">Use net_monit</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2</B> </FONT><A HREF="#lgc_sm_archived"><U><FONT FACE="Arial" COLOR="#0000ff">Set archived variables</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3</B> </FONT><A HREF="#lgc_sm_startup"><U><FONT FACE="Arial" COLOR="#0000ff">Start-up the simulation</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4</B> </FONT><A HREF="#lgc_sm_parameter"><U><FONT FACE="Arial" COLOR="#0000ff">Configure parameter after start-up</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">5</B> </FONT><A HREF="#lgc_sm_perturbation"><U><FONT FACE="Arial" COLOR="#0000ff">Define perturbation</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER">SIMULATION WINDOWS LAYOUT</P>
+</I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_sm_mw_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Net_monit main window layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2</B> </FONT><A HREF="#lgc_sm_tscalling_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Time scaling dialog window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3</B> </FONT><A HREF="#lgc_sm_crecording_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Continuos recording dialog window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4</B> </FONT><A HREF="#lgc_sm_archived_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Archived variables dialog window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">5</B> </FONT><A HREF="#lgc_sm_snap_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Snapshot dialog windows</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">6</B> </FONT><A HREF="#lgc_sm_statistic_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Statistic dialog window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">7</B> </FONT><A HREF="#lgc_sm_xaing_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">XAING page layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">8</B> </FONT><A HREF="#lgc_sm_perturbation"><U><FONT FACE="Arial" COLOR="#0000ff">Input perturbation dialog windows</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_sm_net_monit"></A>Simulation: use net_monit</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The researcher can manage the simulation through the net_monit requiring the following steps: basic parameter sets, simulation start-up, configuration during the simulation, perturbation dispatch. By operating through the net_monit described above the user will set different simulation states as it is shown in the following figure.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1308.gif" WIDTH=509 HEIGHT=382></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Meaning of the simulator status</P>
+</B><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">STOP</P>
+</B><P ALIGN="JUSTIFY">Status before initializing.</P>
+<B><P ALIGN="JUSTIFY">FREEZE</P>
+</B><P ALIGN="JUSTIFY">Status of simulation block.</P>
+<B><P ALIGN="JUSTIFY">RUN</P>
+</B><P ALIGN="JUSTIFY">Status of full dynamic simulation.</P>
+<B><P ALIGN="JUSTIFY">REPLAY</P>
+</B><P ALIGN="JUSTIFY">Status which allows to load snapshot and the repetition of the related simulation.</P>
+<B><P ALIGN="JUSTIFY">BACKTRACK</P>
+</B><P ALIGN="JUSTIFY">Status which allows the automatic or manual loading of a snapshot saved periodically and automatically by the simulator.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information on net_monit layout is available in:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_sm_mw_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Net_monit main window layout</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_sm_archived"></A>Simulation: set archived variables</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Only before the start-up of the simulation the user will have to choose the number and the set of variables to be saved periodically in the archive file (</FONT><A HREF="lg_gloss.htm#lgc_gl_F22"><U><FONT FACE="Arial" COLOR="#0000ff">f22 file</U></FONT></A><FONT FACE="Arial">). Also archive frequency can be defined by the user as a multiple (or equal) of the time step of simulation. The graphics activity will allow to display trends to be saved . </P>
+<P ALIGN="JUSTIFY">The user can perform these selection by pressing Configure continuos recording on the Configure's pulldown menu and by working on the displayed page. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information on this page layout is available in:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_sm_archived_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Archived variables dialog window</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_sm_startup"></A>Simulation: start-up simulation</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The user can start the simulations by pressing Initialize on Control's pulldown menu. After the initializing step, net_monit will display FREEZE in a yellow label and the simulator will be frozen. Start-up must follow the set of archived variables. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information about net_monit pulldown menu and archived variables page layout is available in:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_sm_mw_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Net_monit main window layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2</B> </FONT><A HREF="#lgc_sm_archived_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Archived variables dialog window</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_sm_parameter"></A>Simulation: configure after start-up</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The user can manage the simulation through net_monit by modifying some parameters and introducing perturbation during the simulation either in freeze or in the run status. </P>
+<P ALIGN="JUSTIFY">Through the Configure's pulldown menu the user can change the simulation speed and maximum simulation time; change the frequency of data saving in archive; change the task integration step to select the best one. It is also possible to change the simulation state (Control's pulldown menu), to display CPU charge time (Statistic's pulldown menu), to saves, load or delete snapshots. Net_monit also allows step-by-step calculation. All these operations are available through a number of displayed dialog windows. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information about all the above windows layout is available in:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_sm_mw_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Net_monit main window layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2</B> </FONT><A HREF="#lgc_sm_tscalling_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Time scaling dialog window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3</B> </FONT><A HREF="#lgc_sm_crecording_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Continuos recording dialog window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4</B> </FONT><A HREF="#lgc_sm_snap_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Snapshot dialog windows</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">5</B> </FONT><A HREF="#lgc_sm_statistic_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Statistic dialog window</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_sm_perturbation"></A>Simulation: define perturbation</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The user can test the model in use by supplying perturbations such as step, pulse, ramp, delay to the input variables. This operation is made through XAING process which is activated by clicking "Aing" on the Input's pulldown menu. Furthermore the user can monitor the inputs by clicking "Edit input" and "Statistic" on the Input's pulldown menu. </P>
+<P ALIGN="JUSTIFY">XAING displays a variable selection window named "Input" where the user can </FONT><A HREF="#lgc_sm_input_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">select the inputs</U></FONT></A><FONT FACE="Arial"> to perturb. After selection a window is displayed to insert the perturbation. XAING can manage simultaneously ten independent windows. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Available perturbation</P>
+</B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The perturbation sent is selected from an option menu which offers three choices:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=364>
+<TR><TD WIDTH="9%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial">1</B></FONT></TD>
+<TD WIDTH="91%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">NORMAL:</B>with this selection three kinds of perturbation are available:</P>
+<I><P ALIGN="JUSTIFY">STEP</I>: through a <I>Target</I> text field (value) and a Start push button.</P>
+<I><P ALIGN="JUSTIFY">PULSE</I>: through a <I>Target</I> (value) and <I>Wise</I> (duration) text fields and the Start, Stop push buttons.</P>
+<I><P ALIGN="JUSTIFY">RAMP</I>: through a Target (value) and duration modality text fields and the Start, Stop push buttons. The second text field depends on the made choice on the option menu; i.e. available modality are <I>Grad</I> (value increment for every sec.) <I>Time</I> (simulation time) <I>Delta</I> (the time necessary to reach the target value)</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1316.gif" WIDTH=433 HEIGHT=148></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=364>
+<TR><TD WIDTH="9%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial">2</B></FONT></TD>
+<TD WIDTH="91%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">PERIODIC:</B> with this selection some text fields are available to introduce the characteristic of a periodic perturbation. </P>
+<P ALIGN="JUSTIFY">Below the <I>General</I> label the Period, Mean Value, Wide and Phase text fields are displayed.</P>
+<P ALIGN="JUSTIFY">Below the <I>Sinusoidal</I> label two push buttons to Start and Stop a sinusoidal perturbation are displayed. </P>
+<P ALIGN="JUSTIFY">Below the <I>Trapezoidal </I>label there are three text fields (T1, T2, T3) and the Start, Stop push buttons. An example is shown in the figure below.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=364>
+<TR><TD WIDTH="9%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial">3</B></FONT></TD>
+<TD WIDTH="91%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">NOISE:</B> by this selection will define a white noise filling Variance and Mean Value text fields. Start and Stop push buttons are also available.</FONT></TD>
+</TR>
+</TABLE>
+
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1317.gif" WIDTH=491 HEIGHT=241></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The user can also assign a delay by choosing between two input modalities: <I>Delay</I> and <I>Start at</I>. The first modality asks the duration of the delay and the second one the absolute time necessary to activate the perturbation. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1318.gif" WIDTH=264 HEIGHT=150></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">By clicking on the window with the first mouse button a Quit pop up menu to close the window will appear.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information on the page layout is available in:</P>
+<B><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_sm_mw_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Net_monit main window layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2</B> </FONT><A HREF="#lgc_sm_xaing_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">XAING page layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3</B> </FONT><A HREF="#lgc_sm_input_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Input perturbation dialog windows</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_sm_mw_pg_ly"></A>Simulation layout: net_monit main window</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Net_monit displays an interactive window featuring a pulldown menu to choose any operative actions and to display the simulation state on a panel (red at first with the STOP label) </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1319.gif" WIDTH=315 HEIGHT=217></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The pulldown menu has the following options:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=532>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial" SIZE=2>Control</B></FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Initialize</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Initializes the simulator</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Run</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Starts the simulation, must follow initialition</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Freeze</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Freezes the simulation</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Backtrack</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Sets the backtrack modality</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Replay</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Sets the replay modality</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Clear</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Clears continuos recording, backtrack and snapshot the file</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Stop</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Stops both the task and net_monit</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Quit</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Stops net_monit</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Configure</B></FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Time scaling</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Chooses the simulation speed (1.0 by default) </FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Set max simulation time</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Sets a fixed time for the simulation and freezes the simulation at the end</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Step scaling</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Integration step multiplier (1.0 by default)</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Step continuos recording</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Sets the continuos recording</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Configure continuous recording</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">By selection</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Selects the f22 recording variables</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">All variables</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Selects all variables for f22 recording</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Initial conditions</B></FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Load initial conditions</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Selections of a snapshot</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Save initial conditions</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Saves actual data like snapshot</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Edit initial conditions</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modifies initial conditions</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Statistic</B></FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Statistic</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Displays the task induced CPU charge</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Input</B></FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Aing</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Selections of variables perturbation</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Staz</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Selections of command station</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Edit input</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Shows and modifies perturbations</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Statistic</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Shows and modifies perturbations</FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Step</B></FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Step</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Manages the simulation step-by-steps </FONT></TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">About</B></FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="40%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">About</FONT></TD>
+<TD WIDTH="60%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Shows net_monit about</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Before starting the simulator, only the Control/Initialize, Control/Quit and Configure/Configure continuos recording options are available with net_monit. The others are available only after pressing Initialize Control's pulldown menu. </P>
+<P ALIGN="JUSTIFY">The red panel bearing the STOP label will become yellow and will contain the FREEZE label at the end of initializing. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Meaning of the text field displayed</P>
+</B><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Real Time</P>
+</B><P ALIGN="JUSTIFY">contains the clock time. This time is related to the simulation speed.</P>
+<B><P ALIGN="JUSTIFY">Simulation Speed</P>
+</B><P ALIGN="JUSTIFY">contains the speed value given by a ratio to the real time.</P>
+<B><P ALIGN="JUSTIFY">Number var C.R.</P>
+</B><P ALIGN="JUSTIFY">contains the number of archived variables.</P>
+<B><P ALIGN="JUSTIFY">Step C.R.</P>
+</B><P ALIGN="JUSTIFY">contains data recording interval.</P>
+<B><P ALIGN="JUSTIFY">Simulation Time</P>
+</B><P ALIGN="JUSTIFY">contains the effective time of the simulation.</P>
+<B><P ALIGN="JUSTIFY">Delay time</P>
+</B><P ALIGN="JUSTIFY">contains the time resulting from the difference between real and simulation time.</P>
+<B><P ALIGN="JUSTIFY">Simulation time/MB</P>
+</B><P ALIGN="JUSTIFY">contains a number indicating the time necessary to fill a disk MB. </P>
+<B><P ALIGN="JUSTIFY">Free disk space (MB)</P>
+</B><P ALIGN="JUSTIFY">contains the free disk space.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">By, using the options in the pulldown menu, the user will display many other dialog windows; more details are available in:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_sm_tscalling_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Time scaling dialog window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2</B> </FONT><A HREF="#lgc_sm_crecording_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Continuos recording dialog window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3</B> </FONT><A HREF="#lgc_sm_archived_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Archived variables dialog window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4</B> </FONT><A HREF="#lgc_sm_snap_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Snapshot dialog windows</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">5</B> </FONT><A HREF="#lgc_sm_statistic_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Statistic dialog window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">6</B> </FONT><A HREF="#lgc_sm_xaing_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">XAING page layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">7</B> </FONT><A HREF="#lgc_sm_input_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Input perturbation dialog windows</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_sm_tscalling_pg_ly"></A>Simulation layout: time scaling window</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This window is displayed by pressing "Time scaling" on the Configure's pulldown menu.</P>
+<B><P ALIGN="JUSTIFY">Configure|Time scaling </B>- :allows the insertion of a new the simulation speed (1.0 by default). </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1320.gif" WIDTH=339 HEIGHT=264></P>
+<B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_sm_crecording_pg_ly"></A>Simulation layout: continuos recording window</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This window is displayed by pressing "Step continous recording" on the Configure's pulldown menu.</P>
+<B><P ALIGN="JUSTIFY">Configure|Step continuous recording</B> - allows to insert the time interval for data recording. 1 is the default values displayed in net_monit main window in the <I>Step C.R.</I> box; it means that data recording will occur at every simulation step.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1321.gif" WIDTH=339 HEIGHT=264></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_sm_archived_pg_ly"></A>Simulation layout: archived variables window</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This window is displayed by pressing "Configure continuos recording" on Configure's pulldown menu.</P>
+<B><P ALIGN="JUSTIFY">Configure|Configure continuous recording</B>. allows the selection of the f22.dat stored variables. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1322.gif" WIDTH=320 HEIGHT=321></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In this window two lists with selected and available variables for the configuration saved are displayed . It is possible to load the configuration, to search for a variable by the name (</FONT><A HREF="lg_gloss.htm#lgc_gl_find"><U><FONT FACE="Arial" COLOR="#0000ff">find area</U></FONT></A><FONT FACE="Arial">) and to move a group of variables between the lists by using the past/cut arrow buttons after selecting them. </P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_sm_snap_pg_ly"></A>Simulation layout: snapshot windows</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The researcher, with the snapshot, can display three kinds of windows either to load, to save or delete a snapshot. These windows are displayed by pressing "Load initial condition", "Save initial condition", "Edit initial condition" on the Initial condition's pulldown menu.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Initial conditions|Load initial conditions </B>-allows the selection of the starting data set on a list of saved snapshots.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1323.gif" WIDTH=208 HEIGHT=226></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Initial conditions|Save initial conditions </B>-allows the saving of the current data (snapshot). Snapshot is identified by a name given by user.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1324.gif" WIDTH=208 HEIGHT=113></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Initial conditions|Edit initial conditions </B>-allows the deletion of a snapshot.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1325.gif" WIDTH=208 HEIGHT=226></P>
+<B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_sm_statistic_pg_ly"></A>Simulation layout: statistic window</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This window is displayed by pressing "Statistic" on the Statistic's pulldown menu.</P>
+<B><P ALIGN="JUSTIFY">Statistics|Statistics </B>-Shows the CPU time. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1326.gif" WIDTH=264 HEIGHT=149></P>
+<B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_sm_xaing_pg_ly"></A>Simulation layout: XAING windows</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">XAING process is activated by pressing "Aing" on the Input's pulldown menu. </P>
+<B><P ALIGN="JUSTIFY">Input|Aing &#9;</B>-Displays a variable selection window named "Input" where the user can choose the variable to perturb. This variable must not be connected with another module.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1327.gif" WIDTH=283 HEIGHT=208></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Once the user has selected the variable (and pressed the OK button) a new window will be displayed to define the perturbation. It is better to use this function with the simulator in FREEZE mode.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1328.gif" WIDTH=270 HEIGHT=132></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Furthermore the user can monitor the inputs by clicking "Edit input" and "Statistic" on the Input's pulldown menu. More information about the input perturbation windows is contained in:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_sm_input_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Input perturbation dialog window</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_sm_input_pg_ly"></A>Simulation layout: input windows</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">These windows are displayed by pressing "Statistic" and "Edit input" on the Input's pulldown menu.</P>
+<B><P ALIGN="JUSTIFY">Input|Statistics </B>&#9;-Displays a window featuring the list of the already set perturbation and their state (Active/Inactive). For the inactive ones, it is displayed also the time lacking for the activation.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1329.gif" WIDTH=283 HEIGHT=226></P>
+<FONT FACE="Arial"><P>&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1330.gif" WIDTH=320 HEIGHT=283></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Input|Edit Input </B>&#9;-Displays two windows: the first is the variable selection window named "Input", which is necessary to choose the variable (see </FONT><A HREF="#lgc_sm_xaing_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">XAING windows</U></FONT></A><FONT FACE="Arial">) and the second is the "Edit input" window which shows the variable and the associated already set perturbation with its state. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1331.gif" WIDTH=244 HEIGHT=321></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

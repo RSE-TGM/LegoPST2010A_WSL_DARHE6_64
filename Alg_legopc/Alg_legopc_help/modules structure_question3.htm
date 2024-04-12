@@ -1,0 +1,41 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>VAR. AND EQ. ORDER IN A MODULE</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"></font>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#99CCFF" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">
+      <font FACE="Arial">Variables and equations' order in a LEGOPC module</font>
+    </font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+<font SIZE="3">
+<p ALIGN="left">Inside a LEGO module, user must divide all differential equations 
+from algebraic equations, because they must be placed in the following order:
+<p ALIGN="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.&nbsp; differential equations
+<p ALIGN="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.&nbsp; algebraic equations</p>
+<p ALIGN="left">Module input and output variables must be placed in the following order:
+<p ALIGN="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.&nbsp; state outputs
+<p ALIGN="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.&nbsp; algebraic outputs
+<p ALIGN="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.&nbsp; input variables</p>
+<p ALIGN="left">Obviously, module equations and variables schemes shall be chosen during 
+module development, and they can't be changed during simulation.</p>
+<p ALIGN="left">Since each differential equation gives the value of the derivative of its 
+corresponding state output variable, the internal order of differential equations must 
+exactly match the internal order of state output variables.</p>
+<p ALIGN="left">No prescription is given for algebraic equations and algebraic outputs orders.</p>
+<p ALIGN="left">Nevertheless, LEGO modules' developer are suggested, for obvious clearness 
+reasons, to make their orders match (when possible). It means that, for example, if the third 
+algebraic output variable of a module is the flow rate, the third algebraic equation should 
+be the one involving the evaluation of the flow rate.</p>
+</font><!--mstheme--></font></body>
+
+</html>

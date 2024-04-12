@@ -1,0 +1,43 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><b><i><font size="5"><span lang="EN-GB" class="MsoFootnoteReference">When</span><span lang="EN-GB">
+is the &quot;xxxx&quot; subroutine called?</span></font></i></b><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">In LEGO modules which uses NAJAC to
+compute the Jacobian matrix, the &quot;xxxx&quot; is called in two different
+cases:</span></p>
+<p class="elenco"><span lang="EN-GB">1.<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>when the &quot;xxxxC1&quot; subroutine has to compute the residuals of
+its equations (IFUN=2);</span></p>
+<p class="elenco"><span lang="EN-GB">2.<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>when the NAJAC subroutines computes the Jacobian matrix of the module's
+equations (the NAJAC is called by &quot;xxxxC1&quot; when IFUN=3).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The value of IFUN is passed to &quot;xxxx&quot;,
+so it can recognize the two different conditions. In the first case, the passed
+values of the module's variables (passed as elements of the XYU vector) are the
+actual ones, as the module has to compute the actual value of the residuals. In
+the second case, the passed values of the module's variables are not the actual
+ones (the NAJAC evaluates the Jacobian matrix computing the incremental ratio of
+the residuals, varying the variables values).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">This is very important for the modules
+which have to record the previous values of any variable, as they must be sure
+to record only the actual values (and not those increased or decreased by NAJAC).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">In some special cases, the residuals
+expression may also be different when the &quot;xxxx&quot; subroutine is called
+for Jacobian matrix computing, but this isn't almost ever the right operating
+way, as the computed Jacobian matrix will be different from the actual one: this
+doesn't help LEGO numerical kernel to solve the differential-algebraic system
+and to satisfy the convergence criterion!</span></p>
+
+<!--mstheme--></font></body>
+
+</html>

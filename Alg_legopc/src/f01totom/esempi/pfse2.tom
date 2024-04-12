@@ -1,0 +1,466 @@
+# this file created with LEGOPHI rel. 0.2
+1500 900
+tubg_0
+e
+10__
+1175.0 354.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubg_0
+e
+11__
+1176.0 602.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+e
+12__
+1175.0 480.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+13__
+828.0 710.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubg_0
+n
+16__
+955.0 710.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+17__
+1079.0 710.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+e
+2___
+1092.0 204.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vaix_0
+n
+35__
+712.0 41.999997
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubg_0
+e
+3___
+1092.0 332.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+e
+4___
+1092.0 454.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+5___
+1195.0 710.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubg_0
+e
+6___
+1092.0 579.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+e
+8___
+1175.0 233.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+CKV1
+463.0 108.205
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+CKV2
+571.0 189.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+CV01
+249.0 108.205
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+CV11
+363.0 188.205
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+w
+DV01
+71.0 192.574802
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+w
+DV11
+177.0 245.574802
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+w
+PSV1
+627.7336 295.333332
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+w
+S11_
+177.0 598.574802
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+w
+S1__
+71.0 525.574802
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+w
+S21_
+177.0 368.574802
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+w
+S2__
+71.0 303.574802
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+S31_
+245.0 188.205
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+S3__
+136.0 108.574802
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+S41_
+463.0 188.66668
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+S4__
+355.0 108.66668
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_2
+n
+S5__
+702.066664 168.333332
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+S6__
+939.06664 169.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+SDV1
+822.06664 169.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+SDV2
+1034.7336 121.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+w
+SV01
+71.0 411.574802
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+w
+SV11
+177.0 484.574802
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubg_0
+w
+T11_
+177.0 720.574802
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubg_0
+w
+T1__
+71.0 642.574802
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+****
+tubg_0
+10__
+port1
+busy port0 12__
+port0
+busy port1 8___
+++++
+tubg_0
+11__
+port1
+busy port0 13__
+port0
+busy port1 12__
+++++
+sera_0
+12__
+port1
+busy port0 11__
+port0
+busy port1 10__
+++++
+sera_0
+13__
+port1
+busy port0 16__
+port0
+busy port1 11__
+++++
+tubg_0
+16__
+port1
+busy port0 17__
+port0
+busy port1 13__
+++++
+sera_0
+17__
+port1
+busy port3 5___
+port0
+busy port1 16__
+++++
+sera_0
+2___
+port1
+busy port0 3___
+port0
+busy port4 SDV2
+++++
+vaix_0
+35__
+port2
+free
+port3
+free
+port4
+free
+++++
+tubg_0
+3___
+port1
+busy port0 4___
+port0
+busy port1 2___
+++++
+sera_0
+4___
+port1
+busy port0 6___
+port0
+busy port1 3___
+++++
+vain_0
+5___
+port2
+free
+port3
+busy port1 17__
+port4
+free
+++++
+tubg_0
+6___
+port1
+busy port0 8___
+port0
+busy port1 4___
+++++
+sera_0
+8___
+port1
+busy port0 10__
+port0
+busy port1 6___
+++++
+vain_0
+CKV1
+port2
+free
+port3
+busy port1 S4__
+port4
+busy port1 S5__
+++++
+vain_0
+CKV2
+port2
+free
+port3
+busy port1 S41_
+port4
+busy port0 S5__
+++++
+vain_0
+CV01
+port2
+free
+port3
+busy port1 S3__
+port4
+busy port0 S4__
+++++
+vain_0
+CV11
+port2
+free
+port3
+busy port1 S31_
+port4
+busy port0 S41_
+++++
+vain_0
+DV01
+port2
+free
+port3
+busy port1 S2__
+port4
+busy port0 S3__
+++++
+vain_0
+DV11
+port2
+free
+port3
+busy port1 S21_
+port4
+busy port0 S31_
+++++
+vain_0
+PSV1
+port2
+free
+port3
+free
+port4
+free
+++++
+sera_0
+S11_
+port1
+busy port3 SV11
+port0
+busy port1 T11_
+++++
+sera_0
+S1__
+port1
+busy port3 SV01
+port0
+busy port1 T1__
+++++
+sera_0
+S21_
+port1
+busy port3 DV11
+port0
+busy port4 SV11
+++++
+sera_0
+S2__
+port1
+busy port3 DV01
+port0
+busy port4 SV01
+++++
+sera_0
+S31_
+port1
+busy port3 CV11
+port0
+busy port4 DV11
+++++
+sera_0
+S3__
+port1
+busy port3 CV01
+port0
+busy port4 DV01
+++++
+sera_0
+S41_
+port1
+busy port3 CKV2
+port0
+busy port4 CV11
+++++
+sera_0
+S4__
+port1
+busy port3 CKV1
+port0
+busy port4 CV01
+++++
+sera_2
+S5__
+port0
+busy port4 CKV2
+port1
+busy port4 CKV1
+port2
+busy port3 SDV1
+port3
+free
+++++
+sera_0
+S6__
+port1
+busy port3 SDV2
+port0
+busy port4 SDV1
+++++
+vain_0
+SDV1
+port2
+free
+port3
+busy port2 S5__
+port4
+busy port0 S6__
+++++
+vain_0
+SDV2
+port2
+free
+port3
+busy port1 S6__
+port4
+busy port0 2___
+++++
+vain_0
+SV01
+port2
+free
+port3
+busy port1 S1__
+port4
+busy port0 S2__
+++++
+vain_0
+SV11
+port2
+free
+port3
+busy port1 S11_
+port4
+busy port0 S21_
+++++
+tubg_0
+T11_
+port1
+busy port0 S11_
+port0
+free
+++++
+tubg_0
+T1__
+port1
+busy port0 S1__
+port0
+free
+++++
+****

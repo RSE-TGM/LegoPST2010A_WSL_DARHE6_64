@@ -1,0 +1,15 @@
+APRO_0                                                                          
+APRO                                                                            
+APRO - Proportinal gain                                                         
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 2
+ 
+NCONF = 1
+ 
+UPRO      --UA-- OUTPUT ANALOG SIGNAL FROM PROPORTIONAL BLOCK                   
+IPRO      --IN-- INPUT ANALOG SIGNAL INTO PROPORTIONAL BLOCK                    
+KPRO      --IN-- PROPORTIONAL BLOCK GAIN                                        
+==============================                                                  
+EOF                                                                             

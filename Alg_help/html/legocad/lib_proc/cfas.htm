@@ -1,0 +1,122 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE CFAS</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CFAS_summ"></A>MODULE CFAS&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CFAS_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CFAS_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CFAS_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="file:///D:/usr/users/giugno/doc_puerto/lib_proc/cfas.htm#lg_libproc_CFAS_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CFAS_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CFAS_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CFAS_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CFAS_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=6><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CFAS_A"></A>MODULE CFAS&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">COSPHI CALCULATION</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module CFAS receives in input the real and the imaginary components of a sinusoidal voltage and a sinusoidal current, and calculates the following three output variables:</P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>the "cos</FONT><FONT FACE="Symbol">j</FONT><FONT FACE="Arial"> " between voltage and current.</LI></P>
+<P ALIGN="JUSTIFY">The cos</FONT><FONT FACE="Symbol">j</FONT><FONT FACE="Arial"> is calculated starting from the concept of scalar product between the two vectorial variables V<I> </I>and I. If <IMG SRC="Image1207.gif" WIDTH=22 HEIGHT=22>and <IMG SRC="Image1208.gif" WIDTH=22 HEIGHT=22>are the components of the V vector, and <IMG SRC="Image1209.gif" WIDTH=14 HEIGHT=22>and <IMG SRC="Image1210.gif" WIDTH=14 HEIGHT=22>the components of the I vector, the scalar product V</FONT><FONT FACE="Symbol">·</FONT><FONT FACE="Arial"> I is <IMG SRC="Image1211.gif" WIDTH=114 HEIGHT=22>. The definition of scalar product between two vectors says also that <IMG SRC="Image1212.gif" WIDTH=129 HEIGHT=25>where <IMG SRC="Image1213.gif" WIDTH=21 HEIGHT=25>and <IMG SRC="Image1214.gif" WIDTH=12 HEIGHT=25>are the modules of the vectorial variables V and I. The previous expressions take to the final result: <IMG SRC="Image1215.gif" WIDTH=217 HEIGHT=25></P>
+<P ALIGN="JUSTIFY">&#9;</P>
+<P ALIGN="JUSTIFY"><LI>the phase angle of the voltage <IMG SRC="Image1216.gif" WIDTH=136 HEIGHT=25></LI></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><LI>the active power produced by the current Q = 3*( V</FONT><FONT FACE="Symbol">·</FONT><FONT FACE="Arial"> I). (The current has three phases, so the constant 3 has to multiply the scalar product V</FONT><FONT FACE="Symbol">·</FONT><FONT FACE="Arial"> I)</LI></P></OL>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CFAS_B"></A>MODULE CFAS&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1217.gif" WIDTH=516 HEIGHT=385></P></DIR>
+</DIR>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P ALIGN="JUSTIFY">[Volt]&#9;UR00&#9;real component of the voltage</P>
+<P ALIGN="JUSTIFY">[Volt]&#9;UX00&#9;imaginary component of the voltage</P>
+<P ALIGN="JUSTIFY">[A]&#9;IR00&#9;real component of the current&#9;</P>
+<P ALIGN="JUSTIFY">[A]&#9;IX00&#9;imaginary component of the current</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;XCOS&#9;cos</FONT><FONT FACE="Symbol">j</FONT><FONT FACE="Arial"> between voltage and current</P>
+<P ALIGN="JUSTIFY">[deg]&#9;XVFA&#9;phase angle of the voltage</P>
+<P ALIGN="JUSTIFY">[W]&#9;QATT&#9;electrical active power</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_CFAS_C"></A>MODULE CFAS&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables, user must assign the following data:</P>
+<P ALIGN="JUSTIFY">[W]&#9;QBASE&#9;normalization constant for electrical power</P>
+<P ALIGN="JUSTIFY">[Volt]&#9;VBASE&#9;normalization constant for electrical voltage</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CFAS_D"></A>MODULE CFAS&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the CFAS module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CFAS_E"></A>MODULE CFAS&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">No items</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CFAS_F"></A>MODULE CFAS&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>cos</FONT><FONT FACE="Symbol">j</FONT><FONT FACE="Arial"> (residual nr. 1)</P><DIR>
+<DIR>
+
+</B><P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1218.gif" WIDTH=142 HEIGHT=25></P>
+<FONT FACE="Arial"><P>&nbsp;</P></DIR>
+</DIR>
+
+<B><P>voltage phase angle (residual nr. 2)</P><DIR>
+<DIR>
+
+</B><P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1216.gif" WIDTH=136 HEIGHT=25></P>
+<FONT FACE="Arial"><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P></DIR>
+</DIR>
+
+<B><P>electrical active power (residual nr. 3)</P>
+</B><P>&nbsp;</P><DIR>
+<DIR>
+
+<P ALIGN="CENTER">Q = 3*( V</FONT><FONT FACE="Symbol">·</FONT><FONT FACE="Arial"> I)</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CFAS_G"></A>MODULE CFAS&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>No items.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CFAS_H"></A>MODULE CFAS&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module aren’t yet available.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

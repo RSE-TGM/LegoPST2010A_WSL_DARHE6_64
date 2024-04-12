@@ -1,0 +1,102 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Puertollano Dynamic Simulator Project</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<FONT SIZE=2><P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P><A NAME="_Toc417186256">ALTERLEGO 2.1 SUITE</A></P><DIR>
+
+</B></FONT><P ALIGN="JUSTIFY">Alterlego 2.1 suite is composed by tools covering from simulator’s construction, debugging and monitoring to the complete configuration and use of a plant simulator training environment.</P>
+<P ALIGN="JUSTIFY">In the following picture Alterlego suite components and their scope of usage are shown:</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image50.gif" WIDTH=639 HEIGHT=478></P>
+<P ALIGN="JUSTIFY"><A HREF="#Legocad"><U><FONT COLOR="#0000ff">LEGOCAD</U></FONT></A> is used in process models development: models testing is achieved using EXECUTIVE tool in a single model environment.</P>
+<P ALIGN="JUSTIFY">Automation models are built using <A HREF="#Regommi"><U><FONT COLOR="#0000ff">REGOMMI</U></FONT></A> configuration tool that allows full graphic editing of automation schemes: testing is than realized with EXECUTIVE tools.</P>
+<P ALIGN="JUSTIFY">The whole simulator is created connecting process and automation models and running <A HREF="#Executive"><U><FONT COLOR="#0000ff">EXECUTIVE</U></FONT></A> tool in multiple models environment. Man machine interface (<A HREF="#MMI"><U><FONT COLOR="#0000ff">MMI tools</U></FONT></A>) is provided via animated Plant Display, Operating Window and Automation Schemes.</P>
+<P ALIGN="JUSTIFY">For Training Simulator Environment a Supervisory Control and Data Acquisition system (<A HREF="#Scada"><U><FONT COLOR="#0000ff">SCADA</U></FONT></A>) is provided for simulation data acquisition, data treatment and alarm management. Furthermore all simulator related information and documents can be stored in ALTERLEGO database using <A HREF="#AlgDB"><U><FONT COLOR="#0000ff">ALG_DB</U></FONT></A>.</P>
+<P ALIGN="JUSTIFY">A brief description of each Alterlego 2.1 suite component follows.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P><A NAME="_Toc417186257"><A NAME="Legocad">LEGOCAD</A></P><DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"></A>Full life cycle of power plant model development is achieved using <A HREF="legocad/lg_help.htm#lgc_summary"><U><FONT COLOR="#0000ff">LEGOCAD tool</U></FONT></A> based on the <A HREF="legocad/models/legoroot.htm#lg_help_root"><U><FONT COLOR="#0000ff">LEGOCAD system</U></FONT></A>.</P>
+<P ALIGN="JUSTIFY">In the following figure LEGOCAD toolbox is shown.</P>
+<P ALIGN="CENTER"><IMG SRC="Image51.gif" WIDTH=481 HEIGHT=503></P>
+<B><P ALIGN="JUSTIFY">LEGOCAD Toolbox first row</B> (labeled <I>model construction</I>) shows the four steps that constitutes model development:</P>
+<P ALIGN="JUSTIFY"><A HREF="legocad/lg_topol.htm#lgc_topology"><U><FONT COLOR="#0000ff">Topology</U></FONT></A>: allows model construction by instantiation and connection of single library modules.</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image52.gif" WIDTH=636 HEIGHT=448></P>
+<P ALIGN="JUSTIFY"><A HREF="legocad/lg_edata.htm#lgc_edata"><U><FONT COLOR="#0000ff">Data Editor</U></FONT></A>: leads user to complete modules definition by physical and geometrical data configuration: moreover it provides editing functionality for attempt simulator variables values that will be used as initial condition in model steady state calculation.</P><IMG SRC="Image53.gif" ALIGN="LEFT" HSPACE=11 WIDTH=340 HEIGHT=219>
+<P ALIGN="JUSTIFY"><IMG SRC="Image54.gif" WIDTH=333 HEIGHT=254></P>
+<P ALIGN="JUSTIFY"><A HREF="legocad/lg_stead.htm#lgc_steady_state"><U><FONT COLOR="#0000ff">Steady State</U></FONT></A> execute model steady state computation starting from previously edited initial condition allowing mathematical convergence analysis and problems detection.</P>
+<P ALIGN="CENTER"><IMG SRC="Image55.gif" WIDTH=463 HEIGHT=335></P>
+<P ALIGN="JUSTIFY"><A HREF="legocad/lg_simu2.htm#lgc_simulation"><U><FONT COLOR="#0000ff">Transient calculation</U></FONT></A> performs model execution (simulation) in an interactive environment. It make available to user all Alterlego EXECUTIVE utilities from simulation control (commands) to variables tracing for debugging purposes.</P>
+<B><P ALIGN="JUSTIFY">Legocad Toolbox second row</B> (labeled <I>utilities</I>) contains facilities for modules library maintenance: <A HREF="legocad/lg_libra.htm#lgc_librarian"><U><FONT COLOR="#0000ff">Librarian</U></FONT></A>, for the analysis of model’s variables trends sampled during simulation: <A HREF="legocad/lg_grafi.htm#lgc_graphics"><U><FONT COLOR="#0000ff">Graphics</U></FONT></A> , for interactive examination of physical properties of water at liquid and steam state: <A HREF="legocad/lg_help.htm#lgc_H2O_tables"><U><FONT COLOR="#0000ff">H2O Tables</U></FONT></A> and for automated model documentation: <A HREF="legocad/lg_docum.htm#lgc_documentation"><U><FONT COLOR="#0000ff">Documents</U></FONT></A></P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P><A NAME="_Toc417186259"><A NAME="Regommi">REGOMMI</A></P><DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"></A><A HREF="regommi/regomodu.htm#lg_rego_main"><U><FONT COLOR="#0000ff">REGOMMI</U></FONT></A> describes automation models by means of interconnected automation schemes: it is a graphical editor where automation components (regulator, actuators, logic functions...) are icons dropped from an <I>automation library </I>ready to be connected each other and configured by user.</P>
+<P ALIGN="CENTER"><IMG SRC="Image56.gif" WIDTH=641 HEIGHT=553></P>
+<P ALIGN="JUSTIFY">Automation schemes compilations leads to an executable automation model, that can be tested using EXECUTIVE in single model mode. An useful debugging feature is achieved viewing simulation variable animated schemes during automation model execution.</P>
+<P ALIGN="CENTER"><IMG SRC="Image57.gif" WIDTH=636 HEIGHT=495></P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P><A NAME="_Toc417186278"><A NAME="Executive"></A>EXECUTIVE</A></P><DIR>
+
+</B></FONT><P ALIGN="JUSTIFY">Alterlego real time general executive provides the functionality to execute multiple models simulation. The EXECUTIVE is composed by a task scheduler, auxiliary services (such as historical data archives, snapshot and backtrack manager) and communication services updating simulation data to MMI and SCADA.</P>
+<P ALIGN="CENTER"><IMG SRC="Image58.gif" WIDTH=639 HEIGHT=485></P>
+<P ALIGN="JUSTIFY">The EXECUTIVE graphical user interface called <A HREF="istr_sta/ist_stat_ow.htm#ist_stat_ow_main"><U><FONT COLOR="#0000ff">instructor’s station</U></FONT></A> controls the execution of simulation (included typical instructor station operations like <I>snapshots</I>, <I>backtrack management</I>, session <I>replay, malfunction </I>management) and provides utilities for variables values modification: <A HREF="istr_sta/ist_stat_prac.htm#ist_stat_prac_xact"><U><FONT COLOR="#0000ff">xaing</U></FONT></A>, values monitoring: <U>mandb</U> or variables’ trends analysis: <A HREF="legocad/lg_grafi.htm#lgc_graphics"><U><FONT COLOR="#0000ff">graphics</U></FONT></A>.</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image59.gif" WIDTH=636 HEIGHT=777></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="Image60.gif" WIDTH=639 HEIGHT=307></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P><A NAME="_Toc417186279"><A NAME="Scada"></A>SCADA</A></P><DIR>
+
+</B></FONT><P ALIGN="JUSTIFY">Alterlego Supervisory Control and Data Acquisition system (<A HREF="scada/scada_um.htm#scada_main"><U><FONT COLOR="#0000ff">SCADA</U></FONT></A>) reads simulation variables values and provide a series of elaboration such as data conversion, calculated values, digital and analog alarm management, additional data archiving.</P>
+<P ALIGN="JUSTIFY">SCADA communicates with MMI providing data for Plant Displays and managing Alarm Sequence Display and hierarchy organized information about alarms in the plant.</P>
+<P ALIGN="CENTER"><IMG SRC="Image61.gif" WIDTH=555 HEIGHT=776></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P><A NAME="_Toc417186280"><A NAME="MMI"></A>MMI</A></P><DIR>
+
+</B></FONT><P ALIGN="JUSTIFY">MMI provides user interface for viewing or interacting with simulation or SCADA elaborated data.</P>
+<P ALIGN="JUSTIFY">MMI is composed by an editor for the construction of Plant Display or Operating Window and a viewer that in connection with EXECUTIVE and SCADA allows animation of plant representation pages and interaction with simulator.</P>
+<P ALIGN="JUSTIFY">Plant displays are an effective way to both give to the user some key information about the plant and allow him to operate, in a visual environment that reminds him the structure of the process, in term of piping lines, components etc. Plant Displays are organized in a hierarchical, tree-like, structure.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="Image62.gif" WIDTH=641 HEIGHT=498></P>
+<P ALIGN="JUSTIFY">Detailed information about devices status and interaction with actuators is provided via Operating and Indicating Windows.</P>
+<P ALIGN="JUSTIFY">The main difference between these two windows categories is that only Operating windows allow the user to execute a command (e.g. opening a valve).</P>
+<P ALIGN="JUSTIFY">An example of a typical Operating window is shown below.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER"><IMG SRC="Image63.gif" WIDTH=387 HEIGHT=538></P>
+<P>&nbsp;</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">The system can be configured to manage alarm conditions, both deviations from regular or planned operations and faulty devices. When the alarm system is active (SCADA is running) , MMI provides some additional features, like CAI (Common alarm indicator) animation, window extension 1 full management and alarm sequence display (ISA).</P>
+<P ALIGN="CENTER"><IMG SRC="Image64.gif" WIDTH=635 HEIGHT=495></P>
+<P>An other useful MMI is Curve display: it show the chronological courses of values in the form of a curve. The time period in the past that may be covered by a curve is limited by the size of the circular archive file and depends on the event rate in the simulator. </P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image65.gif" WIDTH=634 HEIGHT=461></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">For more detailed informations see AlterLego <A HREF="legommi/lmmihelp.htm#Summary"><U><FONT COLOR="#0000ff">MMI user manual</U></FONT></A>. </P></DIR>
+</DIR>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P><A NAME="_Toc417186281"><A NAME="AlgDB"></A>ALG_DB</A></P>
+</B></FONT><P ALIGN="JUSTIFY">ALG_DB is an INFORMIX based database structured for containing all interesting information about the simulator from physical plant data to functional plant decomposition used for building the simulator, from SCADA variables configuration to simulator and plant related documentation.</P>
+<P ALIGN="JUSTIFY">ALG_DB is provided with a Microsoft Access based graphical user interface for ODBC clients, running on Windows or Windows NT platforms.</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image66.gif" WIDTH=636 HEIGHT=407></P>
+<P ALIGN="JUSTIFY">&nbsp;</P></BODY>
+</HTML>

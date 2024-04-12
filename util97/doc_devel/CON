@@ -1,0 +1,6 @@
+:
+#@(#)CON	(Cfr. HUE)
+
+perl rgbhue.pl "$1" | grep ') ' | sort +0.64 |tail -33 > CON.dat
+
+cat CON.dat

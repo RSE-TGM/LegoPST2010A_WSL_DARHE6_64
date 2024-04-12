@@ -1,0 +1,187 @@
+@(#)pagmod.doc Tool per la modifica dei file *.pag	1997-02-23
+________________________________________________________________________
+
+
+	1.	Introduzione
+	____________________
+
+
+La modifica manuale dei file di risorse utilizzati dai programmi Lego,
+in considerazione del numero dei widget e degli attributi presenti, e`
+un' attivita' che richiede tempo ed attenzione; inoltre non e` possibile
+usare l' editor 'vi' se sono presenti righe piu' lunghe di 2048 caratteri.
+
+In questo documento si descrive il programma di utilita' 'pagmod' che
+permette di effettuare le modifiche in modalita' batch mediante dei file
+di script, che fanno uso di una sintassi molto semplice.
+L' obbiettivo e' sia di semplificare e velocizzare l' introduzione
+delle modifiche che di controllare e registrare le variazioni introdotte.
+
+
+
+	2.	Funzionalita' del programma
+	____________________________________
+
+
+Il programma e' in grado di operare su uno o piu' file di risorse
+(di tipo: *.pag) in base alle direttive contenute in un file "script"
+(di tipo: *.scr).     Uno script, pertanto, puo' essere visto come un
+"lotto" di modifiche relativo ad un insieme di pagine e di attributi che
+puo' essere flessibilmente organizzato secondo le esigenze del gestore.
+
+Normalmente i file di input non vengono modificati, ma per ognuno di
+essi viene creato un corrispondente file (di tipo: *.mod).
+Questo consente di controllare con esattezza le variazioni apportate
+ed e' opportuno in quanto potrebbe verificarsi il caso che modifiche
+definite in punti diversi dello script vadano a modificare diversamente
+lo stesso attributo.    Allo scopo e` prevista la possibilita' di un
+file di output (di tipo: *.trc) in cui, per ogni modifica di un valore,
+viene scritta una riga contenente il nome della pagina, dell' attributo
+ed il nuovo valore.
+
+Di regola l' attivita' effettuata dal programma e' registrata in un file
+di log, aggiornato in accodamento.
+
+Il programma riconosce una serie di opzioni della riga di comando che
+ne permettono di modificare il comportamento.
+
+
+
+	3.	Script
+	______________
+
+
+	3.1.	Generalita'
+
+Un file di script e` creato con un editor a carattere e puo' contenere
+una o piu' modifiche (elementari); per definire una modifica elementare 
+occorre, in generale, specificare ordinatamente i seguenti dati :
+
+- Pag-Spec     specifica del file (o dei file) di risorse da modificare
+- Widget-Spec  specifica del widget (o dei widget) di cui si vuole
+	       modificare un attributo
+- Attrib-Spec  nome dell' attributo da modificare
+- Value-Spec   nuovo valore dell' attributo
+
+Naturalmente, per concisione, non e` necessario ripetere la specifica
+della pagina o del widget finche' non cambiano; inoltre e` possibile
+inserire righe vuote o commenti, caratterizzati dal carattere # iniziale).
+
+Il programma 'pagmod' realizza, in base alle direttive contenute nello
+script, un "filtro" che opera secondo il seguente pseudo-codice:
+
+   Per ogni PAGINA specificata dalla modifica:
+      Per ogni WIDGET specificato dalla modifica
+         Per ogni ATTRIBUTO specificato dalla modifica
+            Assegna il VALORE specificato alla risorsa
+
+Si nota esplicitamente che e` previsto di poter definire sia uno specifico
+widget che, per mezzo di determinate keyword, un insieme di widget
+(ad esempio: "tutti i widget di tipo Led", "tutti i widget figli del
+widget xxx").
+
+
+	3.2.	Sintassi
+
+Il diagramma sintattico che descrive il file script e` il seguente:
+
+                  O
+                  |
+                  |<-------------------------------------------------+
+                  |                                                  |
+        +---------+--------------------------------------+           |
+        |         |                   |                  |           |
+        |         v                   v                  v           |
+        |   +-------------+    +-------------+    +-------------+    |
+        |   |  Pag-Spec   |    |  Commento   |    |  L. vuota   |    |
+        |   +-------------+    +-------------+    +-------------+    |
+        |         |                   |                  |           |
+        +-------->|                   |                  |           |
+                  |                   |                  |           |
+                  v                   |                  |           |
+            +-------------+           |                  |           |
+            | Widget-Spec |           |                  |           |
+            +-------------+           |                  |           |
+                  |                   |                  |           |
+                  |<----------+       |                  |           |
+                  |           |       |                  |           |
+                  v           |       |                  |           |
+            +-------------+   |       |                  |           |
+            | Attrib-Spec |   |       |                  |           |
+            +-------------+   |       |                  |           |
+                  |           |       |                  |           |
+                  v           |       |                  |           |
+            +-------------+   |       |                  |           |
+            | Value-Spec  |   |       |                  |           |
+            +-------------+   |       |                  |           |
+                  |           |       |                  |           |
+                  +-----------+       |                  |           |
+                  |                   v                  v           |
+                  |<--------------------------------------           |
+                  |                                                  |
+                  +--------------------------------------------------+
+                  |
+                  v
+                  O
+
+La specificazione di una pagina, di un widget, di un attributo o di un
+valore e` fatta una per riga secondo un formato del tipo:
+
+       [ <white-space> ] <keyword> = <argomento>
+
+Di seguito sono elencate le keyword previste (allo stato attuale) insieme
+con il significato dell' argomento ed eventuali note:
+
+page=		Nome del file di risorse.
+		Questa specificazione puo' essere fornita nella linea
+		di comando.
+
+pagelist=	Nome di un file contenente una lista di file di
+		risorse (uno per riga).
+		Questa specificazione puo' essere fornita nella linea
+		di comando.
+
+widgetname=	Nome esatto del widget interessato alla modifica.
+
+widgetclass=	Nome di una "classe" AlterLego di widget.
+		Esempio: Bottone, IconReg, Indic.
+
+widgetchildof=	Nome di un widget "padre" di cui si vogliono 
+		modificare i "figli".
+
+anywidget=	Specifica di widget nulla (richiesta per rispettare la
+		struttura sintattica definita).
+		In questo caso la modifica verra' applicata a tutti i
+		widget che posseggono l' attributo specificato.
+
+attrib=		Nome esatto dell' attributo da modificare.
+
+value=		Valore da assegnare all' attributo.
+
+
+	3.3.	Esempi di script
+
+# led.scr	Modifica 3 attributi in tutti i widget (165) di classe: Led 
+
+widgetclass=Led
+	attrib=colorNorm
+		value=#a3a3ffffd1d1
+	attrib=colorBlink
+		value=#bbbb00008888
+	attrib=background
+		value=#ffff0000ffff
+
+
+	4.	Opzioni
+	_______________
+
+  -c		effettua solo un controllo dello script
+  -n		non effettua le modifiche
+  -p xxx.pag	specifica il file di risorse
+  -P		log delle pagine accedute
+  -q		non effettua log (nel file: Xxxx.log)
+  -s xxx.scr	specifica lo script
+  -S		log delle modifiche effettuate
+  -t		trace (sul file: Xxxx.trc)
+  -!		modifica i file di risorse originali
+

@@ -1,0 +1,161 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Backtrack Management</TITLE>
+<META NAME="subject" CONTENT="Documentazione BI Puertollano">
+<META NAME="doccomm" CONTENT="Documentazione relativa alla prima release, consegnata in aprile 96. Vedere sp_bist.doc per specifica completa.">
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789938"><A NAME="_Toc353787653"><A NAME="_Toc353787449"><A NAME="_Toc353775577"><A NAME="_Toc353769444"><A NAME="_Toc353756064"><A NAME="_Toc353686291"><A NAME="_Toc353674660"><A NAME="ist_stat_bm_main"></A>Backtrack management</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>This is the interface through which the instructor can go back to previous sessions, access data recorded in the backtrack snapshots automatically recorded, load the backtrack snapshots themselves for restart the simulation or to "replay" the recorded sessions.</P>
+<P>It is activated by clicking the <B>Recording -&gt; Backtrack Management</B> button, or, more quickly, through the selection of the <B><I>B</B></I> button shortcut in the master menu interface.</P>
+<P>&nbsp;</P>
+</FONT><P><A HREF="#ist_stat_bm_descr"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Interface description</U></FONT></A></P>
+<P><A HREF="#ist_stat_bm_oper"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Interface operations</U></FONT></A></P>
+<P><A HREF="#ist_stat_bm_exit"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Exit the dialog</U></FONT></A><FONT FACE="Arial, helvetica"> </P>
+<P>&nbsp;</P>
+<P>&nbsp;<A NAME="ist_stat_bm_descr"></A></FONT><B><FONT FACE="Arial, helvetica" SIZE=5>Interface description</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><P><IMG SRC="Image1303.gif" WIDTH=422 HEIGHT=645></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>The interface is divided into 4 zones:</P>
+<P>&nbsp;</P>
+<P>the menubar</P>
+<P>the replay area</P>
+<P>the backtrack snapshots scrolling list</P>
+<P>the command area, at the bottom side of the window</P>
+<P>&nbsp;</P>
+<P>The command area contains the following buttons:</P>
+<P>&nbsp;</P>
+<B><P>LOAD</B>&#9;to load the selected backtrack in the simulator database</P>
+<B><P>INIT</B>&#9;to validate the last loaded backtrack as the one that will be the starting point of a new training session</P>
+<B><P>VIEW</B>&#9;to initiate the conversation that allows to select and view the recorded values of patterns of simulator variables</P>
+<B><P>QUIT</B> &#9;to terminate the interface</P>
+<P>&nbsp;</P>
+<P>The same commands are available from a popup menu activated by clicking the rightmost mouse button while the pointer is in the backtrack list area.</P>
+<P>&nbsp;</P>
+<P>The menubar provides the following commands:</P>
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=651>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<P><B><FONT FACE="Arial, helvetica">File -&gt;</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Quit</B></FONT></TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to terminate the interface</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Edit -&gt;</B></FONT></TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P>Timer Recording</B></FONT></TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>to modify the time between the automatic snapshots</FONT></TD>
+</TR>
+<TR><TD WIDTH="14%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="28%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="59%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>The replay area shows which backtrack was last loaded, either manually, or automatically by the replay function, and a button that permits to activate and deactivate the simulator replay function.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789940"><A NAME="_Toc353787655"><A NAME="_Toc353787451"><A NAME="_Toc353775579"><A NAME="_Toc353769446"><A NAME="_Toc353756066"><A NAME="ist_stat_bm_oper"></A>Interface operation</A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The interface is used to view and load backtrack snapshots, for purposes of initialize new sessions or to replay recorded sessions.</P>
+<P>The interface is not available when no records are recorded in the backtrack file.</P>
+<P>&nbsp;</P>
+</FONT><P><A HREF="#ist_stat_bm_lbrec"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Loading backtrack records</U></FONT></A></P>
+<P><A HREF="#ist_stat_bm_ibsn"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Initializing from a backtrack snapshot</U></FONT></A></P>
+<P><A HREF="#ist_stat_bm_vrecbsn"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">View the variables value recorded into a backtrack snapshot</U></FONT></A></P>
+<P><A HREF="#ist_stat_bm_respses"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Restoring the previous session</U></FONT></A></P>
+<P><A HREF="#ist_stat_bm_chrecfre"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Changing the recording frequency</U></FONT></A></P>
+<P><A HREF="#ist_stat_bm_repmode"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Replay mode</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787656"><A NAME="_Toc353787452"><A NAME="_Toc353775580"><A NAME="_Toc353769447"><A NAME="_Toc353756067"><A NAME="ist_stat_bm_lbrec"></A>Loading backtrack records</A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The <B>LOAD</B> buttons are available when:</P>
+<P>&nbsp;</P>
+<P>the simulator is in the <B><I>FREEZE</B></I>, <B><I>RUN</B></I> or <B><I>BACKTRACK</B></I> state and a backtrack record is selected on the list.</P>
+<P>&nbsp;</P>
+<P>To load a backtrack snapshot into the simulator database:</P>
+<P>&nbsp;</P>
+<P>select a backtrack record from the list</P>
+<P>click on one of the provided <B>LOAD</B> buttons</P>
+<P>&nbsp;</P>
+<P>The request activates the following sequence:</P>
+<P>&nbsp;</P>
+<P>the simulator state is switched to <B><I>FREEZE</P>
+</B></I><P>the current simulator database is saved on I.C. n. 60 (default snapshot)</P>
+<P>the simulator state is switched to <B><I>BACKTRACK</P>
+</B></I><P>the selected backtrack snapshot is actually loaded</P>
+<P>the backtrack interface is updated</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787657"><A NAME="_Toc353787453"><A NAME="_Toc353775581"><A NAME="_Toc353769448"><A NAME="_Toc353756068"><A NAME="ist_stat_bm_ibsn"></A>Initializing from a backtrack snapshot</A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The <B>INIT</B> buttons are available when:</P>
+<P>&nbsp;</P>
+<P>a backtrack snapshot has been successfully loaded into the simulator database and the simulator is in <B><I>BACKTRACK</B></I> state</P>
+<P>&nbsp;</P>
+<P>To initialize the simulator from a backtrack snapshot:</P>
+<P>&nbsp;</P>
+<P>click on one of the provided <B>INIT</B> buttons</P>
+<P>&nbsp;</P>
+<P>This causes the interface to close and the simulator state to switch to the <B><I>FREEZE</B></I> state.</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787658"><A NAME="_Toc353787454"><A NAME="_Toc353775582"><A NAME="_Toc353769449"><A NAME="_Toc353756069"><A NAME="ist_stat_bm_vrecbsn"></A>View the variables value recorded into a backtrack snapshot</A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The <B>VIEW</B> buttons are available when:</P>
+<P>&nbsp;</P>
+<P>a backtrack snapshot is currently selected from the list</P>
+<P>&nbsp;</P>
+<P>To inspect the values of the recorded variables:</P>
+<P>&nbsp;</P>
+<P>select a backtrack snapshot</P>
+<P>click on one of the provided <B>VIEW</B> buttons</P>
+<P>&nbsp;</P>
+<P>At this time a new window will appear that shows the values of up to 10 variables. From this interface the instructor can configure and select different patterns of variables using a filter function. See the appropriated paragraph to know more about this interface.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353789941"><A NAME="_Toc353787659"><A NAME="_Toc353787455"><A NAME="_Toc353775583"><A NAME="_Toc353769450"><A NAME="_Toc353756070"><A NAME="ist_stat_bm_respses"></A>Restoring the previous session</A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The instructor has the possibility to restore the session left before entering <B><I>BACKTRACK</B></I> mode.</P>
+<P>The function is activated by the selection of one of the <B>QUIT</B> buttons after at least one backtrack snapshot has been loaded (the original database has been replaced). </P>
+<P>The protocol presents a warning that advise the instructor. Choose the <B>OK</B> pushbutton to continue or the <B>Cancel</B> pushbutton to abort the operation.</P>
+<P>If confirmed, the function replaces the current simulator database with the I.C. n. 60 (the one recorded when first entered the <B><I>BACKTRACK</B></I> state), and the simulator state is switched to <B><I>FREEZE</B></I>.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787660"><A NAME="_Toc353787456"><A NAME="_Toc353775584"><A NAME="_Toc353769451"><A NAME="_Toc353756071"><A NAME="ist_stat_bm_chrecfre"></A>Changing the recording</A> frequency</A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>It is given the possibility to modify the interval at which the instructor station triggers the recording of the backtrack snapshots. </P>
+<P>The function is activated by clicking the <B>Edit -&gt; Timer Recording</B> button: an interface is opened with the current value of the interval. </P>
+<P>The instructor can modify that value and click the <B>OK </B>button to activate the new value.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787661"><A NAME="_Toc353787457"><A NAME="_Toc353775585"><A NAME="_Toc353769452"><A NAME="_Toc353756072"><A NAME="ist_stat_bm_repmode"></A>Replay mode</A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The replay button is available whenever a backtrack snapshot has been loaded into the simulator database.</P>
+<P>&nbsp;</P>
+<P>To activate the replay mode:</P>
+<P>&nbsp;</P>
+<P>load a backtrack snapshot</P>
+<P>click on the <B>Replay Mode</B> button</P>
+<P>&nbsp;</P>
+<P>The simulator state switches from <B><I>BACKTRACK</B></I> to <B><I>REPLAY</B></I> state. In this state the models are running, the frame around the status label on the master menu interface is blinking, and all the commands that the models received during the previously recorded session are repeated to the simulator at the appropriated time.</P>
+<P>&nbsp;</P>
+<P>While in this state the automatic recording functions are inhibited and the users should avoid the use of the commands.</P>
+<P>&nbsp;</P>
+<P>The replay mode terminates automatically at the end of a session, or when the instructor toggles the <B>Replay Mode</B> button; at this point the simulator state switch back to <B><I>BACKTRACK</B></I>.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="_Toc353787662"><A NAME="_Toc353787458"><A NAME="_Toc353775586"><A NAME="_Toc353769453"><A NAME="_Toc353756073"><A NAME="ist_stat_bm_exit"></A>Exit the dialog</A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>There are three ways to terminate the interface:</P>
+<P>&nbsp;</P>
+<P>using the <B>INIT</B> buttons, to initiate a new session starting from a backtrack snapshot</P>
+<P>using the <B>QUIT</B> buttons after a backtrack snapshot has been loaded, to restore the previous session</P>
+<P>using the <B>QUIT</B> buttons before loading of a backtrack snapshot to simply quit the interface</P>
+</FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

@@ -1,0 +1,120 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE MIXN</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MIXN_summ"></A>MODULE MIXN&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I><P>&nbsp;</P>
+</FONT><P><A HREF="#lg_libproc_MIXN_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MIXN_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MIXN_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MIXN_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MIXN_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MIXN_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MIXN_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MIXN_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_MIXN_A"></A>MODULE MIXN&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">N-FLUIDS ENTHALPIC MIXER</P>
+<P>&nbsp;</P>
+<P>The MIXN module simulates the perfect mixing of "N" fluids flowing into a cavity.</P>
+<P>Simplifying hypotheses adopted in the physical-mathematical model definition are the following:</P>
+<P>- absence of thermal exchange of the "N" fluids with the surface of the cavity;</P>
+<P>- absence of phenomena of mass and energy accumulation in the cavity;</P>
+<P>&nbsp;</P>
+<P>The used equations, both algebraical are:</P>
+<P>1) the energy conservation equation</P>
+<P>2) the mass conservation equation</P>
+<P>&nbsp;</P>
+<P>The physical-mathematical model inside the module is not able to simulate in a satisfying manner cases of back-flow. If during the simulation of any transient the back-flow of any flows should happen (although simulation is not interrupted), the obtained quantity trends may be little reliable. So it is necessary to check that during the transient evolution this situation does not take place.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MIXN_B"></A>MODULE MIXN&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">N = number of input branches in the cavity (max. 10)</P>
+<P ALIGN="JUSTIFY">i = 1, 2, ... N</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image353.gif" WIDTH=371 HEIGHT=114></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">[kg/s]&#9;WMIX&#9;flow rate of fluid flowing out of the cavity</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HMIX&#9;enthalpy of fluid flowing out of the cavity</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WE_i&#9;(i = 1, 2, ... N) flow rate of fluid flowing into the cavity from the i-th branch</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HE_i&#9;(i = 1, 2, ... N) enthalpy of fluid flowing into the cavity from the i-th branch</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_MIXN_C"></A>MODULE MIXN&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P>&nbsp;</P>
+<P>In the MIXN module there is no request for further data besides starting values of input and output variables.</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MIXN_D"></A>MODULE MIXN&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P>&nbsp;</P>
+<P>To initialize the MIXN module variables no particular prescription is required.</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MIXN_E"></A>MODULE MIXN&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P>&nbsp;</P>
+<P>In the MIXN module no user subprogram is foreseen.</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MIXN_F"></A>MODULE MIXN&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The mass conservation equation, applied to the fluid inside the manifold, gives rise to the following residuals:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image354.gif" WIDTH=193 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P>(normalization factor = W0)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During steady state evaluation the second residual (expression of the energy conservation equation applied to the fluid inside the manifold) is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image355.gif" WIDTH=293 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P>(normalization factor = W0 * H0)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During transient simulation the second residual is not-iterative. The expression of the mixing enthalpy is given by the following relation:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image356.gif" WIDTH=186 HEIGHT=96></P>
+<FONT FACE="Arial, helvetica"><P>(normalization factor = H0)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In both the cases, the second residual is protected against numerical problems which could occurr in case of null or negative flow rates.</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MIXN_G"></A>MODULE MIXN&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE MIXNI3 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MIXNI4 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MIXNI2 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1, IBL2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MIXNC1 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1, IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MIXND1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MIXN_H"></A>MODULE MIXN&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the user manual section dedicated to the examples developed under the abbreviations:</P>
+<P ALIGN="CENTER">"......... module application examples not available yet........"</P></FONT></BODY>
+</HTML>

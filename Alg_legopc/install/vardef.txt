@@ -1,0 +1,42 @@
+
+
+export LG_BASE=$HOME/prove
+
+
+
+export LG_ENTRY=$LG_BASE/user
+export LG_BIN=$LG_BASE/Bin
+ 
+export LG_PREINST=$LG_BIN/Preinst
+export LG_INSTALL=$LG_BASE/Install
+ 
+export LG_LIBGRAPH=$LG_ENTRY/Libgraph
+export LG_LIBUT=$LG_ENTRY/Libut
+export LG_MODELS=$LG_ENTRY/Models
+ 
+export LG_GRAF=$LG_BIN/Grafics
+export LG_LEGO=$LG_BIN/Lego
+export LG_PIXMAPS=$LG_LIBGRAPH/Pixmaps
+export LG_TIX=$LG_BIN/Tix
+export LG_TOOLS=$LG_BIN/Tools
+export LG_TABLES=$LG_BIN/Tables
+export LG_NEWMOD=$LG_BIN/Newmod
+export LG_POSTPROC=$LG_BIN/PostProc
+export LG_LIBRARIAN=$LG_BIN/Libraria
+ 
+export LG_FILESI5=$LG_LIBGRAPH/Files_i5
+export LG_HELP=$LG_LIBGRAPH/Help
+export LG_LIBRARIES=$LG_LIBGRAPH/Libraries
+export LG_XBM=$LG_LIBGRAPH/Xbm
+ 
+export LG_CONCIL=$LG_BIN\LgConcil
+ 
+export LG_SIMULATORS=$LG_ENTRY/Simulators
+ 
+#export LG_BROWSER=C:/PROGRA~1/PLUS!/MICROS~1/IEXPLORE.EXE
+export LG_HTML=$LG_BASE/help
+ 
+#export LG_ICOEDITOR=C:/PROGRA~1/JASC~1/PAINT~1/PSP.EXE
+#export set LG_TEXTEDITOR=C:/Programmi/UltraEdit/UEDIT32.exe
+
+

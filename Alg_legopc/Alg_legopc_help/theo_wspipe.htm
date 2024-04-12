@@ -1,0 +1,118 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title></title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font size="4">WATER AND STEAM PIPES, EXCHANGERS AND
+      EVAPORATOR</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Arial"><u><a href="#parte1">Exchangers and evaporator</a></u></font></p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte1"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p ALIGN="center">Exchangers and evaporator<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font>
+<p align="left"><font FACE="Arial">Modules referred to: <u><a href="evap.htm" target="_blank">EVAP</a></u>,
+EXCH.</p>
+<p ALIGN="left">These components are modelled as a series of control volumes,
+called cells.</p>
+<p ALIGN="left">The basic 1-D equations in local form for a constant
+cross-section straight tube are</p>
+<p ALIGN="CENTER"><img SRC="images/Image297.gif" width="118" height="53"></p>
+<p ALIGN="CENTER"><img SRC="images/Image298.gif" width="306" height="53"></p>
+<p ALIGN="CENTER"><img SRC="images/Image299.gif" width="413" height="58"></p>
+<p ALIGN="left">Dropping the terms v(</font><font FACE="Symbol">¶</font><font FACE="Arial">p/</font><font FACE="Symbol">¶</font><font FACE="Arial">x)
+and (</font><font FACE="Symbol">x</font><font FACE="Arial">/D</font><font FACE="Arial" SIZE="1">h</font><font FACE="Arial">)</font><font FACE="Symbol">r</font><font FACE="Arial">v³
+in the energy conservation equation and integrating the conservation equations
+on a fixed control volume, the following equations for the i-th cell are
+obtained:</p>
+<p ALIGN="CENTER"><img SRC="images/Image300.gif" width="171" height="53"></p>
+<p ALIGN="CENTER"><img SRC="images/Image301.gif" width="598" height="66"></p>
+<p ALIGN="CENTER"><img SRC="images/Image302.gif" width="581" height="56"></p>
+<p ALIGN="left">The following assumptions are made:</p>
+<font FACE="Symbol">
+<p ALIGN="left">* G</font><font FACE="Arial" SIZE="1">IN,i</font><font FACE="Arial">
+= </font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial">
+and of course </font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">EX,i</font><font FACE="Arial">
+= </font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">i+1</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> h</font><font FACE="Arial" SIZE="1">EX,i</font><font FACE="Arial">
+= h</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial"> and of course
+h</font><font FACE="Arial" SIZE="1">IN,i</font><font FACE="Arial"> = h</font><font FACE="Arial" SIZE="1">i-1</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> p</font><font FACE="Arial" SIZE="1">EX,i</font><font FACE="Arial">
+= p</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial"> and of course
+p</font><font FACE="Arial" SIZE="1">IN,i</font><font FACE="Arial"> = p</font><font FACE="Arial" SIZE="1">i-1</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> the terms d</font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial">/dt,
+</font><font FACE="Symbol">G</font><font FACE="Arial">²</font><font FACE="Arial" SIZE="1">IN,i</font><font FACE="Arial">/A</font><font FACE="Symbol">r</font><font FACE="Arial" SIZE="1">IN,i</font><font FACE="Arial">
+and </font><font FACE="Symbol">G</font><font FACE="Arial">²</font><font FACE="Arial" SIZE="1">EX,i</font><font FACE="Arial">/A</font><font FACE="Symbol">r</font><font FACE="Arial" SIZE="1">EX,i</font><font FACE="Arial">
+can be neglected in the momentum equation</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> the term V</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial">(dp</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial">/dt)
+can be neglected in the energy conservation equation</p>
+</font>
+<p ALIGN="left">and the conservation equations become:</p>
+<p ALIGN="CENTER"><img SRC="images/Image303.gif" width="271" height="61"></p>
+<p ALIGN="CENTER"><img SRC="images/Image304.gif" width="376" height="66"></p>
+<p ALIGN="CENTER"><img SRC="images/Image305.gif" width="331" height="53"></p>
+<p ALIGN="left">If the two-phase flow <u><a href="Drift%20flux%20link.htm" target="_blank">drift
+flux</a></u> model is adopted new terms are added to the momentum and energy
+conservation equations</p>
+<p ALIGN="CENTER"><img SRC="images/Image306.gif" WIDTH="775" HEIGHT="66"></p>
+<p ALIGN="CENTER"><img SRC="images/Image307.gif" width="746" height="60"></p>
+<u>
+<p ALIGN="left"><a href="pressure%20drop%20link2.htm" target="_blank">Pressure
+drop</a></u> and <u><a href="pressure%20drop%20link3.htm" target="_blank">heat
+transfer coefficients</a></u> are computed by means of empirical correlations.</p>
+<p ALIGN="left">The wall energy conservation equation is, in local form and in
+cylindrical coordinates,</p>
+<p ALIGN="CENTER"><img SRC="images/Image308.gif" width="563" height="61"></p>
+<p ALIGN="left">The following assumptions are made:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> T</font><font FACE="Arial" SIZE="1">w</font><font FACE="Arial">
+doesn’ t depend on </font><font FACE="Symbol">f</p>
+<p ALIGN="left">* </font><font FACE="Arial">The axial thermal conduction term
+can be neglected</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> The wall thermal conductivity </font><font FACE="Symbol">l</font><font FACE="Arial" SIZE="1">w</font><font FACE="Arial">
+is constant</p>
+</font>
+<p ALIGN="left">Integrating the wall energy equation on a control volume of
+length l</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial"> spanning
+from r</font><font FACE="Arial" SIZE="1">int</font><font FACE="Arial"> to r</font><font FACE="Arial" SIZE="1">ext</font><font FACE="Arial">
+with the boundary conditions:</p>
+<p ALIGN="CENTER"><img SRC="images/Image309.gif" width="291" height="53"></p>
+<p ALIGN="CENTER"><img SRC="images/Image310.gif" width="286" height="53"></p>
+<p ALIGN="left">and assuming the whole wall heat capacity is lumped on the mean
+wall radius it is for each cell:</p>
+<p ALIGN="CENTER"><img SRC="images/Image311.gif" width="758" height="120"></p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

@@ -1,0 +1,610 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>testcase7</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test7_a">T</A>est case 7: general description</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following test case represents the model of a 120 MW turbogas plant (TurboTecnica MS9000) and of the main functions performed by its control system.</P>
+<P ALIGN="JUSTIFY">The turbogas is simulated by three blocks, representing the three main components of a turbogas plant:</P>
+<P ALIGN="JUSTIFY">1.&#9;Axial air compressor (block COAF)</P>
+<P ALIGN="JUSTIFY">2.&#9;Combustion chamber (block CPAF)</P>
+<P ALIGN="JUSTIFY">3.&#9;Axial gas turbine (block TPAF)</P>
+<P ALIGN="JUSTIFY">The function performed by the simplified control system (block RETG) are:</P>
+<P ALIGN="JUSTIFY">1.&#9;to limit turbine exhaust gas temperature, adjusting the position of the compressor Inlet Guide Vanes (IGV) and the fuel flow &#9;rate.</P>
+<P ALIGN="JUSTIFY">2.&#9;to control the rotational speed of the machine</P>
+<P ALIGN="JUSTIFY">The block IRTG has been inserted in the topology of the model to interface the control system variables with the process variables.</P>
+<P ALIGN="JUSTIFY">The block MART (inertia of the turbogas) operates when the plant is not connected with the network (during start-up, shutdown, trip, load-rejection): in this case the rotational speed of the machine is not imposed by the network frequency, but it is given by the energy equation for the rotating masses.</P>
+<P ALIGN="JUSTIFY">The steady condition calculated for the model represents the "full speed no load" state of the plant.</P>
+<P ALIGN="JUSTIFY">The dynamical behaviour of this system has been studied in a case of a load ramp from 0% to 100%.</P>
+<P ALIGN="JUSTIFY">The following figure shows the block diagram of the simulated system.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image51.gif" WIDTH=615 HEIGHT=442></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test7_m"></A>Test case 7: topological diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following picture represents the topological diagram of the "TURBOGAS" model:</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image62.gif" WIDTH=620 HEIGHT=299></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="JUSTIFY">The following list represents the related topological description file, automatically written by LEGOCAD System (MACROBLOCKS.DAT):</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>****</P>
+<P>TURBOGAS</P>
+<P>****</P>
+<P>Turbogas 0000 0000</P>
+<P>****</P>
+<P>0 COAFCOAF COAF 0 400 420 0</P>
+<P>0 CPAFCPAF CPAF 0 500 335 0</P>
+<P>0 TPAFTPAF TPAF 0 600 420 0</P>
+<P>0 IRTGIRTG IRTG 0 265 435 0</P>
+<P>0 MARTMART MART 0 700 435 0</P>
+<P>0 RETGRETG RETG 0 155 435 0</P>
+<P>0 NODOSOMV NODO 0 800 435 0</P>
+<P>0 NODOCPNT NODO 0 700 335 0</P>
+<P>1 *REMARK* 395 580 Air</P>
+<P>1 *REMARK* 610 580 Exhaust gas</P>
+<P>3 *GLINES* 2 1 12 6 0 2</P>
+<P>(450,455)</P>
+<P>(600,455)</P>
+<P>3 *GLINES* 2 1 12 6 0 2</P>
+<P>(450,465)</P>
+<P>(600,465)</P>
+<P>3 *GLINES* 2 1 12 6 0 2</P>
+<P>(650,455)</P>
+<P>(695,455)</P>
+<P>3 *GLINES* 2 1 12 6 0 2</P>
+<P>(650,465)</P>
+<P>(695,465)</P>
+<P>3 *GLINES* 2 1 12 6 1 3</P>
+<P>(755,460)</P>
+<P>(783,460)</P>
+<P>(795,460)</P>
+<P>3 *GLINES* 2 1 12 6 1 3</P>
+<P>(210,445)</P>
+<P>(248,445)</P>
+<P>(260,445)</P>
+<P>3 *GLINES* 2 1 12 6 1 3</P>
+<P>(260,475)</P>
+<P>(222,475)</P>
+<P>(210,475)</P>
+<P>3 *GLINES* 2 1 12 6 1 3</P>
+<P>(320,445)</P>
+<P>(358,445)</P>
+<P>(370,445)</P>
+<P>3 *GLINES* 2 1 12 6 1 3</P>
+<P>(370,475)</P>
+<P>(332,475)</P>
+<P>(320,475)</P>
+<P>3 *GLINES* 2 5 12 6 1 7</P>
+<P>(450,440)</P>
+<P>(470,440)</P>
+<P>(470,440)</P>
+<P>(470,365)</P>
+<P>(470,365)</P>
+<P>(483,365)</P>
+<P>(495,365)</P>
+<P>3 *GLINES* 2 4 12 6 1 7</P>
+<P>(555,365)</P>
+<P>(575,365)</P>
+<P>(575,365)</P>
+<P>(575,440)</P>
+<P>(575,440)</P>
+<P>(588,440)</P>
+<P>(600,440)</P>
+<P>3 *GLINES* 2 4 12 6 1 3</P>
+<P>(645,520)</P>
+<P>(645,568)</P>
+<P>(645,580)</P>
+<P>3 *GLINES* 2 5 12 6 1 3</P>
+<P>(405,520)</P>
+<P>(405,568)</P>
+<P>(405,580)</P>
+<P>3 *GLINES* 2 1 12 6 0 8</P>
+<P>(375,310)</P>
+<P>(375,620)</P>
+<P>(375,620)</P>
+<P>(875,620)</P>
+<P>(875,620)</P>
+<P>(875,310)</P>
+<P>(875,310)</P>
+<P>(375,310)</P>
+<P>****</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test7_b"></A>Test case 7: model topology</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the topological file (F01.DAT) of the "TURBOGAS" model, which is produced by LEGOCAD System topology building activity:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>****</P>
+<P>COAF BLOCCO (COAF) - axial compressor</P>
+<P>CPAF BLOCCO (CPAF) - combustion chamber</P>
+<P>TPAF BLOCCO (TPAF) - gas turbine</P>
+<P>IRTG BLOCCO (IRTG) - interface control system-turbogas</P>
+<P>MART BLOCCO (MART) - inertia of the turbogas</P>
+<P>RETG BLOCCO (RETG) - turbogas control system</P>
+<P>NODO BLOCCO (SOMV) - turbogas rotational velocity</P>
+<P>NODO BLOCCO (CPNT) - clean turbogas power</P>
+<P>****</P>
+<P>TURBOGAS</P>
+<P>****</P>
+<P>COAFCOAF BL.-COAF- **** MODULO COAF - axial compressor</P>
+<P>WARICOAF --UA-- AIR FLOW RATE AT THE COMPRESSOR OUTLET</P>
+<P>TUSCCOAF --UA-- AIR TEMP. AT THE COMPRESSOR OUTLET</P>
+<P>PBYPCOAF --UA-- AIR PRESSURE UPSTREAM THE COMPR. BY-PASS VALVE</P>
+<P>TBYPCOAF --UA-- AIR TEMP. UPSTREAM THE COMPR. BY-PASS VALVE</P>
+<P>WBYPCOAF --UA-- AIR BY-PASS FLOW RATE (DURING THE START)</P>
+<P>QCOMCOAF --UA-- MECHANICAL POWER ABSORBED BY THE COMPRESSOR</P>
+<P>APERCOAF --UA-- IGV OPENING DEGREE</P>
+<P>PINGCOAF --IN-- AIR PRESSURE AT THE COMPRESSOR INLET</P>
+<P>PINGCPAF --IN-- #PUSCCOAF#....................&lt;===CPAFCPAF BL.-CPAF-</P>
+<P>TINGCOAF --IN-- AIR TEMP.AT THE COMPRESSOR INLET</P>
+<P>USOMSOMV --IN-- #OMEGCOAF#....................&lt;===NODOSOMV BL.-SOMV-</P>
+<P>ABYPCOAF --IN-- BY-PASS VALVE OPENING DEG. (DURING THE START)</P>
+<P>XBYPCOAF --IN-- DISCHARGE COEFFICENT BY-PASS VALVE</P>
+<P>XIGVIRTG --IN-- #XIGVCOAF#....................&lt;===IRTGIRTG BL.-IRTG-</P>
+<P>****</P>
+<P>****</P>
+<P>CPAFCPAF BL.-CPAF- **** MODULO CPAF - combustion chamber</P>
+<P>TMETCPAF --US-- MEAN METAL TEMPERATURE OF WALL</P>
+<P>WFUMCPAF --UA-- FLUE GASES FLOW RATE AT THE CHAMBER OUTLET</P>
+<P>TFUMCPAF --UA-- FLUE GASES TEMP AT THE CHAMBER OUTLET</P>
+<P>PINGCPAF --UA-- AIR PRESSURE UPSTREAM COMBUSTION CHAMBER</P>
+<P>XCFUCPAF --UA-- CHEM. COMP. OF THE FLUE GASES AT CHAMBER OUTLET</P>
+<P>PINGTPAF --IN-- #PUSCCPAF#....................&lt;===TPAFTPAF BL.-TPAF-</P>
+<P>WARICOAF --IN-- #WAINCPAF#....................&lt;===COAFCOAF BL.-COAF-</P>
+<P>TUSCCOAF --IN-- #TAINCPAF#....................&lt;===COAFCOAF BL.-COAF-</P>
+<P>WCINIRTG --IN-- #WCINCPAF#....................&lt;===IRTGIRTG BL.-IRTG-</P>
+<P>HCINCPAF --IN-- FUEL THERMAL ENTHALPY</P>
+<P>AKPCCPAF --IN-- PRE CHAMBER/CHAMBER DISCHARGE COEFFICIENT</P>
+<P>TAMBCPAF --IN-- EXTERNAL ENVIRONMENT TEMPERATURE</P>
+<P>****</P>
+<P>****</P>
+<P>TPAFTPAF BL.-TPAF- **** MODULO TPAF - gas turbine</P>
+<P>PINGTPAF --UA-- FLUE GAS PRESSURE AT THE TURBINE INLET</P>
+<P>TUSCTPAF --UA-- FLUE GAS TEMPERATURE AT THE TURBINE OUTLET</P>
+<P>QTURTPAF --UA-- POWER PRODUCED BY THE TURBINE</P>
+<P>GSCATPAF --UA-- THERMAL EXCHANGE COEFF. FLUE GAS-METAL</P>
+<P>WFUMCPAF --IN-- #WTURTPAF#....................&lt;===CPAFCPAF BL.-CPAF-</P>
+<P>PUSCTPAF --IN-- FLUE GAS PRESSURE AT THE TURBINE OUTLET</P>
+<P>TFUMCPAF --IN-- #TINGTPAF#....................&lt;===CPAFCPAF BL.-CPAF-</P>
+<P>USOMSOMV --IN-- #OMEGTPAF#....................&lt;===NODOSOMV BL.-SOMV-</P>
+<P>AKEFTPAF --IN-- TURBINE DISCHARGE COEFFICIENT</P>
+<P>XCFUCPAF --IN-- #XCMBTPAF#....................&lt;===CPAFCPAF BL.-CPAF-</P>
+<P>QMETTPAF --IN-- POWER EXCHANGED WITH THE METAL</P>
+<P>****</P>
+<P>****</P>
+<P>IRTGIRTG BL.-IRTG- **** MODULO IRTG - interface control system-turbogas</P>
+<P>WCINIRTG --UA-- FUEL FLOW RATE AT THE TURBOGAS INLET</P>
+<P>XIGVIRTG --UA-- IGV OPENING AT THE TURBOGAS INLET</P>
+<P>TTERIRTG --UA-- MEASURED TEMPERATURE OF EXHAUST FLUE GASES</P>
+<P>TTRXIRTG --UA-- REFERING TEMPERATURE</P>
+<P>ZWCORETG --IN-- #XRCOIRTG#....................&lt;===RETGRETG BL.-RETG-</P>
+<P>ZIGVRETG --IN-- #XRIGIRTG#....................&lt;===RETGRETG BL.-RETG-</P>
+<P>WCMXIRTG --IN-- MAXIMUM FUEL FLOW RATE</P>
+<P>TUSCTPAF --IN-- #TUSCIRTG#....................&lt;===TPAFTPAF BL.-TPAF-</P>
+<P>TAMBIRTG --IN-- EXTERNAL TEMPERATURE</P>
+<P>USOMCPNT --IN-- #QTURIRTG#....................&lt;===NODOCPNT BL.-CPNT-</P>
+<P>****</P>
+<P>****</P>
+<P>MARTMART BL.-MART- **** MODULO MART - inertia of the turbogas</P>
+<P>RPM1MART --UA-- VELOCITY OF TURBINE N.1</P>
+<P>USOMCPNT --IN-- #QTU1MART#....................&lt;===NODOCPNT BL.-CPNT-</P>
+<P>ASC1MART --IN-- TRIP OF TURBINE N.1</P>
+<P>AAV1MART --IN-- STARTING OF TURBINE N.1</P>
+<P>ARIFMART --IN-- LOAD REJECTION</P>
+<P>QAUSMART --IN-- AUXILIARIES POWER</P>
+<P>RPMIMART --IN-- NETWORK FREQ (ISOLATED OR UNBOUNDED POWER)</P>
+<P>****</P>
+<P>****</P>
+<P>RETGRETG BL.-RETG- **** MODULO RETG - turbogas control system</P>
+<P>ZIGVRETG --UA-- IGV TG POSITION</P>
+<P>ZWCORETG --UA-- FUEL FLOW RATE</P>
+<P>FSRTRETG --UA-- REQUESTED FUEL FLOW RATE IN TEMPERATURE CLIPPING</P>
+<P>FSRVRETG --UA-- SET FUEL FLOW RATE AND FREQUENCY ERROR</P>
+<P>TTERIRTG --IN-- #TTERRETG#....................&lt;===IRTGIRTG BL.-IRTG-</P>
+<P>TTRXIRTG --IN-- #TTRXRETG#....................&lt;===IRTGIRTG BL.-IRTG-</P>
+<P>USOMSOMV --IN-- #RPM_RETG#....................&lt;===NODOSOMV BL.-SOMV-</P>
+<P>YSETRETG --IN-- SET POINT TG</P>
+<P>YRPMRETG --IN-- TG VELOCITY SET POINT</P>
+<P>ZWMCRETG --IN-- MONITORED FUEL FLOW RATE</P>
+<P>ZMIGRETG --IN-- MONITORED IGV POSITION</P>
+<P>ALAVRETG --IN-- STARTING TG BUTTON</P>
+<P>ALSCRETG --IN-- CLIPPING TG BUTTON</P>
+<P>ALSHRETG --IN-- SHUT DOWN TG BUTTON</P>
+<P>****</P>
+<P>****</P>
+<P>NODOSOMV BL.-SOMV- **** MODULO NODO - turbogas rotational velocity</P>
+<P>USOMSOMV --UA-- LINEAR RELATION : OUTPUT VARIABLE</P>
+<P>RPM1MART --IN-- #IN_1SOMV#....................&lt;===MARTMART BL.-MART-</P>
+<P>IN_2SOMV --IN-- LINEAR RELATION : INPUT N. 2</P>
+<P>****</P>
+<P>****</P>
+<P>NODOCPNT BL.-CPNT- **** MODULO NODO - clean turbogas power</P>
+<P>USOMCPNT --UA-- LINEAR RELATION : OUTPUT VARIABLE</P>
+<P>QTURTPAF --IN-- #IN_1CPNT#....................&lt;===TPAFTPAF BL.-TPAF-</P>
+<P>QCOMCOAF --IN-- #IN_2CPNT#....................&lt;===COAFCOAF BL.-COAF-</P>
+<P>IN_3CPNT --IN-- LINEAR RELATION : INPUT N. 3</P>
+<P>****</P>
+<P>**** &gt;&gt;&gt;&gt;&gt;&gt;INGRESSI DI TUTTI I MODULI&lt;&lt;&lt;&lt;&lt;&lt;</P>
+<P>PINGCOAF --IN-- AIR PRESSURE AT THE COMPRESSOR INLET</P>
+<P>TINGCOAF --IN-- AIR TEMP.AT THE COMPRESSOR INLET</P>
+<P>ABYPCOAF --IN-- BY-PASS VALVE OPENING DEG. (DURING THE START)</P>
+<P>XBYPCOAF --IN-- DISCHARGE COEFFICENT BY-PASS VALVE</P>
+<P>HCINCPAF --IN-- FUEL THERMAL ENTHALPY</P>
+<P>AKPCCPAF --IN-- PRE CHAMBER/CHAMBER DISCHARGE COEFFICIENT</P>
+<P>TAMBCPAF --IN-- EXTERNAL ENVIRONMENT TEMPERATURE</P>
+<P>PUSCTPAF --IN-- FLUE GAS PRESSURE AT THE TURBINE OUTLET</P>
+<P>AKEFTPAF --IN-- TURBINE DISCHARGE COEFFICIENT</P>
+<P>QMETTPAF --IN-- POWER EXCHANGED WITH THE METAL</P>
+<P>WCMXIRTG --IN-- MAXIMUM FUEL FLOW RATE</P>
+<P>TAMBIRTG --IN-- EXTERNAL TEMPERATURE</P>
+<P>ASC1MART --IN-- TRIP OF TURBINE N.1</P>
+<P>AAV1MART --IN-- STARTING OF TURBINE N.1</P>
+<P>ARIFMART --IN-- LOAD REJECTION</P>
+<P>QAUSMART --IN-- AUXILIARIES POWER</P>
+<P>RPMIMART --IN-- NETWORK FREQ (ISOLATED OR UNBOUNDED POWER)</P>
+<P>YSETRETG --IN-- SET POINT TG</P>
+<P>YRPMRETG --IN-- TG VELOCITY SET POINT</P>
+<P>ZWMCRETG --IN-- MONITORED FUEL FLOW RATE</P>
+<P>ZMIGRETG --IN-- MONITORED IGV POSITION</P>
+<P>ALAVRETG --IN-- STARTING TG BUTTON</P>
+<P>ALSCRETG --IN-- CLIPPING TG BUTTON</P>
+<P>ALSHRETG --IN-- SHUT DOWN TG BUTTON</P>
+<P>IN_2SOMV --IN-- LINEAR RELATION : INPUT N. 2</P>
+<P>IN_3CPNT --IN-- LINEAR RELATION : INPUT N. 3</P>
+<P>****</P>
+<P>PUSCCOAF --CO-- AIR PRESSURE AT THE COMPRESSOR OUTLET</P>
+<P>OMEGCOAF --CO-- COMPRESSOR ROTATIONAL VELOCITY</P>
+<P>XIGVCOAF --CO-- IGV OPENING (PERCENTAGE OR DEGREE)</P>
+<P>PUSCCPAF --CO-- FLUE GAS PRESSURE DOWNSTREAM THE CHAMBER</P>
+<P>WAINCPAF --CO-- AIR FLOW RATE COMBUSTION CHAMBER INLET</P>
+<P>TAINCPAF --CO-- AIR TEMP. COMBUSTION CHAMBER INLET</P>
+<P>WCINCPAF --CO-- FUEL FLOW RATE COMBUSTION CHAMBER INLET</P>
+<P>WTURTPAF --CO-- FLUE GAS FLOW RATE INTO THE TURBINE</P>
+<P>TINGTPAF --CO-- FLUE GAS TEMPERATURE AT THE TURBINE INLET</P>
+<P>OMEGTPAF --CO-- ROTATIONAL VELOCITY OF THE TURBINE</P>
+<P>XCMBTPAF --CO-- FLUE GAS COMP. AT THE INLET (FUEL/AIR RATIO)</P>
+<P>XRCOIRTG --CO-- REQUESTED FUEL FLOW RATE IN PERCENTAGE</P>
+<P>XRIGIRTG --CO-- IGV REQUESTED POSITION IN PERCENTAGE</P>
+<P>TUSCIRTG --CO-- TEMPERATURE OF THE EXHAUST FLUE GAS</P>
+<P>QTURIRTG --CO-- CLEAN TURBOGAS POWER</P>
+<P>QTU1MART --CO-- POWER OF TURBINE N.1</P>
+<P>TTERRETG --CO-- THERMOCOUPLES TG TEMPERATURE</P>
+<P>TTRXRETG --CO-- REFERENCE TG TEMPERATURE</P>
+<P>RPM_RETG --CO-- ROTATIONAL VELOCITY</P>
+<P>IN_1SOMV --CO-- LINEAR RELATION : INPUT N. 1</P>
+<P>IN_1CPNT --CO-- LINEAR RELATION : INPUT N. 1</P>
+<P>IN_2CPNT --CO-- LINEAR RELATION : INPUT N. 2</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test7_c"></A>Test case 7: geometrical and physical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Geometrical and physical data of the model:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Turbogas type:&#9;TURBOTECNICA MS 9000&#9;(Tipo TG=2)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">1.&#9;<U>Block air compressor:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">Nominal conditions:</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Air flow rate:&#9;409&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Inlet air pressure:&#9;1.013&#9;bar</P>
+<P ALIGN="JUSTIFY">Outlet air pressure:&#9;12.1&#9;bar</P>
+<P ALIGN="JUSTIFY">Inlet air temperature:&#9;288.15&#9;K</P>
+<P ALIGN="JUSTIFY">Rotational speed:&#9;3000&#9;RPM</P>
+<P ALIGN="JUSTIFY">Efficiency:&#9;0.823</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">Coefficients for the definition of the efficiency curve:</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Coefficient K1:&#9;0.32</P>
+<P ALIGN="JUSTIFY">Coefficient K2:&#9;0.32</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">2.&#9;<U>Block combustion chamber:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">General data:</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Internal surface:&#9;20&#9;m²</P>
+<P ALIGN="JUSTIFY">External surface:&#9;24&#9;m²</P>
+<P ALIGN="JUSTIFY">Metal specific heat:&#9;630&#9;J/kg/K</P>
+<P ALIGN="JUSTIFY">Metal weight:&#9;850&#9;kg</P>
+<P ALIGN="JUSTIFY">Net heat value of the fuel:&#9;46250&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Combustion efficiency:&#9;0.99</P>
+<P ALIGN="JUSTIFY">Molar ratio H/C of the fuel:&#9;3.874</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">Time costants of the fuel supply system:</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Tps1:&#9;1.65&#9;s</P>
+<P ALIGN="JUSTIFY">Tps2:&#9;3.3&#9;s</P>
+<P ALIGN="JUSTIFY">Combustion delay:&#9;0.15&#9;s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">3.&#9;<U>Block gas turbine:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">Nominal conditions:</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Inlet gas pressure:&#9;11.6&#9;bar</P>
+<P ALIGN="JUSTIFY">Rotational speed:&#9;3000&#9;RPM</P>
+<P ALIGN="JUSTIFY">Efficiency:&#9;0.89</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">Coefficients for the definition of the efficiency curve:</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Coefficient K1:&#9;0.5</P>
+<P ALIGN="JUSTIFY">Coefficient K2:&#9;1.3</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">4.&#9;<U>Block turbogas inertia:</P>
+</U><P ALIGN="JUSTIFY">Start up time of the turbogas:&#9;20&#9;s</P>
+<P ALIGN="JUSTIFY">Rated turbogas power:&#9;116&#9;MW</P>
+<P ALIGN="JUSTIFY">Rated rotational speed of the machine:&#9;3000&#9;RPM</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">5.&#9;<U>Block turbogas control system:</P>
+</U><P ALIGN="JUSTIFY">Proportional gain of the PI gas temperature</P>
+<P ALIGN="JUSTIFY">regulator by IGV modulating:&#9;0.4&#9;</P>
+<P ALIGN="JUSTIFY">Integral time of the PI gas temperature</P>
+<P ALIGN="JUSTIFY">regulator by IGV modulating:&#9;2&#9;s</P>
+<P ALIGN="JUSTIFY">IGV position at "full speed no load" condition:&#9;46&#9;%</P>
+<P ALIGN="JUSTIFY">Proportional gain of the PI gas temperature</P>
+<P ALIGN="JUSTIFY">regulator by fuel flow rate modulating:&#9;0.2</P>
+<P ALIGN="JUSTIFY">Integral time of the PI gas temperature</P>
+<P ALIGN="JUSTIFY">regulator by fuel flow rate modulating:&#9;3.3&#9;s</P>
+<P ALIGN="JUSTIFY">Time constant for exhaust gas temperature</P>
+<P ALIGN="JUSTIFY">measurement:&#9;2.5&#9;s</P>
+<P ALIGN="JUSTIFY">Time constant of IGV actuator:&#9;20&#9;s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">Main data for the calculation of a steady state condition:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Air pressure at compressor inlet:&#9;1.013&#9;bar</P>
+<P ALIGN="JUSTIFY">Air temperature at compressor inlet:&#9;288.15&#9;K</P>
+<P ALIGN="JUSTIFY">Fuel thermal enthalpy:&#9;28.05&#9;kJ/kg</P>
+<P ALIGN="JUSTIFY">Air pressure at compressor outlet:&#9;7.832&#9;bar</P>
+<P ALIGN="JUSTIFY">Gas pressure at turbine inlet:&#9;7.323&#9;bar</P>
+<P ALIGN="JUSTIFY">Gas pressure at turbine outlet:&#9;1.013&#9;bar</P>
+<P ALIGN="JUSTIFY">Fuel flow rate:&#9;1.8389&#9;kg/s</P>
+<P ALIGN="JUSTIFY">Rotational speed of the machine:&#9;3000&#9;RPM</P>
+<P ALIGN="JUSTIFY">Power absorbed by auxiliary systems:&#9;0.8&#9;MW</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test7_d"></A>Test case 7: auxiliary Fortran procedures</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the source code of the auxiliary Fortran procedures (FORAUS.FOR) of the "TURBOGAS" model.</P>
+<P ALIGN="JUSTIFY">The "auxiliary Fortran procedures" are user-written functions and/or subroutines whose purpose is to perform non-standard computation for particular LEGO modules. The FORAUS.FOR file has to be written in accordance with "ANSI X3.9-1978 Standard Fortran" prescriptions.</P>
+<P ALIGN="JUSTIFY">In this model, auxiliary Fortran is used to evaluate the reference temperature and the set-up value for flue gas outlet temperature as functions of environment temperature for process-regulation interface system (IRTG block).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>REAL FUNCTION TGXUTXGU10(QTGP,FTAMB)</P>
+<P>CC-- CALCOLO DELLA TEMPERATURA DI RIFERIMENTO</P>
+<P>CC********** BREVE SPIEGAZIONE DEI PARAMETRI DELLA SUBROUTINE ***********</P>
+<P>CC</P>
+<P>CC</P>
+<P>CC SUBROUTINE UTENTE: DEVE FORNIRE IL VALORE DI SET PER IL CONTROLLO</P>
+<P>CC DELLA TEMPERATURA DI USCITA GAS DAL TURBOGAS</P>
+<P>CC IN GRADI KELVIN</P>
+<P>CC</P>
+<P>CC IN FUNZIONE DI QTGP = POTENZA IN % ,</P>
+<P>CC FTAMB = TEMPERATURA AMBIENTE IN GRADI FARENHEIT</P>
+<P>CC</P>
+<P>CC</P>
+<P>CC---ESEMPIO PER TURBOGAS TIPO NUOVO PIGNONE</P>
+<P>CC</P>
+<P>PARAMETER (LDT=13,LTC=5,LUR=65)</P>
+<P>DIMENSION TABQ(LDT),TABTAM(LTC),TABTRX(LUR)</P>
+<P>DATA TABQ/0.,20.,40.,62.,71.,77.6,80.,88.6,</P>
+<P>$ 97.,100.,110.6,121.7,130./</P>
+<P>DATA TABTAM/0.,30.,59.,90.,120./</P>
+<P>DATA TABTRX/1295.,1238.25,1181.5,1119.08,1093.54,</P>
+<P>$ 1074.82,1068.01,1043.61,</P>
+<P>$ 1019.77,1011.26,981.18,949.69,926.14,</P>
+<P>$ 1277.,1221.44,1165.89,1104.78,1079.78,</P>
+<P>$ 1061.44,1054.78,1030.89,1007.56,</P>
+<P>$ 999.22,969.78,938.94,915.89,</P>
+<P>$ 1240.,1190.,1140.,1085.,1062.5,1046.,</P>
+<P>$ 1040.,1018.5,997.5,989.33,963.5,</P>
+<P>$ 935.75,915.,1225.,1175.68,1126.36,1072.11,</P>
+<P>$ 1049.92,1033.65,1027.73,1006.52,</P>
+<P>$ 985.81,978.41,952.27,924.9,904.43,</P>
+<P>$ 1195.5,1151.45,1107.41,1058.95,1039.13,</P>
+<P>$ 1024.6,1019.31,1000.37,981.87,</P>
+<P>$ 975.26,951.92,927.47,909.19/</P>
+<P>XQTG=QTGP</P>
+<P>IF(XQTG.LE.62.) THEN</P>
+<P>XQTG=62.</P>
+<P>ENDIF</P>
+<P>CALL TGLINTAV(TABTAM,LTC,TABQ,LDT,TABTRX,XQTG,FTAMB,TR,Z1,Z2)</P>
+<P>TGXUTXGU10=(TR-32.)/1.8+273.15</P>
+<P>RETURN</P>
+<P>END</P>
+<P>C</P>
+<P>C</P>
+<P>C</P>
+<P>REAL FUNCTION TGXUTXGF14(POYX,FTAMB)</P>
+<P>CC-- CALCOLO TEMPERATURA DI RIFERIMENTO</P>
+<P>PARAMETER (LDT=14,LTC=7,LUR=98)</P>
+<P>DIMENSION TABQ(LDT),TABTAM(LTC),TABTRX(LUR)</P>
+<P>DATA TABQ/42.,46.,49.9,54.1,57.8,61.7,65.7,</P>
+<P>$ 77.7,85.,92.3,100.,106.9,114.2,121.5/</P>
+<P>DATA TABTAM/0.,20.,40.,59.,80.,100.,120./</P>
+<P>DATA TABTRX/534.,531.,528.,525.,523.,520.,517.,</P>
+<P>$ 508.,503.,497.,492.,487.,481.,476.,</P>
+<P>$ 536.,533.,530.,527.,524.,521.,518.,</P>
+<P>$ 508.,503.,497.,491.,486.,480.,474.,</P>
+<P>$ 541.,538.,534.,531.,528.,524.,521.,</P>
+<P>$ 511.,505.,499.,492.,486.,480.,474.,</P>
+<P>$ 550.,546.,542.,538.,535.,531.,527.,</P>
+<P>$ 516.,509.,502.,495.,488.,482.,475.,</P>
+<P>$ 555.,551.,547.,543.,539.,535.,531.,</P>
+<P>$ 519.,511.,504.,496.,489.,482.,474.,</P>
+<P>$ 560.,556.,551.,547.,542.,538.,534.,</P>
+<P>$ 520.,512.,504.,495.,487.,479.,471.,</P>
+<P>$ 572.,567.,562.,557.,552.,547.,542.,</P>
+<P>$ 527.,518.,508.,499.,490.,481.,472./</P>
+<P>XQTG=POYX</P>
+<P>CALL TGLINTAV(TABTAM,LTC,TABQ,LDT,TABTRX,XQTG,FTAMB,TR,Z1,Z2)</P>
+<P>TGXUTXGF14=TR+273.15</P>
+<P>RETURN</P>
+<P>END</P>
+<P>C</P>
+<P>C</P>
+<P>C</P>
+<P>SUBROUTINE TGLINTAV(TABP,LP,TABX,LX,TABY,X,P,Y,DYX,DYP)</P>
+<P>DIMENSION TABP(*),TABX(*),TABY(*)</P>
+<P>LP1=LP-1</P>
+<P>DO 10 I=2,LP1</P>
+<P>IF(P-TABP(I)) 20,20,10</P>
+<P>10 CONTINUE</P>
+<P>I=LP</P>
+<P>20 IP=LX*(I-2)+1</P>
+<P>CALL TGLININ(TABX,LX,TABY(IP),X,Y1,DYX1)</P>
+<P>IP=IP+LX</P>
+<P>CALL TGLININ(TABX,LX,TABY(IP),X,Y2,DYX2)</P>
+<P>DYP=(Y2-Y1)/(TABP(I)-TABP(I-1))</P>
+<P>Y=Y1+(P-TABP(I-1))*DYP</P>
+<P>DYX=DYX1+(P-TABP(I-1))*(DYX2-DYX1)/(TABP(I)-TABP(I-1))</P>
+<P>RETURN</P>
+<P>END</P>
+<P>C</P>
+<P>C</P>
+<P>C</P>
+<P>SUBROUTINE TGLININ(TABX,LX,TABY,X,Y,DYX)</P>
+<P>DIMENSION TABX(*),TABY(*)</P>
+<P>LX1=LX-1</P>
+<P>DO 10 I=2,LX1</P>
+<P>IF(X-TABX(I)) 20,20,10</P>
+<P>10 CONTINUE</P>
+<P>I=LX</P>
+<P>20 DYX=(TABY(I)-TABY(I-1))/(TABX(I)-TABX(I-1))</P>
+<P>Y=TABY(I-1)+(X-TABX(I-1))*DYX</P>
+<P>RETURN</P>
+<P>END</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test7_e"></A>Test case 7: steady state condition</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following list represents the data file (F14.DAT) of the "TURBOGAS" model.</P>
+<P ALIGN="JUSTIFY">File F14.DAT is written by LEGOCAD System data assignment activity. Steady states evaluation activity rewrites (only for unknown variables) the values obtained for the calculated steady state condition:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>*LG*NOME IMPIANTO =TURBOGAS</P>
+<P>*LG*DATI DI NORMALIZZAZIONE P0=2.E+07*H0=1.E+06*W0=1.E+03*T0=1.E+03*R0=1.E+02*</P>
+<P>*LG* L0=1.E+01*V0=5.E+01*DP0=1.E+05*</P>
+<P>*LG*CONDIZIONI INIZIALI VARIABILI DEL SISTEMA (MKS)</P>
+<P>1 WARICOAF =337.39 *BL.(COAFCOAF)= AIR FLOW RATE AT THE COMPRESSOR OUTL</P>
+<P>2 TUSCCOAF =569.16 *BL.(COAFCOAF)= AIR TEMP. AT THE COMPRESSOR OUTLET</P>
+<P>3 PBYPCOAF =.44227E+06*BL.(COAFCOAF)= AIR PRESSURE UPSTREAM THE COMPR. BY-</P>
+<P>4 TBYPCOAF =475.60 *BL.(COAFCOAF)= AIR TEMP. UPSTREAM THE COMPR. BY-PAS</P>
+<P>5 WBYPCOAF =.00000E+00*BL.(COAFCOAF)= AIR BY-PASS FLOW RATE (DURING THE ST</P>
+<P>6 QCOMCOAF =.98000E+08*BL.(COAFCOAF)= MECHANICAL POWER ABSORBED BY THE COM</P>
+<P>7 APERCOAF =.82492 *BL.(COAFCOAF)= IGV OPENING DEGREE</P>
+<P>8 WFUMCPAF =339.21 *BL.(CPAFCPAF)= FLUE GASES FLOW RATE AT THE CHAMBER</P>
+<P>9 TFUMCPAF =790.47 *BL.(CPAFCPAF)= FLUE GASES TEMP AT THE CHAMBER OUTLE</P>
+<P>10 PINGCPAF =.78323E+06*BL.(CPAFCPAF)= AIR PRESSURE UPSTREAM COMBUSTION CHA</P>
+<P>11 XCFUCPAF =.53957E-02*BL.(CPAFCPAF)= CHEM. COMP. OF THE FLUE GASES AT CHA</P>
+<P>12 PINGTPAF =.73235E+06*BL.(TPAFTPAF)= FLUE GAS PRESSURE AT THE TURBINE INL</P>
+<P>13 TUSCTPAF =524.55 *BL.(TPAFTPAF)= FLUE GAS TEMPERATURE AT THE TURBINE</P>
+<P>14 QTURTPAF =.98748E+08*BL.(TPAFTPAF)= POWER PRODUCED BY THE TURBINE</P>
+<P>15 GSCATPAF =509.15 *BL.(TPAFTPAF)= THERMAL EXCHANGE COEFF. FLUE GAS-MET</P>
+<P>16 WCINIRTG =1.8389 *BL.(IRTGIRTG)= FUEL FLOW RATE AT THE TURBOGAS INLET</P>
+<P>17 XIGVIRTG =38.000 *BL.(IRTGIRTG)= IGV OPENING AT THE TURBOGAS INLET</P>
+<P>18 TTERIRTG =524.55 *BL.(IRTGIRTG)= MEASURED TEMPERATURE OF EXHAUST FLUE</P>
+<P>19 TTRXIRTG =858.15 *BL.(IRTGIRTG)= REFERING TEMPERATURE</P>
+<P>20 RPM1MART =3000.0 *BL.(MARTMART)= VELOCITY OF TURBINE N.1</P>
+<P>21 ZIGVRETG =46.000 *BL.(RETGRETG)= IGV TG POSITION</P>
+<P>22 ZWCORETG =29.000 *BL.(RETGRETG)= FUEL FLOW RATE</P>
+<P>23 FSRTRETG =70.242 *BL.(RETGRETG)= REQUESTED FUEL FLOW RATE IN TEMPERAT</P>
+<P>24 FSRVRETG =-.5821E-06*BL.(RETGRETG)= SET FUEL FLOW RATE AND FREQUENCY ERR</P>
+<P>25 USOMSOMV =3000.0 *BL.(NODOSOMV)= LINEAR RELATION : OUTPUT VARIABLE</P>
+<P>26 USOMCPNT =.74257E+06*BL.(NODOCPNT)= LINEAR RELATION : OUTPUT VARIABLE</P>
+<P>27 TMETCPAF =783.00 *BL.(CPAFCPAF)= MEAN METAL TEMPERATURE OF WALL</P>
+<P>*LG*CONDIZIONI INIZIALI VARIABILI DI INGRESSO</P>
+<P>1 PINGCOAF =.10130E+06*BL.(COAFCOAF)=NOTO AIR PRESSURE AT THE COMPRESSOR INLET</P>
+<P>2 TINGCOAF =288.15 *BL.(COAFCOAF)=NOTO AIR TEMP.AT THE COMPRESSOR INLET</P>
+<P>3 ABYPCOAF =.00000E+00*BL.(COAFCOAF)=NOTO BY-PASS VALVE OPENING DEG. (DURING T</P>
+<P>4 XBYPCOAF =.45000E-01*BL.(COAFCOAF)=NOTO DISCHARGE COEFFICENT BY-PASS VALVE</P>
+<P>5 HCINCPAF =28050. *BL.(CPAFCPAF)=NOTO FUEL THERMAL ENTHALPY</P>
+<P>6 AKPCCPAF =.49304 *BL.(CPAFCPAF)=NOTO PRE CHAMBER/CHAMBER DISCHARGE COEFFI</P>
+<P>7 TAMBCPAF =288.15 *BL.(CPAFCPAF)=NOTO EXTERNAL ENVIRONMENT TEMPERATURE</P>
+<P>8 PUSCTPAF =.10130E+06*BL.(TPAFTPAF)=NOTO FLUE GAS PRESSURE AT THE TURBINE OUT</P>
+<P>9 AKEFTPAF =.26312 *BL.(TPAFTPAF)=NOTO TURBINE DISCHARGE COEFFICIENT</P>
+<P>10 QMETTPAF =.00000E+00*BL.(TPAFTPAF)=NOTO POWER EXCHANGED WITH THE METAL</P>
+<P>11 WCMXIRTG =7.6586 *BL.(IRTGIRTG)=NOTO MAXIMUM FUEL FLOW RATE</P>
+<P>12 TAMBIRTG =288.15 *BL.(IRTGIRTG)=NOTO EXTERNAL TEMPERATURE</P>
+<P>13 ASC1MART =.00000E+00*BL.(MARTMART)=NOTO TRIP OF TURBINE N.1</P>
+<P>14 AAV1MART =.00000E+00*BL.(MARTMART)=NOTO STARTING OF TURBINE N.1</P>
+<P>15 ARIFMART =.00000E+00*BL.(MARTMART)=NOTO LOAD REJECTION</P>
+<P>16 QAUSMART =.80000E+06*BL.(MARTMART)=NOTO AUXILIARIES POWER</P>
+<P>17 RPMIMART =3000.0 *BL.(MARTMART)=NOTO NETWORK FREQ (ISOLATED OR UNBOUNDED</P>
+<P>18 YSETRETG =.00000E+00*BL.(RETGRETG)=NOTO SET POINT TG</P>
+<P>19 YRPMRETG =1.0000 *BL.(RETGRETG)=NOTO TG VELOCITY SET POINT</P>
+<P>20 ZWMCRETG =29.000 *BL.(RETGRETG)=NOTO MONITORED FUEL FLOW RATE</P>
+<P>21 ZMIGRETG =46.000 *BL.(RETGRETG)=NOTO MONITORED IGV POSITION</P>
+<P>22 ALAVRETG =.00000E+00*BL.(RETGRETG)=NOTO STARTING TG BUTTON</P>
+<P>23 ALSCRETG =.00000E+00*BL.(RETGRETG)=NOTO CLIPPING TG BUTTON</P>
+<P>24 ALSHRETG =.00000E+00*BL.(RETGRETG)=NOTO SHUT DOWN TG BUTTON</P>
+<P>25 IN_2SOMV =.00000E+00*BL.(NODOSOMV)=NOTO LINEAR RELATION : INPUT N. 2</P>
+<P>26 IN_3CPNT =.00000E+00*BL.(NODOCPNT)=NOTO LINEAR RELATION : INPUT N. 3</P>
+<P>*LG*DATI FISICI E GEOMETRICI DEL SISTEMA SUDDIVISI A BLOCCHI</P>
+<P>*LG*DATI DEL BLOCCO COAFCOAF MODULO COAF - axial compressor</P>
+<P>W nom. =409. * Pi nom. =1.013e5 * Pu nom. =12.1e5 *</P>
+<P>Ti nom. =288.15 * Omeg nom =3000. * KpBypass =0.5 *</P>
+<P>* EFFICIENCY CURVE DATA (Csi = 1. / EtaS)</P>
+<P>Csi nom. =1.215 * Coeff.K1 =0.32 * Coeff.K2 =0.32 *</P>
+<P>* TG TYPE AND OPENING CURVE PARAMETERS IGV</P>
+<P>Tipo TG =2. * Coeff.AA = * Coeff.BB = *</P>
+<P>* CHOKE FLOW CURVE COEFFICIENTS</P>
+<P>Coeff.B1 = * Coeff.B2 = *</P>
+<P>* FLOW RATE CURVE COEFFICIENTS</P>
+<P>Coeff.A0 = * Coeff.A2 = * Coeff.A3 = *</P>
+<P>*LG*DATI DEL BLOCCO CPAFCPAF MODULO CPAF - combustion chamber</P>
+<P>H combus =46250000. * Eta comb =0.99 * nH/nC =3.874 *</P>
+<P>Tps1 =1.65 * Tps2 =3.3 * Rit.Comb =0.15 *</P>
+<P>Sup Int =20. * Sup Est =24. * Cp Met =630. *</P>
+<P>Mass Met =850. *</P>
+<P>*LG*DATI DEL BLOCCO TPAFTPAF MODULO TPAF - gas turbine</P>
+<P>Pcam.nom =11.6e5 * Omeg nom =3000. * nH/nC =3.874 *</P>
+<P>* DATA FOR THE CURVE OF THE EFFICIENCY VARIATION</P>
+<P>EtaS nom =0.89 * Coeff.K1 =0.5 * Coeff.K2 =1.3 *</P>
+<P>*LG*DATI DEL BLOCCO IRTGIRTG MODULO IRTG - interface control system-turbogas</P>
+<P>TipoTurb =2. * GuadSche =0.2 * TempSche =15. *</P>
+<P>Pot.Nom. =116.e6 *</P>
+<P>* COEFF. OF THE RELATION BETWEEN REQUEST AND FUEL FLOW RATE</P>
+<P>A = *</P>
+<P>* COEFFICIENTS USED TO DEFINE THE OPENING LAW OF THE IGV</P>
+<P>B1 = * B2 = *</P>
+<P>*LG*DATI DEL BLOCCO MARTMART MODULO MART - inertia of the turbogas</P>
+<P>TAVVIA 1 =20. * POTNOM 1 =116.e6 * OMNOMI 1 =3000. *</P>
+<P>QVENTI 1 = * QLAMIN 1 = * QATTRI 1 = *</P>
+<P>DTLOAD = *</P>
+<P>*LG*DATI DEL BLOCCO RETGRETG MODULO RETG - turbogas control system</P>
+<P>TAU1 =2. * VTPG =0.4 * VINF =46. *</P>
+<P>TAU2 =3.3 * STAT =0.04 * GAIN =0.2 *</P>
+<P>DESE =15. * RPMMX =3010. * RTERM =2.5 *</P>
+<P>RPOGV =20. *</P>
+<P>*LG*DATI DEL BLOCCO NODOSOMV MODULO NODO - turbogas rotational velocity</P>
+<P>NORMALIZ =300. * NORMI_ 1 =300. * NORMI_ 2 =300. *</P>
+<P>USOMSOMV =-1. * RPM1MART =1. * IN_2SOMV =1. *</P>
+<P>*LG*DATI DEL BLOCCO NODOCPNT MODULO NODO - clean turbogas power</P>
+<P>NORMALIZ =Q0 * NORMI_ 1 =Q0 * NORMI_ 2 =Q0 *</P>
+<P>NORMI_ 3 =Q0 *</P>
+<P>USOMCPNT =-1.0075 * QTURTPAF =1. * QCOMCOAF =-1. *</P>
+<P>IN_3CPNT =-1. *</P>
+<P>*LG*EOF</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_test7_f"></A>Test case 7: transient simulation</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<U><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Data for the simulation of a transient condition:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Simulation time:&#9;1000&#9;s</P>
+<P ALIGN="JUSTIFY">Integration step:&#9;1&#9;s</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<U><P ALIGN="JUSTIFY">Perturbated variable:</P>
+</U><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">YSETRETG</P>
+<P ALIGN="JUSTIFY">Type of perturbation:&#9;ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation:&#9;100&#9;s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation:&#9;800&#9;s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation:&#9;1&#9;p.u.</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image52.gif" WIDTH=567 HEIGHT=189></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Load percentage set-point (perturbation) and fuel flow rate (result)</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image53.gif" WIDTH=567 HEIGHT=189></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Results: air and exaust flow rates and combustion chamber pressure</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image54.gif" WIDTH=567 HEIGHT=189></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Results: air/flue gas temperatures at compressor outlet, turbine inlet and turbine outlet</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image55.gif" WIDTH=567 HEIGHT=189></P>
+<FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="CENTER">Results: compressor, turbine and net group powers</P></FONT></BODY>
+</HTML>

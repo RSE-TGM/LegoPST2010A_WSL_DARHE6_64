@@ -1,0 +1,29 @@
+[OPTIONS]
+ROOT=./rtf
+BMROOT=./bmp
+CONTENTS=lmi_summary
+TITLE=LEGOMMI HELP
+COMPRESS=True
+ERRORLOG=lmmihelp.err
+REPORT=ON
+COPYRIGHT=Copyright © ENEL/DSR/CRA 1995 
+
+WARNING=3
+
+[FILES]
+lmmihelp.rtf
+lmmiobje.rtf
+lmmiconf.rtf
+lmmicomp.rtf
+lmmisimu.rtf
+lmmilayo.rtf
+
+[CONFIG]
+BrowseButtons()
+CreateButton("button_glossary","&Glossary","JumpId(`gloshelp.hlp',`lgc_gl_glossary')")
+CreateButton("button_up","&Up","")
+CreateButton("button_exit","&Exit","Exit()")
+
+[WINDOWS]
+main=,(20,20,630,896),0,(253,255,228),(255,130,130)
+

@@ -1,0 +1,64 @@
+C******************************************************************************
+C modulo PARAMETER.F
+C tipo 
+C release 5.1
+C data 11/16/95
+C reserver @(#)PARAMETER.F	5.1
+C******************************************************************************
+C
+C**    MAX_MODEL       = N. MAX MODELLI
+C**    MAX_ALLOC_MODEL = N. DI REAL*4 RISERVATI PER MODELLO NELLA SEZ. GLB.
+C**    MAX_DT_DEC      = PASSO DI TEMPO MASSIMO AMMESSO IN DECIMI DI SEC.
+C**    MAX_COLL        = N. MAX DI INGRESSI CONNESSI PER CIASCUN MODELLO
+C**    NUM_VAR_SUPP    = N. VARIABILI SUPPLEM. ALLOCATE NELLA SEZ. GLOB.
+C**    MAX_SNAP_SHOT   = N. MAX DI SNAP-SHOT CHE SI POSSONO MEMORIZZARE
+C**    MAX_PERTUR      = N. MAX DI PERTURBAZIONI PRESENTI CONTEMPORANEAM.
+C**    MEM_GRAF_SLICE  = AREA DI MEMORIA CENTRALE ALLOCATA PER LA GRAFICA (MB).
+C
+      PARAMETER (MAX_MODEL=20)         
+      PARAMETER (MAX_ALLOC_MODEL=5500)
+      PARAMETER (MAX_DT_DEC=100)
+      PARAMETER (MAX_COLL=300)
+      PARAMETER (NUM_VAR_SUPP=1500)
+      PARAMETER (MAX_PERTUR=50)
+C
+      PARAMETER (MAX_SNAP_SHOT=15)
+C					! M.Sommani  23-08-89
+      PARAMETER (MEM_GRAF_SLICE=1)	! 1 Megabyte
+C**
+C**   Dimensioni dell'area shared
+C**
+      PARAMETER (NUM_VAR_TOT_MOD = MAX_ALLOC_MODEL*MAX_MODEL)
+      PARAMETER (NUM_VAR_TOT_SHR = NUM_VAR_TOT_MOD + NUM_VAR_SUPP)
+      PARAMETER (NUM_VETTORI     = NUM_VAR_TOT_SHR/4095 + 1)
+C
+C**   Descrizione parameter per LG4
+C**
+C**   N000 = MOLTIPLICATORE
+C**
+C**   N001 = N. MODULI
+C**   N002 = N. BLOCCHI
+C**   N003 = N. STATI + ALG. = ORDINE MASSIMO SISTEMA ALGEBRICO
+C**   N004 = N. INGRESSI
+C**   N005 = N. VARIABILI
+C**   N007 = N. DATI
+C
+	PARAMETER (
+     &		N000 = 70,
+     &          N001 = N000*10,
+     &          N002 = N000*25,
+     &          N003 = N000*60,
+     &          N004 = N000*25,
+     &          N005 = N000*100,
+     &          N007 = N000*500)
+C
+C**   M001 = N. TOTALE INGRESSI = N005-N003
+C**   M002 = N. INGRESSI = USCITE = M001-N004
+C
+	PARAMETER (
+     &		M001=N005-N003, 
+     &		M002=M001-N004, 
+     &		M003=N002+1,
+     &          M004=N003+1, 
+     &		M005=N004+1)
+C

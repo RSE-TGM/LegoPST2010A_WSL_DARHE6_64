@@ -1,0 +1,695 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>TRAF</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE TRAF</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TRAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">THREE-PHASE TRANSFORMER</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">The TRAF module simulates the operation of a three-phase
+variable ratio transformer, obtained acting on the number of high voltage turns
+or on the primary.</p>
+<p ALIGN="left">The module employs the representation of a phase of the
+transformer with a gamma <font FACE="Symbol">p</font> circuit. Traverse
+parameters consist of the equivalent resistance for losses in iron and of the
+magnetization reactance. Longitudinal parameters consist of the equivalent short
+circuit impedance brought to the primary. The value of said impedance depends on
+the transformation ratio.</p>
+<p ALIGN="left">The module can simulate a transformer of any capacity and having
+any type of primary and secondary winding, since it refers to an equivalent
+equipment with both star windings.</p>
+<p ALIGN="left">Electrical parameters of the equivalent circuit employed for the
+module solution are determined by nameplate data characteristics for a
+transformer.</p>
+<p ALIGN="left">As far as use of TRAF is concerned, there is no particular
+warning, except for the basic network voltage which must be different for the
+two sides of the transformer, equal to the rated values of the primary and
+secondary voltage of the transformer itself.</p>
+<p ALIGN="left">A basic voltage different from the rated one, is not possible.</p>
+<p ALIGN="left">The transformer output frequency (OMTU) can be used to determine
+the condition of the switches of the transformer itself. In fact it is set equal
+to zero in the case one of the two switches is open. Duly connecting the
+input-output frequency of transformer and line modules connected in cascade, the
+output frequency can be used ad logic variable tied to the upstream supply state
+(OMTU=0 &lt;--&gt; no upstream supply).</p>
+<p ALIGN="left">This applies in case of radial network only.</p>
+<p ALIGN="JUSTIFY">In the mathematical model adopted the following hypothesis
+are assumed:</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY">a transformer is considered, having the connection of
+    primary phases equal to that of secondary ones, therefore the phase shifting
+    between primary and secondary voltage depending on the transformer unit is
+    not considered;<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY">non linearity introduced by iron is neglected;<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY">it is considered the variable ratio under load
+    transformer, with turn variation at primary is considered;<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY">the star equivalent transformer is considered;<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p ALIGN="JUSTIFY">derivatives of the primary and secondary currents with
+    respect to time are considered, that is it is assumed that transient states
+    take place through passage, at each integration step, for a sinusoidal state
+    condition: In this way the mathematical model is merely algebraic.<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="JUSTIFY">As a consequence of this last hypothesis it is not possible
+to detect no-load start up transient states. These can be obtained entering the
+current state variables and the transformer parasitic capacity together with the
+voltage state variable applied to the same.</p>
+<p ALIGN="JUSTIFY">The equations describing the equivalent circuit are used in
+the transformer mathematical model containing also the expressions of its
+losses.</p>
+<p ALIGN="JUSTIFY">In the transformer model, two internal switches are
+introduced through conditions on the equation system.</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">RESIDUALS</p>
+<p ALIGN="JUSTIFY">If the upstream switch is closed and the downstream switch is
+closed, then:</p>
+<p ALIGN="JUSTIFY">1. Equation describing the real current coming out from side
+1, according to the real auxiliary current and to real current shunt from
+no-load impedance.</p>
+<p ALIGN="JUSTIFY">2. Equation describing the imaginary current coming out from
+side 1, according to the imaginary auxiliary current and to real current shunt
+from no-load impedance.</p>
+<p ALIGN="JUSTIFY">3. Equation describing the real current coming out from side
+2, according to the real auxiliary current.</p>
+<p ALIGN="JUSTIFY">4. Equation describing the imaginary current coming out from
+side 2, according to the imaginary auxiliary current.</p>
+<p ALIGN="JUSTIFY">5. Equation determining the active power coming out from side
+2</p>
+<p ALIGN="JUSTIFY">6. Equation determining the reactive power coming out from
+side 2</p>
+<p ALIGN="JUSTIFY">7. Equation determining the percent value of the current
+module side 1 relevant to the module of the equipment rated current.</p>
+<p ALIGN="JUSTIFY">8. Equation determining the percent value of the current
+module side 2 relevant to the module of the equipment rated current.</p>
+<p ALIGN="JUSTIFY">9. Equation determining the transformer joule losses.</p>
+<p ALIGN="JUSTIFY">10. Equation determining losses in iron calculates through an
+equivalent resistance, to which voltage at transformer terminals relevant to the
+side it is supplied from, is applied.</p>
+<p ALIGN="JUSTIFY">11. Equation necessary to introduce the real voltage side 1
+at transformer terminals, different from bus bar ones should the equipment
+switch be open.</p>
+<p ALIGN="JUSTIFY">12. Equation necessary to introduce the imaginary voltage
+side 1 at transformer terminals, different from bus bar one, should the
+equipment switch be open.</p>
+<p ALIGN="JUSTIFY">13. Equation necessary to introduce the real voltage side 2
+at transformer terminals, different from bus bar one should the equipment switch
+be open.</p>
+<p ALIGN="JUSTIFY">14. Equation necessary to introduce the imaginary voltage
+side 2 at transformer terminals, different from bus bar one should the equipment
+switch be open.</p>
+<p ALIGN="JUSTIFY">15. Equation necessary to introduce equality between
+frequency of supply and output from transformer, should both the switches be
+closed (note 1).</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">Otherwise, if the upstream switch is closed and the
+downstream one is open, then:</p>
+<p ALIGN="JUSTIFY">1. Equation describing the real current coming out from side
+1, determined only by the real current shunt from no-load impedance.</p>
+<p ALIGN="JUSTIFY">2. Equation describing the imaginary current coming out from
+side 1, determined only by the real current shunt from no-load impedance.</p>
+<p ALIGN="JUSTIFY">3. Equation nullifying the real current coming out from side
+2.</p>
+<p ALIGN="JUSTIFY">4. Equation nullifying the imaginary current coming out from
+side 2</p>
+<p ALIGN="JUSTIFY">5. Equation nullifying the active power coming out from side
+2</p>
+<p ALIGN="JUSTIFY">6. Equation nullifying the reactive power coming out from
+side 2</p>
+<p ALIGN="JUSTIFY">7. Equation determining the percent value of the current
+module side 1 relevant to the module of the equipment rated current. It is the
+percent module of current absorbed in no-load conditions.</p>
+<p ALIGN="JUSTIFY">8. Equation nullifying the percent value of the current
+module side 2 relevant to the module of the equipment rated current.</p>
+<p ALIGN="JUSTIFY">9. Equation nullifying the transformer joule losses.</p>
+<p ALIGN="JUSTIFY">10. Equation determining losses in iron calculates through an
+equivalent resistance, to which voltage at transformer terminals relevant to the
+side it is supplied from, is applied.</p>
+<p ALIGN="JUSTIFY">11. Equation necessary to introduce the real voltage side 1
+at transformer terminals, different from bus bar one should the equipment switch
+be open.</p>
+<p ALIGN="JUSTIFY">12. Equation necessary to introduce the imaginary voltage
+side 1 at transformer terminals, different from bus bar one should the equipment
+switch be open.</p>
+<p ALIGN="JUSTIFY">13. Equation necessary to introduce the real voltage side 2
+at transformer terminals, different from bus bar ones should the equipment
+switch be open. In this case the voltage side 2 is equal to the real voltage in
+no-load conditions.</p>
+<p ALIGN="JUSTIFY">14. Equation necessary to introduce the imaginary voltage
+side 2 at transformer terminals, different from bus bar one should the equipment
+switch be open. In this case the voltage side 2 is equal to the imaginary
+voltage in no-load conditions.</p>
+<p ALIGN="JUSTIFY">15. Equation necessary to nullify the frequency at output
+being a switch open (note 1).</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">Otherwise, if the upstram switch is open and the downstream
+switch is closed:</p>
+<p ALIGN="JUSTIFY">1. Equation nullifying the real current coming out from side
+1.</p>
+<p ALIGN="JUSTIFY">2. Equation nullifying the imaginary current coming out from
+side 1.</p>
+<p ALIGN="JUSTIFY">3. Equation describing the real current coming out from side
+2 determined only by the real current shunt from the secondary no-load
+impedance.</p>
+<p ALIGN="JUSTIFY">4. Equation describing the imaginary current coming out from
+side 2 determined only by the imaginary current shunt from the secondary no-load
+impedance.</p>
+<p ALIGN="JUSTIFY">5. Equation calculating the active power coming out from side
+2 determined by losses in no-load conditions.</p>
+<p ALIGN="JUSTIFY">6. Equation calculating the reactive power coming out from
+side 2 determined by losses in no-load conditions.</p>
+<p ALIGN="JUSTIFY">7. Equation nullifying the percent value of the current
+module side 2 relevant to the equipment rated current module.</p>
+<p ALIGN="JUSTIFY">8. Equation determining the percent value of the current
+module side 2 relevant to the module of the equipment rated current. It is the
+percent module of current absorbed in no-load conditions.</p>
+<p ALIGN="JUSTIFY">9. Equation nullifying the transformer joule losses.</p>
+<p ALIGN="JUSTIFY">10. Equation determining losses in iron, calculated through
+an equivalent resistance, to which voltage at the transformer terminals is
+applied, relevant to the side it is supplied from.</p>
+<p ALIGN="JUSTIFY">11. Equation necessary to introduce the real voltage side 1
+at transformer terminals, different from bus bar one should the equipment switch
+be open. In this case the voltage side 1 is equal to the real voltage in no-load
+conditions.</p>
+<p ALIGN="JUSTIFY">12. Equation necessary to introduce the imaginary voltage
+side 1 at transformer terminals, different from bus bar one should the equipment
+switch be open. In this case the voltage side 1 is equal to the imaginary
+voltage in no-load conditions.</p>
+<p ALIGN="JUSTIFY">13. Equation necessary to introduce the real voltage side 2
+at transformer terminals, different from bus bar ones should the equipment
+switch be open.</p>
+<p ALIGN="JUSTIFY">14. Equation necessary to introduce the imaginary voltage
+side 2 at transformer terminals, different from bus bar one should the equipment
+switch be open.</p>
+<p ALIGN="JUSTIFY">15. Equation necessary to nullify the frequency at output
+being a switch open (note 1).</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">Otherwise, if the upstream switch is open and the downstream
+switch is open:</p>
+<p ALIGN="JUSTIFY">1. Equation nullifying the real current coming out from side
+1.</p>
+<p ALIGN="JUSTIFY">2. Equation nullifying the imaginary current coming out from
+side 1.</p>
+<p ALIGN="JUSTIFY">3. Equation nullifying the real current coming out from side
+2.</p>
+<p ALIGN="JUSTIFY">4. Equation nullifying the imaginary current coming out from
+side 2.</p>
+<p ALIGN="JUSTIFY">5. Equation calculating the active power coming out from
+side.</p>
+<p ALIGN="JUSTIFY">6. Equation calculating the reactive power coming out from
+side 2.</p>
+<p ALIGN="JUSTIFY">7. Equation nullifying the percent value of the current
+module side 1 relevant to the equipment rated current module.</p>
+<p ALIGN="JUSTIFY">8. Equation nullifying the percent value of the current
+module side 1 relevant to the module of the equipment rated current.</p>
+<p ALIGN="JUSTIFY">9. Equation nullifying the transformer joule losses.</p>
+<p ALIGN="JUSTIFY">10. Equation nullifying joule losses in iron.</p>
+<p ALIGN="JUSTIFY">11. Equation necessary to introduce the real voltage side 1
+at transformer terminals, different from bus bar one should the equipment switch
+be open. In this case the voltage side 1 is equal to zero</p>
+<p ALIGN="JUSTIFY">12. Equation necessary to introduce the imaginary voltage
+side 1 at transformer terminals, different from bus bar one should the equipment
+switch be open. In this case the voltage side 1 is equal to zero.</p>
+<p ALIGN="JUSTIFY">13. Equation necessary to introduce the real voltage side 2
+at transformer terminals, different from bus bar ones should the equipment
+switch be open. In this case the voltage side 2 is equal to zero.</p>
+<p ALIGN="JUSTIFY">14. Equation necessary to introduce the imaginary voltage
+side 2 at transformer terminals, different from bus bar one should the equipment
+switch be open. In this case the voltage side 2 is equal to zero.</p>
+<p ALIGN="JUSTIFY">15. Equation necessary to nullify the frequency at output
+being both switches open (note 1).</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">Note 1</p>
+<p ALIGN="left">The transformer output frequency (OMTU) can be used to determine
+the state of switches of the transformer itself. In fact it is assumed equal to
+zero should one of the two switches at least be open. Adequately connecting
+input-output frequencies of the transformer and line modules connected in
+cascade, the output frequency can be used as logic variable tied to the upstream
+supply state (OMTU=0 &lt;--&gt; no upstream supply).</p>
+<p ALIGN="left">This applies in case of radial network only.</p>
+<p ALIGN="center"></font><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TRAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="CENTER">INPUT - OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="center"><img SRC="images/Image730.gif" width="382" height="386"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT - OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VR1T</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">supply phase real voltage side 1</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VX1T</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">supply phase imaginary voltage side 1</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VR2T</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">supply phase real voltage side 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VX2T</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">supply phase imaginary voltage side 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ETA0</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">voltage variation side 2 / voltage max.
+      variation side 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AIN1</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">state of switch side 1 (1 = on)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">AIN2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">state of switch side 2 (1 = on)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMTI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">transformer input frequency</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IRT1</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">real current coming out from side 1</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IXT1</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">imaginary current coming out from side 1</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IRT2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">real current coming out from side 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IXT2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">imaginary current coming out from side 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QPTR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">active power output from side 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[VAR]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QQTR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">reactive power coming out from side 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IMT1</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">absorbed current module / rated current
+      module - side 1</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IMT2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">absorbed current module / rated current
+      module - side 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QPCU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">losses in copper</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QPFE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">losses in iron</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VR11</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">phase real voltage at terminals side 1</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VX11</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">phase imaginary voltage at terminals side
+      1</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VR22</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">phase real voltage at terminals side 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VX22</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">phase imaginary voltage at terminals side
+      2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMTU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">transformer output frequency</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TRAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i>
+</b>
+          </font>
+<font FACE="Arial">
+<p ALIGN="left">Besides initial values of input and output variables of the TRAF
+module, whose meaning has been defined in card B, the user must assign the
+following set of data to complete the input required by the module:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VBASE1</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">basic voltage = rated voltage between
+      lines side 1</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VBASE2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">basic voltage = rated voltage between
+      lines side 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VN1MX</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">max variation of number of turns side 1
+      in percent</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VCC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">percent short-circuit voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QBASE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">network basic power</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QNTRA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">transformer rated power</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QPFER</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">percent losses in iron</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QPCC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">percent short-circuit power calculated at
+      short-circuit voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[%]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">I0</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">percent current in no-load conditions</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMBA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">basic frequency</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TRAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p ALIGN="left">For the calculation of the steady state of the module containing
+the TRAF module only, make all module inputs known except for an input voltage,
+e.g. VX1T and an output voltage VR2T, and make known the real current side 1
+(IRT1) and the imaginary current side 2 (IXT2). Attention shall be paid to the
+sign of currents with respect to the sign of the real voltage set since the
+generator set coding has been selected for currents. It is not recommended to
+make known the QPTR,QQTR,QPST,QPFE variables clearing some model inputs when far
+from the desired steady state condition.</p>
+<p ALIGN="left">Powers output are positive if the energy flow runs from side 1
+towards side 2. As for the reactive power, this applies only if the load
+downstream the side 2 is inductive.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TRAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></b></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TRAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="left">The equations forming the module mathematical nodel, given in
+card A2 provide the following residuals:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">IF (LIN1 .AND. LIN2) THEN</p>
+<blockquote>
+  <p ALIGN="left">RNI(1) = IRT1+(I0R1+IAR)*CT</p>
+  <p ALIGN="left">RNI(2) = IXT1+(I0X1+IAX)*CT</p>
+  <p ALIGN="left">RNI(3) = IRT2-AM*IAR*CT</p>
+  <p ALIGN="left">RNI(4) = IXT2-AM*IAX*CT</p>
+  <p ALIGN="left">RNI(5) = QPTR-VR2T*IRT2-VX2T*IXT2</p>
+  <p ALIGN="left">RNI(6) = QQTR-VX2T*IRT2+VR2T*IXT2</p>
+  <p ALIGN="left">RNI(7) = IMT1-SQRT(3.*((IRT1/CT)**2.+(IXT1/CT)**2.))</p>
+  <p ALIGN="left">RNI(8) = IMT2-SQRT(3.*((IRT2/CT)**2.+(IXT2/CT)**2.))</p>
+  <p ALIGN="left">RNI(9) = QPCU-RC*(IMT1**2.)/3.</p>
+  <p ALIGN="left">RNI(10) = QPFE-(VR1T**2.+VX1T**2.)*QPFER</p>
+  <p ALIGN="left">RNI(11) = VR11-VR1T</p>
+  <p ALIGN="left">RNI(12) = VX11-VX1T</p>
+  <p ALIGN="left">RNI(13) = VR22-VR2T</p>
+  <p ALIGN="left">RNI(14) = VX22-VX2T</p>
+  <p ALIGN="left">RNI(15) = OMTU-OMTI</p>
+</blockquote>
+<p ALIGN="left">ELSE IF (LIN1 .AND. .NOT. LIN2) THEN</p>
+<blockquote>
+  <p ALIGN="left">RNI(1) = IRT1+I0R1*CT</p>
+  <p ALIGN="left">RNI(2) = IXT1+I0X1*CT</p>
+  <p ALIGN="left">RNI(3) = IRT2</p>
+  <p ALIGN="left">RNI(4) = IXT2</p>
+  <p ALIGN="left">RNI(5) = QPTR</p>
+  <p ALIGN="left">RNI(6) = QQTR</p>
+  <p ALIGN="left">RNI(7) = IMT1-SQRT(3.*((IRT1/CT)**2.+(IXT1/CT)**2.))</p>
+  <p ALIGN="left">RNI(8) = IMT2</p>
+  <p ALIGN="left">RNI(9) = QPCU</p>
+  <p ALIGN="left">RNI(10) = QPFE-(VR1T**2.+VX1T**2.)*QPFER</p>
+  <p ALIGN="left">RNI(11) = VR11-VR1T</p>
+  <p ALIGN="left">RNI(12) = VX11-VX1T</p>
+  <p ALIGN="left">RNI(13) = VR22-VR1T/AM</p>
+  <p ALIGN="left">RNI(14) = VX22-VX1T/AM</p>
+  <p ALIGN="left">RNI(15) = OMTU</p>
+</blockquote>
+<p ALIGN="left">ELSE IF (.NOT. LIN1 .AND. LIN2) THEN</p>
+<blockquote>
+  <p ALIGN="left">RNI(1) = IRT1</p>
+  <p ALIGN="left">RNI(2) = IXT1</p>
+  <p ALIGN="left">RNI(3) = IRT2+I0R2*CT</p>
+  <p ALIGN="left">RNI(4) = IXT2+I0X2*CT</p>
+  <p ALIGN="left">RNI(5) = QPTR</p>
+  <p ALIGN="left">RNI(6) = QQTR</p>
+  <p ALIGN="left">RNI(7) = IMT1</p>
+  <p ALIGN="left">RNI(8) = IMT2-SQRT(3.*((IRT2/CT)**2.+(IXT2/CT)**2.))</p>
+  <p ALIGN="left">RNI(9) = QPCU</p>
+  <p ALIGN="left">RNI(10) = QPFE-(VR2T**2.+VX2T**2.)*QPFER</p>
+  <p ALIGN="left">RNI(11) = VR11-AM*VR2T</p>
+  <p ALIGN="left">RNI(12) = VX11-AM*VX2T</p>
+  <p ALIGN="left">RNI(13) = VR22-VR2T</p>
+  <p ALIGN="left">RNI(14) = VX22-VX2T</p>
+  <p ALIGN="left">RNI(15) = OMTU</p>
+</blockquote>
+<p ALIGN="left">ELSE</p>
+<blockquote>
+  <p ALIGN="left">RNI(1) = IRT1</p>
+  <p ALIGN="left">RNI(2) = IXT1</p>
+  <p ALIGN="left">RNI(3) = IRT2</p>
+  <p ALIGN="left">RNI(4) = IXT2</p>
+  <p ALIGN="left">RNI(5) = QPTR</p>
+  <p ALIGN="left">RNI(6) = QQTR</p>
+  <p ALIGN="left">RNI(7) = IMT1</p>
+  <p ALIGN="left">RNI(8) = IMT2</p>
+  <p ALIGN="left">RNI(9) = QPCU</p>
+  <p ALIGN="left">RNI(10) = QPFE</p>
+  <p ALIGN="left">RNI(11) = VR11</p>
+  <p ALIGN="left">RNI(12) = VX11</p>
+  <p ALIGN="left">RNI(13) = VR22</p>
+  <p ALIGN="left">RNI(14) = VX22</p>
+  <p ALIGN="left">RNI(15) = OMTU</p>
+</blockquote>
+<p ALIGN="left">ENDIF</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TRAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font></b>
+<p ALIGN="JUSTIFY"><font face="Arial">SUBROUTINE TRAF2
+(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,IBL1,IBL2,</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">$ IER,CNXYU,TOL)</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">SUBROUTINE TRAFC1
+(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">SUBROUTINE TRAFJC
+(AJAC,MX5,IXYU,XYU,DATI,RNI,IBL1,IBL2)</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">SUBROUTINE TRAF (IFUN,IXYU,XYU,IPD,DATI,RNI)</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">SUBROUTINE TRAF3 (IFO,IOB,DEBL)</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">SUBROUTINE TRAF4 (IOB,MOD)</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">SUBROUTINE TRAFD1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">$
+IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</font></p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE TRAF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Test cases</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="left">Reference test cases relevant to this module are in the model
+library under the tag:</p>
+<p ALIGN="CENTER">&quot;PROVATRA&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

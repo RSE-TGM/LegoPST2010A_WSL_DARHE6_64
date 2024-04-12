@@ -1,0 +1,2096 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGOMMI HELP</TITLE>
+<META NAME="subject" CONTENT="File Unificato Documentazione Iperhelp">
+<META NAME="doccomm" CONTENT="Main per LMMIHELP">
+<META NAME="Template" CONTENT="C:\PROGRAMMI\MICROSOFT OFFICE\OFFICE\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Univers (W1),Arial" SIZE=5><P><A NAME="Objects"></A>LEGOMMI: active objects</P>
+</B></FONT><P ALIGN="JUSTIFY">Active objects are a collection of graphics objects which have a pre-established dynamic behaviour. These objects can be used inside a synoptic page or included in active objects libraries. Starting from a series of basic objects contained in the "std.lib" library the user can personalize objects setting their resources (Resource Editor) or he can create new composite object by using the Composite container and instantiating inside it desired simple objects.</P>
+<P ALIGN="JUSTIFY">In the following "how to use" topics basic objects are grouped depending on their characteristic.</P>
+<B><I><FONT SIZE=5><P ALIGN="CENTER">HOW TO USE</P>
+</I></FONT><P ALIGN="JUSTIFY">1&#9;</B><A HREF="#Resources"><U><FONT COLOR="#0000ff">Object resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">2&#9;</B><A HREF="#Handling"><U><FONT COLOR="#0000ff">Object handling</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">3&#9;</B><A HREF="#Behaviour"><U><FONT COLOR="#0000ff">Object behaviour during animation</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">4&#9;</B><A HREF="#AnimatedIcon"><U><FONT COLOR="#0000ff">Animated icon</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">5&#9;</B><A HREF="#Button"><U><FONT COLOR="#0000ff">Dedicated buttons</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">6&#9;</B><A HREF="#Composite"><U><FONT COLOR="#0000ff">Composite</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">7&#9;</B><A HREF="#ChangePage"><U><FONT COLOR="#0000ff">Change page</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">8&#9;</B><A HREF="#Graphic"><U><FONT COLOR="#0000ff">Graphic display</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">9&#9;</B><A HREF="#Led"><U><FONT COLOR="#0000ff">Led</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">10&#9;</B><A HREF="#SetValue"><U><FONT COLOR="#0000ff">Set value</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">11&#9;</B><A HREF="#Bitmap"><U><FONT COLOR="#0000ff">Bitmap</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">12&#9;</B><A HREF="#Indicator"><U><FONT COLOR="#0000ff">Indicator</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">13&#9;</B><A HREF="#Label"><U><FONT COLOR="#0000ff">Label</U></FONT></A></P>
+<B><I><P ALIGN="JUSTIFY">14&#9;</B></I><A HREF="#IconReg"><U><FONT COLOR="#0000ff">Iconreg</U></FONT></A><I> </P>
+<B><P ALIGN="JUSTIFY">15&#9;</B></I><A HREF="#Port"><U><FONT COLOR="#0000ff">Port</U></FONT></A></P>
+<B><I><P ALIGN="JUSTIFY">16&#9;</B></I><A HREF="#Dispreg"><U><FONT COLOR="#0000ff">Dispreg</U></FONT></A><B><I> </P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><I><FONT SIZE=5><P ALIGN="CENTER">LAYOUT &amp; RESOURCES</P>
+</I></FONT><P ALIGN="JUSTIFY">1&#9;</B><A HREF="#GeomResources"><U><FONT COLOR="#0000ff">The Geometric resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">2&#9;</B><A HREF="#AnimatedIconLayout"><U><FONT COLOR="#0000ff">Animated icon layout and resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">3&#9;</B><A HREF="#ButtonLayout"><U><FONT COLOR="#0000ff">Button layout and resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">4&#9;</B><A HREF="#CompositeLayout"><U><FONT COLOR="#0000ff">Composite layout and resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">5&#9;</B><A HREF="#ChangePageLayout"><U><FONT COLOR="#0000ff">Change page layout and resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">6&#9;</B><A HREF="#GraphicLayout"><U><FONT COLOR="#0000ff">Graphic display layout and resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">7&#9;</B><A HREF="#LedLayout"><U><FONT COLOR="#0000ff">Led layout and resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">8&#9;</B><A HREF="#SetValueLayout"><U><FONT COLOR="#0000ff">Set value layout and resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">9&#9;</B><A HREF="#BitmapLayout"><U><FONT COLOR="#0000ff">Bitmap layout and resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">10&#9;</B><A HREF="#IndicatorLayout"><U><FONT COLOR="#0000ff">Indicator layout and resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">11&#9;</B><A HREF="#LabelLayout"><U><FONT COLOR="#0000ff">Label layout and resources</U></FONT></A></P>
+<B><I><P ALIGN="JUSTIFY">12&#9;</B></I><A HREF="#IconRegLayout"><U><FONT COLOR="#0000ff">Iconreg layout and resources</U></FONT></A></P>
+<B><I><P ALIGN="JUSTIFY">13&#9;</B></I><A HREF="#PortLayout"><U><FONT COLOR="#0000ff">Port layout and resources</U></FONT></A></P>
+<B><I><P ALIGN="JUSTIFY">14&#9;</B></I><A HREF="#DispregLayout"><U><FONT COLOR="#0000ff">Dispreg layout and resources</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">15&#9;</B><A HREF="#FileComponent"><U><FONT COLOR="#0000ff">List of FileComponent.edf</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">16&#9;</B><A HREF="#FileSubsystem"><U><FONT COLOR="#0000ff">List of FileSubsystem.edf</U></FONT></A></P>
+<B><P ALIGN="JUSTIFY">17&#9;</B><A HREF="#FileDefVarCC"><U><FONT COLOR="#0000ff">List of FileDefVarCC.edf</U></FONT></A></P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="Resources">Objects: object resources</A></P>
+</B></FONT><P ALIGN="JUSTIFY">During the configuration stage the user configures graphic objects by using the <STRIKE>Resource Editor</STRIKE>. By resource we mean every parameter of the object which can be manipulated (personalized) by the user. </P>
+<P ALIGN="JUSTIFY">Every object has "Specific" resources (typical of the object) as well as other standard resources called "Geometric" that define all geometrical characteristics and some colors. </P>
+<P ALIGN="JUSTIFY">The complete list of resources classes is:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=541>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B>Class of resources</B></TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<B><P ALIGN="JUSTIFY">Resources contents</B></TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Geometric</TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">geometrical (position, orientation)</TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Specific</TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">specific for objects</TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Color attributes</TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">color of the object</TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Color change var. 1</TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">color change set and linked variable name for variable 1</TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Color change var. 2</TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">color change set and linked variable name for variable 2</TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Color change var. 3</TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">color change set and linked variable name for variable 3</TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Color change var. 4</TD>
+<TD WIDTH="62%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">color change set and linked variable name for variable 4</TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information about the Geometric resources layout is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><STRIKE>Geometric resources</STRIKE>lmi_aob_geom_res_ly</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><FONT SIZE=5><P>&nbsp;</P>
+<P><A NAME="Handling"></A>Objects: object handling</P>
+</B></FONT><P ALIGN="JUSTIFY">Page construction is completed after instantiation and a number of modifications to the active objects on the page have been performed.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Instantiation </P>
+<P ALIGN="JUSTIFY">- Instantiation. </B>An object is generally retrieved from a library by clicking Add Icon's pulldown menu on the available active objects library. This operation displays the chosen library and the user, can retrieve an object by dragging it (with keeping the second mouse push button pressed) on a free place of the page drawing area.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Modification</P>
+<P ALIGN="JUSTIFY">- Selection. </B>Generally, in order to manipulate one or more objects it is necessary to select them. However selection is not required for some operations such as moving and resizing. To select a single objects the user has to position the mouse pointer over it and to click the first button; selecting two or more objects at one time (inside the same page) is possible by pressing &lt;ctrl&gt; key simultaneously. In case of single selection, (without &lt;ctrl&gt; key) a new selection unselects the previous.</P>
+<P ALIGN="JUSTIFY">Several objects can be selected at the same time by drawing with the mouse a rectangle which contains the objects to be selected. This operation is made by setting the first corner with the first mouse button and then dragging the mouse to build the rectangle with the same button held down. To unselect an unwanted object click it before releasing the &lt;ctrl&gt; key.</P>
+<B><P ALIGN="JUSTIFY">- Resources. </B>By using the <STRIKE>Resource Editor</STRIKE> the user can modify an already instantiated object. Some characteristics, typically the position, the dimension, the basic colors, can be modified through the <A HREF="#GeomResources"><U><FONT COLOR="#0000ff">Geometric resources</U></FONT></A> class. Others can be modified through the available class resources of the object (such as Specific, Color attributes, Color change var).</P>
+<B><P ALIGN="JUSTIFY">- Moving. </B>To move an object the user has to position the cursor in the center of the object, press and hold the second mouse button and drag the pointer to the drop site. Moving of several widgets simultaneously is permitted.</P>
+<B><P ALIGN="JUSTIFY">- Resizing. </B>To resize an object the user has to position the cursor near one of the outer edges of the objects and press the second mouse button. The object will be surrounded by a grid which is divided in 9 areas. Every one allows only particularly resizing movement which is performed by dragging the mouse as shown by the arrows in the following figure. Object resizing is not permitted for "change page" and "iconreg" objects. </P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image68.gif" WIDTH=150 HEIGHT=132></P>
+<B><P ALIGN="JUSTIFY">Editing</P>
+<P ALIGN="JUSTIFY">- Copy, cut, paste. </B>This operation, applied to some selected objects, can be obtained from the popup menu of the page which is recalled by pressing the third mouse button. These operations involve both foreground and background.</P>
+<P ALIGN="JUSTIFY">LEGOMMI allows selective operations on foreground (objects) or background only after choosing the same copy, cut and paste buttons in background and foreground submenus.</P>
+<B><P ALIGN="JUSTIFY">- Duplicate. </B>Duplication is different from copy only for the composite objects. A duplication of an object child of a composite, keep it as child of the composite. Not the same will happen in case of coping because the new object will be born child of the drawing area.</P>
+<B><P ALIGN="JUSTIFY">- Delete. </B>One or more selected objects can be deleted by selecting the Delete option on the popup menu.</P>
+<B><FONT SIZE=5><P><A NAME="Behaviour"></A>Objects: behaviour during animation</P>
+</B></FONT><P ALIGN="JUSTIFY">The behaviour of the animated objects is defined by the animation table defined as a group of resources for each color change variables. In LEGOMMI/Simulator version the table defines color and ranges limits (threshold) for the color change variable. In LEGOMMI/SCADA version defines colors for variable "states" defined by flags.</P>
+<P ALIGN="JUSTIFY">The user during animation has the possibility to insert perturbation and display variables trends using the AING and the PLOT push buttons displayed at the right side of every mmi's synoptic page.</P>
+<P ALIGN="JUSTIFY">This possibility is available for the objects which have almost the first color change variable, in particular:</P>
+<P ALIGN="JUSTIFY">Animated icon</P>
+<P ALIGN="JUSTIFY">Bitmap</P>
+<P ALIGN="JUSTIFY">Indicator</P>
+<P ALIGN="JUSTIFY">Iconreg</P>
+<P ALIGN="JUSTIFY">Dispreg.</P>
+<P ALIGN="JUSTIFY">In the same modality, once AING and PLOT will be clicked with the first mouse button a click on one of the above objects will display the <STRIKE>Variable Editor</STRIKE>.</P>
+<P ALIGN="JUSTIFY">In AING modality, if the first color change variable is set, Variable Editor will be displayed together with the Model and the Block fields already set. The variable set, as says above, is the first color-change variable but it is displayed only if it is an input one; in the others cases this field will appear blank.</P>
+<P ALIGN="JUSTIFY">Once the OK push button has been pressed, a defined perturbation window, called <STRIKE>AING</STRIKE> will be displayed. </P>
+<P ALIGN="JUSTIFY">The similar variable selection is given by mmi once the user has pressed the PLOT push button but differs from the above because Variable Editor does not filter only input but all variables: the first color change variable is always set (if defined).</P>
+<P ALIGN="JUSTIFY">Once the OK push button has been pressed, a window featuring a graphic object (Run time one variable type) will be displayed.</P>
+<P ALIGN="JUSTIFY">Before the user starts the two activity by pressing the OK push button can also modify the selected variable by means of the push button listed in the variable field.</P>
+<P ALIGN="JUSTIFY">During animation the user can display the connected page to the using one by clicking on the interface iconreg of interest. This operation opens the connected page (if it is closed) or popup it (if it is already open) and closes the current page.</P>
+<P ALIGN="JUSTIFY">By clicking on the drawing area of a graphic object (set in run time 1 variable configuration) with the first mouse button it is possible to modify the drawing variable using the <STRIKE>Variable Editor</STRIKE>. The graphic pop-up menu, displayed by clicking the second mouse button, is described in <A NAME="_Hlk421068453"><A HREF="#Graphic"><U><FONT COLOR="#0000ff">Graphic</A></U></FONT></A>.</P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="AnimatedIcon"></A>Objects: animated icon</P>
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image69.gif" WIDTH=180 HEIGHT=214></P>
+<P ALIGN="JUSTIFY">By this term we define a rectangular window containing a user-defined draw with color animated parts (generally a schematic representation of a plant device).</P>
+<P ALIGN="JUSTIFY">The animated icon is connected with variables (animation variables) -that are of significance for the description of the device state or function-, calculated during simulation and with numerical constants that define the range of the variables. Variable values can cause a color modification in parts of the icon draw which the user, during draw construction, has defined as animated parts. Animated parts of a draw are obtained when the user draw a geometric elements using one of the enumerated color (1..4) defined in the color palette of the Draw Editor. Each enumerate color is associated with the corresponding animation variable and the color policy during run time is performed as defined by the color resources specified in the Color Change var. group.</P>
+<P ALIGN="JUSTIFY">Associated colors for each changing interval will define the icon's graphical behaviour. </P>
+<P ALIGN="JUSTIFY">Two types of animated icons are available.</P>
+<B><P ALIGN="JUSTIFY">Vectorial icon</P>
+</B><P ALIGN="JUSTIFY">Is a particular object which defines an animated draw in vectorial form, such as graphics command sequences which allow restoring. Permitted manipulations are:</P>
+<I><P ALIGN="JUSTIFY">Orientation change.</P>
+<P ALIGN="JUSTIFY">Dimension change.</P>
+</I><P ALIGN="JUSTIFY">Dimension change is not directly available; it is possible to modify dimension by changing the dimension of the internal draw (using Draw Editor).</P>
+<P ALIGN="JUSTIFY">The association of drawing by animated variables is contained in the vectorial draw resource which defines, in additions of the command that builds the drawing, the association of portions of its with animated variables values. These portions have been drawn by the user by using a color associated with a variable. </P>
+<B><P ALIGN="JUSTIFY">Bitmap icon</P>
+</B><P ALIGN="JUSTIFY">Is an object that uses the bitmap format and it is build through the standard Bitmap Editor. Only one color change variable is available and its change will affect the whole icon. The dimension is fixed and the resource "icon orientation" is not available. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information on icon resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><A HREF="#AnimatedIconLayout"><U><FONT COLOR="#0000ff">Animated icon</U></FONT></A></P>
+<B><FONT SIZE=5><P><A NAME="Button"></A>Objects: dedicated buttons</P>
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image70.gif" WIDTH=225 HEIGHT=208></P>
+<P ALIGN="JUSTIFY">Buttons derive from Motif's push buttons and actuate functions concerning the output variables perturbation.</P>
+<B><P ALIGN="JUSTIFY">Use</P>
+</B><P ALIGN="JUSTIFY">Actuation button for command card. </P>
+<B><P ALIGN="JUSTIFY">Graphical image</P>
+</B><P ALIGN="JUSTIFY">Depends on the button configuration. Four buttons are available</P>
+<B><P ALIGN="JUSTIFY">1 </B>Simple Button</P>
+<B><P ALIGN="JUSTIFY">2 </B>Button with lamp</P>
+<B><P ALIGN="JUSTIFY">3 </B>Rectangular button</P>
+<B><P ALIGN="JUSTIFY">4 </B>Rectangular button with lamp</P>
+<B><P ALIGN="JUSTIFY">Description</P>
+</B><P ALIGN="JUSTIFY">Upon pressing the button, a perturbation is sent to the output variable. If the button contains a led, the color depends on the input and input blink variables values as the following table shows:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=418>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P ALIGN="CENTER"><B><FONT SIZE=2>var. input color</B></FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="CENTER">var. input blink</B></FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="CENTER">light state</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">on</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">on</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">blinking</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">off</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Information on button resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><A HREF="#ButtonLayout"><U><FONT COLOR="#0000ff">Button</U></FONT></A></P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="Composite"></A>Objects: composite</P>
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image71.gif" WIDTH=111 HEIGHT=131></P>
+<P ALIGN="JUSTIFY">Composite object allow the creation of complex predefined objects such as control panel modular components. So the composite object is used as a container of objects.</P>
+<P ALIGN="JUSTIFY">The user can create new objects inserting them into the composite object. </P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="ChangePage"></A>Objects: change page</P>
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image72.gif" WIDTH=215 HEIGHT=169></P>
+<P ALIGN="JUSTIFY">The Change page push buttons act directly to open/close LEGOMMI's pages. The objects contains a user configurable resource that specify page name (referenced page). By using change page buttons it is possible to define during pages configuration the navigation policy between synoptic's representation of the plant.</P>
+<P ALIGN="JUSTIFY">Three kinds of change page are available selecting by the resource:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=421>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Change page</TD>
+<TD WIDTH="61%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Closes the current page and open referenced page.</TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">New page</TD>
+<TD WIDTH="61%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Popups referenced page.</TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Close page</TD>
+<TD WIDTH="61%" VALIGN="TOP">
+<P ALIGN="JUSTIFY">Closes the current page.</TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Information on change page resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><A HREF="#ChangePageLayout"><U><FONT COLOR="#0000ff">Change page layout and resources</U></FONT></A></P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="Graphic"></A>Objects: graphic</P>
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image73.gif" WIDTH=477 HEIGHT=316></P>
+<P ALIGN="JUSTIFY">The graphic object is used to display trends. </P>
+<P ALIGN="JUSTIFY">Through the related resources the user is able to assign the variables which have been displayed, the upper and lower variables values etc. </P>
+<P ALIGN="JUSTIFY">Graphic trends have many interactive functionalities for manipulation at the variables.</P>
+<P ALIGN="JUSTIFY">selects displayed variables</P>
+<P ALIGN="JUSTIFY">defines and loads groups of variables</P>
+<P ALIGN="JUSTIFY">modifies measure units</P>
+<P ALIGN="JUSTIFY">modifies full scale values and sets auto scaling</P>
+<P ALIGN="JUSTIFY">sets collimation</P>
+<P ALIGN="JUSTIFY">sets zoom</P>
+<P ALIGN="JUSTIFY">set double dimensional zoom</P>
+<P ALIGN="JUSTIFY">A better description of the command is contained in LEGOCAD help graphics activity.</P>
+<B><P ALIGN="JUSTIFY">Animation behaviour</P>
+</B><P ALIGN="JUSTIFY">By clicking on the drawing area of the graphic object (set in run time 1 variable configuration) with the first mouse button it is possible to modify the drawing variable using the <STRIKE>Variable Editor</STRIKE>lmi_con_var_ed. The graphic pop-up menu is displayed by clicking the second mouse button. Voices of the menu:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=477>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>File</B></FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Hardcopy</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Prepares the window for an hard copy</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Graph</B></FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Zoom</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the mouse arrows to select the zoom area</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Redraw</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Excludes zoom selection</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Variable</B></FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Change unit</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Changes the m.u. of the selected variables</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Change Y scaling</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Changes the Y scale</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Option</B></FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Units </FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Changes the m.u.</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Collimate on</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the collimation function</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Y Zoom on</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the Zoom on Y axis</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Time in second</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets time in seconds</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Information on graphic resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><A HREF="#GeomResources"><U><FONT COLOR="#0000ff">Graphic resources</U></FONT></A></P>
+<B><FONT SIZE=5><P><A NAME="Led"></A>Objects: led</P>
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image74.gif" WIDTH=104 HEIGHT=167><B>&nbsp;</P>
+</B><P ALIGN="JUSTIFY">The led is an object which displays a light related to the input and blinking variables. </P>
+<P ALIGN="JUSTIFY">Information on led resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><A HREF="#LedLayout"><U><FONT COLOR="#0000ff">Led resources</U></FONT></A></P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="SetValue"></A>Objects: set value</P>
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image75.gif" WIDTH=96 HEIGHT=52></P>
+<P ALIGN="JUSTIFY">The set value is an object used to display or to force a variable value. The set value is composed by a text field to receive data and by a push button to send them. </P>
+<P ALIGN="JUSTIFY">Through the resources the user can select the variables and define the accepted characteristic of the number i.e. the displayed digit. </P>
+<P ALIGN="JUSTIFY">The set value is able :</P>
+<P ALIGN="JUSTIFY">to display a variable (input) value</P>
+<P ALIGN="JUSTIFY">to insert a perturbation (actuation) into a variable. Generally a step or a pulse.</P>
+<P ALIGN="JUSTIFY">to inhibit the push button</P>
+<P ALIGN="JUSTIFY">Information on set value resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><A HREF="#SetValueLayout"><U><FONT COLOR="#0000ff">Set value layout and resource</U></FONT></A></P>
+<B><FONT SIZE=5><P><A NAME="Bitmap"></A>Objects: bitmap</P>
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image76.gif" WIDTH=120 HEIGHT=159></P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</B><P ALIGN="JUSTIFY">The bitmap object is an icon containing a monochromatic drawing realized through a bitmap file. Transparent attributes allow the displaying of background sections inside the rectangle restricted to the bitmap. </P>
+<P ALIGN="JUSTIFY">Bitmap has only one color change variables; the bitmap color depend on the values acquired by the animation variable in respect of 4 defined values (thresholds).</P>
+<P ALIGN="JUSTIFY">Information on bitmap resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><A HREF="#BitmapLayout"><U><FONT COLOR="#0000ff">Bitmap layout and resource</U></FONT></A></P>
+<B><FONT SIZE=5><P><A NAME="Indicator"></A>Objects: indicator</P>
+</B></FONT><P><IMG SRC="Image79.gif" WIDTH=482 HEIGHT=150></P>
+<P ALIGN="JUSTIFY">The indicator is an object which can display the value of an associated variable through analogical or digital modalities.</P>
+<P ALIGN="JUSTIFY">The variable value is displayed after it has been filtered with the offset and scaling values have been defined in the resource as in the following relation:</P>
+<P ALIGN="CENTER">out = SCALING*in + OFFSET</P>
+<P ALIGN="JUSTIFY">The number of digit displayed and the upper and the lower limits for variable's value are user defined.</P>
+<B><P ALIGN="JUSTIFY">N:B:</B><I> If value is external to limits defined the maximum (or minimum) value is displayed</I>.</P>
+<P ALIGN="JUSTIFY">The following indicator types are available:</P>
+<P ALIGN="JUSTIFY">pointer</P>
+<P ALIGN="JUSTIFY">bar indicator</P>
+<P ALIGN="JUSTIFY">display</P>
+<P ALIGN="JUSTIFY">increasing bar chart</P>
+<P ALIGN="JUSTIFY">decreasing bar chart</P>
+<P ALIGN="JUSTIFY">Information on indicator resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><A HREF="#IndicatorLayout"><U><FONT COLOR="#0000ff">Indicator layout and resource&nbsp;</U></FONT></A></P>
+<B><FONT SIZE=5><P><A NAME="Label"></A>Objects: label</P>
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image80.gif" WIDTH=210 HEIGHT=77></P>
+<P ALIGN="JUSTIFY">Label is an object which contains text assigned by the user. Font used is user-defined.</P>
+<P ALIGN="JUSTIFY">Information on label resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><A HREF="#LabelLayout"><U><FONT COLOR="#0000ff">Label layout and resource</U></FONT></A><STRIKE> </P>
+</STRIKE><B><FONT SIZE=5><P><A NAME="IconReg"></A>Objects: iconreg</P>
+</B></FONT><P ALIGN="JUSTIFY">Iconreg is an object dedicated only to the regulation pages. In fact LEGOMMI prevents the instantiation of any kind of iconreg inside a synoptic page.</P>
+<P ALIGN="JUSTIFY">An iconreg object has been linked to a LEGO regulation module during iconreg construction (in library). </P>
+<P ALIGN="JUSTIFY">Some input and output ports are instantiated as children of iconreg and each linked with a module's variable for use in connection between objects. Depending on the regulation module associated, iconreg features an input form allowing initialization of LEGO module's variables and data values. When an iconreg is instantiated inside a regulation scheme a "Tag" is automatically generated for it's identification. The generated tag identifying the icon named is an acronym of 4 characters XXYY where:</P><DIR>
+
+<P ALIGN="JUSTIFY">&#9;&#9;XX&#9;is the icon progressive number</P>
+<P ALIGN="JUSTIFY">&#9;&#9;YY&#9;is the scheme progressive number.</P></DIR>
+
+<P ALIGN="JUSTIFY">Iconreg's symbol is a user defined vectorial draw animated by 4 variables (max) chosen among block's variable. The vectorial draw is included in an icon file. This file can be edited or created through the Draw Editor.</P>
+<P ALIGN="JUSTIFY">Iconreg generally has one or more of the following children:</P><DIR>
+
+<P ALIGN="JUSTIFY">1)&#9;Input and output ports for icon connection</P>
+<P ALIGN="JUSTIFY">2)&#9;Tags associated with the port (displayed on request)</P>
+<P ALIGN="JUSTIFY">3)&#9;Display representing the value of one of the LEGO module associated variables (dispreg)</P></DIR>
+
+<P ALIGN="JUSTIFY">An iconreg must be completely configured inside a library before any instantiation in pages. In particular MMI avoids:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=433>
+<TR><TD WIDTH="10%" VALIGN="TOP">
+<P>1</TD>
+<TD WIDTH="90%" VALIGN="TOP">
+<P>to instantiate an iconreg without any associated form file </TD>
+</TR>
+<TR><TD WIDTH="10%" VALIGN="TOP">
+<P>2</TD>
+<TD WIDTH="90%" VALIGN="TOP">
+<P>to instantiate any iconreg containing ports which are not associated with a LEGO variable</TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">When an iconreg has been instantiated inside a page, an elementary regulation module is created for the regulation scheme. The elementary regulation block's acronym is assembled as follow:</P>
+<P ALIGN="CENTER">&amp;&amp;&amp;&amp;XXYY</P>
+<P ALIGN="JUSTIFY">where &amp;&amp;&amp;&amp; is the elementary regulation module name.</P>
+<P ALIGN="JUSTIFY">The dimension of an iconreg is fixed by the associated icon which is imported or created through the Draw Editor. Other available resources can move the top, bottom, left and right border in order to obtain additive space for ports.</P>
+<P ALIGN="JUSTIFY">Iconreg can verify the compatibility between the module variable list (retrieved from form in memory) and the associated port variables. This control prevents error when the user changes the file name associated with the object in the resources after ports instantiating . In case of error MMI deletes ports</P>
+<P ALIGN="JUSTIFY">Information on iconreg resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><STRIKE>Iconreg layout and resource</STRIKE>lmi_aob_iconreg_ly</P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="Port"></A>Objects: port</P>
+</B></FONT><P ALIGN="JUSTIFY">Port is an object dedicated only to the regulation schemes construction. It can be instantiated only on an IconReg object; then it is used for the construction of single components which will be insert inside regulation schemes.</P>
+<P ALIGN="JUSTIFY">The Port inserted in a regulation acts as I/O device; during the configuration of a regulation page, when the user choose Connect mode the port is sensitive to mouse click and start the drawing of a connection. The end of the connection it is realized when the user clicks on another port (destination port). A connection between ports means a connection between regulation variables: connected variable names are deduced from a particular resource of the port named "Associated variable name". This resource contains the name of one of the LEGO regulation module variable associated to the regulation icon.</P>
+<P ALIGN="JUSTIFY">Every port can be either input or output, digital or analogical, interface or not; ports will become red if analogical and blue if digital and two different geometrical symbol can be chosen by the user: arrow or square. Interface ports allows linking between variables of different schemes.</P>
+<P ALIGN="JUSTIFY">Connection are allowed only between same type ports (analogical, digital) and between complementary directions (input-output). The type Interface port is used inside interface icon and they allow connections between different regulation pages.</P>
+<P ALIGN="JUSTIFY">According to the set of "Set visual mode" on the Option pulldown menu in the window page, LEGOMMI changes the representation of a port: unmanage, manage, tag (displaying the connected tag).</P>
+<P ALIGN="JUSTIFY">Information on port resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><A HREF="#PortLayout"><U><FONT COLOR="#0000ff">Port layout and resource&nbsp;</U></FONT></A></P>
+<B><FONT SIZE=5><P><A NAME="Dispreg"></A>Objects: dispreg</P>
+</B></FONT><P ALIGN="JUSTIFY">Dispreg is an object dedicated only to the regulation pages, it can be instantiated only into iconreg object during active object library creation.</P>
+<P ALIGN="JUSTIFY">Dispreg inherit the module name associated to their iconreg parent; it is also linked to one of the variables belonging to the module; it is used to show, during run time, the associated module name, the linked variable tag or its value in accordance with the choice made in "Set visual mode" on the Option pulldown menu in the window page. Naturally, during instantiation the user has to assign the linked variable name from the list of associated module variable.</P>
+<P ALIGN="JUSTIFY">Information on dispreg resources is available in:</P>
+<B><P ALIGN="JUSTIFY">1 </B><A HREF="#DispregLayout"><U><FONT COLOR="#0000ff">Dispreg layout and resource</U></FONT></A><STRIKE> </P>
+</STRIKE><B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="GeomResources"></A>layout: geometric resources</P>
+</B></FONT><P ALIGN="JUSTIFY">These resources are general for all the objects. </P>
+<P ALIGN="JUSTIFY">The <I>Resource Editor</I> showing Geometric resources looks like:</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image77.gif" WIDTH=480 HEIGHT=541></P>
+<P ALIGN="JUSTIFY">The "Background color" and the "Border color" options call the resource color viewer (editor); they refer to the color of rectangle area and border of the object.</P>
+<P ALIGN="JUSTIFY">If the "Inherit parent background" resources is set "Yes", LEOGMMI assigns the parent background color as background color to the instantiated object. If it is set "No" it assigns the color specified in the upper background color resources.</P>
+<P ALIGN="JUSTIFY">The "Station page connected" resource define a Station page connected with the icon which will be displayed during run time using LEGOMMI and selecting the object in XSTAZ modality (option push button XSTAZ pressed).</P>
+<P ALIGN="JUSTIFY">Possible rotations are 0, 90, 180, 270 and specular rotation around Y axis.</P>
+<P ALIGN="JUSTIFY">The File's pulldown menu offers, these choices:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=553>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><FONT SIZE=2>Load resource</FONT></TD>
+<TD WIDTH="75%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Loads resources of a new object (Like Load p.b.)</FONT></TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Reset resources</FONT></TD>
+<TD WIDTH="75%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Resets the resources</FONT></TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Close</FONT></TD>
+<TD WIDTH="75%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Closes the pages</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">By pushing Apply the inputs will assigned to the instatiated object .</P>
+<B><FONT SIZE=5><P><A NAME="AnimatedIconLayout"></A>Objects layout: animated icon</P>
+</B></FONT><P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can insert the following resources:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=490>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Component</FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Assigns the icon to a group of components.</FONT></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Subsystem</FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Assigns the icon to a subsystem.</FONT></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Filename</FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Imports Drawing file.</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Through Component and Subsystem LEGOMMI supplies a method to filter block selection.</P>
+<P ALIGN="JUSTIFY">By the "Component" resource the user can assign the editing icon to a particularly group of components such as Valves, Pumps, etc. When the filter Component is set this allocation will ease model block selection as the user is working with the Variable Editor . In fact once the icons have been assigned to a particular components only the specific class blocks will be displayed . LEGOMMI works with an ASCII file named <A HREF="#FileComponent"><U><FONT COLOR="#0000ff">FileComponent.edf </U></FONT></A> (local to the project directory) which contains all the project Components name.</P>
+<P ALIGN="JUSTIFY">The "Subsystem" resource is similar to the Component one except for its way of arrangement. Every subsystem group a part of a plant module i.e. a portion or the whole regulation, low pression devices etc. Once a particular subsystem has been set the user can filter in the Variable Editor the desired models. The ASCII file which gathers this information is named <A HREF="#FileSubsystem"><U><FONT COLOR="#0000ff">FileSubsystem.edf </U></FONT></A> and must be local inside the simulator directory.</P>
+<P ALIGN="JUSTIFY">Another ASCII file named <A HREF="#FileDefVarCC"><U><FONT COLOR="#0000ff">FileDefVarCC.edf</U></FONT></A><STRIKE><FONT FACE="Univers (W1),Arial"> </STRIKE></FONT>is used by LEGOMMI to set a default color change variable name. In fact this file contains a list of rows featuring the names of a LEGO module and of one of its variables. During the assigning of color change variable the Variable Editor, once the user has chosen a particularly block of a module coded in the file, will display the associated block variable by default. Naturally the user can then chooses another variable.</P>
+<P ALIGN="JUSTIFY">By pressing Filename the user can import a file inside the icon. The imported file can be edited by the user, with relation both to the drawing and the animated behaviour, by assigning the color change variables and the related intervals. This operation can be made through the dedicated editor named "Draw".</P>
+<P ALIGN="JUSTIFY">Through the "<B>Color change var. </B>" resources the user can link a portion of drawing already fixed by Draw with the variations of the selected variable value. In order to define the color set of the drawing color change area many numerical constants are required. The resources are gathered in the following table:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=727>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resources name</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of scansion</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color forced by the out scansion flag</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of reliability</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color forced by the out reliability flag</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Digital on</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Digital color</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of low security limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the low security limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value low security </I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Low security limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of low conduction limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the low conduction limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value low conduction</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Low conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color conduction</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is in the conduction area</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value high conduction</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of high conduction limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the high conduction limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value high security</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of high security limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the high conduction limit</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">The table contains two pairs of thresholds, for low and high values: conduction and security. </P>
+<P ALIGN="JUSTIFY">If the variable type is digital, color displayed is Digital on if value is 1 or Color Conduction if value is 0.</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image78.gif" WIDTH=387 HEIGHT=91></P>
+<P ALIGN="JUSTIFY">The "<B>Color attributes</B>" resources are not available.</P>
+<B><FONT SIZE=5><P><A NAME="ButtonLayout"></A>Objects layout: button</P>
+</B></FONT><P ALIGN="JUSTIFY">The user chooses the kind of button he needs trough an option menu. The following buttons are available:</P>
+<B><P ALIGN="JUSTIFY">1 </B>Simple Button</P>
+<B><P ALIGN="JUSTIFY">2 </B>Button with lamp</P>
+<B><P ALIGN="JUSTIFY">3 </B>Rectangular button</P>
+<B><P ALIGN="JUSTIFY">4 </B>Rectangular button with lamp</P>
+<P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can insert the following variable:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=639>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Input Variable</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Lighting variable</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Blink Variable</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Variable determining the blinking</FONT></TD>
+</TR>
+<TR><TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Output Variable</FONT></TD>
+<TD WIDTH="70%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Input variable for the model which </P>
+<P ALIGN="JUSTIFY">sends actuation to the model</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Variables are chosen from a list displayed after selecting the model and block. Insertion of the perturbation associated with the output variable is permitted. </P>
+<P ALIGN="JUSTIFY">The colors table is:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=418>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P ALIGN="CENTER"><B><FONT SIZE=2>input variable </P>
+<P ALIGN="CENTER">(lighting)</B></FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="CENTER">blinking</P>
+<P ALIGN="CENTER">variable</B></FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="CENTER">light state</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">on</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">on</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">blinking</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">off</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Through the "<B>Color attribute</B>" resources the user can insert the following color by the displayed "<I>Color Editor</I>":</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=336>
+<TR><TD WIDTH="60%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name </B></FONT></TD>
+<TD WIDTH="40%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Default value</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="60%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Normal Foreground</FONT></TD>
+<TD WIDTH="40%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Black</FONT></TD>
+</TR>
+<TR><TD WIDTH="60%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Activated Foreground</FONT></TD>
+<TD WIDTH="40%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Black</FONT></TD>
+</TR>
+<TR><TD WIDTH="60%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Normal Background</FONT></TD>
+<TD WIDTH="40%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">White</FONT></TD>
+</TR>
+<TR><TD WIDTH="60%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Lamp Color</FONT></TD>
+<TD WIDTH="40%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">White</FONT></TD>
+</TR>
+<TR><TD WIDTH="60%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Blink Color</FONT></TD>
+<TD WIDTH="40%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">White</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Meaning of the resources:</P>
+<B><P ALIGN="JUSTIFY">Normal foreground</B>: drawing of button board</P>
+<B><P ALIGN="JUSTIFY">Activated foreground</B>: drawing of activated button</P>
+<B><P ALIGN="JUSTIFY">Normal background</B>: internal</P>
+<B><P ALIGN="JUSTIFY">Lamp color</B>: internal lamp</P>
+<B><P ALIGN="JUSTIFY">Blink color</B>: lamp color when blinking</P>
+<P ALIGN="JUSTIFY">The "<B>Color change var.</B>" resources are not available.</P>
+<B><FONT SIZE=5><P><A NAME="CompositeLayout"></A>Objects layout: composite</P>
+</B></FONT><P ALIGN="JUSTIFY">During the construction of a composite object the user has to set both the composite and the included object resources. Modification to parent (composite) resources are avoided when one of the children object is in edit.</P>
+<P ALIGN="JUSTIFY">In order to easily identify the composite object, the user can assign a name to it during management insertion into the library.</P>
+<P ALIGN="JUSTIFY">The composite has a resource (Children layout) that specifies if children are resized proportionally when dimension of the parent composite is modified.</P>
+<P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can insert the following resources:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=514>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Name</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Name of the composite</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Children layout</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Enables (Yes) or prevents (No) children modifications during composite resizing</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Rotate (clockwise)</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Rotates the composite (0/90/180/270)</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Rotate on Y axis</FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Rotates the composite on Y axis</FONT></TD>
+</TR>
+</TABLE>
+
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="ChangePageLayout"></A>Objects layout: change page</P>
+</B></FONT><P ALIGN="JUSTIFY">Three types of change page button are available:</P>
+<P ALIGN="JUSTIFY">Change page: the current page is closed while target page is opened.</P>
+<P ALIGN="JUSTIFY">New page: target page is popped up; current page remains.</P>
+<P ALIGN="JUSTIFY">Close page: current page is closed</P>
+<P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can insert the following resources:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=498>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Font</FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the user font</FONT></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Type of button</FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Changes the button type</FONT></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Page name</FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the target page</FONT></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Label</FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the label of the button</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Through the "<B>Color attributes</B>" resources the user can insert the color foreground (button board drawing). </P>
+<P ALIGN="JUSTIFY">The "<B>Color change var.</B>" resources are not available. </P>
+<B><FONT SIZE=5><P><A NAME="GraphicLayout"></A>Objects layout: graphic</P>
+</B></FONT><P ALIGN="JUSTIFY">Graphic object allows the display of trends from archived or run-time buffered values.</P>
+<P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can set the displayed variables and the kind of display. The following graphics are available:</P>
+<B><P ALIGN="JUSTIFY">1</B> <I>Archived variables display</P>
+</I><P ALIGN="JUSTIFY">Trends from variables recorded on archive (max 4 var). Names of variable traced and archive used are fixed during configuration.</P>
+<B><P ALIGN="JUSTIFY">2</B> <I>Run time variables (max 4)</P>
+</I><P ALIGN="JUSTIFY">Trends are traced starting when the page is opened; trends are scrolled (and old scrolled data lost) once representation time interval (resource defined by the user is reached). Names of variable traced are fixed during configuration.</P>
+<B><P ALIGN="JUSTIFY">3</B> <I>Run time variable (only one)</P>
+</I><P ALIGN="JUSTIFY">Same as previous. The variable traced can be changed calling the variable selection editor during animation.</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=694>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">First variable name</FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<FONT SIZE=2><P ALIGN="JUSTIFY">Calls the Variable Editor and selects a variable</FONT></TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Second variable name</FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<B><FONT SIZE=2><P ALIGN="CENTER">"</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Third variable name</FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<B><FONT SIZE=2><P ALIGN="CENTER">"</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Fourth variable name</FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<B><FONT SIZE=2><P ALIGN="CENTER">"</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Run time: repr. time interval</FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<FONT SIZE=2><P ALIGN="JUSTIFY">Is the scrolling interval in run time modality </FONT></TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Archives: max numb. of samples</FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<FONT SIZE=2><P>Max numb. of samples the archive contains</FONT></TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Graphic title label</FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<FONT SIZE=2><P>Label</FONT></TD>
+</TR>
+<TR><TD WIDTH="42%" VALIGN="TOP" COLSPAN=2>
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">First variable representation settings</B></FONT></TD>
+<TD WIDTH="58%" VALIGN="TOP" COLSPAN=4>
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Autoscaling</FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<FONT SIZE=2><P>Sets automatic scaling</FONT></TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">First variable max scale value</FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<FONT SIZE=2><P>Sets max. value for the displayed variable</FONT></TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">First variable min scale value</FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<FONT SIZE=2><P>Sets min. value for the displayed variable</FONT></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="TOP" COLSPAN=3>
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Second variable representation settings</B></FONT></TD>
+<TD WIDTH="57%" VALIGN="TOP" COLSPAN=3>
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="CENTER">...</B></FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP" COLSPAN=4>
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Third variable representation settings</B></FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP" COLSPAN=2>
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="CENTER">...</B></FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP" COLSPAN=5>
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Fourth variable representation settings</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="39%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="CENTER">...</B></FONT></TD>
+<TD WIDTH="61%" VALIGN="TOP" COLSPAN=5>
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Through the "<B>Color attributes</B>" resources the user can insert the color for the line of each variable. </P>
+<B><FONT SIZE=5><P><A NAME="LedLayout"></A>Objects layout: led</P>
+</B></FONT><P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can set a circular or rectangular led and assigns the two command variable. The light table is the following:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=418>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P ALIGN="CENTER"><B><FONT SIZE=2>input variable </P>
+<P ALIGN="CENTER">(lighting)</B></FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="CENTER">blinking</P>
+<P ALIGN="CENTER">variable</B></FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="CENTER">light state</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">on</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">on</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">blinking</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="30%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="36%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="CENTER">off</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY"></P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=634>
+<TR><TD WIDTH="44%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="56%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="44%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Input variable</FONT></TD>
+<TD WIDTH="56%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Lighting variable</FONT></TD>
+</TR>
+<TR><TD WIDTH="44%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Blinking variable</FONT></TD>
+<TD WIDTH="56%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Variable determining the blinking</FONT></TD>
+</TR>
+<TR><TD WIDTH="44%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Led type</FONT></TD>
+<TD WIDTH="56%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Led type</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Through the "<B>Color attributes</B>" resources the user can insert the color and the blinking color. </P>
+<P ALIGN="JUSTIFY">The "<B>Color change var.</B>" resources are not available. </P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="SetValueLayout"></A>Objects layout: set value</P>
+</B></FONT><P ALIGN="JUSTIFY">Through the option "<B>Specific</B>" available in the Resources Editor the user can insert the following resources:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=643>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="55%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Font</FONT></TD>
+<TD WIDTH="55%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">The user font</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Number of integer digit displayed</FONT></TD>
+<TD WIDTH="55%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Number of integer digits displayed</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Number of decimal digit displayed</FONT></TD>
+<TD WIDTH="55%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Number of decimal digits displayed</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Scaling on input variable value</FONT></TD>
+<TD WIDTH="55%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Scaling on the variable</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Offset on the input variable value</FONT></TD>
+<TD WIDTH="55%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Offset on the variable</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Input variable</FONT></TD>
+<TD WIDTH="55%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Variable value displayed</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Inhibit button variable</FONT></TD>
+<TD WIDTH="55%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Variable which inhibits insertions</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Actuation variable</FONT></TD>
+<TD WIDTH="55%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Variable which receives the perturbation</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Actuation-related variable</FONT></TD>
+<TD WIDTH="55%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Variable which receives a secondary perturbation (generally user set it as a pulse)</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Through the "<B>Color attributes</B>" resources the user can insert the color foreground (set value drawing). </P>
+<P ALIGN="JUSTIFY">The "<B>Color change var.</B>" resources are not available. </P>
+<B><FONT SIZE=5><P><A NAME="BitmapLayout"></A>Objects layout: bitmap</P>
+</B></FONT><P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can insert:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=498>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Component</FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Component described by the icon</FONT></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Subsystem</FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">The subsystem icon belongs</FONT></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Filename</FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Drawing file in bmp format</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Bitmap has only one color change variable.</P>
+<P ALIGN="JUSTIFY">"<B>Color change var.1</B>" resouces:</P>
+<P ALIGN="JUSTIFY">the user has to choose an output variable which sets the whole bitmap color during animation. The value acquired by the variable is compared with the threshold and the color of the bitmap is established by the color associated with the threshold range.</P>
+<P ALIGN="JUSTIFY">Color table:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=727>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resources name</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of scansion</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color forced by the out scansion flag</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of reliability</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color forced by the out reliability flag</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Digital on</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Digital color</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of low security limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the low security limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value low security </I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Low security limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of low conduction limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the low conduction limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value low conduction</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Low conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color conduction</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is in the conduction area</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value high conduction</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of high conduction limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the high conduction limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value high security</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of high security limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the high conduction limit</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">In the table there are two couples of threshold, for low and high values: conduction and security.</P>
+<P ALIGN="JUSTIFY">If the variable type is digital, color displayed is Digital on if value is 1 or Color Conduction if value is 0.</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image78.gif" WIDTH=343 HEIGHT=81></P>
+<P ALIGN="JUSTIFY">The "<B>Color attributes</B>" resources are not available.</P>
+<B><FONT SIZE=5><P><A NAME="IndicatorLayout"></A>Objects layout: indicator</P>
+</B></FONT><P ALIGN="JUSTIFY">During configuration the user sets the graphical images of the object, upper and lower scale values, the input variable and the precision of the representation. </P>
+<P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can insert the following resources:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=512>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Indicator type</FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the type of indicator</FONT></TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<FONT SIZE=2><P>Number of representing digit </FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets number format</FONT></TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Number of decimal representing digit </FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the number format</FONT></TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Scaling of input variable</FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Value used to filter the variable</FONT></TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Lower value for the input value</FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Upper value for the input value</FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Offset of the input variable</FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Value used to filter the variable</FONT></TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Font editor</FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Font used for the alphanumeric </P>
+<P ALIGN="JUSTIFY">part of the object.</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Through the "<B>Color attributes</B>" resources the user can insert the foreground color and the pointer (or bar) color.</P>
+<P ALIGN="JUSTIFY">Only the "<B>Color change var.1</B>" resources is available to connect the indicator with the chosen variable. </P>
+<P ALIGN="JUSTIFY">Color table:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=727>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resources name</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of scansion</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color forced by the out scansion flag</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of reliability</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color forced by the out reliability flag</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Digital on</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Digital color</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of low security limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the low security limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value low security </I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Low security limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of low conduction limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the low conduction limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value low conduction</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Low conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color conduction</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is in the conduction area</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value high conduction</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of high conduction limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the high conduction limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value high security</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of high security limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the high conduction limit</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">In the table there are two couples of threshold, for low and high values: conduction and security.</P>
+<P ALIGN="JUSTIFY">If the variable type is digital, color displayed is Digital on if value is 1 or Color Conduction if value is 0.</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image78.gif" WIDTH=343 HEIGHT=81></P>
+<B><FONT SIZE=5><P><A NAME="LabelLayout"></A>Objects layout: label</P>
+</B></FONT><P ALIGN="JUSTIFY">During configuration the user sets the contents of the string which will be displayed by the object, the dimension and the font.</P>
+<P ALIGN="JUSTIFY">If the label type is normal, dimension are retrieved from font's used characteristic. If it is of type big the label is expanded (or compressed) fitting user specified dimensions.</P>
+<P ALIGN="JUSTIFY">Through big type the user can modify orientation of string using the rotation geometric resource (obtaining for example vertical strings).</P>
+<P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can insert the following resources:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=512>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Label type</FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the type : normal or big</FONT></TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<FONT SIZE=2><P>Font </FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Selects the font</FONT></TD>
+</TR>
+<TR><TD WIDTH="49%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Label </FONT></TD>
+<TD WIDTH="51%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the text</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">Through the "<B>Color attributes</B>" resources the user can insert only the foreground color.</P>
+<P ALIGN="JUSTIFY">None of the "<B>Color change var</B>" resources are available.</P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="IconRegLayout"></A>Objects layout: iconreg</P>
+</B></FONT><P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can insert the following resources:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=543>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Transparent attributes</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the transparent attributes.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P>Filename</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the associated icon.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Iconreg type</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the type.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Top border</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Increases the dimension over the top border.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Bottom border</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Increases the dimension under the bottom border.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Left border</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Increases the dimension at the left border.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Right border</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Increases the dimension at the right border.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Rotate (clockwise)</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Rotates the icon of a fixed angle (0,90,180,270).</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Rotate on Y axis</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Rotates on Y axis.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Module name</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the associated LEGO module.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Tag name</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Shows the tag of an instantiated iconreg.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Description</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Assigns the iconreg description.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Input value</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Enables changes in block's variables and block's data value (values and description for each datum). The text field shows these values. Modification of module name fields resets automatically input value resources.</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">The transparent attributes is able to show the background or the object under the iconreg (in a composite object).</P>
+<P ALIGN="JUSTIFY">LEGOMMI allows two types of iconreg: normal or interface (input or output); interface ones are used to connect different regulation pages.</P>
+<P ALIGN="JUSTIFY">During configuration of module name MMI displays a window containing the list of regulation LEGOCAD modules which the user can import. The list is obtained from the LEGOCAD "libreg" library located at $LEGOCAD_USER/legocad/libut_reg/libreg.</P>
+<P ALIGN="JUSTIFY">Border resources (top, left, right border) give to the user the chance to obtain an icon larger then the size resulting by associated icon draw. These resources are often used for obtain additive space for ports position.</P>
+<P ALIGN="JUSTIFY">Through the "<B>Color change var. </B>" resources the user can link a portion of drawing already fixed by Draw with the variations of the selected variable value. In order to define the color set of the drawing color change area many numerical constants are required. The resources are gathered in the following table:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=727>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resources name</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of scansion</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color forced by the out scansion flag</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of reliability</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color forced by the out reliability flag</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Digital on</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Digital color</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of low security limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the low security limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value low security </I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Low security limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of low conduction limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the low conduction limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value low conduction</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Low conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color conduction</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is in the conduction area</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value high conduction</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of high conduction limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the high conduction limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value high security</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of high security limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the high conduction limit</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">The table contains two pairs of thresholds, for low and high values: conduction and security. </P>
+<P ALIGN="JUSTIFY">If the variable type is digital, color displayed is Digital on if value is 1 or Color Conduction if value is 0.</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image78.gif" WIDTH=343 HEIGHT=81></P>
+<P ALIGN="JUSTIFY">The "<B>Color attributes</B>" resources are not available.</P>
+<B><FONT SIZE=5><P><A NAME="PortLayout"></A>Objects layout: port</P>
+</B></FONT><P ALIGN="JUSTIFY">During configuration the user sets the kind of port and the connection with a LEGO variable.</P>
+<P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can insert the following resources:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=518>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Port type</FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the port type i.e. direction (in/out) and type of variable associated (analogical or digital)</FONT></TD>
+</TR>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<FONT SIZE=2><P>Port layout </FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the port layout (arrow or square)</FONT></TD>
+</TR>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Interface port</FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the port as an interface port or not <B>(*)</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Port name</FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Associates a LEGO variable with port</FONT></TD>
+</TR>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Connect port name</FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Shows the name of the connected port</FONT></TD>
+</TR>
+<TR><TD WIDTH="32%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Font</FONT></TD>
+<TD WIDTH="68%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the font used to display the port </P>
+<P ALIGN="JUSTIFY">name (connect mode)</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">The user has to use interface type only for ports that are child of interface type iconreg objects and are used for connection between different pages.</P>
+<P ALIGN="JUSTIFY">The following kinds of ports are available:</P>
+<P ALIGN="JUSTIFY">ANALOG INPUT</P>
+<P ALIGN="JUSTIFY">ANALOG OUTPUT</P>
+<P ALIGN="JUSTIFY">DIGITAL INPUT</P>
+<P ALIGN="JUSTIFY">DIGITAL OUTPUT</P>
+<P ALIGN="JUSTIFY">The user can change the associated variable through a window displayed by LEGOMMI which shows the list of available variables (input or output depending from the type port) belonging to the LEGO module referenced by its iconreg parent and the list of the already selected variables list.</P>
+<P ALIGN="JUSTIFY">Through the "<B>Color attributes</B>" resources the user can insert the color of the port (analogical or digital) and, for the label, the foreground and the backgrounds. </P>
+<P ALIGN="JUSTIFY">The "<B>Color change var.</B>" resources are not available.</P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P><A NAME="DispregLayout"></A>Objects layout: dispreg</P>
+</B></FONT><P ALIGN="JUSTIFY">Through the "<B>Specific</B>" resources the user can insert the following resources:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=603>
+<TR><TD WIDTH="42%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resource name</B></FONT></TD>
+<TD WIDTH="58%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="42%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Type</FONT></TD>
+<TD WIDTH="58%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Value, vertical bar, horizontal bar, dispreg</FONT></TD>
+</TR>
+<TR><TD WIDTH="42%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Font</FONT></TD>
+<TD WIDTH="58%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the font for the label displayed.</FONT></TD>
+</TR>
+<TR><TD WIDTH="42%" VALIGN="TOP">
+<FONT SIZE=2><P>Number of representing digit </FONT></TD>
+<TD WIDTH="58%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets number of the integer part of the value displayed</FONT></TD>
+</TR>
+<TR><TD WIDTH="42%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Number of decimal representing digit </FONT></TD>
+<TD WIDTH="58%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sets the number of digits of the decimal part of the value displayed</FONT></TD>
+</TR>
+<TR><TD WIDTH="42%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Scaling of input variable</FONT></TD>
+<TD WIDTH="58%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Value used to filter the variable</FONT></TD>
+</TR>
+<TR><TD WIDTH="42%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Lower value for the input value</FONT></TD>
+<TD WIDTH="58%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="42%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Upper value for the input value</FONT></TD>
+<TD WIDTH="58%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="42%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Offset of the input variable</FONT></TD>
+<TD WIDTH="58%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Value used to filter the variable</FONT></TD>
+</TR>
+<TR><TD WIDTH="42%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Font editor</FONT></TD>
+<TD WIDTH="58%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Font used for the alphanumeric </P>
+<P ALIGN="JUSTIFY">part of the object.</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">The resource type allows the user to use a particularly representation of the variable value useful for digital variables; it is the "bar" representation where the numerical value is substituted by a led which color is defined during run time accordingly with the color change resources.</P>
+<P ALIGN="JUSTIFY">"<B>Color change var.1</B>" resources:</P>
+<P ALIGN="JUSTIFY">the user has to choose a variable to connect with the dispreg. The value acquired by the variable is compared with the threshold and the foreground color of the object is established by the color associated with the threshold range.</P>
+<P ALIGN="JUSTIFY">Color table:</P>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=727>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT SIZE=2>Resources name</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<B><FONT SIZE=2><P ALIGN="JUSTIFY">Meaning</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of scansion</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color forced by the out scansion flag</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of reliability</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color forced by the out reliability flag</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Digital on</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Digital color</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of low security limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the low security limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value low security </I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Low security limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of low conduction limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the low conduction limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value low conduction</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Low conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color conduction</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is in the conduction area</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value high conduction</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of high conduction limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the high conduction limit</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<I><FONT SIZE=2><P ALIGN="JUSTIFY">Limit value high security</I></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">High conduction limit for the variable value </FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color out of high security limit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Color once the variable value is out of the high conduction limit</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">In the table there are two couples of threshold, for low and high values: conduction and security.</P>
+<P ALIGN="JUSTIFY">If the variable type is digital, color displayed is Digital on if value is 1 or Color Conduction if value is 0.</P>
+<B><FONT FACE="Univers (W1),Arial" SIZE=5><P><A NAME="FileComponent"></A>Objects layout: FileComponent.edf</P></B></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=309>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><FONT FACE="Univers (W1),Arial" SIZE=2>****</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">|25</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">Valvole</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">VAIN</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">VALC</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">VALV</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">Fumi</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">FUMN</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">FUMB</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">Pompe</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">CPOM</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">Camere di combustione</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">CCDY</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">CCMB</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">CCMP</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">CCPN</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">CCTG</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">Collettori</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">COLN</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">COLT</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">COLV</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">Degasatori</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">DEGB</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">DEGN</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">Pareti Metalliche</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">META</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">METP</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">Miscelatori</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">MIX2</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">MIXN</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">Cavita'</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">TANK</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">RISO</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">COND</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">Tubazioni</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">TUBA</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">TUBO</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">TUBS</FONT></TD>
+</TR>
+<TR><TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial" SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Univers (W1),Arial" SIZE=5><P><A NAME="FileSubsystem"></A>Objects layout: FileSubSystem.edf</P></B></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=450>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><FONT SIZE=2>****</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">|25</FONT></TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">|40</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Raffreddamento</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TVCOND</FONT></TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">DISNDIS1</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">DISNDIS2</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TORFTORF</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">CPOMAARC</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">CPOMBARC</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">COLTMPAR</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TUBODPCN</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">+EVATATR</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Bassa Pressione</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TVCOND</FONT></TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">COLTAEBP</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial"><P ALIGN="JUSTIFY">VALV950A</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial"><P ALIGN="JUSTIFY">VALV950B</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Univers (W1),Arial"><P ALIGN="JUSTIFY">VALV961A</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">VALV961B</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">COLTIEBA</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">COLTIEBB</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">COLTUEBB</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">COLTUEBA</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Sub System per TANICA</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TANICA</FONT></TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TANKCC</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Tutto TANICA</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TANICA</FONT></TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TANKCC</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">VALVVALV</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Solo REGOLA</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">REGOLA</FONT></TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">REGOREGO</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">Praticamente TUTTO</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TANICA</FONT></TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TANKCC</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">VALVVALV</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">REGOLA</FONT></TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">REGOREGO</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="23%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Univers (W1),Arial" SIZE=5><P><A NAME="FileDefVarCC"></A>Objects layout: FileDefVarCC.edf</P></B></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=622>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><FONT SIZE=2>****</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">|10 (I NOMI DEI MODULI SONO IN ORDINE ALFABETICO)</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">CLAV</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">LIVC</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">CNDN</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">LCND</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">COLT</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TCOL</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">CPOM</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">WPOM</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">DISN</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TEFF</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">DRIS</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">PUTU</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">EVAP</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">WITU</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">FUMB</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TUF_</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">FUMN</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TUF_</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">METP</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">MIXN</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">WMIX</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">NODO</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">USOM</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">NPSH</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">LPSH</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TANK</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">LIVC</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TITL</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">ATIT</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TORF</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TEFF</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TREN</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">TUBO</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">WTUB</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">VALV</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">ALZA</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">****</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT SIZE=2><P ALIGN="JUSTIFY">FINE DEL FILE</FONT></TD>
+</TR>
+</TABLE>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></BODY>
+</HTML>

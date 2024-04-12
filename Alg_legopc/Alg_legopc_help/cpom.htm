@@ -1,0 +1,665 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>CPOM</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE CPOM</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CPOM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">CENTRIFUGAL PUMP</p>
+<p align="left">&nbsp;</p>
+<p align="left">The CPOM module simulates the functioning of a centrifugal pump
+(or several identical centrifugal pumps in parallel configuration) having one or
+more impellers.</p>
+<p align="left">In the CPOM module two different mathematical models are
+available which allow user to choose between two options:</p>
+<p ALIGN="left">1) providing input related to the horsepower applied to the pump
+shaft (also calculated by &quot;electric motor module&quot; MOAS or by
+&quot;turbine module&quot; TREN)</p>
+<p ALIGN="left">2) providing input related to the pump speed if user knows its
+value under stationary and transient conditions also coming from experimental
+measuring.</p>
+<p align="left">Concerning the data related to the calculation of pump
+characteristics (relations between flow rate, head, number of revolutions and
+resisting power) two different options are also available:</p>
+<p ALIGN="left">1) the introduction of pump characteristics (if available),
+provided from manufacturer, by using a subroutine written according to specific
+methods</p>
+<p ALIGN="left">2) introduction of few data which allow to calculate the
+characteristic index of the pump to simulate (see note 1 below). In this case
+the curve whose characteristic index is closer to the pump to simulate is
+selected (among some standard characteristics defined in the four quadrants).
+Beginning from this curve, the characteristic to use in the calculation is built
+by means of similarity laws (homologous curves). This second option can be
+particularly useful when the pump is not designed in a detailed manner yet.</p>
+<p align="left">Regarding to complex pumps systems (series or parallel
+configuration) in the CPOM module the following possibilities are available:</p>
+<p ALIGN="left">1) several identical pumps in parallel configuration of which it
+is not interesting to study the dissymmetric transients. User provides the
+physical and geometrical data concerning only one pump specifying the number of
+pumps</p>
+<p ALIGN="left">2) several identical pumps in parallel configuration having the
+possibility to change the number of functioning pumps both under stationary and
+transient conditions. User provides the correct pumps head/capacity to the
+hydraulic system taking into account that it is not interesting to represent in
+a detailed manner the dynamics between the pumps in parallel configuration. User
+has only to change (at right time) the variable indicating the number of pumps
+in parallel configuration or also the provided horsepower if, respectively,
+&quot;pumps with imposed speed&quot; or &quot;pumps with imposed power&quot; are
+chosen</p>
+<p ALIGN="left">3) several identical (or not) pumps in parallel configuration of
+which is interesting to represent the dissymmetric transient in a detailed
+manner. User has to utilize as many CPOM modules as the pumps are</p>
+<p ALIGN="left">4) two or more pumps in series configuration have to be
+simulated interconnecting several CPOM modules in series. If it is enough to
+represent only one equivalent pump (only one CPOM module), user must provide
+consistent data for inertia, characteristic curves and rated data.</p>
+<p align="left">User can also study the pump functioning with null number of
+revolutions in two different conditions:</p>
+<p ALIGN="left">1) excluding the circulation inside the pump, disconnecting
+upstream and downstream headers; in this case he has to put VALV = 1 in module's
+data</p>
+<p ALIGN="left">2) considering the circulation inside the pump, putting VALV =
+0.</p>
+<p ALIGN="left">In the considered mathematical module the following hypotheses
+are assumed:</p>
+<p ALIGN="left">- it is presumed that there is no mass accumulation inside the
+pump, equating the inlet flow rate to the outlet one</p>
+<p ALIGN="left">- both thermal capacity of pump metal and thermal exchanges with
+the outside are not considered</p>
+<p ALIGN="left">- it is presumed that moment of inertia is the total one for the
+pump, motor and possible equipments (cooling fan, etc.)</p>
+<p ALIGN="left">- it is assumed that dissipated power or mechanical losses is 0,
+4% of the nominal power.</p>
+<p align="left">If user chooses to introduce the horsepower applied to the pump
+shaft among the input data (imposed power module), the module is based on the
+following equations which are indicated in the same programming order that the
+module has:</p>
+<p ALIGN="left">1) the equation describing the rotational kinetic energy of a
+pump as function of the applied horsepower and resisting power (differential
+equation). The kinetic energy is indicated in p.u. of nominal kinetic energy</p>
+<p ALIGN="left">2) the equation indicating the connection between the pump speed
+and its rotational kinetic energy (algebraic equation)</p>
+<p ALIGN="left">3) the energy balance equation of fluid between the pump inlet
+and outlet. The equation is differential and so is dealt with, but to avoid it
+participates to the resolution iterative process of other module equations, it
+is separately solved only once for each time step. The actual hydraulic variable
+values for the preceding time step are used. This method is justified from the
+weak connection between the energy equation and the others</p>
+<p ALIGN="left">4) the equation giving the connection among pump speed, delta
+pressure between the pump suction and discharge and flow rate passing through
+the pump.</p>
+<p align="left">If user chooses the imposed speed condition, the mathematical
+model only consists of the equations 3) and 4).</p>
+<p align="left">Among the output variables of CPOM module, user can optionally
+indicate the pump inlet or outlet pressure or capacity, both under power and
+speed imposed conditions.</p>
+<p ALIGN="left">User specifies the option adding to the chosen name for the pump
+block a suitable code.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CPOM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p align="left">&nbsp;</p>
+<p align="left">User chooses &quot;pump with imposed speed&quot; or &quot;pump
+with imposed power&quot; answering &quot;YES&quot; or &quot;NO&quot; during
+topological data assignment.</p>
+<b>
+<p align="left">&nbsp;&nbsp;&nbsp; Module with imposed speed</p>
+</b>
+<p align="left">The module can be interconnected with other ones following three
+methods:</p>
+<p ALIGN="left">1) output in inlet pressure</p>
+<p ALIGN="left">prescription about block-name: preceded by '+' sign.</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="center"><font FACE="Arial" SIZE="2"><img SRC="images/Image56.gif" width="474" height="203"></font></p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">2) output in outlet pressure</p>
+<p ALIGN="JUSTIFY">prescription about block-name: preceded by '-' sign.</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="center"><font FACE="Arial" SIZE="2"><img SRC="images/Image57.gif" width="474" height="203"></font></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">3) output in capacity</p>
+<p ALIGN="JUSTIFY">prescription about block-name: none</p>
+<p ALIGN="left">&nbsp;</p>
+</font>
+<blockquote>
+  <blockquote>
+    <font FACE="Arial" SIZE="2">
+    <p ALIGN="center"><img SRC="images/Image58.gif" width="474" height="203"></p>
+    </font><font FACE="Arial">
+    <p ALIGN="JUSTIFY">&nbsp;</p>
+    <p ALIGN="JUSTIFY">&nbsp;</p>
+    </blockquote>
+  </blockquote>
+  <b>
+  <p align="left">&nbsp;&nbsp;&nbsp; Module with imposed power</p>
+  </b>
+  <p align="left">The module can be interconnected with other ones following
+  three methods:</p>
+  <p ALIGN="left">1) output in inlet pressure</p>
+  <p ALIGN="left">prescription about block-name: preceded by '+' sign</p>
+  <p ALIGN="left">&nbsp;</p>
+  <p ALIGN="center"><font FACE="Arial" SIZE="2"><img SRC="images/Image59.gif" width="484" height="222"></font></p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  <p ALIGN="JUSTIFY">2) output in outlet pressure</p>
+  <p ALIGN="JUSTIFY">prescription about block-name: preceded by '-' sign</p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  <p ALIGN="center"><font FACE="Arial" SIZE="2"><img SRC="images/Image60.gif" width="484" height="222"></font></p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  <p ALIGN="JUSTIFY">3) output in capacity</p>
+  <p ALIGN="JUSTIFY">prescription about block-name: none</p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="center"><img SRC="images/Image61.gif" width="484" height="222"></p>
+</font><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PIPM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure at the pumps suction</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PUPM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure at the pumps discharge</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WPOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pumps total capacity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QIPM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">total horsepower supplied to the pumps</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NPOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of identical pumps in parallel
+      configuration</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HIPM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of fluid at the pumps suction</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HUPM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of fluid at the pumps discharge</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMPM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">angular velocity of each pump</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ECIN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">rotational kinetic energy of each pump,
+      in p.u. of nominal one.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CPOM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to the initial values of input and output variables
+(defined above), user must assign the following data:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TYP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">to assign only if the DPU user subprogram
+      is used (see note 1)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg*m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">INER</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">moment of inertia for each pump (see note
+      2)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QVNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">volumetric capacity of each pump</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pumps nominal revolutions per minute</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DPNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pumps nominal head of pumps</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">POTN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal horsepower for each pump (see
+      note 3)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DENS.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid density (see note 4)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">N.GIRAN.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of impellers (see note 5)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VALV INT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">pump interception index (see note 6)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p>The TYP datum has to be blank if only the pump nominal data are known by
+user. In this case the CPOM module automatically chooses the pump
+characteristics on the basis of the rated data or characteristic revolutions
+number.</p>
+<p>Inside the CPOM module five types of characteristics of pumps are available
+corresponding to 96, 142, 353, 380 and 447 characteristic revolution numbers.
+The characteristic is automatically chosen by the module calculating the
+characteristic revolutions number on the basis of the nominal values that user
+provides. From these data the CPOM module chooses the closer number among the
+available ones.</p>
+<p>To calculate the characteristic revolutions number the following formula is
+used:</p>
+<p ALIGN="CENTER">GCAR = 3.65*GIRI*QVNOM**.5/(DH**(3./4.))</p>
+<p ALIGN="left">where:</p>
+<p ALIGN="left">GCAR = characteristic revolutions number</p>
+<p ALIGN="left">GIRI = revolutions per minute</p>
+<p ALIGN="left">QVNOM = nominal capacity in volume (m³/s)</p>
+<p ALIGN="left">DH = head in meters of water column = DPNOM/DENS./9.81/N.GIRAN.</p>
+<p align="left">If user wants to assign the characteristics of his pump or
+functions which define the connections between flow rate, speed, head and
+resisting torque, he must provide to TYP a value different from zero, and write
+a DPU user subroutine (see below). In this subroutine the FORTRAN's instructions
+to translate the above-mentioned functions are included. The DPU user subroutine
+can include several characteristics related to different pumps. The TYP data,
+provided in input and transferred to the DPU subroutine input, allow the user to
+choose the characteristic of his pump.</p>
+<b>
+<p ALIGN="RIGHT">Note 2</p>
+</b>
+<p align="left">Using the imposed speed module, the INER value is not used by
+code and can consequently be whatever user wants.</p>
+<b>
+<p ALIGN="RIGHT">Note 3</p>
+</b>
+<p align="left">The POTN value is linked to the DPNOM and QVNOM through the ETA
+efficiency following the relation POTN = QVNOM*DPNOM/ETA.</p>
+<p align="left">If the POTN data is not provided, it is automatically calculated
+by the module on the basis of the compulsory data QVNOM and DPNOM and ETA =.85.</p>
+<b>
+<p ALIGN="RIGHT">Note 4</p>
+</b>
+<p align="left">The DENS. density value is only used to calculate characteristic
+revolutions number of pumps (to transform nominal head value from Pascal to
+meters of water column). If the related space is blank, the module automatically
+assumes DENS. = 1000.</p>
+<b>
+<p ALIGN="RIGHT">Note 5</p>
+</b>
+<p>The value assigned to N.GIRAN. is only used for the head calculation (in
+meters of water column) that appears in the expression of the pump
+characteristic index.</p>
+<p>If this datum is not provided, it is assumed N.GIRAN. = 1.</p>
+<b>
+<p ALIGN="RIGHT">Note 6</p>
+</b>
+<p ALIGN="left">The value assigned to VALV can be 0 (not intercepted flow rate)
+or 1 (intercepted flow rate). User must use the value 1 only if OMPM = 0 and no
+valve is foreseen upstream or downstream the pump.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CPOM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">The NPOM variable value must be equal to the number of identical
+pumps functioning in parallel configuration and stationary conditions. The
+variable initialization value must be consistent with such number. This means
+that the WPOM flow rate must be equal to the addition of the flow rates passing
+through the pumps functioning simultaneously. The same considerations have to be
+applied for power value in the &quot;pump with imposed power&quot; model.</p>
+<p align="left">On the contrary, input about physical and geometrical data must
+be related to the single pump. Under transient condition, the NPOM input
+variable, can be modified by user to simulate the variation in number of pumps,
+functioning in parallel configuration. To simulate one or more pumps stopping,
+user decreases (in step) such input.</p>
+<p ALIGN="left">On the contrary to simulate one or more pumps starting, user has
+to increase it. It is necessary to remember that NPOM must never erase itself
+and in the &quot;pump with imposed power&quot; model, to a NPOM variation must
+correspond a consistent variation of the QIPM power.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CPOM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">To define the characteristics of one pump, if manufacturer
+provides its functions or curves, a user subprogram has to be written.</p>
+<p align="left">The declarative statement of this subprogram is:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<blockquote>
+  <p>SUBROUTINE DPU(TYP, QVNOM, OMNOM, DPNOM, CNOM, ETANOM, Q, RO,</p>
+  <p>$ OM, DP, CRES)</p>
+</blockquote>
+</font></b><font FACE="Arial">
+<p align="left">Such subroutine must calculate the DP head and the CRES
+resistant torque values as a function of the nominal data and pump work point
+which is defined by other calling parameters.</p>
+<p align="left">User has to consider that all calling parameters are related to
+only one of the possible NPOM pumps in parallel configuration.</p>
+<p ALIGN="JUSTIFY">Input parameters: TYP, QVNOM, OMNOM, DPNOM, CNOM, ETANOM, Q,
+RO, OM</p>
+<p ALIGN="JUSTIFY">Output parameters: DP, CRES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TYP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">corresponds to the TYP value required in
+      input (see above). It can be used in writing the DPU subroutine to
+      distinguish several pumps' characteristics. In this case such subprogram
+      becomes a collection of characteristics. To attribute to a pump the
+      related characteristics, it is enough to give to the TYP value (related to
+      the considered pump) the value corresponding to a given index of
+      characterics &quot;menu&quot; included in the DPU subroutine.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QVNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal capacity in volume</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal speed</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DPNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal head</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CNOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal resistant torque</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ETANOM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal efficiency</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Q</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">actual volumetric capacity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RO</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid actual density</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">actual angular speed</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">actual head</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CRES</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">actual resistant torque</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">As example, to approximate the pump head with a parabola
+aggregate, the DPU subroutine is:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p align="left">SUBROUTINE DPU(TYP,QVNOM,OMNOM,DPNOM,CNOM,ETANOM,Q,RO,OM,DP,CRES)</p>
+<p align="left">C</p>
+<p align="left">C****************PUMP CHARACTERISTIC*********************</p>
+<p align="left">C</p>
+<p align="left">A=1.22</p>
+<p align="left">OMS=OM/OMNOM</p>
+<p align="left">QS=Q/QVNOM</p>
+<p align="left">DP=DPNOM*(A*OMS²-(A-1.)*QS*ABS(QS))</p>
+<p align="left">C</p>
+<p align="left">C WHEN PUMP IS FUNCTIONING WITH BLIND NOZZLE (Q=0) AND AT</p>
+<p align="left">C NOMINAL SPEED (OM=OMNOM), DP=DPNOM*A.</p>
+<p align="left">C THUS &quot;A&quot; DEFINES HEAD WITH BLIND NOZZLE</p>
+<p align="left">C</p>
+<p align="left">C****************EFFICIENCY FORMULA*******************</p>
+<p align="left">C</p>
+<p align="left">IF(OMS.LT.1.E-4)GO TO 125</p>
+<p align="left">RID=QS/OMS</p>
+<p align="left">ETA=ETANOM*(-RID²+2.*RID)</p>
+<p align="left">C</p>
+<p align="left">C****************RESISTENT TORQUE***********************</p>
+<p align="left">C</p>
+<p align="left">IF(ETA.LT.1.E-4)GO TO 125</p>
+<p align="left">OME=OM</p>
+<p align="left">IF(OME.LE.1.E-3)OME=1.E-3</p>
+<p align="left">CRES=Q*DP/OME/ETA</p>
+<p align="left">GO TO 130</p>
+<p align="left">125 CRES=0.5*DP/DPNOM*CNOM</p>
+<p align="left">130 CONTINUE</p>
+<p align="left">WRITE(6,1000)</p>
+<p align="left">1000 FORMAT(/10X,'*** PROVIDE PUMP CHARACTERISTIC'</p>
+<p align="left">$ ' O TYP=0. IN FILE 14 ***'/)</p>
+<p align="left">RETURN</p>
+<p align="left">END</p>
+<p align="center"></font><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CPOM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The equations forming the module mathematical model give rise to
+the following residuals:</p>
+<p align="left">RNI(1) = (QIPM-WR-WD)/ECINOM (not normalized)</p>
+<p align="left">RNI(2) = (INER*OMPM*OMPM/2.-ECIN)/W0/H0 (normalization factor =
+W0*H0)</p>
+<p align="left">RNI(3) = (WR-WPOM*(HUPM-HIPM))/W0/H0 (normalization factor =
+W0*H0)</p>
+<p align="left">RNI(4) = (PUPM-PIPM-DP)/P0 (normalization factor = P0)</p>
+<p ALIGN="left">If OMPM &lt; 1.E-03 and VALV = 1</p>
+<p align="left">RNI(4) = -WPOM/W0 (normalization factor = W0).</p>
+<p ALIGN="left">where:</p>
+<p align="left">WR indicates the resisting power WD indicates the dissipated
+power for mechanical losses DP indicates the head.</p>
+<p ALIGN="left">The remaining variables have the same physical meanings defined
+above.</p>
+<p ALIGN="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CPOM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<blockquote>
+  <p align="left">SUBROUTINE CPOMI3(IFO, IOB, DEBL)</p>
+  <p align="left">SUBROUTINE CPOMI31(WP, IFO, IOB)</p>
+  <p align="left">SUBROUTINE CPOMI32(WP, IFO, IOB)</p>
+  <p align="left">SUBROUTINE CPOMI4(IOB, MOD)</p>
+  <p align="left">SUBROUTINE CPOMI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1,
+  ID2,</p>
+  <p align="left">$ IBLOC1, IBLOC2, IER, CNXYU, TOL)</p>
+  <p align="left">SUBROUTINE CPOMC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</p>
+  <p align="left">$ IBLOC1, IBLOC2)</p>
+  <p align="left">SUBROUTINE PMPDEC(XYU, IXYU, ECIN, OM, HV, PM, PV, Q, HM, WM,</p>
+  <p align="left">$ DATI, IPD, IHI, IWP, TYP, HIN, NPO, IBL1, IBL2,</p>
+  <p align="left">$ QNOM, OMNOM, DPNOM, CNOM, GCAR, ECINOM, ETANOM,</p>
+  <p align="left">$ PERD)</p>
+  <p align="left">SUBROUTINE PMPDR(PMN, PVN, HMN, HVN, QN, OMN, ECINN, ETANOM,</p>
+  <p align="left">$ TYP, WMN, HIN, RNI, NPO, PERD, GCAR, QNOM, OMNOM,</p>
+  <p align="left">$ DPNOM, CNOM, IHI, ECINOM, DATI, IPD)</p>
+  <p align="left">SUBROUTINE PMPJC(AJAC, MX5, IXYU, XYU, DATI, IPD, RNI, IFUN,</p>
+  <p align="left">$ IBL1, IBL2)</p>
+  <p align="left">SUBROUTINE PMPDPC(GCAR, QNOM, OMNOM, DPNOM, CNOM, Q, OM, DP,
+  CRES)</p>
+  <p align="left">SUBROUTINE DPU(TYP, QVNOM, OMNOM, DPNOM, CNOM, ETANOM, Q, RO,
+  OM,</p>
+  <p align="left">$ DP, CRES)</p>
+  <p align="left">SUBROUTINE CPOTER(DATI, IPD, Q, HM, HV, POT, PM, PV, HVT)</p>
+</blockquote>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE CPOM</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are in the user
+manual section dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;CONDENSA&quot;</p>
+<p ALIGN="CENTER">&quot;CONDEQUI&quot;</p>
+<p ALIGN="CENTER">&quot;MOTORE&quot;</p>
+<p ALIGN="CENTER">&quot;POMPE&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

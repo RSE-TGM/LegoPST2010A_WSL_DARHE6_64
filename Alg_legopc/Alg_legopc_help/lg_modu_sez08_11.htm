@@ -1,0 +1,289 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">The &quot;xxxxC1&quot; subroutine for configurable LEGO
+modules</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">For configurable and/or cellized
+modules, the subroutine &quot;xxxxC1&quot; is not very different from a standard
+module one.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Only, as the number of equations and/or
+variables and/or the variable order may change due to the module configuration,
+the &quot;xxxxC1&quot; subroutine must recognize the correct list and the
+correct order of variables reading the configuration settings (which the
+&quot;xxxxI2&quot; subroutine should have stored into the DATI vector).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">If only the order of the variables
+changes (switching algebraic output and input variables), the residuals
+analytical expressions of could be the same, as algebraic residuals are always
+written in implicit form.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Obviously, if the analytical computation
+of the Jacobian matrix is performed, the order and/or the expressions of its
+elements must be changed if the variables order or the variables list is
+different.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">For CPOM module, taken as an example,
+only the variables decoding section of source code is important (the source code
+has been modified, as it is taken only as an example of how a configurable
+module can recognize the variable set).&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SUBROUTINE CPOMC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>$<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IBLOC1,IBLOC2)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C---CENTRIFUGAL PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>IHI: 1 = imposed speed</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>2 = imposed power (kinetic energy and speed as output)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>IWP: 0 = outlet pressure as output (inlet pr. &amp; flow rate as i.)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>1 = inlet pressure as output (outlet pr. &amp; flow rate as i.)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>2 = flow rate as output (inlet &amp; outlet pressures as input)</b></font></span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>REAL NPOM</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>GO TO (100,200,300),IFUN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C---Jacobian matrix topology (depends on
+IHI but not on IWP)</b></font></span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp; </span>100 IHI = DATI(IPD)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">...</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C---residuals computation</b></font></span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp; </span>200 IHI = DATI(IPD)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>IWP = DATI(IPD+1)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">...</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>GO TO (21,22), IHI</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C---CPOM module variables (alphabetical
+order):</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>ECIN = KINETIC ENERGY OF THE ROTATING MASSES (only if IHI=2)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>HIPM = FLUID ENTHALPY AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>HUPM = FLUID ENTHALPY AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>OMPM = ROTATIONAL SPEED OF THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>NPOM = NUMBER OF PUMPS IN PARALLEL</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>PIPM = PRESSURE AT THE PUMP INLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>PUPM = PRESSURE AT THE PUMP OUTLET</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>QIPM = POWER ABSORBED BY THE PUMP (only if IHI=2)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>WPOM = FLUID FLOW RATE THROUGH THE PUMP</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>21 HUPM = XYU(IXYU)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>HIPM = XYU(IXYU+4)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>OMPM = XYU(IXYU+5)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;</span>NPOM = XYU(IXYU+6)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (IWP .EQ. 0) THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PIPM = XYU(IXYU+1)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PUPM = XYU(IXYU+2)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WPOM = XYU(IXYU+3)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE IF (IWP .EQ. 1) THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PUPM = XYU(IXYU+1)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PIPM = XYU(IXYU+2)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WPOM = XYU(IXYU+3)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WPOM = XYU(IXYU+1)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PUPM = XYU(IXYU+2)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PIPM = XYU(IXYU+3)</b></font></span></p>
+<p class="elenco3"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">ENDIF<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>...<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RNI(1) = ...<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RNI(2) = ...<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">RETURN</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>22 ECIN = XYU(IXYU)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>OMPM = XYU(IXYU+1)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>HUPM = XYU(IXYU+2)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>HIPM = XYU(IXYU+6)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>QIPM = XYU(IXYU+7)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>NPOM = XYU(IXYU+8)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (IWP .EQ. 0) THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PIPM = XYU(IXYU+3)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PUPM = XYU(IXYU+4)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WPOM = XYU(IXYU+5)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE IF (IWP .EQ. 1) THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PUPM = XYU(IXYU+3)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PIPM = XYU(IXYU+4)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WPOM = XYU(IXYU+5)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ELSE</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>WPOM = XYU(IXYU+3)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PUPM = XYU(IXYU+4)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PIPM = XYU(IXYU+5)</b></font></span></p>
+<p class="elenco3"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">ENDIF<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>...<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RNI(1) = ...<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RNI(2) = ...<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RNI(3) = ...<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RNI(4) = ...<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RETURN<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b>C---Jacobian matrix
+computation (depends on IHI and IWP)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp; </span>300 IHI = DATI(IPD)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>IWP = DATI(IPD+1)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">...</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<font size="2" face="Courier New"><b>
+<span lang="EN-GB" style="mso-bidi-font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-bidi-font-family: Times New Roman; mso-ansi-language: EN-GB; mso-fareast-language: IT; mso-bidi-language: AR-SA"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END</span>
+
+</b></font><!--mstheme--></font></body>
+
+</html>

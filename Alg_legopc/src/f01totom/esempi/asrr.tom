@@ -1,0 +1,144 @@
+# this file created with LEGOPHI rel. 0.2
+800 600
+motr_0
+n
+ASRR
+73.0 127.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+car1_0
+n
+CARH
+563.0 165.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+eqre_0
+n
+GEEQ
+659.0 153.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+line_0
+n
+LINE
+456.0 77.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+car1_0
+n
+LOAL
+175.0 165.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+disn_0
+n
+PITC
+91.0 266.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Control
+sble_0
+n
+SBAL
+343.0 65.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+sble_0
+n
+SBAT
+174.0 63.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+sble_0
+n
+SBEQ
+564.0 65.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+traf_0
+n
+TRAS
+257.0 63.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+****
+motr_0
+ASRR
+port0
+busy port0 SBAT
+port3
+free
+port2
+free
+port1
+busy port1 GEEQ
+++++
+car1_0
+CARH
+port1
+free
+port0
+busy port2 SBEQ
+++++
+eqre_0
+GEEQ
+port0
+busy port1 SBEQ
+port1
+busy port1 ASRR
+++++
+line_0
+LINE
+port0
+busy port1 SBAL
+port1
+busy port0 SBEQ
+port3
+free
+port2
+free
+++++
+car1_0
+LOAL
+port1
+free
+port0
+busy port2 SBAT
+++++
+disn_0
+PITC
+port0
+free
+port2
+free
+port1
+free
+++++
+sble_0
+SBAL
+port0
+busy port2 TRAS
+port1
+busy port0 LINE
+port2
+free
+++++
+sble_0
+SBAT
+port0
+busy port0 ASRR
+port1
+busy port0 TRAS
+port2
+busy port0 LOAL
+++++
+sble_0
+SBEQ
+port0
+busy port1 LINE
+port1
+busy port0 GEEQ
+port2
+busy port0 CARH
+++++
+traf_0
+TRAS
+port0
+busy port1 SBAT
+port1
+free
+port3
+free
+port2
+busy port0 SBAL
+++++
+****

@@ -1,0 +1,264 @@
+C**********************************************************************
+C modulo mixn.f
+C tipo 
+C release 5.4
+C data 10/3/96
+C reserver @(#)mixn.f	5.4
+C**********************************************************************
+C
+      SUBROUTINE MIXNI3(IFO,IOB,DEBL)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/MIXN01/IBLOC
+      COMMON/MIXN02/NE,NU
+      CHARACTER*80 DEBL
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MOD
+      DATA MOD/'MIXN'/
+C
+C
+C---MISCELATORE ENTALPICO A N INGRESSI (MASSIMO N=20)
+C
+C
+      CALL MIXNI4(IOB,MOD)
+C
+C
+      NSTATI=0
+      NUSCIT=2
+      NINGRE=2*NE
+      NVAR=NINGRE+2
+C
+C
+C
+      WRITE(IFO,2999)IBLOC,IOB,MOD,DEBL
+ 2999 FORMAT(A,2X,'BL.-',A4,'- **** MODULO ',A4,' - ',A)
+C
+      WRITE(IFO,3000)IOB
+ 3000 FORMAT('WMIX',A4,2X,
+     $  '--UA-- FLUID FLOW RATE AT THE MIXER OUTPUT')
+C
+      WRITE(IFO,3005)IOB
+ 3005 FORMAT('HMIX',A4,2X,
+     $  '--UA-- FLUID ENTHALPY AT THE MIXER OUTPUT')
+C
+      DO 30 J=1,NE
+      WRITE(IFO,3010)J,IOB,J
+ 3010 FORMAT('WE',I2,A4,2X,
+     $  '--IN-- FLUID FLOW RATE AT THE INLET PIPE N. ', I2)
+	WRITE(IFO,3015)J,IOB,J
+ 3015   FORMAT('HE',I2,A4,2X,
+     $  '--IN-- FLUID ENTHALPY AT THE INLET PIPE N. ', I2)
+   30 CONTINUE
+C
+      RETURN
+      END
+      SUBROUTINE MIXNI4(IOB,MOD)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      COMMON/MIXN01/IBLOC
+      COMMON/MIXN02/NE,NU
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MOD
+      PARAMETER (MAX=20)
+C
+   10 WRITE(6,101) MAX
+  101 FORMAT(10X,'ENTHALPIC MIXER WITH N INLETS'/
+     $       10X,'NUMBER OF INLET PIPES (01 -',I3,') ?')
+      READ(5,*) NE
+      IF(NE.LE.0.OR.NE.GT.MAX) THEN
+      WRITE(6,102) NE
+  102 FORMAT(10X,'ERROR - N.ENT.=',I3,/)
+      GOTO 10
+      ENDIF
+C
+      WRITE(IBLOC,1000)MOD,IOB
+ 1000 FORMAT(2A4)
+C
+      RETURN
+      END
+	SUBROUTINE MIXNI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,
+     1                    IBL1,IBL2,IER,CNXYU,TOL)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+	INTEGER VAR
+	DIMENSION VAR(MX1,*),XYU(*),DATI(*),CNXYU(*),TOL(*)
+	COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+C
+C---COLLETTORE DI DISTRIBUZIONE A N TUBI
+C
+	GO TO(100,200),IFUN
+C
+  100 RETURN
+C
+C---lettura e memorizzazione dati
+C
+  200   READ(14,502)
+  500   FORMAT(3(4X,A8,' =',10X,'*'))
+  502   FORMAT(3(14X,F10.2,1X))
+C
+	FNE=(IV2-IV1)/2
+C ! numero tubi entranti
+	DATI(ID2  ) = FNE
+	NE=FNE
+C
+C---costanti di normalizzazione
+C
+	CNXYU(IV1  ) = W0
+	CNXYU(IV1+1) = H0
+	K=IV1+1
+	DO J = 1,NE
+	K1=K+ (J-1)*2+1
+	CNXYU(K1)   = W0
+	CNXYU(K1+1) = H0
+	ENDDO
+C
+	RETURN
+	END
+	SUBROUTINE MIXNC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+	DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)
+C
+	COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+C
+	COMMON/PARPAR/NUL(7),ITERT
+	COMMON/INTEGR/TSTOP,TEMPO,DTINT,NPAS,CDT                        !SNGL
+C        COMMON/INTEG1/TSTOP,TEMPO,DTINT,CDT,ALFADT,NPAS                 !DBLE
+	LOGICAL KREGIM
+	COMMON/REGIME/KREGIM
+	COMMON/NEQUAZ/NEQMOD
+C
+	PARAMETER (MAX=20)
+	DIMENSION WE(MAX),HE(MAX)
+C
+C
+C
+	GO TO(100,200,200),IFUN
+C
+C---topologia jacobiano
+C
+  100   NEQMOD=1
+	NE=DATI(IPD)
+	NVAR=2*NE+2
+C
+	AJAC(1,1)=1.
+C
+	DO J = 3,NVAR,2
+	AJAC(1,J) = 1.
+	END DO
+	RETURN
+C
+C---calcolo residui
+C
+  200   CONTINUE
+C
+C---decodifica dati
+C
+	NE   =DATI(IPD   )
+	NVAR=2*NE+2
+C
+C---decodifica variabili
+C
+	WNODO = XYU(IXYU  )
+	HNODO = XYU(IXYU+1)
+	I0=IXYU+1
+	DO J = 1,NE
+	  JW=2*J-1
+	  JH=JW+1
+	  WE(J) = XYU(I0+JW)
+	  HE(J) = XYU(I0+JH)
+	END DO
+C------- bilancio entalpico
+	SUME=0.
+	SUMHE=0.
+	DO J= 1,NE
+	  IF(WE(J).GT.0.)            THEN
+	    SUME=SUME+WE(J)
+	    SUMHE=SUMHE+WE(J)*HE(J)
+	  ENDIF
+	END DO
+C----------------------------residui
+	RNI(1) = WNODO-SUME
+C
+	IF(KREGIM) THEN
+	  NEQMOD=2
+	  IF(ABS(SUME).LT.1.E-5) THEN
+	     RNI(2)=0.
+	  ELSE
+C            RNI(2) = HNODO*WNODO-SUMHE
+             RNI(2) = HNODO-SUMHE/SUME 
+	  ENDIF
+	ELSE
+	 NEQMOD=1
+	  IF(ABS(SUME).LT.1.E-5) THEN
+	     RNI(2)=HNODO
+	  ELSE
+	     RNI(2)=SUMHE/SUME
+	  ENDIF
+	ENDIF
+C---------------------- CASO DI PORTATE ENTRANTI NULLE
+C
+	IF(IFUN.EQ.2)RETURN
+C
+C---calcolo jacobiano ANALITICO
+C
+ 3000   CONTINUE
+       IF(KREGIM) THEN
+	 NEQMOD=2
+C
+CCCCCC A REGIME
+C
+C---------- EQUAZIONE ENERGIA
+C
+C____ PROTEZIONE PER PORTATE NULLE
+	  IF(ABS(SUME).LT.1.E-5) THEN
+	    AJAC(2,2)=-1.
+	    GO TO 3001
+	  ENDIF
+C
+	  AJAC(2,2)=-1.   
+	  AJAC(2,1)=-SUMHE/(SUME**2)
+	  K=2
+	  DO J = 1,NE
+	  K=K+1
+C--- DERIVATE RISPETTO ALLE PORTATE
+	  AJAC(2,K) = HE(J)/SUME 
+C--- DERIVATE RISPETTO ALLE ENTALPIE
+	  K=K+1
+	  AJAC(2,K) = WE(J)/SUME
+	  END DO
+C
+C---------- EQUAZIONE MASSA
+C
+ 3001   CONTINUE
+	  AJAC(1,1)=-1.
+C
+	  K=2
+	  DO J = 1,2*NE,2
+C--- DERIVATE RISPETTO ALLE PORTATE
+	  AJAC(1,K+J) = 1.
+	  END DO
+C
+
+      ELSE
+	NEQMOD=1
+C
+CCCCCC IN TRANSITORIO
+C
+C
+C---------- EQUAZIONE MASSA
+C
+	 AJAC(1,1)=-1.
+C
+	 K=2
+	 DO J = 1,2*NE,2
+C--- DERIVATE RISPETTO ALLE PORTATE
+	 AJAC(1,K+J) = 1.
+	 END DO
+C
+	ENDIF
+	RETURN
+	END
+CC
+      SUBROUTINE MIXND1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,
+     $   XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)
+      RETURN
+      END

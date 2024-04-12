@@ -1,0 +1,28 @@
+MIXN_0                                                                          
+MIXN                                                                            
+Miscelatore 2 ing                                                               
+                                                                                
+NSTAT = 0
+NUSCI = 2
+NINGR = 4
+ 
+NCONF = 1
+ 
+WMIX      --UA-- FLUID FLOW RATE AT THE MIXER OUTPUT                            
+HMIX      --UA-- FLUID ENTHALPY AT THE MIXER OUTPUT                             
+WE_1      --IN-- FLUID FLOW RATE AT THE INLET PIPE N.  1                        
+HE_1      --IN-- FLUID ENTHALPY AT THE INLET PIPE N.  1                         
+WE_2      --IN-- FLUID FLOW RATE AT THE INLET PIPE N.  2                        
+HE_2      --IN-- FLUID ENTHALPY AT THE INLET PIPE N.  2                         
+==============================                                                  
+EOF                                                                             
+3
+t2 0
+Hydraulic input
+WE_2 XXXX ____ ____ ____ HE_2 ____ HMIX
+t1 1
+Hydraulic output
+WMIX XXXX ____ ____ ____ HMIX ____ ____
+t0 0
+Hydraulic input
+WE_1 XXXX ____ ____ ____ HE_1 ____ HMIX

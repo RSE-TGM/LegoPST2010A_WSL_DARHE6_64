@@ -1,0 +1,15 @@
+ASOM_0                                                                          
+ASOM                                                                            
+ASOM - Two signals algebraic sum                                                
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 2
+ 
+NCONF = 1
+ 
+USOM      --UA-- ANALOG OUTPUT SIGNAL FROM THE ADDER                            
+I1SO      --IN-- INPUT SIGNAL 1 TO THE ADDER                                    
+I2SO      --IN-- INPUT SIGNAL 2 TO THE ADDER                                    
+==============================                                                  
+EOF                                                                             

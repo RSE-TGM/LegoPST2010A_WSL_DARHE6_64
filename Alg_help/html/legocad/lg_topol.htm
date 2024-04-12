@@ -1,0 +1,520 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>TOPOLOGY ACTIVITY</TITLE>
+<META NAME="subject" CONTENT="File Unificato Documentazione/Iperhelp">
+<META NAME="keywords" CONTENT="Topologia">
+<META NAME="doccomm" CONTENT="Tutto quanto riguarda l'attività topologia">
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_topology"></A>TOPOLOGY ACTIVITY</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This activity constitute the first step in model building.</P>
+<P ALIGN="JUSTIFY">The user create or modify the model internal structure using elementary </FONT><A HREF="lg_gloss.htm#lgc_gl_module"><U><FONT FACE="Arial" COLOR="#0000ff">modules</U></FONT></A><FONT FACE="Arial"> from the </FONT><A HREF="lg_gloss.htm#lgc_gl_proc_library"><U><FONT FACE="Arial" COLOR="#0000ff">process module library</U></FONT></A><FONT FACE="Arial">, instantiating them in the model (instantiated modules are called </FONT><A HREF="lg_gloss.htm#lgc_gl_block"><U><FONT FACE="Arial" COLOR="#0000ff">blocks</U></FONT></A><FONT FACE="Arial">).</P>
+<P ALIGN="JUSTIFY">Linkage between LEGO blocks are made connecting blocks' variables using the Variable Editor. </P>
+<P ALIGN="JUSTIFY">During topology activity the user can instantiate new blocks, connect variables, delete blocks or connections.</P>
+<P ALIGN="JUSTIFY">The build up of the topologic scheme can be performed according to two modalities: Symbolic diagram (with the help of graphics) and Only by list.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial" SIZE=6><P ALIGN="CENTER">HOW TO</P>
+</I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#lgc_tp_symb_d"><U><FONT FACE="Arial" COLOR="#0000ff">Use symbolic diagram modality</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2 </B></FONT><A HREF="#lgc_tp_filter"><U><FONT FACE="Arial" COLOR="#0000ff">Define filters</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3 </B></FONT><A HREF="#lgc_tp_obl"><U><FONT FACE="Arial" COLOR="#0000ff">Use only by list modality</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4 </B></FONT><A HREF="#lgc_tp_variable_editor"><U><FONT FACE="Arial" COLOR="#0000ff">Connect variables</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">5 </B></FONT><A HREF="#lgc_tp_modify_model"><U><FONT FACE="Arial" COLOR="#0000ff">Modify a model that already exists</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">6 </B></FONT><A HREF="#lgc_tp_instantiate"><U><FONT FACE="Arial" COLOR="#0000ff">Instantiate new blocks</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER">TOPOLOGY WINDOWS LAYOUT</P>
+</I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#lgc_tp_model_index_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Diagram page's index layout</U></FONT></A><FONT FACE="Arial"> (Only symbolic diagram modality)</P>
+<B><P ALIGN="JUSTIFY">2 </B></FONT><A HREF="#lgc_tp_model_diag_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Model diagram page layout</U></FONT></A><FONT FACE="Arial"> (Only symbolic diagram modality)</P>
+<B><P ALIGN="JUSTIFY">3 </B></FONT><A HREF="#lgc_tp_topology_editor_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Topology editor layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4 </B></FONT><A HREF="#lgc_tp_variable_editor_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Variable editor page layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">5</B> </FONT><A HREF="#lgc_tp_symb_instant_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Instantiation window layout (in symb. d.)</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">6</B> </FONT><A HREF="#lgc_tp_list_instant_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Instantiation window (in only by list)</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_tp_symb_d"></A>Topology: symbolic diagram</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In this modality the user can use a schematic representation of the plant as a worksheet for the construction/modification of the model structure. The model can be divided in multiple pages. The single page represents part of the model in terms of constituting blocks (shown as icons); using arrows, graphics symbols and labels the user can enhance information provided by the diagram.</P>
+<P ALIGN="JUSTIFY">Operations on blocks (such as blocks delete, modify description) are enabled when icons are selected. Selection can be performed in a graphical way (on the diagram page; graphic selection) or by selection in the scrolled list of blocks constituting the model (on topology editor page).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Topology activity shows two windows; see </FONT><A HREF="#lgc_tp_topology_editor_ly"><U><FONT FACE="Arial" COLOR="#0000ff">topology editor</U></FONT></A><FONT FACE="Arial"> and </FONT><A HREF="#lgc_tp_model_index_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">diagram page's index</U></FONT></A><FONT FACE="Arial"> for their layout. Through the diagram page's index is possible to open another window, i.e. </FONT><A HREF="#lgc_tp_model_diag_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">model diagram page</U></FONT></A><FONT FACE="Arial">. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Connection of variables is made by user selecting two blocks (icons in the diagram page or items in model blocks list on topology editor page) and then opening their </FONT><A HREF="#lgc_tp_variable_editor"><U><FONT FACE="Arial" COLOR="#0000ff">variable editors</U></FONT></A><FONT FACE="Arial">. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information on the page layout is available in:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_tp_model_index_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Diagram page's index layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2</B> </FONT><A HREF="#lgc_tp_topology_editor_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Topology editor layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3</B> </FONT><A HREF="#lgc_tp_model_diag_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Model diagram page layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4</B> </FONT><A HREF="#lgc_tp_variable_editor_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Variable editor page layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_tp_filter"></A>Topology: define filters</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Filters are a series of strings of max. 4 char. used for selectively visualize only a group of input (or output) variables using variable editor.</P>
+<P ALIGN="JUSTIFY">Filter editor is activated selecting main window's pulldown menu button Option | Define Filter.</P>
+<P ALIGN="JUSTIFY">The user can specify a filter name (that will be used as a label in variable editor Filter option menu) and specify up to 10 filter strings. </P>
+<P ALIGN="JUSTIFY">During Variable Editor filtering, are displayed only variables' names whose first <B>n</B> characters are equal to the <B>n</B> characters of one of the filter strings (where n is filter string's length). If you select a filter in Variable Editor's option menu input and output variables lists are updated accordingly (only variables accepted by the filter are displayed).</P>
+<P ALIGN="JUSTIFY">From main window's pulldown menu selection Option | Default filter the user can select which filter, from existing ones, may be applied when variable editor is called.</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_tp_obl"></A>Topology: only by list</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This modality creates topology schemes without the help of graphics using only model blocks's list.</P>
+<P ALIGN="JUSTIFY">This modality display only the </FONT><A HREF="#lgc_tp_topology_editor"><U><FONT FACE="Arial" COLOR="#0000ff">topology editor page</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">The researcher can connect blocks after selecting than in the topology editor page list by opening </FONT><A HREF="#lgc_tp_variable_editor"><U><FONT FACE="Arial" COLOR="#0000ff">variable editors</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information on the page layout is available in:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_tp_topology_editor_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Topology editor layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2</B> </FONT><A HREF="#lgc_tp_variable_editor_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Variable editor page layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_tp_variable_editor"></A>Topology: variable editor</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In order to connect variables related to two blocks, two variable editor (one for each block) windows must be opened. Variable editor must be opened when the block of interest is selected.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Variable editor shows two lists displaying block's input and output variables. If variables are connected a lock icon is displayed near the variable name.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Internal variable editor option allows the user to examine the name of corresponding connected variables of the other block (View menu) displayed directly below each name of the connected variables of edited block.</P>
+<P ALIGN="JUSTIFY">An option menu is also available to filter variable lists (Filter option menu) accordingly with user defined filters.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The connection is made by dragging (with mouse button 2) an input (or output) variable of a block and dropping it on an output (or input) variable of the other block.</P>
+<P ALIGN="JUSTIFY">Besides, LEGOCAD prevents incorrect operations such as more than one connection for every input variable, connections of variables belonging to the same block, connections of input/input and output/output variables.</P>
+<P ALIGN="JUSTIFY">Not homogeneous variable connections cause a warning.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Deleting a connection involves the following steps:</P>
+<P ALIGN="JUSTIFY">1 Select show connections option.</P>
+<P ALIGN="JUSTIFY">2 Select connected variable (of the other block; displayed below edited block's variable).</P>
+<P ALIGN="JUSTIFY">3 Delete connection (from Edit menu of Variable Editor)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information on the page layout is available in:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#lgc_tp_variable_editor_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Variable editor page layout</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_tp_modify_model"></A>Topology: modify a model</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">To modify an already existing model the user can work either with symbolic diagram modality or with the only by list modality.</P>
+<P ALIGN="JUSTIFY">If the researcher wants to work with a block it is necessary to select the block first.</P>
+<P ALIGN="JUSTIFY">After selection it is possible to modify or create new connections (see variable editor), to delete the block and to modify its description.</P>
+<P ALIGN="JUSTIFY">N.B: deletion of blocks in enabled only when no Variable Editors are opened.</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lgc_tp_instantiate"><U><FONT FACE="Arial" COLOR="#0000ff">Instantiation</U></FONT></A><FONT FACE="Arial"> of a new block is always permitted.</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_tp_instantiate"></A>Topology: block's instantiation</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">When a model has already been created the user can add new blocks in the model through instantiation.</P>
+<P ALIGN="JUSTIFY">To instantiate a new block two different windows related to select operating mode are displayed but the logical steps for the instantiation are the same:</P>
+<P ALIGN="JUSTIFY">*&#9;select module from a list</P>
+<P ALIGN="JUSTIFY">*&#9;assign </FONT><A HREF="#lgc_tp_block_name"><U><FONT FACE="Arial" COLOR="#0000ff">block name</U></FONT></A><FONT FACE="Arial"> and description</P>
+<P ALIGN="JUSTIFY">If symbolic diagram modality is selected one of the icons representing the module must be dragged and dropped (with second mouse button) on the diagram page window in the desired position.</P>
+<P ALIGN="JUSTIFY">To complete module instantiation for some LEGO modules you are asked for additional information (an instantiation dialog box pop-ups automatically). A question and answer sequence managed directly by the LEGO module is displayed; question are displayed into a scrolled text widget; answer must be edited in the text field below and confirmed activating the <B>send</B> button.</P>
+<P ALIGN="JUSTIFY">The instantiation windows layout are :</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_tp_symb_instant_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Instantiation window in symbolic diagram modality</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2</B> </FONT><A HREF="#lgc_tp_list_instant_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Instantiation window in only by list modality</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_tp_model_index_pg_ly"></A>Topology layout: diagram page's index</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Besides a menu bar and a popup menu, the diagram page's index contains a further scrolled window where boxes representing diagram pages are displayed. Boxes (i.e. pages) can be selected.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Page's selection enables the following menu selections: open, copy, new (creation), modify, delete. In particular, the open option shows a new window displaying the icons of the instantiated blocks.</P>
+<P ALIGN="JUSTIFY">Diagram page's index pulldown menu :</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=490>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial" SIZE=2>File</B></FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Save</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Saves diagram page's index information</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Load icons</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Updates icon information</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Quit</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Exits from the activity</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Edit</B></FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Open</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Opens for editing the diagram page selected.</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">New</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Creates a new page</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modify</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modifies name and description of a selected page</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Delete</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Deletes selected page (all blocks and graphical objects in the page are deleted)</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Snap</B></FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Set Snap</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Snap On/Off</FONT></TD>
+<TD WIDTH="76%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Enables or turn off the snap</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Popup menu associated with the selected macroblock:</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=78>
+<TR><TD VALIGN="TOP">
+<P ALIGN="JUSTIFY"><FONT FACE="Arial" SIZE=2>Open</FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">New</FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modify</FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Delete</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">These options are the same as the Edit's in the pulldown menu.</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_tp_topology_editor_ly"></A>Topology layout: topology editor</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The topology editor window displays the following areas:</P>
+<P ALIGN="JUSTIFY">Pulldown menu area:</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=392>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial" SIZE=2>File</B></FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Open</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Save</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Saves the topology</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Exit</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Exits from the topology activity</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Edit</B></FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">New</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Process Block</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Adds a new process block</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Regulation Block</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Adds a new regulation block</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Delete</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Deletes all selected blocks</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Variable</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Shows variable editor loaded with the variables of the block currently selected.</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Options</B></FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Set Default filter</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Define which filter is used when a variable editor is opened</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Define filter</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Create/modify filters</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Scrolled window area</P>
+</B><P ALIGN="JUSTIFY">Contains the list of the model's blocks </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="lg_gloss.htm#lgc_gl_find"><U><FONT FACE="Arial" COLOR="#0000ff">Find area</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">When a model is selected the following popup menu is available:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=490>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><FONT FACE="Arial" SIZE=2>Edit descr</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Allows to modify the name and description of a selected block</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Delete</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Deletes a selected block</FONT></TD>
+</TR>
+<TR><TD WIDTH="28%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Variables</FONT></TD>
+<TD WIDTH="72%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Popups the Variable Editor (editor for creating/deleting variables' connections) loaded with the block currently selected.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">A selection in this page selects the same blocks in the model diagram page.</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_tp_model_diag_pg_ly"></A>Topology layout: model diagram page</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Model diagram page shows a pulldown menu and a scrolled window which displayed the instantiated icons of the model. </P>
+<P ALIGN="JUSTIFY">Pulldown menu :</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=513>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial" SIZE=2>File</B></FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Close</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Closes the page</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Edit</B></FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Variable</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Shows a window with the selected block's variable </FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">New Block</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Process Block</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Adds a new process block</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Regulation Block</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Adds a new regulation block</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modify</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modifies name or description a selected block's icons.</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Delete</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Deletes all selected blocks</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Graphics</B></FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Add Symbol</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Adds a graphic symbol</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Add Remark</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Adds a remark</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Add Line</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Adds a line</FONT></TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Move</FONT></TD>
+<TD WIDTH="67%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Moves selected object</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The popup menu associated with the selected blocks (icons) has the same options as the Edit's in the pulldown menu.</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=91>
+<TR><TD VALIGN="TOP">
+<P ALIGN="JUSTIFY"><FONT FACE="Arial" SIZE=2>Variable</FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">New Block</FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modify</FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Delete</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Selection in this page selects the same block in the topology editor window. </P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_tp_variable_editor_pg_ly"></A>Topology layout: variable editor</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The variable editor page has the following areas :</P>
+<P ALIGN="JUSTIFY">Pulldown menu area:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=461>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial" SIZE=2>File</B></FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Load</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Loads a new block in variable editor; input and output variable lists are updated with variables belonging to block loaded.</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Close</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Closes the variable editor</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Edit</B></FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Show connection</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Shows the connections of the selected variable (i.e. the names of the external variables which are connected with the current block)</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Delete connection</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Deletes variable connection (the external variable name belonging to the connection must be selected).</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">View</B></FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Show input connection</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Shows the connections of all input variables</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Show output connection</FONT></TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Shows the connections of all output variables</FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="65%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Options menu area</P>
+</B><P ALIGN="JUSTIFY">Contains an option menu composed by the filters defined by the user. Selecting a filter affect variable displayed in input and output lists; only variables whose names begin with one of the filter strings are displayed.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Scrolled lists area</P>
+</B><P ALIGN="JUSTIFY">Contains the list of input and output variables. Lists are enabled for drag and drop between different variable editors (making a connection). When show connections option is enabled you can delete connections.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_tp_symb_instant_pg_ly"></A>Topology layout: instantiation window (symb.diag.)</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The window displayed has seven areas:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Title area</B> :</P>
+<P ALIGN="JUSTIFY">"new block creation"</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Scrolled window area</P>
+</B><P ALIGN="JUSTIFY">Contains the list of the available modules, the number of available associated icons and module's description</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Selection area</P>
+</B><P ALIGN="JUSTIFY">Contains an input text for the module name search and two arrow buttons for the direction of the search in the scrolled window</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Window area</P>
+</B><P ALIGN="JUSTIFY">Contains the icons associated with the module currently selected; from this window you can select (second mouse button) one of the icons and drag and drop it on the diagram page window. In this way an instantiation of the module is made (for some LEGO modules instantiation dialog follows for completing instantiation).</P>
+<B><P ALIGN="JUSTIFY">N.B.</B> instantiation is made only if you have specified in the input text area a not already used block name.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Input text area</P>
+</B><P ALIGN="JUSTIFY">featuring two input texts for name and description of the new block</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Confirmation push button area</B> </P>
+<P ALIGN="JUSTIFY">Contains approval and cancel push buttons </P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_tp_list_instant_pg_ly"></A>Topology layout: instantiation window (o.b.l.)</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The window displayed has five areas:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Scrolled window area</P>
+</B><P ALIGN="JUSTIFY">featuring the list of available modules</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Input text area: Block name</P><DIR>
+
+</B><P ALIGN="JUSTIFY">Insert here new block name (more correct Block Identifier). The block identifier is composed by four characters, and is used for the specification of the full block name that consist of two parts:</P></DIR>
+
+<P ALIGN="JUSTIFY">1) Module name (first four characters, fixed)</P>
+<P ALIGN="JUSTIFY">2) Block identifier (second four characters, assigned by the user)</P>
+<P ALIGN="JUSTIFY">The block identifier must not been already used is the current model in editing.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Input text area</P>
+</B><P ALIGN="JUSTIFY">for the new block description </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Input text area</P>
+</B><P ALIGN="JUSTIFY">for the name of the module that has to be searched for in the scrolled window.</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_tp_block_name"></A>Topology: block name</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">The block name consists of two parts :</P>
+<P ALIGN="JUSTIFY">1) Module name (first four characters, fixed)</P>
+<P ALIGN="JUSTIFY">2) Block identifier (second four characters, assigned by the user)</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_tp_topology_editor"></A>Topology: topology editor page</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">Contains the list of model's blocks in a scrolled window and a "</FONT><A HREF="lg_gloss.htm#lgc_gl_find"><U><FONT FACE="Arial" COLOR="#0000ff">Find area</U></FONT></A><FONT FACE="Arial">". A pulldown menu is provided for editing operations on selected blocks.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

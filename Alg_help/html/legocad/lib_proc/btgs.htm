@@ -1,0 +1,172 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE BTGS</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_BTGS_summ"></A>MODULE BTGS CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I><P>&nbsp;</P>
+</FONT><P><A HREF="#lg_libproc_BTGS_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P><A HREF="#lg_libproc_BTGS_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_BTGS_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_BTGS_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P><A HREF="#lg_libproc_BTGS_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_BTGS_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P><A HREF="#lg_libproc_BTGS_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_BTGS_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<B><I><FONT SIZE=4><P>&nbsp;</P>
+</I></FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_BTGS_A"></A>MODULE BTGS CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P>&nbsp;</P>
+<P ALIGN="CENTER">SYNGAS-FED TURBOGAS COMBUSTION CHAMBER</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The BTGS module simulates the thermal and chemical part of the combustion of natural gas mixed-syngas. It is devoted to the simulation of the combustion chamber of turbogas groups in turbogas plants, combined cycle plants and coal gasification plants.</P>
+<P>For the complete simulation of the combustion chamber is so needed the simulation of the other components and thermodynamical effects (head losses, pressure nodes and bypass and cooling channels) with the existing library modules for the simulation of compressed air subsystems (</FONT><A HREF="sera.htm#lg_libproc_SERA_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">SERA</U></FONT></A><FONT FACE="Arial, helvetica">, </FONT><A HREF="vain.htm#lg_libproc_VAIN_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">VAIN</U></FONT></A><FONT FACE="Arial, helvetica">, </FONT><A HREF="cmsc.htm#lg_libproc_CMSC_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">CMSC</U></FONT></A><FONT FACE="Arial, helvetica">, …).</P>
+<P>The module allows the simulation of the injection of steam in the combustion chamber (De-NOx steam) in case of natural gas functioning and the combustion of the coal gasification gas (mixed-syngas). Also it allows the correct simulation of the commutation transient from one kind of fuel to the other.</P>
+<P>The BTGS module performs the calculation of the flow rate, the temperature and the chemical composition of the flue gases at the combustion chamber outlet. In order to allow the correct simulation of the chemical composition, it is possible to mix to the flue gases air coming from bypass or cooling channels external to the chamber.</P>
+<P>The physical inlets of the BTGS module are five:</P>
+<P ALIGN="JUSTIFY">the combustive air;</P>
+<P ALIGN="JUSTIFY">the natural gas and steam mixture (DeNOx steam);</P>
+<P ALIGN="JUSTIFY">a second inlet of auxiliary natural gas;</P>
+<P ALIGN="JUSTIFY">the mixed-syngas;</P>
+<P ALIGN="JUSTIFY">the air coming from the bypass channels.</P>
+</FONT><P>&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>For each of these physical inlets are required the values of flow rate and temperature; for the natural gas mixture and steam is required also the mass fraction of natural gas; for the mixed-syngas is instead required the chemical composition (given as mass fractions of CO, H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">, CH</FONT><FONT FACE="Arial, helvetica" SIZE=1>4</FONT><FONT FACE="Arial, helvetica">, H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O and CO</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">: the mass fraction of N</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> is the complement to one).</P>
+<P>The physical outlet is one (corresponding to the turbine inlet). For this physical outlet the model supplies the flow rate, the temperature and the chemical composition of the flue gas. As in a turbogas there is always a considerable air excess, one may assume that the combustion is always complete. So the chemical composition of the flue gas is computed as mass fractions of CO</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">, H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O, O</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> and Ar (the mass fraction of N</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> is the complement to one).</P>
+<P>The module evaluates also the temperature before the bypass mixing, that should correspond to the maximum temperature in the combustion chamber. But the exact calculation of this quantity should take into account the kinetical-chemical effects of the combustion, which are not considered inside the BTGS module. Thus the supplied value must be intended in a qualitative manner.</P>
+<P>For the calculation and the conversion of the thermodynamical properties of all the fluids incoming and exiting is used the functions library devoted to the evaluation of the properties of gas mixtures (Tavsyngas library).</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_BTGS_B"></A>MODULE BTGS CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image269.gif" WIDTH=390 HEIGHT=466></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;&#9;WAIR&#9;&#9;Flow rate of combustive air at the comustion chamber inlet</P>
+<P ALIGN="JUSTIFY">[K] &#9;&#9;TAIR&#9;&#9;Temperature of combustive air at the combustion chamber inlet</P>
+<P ALIGN="JUSTIFY">[kg/s] &#9;&#9;WGAS&#9;Flow rate of natural gas and steam mixture at chamber inlet</P>
+<P ALIGN="JUSTIFY">[K] &#9;&#9;TGAS&#9;&#9;Temperature of natural gas and steam mixture at chamber inlet</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;XGAS&#9;&#9;Mass fraction of natural gas in the mixture</P>
+<P ALIGN="JUSTIFY">[kg/s] &#9;&#9;WAUX&#9;Flow rate of the natural gas through the auxiliary nozzles</P>
+<P ALIGN="JUSTIFY">[K] &#9;&#9;TAUX&#9;&#9;Temperature of the natural gas through the auxiliary nozzles</P>
+<P ALIGN="JUSTIFY">[kg/s] &#9;&#9;WBYP&#9;&#9;Flow rate of mixing air through the chamber bypass</P>
+<P ALIGN="JUSTIFY">[K] &#9;&#9;TBYP&#9;&#9;Temperature of mixing air through the chamber bypass</P>
+<P ALIGN="JUSTIFY">[kg/s] &#9;&#9;WMIX&#9;&#9;Flow rate of mixed-syngas at the combustion chamber inlet</P>
+<P ALIGN="JUSTIFY">[K] &#9;&#9;TMIX&#9;&#9;Temperature of mixed-syngas at the combustion chamber inlet</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;FCOM&#9;Mass fraction from CO in the incoming mixed-syngas</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;FH2M&#9;&#9;Mass fraction of H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in the incoming mixed-syngas</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;FCH4&#9;&#9;Mass fraction of CH</FONT><FONT FACE="Arial, helvetica" SIZE=1>4</FONT><FONT FACE="Arial, helvetica"> in the incoming mixed-syngas</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;FCO2&#9;&#9;Mass fraction of CO</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in the incoming mixed-syngas</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;FH2O&#9;&#9;Mass fraction of H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O in the incoming mixed-syngas</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;AUXN&#9;&#9;Corrective coefficient of the thermal power for the natural gas</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;AUXM&#9;&#9;Corrective coefficient of the thermal power for the mixed-syngas</P>
+<P ALIGN="JUSTIFY">[kg/s] &#9;&#9;WFUM&#9;Flow rate of flue gas at the combustion chamber outlet</P>
+<P ALIGN="JUSTIFY">[K] &#9;&#9;TFUM&#9;&#9;Temperature of the flue gas at the comb. chamber outlet</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;FFC2&#9;&#9;Mass fraction of CO</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in the flue gas at the chamber outlet</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;FFH2&#9;&#9;Mass fraction of H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O in the flue gas at the chamber outlet</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;FFO2&#9;&#9;Mass fraction of O</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in the flue gas at the chamber outlet</P>
+<P ALIGN="JUSTIFY">[ ] &#9;&#9;FFAR&#9;&#9;Mass fraction of Ar in the flue gas at the chamber outlet</P>
+<P ALIGN="JUSTIFY">[K] &#9;&#9;THOT&#9;&#9;Flue gases temperature before bypass air mixing</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT VARIABLES NORMALIZATION FACTORS</P>
+<P>&nbsp;</P>
+<P>Variables&#9;Normalization</P>
+<P>WAIR, WGAS, WAUX, WBYP, WMIX, WFUM&#9;W0</P>
+<P>TAIR, TGAS, TAUX, TBYP, TMIX, TFUM, THOT&#9;T0</P>
+<P>XGAS, AUXN, AUXM&#9;1.</P>
+<P>FCOM, FH2M, FCH4, FCO2, FH2O, FFC2, FFH2, FFO2, FFAR&#9;0.1</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_BTGS_C"></A>MODULE BTGS CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to initial values of BTGS module input and output variables (meanings defined above), user must assign the following data set to complete the module input on the file F14:</P>
+<P ALIGN="JUSTIFY">[ ] &#9;ETA&#9;&#9;comb&#9;Combustion efficiency&#9;</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;LHV met.&#9;LHV (low heat value) of the natural gas</P>
+<P ALIGN="JUSTIFY">[ ] &#9;X CnHxn&#9;Mean molar ratio hydrogen/carbon in the natural gas</P>
+<P ALIGN="JUSTIFY">[ ] &#9;Xm Inert&#9;Inerts mass fraction (assumed as N</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">) in the natural gas</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<B><P ALIGN="CENTER"><A NAME="lg_libproc_BTGS_D"></A>MODULE BTGS CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">To initialize the BTGS module variables on the file F14, no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_BTGS_E"></A>MODULE BTGS CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>No user subprograms are present in the BTGS module.</P>
+<P>The BTGS module makes use of the procedures contained in the syngas thermodynamic tables (TAVSYNGAS) which must be present in the user library.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_BTGS_F"></A>MODULE BTGS CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P>The equations forming the BTGS module mathematical model give rise to a set of residuals. Here only their correspondences with the output variables equations have been indicated, also mentioning the respective normalization factors. Further explanations are given in the related theoretical description.</P>
+<P ALIGN="JUSTIFY">1) RNI(1) - normalization factor = W0</P>
+<P ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas flow rate;</P>
+<P ALIGN="JUSTIFY">2) RNI(2) - normalization factor = T0</P>
+<P ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas temperature;</P>
+<P ALIGN="JUSTIFY">3) RNI(3) - normalization factor = 0.1</P>
+<P ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas chemical composition;</P>
+<P ALIGN="JUSTIFY">4) RNI(4) - normalization factor = 0.1</P>
+<P ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas chemical composition;</P>
+<P ALIGN="JUSTIFY">5) RNI(5) - normalization factor = 0.1</P>
+<P ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas chemical composition;</P>
+<P ALIGN="JUSTIFY">6) RNI(6) - normalization factor = 0.1</P>
+<P ALIGN="JUSTIFY">related to the combustion chamber outlet flue gas chemical composition;</P>
+<P ALIGN="JUSTIFY">7) RNI(7) - normalization factor = T0</P>
+<P ALIGN="JUSTIFY">related to the maximum flue gas temperature inside the chamber.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+</I></FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_BTGS_G"></A>MODULE BTGS CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE BTGSI3 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO,IOB,DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE BTGSI2 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE BTGSC1 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE BTGS</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE BTGSD1 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_BTGS_H"></A>MODULE BTGS CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are reported in the user manual section devoted to the examples developed under the abbreviation:</P>
+<P ALIGN="CENTER">"........." </P>
+</FONT><P>&nbsp;</P></BODY>
+</HTML>

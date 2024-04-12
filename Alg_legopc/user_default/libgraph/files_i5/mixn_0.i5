@@ -1,0 +1,33 @@
+MIXN
+
+Miscelatore 2 ing                                                               
+3
+1
+
+t2
+WE_2 XXXX ____ ____ ____ HE_2 ____ HMIX 
+1 2 0 0 0 1 0 -1 
+t1
+WMIX XXXX ____ ____ ____ HMIX ____ ____ 
+1 2 0 0 0 1 0 0 
+t0
+WE_1 XXXX ____ ____ ____ HE_1 ____ HMIX 
+1 2 0 0 0 1 0 -1 
+
+0
+2
+4
+
+WMIX UA
+FLUID FLOW RATE AT THE MIXER OUTPUT                            
+HMIX UA
+FLUID ENTHALPY AT THE MIXER OUTPUT                             
+WE_1 IN
+FLUID FLOW RATE AT THE INLET PIPE N.  1                        
+HE_1 IN
+FLUID ENTHALPY AT THE INLET PIPE N.  1                         
+WE_2 IN
+FLUID FLOW RATE AT THE INLET PIPE N.  2                        
+HE_2 IN
+FLUID ENTHALPY AT THE INLET PIPE N.  2                         
+

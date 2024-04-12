@@ -1,0 +1,42 @@
+BRTT_3                                                                          
+BRTT                                                                            
+BRTT - Gas turbine cobustor chamber                                             
+                                                                                
+NSTAT = 0
+NUSCI = 7
+NINGR = 7
+ 
+NCONF = 1
+ 
+WFUM      --UA-- FLUE GASES FLOW RATE AFTER BYPASS AIX MIXING                   
+TFUM      --UA-- FLUE GASES TEMPERATURE AFTER BYPASS AIX MIXING                 
+THOT      --UA-- FLUE GASES TEMPERATURE IN THE HOT CHAMBER                      
+XCOM      --UA-- FUEL/AIR MASS RATIO (FLUE GAS CHEM. COMP.)                     
+XH2O      --UA-- H2O/AIR MASS RATIO (FLUE GAS CHEM. COMP.)                      
+XXCH      --UA-- H/C MOLAR RATIO (FUEL MEAN CHEM. COMP.)                        
+ZMN2      --UA-- INERT MASS RATIO (FUEL MEAN CHEM. COMP.)                       
+WAIR      --IN-- AIR FLOW RATE AT COMBUSTION CHAMBER INLET                      
+TAIR      --IN-- AIR TEMPERATURE AT COMBUSTION CHAMBER INLET                    
+WBYP      --IN-- AIR FLOW RATE THROUGH THE CHAMBER BYPASS                       
+TBYP      --IN-- AIR TEMPERATURE THROUGH THE CHAMBER BYPASS                     
+WCO1      --IN-- FUEL 1 FLOW RATE AT COMBUSTION CHAMBER INLET                   
+TCO1      --IN-- FUEL 1 TEMPERATURE AT COMBUSTION CHAMBER INLET                 
+JFLA      --IN-- COMBUSTION CHAMBER IGNITION FLAG (1.=ON, 0.=OFF)               
+==============================                                                  
+EOF                                                                             
+5
+t0 4
+INGRESSO IDR. FUMI
+WAIR PPPP TAIR ____ ____ ____ ____ ____
+t1 4
+INGRESSO IDR. FUMI
+WCO1 PPPP TCO1 ____ ____ ____ ____ ____
+t3 4
+INGRESSO IDR. FUMI
+WBYP PPPP TBYP ____ ____ ____ ____ ____
+t2 5
+USCITA IDR. FUMI
+WFUM PPPP TFUM ____ XCOM XH2O XXCH ZMN2
+t4 6
+INGRESSO ATTUAZIONE
+JFLA

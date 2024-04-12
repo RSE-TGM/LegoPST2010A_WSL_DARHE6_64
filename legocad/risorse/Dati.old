@@ -1,0 +1,35 @@
+
+!	dati_mainWS.rf
+!	This resource file is loaded by dati_mainWS.c
+
+*.dati_mainWS.keyboardFocusPolicy: explicit
+
+*.workAreaFrame.topOffset: 10
+*.workAreaFrame.rightOffset: 10
+*.workAreaFrame.leftOffset: 10
+*.workAreaFrame.bottomOffset: 10
+*XmScrolledWindow.background: #50A0A0
+*XmFileSelectionBox.background: #50A0A0
+*XmTextField.background: #FFFAF0
+*XmText.background:  #FFFAF0
+*XmTextField.background:  #FFFAF0
+*XmMessageBox.background: #50A0A0
+*background: 	#FAEBD7
+
+!!!! Defaults per macro
+!macro*fontList:-adobe-helvetica-bold-r-normal--14-100-100-100-p-82-iso8859-1
+
+*icon_label*fontList:              fixed
+*Macro_label*fontList:             Rom14
+*Remark_label*fontList:            TimBI14
+*Lista_moduli*fontList:            9x15
+*Text*fontList:                    Rom14
+
+!macro*background:                       orange
+
+dati*Pagina_indice*background:         #1996ab6de646
+dati*Scroll_index*background:          #1996ab6de646
+dati*Finestra_blocchi*background:      #1996ab6de646
+dati*Simboli*background:               #1996ab6de646
+dati*Scroll_simboli*background:        #1996ab6de646
+

@@ -1,0 +1,267 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE VALV</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VALV_summ"></A>MODULE VALV&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I><P>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VALV_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VALV_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VALV_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VALV_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VALV_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VALV_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VALV_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VALV_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_VALV_A"></A>MODULE VALV&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial"><P ALIGN="CENTER">STEAM-WATER VALVE</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The VALV module simulates different types of valve which can be present in a plant.</P>
+<P>The following mathematical models, mentioned in a decreasing order of complexity, are included in the module:</P>
+<P ALIGN="JUSTIFY">1) Moody-Morris based on Moody correlation (critical flowing) and Morris correlation (sub-critical flowing)</P>
+<P ALIGN="JUSTIFY">2) CADIPO deriving from dimensioning equations of valves proposed by ISA</P>
+<P ALIGN="JUSTIFY">3) Simplified model merely assumes a quadratic relation between delta pressure at the valve inlet and outlet sides and the flow rate flowing through it. In case the outlet actual pressure is lower than the critical one (sonic valves), in the flow rate calculation the critical pressure is used as outlet pressure.</P>
+<P>&nbsp;</P>
+<P>With the models 2) and 3) also check valves are representable. They allow to nullify the flow rate when, on the two sides of the valve, it is lower than DP.CHIU prefixed value included in the data (see below). They allow again the flow when the delta pressure is higher than DP.APER.</P>
+<P>These models are based on the following main hypotheses:</P>
+<P ALIGN="JUSTIFY">- thermal capacity of valve metal is negligible</P>
+<P ALIGN="JUSTIFY">- isenthalpic thermodynamic transformation of fluid inside the valve</P>
+<P ALIGN="JUSTIFY">- absence of fluid accumulation inside the valve.</P>
+<P>It is useful to note that also back-flow can be represented. Nevertheless, since fluid enthalpy is always considered by module on the inlet side, it is possible that the obtained results do not correspond to the physical reality.</P>
+<P>Choice of one module rather than another is made assigning a suitable value to the COD. parameter required in input (see below).</P>
+<P>In order to choose the most adequate model for user's needs and to allow its more correct use, some suggestions are given:</P>
+<P ALIGN="JUSTIFY">- The simplified model requires a shorter calculation time than other ones, but it is less sophisticated. Its use is advisable in simulating regulating valves since, because of control system feedback, possible inaccuracies on flow rate calculation particularly affect the valve opening degree. On the contrary, these inaccuracies have a limited influence on the plant thermohydraulic variables tendencies. Utilization of this module is inadvisable in safety valves simulation. In fact, without regulation 2feedback, these valves cause a possible error on flow calculation to affect the whole plant.</P>
+<P ALIGN="JUSTIFY">- The CADIPO model is able to cover, with a good precision degree, a very wide part of the VALV module application including safety valves simulation.</P>
+<P ALIGN="JUSTIFY">- The Moody-Morris model has a higher precision degree than the CADIPO model. It is particularly suitable to represent flows caused by little or big pipe burst.</P>
+<P ALIGN="JUSTIFY">- All models are able to deal with both single-phase and two-phase liquids. Nevertheless for a two phase liquid it is advisable the Moody-Morris model which is more precise.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VALV_B"></A>MODULE VALV&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module can be interconnected to other ones following three methods:</P>
+<P ALIGN="JUSTIFY">1) output in flow rate</P>
+<P ALIGN="JUSTIFY">prescription about block name: none</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image429.gif" WIDTH=379 HEIGHT=114></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">2) output in inlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block name: preceded by '+' sign</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image430.gif" WIDTH=379 HEIGHT=114></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">3) output in outlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block name: preceded by '-' sign</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image431.gif" WIDTH=379 HEIGHT=114></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial"><P>[Pa]&#9;PIVA&#9;&#9;valve inlet pressure</P>
+<P>[Pa]&#9;PUVA&#9;&#9;valve outlet pressure</P>
+<P>[J/kg]&#9;HVAL&#9;&#9;fluid enthalpy at the valve inlet</P>
+<P>[p.u.]&#9;ALZA&#9;&#9;valve opening degree</P>
+<P>[kg/s]&#9;WVAL&#9;&#9;fluid flow rate</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_VALV_C"></A>MODULE VALV&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Meanings of the required data in VALV module input:</P>
+<P>[ ]&#9;ALFA&#9;coefficient used to define the valve characteristic, that is the cross section area variation law as a &#9;function of ALZA opening &#9;&#9;&#9;degree following the formula:<BR>
+&#9;&#9;AREA = ALZA**ALFA<BR>
+&#9;&#9;AREA is normalized as regards to the valve cross section area when the valve is fully opened. If user knows the manufacturer &#9;&#9;&#9;valve characteristic, this can be assigned through the function AVNS10(ALZA, ALFA) (see below). In this case to ALFA must &#9;&#9;&#9;be assigned any value &gt; 10.</P>
+<P>[ ]&#9;CFA&#9;valve recovery coefficient with fully opened valve (ALZA = 1). Typical value CFA = 0.85. This coefficient is calculated as a &#9;&#9;&#9;function of ALZA and CFA following the law:<BR>
+&#9;&#9;CF(ALZA) = CFA+(1.-CFA)*(1.-A(ALZA))²<BR>
+&#9;&#9;where A(ALZA) is the normalized cross section area. For CFA &gt; 10 the CF variation law is assigned by user through the &#9;&#9;&#9;function CFNS10 (ALZA, A, CFA) (see below).</P>
+<P>[ ]&#9;COD.&#9;parameter for selection of mathematical model to use and type of valve to simulate. Depending on the value assigned to this &#9;&#9;&#9;parameter, several options in accordance with below mentioned scheme are:</P>
+<P>&#9;&#9;COD. &lt; 0.&#9;the valve is simulated through the Moody-Morris model using the valve calculated by the CADIPO &#9;&#9;&#9;&#9;&#9;model as cross section area</P>
+<P>&#9;&#9;0. &lt; COD. &lt; 1.&#9;the valve is simulated through the Moody-Morris model giving the COD value to the &#9;&#9;&#9;&#9;&#9;&#9;normalized cross section area</P>
+<P>&#9;&#9;COD. = 0.&#9;the valve is simulated through the CADIPO model</P>
+<P>&#9;&#9;COD. = 1.&#9;the valve is simulated through the CADIPO model with check valve positioned downstream</P>
+<P>&#9;&#9;COD. = 2.&#9;the valve is simulated through the not sonic simplified model</P>
+<P>&#9;&#9;COD. = 3.&#9;the valve is simulated through the not sonic simplified model with check valve positioned downstream</P>
+<P>&#9;&#9;COD. = 4.&#9;the valve is simulated through the sonic simplified model</P>
+<P>&#9;&#9;COD. = 5.&#9;the valve is simulated through the sonic simplified model with check valve positioned downstream</P>
+<P>[gal/min*psi^½]&#9;CVA&#9;identification coefficient of valve working point</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P>If this datum is not available, user leaves the related space blank and provides the following data referred to a known valve functioning point:</P>
+<P>[kg/s]&#9;PORTATA&#9;flow rate</P>
+<P>[Pa]&#9;P1 MONTE&#9;valve inlet pressure</P>
+<P>[Pa]&#9;P2 VALLE&#9;valve outlet pressure</P>
+<P>[J/kg]&#9;ENTALPIA&#9;valve inlet enthalpy</P>
+<P>[p.u.]&#9;CORSA&#9;ALZA value related to the assigned working point.</P>
+<P>If chosen valve admits the presence of a check valve downstream it, user must provide the DP values which provoke valve closing and opening.</P>
+<P>[Pa]&#9;DP.APER&#9;differential pressure provoking valve opening</P>
+<P>[Pa]&#9;DP.CHIU&#9;differential pressure provoking valve opening.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VALV_D"></A>MODULE VALV&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the VALV module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VALV_E"></A>MODULE VALV&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To assign valve characteristic (if user knows its data provided by the manufacturer) it is necessary a subprogram whose declarative statement is:</P>
+<P>FUNCTION AVNS10(ALZA, ALFA)</P>
+<P ALIGN="JUSTIFY">Input parameters: ALZA, ALFA</P>
+<P ALIGN="JUSTIFY">Output parameters: AVNS10</P>
+<P>[p.u.]&#9;ALZA&#9;&#9;valve opening degree</P>
+<P>[ ]&#9;ALFA&#9;&#9;(&gt; 10) parameter, coming from input data. It can be used as choice index in case user has to introduce several &#9;&#9;&#9;&#9;&#9;characteristics through the only one function:</P>
+<P ALIGN="CENTER">AVNS10(ALZA, ALFA)</P>
+<P>[p.u.]&#9;AVNS10&#9;value of calculation cross section area. This value has to be normalized as regards to the cross section area of a fully &#9;&#9;&#9;&#9;opened valve.</P>
+<P>Example of characteristic assigned in points:</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+<P>FUNCTION AVNS10(Z,ALFA)</P>
+<P>DIMENSION X1(12),Y1(12)</P>
+<P>DATA X1/0.,.1,.2,.3,.4,.5,.6,.7,.8,.9,1.,1.2/</P>
+<P>DATA Y1/.0,.035,.085,.13,.18,.24,..32,.42,.55,.7,1.,1./</P>
+<P>C</P>
+<P>C CHARACTERISTICS CV=FUNCTION OF VALVE OPENING DEGREE</P>
+<P>C</P>
+<P>IALF=ALFA-10.</P>
+<P>GO TO (1,100),IALF</P>
+<P>C</P>
+<P>C CHARACTERISTIC FCV OF RECIRCULATION</P>
+<P>C</P>
+<P>1 CALL AVNSIN(Z,X1,Y1,12,A)</P>
+<P>AVNS10=A</P>
+<P>GO TO 500</P>
+<P>C</P>
+<P>100 CONTINUE</P>
+<P>500 RETURN</P>
+<P>END</P>
+<P>SUBROUTINE AVNSIN(Z,X,Y,NP,A)</P>
+<P>DIMENSION X(1),Y(1)</P>
+<P>C</P>
+<P>C INTERPOLATION</P>
+<P>C</P>
+<P>DO 10 I=1,NP-1</P>
+<P>J=I</P>
+<P>IF(Z.GE.X(J).AND.Z.LE.X(J+1))GO TO 15</P>
+<P>10 CONTINUE</P>
+<P>A=0.</P>
+<P>GO TO 20</P>
+<P>15 A=Y(J)+(Z-X(J))*(Y(J+1)-Y(J))/(X(J+1)-X(J))</P>
+<P>20 RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial"><P>User has also the possibility to assign the variation law of valve recovery coefficient through the user subprogram:</P>
+<P>&nbsp;</P>
+<P>FUNCTION CFNS10(ALZA, A, CFA)</P>
+<P ALIGN="JUSTIFY">Input parameters: ALZA, A, CFA</P>
+<P ALIGN="JUSTIFY">Output parameters: CFNS10</P>
+<P>[p.u.]&#9;ALZA&#9;&#9;valve opening degree</P>
+<P>[p.u.]&#9;A&#9;&#9;normalized cross section area</P>
+<P>[ ]&#9;CFA&#9;&#9;(&gt;10) parameter coming from input data. It can be used as choice index in case user has to assign several variation &#9;&#9;&#9;&#9;laws of recovery coefficient through the only one function:</P>
+<P ALIGN="CENTER">CFNS10(ALZA, A, CFA).</P>
+<P>[ ]&#9;CFNS10&#9;value of calculated recovery coefficient.</P>
+<P>Example of recovery coefficient assigned through the function:</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+<P>FUNCTION CFNS10(Z, A, CFA)</P>
+<P>C IMPLICIT REAL*8 (A-H, O-Z)</P>
+<P>CFNS = 0.95</P>
+<P>RETURN</P>
+<P ALIGN="JUSTIFY">END</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VALV_F"></A>MODULE VALV&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module has only one residual related to the calculation of the flow rate flowing through the valve. It can be formally written as:</P>
+<P>RNI(1) = f(WVAL, PIVA, PUVA, ALZA)</P>
+<P>The variables which appear at the second member have physical meaning already defined in the related section on topological data.</P>
+<P ALIGN="JUSTIFY">The residual is normalized as regards to the flow rate W0.</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VALV_G"></A>MODULE VALV&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>SUBROUTINE VALVI3</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE VALVI4</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE VALVI2</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial" SIZE=2>IBLOC1, IBLOC2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE VALVC1</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ </B></FONT><FONT FACE="Arial">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial" SIZE=2>IBLOC1, IBLOC2)</P>
+<P>&nbsp;</P>
+<P>FUNCTION CA10</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(W, P1, P2, H, Z, ALFA, CFA)</P>
+<P>&nbsp;</P>
+<P>FUNCTION CADI10</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(P1, H1, P2, Z, CA, ALFA, CFA)</P>
+<P>&nbsp;</P>
+<P>FUNCTION R1VL10</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(R2, R3, R4, CF, CA)</P>
+<P>&nbsp;</P>
+<P>FUNCTION R1WT10</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(R2, R3, R4, CF, CA)</P>
+<P>&nbsp;</P>
+<P>FUNCTION R1VP10</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(R2, R3, R4, CF, CA)</P>
+<P>&nbsp;</P>
+<P>FUNCTION AVAL10</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2> (Z, ALFA)</P>
+<P>&nbsp;</P>
+<P>FUNCTION CFNS10</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2> (Z, A, CFA)</P>
+<P>&nbsp;</P>
+<P>FUNCTION CFVA10</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2> (Z, A, CFA)</P>
+<P>&nbsp;</P>
+<P>FUNCTION R1CISE</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2> (P1, H1, P2, CA, A, CF)</P>
+<P>&nbsp;</P>
+<P>FUNCTION MOODY</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2> (P1, H1)</P>
+<P>&nbsp;</P>
+<P>FUNCTION MORRIS</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2> (P1, H1, P2, CA, A)</P>
+<P>&nbsp;</P>
+<P>FUNCTION AEFFL</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2> (CA, CFA)</P>
+<P>&nbsp;</P>
+<P>FUNCTION AVNS10</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2> (Z, ALFA)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE AVNSIN</B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2> (Z, X, Y, NP, A)</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VALV_H"></A>MODULE VALV&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the user manual section dedicated to the examples developed under the abbreviations:</P>
+<P ALIGN="CENTER">"CONDENSA"</P>
+<P ALIGN="CENTER">"CODEQUI"</P>
+<P ALIGN="CENTER">"MOTORE"</P>
+<P ALIGN="CENTER">"POMPE"</P>
+<P ALIGN="CENTER">"TURBINA"</P></FONT></BODY>
+</HTML>

@@ -1,0 +1,4508 @@
+!******************************************************************************
+! modulo monit.uil
+! tipo 
+! release 5.2
+! data 96/03/18
+! reserver @(#)monit.uil	5.2
+!******************************************************************************
+!******************************************************************************
+! MONIT.UIL
+!     file .uil per l'applicativo monit
+!******************************************************************************
+
+module monit
+        version = 'v2.0'
+        names = case_sensitive
+
+objects = {
+          XmSeparator = gadget ;
+          }
+
+!
+! Callbacks functions utilizzate
+!
+
+include file 'XmAppl.uil';
+
+procedure
+	create_proc(integer);
+	initialize_proc(integer);
+	run_proc(integer);
+	freeze_proc(integer);
+	backtrack_proc(integer);
+	replay_proc(integer);
+	clear_proc(integer);
+	set_ftime_proc(integer);
+	stop_proc(integer);
+	quit_proc(integer);
+	timescaling_proc(integer);
+	stepscaling_proc(integer);
+	stepcr_proc(integer);
+	confcr_proc(integer);
+	confcrall_proc(integer);
+	load_proc(integer);
+	save_proc(integer);
+	edit_proc(integer);
+	statistics_proc(integer);
+	procstat_proc(integer);
+	input_proc(integer);
+	inputstat_proc(integer);
+	editpert_proc(integer);
+	go_proc(integer);
+	graphics_proc(integer);
+	about_proc(integer);
+	monit_stat(integer);
+	seleziona_var (integer);
+        seleziona_activate (integer);
+        paste_var_selez (integer);
+        seleziona_file     (integer);
+        salva_file    (integer);
+	seleziona_snapshot(integer);
+        seleziona_backtrack(integer);
+	snapshot_activate(integer);
+        backtrack_activate(integer);
+	seleziona_pert     (integer);
+        seleziona_pert_activate (integer);
+        seleziona_staz(integer);
+        activate_staz(integer);
+	seleziona_inputstat(integer);
+	seleziona_inputstat_activate(integer);
+	seleziona_editpert(integer);
+	seleziona_editpert_activate(integer);
+	clear_list_proc(integer);
+	data_proc(integer);
+        seleziona_data(integer);
+        seleziona_editdata_activate(integer);
+	override_allineamento(integer);
+        help_proc(integer);
+        malf_proc(integer);
+        frem_proc(integer);
+
+
+
+!
+!       Costanti per il riconoscimento delle XmDrawingArea nelle callbacks
+!       functions.
+!
+
+value
+
+! Menu' stato
+	k_stato_label		:'Control';
+	k_initialize_label	:'Initialize';
+	k_run_label		:'Run';
+	k_freeze_label		:'Freeze';
+	k_backtrack_label	:'Backtrack';
+        k_replay_label          :'Start';
+        k_stop_replay_label     :'Stop';
+	k_clear_label		:'Clear';
+	k_stop_label		:'Stop';
+	k_quit_label		:'Quit';
+
+! Menu' configure
+	k_configure_label	:'Configure';
+	k_timescaling_label	:'Time scaling';
+	k_stepscaling_label	:'Step scaling';
+	k_stepcr_label		:'Step continuos recording';
+	k_conflg_label		:'Select variables for legograf';
+	k_confcr_label		:'Configure continuos recording';
+	k_set_ftime_label	:'Set max simulation time';
+
+! Menu'  C.I.
+	k_ci_label		:'Initial Condition';
+	k_load_label		:'Load initial condition';
+	k_save_label		:'Save initial condition';
+	k_edit_label		:'Edit initial condition';
+
+! Menu' Statistics
+	k_statistics_label	:'Statistics';
+	k_procstat_label	:'Process stat';
+
+! Menu' Input
+	k_input_label		:'Input';
+
+! Menu' Graphics
+	k_graphics_label		:'Graphics';
+
+! Menu' backtrack
+        k_bt_menu_label         :'Modi';
+        k_bt_help_label         :'Help';
+        k_bt_help_funzioni_label:'Funzioni';
+        k_bt_direction_label    :'Direzione ';
+        k_bt_automan_label      :'Auto/Man  ';
+        k_bt_configure_label    :'Configure ';
+        k_bt_conf_label         :'Variabili ';
+!       k_stato_bt_label        :'Stato';
+        k_stato_bt_label        :'Replay';
+        k_modo_bt_label         :'Modo';
+        k_modo_bt_val_label     :'manuale';
+        k_direz_bt_label        :'Direzione';
+        k_direz_bt_val_label    :'indietro';
+        k_limiti_bt_label       :'Limiti sessione';
+        k_limiti_bt_val_label   :' ';
+        k_lastrec_bt_label      :'Ultimo registrato';
+        k_lastrec_bt_val_label  :'0';
+        k_lastload_bt_label     :'Ultimo caricato';
+        k_lastload_bt_val_label :'0';
+        k_nextstep_bt_label     :'Prossimo step';
+        k_nextstep_bt_val_label :'0';
+
+!  menu' malfunzioni e funzioni remote
+        k_mf_fr_label           :'Mf & Fr';
+        k_malf_label            :'Malfunzioni';
+        k_frem_label            :'Funz. remote';
+
+!
+!  stringhe di testo  per visualizzazione valori correnti
+!
+        k_tempo_sim_label                : 'Simulation time';
+        k_tempo_sim_val_label            : '0.0';
+        k_timescaling_sim_label             : 'Simulation speed';
+        k_timescaling_sim_val_label         : '0.0';
+        k_grandezze_mem_label            : 'Number var. C.R.';
+        k_grandezze_mem_val_label        : '0';
+        k_passo_reg_label                : 'Step C.R.';
+        k_passo_reg_val_label            : '1.0';
+        k_tempo_reale_label              : 'Real time';
+        k_tempo_reale_val_label          : '0.0';
+        k_tempo_ritardo_label            : 'Delay time';
+        k_tempo_ritardo_val_label        : '0.0';
+        k_tempo_simMB_label              : 'Simulation time/MB';
+        k_tempo_simMB_val_label          : '0';
+        k_spazio_dsk_label               : 'Free disk space (MB)';
+        k_spazio_dsk_val_label           : '0';
+        k_stato_iniz_label               : 'STOP';
+        k_stepscaling_sim_label             : 'Integration step';
+        k_stepscaling_sim_val_label         : '1.0';
+        k_endtime_sim_label             : 'Max simulation time';
+        k_endtime_sim_val_label         : 'none';
+	k_clear_list_label		: 'Clear list';
+	k_modify_data_label		: 'Modify data';
+
+!
+! Costanti per il riconoscimento delle XmLabel dei menu:
+! vengono utilizzate per attivare/disattivare le voci
+! dei menu stessi.
+!
+
+k_stato                         :  1;
+k_initialize                    :  2;
+k_run                           :  3;
+k_freeze                        :  4;
+k_step                          :  5;
+k_backtrack                     :  6;
+k_replay                        :  7;
+k_stop                          :  8;
+k_quit                          :  9;
+k_configure                     : 10;
+k_timescaling                   : 11;
+k_stepcr                        : 12;
+k_confcr                        : 13;
+k_set_ftime                     : 14;
+k_ci                            : 15;
+k_load                          : 16;
+k_save                          : 17;
+k_edit                          : 18;
+k_statistics                    : 19;
+k_input                         : 20;
+k_go                            : 21;
+k_tempo_sim                     : 22;
+k_tempo_sim_val                 : 23;
+k_timescaling_sim               : 24;
+k_timescaling_sim_val           : 25;
+k_grandezze_mem                 : 26;
+k_grandezze_mem_val             : 27;
+k_passo_reg                     : 28;
+k_passo_reg_val                 : 29;
+k_tempo_reale                   : 30;
+k_tempo_reale_val               : 31;
+k_tempo_ritardo                 : 32;
+k_tempo_ritardo_val             : 33;
+k_tempo_simMB                   : 34;
+k_tempo_simMB_val               : 35;
+k_spazio_dsk                    : 36;
+k_spazio_dsk_val                : 37;
+k_stato_sim                     : 38;
+k_stato_sim_val                 : 39;
+k_messaggi                      : 40;
+k_statistica_dialog             : 41;
+k_statistica_dialog_fine        : 42;
+k_statistica_window             : 43;
+k_timescaling_dialog            : 44;
+k_timescaling_dialog_ok         : 45;
+k_timescaling_dialog_annulla    : 46;
+k_timescaling_dialog_label      : 47;
+k_timescaling_dialog_text       : 48;
+k_stepcr_dialog                 : 49;
+k_stepcr_dialog_ok              : 50;
+k_stepcr_dialog_annulla         : 51;
+k_stepcr_dialog_label           : 52;
+k_stepcr_dialog_text            : 53;
+k_salva_file_dialog             : 54;
+k_salva_file_dialog_ok          : 55;
+k_salva_file_dialog_annulla     : 56;
+k_salva_file_dialog_label1      : 57;
+k_elenco_variabili_dialog       : 58;
+k_elenco_variabili_dialog_ok    : 59;
+k_elenco_variabili              : 60;
+k_elenco_variabili_sel          : 61;
+k_elenco_modelli                : 62;
+k_elenco_blocchi                : 63;
+k_elenco_variabili_aggiungi     : 64;
+k_elenco_variabili_elimina      : 65;
+k_elenco_variabili_carica       : 66;
+k_elenco_variabili_salva        : 67;
+k_elenco_variabili_annulla      : 68;
+k_elenco_variabili_dialog_label : 69;
+k_salva_file_dialog_text        : 70;
+k_elenco_variabili_descr        : 71;
+k_elenco_variabili_autore       : 72;
+k_elenco_variabili_versione     : 73;
+k_elenco_variabili_modello      : 74;
+k_selezione_file_dialog         : 75;
+k_elenco_variabili_label        : 76;
+k_elenco_variabili_sel_label    : 77;
+k_elenco_variabili_cerca_avanti : 78;
+k_elenco_variabili_cerca_ind    : 79;
+k_elenco_variabili_text_cerca   : 80;
+k_caricamento_dialog            : 81;
+k_caricamento_label             : 82;
+k_caricamento_lista             : 83;
+k_caricamento_ok                : 84;
+k_caricamento_annulla           : 85;
+k_editing_dialog                : 86;
+k_editing_label                 : 87;
+k_editing_fine                  : 88;
+k_editing_cancella              : 89;
+k_editing_lista                 : 90;
+k_scrittura_dialog              : 91;
+k_scrittura_label               : 92;
+k_scrittura_text                : 93;
+k_scrittura_ok                  : 94;
+k_scrittura_annulla             : 95;
+k_elenco_pert_dialog            : 96;
+k_elenco_pert_ok                : 97;
+k_elenco_pert_fine              : 98;
+k_elenco_ingressi               : 99;
+k_elenco_modelli_pert           :100;
+k_elenco_blocchi_pert           :101;
+k_elenco_pert_dialog_label      :102;
+k_elenco_ingressi_label         :103;
+k_elenco_pert_cerca_avanti      :104;
+k_elenco_pert_cerca_ind         :105;
+k_elenco_pert_text_cerca        :106;
+k_staz_dialog                   :107;
+k_staz_label                    :108;
+k_staz_lista                    :109;
+k_staz_ok                       :110;
+k_staz_annulla                  :111;
+k_staz_button                   :112;
+k_conflg                        :113;
+k_elenco_variabili_nu_var_sel   :114;
+k_clear                         :115;
+k_inputstat	                :116;
+k_inputstat_quit                :117;
+k_inputstat_dialog              :118;
+k_inputstat_label_1             :119;
+k_inputstat_label_2             :120;
+k_inputstat_lista_1             :121;
+k_inputstat_lista_2             :122;
+k_inputstat_del                 :123;
+k_set_ftime_dialog              :124;
+k_set_ftime_dialog_ok           :125;
+k_set_ftime_dialog_annulla      :126;
+k_set_ftime_dialog_label        :127;
+k_set_ftime_dialog_text         :128;
+k_about                         :129;
+k_stepscaling		        :130;
+k_stepscaling_sim               :131;
+k_stepscaling_sim_val           :132;
+k_endtime_sim                   :133;
+k_endtime_sim_val               :134;
+k_stepscaling_dialog            :135;
+k_stepscaling_dialog_ok         :136;
+k_stepscaling_dialog_annulla    :137;
+k_stepscaling_dialog_label      :138;
+k_stepscaling_dialog_text       :139;
+k_timescaling_dialog_max        :140;
+k_editpert                      :141;
+k_editpert_quit                 :142;
+k_editpert_dialog               :143;
+k_editpert_label_1              :144;
+k_editpert_label_2              :145;
+k_editpert_lista_1              :146;
+k_editpert_lista_2              :147;
+k_editpert_del                  :148;
+k_editpert_mod                  :149;
+k_clear_list        	        :150;
+k_clear_list_popup              :151;
+k_confcrall                     :152;
+k_editpert_del_all              :153;
+k_backtrack_dialog              :154;
+k_menu_backtrack_label          :155;
+k_step_bt                       :156;
+k_limiti_bt_val                 :157;
+k_lastrec_bt_val                :158;
+k_caricamento_lista_bt          :159;
+k_reset_bt                      :160;
+k_bt_help                       :161;
+k_bt_configure                  :162;
+k_bt_conf                       :163;
+k_restart_bt                    :164;
+k_modo_bt_val                   :165;
+k_direz_bt_val                  :166;
+k_stato_bt                      :167;
+k_bt_indietro                   :168;
+k_bt_avanti                     :169;
+k_bt_automatico                 :170;
+k_bt_manuale                    :171;
+k_lastload_bt_val               :172;
+k_nextstep_bt_val               :173;
+k_allineamento_dialog           :174;
+k_caricamento_lista_comp        :175;
+k_override_comp                 :176;
+k_help                          :177;
+k_bt_help_load                  :178;
+k_bt_help_ok                    :179;
+k_bt_help_exit                  :180;
+k_bt_help_procedure             :181;
+k_stop_replay                   :182;
+k_malf_menu_entry               :183;
+k_malf                          :184;
+k_frem                          :185;
+k_malf_dialog                   :186;
+k_frem_dialog                   :187;
+k_window_malf                   :188;
+k_window_frem                   :189;
+k_data_button		        :190;
+k_data_dialog		        :191;
+k_data_dialog_label             :192;
+k_elenco_modelli_modat          :193;
+k_elenco_blocchi_modat          :194;
+k_data_dialog_ok                :195;
+k_data_dialog_canc              :196;
+k_data_scrolled                 :197;
+k_data_rowcol                   :198;
+k_editing_modify                :199;
+k_azzera_cascade                :200;
+k_graphics                      :201;
+k_procstat			:202;
+
+
+! Sono gia' state utilizzate le costanti fino a 201
+
+
+value
+piccolo: font('-adobe-helvetica-medium-r-normal--14-140-75-75-p-77-iso8859-1');
+bold : font('-adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1');
+bbold : font('-adobe-times-medium-r-normal--34-240-100-100-p-170-iso8859-1');
+normal : font('-adobe-helvetica-medium-r-normal--17-120-100-100-p-88-iso8859-1');
+
+! Colors, color tables, and icons.
+
+        black                     : color('black', background);
+        blue                      : color('navy blue', foreground);
+        gray                      : color('light gray', background);
+        sfondo                    : color('MediumAquamarine', background);
+       sfondo_menu               : color('MediumSpringGreen', background);
+       sfondo_tasti              : color('MediumSpringGreen', background);
+       sfondo_label              : color('ivory', background);
+       sfondo_text              : color('ivory', background);
+       sfondo_lista              : color('ivory', background);
+       red                       : exported color('red',background);
+       green                     : exported color('lime green',background);
+       yellow                    : exported color('yellow',background);
+       light_gray                : exported color('Light gray',background);
+       blu_sfondo                : exported color('Blue',background);
+       light_blue                : exported color('Light blue',background);
+       Cyan                      : exported color('Cyan',background);
+       Aquamarine                : exported color('Aquamarine',background);
+       light_slate_gray          : exported color('Light Slate Gray',background);
+       sky_blue                  : exported color('Sky Blue',background);
+
+!value	black		: rgb(0,0,0);
+!value	blue		: rgb(0,0,32896);
+!value	gray		: rgb(54227,54227,54227);
+!value	sfondo		: rgb(11796,45219,45219);
+!value	sfondo		: rgb(26214,52685,43590);
+!value   sfondo_menu	: rgb(65535,58981,48495);
+!value   sfondo_menu	: rgb(0,64250,39578);
+!value   sfondo_tasti    : rgb(65535,58981,48495);
+!value   sfondo_tasti    : rgb(0,64250,39578);
+!value   sfondo_text    : rgb(65535,58981,48495);
+!value   sfondo_label    : rgb(65535,58981,48495);
+!value   sfondo_label    : rgb(65535,65535,61680);
+!value   sfondo_lista    : rgb(65535,58981,48495);
+!value   sfondo_lista    : rgb(65535,65535,61680);
+!value   rgbred		: rgb(65535,0,0);
+!value   rgbgreen		: rgb(12850,52685,12850);
+!value   rgbyellow          : rgb(65535,65535,0);
+
+value
+icona : color_table (blue='*',gray=' ');
+x_icon : icon(color_table=icona,'**********',
+	                        '*        *',
+	                        '*        *',
+	                        '*        *',
+	                        '*        *',
+	                        '*        *',
+                                '**********');
+
+!
+! Dimensionamenti delle windows utilizzate per la grafica
+!
+
+        value kx_main           : 10;
+        value ky_main           : 0;
+        value kw_main           : 670;
+        value kh_main           : 430;
+
+
+object
+        S_MAIN_WINDOW : XmMainWindow {
+            arguments {
+                XmNwidth = kw_main;
+                XmNheight =kh_main;
+            };
+            controls {
+                XmBulletinBoard appoggio;
+                XmMenuBar       s_menu_bar;
+            };
+        };
+
+object
+        appoggio : XmBulletinBoard {
+                arguments {
+                XmNmarginWidth=20;
+                XmNmarginHeight=10;
+                XmNbackground = sfondo;
+                        };
+	controls {
+                XmLabel         tempo_sim;
+                XmLabel         tempo_sim_val;
+                XmLabel         timescaling_sim;
+                XmLabel         timescaling_sim_val;
+                XmLabel         stepscaling_sim;
+                XmLabel         stepscaling_sim_val;
+                XmLabel         endtime_sim;
+                XmLabel         endtime_sim_val;
+                XmLabel         grandezze_mem;
+                XmLabel         grandezze_mem_val;
+                XmLabel         passo_reg;
+                XmLabel         passo_reg_val;
+                XmLabel         tempo_reale;
+                XmLabel         tempo_reale_val;
+                XmLabel         tempo_ritardo;
+                XmLabel         tempo_ritardo_val;
+                XmLabel         tempo_simMB;
+                XmLabel         tempo_simMB_val;
+                XmLabel         spazio_dsk;
+                XmLabel         spazio_dsk_val;
+                XmPushButton    stato_sim;
+                XmScrolledList  messaggi;
+            };
+        };
+
+object
+        tempo_sim : XmLabel {
+                arguments {
+                        XmNx = 370;
+                        XmNy = 10;
+                        XmNlabelString=k_tempo_sim_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+
+object
+        tempo_sim_val : XmLabel {
+                arguments {
+                        XmNx = 560;
+                        XmNy = 10;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNlabelString=k_tempo_sim_val_label;
+                        XmNfontList = piccolo;
+			XmNalignment = XmALIGNMENT_END;
+                	XmNbackground = sfondo_label;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_tempo_sim_val);
+           };
+        };
+
+object
+        tempo_reale : XmLabel {
+                arguments {
+                        XmNx = 10;
+                        XmNy = 10;
+                        XmNlabelString=k_tempo_reale_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+
+object
+        tempo_reale_val : XmLabel {
+                arguments {
+                        XmNx = 200;
+                        XmNy = 10;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNfontList = piccolo;
+                        XmNlabelString=k_tempo_reale_val_label;
+			XmNalignment = XmALIGNMENT_END;
+                	XmNbackground = sfondo_label;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure
+create_proc(k_tempo_reale_val);
+            };
+        };
+
+object
+        timescaling_sim : XmLabel {
+                arguments {
+                        XmNx = 10;
+                        XmNy = 40;
+                        XmNlabelString=k_timescaling_sim_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+
+object
+        timescaling_sim_val : XmLabel {
+                arguments {
+                        XmNx = 200;
+                        XmNy = 40;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNfontList = piccolo;
+                        XmNlabelString=k_timescaling_sim_val_label;
+			XmNalignment = XmALIGNMENT_END;
+                	XmNbackground = sfondo_label;
+                        };
+            callbacks {
+      MrmNcreateCallback = procedure create_proc(k_timescaling_sim_val);
+            };
+        };
+
+object
+        stepscaling_sim : XmLabel {
+                arguments {
+                        XmNx = 10;
+                        XmNy = 70;
+                        XmNlabelString=k_stepscaling_sim_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+                
+object
+        stepscaling_sim_val : XmLabel {
+                arguments {
+                        XmNx = 200;
+                        XmNy = 70;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNfontList = piccolo;
+                        XmNlabelString=k_stepscaling_sim_val_label;
+                        XmNalignment = XmALIGNMENT_END;
+                        XmNbackground = sfondo_label;
+                        };
+            callbacks {
+      MrmNcreateCallback = procedure create_proc(k_stepscaling_sim_val);
+            };
+        };
+
+object
+        endtime_sim : XmLabel {
+                arguments {
+                        XmNx = 370;
+                        XmNy = 70;
+                        XmNlabelString=k_endtime_sim_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+                
+object
+        endtime_sim_val : XmLabel {
+                arguments {
+                        XmNx = 560;
+                        XmNy = 70;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNfontList = piccolo;
+                        XmNlabelString=k_endtime_sim_val_label;
+                        XmNalignment = XmALIGNMENT_END;
+                        XmNbackground = sfondo_label;
+                        };
+            callbacks {
+      MrmNcreateCallback = procedure create_proc(k_endtime_sim_val);
+            };
+        };
+
+
+object
+        tempo_ritardo : XmLabel {
+                arguments {
+                        XmNx = 370;
+                        XmNy = 40;
+                        XmNlabelString=k_tempo_ritardo_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+
+object
+        tempo_ritardo_val : XmLabel {
+                arguments {
+                        XmNx = 560;
+                        XmNy = 40;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNfontList = piccolo;
+                        XmNlabelString=k_tempo_ritardo_val_label;
+			XmNalignment = XmALIGNMENT_END;
+                        XmNbackground= sfondo_label;
+                        };
+            callbacks {
+      MrmNcreateCallback = procedure create_proc(k_tempo_ritardo_val);
+            };
+        };
+
+object
+        grandezze_mem : XmLabel {
+                arguments {
+                        XmNx = 10;
+                        XmNy = 100;
+                        XmNlabelString=k_grandezze_mem_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+
+object
+        grandezze_mem_val : XmLabel {
+                arguments {
+                        XmNx = 200;
+                        XmNy = 100;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNfontList = piccolo;
+                        XmNlabelString=k_grandezze_mem_val_label;
+			XmNalignment = XmALIGNMENT_END;
+                        XmNbackground= sfondo_label;
+                        };
+            callbacks {
+      MrmNcreateCallback = procedure create_proc(k_grandezze_mem_val);
+            };
+
+        };
+
+object
+        tempo_simMB : XmLabel {
+                arguments {
+                        XmNx = 370;
+                        XmNy = 100;
+                        XmNlabelString=k_tempo_simMB_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+
+object
+        tempo_simMB_val : XmLabel {
+                arguments {
+                        XmNx = 560;
+                        XmNy = 100;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNfontList = piccolo;
+                        XmNlabelString=k_tempo_simMB_val_label;
+			XmNalignment = XmALIGNMENT_END;
+                	XmNbackground = sfondo_label;
+                        };
+            callbacks {
+      MrmNcreateCallback = procedure create_proc(k_tempo_simMB_val);
+            };
+        };
+
+object
+        passo_reg : XmLabel {
+                arguments {
+                        XmNx = 10;
+                        XmNy = 130;
+                        XmNlabelString=k_passo_reg_label;
+                        XmNforeground= black;
+                	XmNbackground = sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+
+object
+        passo_reg_val : XmLabel {
+                arguments {
+                        XmNx = 200;
+                        XmNy = 130;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNfontList = piccolo;
+                        XmNlabelString=k_passo_reg_val_label;
+			XmNalignment = XmALIGNMENT_END;
+                	XmNbackground = sfondo_label;
+                        };
+            callbacks {
+      MrmNcreateCallback = procedure create_proc(k_passo_reg_val);
+            };
+        };
+
+object
+        spazio_dsk : XmLabel {
+                arguments {
+                        XmNx = 370;
+                        XmNy = 130;
+                        XmNlabelString=k_spazio_dsk_label;
+                        XmNforeground= black;
+                	XmNbackground = sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+
+object
+        spazio_dsk_val : XmLabel {
+                arguments {
+                        XmNx = 560;
+                        XmNy = 130;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNfontList = piccolo;
+                        XmNlabelString=k_spazio_dsk_val_label;
+			XmNalignment = XmALIGNMENT_END;
+                	XmNbackground = sfondo_label;
+                        };
+            callbacks {
+      MrmNcreateCallback = procedure create_proc(k_spazio_dsk_val);
+            };
+        };
+
+object
+        stato_sim : XmPushButton {
+                arguments {
+                        XmNx = 100;
+                        XmNy = 175;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 460;
+                        XmNheight = 40;
+                        XmNmarginTop=2;
+                        XmNbackground= red;
+                        XmNforeground= black;
+                        XmNborderWidth=1;
+                        XmNlabelString=k_stato_iniz_label;
+                        XmNfontList = bbold;
+                        };
+            callbacks {
+      MrmNcreateCallback = procedure create_proc(k_stato_sim_val);
+                XmNactivateCallback = procedure go_proc(k_go);
+            };
+        };
+
+object
+    messaggi : XmScrolledList {
+                arguments{
+                        XmNy = 230;
+                        XmNx = 10;
+                        XmNvisibleItemCount = 6;
+                        XmNwidth = 630;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNfontList = normal;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_messaggi);
+                        };
+                };
+
+    clear_list_popup : XmPopupMenu {
+                callbacks {
+        MrmNcreateCallback = procedure create_proc(k_clear_list_popup);
+                        };
+	controls{
+		XmLabel label_popup;
+                XmSeparator   {};
+		XmPushButton clear_list;
+		};
+		};
+
+     label_popup : XmLabel
+		{
+                arguments {
+                	XmNfontList = bold;
+            		XmNbackground = sfondo_tasti;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 140;
+                        XmNheight = 30;
+                        XmNlabelString="Messagge list";
+                        };
+		};
+ 
+     clear_list : XmPushButton {
+                arguments {
+                	XmNfontList = normal;
+            		XmNbackground = sfondo_tasti;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 140;
+                        XmNheight = 30;
+                        XmNlabelString=k_clear_list_label;
+                        };
+                callbacks {
+        MrmNcreateCallback = procedure create_proc(k_clear_list);
+	XmNactivateCallback = procedure clear_list_proc(k_messaggi);
+                        };
+		};
+
+!
+! Definizione della menu bar e relativi pulldown menu
+!
+
+object
+    s_menu_bar : XmMenuBar {
+        arguments {
+            XmNorientation = XmHORIZONTAL;
+            XmNspacing     = 10;
+            XmNbackground = sfondo_menu;
+        };
+        controls {
+            XmCascadeButton stato_menu_entry;
+            XmCascadeButton configure_menu_entry;
+            XmCascadeButton ci_menu_entry;
+            XmCascadeButton statistics_menu_entry;
+            XmCascadeButton input_menu_entry;
+            XmCascadeButton go_menu_entry;
+            XmCascadeButton mf_fr_menu_entry;
+            XmCascadeButton about_menu_entry;
+        };
+    };
+
+!
+!    definizione stato_menu_entry
+!
+
+object
+        stato_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString= k_stato_label;
+                XmNmnemonic = keysym("C");
+                XmNfontList = bold;
+                XmNbackground = sfondo_menu;
+            };
+            controls {
+                XmPulldownMenu stato_menu;
+            };
+        };
+
+object
+        stato_menu : XmPulldownMenu {
+            controls {
+                XmPushButton initialize_button;
+                XmSeparator   {};
+                XmPushButton run_button;
+                XmPushButton freeze_button;
+                XmPushButton backtrack_button;
+                XmSeparator   {};
+                XmCascadeButton azzera_button;
+                XmSeparator   {};
+                XmCascadeButton fermata_button;
+                XmSeparator   {};
+                XmPushButton quit_button;
+            };
+        };
+
+object
+        fermata_button : XmCascadeButton {
+            arguments {
+               XmNlabelString = k_stop_label;
+               XmNfontList = normal;
+               XmNbackground = sfondo_tasti;
+                     };
+            controls {
+               XmPulldownMenu fermata_menu;
+               };
+            };
+
+object fermata_menu : XmPulldownMenu {
+               controls {
+                  XmLabel      fermata_menu_label;
+                  XmSeparator {};
+                  XmPushButton stop_button;
+               };
+            };
+object
+   fermata_menu_label : XmLabel {
+        arguments{
+                XmNfontList = bold;
+               XmNbackground = red;
+                XmNlabelString = "Stop simulator";
+                                };
+                        };
+object
+                  azzera_button : XmCascadeButton {
+                                arguments {
+                                        XmNlabelString = k_clear_label;
+                                        XmNfontList = normal;
+               XmNbackground = sfondo_tasti;
+                     };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_azzera_cascade);
+		};
+                                controls {
+                                        XmPulldownMenu azzera_menu;
+                                        };
+                                };
+object azzera_menu : XmPulldownMenu {
+               controls {
+                                                XmLabel      azzera_menu_label;
+                                                XmSeparator {};
+                  XmPushButton clear_button;
+                                        };
+                                };
+object
+   azzera_menu_label : XmLabel {
+        arguments{
+                XmNfontList = bold;
+               XmNbackground = red;
+                XmNlabelString = "Reset files & time";
+                                };
+                        };
+
+object
+        initialize_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_initialize_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+            	      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_initialize);
+		XmNactivateCallback = procedure initialize_proc(k_initialize);
+		};
+		};
+
+object
+        run_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_run_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_run);
+		XmNactivateCallback = procedure run_proc(k_run);
+		};
+                };
+
+object
+        freeze_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_freeze_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_freeze);
+		XmNactivateCallback = procedure freeze_proc(k_freeze);
+		};
+                };
+
+object
+        backtrack_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_backtrack_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_backtrack);
+		XmNactivateCallback = procedure backtrack_proc(k_backtrack);
+		};
+                };
+
+object
+        clear_button : XmPushButton {
+            arguments {
+                XmNlabelString = "Conferma" ;
+                XmNfontList = normal;
+                XmNbackground = sfondo_tasti;
+                      };
+            callbacks{
+                MrmNcreateCallback = procedure create_proc(k_clear);
+                XmNactivateCallback = procedure clear_proc(k_clear);
+                };
+                };
+
+object
+        stop_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_stop_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_stop);
+		XmNactivateCallback = procedure stop_proc(k_stop);
+		};
+                };
+
+object
+        quit_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_quit_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_quit);
+		XmNactivateCallback = procedure quit_proc(k_quit);
+		};
+                };
+
+!
+!   definizione configure_menu_entry
+!
+
+object
+        configure_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString= k_configure_label;
+                XmNmnemonic = keysym("o");
+                XmNfontList = bold;
+                XmNbackground = sfondo_menu;
+            };
+            controls {
+                XmPulldownMenu configure_menu;
+            };
+        };
+
+object
+        configure_menu : XmPulldownMenu {
+            controls {
+                XmPushButton timescaling_button;
+                XmPushButton set_ftime_button;
+                XmPushButton stepscaling_button;
+                XmSeparator   {};
+                XmPushButton stepcr_button;
+                XmSeparator   {};
+                XmPushButton conflg_button;
+                !XmPushButton confcr_button;
+                XmCascadeButton confcr_popup;
+            };
+        };
+
+object
+        timescaling_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_timescaling_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_timescaling);
+		XmNactivateCallback = procedure timescaling_proc(k_timescaling);
+		};
+                };
+
+object
+        stepscaling_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_stepscaling_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_stepscaling);
+		XmNactivateCallback = procedure stepscaling_proc(k_stepscaling);
+		};
+                };
+
+object
+        stepcr_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_stepcr_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_stepcr);
+		XmNactivateCallback = procedure stepcr_proc(k_stepcr);
+		};
+                };
+
+
+
+object
+        conflg_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_conflg_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_conflg);
+		XmNactivateCallback = procedure confcr_proc(k_conflg);
+		};
+                };
+
+
+
+object confcr_popup : XmCascadeButton {
+		arguments {
+			XmNlabelString = k_confcr_label ;
+                	XmNfontList = normal;
+            		XmNbackground = sfondo_tasti;
+			};
+	controls {
+                       XmPulldownMenu confcr_menu;
+                      };
+		};
+
+object confcr_menu : XmPulldownMenu
+	{
+	controls {
+		XmLabel confcr_menu_label; 
+                XmSeparator   {};
+		XmPushButton confcr_button;
+		XmPushButton confcrall_button;
+		};
+	};
+
+object
+	confcr_menu_label : XmLabel {
+		  arguments{
+                XmNfontList = bold;
+            	XmNbackground = sfondo_tasti;
+                XmNlabelString = "Kind of selection";
+                                };
+                        };
+
+object
+        confcr_button : XmPushButton {
+            arguments {
+                XmNlabelString = "By selection";
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_confcr);
+		XmNactivateCallback = procedure confcr_proc(k_confcr);
+		};
+                };
+
+object
+        confcrall_button : XmPushButton {
+            arguments {
+                XmNlabelString = "All variables";
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_confcrall);
+		XmNactivateCallback = procedure confcrall_proc(k_confcrall);
+		};
+                };
+
+
+object
+        set_ftime_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_set_ftime_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_set_ftime);
+		XmNactivateCallback = procedure set_ftime_proc(k_set_ftime);
+		};
+                };
+
+!
+!   definizione ci_menu_entry
+!
+
+object
+        ci_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString= k_ci_label;
+                XmNmnemonic = keysym("I");
+                XmNfontList = bold;
+                XmNbackground = sfondo_menu;
+            };
+            controls {
+                XmPulldownMenu ci_menu;
+            };
+        };
+
+object
+        ci_menu : XmPulldownMenu {
+            controls {
+                XmPushButton load_button;
+                XmPushButton save_button;
+                XmPushButton edit_button;
+            };
+        };
+
+object
+        load_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_load_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_load);
+		XmNactivateCallback = procedure load_proc(k_load);
+		};
+                };
+
+object
+        save_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_save_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_save);
+		XmNactivateCallback = procedure save_proc(k_save);
+		};
+                };
+
+object
+        edit_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_edit_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_edit);
+		XmNactivateCallback = procedure edit_proc(k_edit);
+		};
+                };
+
+!
+!   definizione statistics_menu_entry
+!
+
+object
+        statistics_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString= k_statistics_label;
+                XmNmnemonic = keysym("t");
+                XmNfontList = bold;
+                XmNbackground = sfondo_menu;
+            };
+            controls {
+                XmPulldownMenu statistics_menu;
+            };
+        };
+
+object
+        statistics_menu : XmPulldownMenu {
+            controls {
+                XmPushButton statistics_button;
+		XmPushButton procstat_button;
+            };
+        };
+
+object
+        statistics_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_statistics_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_statistics);
+		XmNactivateCallback = procedure statistics_proc(k_statistics);
+		};
+                };
+
+/* Inizio codice CAPPE */
+
+object
+        procstat_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_procstat_label;
+                XmNfontList = normal;
+                XmNbackground = sfondo_tasti;
+                      };
+            callbacks{
+                MrmNcreateCallback = procedure create_proc(k_procstat);
+                XmNactivateCallback = procedure procstat_proc(k_procstat);
+                };
+                };
+
+/* Fine codice CAPPE */
+
+
+
+!
+!   definizione input_menu_entry
+!
+
+object
+        input_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString= k_input_label;
+                XmNmnemonic = keysym("n");
+                XmNfontList = bold;
+                XmNbackground = sfondo_menu;
+            };
+            controls {
+                XmPulldownMenu input_menu;
+            };
+        };
+
+object
+        input_menu : XmPulldownMenu {
+            controls {
+                XmPushButton input_button;
+                XmPushButton staz_button;
+                XmSeparator   {};
+                XmPushButton edit_pert;
+                XmPushButton input_stat;
+                XmSeparator   {};
+                XmPushButton data_button;
+            };
+        };
+
+object
+        input_button : XmPushButton {
+            arguments {
+                XmNlabelString = "Aing" ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_input);
+		XmNactivateCallback = procedure input_proc(k_input);
+		};
+                };
+
+
+object
+        staz_button : XmPushButton {
+            arguments {
+                XmNlabelString = "Staz";
+                XmNfontList = normal;
+                XmNbackground = sfondo_tasti;
+                      };
+            callbacks{
+                MrmNcreateCallback = procedure create_proc(k_staz_button);
+                XmNactivateCallback = procedure input_proc(k_staz_button);
+                };
+                };
+
+object
+        edit_pert : XmPushButton {
+            arguments {
+                XmNlabelString = "Edit Input";
+                XmNfontList = normal;
+                XmNbackground = sfondo_tasti;
+                      };
+            callbacks{
+                MrmNcreateCallback = procedure create_proc(k_editpert);
+                XmNactivateCallback = procedure editpert_proc(k_editpert);
+                };
+                };
+                                                                                 
+
+object
+        input_stat : XmPushButton {
+            arguments {
+                XmNlabelString = "Statistics";
+                XmNfontList = normal;
+                XmNbackground = sfondo_tasti;
+                      };
+            callbacks{
+                MrmNcreateCallback = procedure create_proc(k_inputstat);
+                XmNactivateCallback = procedure inputstat_proc(k_inputstat);
+                };
+                };
+
+
+
+!*************************************************************!
+!
+!   definizione mf&fr_menu_entry
+!
+object
+                mf_fr_menu_entry : XmCascadeButton {
+            arguments {
+                                        XmNlabelString= k_mf_fr_label;
+                                        XmNmnemonic = keysym("M");
+               XmNfontList = bold;
+               XmNbackground = sfondo_menu;
+                                };
+                      controls {
+                XmPulldownMenu mf_fr_menu;
+            };
+           callbacks{
+        MrmNcreateCallback = procedure create_proc(k_malf_menu_entry);
+        };
+        };
+object
+                mf_fr_menu : XmPulldownMenu {
+            controls {
+                                        XmPushButton malf_button;
+                                        XmSeparator   {};
+                                        XmPushButton frem_button;
+                                };
+                };
+                     
+object
+                malf_button : XmPushButton {
+                                arguments {
+                                XmNlabelString = k_malf_label;
+            XmNfontList = normal;
+            XmNbackground = sfondo_tasti;
+                                };
+                        callbacks{
+        MrmNcreateCallback = procedure create_proc(k_malf);
+        XmNactivateCallback = procedure malf_proc(k_malf);
+        };
+      };
+object
+      frem_button : XmPushButton {
+            arguments {
+            XmNlabelString = k_frem_label ;
+            XmNfontList = normal;
+            XmNbackground = sfondo_tasti;
+            };
+         callbacks{
+         MrmNcreateCallback = procedure create_proc(k_frem);
+         XmNactivateCallback = procedure frem_proc(k_frem);
+         };
+      };
+object
+                malf_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=true;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNdefaultPosition=false;
+                XmNx=650;
+                XmNy=100;
+                XmNwidth=1000;
+!                XmNheight=700;
+!                XmNdefaultButton = XmPushButton step_bt;
+!                XmNnoResize=true;
+!                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=40;
+                XmNborderColor=black;
+                                         XmNdialogTitle='Sommario Malfunzioni';
+           };
+           controls{
+                                         XmScrolledWindow lista_malf;
+                          };
+                          callbacks {
+              MrmNcreateCallback = procedure create_proc(k_malf_dialog);
+            };
+        };
+object
+                lista_malf : XmScrolledWindow {
+                arguments{
+                        XmNy = 50;
+                        XmNx = 5;
+                        XmNwidth = 950;
+                        XmNheight = 360;
+                        XmNscrollingPolicy = XmAUTOMATIC;
+                        XmNbackground = light_gray;
+                        };
+                callbacks {
+                MrmNcreateCallback = procedure create_proc(k_window_malf);
+                        };
+                };
+object
+      frem_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNdefaultPosition=false;
+                XmNx=650;
+                XmNy=600;
+                XmNwidth=700;
+                XmNheight=500;
+!                XmNdefaultButton = XmPushButton step_bt;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=40;
+                XmNborderColor=black;
+                XmNdialogTitle='Sommario Funzioni Remote';
+           };
+           controls{
+           };
+           callbacks {
+              MrmNcreateCallback = procedure create_proc(k_frem_dialog);
+            };
+        };
+
+object
+        data_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_modify_data_label;
+                XmNfontList = normal;
+                XmNbackground = sfondo_tasti;
+                      };
+            callbacks{
+                MrmNcreateCallback = procedure create_proc(k_data_button);
+                XmNactivateCallback = procedure data_proc(k_data_button);
+                };
+                };
+
+!
+!   definizione go_menu_entry
+!
+
+object
+        go_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString= "Graf";
+                XmNmnemonic = keysym("G");
+                XmNfontList = bold;
+                XmNbackground = sfondo_menu;
+            };
+            controls {
+                XmPulldownMenu go_menu;
+            };
+        };
+object
+        go_menu : XmPulldownMenu {
+            controls {
+                XmPushButton go_button;
+            };
+        };
+
+object
+        go_button : XmPushButton {
+            arguments {
+                XmNlabelString = k_graphics_label ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_graphics);
+		XmNactivateCallback = procedure graphics_proc(k_graphics);
+		};
+                };
+!
+!   definizione about_menu_entry
+!
+
+object
+        about_menu_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString= "About";
+                XmNmnemonic = keysym("A");
+                XmNfontList = bold;
+                XmNbackground = sfondo_menu;
+            };
+            controls {
+                XmPulldownMenu about_menu;
+            };
+        };
+object
+        about_menu : XmPulldownMenu {
+            controls {
+                XmPushButton about_button;
+            };
+        };
+
+object
+        about_button : XmPushButton {
+            arguments {
+                XmNlabelString = "About" ;
+                XmNfontList = normal;
+            	XmNbackground = sfondo_tasti;
+                      };
+	    callbacks{
+		MrmNcreateCallback = procedure create_proc(k_about);
+		XmNactivateCallback = procedure about_proc(k_about);
+		};
+                };
+
+
+!
+!   Definizione statistica dialog
+!
+
+object
+        statistica_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=true;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNdefaultPosition=false;
+                XmNwidth=320;
+                XmNheight=400;
+                XmNx=650;
+                XmNy=50;
+                XmNdefaultButton = XmPushButton statistica_dialog_fine;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Statistics (1/1000s) CPU';
+                      };
+           controls   {
+                XmPushButton statistica_dialog_fine;
+                XmDrawingArea statistica_window;
+                      };
+           callbacks  {
+                MrmNcreateCallback = procedure create_proc(k_statistica_dialog);
+            };
+         };
+
+object
+        statistica_dialog_fine : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=330;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = "Quit";
+            	XmNbackground = sfondo_tasti;
+                         };
+            callbacks {
+         MrmNcreateCallback = procedure create_proc(k_statistica_dialog_fine);
+         !XmNactivateCallback= procedure activate_proc(k_statistica_dialog);
+            };
+        };
+
+object
+        statistica_window : XmDrawingArea{
+          arguments {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=300;
+                XmNheight=310;
+                XmNbackground = blue;
+                     };
+          callbacks {
+         MrmNcreateCallback = procedure create_proc(k_statistica_window);
+         XmNexposeCallback = procedure monit_stat(k_statistica_window);
+                    };
+                };
+
+!
+! Definizione della dialog per l'impostazione della velocita' di simulazione
+!   
+
+object
+        timescaling_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=true;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNwidth=400;
+                XmNheight=200;
+                XmNx=150;
+                XmNy=50;
+                XmNdefaultButton = XmPushButton timescaling_dialog_ok;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Configure';
+                      };
+           controls   {
+                XmPushButton timescaling_dialog_ok;
+                XmPushButton timescaling_dialog_max;
+                XmPushButton timescaling_dialog_annulla;
+                XmLabel timescaling_dialog_label;
+                XmText timescaling_dialog_text;
+                      };
+            callbacks {
+                 MrmNcreateCallback = procedure create_proc(k_timescaling_dialog);
+            };
+         };
+
+object
+        timescaling_dialog_label : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=380;
+                XmNheight=50;
+                XmNlabelString = "Time scaling";
+		XmNfontList = bold;
+                XmNbackground=red;
+                      };
+           callbacks {
+            MrmNcreateCallback = procedure create_proc(k_timescaling_dialog_label);
+            };
+        };
+
+object
+        timescaling_dialog_ok : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=130;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = "Ok";
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+            MrmNcreateCallback = procedure create_proc(k_timescaling_dialog_ok);
+          XmNactivateCallback= procedure timescaling_proc(k_timescaling_dialog_ok);
+            };
+        };
+
+object
+        timescaling_dialog_max : XmPushButton{
+           arguments  {
+                XmNx=130;
+                XmNy=130;
+                XmNwidth=110;
+                XmNheight=40;
+                XmNlabelString = "Max Speed";
+                XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+            MrmNcreateCallback = 
+		procedure create_proc(k_timescaling_dialog_max);
+            XmNactivateCallback= 
+		procedure timescaling_proc(k_timescaling_dialog_max);
+            };
+        };
+
+object
+        timescaling_dialog_annulla : XmPushButton{
+           arguments  {
+                XmNx=280;
+                XmNy=130;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = "Cancel";
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+       MrmNcreateCallback = procedure create_proc(k_timescaling_dialog_annulla);
+     XmNactivateCallback= procedure timescaling_proc(k_timescaling_dialog_annulla);
+            };
+        };
+
+object
+        timescaling_dialog_text : XmText {
+           arguments  {
+                XmNx=63;
+                XmNy=80;
+                XmNwidth=260;
+                XmNheight=35;
+                XmNborderWidth=2;
+                XmNmaxLength=9;
+                XmNvalue="1.0";
+            	XmNbackground = sfondo_text;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_timescaling_dialog_text);
+            };
+        };
+
+
+!
+! Definizione della dialog per l'impostazione dello step di integrazione
+!   
+
+object
+        stepscaling_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=true;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNwidth=400;
+                XmNheight=200;
+                XmNx=150;
+                XmNy=50;
+                XmNdefaultButton = XmPushButton stepscaling_dialog_ok;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Configure';
+                      };
+           controls   {
+                XmPushButton stepscaling_dialog_ok;
+                XmPushButton stepscaling_dialog_annulla;
+                XmLabel stepscaling_dialog_label;
+                XmText stepscaling_dialog_text;
+                      };
+            callbacks {
+                 MrmNcreateCallback = procedure create_proc(k_stepscaling_dialog);
+            };
+         };
+
+object
+        stepscaling_dialog_label : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=380;
+                XmNheight=50;
+                XmNlabelString = "Step scaling";
+		XmNfontList = bold;
+                XmNbackground=red;
+                      };
+           callbacks {
+            MrmNcreateCallback = procedure create_proc(k_stepscaling_dialog_label);
+            };
+        };
+
+object
+        stepscaling_dialog_ok : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=130;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = "Ok";
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+            MrmNcreateCallback = procedure create_proc(k_stepscaling_dialog_ok);
+          XmNactivateCallback= procedure stepscaling_proc(k_stepscaling_dialog_ok);
+            };
+        };
+
+object
+        stepscaling_dialog_annulla : XmPushButton{
+           arguments  {
+                XmNx=280;
+                XmNy=130;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = "Cancel";
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+       MrmNcreateCallback = procedure create_proc(k_stepscaling_dialog_annulla);
+     XmNactivateCallback= procedure stepscaling_proc(k_stepscaling_dialog_annulla);
+            };
+        };
+
+object
+        stepscaling_dialog_text : XmText {
+           arguments  {
+                XmNx=63;
+                XmNy=80;
+                XmNwidth=260;
+                XmNheight=35;
+                XmNborderWidth=2;
+                XmNmaxLength=9;
+                XmNvalue="1.0";
+            	XmNbackground = sfondo_text;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_stepscaling_dialog_text);
+            };
+        };
+
+
+!
+!
+! Definizione della dialog per l'impostazione della frequenza di
+! registrazione delle variabili grafiche
+!
+
+object
+        stepcr_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=true;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNwidth=400;
+                XmNheight=200;
+                XmNx=150;
+                XmNy=50;
+                XmNdefaultButton = XmPushButton stepcr_dialog_ok;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Configure';
+                      };
+           controls   {
+                XmPushButton stepcr_dialog_ok;
+                XmPushButton stepcr_dialog_annulla;
+                XmLabel stepcr_dialog_label;
+                XmText stepcr_dialog_text;
+                      };
+           callbacks  {
+                 MrmNcreateCallback = procedure create_proc(k_stepcr_dialog);
+            };
+         };
+
+object
+        stepcr_dialog_label : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=380;
+                XmNheight=50;
+                XmNlabelString = "Step continuos recording";
+		XmNfontList = bold;
+                XmNbackground=red;
+                      };
+           callbacks {
+           MrmNcreateCallback = procedure create_proc(k_stepcr_dialog_label);
+            };
+        };
+
+object
+        stepcr_dialog_ok : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=130;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Ok';
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+            MrmNcreateCallback = procedure create_proc(k_stepcr_dialog_ok);
+            XmNactivateCallback= procedure stepcr_proc(k_stepcr_dialog_ok);
+            };
+        };
+
+object
+        stepcr_dialog_annulla : XmPushButton{
+           arguments  {
+                XmNx=280;
+                XmNy=130;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Cancel';
+            	XmNbackground = sfondo_tasti;
+                         };
+            callbacks {
+      MrmNcreateCallback = procedure create_proc (k_stepcr_dialog_annulla);
+      XmNactivateCallback= procedure stepcr_proc (k_stepcr_dialog_annulla);
+            };
+        };
+
+object
+        stepcr_dialog_text : XmText {
+           arguments  {
+                XmNx=63;
+                XmNy=80;
+                XmNwidth=260;
+                XmNheight=35;
+                XmNborderWidth=2;
+                XmNmaxLength=9;
+                XmNvalue='1';
+            	XmNbackground = sfondo_text;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_stepcr_dialog_text);
+            };
+        };
+
+!
+! Definizione della dialog per l'impostazione del tempo massimo
+! di simulazione
+!
+
+object
+        set_ftime_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=true;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNwidth=400;
+                XmNheight=200;
+                XmNx=150;
+                XmNy=50;
+                XmNdefaultButton = XmPushButton set_ftime_dialog_ok;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Configure';
+                      };
+           controls   {
+                XmPushButton set_ftime_dialog_ok;
+                XmPushButton set_ftime_dialog_annulla;
+                XmLabel set_ftime_dialog_label;
+                XmText set_ftime_dialog_text;
+                      };
+           callbacks  {
+                 MrmNcreateCallback = procedure create_proc(k_set_ftime_dialog);
+            };
+         };
+
+object
+        set_ftime_dialog_label : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=380;
+                XmNheight=50;
+                XmNlabelString = k_set_ftime_label;
+		XmNfontList = bold;
+                XmNbackground=red;
+                      };
+           callbacks {
+           MrmNcreateCallback = procedure create_proc(k_set_ftime_dialog_label);
+            };
+        };
+
+object
+        set_ftime_dialog_ok : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=130;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Ok';
+                XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+           MrmNcreateCallback = procedure create_proc(k_set_ftime_dialog_ok);
+           XmNactivateCallback= procedure set_ftime_proc(k_set_ftime_dialog_ok);
+            };
+        };
+
+object
+        set_ftime_dialog_annulla : XmPushButton{
+           arguments  {
+                XmNx=280;
+                XmNy=130;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Cancel';
+                XmNbackground = sfondo_tasti;
+                         };
+            callbacks {
+     MrmNcreateCallback = procedure create_proc (k_set_ftime_dialog_annulla);
+     XmNactivateCallback= procedure set_ftime_proc (k_set_ftime_dialog_annulla);
+            };
+        };
+
+object
+        set_ftime_dialog_text : XmText {
+           arguments  {
+                XmNx=63;
+                XmNy=80;
+                XmNwidth=260;
+                XmNheight=35;
+                XmNborderWidth=2;
+                XmNmaxLength=9;
+                XmNvalue='0.0';
+                XmNbackground = sfondo_text;
+                      };
+           callbacks {
+         MrmNcreateCallback = procedure create_proc(k_set_ftime_dialog_text);
+            };
+        };
+
+                                             
+
+!
+! Definizione della dialog per l'impostazione delle variabili da
+! registrare 
+!
+object
+        salva_file_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=true;
+                XmNdialogStyle=XmDIALOG_SYSTEM_MODAL;
+                XmNdefaultPosition=false;
+                XmNwidth=550;
+                XmNheight=225;
+                XmNx=700;
+                XmNy=300;
+                XmNdefaultButton = XmPushButton salva_file_dialog_ok;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Configure';
+                      };
+           controls   {
+                XmPushButton salva_file_dialog_ok;
+                XmPushButton salva_file_dialog_annulla;
+                XmLabel salva_file_dialog_label1;
+                XmLabel salva_file_dialog_label2;
+                XmText  salva_file_dialog_text;
+                      };
+            callbacks  {
+                 MrmNcreateCallback = procedure create_proc(k_salva_file_dialog);
+            };
+         };
+
+object
+        salva_file_dialog_label1 : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=530;
+                XmNheight=50;
+                XmNlabelString = 'Save file';
+			XmNfontList = bold;
+                XmNbackground=red;
+                      };
+           callbacks {
+           MrmNcreateCallback = procedure create_proc
+                                        (k_salva_file_dialog_label1);
+            };
+        };
+
+object
+        salva_file_dialog_ok : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=160;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Ok';
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+            MrmNcreateCallback = procedure create_proc
+                                        (k_salva_file_dialog_ok);
+            XmNactivateCallback= procedure salva_file
+                                        (k_salva_file_dialog_ok);
+            };
+        };
+
+object
+        salva_file_dialog_annulla : XmPushButton{
+           arguments  {
+                XmNx=430;
+                XmNy=160;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Cancel';
+            	XmNbackground = sfondo_tasti;
+                       };
+           callbacks {
+            MrmNcreateCallback = procedure create_proc
+                                      (k_salva_file_dialog_annulla);
+            XmNactivateCallback= procedure confcr_proc (k_salva_file_dialog_annulla);
+            };
+        };
+
+
+object
+        elenco_variabili_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNdefaultPosition=false;
+                XmNwidth=630;
+                XmNheight=825;
+                XmNx=630;
+                XmNy=20;
+                XmNdefaultButton = XmArrowButton elenco_variabili_cerca_avanti;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground = sfondo;
+                XmNborderWidth=0;
+                XmNmarginHeight=0;
+                XmNmarginWidth=0;
+                XmNborderColor=black;
+                XmNdialogTitle='Configure';
+                      };
+           controls   {
+                XmPushButton elenco_variabili_dialog_ok;
+                XmPushButton elenco_variabili_carica;
+                XmPushButton elenco_variabili_salva;
+                XmPushButton elenco_variabili_annulla;
+                XmArrowButton elenco_variabili_cerca_avanti;
+                XmArrowButton elenco_variabili_cerca_ind;
+                XmArrowButton elenco_variabili_elimina;
+                XmArrowButton elenco_variabili_aggiungi;
+                XmLabel label_aggiungi;
+                XmLabel label_elimina;
+                XmLabel elenco_variabili_cerca_label;
+                XmScrolledList elenco_variabili;
+                XmScrolledList elenco_variabili_sel;
+                XmScrolledList elenco_modelli;
+                XmScrolledList elenco_blocchi;
+                XmLabel elenco_variabili_label;
+                XmLabel elenco_variabili_sel_label;
+                XmLabel elenco_variabili_dialog_label;
+                XmText elenco_variabili_descr;
+                XmText elenco_variabili_autore;
+                XmText elenco_variabili_versione;
+                XmText elenco_variabili_modello;
+                XmText elenco_variabili_text_cerca;
+                XmLabel label_descr;
+                XmLabel label_autore;
+                XmLabel label_versione;
+                XmLabel label_modello;
+                XmLabel label_nu_var_sel;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure
+create_proc(k_elenco_variabili_dialog);
+            };
+        };
+
+object
+        selezione_file_dialog : XmFileSelectionDialog {
+                arguments {
+                        XmNx=700;
+                        XmNy=300;
+                        XmNwidth=600;
+                        XmNheight=400;
+                        XmNdefaultPosition=false;
+                        XmNcancelLabelString='Cancel';
+                        XmNfilterLabelString='Filter';
+                        XmNapplyLabelString='Filter';
+                        XmNdialogTitle='Configure';
+                        XmNdirMask='*.edf';
+                        XmNokLabelString='Ok';
+                        XmNselectionLabelString='Selected file';
+                        XmNdialogStyle=XmDIALOG_SYSTEM_MODAL;
+                        XmNbackground = sfondo;
+                        };
+                callbacks {
+        MrmNcreateCallback = procedure
+create_proc(k_selezione_file_dialog);
+        XmNokCallback = procedure
+seleziona_file(k_selezione_file_dialog);
+        XmNcancelCallback = procedure
+seleziona_file(k_selezione_file_dialog);
+                };
+                };
+
+object
+        elenco_variabili_dialog_label : XmLabel {
+                arguments {
+                        XmNx=0;
+                        XmNy=0;
+                        XmNwidth=630;
+                        XmNheight=30;
+                        XmNlabelString = 'File: recorder.edf';
+                        XmNbackground=red;
+			XmNfontList = bold;
+                        XmNborderWidth=0;
+                        XmNshadowThickness=0;
+                };
+                callbacks {
+          MrmNcreateCallback = procedure
+                create_proc(k_elenco_variabili_dialog_label);
+            };
+        };
+
+object
+       salva_file_dialog_text : XmText {
+           arguments  {
+                XmNx=110;
+                XmNy=100;
+                XmNwidth=400;
+                XmNheight=35;
+                XmNvalue='recorder.edf';
+            	XmNbackground = sfondo_text;
+        };
+                callbacks {
+          MrmNcreateCallback = procedure
+                create_proc(k_salva_file_dialog_text);
+            };
+        };
+
+object
+        salva_file_dialog_label2 : XmLabel {
+                arguments  {
+                XmNx=5;
+                XmNy=100;
+                XmNwidth=100;
+                XmNheight=35;
+                XmNforeground=black;
+               	XmNbackground = sfondo;
+                XmNlabelString='Save as';
+                XmNborderWidth=0;
+                XmNalignment=XmALIGNMENT_BEGINNING;
+        };
+        };
+
+object
+        label_nu_var_sel : XmLabel  {
+           arguments  {
+                XmNx=305;
+                XmNy=575;
+                XmNwidth=300;
+                XmNheight=35;
+                XmNlabelString='Version';
+                XmNborderWidth=0;
+                XmNalignment=XmALIGNMENT_BEGINNING;
+                XmNforeground= black;
+               	XmNbackground = sfondo;
+        };
+                callbacks {
+                                                              
+          MrmNcreateCallback = procedure
+                create_proc(k_elenco_variabili_nu_var_sel);
+            };
+        };
+
+object
+        elenco_variabili_versione : XmText {
+           arguments  {
+                XmNx=110;
+                XmNy=140;
+                XmNwidth=500;
+                XmNheight=35;
+                XmNvalue='version';
+            	XmNbackground = sfondo_text;
+        };
+                callbacks {
+                                                              
+          MrmNcreateCallback = procedure
+                create_proc(k_elenco_variabili_versione);
+            };
+        };
+
+object
+        label_versione : XmLabel  {
+           arguments  {
+                XmNx=5;
+                XmNy=140;
+                XmNwidth=100;
+                XmNheight=35;
+                XmNlabelString='Version';
+                XmNborderWidth=0;
+                XmNalignment=XmALIGNMENT_BEGINNING;
+                XmNforeground= black;
+               	XmNbackground = sfondo;
+        };
+        };
+
+object
+        elenco_variabili_autore : XmText {
+           arguments  {
+                XmNx=110;
+                XmNy=105;
+                XmNwidth=500;
+                XmNheight=35;
+                XmNvalue='author';
+            	XmNbackground = sfondo_text;
+        };
+                callbacks {
+          MrmNcreateCallback = procedure
+                create_proc(k_elenco_variabili_autore);
+            };
+        };
+
+object
+        label_autore : XmLabel {
+           arguments  {
+                XmNx=5;
+                XmNy=105;
+                XmNwidth=100;
+                XmNheight=35;
+                XmNlabelString='Author';
+                XmNborderWidth=0;
+                XmNalignment=XmALIGNMENT_BEGINNING;
+                XmNforeground= black;
+               	XmNbackground = sfondo;
+        };
+        };
+
+object
+        elenco_variabili_descr : XmText {
+           arguments  {
+                XmNx=110;
+                XmNy=70;
+                XmNwidth=500;
+                XmNheight=35;
+                XmNvalue='description';
+            	XmNbackground = sfondo_text;
+        };
+                callbacks {
+          MrmNcreateCallback = procedure
+                create_proc(k_elenco_variabili_descr);
+            };
+        };
+
+object
+        label_descr : XmLabel  {
+           arguments  {
+                XmNx=5;
+                XmNy=70;
+                XmNwidth=100;
+                XmNheight=35;
+                XmNlabelString='Description';
+                XmNborderWidth=0;
+                XmNalignment=XmALIGNMENT_BEGINNING;
+                XmNforeground= black;
+               	XmNbackground = sfondo;
+        };
+        };
+
+object
+        elenco_variabili_modello : XmText {
+           arguments  {
+                XmNx=110;
+                XmNy=35;
+                XmNwidth=500;
+                XmNheight=35;
+                XmNvalue='model';
+            	XmNbackground = sfondo_text;
+        };
+                callbacks {
+          MrmNcreateCallback = procedure
+                create_proc(k_elenco_variabili_modello);
+            };
+        };
+
+object
+        label_modello : XmLabel {
+           arguments  {
+                XmNx=5;
+                XmNy=35;
+                XmNwidth=100;
+                XmNheight=35;
+                XmNlabelString='Model';
+                XmNborderWidth=0;
+                XmNalignment=XmALIGNMENT_BEGINNING;
+                XmNforeground= black;
+               	XmNbackground = sfondo;
+        };
+        };
+
+object
+        elenco_variabili_text_cerca : XmText {
+           arguments  {
+                XmNx=210;
+                XmNy=542;
+                XmNwidth=200;
+                XmNheight=35;
+                XmNvalue='var';
+            	XmNbackground = sfondo_text;
+        };
+                callbacks {
+          MrmNcreateCallback = procedure
+                create_proc(k_elenco_variabili_text_cerca);
+            };
+        };
+
+object
+        elenco_variabili_dialog_ok : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=770;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Ok';
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_elenco_variabili_dialog_ok);
+ XmNactivateCallback= procedure confcr_proc(k_elenco_variabili_dialog_ok);
+         };
+           };
+
+object
+        elenco_variabili_cerca_avanti : XmArrowButton{
+           arguments  {
+                XmNx=215;
+                XmNy=778;
+                XmNwidth=45;
+                XmNheight=38;
+                XmNarrowDirection=XmARROW_DOWN;
+                !XmNlabelString = 'Find';
+                XmNborderWidth = 0;
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_elenco_variabili_cerca_avanti);
+ XmNactivateCallback= procedure seleziona_activate(k_elenco_variabili_cerca_avanti);
+            };
+           };
+
+object
+        elenco_variabili_cerca_label  : XmLabel{
+                arguments  {
+                XmNlabelString = 'Find';
+                XmNx=260;
+                XmNy=778;
+                XmNwidth=90;
+                XmNheight=37;
+               	XmNbackground = sfondo;
+                };
+        };
+
+object
+        elenco_variabili_cerca_ind : XmArrowButton{
+           arguments  {
+                XmNx=350;
+                XmNy=779;
+                XmNwidth=45;
+                XmNheight=38;
+                XmNarrowDirection=XmARROW_UP;
+                !XmNlabelString = 'Find';
+                XmNborderWidth = 0;
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_elenco_variabili_cerca_ind);
+ XmNactivateCallback= procedure seleziona_activate(k_elenco_variabili_cerca_ind);
+            };
+           };
+
+object
+        elenco_variabili_carica : XmPushButton{
+           arguments  {
+                XmNx=400;
+                XmNy=770;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Load';
+		XmNfontList = bold;
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_elenco_variabili_carica);
+ XmNactivateCallback= procedure confcr_proc(k_selezione_file_dialog);
+            };
+           };
+
+object
+        elenco_variabili_salva : XmPushButton{
+           arguments  {
+                XmNx=505;
+                XmNy=770;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Save';
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_elenco_variabili_salva);
+ XmNactivateCallback= procedure confcr_proc(k_salva_file_dialog);
+            };
+           };
+
+object
+        elenco_variabili_annulla : XmPushButton{
+           arguments  {
+                XmNx=105;
+                XmNy=770;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Cancel';
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_elenco_variabili_annulla);
+ XmNactivateCallback= procedure confcr_proc(k_elenco_variabili_annulla);
+            };
+           };
+
+
+object
+        elenco_variabili_aggiungi : XmArrowButton{
+           arguments  {
+                XmNx=5;
+                XmNy=542;
+                XmNwidth=90;
+                XmNheight=35;
+                XmNarrowDirection=XmARROW_DOWN;
+                XmNborderWidth=0;
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_elenco_variabili_aggiungi);
+/*
+ XmNactivateCallback= procedure seleziona_activate(k_elenco_variabili_aggiungi);
+*/
+ XmNactivateCallback= procedure paste_var_selez(k_elenco_variabili_aggiungi);
+            };
+           };
+object
+        label_aggiungi : XmLabel{
+                arguments  {
+                XmNx=95;
+                XmNy=542;
+                XmNwidth=90;
+                XmNheight=35;
+                XmNlabelString = 'Paste';
+                XmNborderWidth=0;
+                XmNforeground= black;
+               	XmNbackground = sfondo;
+                };
+                                            
+        };
+
+object
+        elenco_variabili_elimina : XmArrowButton{
+           arguments  {
+                XmNx=500;
+                XmNy=542;
+                XmNwidth=90;
+                XmNheight=35;
+                XmNarrowDirection=XmARROW_UP;
+                XmNborderWidth=0;
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_elenco_variabili_elimina);
+/*
+XmNactivateCallback= procedure seleziona_activate(k_elenco_variabili_elimina);
+*/
+ XmNactivateCallback= procedure paste_var_selez(k_elenco_variabili_elimina);
+            };
+           };
+
+object
+        label_elimina : XmLabel{
+                arguments  {
+                XmNx=410;
+                XmNy=542;
+                XmNwidth=90;
+                XmNheight=35;
+                XmNlabelString = 'Cut';
+                XmNborderWidth=0;
+                XmNforeground= black;
+               	XmNbackground = sfondo;
+                };
+        };
+
+object
+        elenco_variabili_label :XmLabel{
+                arguments  {
+                XmNx=5;
+                XmNy=330;
+                XmNwidth=600;
+                XmNheight=30;
+                XmNlabelString = 'Unselected var';
+                XmNborderWidth=0;
+                XmNforeground= black;
+               	XmNbackground = sfondo;
+                };
+                                              
+        callbacks {
+      MrmNcreateCallback = procedure create_proc(k_elenco_variabili_label);
+                        };
+        };
+
+object
+    elenco_variabili : XmScrolledList {
+                arguments{
+                        XmNy = 365;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 6;
+                        XmNwidth = 600;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNselectionPolicy=XmEXTENDED_SELECT;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_elenco_variabili);
+/*
+     XmNsingleSelectionCallback = procedure seleziona_var(k_elenco_variabili);
+*/
+     XmNdefaultActionCallback = procedure seleziona_var(k_elenco_variabili);
+     XmNextendedSelectionCallback = procedure seleziona_var(k_elenco_variabili);
+                        };
+                };
+
+object
+                                           
+        elenco_variabili_sel_label :XmLabel{
+                arguments  {
+                XmNx=5;
+                XmNy=575;
+                XmNwidth=300;
+                XmNheight=30;
+                XmNlabelString = 'Selected var';
+                XmNborderWidth=0;
+                XmNforeground= black;
+               	XmNbackground = sfondo;
+                };
+         callbacks {
+      MrmNcreateCallback = procedure create_proc(k_elenco_variabili_sel_label);
+                        };
+        };
+
+object
+    elenco_variabili_sel : XmScrolledList {
+                arguments{
+                        XmNy = 610;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 6;
+                        XmNwidth = 600;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNselectionPolicy=XmEXTENDED_SELECT;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_elenco_variabili_sel);
+     XmNdefaultActionCallback = procedure seleziona_var(k_elenco_variabili_sel);
+ XmNextendedSelectionCallback = procedure seleziona_var(k_elenco_variabili_sel);
+                        };
+                };
+object
+    elenco_modelli : XmScrolledList {
+                arguments{
+                        XmNy = 180;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 6;
+                        XmNwidth = 195;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_elenco_modelli);
+     XmNdefaultActionCallback = procedure seleziona_var(k_elenco_modelli);
+      XmNsingleSelectionCallback = procedure seleziona_var(k_elenco_modelli);
+                        };
+                };
+object
+    elenco_blocchi : XmScrolledList {
+                arguments{
+                        XmNy = 180;
+                        XmNx = 230;
+                        XmNvisibleItemCount = 6;
+                        XmNwidth = 380;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_elenco_blocchi);
+     XmNdefaultActionCallback = procedure seleziona_var(k_elenco_blocchi);
+      XmNsingleSelectionCallback = procedure seleziona_var(k_elenco_blocchi);
+                        };
+                };
+
+
+! ALLINEAMENTO  ******************************************************** !
+!
+! Definizioni per controllo allineamento
+!
+
+object
+       allineamento_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNdefaultPosition=false;
+                XmNx=650;
+                XmNy=100;
+                XmNwidth=620;
+                XmNheight=400;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=40;
+                XmNborderColor=black;
+                XmNdialogTitle='Componenti disallineati';
+                      };
+                        controls{
+                                         XmScrolledList lista_componenti;
+!                                        XmPushButton allineamento_override;
+
+                };
+        callbacks {
+              MrmNcreateCallback = procedure create_proc(k_allineamento_dialog);
+            };
+        };
+object
+    lista_componenti : XmScrolledList {
+                arguments{
+                        XmNy = 50;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 10;
+                        XmNwidth = 590;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNscrollBarDisplayPolicy=XmAS_NEEDED;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                        XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_caricamento_lista_comp);
+                        };
+                };
+object
+        allineamento_override : XmPushButton{
+           arguments  {
+                XmNx=225;
+                XmNy=330;
+                XmNwidth=150;
+                XmNheight=40;
+                XmNlabelString = 'OVERRIDE';
+                XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_override_comp);
+          XmNactivateCallback= procedure override_allineamento(k_override_comp);
+            };
+        };
+
+! BACKTRACK ******************************************************** !
+!
+! Definizioni per le finestre di backtrack
+!
+
+object
+       backtrack_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNdefaultPosition=false;
+                XmNx=650;
+                XmNy=100;
+                XmNwidth=320+300;
+                XmNheight=400+300;
+                XmNdefaultButton = XmPushButton step_bt;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=40;
+                XmNborderColor=black;
+                XmNdialogTitle='Registrazioni di backtrack';
+                      };
+        controls{
+                XmPushButton step_bt;
+                XmPushButton reset_bt;
+                XmPushButton restart_bt;
+                                         XmLabel      modo_bt;
+                                         XmLabel      modo_bt_value;
+                                         XmLabel      direz_bt;
+                                         XmLabel      direz_bt_value;
+                                         XmLabel                  limiti_bt;
+                                         XmLabel      limiti_bt_value;
+                                         XmLabel                  lastrec_bt;
+                                         XmLabel      lastrec_bt_value;
+                                         XmLabel                  lastload_bt;
+                                         XmLabel      lastload_bt_value;
+                                         XmLabel                  nextstep_bt;
+                                         XmLabel      nextstep_bt_value;
+                                         XmScrolledList lista_backtrack;
+                                         XmMenuBar bt_menu_bar;
+                };
+        callbacks {
+              MrmNcreateCallback = procedure create_proc(k_backtrack_dialog);
+            };
+        };
+object
+        step_bt : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=330+300;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'LOAD';
+                XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_step_bt);
+          XmNactivateCallback= procedure backtrack_activate(k_step_bt);
+            };
+        };
+object
+        reset_bt : XmPushButton{
+           arguments  {
+                XmNx=510;
+                XmNy=330+300;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'EXIT';
+                XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_reset_bt);
+          XmNactivateCallback= procedure backtrack_activate(k_reset_bt);
+            };
+        };
+object
+        modo_bt : XmLabel {
+                arguments {
+                        XmNx = 10;
+                        XmNy = 550;
+                        XmNlabelString= k_modo_bt_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+object
+        modo_bt_value : XmLabel {
+                arguments {
+                        XmNx = 200;
+                        XmNy = 550;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNlabelString=k_modo_bt_val_label;
+                        XmNfontList = piccolo;
+                        XmNalignment = XmALIGNMENT_END;
+                        XmNbackground = sfondo_label;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_modo_bt_val);
+           };
+        };
+object
+        direz_bt : XmLabel {
+                arguments {
+                        XmNx = 10;
+                        XmNy = 520;
+                        XmNlabelString= k_direz_bt_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+object
+        direz_bt_value : XmLabel {
+                arguments {
+                        XmNx = 200;
+                        XmNy = 520;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNlabelString=k_direz_bt_val_label;
+                        XmNfontList = piccolo;
+                        XmNalignment = XmALIGNMENT_END;
+                        XmNbackground = sfondo_label;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_direz_bt_val);
+           };
+        };
+object
+        limiti_bt : XmLabel {
+                arguments {
+                        XmNx = 10;
+                        XmNy = 490;
+                        XmNlabelString= k_limiti_bt_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+object
+        limiti_bt_value : XmLabel {
+                arguments {
+                        XmNx = 200;
+                        XmNy = 490;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNlabelString=k_limiti_bt_val_label;
+                        XmNfontList = piccolo;
+                        XmNalignment = XmALIGNMENT_END;
+                        XmNbackground = sfondo_label;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_limiti_bt_val);
+           };
+        };
+object
+        lastrec_bt : XmLabel {
+                arguments {
+                        XmNx = 325;
+                        XmNy = 550;
+                        XmNlabelString= k_lastrec_bt_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+object
+        lastrec_bt_value : XmLabel {
+                arguments {
+                        XmNx = 515;
+                        XmNy = 550;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNlabelString=k_lastrec_bt_val_label;
+                        XmNfontList = piccolo;
+                        XmNalignment = XmALIGNMENT_END;
+                        XmNbackground = sfondo_label;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_lastrec_bt_val);
+           };
+        };
+object
+        lastload_bt : XmLabel {
+                arguments {
+                        XmNx = 325;
+                        XmNy = 520;
+                        XmNlabelString= k_lastload_bt_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+object
+        lastload_bt_value : XmLabel {
+                arguments {
+                        XmNx = 515;
+                        XmNy = 520;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNlabelString=k_lastload_bt_val_label;
+                        XmNfontList = piccolo;
+                        XmNalignment = XmALIGNMENT_END;
+                        XmNbackground = sfondo_label;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_lastload_bt_val);
+           };
+        };
+object
+        nextstep_bt : XmLabel {
+                arguments {
+                        XmNx = 325;
+                        XmNy = 490;
+                        XmNlabelString= k_nextstep_bt_label;
+                        XmNforeground= black;
+                        XmNbackground= sfondo;
+                        XmNfontList = bold;
+                        };
+        };
+object
+        nextstep_bt_value : XmLabel {
+                arguments {
+                        XmNx = 515;
+                        XmNy = 490;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 85;
+                        XmNheight = 20;
+                        XmNlabelString=k_nextstep_bt_val_label;
+                        XmNfontList = piccolo;
+                        XmNalignment = XmALIGNMENT_END;
+                        XmNbackground = sfondo_label;
+                        };
+            callbacks {
+                MrmNcreateCallback = procedure create_proc(k_nextstep_bt_val);
+           };
+        };
+object
+        restart_bt : XmPushButton{
+           arguments  {
+                XmNx=115;
+                XmNy=330+300;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'OK';
+                XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_restart_bt);
+          XmNactivateCallback= procedure backtrack_activate(k_restart_bt);
+            };
+        };
+object
+    lista_backtrack : XmScrolledList {
+                arguments{
+                        XmNy = 80;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 15;
+                        XmNwidth = 295+300;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNscrollBarDisplayPolicy=XmAS_NEEDED;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                        XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_caricamento_lista_bt);
+ XmNsingleSelectionCallback = procedure seleziona_backtrack(k_caricamento_lista_bt);
+                        };
+                };
+object
+        bt_menu_bar : XmMenuBar{
+        arguments {
+            XmNorientation = XmHORIZONTAL;
+            XmNbackground = sfondo_menu;
+            XmNmenuHelpWidget   = XmCascadeButton bt_help_entry;
+        };
+        controls {
+            XmCascadeButton bt_stato_entry;
+            XmCascadeButton bt_modi_entry;
+                                XmCascadeButton bt_help_entry;
+        };
+        };
+object
+   bt_help_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString= k_bt_help_label;
+                XmNmnemonic = keysym("H");
+                XmNfontList = bold;
+                XmNbackground = sfondo_menu;
+            };
+                        controls {
+            XmPulldownMenu      bt_help_menu;
+                                };
+        };
+
+object
+   bt_help_menu :XmPulldownMenu {
+                        controls {
+                                XmPushButton bt_help_load;
+                                XmPushButton bt_help_ok;
+                                XmPushButton bt_help_exit;
+                                XmSeparator   {};
+                                XmPushButton bt_help_procedure;
+                                };
+                        };
+
+object
+        bt_help_load : XmPushButton {
+                        arguments {
+!                               XmNlabelString = k_bt_help_funzioni_label;
+                                XmNlabelString = "Load   ";
+                                XmNfontList = normal;
+                                XmNbackground = sfondo_tasti;
+                    };
+                        callbacks{
+      MrmNcreateCallback = procedure create_proc(k_bt_help);
+                XmNactivateCallback = procedure help_proc(k_bt_help_load);
+                                };
+                        };
+object
+   bt_help_ok : XmPushButton {
+         arguments {
+!           XmNlabelString = k_bt_help_funzioni_label;
+            XmNlabelString = "Ok    ";
+            XmNfontList = normal;
+            XmNbackground = sfondo_tasti;
+                    };
+         callbacks{
+      MrmNcreateCallback = procedure create_proc(k_bt_help);
+      XmNactivateCallback = procedure help_proc(k_bt_help_ok);
+            };
+         };
+object
+   bt_help_exit : XmPushButton {
+         arguments {
+!           XmNlabelString = k_bt_help_funzioni_label;
+            XmNlabelString = "Exit  ";
+            XmNfontList = normal;
+            XmNbackground = sfondo_tasti;
+                    };
+         callbacks{
+      MrmNcreateCallback = procedure create_proc(k_bt_help);
+      XmNactivateCallback = procedure help_proc(k_bt_help_exit);
+            };
+         };
+object
+   bt_help_procedure : XmPushButton {
+         arguments {
+!           XmNlabelString = k_bt_help_funzioni_label;
+            XmNlabelString = "Procedure";
+            XmNfontList = normal;
+            XmNbackground = sfondo_tasti;
+                    };
+         callbacks{
+      MrmNcreateCallback = procedure create_proc(k_bt_help);
+      XmNactivateCallback = procedure help_proc(k_bt_help_procedure);
+            };
+         };
+object
+   bt_stato_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString= k_stato_bt_label;
+                XmNmnemonic = keysym("S");
+                XmNfontList = bold;
+                XmNbackground = sfondo_menu;
+            };
+!   callbacks {
+!   MrmNcreateCallback = procedure create_proc(k_stato_bt);
+!   };
+                        controls {
+                XmPulldownMenu bt_stato_menu;
+                                };
+        };
+object
+                bt_stato_menu : XmPulldownMenu {
+            controls {
+                                        XmCascadeButton replay_button;
+                                        XmSeparator   {};
+                                        XmCascadeButton stop_replay_button;
+                                        };
+                        };
+object
+                        replay_button : XmCascadeButton {
+                                        arguments {
+                XmNlabelString = k_replay_label ;
+                XmNfontList = normal;
+               XmNbackground = sfondo_tasti;
+                      };
+       callbacks{
+      MrmNcreateCallback = procedure create_proc(k_replay);
+      XmNactivateCallback = procedure replay_proc(k_replay);
+                                        };
+                };
+object
+         stop_replay_button : XmCascadeButton {
+               arguments {
+                XmNlabelString = k_stop_replay_label ;
+                XmNfontList = normal;
+               XmNbackground = sfondo_tasti;
+                      };
+       callbacks{
+      MrmNcreateCallback = procedure create_proc(k_stop_replay);
+      XmNactivateCallback = procedure replay_proc(k_stop_replay);
+                     };
+                };
+!
+!
+!
+
+object
+        bt_modi_entry : XmCascadeButton {
+            arguments {
+                XmNlabelString= k_bt_menu_label;
+                XmNmnemonic = keysym("M");
+                XmNfontList = bold;
+                XmNbackground = sfondo_menu;
+            };
+            controls {
+                XmPulldownMenu modo_menu;
+            };
+        };
+object
+        modo_menu : XmPulldownMenu {
+            controls {
+                XmCascadeButton direzione_popup;
+                XmSeparator   {};
+                XmCascadeButton auto_man_popup;
+            };
+        };
+object auto_man_popup : XmCascadeButton {
+      arguments {
+         XmNlabelString = k_bt_automan_label ;
+                  XmNfontList = normal;
+                  XmNbackground = sfondo_tasti;
+         };
+   controls {
+                       XmPulldownMenu automan_menu;
+                      };
+      };
+object automan_menu : XmPulldownMenu {
+               controls {
+                  XmPushButton manuale_button;
+                  XmSeparator {};
+                  XmPushButton automatico_button;
+            };
+      };
+   manuale_button : XmPushButton {
+               arguments {
+                        XmNfontList = normal;
+                        XmNbackground = sfondo_tasti;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 140;
+                        XmNheight = 30;
+                        XmNlabelString="Manuale";
+                        };
+               callbacks {
+        MrmNcreateCallback = procedure create_proc(k_bt_manuale);
+        XmNactivateCallback= procedure backtrack_activate(k_bt_manuale);
+                        };
+               };
+   automatico_button : XmPushButton {
+               arguments {
+                        XmNfontList = normal;
+                        XmNbackground = sfondo_tasti;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 140;
+                        XmNheight = 30;
+                        XmNlabelString="Automatico";
+                        };
+               callbacks {
+        MrmNcreateCallback = procedure create_proc(k_bt_automatico);
+        XmNactivateCallback= procedure backtrack_activate(k_bt_automatico);
+                        };
+               };
+object direzione_popup : XmCascadeButton {
+      arguments {
+         XmNlabelString = k_bt_direction_label ;
+                  XmNfontList = normal;
+                  XmNbackground = sfondo_tasti;
+         };
+   controls {
+                       XmPulldownMenu direzione_menu;
+                      };
+      };
+object direzione_menu : XmPulldownMenu {
+                                        controls {
+                                                XmPushButton indietro_button;
+                                                XmSeparator {};
+                                                XmPushButton avanti_button;
+                                };
+                };
+        indietro_button : XmPushButton {
+                                        arguments {
+                                       XmNfontList = normal;
+                        XmNbackground = sfondo_tasti;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 140;
+                        XmNheight = 30;
+                        XmNlabelString="Indietro";
+                                                                };
+                                        callbacks {
+        MrmNcreateCallback = procedure create_proc(k_bt_indietro);
+        XmNactivateCallback= procedure backtrack_activate(k_bt_indietro);
+                                                                };
+                                        };
+   avanti_button : XmPushButton {
+               arguments {
+                        XmNfontList = normal;
+                        XmNbackground = sfondo_tasti;
+                        XmNrecomputeSize=false;
+                        XmNwidth = 140;
+                        XmNheight = 30;
+                        XmNlabelString="Avanti";
+                        };
+               callbacks {
+        MrmNcreateCallback = procedure create_proc(k_bt_avanti);
+        XmNactivateCallback= procedure backtrack_activate(k_bt_avanti);
+                        };
+               };
+
+!
+! Definizioni per le finestre di snapshot
+!
+
+object
+        caricamento_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNdefaultPosition=false;
+                XmNx=700;
+                XmNy=50;
+                XmNwidth=320+300;
+                XmNheight=400+300;
+                XmNdefaultButton = XmPushButton caricamento_ok;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Initial condition';
+                      };
+        controls{
+                XmPushButton caricamento_ok;
+                XmPushButton caricamento_annulla;
+                XmScrolledList caricamento_lista;
+                XmLabel caricamento_label;
+                };
+        callbacks {
+              MrmNcreateCallback = procedure create_proc(k_caricamento_dialog);
+            };
+        };
+
+object
+        caricamento_label : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=300+300;
+                XmNheight=50;
+                XmNlabelString = 'Load initial condition';
+                XmNbackground=red;
+			XmNfontList = bold;
+                      };
+           callbacks {
+         MrmNcreateCallback = procedure create_proc(k_caricamento_label);
+            };
+        };
+
+object
+        caricamento_ok : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=330+300;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Ok';
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_caricamento_ok);
+          XmNactivateCallback= procedure snapshot_activate(k_caricamento_ok);
+            };
+        };
+
+object
+        caricamento_annulla : XmPushButton{
+           arguments  {
+                XmNx=210+300;
+                XmNy=330+300;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Cancel';
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_caricamento_annulla);
+        XmNactivateCallback= procedure snapshot_activate(k_caricamento_annulla);
+            };
+        };
+
+object
+    caricamento_lista : XmScrolledList {
+                arguments{
+                        XmNy = 80;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 9+12;
+                        XmNwidth = 295+300;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNscrollBarDisplayPolicy=XmSTATIC;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_caricamento_lista);
+ XmNsingleSelectionCallback = procedure seleziona_snapshot(k_caricamento_lista);
+                        };
+                };
+
+object
+        scrittura_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNwidth=320+300;
+                XmNheight=200;
+                XmNdefaultPosition=false;
+                XmNx=700;
+                XmNy=50;
+                XmNdefaultButton = XmPushButton scrittura_ok;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Initial condition';
+                      };
+        controls{
+                XmPushButton scrittura_ok;
+               XmPushButton scrittura_annulla;
+                XmLabel scrittura_label;
+                XmText scrittura_text;
+                };
+        callbacks {
+              MrmNcreateCallback = procedure create_proc(k_scrittura_dialog);
+            };
+        };
+
+object
+        scrittura_text : XmText {
+           arguments  {
+                XmNx=63;
+                XmNy=80;
+                XmNwidth=180+300;
+                XmNheight=35;
+                XmNborderWidth=2;
+                XmNmaxLength=80;
+                XmNvalue='Description';
+            	XmNbackground = sfondo_text;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_scrittura_text);
+            };
+        };
+object
+        scrittura_label : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=300+300;
+                XmNheight=50;
+                XmNlabelString = 'Save initial condition';
+		XmNfontList = bold;
+                XmNbackground=red;
+                      };
+           callbacks {
+         MrmNcreateCallback = procedure create_proc(k_scrittura_label);
+            };
+        };
+
+object
+        scrittura_ok : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=130;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Ok';
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_scrittura_ok);
+          XmNactivateCallback= procedure snapshot_activate(k_scrittura_ok);
+            };
+        };
+
+object
+        scrittura_annulla : XmPushButton{
+           arguments  {
+                XmNx=180+300;
+                XmNy=130;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Cancel';
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_scrittura_annulla);
+          XmNactivateCallback= procedure snapshot_activate(k_scrittura_annulla);
+            };
+        };
+
+object
+        editing_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNwidth=320+300;
+                XmNheight=400+300;
+                XmNdefaultPosition=false;
+                XmNx=700;
+                XmNy=50;
+                XmNdefaultButton = XmPushButton editing_fine;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Initial condition';
+                      };
+        controls{
+                XmPushButton editing_fine;
+!                XmPushButton editing_modify;
+                XmPushButton editing_cancella;
+                XmScrolledList editing_lista;
+                XmLabel editing_label;
+                };
+        callbacks {
+              MrmNcreateCallback = procedure create_proc(k_editing_dialog);
+            };
+        };
+
+object
+        editing_label : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=300+300;
+                XmNheight=50;
+                XmNlabelString = 'Editing initial condition';
+		XmNfontList = bold;
+                XmNbackground=red;
+                      };
+           callbacks {
+         MrmNcreateCallback = procedure create_proc(k_editing_label);
+            };
+        };
+
+object
+        editing_fine : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=330+300;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'End';
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_editing_fine);
+          XmNactivateCallback= procedure snapshot_activate(k_editing_fine);
+            };
+        };
+
+object
+        editing_modify : XmPushButton{
+           arguments  {
+                XmNx=220;
+                XmNy=330+300;
+                XmNwidth=170;
+                XmNheight=40;
+                XmNlabelString = 'Modify description';
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_editing_modify);
+          XmNactivateCallback= procedure snapshot_activate(k_editing_modify);
+            };
+        };
+
+object
+        editing_cancella : XmPushButton{
+           arguments  {
+                XmNx=210+300;
+                XmNy=330+300;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Delete';
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_editing_cancella);
+          XmNactivateCallback= procedure snapshot_activate(k_editing_cancella);
+            };
+        };
+
+object
+    editing_lista : XmScrolledList {
+                arguments{
+                        XmNy = 80;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 9+12;
+                        XmNwidth = 295+300;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNscrollBarDisplayPolicy=XmSTATIC;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+    MrmNcreateCallback = procedure create_proc(k_editing_lista);
+    XmNsingleSelectionCallback = procedure seleziona_snapshot(k_editing_lista);
+ };
+                };
+
+!
+! Definizioni per le finestre di input
+!
+object
+        elenco_pert_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNdefaultPosition=false;
+                XmNwidth=650;
+                XmNheight=530;
+                XmNx=620;
+                XmNy=20;
+                XmNdefaultButton = XmArrowButton elenco_pert_cerca_avanti;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground = sfondo;
+                XmNborderWidth=0;
+                XmNborderColor=black;
+                XmNdialogTitle='Input';
+                      };
+           controls   {
+                XmPushButton elenco_pert_ok;
+                XmPushButton elenco_pert_fine;
+                XmArrowButton elenco_pert_cerca_avanti;
+                XmArrowButton elenco_pert_cerca_ind;
+                XmLabel elenco_pert_cerca_label;
+                XmText  elenco_pert_text_cerca ;
+                XmScrolledList elenco_ingressi;
+                XmScrolledList elenco_modelli_pert;
+                XmScrolledList elenco_blocchi_pert;
+                XmLabel elenco_ingressi_label;
+                XmLabel elenco_pert_dialog_label;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_elenco_pert_dialog);
+            };
+        };
+
+object
+        elenco_pert_text_cerca : XmText {
+           arguments  {
+                XmNx=115;
+                XmNy=476;
+                XmNwidth=200;
+                XmNheight=40;
+                XmNvalue='input';
+            	XmNbackground = sfondo_text;
+                  };
+                callbacks {
+          MrmNcreateCallback = procedure create_proc(k_elenco_pert_text_cerca);
+            };
+        };
+
+object
+        elenco_pert_ok : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=470;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Ok';
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_elenco_pert_ok);
+ XmNactivateCallback= procedure seleziona_pert_activate(k_elenco_pert_ok);
+            };
+           };
+
+object
+        elenco_pert_fine : XmPushButton{
+           arguments  {
+                XmNx=500;
+                XmNy=470;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'End';
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_elenco_pert_fine);
+ XmNactivateCallback= procedure seleziona_pert_activate(k_elenco_pert_fine);
+            };
+           };
+
+object
+        elenco_pert_cerca_avanti : XmArrowButton{
+           arguments  {
+                XmNx=326;
+                XmNy=475;
+                XmNwidth=45;
+                XmNheight=38;
+                XmNarrowDirection=XmARROW_DOWN;
+            	XmNbackground = sfondo_tasti;
+                XmNborderWidth = 0;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_elenco_pert_cerca_avanti);
+XmNactivateCallback= procedure 
+	seleziona_pert_activate(k_elenco_pert_cerca_avanti);
+            };
+           };
+
+object
+        elenco_pert_cerca_label  : XmLabel{
+                arguments  {
+                XmNlabelString = 'Find';
+                XmNx=371;
+                XmNy=475;
+                XmNwidth=90;
+                XmNheight=37;
+               	XmNbackground = sfondo;
+                };
+        };
+
+
+object
+        elenco_pert_cerca_ind : XmArrowButton{
+           arguments  {
+                XmNx=461;
+                XmNy=475;
+                XmNwidth=45;
+                XmNheight=38;
+                XmNarrowDirection=XmARROW_UP;
+            	XmNbackground = sfondo_tasti;
+                XmNborderWidth = 0;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure
+create_proc(k_elenco_pert_cerca_ind);
+XmNactivateCallback= procedure
+seleziona_pert_activate(k_elenco_pert_cerca_ind);
+            };
+           };
+
+
+
+object
+    elenco_ingressi : XmScrolledList {
+                arguments{
+                        XmNy = 290;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 6;
+                        XmNwidth = 600;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_elenco_ingressi);
+     XmNsingleSelectionCallback = procedure
+seleziona_pert(k_elenco_ingressi);
+                        };
+                };
+
+object
+    elenco_modelli_pert : XmScrolledList {
+                arguments{
+                        XmNy = 65;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 6;
+                        XmNwidth = 195;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_elenco_modelli_pert);
+   XmNsingleSelectionCallback = procedure
+seleziona_pert(k_elenco_modelli_pert);
+                        };
+                };
+object
+    elenco_blocchi_pert : XmScrolledList {
+                arguments{
+                        XmNy = 65;
+                        XmNx = 230;
+                        XmNvisibleItemCount = 6;
+                        XmNwidth = 380;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_elenco_blocchi_pert);
+   XmNsingleSelectionCallback = procedure
+seleziona_pert(k_elenco_blocchi_pert);
+                        };
+                };
+
+object
+        elenco_pert_dialog_label : XmLabel {
+                arguments {
+                        XmNx=5;
+                        XmNy=5;
+                        XmNwidth=630;
+                        XmNheight=35;
+                        XmNlabelString = 'Input';
+			XmNfontList = bold;
+                        XmNbackground=red;
+                        XmNborderWidth=0;
+                };
+                callbacks {
+          MrmNcreateCallback = procedure
+                create_proc(k_elenco_pert_dialog_label);
+            };
+        };
+
+object
+        elenco_ingressi_label :XmLabel{
+                arguments  {
+                XmNx=5;
+                XmNy=255;
+                XmNwidth=600;
+                XmNheight=30;
+                XmNlabelString = 'Available input';
+                XmNborderWidth=0;
+                XmNforeground= black;
+               	XmNbackground = sfondo;
+                };
+        callbacks {
+      MrmNcreateCallback = procedure
+create_proc(k_elenco_ingressi_label);
+                        };
+        };
+
+!
+! Definizioni per le finestre di chaimata stazioni
+!
+
+object
+        staz_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNdefaultPosition=false;
+                XmNx=700;
+                XmNy=50;
+                XmNwidth=320;
+                XmNheight=400;
+                XmNdefaultButton = XmPushButton staz_ok;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Calling stations';
+                      };
+        controls{
+                XmPushButton staz_ok;
+                XmPushButton staz_annulla;
+                XmScrolledList staz_lista;
+                XmLabel staz_label;
+                };
+        callbacks {
+              MrmNcreateCallback = procedure create_proc(k_staz_dialog);
+            };
+        };
+
+
+
+object
+        staz_label : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=300;
+                XmNheight=50;
+                XmNlabelString = 'Page list';
+                XmNbackground=red;
+			XmNfontList = bold;
+                      };
+           callbacks {
+         MrmNcreateCallback = procedure create_proc(k_staz_label);
+            };
+        };
+
+object
+        staz_ok : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=330;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Ok';
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_staz_ok);
+          XmNactivateCallback= procedure activate_staz(k_staz_ok);
+            };
+        };
+
+object
+        staz_annulla : XmPushButton{
+           arguments  {
+                XmNx=210;
+                XmNy=330;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Cancel';
+            	XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_staz_annulla);
+        XmNactivateCallback= procedure activate_staz(k_staz_annulla);
+            };
+        };
+
+
+object
+    staz_lista : XmScrolledList {
+                arguments{
+                        XmNy = 80;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 9;
+                        XmNwidth = 295;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNscrollBarDisplayPolicy=XmSTATIC;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_staz_lista);
+ XmNsingleSelectionCallback = procedure seleziona_staz(k_staz_lista);
+                        };
+                };
+
+!
+! Definizioni per la finestre di statistica delle perturbazioni
+!
+object
+        input_statistics_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNwidth=320+300;
+                XmNheight=700;
+                XmNdefaultPosition=false;
+                XmNx=700;
+                XmNy=50;
+                XmNdefaultButton = XmPushButton inputstat_quit;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Input statistics';
+                      };
+        controls{
+                XmPushButton inputstat_quit;
+                !XmPushButton inputstat_del;
+                XmScrolledList inputstat_lista_1;
+                XmScrolledList inputstat_lista_2;
+                XmLabel inputstat_label_1;
+                XmLabel inputstat_label_2;
+                };
+        callbacks {
+              MrmNcreateCallback = procedure create_proc(k_inputstat_dialog);
+            };
+        };
+
+object
+        inputstat_label_1 : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=600;
+                XmNheight=50;
+                XmNlabelString = 'Active pert';
+                XmNbackground=red;
+			XmNfontList = bold;
+                      };
+           callbacks {
+         MrmNcreateCallback = procedure create_proc(k_inputstat_label_1);
+            };
+        };
+
+object
+        inputstat_label_2 : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=330;
+                XmNwidth=600;
+                XmNheight=50;
+                XmNlabelString = 'Non active pert';
+                XmNbackground=red;
+			XmNfontList = bold;
+                      };
+           callbacks {
+         MrmNcreateCallback = procedure create_proc(k_inputstat_label_2);
+            };
+        };
+
+object
+        inputstat_quit : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=635;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Quit';
+                XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_inputstat_quit);
+          XmNactivateCallback= procedure inputstat_proc(k_inputstat_quit);
+            };
+        };
+
+object
+        inputstat_del : XmPushButton{
+           arguments  {
+                XmNx=500;
+                XmNy=635;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Remove';
+                XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_inputstat_del);
+          XmNactivateCallback= procedure seleziona_inputstat_activate(k_inputstat_del);
+            };
+        };
+object
+    inputstat_lista_1 : XmScrolledList {
+                arguments{
+                        XmNy = 65;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 9;
+                        XmNwidth = 600;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNscrollBarDisplayPolicy=XmSTATIC;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                        XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+    MrmNcreateCallback = procedure create_proc(k_inputstat_lista_1);
+!   XmNsingleSelectionCallback = procedure seleziona_snapshot(k_editing_lista);
+ };
+                };
+
+object
+    inputstat_lista_2 : XmScrolledList {
+                arguments{
+                        XmNy = 385;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 9;
+                        XmNwidth = 600;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNscrollBarDisplayPolicy=XmSTATIC;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                        XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+    MrmNcreateCallback = procedure create_proc(k_inputstat_lista_2);
+    XmNsingleSelectionCallback = procedure seleziona_inputstat(k_inputstat_lista_2);
+ };
+                };
+
+
+!
+! Definizioni per la finestre di editing delle perturbazioni
+!
+object
+        editpert_statistics_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNwidth=320+300;
+                XmNheight=700;
+                XmNdefaultPosition=false;
+                XmNx=700;
+                XmNy=50;
+                XmNdefaultButton = XmPushButton editpert_quit;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground=sfondo;
+                XmNborderWidth=5;
+                XmNborderColor=black;
+                XmNdialogTitle='Edit Input';
+                      };
+        controls{
+                XmPushButton editpert_quit;
+                XmPushButton editpert_del;
+                XmPushButton editpert_del_all;
+                XmPushButton editpert_mod;
+                XmScrolledList editpert_lista_1;
+                XmScrolledList editpert_lista_2;
+                XmLabel editpert_label_1;
+                XmLabel editpert_label_2;
+                };
+        callbacks {
+              MrmNcreateCallback = procedure create_proc(k_editpert_dialog);
+            };
+        };
+
+object
+        editpert_label_1 : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=5;
+                XmNwidth=600;
+                XmNheight=50;
+                XmNlabelString = 'Variables';
+                XmNbackground=red;
+			XmNfontList = bold;
+                      };
+           callbacks {
+         MrmNcreateCallback = procedure create_proc(k_editpert_label_1);
+            };
+        };
+
+object
+        editpert_label_2 : XmLabel{
+           arguments  {
+                XmNx=5;
+                XmNy=330;
+                XmNwidth=600;
+                XmNheight=50;
+                XmNlabelString = 'Input';
+                XmNbackground=red;
+			XmNfontList = bold;
+                      };
+           callbacks {
+         MrmNcreateCallback = procedure create_proc(k_editpert_label_2);
+            };
+        };
+
+object
+        editpert_quit : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=635;
+                XmNwidth=100;
+                XmNheight=40;
+                XmNlabelString = 'Quit';
+                XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_editpert_quit);
+          XmNactivateCallback= procedure editpert_proc(k_editpert_quit);
+            };
+        };
+
+object
+        editpert_del_all : XmPushButton{
+           arguments  {
+                XmNx=500;
+                XmNy=635;
+                XmNwidth=100;
+                XmNheight=40;
+                XmNlabelString = 'Remove all';
+                XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_editpert_del_all);
+          XmNactivateCallback= procedure seleziona_editpert_activate(k_editpert_del_all);
+            };
+        };
+
+object
+        editpert_del : XmPushButton{
+           arguments  {
+                XmNx=350;
+                XmNy=635;
+                XmNwidth=100;
+                XmNheight=40;
+                XmNlabelString = 'Remove';
+                XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_editpert_del);
+          XmNactivateCallback= procedure seleziona_editpert_activate(k_editpert_del);
+            };
+        };
+
+object
+        editpert_mod : XmPushButton{
+           arguments  {
+                XmNx=200;
+                XmNy=635;
+                XmNwidth=100;
+                XmNheight=40;
+                XmNlabelString = 'Modify';
+                XmNbackground = sfondo_tasti;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_editpert_mod);
+          XmNactivateCallback= procedure seleziona_editpert_activate(k_editpert_mod);
+            };
+        };
+
+object
+    editpert_lista_1 : XmScrolledList {
+                arguments{
+                        XmNy = 65;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 9;
+                        XmNwidth = 600;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNscrollBarDisplayPolicy=XmSTATIC;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                        XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+   MrmNcreateCallback = procedure create_proc(k_editpert_lista_1);
+   XmNsingleSelectionCallback = procedure seleziona_editpert(k_editpert_lista_1);
+ };
+                };
+
+object
+    editpert_lista_2 : XmScrolledList {
+                arguments{
+                        XmNy = 385;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 9;
+                        XmNwidth = 600;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNscrollBarDisplayPolicy=XmSTATIC;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                        XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+    MrmNcreateCallback = procedure create_proc(k_editpert_lista_2);
+    XmNsingleSelectionCallback = procedure seleziona_editpert(k_editpert_lista_2);
+ };
+                };
+
+!
+! Definizioni per le finestre di data modify
+!
+object
+        data_dialog : XmBulletinBoardDialog {
+           arguments  {
+                XmNallowOverlap=false;
+                XmNautoUnmanage=false;
+                XmNdialogStyle=XmDIALOG_MODELESS;
+                XmNdefaultPosition=false;
+                XmNwidth=650;
+                XmNheight=530;
+                XmNx=620;
+                XmNy=20;
+                !XmNdefaultButton = XmArrowButton elenco_pert_cerca_avanti;
+                XmNnoResize=true;
+                XmNresizePolicy=XmRESIZE_NONE;
+                XmNbackground = sfondo;
+                XmNborderWidth=0;
+                XmNborderColor=black;
+                XmNdialogTitle='Data modify';
+                      };
+           controls   {
+                XmPushButton data_dialog_ok;
+                XmPushButton data_dialog_canc;
+                XmScrolledList elenco_modelli_modat;
+                XmScrolledList elenco_blocchi_modat;
+                XmLabel data_dialog_label;
+		XmScrolledWindow scrolled_data;
+                      };
+           callbacks {
+          MrmNcreateCallback = procedure create_proc(k_data_dialog);
+            };
+        };
+object
+        data_dialog_label : XmLabel {
+                arguments {
+                        XmNx=5;
+                        XmNy=5;
+                        XmNwidth=630;
+                        XmNheight=35;
+                        XmNlabelString ='Data modify' ;
+                        XmNbackground=red;
+			XmNfontList = bold;
+                        XmNborderWidth=0;
+                };
+                callbacks {
+          MrmNcreateCallback = procedure create_proc(k_data_dialog_label);
+            };
+	};
+object
+    elenco_modelli_modat : XmScrolledList {
+                arguments{
+                        XmNy = 65;
+                        XmNx = 5;
+                        XmNvisibleItemCount = 6;
+                        XmNwidth = 195;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                        XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_elenco_modelli_modat);
+  XmNsingleSelectionCallback = procedure seleziona_data(k_elenco_modelli_modat);
+                        };
+                };
+object
+    elenco_blocchi_modat : XmScrolledList {
+                arguments{
+                        XmNy = 65;
+                        XmNx = 230;
+                        XmNvisibleItemCount = 6;
+                        XmNwidth = 380;
+                        XmNlistSizePolicy = XmCONSTANT;
+                        XmNselectionPolicy=XmSINGLE_SELECT;
+                	XmNbackground = sfondo_lista;
+                        };
+                callbacks {
+      MrmNcreateCallback = procedure create_proc(k_elenco_blocchi_modat);
+  XmNsingleSelectionCallback = procedure seleziona_data(k_elenco_blocchi_modat);
+                        };
+                };
+object
+        data_dialog_ok : XmPushButton{
+           arguments  {
+                XmNx=5;
+                XmNy=470;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNsensitive=false;
+                XmNlabelString = 'Ok';
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_data_dialog_ok);
+ XmNactivateCallback= procedure seleziona_editdata_activate(k_data_dialog_ok);
+            };
+           };
+object
+        data_dialog_canc : XmPushButton{
+           arguments  {
+                XmNx=105;
+                XmNy=470;
+                XmNwidth=90;
+                XmNheight=40;
+                XmNlabelString = 'Cancel';
+            	XmNbackground = sfondo_tasti;
+                         };
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_data_dialog_canc);
+ XmNactivateCallback= procedure seleziona_editdata_activate(k_data_dialog_canc);
+            };
+           };
+
+object
+        scrolled_data : XmScrolledWindow {
+                arguments {
+                        XmNx=5;
+                        XmNy=265;
+                        XmNwidth=630;
+                        XmNheight=200;
+                        XmNbackground = sfondo_lista;
+			XmNscrollingPolicy= XmAUTOMATIC;
+		};
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_data_scrolled);
+            };
+           controls   {
+		!XmRowColumn rowcol_data;
+		XmDrawingArea rowcol_data;
+		};
+	};
+
+object
+	rowcol_data : XmDrawingArea {
+                arguments {
+                        XmNx=0;
+                        XmNy=0;
+                        XmNwidth=1000;
+                        XmNheight=400;
+	!		XmNadjustMargin=false;
+	!		XmNadjustLast=true;
+	!		XmNisAligned=true;
+	!		XmNpacking=XmPACK_COLUMN;
+	!		XmNorientation=XmVERTICAL;
+	!		XmNnumColumns = 1;
+                        XmNbackground = sfondo_lista;
+			};
+           callbacks {
+ MrmNcreateCallback = procedure create_proc(k_data_rowcol);
+            };
+        };
+
+end module;
+
+
+
+
+
+         

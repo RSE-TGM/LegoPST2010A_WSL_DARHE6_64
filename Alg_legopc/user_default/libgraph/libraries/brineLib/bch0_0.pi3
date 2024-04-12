@@ -1,0 +1,24 @@
+BCH0_0                                                                          
+BCH0                                                                            
+Brine evaporator sluice gate                                                    
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR =11
+ 
+NCONF = 1
+ 
+WTUB      --UA-- FLOW RATE THROUGH THE HEAD LOSS                                
+PITU      --IN-- PRESSURE AT THE HEAD LOSS INLET                                
+PIFO      --IN-- INLET BOTTOM PRESSURE                                          
+PUTU      --IN-- PRESSURE AT THE HEAD LOSS OUTLET                               
+PUFO      --IN-- OUTLET BOTTOM PRESSURE                                         
+HTUB      --IN-- ENTHALPY AT HEAD LOSS IN/OUT                                   
+AKTB      --IN-- HEAD LOSS CORRECTOR COEFFICIENT                                
+ZUPS      --IN-- LEVEL UPSTREAM HEAD LOSS                                       
+ZDWN      --IN-- LEVEL DOWNSTREAM HEAD LOSS                                     
+FNAC      --IN-- NaCl INLET MASS FRACTION                                       
+FINV      --IN-- NaCl MASS FRACTION (FLOW INVERSION)                            
+HINV      --IN-- ENTHALPY AT INLET (FLOW INVERSION)                             
+==============================                                                  
+EOF                                                                             

@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGOMMI HELP</TITLE>
+<META NAME="subject" CONTENT="Documentazione LEGOMMI">
+<META NAME="doccomm" CONTENT="LMMIHELP run-time">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=5><P><A NAME="MmiSynopticAnimation"></A>LEGOMMI: synoptic animation</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">During simulation session the MMI system is composed by a pagination subsystem that activate/deactivate requested pages, requests the updating of the variables present on the visualized pages ( to the updating system) and act as a client in respect of run-time services. Simulation's variables are requested or send to the updating system which communicate (generally via ethernet) with the simulator.</P>
+</FONT><B><FONT FACE="Univers (W1),Arial"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image104.gif" WIDTH=797 HEIGHT=797></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><IMG SRC="Image105.gif" WIDTH=506 HEIGHT=258></P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><I><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER">HOW TO</P>
+</I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#MmiStartup"><U><FONT FACE="Univers (W1),Arial" COLOR="#0000ff">Startup MMI</U></FONT></A><B><FONT FACE="Arial"> </B>lmi_sim_startup</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><I><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER">LAYOUT</P>
+</I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="file:///\\Ucin7/lomgr/html/lmmilayo.htm#MmiMainWindow"><U><FONT FACE="Univers (W1),Arial" COLOR="#0000ff">MMI Main Window Layout</U></FONT></A><FONT FACE="Arial">lmi_mmi_mw_ly</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="MmiStartup"></A>Animation: MMI startup</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">MMI can start up with some already set pages by using the following parameters:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">mmi -Context </B><I>a.ctx</I> <B>-pag </B><I>pg1</I> <B>-pag </B><I>pg2</I> <B>-pagback </B><I>pg2</P>
+</I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY"></P></FONT>
+<TABLE CELLSPACING=0 BORDER=0 CELLPADDING=5 WIDTH=430>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">-Context</FONT></TD>
+<TD WIDTH="74%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">sets a Context file different from the default Context.ctx.</P>
+<P ALIGN="JUSTIFY"></FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">-pag</FONT></TD>
+<TD WIDTH="74%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">sets a page which has to be open at MMI start-up on the local display.</P>
+<P ALIGN="JUSTIFY"></FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">-pagback</FONT></TD>
+<TD WIDTH="74%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">set a page characteristic; once the page is open, its default position will behind the other pages which already are or will be opened. This page is usually included among start up pages.</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY"></P>
+<U><P ALIGN="JUSTIFY">Display</P>
+</U><P ALIGN="JUSTIFY">During start-up MMI tries to open a connection with all the displays defined inside the context file and sends an error message on mmi main window in case of failure. Only errors in the local display connection can abort mmi. Every page can be opened only once for each display. </P>
+<P ALIGN="JUSTIFY"></P>
+<U><P ALIGN="JUSTIFY">Limits</P>
+</U><P ALIGN="JUSTIFY">If mmi is used in the SCADA version, up to 10 pages can be open simultaneously while the figure rises to 100 with the simulator version.</P>
+<U><P ALIGN="JUSTIFY"></P>
+</U></FONT><FONT FACE="Univers (W1),Arial"><P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

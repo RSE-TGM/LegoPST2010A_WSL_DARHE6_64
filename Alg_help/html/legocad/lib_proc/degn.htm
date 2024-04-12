@@ -1,0 +1,190 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE DEGN</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DEGN_summ"></A>MODULE DEGN CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><P>&nbsp;</P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DEGN_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DEGN_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DEGN_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DEGN_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DEGN_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DEGN_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DEGN_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DEGN_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DEGN_A"></A>MODULE DEGN CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">DEAERATOR WITH ONE PRESSURE NODE</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The DEGN module simulates the dynamics of thermo-hydraulic phenomena which the liquid-steam mixture contained in a degasifier cavity is subjected to.</P>
+<P>To define the module mathematical model, the volume engaged by the fluid is subdivided in the following zones:</P>
+<P ALIGN="JUSTIFY">- upper zone identified as "steam zone"</P>
+<P ALIGN="JUSTIFY">- lower zone identified as "liquid zone"</P>
+<P>In these zones, that may not be in thermodynamic equilibrium, water can be present as a two-phase mixture. So, it is possible to consider:</P>
+<P ALIGN="JUSTIFY">- the condensation flow rate proportional to the mass of liquid present in the steam zone</P>
+<P ALIGN="JUSTIFY">- the evaporation flow rate proportional to the mass of steam present in the liquid zone</P>
+<P>To take into account the power exchanged by degasifier feeding liquid with the steam present into the dome, it is supposed that (whatever the conditions are at the degasifier inlet), the feeding liquid exchanges with the steam inside dome the power needed to reach saturation conditions.</P>
+<P>Further hypotheses introduced in the module are:</P>
+<P ALIGN="JUSTIFY">- absence of incondensable gas</P>
+<P ALIGN="JUSTIFY">- the thermal exchange between fluid and cavity walls is negligible</P>
+<P ALIGN="JUSTIFY">- the distribution of pressure and enthalpy in the steam zone is uniform</P>
+<P ALIGN="JUSTIFY">- the distribution of enthalpy in the liquid zone is uniform.</P>
+<P>Hereinafter the utilized equations are indicated with the same programming order:</P>
+<P ALIGN="JUSTIFY">1) the conservation equation of energy in the liquid zone</P>
+<P ALIGN="JUSTIFY">2) the conservation equation of energy in the steam zone</P>
+<P ALIGN="JUSTIFY">3) the conservation equation of mass in the liquid zone</P>
+<P ALIGN="JUSTIFY">4) the conservation equation of mass in the steam zone</P>
+<P ALIGN="JUSTIFY">5) the equation for pressure calculation on the cavity bottom.</P>
+<P>The first four equations are differential whereas the fifth one is algebraical.</P>
+<P>The equation 5) (useful for a correct evaluation of NPSH concerning the liquid extraction pump) is formulated for a cylindrical cavity having horizontal axis, considering this geometry the most common one used in manufacturing of degasifier collecting tanks. User must supply the characteristic dimensions of the cavity among the input data required in the DEGN module (see below).</P>
+<P ALIGN="JUSTIFY">It is useful to note that it is possible to simulate both the heating phase of degasifier during start-up and pumps recirculation.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DEGN_B"></A>MODULE DEGN CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image302.gif" WIDTH=393 HEIGHT=280></P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>[kg/s]&#9;WSPD&#9;flow rate of steam bled from the turbine and supplied into the degasifier dome</P>
+<P>[J/kg]&#9;HSPD&#9;&#9;enthalpy of steam bled from the turbine and supplied into the degasifier dome</P>
+<P>[kg/s]&#9;WALI&#9;&#9;flow rate of feedwater to the dome</P>
+<P>[J/kg]&#9;HALI&#9;&#9;enthalpy of feedwater to the dome</P>
+<P>[kg/s]&#9;WDRE&#9;flow rate of drainages flowing into the degasifier</P>
+<P>[J/kg]&#9;HDRE&#9;&#9;enthalpy of drainages flowing into the degasifier</P>
+<P>[kg/s]&#9;WOUT&#9;flow rate of liquid flowing out from the tank</P>
+<P>[kg/s]&#9;WRIS&#9;&#9;flow rate of steam flowing into the tank during start-up phase</P>
+<P>[J/kg]&#9;HRIS&#9;&#9;enthalpy of steam flowing into the tank during start-up phase</P>
+<P>[kg/s]&#9;WRIC&#9;&#9;flow rate of liquid flowing into the tank coming from the recirculation of boiler feed pumps</P>
+<P>[J/kg]&#9;HRIC&#9;&#9;enthalpy of liquid flowing into the tank coming from the recirculation of boiler feed pumps</P>
+<P>[Pa]&#9;PVDG&#9;&#9;pressure of steam in the tank</P>
+<P>[J/kg]&#9;HVDG&#9;&#9;enthalpy of steam in the tank</P>
+<P>[J/kg]&#9;HLDG&#9;&#9;enthalpy of liquid in the tank</P>
+<P>[m]&#9;LIVD&#9;&#9;level of liquid inside the tank</P>
+<P>[Pa]&#9;PLDG&#9;&#9;pressure on the tank bottom (condensate outlet)</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DEGN_C"></A>MODULE DEGN CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables (meanings defined above), user must assign the following data:</P>
+<P>[m³]&#9;VOL.CAV.&#9;internal volume available for the fluid (dome volume + tank volume - internal parts volume)</P>
+<P>[m]&#9;D. SERB.&#9;tank internal diameter</P>
+<P>[m] &#9;L. SERB.&#9;tank internal length.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DEGN_D"></A>MODULE DEGN CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the DEGN variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DEGN_E"></A>MODULE DEGN CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In the DEGN module no user subprograms are foreseen.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DEGN_F"></A>MODULE DEGN CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The equations, mentioned above, give rise to the following residuals:</P>
+<P ALIGN="JUSTIFY">RNI(1) = WDRE*(HDRE-HLDG)+(QC+WALI)*(HLS-HLDG)-QEV*(HVS-HLDG)+</P>
+<P>+QSUP+WRIC*(HRIC-HLDG)-WOUT*(HLS-HL)</P>
+<P ALIGN="JUSTIFY">(normalization factor = W0*H0)</P>
+<P ALIGN="JUSTIFY">RNI(2) = WSPD*(HSPD-HVDG)+WRIS*(HRIS-HVDG)+QEV*(HVS-HVDG)+</P>
+<P>-QC*(HLS-HVDG)+QQ-QSUP</P>
+<P ALIGN="JUSTIFY">(normalization factor = W0*H0)</P>
+<P ALIGN="JUSTIFY">RNI(3) = WDRE+QC-WOUT-QEV+WRIC+WALI</P>
+<P ALIGN="JUSTIFY">(normalization factor = W0)</P>
+<P ALIGN="JUSTIFY">RNI(4) = WSPD+WRIS+QEV-QC</P>
+<P ALIGN="JUSTIFY">(normalization factor = W0)</P>
+<P ALIGN="JUSTIFY">RNI(5) = PLDG-PVDG-9.80665*ROWS*LIVD/P0</P>
+<P ALIGN="JUSTIFY">(normalization factor = P0)</P>
+<P>Where:</P>
+<P ALIGN="JUSTIFY">QC&#9;is the condensation flow rate</P>
+<P ALIGN="JUSTIFY">HLS&#9;is the enthalpy of saturated liquid</P>
+<P ALIGN="JUSTIFY">QEV&#9;is the evaporation flow rate</P>
+<P ALIGN="JUSTIFY">HWS&#9;is the enthalpy of saturated steam</P>
+<P ALIGN="JUSTIFY">QSUP&#9;is the thermal power exchanged through liquid-steam separation surface</P>
+<P ALIGN="JUSTIFY">QQ&#9;is the power given up from saturated steam to the dome feed liquid</P>
+<P ALIGN="JUSTIFY">ROWS&#9;is the density of saturated liquid</P>
+<P>The physical meanings of remaining variables are defined above.</P>
+<P ALIGN="JUSTIFY">Further explanations about the quantities of above-mentioned meanings are available in the section concerning the DEGN module of the manual "LEGOCAD - Modelling Library for Simulation of Power Generation Plants - Theory".</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DEGN_G"></A>MODULE DEGN CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE DEGNI3</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DEGNI4</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DEGNI2</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1, IBL2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DEGNC1</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1, IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DGNDEC</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(P, HL, HV, Y, PF, QV, HVI, QCOND, HCOND, QDR,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>HDR, QEC, QVV, HVV, QWR, HWR, VCAV, RSERB,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>ALSERB, XYU, IXYU, DATI, IPD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DGNTAV</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(P, HL, HV, ROL, ROV, ROWS, BELI, BEVA, A2LI,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>A2VA, XL, XV, TLS, TV, HLS, HVS, PF)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DGNTYP</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(Y, VL, DVLDY, RSERB, ALSERB)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DGNTAU</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(A2LI, BELI, ROL, TLS, A2VA, BEVA, ROV, TV, Y,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>VCAV, VL, DVLDY, TAU11, TAU14, TAU22, TAU24,</P>
+<P>$</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>TAU31, TAU33, TAU34, TAU42, TAU43, TAU44)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DGNDER</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(P, HL, HV, Y, PF, QV, HVI, QCOND, HCOND, QDR,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>HDR, QEC, QVV, HVV, QWR, HWR, VCAV, RSERB,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>ALSERB, VL, DVLDY, ROL, ROV, ROWS, XL, XV,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>HLS, HVS, TLS, TV, IFUN, TAU11, TAU14, TAU22,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>TAU24, TAU31, TAU33, TAU34, TAU42, TAU43,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>TAU44, DATI, IPD, RNI)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DGNSOL</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(A11, A14, A22, A24, A31, A33, A34, A42,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>A43, A44, B1, B2, B3, B4, X1, X2, X3, X4)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DGNJAC</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(AJAC, MX5, IXYU, XYU, DATI, IPD, RNI, IFUN)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DEGN_H"></A>MODULE DEGN CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases concerning this module are in the user manual section dedicated to the examples developed under the abbreviations:</P>
+<P ALIGN="CENTER">"DEG_S_L"</P></FONT></BODY>
+</HTML>

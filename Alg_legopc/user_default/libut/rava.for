@@ -1,0 +1,256 @@
+C**********************************************************************
+C modulo rava.f
+C tipo 
+C release 5.2
+C data 4/12/95
+C reserver @(#)rava.f	5.2
+C**********************************************************************
+C
+C  MODULO RAVA : RISCALDATORE ARIA-VAPORE
+C
+C  MODIFICATO DA DRAGONI M. PER AGGIUNGERE IN USCITA IL
+C  COEFFICIENTE DI SCAMBIO ARIA-METALLO
+C
+      SUBROUTINE RAVAI3(IFO,IOB,DEBL)
+      COMMON/RAVA01/IBLOC
+      COMMON/RAVA02/NCEL,NPAR
+      CHARACTER*80 DEBL
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MOD
+      DATA MOD/'RAVA'/
+      CALL RAVAI4(IOB,MOD)
+      WRITE(IFO,2999)IBLOC,IOB,MOD,DEBL
+ 2999 FORMAT(A,2X,'BL.-',A4,'- **** MODULO ',A4,' - ',A)
+      WRITE(IFO,3001)IOB
+ 3001 FORMAT('TMAR',A4,2X,
+     $'--US-- MEAN AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER')
+      WRITE(IFO,3002)IOB
+ 3002 FORMAT('TUA2',A4,2X,
+     $'--UA-- AIR OUTLET TEMPERATURE IN THE AIR-STEAM EXCHANGER')
+      WRITE(IFO,3003)IOB
+ 3003 FORMAT('TUA1',A4,2X,
+     $'--UA-- AIR TEMP. AT THE EXCHANGER INLET (FLOW RATE INV.)')
+      WRITE(IFO,3004)IOB
+ 3004 FORMAT('GAMR',A4,2X,
+     $'--UA-- AIR-METAL THERMAL EXCHANGE COEFFICIENT')
+      WRITE(IFO,3005)IOB
+ 3005 FORMAT('WARI',A4,2X,
+     $'--IN-- AIR FLOW RATE INTO THE AIR-STEAM EXCHANGER')
+      WRITE(IFO,3006)IOB
+ 3006 FORMAT('TMET',A4,2X,
+     $'--IN-- METAL TEMPERATURE IN THE AIR-STEAM EXCHANGER')
+      WRITE(IFO,3007)IOB
+ 3007 FORMAT('TIA1',A4,2X,
+     $'--IN-- INLET AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER')
+      WRITE(IFO,3008)IOB
+ 3008 FORMAT('TIA2',A4,2X,
+     $'--IN-- OUTLET AIR TEMP. IN THE EXCHANGER (FLOW RATE INV.)')
+      WRITE(IFO,3009)IOB
+ 3009 FORMAT('AKCO',A4,2X,
+     $'--IN-- CORRECTOR COEFF. AIR-METAL THERMAL EXCHANGE')
+      RETURN
+      END
+
+      SUBROUTINE RAVAI4(IOB,MOD)
+      COMMON/RAVA01/IBLOC
+      COMMON/RAVA02/NCEL,NPAR
+      CHARACTER*8 IBLOC
+      CHARACTER*4 IOB
+      CHARACTER*4 MOD
+C
+      WRITE(IBLOC,1000)MOD,IOB
+ 1000 FORMAT(2A4)
+C
+      RETURN
+      END
+
+      SUBROUTINE RAVAI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,
+     1    IBL1,IBL2,IER,CNXYU,TOL)
+      INTEGER VAR
+      DIMENSION VAR(MX1,*),XYU(*),DATI(*),CNXYU(*),TOL(*)
+      COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+C
+C---RISCALDATORE ARIA-VAPORE
+C
+      GO TO(100,200),IFUN
+C
+  100 WRITE(14,500)  'SUSCA       '
+     1  ,'CAPPA       '
+     1  ,'ALFA       '
+      RETURN
+C
+C---lettura e memorizzazione dati
+C
+  200 READ(14,501)
+      READ(14,501)  SUSCA
+     1  ,CAPPA
+     1  ,ALFA
+C
+  500 FORMAT(3(4X,A8,' =',10X,'*'))
+  501 FORMAT(3(14X,F10.0,1X))
+C
+      DATI(ID2  ) = SUSCA
+      DATI(ID2+1) = CAPPA
+      DATI(ID2+2) = ALFA
+C lascio TRE dati liberi per memorizzare
+C la portata e le temperature del passo precedente:
+      ID2 = ID2+5
+C
+C---costanti di normalizzazione
+C
+      CNXYU(IV1  ) = T0
+      CNXYU(IV1+1) = T0
+      CNXYU(IV1+2) = T0
+      CNXYU(IV1+3) = 1.
+      CNXYU(IV1+4) = W0
+      CNXYU(IV1+5) = T0
+      CNXYU(IV1+6) = T0
+      CNXYU(IV1+7) = T0
+      CNXYU(IV1+8) = 1.
+C
+      RETURN
+      END
+
+      SUBROUTINE RAVAC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)
+      DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)
+      EXTERNAL RAVA
+C
+C---RISCALDATORE ARIA-VAPORE
+C
+      NSTATI = 1
+      NUSCIT = 3
+      NINGRE = 5
+      NEQ  = NSTATI + NUSCIT
+      NVAR = NEQ + NINGRE
+C
+      GO TO(100,200,300),IFUN
+C
+C---topologia jacobiano
+C
+  100 DO I = 1,NEQ
+      DO J = 1,NVAR
+      AJAC(I,J) = 1.
+      END DO
+      END DO
+      RETURN
+C
+C---calcolo residui
+C
+  200 CALL RAVA(IFUN,IXYU,XYU,IPD,DATI,RNI)
+      RETURN
+C
+C---calcolo jacobiano numerico
+C
+  300 EPS    = 1.E-3
+      EPSLIM = 1.E-4
+      CALL NAJAC(AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,
+     1    NSTATI,NUSCIT,NINGRE,EPS,EPSLIM,RAVA)
+      RETURN
+      END
+
+      SUBROUTINE RAVA(IFUN,IXYU,XYU,IPD,DATI,RNI)
+      LOGICAL KREGIM
+      DIMENSION XYU(*),DATI(*),RNI(*)
+      COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+C Common LEGO per determinare le soluzioni del passo precedente:
+      COMMON/PARPAR/NULL(7),ITERT
+      COMMON/INTEGR/PS1,TEMPO,PS3,NPAS,CDT                              !SNGL
+      COMMON/REGIME/KREGIM
+      DATA UMID,WMIN/0.01,1./
+      DATA PRIF0,RGAS,VOL/101300.,287.,100./
+C
+C---RISCALDATORE ARIA-VAPORE
+C   CALCOLO RESIDUI
+C
+C---decodifica variabili e dati
+C
+      TMED= XYU(IXYU  )
+      TU2 = XYU(IXYU+1)
+      TU1 = XYU(IXYU+2)
+      GAMR = XYU(IXYU+3)
+      W = XYU(IXYU+4)
+      TM = XYU(IXYU+5)
+      TI1 = XYU(IXYU+6)
+      TI2 = XYU(IXYU+7)
+      AKCO = XYU(IXYU+8)
+C
+      IF(ITERT.EQ.0.AND.IFUN.EQ.2) THEN
+	 DATI(IPD+3)=XYU(IXYU+4)
+	 DATI(IPD+4)=XYU(IXYU+1)
+	 DATI(IPD+5)=XYU(IXYU+2)
+      END IF
+C
+      SUSCA = DATI(IPD  )
+      CAPPA = DATI(IPD+1)
+      ALFA = DATI(IPD+2)
+      WPRE=DATI(IPD+3)*W0
+      TU2PRE=DATI(IPD+4)
+      TU1PRE=DATI(IPD+5)
+C
+C---denormalizzazione delle variabili
+C
+      TMEDDEN= XYU(IXYU  )*T0
+      TU2DEN = XYU(IXYU+1)*T0
+      TU1DEN = XYU(IXYU+2)*T0
+      WDEN   = XYU(IXYU+4)*W0
+      TI1DEN = XYU(IXYU+6)*T0
+      TI2DEN = XYU(IXYU+7)*T0
+C
+C---calcolo coefficiente di scambio GAMMA
+C
+      GAMMA=AKCO*GAMRAV(WDEN,CAPPA)
+C
+C Calcolo residui
+C
+      CN=T0/(W0*H0)
+      RO=PRIF0/(RGAS*TMEDDEN)
+      CP=CPFU(TMEDDEN,UMID)
+      TAU=RO*VOL*CP
+C
+C  Calcolo di un permanente a portata nulla
+C
+      IF(KREGIM.AND.(ABS(WDEN).LE.2.E-3*W0)) THEN
+	 RNI(1)=-TMED+TM
+	 RNI(2)=-TU2+TMED
+	 RNI(3)=-TU1+TI1
+	 RNI(4)=-GAMR+GAMMA
+	 RETURN
+      END IF
+C
+      IF(WPRE.GE.0.) THEN
+	 HA=HTFU(TI1DEN,UMID,1)/H0
+	 HB=HTFU(TU2DEN,UMID,1)/H0
+	 RNI(1)=(W*(HA-HB)+GAMMA*SUSCA*(TM-TMED)*CN)/(TAU*CN)
+	 RNI(2)=-TU2+TMED
+	 RNI(3)=-TU1+TI1
+	 RNI(4)=-GAMR+GAMMA
+      ELSE
+	 HA=HTFU(TU1DEN,UMID,1)/H0
+	 HB=HTFU(TI2DEN,UMID,1)/H0
+	 RNI(1)=(W*(HA-HB)+GAMMA*SUSCA*(TM-TMED)*CN)/(TAU*CN)
+	 RNI(2)=-TU2+TI2
+	 RNI(3)=-TU1+TMED
+	 RNI(4)=-GAMR+GAMMA
+      END IF
+      RETURN
+      END
+C
+C Calcolo del coefficiente di scambio
+C
+      REAL FUNCTION GAMRAV(W,CAPPA)
+      DATA WMIN,GAMIN/1.,1./
+C
+      WABS=ABS(W)
+      IF(WABS.GT.WMIN) THEN
+	 GAMRAV=CAPPA*WABS**0.61
+      ELSE
+	 GAMRAV=GAMIN
+      END IF
+      RETURN
+      END
+CC
+      SUBROUTINE RAVAD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,
+     $   XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)
+      RETURN
+      END

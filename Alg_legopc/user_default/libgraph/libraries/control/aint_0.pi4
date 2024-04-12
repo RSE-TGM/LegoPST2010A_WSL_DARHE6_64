@@ -1,0 +1,25 @@
+AINT_0                                                                          
+AINT                                                                            
+AINT - Time integrator                                                          
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 2
+ 
+NCONF = 1
+ 
+UINT      --UA-- INTEGRATOR OUTPUT VARIABLE                                     
+IINT      --IN-- INTEGRATOR INPUT VARIABLE                                      
+KTIN      --IN-- INTEGRAL TIME OF THE INTEGRATOR                                
+==============================                                                  
+EOF                                                                             
+3
+t0 6
+INGRESSO ATTUAZIONE
+IINT
+t2 6
+INGRESSO ATTUAZIONE
+KTIN
+t1 7
+USCITA ATTUAZIONE
+UINT

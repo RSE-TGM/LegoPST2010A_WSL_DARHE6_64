@@ -1,0 +1,28 @@
+* TSTEP
+0.02
+* NPASREC
+0
+* METHOD (M=MA28; N=QUASI NEWTON)
+N
+* INPUTS 6
+QMEC0___
+QMEC6___
+SISC11__
+SISC8___
+FG008___
+FP0011__
+* MONITORED 10
+QATT6___
+QREA6___
+QATT0___
+QREA0___
+FREQ0___
+FREQ6___
+USOM32__
+UMMA0___
+UMMA6___
+QAT229__
+* PRINTOUTS (1=ingressi,2=jacobiani;3=num.iterazioni;4=matr.topologica;5=residui)
+0     
+* END
+EOF

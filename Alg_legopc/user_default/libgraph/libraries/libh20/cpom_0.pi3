@@ -1,0 +1,35 @@
+CPOM_0                                                                          
+CPOM                                                                            
+CPOM - Pompa centrifuga a velocit… imposta                                      
+                                                                                
+NSTAT = 0
+NUSCI = 2
+NINGR = 5
+ 
+NCONF = 3
+ 
+HUPM      --UA-- FLUID ENTHALPY AT THE PUMP OUTLET                              
+WPOM      --UA-- FLUID FLOW RATE THROUGH THE PUMP                               
+PUPM      --IN-- PRESSURE AT THE PUMP OUTLET                                    
+PIPM      --IN-- PRESSURE AT THE PUMP INLET                                     
+HIPM      --IN-- FLUID ENTHALPY AT THE PUMP INLET                               
+OMPM      --IN-- ROTATIONAL SPEED OF THE PUMP                                   
+NPOM      --IN-- NUMBER OF PUMPS IN PARALLEL                                    
+==============================                                                  
+HUPM      --UA-- FLUID ENTHALPY AT THE PUMP OUTLET                              
+PIPM      --UA-- PRESSURE AT THE PUMP INLET                                     
+PUPM      --IN-- PRESSURE AT THE PUMP OUTLET                                    
+WPOM      --IN-- FLUID FLOW RATE THROUGH THE PUMP                               
+HIPM      --IN-- FLUID ENTHALPY AT THE PUMP INLET                               
+OMPM      --IN-- ROTATIONAL SPEED OF THE PUMP                                   
+NPOM      --IN-- NUMBER OF PUMPS IN PARALLEL                                    
+==============================                                                  
+HUPM      --UA-- FLUID ENTHALPY AT THE PUMP OUTLET                              
+PUPM      --UA-- PRESSURE AT THE PUMP OUTLET                                    
+PIPM      --IN-- PRESSURE AT THE PUMP INLET                                     
+WPOM      --IN-- FLUID FLOW RATE THROUGH THE PUMP                               
+HIPM      --IN-- FLUID ENTHALPY AT THE PUMP INLET                               
+OMPM      --IN-- ROTATIONAL SPEED OF THE PUMP                                   
+NPOM      --IN-- NUMBER OF PUMPS IN PARALLEL                                    
+==============================                                                  
+EOF                                                                             

@@ -1,0 +1,185 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE VAIN</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VAIN_summ"></A>MODULE VAIN&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VAIN_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VAIN_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VAIN_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VAIN_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VAIN_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VAIN_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VAIN_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VAIN_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_VAIN_A"></A>MODULE VAIN&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial"><P ALIGN="CENTER">REAL GAS VALVE</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The VAIN module can simulate the operation of a valve crossed by a real gas, simply assuming a quadratic relation between the pressure head at the valve ends and the flow rate crossing the same. In the case the actual pressure downstream is lower than the critical pressure (sonic valve), the critical pressure is used for the calculation of the flow rate as downstream pressure.</P>
+<P ALIGN="JUSTIFY">The VAIN module can represent both a valve having the possibility of flow inversion and a check valve, simply making the flow rate null when the pressure head at the valve ends becomes negative or null.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Main hypothesis at the module basis are:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">-&#9;all thermal capacities are neglectable.</P>
+<P ALIGN="JUSTIFY">-&#9;the pressure drop is related to concentrated load losses;</P>
+<P ALIGN="JUSTIFY">-&#9;there’s no fluid accumulation inside the valve;</P>
+<P ALIGN="JUSTIFY">-&#9;presence of a temperature drop in the throttled gas.</P><DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P></DIR>
+
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VAIN_B"></A>MODULE VAIN&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P>&nbsp;</P>
+<FONT FACE="Arial"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P>&nbsp;</P>
+<P>The module can be interconnected with other ones according to the following three methods:</P>
+<P ALIGN="JUSTIFY">1) output in flow rate</P>
+<P ALIGN="JUSTIFY">prescription about block name: none</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image426.gif" WIDTH=374 HEIGHT=145></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">2) outlet in inlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block name: preceded by a '+' sign</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image427.gif" WIDTH=374 HEIGHT=145></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">3) output in outlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block name: preceded by a '-' sign</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image428.gif" WIDTH=374 HEIGHT=145></P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<FONT FACE="Arial"><P ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT - OUTPUT VARIABLES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial"><P>[kg/s]&#9;WVAL&#9;&#9;gas mass flow rate in the valve</P>
+<P>[K]&#9;TVAL&#9;&#9;temperature downstream the valve</P>
+<P>[K]&#9;TMI&#9;&#9;fluid temperature upstream the valve with flow inversion</P>
+<P>[Pa]&#9;PMON&#9;pressure upstream the valve </P>
+<P>[Pa]&#9;PVAL&#9;&#9;pressure downstream the valve</P>
+<P>[K] &#9;TMON&#9;&#9;temperature upstream the valve</P>
+<P>[K]&#9;TVI&#9;&#9;temperature downstream the valve with flow inversion</P>
+<P>[p.u.]&#9;ALZV&#9;&#9;valve lift</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_VAIN_C"></A>MODULE VAIN&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Meaning of data required at VAIN module input:</P>
+<P>[Pa]&#9;&#9;PMONOM&#9;rated upstream pressure (see note 1)</P>
+<P>[Pa]&#9;&#9;PVANOM&#9;rated downstream pressure (see note 1)</P>
+<P>[p.u.]&#9;&#9;ALZNOM&#9;valve lift (see note 1)</P>
+<P>[Nm³/h]&#9;XWNOM&#9;rated flow (see note 1)</P>
+<P>[K] &#9;&#9;TMONOM&#9;rated upstream temperature (see note 1)</P>
+<P>[K³/Pa]&#9;XKTEMP&#9;decrease factor of laminated gas temperature according to experimental law:<BR>
+&#9;&#9;&#9;&#9;DeltaT = -XKTEMP / T</FONT>² <FONT FACE="Symbol">*</FONT> <FONT FACE="Arial">DeltaP<BR>
+&#9;&#9;&#9;&#9;where DeltaT and DeltaP are temperature and pressure drops at the valve ends and T is the temperature at &#9;&#9;&#9;&#9;&#9;valve inlet.</P>
+<P>[ ]&#9;&#9;CLAPET&#9;check valve present or not and therefore impossibility or not of flow inversion according to this configuration:<BR>
+&#9;&#9;&#9;&#9;CLAPET = 1. check valve present<BR>
+&#9;&#9;&#9;&#9;CLAPET = 0. check valve not present</P>
+<P>[ ]&#9;&#9;ALFA&#9;&#9;coefficient used to define the valve characteristic, that is the law for variation of the path AREA according to &#9;&#9;&#9;&#9;&#9;the ALZV opening degree, according to the following formula:<BR>
+&#9;&#9;&#9;&#9;AREA = AREAMAX *ALZV ** ALFA<BR>
+&#9;&#9;&#9;&#9;where AREAMAX is the path area of the valve when it is fully open.<BR>
+&#9;&#9;&#9;&#9;The default value for ALFA is 1.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Note 1</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">To define the valve type, that is, if sonic or supersonic valve, rated operation conditions shall be defined, which indicate if the critical condition of gas outflow is exceeded or not.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VAIN_D"></A>MODULE VAIN&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P>&nbsp;</P>
+<P>No particular prescription is required to initialize module variables.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VAIN_E"></A>MODULE VAIN&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P>&nbsp;</P>
+<P>No user’s subprogram is required in the VAIN module.</P>
+<P>The VAIN module makes use of the procedures contained in the perfect gas thermodynamic tables (TAVGASPERF) which must be present in the user library.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VAIN_F"></A>MODULE VAIN&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P>&nbsp;</P>
+<P ALIGN="JUSTIFY">Three residuals relevant to flow rate, temperature downstream the valve and to the upstream one in case of inversion are present in the module. For the first, the expression is different if the valve lift ALZV is higher or lower than 0.15; in any case, it deals with the flux characteristics through the valve, according to the value of XCLAP:</P>
+<P ALIGN="JUSTIFY">XCLAP =&#9;-2&#9;check valve not present - reversed flow (ALZV </FONT><FONT FACE="Symbol">³</FONT><FONT FACE="Arial"> 0.15)</P>
+<P ALIGN="JUSTIFY">XCLAP =&#9;-1&#9;check valve not present - reversed flow (ALZV </FONT><FONT FACE="Symbol">&lt;</FONT><FONT FACE="Arial"> 0.15)</P>
+<P ALIGN="JUSTIFY">XCLAP =&#9;0&#9;check valve present and closed (flow halted)</P>
+<P ALIGN="JUSTIFY">XCLAP =&#9;1&#9;normal flow (ALZV </FONT><FONT FACE="Symbol">³</FONT><FONT FACE="Arial"> 0.15) (undepending on check valve presence)</P>
+<P ALIGN="JUSTIFY">XCLAP =&#9;2&#9;normal flow (ALZV </FONT><FONT FACE="Symbol">&lt;</FONT><FONT FACE="Arial"> 0.15) (undepending on check valve presence)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The expressions of the residuals are the followings:</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+<P>IF (XCLAP .EQ. 0.) THEN</P>
+<P>RNI(1) = WVAL / W0</P>
+<P>ELSE IF (ABS(XCLAP) .EQ. 1.) THEN</P>
+<P>RNI(1) = (PMON - PVAL - WVAL * (ABS(WVAL) + WEPS) / ROCC) / P0</P>
+<P>ELSE</P>
+<P>RNI(1) = (WVAL - (PMON - PVAL) * ROCC / (ABS(WVAL) + WEPS)) / W0</P>
+<P>ENDIF</P>
+<P>&nbsp;</P>
+<P>RNI(2) = (TVAL - TVAX) / T0</P>
+<P>RNI(3) = (TMOI - TMIX) / T0</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VAIN_G"></A>MODULE VAIN&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>SUBROUTINE VAINI3 </B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IFO,IOB,DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE VAINI4 </B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IOB,MOD,IBLOC,I1,I4,I5)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE VAINI2 </B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial" SIZE=2>IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE VAINC1 </B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE VAIN </B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE VAIND1 </B></FONT><FONT FACE="Arial">&#9;</FONT><B><FONT FACE="Arial" SIZE=2>(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P>$ </B></FONT><FONT FACE="Arial">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial" SIZE=2>IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VAIN_H"></A>MODULE VAIN&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P>&nbsp;</P>
+<P>Reference test cases relevant to this module are in the manual section dedicated to the examples carried out and marked with the tag:</P>
+<P ALIGN="CENTER">"...not yet available..."</P></FONT></BODY>
+</HTML>

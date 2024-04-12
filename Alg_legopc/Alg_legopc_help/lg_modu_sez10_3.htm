@@ -1,0 +1,272 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">An example of the &quot;xxxxD1&quot; subroutine in a
+standard process module (RAVA)</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">As the RAVA module equations are not jet
+documented, the RAVAD1 actual source code is only an empty skeleton. For
+documentation purpose, an example of an hypothetical RAVAD1 subroutine follows.&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">SUBROUTINE
+RAVAD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>$<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>CHARACTER*8 BLOCCO, SYMVAR(*), UNITEQ(*)*10,
+SIGNEQ(*)*50<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>DIMENSION XYU(*), DATI(*), COSNOR(*),
+ITOPVA(MXT,*)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>COMMON /NORM/
+P0,H0,T0,W0,RO0,AL0,V0,DP0<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>LOGICAL NOFLOW, NORMAL<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>WDEN = XYU(IXYU+4)*W0<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>WPRE = DATI(IPD+3)*W0<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>NOFLOW = ABS (WDEN) .LT. 2.E-3*W0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>NORMAL = WPRE .GE. 0.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---equation number 1</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SIGNEQ(1) = 'AIR MEAN TEMPERATURE COMPUT. IN AIR/STEAM HEATER'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COSNOR(1) = T0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (NOFLOW) THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C-------no air flow (simplified residual)</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">UNITEQ(1) = 'K'<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(1, 1) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(1, 6) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">ELSE</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C-------normal air flow or inverted air
+flow</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>UNITEQ(1) = 'K/s'</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">ITOPVA(1, 1) = 1<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(1, 2) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(1, 3) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(1, 5) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(1, 6) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(1, 7) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(1, 8) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(1, 9) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ENDIF<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---equation number 2</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SIGNEQ(2) = 'AIR TEMPERATURE COMPUT. AT AIR/STEAM HEATER OUTLET'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>UNITEQ(2) = 'K'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COSNOR(2) = T0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (NOFLOW .OR. NORMAL) THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C-------no air flow or normal flow</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">ITOPVA(2, 1) = 1<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(2, 2) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ELSE<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C-------inverted air flow</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">ITOPVA(2, 2) = 1<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(2, 7) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ENDIF<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---equation number 3</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SIGNEQ(3) = 'AIR TEMPERATURE COMPUT. AT AIR/STEAM HEATER INLET'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>UNITEQ(3) = 'K'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>COSNOR(3) = T0</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>IF (NOFLOW .OR. NORMAL) THEN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C-------no air flow or normal flow</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">ITOPVA(3, 3) = 1<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(3, 8) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ELSE<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C-------inverted air flow</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">ITOPVA(3, 1) = 1<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(3, 3) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ENDIF<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C---equation number 4</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>SIGNEQ(4) = 'AIR THERMAL EXC. COEFF. COMP. IN AIR/STEAM HEATER'</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>UNITEQ(4) = 'W/m^2/K'</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">COSNOR(4) = 1.<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(4, 4) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(4, 5) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font face="Courier New" size="2"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ITOPVA(4, 9) = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</b></font></span></p>
+<font face="Courier New" size="2">
+<span lang="EN-GB" style="mso-bidi-font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-bidi-font-family: Times New Roman; mso-ansi-language: EN-GB; mso-fareast-language: IT; mso-bidi-language: AR-SA"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END</b></span>
+
+</font><!--mstheme--></font></body>
+
+</html>

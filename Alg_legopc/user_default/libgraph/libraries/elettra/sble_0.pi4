@@ -1,0 +1,31 @@
+SBLE_0                                                                          
+SBLE                                                                            
+SBLE - Electrical bus (for LINEs interconnections)                              
+                                                                                
+NSTAT = 0
+NUSCI = 2
+NINGR = 7
+ 
+NCONF = 1
+ 
+V1RE      --UA-- Tensione reale di sbarra                                       
+V1IM      --UA-- Tensione immaginaria di sbarra                                 
+I1RE      --IN-- Corrente reale linea 1                                         
+I1IM      --IN-- Corrente immaginaria linea 1                                   
+I2RE      --IN-- Corrente reale linea 2                                         
+I2IM      --IN-- Corrente immaginaria linea 2                                   
+ICRE      --IN-- Corrente reale carico                                          
+ICIM      --IN-- Corrente immaginaria carico                                    
+SBIS      --IN-- Logica di sbarra isolata                                       
+==============================                                                  
+EOF                                                                             
+3
+t0 8
+INGRESSO ELETTRICO
+V1RE V1IM I1RE I1IM
+t1 8
+INGRESSO ELETTRICO
+V1RE V1IM I2RE I2IM
+t2 9
+USCITA ELETTRICA
+V1RE V1IM ICRE ICIM

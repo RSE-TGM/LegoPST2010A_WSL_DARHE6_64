@@ -1,0 +1,355 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>ASCA</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE ASCA</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ASCA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">SIMPLIFIED EXCHANGER</p>
+<p ALIGN="JUSTIFY">The ASCA module represents the pattern of the operation of a
+water-water exchanger with some simplifications.</p>
+<p ALIGN="JUSTIFY">Let’s consider a plant component where water flows from
+both branches, for instance, process water from one branch and cooling water
+from the other one.</p>
+<p ALIGN="JUSTIFY">The model shall consider thermal capacities of the two fluid
+masses contained in the exchanger in addition to currents.</p>
+<p ALIGN="JUSTIFY">The possibility of a heat loss towards the outside is also
+considered on the cooler side.</p>
+<p ALIGN="JUSTIFY">The thermal exchange is treated according to the following
+hypothesis:</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">- Assuming as known the performance of the exchanger at its
+  rated operation point, that is, given the two mass flow rates, obtain the
+  product of global exchange coefficient by exchange surface between the two
+  currents;</p>
+  <p ALIGN="JUSTIFY">- The exchanger dimensioning in that point is the optimum
+  one, that is the thermal resistance obtained from the reciprocal of the above
+  mentioned product is shared in two perfectly identical parts by the two
+  branches.</p>
+  <p ALIGN="JUSTIFY">- The exchange coefficient in each branch depends only on
+  the relevant mass flow rate, and more particularly the same is proportional to
+  this one increased to 0.8.</p>
+</blockquote>
+<p ALIGN="JUSTIFY">Known the above mentioned conditions and formulated the
+hypothesis as above, it is possible to calculate, obtaining temperatures from
+enthalpies (it is known that the fluid is water), the power exchanged, knowing
+mass flow rates only.</p>
+<p ALIGN="JUSTIFY">Keeping into account power stored, the module can be used
+also in case one or both the mass flow rates are nullified.</p>
+<p ALIGN="JUSTIFY">The exchange with the outside of the cooler side, finaly
+allows to simulate the realistic cooling of the system during its non use.</p>
+<p ALIGN="JUSTIFY">Therefore, knowing mass flow rates and input conditions for
+both the branches, as well as surface, temperature and outside exchange
+coefficient, and masses contained in the two branches, we could describe the
+behaviour of the system with two energy conservation differential equations,
+supported by two calculations of lminal exchange coefficient, or thermal
+resistances to be summed up and of power exchanged with the outside.</p>
+<p ALIGN="JUSTIFY">The two equations are seen by the user as algebraic ones, but
+they are actually treated as differential inside the module. A final comment
+concerns pressures: on the cooler side it is assumed to be atmospheric, on the
+opposite side faculty is given to assign a value; in any case pressure is used
+only for the calculation of water properties and has neglectable influence.</p>
+<p ALIGN="center"></font><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ASCA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font><b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Topological data</p>
+</i>
+          </font></b>
+<p ALIGN="CENTER"><font face="Arial">MODULE INPUT OUTPUT SCHEME</font></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER"><font face="Arial"><img SRC="images/Image14.gif" width="488" height="303"></font></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER"><font face="Arial">MEANING OF MODULE INPUTS OUTPUTS</font></p>
+<font FACE="Arial" SIZE="4">
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+              <p><font face="Arial">[kg/s] WFSE Work fluid capacity</font></p>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">[J/kg/K] HISE Enthalpy of work fluid at input</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+              <p><font face="Arial">[kg/s] WFRE Cooler capacity</font></p>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+              <p><font face="Arial">[J/kg/K] HIRE Cooler enthalpy at input</font></p>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">[Pa] PRSE Pressure of work fluid side</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">[W/m²/K] GEXT Exchange coefficient with outside environment</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">[K] TEXT Temperature of outside environment</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">[J/kg/K] HUSE Enthalpy of work fluid at output</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+              <p><font face="Arial">[J/kg/K] HURE Cooler enthalpy at output</font></p>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+          </font><b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ASCA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i>
+          </font></b>
+<p ALIGN="JUSTIFY"><font face="Arial">In addition to the initial values of input and output
+variables of the ASCA module, whose meaning has been defined in card B, the user
+must assign the following set of data to complete the input required by the
+module:</font></p>
+<!--mstheme--></font><table border="0" width="100%" cellpadding="5">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+                  <p><font face="Arial">[kg/s] WNRE Rated capacity cooler side</font></p>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">[kg/s] WNSE Rated capacity cooled side</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+                  <p><font face="Arial">[W/K] GAMSUPNOM Surface rated product by global exchange
+                  coefficient</font></p>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">[kg] MASSLREF Fluid mass contained in cooler side</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+                  <p><font face="Arial">[kg] MASSLSER Fluid mass contained in cooled side</font></p>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Arial">[m²] SUPEXT Exchange surface with the outside</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font FACE="Arial" SIZE="4">
+<font FACE="Arial">
+  <sup>
+</sup></font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ASCA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Arial" SIZE="4">
+<b>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i></b>
+          </font>
+<p ALIGN="JUSTIFY"><font face="Arial">No particular prescription is required for the module
+initialization.</font></p>
+<p ALIGN="center"><font FACE="Arial" SIZE="4"><b><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ASCA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<font FACE="Tms Rmn" SIZE="1">
+        </font><b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i>
+        </font></b>
+<p ALIGN="JUSTIFY"><font face="Arial">No user’s subprogram is required in the ASCA module.</font></p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ASCA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<i>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="CENTER">Residuals</p>
+</font></b>
+</i>
+  <p ALIGN="left"><font face="Courier New">C</font></p>
+  <p ALIGN="left"><font face="Courier New">C---residuals calculation</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">C</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">C</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">IF(KREGIM) THEN</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">C</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">RNI(1) = (WFSE * (HISE - HUSE) - Q)/(H0*W0)</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">C</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">C</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">RNI(2) = (WFRE * (HURE - HIRE) - Q +
+  QEXT)/(H0*W0)</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">C</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">ELSE</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">C</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">RNI(1) = (HSPR - HUSE + DHSDT *
+  DTINT)/H0</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">C</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">RNI(2) = (HRPR - HURE + DHRDT *
+  DTINT)/H0</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">C</font></p>
+  <p ALIGN="JUSTIFY"><font face="Courier New">ENDIF</font></p>
+<font FACE="Arial">
+  <p ALIGN="JUSTIFY">DHSDT and DHRDT are the derivatives of enthalpies with
+  respect to time, calculated inside the module, while DTINT is the integration
+  time step, while in steady state conditions, presence of Q and QEXT, powers
+  exchanged between the two branches and the environment are noticed.</p>
+</font>
+<blockquote>
+  <blockquote>
+  </blockquote>
+  </blockquote>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ASCA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font><font FACE="Arial" SIZE="4">
+<i>
+<b>
+<p ALIGN="CENTER">Module subprograms</p>
+</b>
+</i>
+        </font>
+                <p><font face="Courier New">SUBROUTINE ASCAI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,<br>
+                IBL1,IBL2,IER,CNXYU,TOL)</font></p>
+                <p><font face="Courier New">SUBROUTINE ASCAC1 (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,<br>
+                IBL1,IBL2)</font></p>
+                <p><font face="Courier New">SUBROUTINE ASCAJC (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,<br>
+                IBL1,IBL2)</font></p>
+                <p><font face="Courier New">SUBROUTINE ASCA (IFUN,IXYU,XYU,IPD,DATI,RNI)</font></p>
+                <p><font face="Courier New">SUBROUTINE ASCAI3 (IFO,IOB,DEBL)</font></p>
+                <p><font face="Courier New">SUBROUTINE ASCAD1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,<br>
+                SYMVAR,XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,<br>
+                COSNOR,ITOPVA,MXT)</font></p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ASCA</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+  <i>
+  <p ALIGN="CENTER">Test cases</p>
+</i></font></b>
+  <p ALIGN="left"><font face="Arial">Reference test cases relevant to this module are in the
+manual section dedicated to the examples carried out and marked with the tag:</font></p>
+<font FACE="Arial">
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER">&quot; .....module application examples not yet available
+.....&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

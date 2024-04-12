@@ -1,0 +1,142 @@
+EXCH
+
+EXCH - heat exchanger 6 cells 1 walle per cell                                  
+8
+1
+
+t5
+WUTU PUTU ____ ____ ____ HUTU ____ HVAL 
+-1 1 0 0 0 1 0 -1 
+t0
+TPE1 TF11 GE11 ____ 
+-1 1 1 0 
+t2
+TPE3 TF31 GE31 ____ 
+-1 1 1 0 
+t1
+TPE2 TF21 GE21 ____ 
+-1 1 1 0 
+t3
+TPE4 TF41 GE41 ____ 
+-1 1 1 0 
+t6
+TPE5 TF51 GE51 ____ 
+-1 1 1 0 
+t7
+TPE6 TF61 GE61 ____ 
+-1 1 1 0 
+t4
+WITU PITU ____ ____ ____ HITU ____ HM_1 
+-1 1 0 0 0 1 0 -1 
+
+0
+36
+17
+
+HM_1 UA
+AVERAGE FLUID ENTHALPY CELL  1                                 
+HM_2 UA
+AVERAGE FLUID ENTHALPY CELL  2                                 
+HM_3 UA
+AVERAGE FLUID ENTHALPY CELL  3                                 
+HM_4 UA
+AVERAGE FLUID ENTHALPY CELL  4                                 
+HM_5 UA
+AVERAGE FLUID ENTHALPY CELL  5                                 
+HM_6 UA
+AVERAGE FLUID ENTHALPY CELL  6                                 
+PU_1 UA
+FLUID PRESSURE AT CELL  1 OUTLET                               
+PU_2 UA
+FLUID PRESSURE AT CELL  2 OUTLET                               
+PU_3 UA
+FLUID PRESSURE AT CELL  3 OUTLET                               
+PU_4 UA
+FLUID PRESSURE AT CELL  4 OUTLET                               
+PU_5 UA
+FLUID PRESSURE AT CELL  5 OUTLET                               
+PUTU UA
+TUBE OUTLET FLUID PRESSURE                                     
+WITU UA
+TUBE INLET MASS FLOW                                           
+WI_1 UA
+FLUID MASS FLOW AT CELL  1 INLET                               
+WI_2 UA
+FLUID MASS FLOW AT CELL  2 INLET                               
+WI_3 UA
+FLUID MASS FLOW AT CELL  3 INLET                               
+WI_4 UA
+FLUID MASS FLOW AT CELL  4 INLET                               
+WI_5 UA
+FLUID MASS FLOW AT CELL  5 INLET                               
+QTI1 UA
+POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL  1         
+QTI2 UA
+POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL  2         
+QTI3 UA
+POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL  3         
+QTI4 UA
+POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL  4         
+QTI5 UA
+POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL  5         
+QTI6 UA
+POWER EXCHANGED BETWEEN METAL AND FLUID INSIDE CELL  6         
+HU_1 UA
+TOTAL ENTHALPY AT CELL  1 OUTLET                               
+HU_2 UA
+TOTAL ENTHALPY AT CELL  2 OUTLET                               
+HU_3 UA
+TOTAL ENTHALPY AT CELL  3 OUTLET                               
+HU_4 UA
+TOTAL ENTHALPY AT CELL  4 OUTLET                               
+HU_5 UA
+TOTAL ENTHALPY AT CELL  5 OUTLET                               
+HUTU UA
+TUBE OUTLET TOTAL ENTHALPY                                     
+TPE1 UA
+EXTERNAL WALL TEMPERATURE AT CELL  1                           
+TPE2 UA
+EXTERNAL WALL TEMPERATURE AT CELL  2                           
+TPE3 UA
+EXTERNAL WALL TEMPERATURE AT CELL  3                           
+TPE4 UA
+EXTERNAL WALL TEMPERATURE AT CELL  4                           
+TPE5 UA
+EXTERNAL WALL TEMPERATURE AT CELL  5                           
+TPE6 UA
+EXTERNAL WALL TEMPERATURE AT CELL  6                           
+HITU IN
+TUBE INLET TOTAL ENTHALPY                                      
+PITU IN
+TUBE INLET FLUID PRESSURE                                      
+WUTU IN
+TUBE OUTPUT MASS FLOW                                          
+HVAL IN
+TUBE OUTLET FLUID ENTHALPY (FLOW INVERSION)                    
+ATTR IN
+TUBE FRICTION COEFFICIENT                                      
+TF11 IN
+EXTERNAL FLUID TEMPERATURE CELL 1 ZONE 1                       
+TF21 IN
+EXTERNAL FLUID TEMPERATURE CELL 2 ZONE 1                       
+TF31 IN
+EXTERNAL FLUID TEMPERATURE CELL 3 ZONE 1                       
+TF41 IN
+EXTERNAL FLUID TEMPERATURE CELL 4 ZONE 1                       
+TF51 IN
+EXTERNAL FLUID TEMPERATURE CELL 5 ZONE 1                       
+TF61 IN
+EXTERNAL FLUID TEMPERATURE CELL 6 ZONE 1                       
+GE11 IN
+CONVECTIVE COEFF. EXTERNAL FLUID CELL 1 ZONE 1                 
+GE21 IN
+CONVECTIVE COEFF. EXTERNAL FLUID CELL 2 ZONE 1                 
+GE31 IN
+CONVECTIVE COEFF. EXTERNAL FLUID CELL 3 ZONE 1                 
+GE41 IN
+CONVECTIVE COEFF. EXTERNAL FLUID CELL 4 ZONE 1                 
+GE51 IN
+CONVECTIVE COEFF. EXTERNAL FLUID CELL 5 ZONE 1                 
+GE61 IN
+CONVECTIVE COEFF. EXTERNAL FLUID CELL 6 ZONE 1                 
+

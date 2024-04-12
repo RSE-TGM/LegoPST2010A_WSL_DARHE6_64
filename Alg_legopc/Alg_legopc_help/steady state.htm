@@ -1,0 +1,210 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="it">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Introduction</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+<meta name="Microsoft Border" content="none, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+  <p ALIGN="CENTER"><blink><font color="#800000" size="5"><sup>Steady state
+  calculation</sup></font></blink></p>
+  </blockquote>
+<a NAME="_Toc495145212">
+<font SIZE="3">
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">One of the most significant assets of LegoPC is its new
+approach to steady state calculation.</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">The traditional approach (already used by LEGO and still
+available in LegoPC) uses the iterative method of Newton-Raphson (fig.1): at
+each iteration, the set of steady state equations is linearized and squared by
+putting known (fixed) a certain number of variables. Then, the outcoming square
+system is LU-factorized and new values are calculated for the unknowns. These
+calculations exploit the mathematical functions of Harwell’s MA28 library.</p>
+</font><font SIZE="2">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image1.gif" WIDTH="542" HEIGHT="445"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<b>
+<p ALIGN="CENTER">Fig. 1 – The Newton-Raphson method</p>
+</b>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font SIZE="3">
+<p ALIGN="left">The problem with this approach is to be bound to solve only
+square systems, that is, with as many unknowns as the number of equations.
+Getting the system square requires often to declare arificially known a certain
+number of variables that, in the reality, are not known with certitude. On the
+contrary, many values (e.g. measured quantities) are available with different
+degrees of incertitude, information that could be precious for guiding the
+calculations towards the correct solution.</p>
+<p ALIGN="left">Another problem with the traditional approach is concerned
+with diagnostics in case of singularities: it would be very useful to get an
+indication on what equations are linear combination of the others, leaving them
+off and finding in any case a solution for the problem, which is only seemingly
+square but actually underdetermined (less equations than unknowns).</p>
+<p ALIGN="left">The new LegoPC solver, allowing to solve all these problems,
+uses the Weighed Gram-Schmidt method (WGS). Such a method can solve both square
+and rectangular underdetermined systems. In case of underdetermined system, the
+user is free either to fix or to &quot;weigh&quot; a variable. A weight on a
+variable associates a degree of likelihood to its initial value, relatively to
+the one of all the other unknowns. The WGS method is able, at each resolution of
+the linearized system (Newton-Raphson iteration), to calculate the optimal
+solution, that is, the one minimizing the weighed euclidean norm:</p>
+</font><font SIZE="2">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image2.gif" WIDTH="141" HEIGHT="53"></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font SIZE="3">
+<p ALIGN="left">Let’s consider, as an example of practical usage of WGS,
+the simple steam generator model in fig.2.</p>
+<p ALIGN="center"><font SIZE="2">
+<img SRC="images/Image3.gif" WIDTH="462" HEIGHT="462"></font></p>
+<p ALIGN="center"><font SIZE="2"><b>Fig.2 – A simple LegoPC model of a steam
+            generator
+            </b></font></p>
+</font><font SIZE="2">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font SIZE="3">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">Supposing to set as known the following quantities:</p>
+<blockquote>
+  <!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <!--msthemelist--><tr><td valign="top" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p ALIGN="JUSTIFY">Mass inside DRUM and level<!--mstheme--></font><!--msthemelist--></td></tr>
+    <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p ALIGN="JUSTIFY">Pressure and enthalpy upstream pomp 7____<!--mstheme--></font><!--msthemelist--></td></tr>
+    <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p ALIGN="JUSTIFY">Pressure downstream valve VSTE<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</blockquote>
+<p ALIGN="left">and to know with incertitude the following measured
+quantities, each matched with a weight proportional to the likelihood of the
+measurement:</p>
+</font><font SIZE="2">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font>
+<p ALIGN="CENTER"><center>
+<!--mstheme--></font><table BORDER="1" CELLSPACING="1" CELLPADDING="5" WIDTH="643" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td WIDTH="63%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="2">
+      <p ALIGN="JUSTIFY">VARIABLE NAME</font></b><!--mstheme--></font></td>
+    <td WIDTH="37%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="2">
+      <p ALIGN="JUSTIFY">WEIGHT (likelihood of value)</font></b><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td WIDTH="63%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font SIZE="2">
+      <p ALIGN="JUSTIFY">Drum pressure (PCAVDRUM)</font><!--mstheme--></font></td>
+    <td WIDTH="37%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font SIZE="2">
+      <p ALIGN="JUSTIFY">1000.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td WIDTH="63%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font SIZE="2">
+      <p ALIGN="JUSTIFY">Steam valve mass flow rate (WVALVSTE)</font><!--mstheme--></font></td>
+    <td WIDTH="37%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font SIZE="2">
+      <p ALIGN="JUSTIFY">100.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td WIDTH="63%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font SIZE="2">
+      <p ALIGN="JUSTIFY">Enthalpy outlet economizer (HUTU6___)</font><!--mstheme--></font></td>
+    <td WIDTH="37%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font SIZE="2">
+      <p ALIGN="JUSTIFY">100.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td WIDTH="63%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font SIZE="2">
+      <p ALIGN="JUSTIFY">Feed pump rotational speed (OMPM7___)</font><!--mstheme--></font></td>
+    <td WIDTH="37%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font SIZE="2">
+      <p ALIGN="JUSTIFY">10.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td WIDTH="63%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font SIZE="2">
+      <p ALIGN="JUSTIFY">Feed pump stem position (ALZAVALI)</font><!--mstheme--></font></td>
+    <td WIDTH="37%" VALIGN="TOP"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font SIZE="2">
+      <p ALIGN="JUSTIFY">10.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</center><font SIZE="2">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font SIZE="3">
+<p ALIGN="left">we get a rectangular underdetermined problem.</p>
+<p ALIGN="left">Solving with LegoPC (WGS) we get the following values (column
+&quot;f24&quot;):</p>
+</font><font SIZE="2">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image4.gif" WIDTH="621" HEIGHT="376"></p>
+<b>
+<p ALIGN="CENTER">Fig. 3 – First steady state calculation</p>
+</b>
+<p ALIGN="CENTER">&nbsp;</p>
+</font><font SIZE="3">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">Notice that the pump rotational speed, hypothized 317.15 spin/min,
+has been calculated as 324.36 spin/min and the steam mass flow rate, hypothized
+100 kg/s has been calculated as 94.33 kg/s. The other variables have taken
+values very close to the trial ones (to be read on column &quot;f14&quot;).</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">Supposing we want to take the pump speed closer to its trial
+value, we can get it by rising its measurement likelihood (bringing the weight
+from 10 to 100). Of course the value of the weigths must be considered in
+comparison with all the other weigths (rising all weight by 10 we get no
+changing).</p>
+<p ALIGN="left">We obtain now the values that are shown in fig. 4 (results on
+column &quot;f24&quot;, previous calculation on column &quot;f24(t-1)&quot;,
+trial values on column &quot;f14&quot;).</p>
+</font><font SIZE="2">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image5.gif" WIDTH="627" HEIGHT="370"></p>
+<b>
+<p ALIGN="CENTER">Fig. 4 – Second steady state calculation</p>
+</b>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font SIZE="3">
+<p ALIGN="left">The pump speed is diminished getting closer to the trial
+value. However, the steam mass flow rate is further sunken, getting apart from
+the its trial value. Supposing, on the contrary, that this value is very
+accurate, we give it a weight of 1000. The corresponding results are in fig. 5.</p>
+</font><font SIZE="2">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image6.gif" WIDTH="629" HEIGHT="407"></p>
+<b>
+<p ALIGN="CENTER">Fig. 5 – Third steady state calculation</p>
+</b>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font SIZE="3">
+<p ALIGN="left">The mass flow rate is grown while the pump rotational speed,
+though less close to its trial value, is still nearer with respect to the first
+calculation (column &quot;f24(t-2)&quot;).</p>
+<p ALIGN="left">A last calculation is performed by putting a very small
+weight on the enthalpy at economizer outlet. Results in fig.6.</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image7.gif" WIDTH="638" HEIGHT="421"></p>
+<b>
+<p ALIGN="CENTER">Fig. 6 – Fourth steady state calculation</p>
+</b>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><font SIZE="3">
+<p align="left">The calculation for enthalpy HUTU6___ is now more distant
+from its initial value: being the measurement considered less accurate, the
+solver has given more importance to the initialization values for the thermal
+power getting into each cell of the exchanger.</p>
+</font><font SIZE="2">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<i>
+<p ALIGN="left"></i></font></a><font SIZE="2"><i>NOTA BENE</p>
+<p ALIGN="left">All the solutions found with the above-described calculations
+satisfy the required precision for the solution of the algebraic non linear
+system, independently from the weights set on each unknown variable.</p>
+</i>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><!--mstheme--></font></body>
+
+</html>

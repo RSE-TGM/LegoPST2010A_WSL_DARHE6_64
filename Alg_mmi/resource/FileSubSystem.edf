@@ -1,0 +1,31 @@
+****                    |25            |40
+Raffreddamento          TVCOND         DISNDIS1
+                                       DISNDIS2
+                                       TORFTORF
+                                       CPOMAARC
+                                       CPOMBARC
+                                       COLTMPAR
+                                       TUBODPCN
+                                       +EVATATR
+****
+Bassa Pressione         TVCOND         COLTAEBP
+                                       VALV950A
+                                       VALV950B
+                                       VALV961A
+                                       VALV961B
+                                       COLTIEBA
+                                       COLTIEBB
+                                       COLTUEBB
+                                       COLTUEBA
+****
+Sub System per TANICA   TANICA         TANKCC
+****
+Tutto TANICA            TANICA         TANKCC
+                                       VALVVALV
+****
+Solo REGOLA             REGOLA         REGOREGO
+****
+Praticamente TUTTO      TANICA         TANKCC
+                                       VALVVALV
+                        REGOLA         REGOREGO
+****

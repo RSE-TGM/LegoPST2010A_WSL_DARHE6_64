@@ -1,0 +1,36 @@
+VENT_1                                                                          
+VENT                                                                            
+VENT Air gas centrifugal fun (rotational speed as input)                        
+                                                                                
+NSTAT = 0
+NUSCI = 4
+NINGR = 7
+ 
+NCONF = 1
+ 
+PFVE      --UA-- FLUID PRESSURE AT THE FAN OUTLET                               
+TFU2      --UA-- FLUID TEMPERATURE AT THE FAN OUTLET                            
+TFU1      --UA-- FLUID TEMP. AT THE FAN INLET (INVERTED FLOW)                   
+QRES      --UA-- FAN RESISTENT POWER                                            
+OMVE      --IN-- FAN ROTATIONAL SPEED                                           
+WFVE      --IN-- FLUID FLOW RATE INTO THE FAN                                   
+PFMV      --IN-- FLUID PRESSURE AT THE FAN INLET                                
+ALSR      --IN-- REGISTER OPENING DEGREE OF THE FAN                             
+TFI1      --IN-- FLUID TEMPERATURE AT THE FAN INLET                             
+TFI2      --IN-- FLUID TEMP. AT THE FAN OUTLET (INVERTED FLOW)                  
+NVEN      --IN-- NUMBER OF FANS IN PARALLEL                                     
+==============================                                                  
+EOF                                                                             
+4
+t0 5
+USCITA IDR. FUMI
+WFVE PFVE TFU2 TFI2 ____ ____ ____ ____
+t1 4
+INGRESSO IDR. FUMI
+WFVE PFMV TFI1 TFU1 ____ ____ ____ ____
+t3 6
+INGRESSO ATTUAZIONE
+ALSR
+t2 6
+INGRESSO ATTUAZIONE
+OMVE

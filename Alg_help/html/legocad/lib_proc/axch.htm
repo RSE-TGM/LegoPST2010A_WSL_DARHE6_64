@@ -1,0 +1,158 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE AXCH</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AXCH_summ"></A>MODULE AXCH&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AXCH_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AXCH_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AXCH_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="file:///D:/usr/users/giugno/doc_puerto/lib_proc/axch.htm#lg_libproc_AXCH_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AXCH_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AXCH_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AXCH_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AXCH_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=6><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AXCH_A"></A>MODULE AXCH&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">AIR DUCT</P>
+<P>&nbsp;</P>
+<P>The AXCH module simulates the thermal exchange between air flowing through a duct and the external surface of several elements which (also belonging to the duct itself) can have mean temperatures considerably different.</P>
+<P>Symplifying hypoteses used in definition of physical-mathematical model are the following:</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>- duct which air is flowing through is subdivided in cells (max.9) along motion direction;</P>
+<P>- in each cell air can exchange with several surfaces (max.6) having different mean temperatures;</P>
+<P>- air can be dry or wet;</P>
+<P>- humidity cannot condensate, that is to say steam can be superheated or saturated dry;</P>
+<P>- convective thermal exchange can occur as longflow;</P>
+<P>- all accumulation phenomena are not considered.</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>The used equations are:</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>- conservation equation of air energy</P>
+<P>- conservation equation of air mass</P>
+<P>- equation of thermal exchange between air and duct walls .</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>Not considering all accumulation phenomena, all mentioned equations are algebraical.</P>
+<P>&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AXCH_B"></A>MODULE AXCH&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Nc = number of cells (max.9) in which the duct is subdivided</P>
+<P>Np(i) = number of surfaces (max.6) exchanging heat with air flowing through the</P>
+<P>i-th duct cell</P>
+<P>&nbsp;</P>
+<P>i = 1, 2,... Nc</P>
+<P>j = 1, 2,... Np(i)</P>
+<P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1270.gif" WIDTH=516 HEIGHT=385></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P>[K] TUF flue gas temperature at the duct outlet</P>
+<P>&nbsp;</P>
+<P>[%] XUMD air absolute humidity (mass fraction) </P>
+<P>&nbsp;</P>
+<P>[K] TF_1 (i=1,2,...,Nc) mean temperature of air flowing through the i-th cell</P>
+<P>&nbsp;</P>
+<P>[W/m**2/K] GF_1 heat transfer coefficient in the i-th cell</P>
+<P>&nbsp;</P>
+<P>[kg/s] WIF flow rate of air flowing through the duct</P>
+<P>&nbsp;</P>
+<P>[K] TIF air temperature at the duct inlet</P>
+<P>&nbsp;</P>
+<P>[ ] FAS dirty factor of bench pipes</P>
+<P>&nbsp;</P>
+<P>[Pa] PRES air pressure</P>
+<P>&nbsp;</P>
+<P>[%] XUMA air humidity (mass fraction)</P>
+<P>if TYUM = 0 relative humidity</P>
+<P>if TYUM = 1 absolute humidity</P>
+<P>&nbsp;</P>
+<P>[K] TMji mean temperature of the j-th surface exchanging heat with air flowing</P>
+<P>through the i-th cell</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_AXCH_C"></A>MODULE AXCH&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P>&nbsp;</P>
+<P>In addition to initial values of the AXCH module input and output variables (meanings defined in card B1), user must assign the following data:</P>
+<P>&nbsp;</P>
+<P>[ ] TYUM air humidity definition</P>
+<P>TYUM = 0 relative humidity</P>
+<P>TYUM = 1 absolute humidity</P>
+<P>&nbsp;</P>
+<P>and, for each cell:</P>
+<P>[ ] NTUB number of pipes forming the bench</P>
+<P>[m] DIDR hydraulic diameter of bench pipes (air side)</P>
+<P>[m] LUNG length of bench pipes</P>
+<P>[m**2] SCAN cell cross section area</P>
+<P>[ ] FA correction factor for heat trasfer coefficient</P>
+<P>[m**2] SUP.j (j=1,...,6) area of the j-th surface exchanging heat with air flowing through the cell.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AXCH_D"></A>MODULE AXCH&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P>&nbsp;</P>
+<P>To initialize the AXCH module variables no particular prescription is required.</P>
+<P>Care must be used in assigning realistic values of inlet air humidity.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AXCH_E"></A>MODULE AXCH&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P>&nbsp;</P>
+<P>In the AXCH module no user programs are requested.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AXCH_F"></A>MODULE AXCH&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P>&nbsp;</P>
+<P>Equations forming the module mathematical model, mentioned in card A1 give rise to a residual set whose are only indicated their respective normalization factor.</P>
+<P>Further explanation are given in the related section of the manual "LEGOCAD -</P>
+<P>Modelling Library for Simulation of Power Generation Plants - Theory".</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AXCH_G"></A>MODULE AXCH&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+<P>SUBROUTINE AXCHI1(IFUN, K, IBLOC1, IBLOC2, NSTATI, NUSCIT, NINGRE)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE AXCHI3(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE AXCHI4(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE AXCHI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ IBLOC1, IBLOC2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE AXCHC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ IBLOC1, IBLOC2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE AXCH(IFUN, IXYU, XYU, IPD, DATI, RN)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE AXCHDA(T, P, ROAR, CPAR, CTAR, VDAR)</P>
+<P>SUBROUTINE AXCHWA(T, RPVP, ROAR, CPAR, CTAR, VDAR, ROAC, CPAC, CTAC,</P>
+<P>$ VDAC, ROM, CPM, CTM, VDM)</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AXCH_H"></A>MODULE AXCH&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P>&nbsp;</P>
+<P>Reference test cases related to this module are in the manual section dedicated to the examples developed under the abbreviations:</P>
+<P ALIGN="CENTER">"....module application example not available yet..."</P>
+<P>&nbsp;</P></FONT></BODY>
+</HTML>

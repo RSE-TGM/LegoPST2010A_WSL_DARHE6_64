@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE MVAM</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MVAM_summ"></A>MODULE MVAM CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MVAM_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MVAM_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MVAM_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MVAM_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MVAM_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MVAM_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MVAM_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_MVAM_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_MVAM_A"></A>MODULE MVAM CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">METHANE AND STEAM MIXER</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The target of the MVAM module is the evaluation of the total flow rate and the equilibrium temperature of two mixing flows, one of (surheated) steam and the other of methane (or natural gas). The target of the module is also to allow the connection between a steam pipe line and a gas pipe, as the definition of the thermodynamical characteristics of the fluid are different for the two types of fluid.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Simplifying hypotheses adopted in the physical-mathematical model definition are the following:</P>
+<P ALIGN="JUSTIFY">- absence of thermal exchange of the "N" fluids with the surface of the cavity;</P>
+<P ALIGN="JUSTIFY">- absence of phenomena of mass and energy accumulation in the cavity;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The hypothesis that the steam is (before and after the mixing) surheated allows the usage (also for the steam) of relations valid for perfect gases. Actually the methane is usually colder than the steam, and it would cause a (partial) condensation of the steam. But one of the effects of the mixing is that the partial pressure of the steam diminuishes greatly (keeping constant the static pressure of the mixture) with the consequence of an equivalent diminution of the condensation temperature.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In case of null (or negative) flow rates, the module keeps the chemical composition in the previous time step; during steady state evaluation it is instead kept the attempt value assigned by the user (read from the F14.DAT file).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The temperature of the incoming steam is evaluated with a simple call to the steam properties tables of the LEGOCAD System. The partial pressure of the steam is evaluated multiplying the pressure in the mixer for the molar fraction of steam.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The correspondence between temperatures and enthalpies of the methane, of the steam and of the mixture is made approximating them to perfect gases with c</FONT><FONT FACE="Arial, helvetica" SIZE=1>p</FONT><FONT FACE="Arial, helvetica"> not constant:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image358.gif" WIDTH=177 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In case of null (or negative) flow rates, the module keeps the outlet temperature in the previous time step; during steady state evaluation it is instead kept the attempt value assigned by the user (read from the F14.DAT file).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MVAM_B"></A>MODULE MVAM CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;<IMG SRC="Image359.gif" WIDTH=374 HEIGHT=145></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WSTE&#9;&#9;Steam flow rate at the mixer inlet</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HSTE&#9;&#9;Steam enthalpy at the mixer inlet</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WGAS&#9;Methane flow rate at the mixer inlet</P>
+<P ALIGN="JUSTIFY">[K]&#9;TGAS&#9;&#9;Methane temperature at the mixer inlet</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PMIX&#9;&#9;Mixture pressure inside the mixer</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WMIX&#9;&#9;Mixture flow rate at the mixer outlet</P>
+<P ALIGN="JUSTIFY">[K]&#9;TMIX&#9;&#9;Mixture temperature at the mixer outlet</P>
+<P ALIGN="JUSTIFY">[ ]&#9;XGAS&#9;&#9;Methane mass fraction at the mixer outlet</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT VARIABLES NORMALIZATION FACTORS</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Variables&#9;Normalization</P>
+<P>WSTE, WGAS, WMIX&#9;W0</P>
+<P>HSTE&#9;H0</P>
+<P>TGAS, TMIX&#9;T0</P>
+<P>PMIX&#9;P0</P>
+<P>XGAS&#9;1.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_MVAM_C"></A>MODULE MVAM CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P ALIGN="JUSTIFY">In the MVAM module there is no request for further data besides starting values of input and output variables.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MVAM_D"></A>MODULE MVAM CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">To initialize the MVAM module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MVAM_E"></A>MODULE MVAM CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In the MVAM module no user subprogram is foreseen.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MVAM_F"></A>MODULE MVAM CARD F</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The mass and energy conservation equations and the mass balance between methane and steam, applied to the fluid inside the manifold, give rise to the following residuals:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">WOUT = WSTE + WGAS</P>
+<P ALIGN="JUSTIFY">IF (WSTE .GE. 0.01 .OR. WGAS .GE. 0.01) THEN</P>
+<P ALIGN="JUSTIFY">WSTE = AMAX1 (WSTE, 0.)</P>
+<P ALIGN="JUSTIFY">WGAS = AMAX1 (WGAS, 0.)</P>
+<P ALIGN="JUSTIFY">HOUT = (WSTE * HSSS + WGAS * HGAS) / (WSTE + WGAS)</P>
+<P ALIGN="JUSTIFY">XOUT = WGAS / (WSTE + WGAS)</P>
+<P ALIGN="JUSTIFY">ELSE</P>
+<P ALIGN="JUSTIFY">HOUT = HPRE</P>
+<P ALIGN="JUSTIFY">XOUT = XPRE</P>
+<P ALIGN="JUSTIFY">ENDIF</P>
+<P ALIGN="JUSTIFY">C</P>
+<P ALIGN="JUSTIFY">RNI(1) = (WMIX - WOUT) / W0</P>
+<P ALIGN="JUSTIFY">RNI(2) = (HMIX - HOUT) / H0</P>
+<P ALIGN="JUSTIFY">RNI(3) = XGAS - XOUT</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MVAM_G"></A>MODULE MVAM CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE MVAMI3 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO,IOB,DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MVAMI2 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MVAMC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MVAM </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MVAMXG </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(XG, XS, FG, FS, R1)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MVAMGP</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (XG, TM, CP, HH)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE MVAMD1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_MVAM_H"></A>MODULE MVAM CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Reference test cases related to this module are in the user manual section dedicated to the examples developed under the abbreviations:</P>
+<P ALIGN="CENTER">"......... module application examples not available yet........"</P></FONT></BODY>
+</HTML>

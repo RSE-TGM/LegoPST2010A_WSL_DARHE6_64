@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_air"></A>Compressed air and natural gas treatment</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_air"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_airgcomp"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Compressors</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_airgserb"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Gas tanks</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_airgvalv"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Air valves</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_airgcomp"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Compressors</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_airgcomp"></A>Compressed air and natural gas treatment: compressors</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/cmsc.htm#lg_libproc_CMSC_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">CMSC</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">The model simulates the operation of an industrial compressor with an internal recirculation line.</P>
+<P ALIGN="JUSTIFY">The main hypotheses are:</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no heat storage</P>
+<P ALIGN="JUSTIFY">no flow inertia</P>
+<P ALIGN="JUSTIFY">The compressor characteristic curve is described by means of the following relationship:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image697.gif" WIDTH=258 HEIGHT=56></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The mass flow rate through the compressor is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image698.gif" WIDTH=100 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and the mass flow rate</FONT> <FONT FACE="Symbol">G</FONT><FONT SIZE=1>recr</FONT> <FONT FACE="Arial, helvetica">through the recirculation line is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image699.gif" WIDTH=244 HEIGHT=28></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The power balance equation of fluid flowing through the fan is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image679.gif" WIDTH=156 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and the inlet enthalpy h</FONT><FONT FACE="Arial, helvetica" SIZE=1>mix</FONT><FONT FACE="Arial, helvetica"> to the compressor stages is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image700.gif" WIDTH=169 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The isentropic efficiency </FONT><FONT FACE="Symbol">h</FONT><FONT SIZE=1>iso</FONT> <FONT FACE="Arial, helvetica">and the mechanical efficiency </FONT><FONT FACE="Symbol">h</FONT><FONT SIZE=1>mec</FONT> <FONT FACE="Arial, helvetica">are defined as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image701.gif" WIDTH=124 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where h</FONT><FONT FACE="Arial, helvetica" SIZE=1>iso</FONT><FONT FACE="Arial, helvetica"> is the enthalpy obtained with an isentropic compression between p</FONT><FONT FACE="Arial, helvetica" SIZE=1>IN</FONT><FONT FACE="Arial, helvetica"> and p</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX</FONT><FONT FACE="Arial, helvetica">, and:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image702.gif" WIDTH=152 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and of course:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image703.gif" WIDTH=200 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">At the outlet of the compressor a cooling device is modelled.</P>
+<P ALIGN="JUSTIFY">The fluid energy conservation equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image704.gif" WIDTH=258 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and the wall energy conservation equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image705.gif" WIDTH=177 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image706.gif" WIDTH=164 HEIGHT=22>&#9;<IMG SRC="Image707.gif" WIDTH=166 HEIGHT=22></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_airgserb"></A>Compressed air and natural gas treatment: gas tanks</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/sera.htm#lg_libproc_SERA_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">SERA</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">Main hypotheses:</P>
+<P ALIGN="JUSTIFY">constant cavity volume</P>
+<P ALIGN="JUSTIFY">perfect mixing of the fluid in the cavity</P>
+<P ALIGN="JUSTIFY">fluid properties are computed at the mean fluid pressure value</P>
+<P ALIGN="JUSTIFY">fluid follows the perfect gas law</P>
+<P ALIGN="JUSTIFY">no friction losses are taken into account</P>
+<P ALIGN="JUSTIFY">The momentum equation takes the form:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image448.gif" WIDTH=49 HEIGHT=42>&#9;<IMG SRC="Image449.gif" WIDTH=49 HEIGHT=45>&#9;<IMG SRC="Image450.gif" WIDTH=49 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The continuity equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image454.gif" WIDTH=174 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">which becomes, assuming T and p as state variables:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image708.gif" WIDTH=276 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image709.gif" WIDTH=66 HEIGHT=42>&#9;<IMG SRC="Image710.gif" WIDTH=52 HEIGHT=45></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and the fluid energy conservation equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image711.gif" WIDTH=249 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where T is the internal fluid temperature and Q is the heat transfer between the internal fluid and the wall:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image712.gif" WIDTH=154 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The wall energy conservation equation is</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image713.gif" WIDTH=401 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where T</FONT><FONT FACE="Arial, helvetica" SIZE=1>ext</FONT><FONT FACE="Arial, helvetica"> is the temperature of the external fluid or the ambient temperature.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_airgvalv"></A>Compressed air and natural gas treatment: air valves</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/vain.htm#lg_libproc_VAIN_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">VAIN</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">Main hypotheses:</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no heat storage</P>
+<P ALIGN="JUSTIFY">no inertia</P>
+<P ALIGN="JUSTIFY">no heat transfer between fluid and component casing and internals</P>
+<P ALIGN="JUSTIFY">The following relationship, which strictly is only valid for incompressible fluids, is used:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image714.gif" WIDTH=214 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Remembering that:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image162.gif" WIDTH=141 HEIGHT=58><IMG SRC="Image163.gif" WIDTH=12 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image164.gif" WIDTH=56 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the term p</FONT><FONT FACE="Arial, helvetica" SIZE=1>app</FONT><FONT FACE="Arial, helvetica"> is defined:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image165.gif" WIDTH=17 HEIGHT=22>&#9;<IMG SRC="Image166.gif" WIDTH=73 HEIGHT=22>&#9;<IMG SRC="Image167.gif" WIDTH=78 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image168.gif" WIDTH=17 HEIGHT=22>&#9;<IMG SRC="Image169.gif" WIDTH=73 HEIGHT=22>&#9;<IMG SRC="Image170.gif" WIDTH=78 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The outlet temperature T</FONT><FONT FACE="Arial, helvetica" SIZE=1>EX</FONT><FONT FACE="Arial, helvetica"> is computed as</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image715.gif" WIDTH=164 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where k is an assigned coefficient.</P></FONT></BODY>
+</HTML>

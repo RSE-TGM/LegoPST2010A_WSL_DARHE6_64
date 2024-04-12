@@ -1,0 +1,74 @@
+CATT_0                                                                          
+CATT                                                                            
+CATT - Compressor of a gas turbine - 4 stages, 7 bleeds                         
+                                                                                
+NSTAT = 0
+NUSCI =12
+NINGR =13
+ 
+NCONF = 1
+ 
+WMAN      --UA-- AIR FLOW RATE AT COMPRESSOR OUTLET                             
+TMAN      --UA-- AIR TEMPERATURE AT COMPRESSOR OUTLET                           
+QCOM      --UA-- MECHANICAL POWER ABSORBED BY AIR COMPRESSOR                    
+WASP      --UA-- AIR FLOW RATE AT COMPRESSOR INLET                              
+WST2      --UA-- AIR FLOW RATE THROUGH COMPRESSOR STAGE N. 2                    
+WST3      --UA-- AIR FLOW RATE THROUGH COMPRESSOR STAGE N. 3                    
+PCA1      --UA-- AIR PRESSURE DOWNSTREAM COMPRESSOR STAGE N. 1                  
+PCA2      --UA-- AIR PRESSURE DOWNSTREAM COMPRESSOR STAGE N. 2                  
+PCA3      --UA-- AIR PRESSURE DOWNSTREAM COMPRESSOR STAGE N. 3                  
+TCA1      --UA-- AIR TEMPERATURE DOWNSTREAM COMPRESSOR STAGE N. 1               
+TCA2      --UA-- AIR TEMPERATURE DOWNSTREAM COMPRESSOR STAGE N. 2               
+TCA3      --UA-- AIR TEMPERATURE DOWNSTREAM COMPRESSOR STAGE N. 3               
+PASP      --IN-- AIR PRESSURE AT TG COMPRESSOR INLET                            
+TASP      --IN-- AIR TEMPERATURE AT TG COMPRESSOR INLET                         
+PMAN      --IN-- COMPRESSOR OUTLET PRESSURE (COLD CHAMBER)                      
+RPMC      --IN-- ROTATIONAL SPEED OF TG GROUP SHAFT                             
+AIGV      --IN-- IGV DEVIATION FROM NOMINAL CONDITION [DEG]                     
+ZSPO      --IN-- COMPRESSOR BLADES GRITNESS DEGREE [%]                          
+WSP1      --IN-- AIR FLOW RATE THROUGH COMPRESSOR BLEEDING N. 1                 
+WSP2      --IN-- AIR FLOW RATE THROUGH COMPRESSOR BLEEDING N. 2                 
+WSP3      --IN-- AIR FLOW RATE THROUGH COMPRESSOR BLEEDING N. 3                 
+WSP4      --IN-- AIR FLOW RATE THROUGH COMPRESSOR BLEEDING N. 4                 
+WSP5      --IN-- AIR FLOW RATE THROUGH COMPRESSOR BLEEDING N. 5                 
+WSP6      --IN-- AIR FLOW RATE THROUGH COMPRESSOR BLEEDING N. 6                 
+WSP7      --IN-- AIR FLOW RATE THROUGH COMPRESSOR BLEEDING N. 7                 
+==============================                                                  
+EOF                                                                             
+12
+t9 6
+INGRESSO ATTUAZIONE
+RPMC
+10 6
+INGRESSO ATTUAZIONE
+AIGV
+11 6
+INGRESSO ATTUAZIONE
+ZSPO
+t0 4
+INGRESSO IDR. FUMI
+WASP PASP TASP ____ ____ ____ ____ ____
+t2 5
+USCITA IDR. FUMI
+WSP1 PCA1 TCA1 ____ ____ ____ ____ ____
+t3 5
+USCITA IDR. FUMI
+WSP2 PCA1 TCA1 ____ ____ ____ ____ ____
+t4 5
+USCITA IDR. FUMI
+WSP3 PCA2 TCA2 ____ ____ ____ ____ ____
+t5 5
+USCITA IDR. FUMI
+WSP4 PCA3 TCA3 ____ ____ ____ ____ ____
+t6 5
+USCITA IDR. FUMI
+WSP5 PCA1 TCA1 ____ ____ ____ ____ ____
+t7 5
+USCITA IDR. FUMI
+WSP6 PCA2 TCA2 ____ ____ ____ ____ ____
+t8 5
+USCITA IDR. FUMI
+WSP7 PCA3 TCA3 ____ ____ ____ ____ ____
+t1 5
+USCITA IDR. FUMI
+WMAN PMAN TMAN ____ ____ ____ ____ ____

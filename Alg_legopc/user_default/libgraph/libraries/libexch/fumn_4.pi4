@@ -1,0 +1,56 @@
+FUMN_4                                                                          
+FUMN                                                                            
+FUMN - heat exchanger (flue gas side), 5 cells 1 wall per cell                  
+                                                                                
+NSTAT = 0
+NUSCI =11
+NINGR =11
+ 
+NCONF = 1
+ 
+TUF_      --UA-- OUTLET FLUE GAS TEMPERATURE                                    
+TF_1      --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 1                              
+TF_2      --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 2                              
+TF_3      --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 3                              
+TF_4      --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 4                              
+TF_5      --UA-- FLUE GAS MEAN TEMP. INSIDE CELL 5                              
+GF_1      --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 1                         
+GF_2      --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 2                         
+GF_3      --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 3                         
+GF_4      --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 4                         
+GF_5      --UA-- THERMAL EXCHANGE COEFFICIENT IN CELL 5                         
+WIF_      --IN-- INLET FLOW RATE OF FLUE GAS                                    
+TIF_      --IN-- INLET FLUE GAS TEMPERATURE                                     
+FAS_      --IN-- GRITNESS FACTOR OF THE TUBES                                   
+%CO2      --IN-- PARTIAL PRESSURE OF CO2 IN FLUE GAS (IN PERCENT)               
+%PH2      --IN-- PARTIAL PRESSURE OF H2O IN FLUE GAS (IN PERCENT)               
+%H2O      --IN-- MASSIC FRACTION OF H2O IN FLUE GAS (IN PERCENT)                
+TM11      --IN-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 1                    
+TM12      --IN-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 2                    
+TM13      --IN-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 3                    
+TM14      --IN-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 4                    
+TM15      --IN-- TEMP. OF METAL SURF. 1 FLUE GAS SIDE CELL 5                    
+==============================                                                  
+EOF                                                                             
+7
+t1 5
+FlueGas output
+WIF_ ____ TUF_ ____ ____ %CO2 %PH2 %H2O
+t0 4
+FlueGas input
+WIF_ ____ TIF_ ____ ____ %CO2 %PH2 %H2O
+t4 3
+Termic output
+TM13 TF_3 GF_3 ____
+t3 3
+Termic output
+TM12 TF_2 GF_2 ____
+t2 3
+Termic output
+TM11 TF_1 GF_1 ____
+t5 3
+Termic output
+TM14 TF_4 GF_4 ____
+t6 3
+Termic output
+TM15 TF_5 GF_5 ____

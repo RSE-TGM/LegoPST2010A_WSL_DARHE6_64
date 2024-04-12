@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE VFLW</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VFLW_summ"></A>MODULE VFLW CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VFLW_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VFLW_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VFLW_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VFLW_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VFLW_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VFLW_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VFLW_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VFLW_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VFLW_A"></A>MODULE VFLW CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">VOLUMETRIC FLOW CALCULATION</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The VFLW module calculates the equivalent volumetric flow rate for an assigned mass flow rate. </P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VFLW_B"></A>MODULE VFLW CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><FONT FACE="Arial" SIZE=4 COLOR="#008000"><P ALIGN="JUSTIFY">Input variables&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;</FONT><FONT FACE="Arial" SIZE=4 COLOR="#800000">output variables</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" COLOR="#008000"><P ALIGN="JUSTIFY">PFLD&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;</FONT><FONT FACE="Arial" COLOR="#800080">VFLW</P>
+</FONT><FONT FACE="Arial" COLOR="#008000"><P>HFLD&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;</FONT><FONT FACE="Arial" COLOR="#800080">VFLH</P>
+</FONT><FONT FACE="Arial" COLOR="#008000"><P ALIGN="JUSTIFY">WFLD&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;</FONT><FONT FACE="Arial" COLOR="#800080">FLSV</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;</FONT><FONT FACE="Arial" COLOR="#800080">FLDR</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;&#9;PFLD&#9;&#9;fluid pressure</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;&#9;HFLD&#9;&#9;fluid enthalpy</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;&#9;WFLD&#9;&#9;fluid mass flow rate </P>
+<P ALIGN="JUSTIFY">[m<SUP>3</SUP>/s]&#9;&#9;VFLW&#9;&#9;fluid volumetric flow rate</P>
+<P ALIGN="JUSTIFY">[m<SUP>3</SUP>/h]&#9;&#9;VFLH&#9;&#9;fluid volumetric flow rate</P>
+<P ALIGN="JUSTIFY">[m<SUP>3</SUP>/kg]&#9;FLSV&#9;&#9;fluid specific volume</P>
+<P ALIGN="JUSTIFY">[kg/m<SUP>3</SUP>]&#9;FLDR&#9;&#9;fluid density</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_VFLW_C"></A>MODULE VFLW CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>No data required.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VFLW_D"></A>MODULE VFLW CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the VFLW module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VFLW_E"></A>MODULE VFLW CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In the VFLW module no user subprograms are foreseen.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VFLW_F"></A>MODULE VFLW CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module mathematical model consists of the algebraic relations which give the value of the output required, directly assigned to the variables during steady state calculation and to residuals during transient calculation.</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VFLW_G"></A>MODULE VFLW CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=2><P>SUBROUTINE VFLWI3(IFO, IOB, DEBL)</P>
+<P>SUBROUTINE VFLWI4(IOB, MOD)</P>
+<P>SUBROUTINE VFLWI2(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ IBL1, IBL2, IER, CNXYU, TOL)</P>
+<P>SUBROUTINE VFLWC1(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ IBL1, IBL2)</P>
+<P>SUBROUTINE VFLW(IFUN, IXYU, XYU, IPD, DATI, RNI)</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VFLW_H"></A>MODULE VFLW CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the manual section dedicated to the examples developed under the abbreviations: </P>
+<P ALIGN="CENTER">"… not available …"</P></FONT></BODY>
+</HTML>

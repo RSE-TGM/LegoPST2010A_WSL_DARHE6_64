@@ -1,0 +1,233 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE GENE</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GENE_summ"></A>MODULE GENE CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+</FONT><P><A HREF="#lg_libproc_GENE_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P><A HREF="#lg_libproc_GENE_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_GENE_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_GENE_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P><A HREF="#lg_libproc_GENE_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_GENE_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P><A HREF="#lg_libproc_GENE_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_GENE_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<B><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_GENE_A"></A>MODULE GENE CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P>&nbsp;</P>
+<P ALIGN="CENTER">SYNCHRONOUS GENERATOR</P>
+<P>&nbsp;</P>
+<P>The GENE module simulates the operation of a three-phase synchronous generator of the third order.</P>
+<P>&nbsp;</P>
+<P>In the mathematical model, the following hypothesis are assumed:</P>
+<P>&nbsp;</P>
+<P>1)&#9;hysteresis and magnetic saturations are not considered;</P>
+<P>2)&#9;the field circuit acts according to the direct axis;</P>
+<P>3)&#9;there is a damper circuit according to the direct axis and one according to axis in quadrature;</P>
+<P>4)&#9;distributions of magnetomotive forces and of flows are sinusoidal to the entrefer;</P>
+<P>5)&#9;the homopolar circuit is neglected;</P>
+<P>6)&#9;transformer emfs are neglected;</P>
+<P>7)&#9;subtransient emf time variations are neglected.</P>
+<P>&nbsp;</P>
+<P>Including these simplifications a model of the third order is obtained in which state outputs are SFAS and E1Q0.</P>
+<P>&nbsp;</P>
+<P>The generator model here reported may be a reference synchronous generator, or it may be referred to the absolute one, depending on the value of STIP input variable (for STIP=0 it is a reference generator, for STIP=1 it is referred to the absolute one)</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GENE_B"></A>MODULE GENE CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I><P>&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+</FONT><P>&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;<IMG SRC="Image1294.gif" WIDTH=390 HEIGHT=606></P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT OUTPUT VARIABLES</P>
+<P>&nbsp;</P>
+<P>[rad]&#9;SFAS&#9;angle between rotor and network </P>
+<P>[p.u.]&#9;E1QO&#9;transient voltage according to axis in quadrature</P>
+<P>[rad/s]&#9;OMMA&#9;rotor angular speed</P>
+<P>[pum]&#9;ID00&#9;component according to current direct axis</P>
+<P>[pum]&#9;IQ00&#9;component according to current axis in quadrature</P>
+<P>[A]&#9;IR00&#9;real output current</P>
+<P>[A]&#9;IX00&#9;imaginary output current</P>
+<P>[V]&#9;UR00&#9;real voltage before generator circuit breaker</P>
+<P>[V]&#9;UX00&#9;imaginary voltage before generator circuit breaker</P>
+<P>[V]&#9;UMOD&#9;module of voltage before generator circuit breaker</P>
+<P>[W]&#9;QATT&#9;active output power</P>
+<P>[VAR]&#9;QREA&#9;reactive output power</P>
+<P>[rad/s]&#9;OMEL&#9;generator pulsation </P>
+<P>[ ]&#9;FDP0&#9;power factor</P>
+<P>[%]&#9;IMMA&#9;current output with respect to the rated one</P>
+<P>[W]&#9;QPJS&#9;stator joule losses</P>
+<P>[W]&#9;QPJE&#9;excitation joule losses. Whenever RECC (or IEBA) are not known, excitation losses are estimated equal to:<BR>
+QPJE = .0015*QNOM </P>
+<P>[W]&#9;QPFA&#9;power lost in iron</P>
+<P>[A]&#9;IF00&#9;excitation current</P>
+<P>[V]&#9;UR00&#9;actual phase voltage at terminals</P>
+<P>[V]&#9;UX00&#9;imaginary phase voltage at terminals </P>
+<P>[V ]&#9;UF00&#9;excitation voltage</P>
+<P>[W]&#9;QMEC&#9;turbine mechanical capacity</P>
+<P>[]&#9;STIP&#9;for STIP=0 the generator is the reference one; for STIP=1 the generator is referred to the absolute one</P>
+<P>[rad/s]&#9;OMRE&#9;electrical grid frequency</P>
+<P>[]&#9;SINT&#9;gen. circuit breaker (SINT=0 open; SINT=1 closed)</P>
+<P>[]&#9;SFER&#9;for SFER=1 the generator is in shutdown or tripped</P>
+<P>[]&#9;XMAL&#9;malfunction index (for XMAL=0 the generator is ok, for XMAL=1 a malfunction of gen. circuit breaker causes its opening)</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GENE_C"></A>MODULE GENE CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P>&nbsp;</P>
+<P>In addition to the initial values of input and output variables of the GENE module, whose meaning has been defined in card B1, the user must assign the following set of data to complete the input required by the module:</P>
+<P>[V]&#9;VBASE&#9;system basic voltage between lines</P>
+<P>[rad/s]&#9;OMBA&#9;system basic pulsation </P>
+<P>[W]&#9;QNOM&#9;rated apparent capacity of the generator set</P>
+<P>[W]&#9;QBASE&#9;system basic power </P>
+<P>[ ]&#9;CPOLI&#9;number of poles (if not indicated, it is assumed equal to 2)</P>
+<P>[pum]&#9;XD&#9;direct axis synchronous reactance</P>
+<P>[pum]&#9;X1D&#9;direct axis transient reactance</P>
+<P>[pum]&#9;XQ&#9;synchronous reactance axis in quadrature</P>
+<P>[s]&#9;T1D0&#9;transient time constant according to direct axis in no-load conditions</P>
+<P>[s]&#9;TA&#9;unit starting time</P>
+<P>[A]&#9;I0F&#9;excitation current relevant to rated no-load voltage, with linear magnetic circuit.</P>
+<P>[ohm]&#9;RECC&#9;resistance of the excitation circuit</P>
+<P>[ohm]&#9;RSTA&#9;statoric phase resistance. If RSTA is not indicated, then it is assumed equal to RSTA = .0016*QNOM/3./INOM**2</P>
+<P>[W]&#9;QPFER&#9;losses in iron at rated voltage. If QFER is not indicated, it is assumed equal to QFER = .0016*QNOM</P>
+<P>&nbsp;</P>
+<P>The machine per unit is indicated with pum, that is the one calculated with the alternator rated values.</P>
+<P>&nbsp;</P>
+<P>If one of the following data is null XD,X1D,X2D,XQ,X2Q,T1D0,T2D,T2Q,TA, all are fixed on the basis of the rated equipment capacity QNOM according to the following scheme:</P>
+<P>&nbsp;</P>
+<P>QNOM &lt; 150&#9;150&lt;QNOM&lt;250&#9;250&lt;QNOM&lt;500&#9;QNOM &gt; 500</P>
+<P>XD&#9;1.&#9;2.&#9;1.9&#9;2.5</P>
+<P>X1D&#9;.3&#9;.2&#9;.302&#9;.25</P>
+<P>XQ&#9;.7&#9;2.&#9;1.7&#9;2.35</P>
+<P>T1D0&#9;5.&#9;7.&#9;8.&#9;7.5</P>
+<P>TA&#9;7.&#9;9.&#9;8.&#9;8.</P>
+<P>&nbsp;</P>
+<P>where QNOM is in MVA</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GENE_D"></A>MODULE GENE CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P>&nbsp;</P>
+<P>No particular prescription is required for the GENE module initialization.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GENE_E"></A>MODULE GENE CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P>&nbsp;</P>
+<P>No user’s subprogram is required in the GENE module.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GENE_F"></A>MODULE GENE CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P>&nbsp;</P>
+<P>The equations of the mathematical model, mentioned in Card A, give the following residuals:</P>
+<P>If STIP=0</P>
+<P>RNI(1)&#9;= 0.05*(6.28–SFAS)</P>
+<P>If STIP =1 </P>
+<P>RNI(1)&#9;= OMBA*(OMMA-OMRE)</P>
+<P>&nbsp;</P>
+<P>RNI(2)&#9;= -A4*E1Q0-A5*ID00+A4*VF00</P>
+<P>where</P>
+<P>A4 = 1./T1D0</P>
+<P>A5 = (XD-X1D)/T1D0</P>
+<P>QVENT=.0016</P>
+<P>&nbsp;</P>
+<P>RNI(3)&#9;= (QMEC-QATT-(QVENT*OMMA**2)-QPJS-QPFA)*(1./(TA*OMMA))</P>
+<P>&nbsp;</P>
+<P>If STIP = 0</P>
+<P>RNI(4) =(UXMI*SQRT(3.)/OMMA)-E1Q0+X1D*ID00</P>
+<P>RNI(5) =(URMI*SQRT(3.)/OMMA)-XQ*IQ00</P>
+<P>&nbsp;</P>
+<P>If SINT=1 </P>
+<P>RNI(6) =IR00-ID00/SQRT(3.)+URMI*GTOT</P>
+<P>RNI(7) =IX00-IQ00/SQRT(3.)+UXMI*GTOT</P>
+<P>RNI(8) =URMI-UR00</P>
+<P>RNI(9) =UXMI-UX00</P>
+<P>&nbsp;</P>
+<P>where</P>
+<P>QAUX= SQRT(QATT**2+QREA**2)</P>
+<P>QADD= .0016*QAUX</P>
+<P>RFER= VBASE**2/QPFER</P>
+<P>GADD= QADD/VBASE**2</P>
+<P>GFER= 1./RFER</P>
+<P>GTOT= GFER+GADD</P>
+<P>&nbsp;</P>
+<P>If SINT=0</P>
+<P>RNI(6) =IR00</P>
+<P>RNI(7) =IX00</P>
+<P>RNI(8) =URMI-ID00/SQRT(3.)/GTOT</P>
+<P>RNI(9) =UXMI-IQ00/SQRT(3.)/GTOT</P>
+<P>&nbsp;</P>
+<P>If STIP=1, defining</P>
+<P>&nbsp;</P>
+<P>VD00=(URMI*(COS(SFAS))+UXMI*(SIN(SFAS)))*SQRT(3.)</P>
+<P>VQ00=(UXMI*(COS(SFAS))-URMI*(SIN(SFAS)))*SQRT(3.)</P>
+<P>IR10=(ID00*(COS(SFAS))-IQ00*(SIN(SFAS)))/SQRT(3.)</P>
+<P>IX10=(IQ00*(COS(SFAS))+ID00*(SIN(SFAS)))/SQRT(3.)</P>
+<P>&nbsp;</P>
+<P>we have:</P>
+<P>&nbsp;</P>
+<P>RNI(4) =(VQ00/OMMA)-E1Q0+X1D*ID00</P>
+<P>RNI(5) =(VD00/OMMA)-XQ*IQ00</P>
+<P>&nbsp;</P>
+<P>If SINT=1</P>
+<P>RNI(6) =IR00-IR10+URMI*GTOT</P>
+<P>RNI(7) =IX00-IX10+UXMI*GTOT</P>
+<P>RNI(8) =URMI-UR00</P>
+<P>RNI(9) =UXMI-UX00</P>
+<P>If SINT=0</P>
+<P>RNI(6) =IR00</P>
+<P>RNI(7) =IX00</P>
+<P>RNI(8) =URMI-IR10/GTOT</P>
+<P>RNI(9) =UXMI-IX10/GTOT</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>The remaining residuals are:</P>
+<P>&nbsp;</P>
+<P>RNI(10) =UMOD-SQRT(3.*(URMI*URMI+UXMI*UXMI))</P>
+<P>RNI(11) =QATT-3.*(UR00*IR00+UX00*IX00)</P>
+<P>RNI(12) =QREA-3.*(UX00*IR00-UR00*IX00)</P>
+<P>RNI(13) =OMEL-OMMA*CPOLI</P>
+<P>&nbsp;</P>
+<P>If QATT&gt;0 then</P>
+<P>RNI(14)= FDP0-(QATT/QAUX)</P>
+<P>else:</P>
+<P>RNI(14)= FDP0</P>
+<P>&nbsp;</P>
+<P>RNI(15) =IMMA-(SQRT(IR00**2+IX00**2)/INOM)</P>
+<P>RNI(16) =QPJS-3.*(RSTA*((IR00+URMI*GTOT)**2+(IX00+UXMI*GTOT)**2))</P>
+<P>RNI(17) =QPJE-(RECC*(IF00*I0F)**2)</P>
+<P>RNI(18) =QPFA-3.*(URMI**2+UXMI**2)*GTOT</P>
+<P>RNI(19) =IF00-VF00</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GENE_G"></A>MODULE GENE CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+<P>SUBROUTINE GENEI2&#9;(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2, &#9;&#9;&#9; </P>
+<P>IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>SUBROUTINE GENEC1&#9;(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE GENEJC&#9;(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE GENE&#9;(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>SUBROUTINE GENEI3&#9;(IFO,IOB,DEBL)</P>
+<P>SUBROUTINE GENEI4&#9;(IOB,MOD)</P>
+<P>SUBROUTINE GENED1&#9;(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P>IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P>&nbsp;&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_GENE_H"></A>MODULE GENE CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></FONT></BODY>
+</HTML>

@@ -1,0 +1,995 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>EXCH</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE EXCH</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EXCH</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">TWO PHASES (steam-water) EXCHANGER - DRIFT FLUX MODEL</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">The EXCH module simulates the thermodynamic behavior of a metal
+pipe and the fluid flowing inside it. It takes into account also a thermal
+exchange between fluid and metal wall. It is possible to represent the
+functioning of several piping, either in series or in parallel configuration, of
+which a hydraulic equivalent is considered. The EXCH module can also be used in
+a profitable manner to simulate the functioning of a heat exchanger or a steam
+generator.</p>
+<p align="left">The module mathematical model is based on the following
+hypotheses:</p>
+<p ALIGN="left">- conservation equation of mass, energy and momentum using
+concentrated parameters monodimensional approximation (mass, momentum and energy
+balances are carried out for each single cell)</p>
+<p ALIGN="left">- the piping is subdivided, along his main axis, in an arbitrary
+number of cells (from 2 to 6) which may or not exchange heat with outside</p>
+<p ALIGN="left">- up to a maximum of 6 external fluids can exchange heat with
+the duct metal wall</p>
+<p ALIGN="left">- water flowing through the piping is considered as a
+compressible fluid able to undergo some phase transition. So, fluid may be
+present at liquid or steam state or as two phase mixture liquid-steam</p>
+<p ALIGN="left">- in case of two phase mixture, to represent its thermo-fluid
+dynamic behaviour, both usual homogeneous model (without slip between the
+phases) and the more sophisticated two velocities &quot;DRIFT&quot; model, are
+available</p>
+<p ALIGN="left">- steam and liquid phases are supposed to be in thermodynamic
+equilibrium on general piping transverse cross section area (at constant
+pressure)</p>
+<p ALIGN="left">- in the momentum conservation equation, water inertia is
+considered as negligible</p>
+<p ALIGN="left">- friction flow resistances consist of two terms in the momentum
+equation one of which linear and one considering a quadratic dependency on flow
+rate. They are connected to fluid laminar and turbulent flow respectively whose
+coefficients are considered constant under a single phase condition</p>
+<p ALIGN="left">- phenomenon concerning the heat longitudinal conductivity in
+the fluid and in the metal wall is not considered.</p>
+<p align="left">The module is conceived to deal with fluid dynamic of water ad
+steam in the piping.</p>
+<p align="left">It is also possible to simulate the dynamics of other fluids
+(e.g. different types of freon) appropriately modifying the used tables.</p>
+<p align="left">The subdivision in axial cells allows to simulate the transfer
+phenomena (e.g. enthalpy) with a suitable time constant. It also allows to
+define, cell by cell, different physical properties (e.g. friction coefficient
+discontinuity, number of pipes in parallel configuration, etc.).</p>
+<p align="left">During definition phase of the model topology, the user can
+chose the number of axial cells and thermal exchange zones.</p>
+<p align="left">By the EXCH module it is possible to deal with zero flow rate
+situations and natural circulation cases (so that gravitational term in momentum
+conservation equation is correctly calculated). Also back-flow event is
+foreseen, at least for the homogeneous model and the enthalpy at the piping
+downstream is included among the module input variables.</p>
+<p align="left">To calculate the fluid-wall convective thermal exchange
+coefficient (see below) into the module a general subroutine (GAM01) is called
+but it’s also possible to use simplified correlations in routine EXCHGTERT.
+All this is managed through an input parameter (CRIG) modifiable by the user.</p>
+<p align="left">The fluid friction coefficient (EXCH input variable) is
+increased under a two phase condition by the Martinelli-Nelson's multiplier
+evaluated with the Becker's correlation.</p>
+<p align="left">If the piping to simulate has concentrated head losses (e.g.
+elbows or reducing fittings) they have to be incorporated in an equivalent
+friction coefficient.</p>
+<p align="left">The linear term of head losses (effective at low flow rates) is
+a function of fluid temperature. In fact it linearly increases when temperature
+decreases.</p>
+<p align="left">The EXCH module takes into account the uneven radial
+distribution of empties and velocities as well as the two phases local slip
+(through the known mean parameters CO and Vgj). In presence of a two phase
+fluid, the module provides a more precise mixture representation (particularly
+at low values of pressure and specific flow rate) as regards to an homogeneous
+description with only one velocity of same. Besides to the known homogeneous
+model without slip between the phases, at present, are implemented the following
+DRIFT correlations selected by input (see below):</p>
+<p ALIGN="left">1) Zuber-Dix</p>
+<p ALIGN="left">2) Bankoff</p>
+<p ALIGN="left">3) Chexal-Lellouche</p>
+<p ALIGN="left">4) Zuber-Rouhany</p>
+<p align="left">Through these correlations the DRIFT CO parameters (velocities
+and empties distribution coefficient) are calculated. So, vacuum degree of
+mixture, following the Zuber-Findlay's formulation, is, ultimately the mixture
+density.</p>
+<p align="left">All above mentioned correlations (with the exception of the 2)
+that is rather approximate and not really of DRIFT) are considered full-range
+and characterized by similar accuracy levels also whether the correlation 3) is
+slightly preferable for its quite recent formulation.</p>
+<p align="left">Under a single phase condition the DRIFT and homogeneous models
+provide quite equivalent results so, use of the homogeneous one has not
+contraindication.</p>
+<p align="center"></font><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EXCH</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY">NCEL = number of axial cells (NCEL = 2, ... NCELMAX)</p>
+<p ALIGN="JUSTIFY">NZON = number of thermal exchange walls (NZON = 1, ... ,
+NZFMAX with a global maximum of NZTMAX zones)</p>
+<p ALIGN="JUSTIFY">Actually: NCELMAX=6; NZFMAX=6; NZTMAX=32</p>
+<p ALIGN="JUSTIFY">In the following scheme:</p>
+<p ALIGN="JUSTIFY">- i = 1, ... NZON</p>
+<p ALIGN="JUSTIFY">- j = 1, ... NCEL (if not otherwise specified)</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<blockquote>
+  <blockquote>
+    <p ALIGN="center"><img SRC="images/Image757.gif" width="410" height="213"></p>
+  </blockquote>
+</blockquote>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HITU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">total enthalpy of fluid at the piping
+      inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PITU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid pressure at the piping inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WUTU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid flow rate at the piping outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HVAL</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid total enthalpy at the piping outlet
+      (if back-flow event occurs)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ATTR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">piping friction coefficient (see note 1)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T F ji</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(i = 1, NZON) (j = 1, NCEL) i-th external
+      fluid temperature related to the i-th exchange zone of the j-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/(m<sup>2 </sup>K)]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GEji</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(i = 1, NZON) (j = 1, NCEL) convective
+      exchange coefficient between the i-th external fluid of the j-th cell and
+      the j-th cell itself</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HM j</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(j = 1, NCEL) mean enthalpy (static) of
+      fluid in the cell j</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PU j</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(j = 1, NCEL-1) outlet pressure of fluid
+      from the cell j</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PUTU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">outlet pressure of fluid from the tube</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WITU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">inlet flow rate of fluid into the tube</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WI j</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(j = 2, NCEL) inlet flow rate of fluid
+      into the cell j</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">QTI j</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(j = 1, NCEL) thermal power exchanged
+      between the j-th cell metal wall and the inner fluid</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HU j</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(j = 1, NCEL) total enthalpy of fluid at
+      the cell j outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HUTU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">total enthalpy of fluid at the tube
+      outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TPE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(j= 1, NCEL) j-th cell wall external
+      temperature</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p align="left">The module refers to the Fanning's friction coefficient which
+has the following formula:</p>
+</font><font FACE="Courier New" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image758.gif" WIDTH="260" HEIGHT="49"></p>
+</font>
+<p ALIGN="left"><font face="Arial">where:</font></p>
+<font FACE="Arial">
+<p ALIGN="left">RO is the fluid density</p>
+<p ALIGN="left">&lt;V&gt; is the fluid mean velocity.</p>
+<p align="left">The physical meanings concerning the other variables are defined
+below.</p>
+<p align="left">This constant friction coefficient (input to the EXCH module
+used both for linear and quadratic head losses in flow rate) (see below) is
+successively, respectively, modified by the Martinelli-Nelson's friction
+multiplier.</p>
+<p align="left">This multiplier is calculated following the Becker's correlation
+concerning the head losses under a two phase condition proportional to the
+square of the flow rate:</p>
+<p ALIGN="CENTER">FIQLO = 1 + 10 * (Pcrit / P) * Xp</p>
+<p ALIGN="CENTER">Pcrit = 221.2 bar = critical pressure</p>
+<p align="left">and also by a similar multiplier (of empirical nature) linearly
+dependent on the fluid temperature for linear head losses:</p>
+<p ALIGN="CENTER">CMOLT2 = 10.397 - 0.058 * TF</p>
+<p align="left">It is useful to note that the first friction multiplier is
+proportional to the flow rate ratio 'Xp' of the mixture (FIQLO = 1 &lt;==&gt; Xp
+= 0) and inversely proportional to the pressure 'P'. The second one is effective
+only when the fluid temperature 'TF' decreases below 170 °C (CMOLT2 = 1
+&lt;==&gt; TF &gt; 170 °C).</p>
+<b>
+<p ALIGN="RIGHT">Note 2</p>
+</b>
+<p align="left">The thermal power which fluid exchange through the i-th external
+fluid of the j-th cell is determined by the following relation:</p>
+<p ALIGN="CENTER">Q(i, j) = GE(j,i) * SUP ( j,i) * [TF(j,i) - TPE (j)]</p>
+<p ALIGN="CENTER">(j = 1, ... NCEL)</p>
+<p ALIGN="CENTER">(i = 1, ... NZON)</p>
+<p ALIGN="left">where:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SUP(j,i)</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the exchange surface related to the
+      i-th external fluid of the j-th cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GE(j,i)</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the fluid-wall convective thermal
+      exchange coefficient (see below)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TPE(j)</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the metallic wall external temperature</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TF(j,i)</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">is the i-th external fluid temperature</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left">Such thermal power value is positive when the fluid takes heat
+from outside.</p>
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EXCH</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to initial values of input and output variables
+(meanings defined above) user must assign the following data:</p>
+<u><i>
+<p align="left">1. general data</p>
+</i></u>
+<div align="left">
+  <!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PACO</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">choose parameter of correlation to ease
+      in describing fluid in the whole piping (see note 1)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m<sup>3</sup>]</font><!--mstheme--></font></td>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ROM</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">metal wall density</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/(kg K)]</font><!--mstheme--></font></td>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CM</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">metal wall specific heat</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/(m K)]</font><!--mstheme--></font></td>
+    <td width="13%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COND</font><!--mstheme--></font></td>
+    <td width="76%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">metal wall thermal conductivity</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</div>
+<u><i>
+<p ALIGN="left">&nbsp;2. cell data</p>
+</i></u>
+<div align="left">
+  <!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NTUB&nbsp;</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of pipes in parallel configuration
+      for each cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DIAI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pipes internal diameter (or hydraulic)
+      for each cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DIAE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pipes external diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LUNG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pipes length for each cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DELZ</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">level gap between inlet and outlet of
+      single cell</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CRIG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">parameter available for the user to allow
+      selecting how to calculate the fluid-wall internal exchange coefficient
+      for each cell (see note 2)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m<sup>3</sup>]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VOL.M</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cell metal volume (if a zero value is
+      indicated, a value is calculated assuming cylindrical geometry with
+      current cell dimensioning)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DRN_FLG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flag for eventual condensate draining
+      (see not 3)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SUPi</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">i-th external exchange surface of the
+      current cell (if the value of SUP1 for the current cell is zero, one only
+      zone is supposed for that very cell and a value is calculated assuming
+      cylindrical geometry with current cell dimensioning)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</div>
+<p align="left">When the data related to consecutive cells are the same, it is
+enough to assign them to the first cell leaving blank the data sections of the
+other ones. In this way, automatically the following cells are assigned the same
+data as the previous ones.</p>
+<p align="left">The value of NTUB and DIAI are utilized for the calculation of
+the friction and thermal exchange coefficients. When there are several pipes in
+parallel configuration, their number must be indicated and their DIAI values
+must be calculated.</p>
+<p align="left">For instance, when pipes are externally licked by fluid, DIAI is
+the equivalent diameter calculated as four times the cross section area divided
+for the wet perimeter. In this case the length indicated in the LUNG datum of
+the pipes must be such to provide the correct value for its exchange surface
+using the value calculated for DIAI.</p>
+<p align="left">In addition to the above mentioned data, the model needs of the
+thermal exchange coefficient value between wall and fluid for each cell. It is
+obtained through the CRIG parameter following the methods hereinafter indicated
+(see note 2 and below).</p>
+<b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p align="left">The PACO parameter allows the user in choosing the model by
+which fluid in the</p>
+<p align="left">whole piping can be described. So, it has to be indicated only
+one time for each modelled block by the EXCH module whatever be the number of
+axial cells used in piping schematization.</p>
+<p align="left">The following possibilities of choice are given:</p>
+<p ALIGN="left">PACO = 0 ==&gt; homogeneous model (without slip between the
+phases)</p>
+<p ALIGN="left">PACO &gt; 0 ==&gt; DRIFT model (with two velocity profiles).</p>
+<p align="left">For the calculation of DRIFT parameter the following four
+correlations are available:</p>
+<p ALIGN="left">1) PACO = 1 ==&gt; Zuber-Dix's correlation</p>
+<p ALIGN="left">2) PACO = 2 ==&gt; Bankoff's correlation</p>
+<p ALIGN="left">3) PACO = 3 ==&gt; Chexal-Lellouche's correlation</p>
+<p ALIGN="left">4) PACO = 4 ==&gt; Zuber-Rouhany's correlation</p>
+<p align="left">The carried out experimentation suggests to use the correlations
+1) (with simple structure and widely tested) or 3) (more complex but more
+recent).</p>
+<p align="left">They are both given &quot;full range&quot;, when it is evaluated
+that functioning conditions are such as to consider unsuited the use of the
+model homogeneous in describing a two phase mixture. The correlation 2) (not
+exactly of DRIFT) provides results intermediate among those of the homogeneous
+and DRIFT models. the last correlation has not big differences as regards to the
+1).</p>
+<p align="left">As remembered before, through the above mentioned correlations
+are calculated the known parameters of DRIFT CO (distribution coefficients on
+the cross section area of empties and velocities) and Vgj (steam drift mean
+velocity weighted on empty radial profile) then the cell vacuum degree of
+mixture following the Zuber-Findlay's formulation:</p>
+<p ALIGN="CENTER">ALF(I) = Xv / (CO + Vg J/&lt;J&gt;)</p>
+<p ALIGN="CENTER">I = 1, NCEL</p>
+<p ALIGN="left">where:</p>
+<p ALIGN="left">Xv = &lt;Jg&gt;/&lt;J&gt; = mixture mean volumetric drift</p>
+<p ALIGN="left">&lt;J&gt; = &lt;Jg&gt;+&lt;J1&gt; = mixture mean total
+volumetric flow.</p>
+<p align="left">Knowing the cell empty degree, the mixture density is obtained
+from the following correlation:</p>
+<p ALIGN="CENTER">RO(j) = ALF(j)*ROVS(j) + [1 - ALF(j)]*ROLS(j)</p>
+<p ALIGN="left">where:</p>
+<p ALIGN="left">ROVS(j) = saturated density of steam in the cell j</p>
+<p ALIGN="left">ROLS(j) = saturated density of liquid in the cell j</p>
+<p align="left">It is known that a two phase mixture density calculated in this
+manner is more faithful to physical reality whereas with the model homogeneous
+tends to be undervalued (sometimes even considerably), above all when there are
+low value of flow rate and pressure.</p>
+<b>
+<p ALIGN="RIGHT">Note 2</p>
+</b>
+<p align="left">A user is free to choose arbitrarily the best suited value for
+CRIG as a function of the calculation type of the fluid-wall convective thermal
+exchange coefficient to be carried out. It can be used as pointer inside the
+GAM01 subroutine which through an adequate correlation set (well experimented)
+provides to determine the value of above thermal coefficient as a function of
+both fluid state and metallic wall temperature. For particular value of CRIG,
+user can resort to own specific correlations (subroutine EXCHGAMUT) or even to a
+constant thermal exchange coefficient whether this is useful to his
+requirements.</p>
+<p align="left">Depending on the value assigned to such parameter, several
+operating options are adopted according to the following scheme:</p>
+<b>
+<p ALIGN="RIGHT">CRIG &lt; 0</p>
+</b>
+<p align="left">correlation for calculation of the thermal exchange coefficient
+has to be provided by the user through the subroutine EXCHGAMUT (see below)</p>
+<b>
+<p ALIGN="RIGHT">CRIG &gt; 0</p>
+</b>
+<p align="left">correlations used for calculation of the exchange coefficient
+are encoded in the library subroutine of GAM01 (see below). They take into
+account both the thermodynamic state of fluid flowing in the piping and its wall
+temperature. A further distinction is carried out between pipes having smooth or
+rough surface. Selection between the two type of pipes is made as a function of
+the value assigned to the CRIG parameter which, in this case, identifies also a
+multiplier coefficient &quot;MOLT&quot; modifying the thermal exchange
+coefficient calculated through the related correlations:</p>
+<b>
+<p ALIGN="left">0 &lt; CRIG &lt; 10</b> ==&gt; smooth pipes</p>
+<blockquote>
+  <p ALIGN="left">if CRIG = 0, 1 ==&gt; MOLT = 1</p>
+  <p ALIGN="left">otherwise ==&gt; MOLT = CRIG</p>
+</blockquote>
+<b>
+<p ALIGN="left">10 &lt; CRIG &lt; 20</b> ==&gt; rough pipes</p>
+<blockquote>
+  <p ALIGN="left">if CRIG = 10, 11 ==&gt; MOLT = 1</p>
+  <p ALIGN="left">otherwise ==&gt; MOLT = CRIG - 10</p>
+</blockquote>
+<p align="left">Putting <b>CRIG = 0</b> allows the use of the simplified routine
+EXCHGTERT using essentially a Dittus-Boelter correlation in liquid phase, a
+constant value in evaporating zone and a Hadaller correlation in steam phase.
+The three zones are linearly connected.</p>
+<b>
+<p ALIGN="left">CRIG = 20</b>: a constant thermal exchange coefficient is used
+(at present equal to 50000 W/m²/°C) whatever the fluid and wall state are.</p>
+<b>
+<p ALIGN="left">CRIG = 30</b>:<b> </b>a convection exchange is assumed and
+Dittus-Boelter correlation is used for steady state calculation. The w<sup>0.8</sup>
+dependency is isolated and all the rest is saved as a contant value to be
+retrived during transient calculations. In fact, during transient calculations
+only the dependency upon w<sup>0.8</sup> is retained (the others parameters are
+kept constant). This allows not only to spare calculation time but also to make
+the trends of the exchange coefficient less nervous.</p>
+<b>
+<p ALIGN="left">CRIG &gt; 30</b>: the indicated value is retained as the (contant)
+value of the exchange coefficient</p>
+<p align="left">The user has to consider that the more accurate the utilized
+subroutine for the exchange coefficient is, the heaviest is the computational
+time burden. In fact, calculation times using GAM01 are usually quite higher
+than those required by a simplified or a user routine, which is relatively
+simpler. Further numerical problems can derive, during the calculation phase, by
+the usage of the GAM01 if the fluid state is at the end of use zones of the two
+different correlations. In this case alternately small variations of the state
+quantities provoke a jump from a correlation to another with strong oscillations
+of calculated exchange coefficient. Further informations related to use method
+of the subroutine GAM01 are available in section concerning utility subprograms
+of the manual: &quot;LEGOCAD - Modelling Library for Simulation of Power
+Generation Plant - Modules Description&quot;.</p>
+<p align="right"><b>Note 3</p>
+</b>
+<p ALIGN="left">If draining flag is active, during transient calculation a
+condensating flow rate is considered following the formula:</p>
+<p ALIGN="CENTER"><img SRC="images/Image759.gif" WIDTH="156" HEIGHT="55"></p>
+<p align="left">where X is the title of the mixture and tau is a time constant,
+set to the symbolic value of 5s. Such draining water flow rate is not an output
+variable. Therefore, considering the flow rates related to input-output
+variables maybe that mass conservation is not respected.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EXCH</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the EXCH module variables, no particular
+prescription is required.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EXCH</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">A user can introduce a particular correlation into the module to
+evaluate the fluid-wall convective thermal exchange coefficient, by assigning a
+negative value to the CRIG parameter (see above) and writing an user subprogram
+whose declarative statement is:</p>
+<b><font FACE="Courier New" SIZE="2">
+<blockquote>
+  <p align="left">SUBROUTINE EXCHGAMUT (P, H, S, T, RO, TIT, TP, DIAI, CRIG, G,
+  CAL,</p>
+  <p align="left">$ SUP, GAMMA)</p>
+</blockquote>
+</font></b>
+<p ALIGN="left">Input parameters: P, H, S, T, RO, TIT, TP, DIAI, CRIG, G, CAL,
+SUP</p>
+<p ALIGN="left">Output parameters: GAMMA</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">P</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure of fluid flowing through the
+      piping</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">H</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">specific enthalpy of fluid flowing
+      through the piping</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg/K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">S</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">specific entropy of fluid flowing through
+      the piping</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">T</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">temperature of fluid flowing through the
+      piping</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RO</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">density of fluid flowing through the
+      piping</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TIT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">thermodynamic drift of fluid flowing
+      through the piping</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">temperature of piping metallic wall</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DIAI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">piping internal diameter (or hydraulic)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CRIG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">parameter corresponding to the CRIG data
+      as described above. It can be used as selection index of the correlation
+      to adopt for convective exchange coefficient between fluid and metal
+      whether user wants include more correlations in only one subroutine.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m²/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">G</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">specific flow rate of fluid flowing
+      through the piping</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CAL</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">thermal power exchanged between wall
+      metal and fluid flowing through the piping</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SUP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">exchange surface area between wall metal
+      and fluid flowing through the piping</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/m²/K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GAMMA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">convective thermal exchange coefficient
+      between wall metal and fluid flowing through the piping (output of GAMUT).</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">To obtain the exchange coefficient of a considered cell, the
+user must call the EXCHGAMUT user subprogram by input parameter values typical
+for each piping axial cell. Hereinafter is represented an example of the GAMUT
+subroutine related to the assignment of a constant value to the GAMMA exchange
+coefficient and to its calculation through the Dittus-Bölter's correlation
+depending an the values assigned to CRIG.</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p align="left">SUBROUTINE EXCHGAMUT(P,H,S,T,RO,TIT,TP,DIAI,CRIG,G,CAL,SUP,GAMMA)</p>
+<p align="left">C</p>
+<p align="left">REAL P,H,S,T,RO,TIT,TP,DIAI,CRIG,G,CAL,SUP,GAMMA</p>
+<p align="left">C</p>
+<p align="left">INTEGER ICO</p>
+<p align="left">C</p>
+<p align="left">ICO=-CRIG</p>
+<p align="left">GO TO (1,2) ICO</p>
+<p align="left">C</p>
+<p align="left">C*************************** COSTANTE
+**********************************</p>
+<p align="left">C</p>
+<p align="left">1 GAMMA = 65000.</p>
+<p align="left">RETURN</p>
+<p align="left">C</p>
+<p align="left">2 CONTINUE</p>
+<p align="left">C</p>
+<p align="left">GAMMA = DITBOE (G,DIAI,P,T,S,RO,TIT)</p>
+<p align="left">C</p>
+<p align="left">RETURN</p>
+<p align="left">END</p>
+<p align="left">&nbsp;</p>
+<p align="left">FUNCTION DITBOE (G,D,P,T,S,RO,TIT)</p>
+<p align="left">REAL MU,K</p>
+<p align="left">C</p>
+<p align="left">C LETTURA DA TAVOLE DI PROPRIETA' DI INTERESSE</p>
+<p align="left">C</p>
+<p align="left">CALL SATUR(P,3,ROLS,ROVS,1)</p>
+<p align="left">C</p>
+<p align="left">ROLG=ROLS/ROVS</p>
+<p align="left">C</p>
+<p align="left">CP=CPEV(P,S,TIT,1.,1.)</p>
+<p align="left">MU=ETEV(P,T,RO,ROLG,TIT,1.,1.)</p>
+<p align="left">K=ALEV(P,T,RO,ROLG,TIT,1.,1.)</p>
+<p align="left">C</p>
+<p align="left">C NUMERO DI REYNOLDS</p>
+<p align="left">C</p>
+<p align="left">RE=G*D/MU</p>
+<p align="left">IF(RE.LT.10000.) RE=10000.</p>
+<p align="left">C</p>
+<p align="left">C NUMERO DI PRANDTL</p>
+<p align="left">C</p>
+<p align="left">PR=CP*MU/K</p>
+<p align="left">C</p>
+<p align="left">C CALCOLO DEL COEFFICIENTE DI SCAMBIO TERMICO</p>
+<p align="left">C</p>
+<p align="left">DITBOE = 0.023*(K/D)*RE**0.8*PR**0.4</p>
+<p align="left">C</p>
+<p align="left">RETURN</p>
+<p align="left">END</p>
+</font></b><font FACE="Arial">
+<p align="left">As already seen, the thermal exchange coefficient (expressed in
+W/(m²K)) between metallic wall and fluid, is not provided to the EXCH module by
+a data written directly in the file F14. It is done by an user routine (EXCHGAMUT)
+or by the GAM01 subroutine to which the module gives the variable values
+defining the fluid or metallic wall state.</p>
+<p align="left">In this manner the user avoids to utilize a constant value as
+thermal coefficient, on the contrary strongly dependent on the downflow range
+and fluid thermodynamic state as well as temperature.</p>
+<p align="left">The GAM01 subroutine already exists in the library and includes
+a set of classic correlations widely used and validated. Nevertheless, the user
+can introduce other exchange coefficients (constant or as a result of
+alternative correlations) substituting to the GAM01 subroutine another one
+having the same name an calling parameters.</p>
+<p align="left">It is useful to note that the GAM01 subroutine (whose listing is
+available in the TUBS module documentation) can be called by several EXCH block
+whether coexisting in a given model.</p>
+<p align="left">The subroutine calling parameters are the following:</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p align="left">SUBROUTINE GAM01 (P, H, S, TF, RO, TITOL, TP, DIA, CRIG, G, Q,</p>
+<p align="left">$ SUP, HTC)</p>
+</font></b>
+<p ALIGN="JUSTIFY"><font face="Arial">whose symbol meaning is:</font></p>
+<font FACE="Arial">
+<div align="left">
+  <!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">P</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid pressure</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">H</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid specific enthalpy</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg/°C]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">S</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid specific entropy</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[°C]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TF</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid temperature</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">RO</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid density</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TITOL</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">mixture drift</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[°C]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">wall temperature</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DIA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">piping hydraulic diameter</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CRIG</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">coefficient available for user (see
+      above)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m²/s]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">G</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid specific flow rate</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">Q</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">total power exchanged with the wall</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SUP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">exchange surface</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="11%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/m²/°C]</font><!--mstheme--></font></td>
+    <td width="17%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HTC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">thermal exchange coefficient (output of
+      GAM01)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</div>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EXCH</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">Besides fluid homogeneous description and several DRIFT correlations
+concerning a two phase mixture (see above) the piping mathematical model of the
+EXCH module consists of the following already mentioned equations:</p>
+    <p ALIGN="left">1) conservation equation of fluid energy</p>
+    <p ALIGN="left">2) conservation equation of fluid momentum</p>
+    <p ALIGN="left">3) conservation equation of fluid mass</p>
+    <p ALIGN="left">4) conservation equation of metal energy</p>
+    <p ALIGN="left">4) as many fluid-wall convective thermal exchange
+    equations as the number of zones</p>
+    <p ALIGN="left">5) one equation which allows to calculate the outlet
+    total enthalpy of fluid from each cell.</p>
+<p align="left">All above mentioned equations (written for each axial cell) are algebraical
+including the 1), 2) and 4) which, even if represent system states, are formally
+presented as algebraical to the module.</p>
+<p align="left">The module calculates the following output variables:</p>
+    <p ALIGN="left">1) mean enthalpies (static) of fluid (HM) (algeb.var.)</p>
+    <p ALIGN="left">2) outlet pressure of fluid from the cells (PU) (algeb.var.)</p>
+    <p ALIGN="left">3) inlet flow rate of fluid into the cells (WI) (algeb.var.)</p>
+<p ALIGN="left">4) thermal powers exchanged between fluid inside the tube and
+surrounding walls (QTI) (algeb.var.)</p>
+    <p ALIGN="left">5) outlet total enthalpies of fluid from the cells (HU) (algeb.var.)</p>
+    <p ALIGN="left">6) cell metal temperatures on the external surface (TPE)</p>
+<p ALIGN="left">It is useful to remember that the algebraical-differential
+system representing the EXCH module is formally turned in a system consisting of
+algebraical equations expressing the states temporal derivative (HM and PU) as
+finite differences, so in the module output only algebraical variables are
+available.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EXCH</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font><font FACE="Courier New" SIZE="2">
+<p>&nbsp;</p>
+<p align="left">SUBROUTINE EXCHI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,IBLOC1,</p>
+<p align="left">$ IBLOC2,IER,CNXYU,TOL)</p>
+<p align="left">SUBROUTINE EXCHI3(IFO,IOB,DEBL)</p>
+<p align="left">SUBROUTINE EXCHI4(IOB,MOD)</p>
+<p align="left">SUBROUTINE EXCHC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBLOC1,</p>
+<p align="left">$ IBLOC2)</p>
+<p align="left">SUBROUTINE EXCHJC(AJAC,MX5,IXYU,XYU,DATI,IPD,RNI,IFUN)</p>
+<p align="left">SUBROUTINE EXCHRES (IFUN,RNI,DATI,IPD)</p>
+<p align="left">SUBROUTINE EXCHDEC(XYU,IXYU,DATI,IPD,IFUN)</p>
+<p align="left">SUBROUTINE EXCHTAU(IFUN,DATI,IPD)</p>
+<p align="left">SUBROUTINE EXCHMET(TM,TMN,TPI,QTE,FM,DATI,IPD,IFUN,DELTAT)</p>
+<p align="left">SUBROUTINE EXCHGTERT(P, H, S, T, RO, TIT, TP, DIAI, CRIG, G, CAL,</p>
+<p align="left">$ SUP, GAMMA)</p>
+<p align="left">SUBROUTINE EXCHD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</p>
+<p align="left">$ IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</p>
+<p align="left">FUNCTION EXCHISTA09(IFUN)</p>
+<p align="left">SUBROUTINE EXCHTA(ISTA)</p>
+<p align="left">FUNCTION EXCHG9(IFUN)</p>
+<p align="left">SUBROUTINE EXCHNOM(TIF,AREA,DIAH,IFUN,PACO,QQI,HHI,PPI,HTI,</p>
+<p align="left">$ RM,DRD,DHD,ALFN,SLN,C0,VGJ,FL,I,FIQLOJ,RL)</p>
+<p align="left">SUBROUTINE EXCHZD(RL,RV,XV,FL,SIG,AREA,UGJ,ALFN,C0,VGJ,XP)</p>
+<p align="left">SUBROUTINE EXCHBKO(P,XV,FL,UGJ,ALFN,C0,VGJ)</p>
+<p align="left">SUBROUTINE EXCHCHELEL(PPI,XV,FL,ALF,SIG,RV,RL,TIF,</p>
+<p align="left">$ DIAH,UGJ,ALFN,C0,VGJ)</p>
+<p align="left">SUBROUTINE EXCHUGJALF(C0,FL,VGJ,XV,UGJ,ALF)</p>
+<p align="left">SUBROUTINE EXCHC0CHEX (RE,RA,P,ALF,B1,C0)</p>
+<p align="left">SUBROUTINE EXCHRECHEX(RL,RV,VG,VL,DIAH,UL,UV,REG,REL,RE)</p>
+<p align="left">SUBROUTINE EXCHVISCO(TK,UL,UV)</p>
+<p align="left">FUNCTION EXCHTENSUP(T)</p>
+<p align="left">SUBROUTINE EXCHZUBROU(RL,RV,FL,XV,SIG,G,DE,UGJ,ALFN,C0,VGJ,XP)</p>
+<p align="left">SUBROUTINE EXCHGAMUT(P,H,S,T,RO,TIT,TP,DIAI,CRIG,G,CAL,SUP,GAMMA)</p>
+<p>&nbsp;</p>
+</font></b><font FACE="Arial">
+<p align="left">The listing of the library GAM01 subroutine for calculation of the fluid-wall
+exchange coefficient is available in the TUBS user documentation.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE EXCH</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b>
+<font FACE="Arial">
+<p align="left">No test case involving the module EXCH has yet been implemented.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

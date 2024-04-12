@@ -1,0 +1,842 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>VENT</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE VENT</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE VENT</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">AXIAL &amp; CENTRIFUGAL FAN</p>
+<p>&nbsp;</p>
+<p align="left">The VENT module simulates the functioning of a fan, both axial
+and centrifugal, complete of flow rate regulation system.</p>
+<p align="left">User has two different options to assign the fans
+characteristics (link among flow rate, head, speed and resisting power) for
+several positions of ALSR control parameter concerning the flow rate regulation
+system (see note 1):</p>
+<p ALIGN="left">1) to insert the fan manufacturer's characteristics (if they are
+known) by means of a user subprogram written according to specific methods (see
+below)</p>
+<p ALIGN="left">2) to choose among several characteristics included in the
+module, the one related to the concerned fan. In this case, since
+characteristics are not standardized, it is not enough that fan to simulate has
+geometrical features similar to that whose characteristics are chosen, but it
+needs that the fans are identical.</p>
+<p align="left">The module includes head curves concerning different values of
+control parameter (ALSR) related to the flow rate regulation system.</p>
+<p align="left">The power curves, instead, are approximated by means of a second
+degree polynomial whose coefficients are desumed from manufacturer's
+characteristics in correspondence of ALSR maximum value. In fact, manufacturer
+usually provides, for power, only such curve.</p>
+<p align="left">In addition, in determining the temperature gap between inlet
+and outlet of fluid flowing through the fan, the error made by using this
+characteristic (in substitution of the actual one) is negligible. It also needs
+to add that algebraical expression calculation, as regards to the chart data
+scansion and interpolation, produces a certain saving in calculation times.</p>
+<p align="left">Both head and power curves are obtained keeping the fan at
+nominal speed. The effective head and power for different speeds are calculated
+by means of the &quot;fan equations&quot; (see note 2).</p>
+<p align="left">For complex fan configurations, in the VENT module are included
+the following possibilities:</p>
+<p ALIGN="left">1) several identical fans in parallel configuration whose it is
+not interesting to study the unsymmetrical transients. User provides the
+physical and geometrical data concerning only one fan and specifies the number
+of them in parallel configuration</p>
+<p ALIGN="left">2) several identical fans in parallel configuration with the
+possibility to vary the number of them functioning under transient condition. It
+is not interesting to represent with accuracy the dynamics among fans in
+parallel configuration, but only to provide the correct flow rate or head
+variation to the fed air circuit. As in the preceding case, user varies (at the
+right moment) only the variable indicating the number of fans in parallel
+configuration</p>
+<p ALIGN="left">3) several identical (or not) fans in parallel configuration
+whose it is interesting to accurately represent the unsymmetrical transients.
+User has to utilize as many VENT module as fans are.</p>
+<p ALIGN="left">4) two or more fans in series configuration, in general, have to
+be dealt with interconnecting in series several VENT modules. It is enough an
+equivalent fan (only one VENT module), user must provide the consistent data:
+characteristic curves and nominal data.</p>
+<p align="left">In the adopted mathematical model, the following hypotheses are
+assumed:</p>
+<p ALIGN="left">- it is supposed that no fluid accumulation inside the fan
+occurs (inlet and outlet flow rates are considered equal each other)</p>
+<p ALIGN="left">- thermal capacity of the metal forming the fan and its possible
+thermal exchange with outside are not considered</p>
+<p ALIGN="left">- fan inertia is not considered (the speed is imposed from
+outside)</p>
+<p align="left">The used equations are:</p>
+<p ALIGN="left">1) pressure calculation equation at the fan outlet</p>
+<p ALIGN="left">2) thermal balance equation of fluid flowing through the fan.</p>
+<p align="left">The model keeps its validity even if a back-flow event occurs.
+Such phenomenon could happen, for example, in a suction fan because of a quick
+boiler depressurization caused by a sudden shutdown of the burners flame (boiler
+lock). Or, for example, in a pressurized boiler blowing fan as a consequence of
+its breakdown from feeding network.</p>
+<b>
+<p ALIGN="RIGHT">Note 1</p>
+</b>
+<p align="left">For axial fans the ALSR parameter is related to the position of
+blades, whereas for centrifugal ones the parameter is related to the position of
+the diffuser. In the module it is supposed that the ALSR value is zero when
+blades (or diffuser) position allows to flow through the fan the minimum flow
+rate. Value 1 is supposed when blades (or diffuser) position allows to flow
+through the fan the maximum flow rate. At intermediate values of ALSR control
+parameter, correspond intermediate values of blades (or diffuser) position.</p>
+<b>
+<p ALIGN="RIGHT">Note 2</p>
+</b>
+<p align="left">The so called &quot;fan laws&quot; state that the volumetric
+flow rate Wv, head DP and the absorbed power Qres are proportional respectively
+to the first power, to the square and to the cube of the OMVEn fan rotational
+speed.</p>
+<p align="left">Indicating with the subscript n the mentioned quantities in
+correspondence of OMVEn nominal speed we have:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image745.gif" WIDTH="164" HEIGHT="38"></p>
+<p ALIGN="CENTER"><img SRC="images/Image746.gif" width="173" height="48"></p>
+<p ALIGN="CENTER"><img SRC="images/Image747.gif" width="206" height="48"></p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE VENT</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font>
+<blockquote>
+  <blockquote>
+    <font FACE="Arial" SIZE="2">
+    <p ALIGN="center"><img SRC="images/Image748.gif" width="379" height="184"></p>
+    </font><font FACE="Arial">
+    <p ALIGN="JUSTIFY">&nbsp;</p>
+    </blockquote>
+  </blockquote>
+  <p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+  <!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PFVE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid pressure at the fan outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TFU2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid temperature at the fan outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TFU1</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid temperature at the fan inlet (if a
+      back-flow event occurs)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">OMVE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fan angular velocity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WFVE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of fluid flowing through the
+      fan</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PFMV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid pressure at the fan inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ALSR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">control parameter value of fluid flow
+      rate regulation system (see note 1 above)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TFI1</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid temperature at the fan inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TFI2</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fluid temperature at the fan outlet (if a
+      back-flow event occurs)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NVEN</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of fans functioning in parallel
+      configuration</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE VENT</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to initial values of the VENT module input and
+output variables, user must assign the following data:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TIPO</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">parameter for choosing the
+      characteristics of the fan to be used. Selection is made according to the
+      following scheme:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TIPO &lt; 0.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">(= 0) it is recalled the user subprogram
+      related to the fan characteristics assignment (see below)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TIPO = 1.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p style="text-indent: 0"><font FACE="Arial">in the module are included
+      and utilized the following characteristics:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COMBURENT AIR BLOWING FAN</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">manufacturer: ERCOLE MARELLI</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">type: AD 3150/2440-CA/VIV/3G</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal speed: 735 rpm</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TIPO = 2. -</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">in the module are included and utilized the following
+      characteristics:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GAS RICIRCULATING FAN</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">manufacturer: ERCOLE MARELLI</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">type: HD 7100/1970-CA/SERR./3G</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal speed: 735 rpm</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">TIPO = 3.</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+      <p ALIGN="JUSTIFY">&nbsp;- in the module are included and utilized the
+      following characteristics:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GAS SUCTION FAN</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">manufacturer: FRANCO TOSI</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">type: SERIE 4000 DWDI PALA B/C TIPO 4154
+      ARR 3</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">nominal speed: 600 rpm</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ORIF</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">fan nominal rotational speed</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg*K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ERRE</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">used constant in the perfect gas law (see
+      note 3)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b>
+<p align="right">Note 3</p>
+</b>
+<p align="left">The perfect gas law is expressed by the following usual
+equation:</p>
+<p ALIGN="CENTER">P*V = n*R*T</p>
+<p ALIGN="left">where:</p>
+<p ALIGN="left">- P is the gas pressure</p>
+<p ALIGN="left">- V is the gas volume</p>
+<p ALIGN="left">- T is the gas temperature</p>
+<p ALIGN="left">- R is the gas universal constant</p>
+<p ALIGN="left">- n is the mole number of the considered gas</p>
+<p align="left">Dividing by the gas mass M we get:</p>
+<p ALIGN="CENTER">P/RO = (n*R/M)*T</p>
+<p ALIGN="left">where RO is the gas density.</p>
+<p align="left">Assuming:</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image749.gif" width="201" height="38"></p>
+</font>
+<p ALIGN="left"><font face="Arial">where M/n is the gas molecular mass we
+obtain:</font></p>
+<p ALIGN="center"><font face="Arial">P/RO = ERRE*T</p>
+<p ALIGN="left">The above mentioned relation is used to determine the RO density
+of fluid flowing through the fan as a function of temperature and assigning to
+the pressure a constant value P = 101300. Pa.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE VENT</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">The NVEN variable value must be equal to the number of identical
+fans which are functioning at under rated conditions in parallel configuration.
+The variable initialization value must be consistent with such number. More
+precisely, the WFVE flow rate must be equal to the sum of the flow rates related
+to the single fans functioning simultaneously. On the contrary, physical and
+geometrical data must be those related to the single fan.</p>
+<p align="left">Under transient condition the NVEN input variable can be
+disturbed by user when simulates the variation of funs number functioning in
+parallel configuration. In simulating one ore more fan stopping, user must
+decrease (in steps) such input; on the contrary he must increase it if one or
+more fans starting has to be simulate.</p>
+<p align="left">N.B. NVEN must never cancel itself.</p>
+<p align="center"></font><b><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE VENT</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p>&nbsp;</p>
+<p align="left">To assign the manufacturer's fan characteristics an user
+subprogram has to be provided. Its declarative statement is:</p>
+<p align="left">SUBROUTINE CARVENUT(TYP, OM, OM0, W, TET, RO, DELTAP, CR)</p>
+<p ALIGN="left">Input parameters: TYP, OM, OM0, W, TET, RO</p>
+<p ALIGN="left">Output parameters: DELTAP, CR</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">TYP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">corresponds to the TIPO data required
+      in input (see above). It can be used as selection index of characteristics
+      curves when only one user subprogram related to several fans type is
+      requested.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">OM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">fan angular speed</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">OM0</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">nominal angular speed (reference speed
+      provided by manufacturer)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">W</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">flow rate of fluid inside the fan</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[p.u.]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">TET</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">control parameter value of flow rate
+      regulation system</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">RO</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">density of fluid flowing through the
+      fan</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">DELTAP</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">fan head</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[N*m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">CR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">fan stall torque</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">As example of user subprogram, is represented the CARVENUT
+subroutine listing including the characteristics concerning the three type of
+fans mentioned above (in section on module's data):</p>
+</font><b>
+<p align="left"><font face="Courier New" size="2">SUBROUTINE CARVENUT(TYP, OM,
+OM0, W, TET, RO, DELTAP, CR)</font></p>
+<p align="left"><font face="Courier New" size="2">C</font></p>
+<p align="left"><font face="Courier New" size="2">C Significato di TIPO : 1
+Prementi BRINDISI SUD</font></p>
+<p align="left"><font face="Courier New" size="2">C 2 Ricircolo BRINDISI SUD</font></p>
+<p align="left"><font face="Courier New" size="2">C 3 Aspirante BRINDISI SUD</font></p>
+<p align="left"><font face="Courier New" size="2">C</font></p>
+<p align="left"><font face="Courier New" size="2">ITY=-TYP</font></p>
+<p align="left"><font face="Courier New" size="2">GO TO (10,20,30),ITY</font></p>
+<p align="left"><font face="Courier New" size="2">10 CONTINUE</font></p>
+<font FACE="Courier New" SIZE="2">
+<p align="left">C</p>
+<p align="left">C TABELLE PER VENTILATORI PREMENTI (BRINDISI SUD)</p>
+<p align="left">C</p>
+<p align="left">CALL VE_PREM(OM, OM0, W, TET, RO, DELTAP, CR)</p>
+<p align="left">RETURN</p>
+<p align="left">20 CONTINUE</p>
+<p align="left">C</p>
+<p align="left">C TABELLE PER VENTILATORI DI RICIRCOLO (BRINDISI SUD)</p>
+<p align="left">C</p>
+<p align="left">CALL VE_RICI(OM, OM0, W, TET, RO, DELTAP, CR)</p>
+<p align="left">RETURN</p>
+<p align="left">30 CONTINUE</p>
+<p align="left">C</p>
+<p align="left">C TABELLE PER VENTILATORI ASPIRANTI (BRINDISI SUD)</p>
+<p align="left">C</p>
+<p align="left">CALL VE_ASPI(OM,OM0,W,TET,RO,DELTAP,CR)</p>
+<p align="left">RETURN</p>
+<p align="left">END</p>
+<p align="left">&nbsp;</p>
+<p align="left">SUBROUTINE VE_PREM(OM, OM0, W, TET, RO, DELTAP, CR)</p>
+<p align="left">C</p>
+<p align="left">C Opera su grandezze non normalizzate</p>
+<p align="left">C</p>
+<p align="left">C</p>
+<p align="left">C======================================================================</p>
+<p align="left">C CURVE DELLA PREVALENZA DEL VENTILATORE DATE PER PUNTI</p>
+<p align="left">C</p>
+<p align="left">C</p>
+<p align="left">C TABELLE PER VENTILATORI PREMENTI (BRINDISI SUD)</p>
+<p align="left">C</p>
+<p align="left">DIMENSION VETXDP(13),VETDP(78),VETPDP(6)</p>
+<p align="left">C TABELLA PORTATE(V. PREM. BRINDISI SUD)</p>
+<p align="left">DATA VETXDP/0.,40.,80.,120.,160.,200.,240.,</p>
+<p align="left">$ 280.,320.,360.,400.,440.,480./</p>
+<p align="left">C TABELLA PREVALENZE (V. PREM. BRINDISI SUD) DELTAP/RO</p>
+<p align="left">C</p>
+<p align="left">C TETA=0.0:</p>
+<p align="left">DATA VETDP/5894.,630.,-4630.,-9900.,-15150.,-20000.,</p>
+<p align="left">$ -25000.,-29000.,-32000.,-34000.,-36000.,</p>
+<p align="left">$ -38000.,-39000.,</p>
+<p align="left">C</p>
+<p align="left">C TETA=0.2:</p>
+<p align="left">$ 5894.,5490.,4210.,2020.,-670.,-2016.,</p>
+<p align="left">$ -3386.,-4756.,-6126.,-7496.,-8866.,</p>
+<p align="left">$ -10236.,-11606.,</p>
+<p align="left">C TETA=0.4:</p>
+<p align="left">$ 5894.,5793.,5473.,4841.,3790.,2357.,1515.,</p>
+<p align="left">$ -169.,-1853.,-3537.,-5221.,-6905.,-8589.,</p>
+<p align="left">C TETA=0.6:</p>
+<p align="left">$ 5894.,5890.,5790.,5557.,5120.,4630.,3974.,</p>
+<p align="left">$ 3073.,1852.,505.,-842.,-2189.,-3536.,</p>
+<p align="left">C TETA=0.8:</p>
+<p align="left">$ 5894.,5890.,5790.,5780.,5760.,5680.,5390.,</p>
+<p align="left">$ 5052.,4420.,3536.,2357.,842.,-673.,</p>
+<p align="left">C TETA=1.:</p>
+<p align="left">$ 5894.,5890.,5820.,5790.,5770.,5750.,5740.,</p>
+<p align="left">$ 5726.,5389.,4757.,3831.,2694.,1094./</p>
+<p align="left">C</p>
+<p align="left">DATA LXDP,LPDP/13,6/</p>
+<p align="left">C</p>
+<p align="left">DATA RO0/1.165/</p>
+<p align="left">C</p>
+<p align="left">C INLET VANES VENT. PREMENTI (BRINDISI SUD):</p>
+<p align="left">DATA VETPDP/0.,0.2,0.4,0.6,0.8,1./</p>
+<p align="left">C COEFFICIENTI DELLA PARABOLA DELLA POTENZA:</p>
+<p align="left">C P=A*X**2+B*X+C</p>
+<p align="left">DATA A,B,C/-12.1875,9750.,700.E3/</p>
+<p align="left">C</p>
+<p align="left">C=========================================================================</p>
+<p align="left">C</p>
+<p align="left">DATA EPS/1.E-4/</p>
+<p align="left">C-------CALCOLO DELTAP</p>
+<p align="left">C</p>
+<p align="left">X=OM0/(OM+EPS)*W/RO</p>
+<p align="left">CALL LINTAB(VETPDP, LPDP, VETXDP, LXDP, VETDP, X, TET,</p>
+<p align="left">$ DPSRO, DDPDX, DDPTE)</p>
+<p align="left">DELTAP=RO*(OM/OM0)**2*DPSRO</p>
+<p align="left">C-------CALCOLO POTENZA ASSORBITA ALLA VELOCITA' OM0:</p>
+<p align="left">POT0=A*X*X+B*ABS(X)+C</p>
+<p align="left">C Applico le leggi dei ventilatori per calcolare la coppia</p>
+<p align="left">C resistente effettiva:</p>
+<p align="left">CR=POT0*RO/RO0*(OM/OM0)**2/OM0</p>
+<p align="left">IF(OM.LT.(OM0*EPS))CR=0.</p>
+<p align="left">RETURN</p>
+<p align="left">END</p>
+<p align="left">&nbsp;</p>
+<p align="left">SUBROUTINE VE_RICI(OM, OM0, W, TET, RO, DELTAP, CR)</p>
+<p align="left">C</p>
+<p align="left">C Opera su grandezze non normalizzate</p>
+<p align="left">C</p>
+<p align="left">C</p>
+<p align="left">C======================================================================</p>
+<p align="left">C CURVE DELLA PREVALENZA DEL VENTILATORE DATE PER PUNTI</p>
+<p align="left">C</p>
+<p align="left">C TABELLE PER VENTILATORI RICIRCOLO (BRINDISI SUD)</p>
+<p align="left">C</p>
+<p align="left">DIMENSION VETXDP(13),VETDP(65),VETPDP(5)</p>
+<p align="left">C TABELLA PORTATE(V. RICIRCOLO BRINDISI SUD)</p>
+<p align="left">DATA VETXDP/0.,27.8,55.6,83.3,111.1,138.9,</p>
+<p align="left">$ 166.7,194.4,222.2,250.,277.8,305.5,</p>
+<p align="left">$ 333.3/</p>
+<p align="left">C TABELLA PREVALENZE (V. RICIRCOLO BRINDISI SUD) DELTAP/RO</p>
+<p align="left">C</p>
+<p align="left">C TETA=0.2:</p>
+<p align="left">DATA VETDP/5040.,4900.,4170.,2780.5,695.,-1390.,</p>
+<p align="left">$ -3474.,-5560.,-7644.,-9729.,-11814.,</p>
+<p align="left">$ -13900.,-15984.,</p>
+<p align="left">C TETA=0.4:</p>
+<p align="left">$ 5178.,5126.,4970.,4622.,4083.,3214.,2085.,</p>
+<p align="left">$ 695.,-694.,-2084.,-3474.,-4864.,-6524.,</p>
+<p align="left">C TETA=0.6:</p>
+<p align="left">$ 5317.,5283.,5213.,5143.,4952.,4587.,4170.,</p>
+<p align="left">$ 3406.,2502.,1216.,-348.,-1912.,-3476.,</p>
+<p align="left">C TETA=0.8:</p>
+<p align="left">$ 5630.,5561.,5491.,5457.,5352.,5283.,4935.,</p>
+<p align="left">$ 4692.,4136.,3389.,2328.,1042.,-592.,</p>
+<p align="left">C TETA=1.:</p>
+<p align="left">$ 5735.,5700.,5665.,5650.,5595.,5580.,5526.,</p>
+<p align="left">$ 5387.,4592.,4344.,3562.,2190.,1251./</p>
+<p align="left">C</p>
+<p align="left">DATA LXDP,LPDP/13,5/</p>
+<p align="left">C</p>
+<p align="left">DATA RO0/0.5645/</p>
+<p align="left">C</p>
+<p align="left">C INLET VANES VENT. RICIRCOLO (BRINDISI SUD):</p>
+<p align="left">DATA VETPDP/0.2,0.4,0.6,0.8,1./</p>
+<p align="left">C COEFFICIENTI DELLA PARABOLA DELLA POTENZA:</p>
+<p align="left">C P=A*X**2+B*X+C</p>
+<p align="left">C PER I VENTILATORI RICIRCOLO SI HA UNA LEGGE LINEARE:</p>
+<p align="left">DATA A,B,C/0.,3200.,170.E3/</p>
+<p align="left">C</p>
+<p align="left">C=========================================================================</p>
+<p align="left">C</p>
+<p align="left">DATA EPS/1.E-4/</p>
+<p align="left">C-------CALCOLO DELTAP</p>
+<p align="left">C</p>
+<p align="left">X=OM0/(OM+EPS)*W/RO</p>
+<p align="left">CALL LINTAB(VETPDP, LPDP, VETXDP, LXDP, VETDP, X, TET,</p>
+<p align="left">$ DPSRO, DDPDX, DDPTE)</p>
+<p align="left">DELTAP=RO*(OM/OM0)**2*DPSRO</p>
+<p align="left">C-------CALCOLO POTENZA ASSORBITA ALLA VELOCITA' OM0:</p>
+<p align="left">POT0=A*X*X+B*ABS(X)+C</p>
+<p align="left">C Applico le leggi dei ventilatori per calcolare la coppia</p>
+<p align="left">C resistente effettiva:</p>
+<p align="left">CR=POT0*RO/RO0*(OM/OM0)**2/OM0</p>
+<p align="left">IF(OM.LT.(OM0*EPS))CR=0.</p>
+<p align="left">RETURN</p>
+<p align="left">END</p>
+<p align="left">&nbsp;</p>
+<p align="left">SUBROUTINE VE_ASPI(OM, OM0, W, TET, RO, DELTAP, CR)</p>
+<p align="left">C</p>
+<p align="left">C Opera su grandezze non normalizzate</p>
+<p align="left">C</p>
+<p align="left">C</p>
+<p align="left">C======================================================================</p>
+<p align="left">C CURVE DELLA PREVALENZA DEL VENTILATORE DATE PER PUNTI</p>
+<p align="left">C</p>
+<p align="left">C</p>
+<p align="left">C TABELLE PER VENTILATORI ASPIRANTI (BRINDISI SUD)</p>
+<p align="left">C</p>
+<p align="left">DIMENSION VETXDP(11),VETDP(77),VETPDP(7)</p>
+<p align="left">C TABELLA PORTATE(V. ASPIR. BRINDISI SUD)</p>
+<p align="left">DATA VETXDP/0.,100.,200.,300.,400.,500.,600.,</p>
+<p align="left">$ 700.,800.,900.,1000./</p>
+<p align="left">C TABELLA PREVALENZE (V. ASPIR. BRINDISI SUD) DELTAP/RO</p>
+<p align="left">C</p>
+<p align="left">C TETA=0.01:</p>
+<p align="left">DATA VETDP/8823.,-8823.,-26000.,-44100.,-61746.,</p>
+<p align="left">$ -79400.,-97038.,-114000.,-132300.,</p>
+<p align="left">$ -150000.,-167600.,</p>
+<p align="left">C TETA=0.15:</p>
+<p align="left">$ 8823.,6385.,4063.,1625.,-1270.,-4179.,</p>
+<p align="left">$ -7082.,-9984.,-12886.,-15789.,-18690.,</p>
+<p align="left">C TETA=0.3:</p>
+<p align="left">$ 8823.,7850.,7081.,5978.,4353.,2437.,521.,</p>
+<p align="left">$ -1395.,-3311.,-5227.,-7143.,</p>
+<p align="left">C TETA=0.45</p>
+<p align="left">$ 8823.,8474.,8126.,7604.,6849.,5804.,4353.,</p>
+<p align="left">$ 2786.,1219.,-347.,-1914.,</p>
+<p align="left">C TETA=0.6:</p>
+<p align="left">$ 8823.,8707.,8532.,8416.,8184.,7430.,6269.,</p>
+<p align="left">$ 4934.,3076.,1219.,-638.,</p>
+<p align="left">C TETA=0.75:</p>
+<p align="left">$ 8823.,8765.,8707.,8590.,8474.,8068.,7197.,</p>
+<p align="left">$ 5978.,4353.,2728.,1103.,</p>
+<p align="left">C TETA=1.:</p>
+<p align="left">$ 8823.,8770.,8700.,8649.,8591.,8474.,7720.,</p>
+<p align="left">$ 6559.,5282.,3773.,1741./</p>
+<p align="left">C</p>
+<p align="left">DATA LXDP,LPDP/11,7/</p>
+<p align="left">C</p>
+<p align="left">DATA RO0/0.845/</p>
+<p align="left">C</p>
+<p align="left">C INLET VANES VENT. ASPIRANTI (BRINDISI SUD):</p>
+<p align="left">DATA VETPDP/0.01,0.15,0.3,0.45,0.6,0.75,1./</p>
+<p align="left">C COEFFICIENTI DELLA PARABOLA DELLA POTENZA:</p>
+<p align="left">C P=A*X**2+B*X+C</p>
+<p align="left">DATA A,B,C/-4.94,8400.,1290.E3/</p>
+<p align="left">C</p>
+<p align="left">C=========================================================================</p>
+<p align="left">C</p>
+<p align="left">DATA EPS/1.E-4/</p>
+<p align="left">C-------CALCOLO DELTAP</p>
+<p align="left">C</p>
+<p align="left">X=OM0/(OM+EPS)*W/RO</p>
+<p align="left">CALL LINTAB(VETPDP, LPDP, VETXDP, LXDP, VETDP, X, TET,</p>
+<p align="left">$ DPSRO, DDPDX, DDPTE)</p>
+<p align="left">DELTAP=RO*(OM/OM0)**2*DPSRO</p>
+<p align="left">C-------CALCOLO POTENZA ASSORBITA ALLA VELOCITA' OM0:</p>
+<p align="left">POT0=A*X*X+B*ABS(X)+C</p>
+<p align="left">C Applico le leggi dei ventilatori per calcolare la coppia</p>
+<p align="left">C resistente effettiva:</p>
+<p align="left">CR=POT0*RO/RO0*(OM/OM0)**2/OM0</p>
+<p align="left">IF(OM.LT.(OM0*EPS))CR=0.</p>
+<p align="left">RETURN</p>
+<p align="left">END</p>
+<p align="center"></font><font FACE="Arial" SIZE="4"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE VENT</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The equations mentioned in first paragraph give rise to the
+following residuals:</p>
+<p ALIGN="CENTER">RNI(1) = - PFVE + PFMV + DP</p>
+<p ALIGN="left">where DP is the fan head.</p>
+<p align="left">The residual is normalized as regards to the pressure PRIF =
+1.E+05 Pa.</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image750.gif" width="278" height="41"></p>
+</font>
+<p ALIGN="left"><font face="Arial">where:</font></p>
+<p ALIGN="left"><font face="Arial">- Cp is the specific heat of fluid flowing
+through the fan</font></p>
+<p ALIGN="left"><font face="Arial">- Qres is the fan resisting power.</font></p>
+<p ALIGN="left"><font face="Arial">The residual is normalized as regards to the
+temperature T0.</p>
+<p ALIGN="CENTER">RNI(3) = - TFU1 + TFI1</p>
+<p align="left">The residual is normalized as regards to the temperature T0.</p>
+<p align="left">It is useful to note that last residual represents an identity
+rather than an equation.</p>
+<p align="left">In <b>case of back-flow</b> the expression of the residuals (2)
+and (3) are substituted by the following ones:</p>
+<p ALIGN="CENTER">RNI(2) = - TFU2 + TFI2</p>
+<p align="left">The residual is normalized as regards to the temperature T0.</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image751.gif" width="278" height="41"></p>
+</font>
+<p ALIGN="left"><font face="Arial">where:</font></p>
+<p ALIGN="left"><font face="Arial">- Cp is the specific heat of fluid flowing
+through the fan</font></p>
+<p ALIGN="left"><font face="Arial">- Qres is the fan resisting power.</font></p>
+<p ALIGN="left"><font face="Arial">The residual is normalized as regards to the
+temperature T0.</p>
+<p ALIGN="left">In this case it is useful to note that the residual (2)
+represents one identity rather than an equation.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE VENT</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p align="left">SUBROUTINE VENTI3(IFO,IOB,DEBL)</p>
+<p align="left">SUBROUTINE VENTI4(IOB,MOD)</p>
+<p align="left">SUBROUTINE VENTI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+<p align="left">$ NOMBL1,NOMBL2,IER,CNXYU,TOL)</p>
+<p align="left">SUBROUTINE VENTC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,</p>
+<p align="left">$ RNI,IBLOC1,IBLOC2)</p>
+<p align="left">SUBROUTINE VENT(IFUN,IXYU,XYU,IPD,DATI,RNI)</p>
+<p align="left">SUBROUTINE CARVEN(TYP,OM,OM0,W,TET,RO,DELTAP,CR)</p>
+<p align="left">SUBROUTINE VE_PREM(OM,OM0,W,TET,RO,DELTAP,CR)</p>
+<p align="left">SUBROUTINE VE_RICI(OM,OM0,W,TET,RO,DELTAP,CR)</p>
+<p align="left">SUBROUTINE VE_ASPI(OM,OM0,W,TET,RO,DELTAP,CR)</p>
+<p align="left">SUBROUTINE CARVENUT(TYP,OMDEN,ORIF,WDEN,TETDEN,RO,DELTAP,CRDEN)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE VENT</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases related to this module are in the manual
+section dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;ARIAGAS&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

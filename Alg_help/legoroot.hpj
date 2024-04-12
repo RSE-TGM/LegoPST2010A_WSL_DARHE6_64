@@ -1,0 +1,24 @@
+[OPTIONS]
+ROOT=c:\help\recine
+BMROOT=c:\help\recine
+CONTENTS=lg_help_root
+TITLE=Help LEGO environment
+COMPRESS=True
+ERRORLOG=legoroot.err
+REPORT=ON
+COPYRIGHT=Copyright © ENEL/DSR/CRA 1995 
+
+WARNING=3
+
+[FILES]
+z_legoro.rtf;legoroot.rtf
+lg_intro.rtf
+
+[CONFIG]
+BrowseButtons()
+CreateButton("button_glossary","&Glossary","JumpId(`gloshelp.hlp',`lgc_gl_glossary')")
+CreateButton("button_up", "&Up", "")
+CreateButton("button_exit","&Exit","Exit()")
+
+[WINDOWS]
+main=,(20,20,630,896),0,(255,255,159),(255,159,255)

@@ -1,0 +1,24 @@
+[OPTIONS]
+ROOT=c:\help\recine
+BMROOT=c:\help\recine
+CONTENTS=lg_proc_main
+TITLE=LEGOCAD Process Modules Help
+COMPRESS=True
+ERRORLOG=legomodu.err
+REPORT=ON
+COPYRIGHT=Copyright © ENEL/DSR/CRA 1995 
+
+WARNING=3
+
+[FILES]
+procmodu.rtf
+regomodu.rtf
+
+[CONFIG]
+BrowseButtons()
+CreateButton("button_up", "&Up", "")
+CreateButton("button_glossary","&Glossary","JumpId(`gloshelp.hlp',`lgc_gl_glossary')")
+CreateButton("button_exit","&Exit","Exit()")
+
+[WINDOWS]
+main=,,0,(164,200,240),(192,220,192)

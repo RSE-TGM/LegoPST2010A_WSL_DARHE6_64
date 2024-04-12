@@ -1,0 +1,421 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>lgmodsam</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER">Example of a LEGO model building:</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">modules selection</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">For the representation of this system we are going to use three LEGO modules of the LEGOCAD process library:</P>
+<P ALIGN="JUSTIFY">1)&#9;module CPOM: centrifugal water pump;</P>
+<P ALIGN="JUSTIFY">2)&#9;module VALV: generic steam-water valve;</P>
+<P ALIGN="JUSTIFY">3)&#9;module COLT: steam-water manifold (this module is defined in this model to take into account the storage phenomena in the &#9;tube &#9;between the pump and the valve).</P>
+<P ALIGN="JUSTIFY">Each module has to be istanciated only once in the model, so the number of blocks in the model is three.</P>
+<P ALIGN="JUSTIFY">When the modules CPOM and VALV are istanciated in the model, the LEGOCAD "Topology" program asks the user which output variable he want to define between inlet pressure, outlet pressure and water flow rate. In the same way, when the user defines the module COLT, the program asks him to define the number of inlet and outlet branches. The user must operate correct definitions to be able, in a second time, to connect appropriately the three blocks defined in the model.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_example_b"></A>Example of a LEGO model building:</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">list of block variables</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">For each block we have the following variables:</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>Block POMP:</P>
+</B></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">nput variables:</P>
+</B><P ALIGN="JUSTIFY">PUPMPOMP = pressure at the pump delivery</P>
+<P ALIGN="JUSTIFY">PIPMPOMP = pressure at the pump suction</P>
+<P ALIGN="JUSTIFY">HIPMPOMP = water enthalpy at the pump suction</P>
+<P ALIGN="JUSTIFY">OMPMPOMP = angular velocity of the pump</P>
+<P ALIGN="JUSTIFY">NPOMPOMP = number of identical pumps in parallel configuration</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Output variables:</P>
+</B><P ALIGN="JUSTIFY">HUPMPOMP = water enthalpy at the pump delivery</P>
+<P ALIGN="JUSTIFY">WPOMPOMP = pump total capacity</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>Block TUBO:</P>
+</B></FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Input variables:</P>
+</B><P ALIGN="JUSTIFY">WE_1TUBO = tube inlet water flow rate</P>
+<P ALIGN="JUSTIFY">HE_1TUBO = tube inlet water enthalpy</P>
+<P ALIGN="JUSTIFY">WU_1TUBO = tube outlet water flow rate</P>
+<P ALIGN="JUSTIFY">HU_1TUBO = tube outlet water enthalpy (in case of back-flow)</P>
+<P ALIGN="JUSTIFY">TESTTUBO = tube external temperature</P>
+<P ALIGN="JUSTIFY">GESTTUBO = tube external heat exchange coefficient</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Output variables:</P>
+</B><P ALIGN="JUSTIFY">HCOLTUBO = mean water enthalpy in the tube</P>
+<P ALIGN="JUSTIFY">PCOLTUBO = mean water pressure in the tube</P>
+<P ALIGN="JUSTIFY">TCOLTUBO = tube metal temperature</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>Block VALV:</P>
+</B></FONT><U><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</U></FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Input variables:</P>
+</B><P ALIGN="JUSTIFY">PIVAVALV = valve inlet pressure</P>
+<P ALIGN="JUSTIFY">PUVAVALV = valve outlet pressure</P>
+<P ALIGN="JUSTIFY">HVALVALV = water enthalpy at the valve inlet</P>
+<P ALIGN="JUSTIFY">ALZAVALV = valve opening degree</P>
+</FONT><U><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</U></FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Output variables:</P>
+</B><P ALIGN="JUSTIFY">WVALVALV = water flow rate in the valve </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_example_c"></A>Example of a LEGO model building:</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">blocks connections</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">The connections between the three blocks must take into account the physical interactions of the system components.</P>
+<P ALIGN="JUSTIFY">In this case there is only one possibility of connecting the three blocks and it's shown in the following figure:</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image11.gif" WIDTH=549 HEIGHT=474></P>
+<FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_example_d"></A>Example of a LEGO model building:</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">data collection</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">The following step is to collect all the possible data regarding the plant. We suppose to know the following data about each component of the plant:</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>Centrifugal pump:</P>
+</B></FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">Design flow rate = 0.1 m³/s</P>
+<P ALIGN="JUSTIFY">Design head = 9 bar</P>
+<P ALIGN="JUSTIFY">Design inlet temperature = 20 °C</P>
+<P ALIGN="JUSTIFY">Design rotational speed = 3000 RPM</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>Tubation:</P>
+</B></FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">Outside diameter = 0.27 m</P>
+<P ALIGN="JUSTIFY">Wall thickness = 0.01 m</P>
+<P ALIGN="JUSTIFY">Inside diameter = 0.25 m</P>
+<P ALIGN="JUSTIFY">Length = 10 m</P>
+<P ALIGN="JUSTIFY">Metal wall density = 7800 kg/m³</P>
+<P ALIGN="JUSTIFY">Metal wall specific heat = 630 J/(kg K)</P>
+<P ALIGN="JUSTIFY">Metal wall conductivity = 35 W/(m K)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>Valve:</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">Design flow rate = 100 kg/s</P>
+<P ALIGN="JUSTIFY">Design inlet pressure = 10 bar</P>
+<P ALIGN="JUSTIFY">Design outlet pressure = 1 bar</P>
+<P ALIGN="JUSTIFY">Design opening degree = 0.8</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_example_e"></A>Example of a LEGO model building:</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">data assignment</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">To assign blocks geometrical and physical data, the user has to examine the documentation about the modules CPOM, COLT and VALV: </P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P>Block POMP:</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</B></FONT><FONT FACE="Arial"><P>TYP = 1 &#9;This parameter identifies the characteristic head-flow rate of the pump: this characteristic may be assigned by the user in the &#9;&#9;&#9;auxiliary FORTRAN of the model (the auxiliary FORTRAN contains particular subroutines that the user can modify to his own &#9;&#9;&#9;necessity). In this case the pump characteristic is unknown so we must suppose a reasonable relation between pump flow rate &#9;&#9;and pump head.</P>
+<P>INER = 0&#9;Moment of inertia of the pump [kg m²]. This data must be assigned only if the pump rotational speed is an output variable; in &#9;&#9;&#9;our model we have chosen a pump model with the rotational speed as input variable, so this data value is irrelevant.</P>
+<P>QVNOM = 0.1&#9;Design water flow rate [m³/s].</P>
+<P>OMNOM = 314&#9;Design rotational speed [rad/s].</P>
+<P>DPNOM = 9.e5</FONT><FONT FACE="Arial" SIZE=1>&#9;</FONT><FONT FACE="Arial">Design head [Pa].</P>
+<P>POTN = 0&#9;Design power absorbed by the pump [W]: if the POTN data is not provided, it is automatically calculated by the module on the &#9;&#9;&#9;basis of the compulsory data QVNOM and DPNOM and ETA (efficiency) = 0.85.</P>
+<P>DENS. = &#9;998&#9;Water density [kg/m³]. In this case the density is calculated for a pressure of 1 bar and a temperature of 20 °C.</P>
+<P>N. GIRAN. = 1&#9;Number of impellers. This value is only used for the head calculation (in meters of water column) that appears in the &#9;&#9;&#9;&#9;expression of the pump characteristic index. If this value is not provided, it is assumed N.GIRAN. = 1.</P>
+<P>VALV INT = 0&#9;Pump interception index. The value assigned to VALV INT can be 0 (not intercepted flow rate) or 1 (intercepted flow &#9;&#9;&#9;&#9;rate). User must use the value 1 only if OMPM = 0 and no valve is foreseen upstream or downstream the pump.</P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P>Block TUBO:</P>
+</B></FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>NU.TU.EN = 1&#9;Number of inlet branches.</P>
+<P>NU.TU.US = 1&#9;Number of outlet branches.</P>
+<P>VOLUME = 0.49&#9;Volume of water inside the tube [m³]. This value is calculated in relation to the tube inside diameter and length.</P>
+<P>MASSA ME = 637&#9;Metallic tube mass [kg]. This value is calculated in relation to the tube inside and outside diameter, the length and the &#9;&#9;&#9;&#9;metal density.</P>
+<P>CP MET = 630&#9;Metal specific heat [J/(kg K)].</P>
+<P>COND MET = 35&#9;Metal thermal conductivity [W/(m K)]</P>
+<P>SPESSORE = 0.01&#9;Wall thickness [m].</P>
+<P>SUP. ES = 8.482&#9;Tube external surface [m²]. This value is calculated in relation to the tube outside diameter and length.</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>Block VALV:</P>
+</B></FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>ALFA = 1&#9;Coefficient used to define the valve characteristic, that is the cross section area variation law as a function of ALZA opening &#9;&#9;&#9;degree following the formula: AREA=ALZA**ALFA. If we suppose the characteristic as linear, we must assign ALFA = 1.</P>
+<P>CFA = 0.85&#9;Valve recovery coefficient with fully opened valve (ALZA=1) Typical value CFA = 0.85.</P>
+<P>COD. = 2&#9;parameter that identifies the type of valve to simulate and so the mathematical model to use. We suppose to use a not sonic &#9;&#9;&#9;simplified model: in this case COD = 2.</P>
+<P>CVA = 0&#9;identification coefficient of valve working point. If this datum is not available (as in this case), the user assigns CVA = 0 and &#9;&#9;&#9;provides the following data referred to a known valve working point.</P>
+<P>PORTATA = 100&#9;Fluid flow rate [kg/s].</P>
+<P>P1 MONTE = 10.e5&#9;Inlet pressure [Pa].</P>
+<P>P2 VALLE = 1.e5&#9;Outlet pressure [Pa].</P>
+<P>ENTALPIA = 83.4e3&#9;Inlet fluid enthalpy [J/(kg K)].</P>
+<P>CORSA = 0.8&#9;Opening degree.</P>
+</FONT><FONT FACE="Arial" SIZE=1><P><A NAME="lg_model_example_f"></A></P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER">Example of a LEGO model building:</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">variables assignment</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">The following step is to specify the steady state condition we want to calculate. As we have sufficient data about the design condition of the plant, our target will be to get the steady design conditions. To do this we must assign the appropriate values to the model variables and to choose which of these variables would be defined "known" (remember that this choice must not be random).</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>Input variables:</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=604>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER"><B>NAME</B></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><P ALIGN="CENTER">VALUE</B></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><P ALIGN="CENTER">UNIT</B></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><P ALIGN="CENTER">STATUS</B></TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">PIPMPOMP</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">1.e5</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">Pa</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">KNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">HIPMPOMP</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">83960</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">J/(kg K)</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">KNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">OMPMPOMP</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">314</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">rad/s</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">KNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">NPOMPOMP</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">1</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">-----</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">KNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">HU_1TUBO</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">84000</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">J/(kg K)</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">KNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">TESTTUBO</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">288.15</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">K</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">KNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">GESTTUBO</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">1</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">W/(m² K)</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">KNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">PUVAVALV</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">1.e5</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">Pa</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">KNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">ALZAVALV</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">0.8</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">p.u.</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>Output variables:</P>
+</B></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=604>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER"><B>NAME</B></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><P ALIGN="CENTER">VALUE</B></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><P ALIGN="CENTER">UNIT</B></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><P ALIGN="CENTER">STATUS</B></TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">HUPMPOMP</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">84000</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">J/(kg K)</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">WPOMPOMP</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">100</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">kg/s</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">HCOLTUBO</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">84000</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">J/(kg K)</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">PCOLTUBO</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">10.e5</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">Pa</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">TCOLTUBO</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">293</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">K</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">WVALVALV</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">100</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">kg/s</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">KNOWN</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=1 COLOR="#ffffff"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_example_g"></A>Example of a LEGO model building:</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">steady state result</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">The steady state calculation takes to the following results for the "unknown" variables (the "known" variables values do not change during iterative process):</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=604>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER"><B>NAME</B></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><P ALIGN="CENTER">VALUE</B></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><P ALIGN="CENTER">UNIT</B></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><P ALIGN="CENTER">STATUS</B></TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">HUPMPOMP</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">85020</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">J/(kg K)</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">WPOMPOMP</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">100</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">kg/s</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">HCOLTUBO</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">85020</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">J/(kg K)</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">PCOLTUBO</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">9.9934e5</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">Pa</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">TCOLTUBO</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">293.2</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">K</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+<TR><TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">ALZAVALV</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">0.8004</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">p.u.</TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<P ALIGN="CENTER">UNKNOWN</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_example_h"></A>Example of a LEGO model building:</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">execution of a test transient</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">The steady state calculated is the starting point for any simulation we want execute on this model.</P>
+<P ALIGN="JUSTIFY">For instance, we can try to stop the pump by reducing its rotational speed from design value to zero value. Before starting the simulation we are going to define the following parameters:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>Simulation parameters:</P>
+</B></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">Integration step = 0.5 s</P>
+<P ALIGN="JUSTIFY">Max simulation time = 400 s</P>
+<P ALIGN="JUSTIFY">Variables values recording step = 2 s</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>Perturbed variables:</P>
+</B></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">OMPMPOM</P>
+<P ALIGN="JUSTIFY">Type of perturbation: ramp</P>
+<P ALIGN="JUSTIFY">Start time of the perturbation = 10 s</P>
+<P ALIGN="JUSTIFY">Stop time of the perturbation = 310 s</P>
+<P ALIGN="JUSTIFY">Variable value after the perturbation = 0 rad/s</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER"><A NAME="lg_model_example_i"></A>Example of a LEGO model building:</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">test transient result</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">The following diagrams show the results of the simulation for the most important model variables:</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image12.gif" WIDTH=567 HEIGHT=226></P>
+<FONT FACE="Arial"><P ALIGN="CENTER">OMPMPOMP - pump rotational speed [rad/s]</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image13.gif" WIDTH=567 HEIGHT=226></P>
+<FONT FACE="Arial"><P ALIGN="CENTER">WVALVALV - water flow rate in the valve [kg/s]</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image14.gif" WIDTH=567 HEIGHT=226></P>
+<FONT FACE="Arial"><P ALIGN="CENTER">PCOLTUBO - mean water pressure in the tube [bar]</P></FONT></BODY>
+</HTML>

@@ -1,0 +1,129 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><i><b><font size="4">The &quot;xxxxI3&quot; subroutine for configurable LEGO
+modules (the CPOM example)</font></b></i></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">For configurable and/or cellized
+modules, the subroutine &quot;xxxxI3&quot; must also ask to the user how to
+configure the block variable set. For instance, in an adder, the number of input
+quantities could be chosen by the user when he creates the module instance.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Unfortunately the configuration
+informations selected by the user cannot be directly passed as they are to the
+other activities of LEGO code. Only a few informations registered into the
+topological data can be used in the following activities: the numbers of
+variables (divided in state outputs, algebraic outputs and inputs) and the
+complete block name.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The variable set can be unique for that
+module (always the same number of variables and always the same variables in the
+same order) or it can be changed due to some user choices.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">For example, in a LEGO module simulating
+a pump, two different kind of configurability can be inserted: the speed
+computation and the output choice (this is exactly the case of the standard
+module CPOM).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The rotational speed of the pump can be
+directly imposed as a boundary condition (so, the speed will be an input
+variable of the module); otherwise the pump speed can be computed evaluating the
+resisting couple of the pump, and using the motor power as boundary condition
+(so the speed will be a state output variable and the motor power will be an
+input).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">In the second case, the module will have
+one more state output variable (the speed) than in the first one, but they
+always have the same number of inputs (actually, in CPOM module, the kinetic
+energy is the state output, while speed is an algebraic output: the module has
+two more outputs, not only one). So the following LEGO activity (data section)
+can easily recognize the user choice.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">Known the pump speed and the water
+density, the momentum conservation principium involves the inlet pressure, the
+outlet pressure and the water flow rate: so, the user may choose that the pump
+module have to evaluate the flow rate knowing the inlet and outlet pressure, or
+to evaluate one of the two pressure known the other one and the flow rate:</span></p>
+<!--mstheme--></font><table border="1" width="100%" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><span lang="EN-GB">Choice:</span><!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p class="MsoNormal" align="center" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:center;text-indent:0in"><span lang="EN-GB">1</span></p>
+    <!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><span lang="EN-GB">2</span><!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p class="MsoNormal" align="center" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:center;text-indent:0in"><span lang="EN-GB">3</span></p>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><span lang="EN-GB">flow rate</span><!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+        <p class="MsoNormal" align="center" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:center;text-indent:0in"><span lang="EN-GB">output</span></p>
+    <!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+        <p class="MsoNormal" align="center" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:center;text-indent:0in"><span lang="EN-GB">input</span></p>
+    <!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><span lang="EN-GB">input</span><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><span lang="EN-GB">inlet pressure</span><!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><span lang="EN-GB">input</span><!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><span lang="EN-GB">output</span><!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+          <p class="MsoNormal" align="center" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:center;text-indent:0in"><span lang="EN-GB">input</span></p>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><span lang="EN-GB">outlet pressure</span><!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+            <p class="MsoNormal" align="center" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:center;text-indent:0in"><span lang="EN-GB">input</span></p>
+    <!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+            <p class="MsoNormal" align="center" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:center;text-indent:0in"><span lang="EN-GB">input</span></p>
+    <!--mstheme--></font></td>
+    <td width="25%" align="center"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+            <p class="MsoNormal" align="center" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:center;text-indent:0in"><span lang="EN-GB">output</span></p>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+        <p class="MsoNormal"><span lang="EN-GB">Unfortunately, the numbers of
+        input and output variables will be always the same: so the module must
+        use the complete block name to let the following activity know the block
+        configuration.</span></p>
+        <p class="MsoNormal"><span lang="EN-GB">As usual, the first character of
+        the module will be modified in the following way (assume user is
+        instancing the CPOM module using PUMP as block name):</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="listanomi"><span lang="EN-GB">CPOMPUMP<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>(first character unchanged) for flow rate output (inlet pressure and
+    &nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    outlet pressure as input);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="listanomi"><span lang="EN-GB">+CPOPUMP<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+    </span><span style="mso-tab-count: 1"> </span>(first character is a plus)
+    for inlet pressure output (flow rate and&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    outlet pressure as input)</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="listanomi"><span lang="EN-GB">-CPOPUMP<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;
+    </span><span style="mso-tab-count: 1"> </span>(first character is a minus)
+    for outlet pressure output (flow rate&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    and&nbsp; inlet pressure as input)</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+        <p class="MsoNormal">&nbsp;</p>
+<!--mstheme--></font></body>
+
+    </html>

@@ -1,0 +1,189 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE TTGS</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TTGS_summ"></A>MODULE TTGS CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I><P>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TTGS_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TTGS_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TTGS_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TTGS_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TTGS_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TTGS_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TTGS_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_TTGS_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_TTGS_A"></A>MODULE TTGS CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">GAS TURBINE FOR SYNGAS-FED TURBOGAS GROUP</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The TTGS module simulates an axial turbine for turbogas; the physical-mathematical model used is based on the actual discharge characteristics of the machine, analyzed stage by stage or by groups of stages (delimited by the air injections present on the machine). Certain characteristics of the machine are instead simulated in ground of the global behaviour of the turbine.</P>
+<P>&nbsp;</P>
+<P>The TTGS module allows the correct simulation of the cooling air injections present on the real turbines. It doesn't instead simulate the effect of the turbine metals, which must be simulated in the inlet and/or outlet manifolds.</P>
+<P>The global characteristic parameters of the machine (of the whole turbine, and not stage by stage) have to be imposed by the user, assigning (using the related activity) data like the nominal inlet and outlet pressures, the nominal inlet flow rate and temperature and the chemical composition of the flue gases (the one related to the nominal conditions assigned).</P>
+<P>The coefficients that define the flowing characteristics of the single stages of the machine and the parameters which define the efficiency variation curves, are instead definite directly inside the Fortran source code of the module for two standard types of turbogas group (the Fiat TG50D and the Siemens V94.3). For other types of group it is possible to define such data using the related routine of the "auxiliary Fortran" (Foraus).</P>
+<P>&nbsp;</P>
+<P>Note that for the Siemens V94.3 group (type 2) the module has been fully tested and validated as regards to the characteristics of the machine supplied by the manufacturer, while for the Fiat TG50D group (type 1) could be required a futher refining of the parameters.</P>
+<P>&nbsp;</P>
+<P>For the evaluation and the conversion of the thermodynamical properties of the air and of the flue gases that flows through the turbine it is used the functions library related to the properties of gas mixtures (TAVSYNGAS library).</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TTGS_B"></A>MODULE TTGS CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">NSTADI = number of compressor stages</P>
+<P ALIGN="JUSTIFY">NINJEC = number of air injections</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">i = 1, NSTADI - 1</P>
+<P ALIGN="JUSTIFY">j = 1, NINJEC</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image415.gif" WIDTH=390 HEIGHT=274></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Note:&#9;the flow rate in the first stage is called WAMM instead of WST1 (the variable is present only for multi-stage turbines)</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;&#9;PAMM&#9;Flue gas pressure at the turbine inlet</P>
+<P ALIGN="JUSTIFY">[K]&#9;&#9;TAMM&#9;&#9;Flue gas temperature at the turbine inlet</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;&#9;PSCA&#9;&#9;Flue gas pressure at the turbine outlet</P>
+<P ALIGN="JUSTIFY">[RPM] &#9;RPMC&#9;Rotational speed of the turbine</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;FCO2&#9;&#9;Mass fraction of CO</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in the flue gas at the turbine inlet</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;FH2O&#9;&#9;Mass fraction of H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O in the flue gas at the turbine inlet</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;FFO2&#9;&#9;Mass fraction of O</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in the flue gas at the turbine inlet</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;FFAR&#9;&#9;Mass fraction of Ar in the flue gas at the turbine inlet</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;&#9;WINj&#9;&#9;Air flow rate through the j-th injection of the turbine</P>
+<P ALIGN="JUSTIFY">[K]&#9;&#9;TINj&#9;&#9;Temperature of the air incoming from the j-th injection</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;&#9;WSCA&#9;Flue gas flow rate at the turbine outlet</P>
+<P ALIGN="JUSTIFY">[K]&#9;&#9;TSCA&#9;&#9;Flue gas temperature at the turbine outlet</P>
+<P ALIGN="JUSTIFY">[W]&#9;&#9;QTUR&#9;&#9;Mechanical power produced by the turbine</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;&#9;WSTi&#9;&#9;Flue gas flow rate in the i-th stage of the turbine</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;&#9;PCAi&#9;&#9;Flue gas pressure in the i-th cavity of the turbine</P>
+<P ALIGN="JUSTIFY">[K]&#9;&#9;TCAi&#9;&#9;Flue gas temperature at the i-th cavity inlet</P>
+<P ALIGN="JUSTIFY">[K]&#9;&#9;TMXi&#9;&#9;Flue gas temperature at the i-th cavity outlet</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Note:&#9;the flow rate in the first stage is called WAMM instead of WST1 (the variable is present only for multi-stage turbines)</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT VARIABLES NORMALIZATION FACTORS</P>
+<P>&nbsp;</P>
+<P>Variables&#9;Normalization</P>
+<P>PAMM, PSCA, PCAi&#9;P0</P>
+<P>TAMM, TINj, TSCA, TCAi, TMXi&#9;T0</P>
+<P>WINj, WSCA, WAMM, WSTi&#9;W0</P>
+<P>RPMC&#9;300.</P>
+<P>QTUR&#9;W0 * H0</P>
+<P>FCO2, FH2O, FFO2, FFAR&#9;0.1</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_TTGS_C"></A>MODULE TTGS CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to initial values of TTGS module input and output variables, user must assign the following data set to complete the module input on the file F14: </P>
+<P ALIGN="JUSTIFY">[ ]&#9;TG type&#9;Type of Turbogas group:</P>
+<P ALIGN="JUSTIFY">1 = Fiat TG50D</P>
+<P ALIGN="JUSTIFY">2 = Siemens V94.3</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;Pamm nom&#9;Inlet flue gas pressure in nominal conditions</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;Psca nom&#9;Outlet flue gas pressure in nominal conditions</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;Wfum nom&#9;Inlet flue gas flow rate in nominal conditions</P>
+<P ALIGN="JUSTIFY">[K]&#9;Tamm nom&#9;Inlet flue gas temperature nominal conditions</P>
+<P ALIGN="JUSTIFY">[ ]&#9;EtaS nom&#9;Turbine isoentropic efficiency in nominal conditions</P>
+<P ALIGN="JUSTIFY">[ ]&#9;FCO2 nom&#9;Mass fraction of CO</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in inlet flue gas in nominal conditions</P>
+<P ALIGN="JUSTIFY">[ ]&#9;FH2O nom&#9;Mass fraction of H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O in inlet flue gas in nominal conditions</P>
+<P ALIGN="JUSTIFY">[ ]&#9;F O2 nom&#9;Mass fraction of O</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in inlet flue gas in nominal conditions</P>
+<P ALIGN="JUSTIFY">[ ]&#9;F Ar nom&#9;Mass fraction of Ar in inlet flue gas in nominal conditions</P>
+<P ALIGN="JUSTIFY">[ ]&#9;Injecn.j&#9;&#9;Number of the cavity of the j-th air injection (j = 1, NINJEC)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Note:&#9;there can’t be more than one air injection in each cavity; also the injections must be sorted in increasing order to respect to the number of the related cavities (therefore the Injecn.j values must be in a strictly increasing order).</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TTGS_D"></A>MODULE TTGS CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the TTGS module variables on the file F14, no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TTGS_E"></A>MODULE TTGS CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In the auxiliary Fortran (Foraus) of the TTGS module there is only one routine, called TTGSDU, whose declaratory instructions are the followings:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE TTGSDU (ITIPO, IER, NSTADI, CB, CE)</P>
+<P>DIMENSION CB(9), CE(4)</P>
+<P>&nbsp;</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The parameters have the following meanings:</P>
+<P ALIGN="JUSTIFY">ITIPO&#9;&#9; [read-only]&#9;type of turbine (turbogas group) assigned by the user</P>
+<P ALIGN="JUSTIFY">IER&#9; &#9; [write-only]&#9;IER parameter of the TTGSI2 subroutine - to be set to 1 in case of errors, in order to abort the data &#9;&#9;&#9;&#9;&#9;&#9;acquisition activity</P>
+<P ALIGN="JUSTIFY">NSTADI&#9; [read-only]&#9;number of stages of the turbine (to be used for the check of the coherence between &#9;the value assigned &#9;&#9;&#9;&#9;&#9;&#9;in the present routine for the selected type of turbine and the value assigned by the user during topology &#9;&#9;&#9;&#9;&#9;&#9;building phase)</P>
+<P ALIGN="JUSTIFY">CB &#9; &#9; [write-only]&#9;vector of the multiplying factors for the efflux coefficients of the single stages (the number of elements to &#9;&#9;&#9;&#9;&#9;&#9;assign is equal to the number of stages; see theoretical related description)</P>
+<P ALIGN="JUSTIFY">CE&#9; &#9; [write-only]&#9;coefficients k</FONT><FONT FACE="Arial, helvetica" SIZE=1>1</FONT><FONT FACE="Arial, helvetica">, k</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">, k</FONT><FONT FACE="Arial, helvetica" SIZE=1>eta</FONT><FONT FACE="Arial, helvetica"> and k</FONT><FONT FACE="Arial, helvetica" SIZE=1>pot</FONT><FONT FACE="Arial, helvetica"> for the definition of the efficiency variation curves and corrective &#9;&#9;&#9;&#9;&#9;&#9;&#9;correlated factors (see theoretical related description)</P>
+<P>&nbsp;</P>
+<P>Also the TTGS module makes use of the procedures contained in the syngas thermodynamic tables (TAVSYNGAS) which must be present in the user library.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TTGS_F"></A>MODULE TTGS CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The equations forming the TTGS module mathematical model (mentioned above) give rise to a set of residuals. Here only their correspondences with the output variables equations have been indicated, also mentioning the respective normalization factors. Further explanations are given in the related theoretical description.</P>
+<P ALIGN="JUSTIFY">1) RNI(1) - normalization factor = W0</P>
+<P ALIGN="JUSTIFY">related to the air flow rate at the turbine outlet</P>
+<P ALIGN="JUSTIFY">2) RNI(2) - normalization factor = T0</P>
+<P ALIGN="JUSTIFY">related to the air temperature at the turbine outlet</P>
+<P ALIGN="JUSTIFY">3) RNI(3) - normalization factor = W0 * H0</P>
+<P ALIGN="JUSTIFY">related to the mechanical power produced by the turbine</P>
+<P ALIGN="JUSTIFY">do i = 1, NSTADI - 1</P>
+<P ALIGN="JUSTIFY">4) RNI(4*i) - normalization factor = W0</P>
+<P ALIGN="JUSTIFY">related to the air flow rate in the i-th stage</P>
+<P ALIGN="JUSTIFY">5) RNI(4*i+1) - normalization factor = P0</P>
+<P ALIGN="JUSTIFY">related to the air pressure inside the i-th cavity</P>
+<P ALIGN="JUSTIFY">6) RNI(4*i+2) - normalization factor = T0</P>
+<P ALIGN="JUSTIFY">related to the air temperature inside the i-th cavity before injection mixing</P>
+<P ALIGN="JUSTIFY">7) RNI(4*i+3) - normalization factor = T0</P>
+<P ALIGN="JUSTIFY">related to the air temperature inside the i-th cavity after injection mixing</P>
+<P ALIGN="JUSTIFY">enddo</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TTGS_G"></A>MODULE TTGS CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE TTGSI3 (IFO,IOB,DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TTGSI4 (NSTADI,NINJEC)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TTGSI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TTGSC1 (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TTGS </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>&nbsp;</P>
+<P>FUNCTION TTGSPV </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (PM, TM, PV)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TTGSDT (ITIPO, IER, NSTADI, CB, CE)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE TTGSD1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_TTGS_H"></A>MODULE TTGS CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are reported in the user manual section devoted to the examples developed under the abbreviation:</P>
+<P ALIGN="CENTER">"........."</P></FONT></BODY>
+</HTML>

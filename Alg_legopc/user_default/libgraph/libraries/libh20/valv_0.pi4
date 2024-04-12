@@ -1,0 +1,39 @@
+VALV_0                                                                          
+VALV                                                                            
+VALV - valvola acqua vapore                                                     
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 4
+ 
+NCONF = 3
+ 
+WVAL      --UA-- FLUID FLOW RATE IN THE VALVE                                   
+PIVA      --IN-- FLUID PRESSURE AT THE VALVE INLET                              
+PUVA      --IN-- FLUID PRESSURE AT THE VALVE OUTLET                             
+HVAL      --IN-- VALVE INLET-OUTLET FLUID ENTHALPY                              
+ALZA      --IN-- VALVE LIFT                                                     
+==============================                                                  
+PIVA      --UA-- FLUID PRESSURE AT THE VALVE INLET                              
+WVAL      --IN-- FLUID FLOW RATE IN THE VALVE                                   
+PUVA      --IN-- FLUID PRESSURE AT THE VALVE OUTLET                             
+HVAL      --IN-- VALVE INLET-OUTLET FLUID ENTHALPY                              
+ALZA      --IN-- VALVE LIFT                                                     
+==============================                                                  
+PUVA      --UA-- FLUID PRESSURE AT THE VALVE OUTLET                             
+PIVA      --IN-- FLUID PRESSURE AT THE VALVE INLET                              
+WVAL      --IN-- FLUID FLOW RATE IN THE VALVE                                   
+HVAL      --IN-- VALVE INLET-OUTLET FLUID ENTHALPY                              
+ALZA      --IN-- VALVE LIFT                                                     
+==============================                                                  
+EOF                                                                             
+3
+t0 6
+Actuation input
+ALZA
+t1 0
+Hydraulic input
+WVAL PIVA ____ ____ ____ HVAL ____ XXXX
+t2 1
+Hydraulic output
+WVAL PUVA ____ ____ ____ HVAL ____ XXXX

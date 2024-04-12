@@ -1,0 +1,293 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Nuova pagina 1</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+
+<h1 align="center"><!--mstheme--><font color="#000066"><span lang="EN-GB"><b><i><font size="5">An example of the &quot;xxxxC1&quot; subroutine in a
+standard process module (RAVA)</font></i></b></span><!--mstheme--></font></h1>
+<p class="MsoNormal"><span lang="EN-GB">The source code of RAVAC1 follows
+(comment line has been added or translated for legibility reasons).&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier New"><b><font size="2">
+</font></b></font>
+</span><font face="Courier New"><b><font size="2">SUBROUTINE RAVAC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></b></font></span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="FR" style="mso-ansi-language:FR">EXTERNAL RAVA<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font size="2" face="Courier New"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C--- MODULE RAVA: AIR-STEAM PREHEATER</b></font></span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>NSTATI = 1<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>NUSCIT = 3<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>NINGRE = 5<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>NEQ<span style="mso-spacerun: yes">&nbsp;
+</span>= NSTATI + NUSCIT<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">NVAR = NEQ + NINGRE</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>GO TO(100,200,300),IFUN</b></font></span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font size="2" face="Courier New"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font size="2" face="Courier New"><b>C---Jacobian
+matrix topology<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp; </span>100
+DO I = 1,NEQ</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DO J = 1,NVAR</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(I,J) = 1.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END DO</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END DO</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C---residuals computation</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b>C</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp; </span>200
+CALL RAVA(IFUN,IXYU,XYU,IPD,DATI,RNI)</b></font></span></p>
+<p class="elenco3"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes" lang="EN-GB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-ansi-language:IT">RETURN<o:p>
+</o:p>
+</span></b></font></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b>C---Jacobian matrix
+numerical computation<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b>C<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp; </span>300 EPS<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>=
+1.E-3<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>EPSLIM = 1.E-4<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>CALL
+NAJAC(AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span style="mso-ansi-language:IT"><font size="2" face="Courier New"><b><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>$<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>NSTATI,NUSCIT,NINGRE,EPS,EPSLIM,RAVA)<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes; mso-ansi-language: IT">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">RETURN</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font size="2" face="Courier New"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>END</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">As anyone can see, in the RAVA module
+the topology of the Jacobian matrix is assigned in the easiest way: assuming
+that all the residuals depend by all the variables. As we sad, this is only the
+easiest way, not the best one.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The list of the RAVA's variables is the
+following:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>TMAR (US) MEAN AIR TEMPERATURE IN THE
+AIR-STEAM EXCHANGER</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>TUA2 (UA) AIR OUTLET TEMPERATURE IN THE
+AIR-STEAM EXCHANGER</b></font></span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span lang="FR" style="mso-ansi-language:FR">TUA1 (UA) AIR
+TEMP. </span><span lang="EN-GB">AT THE EXCHANGER INLET (FLOW RATE INV.)</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>GAMR (UA) THERMAL EXCHANGE COEFFICIENT
+AIR-METAL</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>WARI (IN) AIR FLOW RATE IN THE AIR-STEAM
+EXCHANGER</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>TMET (IN) METAL TEMPERATURE IN THE
+AIR-STEAM EXCHANGER</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>TIA1 (IN) INLET AIR TEMPERATURE IN THE
+AIR-STEAM EXCHANGER</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>TIA2 (IN) OUTLET AIR TEMP. IN THE
+EXCHANGER (FLOW RATE INV.)</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b>AKCO (IN) CORRECTOR COEFF. THERMAL
+EXCHANGE AIR-METAL</b></font></span></p>
+<p class="MsoNormal"><span lang="EN-GB">Actually:</span></p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">the first residual depends on all the variables except
+    GAMR;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">the second residual may depend on TMAR, TUA2 and TMAR or on TUA2 and TIA2
+(depending on the flow actual direction): so it has to be assigned that it
+depends on TMAR, TUA2 and TIA2;</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">the third residual depends on TMAR, TUA1 and TIA1 (two of them at a time,
+    depending on the flow actual direction, like the second one);</span><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+    <p class="elenco"><span lang="EN-GB">the fourth residuals depends on GAMR, WARI and AKCO.</span><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p class="MsoNormal"><span lang="EN-GB">(this can be checked reading the source
+code of RAVA subroutine).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">So, the topology of RAVA's Jacobian
+matrix should be the following one:&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="elenco3"><span style="mso-spacerun: yes" lang="EN-GB">&nbsp; </span><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b>100
+AJAC(1,1) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(1,2) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(1,3) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(1,5) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(1,6) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(1,7) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(1,8) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(1,9) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(2,1) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(2,2) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(2,8) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(3,1) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(3,3) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(3,7) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><span lang="FR" style="mso-ansi-language:FR"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(4,4) = 1.<o:p>
+</o:p>
+</b></font>
+</span></p>
+<p class="elenco3"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes; mso-ansi-language: FR" lang="FR">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="EN-GB">AJAC(4,5) = 1.</span></b></font></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>AJAC(4,9) = 1.</b></font></span></p>
+<p class="elenco3"><span lang="EN-GB"><font face="Courier New" size="2"><b><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>RETURN</b></font></span></p>
+<p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-GB">This
+don't absolutely means that the RAVA Jacobian matrix topology is wrong: it isn't
+the best one. It would be wrong only if it didn't assign <u>at least</u> the
+right elements of AJAC array (but it assigns the right ones and some others).</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The only actual effect of the all-one
+topology of the RAVA module is that the memory storage area required for RAVA's
+Jacobian matrix is about twice the minimum feasible one (36 elements versus 17),
+and also the computing time required to solve its equations may be nearly two
+times the minimum one.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">On the contrary, if also only one of the
+17 required elements would have been forgotten, the LEGO numerical kernel
+couldn't solve the RAVA's equations during transient simulations (well, actually
+it depends on the transient: unfortunately, this is also a mistake which is not
+very easy to detect :-)! So it doesn't look very odd that most modules have
+all-one topology, like RAVA...</span></p>
+<p class="MsoNormal"><span lang="EN-GB">The RAVA subroutine has been realized
+for residuals computation, as RAVA module computes numerically the Jacobian
+matrix of its equations, using the NAJAC routine.</span></p>
+<p class="MsoNormal"><span lang="EN-GB">So the RAVAC1 subroutine doesn't contain
+neither the residuals computation nor the Jacobian matrix analytical
+computation.</span></p>
+
+<!--mstheme--></font></body>
+
+</html>

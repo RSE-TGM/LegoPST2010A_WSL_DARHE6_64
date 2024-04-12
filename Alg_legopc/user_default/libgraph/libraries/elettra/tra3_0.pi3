@@ -1,0 +1,43 @@
+TRA3_0                                                                          
+TRA3                                                                            
+TRA3 - three coils trafo                                                        
+                                                                                
+NSTAT = 0
+NUSCI =19
+NINGR =12
+ 
+NCONF = 1
+ 
+IR1_      --UA-- REAL COMPONENT OF FIRST COIL CURRENT                           
+IX1_      --UA-- IMAGINARY COMPONENT OF FIRST COIL CURRENT                      
+IR2_      --UA-- REAL COMPONENT OF SECOND COIL CURRENT                          
+IX2_      --UA-- IMAGINARY COMPONENT OF SECOND COIL CURRENT                     
+IR3_      --UA-- REAL COMPONENT OF THIRD COIL CURRENT                           
+IX3_      --UA-- IMAGINARY COMPONENT OF THIRD COIL CURRENT                      
+P1__      --UA-- ACTIVE POWER ON FIRST COIL                                     
+Q1__      --UA-- REACTIVE POWER ON FIRST COIL                                   
+P2__      --UA-- ACTIVE POWER ON SECOND COIL                                    
+Q2__      --UA-- REACTIVE POWER ON SECOND COIL                                  
+P3__      --UA-- ACTIVE POWER ON THIRD COIL                                     
+Q3__      --UA-- REACTIVE POWER ON THIRD COIL                                   
+VMR1      --UA-- REAL COMPONENT OF TENSION AT FIRST COIL TERMINAL               
+VMX1      --UA-- IMAGINARY COMPONENT OF TENSION AT FIRST COIL TERM.             
+VMR2      --UA-- REAL COMPONENT OF TENSION AT SECOND COIL TERMINAL              
+VMX2      --UA-- IMAGINARY COMPONENT OF TENSION AT SECOND COIL TERM             
+VMR3      --UA-- REAL COMPONENT OF TENSION AT THIRD COIL TERMINAL               
+VMX3      --UA-- IMAGINARY COMPONENT OF TENSION AT THIRD COIL TERM.             
+OMTU      --UA-- OUTPUT ELECTRICAL DUTY PULSE FACTOR                            
+VFR1      --IN-- REAL COMPONENT OF TENSION AT FIRST COIL                        
+VFX1      --IN-- IMAGINARY COMPONENT OF TENSION AT FIRST COIL                   
+VFR2      --IN-- REAL COMPONENT OF TENSION AT SECOND COIL                       
+VFX2      --IN-- IMAGINARY COMPONENT OF TENSION AT SECOND COIL                  
+VFR3      --IN-- REAL COMPONENT OF TENSION AT THIRD COIL                        
+VFX3      --IN-- IMAGINARY COMPONENT OF TENSION AT THIRD COIL                   
+SW1_      --IN-- STATE OF FIRST COIL SWITCH                                     
+SW2_      --IN-- STATE OF SECOND COIL SWITCH                                    
+SW3_      --IN-- STATE OF THIRD COIL SWITCH                                     
+ETA0      --IN-- TENSION VARIATION ON 2-3 IN PERC. TO MAX                       
+OMT_      --IN-- INPUT ELECTRICAL DUTY PULSE FACTOR                             
+MLF1      --IN-- MALFUNCTION SWITCH                                             
+==============================                                                  
+EOF                                                                             

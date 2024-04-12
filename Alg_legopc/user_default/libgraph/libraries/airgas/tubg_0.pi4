@@ -1,0 +1,45 @@
+TUBG_0                                                                          
+TUBG                                                                            
+TUBG - GAS tube friction losses                                                 
+                                                                                
+NSTAT = 0
+NUSCI = 3
+NINGR = 5
+ 
+NCONF = 3
+ 
+WVAL      --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVAL      --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_      --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PMON      --IN-- GAS PRESSURE AT VALVE INLET                                    
+PVAL      --IN-- GAS PRESSURE AT VALVE OUTLET                                   
+TMON      --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_      --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+AKSI      --IN-- FRICTION LOSSES CORRECTOR                                      
+==============================                                                  
+PMON      --UA-- GAS PRESSURE AT VALVE INLET                                    
+TVAL      --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_      --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+WVAL      --IN-- GAS FLOW RATE THROUGH THE VALVE                                
+PVAL      --IN-- GAS PRESSURE AT VALVE OUTLET                                   
+TMON      --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_      --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+AKSI      --IN-- FRICTION LOSSES CORRECTOR                                      
+==============================                                                  
+PVAL      --UA-- GAS PRESSURE AT VALVE OUTLET                                   
+TVAL      --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_      --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+WVAL      --IN-- GAS FLOW RATE THROUGH THE VALVE                                
+PMON      --IN-- GAS PRESSURE AT VALVE INLET                                    
+TMON      --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_      --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+AKSI      --IN-- FRICTION LOSSES CORRECTOR                                      
+==============================                                                  
+EOF                                                                             
+2
+t1 5
+USCITA IDR. FUMI
+WVAL PVAL TVAL TVI_ ____ ____ ____ ____
+t0 4
+INGRESSO IDR. FUMI
+WVAL PMON TMON TMI_ ____ ____ ____ ____

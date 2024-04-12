@@ -1,0 +1,124 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE FUGS</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUGS_summ"></A>MODULE FUGS&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUGS_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUGS_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUGS_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUGS_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUGS_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUGS_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUGS_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUGS_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUGS_A"></A>MODULE FUGS&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">CONVERTION OF FLUE GASES CHEMICAL COMPOSITION</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The modules of the standard thermodynamical library of the LEGOCAD System related to the simulation of flue gas ducts of the thermal power plants have to read the chemical composition of the flue gas in a particular way.</P>
+<P>So it is necessary that the chemical composition of the flue gas is converted from that supplied by the combustion chamber as mass fractions of each chemical component; at the same time it must be taken into account the dilution of the flue gas caused by the turbine air injections and the blow-off (when these valves are opened).</P>
+<P>Finally the total flue gas flow rate is evaluated again and low-bounded with an user assignable value in order to don't supply to the boiler a null flow rate of flue gas when the machine is halted (always for demands of the library modules related to the simulation of the flue gas ducts).</P>
+<P>&nbsp;</P>
+<P>The module that performs these conversions is called FUGS.</P>
+<P>The chemical composition of the flue gas at the combustion chamber outlet is defined by the mass fractions of CO</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">, H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O, O</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> and Ar (the mass fraction of N</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> is given by the complement to one). Both for the air injected in the turbine cavities and for that which comes from the blow-off valves it is used the chemical composition of the international standard dry air, corrected adding the opportune fractions of aqueous steam and carbonic anhydrite.</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUGS_B"></A>MODULE FUGS&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P>&nbsp;</P>
+</FONT><P><IMG SRC="Image311.gif" WIDTH=382 HEIGHT=162></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">[kg/s]&#9;&#9;WFUM&#9;Flue gas flow rate before the dilution</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;FCO2&#9;&#9;Mass fraction of CO</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in the flue gas before the dilution</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;FH2O&#9;&#9;Mass fraction of H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O in the flue gas before the dilution</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;FFO2&#9;&#9;Mass fraction of O</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in the flue gas before the dilution</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;FFAR&#9;&#9;Mass fraction of Ar in the flue gas before the dilution</P>
+<P ALIGN="JUSTIFY">[kg/s] &#9;&#9;WARi&#9;&#9;Air flow rate of the i-th additive flow</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;&#9;WTOT&#9;&#9;Total flue gas flow rate at the boiler inlet (kg/s)</P>
+<P ALIGN="JUSTIFY">[%]&#9;&#9;ZCO2&#9;&#9;Molar fraction of CO</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in the flue gas in percentage</P>
+<P ALIGN="JUSTIFY">[%]&#9;&#9;ZPH2&#9;&#9;Molar fraction of H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O in the flue gas in percentage</P>
+<P ALIGN="JUSTIFY">[%]&#9;&#9;ZPO2&#9;&#9;Molar fraction of O</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica"> in the flue gas in percentage</P>
+<P ALIGN="JUSTIFY">[%]&#9;&#9;ZH2O&#9;&#9;Mass fraction of H</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">O in the flue gas in percentage</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT VARIABLES NORMALIZATION FACTORS</P>
+<P>&nbsp;</P>
+<P>Variables&#9;Normalization</P>
+<P>WFUM, WARi, WTOT&#9;W0</P>
+<P>FCO2, FH2O, FFO2, FFAR&#9;0.1</P>
+<P>ZCO2, ZPH2, ZPO2, ZH2O&#9;1.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_FUGS_C"></A>MODULE FUGS&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to initial values of FUGS module input and output variables, the user must assign the following datum set to complete the module input on the file F14:</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;Wfum Min&#9;Flue gas flow rate lower limit (for the HRSG)</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUGS_D"></A>MODULE FUGS&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">To initialize the FUGS module variables on the file F14, no particular prescription is required.</P>
+<B><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUGS_E"></A>MODULE FUGS&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>No user subprograms are present in the FUGS module.</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUGS_F"></A>MODULE FUGS&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>RNI(1) = WTOT - WFUM - WARI</P>
+<P>&nbsp;</P>
+<P>IF (KREGIM) THEN</P>
+<P>RNI(2) = (ZCO2 - ZCO2C) / 10.</P>
+<P>RNI(3) = (ZPH2 - ZPH2C) / 10.</P>
+<P>RNI(4) = (ZPO2 - ZPO2C) / 10.</P>
+<P>RNI(5) = (ZH2O - ZH2OC) / 10.</P>
+<P>ELSE</P>
+<P>RNI(2) = ZCO2C</P>
+<P>RNI(3) = ZPH2C</P>
+<P>RNI(4) = ZPO2C</P>
+<P>RNI(5) = ZH2OC</P>
+<P>ENDIF</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Note: during transient simulation, the outputs related to the chemical composition of the flue gas are not-iterative outputs and the Jacobian matrix (related to the one iterative output) is evaluated algorithmically; during the steady state evaluation all the five outputs are iterative, and the Jacobian matrix is evaluated numerically calling the NAJAC subroutine.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUGS_G"></A>MODULE FUGS&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE FUGSI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO,IOB,DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE FUGSI2</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE FUGSC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE FUGS</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE FUGSD1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUGS_H"></A>MODULE FUGS&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are reported in the user manual section devoted to the examples developed under the abbreviation:</P>
+<P ALIGN="CENTER">"........." </P></FONT></BODY>
+</HTML>

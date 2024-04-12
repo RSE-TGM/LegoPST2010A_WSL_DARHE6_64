@@ -1,0 +1,36 @@
+COEX_0                                                                          
+COEX                                                                            
+COEX - Water-water exchanger                                                    
+                                                                                
+NSTAT = 0
+NUSCI =11
+NINGR =13
+ 
+NCONF = 1
+ 
+HFLU      --UA-- FLUID ENTHALPY                                                 
+PFLU      --UA-- FLUID PRESSURE                                                 
+TAVE      --UA-- FLUID AVERAGE TEMPERATURE                                      
+GAM1      --UA-- THERMAL EXCH. COEFF. CELL 1                                    
+GAM2      --UA-- THERMAL EXCH. COEFF. CELL 2                                    
+GAM3      --UA-- THERMAL EXCH. COEFF. CELL 3                                    
+GAM4      --UA-- THERMAL EXCH. COEFF. CELL 4                                    
+GAM5      --UA-- THERMAL EXCH. COEFF. CELL 5                                    
+TSHE      --UA-- SHELL METAL TEMPERATURE                                        
+WSPU      --UA-- DROPDOWN WATER MASS FLOW RATE                                  
+HSPU      --UA-- DROPDOWN WATER ENTHALPY                                        
+WE_1      --IN-- MASS FLOW RATE INLET BRANCH N. 1                               
+HE_1      --IN-- ENTHALPY INLET BRANCH N. 1                                     
+WU_1      --IN-- MASS FLOW RATE OUTLET BRANCH N. 1                              
+HU_1      --IN-- ENTHALPY OUTLET BRANCH  1 (W<0)                                
+TEST      --IN-- EXTERNAL ENVIRONMENT TEMPERATURE                               
+GEST      --IN-- THERMAL EXCH. COEFF. WITH EXT. ENV.                            
+ALZA      --IN-- DROPDOWN VALVE STEM POSITION                                   
+TMI1      --IN-- TUBES METAL TEMPERATURE CELL 1                                 
+TMI2      --IN-- TUBES METAL TEMPERATURE CELL 2                                 
+TMI3      --IN-- TUBES METAL TEMPERATURE CELL 3                                 
+TMI4      --IN-- TUBES METAL TEMPERATURE CELL 4                                 
+TMI5      --IN-- TUBES METAL TEMPERATURE CELL 5                                 
+CORR      --IN-- THERMAL EXCHANGE CORRECTION                                    
+==============================                                                  
+EOF                                                                             

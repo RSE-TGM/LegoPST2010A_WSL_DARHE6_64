@@ -1,0 +1,502 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>RETN</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE RETN</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RETN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">ELECTRICAL NETWORK</p>
+<p>&nbsp;</p>
+<p align="left">A one-phase model at direct sequence of an electrical network is
+implemented in the module RETN to represent symmetrical and equilibrated systems.</p>
+<p align="left">The module can calculate the short circuit current at any
+network bus.</p>
+<p align="left">Each network component (line or transformer) is represented by
+the <font FACE="Symbol">P</font> </font><font FACE="Arial" SIZE="3">-</font><font FACE="Arial">equivalent
+double bipole.</p>
+<p align="left">Overall the network is represented by the admittance matrix,
+which coincides with the jacobian one of the module, as far as bus voltages and
+currents calculation is concerned.</p>
+<p align="left">Each breaker manouvre or short circuit case modifies the network
+topology: a procedure to update it during a simulation is implemented in the
+module.</p>
+<p align="left">Indeed, before inserting the module RETN in a model, the user is
+requested to write the RETE_BASE auxiliary file, where topological structure and
+physical data of the network are contained.</p>
+<p align="left">An example of a RETE_BASE file is enclosed in card C.</p>
+<p align="left">RETE_BASE file is read during the F01 activity. During
+admittances matrix construction the program writes automatically the F_DATI_n
+file (n = order number of the network), where network topology and data are
+registered (for instance, real and imaginary components of the admittances
+matrix, number of busses, number of breakers, breaker states, and other data)</p>
+<p align="left">Opening and closing breaker manoeuvres, and short circuit cases
+are simulated respectively through OPENI, CLOSEI and ES_CTO subroutines,
+interacting with the F_DATI_n file.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RETN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></b></font><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p align="center"><img border="0" src="images/retn.h1.gif" width="596" height="485"></p>
+<p>&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%" height="167">
+  <tr>
+    <td width="10%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VRi</font><!--mstheme--></font></td>
+    <td width="72%" height="19"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">voltage real component at i<sup>th</sup>
+      bus</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VXi</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">voltage imaginary component
+      at i<sup>th</sup> bus</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[…]</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IRCC</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">short circuit current real
+      component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IXCC</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">short circuit current
+      imaginary component</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IRi</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">current real component at i<sup>th</sup>
+      bus</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[A]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">IXi</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">current imaginary component
+      at i<sup>th</sup> bus</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[…]</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">STj j<sup>th</sup></font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">breaker state variable (1=closed,
+      0=open)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[…]</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NNCC</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">bus in short circuit index</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ZRCC</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">real component of the short
+      circuit impedance</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ZXCC</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">imaginary component of the
+      short circuit impedance</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RETN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i>
+</b>
+          </font>
+<font FACE="Arial">
+<p align="left">As mentioned before, module data are not requested directly by
+the module, with the exception of:</p>
+<!--mstheme--></font><table border="0" width="100%" height="19">
+  <tr>
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">[-]</font><!--mstheme--></font></td>
+    <td width="18%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">PU</font><!--mstheme--></font></td>
+    <td width="72%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="left"><font FACE="Arial">p.u./absolute values option (1<font FACE="Wingdings">à</font>
+      in p.u.; 0<font FACE="Wingdings">à</font> absolute)</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">Indeed, the user has to write the RETE_BASE file, like the
+following example:</p>
+</font>
+<!--mstheme--></font><table BORDER="1" CELLSPACING="0" CELLPADDING="4" WIDTH="538" height="664" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td VALIGN="TOP" height="10"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p># NUMERO NODI:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>3</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p># NUMERO LINEE:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>0</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p># NUMERO TRASFORMATORI:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p># </font><font FACE="Courier New" SIZE="3">COLLEGAMENTO</font><font FACE="Courier New">:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>T</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>1</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>1 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>1 2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>0.007656 0.1387</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>2.11E-04 1.74E-03</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p># COLLEGAMENTO:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>T</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>2</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>2 3</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>3 4</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>0.234 4.927</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>14.6E-06 112.5E-06</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>#POTENZA DI BASE:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>370.E6</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>#TENSIONI DI BASE IN OGNI NODO:</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td VALIGN="TOP" height="18"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New">
+      <p>400.E3 15.E3 6.3E3</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+<p>&nbsp;</p>
+<p>User must insert data in a definite order, as specified below:</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">number of busses (<font FACE="Courier New">NUMERO NODI</font>)<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">number of lines (<font FACE="Courier New">NUMERO LINEE</font>)<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">number of transformers (<font FACE="Courier New">NUMERO TRASFORMATORI</font>)<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">After that, for each connection (</font><font FACE="Courier New" SIZE="3">COLLEGAMENTO</font><font FACE="Arial">)
+between two network busses, the following items are indicated:</font></p>
+<font FACE="Arial">
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">connection type (L = line, T = transformer ratio, V = tap changer ratio)<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">progressive connection identification number<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">identification number of the connected busses<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">identification number of the breakers at connection extremities<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">p.u. values of series resistance and reactance<!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="_themes/copy_of_industrial/indbul1a.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">p.u. values of shunt conductance and susceptance<!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p align="left">At the end of the file, basic network power (</font><font FACE="Courier New">POTENZA
+DI BASE, </font><font FACE="Arial">not necessarily equal to the QBASE value
+chosen for the whole model) and busses basic voltages (</font><font FACE="Courier New">TENSIONI
+DI BASE IN OGNI NODO,</font><font FACE="Arial"> observing the progressive order
+of the busses) are reported.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RETN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i></b></font><font FACE="Arial">
+<p align="left">No particular prescription is required for the RETN module
+initialization.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RETN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></b></font><font FACE="Arial">
+<p align="left">No user’s subprogram is required in the RETN module.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RETN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<font FACE="Arial" SIZE="4"><b>
+<i>
+<p ALIGN="CENTER">Residuals</p>
+</i></b></font><font FACE="Arial">
+<p align="left">The equations of the mathematical model, mentioned in Card A, give the
+following residuals:</p>
+<p align="left">Voltages and currents of the busses:</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">DO I=1,NUM_NODI</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">if the bus is in short circuit,</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(I)=ER(I)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(I+NUM_NODI)=EX(I)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">otherwise</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; PAR=0.</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; PAX=0.</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; DO
+J=1,NUM_NODI</p>
+  <p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  PAR=PAR+YR(I,J)*ER(J)-YX(I,J)*EX(J)</p>
+  <p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  PAX=PAX+YX(I,J)*ER(J)+YR(I,J)*EX(J)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; ENDDO</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(I)=-PAR+CIR(I)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(I+NUM_NODI)=-PAX+CIX(I)</p>
+<p align="left" style="margin-top: 2; margin-bottom: 2">ENDDO</p>
+<p align="left">Short circuit current calculation:</p>
+<p style="margin-top: 2; margin-bottom: 2">If there is not any bus in short circuit,</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(2*NUM_NODI+1) = IRCC</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(2*NUM_NODI+2) = IXCC</p>
+<p style="margin-top: 2; margin-bottom: 2">otherwise,</p>
+<p style="margin-top: 2; margin-bottom: 2">IF (NNC0.NE.0) THEN</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; PAR=0.</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; PAX=0.</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; DO J=1,NUM_NODI</p>
+  <p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  IF (J.NE.NNC0) THEN</p>
+  <p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  PAR=PAR+YR(J,NNC0)*ER(J)-YX(J,NNC0)*EX(J)</p>
+  <p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  PAX=PAX+YX(J,NNC0)*ER(J)+YR(J,NNC0)*EX(J)</p>
+  <p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  ENDIF</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; ENDDO</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(2*NUM_NODI+1)=IRCC*(VBASE(NNCC)/VBASE(1))+PAR-CIR(NNC0)</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(2*NUM_NODI+2)=IXCC*(VBASE(NNCC)/VBASE(1))+PAX-CIX(NNC0)</p>
+<p style="margin-top: 2; margin-bottom: 2">ELSE</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; YRCC=ZRCC/(ZRCC**2+ZXCC**2)</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; YXCC=-ZXCC/(ZRCC**2+ZXCC**2)</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(2*NUM_NODI+1)=IRCC*(VBASE(NNCC)/VBASE(1))+</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<font FACE="Arial">
+-YRCC*ER(NNCC)+YXCC*EX(NNCC)</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp; RNI(2*NUM_NODI+2)=IXCC*(VBASE(NNCC)/VBASE(1))+</p>
+        <p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        -YRCC*EX(NNCC)-YXCC*ER(NNCC)</p>
+<p style="margin-top: 2; margin-bottom: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+      <p style="margin-top: 2; margin-bottom: 2">ENDIF</p>
+      <p align="left" style="margin-top: 2; margin-bottom: 2">&nbsp;</p>
+      <p align="left" style="margin-top: 2; margin-bottom: 2">Where,</p>
+      <p align="left" style="margin-top: 2; margin-bottom: 2">ER and EX are the real and imaginary components of the busses voltages,</p>
+      <p align="left" style="margin-top: 2; margin-bottom: 2">CIR and CIX are the real and imaginary components of the busses
+      currents,</p>
+      <p align="left" style="margin-top: 2; margin-bottom: 2">YR and YX are the real and imaginary components of the network
+      admittances matrix</p>
+      <p align="left" style="margin-top: 2; margin-bottom: 2">VBASE(J) is the j<sup>th</sup> bus basic voltage,</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RETN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+<p ALIGN="CENTER">&nbsp;</p>
+</i></font></b>
+<p><font face="Arial">SUBROUTINE RETNI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</font></p>
+<p><font face="Arial">IBL1,IBL2,IER,CNXYU,TOL)</font></p>
+<p><font face="Arial">SUBROUTINE RETNC1 (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</font></p>
+<p><font face="Arial">SUBROUTINE OPENI (IND_INTER,NUM_COLL,NUM_NODI,COLL,GB,YR,YX,INI)</font></p>
+<p><font face="Arial">SUBROUTINE CLOSEI (IND_INTER,NUM_COLL,NUM_NODI,COLL,GB,YR,YX,INI)</font></p>
+<p><font face="Arial">SUBROUTINE ES_CTO (NNCC,NCCP,NUM_NODI,YR,YX,ZRCC,ZXCC)</font></p>
+<p><font face="Arial">SUBROUTINE RETNI3 (IFO,IOB,DEBL)</font></p>
+<p><font face="Arial">SUBROUTINE RETNI4 (IOB,MOD,IBLOC)</font></p>
+<p><font face="Arial">SUBROUTINE RETND1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</font></p>
+<p><font face="Arial">IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</font></p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RETN</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b>
+<font FACE="Arial" SIZE="4"><b><i>
+<p ALIGN="CENTER">Test cases</p>
+</i></b></font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

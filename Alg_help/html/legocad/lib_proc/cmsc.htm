@@ -1,0 +1,218 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE CMSC</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CMSC_summ"></A>MODULE CMSC CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</FONT><P><A HREF="#lg_libproc_CMSC_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CMSC_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CMSC_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CMSC_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CMSC_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CMSC_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CMSC_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P><A HREF="#lg_libproc_CMSC_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CMSC_A"></A>MODULE CMSC CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">COMPRESSOR WITH COOLER AND RECIRCULATION VALVE</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The CMSC module simulates the dynamical behaviour of an air or gas compressor equipped with an outlet air (or gas) cooling exchanger and a recirculation valve.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The dynamical behaviour of the mass storage inside the compressor is neglected; so the mass flow rates at the compressor oultet and at the compressor inlet are equal. On the contrary it is not neglected the energy storage behaviour of the air (or the gas) contained inside the outlet cooler and of the metal mass of the exchanger.</P>
+<P>&nbsp;</P>
+<P>The outlet cooler may be an actual pipe bundle exchanger or simply the compressor casing. In the first case, the fluid temperature will represent the cooling fluid temperature, and the exchanging surfaces (internal and external) represent the pipe bundle surfaces (note that the meaning of "internal" and "external" is referred to the compressed fluid (air or gas), undepending by the actual cooler arrahgement).</P>
+<P>In the second case, the fluid temperature is simply the ambient air temperature, and the exchanging surfaces are the actual compressor casing surfaces.</P>
+<P>&nbsp;</P>
+<P>The isoentropic efficiency of the compressor is assumed to be constant (undependent from inlet fluid conditions, compressor speed and working conditions).</P>
+<P>&nbsp;</P>
+<P>The recirculation valve is simulated internally to the compressor; the valves takes fluid from the outlet manifold (cooler) and adds it to the intake fluid; so the intake flow rate and the outlet flow rate are equal also when the valve is opened (totally or partially), but the flow rate crossing the compressor is greater (it is equal to the sum of the inlet one and the recirculating one).</P>
+<P>&nbsp;</P>
+<P>The main equations used in the mathematical model of the compressor are the following:</P>
+<P>1) relation between the rotational speed of the compressor, the pressure difference between inlet and outlet ones and the crossing flow rate (internal algebraic equation);</P>
+<P>2) evaluation of the compressor outlet temperature (before cooling) as function of the compressor efficiency and the inlet and outlet conditions (internal algebraic equation);</P>
+<P>3) energy conservation equation for the fluid mass contained inside the outlet cooler (differential equation);</P>
+<P>4) energy conservation equation for the metal of the compressor casing (or of the cooler pipe bundle) (differential equation);</P>
+<P>5) evaluation of the mechanical power absorbed by the compressor (algebraic equation);</P>
+<P>6) evaluation of the thermal power given to the cooling fluid (algebraic equation);</P>
+<P>7) evaluation of the flow rate passing through the recirculation valve (algebraic equation);</P>
+<P>8) mass conservation equation (as mass storage dynamic is neglected, the fluid flow rate at the compressor inlet and outlet must be the sum of the flow rate through the compressor and the recirculating one) (algebraic equation);</P>
+<P>9) evaluation of the temperature at the compressor outlet (after cooling) known its entropy and pressure (algebraic equation).</P><DIR>
+
+<P>&nbsp;</P></DIR>
+
+<P>The CMSC may be used both for single compressors and for complex multi-stage compressors using several CMSC models in cascade, with or without mass storages between the stages (simulable by means of the air/gas storage tank </FONT><A HREF="sera.htm#lg_libproc_SERA_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">SERA</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>The CMSC module is configurable during topology building activity, io order to allow the user choose between compressor air flow rate or compressor outlet pressure as output variable.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CMSC_B"></A>MODULE CMSC CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P>&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module can be interconnected with other ones according to the following three methods:</P>
+<P>1) output in flow rate<BR>
+prescription about block name: none</P>
+<P>&nbsp;</P>
+</FONT><P><IMG SRC="Image279.gif" WIDTH=382 HEIGHT=226></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>2) outlet in outlet pressure<BR>
+prescription about block name: preceded by a '+' sign</P>
+<P>&nbsp;</P>
+</FONT><P><IMG SRC="Image280.gif" WIDTH=382 HEIGHT=226></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><P>&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>[Pa]&#9;&#9;PMON&#9;air (or gas) pressure at the compressor inlet</P>
+<P>[K]&#9;&#9;TMON&#9;&#9;air (or gas) temperature at the compressor inlet</P>
+<P>[rad/s]&#9;&#9;OMEG&#9;rotational speed of the compressor</P>
+<P>[Pa]&#9;&#9;PVAL&#9;&#9;air (or gas) pressure at the compressor outlet</P>
+<P>[K]&#9;&#9;TREF&#9;&#9;cooling fluid mean temperature (cooling liquid or ambient air)</P>
+<P>[W/m²K]&#9;XCSE&#9;&#9;external thermal exchange coefficent (between the compressor casing or the cooler pipe bundle and the cooling &#9;&#9;&#9;&#9;fluid)</P>
+<P>[ ]&#9;&#9;ALFC&#9;&#9;recirculation valve stem position</P>
+<P>[K] &#9;&#9;TMET&#9;&#9;compressor casing (or cooler pipe bundle metal) temperature</P>
+<P>[J/kgK]&#9;SAIR&#9;&#9;air (or gas) entropy inside the cooler cavity</P>
+<P>[K]&#9;&#9;TVAL&#9;&#9;air (or gas) temperature dowstream the cooler (at the compressor outlet)</P>
+<P>[kg/s]&#9;&#9;WCOM&#9;air (or gas) flow rate (at the compressor inlet and outlet)</P>
+<P>[W]&#9;&#9;QREF&#9;&#9;thermal power given to the cooling fluid</P>
+<P>[W]&#9;&#9;QASS&#9;&#9;mechanical power absorbed by the compressor</P>
+<P>&nbsp;</P>
+</FONT><P>&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CMSC_C"></A>MODULE CMSC CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In addition to initial values of input and output variables of the CMSC module, whose meaning has been defined in Card B, the user must assign the following data to complete the input required by the module:</P>
+<P>[ ]&#9;&#9;TIPO&#9;&#9;compressor type (used for the definition of the compressor characteristic curve):<BR>
+TIPO = 1.&#9;centrifugal compressor<BR>
+TIPO = 2.&#9;axial compressor<BR>
+TIPO = 3.&#9;volumetric compressor</P>
+<P>[m²]&#9;&#9;SUPINT&#9;cooler exchange surface (compressed air/gas side)</P>
+<P>[m²]&#9;&#9;SUPEST&#9;cooler exchange surface (cooling fluid side)</P>
+<P>[Pa]&#9;&#9;PMNOM&#9;air (or gas) pressure at the compressor inlet in nominal conditions</P>
+<P>[K]&#9;&#9;TMNOM&#9;air (or gas) temperature at the compressor inlet in nominal conditions</P>
+<P>[Pa]&#9;&#9;DPNOM&#9;pressure difference between compressor outlet and inlet in nominal conditions</P>
+<P>[Nm³/h]&#9;XWNOM&#9;air flow rate in nominal conditions</P>
+<P>[giri/min]&#9;GIRNOM&#9;rotational speed in nominal conditions</P>
+<P>[ ]&#9;&#9;IGAS&#9;&#9;type of fluid crossing the compressor (default = 1.):<BR>
+IGAS = 1.&#9;air<BR>
+IGAS = 2.&#9;methane<BR>
+IGAS = 3.&#9;hydrogen</P>
+<P>[m²]&#9;&#9;AREORIF&#9;recirculation valve crossing section (when fully opened)</P>
+<P>[kg]&#9;&#9;MASSMET&#9;compressor casing and/or cooling pipe bundle metal mass (default = XWNOM / 25.)</P>
+<P>[J/kgK]&#9;CPMET&#9;compressor casing and/or cooling pipe bundle metal specific heat</P>
+<P>&nbsp;</P>
+<P>Data related to the compressor efficiency:</P>
+<P>[ ]&#9;&#9;ETAISO&#9;isoentropic efficiency of the compressor (default = 0.81 if no value is given to POTNOM)</P>
+<P>[W]&#9;&#9;POTNOM&#9;mechanical power absorbed by the compressor: neglected if ETASIO value is assigned otherwise used to &#9;&#9;&#9;&#9;&#9;evaluate compressor isoentropic efficiency</P>
+<P>[ ]&#9;&#9;ETAMEC&#9;mechanical efficiency of the compressor and/or of the gearbox (default = 0.98)</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CMSC_D"></A>MODULE CMSC CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The value of SAIR (air or gas entropy at the compressor outlet) is used to evaluate the fluid temperature at the compressor outlet (according to the outlet pressure). Steady state evaluation activity may require a sufficiently accurate guess of its first-attempt value.</P>
+<P>Its value is defined according to the standard used in TAVGASPERF library (it is equal to zero at 101325. Pa and 273.15 K).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CMSC_E"></A>MODULE CMSC CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P>&nbsp;</P>
+<P>No user’s subprograms are required for this module.</P>
+<P>The CMSC module makes use of the procedures contained in the perfect gas thermodynamic tables (TAVGASPERF) which must be present in the user library.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+</I></FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CMSC_F"></A>MODULE CMSC CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The expressions of the residuals originated by the mathematical model, as already mentioned in Card A, are the following:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>IF (KREGIM) THEN</P>
+<P>RNI(1) = ((COSINT * TVAL + COSEST * TREF) /</P>
+<P>$ (COSINT + COSEST) - TMET) / T0</P>
+<P>RNI(2) = ((CPGAS * WTOT * TOUT1 + COSINT * TMET) /</P>
+<P>$ (CPGAS * WTOT + COSINT) - TVAL) / T0</P>
+<P>ELSE</P>
+<P>RNI(1) = (QMETI - QMETE) / (CPMET * AMMET * T0)</P>
+<P>IF (WTOT .GT. 0.) THEN</P>
+<P>RNI(2) = (CPGAS * WTOT * (TOUT1 - TVAL) - QMETI) /</P>
+<P>$ (AMASS * TVAL * 1000.)</P>
+<P>ELSE</P>
+<P>RNI(2) = - QMETI / (AMASS * TVAL * 1000.)</P>
+<P>ENDIF</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>RNI(3) = (TVALC - TVAL) / T0</P>
+<P>RNI(4) = (PMON + DPCAL - PVAL) / P0</P>
+<P>RNI(5) = (WRICC - WRIC) / W0</P>
+<P>RNI(6) = (QMETE - QREF) / (W0 * H0)</P>
+<P>RNI(7) = (WTOT * (HOUT1 - HMIX) / ETAMEC - QASS) / (W0 * H0)</P>
+<P>&nbsp;</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CMSC_G"></A>MODULE CMSC CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE CMSCI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO,IOB,DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CMSCI4</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB, MOD, IBLOC, II, JJ)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CMSCI2</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBL1,IBL2,IER,CNXYU,TOL)</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P>SUBROUTINE CMSCC1 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CMSC</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE CMSCD1 </B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P>&nbsp;</P>
+</FONT><I><FONT SIZE=4><P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</I></FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CMSC_H"></A>MODULE CMSC CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P>&nbsp;</P>
+<P>Test cases for CMSC module are not yet defined.</P></FONT></BODY>
+</HTML>

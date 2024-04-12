@@ -1,0 +1,44 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>THE &quot;xxxxI2&quot; SUBROUTINE</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"></font>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#99CCFF" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">
+      <font FACE="Arial">The &quot;xxxxI2&quot; subroutine of a LEGOPC process module</font>
+    </font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+<font SIZE="3">
+<p align="left">The &quot;xxxxI2&quot; subroutine of a LEGO module is called twice during a 
+simulation: the first time it is called by LG2 activity (topology acceptance and data editor 
+activation) and the second one by LG3 activity (steady state computation).</p>
+<p align="left">These two cases can be recognized by the subroutine checking the actual value 
+of the IFUN parameter: it is 1 in LG2 program, and it is 2 in LG3. If the module is present 
+more than once in the plant model, then &quot;xxxxI2&quot; will be called (in each activity) 
+as many times as the module is used (so it won't be called by models not using the module).</p>
+<p align="left">The action performed by subroutine &quot;xxxxI2&quot; must be different in these cases.</p>
+<center>
+<p><a href="lg_modu_sez07_1.htm">
+	What does &quot;xxxxI2&quot; have to do when it is called by the LG2 activity?</a></p>
+<p><a href="lg_modu_sez07_2.htm">
+	What does &quot;xxxxI2&quot; have to do when it is called by the LG3 activity?</a></p>
+<p><a href="lg_modu_sez07_3.htm">FORTRAN prescriptions for &quot;xxxxI2&quot; subroutines</a></p>
+<p><a href="lg_modu_sez07_4.htm">The AUSIL1 common area</a></p>
+<p><a href="lg_modu_sez07_5.htm">The NORM common area</a></p>
+<p><a href="lg_modu_sez07_6.htm">
+	An example of the &quot;xxxxI2&quot; subroutine in a standard process module (RAVA)</a></p>
+<p><a href="lg_modu_sez07_7.htm">
+	The &quot;xxxxI2&quot; subroutine for configurable LEGO modules (the CPOM example)</a></p>
+</center>
+</font><!--mstheme--></font></body>
+
+</html>

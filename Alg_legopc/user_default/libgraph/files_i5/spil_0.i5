@@ -1,0 +1,45 @@
+SPIL
+
+SPIL - Steam bleed from a turbine stage                                         
+5
+1
+
+t0
+WALI PALI ____ ____ ____ HALU ____ HALI 
+2 2 0 0 0 2 0 2 
+t1
+WALI PALI ____ ____ ____ HALI ____ HALU 
+2 2 0 0 0 2 0 2 
+t2
+WSPI PTUR ____ ____ ____ ____ ____ ____ 
+-1 1 0 0 0 0 0 0 
+t4
+ALZC 
+1 
+t3
+ALZ1 
+1 
+
+0
+1
+8
+
+WSPI UA
+BLEEDING STEAM FLOW RATE FROM THE TURBINE                      
+PTUR IN
+PRESSURE OF THE STEAM BLED FROM THE TURBINE                    
+WALI IN
+FLOW RATE OF PRE-HEATED WATER                                  
+HALI IN
+WATER ENTHALPY AT THE HEATER INLET                             
+HALU IN
+WATER ENTHALPY AT THE HEATER OUTLET                            
+PALI IN
+PRE-HEATED WATER PRESSURE                                      
+ALZ1 IN
+LIFT OF THE MOTOR-OPERATED BLEEDING VALVE                      
+ALZC IN
+LIFT OF THE CHECK-VALVE                                        
+ALZ2 IN
+LIFT OF THE MOTOR-OPERATED VALVE UPSTREAM THE HEATER           
+

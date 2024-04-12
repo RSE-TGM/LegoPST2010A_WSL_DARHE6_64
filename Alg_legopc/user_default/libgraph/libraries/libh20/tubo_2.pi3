@@ -1,0 +1,17 @@
+TUBO_2                                                                          
+TUBO                                                                            
+TUBO - Pressure drops - W-out computed                                          
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 4
+ 
+NCONF = 1
+ 
+WTUB      --UA-- FLOW RATE THROUGH THE HEAD LOSS                                
+PITU      --IN-- PRESSURE AT THE HEAD LOSS INLET                                
+PUTU      --IN-- PRESSURE AT THE HEAD LOSS OUTLET                               
+HTUB      --IN-- ENTHALPY AT HEAD LOSS INLET AND OUTLET                         
+AKTB      --IN-- CORRECTOR COEFFICIENT OF THE HEAD LOSS                         
+==============================                                                  
+EOF                                                                             

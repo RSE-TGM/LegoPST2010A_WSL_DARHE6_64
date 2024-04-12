@@ -1,0 +1,68 @@
+@(#)PAG.doc Tool per la modifica degli attributi nei file *.pag	1997-02-11
+________________________________________________________________________
+
+	1.	Obbiettivi
+
+Automatizzare le modifiche dei valori degli attributi specificati nei
+file di tipo *.pag .
+
+	2.	Soluzione proposta
+
+Le modifiche da introdurre vengono specificate in un file di tipo
+ASCII (script), in cui vengono specificate - per ogni modifica - i
+seguenti dati:
+
+- Pagina
+  (singola, mediante wildcard, file-list contenente i nomi dei .pag)
+
+- Widget
+  (nome esatto, "tipo", attributo, attributo con valore, paternita',...)
+
+- Attributo
+  (nome esatto)
+
+- Valore
+  (valore esatto)
+
+
+	3.	Esempio di script
+
+............................................................
+# Inizio modifiche pagina H280
+PAGINA=H280.pag
+WIDGET=346w348c
+ATTRIB=labelBackgroundColor
+VALORE=#00000000ffff
+ATTRIB=labelForegroundColor
+VALORE=#ffff00000000
+
+WIDGET=105w172c
+ATTRIB=valoreMinimo
+VALORE=0.50
+ATTRIB=valoreMassimo
+VALORE=2.00
+
+WIDGET=HAS_ATTRIB:colorBlink
+ATTRIB=colorBlink
+VALORE=#ffff00000000
+
+WIDGET=CHILD_OF:73w
+ATTRIB=varInputBlink
+VALORE=VW0L04TE C04704TE LEGOCAD NOT 1.0 0.0 ---
+
+# Fine    modifiche pagina H280
+............................................................
+
+
+	4.	Realizzazione
+
+Un primo prototipo potrebbe essere realizzato rapidamente con delle shell
+con utilizzo di sed ed awk (preferibilmente del Perl); e' da verificare 
+l' eventuale impatto di vincoli (ad esempio: righe particolarmente lunghe).
+
+Naturalmente il programma sara' in grado di produrre un report delle
+modifiche introdotte (con formato da definire); al riguardo e' pensabile
+addirittura di separare nettamente la fase di interpretazione dello
+script per l' effettuazione delle modifiche (che si limiterebbe al report)
+e la fase di esecuzione (alimentata ad esempio dal report) in modo da
+consentire la verifica manuale.

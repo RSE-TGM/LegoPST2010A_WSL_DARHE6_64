@@ -1,0 +1,2069 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO process modules</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_proc_main"></A>LEGO process modules</P>
+</B></FONT><STRIKE><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</STRIKE></FONT><P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez01"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Why should one realize a new LEGO module?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez02"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Which kind of models can be simulated by a LEGO module?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez03"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Variables and equations' order in a LEGO module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez04"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Variables normalization factors in LEGO modules</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez05"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Standard subroutines in a LEGO process module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez06"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxxI3" subroutine of a LEGO process module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez07"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxxI2" subroutine of a LEGO process module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxxC1" subroutine of a LEGO process module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez09"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Use of "xxxx" and NAJAC subroutines in a LEGO module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez10"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxxD1" subroutine of a LEGO process module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez11"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Special features for LEGO process modules</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez01"></A>Why should one realize a new LEGO module?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">LEGO process modules has to simulate the physical or mathematical behaviour of a plant component, or to realize some special function (like algebraic sums) in a process simulator.</P>
+<P ALIGN="JUSTIFY">At the moment, a lot of LEGO standard modules (which can simulate every component in standard thermoelectric and thermonuclear plants) has been developed and tested. So, if the user has not to simulate a non-standard size electrical power plant, he (almost surely) won't have any needing to realize new process modules.</P>
+<P ALIGN="JUSTIFY">But LEGOCAD system and LEGO code have been often used also to simulate non-electrical plants (hot strip milling plants, robots, pipe nets, etc...): if one has to simulate with LEGOCAD system a non-electrical plant, he will have to realize his own library.</P>
+<P ALIGN="JUSTIFY">Besides, someone can also have to realize a part of an electrical plant model with more or less accuracy than standard LEGO libraries do.</P>
+<P ALIGN="JUSTIFY">For example, if one has only to simulate an auxiliary subsystem, which takes water from the degasifier of an electric plant, it's not a good idea to simulate the dynamic behaviour of the degasifier, because he should have to simulate also part of the condensate and the feed water subsystems and their regulation models: it's more easy to realize a very simple module which computes the saturation enthalpy of water given the degasifier pressure! Maybe enthalpy of water in the degasifier is not exactly equal to saturation enthalpy, but this effect is quite surely negligible for the auxiliary subsystem to be simulated.</P>
+<P ALIGN="JUSTIFY">On the contrary, very fast transients in long water pipes (when also water compressibility and pipe's metal deformation shall be taken into account) can not be simulated with standard library modules.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez02"></A>Which kind of models can be simulated by a LEGO module?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">A LEGO module is a set of </FONT><A HREF="#lg_whatisFORTRAN"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FORTRAN</U></FONT></A><FONT FACE="Arial, helvetica"> subroutines, which contains a simulation model (no limit is set to component or function kind).</P>
+<P ALIGN="JUSTIFY">A simulation model must be formalized in a set of ordinary differential equations and algebraic equations:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1186.gif" WIDTH=310 HEIGHT=152></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1187.gif" WIDTH=64 HEIGHT=18><FONT FACE="Arial, helvetica">&#9;are the state output variables</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1188.gif" WIDTH=65 HEIGHT=18><FONT FACE="Arial, helvetica">&#9;are the algebraic output variables</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1189.gif" WIDTH=64 HEIGHT=21><FONT FACE="Arial, helvetica">&#9;are the input variables</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1190.gif" WIDTH=11 HEIGHT=12><FONT FACE="Arial, helvetica">&#9;&#9;is the simulation time</P>
+<P ALIGN="JUSTIFY">The whole set of module output variable will so contain <IMG SRC="Image1187.gif" WIDTH=64 HEIGHT=18>and <IMG SRC="Image1188.gif" WIDTH=65 HEIGHT=18>(<I>n+m</I> will be the total number of output variables).</P>
+<P ALIGN="JUSTIFY">The mathematical expression of <IMG SRC="Image1183.gif" WIDTH=62 HEIGHT=18>and <IMG SRC="Image1191.gif" WIDTH=68 HEIGHT=18>can be linear or non-linear, and they may be formalized in analytical form, in tabular form or using logical functions. They also may change during simulation (due to simulation time and/or input variables values), but all these features must be managed internally inside the FORTRAN code of the module.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><A NAME="lg_whatisFORTRAN"></A>Many paragraphs of this documentation assumes user is at least a medium FORTRAN programmer; special modules' (cellized, configurable, etc...) development sometimes requires a skilled programmer; inexperienced programmers are not suggested to realize complex modules. Reference text for all module developers is: ANSI X3.9-1978 Standard FORTRAN by American National Standard Institute, New York NY (USA), 1978.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez03"></A>Variables and equations' order in a LEGO module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Inside a LEGO module, user must divide all differential equations from algebraic equations, because they must be placed in the following order:</P>
+<P ALIGN="JUSTIFY">1.&#9;differential equations</P>
+<P ALIGN="JUSTIFY">2.&#9;algebraic equations</P>
+<P ALIGN="JUSTIFY">Module input and output variables must be placed in the following order:</P>
+<P ALIGN="JUSTIFY">1.&#9;state outputs</P>
+<P ALIGN="JUSTIFY">2.&#9;algebraic outputs</P>
+<P ALIGN="JUSTIFY">3.&#9;input variables</P>
+<P ALIGN="JUSTIFY">Obviously, module equations and variables schemes shall be chosen during module development, and they can't be changed during simulation.</P>
+<P ALIGN="JUSTIFY">Since each differential equation gives the value of the derivative of its corresponding state output variable, the internal order of differential equations must exactly match the internal order of state output variables.</P>
+<P ALIGN="JUSTIFY">No prescription is given for algebraic equations and algebraic outputs orders.</P>
+<P ALIGN="JUSTIFY">Nevertheless, LEGO modules' developer are suggested, for obvious clearness reasons, to make their orders match (when possible). It means that, for example, if the third algebraic output variable of a module is the flow rate, the third algebraic equation should be the one involving the evaluation of the flow rate.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez04"></A>Variables normalization factors in LEGO modules</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">LEGO code allows the user to operate with normalized values of system variables. Every LEGO computation algorithm is build to operate only with normalized values; besides, LEGO computes the actual value of all quantities for both data input and results output phases.</P>
+<P ALIGN="JUSTIFY">The reference values for normalization factors are different for each kind of variable, and they can be set by the user during plant data assignment phase.</P>
+<P ALIGN="JUSTIFY">Actually, LEGO code can manage the following normalization reference values:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=458>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<P ALIGN="CENTER"><FONT FACE="Arial, helvetica">Normal. factor</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Quantity</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Unit (MKS)</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Def. value</FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">P0</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Pressure</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Pa</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">2.E+07</FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">H0</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Enthalpy</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">J/kg</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">1.E+06</FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">T0</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Temperature</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">K</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">1.E+03</FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">W0</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Flow rate</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">kg/s</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">1.E+03</FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">R0</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Density</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">kg/m³</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">1.E+02</FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">AL0</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Length</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">m</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">1.E+01</FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">V0</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Volume</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">m³</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">5.E+01</FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">DP0</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Pressure diff.</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Pa</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">1.E+05</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Inside the module, the module developers must define the normalization factor for each variable: he is strongly suggested to use (when possible) only reference values and their combinations; when reference values are not sufficient (or they don't fit module working conditions or requirements) he can set fixed values in the module, or he can let the user to set them during plant data assignment phase (asking them inside module physical and geometrical data section).</P>
+<P ALIGN="JUSTIFY">If two variable in two different modules shall be connected, <B>they must have the same normalization factor</B>: LEGO code checks normalization factors for connected variables, and it doesn't let the user to execute the simulation if they don't match exactly.</P>
+<P ALIGN="JUSTIFY">So, if an input (or output) variable can be connected with different kind of variables (like input and output variables of an adder), their normalization factor must be set by the user, because only the user knows which kind of variables has been connected to module's inputs and outputs.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez05"></A>Standard subroutines in a LEGO process module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Every LEGO module must contain at least 4 standard subroutines, whose names must be "xxxxI3", "xxxxI2", "xxxxC1" and "xxxxD1", where "xxxx" is the module name.</P>
+<P ALIGN="JUSTIFY">Obviously, this also means that the name of every module must be <B>exactly four character long</B> a it must be <B>a valid FORTRAN identifier</B> (its first character must be alphabetical, and the following three can must be alphabetical or numerical).</P>
+<P ALIGN="JUSTIFY">A LEGO module can also contain other routines (subroutine and/or functions), called by the standard ones. Very often, modules also contains two other semi-standard subroutines, whose names are "xxxxI4" and "xxxx".</P>
+<P ALIGN="JUSTIFY">The name "semi-standard subroutines" mean that many library modules (about three quarters of them) have these routines, and they performs the same kind of actions in all the modules. As they are not ought to exist, they also may exist with other name and same function, or they may exist with the same name but different function; obviously, a skilled modules' developer won't ever make it!</P>
+<P ALIGN="JUSTIFY">Very frequently, modules' standard routines calls other standard routines, contained in the following libraries:</P>
+<P ALIGN="JUSTIFY">-&#9;standard correlations library</P>
+<P ALIGN="JUSTIFY">-&#9;water &amp; steam thermodinamical properties</P>
+<P ALIGN="JUSTIFY">-&#9;air &amp; flue gases thermodinamical properties</P>
+<P ALIGN="JUSTIFY">-&#9;water &amp; steam thermal exchange coefficients</P>
+<P ALIGN="JUSTIFY">-&#9;air &amp; flue gases thermal exchange coefficients</P>
+<P ALIGN="JUSTIFY">In some special version of LEGO code, but not in standard one, also other libraries are present for thermodinamical properties computation:</P>
+<P ALIGN="JUSTIFY">-&#9;liquid sodium (for nuclear applications like PHOENIX)</P>
+<P ALIGN="JUSTIFY">-&#9;liquid air (for air separation unit models)</P>
+<P ALIGN="JUSTIFY">-&#9;liquid methane (for natural gas stocking unit models)</P>
+<P ALIGN="JUSTIFY">-&#9;gas mixtures (for chemical and special plant models)</P>
+<P ALIGN="JUSTIFY">The most used is no doubtly the numerical Jacobian matrix computation (subroutine NAJAC), contained in the standard correlations library.</P>
+<P ALIGN="JUSTIFY">As LEGO code requires modules to compute Jacobian matrix of all differential and algebraic equations, almost every LEGO module whose equations are not in analytical form (or they are too complex) calls NAJAC routine for Jacobian matrix computation. Only a few modules, instead of using NAJAC routine, perform the numerical computation of Jacobian matrix inside the module (sometimes using <I>ad-hoc</I> modified versions of NAJAC).</P>
+<P ALIGN="JUSTIFY">In exceptional cases, a module can call a routine inserted in another module, but this is allowed only for special couples of modules, as the first one will not work if the second one is not present in the user library (also if it is not necessary that the second is used in the plant model).</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez06"></A>The "xxxxI3" subroutine of a LEGO process module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Module standard "xxxxI3" subroutine is called by the topology building activity.</P>
+<P ALIGN="JUSTIFY">It must set the complete block name and the block variables set and names, writing the module header and the list of the block variables on the topological data file.</P>
+<P ALIGN="JUSTIFY">The complete name of the block must be 8 character long, and usually it is formed collating the module name (4 characters) and the block name (4 characters). The complete block name can be sometimes modified for module configurability reasons: usually, the complete block name is set in the semi-standard subroutine "xxxxI4".</P>
+<P ALIGN="JUSTIFY">The names of the block variables must be 8 character long, and they should be formed collating an unique variable identifier (4 characters) and the block name (4 characters). The variable set can be always the same for that module or it can be changed depending on configurability reasons.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez06_1"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The output which an "xxxxI3" subroutine must produce</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez06_2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FORTRAN prescriptions for "xxxxI3" subroutines</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez06_3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The first character of a LEGO variable name</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez06_4"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">An example of the "xxxxI3" subroutine in a standard process module (RAVA)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez06_5"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxxI3" subroutine for configurable LEGO modules (the CPOM example)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez06_6"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The output of the CPOMI3 subroutine of CPOM module</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez06_7"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The source code of the CPOMI3 and CPOMI4 subroutines</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez06_8"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">When the module configuration requires user instructions for the following activities?</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez06_1"></A>The output which an "xxxxI3" subroutine must produce</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The "xxxxI3" subroutine of every LEGO module must set the complete block name and the block variables set and names, writing the module header and the list of the block variables on the topological data file.</P>
+<P ALIGN="JUSTIFY">The module header must be written in the following format:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>CCCCCCCC BL.-BBBB- ***** MODULO AAAA - ddd ddd ddd</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">-&#9;"AAAA" is the module name, set once by the module developer (exactly 4 characters);</P>
+<P ALIGN="JUSTIFY">-&#9;"BBBB" is the block name, set by the user creating an instance of AAAA module (exactly 4 characters);</P>
+<P ALIGN="JUSTIFY">-&#9;"CCCCCCCC" is the complete block name, set by the module (usually, CCCCCCCC is equal to AAAABBBB);</P>
+<P ALIGN="JUSTIFY">-&#9;"ddd ddd ddd" is the block description, set by the user (no more than 50 characters)</P>
+<P ALIGN="JUSTIFY">The variable list, must be written in the following format:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>V001AAAA --XX-- V001descr</P>
+<P>V002AAAA --XX-- V002descr</P>
+<P>...</P>
+<P>VVVVAAAA --XX-- Vvvvdescr</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">-&#9;"V001AAAA", "V002AAAA", ..., "VVVVAAAA" are the complete name of the module variables (exactly 8 characters);</P>
+<P ALIGN="JUSTIFY">-&#9;"XX" defines the variable type (exactly 2 characters):</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">"US" for state outputs;</P>
+<P ALIGN="JUSTIFY">"UA" for algebraic outputs;</P>
+<P ALIGN="JUSTIFY">"IN" for inputs;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">-&#9;"V001descr", "V002descr", ..., "Vvvvdescr" are the original description of the module variables (not more than 50 characters).</P>
+<P ALIGN="JUSTIFY">Note that:</P>
+<P ALIGN="JUSTIFY">-&#9;all state outputs ("US") must precede all algebraic outputs ("UA"), and all algebraic outputs must precede all inputs ("IN"): no other &#9;type is allowed;</P>
+<P ALIGN="JUSTIFY">-&#9;if there are no state output or no algebraic output in the module, the related list section will be absent (at least one output and one &#9;input should be present: a module with no input or no output variable is not very useful :-);</P>
+<P ALIGN="JUSTIFY">-&#9;the total number of module outputs (state + algebraic) must not exceed 40; the total number of module variables (outputs + inputs) &#9;must not exceed 100;</P>
+<P ALIGN="JUSTIFY">-&#9;the original descriptions shall be written by the module, but they can be furthermore modified by the user (description fields are also &#9;automatically modified for connected input variables).</P><DIR>
+<DIR>
+
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez06_2"></A>FORTRAN prescriptions for "xxxxI3" subroutines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The calling parameters, common areas and called routines of "xxxxI3" subroutines are the following:</P>
+<B><P>Calling parameters:</P>
+</B><P ALIGN="JUSTIFY">IFO&#9;[integer]&#9;&#9;logical unit of topological file (I)</P>
+<P ALIGN="JUSTIFY">IOB&#9;[character * 4]&#9;block name (I)</P>
+<P ALIGN="JUSTIFY">DEBL&#9;[character * 80]&#9;block description (I)</P>
+<B><P>Common areas:</P>
+</B><P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+<P ALIGN="JUSTIFY">if subroutine xxxxI4 is present, xxxx01 and xxxx02 common areas are often used to exchange values between xxxxI3 and xxxxI4 (see RAVA example)</P>
+<B><P>Called routines:</P>
+</B><P ALIGN="JUSTIFY">xxxxI4&#9;&#9;(not always present, but very often user to build the complete block name: see RAVA and CPOM examples)</P>
+<P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez06_3"></A>The first character of a LEGO variable name</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The first character of every variable name is also used to identify the quantity (and the related default measurement unit) for that variable, and is tested during variable connection activity, because usually user should connect together only homogeneous variables.</P>
+<P ALIGN="JUSTIFY">The first character meanings used in LEGOCAD system are the following:</P>
+<P ALIGN="JUSTIFY">A)&#9;valve lift (in p.u.) and other quantities defined in "per unit" - also used for discrete quantities (like logical flags)</P>
+<P ALIGN="JUSTIFY">B)&#9;reactivity (in pcm)</P>
+<P ALIGN="JUSTIFY">C)&#9;concentration (in ppm)</P>
+<P ALIGN="JUSTIFY">D)&#9;pressure difference (in Pa)</P>
+<P ALIGN="JUSTIFY">G)&#9;meaning not defined, but used for thermal exchange coefficient (in J/m²K) and mechanical stress (in kg</FONT><FONT FACE="Arial, helvetica" SIZE=1>f</FONT><FONT FACE="Arial, helvetica">/mm²)</P>
+<P ALIGN="JUSTIFY">H)&#9;enthalpy (in J/kg)</P>
+<P ALIGN="JUSTIFY">I)&#9;meaning not defined, but used for analog input variables in automation and regulation models</P>
+<P ALIGN="JUSTIFY">J)&#9;meaning not defined, but used for boolean input and output variables in automation and regulation models</P>
+<P ALIGN="JUSTIFY">L)&#9;length (in m) - mainly used for liquid level in tanks and drums</P>
+<P ALIGN="JUSTIFY">M)&#9;mass (in kg)</P>
+<P ALIGN="JUSTIFY">O)&#9;angular velocity (in rad/s)</P>
+<P ALIGN="JUSTIFY">P)&#9;pressure (in Pa)</P>
+<P ALIGN="JUSTIFY">Q)&#9;mechanical and thermal power (in W)</P>
+<P ALIGN="JUSTIFY">R)&#9;frequency (in RPM) - also used for angular velocity in RPM</P>
+<P ALIGN="JUSTIFY">T)&#9;temperature (in K)</P>
+<P ALIGN="JUSTIFY">U)&#9;meaning not defined, but used for analog output variables in automation and regulation models</P>
+<P ALIGN="JUSTIFY">W)&#9;mass flow rate (in kg/s)</P>
+<P ALIGN="JUSTIFY">Z)&#9;variables defined in % (values in the range [0÷100])</P>
+<P ALIGN="JUSTIFY">%)&#9;no more used (used in some old modules instead of Z, with same meaning)</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez06_4"></A>An example of the "xxxxI3" subroutine in a standard process module (RAVA)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">An example of the output produced by the "xxxxI3" subroutine of a LEGO standard module is the following:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>RAVACAPH BL.-CAPH- **** MODULO RAVA - Comburent air preheater</P>
+<P>TMARCAPH --US-- MEAN AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER</P>
+<P>TUA2CAPH --UA-- AIR OUTLET TEMPERATURE IN THE AIR-STEAM EXCHANGER</P>
+<P>TUA1CAPH --UA-- AIR TEMP. AT THE EXCHANGER INLET (FLOW RATE INV.)</P>
+<P>GAMRCAPH --UA-- THERMAL EXCHANGE COEFFICIENT AIR-METAL</P>
+<P>WARICAPH --IN-- AIR FLOW RATE IN THE AIR-STEAM EXCHANGER</P>
+<P>TMETCAPH --IN-- METAL TEMPERATURE IN THE AIR-STEAM EXCHANGER</P>
+<P>TIA1CAPH --IN-- INLET AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER</P>
+<P>TIA2CAPH --IN-- OUTLET AIR TEMP. IN THE EXCHANGER (FLOW RATE INV.)</P>
+<P>AKCOCAPH --IN-- CORRECTOR COEFF. THERMAL EXCHANGE AIR-METAL</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">This output has been produced instanciating the RAVA module (which simulates the behaviour of the air side of an air/steam heat exchanger) choosing "CAPH" as block name and "Comburent air preheater" as block description. As one can see, the RAVA modules has 1 state output, 3 algebraic outputs and 5 inputs.</P>
+<P ALIGN="JUSTIFY">The source code of RAVAI3 and RAVAI4 follows. The actual code of RAVA module is a bit different: this code works <B>exactly</B> like the actual one, but it has been simplified (the original one was too different from an automatically produced source).</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE RAVAI3(IFO,IOB,DEBL)</P>
+<P>C</P>
+<P>C--- MODULE RAVA: AIR-STEAM PREHEATER</P>
+<P>C</P>
+<P>PARAMETER (NV=9)</P>
+<P>CHARACTER*4 IOB, MOD, IBLOC*8, DEBL*80</P>
+<P>CHARACTER*4 NOME(NV), TIPO(NV)*2, DESC(NV)*50</P>
+<P>COMMON /RAVA01/ IBLOC</P>
+<P>COMMON /RAVA02/ NCEL,NPAR</P>
+<P>C</P>
+<P>DATA MOD/'RAVA'/</P>
+<P>DATA (NOME(I),TIPO(I),DESC(I),I=1,NV) /</P>
+<P>$'TMAR','US','MEAN AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER',</P>
+<P>$'TUA2','UA','AIR OUTLET TEMPERATURE IN THE AIR-STEAM EXCHANGER',</P>
+<P>$'TUA1','UA','AIR TEMP. AT THE EXCHANGER INLET (FLOW RATE INV.)',</P>
+<P>$'GAMR','UA','THERMAL EXCHANGE COEFFICIENT AIR-METAL',</P>
+<P>$'WARI','IN','AIR FLOW RATE IN THE AIR-STEAM EXCHANGER',</P>
+<P>$'TMET','IN','METAL TEMPERATURE IN THE AIR-STEAM EXCHANGER',</P>
+<P>$'TIA1','IN','INLET AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER',</P>
+<P>$'TIA2','IN','OUTLET AIR TEMP. IN THE EXCHANGER (FLOW RATE INV.)',</P>
+<P>$'AKCO','IN','CORRECTOR COEFF. THERMAL EXCHANGE AIR-METAL'/</P>
+<P>C</P>
+<P>CALL RAVAI4(IOB,MOD)</P>
+<P>WRITE(IFO,2999)IBLOC,IOB,MOD,DEBL</P>
+<P>WRITE(IFO,3000)(NOME(I),IOB,TIPO(I),DESC(I),I=1,NV)</P>
+<P>RETURN</P>
+<P>2999 FORMAT(A8,' BL.-',A4,'- **** MODULO ',A4,' - ',A)</P>
+<P>3000 FORMAT(2A4,' --',A2,'-- ',A)</P>
+<P>END</P>
+<P>C</P>
+<P>C</P>
+<P>C</P>
+<P>SUBROUTINE RAVAI4(IOB,MOD)</P>
+<P>CHARACTER*4 IOB, MOD, IBLOC*8</P>
+<P>COMMON /RAVA01/ IBLOC</P>
+<P>COMMON /RAVA02/ NCEL,NPAR</P>
+<P>C</P>
+<P>WRITE(IBLOC,1000)MOD,IOB</P>
+<P>RETURN</P>
+<P>1000 FORMAT(2A4)</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Note that the only calling parameters of RAVAI4 subroutine are IOB and MOD; user is allowed to add other calling parameters in "xxxxI4" subroutines, but this is not feasible in automatically produced code.</P>
+<P ALIGN="JUSTIFY">All other variables can be passed via common areas; the first two areas are always provided by source generation activity:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>COMMON /RAVA01/ IBLOC</P>
+<P>COMMON /RAVA02/ NCEL,NPAR</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">IBLOC&#9;[character * 8]&#9;is the complete block name, and it must be set in the "xxxxI4" subroutine.</P>
+<P ALIGN="JUSTIFY">NCEL&#9;&#9;[integer]&#9;&#9;and</P>
+<P ALIGN="JUSTIFY">NPAR&#9;&#9;[integer]&#9;&#9;have no predefined meaning (they are provided only for module developer commodity).</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez06_5"></A>The "xxxxI3" subroutine for configurable LEGO modules (the CPOM example)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For configurable and/or cellized modules, the subroutine "xxxxI3" must also ask to the user how to configure the block variable set. For instance, in an adder, the number of input quantities could be chosen by the user when he creates the module instance.</P>
+<P ALIGN="JUSTIFY">Unfortunately the configuration informations selected by the user cannot be directly passed as they are to the other activities of LEGO code. Only a few informations registered into the topological data can be used in the following activities: the numbers of variables (divided in state outputs, algebraic outputs and inputs) and the complete block name.</P>
+<P ALIGN="JUSTIFY">The variable set can be unique for that module (always the same number of variables and always the same variables in the same order) or it can be changed due to some user choices.</P>
+<P ALIGN="JUSTIFY">For example, in a LEGO module simulating a pump, two different kind of configurability can be inserted: the speed computation and the output choice (this is exactly the case of the standard module CPOM).</P>
+<P ALIGN="JUSTIFY">The rotational speed of the pump can be directly imposed as a boundary condition (so, the speed will be an input variable of the module); otherwise the pump speed can be computed evaluating the resisting couple of the pump, and using the motor power as boundary condition (so the speed will be a state output variable and the motor power will be an input).</P>
+<P ALIGN="JUSTIFY">In the second case, the module will have one more state output variable (the speed) than in the first one, but they always have the same number of inputs (actually, in CPOM module, the kinetic energy is the state output, while speed is an algebraic output: the module has two more outputs, not only one). So the following LEGO activity (data section) can easily recognize the user choice.</P>
+<P ALIGN="JUSTIFY">Known the pump speed and the water density, the momentum conservation principium involves the inlet pressure, the outlet pressure and the water flow rate: so, the user may choose that the pump module have to evaluate the flow rate knowing the inlet and outlet pressure, or to evaluate one of the two pressure known the other one and the flow rate:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=363>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<P ALIGN="RIGHT"><FONT FACE="Arial, helvetica">Choice:</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">1</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">2</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">3</FONT></TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">flow rate</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">output</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">input</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">input</FONT></TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">inlet pressure</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">input</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">output</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">input</FONT></TD>
+</TR>
+<TR><TD WIDTH="38%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">outlet pressure</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">input</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">input</FONT></TD>
+<TD WIDTH="21%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">output</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Unfortunately, the numbers of input and output variables will be always the same: so the module must use the complete block name to let the following activity know the block configuration.</P>
+<P ALIGN="JUSTIFY">As usual, the first character of the module will be modified in the following way (assume user is instancing the CPOM module using PUMP as block name):</P>
+<P ALIGN="JUSTIFY">CPOMPUMP&#9;(first character unchanged) for flow rate output (inlet pressure and outlet pressure as input);</P>
+<P ALIGN="JUSTIFY">+CPOPUMP&#9;(first character is a plus) for inlet pressure output (flow rate and outlet pressure as input)</P>
+<P ALIGN="JUSTIFY">-CPOPUMP&#9;(first character is a minus) for outlet pressure output (flow rate and inlet pressure as input)</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez06_6"></A>The output of the CPOMI3 subroutine of CPOM module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The CPOM module can be set in six different configurations:</P>
+<P ALIGN="JUSTIFY">1.&#9;speed imposed - flow rate output</P>
+<P ALIGN="JUSTIFY">2.&#9;speed imposed - inlet pressure output</P>
+<P ALIGN="JUSTIFY">3.&#9;speed imposed - outlet pressure output</P>
+<P ALIGN="JUSTIFY">4.&#9;power imposed - flow rate output</P>
+<P ALIGN="JUSTIFY">5.&#9;power imposed - inlet pressure output</P>
+<P ALIGN="JUSTIFY">6.&#9;power imposed - outlet pressure output</P>
+<P ALIGN="JUSTIFY">The following examples represent the output produced in all these cases (the block name is always "PUMP" and the description is always "Water pump"):</P>
+<P ALIGN="JUSTIFY">-&#9;case 1 (speed imposed - flow rate output):</P><DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P></DIR>
+
+<P>CPOMPUMP BL.-PUMP- **** MODULO CPOM - Water pump</P>
+<P>HUPMPUMP --UA-- FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>WPOMPUMP --UA-- FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>PUPMPUMP --IN-- PRESSURE AT THE PUMP OUTLET</P>
+<P>PIPMPUMP --IN-- PRESSURE AT THE PUMP INLET</P>
+<P>HIPMPUMP --IN-- FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>OMPMPUMP --IN-- ROTATIONAL SPEED OF THE PUMP</P>
+<P>NPOMPUMP --IN-- NUMBER OF PUMPS IN PARALLEL</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">-&#9;case 2 (speed imposed - inlet pressure output):</P><DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P></DIR>
+
+<P>+CPOPUMP BL.-PUMP- **** MODULO CPOM - Water pump</P>
+<P>HUPMPUMP --UA-- FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>PIPMPUMP --UA-- PRESSURE AT THE PUMP INLET</P>
+<P>PUPMPUMP --IN-- PRESSURE AT THE PUMP OUTLET</P>
+<P>WPOMPUMP --IN-- FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>HIPMPUMP --IN-- FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>OMPMPUMP --IN-- ROTATIONAL SPEED OF THE PUMP</P>
+<P>NPOMPUMP --IN-- NUMBER OF PUMPS IN PARALLEL</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">-&#9;case 3 (speed imposed - outlet pressure output):</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>-CPOPUMP BL.-PUMP- **** MODULO CPOM - Water pump</P>
+<P>HUPMPUMP --UA-- FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>PUPMPUMP --UA-- PRESSURE AT THE PUMP OUTLET</P>
+<P>PIPMPUMP --IN-- PRESSURE AT THE PUMP INLET</P>
+<P>WPOMPUMP --IN-- FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>HIPMPUMP --IN-- FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>OMPMPUMP --IN-- ROTATIONAL SPEED OF THE PUMP</P>
+<P>NPOMPUMP --IN-- NUMBER OF PUMPS IN PARALLEL</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">-&#9;case 4 (power imposed - flow rate output):</P><DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P></DIR>
+
+<P>CPOMPUMP BL.-PUMP- **** MODULO CPOM - Water pump</P>
+<P>ECINPUMP --US-- KINETIC ENERGY OF THE ROTATING MASSES</P>
+<P>OMPMPUMP --UA-- ROTATIONAL SPEED OF THE PUMP</P>
+<P>HUPMPUMP --UA-- FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>WPOMPUMP --UA-- FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>PUPMPUMP --IN-- PRESSURE AT THE PUMP OUTLET</P>
+<P>PIPMPUMP --IN-- PRESSURE AT THE PUMP INLET</P>
+<P>HIPMPUMP --IN-- FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>QIPMPUMP --IN-- POWER ABSORBED BY THE PUMP</P>
+<P>NPOMPUMP --IN-- NUMBER OF PUMPS IN PARALLEL</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">-&#9;case 5 (power imposed - inlet pressure output):</P><DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P></DIR>
+
+<P>+CPOPUMP BL.-PUMP- **** MODULO CPOM - Water pump</P>
+<P>ECINPUMP --US-- KINETIC ENERGY OF THE ROTATING MASSES</P>
+<P>OMPMPUMP --UA-- ROTATIONAL SPEED OF THE PUMP</P>
+<P>HUPMPUMP --UA-- FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>PIPMPUMP --UA-- PRESSURE AT THE PUMP INLET</P>
+<P>PUPMPUMP --IN-- PRESSURE AT THE PUMP OUTLET</P>
+<P>WPOMPUMP --IN-- FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>HIPMPUMP --IN-- FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>QIPMPUMP --IN-- POWER ABSORBED BY THE PUMP</P>
+<P>NPOMPUMP --IN-- NUMBER OF PUMPS IN PARALLEL</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">-&#9;case 6 (power imposed - outlet pressure output):</P><DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P></DIR>
+
+<P>-CPOPUMP BL.-PUMP- **** MODULO CPOM - Water pump</P>
+<P>ECINPUMP --US-- KINETIC ENERGY OF THE ROTATING MASSES</P>
+<P>OMPMPUMP --UA-- ROTATIONAL SPEED OF THE PUMP</P>
+<P>HUPMPUMP --UA-- FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>PUPMPUMP --UA-- PRESSURE AT THE PUMP OUTLET</P>
+<P>PIPMPUMP --IN-- PRESSURE AT THE PUMP INLET</P>
+<P>WPOMPUMP --IN-- FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>HIPMPUMP --IN-- FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>QIPMPUMP --IN-- POWER ABSORBED BY THE PUMP</P>
+<P>NPOMPUMP --IN-- NUMBER OF PUMPS IN PARALLEL</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">As one can see, the complete block name is changed due to the pressure and flow rate input/output configuration (which otherwise couldn't be recognized by the following LEGO activities), but not due to the speed or power input choice (which can easily recognized using the numbers of block variables).</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez06_7"></A>The source code of the CPOMI3 and CPOMI4 subroutines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The source code of CPOMI3 and CPOMI4 follows. The actual code of CPOM module is quite different: this code works <B>exactly</B> like the actual one, but it has been simplified, making it more alike an automatically produced source.</P>
+<P ALIGN="JUSTIFY">Note that this kind of module cannot be build using only the automatic code generation utility (the source code produced by this utility must be modified to allow module internal configuration).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>C</P>
+<P>C--- MODULE CPOM: CENTRIFUGAL PUMP</P>
+<P>C</P>
+<P>SUBROUTINE CPOMI3(IFO,IOB,DEBL)</P>
+<P>PARAMETER (NV=9)</P>
+<P>CHARACTER*4 IOB, MOD, IBLOC*8, DEBL*80</P>
+<P>CHARACTER*4 NOME(NV), TIPO(NV)*2, DESC(NV)*50</P>
+<P>COMMON /CPOM01/ IBLOC</P>
+<P>COMMON /CPOM02/ IHI,IWP</P>
+<P>C</P>
+<P>DATA MOD/'CPOM'/</P>
+<P>DATA (NOME(I),TIPO(I),DESC(I),I=1,NV) /</P>
+<P>$'ECIN','US','KINETIC ENERGY OF THE ROTATING MASSES',</P>
+<P>$'OMPM','UA','ROTATIONAL SPEED OF THE PUMP',</P>
+<P>$'HUPM','UA','FLUID ENTHALPY AT THE PUMP OUTLET',</P>
+<P>$'WPOM','UA','FLUID FLOW RATE THROUGH THE PUMP',</P>
+<P>$'PUPM','IN','PRESSURE AT THE PUMP OUTLET',</P>
+<P>$'PIPM','IN','PRESSURE AT THE PUMP INLET',</P>
+<P>$'HIPM','IN','FLUID ENTHALPY AT THE PUMP INLET',</P>
+<P>$'QIPM','IN','POWER ABSORBED BY THE PUMP',</P>
+<P>$'NPOM','IN','NUMBER OF PUMPS IN PARALLEL'/</P>
+<P>C</P>
+<P>CALL CPOMI4(IOB,MOD)</P>
+<P>WRITE(IFO,2999)IBLOC,IOB,MOD,DEBL</P>
+<P>IF (IHI .EQ. 2) THEN</P>
+<P>WRITE(IFO,3000)NOME(1),IOB,TIPO(1),DESC(1)</P>
+<P>WRITE(IFO,3000)NOME(2),IOB,TIPO(2),DESC(2)</P>
+<P>ENDIF</P>
+<P>WRITE(IFO,3000)NOME(3),IOB,TIPO(3),DESC(3)</P>
+<P>IF (IWP .EQ. 0) THEN</P>
+<P>WRITE(IFO,3000)NOME(6),IOB,'UA',DESC(6)</P>
+<P>WRITE(IFO,3000)NOME(5),IOB,'IN',DESC(5)</P>
+<P>WRITE(IFO,3000)NOME(4),IOB,'IN',DESC(4)</P>
+<P>ELSE IF (IWP .EQ. 1) THEN</P>
+<P>WRITE(IFO,3000)NOME(5),IOB,'UA',DESC(5)</P>
+<P>WRITE(IFO,3000)NOME(6),IOB,'IN',DESC(6)</P>
+<P>WRITE(IFO,3000)NOME(4),IOB,'IN',DESC(4)</P>
+<P>ELSE</P>
+<P>WRITE(IFO,3000)NOME(4),IOB,'UA',DESC(4)</P>
+<P>WRITE(IFO,3000)NOME(5),IOB,'IN',DESC(5)</P>
+<P>WRITE(IFO,3000)NOME(6),IOB,'IN',DESC(6)</P>
+<P>ENDIF</P>
+<P>WRITE(IFO,3000)NOME(7),IOB,TIPO(7),DESC(7)</P>
+<P>IF (IHI .EQ. 2) THEN</P>
+<P>WRITE(IFO,3000)NOME(8),IOB,TIPO(8),DESC(8)</P>
+<P>ELSE</P>
+<P>WRITE(IFO,3000)NOME(2),IOB,TIPO(8),DESC(2)</P>
+<P>ENDIF</P>
+<P>WRITE(IFO,3000)NOME(9),IOB,TIPO(9),DESC(9)</P>
+<P>RETURN</P>
+<P>2999 FORMAT(A8,' BL.-',A4,'- **** MODULO ',A4,' - ',A)</P>
+<P>3000 FORMAT(2A4,' --',A2,'-- ',A)</P>
+<P>END</P>
+<P>C</P>
+<P>C</P>
+<P>C</P>
+<P>SUBROUTINE CPOMI4(IOB,MOD)</P>
+<P>CHARACTER*4 IOB, MOD, IBLOC*8</P>
+<P>COMMON /CPOM01/ IBLOC</P>
+<P>COMMON /CPOM02/ IHI,IWP</P>
+<P>CHARACTER*4 MODU, RISP*1</P>
+<P>C</P>
+<P>1 WRITE(6,3001)</P>
+<P>3001 FORMAT(/10X,'CENTRIFUGAL PUMP WITH IMPOSED SPEED [YES/NO] ?')</P>
+<P>READ(5,3000)RISP</P>
+<P>IF (RISP .EQ. 'Y' .OR. RISP .EQ. 'y') THEN</P>
+<P>IHI = 1</P>
+<P>ELSE IF (RISP .EQ. 'N' .OR. RISP .EQ. 'n') THEN</P>
+<P>IHI = 2</P>
+<P>ELSE</P>
+<P>GOTO 1</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>2 WRITE(6,3002)</P>
+<P>3002 FORMAT(/5X,'GIVE A CHARACTER'</P>
+<P>$ /5X,'- FLOW RATE AS OUTPUT =========&gt; BLANK',</P>
+<P>$ /5X,'- INLET PRESSURE AS OUTPUT ====&gt; +',</P>
+<P>$ /5X,'- OUTLET PRESSURE AS OUTPUT ===&gt; -')</P>
+<P>READ(5,3000)RISP</P>
+<P>IF (RISP .EQ. '+') THEN</P>
+<P>IWP = 0</P>
+<P>MODU = RISP // MOD(1:3)</P>
+<P>ELSE IF (RISP .EQ. '-') THEN</P>
+<P>IWP = 1</P>
+<P>MODU = RISP // MOD(1:3)</P>
+<P>ELSE IF (RISP .EQ. ' ') THEN</P>
+<P>IWP = 2</P>
+<P>MODU = MOD</P>
+<P>ELSE</P>
+<P>GOTO 2</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>IBLOC = MODU // IOB</P>
+<P>RETURN</P>
+<P>3000 FORMAT(A)</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez06_8"></A>When the module configuration requires user instructions for the following activities?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">As we sad, the only way to let the following activities directly recognize the module configuration involves the following four quantities:</P>
+<P ALIGN="JUSTIFY">-&#9;the complete block name;</P>
+<P ALIGN="JUSTIFY">-&#9;the number of state output variables;</P>
+<P ALIGN="JUSTIFY">-&#9;the number of algebraic output variables;</P>
+<P ALIGN="JUSTIFY">-&#9;the number of input variables.</P>
+<P ALIGN="JUSTIFY">Sometimes, these informations are not enough!</P>
+<P ALIGN="JUSTIFY">If one takes as an example the case of a manifold (like the COLT module), the output variables are represented by temperature of the manifold metal wall and by the pressure and the enthalpy of the fluid inside the manifold (assumed as outlet conditions).</P>
+<P ALIGN="JUSTIFY">The input variables are represented by the flow rate and the enthalpy of the fluid coming from every inlet pipe, and by the flow rate of the fluid drawn by every outlet pipe. Assuming that the fluid flow through the pipes may be inverted, also the enthalpy of the fluid coming from the outlet pipes (in case of flow inversion) will be input variable.</P>
+<P ALIGN="JUSTIFY">So, the number of input variables will be twice the sum of the numbers of inlet and outlet pipes: the following activity can only evaluate the sum of these numbers, but not the numbers themselves!</P>
+<P ALIGN="JUSTIFY">Actually, in the COLT module the number of inlet (or outlet) pipes could be encoded in the block name, but this in not done, and it is not usual in LEGO modules (no library module does it). In some modules this will not be sufficient the same (e.g., in EVAP module, simulating a cellized boiling channel, there are many cells and a variable number of metal walls for each cell).</P>
+<P ALIGN="JUSTIFY">In these cases, the module must ask to the user inside physical and geometrical data section (subroutine "xxxxI2") the actual number of inlet and outlet pipes (or the number of metal wall for each cell, and so on).</P>
+<P ALIGN="JUSTIFY">Skilled modules developers always insert in "xxxxI2" subroutine a checking algorithm, to ensure, at least, that the sum of the two numbers assigned by the user is the right one.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez07"></A>The "xxxxI2" subroutine of a LEGO process module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The "xxxxI2" subroutine of a LEGO module is called twice during a simulation: the first time it is called by LG2 activity (topology acceptance and data editor activation) and the second one by LG3 activity (steady state computation).</P>
+<P ALIGN="JUSTIFY">These two cases can be recognized by the subroutine checking the actual value of the IFUN parameter: it is 1 in LG2 program, and it is 2 in LG3. If the module is present more than once in the plant model, then "xxxxI2" will be called (in each activity) as many times as the module is used (so it won't be called by models not using the module).</P>
+<P ALIGN="JUSTIFY">The action performed by subroutine "xxxxI2" must be different in these cases.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez07_01"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">What does "xxxxI2" have to do when it is called by the LG2 activity?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez07_02"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">What does "xxxxI2" have to do when it is called by the LG3 activity?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez07_03"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FORTRAN prescriptions for "xxxxI2" subroutines</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez07_4"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The AUSIL1 common area</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez07_5"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The NORM common area</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez07_6"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">An example of the "xxxxI2" subroutine in a standard process module (RAVA)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez07_7"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxxI2" subroutine for configurable LEGO modules (the CPOM example)</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez07_01"></A>What does "xxxxI2" have to do when it is called by the LG2 activity?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">When "xxxxI2" subroutine is called by LG2 program (when IFUN is 1) it must write on F14.DAT file the physical and geometrical data section for the related block. The header of the block data section is automatically written by LG2 program, so the module doesn't have to write it. If the block has no physical or geometrical data, no action has to be performed.</P>
+<P ALIGN="JUSTIFY">The format of the F14.DAT area for a physical or geometrical datum must be exactly 25 character, and it have the following format (where blanks have been replaced with dots "." for legibility reasons):</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>....AAAAAAAA.=..........*</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">-&#9;"...." are four leading blanks (they must be exactly 4);</P>
+<P ALIGN="JUSTIFY">-&#9;"AAAAAAAA" is the datum code (it must be exactly 8 characters long, and it must be unique inside the module);</P>
+<P ALIGN="JUSTIFY">-&#9;".=" is a standard string (one blank and an equal sign);</P>
+<P ALIGN="JUSTIFY">-&#9;"..........*" are the value field (exactly 10 blanks) and the ending character (an asterisk).</P>
+<P ALIGN="JUSTIFY">Up to three data can be collected on each line: this means that every line may be 25, 50 or 75 character long as it may contain one, two or three data. Obviously, every datum area must have the prescript format, including the four leading blanks and the ending asterisk. If the module has more than three data, then more than one line must be written.</P>
+<P ALIGN="JUSTIFY">Inside the module data section, also comment line can be inserted before, after or between data lines. A comment line must have the following format:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>* Comment comment comment ...</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">(an asterisk, exactly three blanks and the comment text).</P>
+<P ALIGN="JUSTIFY">The total length of a comment line must not exceed 132 characters (for legibility reasons, the length of a comment line should not exceed 80 characters, so the comment text should not exceed 76 characters).</P>
+<P ALIGN="JUSTIFY">The following physical and geometrical data section is the one of the VALV module (water and steam pump, where "WSVA" and "Water/steam valve" are the block name and description chosen by the user). The VALV module has 11 physical/geometrical data; the VALV module also writes three comment lines (the heading line is not written by VALV module, but by LG2 program).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>*LG*DATI DEL BLOCCO VALVWSVA MODULO VALV - Water/steam valve</P>
+<P>* VALVE DATA (COD. = IDENTIFIER FOR MATEMATHICAL MODEL CHOICE)</P>
+<P>ALFA = * CFA = * COD. = *</P>
+<P>* DATA RELATED TO THE DISCHARGING CHARACTERISTIC</P>
+<P>CVA = * PORTATA = * P1 MONTE = *</P>
+<P>P2 VALLE = * ENTALPIA = * CORSA = *</P>
+<P>* DATA RELATED TO THE CHECK VALVE (IF PRESENT - DEPENDING ON COD.)</P>
+<P>DP. APER = * DP. CHIU = *</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">As the block variables names are passed to the "xxxxI2" (inside the VAR array, from IV1 to IV2 rows), they may be used to build the data codes.</P>
+<P ALIGN="JUSTIFY">On the contrary, they cannot be used to recognize module configuration, as they may be freely changed by the user for topology connection (connecting an input variable to an output one causes the name of the input variable to be set equal to the name of the connected output; in old LEGO versions, setting the same name for two different input variables in two different modules was used to force their values to be everywhen equal), first character modification (for variable measurement units identification) or other less frequent reasons (how can the module builder be sure that all his module's future users will actually like the names he had set? :-).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez07_02"></A>What does "xxxxI2" have to do when it is called by the LG3 activity?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">When the "xxxxI2" subroutine is called by LG3 activity (steady state computation), it must perform the following actions:</P>
+<P ALIGN="JUSTIFY">1.&#9;read the physical and geometrical data area of the block;</P>
+<P ALIGN="JUSTIFY">2.&#9;allocate in the DATI vector the right area for the block;</P>
+<P ALIGN="JUSTIFY">3.&#9;assign the normalization factors for the block variables;</P>
+<P ALIGN="JUSTIFY">4.&#9;set the tolerance thresholds for the block equations during transients simulation (for the iterations convergence criterion).</P>
+<P ALIGN="JUSTIFY">The physical and geometrical data area includes also the heading line and the comment lines (if any). The heading line must always be read, also if the block has no physical or geometrical data (it must move the file pointer to the beginning of the area related to the following block).</P>
+<P ALIGN="JUSTIFY">Data values must be read from the value fields of the data area, which is 10 character long for each datum: a FORTRAN format '(3(14X,F10.0,1X))' is very often used for reading data, except in case of character data, which require specific reading formats (physical and geometrical data are almost always floating point quantities, as DATI is a floating point vector).</P>
+<P ALIGN="JUSTIFY">Note that no error occurs if this format is used to read less than three data, and it may also be used to read more than three data (from more than one line) if every line (except the last) is used for three data.</P>
+<P ALIGN="JUSTIFY">Data values has to be recorded into DATI vector, starting with the ID2 position. Into the DATI vector the module must also record every data which has to be used in steady state and transients computation. For instance, DATI vector may also contain configuration setting informations, temporary variables and internal states (input variables or quantities computed in the module, whose values has to be recorded during the simulation).</P>
+<P ALIGN="JUSTIFY">So the "xxxxI2" subroutine has to evaluate the total size of the DATI vector section which will be used by the following activities, and change the value of the ID2 pointer to the last allocated element of DATI vector. As the incoming value of ID2 points to the first not-allocated element, its value must be increased by (N-1), where N is the total number of elements allocated.</P>
+<P ALIGN="JUSTIFY">If the module has no data, the value of ID2 could be decreased by one, as the module doesn't require any data (neither the first one, pointed by the incoming value of ID2), but this is not usually done by either standard modules or automatically produced ones.</P>
+<P ALIGN="JUSTIFY">As we sad, the configuration informations, which can be read from the data section, from the complete block name and/or from the outputs and inputs values, shall be evaluated by "xxxxI2" subroutine and recorded into the DATI vector.</P>
+<P ALIGN="JUSTIFY">The normalization factors of all the block variables must be recorded into the CNXYU vector, from the IV1 to the IV2 element (the number of allocated elements always matches the number of block variables). If the position and/or the number of the variables may change due to module configurability, also the normalization factors' values has to be correctly chosen and ordered to exactly match the variables sequence. As the normalization factors have no default values, if the module does not assign them (or it assigns zero values) then a "Division by zero" error will occur, and the LG3 activity will abort.</P>
+<P ALIGN="JUSTIFY">As the LEGO code provides (in the NORM common area) the reference normalization factors for many different quantities, module developers are strongly suggested, when feasible, to use only standard values and their combinations:</P>
+<P ALIGN="JUSTIFY">If particular prescription on convergence criterion are required, the module may also assign the tolerance upper thresholds for the transient computation (assigning the correct values to the first N elements of TOL vector, where N is the number of block equations). As the tolerance thresholds have a default value (0.0001), usually the TOL values are not assigned. Note that TOL vector values are used only during transients simulation: the steady state computation threshold is always assigned by the user.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez07_03"></A>FORTRAN prescriptions for "xxxxI2" subroutines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The calling parameters, common areas and called routines of "xxxxI2" subroutines are the following:</P>
+<B><P>Calling parameters:</P>
+</B><P ALIGN="JUSTIFY">IFUN&#9;&#9;[integer]&#9;&#9;flag of required actions (I)</P>
+<P ALIGN="JUSTIFY">VAR&#9;&#9;[real (MX1,2)]&#9;&#9;all blocks variables names list (4 characters per element and one name per row) (I)</P>
+<P ALIGN="JUSTIFY">MX1&#9;&#9;[integer]&#9;&#9;leading dimension of VAR array (I)</P>
+<P ALIGN="JUSTIFY">IV1&#9;&#9;[integer]&#9;&#9;begin of block variables area in VAR, XYU and CNXYU (I)</P>
+<P ALIGN="JUSTIFY">IV2&#9;&#9;[integer]&#9;&#9;end of block variables area in VAR, XYU and CNXYU (I)</P>
+<P ALIGN="JUSTIFY">XYU&#9;&#9;[real (*)]&#9;&#9;all blocks normalized variables values (I)</P>
+<P ALIGN="JUSTIFY">DATI&#9;&#9;[real (*)]&#9;&#9;vector data physical and geometrical (I/O)</P>
+<P ALIGN="JUSTIFY">ID1&#9;&#9;[integer]&#9;&#9;begin of block data area in DATI vector (I)</P>
+<P ALIGN="JUSTIFY">ID2&#9; &#9;[integer]&#9;&#9;end of block data area in DATI vector (I/O)</P>
+<P ALIGN="JUSTIFY">IBL1&#9;&#9;[integer]&#9;&#9;first half of the complete block name (4 characters) (I)</P>
+<P ALIGN="JUSTIFY">IBL2&#9;&#9;[integer]&#9;&#9;second half of the complete block name (4 characters) (I)</P>
+<P ALIGN="JUSTIFY">IER&#9;&#9;[integer]&#9;&#9;exiting or error code (O)</P>
+<P ALIGN="JUSTIFY">CNXYU&#9;[real (*)]&#9;&#9;all blocks variables normalization factors (O)</P>
+<P ALIGN="JUSTIFY">TOL&#9;&#9; [real (*)]&#9;&#9;tolerance thresholds for block equations residuals during transients simulation (I/O)</P>
+<B><P>Common areas:</P>
+</B><P ALIGN="JUSTIFY">AUSIL1</P>
+<P ALIGN="JUSTIFY">NORM</P>
+<P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+<B><P>Called routines:</P>
+</B><P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+<P ALIGN="JUSTIFY">Note: as the VAR array contains in each element 4 characters (the first or the second part of a variable name), it may be defined with any numerical variable type whose allocated area is 4 bytes long: REAL, INTEGER or LOGICAL (if using INTEGER*4 default: otherwise INTEGER*4 must be forced, and LOGICAL should not be used). VAR array cannot be defined CHARACTER (also if it actually contains characters) because the parameter passing strategy for CHARACTER quantities in FORTRAN language is not compatible with numerical quantities passing strategy.</P>
+<P ALIGN="JUSTIFY">This problem derives from the fact that first LEGO releases were coded in FORTRAN IV language (ANSI X3.9 1966 standard) which did not contain CHARACTER type definition (see also IBL1 and IBL2 parameters definition).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez07_4"></A>The AUSIL1 common area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The AUSIL1 common area contains the numbers of state output, algebraic output and input variables of the block. Its contents is assigned by the LG2 and LG3 programs before calling each module, so its values have to be considered "real-only" by the "xxxxI2" subroutine.</P>
+<B><P>List of common area variables:</P>
+</B><P ALIGN="JUSTIFY">NSTATI&#9;[integer]&#9;number of module state output variables</P>
+<P ALIGN="JUSTIFY">NUSCIT&#9;[integer]&#9;number of module algebraic output variables</P>
+<P ALIGN="JUSTIFY">NINGRE&#9;[integer]&#9;number of module input variables</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez07_5"></A>The NORM common area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The NORM common area contains the user assigned values (or default values) for the reference normalization factors. Its contents is assigned by the LG3 program reading the F14.DAT data file, so its values must absolutely be considered "real-only" by the "xxxxI2" subroutine.</P>
+<B><P>List of common area variables:</P>
+</B><P ALIGN="JUSTIFY">P0&#9;[real]&#9;normalization coefficient for pressures</P>
+<P ALIGN="JUSTIFY">H0&#9;[real]&#9;normalization coefficient for enthalpies</P>
+<P ALIGN="JUSTIFY">T0&#9;[real]&#9;normalization coefficient for temperatures</P>
+<P ALIGN="JUSTIFY">W0&#9;[real]&#9;normalization coefficient for flow rates</P>
+<P ALIGN="JUSTIFY">RO0&#9;[real]&#9;normalization coefficient for densities</P>
+<P ALIGN="JUSTIFY">AL0&#9;[real]&#9;normalization coefficient for lengths</P>
+<P ALIGN="JUSTIFY">V0&#9;[real]&#9;normalization coefficient for volumes</P>
+<P ALIGN="JUSTIFY">DP0&#9;[real]&#9;normalization coefficient for pressure differences</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez07_6"></A>An example of the "xxxxI2" subroutine in a standard process module (RAVA)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">An example of the output produced by the "xxxxI2" subroutine of a LEGO standard module is the following:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>*LG*DATI DEL BLOCCO RAVACAPH MODULO RAVA - Comburent air preheater</P>
+<P>SUSCA = * CAPPA = * ALFA = *</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">This output has been produced instanciating the RAVA module (which simulates the behaviour of a air/steam heat exchanger) choosing "CAPH" as block name and "Comburent air preheater" as block description.</P>
+<P ALIGN="JUSTIFY">The source code of RAVAI2 follows (comment line has been added or translated for legibility reasons).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE RAVAI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>INTEGER VAR</P>
+<P>DIMENSION VAR(MX1,*),XYU(*),DATI(*),CNXYU(*),TOL(*)</P>
+<P>COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0</P>
+<P>C</P>
+<P>C--- MODULE RAVA: AIR-STEAM PREHEATER</P>
+<P>C</P>
+<P>GO TO(100,200),IFUN</P>
+<P>C</P>
+<P>C------- IFUN = 1 -------</P>
+<P>C--- data symbols writing</P>
+<P>C</P>
+<P>100 WRITE(14,500) 'SUSCA ','CAPPA ','ALFA '</P>
+<P>RETURN</P>
+<P>C</P>
+<P>C------- IFUN = 2 -------</P>
+<P>C--- data reading and storing</P>
+<P>C</P>
+<P>200 READ(14,501)</P>
+<P>READ(14,501) SUSCA,CAPPA,ALFA</P>
+<P>C</P>
+<P>500 FORMAT(3(4X,A8,' =',10X,'*'))</P>
+<P>501 FORMAT(3(14X,F10.0,1X))</P>
+<P>C</P>
+<P>DATI(ID2 ) = SUSCA</P>
+<P>DATI(ID2+1) = CAPPA</P>
+<P>DATI(ID2+2) = ALFA</P>
+<P>C</P>
+<P>C--- three free data are left for the storage of the flow rate</P>
+<P>C and the temperature in the previous integration pass:</P>
+<P>C</P>
+<P>ID2 = ID2+5</P>
+<P>C</P>
+<P>C--- normalization factors assignment</P>
+<P>C</P>
+<P>CNXYU(IV1 ) = T0</P>
+<P>CNXYU(IV1+1) = T0</P>
+<P>CNXYU(IV1+2) = T0</P>
+<P>CNXYU(IV1+3) = 1.</P>
+<P>CNXYU(IV1+4) = W0</P>
+<P>CNXYU(IV1+5) = T0</P>
+<P>CNXYU(IV1+6) = T0</P>
+<P>CNXYU(IV1+7) = T0</P>
+<P>CNXYU(IV1+8) = 1.</P>
+<P>C</P>
+<P>C--- tolerance thresholds not assigned (default value is used)</P>
+<P>C</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Note that the allocation of extra elements in the DATI vector cannot be done using only the automatic code generation utility: the source code produced by this utility must be modified to allow extra elements allocation. As the RAVA module has three physical or geometrical data (SUSCA, CAPPA and ALFA), the auto-produced instruction for ID2 variable increasing was: ID2 = ID2+2.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez07_7"></A>The "xxxxI2" subroutine for configurable LEGO modules (the CPOM example)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For configurable and/or cellized modules, the subroutine "xxxxI2" must also check the configuration informations. The source code of CPOMI2 follows (comment line has been added for legibility reasons).</P>
+<P ALIGN="JUSTIFY">Note that this kind of module cannot be build using only the automatic code generation utility. While the computation of internal quantities can be performed using the dedicated "user-code" areas during automatic building activity, the allocation of extra elements in DATI vector for the storage of these quantities must be performed modifying the auto-produced code.</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE CPOMI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ IBLOC1,IBLOC2,IER,CNXYU,TOL)</P>
+<P>C</P>
+<P>C---CENTRIFUGAL PUMP</P>
+<P>C</P>
+<P>INTEGER VAR(MX1,2)</P>
+<P>DIMENSION XYU(*),DATI(*),CNXYU(*),TOL(*)</P>
+<P>CHARACTER*1 CWP</P>
+<P>COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0</P>
+<P>COMMON/AUSIL1/NSTATI,NUSCIT,NINGRE</P>
+<P>C</P>
+<P>DATA PI/3.141592/,G/9.81/</P>
+<P>C</P>
+<P>GO TO(1,10),IFUN</P>
+<P>C</P>
+<P>C---WRITING DATA SYMBOLS</P>
+<P>C</P>
+<P>1 WRITE(14,1000)'TYP ','INER ','QVNOM '</P>
+<P>WRITE(14,1000)'OMNOM ','DPNOM ','POTN '</P>
+<P>WRITE(14,1000)'DENS. ','N.GIRAN.','VALV INT'</P>
+<P>1000 FORMAT(3(4X,A8,' =',10X,'*'))</P>
+<P>RETURN</P>
+<P>C</P>
+<P>C---DATA READING AND STORING</P>
+<P>C</P>
+<P>10 READ(14,1002)</P>
+<P>READ(14,1002)TYP,HIN,QNOM,OMNOM,DPNOM,PNOM,RO,GIRAN,VALV</P>
+<P>1002 FORMAT(3(14X,F10.0,1X))</P>
+<P>C</P>
+<P>C---PUMP TYPE DECODING:</P>
+<P>C</P>
+<P>IF (NSTATI .GT. 0) THEN</P>
+<P>IHI=2</P>
+<P>ELSE</P>
+<P>IHI=1</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>WRITE(CWP,3000)IBLOC1</P>
+<P>3000 FORMAT (A1)</P>
+<P>IF (CWP.EQ.'+') THEN</P>
+<P>IWP=0</P>
+<P>ELSE IF (CWP.EQ.'-') THEN</P>
+<P>IWP=1</P>
+<P>ELSE</P>
+<P>IWP=2</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>IF(IHI.EQ.1)WRITE(6,502)'*** IMPOSED SPEED PUMP ***'</P>
+<P>IF(IHI.EQ.2)WRITE(6,502)'*** IMPOSED POWER PUMP ***'</P>
+<P>IF(IWP.EQ.0)WRITE(6,502)'*** INLET PRESSURE AS OUTPUT ***'</P>
+<P>IF(IWP.EQ.1)WRITE(6,502)'*** OUTLET PRESSURE AS OUTPUT ***'</P>
+<P>IF(IWP.EQ.2)WRITE(6,502)'*** FLOW RATE AS OUTPUT ***'</P>
+<P>502 FORMAT(/14X,A)</P>
+<P>C</P>
+<P>C---WORK DATA COMPUTATION</P>
+<P>C</P>
+<P>IF(GIRAN.LE.0.)GIRAN=1.</P>
+<P>C</P>
+<P>C---VALV = 1 MEANS THAT THE PUMP INCLUDES AN UPSTREAM VALVE.</P>
+<P>C</P>
+<P>IF(VALV.NE.0.)VALV=1.</P>
+<P>ETANOM=0.85</P>
+<P>IF(PNOM.GT.0.)ETANOM=QNOM*DPNOM/PNOM</P>
+<P>IF(RO.EQ.0.) RO=1000.</P>
+<P>C</P>
+<P>DH=DPNOM/RO/G/GIRAN</P>
+<P>C</P>
+<P>ECINOM=HIN*OMNOM**2.*.5</P>
+<P>GIRI=OMNOM/2./PI*60.</P>
+<P>GCAR=3.65*GIRI*QNOM**.5/(DH**(3./4.))</P>
+<P>AMPMP=2000.*QNOM</P>
+<P>WRITE(6,1021) GCAR</P>
+<P>1021 FORMAT(/14X,'*** SPECIFIC SPEED: ',F8.2,' ***'/)</P>
+<P>CNOM=PNOM/OMNOM</P>
+<P>IF(PNOM.NE.0.)GO TO 167</P>
+<P>CNOM=QNOM*DPNOM/(OMNOM*ETANOM)</P>
+<P>167 CONTINUE</P>
+<P>C</P>
+<P>C---DATA STORAGE</P>
+<P>C</P>
+<P>DATI(ID2)=IHI</P>
+<P>DATI(ID2+1)=IWP</P>
+<P>DATI(ID2+2)=TYP</P>
+<P>DATI(ID2+3)=HIN</P>
+<P>DATI(ID2+4)=QNOM</P>
+<P>DATI(ID2+5)=OMNOM</P>
+<P>DATI(ID2+6)=DPNOM</P>
+<P>DATI(ID2+7)=PNOM</P>
+<P>DATI(ID2+8)=ETANOM</P>
+<P>DATI(ID2+9)=ECINOM</P>
+<P>DATI(ID2+10)=GCAR</P>
+<P>DATI(ID2+11)=AMPMP</P>
+<P>DATI(ID2+12)=CNOM</P>
+<P>DATI(ID2+16)=.004*CNOM</P>
+<P>DATI(ID2+17)=VALV</P>
+<P>ID2=ID2+17</P>
+<P>C</P>
+<P>C---NORMALIZATION FACTORS</P>
+<P>C</P>
+<P>OM0=PI*2.*50.</P>
+<P>GO TO (50,60), IHI</P>
+<P>C</P>
+<P>50 CNXYU(IV1)=H0</P>
+<P>CNXYU(IV1+1)=P0</P>
+<P>IF(IWP.EQ.2)CNXYU(IV1+1)=W0</P>
+<P>CNXYU(IV1+2)=P0</P>
+<P>CNXYU(IV1+3)=W0</P>
+<P>IF(IWP.EQ.2)CNXYU(IV1+3)=P0</P>
+<P>CNXYU(IV1+4)=H0</P>
+<P>CNXYU(IV1+5)=OM0</P>
+<P>CNXYU(IV1+6)=1.</P>
+<P>GO TO 70</P>
+<P>C</P>
+<P>60 CNXYU(IV1)=1.</P>
+<P>CNXYU(IV1+1)=OM0</P>
+<P>CNXYU(IV1+2)=H0</P>
+<P>CNXYU(IV1+3)=P0</P>
+<P>IF(IWP.EQ.2) CNXYU(IV1+3)=W0</P>
+<P>CNXYU(IV1+4)=P0</P>
+<P>CNXYU(IV1+5)=W0</P>
+<P>IF(IWP.EQ.2) CNXYU(IV1+5)=P0</P>
+<P>CNXYU(IV1+6)=H0</P>
+<P>CNXYU(IV1+7)=H0*W0</P>
+<P>CNXYU(IV1+8)=1.</P>
+<P>C</P>
+<P>C---STANDARD TOLERANCE TRESHOLDS (1.E-4)</P>
+<P>C</P>
+<P>70 RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez08"></A>The "xxxxC1" subroutine of a LEGO process module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The "xxxxC1" subroutine of a LEGO module is called both by LG3 activity (steady state computation) and LG5 activity (transients simulation); in both the activities, "xxxxC1" is called to perform three different kind of actions, which the subroutine must recognize checking the actual value of the IFUN parameter:</P>
+<P ALIGN="JUSTIFY">1 = assignment of the Jacobian matrix topology (for transients simulation);</P>
+<P ALIGN="JUSTIFY">2 = computation of the residuals of differential and algebraic equations;</P>
+<P ALIGN="JUSTIFY">3 = computation of the Jacobian matrix of the block equations.</P>
+<P ALIGN="JUSTIFY">The "xxxxC1" may also recognize if it has been called by LG3 or by LG5 activity checking the value of the KREGIM logical variable: KREGIM is .TRUE. when "xxxxC1" is called by LG3 activity (steady state computation), and it is .FALSE. when "xxxxC1" is called by LG5 activity (transients simulation).</P>
+<STRIKE><P ALIGN="JUSTIFY">&nbsp;</P>
+</STRIKE></FONT><P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08_01"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">What does "xxxxC1" have to do when it is called for Jacobian matrix topology setting?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08_02"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">What does "xxxxC1" have to do when it is called for residuals computation?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08_03"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">What does "xxxxC1" have to do when it is called for Jacobian matrix computation?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08_04"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FORTRAN prescriptions for "xxxxC1" subroutines</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08_05"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The INTEGR common area</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08_06"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The NEQUAZ common area</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08_07"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The NORM common area</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08_08"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The PARPAR common area</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08_09"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The REGIME common area</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08_10"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">An example of the "xxxxC1" subroutine in a standard process module (RAVA)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez08_11"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxxC1" subroutine for configurable LEGO modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez08_01"></A><A NAME="lg_modu_sez08_01"></A><B>What does "xxxxC1" have to do when it is called for Jacobian matrix topology setting?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">When IFUN is 1 "xxxxC1" must assign the topology of the Jacobian matrix during transients simulation. The subroutine must assign to the AJAC array elements 1. or 0. values whose meaning is whether the row-indicated equation's residual depends (1.) or doesn't depend (0.) from the column-indicated block variable.</P>
+<P ALIGN="JUSTIFY">As zero is the default value for AJAC's elements, only ones have to be assigned.</P>
+<P ALIGN="JUSTIFY">In transients simulations, only the terms of Jacobian matrix pointed by non-zero elements of Jacobian topology are used to solve the differential-algebraic system: the other terms are neglected, also if they are not zero (it means: also if there actually were an influence of the related variable on the related residual). So, if the module's developers is not absolutely sure that there is no influence, it is better to set the 1. value also for terms where the influence could not be present: the easiest solution is to set as 1. all the elements of the topology!</P>
+<P ALIGN="JUSTIFY">Obviously this is only the easiest solution, but is not the best one: setting to 1. elements related to variables which don't have ever any influence on the row-indicated residual may hardly increase the computing times and the memory storage requirements (only the non-zero elements of Jacobian matrix are stored and used during differential-algebraic system solving, as it is a "sparse" matrix - a matrix where only a few elements are non-zero).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez08_02"></A>What does "xxxxC1" have to do when it is called for residuals computation?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">When IFUN is 2 "xxxxC1" must evaluate the block equations residuals. During transient simulation, the residuals of differential equations must are the time derivatives of the related state output variables:</P>
+<P ALIGN="JUSTIFY">&#9;<IMG SRC="Image1192.gif" WIDTH=300 HEIGHT=73>&#9;(differential equations)</P>
+<P ALIGN="JUSTIFY">&#9;<IMG SRC="Image1193.gif" WIDTH=306 HEIGHT=73>&#9;(related residuals)</P>
+<P ALIGN="JUSTIFY">while the residuals of the algebraic equations are not so strictly related with algebraic output variables:</P>
+<P ALIGN="JUSTIFY">&#9;<IMG SRC="Image1194.gif" WIDTH=300 HEIGHT=73>&#9;(algebraic equations)</P>
+<P ALIGN="JUSTIFY">&#9;<IMG SRC="Image1195.gif" WIDTH=324 HEIGHT=73>&#9;(related residuals)</P>
+<P ALIGN="JUSTIFY">All the residuals must be normalized, as they have to be compared to the tolerance thresholds. Note that the incoming values of the block variables are normalized too. So, if the module computes the residuals directly on the normalized values of its variable, the residuals are automatically normalized. Otherwise, they have to be normalized using the normalization factors related to the quantities involved in the residuals.</P>
+<P ALIGN="JUSTIFY">The steady state of a system is defined as the system state where the time derivatives of all system quantities (including state variables) are null. So, during steady state computation, also the residuals of differential equations are treated exactly like they were residuals of other algebraic equations.</P>
+<P ALIGN="JUSTIFY">This means that the mathematical expression used for differential residuals evaluation during steady state computation may be different from transient simulation one, and it may be not strictly related with state output variables.</P>
+<P ALIGN="JUSTIFY">This fact is often used for mass continuity and energy continuity equations: during transient computation these equations must be combined (using also fluid thermodynamic properties) to exactly evaluate (e.g.) pressure and enthalpy time derivatives.</P>
+<P ALIGN="JUSTIFY">During steady state computation, it is more easy to use directly the mass equilibrium and the energy equilibrium equations, in their easiest form: the two residuals may be substituted with the algebraic sums of all inlet and outlet mass and energy flows. This is also strongly suggested, as it allows a better and faster convergence of the solution of the steady state algebraic system.</P>
+<P ALIGN="JUSTIFY">Most modules don't compute equation residuals directly in their "xxxxC1" subroutines, but they use an auxiliary semi-standard routine, whose name is usually "xxxx" (the same of the module, with no suffix). This also allows the numerical computation of Jacobian matrix (using the library routine NAJAC).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez08_03"></A>What does "xxxxC1" have to do when it is called for Jacobian matrix computation?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">When IFUN is 3 "xxxxC1" must compute the Jacobian matrix of the block equations (both differential and algebraic ones) and assign it to the AJAC array (the same used for Jacobian topology when IFUN is 1).</P>
+<P ALIGN="JUSTIFY">The Jacobian matrix is defined as the matrix of the partial derivatives of all block equation's residual computed by all block variables (the sign of the derivatives of algebraic residuals must be inverted):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1196.gif" WIDTH=476 HEIGHT=128></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+<P ALIGN="JUSTIFY">n &#9;&#9;=&#9;number of state outputs (and differential equations);</P>
+<P ALIGN="JUSTIFY">m &#9;&#9;=&#9;number of algebraic outputs (and algebraic equations);</P>
+<P ALIGN="JUSTIFY">p &#9;&#9;=&#9;number of input variables;</P>
+<P ALIGN="JUSTIFY">{x}</FONT><FONT FACE="Arial, helvetica" SIZE=1>n</FONT><FONT FACE="Arial, helvetica"> &#9;&#9;=&#9;state output variables;</P>
+<P ALIGN="JUSTIFY">{y}</FONT><FONT FACE="Arial, helvetica" SIZE=1>m</FONT><FONT FACE="Arial, helvetica"> &#9;&#9;=&#9;algebraic output variables;</P>
+<P ALIGN="JUSTIFY">{u}</FONT><FONT FACE="Arial, helvetica" SIZE=1>p</FONT><FONT FACE="Arial, helvetica"> &#9;&#9;=&#9;input variables;</P>
+<P ALIGN="JUSTIFY">{R}</FONT><FONT FACE="Arial, helvetica" SIZE=1>n+m</FONT><FONT FACE="Arial, helvetica"> &#9;=&#9;equation residuals (differential and algebraic);</P>
+<P ALIGN="JUSTIFY">{<IMG SRC="Image1197.gif" WIDTH=12 HEIGHT=16>}</FONT><FONT FACE="Arial, helvetica" SIZE=1>n+m+p</FONT><FONT FACE="Arial, helvetica"> &#9;=&#9;partial differential operator (for all block variables);</P>
+<P ALIGN="JUSTIFY">i &#9;&#9;= &#9;1, ..., n for differential equations;</P>
+<P ALIGN="JUSTIFY">i &#9;&#9;= &#9;n+1, ..., n+m for algebraic equations;</P>
+<P ALIGN="JUSTIFY">j &#9;&#9;= &#9;1, ..., n for state output variables;</P>
+<P ALIGN="JUSTIFY">j &#9;&#9;= &#9;n+1, ..., n+m for algebraic output variables;</P>
+<P ALIGN="JUSTIFY">j &#9;&#9;= &#9;n+m+1, ..., n+m+p for input variables.</P>
+<P ALIGN="JUSTIFY">Both the block equations and the block variables have to be considered as normalized values. Note that the value of the partial derivative is independent of the normalization factors only in case of the variable and the residual have the same normalization factor.</P>
+<P ALIGN="JUSTIFY">Most modules don't compute Jacobian matrix directly in their "xxxxC1" subroutines, as often their expression is not analytical, or is analytical but too complicated. In this cases, the Jacobian matrix can be computed in numerical way, as matrix of incremental ratios:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1198.gif" WIDTH=224 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In LEGO system there is a library routine, called NAJAC, which computes numerically the Jacobian matrix. It may be used if the module developers wants to compute numerically the Jacobian matrix but he doesn't like to build its own algorithm to do it (as other people did it before :-).</P>
+<P ALIGN="JUSTIFY">To use the NAJAC routine, the block residuals cannot be computed directly in "xxxxC1" subroutine, but they have to be computed in an auxiliary semi-standard routine, whose name is usually "xxxx" (the same of the module, with no suffix), which has to be called by NAJAC.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez08_04"></A>FORTRAN prescriptions for "xxxxC1" subroutines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The calling parameters, common areas and called routines of "xxxxC1" subroutines are the following:</P>
+<B><P>Calling parameters:</P>
+</B><P ALIGN="JUSTIFY">IFUN&#9;[integer]&#9; flag of required actions (I)</P>
+<P ALIGN="JUSTIFY">AJAC&#9;[real (MX5,*)]&#9;Jacobian matrix of the block (O)</P>
+<P ALIGN="JUSTIFY">MX5&#9;[integer]&#9;leading dimension of AJAC array (I)</P>
+<P ALIGN="JUSTIFY">IXYU&#9;[integer]&#9;begin of block variables area in XYU vector (I)</P>
+<P ALIGN="JUSTIFY">XYU&#9;[real (*)]&#9;all blocks normalized variables values (I)</P>
+<P ALIGN="JUSTIFY">IPD&#9;[integer]&#9;begin of block data area in DATI vector (I)</P>
+<P ALIGN="JUSTIFY">DATI&#9;[real (*)]&#9;all blocks physical and geometrical data vector (I/O)</P>
+<P ALIGN="JUSTIFY">RNI&#9;[real (*)]&#9;residuals of the block equations (O)</P>
+<P ALIGN="JUSTIFY">IBL1&#9;[integer]&#9;first half of the complete block name (4 characters) (I)</P>
+<P ALIGN="JUSTIFY">IBL2&#9;[integer]&#9;second half of the complete block name (4 characters) (I)</P>
+<B><P>Common areas:</P>
+</B><P ALIGN="JUSTIFY">INTEGR</P>
+<P ALIGN="JUSTIFY">NEQMOD</P>
+<P ALIGN="JUSTIFY">NORM</P>
+<P ALIGN="JUSTIFY">PARPAR</P>
+<P ALIGN="JUSTIFY">REGIME</P>
+<P ALIGN="JUSTIFY">...&#9;&#9;&#9; (depending on module characteristics)</P>
+<B><P>Called routines:</P>
+</B><P ALIGN="JUSTIFY">"xxxx" and NAJAC&#9;(only in case of numerical computation of Jacobian matrix)</P>
+<P ALIGN="JUSTIFY">...&#9;&#9;&#9; (depending on module characteristics)</P>
+<P ALIGN="JUSTIFY">Note: in some special cases, XYU vector is an I/O (read-write) parameter (only in modules with no iterative equation during steady state computation); in all other cases, XYU is a read-only (I) parameter.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez08_05"></A>The INTEGR common area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The INTEGR common area contains some informations about the transient simulation and the actual integration step. Its values must absolutely be considered "real-only" by the "xxxxC1" subroutine.</P>
+<B><P>List of common area variables:</P>
+</B><P ALIGN="JUSTIFY">TSTOP&#9;[real]&#9;&#9;ending time of current simulation (in s)</P>
+<P ALIGN="JUSTIFY">TEMPO&#9;[real]&#9;&#9;actual simulation time (in s)</P>
+<P ALIGN="JUSTIFY">DTINT&#9;&#9;[real]&#9;&#9;actual integration step (in s)</P>
+<P ALIGN="JUSTIFY">NPAS&#9;&#9;[integer]&#9;number of integration steps performed</P>
+<P ALIGN="JUSTIFY">CDT&#9;&#9;[real]&#9;&#9;simulation time for derivatives computation</P>
+<P ALIGN="JUSTIFY">ALFADT&#9;[real]&#9;&#9;implicitness degree of integration algorithm</P>
+<P ALIGN="JUSTIFY">In some old modules, DTINT value is changed to a default value during transient initialization (when its value is zero, as it is not the first step of the transient simulation, but only an initialization calling). This shall not be done, as it is never actually needed: DTINT may appear (e.g.) as denominator in a ratio or in a logarithm argument, but such formulas must always be protected checking DTINT's value, as the problem may exist only in initialization phase, when initialization default values should be provided (only novice developers could forget or neglect this :-).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez08_06"></A>The NEQUAZ common area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The NEQUAZ common area contains only the NEQMOD variable (the number of algebraic equations in the module). For standard modules, NEQMOD variable is not useful, so standard modules don't contain NEQUAZ common area.</P>
+<P ALIGN="JUSTIFY">This variable has to be used to tell to LG3 and LG5 activities if the module is special one (with no iterative equations or with less equations than output variables). Its value is "write-only" in "xxxxC1" subroutine.</P>
+<B><P>List of common area variables:</P>
+</B><P ALIGN="JUSTIFY">NEQMOD&#9;[integer]&#9;number of algebraic equations in the module</P>
+<P ALIGN="JUSTIFY">The way to build modules with no equation and modules with less equations than output variables is furthermore discussed in the "Special features for LEGO process modules" paragraph.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez08_07"></A>The NORM common area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The NORM common area contains the user assigned values (or default values) for the reference normalization factors. Its values must absolutely be considered "real-only" by the "xxxxC1" subroutine.</P>
+<B><P>List of common area variables:</P>
+</B><P ALIGN="JUSTIFY">P0&#9;[real]&#9;normalization coefficient for pressures</P>
+<P ALIGN="JUSTIFY">H0&#9;[real]&#9;normalization coefficient for enthalpies</P>
+<P ALIGN="JUSTIFY">T0&#9;[real]&#9;normalization coefficient for temperatures</P>
+<P ALIGN="JUSTIFY">W0&#9;[real]&#9;normalization coefficient for flow rates</P>
+<P ALIGN="JUSTIFY">RO0&#9;[real]&#9;normalization coefficient for densities</P>
+<P ALIGN="JUSTIFY">AL0&#9;[real]&#9;normalization coefficient for lengths</P>
+<P ALIGN="JUSTIFY">V0&#9;[real]&#9;normalization coefficient for volumes</P>
+<P ALIGN="JUSTIFY">DP0&#9;[real]&#9;normalization coefficient for pressure differences</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez08_08"></A>The PARPAR common area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The PARPAR common area contains some informations about the transient simulation and the iterations of the differential-algebraic system at each integration step. Its values must absolutely be considered "real-only" by the "xxxxC1" subroutine.</P>
+<B><P>List of common area variables:</P>
+</B><P ALIGN="JUSTIFY">NPER&#9;&#9;[integer]&#9;number of perturbations defined</P>
+<P ALIGN="JUSTIFY">NVPLT&#9;[integer]&#9;number of variables selected for graphical output</P>
+<P ALIGN="JUSTIFY">NVSTP&#9;[integer]&#9;number of variables selected for tabular output</P>
+<P ALIGN="JUSTIFY">NSTPLT&#9;[integer]&#9;number of integration steps before graphical output</P>
+<P ALIGN="JUSTIFY">NSTSTP&#9;[integer]&#9;number of integration steps before tabular output</P>
+<P ALIGN="JUSTIFY">KPLT&#9;&#9;[integer]&#9;counter of integration steps since last graphical output</P>
+<P ALIGN="JUSTIFY">KSTP&#9;&#9;[integer]&#9;counter of integration steps since last tabular output</P>
+<P ALIGN="JUSTIFY">ITERT&#9;&#9;[integer]&#9;number of iterations in the current integration step</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez08_09"></A>The REGIME common area</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The REGIME common area contains only the KREGIM variable (the steady state computation flag). KREGIM is .TRUE. in LG3 activity (steady state computation) and .FALSE. in LG5 activity (transients simulation). Its value has to be checked by "xxxxC1" subroutine everywhere is useful to distinguish between steady state and transients computation. Its values must absolutely be considered "real-only" by the "xxxxC1" subroutine.</P>
+<B><P>List of common area variables:</P>
+</B><P ALIGN="JUSTIFY">KREGIM&#9;[logical]&#9;steady state computation flag</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez08_10"></A>An example of the "xxxxC1" subroutine in a standard process module (RAVA)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The source code of RAVAC1 follows (comment line has been added or translated for legibility reasons).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE RAVAC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>C</P>
+<P>DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)</P>
+<P>EXTERNAL RAVA</P>
+<P>C</P>
+<P>C--- MODULE RAVA: AIR-STEAM PREHEATER</P>
+<P>C</P>
+<P>NSTATI = 1</P>
+<P>NUSCIT = 3</P>
+<P>NINGRE = 5</P>
+<P>NEQ = NSTATI + NUSCIT</P>
+<P>NVAR = NEQ + NINGRE</P>
+<P>C</P>
+<P>GO TO(100,200,300),IFUN</P>
+<P>C</P>
+<P>C---Jacobian matrix topology</P>
+<P>C</P>
+<P>100 DO I = 1,NEQ</P>
+<P>DO J = 1,NVAR</P>
+<P>AJAC(I,J) = 1.</P>
+<P>END DO</P>
+<P>END DO</P>
+<P>RETURN</P>
+<P>C</P>
+<P>C---residuals computation</P>
+<P>C</P>
+<P>200 CALL RAVA(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>RETURN</P>
+<P>C</P>
+<P>C---Jacobian matrix numerical computation</P>
+<P>C</P>
+<P>300 EPS = 1.E-3</P>
+<P>EPSLIM = 1.E-4</P>
+<P>CALL NAJAC(AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,</P>
+<P>$ NSTATI,NUSCIT,NINGRE,EPS,EPSLIM,RAVA)</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">As anyone can see, in the RAVA module the topology of the Jacobian matrix is assigned in the easiest way: assuming that all the residuals depend by all the variables. As we sad, this is only the easiest way, not the best one.</P>
+<P ALIGN="JUSTIFY">The list of the RAVA's variables is the following:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>TMAR (US) MEAN AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER</P>
+<P>TUA2 (UA) AIR OUTLET TEMPERATURE IN THE AIR-STEAM EXCHANGER</P>
+<P>TUA1 (UA) AIR TEMP. AT THE EXCHANGER INLET (FLOW RATE INV.)</P>
+<P>GAMR (UA) THERMAL EXCHANGE COEFFICIENT AIR-METAL</P>
+<P>WARI (IN) AIR FLOW RATE IN THE AIR-STEAM EXCHANGER</P>
+<P>TMET (IN) METAL TEMPERATURE IN THE AIR-STEAM EXCHANGER</P>
+<P>TIA1 (IN) INLET AIR TEMPERATURE IN THE AIR-STEAM EXCHANGER</P>
+<P>TIA2 (IN) OUTLET AIR TEMP. IN THE EXCHANGER (FLOW RATE INV.)</P>
+<P>AKCO (IN) CORRECTOR COEFF. THERMAL EXCHANGE AIR-METAL</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Actually:</P>
+<P ALIGN="JUSTIFY">-&#9;the first residual depends on all the variables except GAMR;</P>
+<P ALIGN="JUSTIFY">-&#9;the second residual may depend on TMAR, TUA2 and TMAR or on TUA2 and TIA2 (depending on the flow actual direction): so it has &#9;to be assigned that it depends on TMAR, TUA2 and TIA2;</P>
+<P ALIGN="JUSTIFY">-&#9;the third residual depends on TMAR, TUA1 and TIA1 (two of them at a time, depending on the flow actual direction, like the second &#9;one);</P>
+<P ALIGN="JUSTIFY">-&#9;the fourth residuals depends on GAMR, WARI and AKCO.</P>
+<P ALIGN="JUSTIFY">(this can be checked reading the source code of RAVA subroutine).</P>
+<P ALIGN="JUSTIFY">So, the topology of RAVA's Jacobian matrix should be the following one:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>100 AJAC(1,1) = 1.</P>
+<P>AJAC(1,2) = 1.</P>
+<P>AJAC(1,3) = 1.</P>
+<P>AJAC(1,5) = 1.</P>
+<P>AJAC(1,6) = 1.</P>
+<P>AJAC(1,7) = 1.</P>
+<P>AJAC(1,8) = 1.</P>
+<P>AJAC(1,9) = 1.</P>
+<P>AJAC(2,1) = 1.</P>
+<P>AJAC(2,2) = 1.</P>
+<P>AJAC(2,8) = 1.</P>
+<P>AJAC(3,1) = 1.</P>
+<P>AJAC(3,3) = 1.</P>
+<P>AJAC(3,7) = 1.</P>
+<P>AJAC(4,4) = 1.</P>
+<P>AJAC(4,5) = 1.</P>
+<P>AJAC(4,9) = 1.</P>
+<P>RETURN</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>This don't absolutely means that the RAVA Jacobian matrix topology is wrong: it isn't the best one. It would be wrong only if it didn't assign <U>at least</U> the right elements of AJAC array (but it assigns the right ones and some others).</P>
+<P ALIGN="JUSTIFY">The only actual effect of the all-one topology of the RAVA module is that the memory storage area required for RAVA's Jacobian matrix is about twice the minimum feasible one (36 elements versus 17), and also the computing time required to solve its equations may be nearly two times the minimum one.</P>
+<P ALIGN="JUSTIFY">On the contrary, if also only one of the 17 required elements would have been forgotten, the LEGO numerical kernel couldn't solve the RAVA's equations during transient simulations (well, actually it depends on the transient: unfortunately, this is also a mistake which is not very easy to detect :-)! So it doesn't look very odd that most modules have all-one topology, like RAVA...</P>
+<P ALIGN="JUSTIFY">The RAVA subroutine has been realized for residuals computation, as RAVA module computes numerically the Jacobian matrix of its equations, using the NAJAC routine.</P>
+<P ALIGN="JUSTIFY">So the RAVAC1 subroutine doesn't contain neither the residuals computation nor the Jacobian matrix analytical computation.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez08_11"></A>The "xxxxC1" subroutine for configurable LEGO modules</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For configurable and/or cellized modules, the subroutine "xxxxC1" is not very different from a standard module one.</P>
+<P ALIGN="JUSTIFY">Only, as the number of equations and/or variables and/or the variable order may change due to the module configuration, the "xxxxC1" subroutine must recognize the correct list and the correct order of variables reading the configuration settings (which the "xxxxI2" subroutine should have stored into the DATI vector).</P>
+<P ALIGN="JUSTIFY">If only the order of the variables changes (switching algebraic output and input variables), the residuals analytical expressions of could be the same, as algebraic residuals are always written in implicit form.</P>
+<P ALIGN="JUSTIFY">Obviously, if the analytical computation of the Jacobian matrix is performed, the order and/or the expressions of its elements must be changed if the variables order or the variables list is different.</P>
+<P ALIGN="JUSTIFY">For CPOM module, taken as an example, only the variables decoding section of source code is important (the source code has been modified, as it is taken only as an example of how a configurable module can recognize the variable set).</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE CPOMC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,</P>
+<P>$ IBLOC1,IBLOC2)</P>
+<P>C</P>
+<P>C---CENTRIFUGAL PUMP</P>
+<P>C</P>
+<P>C IHI: 1 = imposed speed</P>
+<P>C 2 = imposed power (kinetic energy and speed as output)</P>
+<P>C</P>
+<P>C IWP: 0 = outlet pressure as output (inlet pr. &amp; flow rate as i.)</P>
+<P>C 1 = inlet pressure as output (outlet pr. &amp; flow rate as i.)</P>
+<P>C 2 = flow rate as output (inlet &amp; outlet pressures as input)</P>
+<P>C</P>
+<P>DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)</P>
+<P>COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0</P>
+<P>REAL NPOM</P>
+<P>C</P>
+<P>GO TO (100,200,300),IFUN</P>
+<P>C</P>
+<P>C</P>
+<P>C---Jacobian matrix topology (depends on IHI but not on IWP)</P>
+<P>C</P>
+<P>100 IHI = DATI(IPD)</P>
+<P>...</P>
+<P>RETURN</P>
+<P>C</P>
+<P>C---residuals computation</P>
+<P>C</P>
+<P>200 IHI = DATI(IPD)</P>
+<P>IWP = DATI(IPD+1)</P>
+<P>...</P>
+<P>GO TO (21,22), IHI</P>
+<P>C</P>
+<P>C---CPOM module variables (alphabetical order):</P>
+<P>C ECIN = KINETIC ENERGY OF THE ROTATING MASSES (only if IHI=2)</P>
+<P>C HIPM = FLUID ENTHALPY AT THE PUMP INLET</P>
+<P>C HUPM = FLUID ENTHALPY AT THE PUMP OUTLET</P>
+<P>C OMPM = ROTATIONAL SPEED OF THE PUMP</P>
+<P>C NPOM = NUMBER OF PUMPS IN PARALLEL</P>
+<P>C PIPM = PRESSURE AT THE PUMP INLET</P>
+<P>C PUPM = PRESSURE AT THE PUMP OUTLET</P>
+<P>C QIPM = POWER ABSORBED BY THE PUMP (only if IHI=2)</P>
+<P>C WPOM = FLUID FLOW RATE THROUGH THE PUMP</P>
+<P>C</P>
+<P>21 HUPM = XYU(IXYU)</P>
+<P>HIPM = XYU(IXYU+4)</P>
+<P>OMPM = XYU(IXYU+5)</P>
+<P>NPOM = XYU(IXYU+6)</P>
+<P>IF (IWP .EQ. 0) THEN</P>
+<P>PIPM = XYU(IXYU+1)</P>
+<P>PUPM = XYU(IXYU+2)</P>
+<P>WPOM = XYU(IXYU+3)</P>
+<P>ELSE IF (IWP .EQ. 1) THEN</P>
+<P>PUPM = XYU(IXYU+1)</P>
+<P>PIPM = XYU(IXYU+2)</P>
+<P>WPOM = XYU(IXYU+3)</P>
+<P>ELSE</P>
+<P>WPOM = XYU(IXYU+1)</P>
+<P>PUPM = XYU(IXYU+2)</P>
+<P>PIPM = XYU(IXYU+3)</P>
+<P>ENDIF</P>
+<P>...</P>
+<P>RNI(1) = ...</P>
+<P>RNI(2) = ...</P>
+<P>RETURN</P>
+<P>C</P>
+<P>22 ECIN = XYU(IXYU)</P>
+<P>OMPM = XYU(IXYU+1)</P>
+<P>HUPM = XYU(IXYU+2)</P>
+<P>HIPM = XYU(IXYU+6)</P>
+<P>QIPM = XYU(IXYU+7)</P>
+<P>NPOM = XYU(IXYU+8)</P>
+<P>IF (IWP .EQ. 0) THEN</P>
+<P>PIPM = XYU(IXYU+3)</P>
+<P>PUPM = XYU(IXYU+4)</P>
+<P>WPOM = XYU(IXYU+5)</P>
+<P>ELSE IF (IWP .EQ. 1) THEN</P>
+<P>PUPM = XYU(IXYU+3)</P>
+<P>PIPM = XYU(IXYU+4)</P>
+<P>WPOM = XYU(IXYU+5)</P>
+<P>ELSE</P>
+<P>WPOM = XYU(IXYU+3)</P>
+<P>PUPM = XYU(IXYU+4)</P>
+<P>PIPM = XYU(IXYU+5)</P>
+<P>ENDIF</P>
+<P>...</P>
+<P>RNI(1) = ...</P>
+<P>RNI(2) = ...</P>
+<P>RNI(3) = ...</P>
+<P>RNI(4) = ...</P>
+<P>RETURN</P>
+<P>C</P>
+<P>C---Jacobian matrix computation (depends on IHI and IWP)</P>
+<P>C</P>
+<P>300 IHI = DATI(IPD)</P>
+<P>IWP = DATI(IPD+1)</P>
+<P>...</P>
+<P>RETURN</P>
+<P>C</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez09"></A>Use of "xxxx" and NAJAC subroutines in a LEGO module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The "xxxx" subroutine of a LEGO module is not present in all LEGO process modules, as it isn't one of the four standard subroutines actually needed in every module: "xxxxI3", "xxxxI2", "xxxxC1" and "xxxxD1".</P>
+<P ALIGN="JUSTIFY">The "xxxx" subroutine must compute the residuals of all the module equations (both differential and algebraic ones). Like in the "xxxxC1" subroutine, the residuals have to be normalized using the normalization factors related to the quantities involved in the equations.</P>
+<P ALIGN="JUSTIFY">As we sad, it is only needed to allow the module to perform the numerical computation of its Jacobian matrix using the NAJAC standard routine. Obviously, the "xxxx" subroutine is not needed if the Jacobian matrix is computed analytically. Note that, obviously, the developer can also choose to realize this subroutine also when it is not needed: this is automatically inserted in the auto-produced code if he uses the standard module building activity.</P>
+<P ALIGN="JUSTIFY">This doesn't mean that every module which computes numerically the Jacobian matrix must have the "xxxx" subroutine: it must have this subroutine only if it uses the NAJAC routine. On the contrary, a LEGO process module can compute numerically the Jacobian matrix in a different way, e.g. using another ad-hoc algorithm (like some library modules do).</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez09_1"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">When is the "xxxx" subroutine called?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez09_2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">What does "xxxx" have to do when it is called for residuals computation?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez09_3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">What does "xxxx" have to do when it is called for Jacobian matrix computation?</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez09_4"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FORTRAN prescriptions for "xxxx" subroutines</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez09_5"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">An example of the "xxxx" subroutine in a standard process module (RAVA)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez09_6"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Calling parameters of the NAJAC subroutines</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez09_7"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">How to compute Jacobian matrix as double side incremental ratios (using BNAJAC)</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<B><P><A NAME="lg_modu_sez09_1"></A>When is the "xxxx" subroutine called?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In LEGO modules which uses NAJAC to compute the Jacobian matrix, the "xxxx" is called in two different cases:</P>
+<P ALIGN="JUSTIFY">1.&#9;when the "xxxxC1" subroutine has to compute the residuals of its equations (IFUN=2);</P>
+<P ALIGN="JUSTIFY">2.&#9;when the NAJAC subroutines computes the Jacobian matrix of the module's equations (the NAJAC is called by "xxxxC1" when &#9;IFUN=3).</P>
+<P ALIGN="JUSTIFY">The value of IFUN is passed to "xxxx", so it can recognize the two different conditions. In the first case, the passed values of the module's variables (passed as elements of the XYU vector) are the actual ones, as the module has to compute the actual value of the residuals. In the second case, the passed values of the module's variables are not the actual ones (the NAJAC evaluates the Jacobian matrix computing the incremental ratio of the residuals, varying the variables values).</P>
+<P ALIGN="JUSTIFY">This is very important for the modules which have to record the previous values of any variable, as they must be sure to record only the actual values (and not those increased or decreased by NAJAC).</P>
+<P ALIGN="JUSTIFY">In some special cases, the residuals expression may also be different when the "xxxx" subroutine is called for Jacobian matrix computing, but this isn't almost ever the right operating way, as the computed Jacobian matrix will be different from the actual one: this doesn't help LEGO numerical kernel to solve the differential-algebraic system and to satisfy the convergence criterion!</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez09_2"></A>What does "xxxx" have to do when it is called for residuals computation?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">When IFUN is 2 "xxxx" must evaluate the block equations residuals, exactly like the "xxxxC1" has to do ("xxxx" is called by "xxxxC1" to perform this action).</P>
+<P ALIGN="JUSTIFY">During transient simulation, the residuals of differential equations must are the time derivatives of the related state output variables:</P>
+<P ALIGN="JUSTIFY">&#9;<IMG SRC="Image1192.gif" WIDTH=300 HEIGHT=73>&#9;(differential equations)</P>
+<P ALIGN="JUSTIFY">&#9;<IMG SRC="Image1193.gif" WIDTH=306 HEIGHT=73>&#9;(related residuals)</P>
+<P ALIGN="JUSTIFY">while the residuals of the algebraic equations are not so strictly related with algebraic output variables:</P>
+<P ALIGN="JUSTIFY">&#9;<IMG SRC="Image1194.gif" WIDTH=300 HEIGHT=73>&#9;(algebraic equations)</P>
+<P ALIGN="JUSTIFY">&#9;<IMG SRC="Image1195.gif" WIDTH=324 HEIGHT=73>&#9;(related residuals)</P>
+<P ALIGN="JUSTIFY">The steady state of a system is defined as the system state where the time derivatives of all system quantities (including state variables) are null. So, during steady state computation, also the residuals of differential equations are treated exactly like they were residuals of other algebraic equations.</P>
+<P ALIGN="JUSTIFY">This means that the mathematical expression used for differential residuals evaluation during steady state computation may be different from transient simulation one, and it may be not strictly related with state output variables.</P>
+<P ALIGN="JUSTIFY">This fact is often used for mass continuity and energy continuity equations: during transient computation these equations must be combined (using also fluid thermodynamic properties) to exactly evaluate (e.g.) pressure and enthalpy time derivatives.</P>
+<P ALIGN="JUSTIFY">During steady state computation, it is more easy to use directly the mass equilibrium and the energy equilibrium equations, in their easiest form: the two residuals may be substituted with the algebraic sums of all inlet and outlet mass and energy flows. This is also strongly suggested, as it allows a better and faster convergence of the solution of the steady state algebraic system.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez09_3"></A>What does "xxxx" have to do when it is called for Jacobian matrix computation?</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">When IFUN is 3 "xxxx" is called by NAJAC to compute the Jacobian matrix of the block equations (both differential and algebraic ones).</P>
+<P ALIGN="JUSTIFY">Nevertheless, "xxxx" has always to compute the residuals of the block equations: the only difference is that the values of the variables passed (as elements of the XYU vector) are not the actual one, as they are modified by NAJAC to computes the incremental ratios of the residuals:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1199.gif" WIDTH=224 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Note that <IMG SRC="Image1200.gif" WIDTH=44 HEIGHT=25>and <IMG SRC="Image1201.gif" WIDTH=82 HEIGHT=25>are the value of the i-th residual computed on the original and the modified values of the j-th variable (when all the variables but the j-th do have their original values).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez09_4"></A>FORTRAN prescriptions for "xxxx" subroutines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The calling parameters, common areas and called routines of "xxxxC1" subroutines are the following:</P>
+<B><P>Calling parameters:</P>
+</B><P ALIGN="JUSTIFY">IFUN&#9;[integer]&#9; flag of required actions (I)</P>
+<P ALIGN="JUSTIFY">IXYU&#9;[integer]&#9;begin of block variables area in XYU vector (I)</P>
+<P ALIGN="JUSTIFY">XYU&#9;[real (*)]&#9;all blocks normalized variables values (I)</P>
+<P ALIGN="JUSTIFY">IPD&#9;[integer]&#9;begin of block data area in DATI vector (I)</P>
+<P ALIGN="JUSTIFY">DATI&#9;[real (*)]&#9;all blocks physical and geometrical data vector (I/O)</P>
+<P ALIGN="JUSTIFY">RNI&#9;[real (*)]&#9;residuals of the block equations (O)</P>
+<B><P>Common areas:</P>
+</B><P ALIGN="JUSTIFY">INTEGR</P>
+<P ALIGN="JUSTIFY">NEQMOD</P>
+<P ALIGN="JUSTIFY">NORM</P>
+<P ALIGN="JUSTIFY">PARPAR</P>
+<P ALIGN="JUSTIFY">REGIME</P>
+<P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+<B><P>Called routines:</P>
+</B><P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+<P ALIGN="JUSTIFY">The common areas usually present in the "xxxx" subroutine are the same present in the "xxxxC1" subroutine (see the related section for their description).</P>
+<P ALIGN="JUSTIFY">As the complete block name (the IBL1 and IBL2 parameters of "xxxxC1") is not passed as a calling parameter to "xxxx", it may be passed by "xxxxC1" using a common area (whose contents must be assigned at every call of "xxxxC1") if actually needed for warnings or alarms printing or debugging reasons.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez09_5"></A>An example of the "xxxx" subroutine in a standard process module (RAVA)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The source code of RAVA follows (comment line has been added or translated for legibility reasons).</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE RAVA(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>C</P>
+<P>DIMENSION XYU(*),DATI(*),RNI(*)</P>
+<P>COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0</P>
+<P>COMMON/PARPAR/NPER,NVPLT,NVSTP,NSTPLT,NSTSTP,KPLT,KSTP,ITERT</P>
+<P>COMMON/INTEGR/PS1,TEMPO,PS3,NPAS,CDT</P>
+<P>LOGICAL KREGIM</P>
+<P>COMMON/REGIME/KREGIM</P>
+<P>C</P>
+<P>DATA UMID,WMIN/0.01,1./</P>
+<P>DATA PRIF0,RGAS,VOL/101300.,287.,100./</P>
+<P>C</P>
+<P>C--- MODULE RAVA: AIR-STEAM PREHEATER</P>
+<P>C</P>
+<P>C---variables decoding</P>
+<P>C (their values are not denormalized)</P>
+<P>C</P>
+<P>TMED = XYU(IXYU )</P>
+<P>TU2 = XYU(IXYU+1)</P>
+<P>TU1 = XYU(IXYU+2)</P>
+<P>GAMR = XYU(IXYU+3)</P>
+<P>W = XYU(IXYU+4)</P>
+<P>TM = XYU(IXYU+5)</P>
+<P>TI1 = XYU(IXYU+6)</P>
+<P>TI2 = XYU(IXYU+7)</P>
+<P>AKCO = XYU(IXYU+8)</P>
+<P>C</P>
+<P>C---storage of the values of some variables</P>
+<P>C in the previous integration step</P>
+<P>C (only in residual evaluation calls during steady state</P>
+<P>C computation and at the first iteration of a new step)</P>
+<P>C</P>
+<P>C ITERT=0 during steady state computation and at the first</P>
+<P>C iteration of each transient integration step</P>
+<P>C</P>
+<P>C IFUN=2 in residual evaluation calls (storage is not performed</P>
+<P>C when RAVAC1 is called to compute Jacobian matrix)</P>
+<P>C</P>
+<P>IF(ITERT.EQ.0.AND.IFUN.EQ.2) THEN</P>
+<P>DATI(IPD+3)=XYU(IXYU+4)</P>
+<P>DATI(IPD+4)=XYU(IXYU+1)</P>
+<P>DATI(IPD+5)=XYU(IXYU+2)</P>
+<P>END IF</P>
+<P>C</P>
+<P>C---data decoding</P>
+<P>C WPRE value is denormalized (now it is in MKS units)</P>
+<P>C</P>
+<P>SUSCA = DATI(IPD )</P>
+<P>CAPPA = DATI(IPD+1)</P>
+<P>ALFA = DATI(IPD+2)</P>
+<P>WPRE = DATI(IPD+3)*W0</P>
+<P>TU2PRE = DATI(IPD+4)</P>
+<P>TU1PRE = DATI(IPD+5)</P>
+<P>C</P>
+<P>C---variables denormalization</P>
+<P>C</P>
+<P>TMEDDEN= XYU(IXYU )*T0</P>
+<P>TU2DEN = XYU(IXYU+1)*T0</P>
+<P>TU1DEN = XYU(IXYU+2)*T0</P>
+<P>WDEN = XYU(IXYU+4)*W0</P>
+<P>TI1DEN = XYU(IXYU+6)*T0</P>
+<P>TI2DEN = XYU(IXYU+7)*T0</P>
+<P>C</P>
+<P>C---evaluation of thermal exchanging coefficient GAMMA</P>
+<P>C using the external routine GAMRAV</P>
+<P>C</P>
+<P>C---GAMRAV is a special-purpose routine (part of RAVA source code)</P>
+<P>C</P>
+<P>GAMMA=AKCO*GAMRAV(WDEN,CAPPA)</P>
+<P>C</P>
+<P>C---evaluation of other internal quantities of RAVA module using the</P>
+<P>C external routine CPFU for the evaluation of air specific heat</P>
+<P>C</P>
+<P>C---CPFU is a library routine (it is not part of RAVA source code)</P>
+<P>C</P>
+<P>CN=T0/(W0*H0)</P>
+<P>RO=PRIF0/(RGAS*TMEDDEN)</P>
+<P>CP=CPFU(TMEDDEN,UMID)</P>
+<P>TAU=RO*VOL*CP</P>
+<P>C</P>
+<P>C---steady state computation in case of null flow rate</P>
+<P>C</P>
+<P>IF(KREGIM.AND.(ABS(WDEN).LE.2.E-3*W0)) THEN</P>
+<P>RNI(1)=-TMED+TM</P>
+<P>RNI(2)=-TU2+TMED</P>
+<P>RNI(3)=-TU1+TI1</P>
+<P>RNI(4)=-GAMR+GAMMA</P>
+<P>RETURN</P>
+<P>END IF</P>
+<P>C</P>
+<P>IF(WPRE.GE.0.) THEN</P>
+<P>C</P>
+<P>C---residuals computation in case normal flow</P>
+<P>C</P>
+<P>HA=HTFU(TI1DEN,UMID,1)/H0</P>
+<P>HB=HTFU(TU2DEN,UMID,1)/H0</P>
+<P>RNI(1)=(W*(HA-HB)+GAMMA*SUSCA*(TM-TMED)*CN)/(TAU*CN)</P>
+<P>RNI(2)=-TU2+TMED</P>
+<P>RNI(3)=-TU1+TI1</P>
+<P>RNI(4)=-GAMR+GAMMA</P>
+<P>ELSE</P>
+<P>C</P>
+<P>C---residuals computation in case inverted flow</P>
+<P>C</P>
+<P>HA=HTFU(TU1DEN,UMID,1)/H0</P>
+<P>HB=HTFU(TI2DEN,UMID,1)/H0</P>
+<P>RNI(1)=(W*(HA-HB)+GAMMA*SUSCA*(TM-TMED)*CN)/(TAU*CN)</P>
+<P>RNI(2)=-TU2+TI2</P>
+<P>RNI(3)=-TU1+TMED</P>
+<P>RNI(4)=-GAMR+GAMMA</P>
+<P>END IF</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The memorization of previous-step values of some variables (present in RAVA module) is furthermore discussed in the "Special features for LEGO process modules" paragraph.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez09_6"></A>Calling parameters of the NAJAC subroutines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The calling parameters which have to be passed to the NAJAC subroutine are the following:</P>
+<B><P>Calling parameters:</P>
+</B><P ALIGN="JUSTIFY">AJAC&#9;&#9;[real (MX5,*)]&#9;&#9;Jacobian matrix of the block (O)</P>
+<P ALIGN="JUSTIFY">MX5&#9;&#9;[integer]&#9;&#9;leading dimension of AJAC array (I)</P>
+<P ALIGN="JUSTIFY">IXYU&#9;&#9;[integer]&#9;&#9;begin of block variables area in XYU vector (I)</P>
+<P ALIGN="JUSTIFY">XYU&#9;&#9;[real (*)]&#9;&#9;all blocks normalized variables values (I)</P>
+<P ALIGN="JUSTIFY">IPD&#9;&#9;[integer]&#9;&#9;begin of block data area in DATI vector (I)</P>
+<P ALIGN="JUSTIFY">DATI&#9;&#9;[real (*)]&#9;&#9;all blocks physical and geometrical data vector (I/O)</P>
+<P ALIGN="JUSTIFY">RNI&#9;&#9;[real (*)]&#9;&#9;residuals of the block equations (O)</P>
+<P ALIGN="JUSTIFY">NSTATI&#9;[integer]&#9;&#9;number of module state output variables (I)</P>
+<P ALIGN="JUSTIFY">NUSCIT&#9;[integer]&#9;&#9;number of module algebraic output variables (I)</P>
+<P ALIGN="JUSTIFY">NINGRE&#9;[integer]&#9;&#9;number of module input variables (I)</P>
+<P ALIGN="JUSTIFY">EPS&#9;&#9;[real]&#9;&#9;&#9;ratio between variables actual values and their variation for incremental ratios computation (I)</P>
+<P ALIGN="JUSTIFY">EPSLIM&#9;[real]&#9;&#9;&#9;lowest bound (as absolute value) for variables variations for incremental ratios computation (I)</P>
+<P ALIGN="JUSTIFY">RESIDUI&#9;[pointer to subroutine]&#9;the name of the "xxxx" routine called for residuals computation (I)</P>
+<P ALIGN="JUSTIFY">The suggested value for EPS and EPSLIM value are 1.E-03 and 1.E-04; these values are automatically inserted into auto-produced code when the module builder selects the "numerical Jacobian matrix computation" option. These value can be modified according to module particular prescriptions.</P>
+<P ALIGN="JUSTIFY">The RNI vector is used as a "scratch" parameter: this means that the NAJAC subroutine needs this parameter and uses it for internal storage, but the exiting values (the values stored into the array when the subroutine returns the control) have to be neglected (as they have no meaning for the calling routine).</P>
+<P ALIGN="JUSTIFY">The RESIDUI parameter must contain the name of the "xxxx" routine of the module, and the related subroutine must have exactly the calling parameters defined for "xxxx" subroutines, and it must perform the actions defined for this kind of semi-standard subroutines. The name of this subroutine must also be defined as a "global name" inserting it in an "EXTERNAL" declaration instruction in the subroutine which calls the NAJAC (usually the "xxxxC1").</P>
+<P ALIGN="JUSTIFY">For example, in the declaration zone of RAVAC1 subroutine code there is the following instruction:</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+<P>EXTERNAL RAVA</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">as RAVA is the name of the "xxxx" subroutine of RAVA module which computes the equations residuals (see also the source code of RAVAC1).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez09_7"></A>How to compute Jacobian matrix as double side incremental ratios (using BNAJAC)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Sometimes, it is better to compute the Jacobian matrix of the block residuals as double side incremental ratios:</P>
+<P ALIGN="JUSTIFY">&#9;<IMG SRC="Image1202.gif" WIDTH=261 HEIGHT=49></P>
+<P ALIGN="JUSTIFY">Note that the actual value of the residual <IMG SRC="Image1200.gif" WIDTH=44 HEIGHT=25>is not used in this algorithm.</P>
+<P ALIGN="JUSTIFY">This can be done using the BNAJAC routine instead of the NAJAC. The BNAJAC routine works like the NAJAC, and it must be used in the same way (same calling parameters and same prescriptions in the calling routine).</P>
+<P ALIGN="JUSTIFY">The computing time of BNAJAC is about two times the time required for NAJAC routine, as the "xxxx" subroutine of the LEGO module has to be called twice for each column of Jacobian matrix (while in NAJAC the actual values of the residuals are computed only once for all the columns).</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez10"></A>The "xxxxD1" subroutine of a LEGO process module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The "xxxxD1" subroutine of a LEGO module is called by the steady state documentation utility of the LG3 activity (steady state computation).</P>
+<P ALIGN="JUSTIFY">The "xxxxD1" subroutine must assign, for each block equation, the following data:</P>
+<P ALIGN="JUSTIFY">-&#9;the meaning of the equation;</P>
+<P ALIGN="JUSTIFY">-&#9;the measurement units of the residual;</P>
+<P ALIGN="JUSTIFY">-&#9;the normalization factor of the residual;</P>
+<P ALIGN="JUSTIFY">-&#9;the Jacobian matrix topology (for steady state computation)</P>
+<P ALIGN="JUSTIFY">The XYU (all blocks variables) and DATI (all blocks physical and geometrical data) vectors are passed to the "xxxxD1" subroutine and they can be used (as read-only parameters) to recognize the block configuration (for configurable modules) or particular operating conditions (e.g.: a check valve which intercepts the flow because the downstream pressure is greater than the upstream one).</P>
+<P ALIGN="JUSTIFY">The topology of the Jacobian matrix for steady state computation must be evaluated in the same way used to evaluate the transients simulation one in "xxxxC1" subroutine. Obviously, the topology has to be evaluated using the expressions of the residuals used for steady state computation, which may be different from the ones used for transients simulation.</P>
+<STRIKE><P ALIGN="JUSTIFY">&nbsp;</P>
+</STRIKE></FONT><P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez10_1"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FORTRAN prescriptions for "xxxxD1" subroutines</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez10_2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">The "xxxxD1" subroutine for not internally documented modules</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez10_3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">An example of the "xxxxD1" subroutine in a standard process module (RAVA)</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<B><P><A NAME="lg_modu_sez10_1"></A>FORTRAN prescriptions for "xxxxD1" subroutines</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The calling parameters, common areas and called routines of "xxxxD1" subroutines are the following:</P>
+<B><P>Calling parameters:</P>
+</B><P ALIGN="JUSTIFY">BLOCCO&#9;[character * 8]&#9;complete block name (4 characters) (I)</P>
+<P ALIGN="JUSTIFY">NEQUAZ&#9;[integer]&#9;&#9;number of steady state equations in the module (I)</P>
+<P ALIGN="JUSTIFY">NSTATI&#9;[integer]&#9;&#9;number of module state output variables (I)</P>
+<P ALIGN="JUSTIFY">NUSCIT&#9;[integer]&#9;&#9;number of module algebraic output variables (I)</P>
+<P ALIGN="JUSTIFY">NINGRE&#9;[integer]&#9;&#9;number of module input variables (I)</P>
+<P ALIGN="JUSTIFY">SYMVAR&#9;[character * 8 (*)]&#9;block variables names vector (I)</P>
+<P ALIGN="JUSTIFY">XYU&#9;&#9;[real (*)]&#9;&#9;all blocks normalized variables values (I)</P>
+<P ALIGN="JUSTIFY">IXYU&#9;&#9;[integer]&#9;&#9;begin of block variables area in XYU vector (I)</P>
+<P ALIGN="JUSTIFY">DATI&#9;&#9;[real (*)]&#9;&#9;all blocks physical and geometrical data vector (I)</P>
+<P ALIGN="JUSTIFY">IPD&#9;&#9;[integer]&#9;&#9;begin of block data area in DATI vector (I)</P>
+<P ALIGN="JUSTIFY">SIGNEQ&#9;[character * 50 (*)]&#9;physical meaning of block equations (O)</P>
+<P ALIGN="JUSTIFY">UNITEQ&#9;[character * 10 (*)]&#9;measurement units of block residuals (O)</P>
+<P ALIGN="JUSTIFY">COSNOR&#9;[real (*)]&#9;&#9;normalization factors of block residuals (O)</P>
+<P ALIGN="JUSTIFY">ITOPVA&#9;[integer (MXT, *)]&#9;topology of the block equations Jacobian matrix for steady state computation (O)</P>
+<P ALIGN="JUSTIFY">MXT&#9;&#9;[integer]&#9;&#9;leading dimension of ITOPVA array (I)</P>
+<B><P>Common areas:</P>
+</B><P ALIGN="JUSTIFY">NORM</P>
+<P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+<B><P>Called routines:</P>
+</B><P ALIGN="JUSTIFY">...&#9;&#9;(depending on module characteristics)</P>
+<P ALIGN="JUSTIFY">The ITOPVA array is an integer array (and not a real one, like the AJAC array used for Jacobian matrix topology in "xxxxC1" subroutine). So the Jacobian matrix topology must be assigned using "1" (integer one, without the decimal point) values instead of "1." (floating point one).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez10_2"></A>The "xxxxD1" subroutine for not internally documented modules</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">As the "xxxxD1" subroutine is used only for documentation purpose, and it wasn't called by previous releases of LEGO code, the LEGOCAD system can also simulate modules without the "xxxxD1" subroutine.</P>
+<P ALIGN="JUSTIFY">As the "xxxxD1" subroutine is nevertheless called by LEGOCAD system, a link error will occur if the subroutine isn't present at all: at least a no-action skeleton must be present.</P>
+<P ALIGN="JUSTIFY">The RAVA module is one of these "not internally documented" modules. The actual source code of its "xxxxD1" is the following:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE RAVAD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">This is also an example of the minimum skeleton which must always be present, also in modules without equation documentation.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez10_3"></A>An example of the "xxxxD1" subroutine in a standard process module (RAVA)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">As the RAVA module equations are not jet documented, the RAVAD1 actual source code is only an empty skeleton. For documentation purpose, an example of an hypothetical RAVAD1 subroutine follows.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE RAVAD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P>C</P>
+<P>CHARACTER*8 BLOCCO, SYMVAR(*), UNITEQ(*)*10, SIGNEQ(*)*50</P>
+<P>DIMENSION XYU(*), DATI(*), COSNOR(*), ITOPVA(MXT,*)</P>
+<P>COMMON /NORM/ P0,H0,T0,W0,RO0,AL0,V0,DP0</P>
+<P>C</P>
+<P>LOGICAL NOFLOW, NORMAL</P>
+<P>C</P>
+<P>WDEN = XYU(IXYU+4)*W0</P>
+<P>WPRE = DATI(IPD+3)*W0</P>
+<P>C</P>
+<P>NOFLOW = ABS (WDEN) .LT. 2.E-3*W0</P>
+<P>NORMAL = WPRE .GE. 0.</P>
+<P>C</P>
+<P>C---equation number 1</P>
+<P>C</P>
+<P>SIGNEQ(1) = 'AIR MEAN TEMPERATURE COMPUT. IN AIR/STEAM HEATER'</P>
+<P>COSNOR(1) = T0</P>
+<P>IF (NOFLOW) THEN</P>
+<P>C-------no air flow (simplified residual)</P>
+<P>UNITEQ(1) = 'K'</P>
+<P>ITOPVA(1, 1) = 1</P>
+<P>ITOPVA(1, 6) = 1</P>
+<P>ELSE</P>
+<P>C-------normal air flow or inverted air flow</P>
+<P>UNITEQ(1) = 'K/s'</P>
+<P>ITOPVA(1, 1) = 1</P>
+<P>ITOPVA(1, 2) = 1</P>
+<P>ITOPVA(1, 3) = 1</P>
+<P>ITOPVA(1, 5) = 1</P>
+<P>ITOPVA(1, 6) = 1</P>
+<P>ITOPVA(1, 7) = 1</P>
+<P>ITOPVA(1, 8) = 1</P>
+<P>ITOPVA(1, 9) = 1</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>C---equation number 2</P>
+<P>C</P>
+<P>SIGNEQ(2) = 'AIR TEMPERATURE COMPUT. AT AIR/STEAM HEATER OUTLET'</P>
+<P>UNITEQ(2) = 'K'</P>
+<P>COSNOR(2) = T0</P>
+<P>IF (NOFLOW .OR. NORMAL) THEN</P>
+<P>C-------no air flow or normal flow</P>
+<P>ITOPVA(2, 1) = 1</P>
+<P>ITOPVA(2, 2) = 1</P>
+<P>ELSE</P>
+<P>C-------inverted air flow</P>
+<P>ITOPVA(2, 2) = 1</P>
+<P>ITOPVA(2, 7) = 1</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>C---equation number 3</P>
+<P>C</P>
+<P>SIGNEQ(3) = 'AIR TEMPERATURE COMPUT. AT AIR/STEAM HEATER INLET'</P>
+<P>UNITEQ(3) = 'K'</P>
+<P>COSNOR(3) = T0</P>
+<P>IF (NOFLOW .OR. NORMAL) THEN</P>
+<P>C-------no air flow or normal flow</P>
+<P>ITOPVA(3, 3) = 1</P>
+<P>ITOPVA(3, 8) = 1</P>
+<P>ELSE</P>
+<P>C-------inverted air flow</P>
+<P>ITOPVA(3, 1) = 1</P>
+<P>ITOPVA(3, 3) = 1</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>C---equation number 4</P>
+<P>C</P>
+<P>SIGNEQ(4) = 'AIR THERMAL EXC. COEFF. COMP. IN AIR/STEAM HEATER'</P>
+<P>UNITEQ(4) = 'W/m^2/K'</P>
+<P>COSNOR(4) = 1.</P>
+<P>ITOPVA(4, 4) = 1</P>
+<P>ITOPVA(4, 5) = 1</P>
+<P>ITOPVA(4, 9) = 1</P>
+<P>C</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="lg_modu_sez11"></A>Special features for LEGO process modules</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In this section will be described the way to realize LEGO modules with non-standard features, like:</P>
+<P ALIGN="JUSTIFY">-&#9;storage of variables values at the first iteration of an integration pass;</P>
+<P ALIGN="JUSTIFY">-&#9;storage of variables values at the previous integration pass;</P>
+<P ALIGN="JUSTIFY">-&#9;modules with no iterative equation (regulators);</P>
+<P ALIGN="JUSTIFY">-&#9;modules with less equations than output variables;</P>
+<P ALIGN="JUSTIFY">-&#9;use of FORAUS (auxiliary FORTRAN utility);</P>
+<P ALIGN="JUSTIFY">-&#9;modules which are shells of non-LEGO models.</P>
+<P ALIGN="JUSTIFY">The first suggestion for any special feature a module developer has to realize is always the following one: <B>read the source code of some library modules</B> which use that feature! This is the best way for the developer to see how to do it, as he can be sure that someone else did it and tested it before and it works well!</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez11_1"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Storage of variables values (at the end or the beginning of each time step)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez11_2"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Examples of storage of variables values (at the end or the beginning of each time step)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez11_3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">LEGO modules with no equation (regulators)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez11_4"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">An example of LEGO module with no equation (NPSH)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez11_5"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">LEGO modules with less equations than output variables</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez11_6"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">An example of LEGO module with less equations than output values (MIXN)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez11_7"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Usage of auxiliary FORTRAN utility (FORAUS)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez11_8"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">An example of the usage of the FORAUS utility (CPOM)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_modu_sez11_9"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Modules which are shells for non LEGO models</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez11_1"></A>Storage of variables values (at the end or the beginning of each time step)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Storage of variables values may be needed in LEGO modules for two different reasons:</P>
+<P ALIGN="JUSTIFY">-&#9;to evaluate the time trend of a variable;</P>
+<P ALIGN="JUSTIFY">-&#9;to select a working condition.</P>
+<P ALIGN="JUSTIFY">The selection of a working condition (e.g.: normal or inverted flow in a pipe, check valve opened or closed, insulated or grid connected turbine, ...) has to be done using the incoming value of the related variables at the first iteration. Otherwise (if the residual expression changes due to the working condition) the residual could look non-continuous to the calling routine if input values variations may cause switching between two different expressions. This may happen both during the iterations used to solve the algebraic-differential system and during residuals evaluation for incremental ratios evaluation (numerical Jacobian matrix computation).</P>
+<P ALIGN="JUSTIFY">Using for working condition selections the previous step values is not correct, as it wouldn't take into account actual input variables values if they are modified by external actions (user inputs actuation, other tasks connection, control system outputs, ...)</P>
+<P ALIGN="JUSTIFY">Obviously the difference is present only during transients simulation, but not during steady state computation.</P>
+<P ALIGN="JUSTIFY">In both the cases, the REGIME and PARPAR common areas must be present in the subroutine which computes the module residuals ("xxxxC1" or "xxxx"):</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>LOGICAL KREGIM</P>
+<P>COMMON /REGIME/ KREGIM</P>
+<P>COMMON /PARPAR/ NPER,NVPLT,NVSTP,NSTPLT,NSTSTP,KPLT,KSTP,ITERT</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The storage of first-iteration values requires <B>one</B> free element in DATI vector (for each variable stored). The contents of this element (which has to be used for the selection of the working condition) must be assigned at the <B>beginning</B> of the subroutine under the following condition:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>IF (IFUN .EQ. 2 .AND. ITERT .LE. 0) ...</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">using the actual values of the variables.</P>
+<P ALIGN="JUSTIFY">The storage of previous step values requires <B>two</B> free elements in DATI vector (for each variable stored).</P>
+<P ALIGN="JUSTIFY">If the expressions of the steady state residuals are the same as the transient ones, the contents of the <B>first</B> element must be assigned twice, using the actual values of the variables: at the beginning of the subroutine, <B>before</B> the assignment of the second one, under the following condition:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>IF (KREGIM) ...</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and <B>unconditionally</B> at the end of the subroutine (or elsewhere after the assignment of the second one).</P>
+<P ALIGN="JUSTIFY">The <B>second</B> element (which has to be used inside the module) must be assigned at the <B>beginning</B> of the subroutine under the following condition:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>IF (IFUN .EQ. 2 .AND. ITERT .LE. 0) ...</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">copying the value stored in the first element.</P>
+<P ALIGN="JUSTIFY">If the expressions of the steady state residuals are different from the transient ones, maybe they don't need to use the value stored in the second element. In this case it is not necessary to store the value in the first element two times: only the second one is actually needed (unconditionally at the end of the subroutine or elsewhere after the assignment of the second one).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez11_2"></A>Examples of storage of variables values (at the end or the beginning of each time step)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">An example of storage of variables values at the beginning of each time step is present in RAVA module. As the element of DATI vector used for flow rate storage is the (IPD+3)-th, the following instructions are used:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>C---variables decoding</P>
+<P>W = XYU(IXYU+4)</P>
+<P>...</P>
+<P>C---denormalization and storage of incoming value of W</P>
+<P>IF (ITERT .EQ. 0 .AND. IFUN .EQ. 2) THEN</P>
+<P>DATI(IPD+3) = W * W0</P>
+<P>END IF</P>
+<P>WPRE = DATI(IPD+3)</P>
+<P>...</P>
+<P>C</P>
+<P>C---selection of working conditions</P>
+<P>IF (WPRE .GE. 0.) THEN</P>
+<P>C-------residuals computation in case normal flow</P>
+<P>...</P>
+<P>ELSE</P>
+<P>C-------residuals computation in case inverted flow</P>
+<P>...</P>
+<P>END IF</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">An example of storage of variables values at the end of the previous step is present in COLT module (simulating a manifold).</P>
+<P ALIGN="JUSTIFY">As the elements of DATI vector used for the storage of TMK (the previous step metal temperature) are the (IPD+9)-th and the (IPD+12)-th, the following instructions are present:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>C---steady state or transient?</P>
+<P>IF (KREGIM) GO TO 1000</P>
+<P>C---transient</P>
+<P>IF (ITERT .LE. 0 .AND. IFUN .EQ. 2) THEN</P>
+<P>C-------previous step metal temperature</P>
+<P>DATI(IPD+12) = DATI(IPD+9)</P>
+<P>ENDIF</P>
+<P>TMK = DATI(IPD+12)</P>
+<P>...</P>
+<P>C---TM is a value computed inside the module</P>
+<P>TM = ....</P>
+<P>...</P>
+<P>DATI(IPD+9) = TM</P>
+<P>RETURN</P>
+<P>C</P>
+<P>1000 CONTINUE</P>
+<P>C---steady state</P>
+<P>...</P>
+<P>TM = ....</P>
+<P>...</P>
+<P>DATI(IPD+9) = TM</P>
+<P>RETURN</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">If the expression of the residuals were the same, the following instructions (or some equivalent) should have been used:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>C---steady state initialization of TMK</P>
+<P>IF (KREGIM) THEN</P>
+<P>TM = ....</P>
+<P>DATI(IPD+9) = TM</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>IF (ITERT .LE. 0 .AND. IFUN .EQ. 2) THEN</P>
+<P>C-------stored value of metal temperature</P>
+<P>DATI(IPD+12) = DATI(IPD+9)</P>
+<P>ENDIF</P>
+<P>TMK = DATI(IPD+12)</P>
+<P>...</P>
+<P>C---TM is a value computed inside the module</P>
+<P>TM = ....</P>
+<P>...</P>
+<P>DATI(IPD+9) = TM</P>
+<P>RETURN</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez11_3"></A>LEGO modules with no equation (regulators)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Usually in LEGO code the regulation model behaviour is not resolved at each iteration of transients simulation, but only at the first iteration of each integration step. Regulation schemes are LEGO modules whose FORTRAN code is automatically written by regulation and automation building activities of LEGOCAD system, and they have no iterative equation (both in steady state and transient simulation activity).</P>
+<P ALIGN="JUSTIFY">The word "regulator" is so used to classify LEGO modules with no iterative equation, also if they are process modules. The direct assignment of an output variable value (without solving a LEGO equation) is called a "non-equation".</P>
+<P ALIGN="JUSTIFY">Regulators don't participate in steady state system solution, but only after the end of the solution. So the output values computed by regulators are not known by standard modules during this phase (output values of regulators are only exchanged between regulators during steady state computation). This may cause some problems if the output of a regulator is an input variable of a process module, as the input values of the module may be changed <U>after</U> the steady state computation (invalidating the steady state obtained).</P>
+<P ALIGN="JUSTIFY">The "xxxxI2" subroutine is not affected by this feature: it must be exactly like the "xxxxI2" of a standard module (same features and same prescriptions).</P>
+<P ALIGN="JUSTIFY">The "xxxxI3" subroutine is only a bit affected by this feature: all the output variables of the module must be defined as algebraic outputs ("UA").</P>
+<P ALIGN="JUSTIFY">The "xxxxD1" subroutine is more affected by this feature: as the module has no equation, there is no residual to be documented (the "xxxxD1" will be an empty skeleton).</P>
+<P ALIGN="JUSTIFY">The "xxxxC1" subroutine is the one actually affected by this feature, as the actions to be performed by this subroutine are very different.</P>
+<P ALIGN="JUSTIFY">First of all, in the "xxxxC1" subroutine must be present the NEQUAZ and the REGIME common areas:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>LOGICAL KREGIM</P>
+<P>COMMON /REGIME/ KREGIM</P>
+<P>COMMON /NEQUAZ/ NEQMOD</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The value of NEQMOD must be set to zero at every call of "xxxxC1" (independently of the value of IFUN and KREGIM).</P>
+<P ALIGN="JUSTIFY">When called for Jacobian matrix computation (IFUN = 3) or for Jacobian matrix topology (IFUN = 1) the "xxxxC1" subroutine has nothing to do but assigning the value of NEQMOD.</P>
+<P ALIGN="JUSTIFY">When called for residuals computation, the action to be performed is different during steady state and transient computation:</P>
+<P ALIGN="JUSTIFY">-&#9;during steady state computation (KREGIM = .TRUE.) the values of the output variables must be assigned DIRECTLY to the same &#9;variables (in the related elements of the XYU vector, as normalized values);</P>
+<P ALIGN="JUSTIFY">-&#9;during transients simulation (KREGIM = .FALSE.) the values of the output variables must be assigned DIRECTLY to the related &#9;elements of the RNI vector (as normalized values).</P><DIR>
+<DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P></DIR>
+</DIR>
+
+<P><A NAME="lg_modu_sez11_4"></A>An example of LEGO module with no equation (NPSH)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The NPSH module computes the net positive suction head (NPSH) for a pump. The list of the variables of the NPSH module is the following:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>LPSH (UA) DISPOSABLE PUMP NPSH</P>
+<P>PCAV (IN) PRESSURE IN THE TANK</P>
+<P>PASP (IN) PRESSURE AT SUCTION FLANGE OF THE PUMP</P>
+<P>HASP (IN) ENTHALPY AT SUCTION FLANGE OF THE PUMP</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The source code of NPSHC1 is the following (source code is a bit modified and comment line has been added or translated for legibility reasons):</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE NPSHC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>C</P>
+<P>DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)</P>
+<P>C</P>
+<P>LOGICAL KREGIM</P>
+<P>COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0</P>
+<P>COMMON/REGIME/KREGIM</P>
+<P>COMMON/INTEGR/TSTOP,TEMPO,DTINT,NPAS,CDT</P>
+<P>COMMON/PARPAR/NPER,NVPLT,NVSTP,NSTPLT,NSTSTP,KPLT,KSTP,ITERT</P>
+<P>COMMON/NEQUAZ/NEQMOD</P>
+<P>C</P>
+<P>REAL LPSH,PCAV,PASP,HASP,NPSHC</P>
+<P>C</P>
+<P>C---DISPOSABLE NPSH FOR A PUMP</P>
+<P>C output values computation</P>
+<P>C</P>
+<P>NEQMOD=0</P>
+<P>IF (IFUN .NE. 2) RETURN</P>
+<P>C</P>
+<P>C---variables decoding</P>
+<P>C</P>
+<P>LPSH = XYU(IXYU )</P>
+<P>PCAV = XYU(IXYU+1)*P0</P>
+<P>PASP = XYU(IXYU+2)*P0</P>
+<P>HASP = XYU(IXYU+3)*H0</P>
+<P>C</P>
+<P>C---PHSAT and SHEV are library routines (water and steam tables)</P>
+<P>C enthalpy value is limited using the H2O tables bounds</P>
+<P>C</P>
+<P>IF (HASP .GT. 4200.E3) THEN</P>
+<P>HASP = 4200.E3</P>
+<P>ELSE IF (HASP .LT. 0.) THEN</P>
+<P>HASP = 0.</P>
+<P>ENDIF</P>
+<P>PSAT=PHSAT(HASP)</P>
+<P>SASP=SHEV(PASP,HASP,1)</P>
+<P>NPSHC=(PASP-PSAT)/9.8066/ROEV(PASP,SASP,1)</P>
+<P>C</P>
+<P>C---output values assignment</P>
+<P>C</P>
+<P>IF (KREGIM) THEN</P>
+<P>C-------steady state</P>
+<P>XYU(IXYU) = NPSHC</P>
+<P>ELSE</P>
+<P>C-------transient</P>
+<P>RNI(1) = NPSHC</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>RETURN</P>
+<P>END</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez11_5"></A>LEGO modules with less equations than output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Some LEGO module has less equations than output variables. this means that the values of some output variables are directly assigned, without the resolution of LEGO iterative equations (like in regulators). The difference is that in regulators no equation is present: in this kind of module, there are both equations and non-equations.</P>
+<P ALIGN="JUSTIFY">Unfortunately, this kind of module will not work in steady state computation: so the developer must choose (for steady state only) whether to add equations also for non-iterative outputs or to directly assign values also for iterative outputs.</P>
+<P ALIGN="JUSTIFY">In the second case, the module will be a regulator (with no equation) during steady state computation. Note that this is not usually done, as regulators don't participate in steady state system solution (this may invalidate the steady state obtained). This case will not be furthermore discussed, as it has been discussed in the previous section.</P>
+<P ALIGN="JUSTIFY">In the first (and more usual) case, the residuals for non-iterative outputs (which will be iterative outputs in steady state computation phase) may be written in a very easy way, as difference between the actual value and the computed value (this the easiest kind of implicit equation).</P>
+<P ALIGN="JUSTIFY">The "xxxxI2" subroutine is not affected by this feature: it must be exactly like the "xxxxI2" of a standard module (same features and same prescriptions).</P>
+<P ALIGN="JUSTIFY">The "xxxxD1" subroutine is not affected by this feature: as the module is a standard module during steady state computation, the "xxxxD1" subroutine must be exactly like the "xxxxD1" of a standard module (on the contrary, if the module has no steady-state equation, the "xxxxD1" will be an empty skeleton).</P>
+<P ALIGN="JUSTIFY">The "xxxxI3" subroutine is only a bit affected by this feature: the non-iterative output variables must be defined as algebraic outputs ("UA"), and they must follow all the other algebraic outputs (the iterative ones).</P>
+<P ALIGN="JUSTIFY">The "xxxxC1" subroutine is the one actually affected by this feature, as the actions to be performed by this subroutine are very different.</P>
+<P ALIGN="JUSTIFY">First of all, in the "xxxxC1" subroutine must be present the NEQUAZ and the REGIME common areas:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>LOGICAL KREGIM</P>
+<P>COMMON /REGIME/ KREGIM</P>
+<P>COMMON /NEQUAZ/ NEQMOD</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">During steady state computation (KREGIM = .TRUE.) the value of NEQMOD must not be modified, as the module must be a standard one.</P>
+<P ALIGN="JUSTIFY">During transients simulation (KREGIM = .FALSE.) the value of NEQMOD must be set to the number of <U>iterative algebraic equations</U> (differential equations and non-equations must not be computed) at every call of "xxxxC1" (independently of the value of IFUN).</P>
+<P ALIGN="JUSTIFY">The Jacobian matrix (IFUN = 3) and its topology (IFUN = 1) must be assigned taking into account both the differential equation and the iterative algebraic equations. As during steady state computation also the non-iterative outputs must be computed using algebraic equation, the Jacobian matrix must take into account also these residuals (during steady state computation). This is not required for Jacobian matrix topology, as topology is defined in subroutine "xxxxC1" only for transients simulation.</P>
+<P ALIGN="JUSTIFY">If the module developer wants to let the module compute numerically the Jacobian matrix, he can use the NAJAC (or the BNAJAC) routine cheating on the numbers of variables:</P>
+<P ALIGN="JUSTIFY">-&#9;NSTATI (number of state outputs) must be the actual one;</P>
+<P ALIGN="JUSTIFY">-&#9;NUSCIT (number of algebraic output) must be computed taking into account only the iterative ones;</P>
+<P ALIGN="JUSTIFY">-&#9;NINGRE (number of inputs) must be the sum of the actual number of inputs and the number of non-iterative outputs.</P>
+<P ALIGN="JUSTIFY">(cheating is not a thing a good programmer should do, but in this case it works well and avoids the realization of another clone of NAJAC :-).</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez11_6"></A>An example of LEGO module with less equations than output values (MIXN)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The MIXN module simulates the mixing of many flows of water and/or steam. The mass and energy storage are neglected, as the module simulates a zero-dimensional confluence. The equations involved in the module are two: the sum of incoming mass flow rates and the thermal equilibrium of the mixture.</P>
+<P ALIGN="JUSTIFY">During transient simulation, the thermal equilibrium equation is computed with a non-equation. The list of the variables of the MIXN module is the following (three inlet pipes have been selected):</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>WMIX (UA) FLUID FLOW RATE AT THE MIXER OUTLET</P>
+<P>HMIX (UA) FLUID ENTHALPY AT THE MIXER OUTLET</P>
+<P>WE_1 (IN) FLUID FLOW RATE AT THE INLET PIPE N. 1</P>
+<P>HE_1 (IN) FLUID ENTHALPY AT THE INLET PIPE N. 1</P>
+<P>WE_2 (IN) FLUID FLOW RATE AT THE INLET PIPE N. 2</P>
+<P>HE_2 (IN) FLUID ENTHALPY AT THE INLET PIPE N. 2</P>
+<P>WE_3 (IN) FLUID FLOW RATE AT THE INLET PIPE N. 3</P>
+<P>HE_3 (IN) FLUID ENTHALPY AT THE INLET PIPE N. 3</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The source code of MIXNC1 is the following (source code is a bit modified and comment line has been added or translated for legibility reasons):</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE MIXNC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)</P>
+<P>C</P>
+<P>COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0</P>
+<P>COMMON/INTEGR/TSTOP,TEMPO,DTINT,NPAS,CDT</P>
+<P>LOGICAL KREGIM</P>
+<P>COMMON/REGIME/KREGIM</P>
+<P>COMMON/NEQUAZ/NEQMOD</P>
+<P>C</P>
+<P>PARAMETER (MAX=10)</P>
+<P>DIMENSION WE(MAX),HE(MAX)</P>
+<P>C</P>
+<P>C---numbers of inlet pipes and block variables</P>
+<P>C</P>
+<P>NE = DATI(IPD)</P>
+<P>NVAR = 2*NE+2</P>
+<P>C</P>
+<P>GO TO(100,200,200),IFUN</P>
+<P>C</P>
+<P>C---Jacobian matrix topology</P>
+<P>C</P>
+<P>100 NEQMOD = 1</P>
+<P>AJAC(1,1) = 1.</P>
+<P>DO J = 3, NVAR, 2</P>
+<P>AJAC(1,J) = 1.</P>
+<P>END DO</P>
+<P>RETURN</P>
+<P>C</P>
+<P>C---residuals or Jacobian matrix computation</P>
+<P>C</P>
+<P>200 CONTINUE</P>
+<P>C</P>
+<P>C---variables decoding</P>
+<P>C</P>
+<P>WNODO = XYU(IXYU )</P>
+<P>HNODO = XYU(IXYU+1)</P>
+<P>I0 = IXYU+1</P>
+<P>DO J = 1, NE</P>
+<P>JW = 2*J-1</P>
+<P>JH = JW+1</P>
+<P>WE(J) = XYU(I0+JW)</P>
+<P>HE(J) = XYU(I0+JH)</P>
+<P>END DO</P>
+<P>C---enthalpic balance</P>
+<P>SUME = 0.</P>
+<P>SUMHE = 0.</P>
+<P>DO J= 1, NE</P>
+<P>IF (WE(J) .GT. 0.) THEN</P>
+<P>C---------normal flow</P>
+<P>SUME = SUME+WE(J)</P>
+<P>SUMHE = SUMHE+WE(J)*HE(J)</P>
+<P>ENDIF</P>
+<P>END DO</P>
+<P>C</P>
+<P>C---first residual (always iterative) - flow rates sum</P>
+<P>C</P>
+<P>RNI(1) = WNODO-SUME</P>
+<P>C</P>
+<P>C---second residual (non-iterative in transient simulation)</P>
+<P>C outlet enthalpy is assumed as non-varying if flow rate is null</P>
+<P>C</P>
+<P>IF(KREGIM) THEN</P>
+<P>C-------steady state (iterative residual)</P>
+<P>NEQMOD = 2</P>
+<P>IF (ABS(SUME) .LT. 1.E-5) THEN</P>
+<P>RNI(2) = 0.</P>
+<P>ELSE</P>
+<P>RNI(2) = HNODO*WNODO-SUMHE</P>
+<P>ENDIF</P>
+<P>ELSE</P>
+<P>C-------transient (not iterative residual)</P>
+<P>NEQMOD = 1</P>
+<P>IF (ABS(SUME) .LT. 1.E-5) THEN</P>
+<P>RNI(2) = HNODO</P>
+<P>ELSE</P>
+<P>RNI(2) = SUMHE/SUME</P>
+<P>ENDIF</P>
+<P>ENDIF</P>
+<P>C</P>
+<P>C---returns control if called for residuals evaluation</P>
+<P>C</P>
+<P>IF (IFUN .EQ. 2) RETURN</P>
+<P>C</P>
+<P>C---analytical computation of Jacobian matrix</P>
+<P>C</P>
+<P>C---derivatives of first residual (always present)</P>
+<P>C</P>
+<P>AJAC(1,1) = -1.</P>
+<P>K=2</P>
+<P>DO J = 1,2*NE,2</P>
+<P>C-------flow rates derivatives</P>
+<P>AJAC(1,K+J) = 1.</P>
+<P>END DO</P>
+<P>C</P>
+<P>C---returns control if called for transient (one residual only)</P>
+<P>C</P>
+<P>IF (.NOT. KREGIM) RETURN</P>
+<P>C</P>
+<P>C---derivatives of second residual (only for steady state)</P>
+<P>C</P>
+<P>IF (ABS(SUME) .LT. 1.E-5) THEN</P>
+<P>C-------no flow (simplified residual)</P>
+<P>AJAC(2,2) = -1.</P>
+<P>ELSE</P>
+<P>C-------normal working conditions</P>
+<P>AJAC(2,2) = -WNODO</P>
+<P>AJAC(2,1) = -HNODO</P>
+<P>K=2</P>
+<P>DO J = 1,NE</P>
+<P>C-------flow rates derivatives</P>
+<P>K=K+1</P>
+<P>AJAC(2,K) = HE(J)</P>
+<P>C-------enthalpies derivatives</P>
+<P>K=K+1</P>
+<P>AJAC(2,K) = WE(J)</P>
+<P>END DO</P>
+<P>RETURN</P>
+<P>C</P>
+<P>END</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez11_7"></A>Usage of auxiliary FORTRAN utility (FORAUS)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Sometimes, the module developer may choose to let the user write an user routine to perform special actions or to assign particular data.</P>
+<P ALIGN="JUSTIFY">For instance, in the LEGO standard library this feature is used for these kind of data:</P>
+<P ALIGN="JUSTIFY">-&#9;assignment or usage of the characteristic curves of non standard valves, pumps, fans, compressors, turbines, ...</P>
+<P ALIGN="JUSTIFY">-&#9;computing of the fluid level inside a tank with varying horizontal section (every tank which is not a vertical cylinder or a vertical prism);</P>
+<P ALIGN="JUSTIFY">-&#9;usage of non standard technical prescription for material properties or material behaviour.</P>
+<P ALIGN="JUSTIFY">Note that the word "non standard" used in the previous list has to be intended as "everything else but those whose data have been coded in the LEGO library modules".</P>
+<P ALIGN="JUSTIFY">In these cases, the routine computing the standard values checks the value of a quantity used as flag:</P>
+<P ALIGN="JUSTIFY">-&#9;in a module simulating a tank, the horizontal section may be used as flag: if negative, the level has to be computed by an user routine;</P>
+<P ALIGN="JUSTIFY">-&#9;in a numbered list of standard components, an out-of-boundary index will point to a non standard component, whose data (or whose &#9;behaviour) will be provided (or computed) in an user routine.</P>
+<P ALIGN="JUSTIFY">The calling parameters and the other FORTRAN prescriptions for the user routine must be set by the module developer, and they may not be changed by the user.</P>
+<P ALIGN="JUSTIFY">As the routine must always be linked by LEGO system, the module developer must also write a standard routine, which will be called only if the user sets the "non standard" values of the flags but he doesn't provide the user routine required. So the developer-written routine has to write a warning message to the user, as it should never be invoked.</P>
+<P ALIGN="JUSTIFY">In some special cases, there is no flag (and no related check) to allow the module know if an user routine must be called. In these cases, the developer written routine is the standard working one, and the user written routine must perform the same action (obviously with its own algorithm). If the user routine is present, the standard one is no more linked (and invoked).</P>
+<P ALIGN="JUSTIFY">To allow the user know how to realize the user routine, the module developer must write a skeleton or an example of the routine to be provided, which has to be inserted <B>wholly commented</B> between two standard comment lines:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>C~FORAUS_xxxx~</P>
+<P>...</P>
+<P>...</P>
+<P>...</P>
+<P>C~FORAUS_xxxx~</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where, as usual, "xxxx" represents the name of the block.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez11_8"></A>An example of the usage of the FORAUS utility (CPOM)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The standard library module simulating a centrifugal pump (CPOM) uses the FORAUS utility for the characteristic curves of non standard pumps. The model of pump is distinguished by an user assigned code (COD), which is zero for standard pumps. If the value of COD is positive, the pump is a non standard one, and the user routine DPU is invoked:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>C</P>
+<P>C---residuals evaluation</P>
+<P>C</P>
+<P>IF (TYP .LE. 0.) THEN</P>
+<P>C</P>
+<P>C-------standard model for pump characteristic curve</P>
+<P>C</P>
+<P>CALL PMPDPC(GCAR,QNOM,OMNOM,DPNOM,CNOM,Q1PV,OM,DP,CRES)</P>
+<P>ELSE</P>
+<P>C</P>
+<P>C-------invoke FORAUS routine for pump characteristic curve</P>
+<P>C</P>
+<P>CALL DPU(TYP,QNOM,OMNOM,DPNOM,CNOM,ETANOM,Q1PV,RO,OM,DP,CRES)</P>
+<P>ENDIF</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The source code of developer written DPU and of the related FORAUS section follows (comments have been translated for legibility reasons):</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>C</P>
+<P>C</P>
+<P>C</P>
+<P>C~FORAUS_CPOM~C</P>
+<P>C</P>
+<P>C AUXILIARY FORTRAN OF CONTRIFUGAL PUMP MODULE</P>
+<P>C FOR ITS DEFINITION SEE THE USER MANUAL OR</P>
+<P>C USE THE RELATED COMMANDS OF LEGOCAD SYSTEM.</P>
+<P>C</P>
+<P>C************ QUICK REFERENCE ON CALLING PARAMETERS ***********</P>
+<P>C</P>
+<P>C SUBROUTINE DPU(TYP,QVNOM,OMNOM,DPNOM,CNOM,ETANOM,Q,RO,OM,DP,CRES)</P>
+<P>C</P>
+<P>C Input parameters: TYP,QVNOM,OMNOM,DPNOM,CNOM,ETANOM,Q,RO,OM</P>
+<P>C Output parameters: DP,CRES</P>
+<P>C</P>
+<P>C USER SUBROUTINE: MUST COMPUTE THE VALUE OF DP AND CRES</P>
+<P>C DEPENDING ON THE OTHER VARIABLES VALUES.</P>
+<P>C MEANING OF THE INPUT AND OUTPUT VARIABLES:</P>
+<P>C</P>
+<P>C TYP = DATUM (USER PROVIDED) WHICH CAN BE USED TO DISTINGUISH</P>
+<P>C DIFFERENT KIND OF PUMP CHARACTERISTIC CURVES</P>
+<P>C CONTAINED IN THIS SUBROUTINE</P>
+<P>C</P>
+<P>C QVNOM = NOMINAL VOLUMETRIC FLOW RATE (M**3/S)</P>
+<P>C OMNOM = NOMINAL ROTATIONAL SPEED (RAD/S)</P>
+<P>C DPNOM = NOMINAL PUMP HEAD (PA)</P>
+<P>C CNOM = NOMINAL RESISTANT TORQUE (N*M)</P>
+<P>C ETANOM = NOMINAL EFFICIENCY</P>
+<P>C Q = ACTUAL FLOW RATE (M**3/S)</P>
+<P>C RO = ACTUAL FLUID DENSITY (KG/M**3)</P>
+<P>C OM = ACTUAL PUMP SPEED (RAD/S)</P>
+<P>C DP = ACTUAL PUMP HEAD (PA)</P>
+<P>C CRES = ACTUAL RESISTANT TORQUE (KG*M)</P>
+<P>C</P>
+<P>C SUBROUTINE EXAMPLE:</P>
+<P>C</P>
+<P>C**************** PUMP CHARACTERISTIC *********************</P>
+<P>CC A=1.22</P>
+<P>CC OMS=OM/OMNOM</P>
+<P>CC QS=Q/QVNOM</P>
+<P>CC DP=DPNOM*(A*OMS**2-(A-1.)*QS*ABS(QS))</P>
+<P>C</P>
+<P>C WHEN THE PUMP WORKS IN "CLOSED INLET" CONDITION (Q=0)</P>
+<P>C AND AT NOMINAL SPEED (OM=OMNOM), DP=DPNOM*A.</P>
+<P>C SO "A" IS THE VALUE OF THE "CLOSED INLET" PUMP HEAD</P>
+<P>C</P>
+<P>C*************** EFFICIENCY EVALUATION ******************</P>
+<P>CC IF(OMS.LT.1.E-4)GO TO 125</P>
+<P>CC RID=QS/OMS</P>
+<P>CC ETA=ETANOM*(-RID**2+2.*RID)</P>
+<P>C</P>
+<P>C**************** RESISTANT TORQUE **********************</P>
+<P>CC IF(ETA.LT.1.E-4)GO TO 125</P>
+<P>CC OME=OM</P>
+<P>CC IF(OME.LE.1.E-3)OME=1.E-3</P>
+<P>CC CRES=Q*DP/OME/ETA</P>
+<P>CC GO TO 130</P>
+<P>CC125 CRES=0.5*DP/DPNOM*CNOM</P>
+<P>CC130 RETURN</P>
+<P>CC END</P>
+<P>C</P>
+<P>C EXAMPLE END.</P>
+<P>C</P>
+<P>C</P>
+<P>C************ BEGINNING OF FORTRAN SOURCE CODE TO BE WRITTEN ************</P>
+<P>C</P>
+<P>C SUBROUTINE DPU(TYP,QVNOM,OMNOM,DPNOM,CNOM,ETANOM,Q,RO,OM,DP,CRES)</P>
+<P>C</P>
+<P>C RETURN</P>
+<P>C END</P>
+<P>C</P>
+<P>C~FORAUS_CPOM~C</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lg_modu_sez11_9"></A>Modules which are shells for non LEGO models</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Sometimes one may need to insert in LEGO simulator a special component which has been modelled using a different simulation strategy.</P>
+<P ALIGN="JUSTIFY">If the model is easy, the best way is to realize a LEGO process module whose equations are the same of the non LEGO model (obviously, this is not the most frequent case :-). If the model is very complicated, the best way is not to realize a LEGO module shell, but to link the non LEGO model as a separate task in the simulator: the LEGOCAD system allows the connection between LEGO and non LEGO tasks in the same simulator.</P>
+<P ALIGN="JUSTIFY">Only if the model is neither very easy nor very complicated, it may be convenient to realize a LEGO shell which calls the non LEGO model.</P>
+<P ALIGN="JUSTIFY">The LEGO shells (which should not have more than 40 outputs and 100 total variables) may uses iterative (state and/or algebraic) outputs and/or non iterative outputs (see also the related section).</P>
+<P ALIGN="JUSTIFY">The shell must also manage the exchange between LEGO and non LEGO variables, as in the LEGO environment the only recorded variables are the DATI and the XYU vector. The usage of common areas to store static variables are not allowed, as the values will be mutually modified between the different instances of the module (it is allowed only for modules which cannot be present more than once in the same LEGO model: it depends on the kind of component modelled).</P></FONT></BODY>
+</HTML>

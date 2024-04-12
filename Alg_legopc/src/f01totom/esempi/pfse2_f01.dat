@@ -1,0 +1,669 @@
+****
+TUBG      BLOCCO (10__) - TUBG - GAS tube friction losses                      
+TUBG      BLOCCO (11__) - TUBG - GAS tube friction losses                      
+SERA      BLOCCO (12__) - SERA - GAS reservoir                                 
+SERA      BLOCCO (13__) - SERA - GAS reservoir                                 
+TUBG      BLOCCO (16__) - TUBG - GAS tube friction losses                      
+SERA      BLOCCO (17__) - SERA - GAS reservoir                                 
+SERA      BLOCCO (2___) - SERA - GAS reservoir                                 
+VAIX      BLOCCO (35__) - VAIX - VALVOLA GAS CON SPECI CHIMICHE                
+TUBG      BLOCCO (3___) - TUBG - GAS tube friction losses                      
+SERA      BLOCCO (4___) - SERA - GAS reservoir                                 
+VAIN      BLOCCO (5___) - VAIN - Air-gas valve                                 
+TUBG      BLOCCO (6___) - TUBG - GAS tube friction losses                      
+SERA      BLOCCO (8___) - SERA - GAS reservoir                                 
+VAIN      BLOCCO (CKV1) - VAIN - Air-gas valve                                 
+VAIN      BLOCCO (CKV2) - VAIN - Air-gas valve                                 
+VAIN      BLOCCO (CV01) - VAIN - Air-gas valve                                 
+VAIN      BLOCCO (CV11) - VAIN - Air-gas valve                                 
+VAIN      BLOCCO (DV01) - VAIN - Air-gas valve                                 
+VAIN      BLOCCO (DV11) - VAIN - Air-gas valve                                 
+VAIN      BLOCCO (PSV1) - VAIN - Air-gas valve                                 
+SERA      BLOCCO (S11_) - SERA - GAS reservoir                                 
+SERA      BLOCCO (S1__) - SERA - GAS reservoir                                 
+SERA      BLOCCO (S21_) - SERA - GAS reservoir                                 
+SERA      BLOCCO (S2__) - SERA - GAS reservoir                                 
+SERA      BLOCCO (S31_) - SERA - GAS reservoir                                 
+SERA      BLOCCO (S3__) - SERA - GAS reservoir                                 
+SERA      BLOCCO (S41_) - SERA - GAS reservoir                                 
+SERA      BLOCCO (S4__) - SERA - GAS reservoir                                 
+SERA      BLOCCO (S5__) - SERA - Gas manifold (2 inputs, 2 outputs)            
+SERA      BLOCCO (S6__) - SERA - GAS reservoir                                 
+VAIN      BLOCCO (SDV1) - VAIN - Air-gas valve                                 
+VAIN      BLOCCO (SDV2) - VAIN - Air-gas valve                                 
+VAIN      BLOCCO (SV01) - VAIN - Air-gas valve                                 
+VAIN      BLOCCO (SV11) - VAIN - Air-gas valve                                 
+TUBG      BLOCCO (T11_) - TUBG - GAS tube friction losses                      
+TUBG      BLOCCO (T1__) - TUBG - GAS tube friction losses                      
+****
+PFSE2
+****
+TUBG10__  BL.-10__- **** MODULO TUBG - TUBG - GAS tube friction losses         
+WVAL10__  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVAL10__  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_10__  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSER8___  --IN-- #PMON10__#....................<===SERA8___  BL.-8___-
+PSER12__  --IN-- #PVAL10__#....................<===SERA12__  BL.-12__-
+TSER8___  --IN-- #TMON10__#....................<===SERA8___  BL.-8___-
+TSER12__  --IN-- #TVI_10__#....................<===SERA12__  BL.-12__-
+AKSI10__  --IN-- FRICTION LOSSES CORRECTOR                                      
+****
+****
+TUBG11__  BL.-11__- **** MODULO TUBG - TUBG - GAS tube friction losses         
+WVAL11__  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVAL11__  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_11__  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSER12__  --IN-- #PMON11__#....................<===SERA12__  BL.-12__-
+PSER13__  --IN-- #PVAL11__#....................<===SERA13__  BL.-13__-
+TSER12__  --IN-- #TMON11__#....................<===SERA12__  BL.-12__-
+TSER13__  --IN-- #TVI_11__#....................<===SERA13__  BL.-13__-
+AKSI11__  --IN-- FRICTION LOSSES CORRECTOR                                      
+****
+****
+SERA12__  BL.-12__- **** MODULO SERA - SERA - GAS reservoir                    
+PSER12__  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMET12__  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSER12__  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVAL10__  --IN-- #WI_112__#....................<===TUBG10__  BL.-10__-
+TVAL10__  --IN-- #TI_112__#....................<===TUBG10__  BL.-10__-
+WVAL11__  --IN-- #WU_112__#....................<===TUBG11__  BL.-11__-
+TMI_11__  --IN-- #TU_112__#....................<===TUBG11__  BL.-11__-
+TEST12__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE12__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+SERA13__  BL.-13__- **** MODULO SERA - SERA - GAS reservoir                    
+PSER13__  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMET13__  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSER13__  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVAL11__  --IN-- #WI_113__#....................<===TUBG11__  BL.-11__-
+TVAL11__  --IN-- #TI_113__#....................<===TUBG11__  BL.-11__-
+WVAL16__  --IN-- #WU_113__#....................<===TUBG16__  BL.-16__-
+TMI_16__  --IN-- #TU_113__#....................<===TUBG16__  BL.-16__-
+TEST13__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE13__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+TUBG16__  BL.-16__- **** MODULO TUBG - TUBG - GAS tube friction losses         
+WVAL16__  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVAL16__  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_16__  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSER13__  --IN-- #PMON16__#....................<===SERA13__  BL.-13__-
+PSER17__  --IN-- #PVAL16__#....................<===SERA17__  BL.-17__-
+TSER13__  --IN-- #TMON16__#....................<===SERA13__  BL.-13__-
+TSER17__  --IN-- #TVI_16__#....................<===SERA17__  BL.-17__-
+AKSI16__  --IN-- FRICTION LOSSES CORRECTOR                                      
+****
+****
+SERA17__  BL.-17__- **** MODULO SERA - SERA - GAS reservoir                    
+PSER17__  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMET17__  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSER17__  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVAL16__  --IN-- #WI_117__#....................<===TUBG16__  BL.-16__-
+TVAL16__  --IN-- #TI_117__#....................<===TUBG16__  BL.-16__-
+WVAL5___  --IN-- #WU_117__#....................<===VAIN5___  BL.-5___-
+TMI_5___  --IN-- #TU_117__#....................<===VAIN5___  BL.-5___-
+TEST17__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE17__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+SERA2___  BL.-2___- **** MODULO SERA - SERA - GAS reservoir                    
+PSER2___  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMET2___  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSER2___  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVALSDV2  --IN-- #WI_12___#....................<===VAINSDV2  BL.-SDV2-
+TVALSDV2  --IN-- #TI_12___#....................<===VAINSDV2  BL.-SDV2-
+WVAL3___  --IN-- #WU_12___#....................<===TUBG3___  BL.-3___-
+TMI_3___  --IN-- #TU_12___#....................<===TUBG3___  BL.-3___-
+TEST2___  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE2___  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+VAIX35__  BL.-35__- **** MODULO VAIX - VAIX - VALVOLA GAS CON SPECI CHIMICHE   
+WVAL35__  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+PMON35__  --IN-- GAS PRESSURE AT VALVE INLET                                    
+PVAL35__  --IN-- GAS PRESSURE AT VALVE OUTLET                                   
+TVAL35__  --IN-- GAS TEMPERATURE AT VALVE INLET/OUTLET                          
+TVII35__  --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZV35__  --IN-- GAS VALVE LIFT                                                 
+XCH435__  --IN-- CH4 MASS FRACTION                                              
+XIH235__  --IN-- H2 MASS FRACTION                                               
+XICO35__  --IN-- CO MASS FRACTION                                               
+XCO235__  --IN-- CO2 MASS FRACTION                                              
+XH2O35__  --IN-- H2O MASS FRACTION                                              
+XIO235__  --IN-- O2 MASS FRACTION                                               
+XIN235__  --IN-- N2 MASS FRACTION                                               
+****
+****
+TUBG3___  BL.-3___- **** MODULO TUBG - TUBG - GAS tube friction losses         
+WVAL3___  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVAL3___  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_3___  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSER2___  --IN-- #PMON3___#....................<===SERA2___  BL.-2___-
+PSER4___  --IN-- #PVAL3___#....................<===SERA4___  BL.-4___-
+TSER2___  --IN-- #TMON3___#....................<===SERA2___  BL.-2___-
+TSER4___  --IN-- #TVI_3___#....................<===SERA4___  BL.-4___-
+AKSI3___  --IN-- FRICTION LOSSES CORRECTOR                                      
+****
+****
+SERA4___  BL.-4___- **** MODULO SERA - SERA - GAS reservoir                    
+PSER4___  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMET4___  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSER4___  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVAL3___  --IN-- #WI_14___#....................<===TUBG3___  BL.-3___-
+TVAL3___  --IN-- #TI_14___#....................<===TUBG3___  BL.-3___-
+WVAL6___  --IN-- #WU_14___#....................<===TUBG6___  BL.-6___-
+TMI_6___  --IN-- #TU_14___#....................<===TUBG6___  BL.-6___-
+TEST4___  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE4___  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+VAIN5___  BL.-5___- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVAL5___  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVAL5___  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_5___  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSER17__  --IN-- #PMON5___#....................<===SERA17__  BL.-17__-
+PVAL5___  --IN-- GAS PRESSURE AT VALVE OUTLET                                   
+TSER17__  --IN-- #TMON5___#....................<===SERA17__  BL.-17__-
+TVI_5___  --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZV5___  --IN-- GAS VALVE LIFT                                                 
+****
+****
+TUBG6___  BL.-6___- **** MODULO TUBG - TUBG - GAS tube friction losses         
+WVAL6___  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVAL6___  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_6___  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSER4___  --IN-- #PMON6___#....................<===SERA4___  BL.-4___-
+PSER8___  --IN-- #PVAL6___#....................<===SERA8___  BL.-8___-
+TSER4___  --IN-- #TMON6___#....................<===SERA4___  BL.-4___-
+TSER8___  --IN-- #TVI_6___#....................<===SERA8___  BL.-8___-
+AKSI6___  --IN-- FRICTION LOSSES CORRECTOR                                      
+****
+****
+SERA8___  BL.-8___- **** MODULO SERA - SERA - GAS reservoir                    
+PSER8___  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMET8___  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSER8___  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVAL6___  --IN-- #WI_18___#....................<===TUBG6___  BL.-6___-
+TVAL6___  --IN-- #TI_18___#....................<===TUBG6___  BL.-6___-
+WVAL10__  --IN-- #WU_18___#....................<===TUBG10__  BL.-10__-
+TMI_10__  --IN-- #TU_18___#....................<===TUBG10__  BL.-10__-
+TEST8___  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE8___  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+VAINCKV1  BL.-CKV1- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVALCKV1  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALCKV1  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_CKV1  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSERS4__  --IN-- #PMONCKV1#....................<===SERAS4__  BL.-S4__-
+PSERS5__  --IN-- #PVALCKV1#....................<===SERAS5__  BL.-S5__-
+TSERS4__  --IN-- #TMONCKV1#....................<===SERAS4__  BL.-S4__-
+TSERS5__  --IN-- #TVI_CKV1#....................<===SERAS5__  BL.-S5__-
+ALZVCKV1  --IN-- GAS VALVE LIFT                                                 
+****
+****
+VAINCKV2  BL.-CKV2- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVALCKV2  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALCKV2  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_CKV2  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSERS41_  --IN-- #PMONCKV2#....................<===SERAS41_  BL.-S41_-
+PSERS5__  --IN-- #PVALCKV2#....................<===SERAS5__  BL.-S5__-
+TSERS41_  --IN-- #TMONCKV2#....................<===SERAS41_  BL.-S41_-
+TSERS5__  --IN-- #TVI_CKV2#....................<===SERAS5__  BL.-S5__-
+ALZVCKV2  --IN-- GAS VALVE LIFT                                                 
+****
+****
+VAINCV01  BL.-CV01- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVALCV01  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALCV01  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_CV01  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSERS3__  --IN-- #PMONCV01#....................<===SERAS3__  BL.-S3__-
+PSERS4__  --IN-- #PVALCV01#....................<===SERAS4__  BL.-S4__-
+TSERS3__  --IN-- #TMONCV01#....................<===SERAS3__  BL.-S3__-
+TSERS4__  --IN-- #TVI_CV01#....................<===SERAS4__  BL.-S4__-
+ALZVCV01  --IN-- GAS VALVE LIFT                                                 
+****
+****
+VAINCV11  BL.-CV11- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVALCV11  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALCV11  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_CV11  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSERS31_  --IN-- #PMONCV11#....................<===SERAS31_  BL.-S31_-
+PSERS41_  --IN-- #PVALCV11#....................<===SERAS41_  BL.-S41_-
+TSERS31_  --IN-- #TMONCV11#....................<===SERAS31_  BL.-S31_-
+TSERS41_  --IN-- #TVI_CV11#....................<===SERAS41_  BL.-S41_-
+ALZVCV11  --IN-- GAS VALVE LIFT                                                 
+****
+****
+VAINDV01  BL.-DV01- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVALDV01  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALDV01  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_DV01  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSERS2__  --IN-- #PMONDV01#....................<===SERAS2__  BL.-S2__-
+PSERS3__  --IN-- #PVALDV01#....................<===SERAS3__  BL.-S3__-
+TSERS2__  --IN-- #TMONDV01#....................<===SERAS2__  BL.-S2__-
+TSERS3__  --IN-- #TVI_DV01#....................<===SERAS3__  BL.-S3__-
+ALZVDV01  --IN-- GAS VALVE LIFT                                                 
+****
+****
+VAINDV11  BL.-DV11- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVALDV11  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALDV11  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_DV11  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSERS21_  --IN-- #PMONDV11#....................<===SERAS21_  BL.-S21_-
+PSERS31_  --IN-- #PVALDV11#....................<===SERAS31_  BL.-S31_-
+TSERS21_  --IN-- #TMONDV11#....................<===SERAS21_  BL.-S21_-
+TSERS31_  --IN-- #TVI_DV11#....................<===SERAS31_  BL.-S31_-
+ALZVDV11  --IN-- GAS VALVE LIFT                                                 
+****
+****
+VAINPSV1  BL.-PSV1- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVALPSV1  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALPSV1  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_PSV1  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PMONPSV1  --IN-- GAS PRESSURE AT VALVE INLET                                    
+PVALPSV1  --IN-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONPSV1  --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_PSV1  --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZVPSV1  --IN-- GAS VALVE LIFT                                                 
+****
+****
+SERAS11_  BL.-S11_- **** MODULO SERA - SERA - GAS reservoir                    
+PSERS11_  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMETS11_  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSERS11_  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVALT11_  --IN-- #WI_1S11_#....................<===TUBGT11_  BL.-T11_-
+TVALT11_  --IN-- #TI_1S11_#....................<===TUBGT11_  BL.-T11_-
+WVALSV11  --IN-- #WU_1S11_#....................<===VAINSV11  BL.-SV11-
+TMI_SV11  --IN-- #TU_1S11_#....................<===VAINSV11  BL.-SV11-
+TESTS11_  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES11_  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+SERAS1__  BL.-S1__- **** MODULO SERA - SERA - GAS reservoir                    
+PSERS1__  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMETS1__  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSERS1__  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVALT1__  --IN-- #WI_1S1__#....................<===TUBGT1__  BL.-T1__-
+TVALT1__  --IN-- #TI_1S1__#....................<===TUBGT1__  BL.-T1__-
+WVALSV01  --IN-- #WU_1S1__#....................<===VAINSV01  BL.-SV01-
+TMI_SV01  --IN-- #TU_1S1__#....................<===VAINSV01  BL.-SV01-
+TESTS1__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES1__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+SERAS21_  BL.-S21_- **** MODULO SERA - SERA - GAS reservoir                    
+PSERS21_  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMETS21_  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSERS21_  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVALSV11  --IN-- #WI_1S21_#....................<===VAINSV11  BL.-SV11-
+TVALSV11  --IN-- #TI_1S21_#....................<===VAINSV11  BL.-SV11-
+WVALDV11  --IN-- #WU_1S21_#....................<===VAINDV11  BL.-DV11-
+TMI_DV11  --IN-- #TU_1S21_#....................<===VAINDV11  BL.-DV11-
+TESTS21_  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES21_  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+SERAS2__  BL.-S2__- **** MODULO SERA - SERA - GAS reservoir                    
+PSERS2__  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMETS2__  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSERS2__  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVALSV01  --IN-- #WI_1S2__#....................<===VAINSV01  BL.-SV01-
+TVALSV01  --IN-- #TI_1S2__#....................<===VAINSV01  BL.-SV01-
+WVALDV01  --IN-- #WU_1S2__#....................<===VAINDV01  BL.-DV01-
+TMI_DV01  --IN-- #TU_1S2__#....................<===VAINDV01  BL.-DV01-
+TESTS2__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES2__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+SERAS31_  BL.-S31_- **** MODULO SERA - SERA - GAS reservoir                    
+PSERS31_  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMETS31_  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSERS31_  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVALDV11  --IN-- #WI_1S31_#....................<===VAINDV11  BL.-DV11-
+TVALDV11  --IN-- #TI_1S31_#....................<===VAINDV11  BL.-DV11-
+WVALCV11  --IN-- #WU_1S31_#....................<===VAINCV11  BL.-CV11-
+TMI_CV11  --IN-- #TU_1S31_#....................<===VAINCV11  BL.-CV11-
+TESTS31_  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES31_  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+SERAS3__  BL.-S3__- **** MODULO SERA - SERA - GAS reservoir                    
+PSERS3__  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMETS3__  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSERS3__  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVALDV01  --IN-- #WI_1S3__#....................<===VAINDV01  BL.-DV01-
+TVALDV01  --IN-- #TI_1S3__#....................<===VAINDV01  BL.-DV01-
+WVALCV01  --IN-- #WU_1S3__#....................<===VAINCV01  BL.-CV01-
+TMI_CV01  --IN-- #TU_1S3__#....................<===VAINCV01  BL.-CV01-
+TESTS3__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES3__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+SERAS41_  BL.-S41_- **** MODULO SERA - SERA - GAS reservoir                    
+PSERS41_  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMETS41_  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSERS41_  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVALCV11  --IN-- #WI_1S41_#....................<===VAINCV11  BL.-CV11-
+TVALCV11  --IN-- #TI_1S41_#....................<===VAINCV11  BL.-CV11-
+WVALCKV2  --IN-- #WU_1S41_#....................<===VAINCKV2  BL.-CKV2-
+TMI_CKV2  --IN-- #TU_1S41_#....................<===VAINCKV2  BL.-CKV2-
+TESTS41_  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES41_  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+SERAS4__  BL.-S4__- **** MODULO SERA - SERA - GAS reservoir                    
+PSERS4__  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMETS4__  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSERS4__  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVALCV01  --IN-- #WI_1S4__#....................<===VAINCV01  BL.-CV01-
+TVALCV01  --IN-- #TI_1S4__#....................<===VAINCV01  BL.-CV01-
+WVALCKV1  --IN-- #WU_1S4__#....................<===VAINCKV1  BL.-CKV1-
+TMI_CKV1  --IN-- #TU_1S4__#....................<===VAINCKV1  BL.-CKV1-
+TESTS4__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES4__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+SERAS5__  BL.-S5__- **** MODULO SERA - SERA - Gas manifold (2 inputs, 2 outputs
+PSERS5__  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMETS5__  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSERS5__  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVALCKV1  --IN-- #WI_1S5__#....................<===VAINCKV1  BL.-CKV1-
+TVALCKV1  --IN-- #TI_1S5__#....................<===VAINCKV1  BL.-CKV1-
+WVALCKV2  --IN-- #WI_2S5__#....................<===VAINCKV2  BL.-CKV2-
+TVALCKV2  --IN-- #TI_2S5__#....................<===VAINCKV2  BL.-CKV2-
+WVALSDV1  --IN-- #WU_1S5__#....................<===VAINSDV1  BL.-SDV1-
+TMI_SDV1  --IN-- #TU_1S5__#....................<===VAINSDV1  BL.-SDV1-
+WU_2S5__  --IN-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  2                    
+TU_2S5__  --IN-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  2 (INV. FLOW)           
+TESTS5__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES5__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+SERAS6__  BL.-S6__- **** MODULO SERA - SERA - GAS reservoir                    
+PSERS6__  --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMETS6__  --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSERS6__  --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WVALSDV1  --IN-- #WI_1S6__#....................<===VAINSDV1  BL.-SDV1-
+TVALSDV1  --IN-- #TI_1S6__#....................<===VAINSDV1  BL.-SDV1-
+WVALSDV2  --IN-- #WU_1S6__#....................<===VAINSDV2  BL.-SDV2-
+TMI_SDV2  --IN-- #TU_1S6__#....................<===VAINSDV2  BL.-SDV2-
+TESTS6__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES6__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+****
+****
+VAINSDV1  BL.-SDV1- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVALSDV1  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALSDV1  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_SDV1  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSERS5__  --IN-- #PMONSDV1#....................<===SERAS5__  BL.-S5__-
+PSERS6__  --IN-- #PVALSDV1#....................<===SERAS6__  BL.-S6__-
+TSERS5__  --IN-- #TMONSDV1#....................<===SERAS5__  BL.-S5__-
+TSERS6__  --IN-- #TVI_SDV1#....................<===SERAS6__  BL.-S6__-
+ALZVSDV1  --IN-- GAS VALVE LIFT                                                 
+****
+****
+VAINSDV2  BL.-SDV2- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVALSDV2  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALSDV2  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_SDV2  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSERS6__  --IN-- #PMONSDV2#....................<===SERAS6__  BL.-S6__-
+PSER2___  --IN-- #PVALSDV2#....................<===SERA2___  BL.-2___-
+TSERS6__  --IN-- #TMONSDV2#....................<===SERAS6__  BL.-S6__-
+TSER2___  --IN-- #TVI_SDV2#....................<===SERA2___  BL.-2___-
+ALZVSDV2  --IN-- GAS VALVE LIFT                                                 
+****
+****
+VAINSV01  BL.-SV01- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVALSV01  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALSV01  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_SV01  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSERS1__  --IN-- #PMONSV01#....................<===SERAS1__  BL.-S1__-
+PSERS2__  --IN-- #PVALSV01#....................<===SERAS2__  BL.-S2__-
+TSERS1__  --IN-- #TMONSV01#....................<===SERAS1__  BL.-S1__-
+TSERS2__  --IN-- #TVI_SV01#....................<===SERAS2__  BL.-S2__-
+ALZVSV01  --IN-- GAS VALVE LIFT                                                 
+****
+****
+VAINSV11  BL.-SV11- **** MODULO VAIN - VAIN - Air-gas valve                    
+WVALSV11  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALSV11  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_SV11  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PSERS11_  --IN-- #PMONSV11#....................<===SERAS11_  BL.-S11_-
+PSERS21_  --IN-- #PVALSV11#....................<===SERAS21_  BL.-S21_-
+TSERS11_  --IN-- #TMONSV11#....................<===SERAS11_  BL.-S11_-
+TSERS21_  --IN-- #TVI_SV11#....................<===SERAS21_  BL.-S21_-
+ALZVSV11  --IN-- GAS VALVE LIFT                                                 
+****
+****
+TUBGT11_  BL.-T11_- **** MODULO TUBG - TUBG - GAS tube friction losses         
+WVALT11_  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALT11_  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_T11_  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PMONT11_  --IN-- GAS PRESSURE AT VALVE INLET                                    
+PSERS11_  --IN-- #PVALT11_#....................<===SERAS11_  BL.-S11_-
+TMONT11_  --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+TSERS11_  --IN-- #TVI_T11_#....................<===SERAS11_  BL.-S11_-
+AKSIT11_  --IN-- FRICTION LOSSES CORRECTOR                                      
+****
+****
+TUBGT1__  BL.-T1__- **** MODULO TUBG - TUBG - GAS tube friction losses         
+WVALT1__  --UA-- GAS FLOW RATE THROUGH THE VALVE                                
+TVALT1__  --UA-- GAS TEMPERATURE AT VALVE OUTLET                                
+TMI_T1__  --UA-- GAS TEMP. AT VALVE INLET (INV. FLOW)                           
+PMONT1__  --IN-- GAS PRESSURE AT VALVE INLET                                    
+PSERS1__  --IN-- #PVALT1__#....................<===SERAS1__  BL.-S1__-
+TMONT1__  --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+TSERS1__  --IN-- #TVI_T1__#....................<===SERAS1__  BL.-S1__-
+AKSIT1__  --IN-- FRICTION LOSSES CORRECTOR                                      
+****
+****      >>>>>>INGRESSI DI TUTTI I MODULI<<<<<<
+AKSI10__  --IN-- FRICTION LOSSES CORRECTOR                                      
+AKSI11__  --IN-- FRICTION LOSSES CORRECTOR                                      
+TEST12__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE12__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+TEST13__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE13__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+AKSI16__  --IN-- FRICTION LOSSES CORRECTOR                                      
+TEST17__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE17__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+TEST2___  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE2___  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+PMON35__  --IN-- GAS PRESSURE AT VALVE INLET                                    
+PVAL35__  --IN-- GAS PRESSURE AT VALVE OUTLET                                   
+TVAL35__  --IN-- GAS TEMPERATURE AT VALVE INLET/OUTLET                          
+TVII35__  --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZV35__  --IN-- GAS VALVE LIFT                                                 
+XCH435__  --IN-- CH4 MASS FRACTION                                              
+XIH235__  --IN-- H2 MASS FRACTION                                               
+XICO35__  --IN-- CO MASS FRACTION                                               
+XCO235__  --IN-- CO2 MASS FRACTION                                              
+XH2O35__  --IN-- H2O MASS FRACTION                                              
+XIO235__  --IN-- O2 MASS FRACTION                                               
+XIN235__  --IN-- N2 MASS FRACTION                                               
+AKSI3___  --IN-- FRICTION LOSSES CORRECTOR                                      
+TEST4___  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE4___  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+PVAL5___  --IN-- GAS PRESSURE AT VALVE OUTLET                                   
+TVI_5___  --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZV5___  --IN-- GAS VALVE LIFT                                                 
+AKSI6___  --IN-- FRICTION LOSSES CORRECTOR                                      
+TEST8___  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE8___  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+ALZVCKV1  --IN-- GAS VALVE LIFT                                                 
+ALZVCKV2  --IN-- GAS VALVE LIFT                                                 
+ALZVCV01  --IN-- GAS VALVE LIFT                                                 
+ALZVCV11  --IN-- GAS VALVE LIFT                                                 
+ALZVDV01  --IN-- GAS VALVE LIFT                                                 
+ALZVDV11  --IN-- GAS VALVE LIFT                                                 
+PMONPSV1  --IN-- GAS PRESSURE AT VALVE INLET                                    
+PVALPSV1  --IN-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONPSV1  --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_PSV1  --IN-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+ALZVPSV1  --IN-- GAS VALVE LIFT                                                 
+TESTS11_  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES11_  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+TESTS1__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES1__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+TESTS21_  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES21_  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+TESTS2__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES2__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+TESTS31_  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES31_  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+TESTS3__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES3__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+TESTS41_  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES41_  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+TESTS4__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES4__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+WU_2S5__  --IN-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  2                    
+TU_2S5__  --IN-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  2 (INV. FLOW)           
+TESTS5__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES5__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+TESTS6__  --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSES6__  --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+ALZVSDV1  --IN-- GAS VALVE LIFT                                                 
+ALZVSDV2  --IN-- GAS VALVE LIFT                                                 
+ALZVSV01  --IN-- GAS VALVE LIFT                                                 
+ALZVSV11  --IN-- GAS VALVE LIFT                                                 
+PMONT11_  --IN-- GAS PRESSURE AT VALVE INLET                                    
+TMONT11_  --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+AKSIT11_  --IN-- FRICTION LOSSES CORRECTOR                                      
+PMONT1__  --IN-- GAS PRESSURE AT VALVE INLET                                    
+TMONT1__  --IN-- GAS TEMPERATURE AT VALVE INLET                                 
+AKSIT1__  --IN-- FRICTION LOSSES CORRECTOR                                      
+****
+PMON10__  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVAL10__  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMON10__  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_10__  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+PMON11__  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVAL11__  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMON11__  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_11__  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+WI_112__  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_112__  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_112__  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_112__  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WI_113__  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_113__  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_113__  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_113__  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+PMON16__  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVAL16__  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMON16__  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_16__  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+WI_117__  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_117__  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_117__  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_117__  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WI_12___  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_12___  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_12___  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_12___  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+PMON3___  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVAL3___  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMON3___  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_3___  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+WI_14___  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_14___  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_14___  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_14___  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+PMON5___  --CO-- GAS PRESSURE AT VALVE INLET                                    
+TMON5___  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+PMON6___  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVAL6___  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMON6___  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_6___  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+WI_18___  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_18___  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_18___  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_18___  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+PMONCKV1  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVALCKV1  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONCKV1  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_CKV1  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+PMONCKV2  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVALCKV2  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONCKV2  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_CKV2  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+PMONCV01  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVALCV01  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONCV01  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_CV01  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+PMONCV11  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVALCV11  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONCV11  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_CV11  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+PMONDV01  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVALDV01  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONDV01  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_DV01  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+PMONDV11  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVALDV11  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONDV11  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_DV11  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+WI_1S11_  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1S11_  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_1S11_  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1S11_  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WI_1S1__  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1S1__  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_1S1__  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1S1__  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WI_1S21_  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1S21_  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_1S21_  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1S21_  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WI_1S2__  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1S2__  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_1S2__  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1S2__  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WI_1S31_  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1S31_  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_1S31_  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1S31_  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WI_1S3__  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1S3__  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_1S3__  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1S3__  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WI_1S41_  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1S41_  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_1S41_  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1S41_  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WI_1S4__  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1S4__  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_1S4__  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1S4__  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WI_1S5__  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1S5__  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WI_2S5__  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  2                     
+TI_2S5__  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  2                        
+WU_1S5__  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1S5__  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WI_1S6__  --CO-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1S6__  --CO-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WU_1S6__  --CO-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1S6__  --CO-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+PMONSDV1  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVALSDV1  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONSDV1  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_SDV1  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+PMONSDV2  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVALSDV2  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONSDV2  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_SDV2  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+PMONSV01  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVALSV01  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONSV01  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_SV01  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+PMONSV11  --CO-- GAS PRESSURE AT VALVE INLET                                    
+PVALSV11  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TMONSV11  --CO-- GAS TEMPERATURE AT VALVE INLET                                 
+TVI_SV11  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+PVALT11_  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TVI_T11_  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          
+PVALT1__  --CO-- GAS PRESSURE AT VALVE OUTLET                                   
+TVI_T1__  --CO-- GAS TEMP. AT VALVE OUTLET (INV. FLOW)                          

@@ -1,0 +1,27 @@
+#!/usr/bin/ksh
+#@(#)RGB
+
+rgb=/usr/users/pride/doc/rgb.col
+
+if [ ! -r $rgb ]; then
+	echo "File: $rgb unreadable"
+	exit	1
+fi
+
+lc=`wc -l $rgb | awk '{ print $1 }'`
+
+fg=`expr $RANDOM$RANDOM % $lc`
+fg=`expr $fg + 1`
+
+bg=`expr $RANDOM$RANDOM % $lc`
+bg=`expr $bg + 1`
+
+#+ echo "lc: $lc fg: $fg bg: $bg"
+
+grep -n ' ' $rgb | grep "^$fg:" | sed -e 's/.*://'
+FG=`grep -n ' ' $rgb | grep "^$fg:" | sed -e 's/.*://' | cut -c1-24`
+echo "FG: <$FG>"
+
+grep -n ' ' $rgb | grep "^$bg:" | sed -e 's/.*://'
+BG=`grep -n ' ' $rgb | grep "^$bg:" | sed -e 's/.*://' | cut -c1-24`
+echo "BG: <$FG>"

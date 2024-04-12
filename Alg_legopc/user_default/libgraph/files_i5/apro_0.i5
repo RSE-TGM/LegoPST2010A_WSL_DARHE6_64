@@ -1,0 +1,27 @@
+APRO
+
+APRO - Proportinal gain                                                         
+3
+1
+
+t0
+IPRO 
+1 
+t1
+KPRO 
+1 
+t2
+UPRO 
+1 
+
+0
+1
+2
+
+UPRO UA
+OUTPUT ANALOG SIGNAL FROM PROPORTIONAL BLOCK                   
+IPRO IN
+INPUT ANALOG SIGNAL INTO PROPORTIONAL BLOCK                    
+KPRO IN
+PROPORTIONAL BLOCK GAIN                                        
+

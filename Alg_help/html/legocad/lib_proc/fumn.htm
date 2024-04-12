@@ -1,0 +1,140 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE FUMN</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUMN_summ"></A>MODULE FUMN CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUMN_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUMN_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUMN_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUMN_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUMN_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUMN_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUMN_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_FUMN_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUMN_A"></A>MODULE FUMN CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">GAS DUCT EXCHANGER</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The FUMN module simulates the thermal exchange between the combustion flue gas flowing through a duct and the external surface of several elements which (also belonging to the duct itself) can have mean temperatures considerably different.</P>
+<P>The module is used in carrying out models of radiance boiler for taking into account all thermal exchanges between flue gas flowing out from the combustion furnace and all the elements (thermal shields, pipe benches etc.) with which have contact before coming out from the boiler.</P>
+<P>Simplifying hypotheses used in definition of physic-mathematical model are the following:</P>
+<P ALIGN="JUSTIFY">- duct which flue gas are flowing through is subdivided in cells (max.9) along motion direction</P>
+<P ALIGN="JUSTIFY">- in each cell flue gas can exchange with several surfaces (max.6) having different mean temperatures</P>
+<P ALIGN="JUSTIFY">- flue gas arise from combustion of fuel oil</P>
+<P ALIGN="JUSTIFY">- convective thermal exchange can occur as cross-flow or long-flow</P>
+<P ALIGN="JUSTIFY">- in radiative thermal exchange the contribution coming from flue gas among bench pipes is only taken into account (inter-tube radiation). Contribution coming from flue gas inside the cavities interposed among pipe benches (cavity radiation) are not considered.</P>
+<P ALIGN="JUSTIFY">- all accumulation phenomena are not considered.</P>
+<P>The used equations are:</P>
+<P ALIGN="JUSTIFY">- conservation equation of flue gas energy</P>
+<P ALIGN="JUSTIFY">- conservation equation of flue gas mass</P>
+<P ALIGN="JUSTIFY">- equation of thermal exchange between flue gas and surfaces.</P>
+<P ALIGN="JUSTIFY">Not considering all accumulation phenomena, all mentioned equations are algebraical.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUMN_B"></A>MODULE FUMN CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Nc = number of cells (max.9) in which the duct is subdivided</P>
+<P ALIGN="JUSTIFY">Np(i) = number of surfaces (max.6) exchanging heat with flue gas flowing through the i-th duct cell</P>
+<P ALIGN="JUSTIFY">i = 1, 2, ... Nc</P>
+<P ALIGN="JUSTIFY">j = 1, 2, ... Np(i)</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image313.gif" WIDTH=366 HEIGHT=241></P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">[K]&#9;&#9;TUF&#9;&#9;flue gas temperature at the duct outlet</P>
+<P ALIGN="JUSTIFY">[K]&#9;&#9;TF_i&#9;&#9; (i = 1, 2,..., Nc) mean temperature of flue gas flowing through the i-th cell</P>
+<P ALIGN="JUSTIFY">[W/m²/K]&#9;GF_i&#9;&#9;total thermal exchange coefficient (convective + radiative) between exchange total surface &#9;in the i-th cell and &#9;&#9;&#9;&#9;&#9;flue gas flowing through it</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;&#9;WIF&#9;&#9;flow rate of flue gas flowing through the duct</P>
+<P ALIGN="JUSTIFY">[K]&#9;&#9;TIF&#9;&#9;flue gas temperature at the duct inlet</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;FAS&#9;&#9;dirty factor of bench pipes</P>
+<P ALIGN="JUSTIFY">[%]&#9;&#9;%CO2&#9;partial pressure of CO2 present in the flue gas</P>
+<P ALIGN="JUSTIFY">[%]&#9;&#9;%PH2&#9;&#9;partial pressure of H2O present in the flue gas</P>
+<P ALIGN="JUSTIFY">[%]&#9;&#9;%H2O&#9;&#9;mass fraction of H2O present in the flue gas</P>
+<P ALIGN="JUSTIFY">[K]&#9;&#9;TMji&#9;&#9;mean temperature of the j-th surface exchanging heat with flue gas flowing through the i-th cell</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_FUMN_C"></A>MODULE FUMN CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Dat</FONT><FONT FACE="Arial, helvetica" SIZE=4>a</P>
+</B></I></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to initial values of the FUMN module input and output variables (meanings defined above), user must assign the following data:</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;NTUB&#9;&#9;number of pipes forming the bench</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;DIAE&#9;&#9;external diameter of bench pipes</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;LUNG&#9;&#9;length of bench pipes</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;PASP&#9;&#9;transverse row pitch (at the right angle to the direction of flue gas flow) of bench pipes</P>
+<P ALIGN="JUSTIFY">[m]&#9;&#9;PASL&#9;&#9;longitudinal row pitch (along direction of the flue gas flow) of bench pipes</P>
+<P ALIGN="JUSTIFY">[m²]&#9;&#9;SCAN&#9;&#9;cell transverse cross section area</P>
+<P ALIGN="JUSTIFY">[ ]&#9;&#9;FA&#9;&#9;geometrical arrangement factor of bench pipes (see note)</P>
+<P ALIGN="JUSTIFY">[m²]&#9;&#9;SUP.j&#9;&#9;(j = 1, ..., 6) area of the j-th surface exchanging heat with flue gas flowing through the cell (if such value is &#9;&#9;&#9;&#9;&#9;&#9;negative the exchange is long-flow type).</P>
+<P>When several consecutive cells have the same geometrical data, it is enough to assign those related to the first one. To the remaining cells the same data are automatically assigned.</P>
+<B><P>Note</P>
+</B><P>In physic-mathematical model encoded in the module both cross-flow and long-flow convective exchanges are taken into account.</P>
+<P>FA is a non dimensional factor both depending on flue gas flow in the cell and geometrical arrangement of exchanger bench pipes.</P>
+<P>In particular FA is a function type:</P>
+<P ALIGN="CENTER">FA = FA(Re, PASL/DIAE, PASP/DIAE)</P>
+<P>where for 2000. &lt; Re &lt; 40000., 1. &lt; PASL/DIAE &lt; 2. and 1. &lt; PASP/DIAE &lt; 6., assumes the values within interval [0.3, 1.1].</P>
+<P>In the physic-mathematical model such factor (called arrangement factor) is considered as constant.</P>
+<P ALIGN="JUSTIFY">When a cell exchanges only (or prevalently) with one or several shields (only one row of pipes), user have to assign to FA unitary value (FA = 1.) and to PASL a negative value (PASL &lt; 0. is equivalent to impose zero the radiative thermal exchange coefficient).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUMN_D"></A>MODULE FUMN CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the FUMN module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><P>&nbsp;</P>
+<FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUMN_E"></A>MODULE FUMN CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In the FUMN module no user programs are foreseen.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUMN_F"></A>MODULE FUMN CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Equations forming the module mathematical model give rise to a residual set whose are only indicated their respective normalization factor.</P>
+<P>Further explanation are given in the related section of the manual "LEGOCAD - Modelling Library for Simulation of Power Generation Plants - Theory".</P>
+<P>i = 1, 2, ..., Nc</P>
+<P>RNI(1)&#9;&#9;normalization factor = T0</P>
+<P>RNI(1+i)&#9;normalization factor = Q0</P>
+<P>RNI(1+Nc+i)&#9;normalization factor = 1000.</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUMN_G"></A>MODULE FUMN CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE FUMNI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE FUMNI4</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE FUMNI2</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBLOC1, IBLOC2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE FUMNC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ </B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>IBLOC1, IBLOC2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE FUMN</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2>(IFUN, IXYU, XYU, IPD, DATI, RN)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_FUMN_H"></A>MODULE FUMN CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the manual section dedicated to the examples developed under the abbreviations:</P>
+<P ALIGN="CENTER">"....module application example not available yet..."</P></FONT></BODY>
+</HTML>

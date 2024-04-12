@@ -1,0 +1,138 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_metals"></A>Flue gas side and metal wall of pipes and exchangers</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_metals"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_metaduct"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Gas duct exchangers</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_metawall"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Component walls:</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_metapipe"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">pipe walls</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_metaslab"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">flat slabs</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_metacase"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">steam turbine rotors, shells and casing</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_metaduct"></A>Flue gas side and metal wall of pipes and exchangers: gas duct exchangers</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/fumn.htm#lg_libproc_FUMN_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">FUMN</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">The thermal exchange among the exhaust gas flowing through a duct and the duct walls is computed. The momentum equation is not considered in the model.</P>
+<P ALIGN="JUSTIFY">The main hypotheses are:</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no energy storage</P>
+<P ALIGN="JUSTIFY">kinetic and gravitational terms are neglected in the energy conservation equation</P>
+<P ALIGN="JUSTIFY">A one-dimensional approximation is adopted.</P>
+<P ALIGN="JUSTIFY">The duct is axially split in cells.</P>
+<P ALIGN="JUSTIFY">The conservation equations for each cell are:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image597.gif" WIDTH=97 HEIGHT=22></P>
+<P ALIGN="CENTER"><IMG SRC="Image598.gif" WIDTH=120 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Q is the power entering the gas and it is sum of two contributions, the convective one Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>conv</FONT><FONT FACE="Arial, helvetica"> and the radiative one Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>rad</FONT><FONT FACE="Arial, helvetica">, expressed as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image599.gif" WIDTH=168 HEIGHT=22></P>
+<P ALIGN="CENTER"><IMG SRC="Image600.gif" WIDTH=149 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The expressions of the convective heat transfer coefficient g</FONT><FONT FACE="Arial, helvetica" SIZE=1>conv</FONT><FONT FACE="Arial, helvetica"> and the radiative heat transfer coefficient g</FONT><FONT FACE="Arial, helvetica" SIZE=1>rad</FONT><FONT FACE="Arial, helvetica"> are explained in the section "</FONT><A HREF="#lg_lptheo_dphtcorr"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">pressure drop and heat transfer correlations</U></FONT></A><FONT FACE="Arial, helvetica">".</P>
+<P ALIGN="JUSTIFY">The radiative power only takes into account the intertube radiation, whereas the cavity radiation is neglected.</P>
+<P ALIGN="JUSTIFY">It often happens the duct walls of the same cell, belonging to different boiler sections, have different temperatures T</FONT><FONT FACE="Arial, helvetica" SIZE=1>w,i</FONT><FONT FACE="Arial, helvetica">. The following approximations are made:</P>
+<P ALIGN="JUSTIFY">the mean wall temperature T</FONT><FONT FACE="Arial, helvetica" SIZE=1>w</FONT><FONT FACE="Arial, helvetica"> is defined as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image601.gif" WIDTH=106 HEIGHT=56></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the heat transfer coefficients and powers, both convective and radiative, are evaluated using the mean wall temperature T</FONT><FONT FACE="Arial, helvetica" SIZE=1>w</FONT><FONT FACE="Arial, helvetica">.</P><DIR>
+<DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_metawall"></A>Flue gas side and metal wall of pipes and exchangers: component walls</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The energy conservation equation in local form for a solid body is</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image602.gif" WIDTH=216 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where</FONT> <FONT FACE="Symbol">·</FONT> <FONT FACE="Arial, helvetica">indicates the inner product between vectors and Y is the internal power for unit volume. If it is:</P>
+</FONT><FONT FACE="Symbol"><P ALIGN="CENTER">Y</FONT> = 0</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the equation becomes in rectangular coordinates:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image603.gif" WIDTH=420 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and in cylindrical coordinates:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image604.gif" WIDTH=453 HEIGHT=49></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_metapipe"></A>Flue gas side and metal wall of pipes and exchangers: pipe walls</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The thermal field in a thin hollow cylindrical body, such as a pipe wall, must be determined.</P>
+<P ALIGN="JUSTIFY">The pipe is modelled as a series of control volumes, called cells, in the axial direction.</P>
+<P ALIGN="JUSTIFY">The following assumptions are made:</P>
+<P ALIGN="JUSTIFY">the wall thickness is small with respect to the diameter</P>
+<P ALIGN="JUSTIFY">T</FONT><FONT FACE="Arial, helvetica" SIZE=1>w</FONT><FONT FACE="Arial, helvetica"> doesn’ t depend on</FONT> <FONT FACE="Symbol">f</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">T</FONT><FONT FACE="Arial, helvetica" SIZE=1>w</FONT><FONT FACE="Arial, helvetica">, T</FONT><FONT FACE="Arial, helvetica" SIZE=1>int</FONT><FONT FACE="Arial, helvetica"> and T</FONT><FONT FACE="Arial, helvetica" SIZE=1>est</FONT><FONT FACE="Arial, helvetica"> are constant in the axial direction along the cell</P>
+<P ALIGN="JUSTIFY">the axial thermal conduction term can be neglected</P>
+<P ALIGN="JUSTIFY">the wall thermal conductivity</FONT> <FONT FACE="Symbol">l</FONT><FONT SIZE=1>w</FONT> <FONT FACE="Arial, helvetica">is constant</P>
+<P ALIGN="JUSTIFY">Referring to the wall energy equation in cylindrical coordinates:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image605.gif" WIDTH=209 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the equation is integrated on a control volume of length l</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> spanning from r</FONT><FONT FACE="Arial, helvetica" SIZE=1>int</FONT><FONT FACE="Arial, helvetica"> to r</FONT><FONT FACE="Arial, helvetica" SIZE=1>ext</FONT><FONT FACE="Arial, helvetica">, that is the whole wall is lumped in only one cell in the radial direction, with the boundary conditions:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image606.gif" WIDTH=306 HEIGHT=46></P>
+<P ALIGN="CENTER"><IMG SRC="Image607.gif" WIDTH=289 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">It is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image608.gif" WIDTH=273 HEIGHT=44></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image609.gif" WIDTH=204 HEIGHT=72>&#9;<IMG SRC="Image610.gif" WIDTH=214 HEIGHT=72></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">To obtain the definition of mean radius r</FONT><FONT FACE="Arial, helvetica" SIZE=1>m</FONT><FONT FACE="Arial, helvetica"> the mean temperature T</FONT><FONT FACE="Arial, helvetica" SIZE=1>w</FONT><FONT FACE="Arial, helvetica"> in steady state conditions is computed.</P>
+<P ALIGN="JUSTIFY">It is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image611.gif" WIDTH=112 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image612.gif" WIDTH=108 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">for r</FONT><FONT FACE="Arial, helvetica" SIZE=1>int</FONT> <FONT FACE="Symbol">£</FONT> <FONT FACE="Arial, helvetica">r</FONT> <FONT FACE="Symbol">£</FONT> <FONT FACE="Arial, helvetica">r</FONT><FONT FACE="Arial, helvetica" SIZE=1>ext</FONT><FONT FACE="Arial, helvetica">.</P>
+</FONT><P ALIGN="JUSTIFY">Integrating two times it is obtained:</P>
+<P ALIGN="CENTER"><IMG SRC="Image613.gif" WIDTH=182 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and the mean temperature:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image614.gif" WIDTH=394 HEIGHT=60></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Imposing T(r</FONT><FONT FACE="Arial, helvetica" SIZE=1>m</FONT><FONT FACE="Arial, helvetica">) = T</FONT><FONT FACE="Arial, helvetica" SIZE=1>w</FONT><FONT FACE="Arial, helvetica"> it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image615.gif" WIDTH=204 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image616.gif" WIDTH=137 HEIGHT=62></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and, if it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image617.gif" WIDTH=105 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">it can be taken:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image618.gif" WIDTH=97 HEIGHT=42></P>
+<B><FONT SIZE=5 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_metaslab"></A>Flue gas side and metal wall of pipes and exchangers: flat slab</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The thermal field in a flat slab must be determined.</P>
+<P ALIGN="JUSTIFY">The following assumptions are made:</P>
+<P ALIGN="JUSTIFY">the wall thermal conductivity</FONT> <FONT FACE="Symbol">l</FONT><FONT SIZE=1>w</FONT> <FONT FACE="Arial, helvetica">is constant</P>
+<P ALIGN="JUSTIFY">Referring to the wall energy equation in rectangular coordinates:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image619.gif" WIDTH=196 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">integrating on a control volume of length l</FONT><FONT FACE="Arial, helvetica" SIZE=1>i</FONT><FONT FACE="Arial, helvetica"> spanning from x</FONT><FONT FACE="Arial, helvetica" SIZE=1>int</FONT><FONT FACE="Arial, helvetica"> to x</FONT><FONT FACE="Arial, helvetica" SIZE=1>ext</FONT><FONT FACE="Arial, helvetica">, that is the whole wall is lumped in only one cell in the x direction, with the boundary conditions:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image620.gif" WIDTH=300 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image621.gif" WIDTH=282 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and assuming the whole wall heat capacity is lumped on the mean wall abscissa, defined as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image622.gif" WIDTH=112 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the energy equation becomes for each cell:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image623.gif" WIDTH=197 HEIGHT=44></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image624.gif" WIDTH=173 HEIGHT=25>&#9;<IMG SRC="Image625.gif" WIDTH=180 HEIGHT=25></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_metacase"></A>Flue gas side and metal wall of pipes and exchangers: steam turbine rotor, shells and casing</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The thermal field in a thick cylindrical body, such as steam turbine rotors, shells and casings, must be determined.</P>
+<P ALIGN="JUSTIFY">The body is divided in axial cells, each one consisting of radial layers.</P>
+<P ALIGN="JUSTIFY">The following assumptions are made:</P>
+<P ALIGN="JUSTIFY">the body has an axial-symmetric geometry</P>
+<P ALIGN="JUSTIFY">T</FONT><FONT FACE="Arial, helvetica" SIZE=1>w</FONT><FONT FACE="Arial, helvetica"> doesn’ t depend on</FONT> <FONT FACE="Symbol">f</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">T</FONT><FONT FACE="Arial, helvetica" SIZE=1>w</FONT><FONT FACE="Arial, helvetica">, T</FONT><FONT FACE="Arial, helvetica" SIZE=1>int</FONT><FONT FACE="Arial, helvetica"> and T</FONT><FONT FACE="Arial, helvetica" SIZE=1>est</FONT><FONT FACE="Arial, helvetica"> are constant in the axial direction along the cell</P>
+<P ALIGN="JUSTIFY">the axial thermal conduction term can be neglected</P>
+<P ALIGN="JUSTIFY">Referring to the energy equation in cylindrical coordinates:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image626.gif" WIDTH=321 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and integrating it on each layer an equations set is obtained. The generical i-th equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image627.gif" WIDTH=340 HEIGHT=45></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where i is the cell index, j is the layer index and i</FONT><FONT FACE="Arial, helvetica" SIZE=1>max</FONT><FONT FACE="Arial, helvetica"> and j</FONT><FONT FACE="Arial, helvetica" SIZE=1>max</FONT><FONT FACE="Arial, helvetica"> are the top values of the indexes.</P>
+<P ALIGN="JUSTIFY">Moreover it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image628.gif" WIDTH=356 HEIGHT=124></P>
+<P ALIGN="CENTER"><IMG SRC="Image629.gif" WIDTH=377 HEIGHT=124></P>
+<P ALIGN="CENTER"><IMG SRC="Image630.gif" WIDTH=289 HEIGHT=154></P>
+<P ALIGN="CENTER"><IMG SRC="Image631.gif" WIDTH=312 HEIGHT=156></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Right and left extensions with respect to a fixed point are calculated as sum of the partial dilatation on each cell. The thermal dilatation and the contraction due to the spin for rotating parts are taken into account. The linear dilatation for unit length e</FONT><FONT FACE="Arial, helvetica" SIZE=1>z</FONT><FONT FACE="Arial, helvetica"> is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image632.gif" WIDTH=270 HEIGHT=84></P></BODY>
+</HTML>

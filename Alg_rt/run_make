@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+#  Script:			run_make
+#  Instance:		1
+#  %version:		2 %
+#  Description:		
+#  %created_by:		famgr %
+#  %date_created:	Wed Oct 16 16:10:04 1996 %
+echo "Shell provvisoria per make ricorsivi"
+if [ $# -eq 0 ]
+then
+        echo "inserire  flags tra apici"
+else
+OPTION=$1
+echo "Sto per compilare"
+echo "Flag usati: " $OPTION
+cd ./net_simula
+cd ./net_monit
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./net_sked
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./net_compi
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./net_demone
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./net_updbase
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./net_net
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./net_prepf22_circ
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./mandb
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./net_clean
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./net_disp
+ccm make $OPTION -f Makefile.mk
+cd ../..
+fi

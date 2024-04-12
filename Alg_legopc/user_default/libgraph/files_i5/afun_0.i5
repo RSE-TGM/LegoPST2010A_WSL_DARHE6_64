@@ -1,0 +1,22 @@
+AFUN
+
+AFUN - Function generator                                                       
+2
+1
+
+t0
+IFUN 
+1 
+t1
+UFUN 
+1 
+
+0
+1
+1
+
+UFUN UA
+FUNCTION GENERATOR OUTPUT VARIABLE                             
+IFUN IN
+FUNCTION GENERATOR INPUT VARIABLE                              
+

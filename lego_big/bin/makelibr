@@ -1,0 +1,25 @@
+#!/bin/ksh
+#
+#  Script:                      makelibr.sh
+#  Subsystem:           1
+#  %version:            6 %
+#  Description:
+#  %created_by:         lomgr %
+#  %date_created:       Tue Apr  6 16:07:57 2004 %
+
+.SUFFIXES:  .pf .o .f .c .sh .h .a
+FFLAGS=$(F_FLAGS) 
+CFLAGS=$(C_FLAGS) 
+
+all: $(LIBRERIA)($(LISTA))
+
+.pf.f:
+	/lib/cpp -P $(CPP_FLAGS) $(PREPROCESSOR_OPTIONS) $< >> $*.f
+.c.o:
+	$(CC) -c $(CFLAGS) $<
+.f.o:
+	$(FC) -c $(FFLAGS) $<
+.f.a:
+	$(FC) $(FFLAGS) -c $< -o $*.o
+	ar rv $@ $*.o
+	ranlib $(LIBRERIA)

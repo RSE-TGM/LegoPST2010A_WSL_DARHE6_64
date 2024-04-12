@@ -1,0 +1,15 @@
+DISN_0                                                                          
+DISN                                                                            
+DISN - Two signals generator                                                    
+                                                                                
+NSTAT = 0
+NUSCI = 2
+NINGR = 1
+ 
+NCONF = 1
+ 
+A_1_      --UA-- DISN: OUTPUT VARIABLE NUM.  1                                  
+A_2_      --UA-- DISN: OUTPUT VARIABLE NUM.  2                                  
+AING      --IN-- DISN: INPUT VARIABLE                                           
+==============================                                                  
+EOF                                                                             

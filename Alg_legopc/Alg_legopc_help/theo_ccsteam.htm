@@ -1,0 +1,421 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title></title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font size="4">COMBUSTION CHAMBERS FOR STEAM
+      GENERATORS</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<blockquote>
+  <p ALIGN="left"><font FACE="Arial"><a href="#parte1">Generalities (on these
+  modules)</a></p>
+  </font>
+  <p ALIGN="left"><font FACE="Arial"><u><a href="#parte2">Furnace fluid-dynamic
+  model</a></u></p>
+  </font>
+  <p ALIGN="left"><font FACE="Arial"><u><a href="#parte3">Furnace thermal
+  balance model:</a></u></p>
+  <blockquote>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> <u><a href="#parte4">fluid mass
+  conservation</a></u></p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> <u><a href="#parte5">fluid energy
+  conservation</a></u></p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> <u><a href="#parte6">radiative
+  heat transfer</a></u></p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> <u><a href="#parte7">convective
+  heat transfer</a></u></p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> <u><a href="#parte8">combustion
+  chemical reactions</a></u></p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> <u><a href="#parte9">burners tilt
+  effect</a></u></p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> <u><a href="#parte10">coal
+  combustion</a></u></p>
+  </font><b><font FACE="Arial" SIZE="5" COLOR="#ffffff">
+  </blockquote>
+  </font></b>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte1"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Generalities<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">The model of the furnace is split in two partial models; one of
+them deals with the thermal balance of the fluid passing through the chamber,
+the other one is the fluid-dynamic model.</p>
+<p ALIGN="left">The module EXCH can be used to build a model of the furnace
+walls.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte2"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Furnace fluid-dynamic model<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">Modules referred to: <u><a href="ccpn.htm" target="_blank">CCPN</a></u></p>
+<p ALIGN="left">The internal differences of pressure in the furnace are very
+small with respect to those along the air-gas path from air intake to the
+chimney. The internal pressure in the furnace can be therefore considered as
+spatially constant.</p>
+<p ALIGN="left">The furnace is modelled as a volume in which the gas has uniform
+pressure. The volume is split in so many cells as those of the thermal model of
+the furnace. For each cell the gas temperature T</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial">
+is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image348.gif" WIDTH="136" HEIGHT="55"></p>
+<p ALIGN="left">where T</font><font FACE="Arial" SIZE="1">TM,i</font><font FACE="Arial">
+is the gas temperature in the corresponding cell of the thermal model.</p>
+<p ALIGN="left">Assuming the gas follows the perfect gas law it is for each
+cell:</p>
+<p ALIGN="CENTER"><img SRC="images/Image349.gif" WIDTH="100" HEIGHT="28"></p>
+<p ALIGN="left">and the volume mean gas temperature T is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image350.gif" width="180" height="66"></p>
+<p ALIGN="left">Assuming the molar mass m = 28.725 kg/kmole it is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image351.gif" width="68" height="53"> <img SRC="images/Image352.gif" WIDTH="85" HEIGHT="53">
+<img SRC="images/Image353.gif" WIDTH="15" HEIGHT="28"><img SRC="images/Image354.gif" WIDTH="65" HEIGHT="56"></p>
+<p ALIGN="left">the continuity equation is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image355.gif" WIDTH="400" HEIGHT="60"></p>
+<p ALIGN="left">The temperature changes are much slower than pressure changes
+and the term V(</font><font FACE="Symbol">¶</font><font FACE="Arial">r/</font><font FACE="Symbol">¶</font><font FACE="Arial">p)(dT/dt)
+can be dropped. It results:</p>
+<p ALIGN="CENTER"><img SRC="images/Image356.gif" width="233" height="56"></p>
+<p ALIGN="left">where </font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">IN,i</font><font FACE="Arial">
+and </font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">EX,j</font><font FACE="Arial">
+are the mass flow rates entering and leaving the furnace.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte3"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">Furnace thermal balance model:<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">Modules referred to: <u><a href="cccm.htm" target="_blank">CCCM</a></u></p>
+<p ALIGN="left">The goal is the evaluation of radiation heat transfer as well as
+temperature and radiating species concentration distributions in the furnace.
+The furnace walls temperatures, the inlet and outlet flow rates are boundary
+conditions.</p>
+<p ALIGN="left">The models for analysing heat transfer in industrial furnaces
+are of three types:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> the &quot;stirred vessel&quot;
+(zero-dimensional) model, which yields only the total heat transfer rate without
+providing information on the local heat flux distribution;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> the &quot;plug-flow&quot;
+(one-dimensional) model, which is capable of predicting the local heat flux in
+the furnace along the flow direction;</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> the multidimensional model which can
+predict two-dimensional heat flux distribution at the load surface.</p>
+</font>
+<p ALIGN="left">The first two models are being used routinely in engineering
+design calculations, and the one-dimensional model has been adopted as standard
+model in the LEGOCAD modules library and will be discussed in greater detail.</p>
+<p ALIGN="left">Various kinds of fuel are considered, such as natural gas, fuel
+oil and coal.</p>
+<p ALIGN="left">The burners tilting is taken into account.</p>
+<p ALIGN="left">The furnace is divided in control volumes, called cells, along
+the main gas path.</p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">The simulated phenomena are:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> fluid mass conservation</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> fluid energy conservation</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> radiative and convective heat
+transfer</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> combustion chemical reactions</p>
+</font>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left">The main hypotheses are:</p>
+<blockquote>
+  <blockquote>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> no mass storage</p>
+  </font><font FACE="Symbol">
+  <p ALIGN="left">*</font><font FACE="Arial"> no heat storage</p>
+  </font>
+</blockquote>
+</blockquote>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="center">&nbsp;</p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte4"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">fluid mass conservation<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">For each cell the continuity equation is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image357.gif" width="186" height="38"></p>
+<p ALIGN="left">The inlet flow rates </font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">IN,i</font><font FACE="Arial">
+are comprised of fuel and comburent air from the cell burners, the exhaust gas,
+unburnt fuel and air from the preceding cell. The outlet flow rates </font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">EX,j</font><font FACE="Arial">
+are comprised of exhaust gas, unburnt fuel and air.</p>
+<p ALIGN="left">The evaluation of the unburnt fuel </font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">ubf</font><font FACE="Arial">
+and air </font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">uba</font><font FACE="Arial">
+mass flow rates is based on the stoichiometric air-fuel ratio. When the actual
+ratio of the total entering air and the total entering fuel is greater than the
+stoichiometric ratio, the fuel entirely burns and an excess air flow rate </font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">uba</font><font FACE="Arial">
+leaves the cell; when the actual ratio is less than the stoichiometric one, an
+unburnt fuel flow rate </font><font FACE="Symbol">G</font><font FACE="Arial" SIZE="1">ubf</font><font FACE="Arial">
+exits the cell. If the furnace is fed with a mixture of fuels, the assumption is
+that as first natural gas burns, as second fuel oil and finally coal.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte5"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">fluid energy conservation<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">For each cell the fluid energy equation is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image358.gif" WIDTH="295" HEIGHT="38"></p>
+<p ALIGN="left">The power Q is the algebraical sum of all powers entering or
+leaving the cell without mass transfer. It includes the power Q</font><font FACE="Arial" SIZE="1">comb</font><font FACE="Arial">
+released by combustion of fuel, the radiative power Q</font><font FACE="Arial" SIZE="1">rad,w</font><font FACE="Arial">
+and the convective power Q</font><font FACE="Arial" SIZE="1">conv,w</font><font FACE="Arial">
+from furnace walls, the radiative power Q</font><font FACE="Arial" SIZE="1">rad,i-1,i</font><font FACE="Arial">
+and Q</font><font FACE="Arial" SIZE="1">rad,i+1,i</font><font FACE="Arial"> from
+adjoining cells.</p>
+<p ALIGN="CENTER"><img SRC="images/Image359.gif" WIDTH="445" HEIGHT="31"></p>
+<p ALIGN="left">All other power sources, that is to say the conduction heat
+transfer with the adjoining cells and the radiative heat transfer with the
+non-adjoining cells, are neglected.</p>
+<p ALIGN="left">It is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image360.gif" width="333" height="31"></p>
+<p ALIGN="left">Of course, if a mixture of fuels is used, this relationship is
+repeated for each fuel.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte6"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">radiative heat transfer<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">In industrial furnaces convective heat transfer usually accounts
+for a very small fraction of the total heat transfer to the load; therefore,
+more emphasis has been given to radiation in the model.</p>
+<p ALIGN="left">Two kinds of radiative heat transfer must be considered:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> heat transfer among gas and furnace
+walls</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> heat transfer among gas and gas in
+the adjoining cells</p>
+</font>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">The heat transfer among furnace walls and internal gas Q</font><font FACE="Arial" SIZE="1">rad,w</font><font FACE="Arial">
+is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image361.gif" width="273" height="36"></p>
+<p ALIGN="left">where </font><font FACE="Symbol">b</font><font FACE="Arial" SIZE="1">w</font><font FACE="Arial">
+is the flat surface / real surface ratio and the radiative heat transfer
+coefficient </font><font FACE="Symbol">g</font><font FACE="Arial" SIZE="1">rad,w</font><font FACE="Arial">
+is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image362.gif" width="180" height="86"></p>
+<p ALIGN="left">The wall emissivity </font><font FACE="Symbol">e</font><font FACE="Arial" SIZE="1">w</font><font FACE="Arial">
+value must be assigned. The gas emissivity </font><font FACE="Symbol">e</font><font FACE="Arial" SIZE="1">g</font><font FACE="Arial">
+is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image363.gif" WIDTH="215" HEIGHT="31"></p>
+<p ALIGN="left">The transparent emissivity </font><font FACE="Symbol">e</font><font FACE="Arial" SIZE="1">tr</font><font FACE="Arial">
+is a function of the gas temperature, the partial pressures of the gas
+components, mainly triatomic components such as steam and carbon dioxide, and
+the optical path length and it is usually obtained by means of tables.</p>
+<p ALIGN="left">The luminous emissivity </font><font FACE="Symbol">e</font><font FACE="Arial" SIZE="1">lum</font><font FACE="Arial">
+is a function of the gas temperature, the optical path length and the presence
+of soot, solid and liquid particles and their diameter and it is strongly
+dependent on the kind of fuel. It is usually obtained by means of tables.</p>
+<p ALIGN="left">The heat transfer among gas and gas in the adjoining cells is
+for the preceding cell:</p>
+<p ALIGN="CENTER"><img SRC="images/Image364.gif" width="298" height="36"></p>
+<p ALIGN="left">An analogous relationship holds for the following cell.</p>
+<p ALIGN="left">The radiative heat transfer coefficient </font><font FACE="Symbol">g</font><font FACE="Arial" SIZE="1">rad,i,i-1</font><font FACE="Arial">
+is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image365.gif" WIDTH="220" HEIGHT="93"></p>
+<p ALIGN="left">and the gas emissivity </font><font FACE="Symbol">e</font><font FACE="Arial" SIZE="1">g</font><font FACE="Arial">
+is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image366.gif" width="136" height="41"></p>
+<p ALIGN="left">where k</font><font FACE="Arial" SIZE="1">abs</font><font FACE="Arial">
+is the absorption coefficient.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte7"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">convective heat transfer<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">The heat transfer among gas and furnace walls Q</font><font FACE="Arial" SIZE="1">conv,w</font><font FACE="Arial">
+is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image367.gif" width="258" height="31"></p>
+<p ALIGN="left">where the convective heat transfer coefficient </font><font FACE="Symbol">g</font><font FACE="Arial" SIZE="1">conv,w</font><font FACE="Arial">
+is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image368.gif" width="311" height="68"></p>
+<p ALIGN="left">The term:</p>
+<p ALIGN="CENTER"><img SRC="images/Image369.gif" width="81" height="68"></p>
+<p ALIGN="left">is approximated as a quadratic function of the boundary layer
+temperature T</font><font FACE="Arial" SIZE="1">FILM</font><font FACE="Arial">,
+defined as:</p>
+<p ALIGN="CENTER"><img SRC="images/Image370.gif" width="136" height="53"></p>
+<p ALIGN="left">and the temperature factor F</font><font FACE="Arial" SIZE="1">T</font><font FACE="Arial">
+is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image371.gif" width="141" height="68"></p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte8"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">combustion chemical reactions<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">The considered chemical reactions are:</p>
+<p ALIGN="CENTER"><img SRC="images/Image372.gif" width="151" height="90"></p>
+<p ALIGN="left">The stoichiometric oxygen mass for a unit fuel mass can be
+computed:</p>
+<p ALIGN="CENTER"><img SRC="images/Image373.gif" WIDTH="383" HEIGHT="65"></p>
+<p ALIGN="left">from which the stoichiometric air / fuel mass ratio can be
+determined.</p>
+<p ALIGN="left">The combustion products masses are:</p>
+<p ALIGN="CENTER"><img SRC="images/Image374.gif" width="211" height="61"></p>
+<p ALIGN="CENTER"><img SRC="images/Image375.gif" width="206" height="61"></p>
+<p ALIGN="CENTER"><img SRC="images/Image376.gif" WIDTH="241" HEIGHT="85"></p>
+<p ALIGN="left">where is:</p>
+<p ALIGN="CENTER"><img SRC="images/Image377.gif" width="210" height="28"></p>
+<p ALIGN="left">X</font><font FACE="Arial" SIZE="1">ash</font><font FACE="Arial">
+is the ash / dry fuel ratio and X</font><font FACE="Arial" SIZE="1">H2O</font><font FACE="Arial">
+is the fuel humidity.</p>
+<p ALIGN="left">When the excess air is known, the concentrations X</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial">,
+the molar fractions N</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial">
+and the partial pressure p</font><font FACE="Arial" SIZE="1">i</font><font FACE="Arial">
+of each species can be computed:</p>
+<p ALIGN="CENTER"><img SRC="images/Image378.gif" width="103" height="66"> <img SRC="images/Image379.gif" width="71" height="58">
+<img SRC="images/Image380.gif" width="108" height="66"></p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte9"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">burners tilt effect<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">The burners tilt shifts the flame upwards or downwards in the
+furnace. The effect rises when the fuel flow rate increases, because the flame
+length grows. The tilt effect is taken into account by partly shifting the inlet
+fuel flow rate upwards or downwards in proportion to the tilt angle.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left">&nbsp;</p>
+<p ALIGN="left"><font SIZE="4"><b><a name="parte10"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><p align="center">coal combustion<!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font></b>
+<font FACE="Arial">
+<p ALIGN="left">The coal combustion has three main phases:</p>
+<font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> volatile matter release</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> volatile matter combustion</p>
+</font><font FACE="Symbol">
+<p ALIGN="left">*</font><font FACE="Arial"> solid particles combustion</p>
+</font>
+<p ALIGN="left">&nbsp;</p>
+<blockquote>
+  <blockquote>
+  </blockquote>
+</blockquote>
+<p ALIGN="left">The volatile matter release and combustion is nearly
+instantaneous, whereas the solid particles combustion takes some time, that is
+to say solid particles do not completely burn in the same cell where they are
+injected.</p>
+<p ALIGN="left">Radiation heat transfer is due to gaseous contributions, mainly
+due to CO</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial"> and H</font><font FACE="Arial" SIZE="1">2</font><font FACE="Arial">O,
+and particulate contributions, which usually result from coal (char), soot and
+fly-ash. Radiation from fly-ash particles exceeds substantially the contribution
+of both triatomic combustion gases, as well as char and soot particles.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

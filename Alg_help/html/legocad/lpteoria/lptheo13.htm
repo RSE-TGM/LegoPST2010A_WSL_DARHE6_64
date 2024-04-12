@@ -1,0 +1,225 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_kinelec"></A>Electrical modules</P>
+</B></FONT><STRIKE><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</STRIKE><P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_kinelec"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_elecgene"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Synchronous machine (simplified model)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_elecmasi"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Asynchronous motor</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_electraf"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Transformer with tap changer</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_electra3"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Three-winding transformer</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_elecline"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Electrical PI-line model</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_elecsbar"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Electrical network node</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_elecamme"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Simplified electrical load</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_elecgipo"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Motor joint for pump or fan (simplified model)</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_elecgene"></A>Electrical modules: synchronous machine (simplified model)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/gene.htm#lg_libproc_GENE_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">GENE</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">The model simulates the behavior of a triphase third order sinchronous generator.</P>
+<P ALIGN="JUSTIFY">The adopted mathematical model utilizes the following leading hypotheses:</P>
+<P ALIGN="JUSTIFY">hysteresis and magnetic saturation phaenomena are omitted</P>
+<P ALIGN="JUSTIFY">field circuit acts along the direct axis</P>
+<P ALIGN="JUSTIFY">a damping circuit is present along both direct and quadrature axis</P>
+<P ALIGN="JUSTIFY">magnetomotive forces and fluxes distributions have sinusoidal shapes at the air gap (entrefer)</P>
+<P ALIGN="JUSTIFY">omopolar circuit is left out</P>
+<P ALIGN="JUSTIFY">transformatoric electromotive forces are left out</P>
+<P ALIGN="JUSTIFY">time variation of subtransient electromotive forces are omitted</P>
+<P ALIGN="JUSTIFY">By means of Park’s transforming and the abovementioned simplifications one gets the following third order model:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image743.gif" WIDTH=145 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image744.gif" WIDTH=193 HEIGHT=70></P>
+<P ALIGN="CENTER"><IMG SRC="Image745.gif" WIDTH=293 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">with three algebraical ties:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image746.gif" WIDTH=156 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image747.gif" WIDTH=156 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image748.gif" WIDTH=110 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">This sinchronous generator can be considered both as reference and as referred.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_elecmasi"></A>Electrical modules: asinchronous motor</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/masi.htm#lg_libproc_MASI_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">MASI</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">This model simulates the behavior of an asinchronous motor.</P>
+<P ALIGN="JUSTIFY">A Park representation of an asinchronous machine is used. It can simulate a motor of whatsoever power and having a whatsoever type of statoric and rotoric winding, as it refers itself to an equivalent machine characterized by star windings.</P>
+<P ALIGN="JUSTIFY">One could determine the electrical parameters of the equivalent circuit used for module solution in the following way:</P>
+<P ALIGN="JUSTIFY">as operator-fixed basing on experience</P>
+<P ALIGN="JUSTIFY">calculated from tag-data and nominal mechanical load values</P>
+<P ALIGN="JUSTIFY">if machine tag parameters are not available the program assigns them automatically on the base of the machine power.</P>
+<P ALIGN="JUSTIFY">To use correctly the related modules, the base tension of tranformer side it’s connected to must be the same as the nominal tension of the motor itself.</P>
+<P ALIGN="JUSTIFY">These are the main model hypotheses:</P>
+<P ALIGN="JUSTIFY">statoric and rotoric windings are symmetrical</P>
+<P ALIGN="JUSTIFY">a two poles equivalent machine is considered having statoric and rotoric windings star-connected</P>
+<P ALIGN="JUSTIFY">the rotor is isotrope (induction coefficients don’t depend on the angle position)</P>
+<P ALIGN="JUSTIFY">mutual induction coefficient vary following a co-sinusoidal law in function of the electrical angle between windings axes</P>
+<P ALIGN="JUSTIFY">magnetic circuits are linear and iron losses are considered irrelevant during Park transforming (these losses are then &#9;considered &#9;by introducing subsequently in the Park equivalent circuit an equivalent resistence in parallel at the inlet terminal)</P>
+<P ALIGN="JUSTIFY">time derivative of statoric flux is omitted (this is equivalent to leave out a current unidirectional component appearing during the first instants of a transient)</P>
+<P ALIGN="JUSTIFY">The equations of the third order model are the following:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image749.gif" WIDTH=401 HEIGHT=57></P>
+<P ALIGN="CENTER"><IMG SRC="Image750.gif" WIDTH=401 HEIGHT=57></P>
+<P ALIGN="CENTER"><IMG SRC="Image751.gif" WIDTH=246 HEIGHT=82></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">with three algebraic ties:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image752.gif" WIDTH=286 HEIGHT=34></P>
+<P ALIGN="CENTER"><IMG SRC="Image753.gif" WIDTH=289 HEIGHT=34></P>
+<P ALIGN="CENTER"><IMG SRC="Image754.gif" WIDTH=217 HEIGHT=34></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image755.gif" WIDTH=132 HEIGHT=54>&#9;<IMG SRC="Image756.gif" WIDTH=134 HEIGHT=54></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image757.gif" WIDTH=121 HEIGHT=54></P>
+<P ALIGN="CENTER"><IMG SRC="Image758.gif" WIDTH=84 HEIGHT=46></P>
+<P ALIGN="CENTER"><IMG SRC="Image759.gif" WIDTH=150 HEIGHT=28></P>
+<P ALIGN="CENTER"><IMG SRC="Image760.gif" WIDTH=154 HEIGHT=60></P>
+<P ALIGN="CENTER"><IMG SRC="Image761.gif" WIDTH=269 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image762.gif" WIDTH=304 HEIGHT=49></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_electraf"></A>Electrical modules: transformer with tap changer</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/traf.htm#lg_libproc_TRAF_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">TRAF</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">This model simulates a triphase variable ratio transformer.</P>
+<P ALIGN="JUSTIFY">Variable ratio is got by acting on the number of high tension spires. It represents a transformer phase with a gamma double bipole.</P>
+<P ALIGN="JUSTIFY">Transversal parameters are consituted by iron losses equivalent resistance and magnetization reactance. Longitudinal parameters are short circuit equivalent impedance brought to the primary, whose value depends on the transformation ratio.</P>
+<P ALIGN="JUSTIFY">With this model it’s possible to simulate a generic transformer, whichever its power and its primary and secondary windings, as it bases itself on an equivalent machine having both windings of star configuration.</P>
+<P ALIGN="JUSTIFY">Electrical parameters for the equivalent circuit used for model solution are determined from tag data.</P>
+<P ALIGN="JUSTIFY">Network base voltage must be different for the two transformer sides and equal to the nominal value for both primary and secondary terminal. It’s not allowed to have base tensions which differ from the nominal ones.</P>
+<P ALIGN="JUSTIFY">In the adopted mathematical model the following hypotheses are assumed:</P>
+<P ALIGN="JUSTIFY">phase displacement between primary and secondary tension depending on the transformer group is not considered</P>
+<P ALIGN="JUSTIFY">non-linearities introduced by iron are omitted</P>
+<P ALIGN="JUSTIFY">a variable ratio transformer is considered in load conditions, with primary winding spires variation</P>
+<P ALIGN="JUSTIFY">star equivalent of transformer is considered</P>
+<P ALIGN="JUSTIFY">time derivatives of primary and secondary currents are omitted, that is transients are considered as if at each integration step &#9;they attain a sinusoidal regime condition, so to have a pure algebraic model (as a consequency of this hypothesis one can’t observe the transients of switch on from void; these ones can be obtained by introducing the state variables currents and the transformer parasitic capacity together with the tension applied to it)</P>
+<P ALIGN="JUSTIFY">the equations describing the equivalent circuit are used in the mathematical model of the transformer, containing also the expression of its losses.</P>
+<P ALIGN="JUSTIFY">two internal switches are introduced in the transformer model by means of some conditions on the equations system</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="CENTER">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER"><IMG SRC="Image763.gif" WIDTH=487 HEIGHT=145></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Normalizing the equations with nominal values of tension, current and power, we obtain:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image764.gif" WIDTH=80 HEIGHT=46>&#9;<IMG SRC="Image765.gif" WIDTH=72 HEIGHT=46>&#9;<IMG SRC="Image766.gif" WIDTH=60 HEIGHT=46></P>
+<P ALIGN="CENTER"><IMG SRC="Image767.gif" WIDTH=86 HEIGHT=49>&#9;<IMG SRC="Image768.gif" WIDTH=101 HEIGHT=45></P>
+<P ALIGN="CENTER"><IMG SRC="Image769.gif" WIDTH=114 HEIGHT=42>&#9;<IMG SRC="Image770.gif" WIDTH=121 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image771.gif" WIDTH=72 HEIGHT=42>&#9;<IMG SRC="Image772.gif" WIDTH=46 HEIGHT=42></P>
+<P ALIGN="CENTER"><IMG SRC="Image773.gif" WIDTH=220 HEIGHT=56></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_electra3"></A>Electrical modules: three-winding transformer</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/tra3.htm#lg_libproc_TRA3_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">TRA3</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">This model simulates a triphase variable ratio transformer with three windings: one primary winding (with variable number of spires) and two secondary windings (with fixed numbers of spires).</P>
+<P ALIGN="JUSTIFY">The main hypoteses used in this model are the same used for the </FONT><A HREF="#lg_lptheo_electraf"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">two-winding transformer</U></FONT></A></P>
+<P ALIGN="CENTER"><IMG SRC="Image774.gif" WIDTH=486 HEIGHT=327></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The equations defining the mathematical of the three-windings transformer are the following:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image775.gif" WIDTH=125 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image776.gif" WIDTH=169 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image777.gif" WIDTH=172 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image778.gif" WIDTH=196 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Using the normalized values (dividing currents and tensions for their rated values):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image779.gif" WIDTH=60 HEIGHT=48>&#9;<IMG SRC="Image780.gif" WIDTH=48 HEIGHT=48></P>
+<P ALIGN="CENTER"><IMG SRC="Image781.gif" WIDTH=150 HEIGHT=56>&#9;<IMG SRC="Image782.gif" WIDTH=132 HEIGHT=56></P>
+<P ALIGN="CENTER"><IMG SRC="Image783.gif" WIDTH=154 HEIGHT=56>&#9;<IMG SRC="Image784.gif" WIDTH=132 HEIGHT=56></P>
+<P ALIGN="CENTER"><IMG SRC="Image785.gif" WIDTH=121 HEIGHT=49>&#9;<IMG SRC="Image786.gif" WIDTH=124 HEIGHT=49></P>
+<P ALIGN="CENTER"><IMG SRC="Image787.gif" WIDTH=201 HEIGHT=60>&#9;<IMG SRC="Image788.gif" WIDTH=204 HEIGHT=60></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image789.gif" WIDTH=189 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and defining (as the number of spires of the secondary windings are fixed, N</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">&nbsp;=&nbsp;N</FONT><FONT FACE="Arial, helvetica" SIZE=1>2n</FONT><FONT FACE="Arial, helvetica"> and N</FONT><FONT FACE="Arial, helvetica" SIZE=1>3</FONT><FONT FACE="Arial, helvetica">&nbsp;=&nbsp;N</FONT><FONT FACE="Arial, helvetica" SIZE=1>3n</FONT><FONT FACE="Arial, helvetica">):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image790.gif" WIDTH=84 HEIGHT=49>&#9;<IMG SRC="Image791.gif" WIDTH=86 HEIGHT=56>&#9;<IMG SRC="Image792.gif" WIDTH=88 HEIGHT=56></P>
+<P ALIGN="CENTER"><IMG SRC="Image793.gif" WIDTH=93 HEIGHT=49>&#9;<IMG SRC="Image794.gif" WIDTH=93 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the previously described equations may be written in the form:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image795.gif" WIDTH=132 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image796.gif" WIDTH=138 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image797.gif" WIDTH=140 HEIGHT=25></P>
+<P ALIGN="CENTER"><IMG SRC="Image798.gif" WIDTH=140 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Finally these equations are divided into their real and imaginary components.</P>
+<P ALIGN="JUSTIFY">Like for the two-winding transformer, the electrical parameters for the equivalent circuit used for model solution are determined from tag data.</P>
+</FONT><B><FONT SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_elecline"></A>Electrical modules: electrical PI-line model</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/lina.htm#lg_libproc_LINA_summ"><U><FONT COLOR="#0000ff">LINA</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">This model simulates the functioning of a triphase line characterized by adjustable lenght, which could be modified by acting on a model variable.</P>
+<P ALIGN="JUSTIFY">A phase of the line is represented by a pi double bipole. Transversal parameters are constituted by an conductance equivalent to the losses, that are proportional to the second power of the tension, and by the capacitive suceptance of the line, considered as a condenser.</P>
+<P ALIGN="JUSTIFY">The longitudinal impedence by total resistence and reactance of the line.</P>
+<P ALIGN="JUSTIFY">The module can simulate a line in which the phaenomenon of waves propagation may be omitted (short lines).</P>
+<P ALIGN="JUSTIFY">The following hypotheses are adopted in the mathematical model:</P>
+<P ALIGN="JUSTIFY">the effect of dissimmetry among the phases due to geometrical conductors disposition is left out</P>
+<P ALIGN="JUSTIFY">waves propagation along the line is left out (sinusoidal regime is hypotized at each time step: hypothesis of short line) (as a consequency of this last hypothesis one can’t observe the transients of switch on from void; these ones can be obtained by introducing the state variables currents together with the tension applied to it)</P>
+<P ALIGN="JUSTIFY">the equations describing the pi equivalent circuit are used in the mathematical model of the line, containing also the expression of its losses</P>
+<P ALIGN="JUSTIFY">two internal switches are introduced in the line model by means of some conditions on the equations system</P>
+<P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image799.gif" WIDTH=516 HEIGHT=168></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P ALIGN="JUSTIFY">For each line phase one can write the following equations:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image800.gif" WIDTH=258 HEIGHT=45></P>
+<P ALIGN="CENTER"><IMG SRC="Image801.gif" WIDTH=264 HEIGHT=45></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER">R = r L&#9;G = g L&#9;B = b L</P>
+<P ALIGN="CENTER"><IMG SRC="Image802.gif" WIDTH=94 HEIGHT=49>&#9;<IMG SRC="Image803.gif" WIDTH=104 HEIGHT=42>&#9;<IMG SRC="Image804.gif" WIDTH=102 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where r, x, g, b indicate quantities for unit of length.</P>
+<P ALIGN="JUSTIFY">Moreover, also the equations for chained difference of tension </FONT>(<FONT FACE="Symbol">D</FONT>v), <FONT FACE="Arial, helvetica">inlet powers (P</FONT><FONT FACE="Arial, helvetica" SIZE=1>1</FONT><FONT FACE="Arial, helvetica">,Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>1</FONT><FONT FACE="Arial, helvetica">) and outlet powers (P</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">,Q</FONT><FONT FACE="Arial, helvetica" SIZE=1>2</FONT><FONT FACE="Arial, helvetica">) are written:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image805.gif" WIDTH=236 HEIGHT=29></P>
+<P ALIGN="CENTER"><IMG SRC="Image806.gif" WIDTH=128 HEIGHT=21>&#9;<IMG SRC="Image807.gif" WIDTH=132 HEIGHT=21></P>
+<P ALIGN="CENTER"><IMG SRC="Image808.gif" WIDTH=142 HEIGHT=21>&#9;<IMG SRC="Image809.gif" WIDTH=145 HEIGHT=21></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_elecsbar"></A>Electrical modules: electrical network node</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/sbar.htm#lg_libproc_SBAR_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">SBAR</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">This model simulates the behavior of a connection bar having N connected branches.</P>
+<P ALIGN="JUSTIFY">The equation used in the model are:</P>
+<P ALIGN="JUSTIFY">Kirchoff node equations:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image810.gif" WIDTH=66 HEIGHT=28>&#9;<IMG SRC="Image811.gif" WIDTH=64 HEIGHT=28></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">chained tension module equation:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image812.gif" WIDTH=154 HEIGHT=36></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">currents modules equations (j = 1,..,N):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image813.gif" WIDTH=101 HEIGHT=38></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Particular cases with connection bars in shor-circuit or isolated are considered too.</P>
+<P ALIGN="JUSTIFY">Utilizers convenction was used to write the equations (entering current as positive).</P>
+<P ALIGN="JUSTIFY">One can distinguish three cases depending on the choices the user takes during module instatiation:</P>
+<P ALIGN="JUSTIFY">N (N=1..15) branches to be connected to other components</P>
+<P ALIGN="JUSTIFY">N+1 branches, N of which to be connected to other components and one to a tension driven switch</P>
+<P ALIGN="JUSTIFY">N+2 branches, N of which to be connected to other components and two to tension driven switches (only one switch can be shut off)</P><DIR>
+<DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_elecamme"></A>Electrical modules: simplified electrical load</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/amme.htm#lg_libproc_AMME_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">AMME</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">This model simulates the behavior of a passive load, constituted by a variable admittance</FONT> Y=G+jB <FONT FACE="Arial, helvetica">which, with a tension</FONT> v=v<FONT SIZE=1>R</FONT>+jv<FONT SIZE=1>X</FONT><FONT FACE="Arial, helvetica">, absorbes a current </FONT>i=Y*v <FONT FACE="Arial, helvetica">and a power</FONT> P+jQ=v*i’.</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The used equations are:</P>
+<P ALIGN="JUSTIFY">Ohm’s law</P>
+<P ALIGN="JUSTIFY">current module equation</P>
+<P ALIGN="JUSTIFY">powers equations</P>
+<P ALIGN="JUSTIFY">Generators convention was used for the equations (delivered currents as positive).</P>
+<P ALIGN="JUSTIFY">Separating real and immaginary components, one gets the following equations:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image814.gif" WIDTH=108 HEIGHT=21>&#9;<IMG SRC="Image815.gif" WIDTH=108 HEIGHT=21></P>
+<P ALIGN="CENTER"><IMG SRC="Image816.gif" WIDTH=106 HEIGHT=21>&#9;<IMG SRC="Image817.gif" WIDTH=108 HEIGHT=21></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_elecgipo"></A>Electrical modules: motor joint for pump or fan (simplified model)</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/gipo.htm#lg_libproc_GIPO_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">GIPO</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">This model simulates the coupling between a motor and an operating machine. It’s used, together with the models of an asynchronous motor and of a generic operating machines (typically a centrifugal pump, an air/gas compressor or a fan).</P>
+<P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image818.gif" WIDTH=455 HEIGHT=180></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Three typical coupling cases are contemplated:</P>
+<P ALIGN="JUSTIFY">a motor coupled to an operating machine by means of an hydraulic coupling and, contemporarily to another operating &#9;machine(e.g. booster pump + motor + feed pump; the booster pump rotates at motor speed while feed pump can vary its speed depending on the value of the input variable ALSC, simulating the behavior of the pump "scoop");</P>
+<P ALIGN="JUSTIFY">motor coupled to a pump by means of a multiplier or a reducer of gears speed;</P>
+<P ALIGN="JUSTIFY">motor coupled with a vent by means of a multiplier or a reducer of gears speed: with respect to the previous case, the expression of resistent power changes, depending now on the input ALSC, which represents suction lock-gates position.</P>
+<P ALIGN="JUSTIFY">In case of rigid coupling all rotate at the same speed, and the mechanical equation is valid:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image819.gif" WIDTH=152 HEIGHT=41></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">If the coupling is effectuated by means of a hydraulic coupling gear and a multiplier (or demultiplier of speed), two different speed must be considered. The transmission ratio will be the product of the ones of multiplier and coupling gear.In steady state conditions gear speed is considered linear with the scoop, while in transient conditions a linear relationship is supposed between motor speed and operating machine.</P></FONT></BODY>
+</HTML>

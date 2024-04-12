@@ -1,0 +1,123 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_airflue"></A>Air and flue gas system components</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_airflue"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<U><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</U></FONT><P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_fluedamp"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Dampers</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_fluevent"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Fans</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_flueplen"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Air and flue gas manifolds</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_flueheat"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Air heaters</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_fluedamp"></A>Air and flue gas system components: dampers</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/damp.htm#lg_libproc_DAMP_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">DAMP</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">The mathematical model of the damper consists of only one algebraical equation deriving from the momentum conservation equation which relates the pressure difference between inlet and outlet of the damper and the fluid flow rate flowing through it.</P>
+<P ALIGN="JUSTIFY">Such pressure difference is subdivided in two terms. One of them takes into account the pressure drop on the duct whereas the second one is related to the losses that the damper actually has.</P>
+<P ALIGN="JUSTIFY">The model main hypotheses are:</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no heat storage</P>
+<P ALIGN="JUSTIFY">The momentum equation is as follows:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image676.gif" WIDTH=222 HEIGHT=53></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_fluevent"></A>Air and flue gas system components: fans</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The model simulates the operation of a fan, both axial and centrifugal.</P>
+<P ALIGN="JUSTIFY">The main hypotheses are:</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no heat storage</P>
+<P ALIGN="JUSTIFY">no inertia</P>
+<P ALIGN="JUSTIFY">no heat transfer between fluid and component casing and internals</P>
+<P ALIGN="JUSTIFY">Fan characteristic curves are empirically developed by the fan manufacturer and uniquely define head response as function of volumetric flow rate q, fan rotational speed </FONT><FONT FACE="Symbol">w</FONT><FONT FACE="Arial, helvetica"> and blades position</FONT> <FONT FACE="Symbol">J</FONT> <FONT FACE="Arial, helvetica">(see </FONT><A HREF="#lg_lptheo_fluenot1v"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">note 1</U></FONT></A><FONT FACE="Arial, helvetica"> and </FONT><A HREF="#lg_lptheo_fluenot2v"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">note 2</U></FONT></A><FONT FACE="Arial, helvetica">)</FONT>.</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The fan head is defined as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image677.gif" WIDTH=126 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">If the fan characteristic curves are not known, but only a working point besides the nominal one is known, the following relationships can be used:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image678.gif" WIDTH=265 HEIGHT=56></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where b is a coefficient dependent on the blades position.</P>
+<P ALIGN="JUSTIFY">The power balance equation of fluid flowing through the fan is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image679.gif" WIDTH=156 HEIGHT=22></P>
+<B><FONT SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY"><A NAME="lg_lptheo_fluenot1v"></A>Note 1:</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For axial fans the</FONT> <FONT FACE="Symbol">J</FONT> <FONT FACE="Arial, helvetica">parameter is related to the position of blades, whereas for centrifugal ones the parameter is related to the position of the diffuser. In the module it is supposed that the </FONT><FONT FACE="Symbol">J</FONT> <FONT FACE="Arial, helvetica">value is zero when blades (or diffuser) position allows to flow through the fan the minimum flow rate. Value 1 is supposed when blades (or diffuser) position allows to flow through the fan the maximum flow rate. At intermediate values of</FONT> <FONT FACE="Symbol">J</FONT> <FONT FACE="Arial, helvetica">control parameter, correspond intermediate values of blades (or diffuser) position.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY"><A NAME="lg_lptheo_fluenot2v"></A>Note 2:</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The fan characteristic curves are usually converted to a simpler form by development of homologous curves, defined in terms of reduced variables (actual value to rated value ratio), namely reduced head and torque versus reduced fan speed and volumetric flow.</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image191.gif" WIDTH=148 HEIGHT=90></P>
+<P ALIGN="CENTER"><IMG SRC="Image192.gif" WIDTH=102 HEIGHT=48>&#9;<IMG SRC="Image193.gif" WIDTH=76 HEIGHT=46>&#9;<IMG SRC="Image194.gif" WIDTH=82 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The similitude theory states that, if two working points 1 and 2 are so related:</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image195.gif" WIDTH=80 HEIGHT=49>&#9;<IMG SRC="Image680.gif" WIDTH=38 HEIGHT=46>&#9;<IMG SRC="Image196.gif" WIDTH=173 HEIGHT=58>&#9;<IMG SRC="Image197.gif" WIDTH=176 HEIGHT=58></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_flueplen"></A>Air and flue gas system components: air and flue gas manifolds</P>
+</B></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/plen.htm#lg_libproc_PLEN_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">PLEN</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">The PLEN module simulates tanks or manifolds full of air or flue gases.</P>
+<P ALIGN="JUSTIFY">The model is based on the following main hypotheses:</P>
+<P ALIGN="JUSTIFY">perfect mixing of the gas</P>
+<P ALIGN="JUSTIFY">the gas follows the perfect gas law</P>
+<P ALIGN="JUSTIFY">no heat transfer between gas and walls</P>
+<P ALIGN="JUSTIFY">The continuity equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image681.gif" WIDTH=249 HEIGHT=52></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">which becomes, dropping the term V</FONT>(<FONT FACE="Symbol">¶r</FONT>/<FONT FACE="Symbol">¶</FONT>T)(dT/dt):</P>
+<P ALIGN="CENTER"><IMG SRC="Image682.gif" WIDTH=180 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The equation of gas energy conservation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image683.gif" WIDTH=193 HEIGHT=48></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1 COLOR="#ffffff"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_flueheat"></A>Air and flue gas system components: air heaters</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">A Ljungstr&ouml;m air heater is modelled. These heaters are constituted by an iron sheet vertical cylinder subdivided into N sectors. In each sector mill packs, arranged in order to obtain a large exchange surface between fluid (flue gas or air) and metal, are inserted.</P>
+<P ALIGN="JUSTIFY">A part of the sectors (generally half) is crossed lengthwise by the flue gas, the remaining part is crossed by the air, in countercurrent with respect to the flue gas flow.</P>
+<P ALIGN="JUSTIFY">The cylinder is kept in rotation at an angular velocity of 0.1 ÷ 0.2 rad/s.</P>
+<P ALIGN="JUSTIFY">As a result of the rotation, the mill packs of the same sector are crossed first by the flue gas, from which heat is absorbed, and then by the air that gets the heat previously taken away from flue gas.</P>
+<P ALIGN="JUSTIFY">In the mathematical model the cylinder is assumed to be subdivided into an even number of sectors and, at a given time "t", one half of the sectors is supposed to be crossed by the flue gas and the other half by the air.</P>
+<P ALIGN="JUSTIFY">Considering a cylindrical coordinates frame of reference with the "z" axis coinciding with the axis of rotation of the sheet iron cylinder, the temperature distribution in the metal of the mill packs contained in each sector is assumed as uniform both along the "z" axis and in the radial direction.</P>
+<P ALIGN="JUSTIFY">Besides, treating the thermal exchange between the fluid (flue gas or air) flowing through a given sector and the mill packs metal, the angular distribution of the metal temperature and the axial distribution of the fluid temperature along the sector are both approximated by means of a weighted average of the temperature at the considered sector extremes (in the angular direction and in the axial direction, respectively).</P>
+<P ALIGN="JUSTIFY">In particular, the average temperature of the mill packs metal contained in the sector i is given by the relation:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image684.gif" WIDTH=174 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where k is the weight factor</FONT> (0 <FONT FACE="Symbol">£</FONT> k <FONT FACE="Symbol">£</FONT> 1) <FONT FACE="Arial, helvetica">and T</FONT><FONT FACE="Arial, helvetica" SIZE=1>w,i</FONT><FONT FACE="Arial, helvetica"> the average temperature (in the radial direction and along the "z" axis) of the mill packs metal at the separation surface between the sectors i and i+1</P>
+<P ALIGN="JUSTIFY">Moreover, the average temperature of the fluid (air or flue gas) in the sector i is given by the relation:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image685.gif" WIDTH=176 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where k is the same weight factor used for the metal average temperature, while T</FONT><FONT FACE="Arial, helvetica" SIZE=1>fl,IN</FONT><FONT FACE="Arial, helvetica"> and T</FONT><FONT FACE="Arial, helvetica" SIZE=1>fl.EX</FONT><FONT FACE="Arial, helvetica"> are the inlet and outlet fluid temperatures of the sector i, respectively.</P>
+<P ALIGN="JUSTIFY">Further hypotheses of the model are:</P>
+<P ALIGN="JUSTIFY">no mass storage in the flue gas as well as in the air;</P>
+<P ALIGN="JUSTIFY">uniform flue gas flow rate through all the sectors crossed by the flue gas;</P>
+<P ALIGN="JUSTIFY">uniform air flow rate through all the sectors crossed by the air;</P>
+<P ALIGN="JUSTIFY">uniform flue gas inlet specific enthalpy over the whole section of each sector crossed by the flue gas;</P>
+<P ALIGN="JUSTIFY">uniform air inlet specific enthalpy over the whole section of each sector crossed by the air;</P>
+<P ALIGN="JUSTIFY">negligible kinetic and gravitational terms in the energy conservation equations both of the flue gas and of the air.</P>
+<P ALIGN="JUSTIFY">The following equations have been used:</P>
+<P ALIGN="JUSTIFY">conservation equation of flue gas mass:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image686.gif" WIDTH=204 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">conservation equation of flue gas energy:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image687.gif" WIDTH=328 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image688.gif" WIDTH=249 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">conservation equation of air mass:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image689.gif" WIDTH=145 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">conservation equation of air energy:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image690.gif" WIDTH=246 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image691.gif" WIDTH=193 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">conservation equation of energy in the mill packs metal:</P>
+<P ALIGN="JUSTIFY">during a revolution the mill pack is crossed by flue gas and air; the general equation:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image692.gif" WIDTH=116 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">approximating dT</FONT><FONT FACE="Arial, helvetica" SIZE=1>w</FONT><FONT FACE="Arial, helvetica"> as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image693.gif" WIDTH=180 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and dt as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image694.gif" WIDTH=81 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">becomes, when the pack is crossed by flue gas:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image695.gif" WIDTH=306 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and when the pack is crossed by air:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image696.gif" WIDTH=286 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">It must be noted that, since an axial nodalization has not been foreseen in the physical-mathematical model, a single application of the module represents a single axial cell. Therefore, generally, to obtain "m" axial cells "m" LJUN modules must be connected in series.</P></FONT></BODY>
+</HTML>

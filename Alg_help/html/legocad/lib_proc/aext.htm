@@ -1,0 +1,133 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE AEXT</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AEXT_summ"></A>MODULE AEXT&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AEXT_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AEXT_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AEXT_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="file:///D:/usr/users/giugno/doc_puerto/lib_proc/aext.htm#lg_libproc_AEXT_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AEXT_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AEXT_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AEXT_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AEXT_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=6><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AEXT_A"></A>MODULE AEXT&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">AIR EJECTOR OR VACUUM PUMP</P>
+<P>&nbsp;</P>
+<P>The AEXT module deals with the problem of calculating the mass flow rate in a plant component such as an air ejector or a vacuum pump.</P>
+<P>The reference component for modelling is the air ejector.&nbsp;</P>
+<P>The working fluid is air.</P>
+<P>The mathematical model is a semi-empirical one.</P>
+<P>It is based on a simplified momentum equation in which the inertial term, the flux term and the gravitational term are neglected.</P>
+<P>The downstream pressure is reduced depending on the value of a control parameter, the driving flow for an air ejector, in order to have the right pressure difference between the inlet of the driven flow and the mixing chamber.</P>
+<P>If the downstream pressure changes, the reduced pressure too varies affecting the driven mass flow rate.</P>
+<P>Data of a working point allow to determine the internal data, namely the driven flow pressure loss coefficient and the downstream pressure reduction coefficient, to match the component performances.</P>
+<P>No mass storage in the component is considered.</P>
+<P>No heat balance is performed.</P>
+<P>The main simplifications are:&nbsp;</P>
+<P>-The drive flow is not taken into account in the computation of the mass flow rate, that is the outlet mass flow is equal to the driven mass flow;</P>
+<P>-The outlet flow temperature is not calculated.&nbsp;</P>
+<P>The module can simulate a vacuum pump, making use of the rotational speed as control parameter.</P>
+<P>Of course, in this case the reduced downstream pressure has no physical meaning.</P>
+<P>The service water mass flow rate appears among the input variables in this case. </P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AEXT_B"></A>MODULE AEXT&#9;CARD B</P>
+<I><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1269.gif" WIDTH=516 HEIGHT=385></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>[kg/S] WAIR air mass flow rate through the device</P>
+<P>[Pa] PMON air pressure at device inlet</P>
+<P>[Pa] PVAL air pressure at device outlet</P>
+<P>[K] TMON air temperature at device inlet</P>
+<P>[rpm] RSPE rotational speed</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>Note 1</P>
+<P>The RSPE variable has really not the meaning of a rotational speed, but it is rather a control variable</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_AEXT_C"></A>MODULE AEXT&#9;CARD C</P>
+<I><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I></FONT><FONT FACE="Arial"><P>&nbsp;</P>
+<P>In addition to initial values of input and output variables (meaning defined in card B1) user must assign the following data:</P>
+<P>&nbsp;</P>
+<P>[Pa] PMONOM nominal air pressure at device inlet</P>
+<P>[Pa] PVANOM nominal air pressure at device outlet</P>
+<P>[K] TMONOM nominal air temperature at device inlet</P>
+<P>[kg/s] WNOM nominal air mass flow rate through the device</P>
+<P>[kg/s] WMAX maximum air mass flow rate through the device</P>
+<P>[Pa] PMMIN minimum allowable air pressure at device outlet in nominal conditions</P>
+<P>[rpm] RSPMA nominal rotational speed</P>
+<P>[ ] REVFLI reverse flow index ( 0 reverse flow allowed)</P>
+<P>( 1 reverse flow not allowed)</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AEXT_D"></A>MODULE AEXT&#9;CARD D</P>
+<I><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I></FONT><FONT FACE="Arial"><P>&nbsp;</P>
+<P>To initialize the AEXT module variables no particular prescription is required.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AEXT_E"></A>MODULE AEXT&#9;CARD E</P>
+<I><P ALIGN="CENTER">User's Subprograms</P>
+</B></I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In the AEXT module no user subprograms are requested.</P>
+<P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AEXT_F"></A>MODULE AEXT&#9;CARD F</P>
+<I><P ALIGN="CENTER">Residuals</P>
+</B></I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module mathematical model consists of the momentum equation which gives rise to the following residual:</P>
+<P ALIGN="CENTER">RNI(1) = CVMAX*SQRT((PMOC-PVAC)*RING)-WAIR</P>
+<P>(normalization factor = WO)</P>
+<P>&nbsp;</P>
+<P>where CVMAX flow coefficient dependent on nominal conditions</P>
+<P>PMOC inlet pressure</P>
+<P>PVAC fictitious downward pressure dependent on nominal conditions, true outlet pressure and control variable</P>
+<P>RING inlet air density </P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AEXT_G"></A>MODULE AEXT&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=2><P>SUBROUTINE AEXTI3 (IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE AEXTI4 (IOB, MOD, IBLOC)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE AEXTI2 (IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>$ IBL1, IBL2, IER, CNXYU, TOL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE AEXTC1 (IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$ IBL1, IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE AEXT (IFUN, IXYU, XYU, IPD, DATI, RNI)</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AEXT_H"></A>MODULE CFAS&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>No reference test case is available.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

@@ -1,0 +1,250 @@
+# this file created with LEGOPHI rel. 0.2
+1256 600
+gen5_0
+n
+0___
+222.0 124.0
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+rgv2_0
+n
+10__
+210.0 62.0
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+zavo_0
+n
+11__
+559.0 538.0
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+rgv2_0
+n
+12__
+231.0 364.0
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+traf_0
+n
+13__
+452.273888 135.999998
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+sble_1
+n
+14__
+535.273888 135.999998
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+car1_0
+n
+15__
+366.273888 244.999998
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+traf_0
+n
+16__
+453.273888 421.999998
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+sble_1
+n
+17__
+362.273888 421.999998
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+line_0
+n
+1___
+647.0 149.0
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+sble_0
+n
+2___
+366.0 137.0
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+sble_0
+n
+3___
+780.0 138.0
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+line_0
+n
+5___
+686.0 433.0
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+gen5_0
+n
+6___
+248.0 424.0
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+car1_0
+n
+8___
+779.0 262.0
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+sble_0
+n
+9___
+557.0 421.0
+d:/LegoPc/Lavoro/Libgraph/Libraries/Elettra
+****
+gen5_0
+0___
+port0
+busy port0 2___
+port1
+busy port3 10__
+port2
+busy port5 6___
+port4
+free
+port5
+free
+port6
+busy port4 10__
+port7
+free
+port8
+free
+++++
+rgv2_0
+10__
+port3
+busy port1 0___
+port4
+busy port6 0___
+++++
+zavo_0
+11__
+port0
+busy port2 9___
+port1
+free
+++++
+rgv2_0
+12__
+port3
+busy port1 6___
+port4
+busy port6 6___
+++++
+traf_0
+13__
+port0
+busy port1 2___
+port1
+free
+port3
+free
+port2
+busy port0 14__
+++++
+sble_1
+14__
+port1
+busy port0 1___
+port2
+free
+port0
+busy port2 13__
+port3
+free
+++++
+car1_0
+15__
+port1
+free
+port0
+busy port2 2___
+++++
+traf_0
+16__
+port0
+busy port1 17__
+port1
+free
+port3
+free
+port2
+busy port0 9___
+++++
+sble_1
+17__
+port1
+busy port0 16__
+port2
+free
+port0
+busy port0 6___
+port3
+free
+++++
+line_0
+1___
+port0
+busy port1 14__
+port1
+busy port0 3___
+port3
+free
+port2
+free
+++++
+sble_0
+2___
+port0
+busy port0 0___
+port1
+busy port0 13__
+port2
+busy port0 15__
+++++
+sble_0
+3___
+port0
+busy port1 1___
+port1
+busy port1 5___
+port2
+busy port0 8___
+++++
+line_0
+5___
+port0
+busy port1 9___
+port1
+busy port1 3___
+port3
+free
+port2
+free
+++++
+gen5_0
+6___
+port0
+busy port0 17__
+port1
+busy port3 12__
+port2
+free
+port4
+free
+port5
+busy port2 0___
+port6
+busy port4 12__
+port7
+free
+port8
+free
+++++
+car1_0
+8___
+port1
+free
+port0
+busy port2 3___
+++++
+sble_0
+9___
+port0
+busy port2 16__
+port1
+busy port0 5___
+port2
+busy port0 11__
+++++
+****

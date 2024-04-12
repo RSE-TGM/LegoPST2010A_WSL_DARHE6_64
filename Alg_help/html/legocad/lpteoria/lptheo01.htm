@@ -1,0 +1,146 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LEGO PROCESS LIBRARIES</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_valves"></A>Valves and pumps</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Abstracts of the <B>user documentation</B> of </FONT><A HREF="../lib_proc/lglibpro.htm#lg_libproc_valves"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">these modules</U></FONT></A></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_valvgen"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Generalities (on these modules)</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_valvvalv"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Valves</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_lptheo_valvpump"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Pumps</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_valvgen"></A>Valves and pumps: generalities</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The main hypotheses used in the modelization of these modules are:</P>
+<P ALIGN="JUSTIFY">no mass storage</P>
+<P ALIGN="JUSTIFY">no heat storage</P>
+<P ALIGN="JUSTIFY">no inertia</P>
+<P ALIGN="JUSTIFY">no heat transfer between fluid and component casing and internals</P>
+<P ALIGN="JUSTIFY">The basic equations with the above mentioned hypotheses become:</P>
+<P ALIGN="JUSTIFY">the continuity equation:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image146.gif" WIDTH=69 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the momentum equation:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image147.gif" WIDTH=284 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the first law of thermodynamics:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image148.gif" WIDTH=193 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Substituting the continuity equation in the momentum equation the last one becomes:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image149.gif" WIDTH=228 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For a constant density fluid the two equations, integrated on the component, become:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image150.gif" WIDTH=97 HEIGHT=22></P>
+<P ALIGN="CENTER"><IMG SRC="Image151.gif" WIDTH=401 HEIGHT=53></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image152.gif" WIDTH=136 HEIGHT=60><FONT FACE="Arial, helvetica">&#9;<IMG SRC="Image153.gif" WIDTH=90 HEIGHT=60></P>
+<P ALIGN="JUSTIFY">It is moreover assumed:</P>
+<P>the inlet and outlet flow cross-section areas of the component are equal, namely:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image154.gif" WIDTH=76 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P>the inlet and outlet component elevations are equal, namely:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image155.gif" WIDTH=69 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P>and the momentum equation becomes:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image156.gif" WIDTH=169 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_valvvalv"></A>Valves and pumps: valves</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/valv.htm#lg_libproc_VALV_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">VALV</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">For valves it is:</P>
+<P ALIGN="CENTER">dh = 0</P>
+<P ALIGN="JUSTIFY">namely:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image157.gif" WIDTH=69 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In the momentum equation it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image158.gif" WIDTH=58 HEIGHT=25></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For local momentum losses Dp</FONT><FONT FACE="Arial, helvetica" SIZE=1>fric</FONT><FONT FACE="Arial, helvetica"> is customarily defined as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image159.gif" WIDTH=134 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The local momentum loss coefficient k</FONT><FONT FACE="Arial, helvetica" SIZE=1>loss</FONT><FONT FACE="Arial, helvetica">/A² can be related to the valve fluid coefficient C</FONT><FONT FACE="Arial, helvetica" SIZE=1>v</FONT><FONT FACE="Arial, helvetica"> (see </FONT><A HREF="#lg_lptheo_valvnot1v"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">note 1</U></FONT></A><FONT FACE="Arial, helvetica">):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image160.gif" WIDTH=121 HEIGHT=60></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">obtaining:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image161.gif" WIDTH=214 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">(see </FONT><A HREF="#lg_lptheo_valvnot2v"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">note 2</U></FONT></A><FONT FACE="Arial, helvetica">).</P>
+<P ALIGN="JUSTIFY">Making the assumption the last relationship to be valid for a compressible fluid too, where the critical flow can occur, and remembering that:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image162.gif" WIDTH=141 HEIGHT=58><IMG SRC="Image163.gif" WIDTH=12 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image164.gif" WIDTH=56 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the term p</FONT><FONT FACE="Arial, helvetica" SIZE=1>app</FONT><FONT FACE="Arial, helvetica"> is defined:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image165.gif" WIDTH=17 HEIGHT=22><FONT FACE="Arial, helvetica">&#9;<IMG SRC="Image166.gif" WIDTH=73 HEIGHT=22>&#9;<IMG SRC="Image167.gif" WIDTH=78 HEIGHT=25></P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image168.gif" WIDTH=17 HEIGHT=22><FONT FACE="Arial, helvetica">&#9;<IMG SRC="Image169.gif" WIDTH=73 HEIGHT=22>&#9;<IMG SRC="Image170.gif" WIDTH=78 HEIGHT=25></P>
+<P ALIGN="JUSTIFY">More accurate models can be used to evaluate the mass flow rate when the critical flow occurs, such as the Moody-Morris model, which are not reported here.</P>
+<P ALIGN="JUSTIFY">The standard form of the momentum equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image171.gif" WIDTH=168 HEIGHT=30></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">but two peculiar conditions must be taken into consideration for numerical stability reasons:</P>
+<P ALIGN="JUSTIFY">the valve is closed - the momentum equation must be replaced with the statement:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image172.gif" WIDTH=41 HEIGHT=17></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the valve is open and the pressure difference is very small with respect to the inlet pressure - the momentum equation is in the form:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image173.gif" WIDTH=185 HEIGHT=49></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><A NAME="lg_lptheo_valvnot1v"></A>Note 1:</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The valve fluid coefficient C</FONT><FONT FACE="Arial, helvetica" SIZE=1>v</FONT><FONT FACE="Arial, helvetica"> is defined as the volumetric fluid flow rate of water at 15 °C and 1 bar through a wide open valve undergoing a pressure difference of one.</P>
+<P ALIGN="JUSTIFY">Usually the volumetric flow rate is expressed in US gallons per minute and the pressure difference in psi. The conversion factor is:</P>
+<P ALIGN="CENTER">c<SUB>v</SUB> (SI units) = 2.4*10<SUP>-5</SUP> c<SUB>v</SUB> (US units)</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><A NAME="lg_lptheo_valvnot2v"></A>Note 2:</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">If the momentum equation has the form:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image174.gif" WIDTH=284 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the term </FONT><FONT FACE="Symbol">¶</FONT>r<FONT FACE="Symbol">/¶G</FONT> <FONT FACE="Arial, helvetica">of the jacobian matrix vanishes when it is G = 0. To avoid it a linear term with respect to G is often added to the equation, which becomes:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image175.gif" WIDTH=345 HEIGHT=48></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where G</FONT><FONT FACE="Arial, helvetica" SIZE=1> lam</FONT><FONT FACE="Arial, helvetica"> has a constant value, which is small in comparison to the nominal value of G, for example G</FONT><FONT FACE="Arial, helvetica" SIZE=1> lam</FONT><FONT FACE="Arial, helvetica"> = 0.1 kg/s.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_lptheo_valvpump"></A>Valves and pumps: pumps</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Modules referred to: </FONT><A HREF="../lib_proc/cpom.htm#lg_libproc_CPOM_summ"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">CPOM</U></FONT></A><FONT FACE="Arial, helvetica">.</P>
+<P ALIGN="JUSTIFY">Defining:</P>
+<P ALIGN="CENTER">&nbsp;<IMG SRC="Image176.gif" WIDTH=124 HEIGHT=25></P>
+<P ALIGN="JUSTIFY">the momentum equation becomes:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image177.gif" WIDTH=105 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">Pump characteristic curves are empirically developed by the pump manufacturer and uniquely define head response as function of volumetric flow and pump rotational speed (see </FONT><A HREF="#lg_lptheo_valvnot1p"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">note 1</U></FONT></A><FONT FACE="Arial, helvetica"> and </FONT><A HREF="#lg_lptheo_valvnot2p"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">note 2</U></FONT></A><FONT FACE="Arial, helvetica">).</P>
+<P ALIGN="JUSTIFY">The pump head is defined as:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image178.gif" WIDTH=126 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">If the pump characteristic curves are not known, but only a working point besides the nominal one is known, the following relationships can be used:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image179.gif" WIDTH=265 HEIGHT=56></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In the first law of thermodynamics it is for the pumps:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image180.gif" WIDTH=78 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">namely:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image181.gif" WIDTH=124 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">which customarily takes the form:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image182.gif" WIDTH=81 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where the total efficiency h is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image183.gif" WIDTH=100 HEIGHT=22></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">For constant density fluids it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image184.gif" WIDTH=184 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">and, multiplying by the mass flow rate G, the resistive power P</FONT><FONT FACE="Arial, helvetica" SIZE=1>res</FONT><FONT FACE="Arial, helvetica"> is obtained:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image185.gif" WIDTH=254 HEIGHT=46></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">To have the pump outlet enthalpy available when the rotational speed is null and the mass flow is not null the hypotesys of no heat storage has been dropped and the energy conservation equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image186.gif" WIDTH=240 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where the fluid mass M</FONT><FONT FACE="Arial, helvetica" SIZE=1>fl</FONT><FONT FACE="Arial, helvetica"> inside the pump is considered constant.</P>
+<P ALIGN="JUSTIFY">The resistive torque:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image187.gif" WIDTH=161 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">is usually obtained as a pump characteristic curve from the pump manufacturer.</P>
+<P ALIGN="JUSTIFY">From the relationship:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image188.gif" WIDTH=174 HEIGHT=70></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">the total efficiency h is determined.</P>
+<P ALIGN="JUSTIFY">When only the efficiency h</FONT><FONT FACE="Arial, helvetica" SIZE=1>nom</FONT><FONT FACE="Arial, helvetica"> at rated conditions is known the following relationship can be used:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image189.gif" WIDTH=276 HEIGHT=54></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">At last the kinetic energy equation is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image190.gif" WIDTH=169 HEIGHT=54></P>
+<B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><A NAME="lg_lptheo_valvnot1p"></A>Note 1:</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The pump characteristic curves are usually converted to a simpler form by development of homologous curves, defined in terms of reduced variables (actual value to rated value ratio), namely reduced head and torque versus reduced pump speed and volumetric flow:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image191.gif" WIDTH=148 HEIGHT=90></P>
+<P ALIGN="CENTER"><IMG SRC="Image192.gif" WIDTH=102 HEIGHT=48><FONT FACE="Arial, helvetica">&#9;<IMG SRC="Image193.gif" WIDTH=76 HEIGHT=46>&#9;<IMG SRC="Image194.gif" WIDTH=82 HEIGHT=46></P>
+<P ALIGN="JUSTIFY">Various methods can be used, all based on the similitude theory, to obtain from these curves the actual values of H</FONT><FONT FACE="Arial, helvetica" SIZE=1>r</FONT><FONT FACE="Arial, helvetica"> and C</FONT><FONT FACE="Arial, helvetica" SIZE=1>r</FONT><FONT FACE="Arial, helvetica"> everywhere in the q</FONT><FONT FACE="Arial, helvetica" SIZE=1>r</FONT><FONT FACE="Arial, helvetica">, w</FONT><FONT FACE="Arial, helvetica" SIZE=1> r</FONT><FONT FACE="Arial, helvetica"> plane.</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><A NAME="lg_lptheo_valvnot2p"></A>Note 2:</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The similitude theory states that, if two working points 1 and 2 are so related:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image195.gif" WIDTH=80 HEIGHT=49></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">it is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image196.gif" WIDTH=173 HEIGHT=58><FONT FACE="Arial, helvetica">&#9;<IMG SRC="Image197.gif" WIDTH=176 HEIGHT=58></P>
+<P ALIGN="JUSTIFY">A common method obtains from the manufacturer’s pump characteristics the four curves:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image198.gif" WIDTH=94 HEIGHT=22><FONT FACE="Arial, helvetica">&#9;<IMG SRC="Image199.gif" WIDTH=104 HEIGHT=22></P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image200.gif" WIDTH=96 HEIGHT=22><FONT FACE="Arial, helvetica">&#9;<IMG SRC="Image201.gif" WIDTH=106 HEIGHT=22></P>
+<P ALIGN="JUSTIFY">The Suter’s method starts from the original characteristic curves to compute H</FONT><FONT FACE="Arial, helvetica" SIZE=1>r</FONT><FONT FACE="Arial, helvetica"> and C</FONT><FONT FACE="Arial, helvetica" SIZE=1>r</FONT><FONT FACE="Arial, helvetica"> values along a unit radius circle in the q</FONT><FONT FACE="Arial, helvetica" SIZE=1>r</FONT><FONT FACE="Arial, helvetica">, w</FONT><FONT FACE="Arial, helvetica" SIZE=1> r</FONT><FONT FACE="Arial, helvetica"> plane.</P></FONT></BODY>
+</HTML>

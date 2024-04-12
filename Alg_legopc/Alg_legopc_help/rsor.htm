@@ -1,0 +1,630 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>RSOR</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE RSOR</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RSOR</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">HORYZONTAL WATER PREHEATER</p>
+<p>&nbsp;</p>
+<p align="left">The RSOR module simulates the dynamics of thermo-hydraulic
+phenomena which occur both inside the cavity and inside the tube bundle of a
+surface horizontal heater.</p>
+<p align="left">To define the mathematical model the RSOR module refers to a
+horizontal heater as schematized in figure 1. It consists of one cylindrical
+cavity having horizontal axis, containing a U-bend tube bundle with feed-water
+inlet and outlet on the same side. The cavity is subdivided in the following
+zones:</p>
+<p ALIGN="left">A) subcooled zone, where the tube bundle exchanges heat with a
+subcooled liquid</p>
+<p ALIGN="left">B) condensing zone, where the tube bundle exchanges heat only
+with steam.</p>
+<p align="left">In the &quot;B&quot; zone, steam condensing on the tube bundle's
+external surface, gives rise to a liquid flow rate collected on the cavity
+bottom going to feed the subcooled zone.</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image710.gif" WIDTH="471" HEIGHT="324"></p>
+</font><font FACE="Arial">
+<p ALIGN="CENTER">figure 1</p>
+<p align="left">In developing the mathematical model, it is assumed that, both
+in &quot;A&quot; and &quot;B&quot; zones the exchange surfaces between the fluid
+inside cavity and the tube bundle keep constant. So it is not taken into account
+that in consequence of a too high increase or decrease in liquid level inside
+the cavity can respectively occur the submersion of a part of the pipes which
+are in contact with steam or the emersion of a part of the submerged pipes which
+would be in contact with steam.</p>
+<p align="left">The cavity total volume is subdivided in two zones having
+variable boundaries respectively identified as condensing and subcooled zones.</p>
+<p align="left">In condensing zone, the fluid is dry saturated steam assuming
+that the liquid produced by condensation instantaneously separates, whereas in
+subcooled zone, the fluid is present as subcooled liquid. In condensing zone the
+accumulation term of energy conservation equation is not considered. Furthermore
+the assumed condensation flow rate is the one which in every moment satisfies
+the energetical balance of such zone.</p>
+<p align="left">To deal with the thermal exchanges between the fluid inside
+cavity and the tube bundle metal wall inside which feed-water is flowing, the
+tube bundle is assumed as subdivided in two cells respectively faced with
+&quot;A&quot; (subcooled) and &quot;B&quot; (condensing) zones.</p>
+<p align="left">Further simplifying hypotheses introduced in the cavity model
+are:</p>
+<p ALIGN="left">- the thermal exchange with cavity walls is negligible</p>
+<p ALIGN="left">- the distribution of pressure inside the cavity (pressure in
+condensing and subcooled zone are identical) is uniform</p>
+<p ALIGN="left">- the distribution of enthalpy in condensing zone is uniform</p>
+<p ALIGN="left">- the distribution of enthalpy in subcooled zone is uniform</p>
+<p ALIGN="left">- the exchange coefficient steam/pipes wall is constant</p>
+<p ALIGN="left">- the exchange coefficient liquid/pipes wall is constant</p>
+<p ALIGN="left">- absence of incondensable gases.</p>
+<p align="left">The model concerning the wall of tube bundle pipes is based on
+the following hypotheses:</p>
+<p ALIGN="left">- the thermal capacity of each cell is concentrated
+corresponding to its medium radius</p>
+<p ALIGN="left">- there is not heat conduction along the longitudinal direction</p>
+<p align="left">In the model of fluid inside tube bundle, it is assumed that all
+pipes in parallel configuration can be represented like only one equivalent pipe
+axially subdivided in two cells respectively faced with the cavity subcooled and
+condensing zones.</p>
+<p align="left">Inside the pipes, fluid is assumed with constant density and its
+heat conduction along the longitudinal direction negligible.</p>
+<p align="left">Inside the pipes, the fluid inertia is negligible; the fluid
+back-flow can not occur.</p>
+<p align="left">The used equations are:</p>
+<p ALIGN="left">1) the conservation equation of mass in subcooled zone</p>
+<p ALIGN="left">2) the conservation equation of energy in subcooled zone</p>
+<p ALIGN="left">3) the conservation equation of mass in condensing zone</p>
+<p ALIGN="left">4) the conservation equation of energy in condensing zone</p>
+<p ALIGN="left">5) the energy conservation equation concerning the wall of tube
+bundle first cell</p>
+<p ALIGN="left">6) the energy conservation equation concerning the wall of tube
+bundle second cell</p>
+<p ALIGN="left">7) the fluid energy conservation equation inside the first cell
+of tube bundle</p>
+<p ALIGN="left">8) the fluid energy conservation equation inside the tube bundle
+second cell</p>
+<p ALIGN="left">9) the conservation equation of fluid momentum inside the tube
+bundle</p>
+<p ALIGN="left">10) the calculation equation of thermal power exchanged between
+the liquid inside cavity and the wall of tube bundle pipes</p>
+<p ALIGN="left">11) the calculation equation of thermal power exchanged between
+the steam inside cavity and the wall of the tube bundle pipes</p>
+<p ALIGN="left">12) the calculation equation of thermal power exchanged between
+the fluid inside the first cell of tube bundles and pipes wall</p>
+<p ALIGN="left">13) the calculation equation of thermal power exchanged between
+the fluid inside the second cell of tube bundle and pipes wall.</p>
+<p ALIGN="left">Among the above-mentioned equations, the first three are
+differential whereas the fourth one is algebraical since the accumulation term
+is not considered.</p>
+<p align="left">The equations 5), 6), 7), and 8) are differential but their
+related integration algorithm is directly implemented in the module so that they
+do not give rise to module residuals.</p>
+<p align="left">The variables they calculate are called internal states. To have
+the enthalpy of fluid flowing out from the bundle among the module output
+variables, such value is taken from the corresponding internal state by means of
+an algebraical equation.</p>
+<p ALIGN="left">The equations from 9) to 13) are algebraical. Since the thermal
+powers exchanged between the fluids and the pipes wall of tube bundle do not
+appear among the module output variables, the equations from 10) to 13) do not
+give rise to residuals.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RSOR</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font>
+<blockquote>
+  <blockquote>
+    <font FACE="Arial" SIZE="2">
+    <p ALIGN="JUSTIFY">&nbsp;</p>
+    <p ALIGN="center"><img SRC="images/Image711.gif" width="366" height="298"></p>
+    </font><font FACE="Arial">
+    <p ALIGN="JUSTIFY">&nbsp;</p>
+    </blockquote>
+  </blockquote>
+  <p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+  <div align="left">
+    <!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WTUR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of steam flowing into the
+      heater cavity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HTUR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of steam flowing into the heater
+      cavity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WCUR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of liquid flowing out from the
+      heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WDIR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of drainages flowing into the
+      heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HDIR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of drainages flowing into the
+      heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GAMC</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">corrective of thermal exchange total
+      coefficient between the condensing steam and the fluid flowing inside the
+      tube bundle (see note 1)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">GAMF</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">corrective of thermal exchange total
+      coefficient between the condensed liquid and the fluid flowing inside the
+      tube bundle (see note 2)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/s]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">WALR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">flow rate of feed-water flowing through
+      the tube bundle</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HALI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of feed-water at the tube bundle
+      inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PALI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure of feed-water at the tube bundle
+      inlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ATTR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pipes friction coefficient of tube bundle
+      (see note 3)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PRIS</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure inside heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">VSOT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">volume of subcooled liquid inside the
+      cavity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HLUR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of liquid flowing out from the
+      heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">HALU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">enthalpy of feed-water at the tube bundle
+      outlet</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LIVR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">liquid level inside the heater</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[Pa]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">PALU</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">pressure of feed-water at the tube bundle
+      outlet</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+  </div>
+  <b>
+  <p ALIGN="RIGHT">Note 1</p>
+  </b>
+  <p align="left">GAMC is a corrective factor which under stationary condition
+  multiplies the thermal exchange total coefficient between steam inside the
+  cavity and fluid flowing through the tube bundle.</p>
+  <p align="left">Since under stationary condition both thermal exchange between
+  steam and tube bundle metal and between tube bundle metal and fluid flowing
+  through it are separately dealt with, such corrective factor both multiplies:</p>
+  <p ALIGN="JUSTIFY">- the total coefficient of thermal exchange between the
+  steam and the central zone of tube bundle metal</p>
+  <p ALIGN="JUSTIFY">- the total coefficient of thermal exchange between the
+  central zone of tube bundle metal and the fluid flowing through it.</p>
+  <p align="left">If no initial value is assigned to GAMC, this is calculated in
+  the module so that the thermal balance of condensing zone, deriving from the
+  tentative values assigned to the other variables, is satisfied. Nevertheless
+  if during calculation of a stationary condition, user has to determine the
+  exchange coefficient related to a thermal balance or to a measured
+  experimental situation, then GAMC must appear among the unknown of the system.
+  In this case a module output variable must be declared NOTO (e.g. flow rate of
+  steam flowing into the heater).</p>
+  <b>
+  <p ALIGN="RIGHT">Note 2</p>
+  </b>
+  <p align="left">GAMF is a corrective factor which, under stationary condition,
+  multiplies the thermal exchange total coefficient between the liquid inside
+  cavity and the fluid flowing through the tube bundle.</p>
+  <p align="left">Since, under dynamic condition, both thermal exchange between
+  the liquid inside the cavity and the tube bundle metal, and between the tube
+  bundle metal and the fluid flowing through it are separately dealt with, such
+  corrective factor both multiplies:</p>
+  <p ALIGN="left">- the total coefficient of thermal exchange between the liquid
+  inside the cavity and the central zone of tube bundle metal</p>
+  <p ALIGN="left">- the total coefficient of thermal exchange between the
+  central zone of tube bundle metal and the fluid flowing through it.</p>
+  <p align="left">If no initial value is assigned to GAMF, this is calculated in
+  the module so that it is satisfied the thermal balance of condensing zone,
+  deriving from the tentative values assigned to the other variables.
+  Nevertheless if during calculation of a stationary condition, user has to
+  determine the exchange coefficient related to a thermal balance or to a
+  measured experimental situation, then GAMF must appear among the unknown of
+  the system. In this case a module output variable must be declared NOTO (e.g.
+  enthalpy of liquid flowing out from the heater).</p>
+  <b>
+  <p ALIGN="RIGHT">Note 3</p>
+  </b>
+  <p align="left">The Fanning's friction coefficient to which the RSOR module is
+  referred, is intended in accordance with the following formula:</p>
+</font><font FACE="Courier New" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image712.gif" WIDTH="220" HEIGHT="49"></p>
+</font>
+<p ALIGN="JUSTIFY"><font face="Arial">where:</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">- Di is the equivalent hydraulic diameter</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">- Lt is the pipes total length</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">- RO is the density of fluid flowing
+through pipes</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">- &lt;v&gt; is the mean velocity of fluid
+flowing through pipes</font></p>
+<p ALIGN="JUSTIFY"><font face="Arial">whereas the remaining quantities have the
+already fixed physical meaning.</font></p>
+<p ALIGN="left">&nbsp;</p>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RSOR</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Physical and Geometrical Data</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In addition to the initial values of input and output variables
+(meanings defined above), user must assign the following data:</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SCON</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">exchange surface in condensing zone</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SSOT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">exchange surface in subcooled zone</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[ ]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">NTUBI</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">number of tube bundle pipes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DCAV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">external diameter of tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SPCA</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">thickness of tank</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LCAV</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">cavity length</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DTUB</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">external diameter of tube bundle pipes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">STUB</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">thickness of tube bundle pipes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LSOT</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">length of tube bundle part faced to the
+      cavity subcooled zone</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">LCON</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">length of tube bundle part faced to the
+      cavity condensing zone</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[kg/m³]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">ROM</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">metal density of tube bundle pipes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[J/kg/K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">CPMET</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">metal specific heat of tube bundle pipes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[W/m/K]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">COND.MET</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">material conductivity of tube bundle
+      pipes</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">DELZ</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">level gap between the tube bundle inlet
+      and outlet (positive if the outlet elevation is higher than inlet one)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">[m²]</font><!--mstheme--></font></td>
+    <td width="18%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">SEZ.OR</font><!--mstheme--></font></td>
+    <td width="72%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">area of free mean horizontal section for
+      the cavity in the subcooled zone</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RSOR</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Module Variables Initialization</p>
+</i>
+          </font></b>
+<font FACE="Arial">
+<p align="left">To initialize the RSOR module variables no particular
+prescription is required.</p>
+<p align="left">It is useful to remember that (almost during the first phase of
+model set-up) it is suitable not to assign the values of the GAMC and GAMF
+corrective coefficients, because they are calculated by module itself also in
+case they were imposed NOTO.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RSOR</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">User's Subprograms</p>
+</i></font></b><font FACE="Arial">
+<p align="left">In the RSOR module no user subprogram is foreseen.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RSOR</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Residuals</p>
+</i></font></b><font FACE="Arial">
+<p align="left">The module mathematical model consists of the equations
+mentioned in first paragraph, which give rise to the following residuals:</p>
+<p ALIGN="left">If WTUR = 0.</p>
+<blockquote>
+  <p ALIGN="left">RNI(1) = QCON - WDRV*(HDRV - HLS)</p>
+</blockquote>
+<p ALIGN="right">(normalization factor = H0)</p>
+<p ALIGN="left">otherwise</p>
+<blockquote>
+  <p ALIGN="left">RNI(1) = HTUR - HLS - [QCON - WDRV*(HDRV - HLS)]/WTUR</p>
+</blockquote>
+<p ALIGN="RIGHT">(normalization factor = H0)</p>
+<p ALIGN="JUSTIFY">RNI(2) = WTUR + WDIR - WCUR</p>
+<p ALIGN="RIGHT">(normalization factor = W0)</p>
+<p ALIGN="left">If WTUR = 0. and WDIR = 0.</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">RNI(3) = HLS - HLUR</p>
+</blockquote>
+<p ALIGN="RIGHT">(normalization factor = H0)</p>
+<p ALIGN="left">otherwise</p>
+<blockquote>
+  <p ALIGN="JUSTIFY">RNI(3) = HLS - HLUR - [QSOT - WDRL*(HDRL - HLS)]/WCUR</p>
+</blockquote>
+<p ALIGN="RIGHT">(normalization factor = H0)</p>
+<p ALIGN="JUSTIFY">RNI(4) = HALI + (QCON + QSOT)/WALR - HALU</p>
+<p ALIGN="RIGHT">(normalization factor = H0)</p>
+<p ALIGN="JUSTIFY">RNI(5) = VSOT/SEZO - LIVR</p>
+<p ALIGN="RIGHT">(normalization factor = V0)</p>
+<p ALIGN="JUSTIFY">RNI(6) = PALI-PALU-(2.*ATTR*G²*(LCON+LSOT)/(DI*RF1)+9.90665*RF1*DELZ</p>
+<p ALIGN="RIGHT">(normalization factor = P0)</p>
+<p ALIGN="left">where:</p>
+<p ALIGN="left">HLS enthalpy of saturated liquid at cavity pressure</p>
+<p ALIGN="left">HVS enthalpy of saturated steam at cavity pressure</p>
+<p ALIGN="left">WDRL flow rate of drainages liquid component</p>
+<p ALIGN="left">HDRL enthalpy of drainages liquid component</p>
+<p ALIGN="left">WDRV flow rate of drainages steam component</p>
+<p ALIGN="left">HDRV enthalpy of drainages steam component</p>
+<p ALIGN="left">QCON power transferred to the tube bundle in condensing zone</p>
+<p ALIGN="left">QSOT power transferred to the tube bundle in subcooled zone</p>
+<p ALIGN="left">SEZO area of free mean horizontal section of subcooled zone</p>
+<p ALIGN="left">G specific mass flow rate of fluid inside tube bundle</p>
+<p ALIGN="left">DI hydraulic diameter of tube bundle pipes</p>
+<p ALIGN="left">RF1 density of fluid inside tube bundle</p>
+<p align="left">The remaining variables have the physical and geometrical
+meanings already defined.</p>
+<p ALIGN="left">Further explanations about quantities of the above-mentioned
+meanings are available in the section concerning the RSOR module of the manual
+&quot;LEGOCAD - Modelling Library for Simulation of Power Generation Plants -
+Theory&quot;.</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RSOR</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Module subprograms</p>
+</i></font></b><font FACE="Arial">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+</font><b><font FACE="Courier New" SIZE="2">
+<p align="left">SUBROUTINE RSORI3 (IFO, IOB, DEBL)</p>
+<p align="left">SUBROUTINE RSORI4 (IOB, MOD)</p>
+<p align="left">SUBROUTINE RSORI2 (IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1,
+ID2,</p>
+<p align="left">$ IBL1, IBL2, IER, CNXYU, TOL)</p>
+<p align="left">SUBROUTINE RSORC1 (IFUN, AJAC, MX5, IXYU, XYU, IPD,</p>
+<p align="left">$ DATI, RNI, IBLI, IBL2)</p>
+<p align="left">SUBROUTINE RSOR (IFUN, IXYU, XYU, IPD, DATI, RNI)</p>
+<p align="left">SUBROUTINE RSCSO (C11, C12, C13, C21, C22, C23, C31, C32, C33,</p>
+<p align="left">$ TN1, TN2, TN3, R1, R2, R3)</p>
+<p align="left">SUBROUTINE RSDST (PP, RLS, RVS, HLS, HVS, DRLDP, DRVDP, DHLDP,</p>
+<p align="left">$ DHVDP)</p>
+<p align="left">SUBROUTINE RSCSIS (PP, VL, HL, WV, HVI, WDR, HDR, WDU, QCON,
+QSOT,</p>
+<p align="left">$ VOL, C11, C12, C13, C21, C22, C23, C31, C32,</p>
+<p align="left">$ C33, TN1, TN2, TN3)</p>
+<p align="left">SUBROUTINE RSDRE (WDR, HDR, HLS, HVS, WDRV, HDRV, WDRL, HDRL)</p>
+<p align="left">SUBROUTINE RSCLI (G, HF, PF, DIDR, COEF, TF, RF, CPF)</p>
+<p align="left">SUBROUTINE RSFT (WAL, PF, HI, HF1, HF2, TM1, TM2, GF, GC, SEZ,
+DI,</p>
+<p align="left">$ L1, L2, V1, V2, DELZ, PNT, CMI, CFR, Q1, Q2,</p>
+<p align="left">$ TNF1, TNF2, DPAL, COMF1, COMF2, ALMA1, ALMA2,</p>
+<p align="left">$ TFI, TF1, TF2, CPF1, CPF2, BETAS, BETAC)</p>
+<p align="left">SUBROUTINE RSMETA (TSAT, TSOC, TM1, TM2, Q1, Q2, CCC1, CCC2,</p>
+<p align="left">$ TNM1, TNM2)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RSOR</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<i>
+<p ALIGN="CENTER">Test cases</p>
+</i>
+        </font></b><font FACE="Arial">
+<p align="left">Reference test cases concerning this module are in the user
+manual section dedicated to the examples developed under the abbreviations:</p>
+<p ALIGN="CENTER">&quot;RIS_ORIZ&quot;</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

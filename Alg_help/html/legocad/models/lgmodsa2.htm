@@ -1,0 +1,243 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>lgmodsa2</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample2_a"></A>Example 2 - LEGO modules choice</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The model is composed of five components. In the building of the topology of this model, the choice of the LEGO modules to be used is very easy:</P>
+<P ALIGN="JUSTIFY">the induction valve has to be simulated by the VALV module (VTUR block);</P>
+<P ALIGN="JUSTIFY">the reaction stages have to be simulated by the TREN module (STA1 and STA2 blocks);</P>
+<P ALIGN="JUSTIFY">the condenser has to be simulated by the CNDN module (COND block);</P>
+<P ALIGN="JUSTIFY">the bleeding valve has to be simulated by the SPIL module (BLED block).</P>
+<P ALIGN="JUSTIFY">Note that it would be wrong to simulate the bleeding valve using the VALV module, as a specific module has been developed to allow the simulation of steam turbine bleedings.</P>
+<P ALIGN="JUSTIFY">As the TREN module, used to simulate tre reaction stages, has the upstream pressure as output variable, and the inlet steam flow rate as input variable, the VALV module has to be istanciated using the fluid flow rate as output variable and the downstream pressure as input variable.</P>
+<P ALIGN="JUSTIFY">Like in the first example, a NODO module (HSTE block) will be added to give to the valve and to the first stage the same value for steam inlet entalpy.</P>
+<P ALIGN="JUSTIFY">If the model would have to be used to simulate turbine group startup, shutdown or load rejection transients, a NODO should be added to give to both the stages the same value for turbine shaft rotational speed. For this example we will assume that these kind of transients will not be simulated, so no other module is required.</P>
+<P ALIGN="JUSTIFY">The blocks variables lists are the following:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P><DIR>
+
+<P>VALVVTUR BL.-VTUR- **** MODULO VALV - turbine inlet valve</P>
+<P>WVALVTUR --UA-- FLUID FLOW RATE IN THE VALVE</P>
+<P>PIVAVTUR --IN-- FLUID PRESSURE AT THE VALVE INLET</P>
+<P>PUVAVTUR --IN-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HVALVTUR --IN-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>ALZAVTUR --IN-- VALVE LIFT</P>
+<P>&nbsp;</P>
+<P>TRENSTA1 BL.-STA1- **** MODULO TREN - turbine stage 1</P>
+<P>HUTZSTA1 --UA-- FLUID ENTHALPY AT THE REACTION STAGE OUTLET</P>
+<P>WUTZSTA1 --UA-- STEAM FLOW RATE AT THE REACTION STAGE OUTLET</P>
+<P>PITZSTA1 --UA-- STEAM PRESSURE AT THE REACTION STAGE INLET</P>
+<P>QMECSTA1 --UA-- MECHANICAL POWER OF THE REACTION TURBINE STAGE</P>
+<P>WITZSTA1 --IN-- STEAM FLOW RATE AT THE REACTION STAGE INLET</P>
+<P>WSPZSTA1 --IN-- FLOW RATE OF STEAM BLED FROM THE REACTION TURB. STAGE</P>
+<P>HITZSTA1 --IN-- STEAM ENTHALPY AT THE REACTION STAGE INLET</P>
+<P>PUTZSTA1 --IN-- STEAM PRESSURE AT THE REACTION STAGE OUTLET</P>
+<P>SERCSTA1 --IN-- LOAD REJECTION OR TRIP SIGNAL</P>
+<P>SEAVSTA1 --IN-- STARTING BUTTON OF THE REACTION TURBINE</P>
+<P>RPMVSTA1 --IN-- ROTATIONAL SPEED OF THE REACTION TURBINE</P>
+<P>&nbsp;</P>
+<P>TRENSTA2 BL.-STA2- **** MODULO TREN - turbine stage 2</P>
+<P>HUTZSTA2 --UA-- FLUID ENTHALPY AT THE REACTION STAGE OUTLET</P>
+<P>WUTZSTA2 --UA-- STEAM FLOW RATE AT THE REACTION STAGE OUTLET</P>
+<P>PITZSTA2 --UA-- STEAM PRESSURE AT THE REACTION STAGE INLET</P>
+<P>QMECSTA2 --UA-- MECHANICAL POWER OF THE REACTION TURBINE STAGE</P>
+<P>WITZSTA2 --IN-- STEAM FLOW RATE AT THE REACTION STAGE INLET</P>
+<P>WSPZSTA2 --IN-- FLOW RATE OF STEAM BLED FROM THE REACTION TURB. STAGE</P>
+<P>HITZSTA2 --IN-- STEAM ENTHALPY AT THE REACTION STAGE INLET</P>
+<P>PUTZSTA2 --IN-- STEAM PRESSURE AT THE REACTION STAGE OUTLET</P>
+<P>SERCSTA2 --IN-- LOAD REJECTION OR TRIP SIGNAL</P>
+<P>SEAVSTA2 --IN-- STARTING BUTTON OF THE REACTION TURBINE</P>
+<P>RPMVSTA2 --IN-- ROTATIONAL SPEED OF THE REACTION TURBINE</P>
+<P>&nbsp;</P>
+<P>CNDNCOND BL.-COND- **** MODULO CNDN - steam condenser</P>
+<P>PCNDCOND --US-- STEAM PRESSURE IN THE CONDENSER</P>
+<P>LCNDCOND --US-- LEVEL OF LIQUID IN THE CONDENSER</P>
+<P>TMFTCOND --UA-- MEAN TEMPERATURE OF METAL AT TUBE BUNDLE OUTLET</P>
+<P>HUFTCOND --UA-- COOLER ENTHALPY AT THE TUBE BUNDLE OUTLET</P>
+<P>HLCNCOND --UA-- ENTHALPY OF THE CONDENSATE LIQUID</P>
+<P>PFCNCOND --UA-- PRESSURE IN THE CONDENSER BOTTOM</P>
+<P>%LCNCOND --UA-- MEASURED LIQUID LEVEL</P>
+<P>WTURCOND --IN-- FLOW RATE OF MAIN TURBINE BLOW-OFF STEAM</P>
+<P>HTURCOND --IN-- ENTHALPY OF MAIN TURBINE BLOW-OFF STEAM</P>
+<P>WEXTCOND --IN-- FLOW RATE OF STEAM FROM SECONDARY CONDENSER INLET</P>
+<P>HEXTCOND --IN-- ENTHALPY OF STEAM AT SECONDARY CONDENSER INLET</P>
+<P>WLCPCOND --IN-- CONDENSATE EXTRACTION FLOW RATE</P>
+<P>WDRECOND --IN-- DRAINS FLOW RATE AT THE CONDENSER INLET</P>
+<P>HDRECOND --IN-- DRAINS ENTHALPY AT THE CONDENSER INLET</P>
+<P>WLCXCOND --IN-- LEVEL CONTROL EXTRACTED (SUPPL.) LIQUID FLOW RATE</P>
+<P>WVCNCOND --IN-- FLOW RATE OF STEAM EXTRACTED FOR CONDENSER VACUUM</P>
+<P>WRICCOND --IN-- FLOW RATE OF LIQUID RECIRCULATED BY EXTR. PUMPS</P>
+<P>HRICCOND --IN-- ENTHALPY OF LIQUID RECIRCULATED BY EXTR. PUMPS</P>
+<P>WRFTCOND --IN-- COOLING WATER FLOW RATE INTO THE TUBE BUNDLE</P>
+<P>HIFTCOND --IN-- COOLING WATER ENTHALPY AT THE TUBE BUNDLE INLET</P>
+<P>&nbsp;</P>
+<P>SPILBLED BL.-BLED- **** MODULO SPIL - bleeding valve</P>
+<P>WSPIBLED --UA-- BLEEDING STEAM FLOW RATE FROM THE TURBINE</P>
+<P>PTURBLED --IN-- PRESSURE OF THE STEAM BLED FROM THE TURBINE</P>
+<P>WALIBLED --IN-- FLOW RATE OF PRE-HEATED WATER</P>
+<P>HALIBLED --IN-- WATER ENTHALPY AT THE HEATER INLET</P>
+<P>HALUBLED --IN-- WATER ENTHALPY AT THE HEATER OUTLET</P>
+<P>PALIBLED --IN-- PRE-HEATED WATER PRESSURE</P>
+<P>ALZ1BLED --IN-- LIFT OF THE MOTOR-OPERATED BLEEDING VALVE</P>
+<P>ALZCBLED --IN-- LIFT OF THE CHECK-VALVE</P>
+<P>ALZ2BLED --IN-- LIFT OF THE MOTOR-OPERATED VALVE UPSTREAM THE HEATER</P>
+<P>&nbsp;</P>
+<P>NODOHSTE BL.-HSTE- **** MODULO NODO - steam entalpy</P>
+<P>HSOMHSTE --UA-- LINEAR RELATION: OUTPUT VARIABLE</P>
+<P>HI_1HSTE --IN-- LINEAR RELATION: INPUT N. 1</P>
+<P>&nbsp;</P></DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample2_b"></A>Example 2 - variables connection</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">How should one connect the variables of the previously created blocks?</P>
+<P ALIGN="JUSTIFY">As we said, the steam flow rate at the 1-st turbine stage inlet has to be connected to the induction valve flow rate, and the downstream pressure of the valve has to be connected to the upstream pressure of the 1-st turbine stage. Bot for the valve and the 1-st turbine stage, the inlet entalpy has to be connected to the output variable of the HSTE adder node.</P>
+<P ALIGN="JUSTIFY">The steam flow rate and entalpy and the at the 2-nd stage inlet have to be connected to the steam and entalpy at the 1-s stage outlet (the bleeding flow rate is taken into account by the 1-st stage simulation module). On the contary, the outlet pressure of the 1-st stage (which is an input) has to be connected to the 2-nd stage inlet pressure (which is an output).</P>
+<P ALIGN="JUSTIFY">The bleeding flow rate of the 1-st stage has to be connected to the steam flow rate through the bleeding valve. As the pressure at the 1-st stage outlet is computed as inlet pressure for the 2-nd stage, the inlet pressure of the bleeding valve (which is equal to the outlet pressure of the 1-st stage) has to be connected to the inlet pressure of the 2-nd stage.</P>
+<P ALIGN="JUSTIFY">The steam entalpy and flow rate at main condenser inlet have to be connected to the steam entalpy and flow rate at the 2-nd stage outlet, and the 2-nd stage outlet pressure has to be connected to the condenser cavity pressure.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample2_c"></A>Example 2 - topological connections scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">This scheme shows the topology of the connections between the variables of the six listed modules:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image19.gif" WIDTH=615 HEIGHT=380></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample2_d"></A>Example 2 - topological diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">The following picture represents the topological diagram of the model:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="image20.gif" WIDTH=479 HEIGHT=286></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_model_sample2_e"></A>Example 2 - resulting topological</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">In order to complete the model topology building, the last action to be performed is to modify the descriptions of the most important variables to allow the user more easily understand the variable meaning inside the plant.</P>
+<P ALIGN="JUSTIFY">The resulting topological file (F01.DAT) of the model is the following one:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P><DIR>
+
+<P>****</P>
+<P>SPIL BLOCCO (BLED) - bleeding valve</P>
+<P>TREN BLOCCO (STA1) - turbine stage 1</P>
+<P>TREN BLOCCO (STA2) - turbine stage 2</P>
+<P>VALV BLOCCO (VTUR) - turbine inlet valve</P>
+<P>CNDN BLOCCO (COND) - steam condenser</P>
+<P>NODO BLOCCO (HSTE) - steam entalpy</P>
+<P>****</P>
+<P>EXAMPLE2</P>
+<P>****</P>
+<P>SPILBLED BL.-BLED- **** MODULO SPIL - bleeding valve</P>
+<P>WSPIBLED --UA-- BLEEDING FLOW RATE FROM STAGE 1</P>
+<P>PITZSTA2 --IN-- #PTURBLED#....................&lt;===TRENSTA2 BL.-STA2-</P>
+<P>WALIBLED --IN-- FLOW RATE OF PRE-HEATED WATER</P>
+<P>HALIBLED --IN-- WATER ENTHALPY AT THE HEATER INLET</P>
+<P>HALUBLED --IN-- WATER ENTHALPY AT THE HEATER OUTLET</P>
+<P>PALIBLED --IN-- PRE-HEATED WATER PRESSURE</P>
+<P>ALZ1BLED --IN-- LIFT OF THE MOTOR-OPERATED BLEEDING VALVE</P>
+<P>ALZCBLED --IN-- LIFT OF THE CHECK-VALVE</P>
+<P>ALZ2BLED --IN-- LIFT OF THE MOTOR-OPERATED VALVE UPSTREAM THE HEATER</P>
+<P>****</P>
+<P>****</P>
+<P>TRENSTA1 BL.-STA1- **** MODULO TREN - turbine stage 1</P>
+<P>HUTZSTA1 --UA-- FLUID ENTHALPY AT STAGE 1 OUTLET</P>
+<P>WUTZSTA1 --UA-- STEAM FLOW RATE AT STAGE 1 OUTLET</P>
+<P>PITZSTA1 --UA-- STEAM PRESSURE AT THE STAGE 1 INLET</P>
+<P>QMECSTA1 --UA-- MECHANICAL POWER OF TURBINE STAGE 1</P>
+<P>WVALVTUR --IN-- #WITZSTA1#....................&lt;===VALVVTUR BL.-VTUR-</P>
+<P>WSPIBLED --IN-- #WSPZSTA1#....................&lt;===SPILBLED BL.-BLED-</P>
+<P>HSOMHSTE --IN-- #HITZSTA1#....................&lt;===NODOHSTE BL.-HSTE-</P>
+<P>PITZSTA2 --IN-- #PUTZSTA1#....................&lt;===TRENSTA2 BL.-STA2-</P>
+<P>SERCSTA1 --IN-- LOAD REJECTION OR TRIP SIGNAL</P>
+<P>SEAVSTA1 --IN-- STARTING BUTTON OF THE REACTION TURBINE</P>
+<P>RPMVSTA1 --IN-- ROTATIONAL SPEED OF THE REACTION TURBINE</P>
+<P>****</P>
+<P>****</P>
+<P>TRENSTA2 BL.-STA2- **** MODULO TREN - turbine stage 2</P>
+<P>HUTZSTA2 --UA-- FLUID ENTHALPY AT STAGE 2 OUTLET</P>
+<P>WUTZSTA2 --UA-- STEAM FLOW RATE AT STAGE 2 OUTLET</P>
+<P>PITZSTA2 --UA-- STEAM PRESSURE AT THE STAGE 1 INLET</P>
+<P>QMECSTA2 --UA-- MECHANICAL POWER OF TURBINE STAGE 2</P>
+<P>WUTZSTA1 --IN-- #WITZSTA2#....................&lt;===TRENSTA1 BL.-STA1-</P>
+<P>WSPZSTA2 --IN-- FLOW RATE OF STEAM BLED FROM STAGE 2</P>
+<P>HUTZSTA1 --IN-- #HITZSTA2#....................&lt;===TRENSTA1 BL.-STA1-</P>
+<P>PCNDCOND --IN-- #PUTZSTA2#....................&lt;===CNDNCOND BL.-COND-</P>
+<P>SERCSTA2 --IN-- LOAD REJECTION OR TRIP SIGNAL</P>
+<P>SEAVSTA2 --IN-- STARTING BUTTON OF THE REACTION TURBINE</P>
+<P>RPMVSTA2 --IN-- ROTATIONAL SPEED OF THE REACTION TURBINE</P>
+<P>****</P>
+<P>****</P>
+<P>VALVVTUR BL.-VTUR- **** MODULO VALV - turbine inlet valve</P>
+<P>WVALVTUR --UA-- FLUID FLOW RATE AT TURBINE INLET</P>
+<P>PIVAVTUR --IN-- STEAM PRESSURE AT TURBINE VALVE INLET</P>
+<P>PITZSTA1 --IN-- #PUVAVTUR#....................&lt;===TRENSTA1 BL.-STA1-</P>
+<P>HSOMHSTE --IN-- #HVALVTUR#....................&lt;===NODOHSTE BL.-HSTE-</P>
+<P>ALZAVTUR --IN-- TURBINE INLET VALVE LIFT</P>
+<P>****</P>
+<P>****</P>
+<P>CNDNCOND BL.-COND- **** MODULO CNDN - steam condenser</P>
+<P>PCNDCOND --US-- STEAM PRESSURE IN THE CONDENSER</P>
+<P>LCNDCOND --US-- LEVEL OF LIQUID IN THE CONDENSER</P>
+<P>TMFTCOND --UA-- MEAN TEMPERATURE OF METAL AT TUBE BUNDLE OUTLET</P>
+<P>HUFTCOND --UA-- COOLER ENTHALPY AT THE TUBE BUNDLE OUTLET</P>
+<P>HLCNCOND --UA-- ENTHALPY OF THE CONDENSATE LIQUID</P>
+<P>PFCNCOND --UA-- PRESSURE IN THE CONDENSER BOTTOM</P>
+<P>%LCNCOND --UA-- MEASURED LIQUID LEVEL</P>
+<P>WUTZSTA2 --IN-- #WTURCOND#....................&lt;===TRENSTA2 BL.-STA2-</P>
+<P>HUTZSTA2 --IN-- #HTURCOND#....................&lt;===TRENSTA2 BL.-STA2-</P>
+<P>WEXTCOND --IN-- FLOW RATE OF STEAM FROM SECONDARY CONDENSER INLET</P>
+<P>HEXTCOND --IN-- ENTHALPY OF STEAM AT SECONDARY CONDENSER INLET</P>
+<P>WLCPCOND --IN-- CONDENSATE EXTRACTION FLOW RATE</P>
+<P>WDRECOND --IN-- DRAINS FLOW RATE AT THE CONDENSER INLET</P>
+<P>HDRECOND --IN-- DRAINS ENTHALPY AT THE CONDENSER INLET</P>
+<P>WLCXCOND --IN-- LEVEL CONTROL EXTRACTED (SUPPL.) LIQUID FLOW RATE</P>
+<P>WVCNCOND --IN-- FLOW RATE OF STEAM EXTRACTED FOR CONDENSER VACUUM</P>
+<P>WRICCOND --IN-- FLOW RATE OF LIQUID RECIRCULATED BY EXTR. PUMPS</P>
+<P>HRICCOND --IN-- ENTHALPY OF LIQUID RECIRCULATED BY EXTR. PUMPS</P>
+<P>WRFTCOND --IN-- COOLING WATER FLOW RATE INTO THE TUBE BUNDLE</P>
+<P>HIFTCOND --IN-- COOLING WATER ENTHALPY AT THE TUBE BUNDLE INLET</P>
+<P>****</P>
+<P>****</P>
+<P>NODOHSTE BL.-HSTE- **** MODULO NODO - steam entalpy</P>
+<P>HSOMHSTE --UA-- STEAM ENTALPY AT TURBINE INLET</P>
+<P>HI_1HSTE --IN-- STEAM ENTALPY AT TURBINE INLET</P>
+<P>****</P>
+<P>**** &gt;&gt;&gt;&gt;&gt;&gt;INGRESSI DI TUTTI I MODULI&lt;&lt;&lt;&lt;&lt;&lt;</P>
+<P>WALIBLED --IN-- FLOW RATE OF PRE-HEATED WATER</P>
+<P>HALIBLED --IN-- WATER ENTHALPY AT THE HEATER INLET</P>
+<P>HALUBLED --IN-- WATER ENTHALPY AT THE HEATER OUTLET</P>
+<P>PALIBLED --IN-- PRE-HEATED WATER PRESSURE</P>
+<P>ALZ1BLED --IN-- LIFT OF THE MOTOR-OPERATED BLEEDING VALVE</P>
+<P>ALZCBLED --IN-- LIFT OF THE CHECK-VALVE</P>
+<P>ALZ2BLED --IN-- LIFT OF THE MOTOR-OPERATED VALVE UPSTREAM THE HEATER</P>
+<P>SERCSTA1 --IN-- LOAD REJECTION OR TRIP SIGNAL</P>
+<P>SEAVSTA1 --IN-- STARTING BUTTON OF THE REACTION TURBINE</P>
+<P>RPMVSTA1 --IN-- ROTATIONAL SPEED OF THE REACTION TURBINE</P>
+<P>WSPZSTA2 --IN-- FLOW RATE OF STEAM BLED FROM STAGE 2</P>
+<P>SERCSTA2 --IN-- LOAD REJECTION OR TRIP SIGNAL</P>
+<P>SEAVSTA2 --IN-- STARTING BUTTON OF THE REACTION TURBINE</P>
+<P>RPMVSTA2 --IN-- ROTATIONAL SPEED OF THE REACTION TURBINE</P>
+<P>PIVAVTUR --IN-- STEAM PRESSURE AT TURBINE VALVE INLET</P>
+<P>ALZAVTUR --IN-- TURBINE INLET VALVE LIFT</P>
+<P>WEXTCOND --IN-- FLOW RATE OF STEAM FROM SECONDARY CONDENSER INLET</P>
+<P>HEXTCOND --IN-- ENTHALPY OF STEAM AT SECONDARY CONDENSER INLET</P>
+<P>WLCPCOND --IN-- CONDENSATE EXTRACTION FLOW RATE</P>
+<P>WDRECOND --IN-- DRAINS FLOW RATE AT THE CONDENSER INLET</P>
+<P>HDRECOND --IN-- DRAINS ENTHALPY AT THE CONDENSER INLET</P>
+<P>WLCXCOND --IN-- LEVEL CONTROL EXTRACTED (SUPPL.) LIQUID FLOW RATE</P>
+<P>WVCNCOND --IN-- FLOW RATE OF STEAM EXTRACTED FOR CONDENSER VACUUM</P>
+<P>WRICCOND --IN-- FLOW RATE OF LIQUID RECIRCULATED BY EXTR. PUMPS</P>
+<P>HRICCOND --IN-- ENTHALPY OF LIQUID RECIRCULATED BY EXTR. PUMPS</P>
+<P>WRFTCOND --IN-- COOLING WATER FLOW RATE INTO THE TUBE BUNDLE</P>
+<P>HIFTCOND --IN-- COOLING WATER ENTHALPY AT THE TUBE BUNDLE INLET</P>
+<P>HI_1HSTE --IN-- STEAM ENTALPY AT TURBINE INLET</P>
+<P>****</P>
+<P>PTURBLED --CO-- PRESSURE OF THE STEAM BLED FROM THE TURBINE</P>
+<P>WITZSTA1 --CO-- STEAM FLOW RATE AT THE REACTION STAGE INLET</P>
+<P>WSPZSTA1 --CO-- FLOW RATE OF STEAM BLED FROM THE REACTION TURB. STAGE</P>
+<P>HITZSTA1 --CO-- STEAM ENTHALPY AT THE REACTION STAGE INLET</P>
+<P>PUTZSTA1 --CO-- STEAM PRESSURE AT THE REACTION STAGE OUTLET</P>
+<P>WITZSTA2 --CO-- STEAM FLOW RATE AT THE REACTION STAGE INLET</P>
+<P>HITZSTA2 --CO-- STEAM ENTHALPY AT THE REACTION STAGE INLET</P>
+<P>PUTZSTA2 --CO-- STEAM PRESSURE AT THE REACTION STAGE OUTLET</P>
+<P>PUVAVTUR --CO-- FLUID PRESSURE AT THE VALVE OUTLET</P>
+<P>HVALVTUR --CO-- VALVE INLET-OUTLET FLUID ENTHALPY</P>
+<P>WTURCOND --CO-- FLOW RATE OF MAIN TURBINE BLOW-OFF STEAM</P>
+<P>HTURCOND --CO-- ENTHALPY OF MAIN TURBINE BLOW-OFF STEAM</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</FONT></BODY>
+</HTML>

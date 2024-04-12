@@ -1,0 +1,170 @@
+****
+SBLE      BLOCCO (0___) - SBLE - Electrical bus (for LINEs int
+LINE      BLOCCO (1___) - LINE - Electrical line
+LINE      BLOCCO (2___) - LINE - Electrical line
+REMT      BLOCCO (3___) - REMT - Rete equivalente di media ten
+SBLE      BLOCCO (4___) - SBLE - Electrical bus (for LINEs int
+SBLE      BLOCCO (5___) - SBLE - Electrical bus (for LINEs int
+CAR1      BLOCCO (7___) - CAR1 - Elettrical load
+****
+RETEBT
+****
+SBLE0___  BL.-0___- **** MODULO SBLE - SBLE - Electrical bus (for LINEs int
+V1RE0___  --UA-- Tensione reale di sbarra
+V1IM0___  --UA-- Tensione immaginaria di sbarra
+IR021___  --IN-- #I1RE0___#....................<===LINE1___  BL.-1___-
+IX021___  --IN-- #I1IM0___#....................<===LINE1___  BL.-1___-
+IR012___  --IN-- #I2RE0___#....................<===LINE2___  BL.-2___-
+IX012___  --IN-- #I2IM0___#....................<===LINE2___  BL.-2___-
+ICRE0___  --IN-- Corrente reale carico
+ICIM0___  --IN-- Corrente immaginaria carico
+SBIS0___  --IN-- Logica di sbarra isolata
+****
+****
+LINE1___  BL.-1___- **** MODULO LINE - LINE - Electrical line
+IR011___  --UA-- CORRENTE REALE LATO 1 [A]
+IX011___  --UA-- CORRENTE IMMAGINARIA LATO 1 [A]
+IR021___  --UA-- CORRENTE REALE LATO 2 [A]
+IX021___  --UA-- CORRENTE IMMAGINARIA LATO 2  [A]
+URL11___  --UA-- TENSIONE REALE AI MORSETTI LATO 1 [
+UXL11___  --UA-- TENSIONE IMMAGINARIA AI MORSETTI LA
+URL21___  --UA-- TENSIONE REALE AI MORSETTI LATO 2 [
+UXL21___  --UA-- TENSIONE IMMAGINARIA AI MORSETTI LA
+UULM1___  --UA-- MODULO DELLA CADUTA DI TENSIONE IN
+QP011___  --UA-- POTENZA ATTIVA LATO 1 [w]
+QQ011___  --UA-- POTENZA REATTIVA LATO 1 [w]
+QP021___  --UA-- POTENZA ATTIVA LATO 2 [w]
+QQ021___  --UA-- POTENZA REATTIVA LATO 2 [w]
+V1RE5___  --IN-- #UR011___#....................<===SBLE5___  BL.-5___-
+V1IM5___  --IN-- #UX011___#....................<===SBLE5___  BL.-5___-
+V1RE0___  --IN-- #UR021___#....................<===SBLE0___  BL.-0___-
+V1IM0___  --IN-- #UX021___#....................<===SBLE0___  BL.-0___-
+STL11___  --IN-- STATO INTERRUTTORE LATO 1 (STL1=1--
+STL21___  --IN-- STATO INTERRUTTORE LATO 2 (STL2=1--
+KLIN1___  --IN-- LUNGHEZZA DELLA LINEA [m]
+OMLI1___  --IN-- PULSAZIONE INGRESSO LINEA [rad/sec]
+SLIN1___  --IN-- CONDIZIONE DEL BLOCCO LINEA
+****
+****
+LINE2___  BL.-2___- **** MODULO LINE - LINE - Electrical line
+IR012___  --UA-- CORRENTE REALE LATO 1 [A]
+IX012___  --UA-- CORRENTE IMMAGINARIA LATO 1 [A]
+IR022___  --UA-- CORRENTE REALE LATO 2 [A]
+IX022___  --UA-- CORRENTE IMMAGINARIA LATO 2  [A]
+URL12___  --UA-- TENSIONE REALE AI MORSETTI LATO 1 [
+UXL12___  --UA-- TENSIONE IMMAGINARIA AI MORSETTI LA
+URL22___  --UA-- TENSIONE REALE AI MORSETTI LATO 2 [
+UXL22___  --UA-- TENSIONE IMMAGINARIA AI MORSETTI LA
+UULM2___  --UA-- MODULO DELLA CADUTA DI TENSIONE IN
+QP012___  --UA-- POTENZA ATTIVA LATO 1 [w]
+QQ012___  --UA-- POTENZA REATTIVA LATO 1 [w]
+QP022___  --UA-- POTENZA ATTIVA LATO 2 [w]
+QQ022___  --UA-- POTENZA REATTIVA LATO 2 [w]
+V1RE0___  --IN-- #UR012___#....................<===SBLE0___  BL.-0___-
+V1IM0___  --IN-- #UX012___#....................<===SBLE0___  BL.-0___-
+V1RE4___  --IN-- #UR022___#....................<===SBLE4___  BL.-4___-
+V1IM4___  --IN-- #UX022___#....................<===SBLE4___  BL.-4___-
+STL12___  --IN-- STATO INTERRUTTORE LATO 1 (STL1=1--
+STL22___  --IN-- STATO INTERRUTTORE LATO 2 (STL2=1--
+KLIN2___  --IN-- LUNGHEZZA DELLA LINEA [m]
+OMLI2___  --IN-- PULSAZIONE INGRESSO LINEA [rad/sec]
+SLIN2___  --IN-- CONDIZIONE DEL BLOCCO LINEA
+****
+****
+REMT3___  BL.-3___- **** MODULO REMT - REMT - Rete equivalente di media ten
+CORR3___  --UA-- Parte reale della corrente
+CORX3___  --UA-- parte immaginaria della corrente
+V1RE4___  --IN-- #VURR3___#....................<===SBLE4___  BL.-4___-
+V1IM4___  --IN-- #VUXX3___#....................<===SBLE4___  BL.-4___-
+FEMR3___  --IN-- parte reale della tensione MT
+FEMX3___  --IN-- parte immaginaria della tensione MT
+****
+****
+SBLE4___  BL.-4___- **** MODULO SBLE - SBLE - Electrical bus (for LINEs int
+V1RE4___  --UA-- Tensione reale di sbarra
+V1IM4___  --UA-- Tensione immaginaria di sbarra
+IR022___  --IN-- #I1RE4___#....................<===LINE2___  BL.-2___-
+IX022___  --IN-- #I1IM4___#....................<===LINE2___  BL.-2___-
+CORR3___  --IN-- #I2RE4___#....................<===REMT3___  BL.-3___-
+CORX3___  --IN-- #I2IM4___#....................<===REMT3___  BL.-3___-
+ICRE4___  --IN-- Corrente reale carico
+ICIM4___  --IN-- Corrente immaginaria carico
+SBIS4___  --IN-- Logica di sbarra isolata
+****
+****
+SBLE5___  BL.-5___- **** MODULO SBLE - SBLE - Electrical bus (for LINEs int
+V1RE5___  --UA-- Tensione reale di sbarra
+V1IM5___  --UA-- Tensione immaginaria di sbarra
+I1RE5___  --IN-- Corrente reale linea 1
+I1IM5___  --IN-- Corrente immaginaria linea 1
+IR011___  --IN-- #I2RE5___#....................<===LINE1___  BL.-1___-
+IX011___  --IN-- #I2IM5___#....................<===LINE1___  BL.-1___-
+IR007___  --IN-- #ICRE5___#....................<===CAR17___  BL.-7___-
+IX007___  --IN-- #ICIM5___#....................<===CAR17___  BL.-7___-
+SBIS5___  --IN-- Logica di sbarra isolata
+****
+****
+CAR17___  BL.-7___- **** MODULO CAR1 - CAR1 - Elettrical load
+IR007___  --UA-- CORRENTE REALE DI CARICO [A]
+IX007___  --UA-- CORRENTE IMMAG. DI CARICO [A]
+QATT7___  --UA-- POTENZA ATTIVA DI CARICO [W]
+QREA7___  --UA-- POTENZA REATTIVA DI CARICO [W]
+IM007___  --UA-- MODULO CORRENTE DI CARICO [A]
+VM007___  --UA-- MODULO TENSIONE DI CARICO [V]
+FDIP7___  --UA-- FATTORE DI POTENZA DEL CARICO
+V1RE5___  --IN-- #VR007___#....................<===SBLE5___  BL.-5___-
+V1IM5___  --IN-- #VX007___#....................<===SBLE5___  BL.-5___-
+FG007___  --IN-- MOLTIPLICATORE DI CONDUTTANZA
+FB007___  --IN-- MOLTIPLICATORE DI SUSCETTANZA
+SISC7___  --IN-- STATO INTERRUTTORE CARICO (1=on)
+****
+****      >>>>>>INGRESSI DI TUTTI I MODULI<<<<<<
+ICRE0___  --IN-- Corrente reale carico
+ICIM0___  --IN-- Corrente immaginaria carico
+SBIS0___  --IN-- Logica di sbarra isolata
+STL11___  --IN-- STATO INTERRUTTORE LATO 1 (STL1=1--
+STL21___  --IN-- STATO INTERRUTTORE LATO 2 (STL2=1--
+KLIN1___  --IN-- LUNGHEZZA DELLA LINEA [m]
+OMLI1___  --IN-- PULSAZIONE INGRESSO LINEA [rad/sec]
+SLIN1___  --IN-- CONDIZIONE DEL BLOCCO LINEA
+STL12___  --IN-- STATO INTERRUTTORE LATO 1 (STL1=1--
+STL22___  --IN-- STATO INTERRUTTORE LATO 2 (STL2=1--
+KLIN2___  --IN-- LUNGHEZZA DELLA LINEA [m]
+OMLI2___  --IN-- PULSAZIONE INGRESSO LINEA [rad/sec]
+SLIN2___  --IN-- CONDIZIONE DEL BLOCCO LINEA
+FEMR3___  --IN-- parte reale della tensione MT
+FEMX3___  --IN-- parte immaginaria della tensione MT
+ICRE4___  --IN-- Corrente reale carico
+ICIM4___  --IN-- Corrente immaginaria carico
+SBIS4___  --IN-- Logica di sbarra isolata
+I1RE5___  --IN-- Corrente reale linea 1
+I1IM5___  --IN-- Corrente immaginaria linea 1
+SBIS5___  --IN-- Logica di sbarra isolata
+FG007___  --IN-- MOLTIPLICATORE DI CONDUTTANZA
+FB007___  --IN-- MOLTIPLICATORE DI SUSCETTANZA
+SISC7___  --IN-- STATO INTERRUTTORE CARICO (1=on)
+****
+I1RE0___  --CO-- Corrente reale linea 1
+I1IM0___  --CO-- Corrente immaginaria linea 1
+I2RE0___  --CO-- Corrente reale linea 2
+I2IM0___  --CO-- Corrente immaginaria linea 2
+UR011___  --CO-- TENSIONE REALE LATO 1 [V]
+UX011___  --CO-- TENSIONE IMMAGINARIA LATO 1 [V]
+UR021___  --CO-- TENSIONE REALE LATO 2 [V]
+UX021___  --CO-- TENSIONE IMMAGINARIA LATO 2 [V]
+UR012___  --CO-- TENSIONE REALE LATO 1 [V]
+UX012___  --CO-- TENSIONE IMMAGINARIA LATO 1 [V]
+UR022___  --CO-- TENSIONE REALE LATO 2 [V]
+UX022___  --CO-- TENSIONE IMMAGINARIA LATO 2 [V]
+VURR3___  --CO-- Parte reale della tensione
+VUXX3___  --CO-- parte immaginaria della tensione
+I1RE4___  --CO-- Corrente reale linea 1
+I1IM4___  --CO-- Corrente immaginaria linea 1
+I2RE4___  --CO-- Corrente reale linea 2
+I2IM4___  --CO-- Corrente immaginaria linea 2
+I2RE5___  --CO-- Corrente reale linea 2
+I2IM5___  --CO-- Corrente immaginaria linea 2
+ICRE5___  --CO-- Corrente reale carico
+ICIM5___  --CO-- Corrente immaginaria carico
+VR007___  --CO-- TENSIONE REALE DEL CARICO [V]
+VX007___  --CO-- TENSIONE IMMAG. DEL CARICO [V]

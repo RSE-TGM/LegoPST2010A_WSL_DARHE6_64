@@ -1,0 +1,125 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>DRIFT FLUX</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#00CC99" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><font size="3"><b>Two-phase flow: drift flux model</b></font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="left">This is the classical formulation of Zuber and Findlay for
+the representation of a non-homogeneous two-phase flow.</p>
+<p ALIGN="left">This representation gives sufficient accuracy for moderate
+transients in which the mixture evolves in a quasi-steady-state fashion and even
+during fast transients it has not been shown to lead to great inaccuracies.</p>
+<p ALIGN="left">As well known, the drift between the phases causes energy and
+momentum to cross the mixture centre-of-mass plane and generates in the
+corresponding conservation equations additional terms depending both on the
+average void fraction a and the so-called &quot;total drift velocity&quot; U<font FACE="Arial" SIZE="1">gj</font>.</p>
+<p ALIGN="left">Therefore a relationship between the void fraction and the
+drift velocity is necessary as well as the determination of the last one by
+means of adequate correlations. In the basic drift-flux approach a linkage is
+established between the average void fraction of the mixture and the two typical
+average parameters accounting for the local drift (V<font FACE="Arial" SIZE="1">gj</font>)
+and the non-uniformity of the velocity and void fraction profiles across the
+duct cross-section (C<font FACE="Arial" SIZE="1">0</font>):</p>
+<font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image103.gif" WIDTH="190" HEIGHT="80"></p>
+</font>
+<p ALIGN="left">where (ñ means cross-sectional average of property n) X<font FACE="Arial" SIZE="1">V</font><sub>
+</sub>is the average volumetric quality:</p>
+<font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image104.gif" WIDTH="66" HEIGHT="55"></p>
+</font>
+<p ALIGN="left">J is the cross-sectional averaged total volumetric flux (or
+velocity of the centre of volume)</p>
+<font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image105.gif" WIDTH="225" HEIGHT="31"></p>
+</font>
+<p ALIGN="left">C<font FACE="Arial" SIZE="1">0</font>
+is the distribution coefficient</p>
+<font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image106.gif" width="73" height="51"></p>
+</font>
+<p ALIGN="left">and V<font FACE="Arial" SIZE="1">gj</font>
+is the average local drift velocity of the gas</p>
+<font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image107.gif" WIDTH="123" HEIGHT="55"></p>
+</font>
+<p ALIGN="left">Finally</p>
+<font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image108.gif" width="226" height="31"></p>
+</font>
+<p ALIGN="left">is the average total drift velocity of the gas, appearing in
+the &quot;drift&quot; terms of the conservation equations.</p>
+<p ALIGN="left">One remarks that the &quot;total drift&quot; U<font FACE="Arial" SIZE="1">gj</font>
+includes contributions due to both the average local drift V<font FACE="Arial" SIZE="1">gj</font>
+and the velocity profile (the (C<font FACE="Arial" SIZE="1">0</font> <font FACE="Symbol">-</font> 1)J term).</p>
+<p ALIGN="left">It is evident that a proper evaluation of the two drift
+parameters C<font FACE="Arial" SIZE="1">0</font> and V<font FACE="Arial" SIZE="1">gj</font>
+becomes essential to obtain a realistic determination of the void fraction (i.e.
+of the density) of the two-phase flow.</p>
+<p ALIGN="left">To this aim several correlations are available, generally
+developed for specific applications and then strongly dependent on the
+considered geometrical and thermal-hydraulic conditions. But if the
+&quot;drift-flux&quot; model must be used in the simulation of the whole working
+situations of a plant system, considerable difficulties from the computational
+view-point could arise utilising different specifically flow-regime dependent
+correlations. To avoid this problem two empirical flow-regime independent
+&quot;drift- flux&quot; correlations have been considered and implemented in
+LEGOCAD models:</p>
+  <font FACE="Symbol">
+  <p ALIGN="JUSTIFY">*</font><font FACE="Arial"> the <u><a href="#Zuber">Zuber-Dix correlation</a></u></p>
+  </font><font FACE="Symbol">
+  <p ALIGN="JUSTIFY">*</font><font FACE="Arial"> the <u><a href="#Chexall">Chexall-Lellouche
+  correlation</a></u></p>
+</font>
+<p ALIGN="left">covering the full range of pressures, flows and void
+fractions and qualified against several sets of steady-state test data coming
+from a wide range of initial conditions and geometries.</p>
+<p ALIGN="left">Of course for homogeneous mixtures, being identical the
+velocities of the two phases:</p>
+<font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image109.gif" width="73" height="26"></font><font FACE="Arial"> </font><font FACE="Arial" SIZE="2"><img SRC="images/Image110.gif" width="76" height="30"></font><font FACE="Arial">
+</font><font FACE="Arial" SIZE="2"><img SRC="images/Image111.gif" width="76" height="30"></p>
+</font>
+<p ALIGN="left">and the drift flux model turns into the HEM.</p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY"><a name="Zuber"></a></p>
+<b><font FACE="Arial" SIZE="5">
+<p ALIGN="JUSTIFY">Zuber-Dix correlation</p>
+</font></b>
+<p ALIGN="left">The distribution coefficient C<font FACE="Arial" SIZE="1">0</font>
+and the average local drift velocity V<font FACE="Arial" SIZE="1">gj</font>
+are given by the following relations:</p>
+<font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image112.gif" width="216" height="76"></font><font FACE="Arial"> </font><font FACE="Arial" SIZE="2"><img SRC="images/Image113.gif" WIDTH="170" HEIGHT="70"></p>
+<p ALIGN="CENTER"><img SRC="images/Image114.gif" WIDTH="225" HEIGHT="75"></p>
+</font>
+<p ALIGN="left">The Mc Coy’s correction is:</p>
+<font FACE="Arial" SIZE="2">
+<p ALIGN="CENTER"><img SRC="images/Image124.gif" WIDTH="242" HEIGHT="71"></p>
+</font>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="JUSTIFY"><a name="Chexall"></a></p>
+<b><font FACE="Arial" SIZE="5">
+<p ALIGN="JUSTIFY">Chexall-Lellouche correlation</p>
+</font></b>
+<p ALIGN="left">This correlation covers a full range of pressures, diameters,
+flows, flow orientation and void fractions.</p>
+<p ALIGN="left">The evaluation of the distribution coefficient C<font FACE="Arial" SIZE="1">0</font>
+and the average local drift velocity V<font FACE="Arial" SIZE="1">gj</font>
+requires a lot of additional parameters to be determined. Their analytical
+formulations are not reported here.</p>
+</font><!--mstheme--></font></body>
+
+</html>

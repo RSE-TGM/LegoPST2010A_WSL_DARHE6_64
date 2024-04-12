@@ -1,0 +1,21 @@
+SBLE_1                                                                          
+SBLE                                                                            
+SBLE - Bus bar                                                                  
+                                                                                
+NSTAT = 0
+NUSCI = 2
+NINGR = 7
+ 
+NCONF = 1
+ 
+V1RE      --UA-- Tensione reale di sbarra                                       
+V1IM      --UA-- Tensione immaginaria di sbarra                                 
+I1RE      --IN-- Corrente reale linea 1                                         
+I1IM      --IN-- Corrente immaginaria linea 1                                   
+I2RE      --IN-- Corrente reale linea 2                                         
+I2IM      --IN-- Corrente immaginaria linea 2                                   
+ICRE      --IN-- Corrente reale carico                                          
+ICIM      --IN-- Corrente immaginaria carico                                    
+SBIS      --IN-- Logica di sbarra isolata                                       
+==============================                                                  
+EOF                                                                             

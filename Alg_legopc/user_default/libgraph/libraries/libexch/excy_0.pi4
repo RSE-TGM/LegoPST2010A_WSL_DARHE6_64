@@ -1,0 +1,46 @@
+EXCY_0                                                                          
+EXCY                                                                            
+EXCY - Heat exchanger 2 cell ( wout and win calc.)                              
+                                                                                
+NSTAT = 0
+NUSCI =12
+NINGR = 9
+ 
+NCONF = 1
+ 
+HM_1      --UA-- AVERAGE FLUID ENTHALPY CELL  1                                 
+HM_2      --UA-- AVERAGE FLUID ENTHALPY CELL  2                                 
+PU_1      --UA-- FLUID PRESSURE AT CELL  1 OUTLET                               
+WITU      --UA-- TUBE INLET MASS FLOW                                           
+WI_1      --UA-- FLUID MASS FLOW AT CELL  1 INLET                               
+WUTU      --UA-- TUBE OUTLET MASS FLOW                                          
+QTI1      --UA-- POWER EXCYANGED BETWEEN METAL AND FLUID INSIDE CELL  1         
+QTI2      --UA-- POWER EXCYANGED BETWEEN METAL AND FLUID INSIDE CELL  2         
+HU_1      --UA-- TOTAL ENTHALPY AT CELL  1 OUTLET                               
+HUTU      --UA-- TUBE OUTLET TOTAL ENTHALPY                                     
+TPE1      --UA-- EXTERNAL WALL TEMPERATURE AT CELL  1                           
+TPE2      --UA-- EXTERNAL WALL TEMPERATURE AT CELL  2                           
+HITU      --IN-- TUBE INLET TOTAL ENTHALPY                                      
+PITU      --IN-- TUBE INTLET FLUID PRESSURE                                     
+PUTU      --IN-- TUBE OUTLET FLUID PRESSURE                                     
+HVAL      --IN-- TUBE OUTLET FLUID ENTHALPY (FLOW INVERSION)                    
+ATTR      --IN-- TUBE FRICTION COEFFICIENT                                      
+TF11      --IN-- EXTERNAL FLUID TEMPERATURE CELL 1 ZONE 1                       
+TF21      --IN-- EXTERNAL FLUID TEMPERATURE CELL 2 ZONE 1                       
+GE11      --IN-- CONVECTIVE COEFF. EXTERNAL FLUID CELL 1 ZONE 1                 
+GE21      --IN-- CONVECTIVE COEFF. EXTERNAL FLUID CELL 2 ZONE 1                 
+==============================                                                  
+EOF                                                                             
+4
+11 1
+Hydraulic output
+WUTU PUTU ____ ____ ____ HUTU ____ HVAL
+t9 0
+Hydraulic input
+WITU PITU ____ ____ ____ HITU ____ HM_1
+t8 2
+Termic input
+TPE1 TF11 GE11 ____
+t7 2
+Termic input
+TPE2 TF21 GE21 ____

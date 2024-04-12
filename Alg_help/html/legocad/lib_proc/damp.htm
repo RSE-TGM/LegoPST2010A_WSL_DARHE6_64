@@ -1,0 +1,222 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE DAMP</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DAMP_summ"></A>MODULE DAMP CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DAMP_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DAMP_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DAMP_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DAMP_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DAMP_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DAMP_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DAMP_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_DAMP_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DAMP_A"></A>MODULE DAMP CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">AIR-GAS CIRCUIT DAMPER</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The DAMP module simulates a plant air-gas circuit damper. The mathematical model consists of only one algebraical equation deriving from the momentum conservation equation which puts in relation the delta P pressure on both sides of the damper and the fluid flow rate flowing through it.</P>
+<P>Such delta P pressure is subdivided in two terms. One of them takes into account the pressure drop on the concerned circuit ducts whereas the second one is related to the losses that the damper actually has.</P>
+<P>The model main hypotheses are:</P>
+<P ALIGN="JUSTIFY">- the thermal capacity of damper metal is negligible;</P>
+<P ALIGN="JUSTIFY">- the isoenthalpic thermodynamic transformation of fluid in the damper;</P>
+<P ALIGN="JUSTIFY">- the absence of fluid accumulation in the damper</P>
+<P ALIGN="JUSTIFY">- the validity of perfect gas law;</P>
+<P ALIGN="JUSTIFY">- the head losses related to the duct are expressed as a function of one quadratic and one linear term in the flow rate.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module is also applicable in case of back-flow.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DAMP_B"></A>MODULE DAMP CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module can be interconnected with other ones according to the following two methods:</P>
+<P ALIGN="JUSTIFY">1) output in flow rate</P>
+<P ALIGN="JUSTIFY">prescription about block name: none</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image296.gif" WIDTH=379 HEIGHT=193></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">2) output in outlet pressure</P>
+<P ALIGN="JUSTIFY">prescription about block name: preceded by '-' sign</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image297.gif" WIDTH=379 HEIGHT=193></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial, helvetica"><P>[Pa]&#9;PFSV&#9;&#9;fluid pressure at the damper outlet</P>
+<P>[Pa]&#9;PFSM&#9;&#9;fluid pressure at the damper inlet</P>
+<P>[kg/s]&#9;WFSR&#9;flow rate of fluid flowing through the damper</P>
+<P>[K]&#9;TFSI&#9;&#9;fluid temperature at the damper inlet</P>
+<P>[K]&#9;TFSU&#9;&#9;fluid temperature at the damper outlet (used in case of back-flow)</P>
+<P>[p.u.]&#9;ALZS&#9;&#9;damper opening degree</P>
+<P>[p.u.]&#9;AKCO&#9;&#9;head loss corrective on the duct</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_DAMP_C"></A>MODULE DAMP CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables (meanings defined above), user must assign the following data:</P>
+<P>[kg/s] &#9;&#9;WNOM&#9;nominal flow rate of fluid flowing through the damper</P>
+<P>[C]&#9;&#9;TNOM&#9;&#9;nominal temperature of fluid flowing through the damper</P>
+<P>[J/kg*K]&#9;RGAS&#9;&#9;constant used in the perfect gas law or, as alternative, index defining the default value used for air and flue gas &#9;&#9;&#9;&#9;&#9;respectively (see note).</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<B><P>Data related to the damper</P>
+</B><P>[Pa]&#9;DP S NOM&#9;pressure drop on the damper under nominal conditions</P>
+<P>[m²]&#9;AREA&#9;&#9;cross section area with fully opened damper</P>
+<P>[ ]&#9;ALFA&#9;&#9;coefficient used to define the damper characteristic, that is the variation law of SEZ cross section area as a function of &#9;&#9;&#9;&#9;the ALZS opening degree following the formula:</P>
+<P ALIGN="CENTER">SEZ = AREA*ALZS**ALFA.</P>
+<P>If user knows the characteristic of the damper supplied by the manufacturer, this can be assigned through the FUNCTION ADNS10(ALZS, ALFA) (see below). In this case to ALFA is assigned any value &gt;10.</P>
+<P>NB: at present for ALFA = 11 the equipercentage characteristic is available.</P>
+<P>&nbsp;</P>
+<B><P>Data related to the duct</P>
+</B><P>[C]&#9;DP C NOM&#9;pressure drop on the duct under nominal conditions</P>
+<P>&nbsp;</P>
+<B><P>Note</P>
+</B><P>The perfect gas law is expressed by the state equation:</P>
+<P ALIGN="CENTER">P*V = n*R*T</P>
+<P>where:</P>
+<P ALIGN="JUSTIFY">P is the gas pressure</P>
+<P ALIGN="JUSTIFY">V is the gas volume</P>
+<P ALIGN="JUSTIFY">T is the gas temperature</P>
+<P ALIGN="JUSTIFY">R is the universal constant</P>
+<P ALIGN="JUSTIFY">n is the mole number of considered gas</P>
+<P>Dividing for the gas mass M we obtain:</P>
+<P ALIGN="CENTER">P/RO = (n*R/M)*T</P>
+<P ALIGN="JUSTIFY">where RO is the gas density.</P>
+<P>Assuming</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image298.gif" WIDTH=185 HEIGHT=42></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where M/n is the gas molecular mass, we obtain:</P>
+<P ALIGN="CENTER">P/RO = RGAS*T</P>
+<P>The above indicated relation is used to determine the RO gas density as a function of the temperature only, assigning to the pressure a constant value P = 101300. Pa.</P>
+<P>For the RGAS datum a default value is foreseen, precisely assuming RGAS = 1, the value RGAS = 287 (air) is used. For RGAS = 2 the value RGAS = 274 (flue gas) is used.</P>
+<P ALIGN="JUSTIFY">In the DP C NOM are summarized all head losses distributed on the line between two dampers under nominal conditions, whereas DP S NOM provides the pressure drop on the damper when it is fully opened.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DAMP_D"></A>MODULE DAMP CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the DAMP module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DAMP_E"></A>MODULE DAMP CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To assign damper characteristic, when user knows those provided by the manufacturer, a user subprogram is needed. Its declarative statement is:</P>
+<P>FUNCTION ADNS10(ALZS, ALFA)</P>
+<P ALIGN="JUSTIFY">Input parameters: ALZS, ALFA</P>
+<P ALIGN="JUSTIFY">Output parameters: ADNS10</P>
+<P>[p.u.]&#9;ALZS&#9;&#9;damper opening degree</P>
+<P>[ ]&#9;ALFA&#9;(&gt;10) &#9;parameter, coming from the input data; it can be used as choosing index whether different standard characteristic have &#9;&#9;&#9;to be introduced by one only FUNCTION ADNS10(ALZAS, ALFA).</P>
+<P>[p.u.]&#9;ADNS10&#9;calculated value of the cross section area. Such value has to be normalized as regards to the cross section area when &#9;&#9;&#9;&#9;the damper is fully opened.</P>
+<P>Hereinafter the function related to the module equipercentage characteristic is indicated, as example:</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P>
+<P>FUNCTION ADNS10(Z,ALFA)</P>
+<P>DIMENSION X1(12),Y1(12)</P>
+<P>LOGICAL IS</P>
+<P>DATA X1/0.,.1,.2,.3,.4,.5,.6,.7,.8,.9,1.,1.2/</P>
+<P>DATA Y1/0.,.055,.085,.125,.17,.22,.28,.35,.43,.55,.7,1./</P>
+<P>DATA IS/.TRUE./ C</P>
+<P>IF (IS) THEN</P>
+<P>WRITE(6,*)' '</P>
+<P>WRITE(6,*)' '</P>
+<P>WRITE(6,*)'*** Warning!!! ',</P>
+<P>$ ' ***'</P>
+<P>WRITE(6,*)'*** Damper characteristic: tabulated ',</P>
+<P>$ 'equipercentage ***'</P>
+<P>WRITE(6,*)' '</P>
+<P>WRITE(6,*)' '</P>
+<P>IS=.FALSE.</P>
+<P>END IF</P>
+<P>CALL ADNSIN(Z,X1,Y1,12,A)</P>
+<P>ADNS10=A</P>
+<P>RETURN</P>
+<P>END</P>
+<P>SUBROUTINE ADNSIN(Z,X,Y,NP,A)</P>
+<P>DIMENSION X(1),Y(1)</P>
+<P>A=0.</P>
+<P>IF(Z.LE.X(1))RETURN</P>
+<P>A=1.</P>
+<P>IF(Z.GE.X(NP))RETURN</P>
+<P>DO I=1,NP-1</P>
+<P>J=I</P>
+<P>IF(Z.GE.X(J).AND.Z.LE.X(J+1))GO TO 15</P>
+<P>END DO</P>
+<P>15 A=Y(J)+(Z-X(J))*(Y(J+1)-Y(J))/(X(J+1)-X(J))</P>
+<P>RETURN</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DAMP_F"></A>MODULE DAMP CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In the module only one residual is present related to the algebraical equation deriving from the fluid momentum conservation equation, putting in relation the delta P pressure on the two damper sides, with the flow rate flowing through it.</P>
+<P>Its expression is:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image299.gif" WIDTH=609 HEIGHT=156></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>where WNOM, TNOM, RO, DP S NOM, DP C NOM, SEZ, have the physical meaning defined in the section on module's data, whereas remaining variables have that defined in module's variables.</P>
+<P>&nbsp;</P>
+<P>W0 and DP0 are normalization constants.</P>
+<P>The residual is normalized as regards to the delta P pressure DP0.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DAMP_G"></A>MODULE DAMP CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P>SUBROUTINE DAMPI3</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFO, IOB, DEBL)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DAMPI4</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IOB, MOD)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DAMPI2</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN, VAR, MX1, IV1, IV2, XYU, DATI, ID1, ID2,</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DAMPC1</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN, AJAC, MX5, IXYU, XYU, IPD, DATI, RNI,</P>
+<P>$</B></FONT><FONT FACE="Arial, helvetica">&#9;&#9;&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> IBL1, IBL2)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE DAMP</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (IFUN, IXYU, XYU, IPD, DATI, RNI)</P>
+<P>&nbsp;</P>
+<P>FUNCTION ADAM10</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (Z, ALFA)</P>
+<P>&nbsp;</P>
+<P>FUNCTION ADNS10</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (Z, ALFA)</P>
+<P>&nbsp;</P>
+<P>SUBROUTINE ADNSIN</B></FONT><FONT FACE="Arial, helvetica">&#9;</FONT><B><FONT FACE="Arial, helvetica" SIZE=2> (Z, X, Y, NP, A)</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_DAMP_H"></A>MODULE DAMP CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module are in the manual section dedicated to the examples developed under the abbreviations:</P>
+<P ALIGN="CENTER">"ARIAGAS"</P></FONT></BODY>
+</HTML>

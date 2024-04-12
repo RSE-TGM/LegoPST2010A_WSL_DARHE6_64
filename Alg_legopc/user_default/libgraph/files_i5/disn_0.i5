@@ -1,0 +1,27 @@
+DISN
+
+DISN - Two signals generator                                                    
+3
+1
+
+t0
+AING 
+1 
+t2
+A_2_ 
+1 
+t1
+A_1_ 
+1 
+
+0
+2
+1
+
+A_1_ UA
+DISN: OUTPUT VARIABLE NUM.  1                                  
+A_2_ UA
+DISN: OUTPUT VARIABLE NUM.  2                                  
+AING IN
+DISN: INPUT VARIABLE                                           
+

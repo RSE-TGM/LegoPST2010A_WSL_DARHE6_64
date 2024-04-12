@@ -1,0 +1,34 @@
+LINE_0                                                                          
+LINE                                                                            
+LINE - Electrical line                                                          
+                                                                                
+NSTAT = 0
+NUSCI =13
+NINGR = 9
+ 
+NCONF = 1
+ 
+IR01      --UA-- CORRENTE REALE LATO 1 [A]                                      
+IX01      --UA-- CORRENTE IMMAGINARIA LATO 1 [A]                                
+IR02      --UA-- CORRENTE REALE LATO 2 [A]                                      
+IX02      --UA-- CORRENTE IMMAGINARIA LATO 2  [A]                               
+URL1      --UA-- TENSIONE REALE AI MORSETTI LATO 1 [V]                          
+UXL1      --UA-- TENSIONE IMMAGINARIA AI MORSETTI LATO 1 [V]                    
+URL2      --UA-- TENSIONE REALE AI MORSETTI LATO 2 [V]                          
+UXL2      --UA-- TENSIONE IMMAGINARIA AI MORSETTI LATO 2 [V]                    
+UULM      --UA-- MODULO DELLA CADUTA DI TENSIONE IN LINEA [V]                   
+QP01      --UA-- POTENZA ATTIVA LATO 1 [w]                                      
+QQ01      --UA-- POTENZA REATTIVA LATO 1 [w]                                    
+QP02      --UA-- POTENZA ATTIVA LATO 2 [w]                                      
+QQ02      --UA-- POTENZA REATTIVA LATO 2 [w]                                    
+UR01      --IN-- TENSIONE REALE LATO 1 [V]                                      
+UX01      --IN-- TENSIONE IMMAGINARIA LATO 1 [V]                                
+UR02      --IN-- TENSIONE REALE LATO 2 [V]                                      
+UX02      --IN-- TENSIONE IMMAGINARIA LATO 2 [V]                                
+STL1      --IN-- STATO INTERRUTTORE LATO 1 (STL1=1-->INT CHIUSO)                
+STL2      --IN-- STATO INTERRUTTORE LATO 2 (STL2=1-->INT CHIUSO)                
+KLIN      --IN-- LUNGHEZZA DELLA LINEA [m]                                      
+OMLI      --IN-- PULSAZIONE INGRESSO LINEA [rad/sec]                            
+SLIN      --IN-- CONDIZIONE DEL BLOCCO LINEA                                    
+==============================                                                  
+EOF                                                                             

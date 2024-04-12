@@ -1,0 +1,66 @@
+hydr Hydraulic
+LineColor blue
+LineWidth 4
+LineBitmap None
+00portata 
+01pressione 
+02x1 
+03x2 
+04x3 
+05entalpia 
+06x4 
+07entalpiaInv
+****
+term Termic
+LineColor red
+LineWidth 4
+LineBitmap None
+00tempEsterna 
+01tempMedia 
+02coeffScambio 
+03potenza
+****
+flue FlueGas
+LineColor black
+LineWidth 4
+LineBitmap None
+00portata 
+01pressione 
+02temperatura 
+03tempInvers 
+04frMolO2 
+05frMolCO2 
+06frMolH2O 
+07frMasH2O
+****
+comm Actuation
+LineColor orange
+LineWidth 4
+LineBitmap None
+00command
+****
+elek Electrical
+LineColor green
+LineWidth 4
+LineBitmap None
+00v_real 
+01v_imag 
+02i_real 
+03i_imag
+****
+dump Generical
+LineColor brown
+LineWidth 4
+LineBitmap None
+00var01 
+01var02 
+02var03 
+03var04 
+04var05 
+05var06 
+06var07 
+07var08 
+08var09 
+09var10
+****
+****

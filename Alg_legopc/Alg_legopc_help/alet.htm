@@ -1,0 +1,427 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>ALET</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE ALET</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ALET</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font><font FACE="Arial" SIZE="4"><i>
+<p ALIGN="CENTER">Model Generalities</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">FINNED TUBE CELL</p>
+<p>The module ALET belongs to the thermodinamic base library. It simulates the
+behaviour of a flue gas duct cell with finned exchange surface on the flue gas
+side.</p>
+<p>The model not only evaluates the actual exchanging surface, but also it
+allows to simulate the dynamic behaviour of thermal exchange and storage in the
+fin metal.</p>
+<p>The model of the fin also allows to simulate the (small) difference between
+the simulation of an exchanging plain pipe (with the same metal mass and the
+same exchanging surface) and of the finned pipe.</p>
+</font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ALET</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font><font FACE="Arial" SIZE="4">
+<i>
+<p ALIGN="CENTER">Topological data</p>
+</i></font></b>
+<font FACE="Arial">
+<p ALIGN="CENTER">INPUT-OUTPUT SCHEME</p>
+<p align="center">&nbsp;</p>
+<p align="center"><img SRC="images/Image10.gif" width="474" height="262"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</p>
+<!--mstheme--></font><table border="0" width="100%">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+            <p ALIGN="JUSTIFY">[K] TMSU temperature of the surface of the pipe
+            where the fin is connected</p>
+          </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+            <p ALIGN="JUSTIFY">[K] TFIC flue gas temperature at the cell inlet</p>
+          </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+            <p ALIGN="JUSTIFY">[kg/s] WFAL flue gas flow rate</p>
+          </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+            <p ALIGN="JUSTIFY">[ ] FSAL pipe gritness fattor</p>
+          </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+[%] %PCO partial pressure of CO2 in the flue gas
+          </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+[%] %PHO partial pressure of H2O in the flue gas
+          </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+            <p ALIGN="JUSTIFY">[%] %O2F partial pressure of O2 in the flue gas</p>
+          </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+[K] TMFF mean filtered flue gas temperature
+          </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+[W] QTIL auxiliary state variable (no phisical
+            meaning)
+          </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+[W] QBNF filtered power given to the metal of the
+            finned pipe
+          </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+            <p ALIGN="JUSTIFY">[W] QBNC power given to the metal of the finned
+            pipe (not filtered)</p>
+          </font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font FACE="Arial">
+            <p ALIGN="JUSTIFY">[K] TFUC flue gas temperature at the cell outlet</p>
+          </font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+          </font><b><font FACE="Arial" SIZE="4">
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <blockquote>
+          <blockquote>
+            <p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+            <u><font SIZE="5">
+            </blockquote>
+            </blockquote>
+          </blockquote>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </font></u>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ALET</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+            <i>
+            <p ALIGN="CENTER">Physical and Geometrical Data</p>
+            </i></font></b><font FACE="Arial">
+        <p>In addition to the initial values of input and output variables
+        (defined above), user must assign the following data:</p>
+        <!--mstheme--></font><table border="0" width="100%" height="288">
+          <tr>
+            <td width="100%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+        [ ] NTUB number of parallel tubes in the
+                    pipe bundle
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+                    <p ALIGN="JUSTIFY">[m] DIAE external diameter of the pipe
+                    where the fin is connected</p>
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+                    <p ALIGN="JUSTIFY">[m] LUNG lenght of the flue gas duct cell</p>
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+        [m] PASP pipe bundle perpendicular pitch (as regards to the flue gas
+        direction)
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+                    <p ALIGN="JUSTIFY">[m] PASL pipe bundle longitudinal pitch
+                    (as regards to the flue gas direction)</p>
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+                    <p ALIGN="JUSTIFY">[m²] SCAN tranversal section of the flue
+                    gas duct</p>
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="23"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+        [ ] FA geometric arrangement factor
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="46"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+        [ ] SIGN convention for the exchanged
+                    power sign (positive sign for EVAF and TUBS; negative sign
+                    for TH2O)
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="27"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+                    <p ALIGN="JUSTIFY">[kg/m³] ROM metal density</p>
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="27"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+        [J/kg/ C] CM metal specific heat
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="27"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+        [W/m/ C] COND metal thermal conductivity
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="27"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+        [m] SPES fin thickness
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="27"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+        [m] ALT fin height
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="27"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+                    <p ALIGN="JUSTIFY">[m] PASS finning helix pitch</p>
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="27"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+                    <p ALIGN="JUSTIFY">[ ] NTBO number of pipes crossed by the
+                    flue gas in a transversal section</p>
+                  </font><!--mstheme--></font></td>
+          </tr>
+          <tr>
+            <td width="100%" height="27"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial">
+                    <p ALIGN="JUSTIFY">[1/m] N/ME it must be 0 if the fin is
+                    helical arrangement; otherwise it is the number of fins per
+                    meter (parallel fins)</p>
+                  </font><!--mstheme--></font></td>
+          </tr>
+        </table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+        <blockquote>
+          <blockquote>
+            <blockquote>
+              <blockquote>
+                <blockquote>
+                  <blockquote>
+                  </font><b><font FACE="Arial" SIZE="4">
+            <p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+                  </blockquote>
+                </blockquote>
+              </blockquote>
+            </blockquote>
+          </blockquote>
+        </blockquote>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ALET</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        <i>
+        <p ALIGN="CENTER">Module Variables Initialization</p>
+        </i></font></b><font FACE="Arial">
+        <p ALIGN="JUSTIFY">To initialize the ALET module variables on the file
+        F14, no particular prescription is required.</p>
+        </font><font FACE="Tms Rmn" SIZE="1">
+        </font><b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ALET</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        <i>
+        <p ALIGN="CENTER">User's Subprograms</p>
+        </i></font></b><font FACE="Arial">
+        <p ALIGN="JUSTIFY">In the ALET module no user subprogram is foreseen.</p>
+        </font><font FACE="Tms Rmn" SIZE="1">
+        <p ALIGN="CENTER">&nbsp;</p>
+        </font><b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ALET</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        <i>
+        <p ALIGN="CENTER">Residuals</p>
+        </i></font></b><font FACE="Arial">
+        <p ALIGN="JUSTIFY">Normal flow rates:</p>
+        </font><b><font FACE="Courier New" SIZE="2">
+        <p>C</p>
+        <p>RN(1)=(-TFF+TFM)/TAU/T0</p>
+        <p>C</p>
+        <p>RN(2)=(-QTILDE+AA*G*ALUNTOT*(TMET-TFF))/TAUN2/Q0</p>
+        <p>C</p>
+        <p>Q1=QTILDE+BB*G*ALUNTOT*(TMET-TFF)</p>
+        <p>RN(3)=(-Q1F+Q1)/TAU/Q0</p>
+        <p>DUEQ2=Q1F+2.*UTOT*ALAL*ALUNTOT*(TFF-TFM)</p>
+        <p>C</p>
+        <p>RN(4)=(SEGNO*QBANK-SBANK*UTOT*DELTF+Q1)/Q0</p>
+        <p>C</p>
+        <p>RN(5)=(WF*(HFI-HFU)-SBANK*UTOT*DELTF+DUEQ2)/Q0</p>
+        </font></b><font FACE="Arial">
+        <p ALIGN="JUSTIFY">&nbsp;</p>
+        <p ALIGN="JUSTIFY">Small flow rates:</p>
+        </font><b><font FACE="Courier New" SIZE="2">
+        <p>RN(1)=(-TFF+TFM)/TAU/T0</p>
+        <p>RN(2)=(-QTILDE)/TAUN2/Q0</p>
+        <p>RN(3)=(-Q1F)/TAU/Q0</p>
+        <p>RN(4)=QBANK/Q0</p>
+        <p>RN(5)=(TFU-TMET)/T0</p>
+        </font></b><font FACE="Arial">
+        </font><font FACE="Tms Rmn" SIZE="1">
+        </font><b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<font SIZE="1">
+<p ALIGN="JUSTIFY"></font><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ALET</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        <i>
+        <p ALIGN="CENTER">Module subprograms</p>
+        </i></font><font FACE="Courier New" SIZE="2">
+        <p>&nbsp;</p>
+        <p>SUBROUTINE ALETI3(IFO,IOB,DEBL)</p>
+        <p>SUBROUTINE ALETI4(IOB,MOD)</p>
+        <p>SUBROUTINE ALETI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+        <p>$ IBLOC1,IBLOC2,IER,CNXYU,TOL)</p>
+        <p>SUBROUTINE ALETC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RN,</p>
+        <p>$ IBLOC1,IBLOC2)</p>
+        <p>SUBROUTINE ALET(IFUN,IXYU,XYU,IPD,DATI,RN)</p>
+        <p>SUBROUTINE COSTXALET(GAMMA,S,ALAMDA,ROM,CM,ALUN,</p>
+        <p>$ TAU,G,TAUN1,TAUN2)</p>
+        <p>SUBROUTINE ALETD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</p>
+        <p>$ IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</p>
+        <p>&nbsp;</p>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font><b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE ADIV</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        <i>
+        <p ALIGN="CENTER">Test cases</p>
+        </i></font></b><font FACE="Arial">
+        <p ALIGN="JUSTIFY">Reference test cases related to this module are
+        reported in the user manual section devoted to the examples developed
+        under the abbreviation:</p>
+        <p ALIGN="JUSTIFY">&nbsp;</p>
+        <p ALIGN="CENTER">&quot;.........&quot;</p>
+        </font>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a>
+</p>
+      <!--mstheme--></font></body>
+
+</html>

@@ -1,0 +1,159 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE VACT</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VACT_summ"></A>MODULE VACT&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VACT_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VACT_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VACT_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VACT_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VACT_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VACT_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VACT_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_VACT_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VACT_A"></A>MODULE VACT&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">EQUIVALENT STEM POSITION OF A SET OF VALVES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module VACT calculates an equivalent stem position of a set of valves allowing to simulate this set of valves with one only module VALV. Moreover, an exact "measure" of each received input variable is also output so to allow a connection with an input variable of a regulation task.</P>
+<P ALIGN="JUSTIFY">The arrangements of valves considered by VACT are the following:</P>
+<P ALIGN="JUSTIFY">1. one only valve (the only effect is to replicate the stem position, as received in input, both to the output variable to be connected with the module VALV, and to the "measure" variable that will be sent to the regulation)</P>
+<P ALIGN="JUSTIFY">2. two valves in serial arrangement (the equivalent is the product of the two stem positions)</P>
+<P ALIGN="JUSTIFY">3. two valves in parallel arrangement (an arithmetic average is taken as the equivalent of the two)</P>
+<P ALIGN="JUSTIFY">4. a three way valve (the equivalent is two valves departing by the same node, the former being the serial arrangement of the three-ways-valve stem position with the one of the branch A, whilst the latter is the serial arrangement of the complement to one of the same with the stem position of the branch B).</P>
+<P ALIGN="JUSTIFY">The simplicity of the used formulas is meant to simplify as much as possible the equivalent calculations: for a more accurate calculation other formulas should be used. </P>
+<P ALIGN="JUSTIFY">To reduce to the minimum the burden of this complementary module upon the global solving system, the equation(s) that output the "measure(s)" are seen as non-equations as far as the transient calculations are concerned.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VACT_B"></A>MODULE VACT&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><U><P ALIGN="JUSTIFY">1. ONE ONLY VALVE</P>
+</B></U><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1262.gif" WIDTH=398 HEIGHT=263></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;ALZV&#9;valve stem position (input)</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;AEQV&#9;valve stem position (output)</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;AMLV&#9;valve stem position ("measure")</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><U><P ALIGN="JUSTIFY">2. TWO VALVES IN SERIAL OR PARALLEL ARRANGEMENT</P>
+</B></U><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1263.gif" WIDTH=398 HEIGHT=263></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;ALZA&#9;branch A stem position</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;ALZB&#9;branch B stem position</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;AEQV&#9;equivalent stem position</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;AMLA&#9;branch A stem position ("measure")</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;AMLB&#9;branch A stem position ("measure")</P>
+<P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<B><U><P ALIGN="JUSTIFY">3. A THREE WAYS VALVE</P>
+</B></U><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1264.gif" WIDTH=398 HEIGHT=263></P>
+<FONT FACE="Arial"><P>&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;ALZ3&#9;three ways valve stem position</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;ALZA&#9;branch A stem position</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;ALZB&#9;branch B stem position</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;AEQA&#9;equivalent branch A stem position</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;AEQB&#9;equivalent branch B stem position</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;AML3&#9;three ways valve stem position ("measure")</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;AMLA&#9;branch A stem position ("measure")</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;AMLB&#9;branch A stem position ("measure")</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_VACT_C"></A>MODULE VACT&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables, user must assign the following data:</P>
+<P ALIGN="JUSTIFY">[]&#9;NC&#9;selection index of equivalence configuration:</P>
+<P ALIGN="JUSTIFY">1: one only valve</P>
+<P ALIGN="JUSTIFY">2: two valves (serial arrangement)</P>
+<P ALIGN="JUSTIFY">3: two valves (parallel arrangement)</P>
+<P ALIGN="JUSTIFY">4: three ways valve</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VACT_D"></A>MODULE VACT&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the VACT module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VACT_E"></A>MODULE VACT&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">VACT doesn’t prescribe any FORAUS subroutine.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VACT_F"></A>MODULE VACT&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="CENTER">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">C ***************** isolated valve</P>
+</B><P ALIGN="JUSTIFY">RNI(1) = AEQV - ALZV</P>
+<P ALIGN="JUSTIFY">IF (KREGIM) THEN</P>
+<P ALIGN="JUSTIFY">RNI(2) = AMLV - ALZV</P>
+<P ALIGN="JUSTIFY">ELSE</P>
+<P ALIGN="JUSTIFY">RNI(2) = ALZV</P>
+<P ALIGN="JUSTIFY">ENDIF</P>
+<B><P ALIGN="JUSTIFY">C ***************** serial or parallel arrangements</P>
+</B><P ALIGN="JUSTIFY">IF (NC .EQ. 1) THEN </FONT><I>!serial arrangement</P>
+</I><FONT FACE="Arial"><P ALIGN="JUSTIFY">RNI(1) = AEQV - ALZA * ALZB</P>
+<P ALIGN="JUSTIFY">ELSE </FONT><I>!parallel arrangement</P>
+</I><FONT FACE="Arial"><P ALIGN="JUSTIFY">RNI(1) = AEQV - 0.5 * (ALZA + ALZB)</P>
+<P ALIGN="JUSTIFY">ENDIF</P>
+<P ALIGN="JUSTIFY">IF (KREGIM) THEN</P>
+<P ALIGN="JUSTIFY">RNI(2) = AMLA - ALZA</P>
+<P ALIGN="JUSTIFY">RNI(3) = AMLB - ALZB</P>
+<P ALIGN="JUSTIFY">ELSE</P>
+<P ALIGN="JUSTIFY">RNI(2) = ALZA</P>
+<P ALIGN="JUSTIFY">RNI(3) = ALZB</P>
+<P ALIGN="JUSTIFY">ENDIF</P>
+<B><P ALIGN="JUSTIFY">C ***************** 3ways valve</P>
+</B><P ALIGN="JUSTIFY">RNI(1) = AEQA - ALZA * ALZ3</P>
+<P ALIGN="JUSTIFY">RNI(2) = AEQB - ALZB * (1.-ALZ3)</P>
+<P ALIGN="JUSTIFY">IF (KREGIM) THEN</P>
+<P ALIGN="JUSTIFY">RNI(3) = AML3 - ALZ3</P>
+<P ALIGN="JUSTIFY">RNI(4) = AMLA - ALZA</P>
+<P ALIGN="JUSTIFY">RNI(5) = AMLB - ALZB</P>
+<P ALIGN="JUSTIFY">ELSE</P>
+<P ALIGN="JUSTIFY">RNI(3) = ALZ3</P>
+<P ALIGN="JUSTIFY">RNI(4) = ALZA</P>
+<P ALIGN="JUSTIFY">RNI(5) = ALZB</P>
+<P ALIGN="JUSTIFY">ENDIF</P>
+<P ALIGN="JUSTIFY">ENDIF</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VACT_G"></A>MODULE VACT&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Courier New"><P>SUBROUTINE VACTI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>SUBROUTINE VACTI3(IFO,IOB,DEBL)</P>
+<P>SUBROUTINE VACTI4(IOB,MOD)</P>
+<P>SUBROUTINE VACTC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE VACTD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_VACT_H"></A>MODULE VACT&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module aren’t yet available.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

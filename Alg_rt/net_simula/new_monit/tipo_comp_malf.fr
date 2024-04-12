@@ -1,0 +1,10 @@
+1;AVALV;Generic automation valve;Primo tipo;SACT;IA;IB;OPEN RMP;IC;CLOS RMP;ID;UNUSED1;IE;UNUSED2
+2;SVALV;Security valve;Secondo tipo;SACT;IA;IB;OPEN RMP;IC;CLOS RMP;ID;UNUSED1;IE;UNUSED2
+3;PUMP;Generic pump ;Terzo tipo;SACT;IA;;;;;;;;
+4;EXCH;Heat exchanger ;Quarto tipo;SMAL;I1;I2;% RUPT;I3;RUP RMP;;;;
+5;TUBE;Generic tube;Quinto tipo;SMAL;I1;I2;% RUPT;I3;RUP RMP;I4;RUP FREQ;;
+6;SSSS;Descrizione;Note varie;Modu;A1;;;;;;;;
+7;TST2;Descrizione;Note varie;Modu;;;;;;;;;
+8;TST1;Descrizione;Note varie;Modu;PU;;;;;;;;
+9;TST1;Descrizione;Note varie;Modu;WV;;;;;;;;
+10;TST1;Descrizione;Note varie;Modu;AL;;;;;;;;

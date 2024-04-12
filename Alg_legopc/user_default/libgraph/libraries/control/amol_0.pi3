@@ -1,0 +1,15 @@
+AMOL_0                                                                          
+AMOL                                                                            
+AMOL - Two signals product                                                      
+                                                                                
+NSTAT = 0
+NUSCI = 1
+NINGR = 2
+ 
+NCONF = 1
+ 
+UMOL      --UA-- OUTPUT ANALOG SIGNAL FROM MULTIPLIER                           
+I1MO      --IN-- INPUT SIGNAL 1 TO MULTIPLIER                                   
+I2MO      --IN-- INPUT SIGNAL 2 TO MULTIPLIER                                   
+==============================                                                  
+EOF                                                                             

@@ -1,0 +1,978 @@
+
+      SUBROUTINE RETNI2 (IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,
+     $                    IBL1,IBL2,IER,CNXYU,TOL)
+C     IMPLICIT DOUBLE PRECISION (A-H, O-Z)                             !DBLE
+C
+      PARAMETER (MAX_NODI=50, MAX_COLL=50, MAX_INT=2*MAX_COLL)
+C      
+      DIMENSION VAR(MX1,*),XYU(*),DATI(*),CNXYU(*),TOL(*)
+C
+      LOGICAL KREGIM
+      COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+      COMMON/REGIME/KREGIM
+C
+      COMMON/AUSIL1/NSTATI,NUSCIT,NINGRE
+C
+      INTEGER IFUN, MX1, ID2, IV1
+      REAL XYU, DATI, CNXYU, TOL
+      REAL P0, H0, T0, W0, RO0, AL0, V0, DP0
+      CHARACTER*8 IBLOC
+C      
+      INTEGER INI(MAX_INT), COLL(5,MAX_COLL)
+      REAL GB(4,MAX_COLL),ZY(4,MAX_COLL),VBASE(MAX_NODI)
+      DIMENSION YR(MAX_NODI,MAX_NODI),YX(MAX_NODI,MAX_NODI)
+      CHARACTER TIPO(MAX_COLL),FDATI*8
+      CHARACTER*4 FNUM
+      QBASE=W0*H0
+C
+C     ----- RETE ELETTRICA PASSIVA                      
+C         
+      GO TO (100, 200), IFUN
+C
+  100 WRITE(14,500) 'PU(1=SI)'
+  500 FORMAT(3(4X,A8,' =',10X,'*'))
+      RETURN
+C
+C     -----  Lettura e memorizzazione dati
+C
+  200 READ (14,627)
+      READ (14,627) PU
+  627 FORMAT (3(14X,F10.0,1X))
+	write(FNUM,3000)ibl2
+3000	format(A4)
+	FDATI='F_DATI_'//FNUM(4:4)
+C
+      OPEN (16,FILE=FDATI,STATUS='OLD',FORM='UNFORMATTED')
+      READ(16) NUM_NODI,NUM_INTER,NUM_COLL   
+      READ(16) (TIPO(I),COLL(1,I),COLL(2,I),COLL(3,I),COLL(4,I),
+     $         COLL(5,I),I=1,NUM_COLL)
+      READ(16) (GB(1,I),GB(2,I),GB(3,I),GB(4,I),I=1,NUM_COLL)
+      DO J=1,NUM_NODI
+      READ(16) (YR(I,J),YX(I,J),I=1,NUM_NODI)
+      ENDDO
+      READ(16) QB_ORI,(VBASE(I),I=1,NUM_NODI)
+      READ(16) (INI(I),I=1,NUM_INTER),NCCP,NC0P,ZRCP,ZXCP
+      CLOSE(16)
+C
+C     SCRITTURA DI CONTROLLO DEL FILE F_DATI
+C
+      WRITE(6,3001) QBASE,QB_ORI,NUM_NODI,NUM_INTER,NUM_COLL,NCCP
+      II=1
+      DO I=1,NUM_COLL
+      WRITE(6,3002) TIPO(I),COLL(1,I),COLL(2,I),VBASE(COLL(2,I)),
+     $              COLL(4,I),INI(II),COLL(3,I),VBASE(COLL(3,I)),
+     $              COLL(5,I),INI(II+1),GB(1,I),GB(2,I),GB(3,I),GB(4,I)
+      II=II+2
+      ENDDO
+      WRITE(6,3004)
+      DO I=1,NUM_NODI
+      WRITE(6,3003)(YR(I,J),J=1,NUM_NODI)
+      ENDDO
+      WRITE(6,3005)
+      DO I=1,NUM_NODI
+      WRITE(6,3003)(YX(I,J),J=1,NUM_NODI)
+      ENDDO
+ 3001 FORMAT(10X,'LETTURA DEL FILE F_DATI:',3X,'POT. BASE= '
+     $       ,F11.0,3X,'POT. ORIG=',F11.0,/10X,'NUMERO NODI=',I2,3X,
+     $       'NUMERO INTERRUTTORI=',I2,3X,'NUMERO COLLEGAMENTI=',I2,3X,
+     $       'NODO IN CORTOCIRCUITO=',I2)
+ 3002 FORMAT(10X,'COLLEGAMENTO ',A1,I2,' FRA NODO',I2,
+     $       ' (','V=',F7.0,')',1X,'INT=',I2,' (',I1,')','  E NODO',I2,
+     $       ' (','V=',F7.0,')',1X,'INT=',I2,' (',I1,')',
+     $       /26X,'amm. long.=',2F10.3,3X,'amm. trasv.=',2F10.3)
+ 3003 FORMAT(10(1X,E10.3,2X))
+ 3004 FORMAT(41H   MATRICE DELLE AMMETTENZE - PARTE REALE)
+ 3005 FORMAT(47H   MATRICE DELLE AMMETTENZE - PARTE IMMAGINARIA)
+C
+      DATI(ID2)=NUM_NODI
+      DATI(ID2+1)=NUM_INTER
+      DATI(ID2+2)=NUM_COLL
+      INT1=3
+      DO 508 IS=1,NUM_INTER
+       DATI (ID2+INT1)=INI(IS)
+       INT1=INT1+1
+  508 CONTINUE
+      DATI(ID2+INT1)=NCCP
+      INT1=INT1+1
+      DO 504 IN=1,NUM_NODI
+       DO 503 IM=1,NUM_NODI
+        DATI(ID2+INT1)=YR(IN,IM)*QB_ORI/QBASE
+        INT1=INT1+1
+  503  CONTINUE
+  504 CONTINUE
+      DO 506 IN=1,NUM_NODI
+       DO 507 IM=1,NUM_NODI
+        DATI(ID2+INT1)=YX(IN,IM)*QB_ORI/QBASE
+        INT1=INT1+1
+  507  CONTINUE
+  506 CONTINUE
+      DO 509 I=1,NUM_COLL
+       DATI(ID2+INT1)=ICHAR(TIPO(I))
+       DATI(ID2+INT1+1)=COLL(1,I)
+       DATI(ID2+INT1+2)=COLL(2,I)
+       DATI(ID2+INT1+3)=COLL(3,I)
+       DATI(ID2+INT1+4)=COLL(4,I)
+       DATI(ID2+INT1+5)=COLL(5,I)
+       DATI(ID2+INT1+6)=GB(1,I)*QB_ORI/QBASE
+       DATI(ID2+INT1+7)=GB(2,I)*QB_ORI/QBASE
+       DATI(ID2+INT1+8)=GB(3,I)*QB_ORI/QBASE
+       DATI(ID2+INT1+9)=GB(4,I)*QB_ORI/QBASE
+       INT1=INT1+10
+  509 CONTINUE
+C
+C      METTIAMO QB_ORI E VBASE IN DATI PERCHE'
+C      NELLA C1 VIENE RISCRITTO IL FILE F_DATI AGGIOR.
+C
+       DATI(ID2+INT1)=QB_ORI
+      DO I=1,NUM_NODI
+         DATI(ID2+INT1+I)=VBASE(I)
+      ENDDO
+      INT1=INT1+NUM_NODI
+      DATI(ID2+INT1+1)=NC0P
+      DATI(ID2+INT1+2)=ZRCP
+      DATI(ID2+INT1+3)=ZXCP
+      ID2 = ID2+INT1+3
+C
+C     -----  Costanti di normalizzazione
+C
+      IF (PU.EQ.1.) THEN
+      NTOT=4*NUM_NODI+NUM_INTER+5
+      DO I=0,NTOT-1
+         CNXYU(IV1+I) = 1.
+      ENDDO
+      ELSE
+      DO I=1,NUM_NODI
+         CNXYU(IV1+I-1)=VBASE(I)
+         CNXYU(IV1+NUM_NODI+I-1)=VBASE(I)
+      ENDDO
+      CNXYU(IV1+2*NUM_NODI)=QBASE/(SQRT(3.)*VBASE(1))
+      CNXYU(IV1+2*NUM_NODI+1)=QBASE/(SQRT(3.)*VBASE(1))
+      DO I=1,NUM_NODI
+         CNXYU(IV1+2*NUM_NODI+1+I)=QBASE/(SQRT(3.)*VBASE(I))
+         CNXYU(IV1+3*NUM_NODI+1+I)=QBASE/(SQRT(3.)*VBASE(I))
+      ENDDO
+      DO I=1,NUM_INTER
+         CNXYU(IV1+4*NUM_NODI+1+I)=1.
+      ENDDO
+      CNXYU(IV1+4*NUM_NODI+NUM_INTER+2)=1.
+      CNXYU(IV1+4*NUM_NODI+NUM_INTER+3)=1.
+      CNXYU(IV1+4*NUM_NODI+NUM_INTER+4)=1.
+      ENDIF
+C
+      RETURN
+      END     
+C
+C
+      SUBROUTINE RETNC1 (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)
+C     IMPLICIT DOUBLE PRECISION (A-H, O-Z)                             !DBLE
+C
+      PARAMETER (MAX_NODI=50, MAX_COLL=50, MAX_INT=2*MAX_COLL)
+C
+      DIMENSION AJAC(MX5,*),XYU(*),DATI(*),RNI(*)
+C
+C
+      LOGICAL KREGIM
+      COMMON/NORM/P0,H0,T0,W0,RO0,AL0,V0,DP0
+      COMMON/SOLV00/JACSI
+      COMMON/REGIME/KREGIM
+      COMMON/INTEGR/TSTOP,TEMPO,DTINT,NPAS,CDT,ALFADT                   !SNGL
+      COMMON/PARPAR/NPER,NVPLT,NVSTP,NSTPLT,NSTSTP,KPLT,KSTP,ITERT
+C 
+      INTEGER  	ISTAT(MAX_INT), VARI, VARC, VARD, KLI
+      REAL CIR(MAX_NODI), CIX(MAX_NODI), EX(MAX_NODI), ER(MAX_NODI)
+      REAL ZRCC,ZXCC,IRCC,IXCC
+      REAL P0, H0, T0, W0, RO0, AL0, V0, DP0
+C
+      INTEGER INI(MAX_INT),COLL(5,MAX_COLL)
+      REAL GB(4,MAX_COLL),ZY(4,MAX_COLL),VBASE(MAX_NODI)
+      REAL YR(MAX_NODI,MAX_NODI),YX(MAX_NODI,MAX_NODI)
+      CHARACTER TIPO(MAX_COLL),IBLOC*8,FDATI*8,FNUM*4
+      QBASE=W0*H0
+C
+C     -----  Decodifica variabili e dati
+C
+      NUM_NODI = DATI(IPD)
+      NUM_INTER= DATI(IPD+1)
+      NUM_COLL = DATI(IPD+2)
+C
+      NCONT=0
+      DO 20 I=1,NUM_NODI
+       ER(I)   =XYU(IXYU + NCONT)
+       NCONT=NCONT+1
+   20 CONTINUE
+      DO 31 I=1,NUM_NODI
+       EX(I)  =XYU(IXYU + NCONT)
+       NCONT=NCONT+1
+   31 CONTINUE
+      IRCC = XYU(IXYU + NCONT)
+      NCONT = NCONT+1
+      IXCC = XYU(IXYU + NCONT)
+      NCONT = NCONT+1
+      DO 40 I=1,NUM_NODI
+       CIR(I) = XYU(IXYU + NCONT)
+       NCONT=NCONT+1
+   40 CONTINUE
+      DO 50 I=1,NUM_NODI
+       CIX(I) = XYU(IXYU + NCONT)
+       NCONT=NCONT+1
+   50 CONTINUE
+      DO 52 I=1,NUM_INTER
+       ISTAT(I) = XYU(IXYU + NCONT)+0.5
+       NCONT=NCONT+1    
+   52 CONTINUE
+      NNCC = XYU(IXYU + NCONT)
+      ZRCC = XYU(IXYU + NCONT+1)
+      ZXCC = XYU(IXYU + NCONT+2)
+C
+      NNC0=NNCC
+      IF ((ZRCC.NE.0).OR.(ZXCC.NE.0)) NNC0=0 !NNC0 indica il nodo (se c'e')
+                                             !in cortocircuito con Zcc=0
+C
+      INT3=3
+      DO 72 IS=1,NUM_INTER
+       INI(IS)=DATI(IPD+INT3)+0.5
+       INT3=INT3+1
+   72 CONTINUE
+      NCCP = DATI(IPD+INT3)
+      INT3 = INT3+1
+      DO 415 IN=1,NUM_NODI
+       DO 314 IM=1,NUM_NODI
+        YR(IN,IM) = DATI(IPD+INT3)
+        INT3=INT3+1
+  314  CONTINUE
+  415 CONTINUE                 
+      DO 61 IN=1,NUM_NODI
+       DO 62 IM=1,NUM_NODI
+        YX(IN,IM) = DATI(IPD+INT3)
+        INT3=INT3+1
+   62  CONTINUE
+   61 CONTINUE
+      DO 509 I=1,NUM_COLL
+       INDATI=NINT(DATI(IPD+INT3))
+       TIPO(I)=CHAR(INDATI)
+       COLL(1,I)=DATI(IPD+INT3+1)
+       COLL(2,I)=DATI(IPD+INT3+2)
+       COLL(3,I)=DATI(IPD+INT3+3)
+       COLL(4,I)=DATI(IPD+INT3+4)
+       COLL(5,I)=DATI(IPD+INT3+5)
+       GB(1,I)=DATI(IPD+INT3+6)
+       GB(2,I)=DATI(IPD+INT3+7)
+       GB(3,I)=DATI(IPD+INT3+8)
+       GB(4,I)=DATI(IPD+INT3+9)
+       INT3=INT3+10
+  509 CONTINUE
+       QB_ORI=DATI(IPD+INT3)
+      DO I=1,NUM_NODI
+         VBASE(I)=DATI(IPD+INT3+I)
+      ENDDO
+      INT3=INT3+NUM_NODI
+      NC0P=DATI(IPD+INT3+1)
+      ZRCP=DATI(IPD+INT3+2)
+      ZXCP=DATI(IPD+INT3+3)
+C
+      GO TO(100,200,300),IFUN
+C
+C     ---topologia jacobiano
+C
+C     1. bilanci ai nodi
+C
+  100 DO I=1,NUM_COLL
+        AJAC(COLL(2,I),COLL(3,I))=1.
+        AJAC(COLL(3,I),COLL(2,I))=1.
+        AJAC(COLL(2,I)+NUM_NODI,COLL(3,I))=1.
+        AJAC(COLL(3,I),COLL(2,I)+NUM_NODI)=1.
+        AJAC(COLL(2,I),COLL(3,I)+NUM_NODI)=1.
+        AJAC(COLL(3,I)+NUM_NODI,COLL(2,I))=1.
+        AJAC(COLL(2,I)+NUM_NODI,COLL(3,I)+NUM_NODI)=1.
+        AJAC(COLL(3,I)+NUM_NODI,COLL(2,I)+NUM_NODI)=1.
+      END DO
+      DO J=1,NUM_NODI
+        AJAC(J,J)=1.
+        AJAC(J,J+NUM_NODI)=1.
+        AJAC(J+NUM_NODI,J)=1.
+        AJAC(J+NUM_NODI,J+NUM_NODI)=1.
+      END DO
+C
+      DO 120 I=1,NUM_NODI*2 !derivate risp. alle correnti
+       AJAC(I,I+NUM_NODI*2+2)=1.      
+  120 CONTINUE
+C
+C     2. calcolo correnti di cortocircuito
+C      
+      AJAC(2*NUM_NODI+1,2*NUM_NODI+1)=1.
+      AJAC(2*NUM_NODI+2,2*NUM_NODI+2)=1.
+      DO I=1,2*NUM_NODI !dipendenza dalle tensioni
+         AJAC(2*NUM_NODI+1,I)=1.
+         AJAC(2*NUM_NODI+2,I)=1.
+      ENDDO
+      DO I=1,NUM_NODI !dipendenza dalle correnti
+          AJAC(2*NUM_NODI+1,2*NUM_NODI+2+I)=1.
+          AJAC(2*NUM_NODI+2,3*NUM_NODI+2+I)=1.
+      ENDDO
+C
+      RETURN
+C
+C     ---calcolo residui
+C
+  200 CONTINUE
+C
+C     ----- CONTROLLO STATO INTERRUTTORI -----
+C
+      VARI=0
+      JACSI=0
+      DO I=1,NUM_INTER
+       IF (ISTAT(I).LE.0.5) THEN
+        ISTAT(I)=0
+       ELSE
+        ISTAT(I)=1
+       ENDIF
+       IF (ISTAT(I).NE.INI(I)) THEN
+          JACSI=1
+          VARI =1
+          IF (ISTAT(I).EQ.1) THEN
+             WRITE (6,65) 'MANOVRA DI CHIUSURA INTERRUTTORE ', 
+     &                    I
+             CALL CLOSEI (I,NUM_COLL,NUM_NODI,COLL,GB,
+     &                    YR,YX,INI)
+             INI(I)=1
+          ELSE
+             WRITE (6,65) 'MANOVRA DI APERTURA INTERRUTTORE ',
+     &                    I
+             CALL OPENI (I,NUM_COLL,NUM_NODI,COLL,GB,
+     &                   YR,YX,INI)
+             INI(I)=0
+          ENDIF
+       ENDIF
+      ENDDO   
+   65 FORMAT (//,A40,I2,//)
+      IF(VARI.EQ.1) THEN
+       INT3=3
+       DO 98 I=1,NUM_INTER
+        DATI(IPD+INT3)=INI(I)
+        INT3=INT3+1
+   98  CONTINUE
+        INT3=INT3+1
+       DO 8 I=1,NUM_NODI
+        DO 9 J=1,NUM_NODI
+         DATI(IPD+INT3)=YR(I,J)
+         INT3=INT3+1
+    9   CONTINUE
+    8  CONTINUE
+       DO 11 I=1,NUM_NODI
+        DO 12 J=1,NUM_NODI
+         DATI(IPD+INT3)=YX(I,J)
+         INT3=INT3+1
+   12   CONTINUE
+   11  CONTINUE
+      ENDIF 
+C
+C     ----- VERIFICA PRESENZA CORTOCIRCUITI ------
+C
+      VARC=0
+      IF (NNCC.NE.NCCP) THEN !variato nodo di cortocircuito
+         VARC=1
+         JACSI=1
+         IF (NNC0.EQ.0) ! cortocircuito con Zcc != 0
+     $      CALL ES_CTO(NNCC,NCCP,NUM_NODI,YR,YX,ZRCC,ZXCC)
+         IF (NCCP.NE.0) WRITE(6,2) 'ELIMINATO CORTOCIRCUITO NODO ',NCCP
+         IF (NNCC.NE.0) WRITE(6,2) 'SETTATO CORTOCIRCUITO NODO ',NNCC
+      ELSE IF (NNC0.NE.0.AND.NC0P.EQ.0) THEN !Zcc va a zero su stesso nodo
+         VARC=1
+         JACSI=1
+         CALL ES_CTO(0,NNCC,NUM_NODI,YR,YX,ZRCP,ZXCP)
+         WRITE(6,2) 'AZZERATA IMPEDENZA CORTOCIRCUITO NODO ',NNCC
+      ELSE IF (NNC0.EQ.0.AND.NC0P.NE.0) THEN !Zcc passa da zero a valore dato
+         VARC=1
+         JACSI=1
+         CALL ES_CTO(NNCC,0,NUM_NODI,YR,YX,ZRCC,ZXCC)
+         WRITE(6,2) 'IMPEDENZA CC. POSTA DIVERSA DA ZERO SU NODO ',NNCC
+      ELSE IF (ZRCC.NE.ZRCP.OR.ZXCC.NE.ZXCP) THEN !modificato valore Zcc
+         VARC=1
+         JACSI=1
+         CALL ES_CTO(0,NNCC,NUM_NODI,YR,YX,ZRCP,ZXCP)
+         CALL ES_CTO(NNCC,0,NUM_NODI,YR,YX,ZRCC,ZXCC)
+         WRITE(6,2) 'MODIFICATA IMPEDENZA CORTOCIRCUITO SU NODO ',NNCC
+      ENDIF
+      IF (VARC.EQ.1) THEN !aggiornamento matrice ammettenze e stati
+         INT3=3+NUM_INTER
+         DATI(IPD+INT3)=NNCC
+         INT3=4+NUM_INTER
+         DO I=1,NUM_NODI
+            DO J=1,NUM_NODI
+               DATI(IPD+INT3)=YR(I,J)
+               INT3=INT3+1
+            ENDDO
+         ENDDO
+         DO I=1,NUM_NODI
+            DO J=1,NUM_NODI
+               DATI(IPD+INT3)=YX(I,J)
+               INT3=INT3+1
+            ENDDO
+         ENDDO
+         INT3=5+NUM_INTER+2*NUM_NODI*NUM_NODI+10*NUM_COLL+NUM_NODI
+         DATI(IPD+INT3)=NNC0
+         DATI(IPD+INT3+1)=ZRCC
+         DATI(IPD+INT3+2)=ZXCC
+      ENDIF
+ 2    FORMAT(/A,I3/)
+C
+C Riscrive dati corretti se e' stato variato lo stato degli interruttori
+C oppure dei nodi nel calcolo di uno stazionario.
+C
+c      IF ((VARI.EQ.1.OR.VARC.EQ.1)
+c     $     .AND.KREGIM.AND.(ITERT.EQ.0)) THEN
+      IF ((VARI.EQ.1.OR.VARC.EQ.1)
+     $     .AND.(ITERT.EQ.0)) THEN
+	if (kregim) then
+        write(FNUM,3000)ibl2
+3000    format(A4)
+        FDATI='F_DATI_'//FNUM(4:4)
+C
+      OPEN (16,FILE=FDATI,STATUS='UNKNOWN',FORM='UNFORMATTED')
+        WRITE(16) NUM_NODI,NUM_INTER,NUM_COLL
+        WRITE(16) (TIPO(I),COLL(1,I),COLL(2,I),COLL(3,I),COLL(4,I),
+     $             COLL(5,I),I=1,NUM_COLL)
+        WRITE(16) (GB(1,I)*QBASE/QB_ORI,GB(2,I)*QBASE/QB_ORI
+     $            ,GB(3,I)*QBASE/QB_ORI,GB(4,I)*QBASE/QB_ORI
+     $            ,I=1,NUM_COLL)
+        DO J=1,NUM_NODI
+        WRITE(16) (YR(I,J)*QBASE/QB_ORI
+     $            ,YX(I,J)*QBASE/QB_ORI,I=1,NUM_NODI)
+        ENDDO
+        WRITE(16) QB_ORI,(VBASE(I),I=1,NUM_NODI)
+        WRITE(16) (INI(I),I=1,NUM_INTER),NNCC,NNC0,ZRCC,ZXCC 
+        CLOSE(16)
+	end if
+C
+C     SCRITTURA DI CONTROLLO DEL FILE F_DATI
+C
+      WRITE(6,3001) QB_ORI,NUM_NODI,NUM_INTER,NUM_COLL,NNCC
+      II=1
+      DO I=1,NUM_COLL
+      WRITE(6,3002) TIPO(I),COLL(1,I),COLL(2,I),VBASE(COLL(2,I)),
+     $              COLL(4,I),INI(II),COLL(3,I),VBASE(COLL(3,I)),
+     $              COLL(5,I),INI(II+1),
+     $              GB(1,I)*QBASE/QB_ORI,GB(2,I)*QBASE/QB_ORI,
+     $              GB(3,I)*QBASE/QB_ORI,GB(4,I)*QBASE/QB_ORI
+      II=II+2
+      ENDDO
+      WRITE(6,'(A)') '  MATRICE DELLE AMMETTENZE - PARTE REALE:'
+      DO I=1,NUM_NODI
+      WRITE(6,3003)(YR(I,J)*QBASE/QB_ORI,J=1,NUM_NODI)
+      ENDDO
+      WRITE(6,'(A)') '  MATRICE DELLE AMMETTENZE - PARTE IMMAGINARIA:'
+      DO I=1,NUM_NODI
+      WRITE(6,3003)(YX(I,J)*QBASE/QB_ORI,J=1,NUM_NODI)
+      ENDDO
+ 3001 FORMAT(10X,'AGGIORNAMENTO DEL FILE F_DATI:',3X,'POT. BASE= '
+     $       ,F11.0,/10X,'NUMERO NODI=',I2,3X,
+     $       'NUMERO INTERRUTTORI=',I2,3X,'NUMERO COLLEGAMENTI=',I2,3X,
+     $       'NODO IN CORTOCIRCUITO=',I2)
+ 3002 FORMAT(10X,'COLLEGAMENTO ',A1,I2,' FRA NODO',I2,
+     $       ' (','V=',F7.0,')',1X,'INT=',I2,' (',I1,')','  E NODO',I2,
+     $       ' (','V=',F7.0,')',1X,'INT=',I2,' (',I1,')',
+     $       /26X,'amm. long.=',2F10.3,3X,'amm. trasv.=',2F10.3)
+ 3003 FORMAT(10(1X,E10.3,2X))
+       ENDIF
+C
+      DO I=1,NUM_NODI !equazioni ai nodi
+          IF (I.EQ.NNC0) THEN
+             RNI(I)=ER(I)
+             RNI(I+NUM_NODI)=EX(I)
+          ELSE
+             PAR=0.
+             PAX=0.
+             DO J=1,NUM_NODI
+                PAR=PAR+YR(I,J)*ER(J)-YX(I,J)*EX(J)
+                PAX=PAX+YX(I,J)*ER(J)+YR(I,J)*EX(J)
+             ENDDO
+             RNI(I)=-PAR+CIR(I)
+             RNI(I+NUM_NODI)=-PAX+CIX(I)
+          ENDIF
+      ENDDO
+      IF (NNCC.EQ.0) THEN !calcolo corrente cortocircuito
+         RNI(2*NUM_NODI+1) = IRCC
+         RNI(2*NUM_NODI+2) = IXCC
+      ELSE IF (NNC0.NE.0) THEN
+         PAR=0.
+         PAX=0.
+         DO J=1,NUM_NODI
+            IF (J.NE.NNC0) THEN
+               PAR=PAR+YR(J,NNC0)*ER(J)-YX(J,NNC0)*EX(J)
+               PAX=PAX+YX(J,NNC0)*ER(J)+YR(J,NNC0)*EX(J)
+            ENDIF
+         ENDDO
+         RNI(2*NUM_NODI+1)=IRCC*(VBASE(NNCC)/VBASE(1))
+     $                     +PAR-CIR(NNC0)
+         RNI(2*NUM_NODI+2)=IXCC*(VBASE(NNCC)/VBASE(1))
+     $                     +PAX-CIX(NNC0)
+      ELSE
+         YRCC=ZRCC/(ZRCC**2+ZXCC**2)
+         YXCC=-ZXCC/(ZRCC**2+ZXCC**2)
+         RNI(2*NUM_NODI+1)=IRCC*(VBASE(NNCC)/VBASE(1))
+     $                     -YRCC*ER(NNCC)+YXCC*EX(NNCC)
+         RNI(2*NUM_NODI+2)=IXCC*(VBASE(NNCC)/VBASE(1))
+     $                     -YRCC*EX(NNCC)-YXCC*ER(NNCC)
+      ENDIF
+C
+      RETURN
+C
+C     ---calcolo jacobiano
+C
+  300 CONTINUE
+C     
+C     1. equazioni ai nodi
+C
+      DO I=1,NUM_NODI !derivate risp. alle tensioni
+        IF (I.EQ.NNC0) THEN
+          AJAC(I,I) =-1.
+          AJAC(NUM_NODI+I,NUM_NODI+I) =-1.
+        ELSE
+          DO J=1,NUM_NODI
+           AJAC(I,J)=YR(I,J)
+           AJAC(I,J+NUM_NODI)=-YX(I,J)
+           AJAC (I+NUM_NODI,J+NUM_NODI)=YR(I,J)
+           AJAC(I+NUM_NODI,J)=YX(I,J)
+          ENDDO
+      IF ((AJAC(I,I).EQ.0.).OR.(AJAC(I+NUM_NODI,I+NUM_NODI).EQ.0.))THEN
+           PIVOT=1.E-10*VBASE(1)*VBASE(1)/QBASE
+           AJAC(I,I)=AJAC(I,I)+PIVOT
+           AJAC(I+NUM_NODI,I+NUM_NODI)=AJAC(I+NUM_NODI,I+NUM_NODI)+PIVOT
+      ENDIF
+        ENDIF
+      ENDDO
+      DO I=1,NUM_NODI*2 !derivate risp. alle correnti
+         IF (I.NE.NNC0.AND.NUM_NODI+I.NE.NNC0) THEN
+            AJAC(I,I+NUM_NODI*2+2)=-1.
+         ENDIF
+      ENDDO
+C
+C     2. equazioni calcolo correnti cortocircuito
+C
+      IF (NNCC.EQ.0) THEN
+         AJAC(2*NUM_NODI+1,2*NUM_NODI+1)=-1.
+         AJAC(2*NUM_NODI+2,2*NUM_NODI+2)=-1.
+      ELSE
+         AJAC(2*NUM_NODI+1,2*NUM_NODI+1)=-VBASE(NNCC)/VBASE(1)
+         AJAC(2*NUM_NODI+2,2*NUM_NODI+2)=-VBASE(NNCC)/VBASE(1)
+      ENDIF
+      IF (NNC0.NE.0) THEN
+         DO J=1,NUM_NODI
+            IF (J.NE.NNC0) THEN
+               AJAC(2*NUM_NODI+1,J)=-YR(J,NNC0)
+               AJAC(2*NUM_NODI+1,J+NUM_NODI)=YX(J,NNC0)
+               AJAC(2*NUM_NODI+2,J)=-YX(J,NNC0)
+               AJAC(2*NUM_NODI+2,J+NUM_NODI)=-YR(J,NNC0)
+            ENDIF
+         ENDDO
+         AJAC(2*NUM_NODI+1,2*NUM_NODI+2+NNC0)=1.
+         AJAC(2*NUM_NODI+2,3*NUM_NODI+2+NNC0)=1.
+      ELSE IF (NNCC.NE.0) THEN
+         YRCC=ZRCC/(ZRCC**2+ZXCC**2)
+         YXCC=-ZXCC/(ZRCC**2+ZXCC**2)
+         AJAC(2*NUM_NODI+1,NNCC)=YRCC
+         AJAC(2*NUM_NODI+1,NUM_NODI+NNCC)=-YXCC
+         AJAC(2*NUM_NODI+2,NNCC)=YXCC
+         AJAC(2*NUM_NODI+2,NUM_NODI+NNCC)=YRCC
+      ENDIF
+C
+C     DO J=1,2*NUM_NODI+2
+C        WRITE(6,*) (AJAC(I,J),I=1,2*NUM_NODI+2)
+C     ENDDO
+C     
+      RETURN
+      END
+C
+C     APERTURA INTERRUTTORE
+C
+      SUBROUTINE OPENI (IND_INTER,NUM_COLL,NUM_NODI,COLL,GB,
+     $                  YR,YX,INI)
+C
+      PARAMETER (MAX_NODI=50, MAX_COLL=50, MAX_INT=2*MAX_COLL)	
+      REAL      GB(4,MAX_COLL),YR(MAX_NODI,MAX_NODI),
+     $          YX(MAX_NODI,MAX_NODI),NUMR,NUMX
+      INTEGER   COLL(5,MAX_COLL),INI(MAX_INT)
+C
+      DO J=1,NUM_COLL 
+         IF (COLL(4,J).EQ.IND_INTER.OR.COLL(5,J)
+     $       .EQ.IND_INTER) THEN
+            JJ=J
+            GOTO 100
+         ENDIF
+      ENDDO
+100   GL=GB(1,JJ)
+      BL=GB(2,JJ)
+      GT=GB(3,JJ)/2.
+      BT=GB(4,JJ)/2.
+      DEN=(GT+GL)**2+(BT+BL)**2
+      NUMR=(GT*GL-BL*BT)*(GL+GT)+(BL*GT+BT*GL)*(BL+BT)
+      NUMX=(BT*GL+GT*BL)*(GT+GL)-(BL+BT)*(GT*GL-BT*BL)
+      GPAR=GT+NUMR/DEN
+      BPAR=BT+NUMX/DEN
+      IF (COLL(4,JJ).EQ.IND_INTER) THEN
+          IND_ALTER=COLL(5,JJ)
+          NODO_INTER=COLL(2,JJ)
+          NODO_ALTER=COLL(3,JJ)
+      ELSE 
+          IND_ALTER=COLL(4,JJ)
+          NODO_INTER=COLL(3,JJ)
+          NODO_ALTER=COLL(2,JJ)
+      ENDIF
+      ISTATO_ALTER=INI(IND_ALTER)
+      IF (ISTATO_ALTER.EQ.0) THEN !altro nodo aperto
+         YR(NODO_INTER,NODO_INTER)=YR(NODO_INTER,NODO_INTER)-GPAR
+         YX(NODO_INTER,NODO_INTER)=YX(NODO_INTER,NODO_INTER)-BPAR
+      ELSE !altro nodo chiuso
+         YR(NODO_INTER,NODO_INTER)=YR(NODO_INTER,NODO_INTER)-GT-GL
+         YX(NODO_INTER,NODO_INTER)=YX(NODO_INTER,NODO_INTER)-BT-BL
+         YR(NODO_INTER,NODO_ALTER)=YR(NODO_INTER,NODO_ALTER)+GL
+         YX(NODO_INTER,NODO_ALTER)=YX(NODO_INTER,NODO_ALTER)+BL
+         YR(NODO_ALTER,NODO_ALTER)=YR(NODO_ALTER,NODO_ALTER)-GT-GL+
+     $                             GPAR
+         YX(NODO_ALTER,NODO_ALTER)=YX(NODO_ALTER,NODO_ALTER)-BT-BL+
+     $                             BPAR
+         YR(NODO_ALTER,NODO_INTER)=YR(NODO_ALTER,NODO_INTER)+GL
+         YX(NODO_ALTER,NODO_INTER)=YX(NODO_ALTER,NODO_INTER)+BL
+      ENDIF
+      RETURN
+      END
+C
+C     CHIUSURA INTERRUTTORE
+C
+      SUBROUTINE CLOSEI (IND_INTER,NUM_COLL,NUM_NODI,COLL,GB,
+     $                   YR,YX,INI)
+C
+      PARAMETER (MAX_NODI=50, MAX_COLL=50, MAX_INT=2*MAX_COLL)
+C
+      REAL      GB(4,MAX_COLL),YR(MAX_NODI,MAX_NODI),
+     $          YX(MAX_NODI,MAX_NODI),NUMR,NUMX
+      INTEGER   COLL(5,MAX_COLL),INI(MAX_INT)
+C
+      DO J=1,NUM_COLL
+         IF (COLL(4,J).EQ.IND_INTER.OR.COLL(5,J)
+     $       .EQ.IND_INTER) THEN
+            JJ=J
+            GOTO 100
+         ENDIF
+      ENDDO
+100   GL=GB(1,JJ)
+      BL=GB(2,JJ)
+      GT=GB(3,JJ)/2.
+      BT=GB(4,JJ)/2.
+      DEN=(GT+GL)**2+(BT+BL)**2
+      NUMR=(GT*GL-BL*BT)*(GL+GT)+(BL*GT+BT*GL)*(BL+BT)
+      NUMX=(BT*GL+GT*BL)*(GT+GL)-(BL+BT)*(GT*GL-BT*BL)
+      GPAR=GT+NUMR/DEN
+      BPAR=BT+NUMX/DEN
+      IF (COLL(4,JJ).EQ.IND_INTER) THEN
+          IND_ALTER=COLL(5,JJ)
+          NODO_INTER=COLL(2,JJ)
+          NODO_ALTER=COLL(3,JJ)
+      ELSE
+          IND_ALTER=COLL(4,JJ)
+          NODO_INTER=COLL(3,JJ)
+          NODO_ALTER=COLL(2,JJ)
+      ENDIF
+      ISTATO_ALTER=INI(IND_ALTER)
+      IF (ISTATO_ALTER.EQ.0) THEN !altro nodo aperto
+          YR(NODO_INTER,NODO_INTER)=YR(NODO_INTER,NODO_INTER)+GPAR
+          YX(NODO_INTER,NODO_INTER)=YX(NODO_INTER,NODO_INTER)+BPAR
+      ELSE !altro nodo chiuso
+          YR(NODO_INTER,NODO_INTER)=YR(NODO_INTER,NODO_INTER)+GT+GL
+          YX(NODO_INTER,NODO_INTER)=YX(NODO_INTER,NODO_INTER)+BT+BL
+          YR(NODO_INTER,NODO_ALTER)=YR(NODO_INTER,NODO_ALTER)-GL
+          YX(NODO_INTER,NODO_ALTER)=YX(NODO_INTER,NODO_ALTER)-BL
+          YR(NODO_ALTER,NODO_ALTER)=YR(NODO_ALTER,NODO_ALTER)+GT+GL-
+     $                              GPAR
+          YX(NODO_ALTER,NODO_ALTER)=YX(NODO_ALTER,NODO_ALTER)+BT+BL-
+     $                              BPAR
+          YR(NODO_ALTER,NODO_INTER)=YR(NODO_ALTER,NODO_INTER)-GL
+          YX(NODO_ALTER,NODO_INTER)=YX(NODO_ALTER,NODO_INTER)-BL
+      ENDIF
+      RETURN
+      END
+C
+C
+C     GESTIONE CORTOCIRCUITI
+C
+      SUBROUTINE ES_CTO(NNCC,NCCP,NUM_NODI,YR,YX,ZRCC,ZXCC)
+C
+      PARAMETER (MAX_NODI=50, MAX_COLL=50, MAX_INT=2*MAX_COLL)
+      DIMENSION YR(MAX_NODI,MAX_NODI), YX(MAX_NODI,MAX_NODI)
+      CHARACTER*8 FAUTO
+      CHARACTER*4 FNUM
+C
+      write(FNUM,3300)ibl2
+3300  format(A4)
+      FAUTO='F_AUTO_'//FNUM(4:4)
+C
+      IF (NCCP.NE.0) THEN !elimina cortocircuito nodo vecchio
+         OPEN(12,FILE=FAUTO, STATUS='OLD',FORM='UNFORMATTED')
+         READ(12) (YR(I,I),YX(I,I),I=1,NUM_NODI)
+         CLOSE(12)
+      ENDIF
+      IF (NNCC.NE.0) THEN !crea cortocircuito nodo corrente
+         OPEN(12,FILE=FAUTO, STATUS='UNKNOWN',FORM='UNFORMATTED')
+         WRITE(12) (YR(I,I),YX(I,I),I=1,NUM_NODI)
+         CLOSE(12)
+         YR(NNCC,NNCC)=ZRCC/(ZRCC**2+ZXCC**2)+YR(NNCC,NNCC)
+         YX(NNCC,NNCC)=-ZXCC/(ZRCC**2+ZXCC**2)+YX(NNCC,NNCC)
+      ENDIF
+C
+      RETURN
+      END
+C
+C
+      SUBROUTINE RETNI3 (IFO,IOB,DEBL)
+C
+      PARAMETER (MAX_NODI=50, MAX_COLL=50, MAX_INT=2*MAX_COLL)
+C
+      INTEGER ISTAT(MAX_INT),INI(MAX_INT),COLL(5,MAX_COLL)
+      REAL GB(4,MAX_COLL),ZY(4,MAX_COLL)
+      DIMENSION YR(MAX_NODI,MAX_NODI),YX(MAX_NODI,MAX_NODI)
+      CHARACTER TIPO(MAX_COLL),IBLOC*8
+C
+      COMMON /RETN1/NUM_COLL,NUM_NODI,NUM_INTER
+C
+      CHARACTER*4 IOB, MOD, DEBL*80
+      DATA MOD/'RETN'/
+C
+      CALL RETNI4(IOB,MOD,IBLOC)
+      NINTER = 2*NUM_COLL
+      NSTATI = 0
+      NUSCIT = 2*NUM_NODI+2
+      NINGRE = 2*NUM_NODI+NUM_INTER+3
+C
+      WRITE (IFO,2999)IBLOC,IOB,MOD,DEBL 
+ 2999 FORMAT(A,2X,'BL.-',A4,'- **** MODULO ',A4,' - ',A)
+C
+ 	IF (NUM_NODI.LE.9)THEN
+      DO 30 J=1,NUM_NODI
+      WRITE(IFO,3001)J,IOB,J
+ 3001 FORMAT('VR0',I1,A4,2X,
+     $ '--UA-- V_REALE NODO 0',I1,' [V]' )
+   30 CONTINUE
+      DO 40 J=1,NUM_NODI
+      WRITE(IFO,3002)J,IOB,J
+ 3002 FORMAT('VX0',I1,A4,2X,
+     $ '--UA-- V_IMMAG NODO 0',I1,' [V]' )
+   40 CONTINUE
+C
+C     CORRENTI DI CTO CTO
+C
+      WRITE(IFO,3020)IOB
+ 3020 FORMAT('IRCC',A4,2X,
+     $ '--UA-- I_REALE DI CTO CTO [A]')
+      WRITE(IFO,3021)IOB
+ 3021 FORMAT('IXCC',A4,2X,
+     $ '--UA-- I_IMMAG DI CTO CTO [A]')
+C
+      DO 50 J=1,NUM_NODI 
+      WRITE(IFO,3003)J,IOB,J
+ 3003 FORMAT('IR0',I1,A4,2X,
+     $ '--IN-- I_REALE NODO 0',I1,' [A]')
+   50 CONTINUE
+      DO 60 J=1,NUM_NODI
+      WRITE(IFO,3004)J,IOB,J
+ 3004 FORMAT('IX0',I1,A4,2X,
+     $ '--IN-- I_IMMAG NODO 0',I1,' [A]')
+   60 CONTINUE 
+
+      ELSE !RETE CON PIU' DI 9 NODI
+C
+      DO 80 J=1,9
+      WRITE(IFO,3006)J,IOB,J
+ 3006 FORMAT('VR0',I1,A4,2X,
+     $ '--UA-- V_REALE NODO 0',I1,' [V]' )
+   80 CONTINUE
+      DO 90 J=10,NUM_NODI
+      WRITE(IFO,3007)J,IOB,J
+ 3007 FORMAT('VR',I2,A4,2X,
+     $ '--UA-- V_REALE NODO ',I2,' [V]' )
+   90 CONTINUE
+      DO 95 J=1,9
+      WRITE(IFO,3008)J,IOB,J
+ 3008 FORMAT('VX0',I1,A4,2X,
+     $ '--UA-- V_IMMAG NODO 0',I1,' [V]' )
+   95 CONTINUE
+      DO 100 J=10,NUM_NODI
+      WRITE(IFO,3009)J,IOB,J
+ 3009 FORMAT('VX',I2,A4,2X,
+     $ '--UA-- V_IMMAG NODO ',I2,' [V]' )
+  100 CONTINUE
+C
+C     CORRENTI DI CTO CTO
+C
+      WRITE(IFO,3025)IOB
+ 3025 FORMAT('IRCC',A4,2X,
+     $ '--UA-- I_REALE DI CTO CTO'          )
+      WRITE(IFO,3026)IOB
+ 3026 FORMAT('IXCC',A4,2X,
+     $ '--UA-- I_IMMAG DI CTO CTO'          )
+C
+      DO 110 J=1,9 
+      WRITE(IFO,3010)J,IOB,J
+ 3010 FORMAT('IR0',I1,A4,2X,
+     $ '--IN-- I_REALE NODO 0',I1,' IN [A]'          )       
+  110 CONTINUE
+      DO 120 J=10,NUM_NODI 
+      WRITE(IFO,3011)J,IOB,J
+ 3011 FORMAT('IR',I2,A4,2X,
+     $ '--IN-- I_REALE NODO ',I2,' IN [A]'           )
+  120 CONTINUE
+      DO 130 J=1,9 
+      WRITE(IFO,3012)J,IOB,J
+ 3012 FORMAT('IX0',I1,A4,2X,
+     $ '--IN-- I_IMMAG NODO 0',I1,' IN [A]'          )
+  130 CONTINUE
+      DO 140 J=10,NUM_NODI
+      WRITE(IFO,3013)J,IOB,J
+ 3013 FORMAT('IX',I2,A4,2X,
+     $ '--IN-- I_IMMAG NODO ',I2,' IN [A]'           )
+  140 CONTINUE 
+
+        ENDIF
+
+        IF (NINTER.LE.9) THEN
+      DO 170 J=1,NINTER
+      WRITE(IFO,3016)J,IOB,J
+ 3016 FORMAT('ST0',I1,A4,2X,
+     $ '--IN-- STATO INTERRUTTORE 0',I1             )
+  170 CONTINUE
+        ELSE 
+      DO 180 J=1,9
+      WRITE(IFO,3017)J,IOB,J
+ 3017 FORMAT('ST0',I1,A4,2X,
+     $ '--IN-- STATO INTERRUTTORE 0',I1             )
+  180 CONTINUE
+      DO 190 J=10,NINTER
+      WRITE(IFO,3018)J,IOB,J
+ 3018 FORMAT('ST',I2,A4,2X,
+     $ '--IN-- STATO INTERRUTTORE ',I2              )
+  190 CONTINUE
+      ENDIF
+      WRITE(IFO,3022)IOB
+ 3022 FORMAT('NNCC',A4,2X,
+     $ '--IN-- INDICE NODO IN CTO CTO'                  )
+      WRITE(IFO,3023)IOB
+ 3023 FORMAT('ZRCC',A4,2X,
+     $ '--IN-- Z_REALE DI CTO CTO'                  )
+      WRITE(IFO,3024)IOB
+ 3024 FORMAT('ZXCC',A4,2X,
+     $ '--IN-- Z_IMM DI CTO CTO'                  )
+      RETURN
+      END
+C
+C
+      SUBROUTINE RETNI4 (IOB,MOD,IBLOC)
+C     
+      PARAMETER (MAX_NODI=50, MAX_COLL=50, MAX_INT=2*MAX_COLL)
+C     
+      CHARACTER*4 IOB, MOD
+      INTEGER ISTAT(MAX_INT),INI(MAX_INT)
+      INTEGER     NUM_COLL,NUM_INTER,NUM_AMM,NUM_NODI,COLL(5,60),
+     $            NUM_LINEE,NUM_TRASF
+      REAL        ZY(4,MAX_COLL),YR(MAX_NODI,MAX_NODI),
+     $            YX(MAX_NODI,MAX_NODI),GB(4,60),VBASE(MAX_NODI)
+      CHARACTER   TIPO(MAX_COLL),RBASE*20,
+     $            FNUM,FDATI*8,IBLOC*8 
+C
+      COMMON /RETN1/NUM_COLL,NUM_NODI,NUM_INTER
+C     
+C     ACQUISIZIONE DEI DATI DAL FILE DI CONFIGURAZIONE DELLA RETE
+C
+      WRITE (6,111)
+  111 FORMAT (1X,'DIGITA IL NOME DEL FILE DAL QUALE ACQUISIRE I DATI')
+      READ  (5,222) RBASE
+  222 FORMAT (1A20)
+      WRITE (6,333)
+  333 FORMAT (1X,'DIGITA IL NUMERO DELLA RETE')
+      READ  (5,444) FNUM
+  444 FORMAT (A1)
+	FDATI='F_DATI_'//FNUM
+C
+      DO K=1,NUM_NODI
+       DO H=1,NUM_NODI
+       YR(K,H)=0.
+       YX(K,H)=0.
+      ENDDO
+      ENDDO
+      
+      OPEN (34, FILE=RBASE, STATUS='OLD')
+      READ (34,1) NUM_NODI
+      READ (34,1) NUM_LINEE
+      READ (34,1) NUM_TRASF
+      NUM_COLL=NUM_LINEE+NUM_TRASF
+      NUM_INTER=2*NUM_COLL
+      DO 10 I=1,NUM_COLL
+       READ (34,2) TIPO(I)
+       READ (34,3) COLL(1,I)
+       READ (34,*) COLL(2,I), COLL(3,I)
+       READ (34,*) COLL(4,I), COLL(5,I)
+       READ (34,*) ZY(1,I), ZY(2,I)
+       READ (34,*) ZY(3,I), ZY(4,I)
+       GB(1,I)=ZY(1,I)/(ZY(1,I)**2+ZY(2,I)**2)
+       GB(2,I)=-ZY(2,I)/(ZY(1,I)**2+ZY(2,I)**2)
+       GB(3,I)=ZY(3,I)
+       GB(4,I)=ZY(4,I)
+   10 CONTINUE
+       READ(34,'(A)')
+       READ(34,*) QB_ORI
+       READ(34,'(A)')
+       READ(34,*) (VBASE(I),I=1,NUM_NODI)
+      CLOSE (34)
+    1 FORMAT (/I2)
+    2 FORMAT (/A2)
+    3 FORMAT (I2,1X,I2)
+    4 FORMAT (/I2/)
+C
+C     COSTRUZIONE MATRICE DELLE AMMETTENZE
+C
+      DO I=1,NUM_NODI
+      DO J=1,NUM_COLL
+      IF ((COLL(2,J).EQ.I).OR.(COLL(3,J).EQ.I)) THEN
+      YR(I,I)=YR(I,I)+GB(1,J)+GB(3,J)/2.
+      YX(I,I)=YX(I,I)+GB(2,J)+GB(4,J)/2.
+      IF (COLL(2,J).EQ.I) THEN
+      YR(I,COLL(3,J))=YR(I,COLL(3,J))-GB(1,J)
+      YX(I,COLL(3,J))=YX(I,COLL(3,J))-GB(2,J)
+      ELSE
+      YR(I,COLL(2,J))=YR(I,COLL(2,J))-GB(1,J)
+      YX(I,COLL(2,J))=YX(I,COLL(2,J))-GB(2,J)
+      ENDIF
+      ENDIF
+      ENDDO
+      ENDDO
+C
+C     COSTRUZIONE FILE F_DATI
+C
+      OPEN (16,FILE=FDATI,STATUS='UNKNOWN',FORM='UNFORMATTED')
+        WRITE(16) NUM_NODI,NUM_INTER,NUM_COLL
+        WRITE(16) (TIPO(I),COLL(1,I),COLL(2,I),COLL(3,I),COLL(4,I),
+     $             COLL(5,I),I=1,NUM_COLL)
+        WRITE(16) (GB(1,I),
+     $             GB(2,I),
+     $             GB(3,I),
+     $             GB(4,I),I=1,NUM_COLL)
+        DO J=1,NUM_NODI
+        WRITE(16) (YR(I,J),
+     $              YX(I,J),
+     $              I=1,NUM_NODI)
+        ENDDO
+        WRITE(16) QB_ORI,(VBASE(I),I=1,NUM_NODI)
+        WRITE(16) (1,I=1,NUM_INTER),0,0,0.,0. 
+       CLOSE (16)
+C
+      WRITE(IBLOC,15)MOD,IOB(1:3),FNUM
+      WRITE(IOB,16)IOB(1:3),FNUM
+15    FORMAT(A4,A3,A1)
+16    FORMAT(A3,A1)
+      RETURN
+      END
+C
+C
+      SUBROUTINE RETND1 (BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,
+     $                   IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                             !DBLE
+      RETURN
+      END

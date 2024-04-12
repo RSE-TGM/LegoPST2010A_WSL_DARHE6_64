@@ -1,0 +1,273 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Italian (Italy) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ITA)
+#ifdef _WIN32
+LANGUAGE LANG_ITALIAN, SUBLANG_ITALIAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+GRAFICS                 ICON    DISCARDABLE     "GRAFICS.ICO"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+GRAFICSMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open...",                    IDM_OPEN
+        MENUITEM "E&xit",                       IDM_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "&About grafics...",           IDM_ABOUT
+    END
+    POPUP "&Select"
+    BEGIN
+        MENUITEM "Select &Variables...",        IDM_VARIA, GRAYED
+        MENUITEM "Select &Group...",            IDM_GROUP, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Memorize Group...",          IDM_MEMOGROUP, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Copy to Clipboard",          IDM_COPY
+    END
+    POPUP "&Zoom"
+    BEGIN
+        MENUITEM "&Full wiew",                  IDM_FULLW, GRAYED
+        MENUITEM "&Zoom",                       IDM_ZOOM
+    END
+    POPUP "&Yscaling"
+    BEGIN
+        MENUITEM "&Auto Yscaling",              IDM_AUTO, CHECKED
+        MENUITEM "&Manual Yscaling",            IDM_MANUAL
+        MENUITEM "&Single Yscaling",            IDM_SCALE
+        MENUITEM SEPARATOR
+        MENUITEM "&Set Yscaling...",            IDM_SETSCALE, GRAYED
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Value",                      IDM_VALUE
+        MENUITEM "&Grid",                       IDM_GRID, CHECKED
+        MENUITEM "&Colors",                     IDM_COLOR, CHECKED
+        MENUITEM SEPARATOR
+        MENUITEM "&Set Refresh Time",           IDM_REFRTIME
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+SETSCALE DIALOGEX 14, 22, 229, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Set Yscale"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "123456780",IDY_MAXAUTO,30,10,44,10,NOT WS_GROUP
+    LTEXT           "123456780",IDY_MINAUTO,30,25,44,10,NOT WS_GROUP
+    EDITTEXT        IDY_MAXVALUE,77,8,41,12,ES_AUTOHSCROLL
+    EDITTEXT        IDY_MINVALUE,77,23,41,12,ES_AUTOHSCROLL
+    LTEXT           "Max",IDY_MAXTXT,5,9,14,8,NOT WS_GROUP
+    LTEXT           "Min",IDY_MINTXT,5,25,14,8,NOT WS_GROUP
+    CONTROL         "ABCDEFGH",IDY_BUTT1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,5,44,49,13
+    CONTROL         "ABCDEFGH",IDY_BUTT2,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,61,44,49,13
+    CONTROL         "ABCDEFGH",IDY_BUTT3,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,116,44,49,13
+    PUSHBUTTON      "OK",1,195,10,22,12
+    PUSHBUTTON      "&Quit",2,195,25,22,12
+    CONTROL         "",IDY_FRAME,"Static",SS_WHITEFRAME,3,41,217,18,
+                    WS_EX_CLIENTEDGE
+    CONTROL         "ABCDEFGH",IDY_BUTT4,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,167,44,49,13
+END
+
+MEMOGROUP DIALOG DISCARDABLE  25, 21, 153, 34
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Memo Group"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDG_DESCR,3,19,146,13,ES_AUTOHSCROLL | WS_GROUP
+    PUSHBUTTON      "OK",1,102,3,21,14
+    PUSHBUTTON      "&Quit",2,128,3,21,14
+    LTEXT           "Groups number :",IDG_TEXT,3,3,56,10,NOT WS_GROUP
+    LTEXT           "66",IDG_GROUPNUM,63,3,17,9,NOT WS_GROUP
+END
+
+ABOUTBOX DIALOG DISCARDABLE  18, 27, 147, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Grafics"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "Grafics  for  Windows 98/NT",IDC_STATIC,19,9,109,10
+    CTEXT           "Version 2.0",IDC_STATIC,55,19,36,9
+    DEFPUSHBUTTON   "OK",1,56,69,32,14,WS_GROUP
+    ICON            "Grafics",IDC_STATIC,18,62,21,20
+    CTEXT           "Copyright © 2001",IDC_STATIC,40,42,74,8,NOT WS_GROUP
+    CTEXT           "CESI s.p.a.",IDC_STATIC,56,30,36,9
+    CONTROL         "",IDC_STATIC,"Static",SS_SIMPLE | SS_SUNKEN | WS_GROUP,
+                    15,6,119,50
+END
+
+GROUPSEL DIALOG DISCARDABLE  22, 24, 155, 109
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Groups"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDG_LISTBX,4,57,122,52,WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Quit",2,130,31,21,14
+    PUSHBUTTON      "&Del",IDG_DELETE,130,48,21,14
+    LTEXT           "Groups number :",IDG_TEXT,4,2,56,10,NOT WS_GROUP
+    LTEXT           "66",IDG_GROUPNUM,61,2,13,8,NOT WS_GROUP
+    LISTBOX         IDG_LISTVAR,4,14,122,35,LBS_USETABSTOPS | WS_VSCROLL
+    PUSHBUTTON      "&Sel",1,130,14,21,14
+END
+
+VARISEL DIALOGEX 0, 0, 279, 145
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Variables selection"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LISTBOX         IDS_LISTBX2,2,71,223,66,LBS_USETABSTOPS | WS_VSCROLL | 
+                    WS_HSCROLL | WS_TABSTOP
+    LISTBOX         IDS_LISTBX1,1,11,224,47,LBS_USETABSTOPS | WS_VSCROLL | 
+                    WS_HSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",1,241,5,26,14
+    PUSHBUTTON      "&Quit",2,241,23,26,14
+    PUSHBUTTON      "&Clear",IDS_CLEAR,241,41,26,14
+    EDITTEXT        IDS_EDITFND,238,93,31,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Find",IDS_FIND,241,108,26,14
+    CONTROL         "",IDS_FRAME,"Static",SS_WHITEFRAME | WS_GROUP,235,90,37,
+                    34,WS_EX_CLIENTEDGE
+    LTEXT           "Selected Variables: ",IDS_TEXT,2,2,64,9,NOT WS_GROUP
+    LTEXT           "0",IDS_NUMBER,74,2,15,9,NOT WS_GROUP
+    PUSHBUTTON      "&Sel",IDS_SELECT,235,59,16,14
+    PUSHBUTTON      "&Del",IDS_DELETE,256,59,16,14
+END
+
+SETREFR DIALOG DISCARDABLE  25, 21, 153, 34
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Set refresh time"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDG_REFRNEW,3,17,26,13,ES_AUTOHSCROLL | ES_NUMBER | 
+                    WS_GROUP
+    PUSHBUTTON      "OK",1,102,3,21,14
+    PUSHBUTTON      "&Quit",2,128,3,21,14
+    LTEXT           "Refresh time",IDG_REFRTXT,3,3,56,10,NOT WS_GROUP
+    LTEXT           "66",IDG_REFRCORR,63,3,17,9,NOT WS_GROUP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    "MEMOGROUP", DIALOG
+    BEGIN
+        TOPMARGIN, 3
+    END
+
+    "ABOUTBOX", DIALOG
+    BEGIN
+        RIGHTMARGIN, 146
+        BOTTOMMARGIN, 88
+    END
+
+    "GROUPSEL", DIALOG
+    BEGIN
+        BOTTOMMARGIN, 106
+    END
+
+    "VARISEL", DIALOG
+    BEGIN
+        RIGHTMARGIN, 196
+        BOTTOMMARGIN, 133
+    END
+
+    "SETREFR", DIALOG
+    BEGIN
+        TOPMARGIN, 3
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+GRAFICA                 BITMAP  DISCARDABLE     "grafica.bmp"
+#endif    // Italian (Italy) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

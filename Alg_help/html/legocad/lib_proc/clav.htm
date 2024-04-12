@@ -1,0 +1,349 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE CLAV</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CLAV_summ"></A>MODULE CLAV&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CLAV_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CLAV_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CLAV_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CLAV_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CLAV_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CLAV_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CLAV_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_CLAV_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CLAV_A"></A>MODULE CLAV&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">STEAM-WATER TANK WITH AIR</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module CLAV simulates the dynamics of thermo-hydraulic phenomena in a cavity containing water and steam separated by gravity effects. Air inlet and outlet is explicitly considered.</P>
+<P>The module is commonly used to simulate plant components like:</P>
+<P ALIGN="JUSTIFY">- steam drums of boiler with natural or forced circulation</P>
+<P ALIGN="JUSTIFY">- "upper plenum" of PWR steam generators</P>
+<P ALIGN="JUSTIFY">- "upper plenum" of BWR</P>
+<P ALIGN="JUSTIFY">- drainage collecting, expansion tanks and flash tanks</P>
+<P ALIGN="JUSTIFY">- tanks usually containing water in liquid and steam phases</P>
+<P>The following mass exchanges between cavity volume and the external systems have been condidered:</P>
+<P>liquid-steam mixture coming from the risers </P>
+<P>subcooled water from the feed system </P>
+<P>liquid outlet to downcomers </P>
+<P>steam outlet to superheating system </P>
+<P>air entering through a venting valve, whose stem position is an input of the module</P>
+<P>The following hypotheses are set for the module:</P>
+<P>air is considered as a perfect gas:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1244.gif" WIDTH=66 HEIGHT=41></P>
+<FONT FACE="Arial"><P>air and steam are always in thermal equilibrium with each other: that means that the air brings itself instantly to the steam temperature:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1245.gif" WIDTH=92 HEIGHT=20></P>
+<FONT FACE="Arial"><P>air and steam occupy the same volume:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1246.gif" WIDTH=120 HEIGHT=20></P>
+<FONT FACE="Arial"><P>air doesn’t interact with the zone occupied by the liquid: there is no air mass diffusion in liquid zone</P>
+<P>The main equations of the module are the following ones :</P>
+<P>1) air mass conservation</P>
+<P ALIGN="JUSTIFY">2) steam mass conservation</P>
+<P ALIGN="JUSTIFY">3) energy conservation for the zone occupied by steam and air</P>
+<P ALIGN="JUSTIFY">4) liquid mass conservation</P>
+<P ALIGN="JUSTIFY">5) liquid energy conservation</P>
+<P ALIGN="JUSTIFY">6) venting valve efflux law</P>
+<P ALIGN="JUSTIFY">7) liquid level calculation</P>
+<P ALIGN="JUSTIFY">8) pressure calculation on the cavity bottom.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The first five equations are differential whereas the other ones are algebraical.</P>
+<P>The equation 7), related to the level calculation, is formulated for a cavity having constant horizontal cross section area characterized by the data required in input (see below). If the cavity has not constant horizontal cross section area, user can assign again the equation 7) by means of a suitable subprogram (see below).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CLAV_B"></A>MODULE CLAV&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1247.gif" WIDTH=398 HEIGHT=263></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WMIC&#9;&#9;flow rate of water-steam mixture at the cavity inlet</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HMIC&#9;&#9;enthalpy of water-steam mixture at the cavity inlet</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WAIC&#9;&#9;flow rate of subcooled water at the cavity inlet</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HAIC&#9;&#9;enthalpy of subcooled water at the cavity inlet</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WVCA&#9;flow rate of steam flowing out from the cavity</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WAUC&#9;flow rate of water flowing out from the cavity</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;ALZS&#9;&#9;valve stem position of the venting valve</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PVVS&#9;&#9;pressure downstream the venting valve</P>
+<P ALIGN="JUSTIFY">[K]&#9;TAIS&#9;&#9;temperature of the air entering the venting valve</P>
+<P ALIGN="JUSTIFY">[kg]&#9;MASA&#9;&#9;air mass inside the cavity</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PCAV&#9;&#9;pressure in the cavity</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HVCA&#9;&#9;enthalpy of steam inside the cavity</P>
+<P ALIGN="JUSTIFY">[J/kg]&#9;HLCA&#9;&#9;enthalpy of water inside the cavity</P>
+<P ALIGN="JUSTIFY">[kg]&#9;MLCA&#9;&#9;mass of water inside the cavity</P>
+<P ALIGN="JUSTIFY">[m]&#9;LIVC&#9;&#9;water level as percentage of the measuring instruments working range</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PFCA&#9;&#9;pressure on the cavity bottom</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PPVC&#9;&#9;steam partial pressure in the cavity</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WVUS&#9;steam flow rate flowing through the venting valve</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WASC&#9;air flow rate</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;PPAC&#9;&#9;air partial pressure inside the cavity</P>
+<P ALIGN="JUSTIFY">[kg]&#9;MVCA&#9;steam mass in the cavity</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_CLAV_C"></A>MODULE CLAV&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>In addition to the initial values of input and output variables, user must assign the following data:</P>
+<P ALIGN="JUSTIFY">[]&#9;TYPE_CAV&#9;selection index about type of cavity to deal with (see below)</P>
+<P ALIGN="JUSTIFY">[m³]&#9;VOL.CAV&#9;cavity internal volume (steam + liquid volume)</P>
+<P ALIGN="JUSTIFY">[]&#9;MISURA_Y&#9;selection index about the type of level measurement</P>
+<P ALIGN="JUSTIFY">MISURA_Y = 1. the level is determined as elevation measure of the liquid surface, also including the steam bubbles as inclusion in liquid &#9;&#9;&#9;phase.</P>
+<P ALIGN="JUSTIFY">MISURA_Y = -1.the level is determined as elevation measure that liquid surface would have excluding the steam bubbles in liquid phase.</P>
+<P ALIGN="JUSTIFY">[%]&#9;X_OVER&#9;nominal ratio of liquid-steam mixture flowing out from the separators at cavity top: carry over (typical value 99. &lt; &#9;&#9;&#9;&#9;&#9;X_OVER &lt; 100.)</P>
+<P ALIGN="JUSTIFY">[%]&#9;X_UNDER&#9;nominal ratio of liquid-steam mixture flowing out from the separators at cavity bottom: carry under (typical value &#9;&#9;&#9;&#9;&#9;X_UNDER = 0.0)</P>
+<P ALIGN="JUSTIFY">[m]&#9;ZERO_Y&#9;elevation gap between the liquid level corresponding to the zero of measuring instrument and the water outlet pipe</P>
+<P ALIGN="JUSTIFY">[m³]&#9;VOL_Y&#9;cavity volume between the zero of level measuring instrument and the water outlet pipe</P>
+<P ALIGN="JUSTIFY">[m]&#9;GAMMA_Y&#9;working range of the level measuring instrument</P>
+<P ALIGN="JUSTIFY">[m²]&#9;SEZ_Y&#9;horizontal cross section area of the cavity</P>
+<P ALIGN="JUSTIFY">[]&#9;CV_SF&#9;venting valve dimensioning coefficient</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To determine the liquid level, the CLAV module refers to a cavity whose liquid volume below the measuring instrument nozzles is known and the level variation is proportional to the liquid volume variation. So it is a cavity where within the working range the horizontal cross section area is constant. If a tank having a more complex geometry is considered, user can provide the related data through the user's subprogram</P>
+<P>SUBROUTINE CLAVLIV(TYP, VLIV, Y, YTOT, AREA)</P>
+<P>(see below). Knowing the engaged volume this subprogram calculates:</P>
+<P ALIGN="JUSTIFY">- the liquid level as a function of the cavity geometrical characteristics</P>
+<P ALIGN="JUSTIFY">- the proportional level of liquid as a function of the measuring instruments nozzles characteristic</P>
+<P ALIGN="JUSTIFY">- the area of separating surface between the liquid and steam phases.</P>
+<P>In this case, user has to assign to the SEZ_Y a negative or zero value.</P>
+<P>If this signal is found, the user subprogram is called and values of ZERO_Y, VOL_Y, GAMMA_Y, and SEZ_Y are ignored.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CLAV_D"></A>MODULE CLAV&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the CLAV module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CLAV_E"></A>MODULE CLAV&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>If the CLAV has a more complex geometry than the reference one, to provide the related data to the module, user has to assign a negative or zero value to SEZ_Y and write a user's subprogram whose declarative statement is:</P>
+<P>SUBROUTINE CLAVLIV(TYP, VLIV, Y, YTOT, AREA).</P>
+<P>Knowing the engaged liquid volume such subprogram calculates:</P>
+<P ALIGN="JUSTIFY">- the level of liquid as a function of the cavity geometrical characteristics</P>
+<P ALIGN="JUSTIFY">- the proportional level of liquid as a function of the measuring instruments characteristics</P>
+<P ALIGN="JUSTIFY">- the area of separating surface between the liquid and steam phases</P>
+<P>Input parameters: TYP, VLIV</P>
+<P>Output parameters: Y, YTOT, AREA</P>
+<P ALIGN="JUSTIFY">[]&#9;TYP&#9;corresponds to the TYPE_CAV datum required in input (see above). It can be used as pointer to select the required cavity &#9;&#9;&#9;geometry in case user has to introduce different models of cavities into only one user subprogram</P>
+<P ALIGN="JUSTIFY">[m³]&#9;VLIV&#9;engaged liquid volume</P>
+<P ALIGN="JUSTIFY">[%]&#9;Y&#9;liquid level, as percentage of the measuring instruments working</P>
+<P>range</P>
+<P ALIGN="JUSTIFY">[m]&#9;YTOT&#9;level of liquid inside the cavity</P>
+<P ALIGN="JUSTIFY">[m²]&#9;AREA&#9;area of separating surface between liquid and steam phases.</P>
+<P>&nbsp;</P>
+<P>Since cylindrical geometry having horizontal axis is one of the most usual geometries for drums, the following subprogram is available in the module:</P>
+<P>SUBROUTINE CLAVLIO(VLIV, RCAV, HLCAV, Y, YTOT, AREA),</P>
+<P>which calculates (once the liquid volume contained inside an horizontal cylinder has been assigned) the level and area of contact surface between the liquid and steam phases.</P>
+<P>The meanings of calling parameters are:</P>
+<P ALIGN="JUSTIFY">[m³]&#9;VLIV&#9;&#9;volume of liquid inside the cylinder</P>
+<P ALIGN="JUSTIFY">[m]&#9;RCAV&#9;&#9;cylinder radius</P>
+<P ALIGN="JUSTIFY">[m]&#9;HLCAV&#9;cylinder length</P>
+<P ALIGN="JUSTIFY">[%]&#9;Y&#9;&#9;liquid level, as percentage of the measuring instruments working range</P>
+<P ALIGN="JUSTIFY">[m]&#9;YTOT&#9;&#9;level of liquid inside the cylinder</P>
+<P ALIGN="JUSTIFY">[m²]&#9;AREA&#9;&#9;area of separating surface between the liquid and steam phases.</P>
+<P>Thereinafter it is indicated a CLAVLIV subroutine example using the CLAVLIO, related to a cavity consisting of a cylindrical drum having radius RCAV = 1 m and length HLCAV = 10 m, positioned on a parallelepiped having volume VOL_Y = 5 m³. The gap ZERO_Y between the zero of level measuring instrument and the pipe nozzle of flowing out liquid is 2 m. The level Y is indicated as percentage as regards to a range GAMMA_Y = 1.6 m centred round the horizontal axis of cylinder.</P>
+</FONT><B><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+<P>SUBROUTINE CLAVLIV(TYP,VLIV,Y,YTOT,AREA)</P>
+<P>IF(TYP.NE.1.) RETURN</P>
+<P>GAMMA_Y=1.6</P>
+<P>RCAV=1.</P>
+<P>HLCAV=10.</P>
+<P>VOL_Y=5.</P>
+<P>ZERO_Y=2.</P>
+<P>VCIL=VLIV-VOL_Y</P>
+<P>CALL CLAVLIO(VCIL,RCAV,HLCAV,Y,YTOT,AREA)</P>
+<P>Y=(YTOT-(RCAV-GAMMA_Y/2.))/GAMMA_Y</P>
+<P>YTOT=YTOT+ZERO_Y</P>
+<P>RETURN</P>
+<P>END</P>
+<P>C</P>
+<P>SUBROUTINE CLAVLIO(VCAV,RCAV,HLCAV,Y,YTOT,SEZ)</P>
+<P>C</P>
+<P>C CALCULATES THE LEVEL IN A HORIZONTAL CYLINDER</P>
+<P>C</P>
+<P>C Y level divided 100</P>
+<P>C YTOT level in meters</P>
+<P>C SEZ area of liquid surface</P>
+<P>C KNOWN:</P>
+<P>C VCAV engaged volume</P>
+<P>C RCAV cylinder radius</P>
+<P>C HLCAV cylinder length</P>
+<P>C</P>
+<P>C EXECUTION</P>
+<P>C</P>
+<P>Y0=Y</P>
+<P>VMAX=RCAV*RCAV*3.141592*HLCAV</P>
+<P>IF(VCAV.LT.VMAX)GO TO 99</P>
+<P>YTOT=2*RCAV</P>
+<P>Y=YTOT/100.</P>
+<P>SEZ=0.</P>
+<P>RETURN</P>
+<P>99 IF(VCAV.GT.1.E-3)GO TO 98</P>
+<P>YTOT=0.</P>
+<P>Y=0.</P>
+<P>SEZ=0.</P>
+<P>RETURN</P>
+<P>C</P>
+<P>C ITERATIVE CALCULATION ACCORDING TO NEWTON-RAPHSON'S</P>
+<P>C</P>
+<P>98 IT=0</P>
+<P>Y=RCAV</P>
+<P>1 IT=IT+1</P>
+<P>C</P>
+<P>C ALFA: ANGLE TO THE CENTRE OF CIRCULAR SEGMENT</P>
+<P>C</P>
+<P>ALFA=ACOS((RCAV-Y)/RCAV)</P>
+<P>AST=RCAV**2.*ALFA-RCAV*(RCAV-Y)*SIN(ALFA)</P>
+<P>C</P>
+<P>C RESIDUAL</P>
+<P>C</P>
+<P>RES=VCAV-HLCAV*AST</P>
+<P>C</P>
+<P>IF(ABS(RES).LT.1.E-4)GO TO 10</P>
+<P>IF(IT.GT.100)GO TO 20</P>
+<P>C JACOBIAN</P>
+<P>DALFA=1./(RCAV*SQRT(1.-((RCAV-Y)/RCAV)**2.))</P>
+<P>DASOT=RCAV**2.*DALFA+RCAV*SIN(ALFA)+COS(ALFA)*RCAV*</P>
+<P>$ DALFA*(Y-RCAV)</P>
+<P>DVDY=DASOT*HLCAV</P>
+<P>C ITERATION</P>
+<P>DY=RES/DVDY</P>
+<P>Y=Y+DY</P>
+<P>GO TO 1</P>
+<P>C SOLUTION</P>
+<P>10 CONTINUE</P>
+<P>YTOT=Y</P>
+<P>SEZ=HLCAV*2*SQRT(2*RCAV*Y-Y*Y)</P>
+<P>Y=Y/100.</P>
+<P>RETURN</P>
+<P>20 WRITE(6,1000)RES</P>
+<P>1000 FORMAT(//10X,'SUBROUTINE CLAVLIO'/</P>
+<P>$ 10X,'MAX NUM. ITERATION REACHED - RESIDUAL = ',E12.5//)</P>
+<P>GO TO 10</P>
+<P>END</P>
+</B></FONT><FONT FACE="Arial"><P>A "drying" phase (dehumidification) of steam may follow the mixture separation phase. This second phase is typical in steam generators of PWR and BWR nuclear reactors. The mathematical model of CLAV module does not make distinction between the separation and drying phases. In addition, the outlet conditions of steam and liquid from the separators are fixed by assigned input data and considered as boundary conditions.</P>
+<P>In order to take into account the thermo-hydraulic conditions influence of mixture, at the cavity inlet, on separation-dehumidification process, user must intervene on the module programming, suitably modifying the subprogram:</P>
+<P>SUBROUTINE CLAVSEP(TYP, RXOV, RXUN, XR, WR, P, XOV, XUN).</P>
+<P>Input parameters: TYP, RXOV, RXUN, XR, WR, P</P>
+<P>Outlet parameters: XOV, XUN</P>
+<P ALIGN="JUSTIFY">[]&#9;TYP&#9;corresponds to the TYPE_CAV value required in input (see above). It can be used as pointer to associate to a given geometry &#9;&#9;of a selected cavity the efficiency of corresponding separation-dehumidification process, in case user has to introduce &#9;&#9;&#9;&#9;different models of this efficiency into only one user subprogram</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;RXOV&#9;nominal ratio of liquid-steam mixture flowing out from the separators at cavity top (it corresponds to X_OVER datum assigned &#9;&#9;in input)</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;RXUN&#9;nominal ratio of liquid-steam mixture flowing out from the separators at cavity bottom (it corresponds to X_UNDER datum &#9;&#9;&#9;assigned in input)</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;XR&#9;enthalpy ratio of mixture at the cavity inlet</P>
+<P ALIGN="JUSTIFY">[kg/s]&#9;WR&#9;flow rate of mixture at the cavity inlet</P>
+<P ALIGN="JUSTIFY">[Pa]&#9;P&#9;pressure in the cavity</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;XOV&#9;ratio of liquid-steam mixture flowing out from the separators at cavity top</P>
+<P ALIGN="JUSTIFY">[p.u.]&#9;XUN&#9;ratio of liquid-steam mixture flowing out from the separators at cavity bottom</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CLAV_F"></A>MODULE CLAV&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>air mass conservation (residual nr. 1)</P>
+</B><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1248.gif" WIDTH=529 HEIGHT=169></P>
+<FONT FACE="Arial"><P>&nbsp;</P></DIR>
+</DIR>
+
+<B><P>steam mass conservation (residual nr. 2)</P><DIR>
+<DIR>
+
+</B><P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1249.gif" WIDTH=409 HEIGHT=100></P>
+<FONT FACE="Arial"><P ALIGN="CENTER">&nbsp;</P></DIR>
+</DIR>
+
+<B><P>energy conservation for the zone occupied by steam and air (residual nr. 3)</P>
+</B><P>By summing steam and air energy conservation equations and considering air as a perfect gas one gets:</P>
+<P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1250.gif" WIDTH=456 HEIGHT=101></P>
+<FONT FACE="Arial"><P ALIGN="CENTER">&nbsp;</P></DIR>
+</DIR>
+
+<B><P>liquid energy conservation (residual nr. 4)</P><DIR>
+<DIR>
+
+</B><P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1251.gif" WIDTH=322 HEIGHT=36></P>
+<FONT FACE="Arial"><P ALIGN="CENTER">&nbsp;</P></DIR>
+</DIR>
+
+<B><P>liquid mass conservation (residual nr. 5)</P><DIR>
+<DIR>
+
+</B><P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1252.gif" WIDTH=300 HEIGHT=100></P>
+<FONT FACE="Arial"><P>&nbsp;</P></DIR>
+</DIR>
+
+<B><P>venting valve efflux law (residuals nr. 9-10)</P>
+</B><I><P>a) p&gt;p<SUB>ext</I></SUB> : a steam-air mixture flows flows out from the cavity through the venting valve. As steam and air occupy the same volume (see card A), it’s possible to define a mixture density as: <IMG SRC="Image1253.gif" WIDTH=88 HEIGHT=21>. Supposing to define also a mixture flow rate as: <IMG SRC="Image1254.gif" WIDTH=89 HEIGHT=21>, an efflux law can be written:</P>
+<P ALIGN="CENTER">&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1255.gif" WIDTH=249 HEIGHT=154></P>
+<FONT FACE="Arial"><P>&nbsp;</P>
+<P>So, as suggested in the formula, the two terms we have isolated can be taken respectively as an air and a steam flow rate through the venting valve.</P>
+<I><P>b) p&lt;p<SUB>ext</I></SUB> . Only dry air is assumed enter the cavity:</P>
+<P>&nbsp;</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1256.gif" WIDTH=154 HEIGHT=56></P>
+<FONT FACE="Arial"><P ALIGN="CENTER">&nbsp;</P>
+<P>The remaining residuals calculate:</P>
+<B><P>nr. 6: level in the cavity</P>
+<P>nr. 7: pressure at bottom of the cavity</P>
+<P>nr. 8: steam partial pressure</P>
+<P>nr. 11: air partial pressure</P>
+<P>nr. 12: superficial condensation/evaporation flow rate</P>
+</B><P>The first five equations form a system which is solved with respect to time derivatives of state variables in order to put the system in canonical form and the module residuals are written in that form.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CLAV_G"></A>MODULE CLAV&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Courier New"><P>SUBROUTINE CLAVI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>SUBROUTINE CLAVI3(IFO,IOB,DEBL)</P>
+<P>SUBROUTINE CLAVI4(IOB,MOD)</P>
+<P>SUBROUTINE CLAVC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE CLJAC(AJAC,MX5,IXYU,XYU,IPD,DATI,RN,</P>
+<P>$ NSTATI,NUSCIT,NINGRE,EPS,EPSLIM,CLAV)</P>
+<P>SUBROUTINE CLAV(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P>SUBROUTINE STAZCLAV(IFUN,IPD,DATI,RNI)</P>
+<P>SUBROUTINE CLSTNF(RNI)</P>
+<P>SUBROUTINE CLSTEMP(RNI)</P>
+<P>SUBROUTINE CLSTFULL(RNI)</P>
+<P>SUBROUTINE TRANCLAV(IFUN,IPD,DATI,RNI)</P>
+<P>SUBROUTINE CLTRNF(RNI)</P>
+<P>SUBROUTINE CLTREMP(RNI)</P>
+<P>SUBROUTINE CLTRFULL(RNI)</P>
+<P>SUBROUTINE CLAVPAR(TYP,PPVC,PCAV,TAUV,TAUL,BETA,ALFA,HSUP,HSUR)</P>
+<P>SUBROUTINE CLAVSEP(TYP,XOVP,XUNP,XR,WR,P,XOVS,XUNS)</P>
+<P>SUBROUTINE CLAVD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P>SUBROUTINE CLAVLIV(VCAV,RCAV,HLCAV,Y,YTOT,SEZ)</P>
+</FONT><FONT FACE="Courier New" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_CLAV_H"></A>MODULE CLAV&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module aren’t yet available.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

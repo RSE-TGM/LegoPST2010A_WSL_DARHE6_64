@@ -1,0 +1,676 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>REGULATION MODULE</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_DERV"></A>DERV regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module DERV simulates the behaviour of an actual derivator whose transfer function (writes using the Laplace transform) is the following (see theoretical treatment related to the derivator):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1013.gif" WIDTH=244 HEIGHT=41></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where KD and KT respectively represent the gain and the derivator time constant, 's' is the Laplace operator and IE(s), UA(s) indicate the L-transforms respectively related to the input IE(t) and output UA(t).</P>
+<P ALIGN="JUSTIFY">Two further input are included in the module (logic of prevailing initialization J1 and value of output initialization II); they allow to force the UA output to a previously fixed value II.</P>
+<P ALIGN="JUSTIFY">The following formulae make clear as previously said.</P>
+<P ALIGN="JUSTIFY">If the logical signal of prevailing initialization J1 is true the UA output is forced to the value of input II.</P>
+<P ALIGN="JUSTIFY">If J1 is false the initialization signal II is not considered. It is useful to distinguish between the cases in which a stationary or transient condition is calculating.</P>
+<P ALIGN="JUSTIFY">1) Stationary condition: the UA output is set to zero.</P>
+<P ALIGN="JUSTIFY">2) Transient condition: the UA output is calculated using the following formula:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1014.gif" WIDTH=320 HEIGHT=38></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where Dt, IEP and UAP respectively represent the time interval and the input and output at the preceding time interval. This expression is obtained beginning from the transfer function, above mentioned, passing from the domain of Laplace transforms to the temporal domain and discretizing.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1015.gif" WIDTH=375 HEIGHT=145></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;IE&#9;request in output (to meet)</P>
+<P ALIGN="JUSTIFY">[]&#9;II&#9;input of output initialization</P>
+<P ALIGN="JUSTIFY">[]&#9;J1&#9;logic of prevailing initialization</P>
+<P ALIGN="JUSTIFY">[]&#9;KD&#9;derivator gain</P>
+<P ALIGN="JUSTIFY">[s]&#9;KT&#9;derivator time constant</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The DERV module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the DERV module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1016.gif" WIDTH=389 HEIGHT=389></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_DI2A"></A>DI2A regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module DI2A simulates the behaviour of a branching node having one input and two output (see figure 1). In fact, it copies the value of input analogue variable on the two output.</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1017.gif" WIDTH=228 HEIGHT=106></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="JUSTIFY">Once defined as II the input analogue variable and as U1 and I2 the output analogue variables, in the formula we can write: </P>
+<P ALIGN="CENTER">U1 = II</P>
+<P ALIGN="CENTER">U2 = II</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1018.gif" WIDTH=399 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;II&#9;input analogue variable</P>
+<P ALIGN="JUSTIFY">[]&#9;U1&#9;output analogue variable 1</P>
+<P ALIGN="JUSTIFY">[]&#9;U2&#9;output analogue variable 2.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module DI2A has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the DI2A module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1019.gif" WIDTH=108 HEIGHT=150></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_DI2L"></A>DI2L regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module DI2L simulates the behaviour of a branching node having one input and two output (figure 1). In fact it copies the value of input logical variable on the two output.</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1017.gif" WIDTH=228 HEIGHT=106></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="JUSTIFY">Once defined as JI the input logical variable and as I1 and J2 the two output logical variables, in the formula we can write:</P>
+<P ALIGN="CENTER">J1 = JI</P>
+<P ALIGN="CENTER">J2 = JI</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1020.gif" WIDTH=375 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;JI&#9;input logical variable</P>
+<P ALIGN="JUSTIFY">[]&#9;J1&#9;output logical variable 1</P>
+<P ALIGN="JUSTIFY">[]&#9;J2&#9;output logical variable 2.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The DI2L module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the DI2L module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1021.gif" WIDTH=108 HEIGHT=150></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_DIRA"></A>DIRA regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module DIRA provides, as output, the input variable value (analogue) multiplied by a gain COSTAN fixed by user.</P>
+<P ALIGN="JUSTIFY">Once defined as II and UU, respectively the input and output analogue variable, in the formula we can write:</P>
+<P ALIGN="CENTER">UU = COSTAN*II</P>
+<B><P>Note 1</P>
+</B><P ALIGN="JUSTIFY">Inside the regulation schemes, the module DIRA is utilized for different purposes:</P>
+<P ALIGN="JUSTIFY">1) Analogue input block (no longer used: use instead analog interface)</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1022.gif" WIDTH=93 HEIGHT=36></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">2) Analogue output block (no longer used: use instead analog interface)</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1023.gif" WIDTH=93 HEIGHT=36></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">3) Trimmer controllable by station (see the documentation related to the carrying out station and to the regulation modules LOGO and LOGS)</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1024.gif" WIDTH=97 HEIGHT=69></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">4) Constant proportional gain (e.g. used to modify quantities measurement units)</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1025.gif" WIDTH=132 HEIGHT=36></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1026.gif" WIDTH=375 HEIGHT=114></P></DIR>
+</DIR>
+
+<B><FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;II&#9;input analogue variable</P>
+<P ALIGN="JUSTIFY">[]&#9;UU&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In addition to the initial values of input and output variables, whose meaning has been defined above, user must assign the following data set to complete the INPUT required by the DIRA module.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;COSTAN&#9;gain of the branching block.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the DIRA module variables, user must not pay particular attention. On the contrary it is useful to note that if to the COSTAN data no value is assigned, it assumes unitary value (the input is copied on the output).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1027.gif" WIDTH=127 HEIGHT=183></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_DIRL"></A>DIRL regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module DIRL provides, as output, the value of input logical variable. It is now no longer used (logical interfaces are used instead of it).</P>
+<P ALIGN="JUSTIFY">Once defined as JI and JU respectively the input and output logical variable, in the formula we can write:</P>
+<P ALIGN="CENTER">JU = JI</P>
+<B><P>Note 1</P>
+</B><P ALIGN="JUSTIFY">Inside the regulation schemes the DIRL module, apparently useless (it carries out a banal function), is utilized for different purposes:</P>
+<P ALIGN="JUSTIFY">1) Logical input block</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1022.gif" WIDTH=93 HEIGHT=36></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">2) Logical output block</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1023.gif" WIDTH=93 HEIGHT=36></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1028.gif" WIDTH=375 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;JI&#9;input logical variable</P>
+<P ALIGN="JUSTIFY">[]&#9;JU&#9;output logical variable.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module DIRL has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the DIRL module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1029.gif" WIDTH=108 HEIGHT=150></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_DIVS"></A>DIVS regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module DIVS provides as output the division result of the first input analogue variable by the second one.</P>
+<P ALIGN="JUSTIFY">Once defined as I1 and I2 the two input analogue variables and as UA the output analogue variable, in the formula we can write:</P>
+<P ALIGN="CENTER">UA = I1 / I2</P>
+<B><P>Note 1</P>
+</B><P ALIGN="JUSTIFY">In order to avoid that the output assumes too big values (for I2 = 0 UA tends to infinite), the module has been provided of a protection in case the second input (divisor) becomes very small. In this case, the input I2 is limited so that its absolute value can not become less than one thousandth.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1030.gif" WIDTH=367 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;I1&#9;input analogue variable 1 (dividend)</P>
+<P ALIGN="JUSTIFY">[]&#9;I2&#9;input analogue variable 2 (divisor)</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The DIVS module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of DIVS module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P><DIR>
+<DIR>
+
+</B></FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1031.gif" WIDTH=221 HEIGHT=377></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_DTRI"></A>DTRI regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module DTRI provides, as output, the value of input variable (analogue) with a delay of one time interval.</P>
+<P ALIGN="JUSTIFY">Once defined as IN the input analogue variable, as UA the output analogue variable, as "t" the general instant time and as "Dt" the duration of time interval, in the formula we can write:</P>
+<P ALIGN="CENTER">UA (t + Dt) = IN (t)</P>
+<B><P>Note 1</P>
+</B><P ALIGN="JUSTIFY">In fact, if we look at the FORTRAN source of DTRI Module we note that the executed operation is only those to copy on the output UA the input IN:</P>
+<P ALIGN="CENTER">UA = IN</P>
+<P ALIGN="JUSTIFY">From this point of view, the DTRI module is equal to the DIRA module with parameter COSTAN = 1 (see related documentation). The delay of one time interval, characteristic of the DTRI module, is obtained at SORTER level which recognizes such module (similarly to the DTRL) and deals with it in a different way as regards to all the other regulation modules.</P>
+<B><P>Note 2</P>
+</B><P ALIGN="JUSTIFY">This module is typically used in feedback loops, where the signals return would cause some problems to the SORTER. In fact, it solves in a sequential way the equations constituting a regulation scheme (set of several regulation modules), so when a LOOP is present we have a conflict (the SORTER does not know what equation to solve first). To better clarify the problem we look at a simple example of regulation scheme consisting of two DIRA modules linked each other by the feedback:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1032.gif" WIDTH=241 HEIGHT=107></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="JUSTIFY">The equations constituting the scheme are (COSTAN = 1 for both the DIRA):</P>
+<P ALIGN="CENTER">UA = IA</P>
+<P ALIGN="CENTER">UB = IB</P>
+<P ALIGN="JUSTIFY">They might be solved if almost one equation would has the input known, but this does not happen for none of the two equations. In fact the input IA is equal to the output UB as the input IB is equal to the output UA.</P>
+<P ALIGN="JUSTIFY">In order to decouple the two equations, a delay in any point of the feedback loop is introduced (figure 2):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1033.gif" WIDTH=394 HEIGHT=112></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 2</P>
+<P ALIGN="JUSTIFY">The equations constituting the scheme are (COSTAN = 1 for both the DIRA):</P>
+<P ALIGN="CENTER">UA (t + Dt) = IA (t + Dt)</P>
+<P ALIGN="CENTER">UB (t + Dt) = IB (t + Dt)</P>
+<P ALIGN="CENTER">UC (t + Dt) = IC (t)</P>
+<P ALIGN="JUSTIFY">in which is defined as "t" the general time instant, and as "Dt" the time interval duration.</P>
+<P ALIGN="JUSTIFY">In this case it is possible to solve the equations in a sequential way. In fact, it is enough to begin from the third, whose input IC(t) is equal to the output UB at the preceding interval, so it is known. We can easily understand that introduction of the DTRI module has carried out a temporal decoupling eliminating the conflict problems we had in case of figure 1.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1034.gif" WIDTH=367 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;IN&#9;input analogue variable</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module DTRI has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the DTRI module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1035.gif" WIDTH=106 HEIGHT=141></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_DTRL"></A>DTRL regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module DTRL provides, as output, the value of input variable (logical) with a delay of one time interval.</P>
+<P ALIGN="JUSTIFY">Once defined as JI the input logical variable, as JU the output logical variable, as "t" the general time instant and as "Dt" the time interval duration, in the formula we can write:</P>
+<P ALIGN="CENTER">JU (t + Dt) = JI (t)</P>
+<B><P>Note 1</P>
+</B><P ALIGN="JUSTIFY">In fact, if we look at the FORTRAN source of the DTRL module we note that the operation executed is merely those to copy on the output JU the input JI:</P>
+<P ALIGN="CENTER">JU = JI</P>
+<P ALIGN="JUSTIFY">From this point of view the DTRL module is equal to the DIRL module (see the related documentation). The delay of one time interval, characteristic of the DTRL module, is obtained at SORTER level which recognizes such module (similarly to the DTRI) and deals with it in a different way as regards to all the other regulation modules.</P>
+<B><P>Note 2</P>
+</B><P ALIGN="JUSTIFY">This module is typically used in feedback loops, where the signals return would cause some problems to the SORTER. In fact, it solves in a sequential way the equations constituting a regulation scheme (set of several regulation modules), so where a LOOP is present we have a conflict (the SORTER does not know what equation to solve first). To better clarify the problem we look at a simple regulation scheme consisting of two DIRL modules linked each other by feedback (figure 1):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1036.gif" WIDTH=241 HEIGHT=107></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="JUSTIFY">The equations constituting the scheme are:</P>
+<P ALIGN="CENTER">JUa = JIa</P>
+<P ALIGN="CENTER">JUb = JIb</P>
+<P ALIGN="JUSTIFY">They might be solved if almost one equation would has the input known, but this does not happen for none of the two equations. In fact, the input JIa is equal to the output JUb as the input JIb is equal to the output JUa.</P>
+<P ALIGN="JUSTIFY">In order to decouple the two equations, a delay in any point of the feedback loop is introduced (figure 2):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1037.gif" WIDTH=394 HEIGHT=112></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 2</P>
+<P ALIGN="JUSTIFY">The equation constituting the scheme are:</P>
+<P ALIGN="CENTER">JUa (t + Dt) = JIa (t + Dt)</P>
+<P ALIGN="CENTER">JUb (t + Dt) = JIb (t + Dt)</P>
+<P ALIGN="CENTER">JUc (t + Dt) = JIc (t)</P>
+<P ALIGN="JUSTIFY">in which is defined as "t" the general time instant and as "Dt" the time interval duration.</P>
+<P ALIGN="JUSTIFY">In this case it is possible to solve the equations in a sequential way, it is enough to begin from the third whose input JIc (t) is equal to the output JUb at the preceding interval so, it is known. We can easily understand that the introduction of the DTRL module has carried out a temporal decoupling eliminating the conflict problems we had in case of figure 1.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1038.gif" WIDTH=367 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of the input-output module variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;JI&#9;input logical variable</P>
+<P ALIGN="JUSTIFY">[]&#9;JU&#9;output logical variable.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module DTRL has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the DTRL module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1039.gif" WIDTH=106 HEIGHT=141></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="CENTER"><A NAME="lg_libreg_FFDL"></A>FFDL regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module FFDL simulates the behaviour of a bistable multivibrator of DELAY type (delay of one time interval). Precisely, the logical output JU at the time is equal to the input JI at the preceding time instant t - Dt (Dt = time interval):</P>
+<P ALIGN="CENTER">JU(t) = JI(t - Dt)</P>
+<P ALIGN="JUSTIFY">In figure 1, as example, a possible run diagrams related both to the input JI and consequently to the output JU is shown:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1040.gif" WIDTH=444 HEIGHT=224></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="JUSTIFY">Operatively the time interval delay is obtained through the introduction of a JS state which acts as de-coupler between input and output. Examining more attentively the functioning of this module we have:</P>
+<P ALIGN="JUSTIFY">1) Stationary condition: the output JU copies the input JI.</P>
+<P ALIGN="JUSTIFY">2) Transient condition: the output JU copies the state JS (initialized to the value "false") and the state JS copies the input JI.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><P>&nbsp;</P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY"><IMG SRC="Image1041.gif" WIDTH=367 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;JI&#9;logical input</P>
+<P ALIGN="JUSTIFY">[]&#9;JU&#9;output logical variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module FFDL has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Initialization variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the FFDL module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1042.gif" WIDTH=250 HEIGHT=331></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_FFFS"></A>FFFS regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module FFFS simulates the behaviour of a bistable multivibrator of SET-RESET type sensitive to the rise fronts. More precisely, when the SET input JS changes over from "false" to "true" (or from 0 to 1 ---&gt; rise front) the logical output JQ is forced to the value "true", while it is forced to the value "false" when the RESET input JR changes over from "false" to "true" (or from 0 to 1). In all other cases JQ keeps the preceding value. Summing up:</P>
+<P ALIGN="JUSTIFY">JQ = true, if JS changes over: false ==&gt; true</P>
+<P ALIGN="JUSTIFY">JQ = false, if JR changes over: false ==&gt; true.</P>
+<P ALIGN="JUSTIFY">Besides the output JQ, also the output JN is present and this is always equal to JQ negation. From what previously said, it is clear that the output can change over the value only when on JS and/or JR input some "rise fronts" are present (change over from "false" to "true").</P>
+<P ALIGN="JUSTIFY">In figure 1, as example, a possible run diagram both related to JS, JR input and consequently of the JQ output are shown (JN is not shown).</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1043.gif" WIDTH=444 HEIGHT=312></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="JUSTIFY">We can examine more in detail the operation carried out by this module.</P>
+<P ALIGN="JUSTIFY">1) Stationary condition: no operation is carried out, the output JQ keeps the tentative value assigned by user.</P>
+<P ALIGN="JUSTIFY">2) Transient condition: using some input to the preceding time intervals JSP and JRP, user has to consider if, in correspondence with the last 2 time instants (the preceding and the present), there are some "rise fronts". Four cases are possible:</P>
+<P ALIGN="JUSTIFY">a) No rise front on JS and JR: no operation is carried out.</P>
+<P ALIGN="JUSTIFY">b) Rise front only on JS (JS "true" and JSP "false"): JQ is forced to "true".</P>
+<P ALIGN="JUSTIFY">c) Rise front only on JR (JR "true" and JRP "false"): JQ is forced to "false".</P>
+<P ALIGN="JUSTIFY">d) Contemporary rise fronts on JS and JR: JQ is forced to "false" as for case c).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1044.gif" WIDTH=367 HEIGHT=114></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;JS&#9;SET logical input</P>
+<P ALIGN="JUSTIFY">[]&#9;JR&#9;RESET logical input</P>
+<P ALIGN="JUSTIFY">[]&#9;JQ&#9;output logical variable</P>
+<P ALIGN="JUSTIFY">[]&#9;JN&#9;logical variable of denied output.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module FFFS has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the FFFS module variables, user must not pay particular attention</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1045.gif" WIDTH=330 HEIGHT=660></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_FFSR"></A>FFSR regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module FFSR simulates the behaviour of a bistable multivibrator of SET-RESET type. More precisely, when the two input JS and JR are equals (both true or false), the logical output JQ keeps the value; it is forced to a value fixed in advance when only one input is true:</P>
+<P ALIGN="JUSTIFY">JQ = true, if JS = true (JR = false)</P>
+<P ALIGN="JUSTIFY">JQ = false, if JR = true (JS = false)</P>
+<P ALIGN="JUSTIFY">Besides the output JQ, also the output JN is present and this is always equal to JQ negation.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=307>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<P ALIGN="CENTER"><B><FONT FACE="Arial, helvetica">JS</B></FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">JR</B></FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">JQ</B></FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<B><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">JN</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">false</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">false</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">JQP</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">JNP</FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">false</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">true</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">false</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">True</FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">true</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">false</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">true</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">False</FONT></TD>
+</TR>
+<TR><TD WIDTH="26%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">true</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">true</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">JQP</FONT></TD>
+<TD WIDTH="25%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">JNP</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 1</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In figure 2, as example, a possible run diagram both related to JS, JR input and consequently of the JQ output are shown (JN is not shown).</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1046.gif" WIDTH=444 HEIGHT=312></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="CENTER">figure 2</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica" SIZE=2><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1047.gif" WIDTH=367 HEIGHT=114></P>
+<B><FONT FACE="Arial, helvetica"><P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">[]&#9;JS&#9;SET logical input</P>
+<P ALIGN="JUSTIFY">[]&#9;JR&#9;RESET logical input</P>
+<P ALIGN="JUSTIFY">[]&#9;JQ&#9;output logical variable</P>
+<P ALIGN="JUSTIFY">[]&#9;JN&#9;logical variable of denied output.</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The module FFSR has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the FFSR module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1048.gif" WIDTH=333 HEIGHT=328></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=6><P ALIGN="CENTER"><A NAME="lg_libreg_FILT"></A>FILT regulation module</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The regulation module FILT simulates the behaviour of a first order low-pass filter whose transfer function (writes using the Laplace transform) is the following (see theoretical treatment related to a low-pass filter):</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1049.gif" WIDTH=204 HEIGHT=41></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where KD and KT respectively represent the gain and the derivator time constant, 's' is the Laplace operator and IE(s), UA(s) indicate the L-transforms respectively related to the input IE(t) and output UA(t).</P>
+<P ALIGN="JUSTIFY">The following formulae make clear as previously said. It is useful to distinguish between the cases in which a stationary or transient condition is calculating.</P>
+<P ALIGN="JUSTIFY">1) Stationary condition: the UA output is set equal to the input multiplied for the gain KG:</P>
+<P ALIGN="CENTER">UA = KG * IN</P>
+<P ALIGN="JUSTIFY">2) Transient condition: the UA output is calculated using the following expression:</P>
+</FONT><P ALIGN="CENTER"><IMG SRC="Image1050.gif" WIDTH=298 HEIGHT=38></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">where DT and UAP respectively represent the time interval and the output to the preceding time interval. This expression is obtained beginning from the transfer function previously mentioned, passing from the domain of Laplace transforms to the temporal domain and discretizing.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Topological data</P>
+<P ALIGN="CENTER">Input-output scheme</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1051.gif" WIDTH=367 HEIGHT=114></P>
+<B><FONT FACE="Arial, helvetica"><P>&nbsp;</P></DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical meaning of input-output variables</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[]&#9;IN&#9;input analogue variable</P>
+<P ALIGN="JUSTIFY">[]&#9;KG&#9;filter gain</P>
+<P ALIGN="JUSTIFY">[s]&#9;KT&#9;filter time constant</P>
+<P ALIGN="JUSTIFY">[]&#9;UA&#9;output analogue variable.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Physical and geometrical data</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The FILT module has no data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Variables initialization</P>
+</B></FONT><FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">During the initialization phase of the FILT module variables, user must not pay particular attention.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER">Flow diagram</P>
+</B></FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><P ALIGN="JUSTIFY"><IMG SRC="Image1052.gif" WIDTH=364 HEIGHT=310></P></DIR>
+</DIR>
+</BODY>
+</HTML>

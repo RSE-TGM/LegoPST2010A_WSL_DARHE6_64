@@ -1,0 +1,33 @@
+CNDN_1                                                                          
+CNDN                                                                            
+CNDN - Steam condenser (water cooled)                                           
+                                                                                
+NSTAT = 2
+NUSCI = 5
+NINGR =14
+ 
+NCONF = 1
+ 
+PCND      --US-- STEAM PRESSURE IN THE CONDENSER                                
+LCND      --US-- LEVEL OF LIQUID IN THE CONDENSER                               
+TMFT      --UA-- MEAN TEMPERATURE OF METAL AT TUBE BUNDLE OUTLET                
+HUFT      --UA-- COOLER ENTHALPY AT THE TUBE BUNDLE OUTLET                      
+HLCN      --UA-- ENTHALPY OF THE CONDENSATE LIQUID                              
+PFCN      --UA-- PRESSURE IN THE CONDENSER BOTTOM                               
+%LCN      --UA-- MEASURED LIQUID LEVEL                                          
+WTUR      --IN-- FLOW RATE OF MAIN TURBINE BLOW-OFF STEAM                       
+HTUR      --IN-- ENTHALPY OF MAIN TURBINE BLOW-OFF STEAM                        
+WEXT      --IN-- FLOW RATE OF STEAM FROM SECONDARY CONDENSER INLET              
+HEXT      --IN-- ENTHALPY OF STEAM AT SECONDARY CONDENSER INLET                 
+WLCP      --IN-- CONDENSATE EXTRACTION FLOW RATE                                
+WDRE      --IN-- DRAINS FLOW RATE AT THE CONDENSER INLET                        
+HDRE      --IN-- DRAINS ENTHALPY AT THE CONDENSER INLET                         
+WLCX      --IN-- LEVEL CONTROL EXTRACTED (SUPPL.) LIQUID FLOW RATE              
+WVCN      --IN-- FLOW RATE OF STEAM EXTRACTED FOR CONDENSER VACUUM              
+WRIC      --IN-- FLOW RATE OF LIQUID RECIRCULATED BY EXTR. PUMPS                
+HRIC      --IN-- ENTHALPY OF LIQUID RECIRCULATED BY EXTR. PUMPS                 
+WRFT      --IN-- COOLING WATER FLOW RATE INTO THE TUBE BUNDLE                   
+HIFT      --IN-- COOLING WATER ENTHALPY AT THE TUBE BUNDLE INLET                
+CORR      --IN-- THERMAL EXCHANGE CORRECTION COEFFICIENT                        
+==============================                                                  
+EOF                                                                             

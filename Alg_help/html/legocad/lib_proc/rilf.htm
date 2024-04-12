@@ -1,0 +1,113 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE RILF</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_RILF_summ"></A>MODULE RILF CARD 0</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_RILF_A"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_RILF_B"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_RILF_C"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_RILF_D"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_RILF_E"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_RILF_F"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_RILF_G"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_RILF_H"><U><FONT FACE="Arial" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_RILF_A"></A>MODULE RILF CARD A</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Model Generalities</P>
+</B></I></FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial"><P ALIGN="CENTER">VOLTAGE REGULATOR</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>The module RILF calculates the value of angular velocity in a node, once provided the angular velocity of the reference generator and the node voltage (real and imaginary parts).</P>
+<P>Indeed, the angular velocity in a node (OMEGAn) is equal to the reference one (OMEGAr) plus DELTOM</FONT><FONT FACE="Arial" SIZE=2> </FONT><FONT FACE="Arial">and DELTOM is tied to the derivatives of the real and imaginary parts of node voltage.</P>
+<P>If Vm is the module, Vr the real part, Vx the imaginary part of the node voltage:</P>
+<P>&nbsp;</P>
+<P>Vr dVx Vx dVr</P>
+<P>OMEGAn = OMEGAr + DELTOM = OMEGAr + ----- ---- - ----- ---- </P>
+<P>Vm**2 dt Vm**2 dt</P>
+<P>&nbsp;</P>
+<P>Approximating the derivatives with incremental ratios:</P>
+<P>&nbsp;</P>
+<P>Vr DVx Vx DVr</P>
+<P>OMEGAn = OMEGAr + DELTOM =~ OMEGAr + ----- ---- - ----- ---- </P>
+<P>Vm**2 Dt Vm**2 Dt</P>
+<P>&nbsp;</P>
+<P>If the node tension is zero, also the angular velocity is zero.</P>
+<P>&nbsp;</P>
+<P>In steady state DELTOM = 0 and OMEGAn = OMEGAr </P>
+</FONT><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial"><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_RILF_B"></A>MODULE RILF CARD B</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT-OUTPUT SCHEME</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><IMG SRC="Image1286.gif" WIDTH=398 HEIGHT=263></P>
+<FONT FACE="Arial"><P>&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+</FONT><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>[rad/s] OMNO &#9;node angular velocity</P>
+<P>[V] &#9;UR00 &#9;&#9;phase real component of node voltage</P>
+<P>[V] &#9;UX00&#9;&#9;phase imaginary component of node voltage</P>
+<P>[rad/s] OMGE&#9;angular velocity of reference node</P>
+</FONT><FONT FACE="Arial" SIZE=1><P>&nbsp;</P>
+<U><P>&nbsp;</P>
+</U></FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_RILF_C"></A>MODULE RILF CARD C</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>[V] &#9;VBASE &#9;system chained base voltage in p.u.</P>
+<P>[rad/s] OMBA &#9;system base angular velocity in p.u.</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_RILF_D"></A>MODULE RILF CARD D</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>To initialize the RILF module variables no particular prescription is required.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_RILF_E"></A>MODULE RILF CARD E</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RILF doesn’t prescribe any FORAUS subroutine.</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_RILF_F"></A>MODULE RILF CARD F</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Residuals</P>
+</B></I></FONT><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+</FONT><FONT FACE="Arial"><P>Steady state:</P>
+<P>RNI(1) = OMNO-OMGE</P>
+<P>In transients:</P>
+<P>If node voltage is negligible:</P>
+<P>RNI(1) = OMNO</P>
+<P>Else:</P>
+<P>RNI(1)=OMNO*OMBA-OMGE*OMBA-(-UX00*(UR00-UR00P)+UR00*(UX00-UX00P))/M1</P>
+<P>where</P>
+<P>M1=(UR00**2.+UX00**2.)*DTINT</P>
+</FONT><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_RILF_G"></A>MODULE RILF CARD G</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>SUBROUTINE RILFI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</P>
+<P>$ IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P>SUBROUTINE RILFI3(IFO,IOB,DEBL)</P>
+<P>SUBROUTINE RILFI4(IOB,MOD)</P>
+<P>SUBROUTINE RILFC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE RILFJC (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P>SUBROUTINE RILF (IFUN,IXYU,XYU,IPD,DATI,RNI)&nbsp;</P>
+<P>SUBROUTINE RILFD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</P>
+<P>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_RILF_H"></A>MODULE RILF CARD H</P>
+</FONT><I><FONT FACE="Arial"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P>Reference test cases related to this module aren’t yet available.</P></FONT></BODY>
+</HTML>

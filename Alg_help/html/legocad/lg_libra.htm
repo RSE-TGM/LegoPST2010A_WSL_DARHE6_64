@@ -1,0 +1,586 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>LIBRARIAN ACTIVITY</TITLE>
+<META NAME="subject" CONTENT="File Unificato Documentazione/Iperhelp">
+<META NAME="doccomm" CONTENT="Attività librarian">
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_librarian"></A>LIBRARIAN ACTIVITY</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The librarian activity creates the basic LEGOCAD <I>user libraries </I>and allows to create, modify or copy a </FONT><A HREF="lg_gloss.htm#lgc_gl_module"><U><FONT FACE="Arial" COLOR="#0000ff">module</U></FONT></A><FONT FACE="Arial">. </P>
+<P ALIGN="JUSTIFY">The basic libraries are:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=334>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">libut </FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<I><FONT FACE="Arial"><P ALIGN="JUSTIFY">user</I> </FONT><A HREF="lg_gloss.htm#lgc_gl_proc_library"><U><FONT FACE="Arial" COLOR="#0000ff">process library</U></FONT></A></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">libut_reg </FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<I><FONT FACE="Arial"><P ALIGN="JUSTIFY">library of control schemes</I></FONT></TD>
+</TR>
+<TR><TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">libreg </FONT></TD>
+<TD WIDTH="71%" VALIGN="TOP">
+<I><FONT FACE="Arial"><P ALIGN="JUSTIFY">control modules library</I></FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This activity also allows to modify the associated module icons through Edicole tools. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER">HOW TO</P>
+</I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#lgc_lb_modify_module"><U><FONT FACE="Arial" COLOR="#0000ff">Create or modify a module</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2 </B></FONT><A HREF="#lgc_lb_copy_module"><U><FONT FACE="Arial" COLOR="#0000ff">Copy a module</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3 </B></FONT><A HREF="#lgc_lb_del_module"><U><FONT FACE="Arial" COLOR="#0000ff">Delete a module</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4 </B></FONT><A HREF="#lgc_lb_icons"><U><FONT FACE="Arial" COLOR="#0000ff">Create or modify associated module icons</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">5 </B></FONT><A HREF="#lgc_lb_library"><U><FONT FACE="Arial" COLOR="#0000ff">Create libraries</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><I><FONT FACE="Arial" SIZE=5><P ALIGN="CENTER">LIBRARIAN WINDOWS LAYOUT</P>
+</I></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">1 </B></FONT><A HREF="#lgc_lb_mw_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Librarian main window</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2 </B></FONT><A HREF="#lgc_lb_modules_list_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Modules list page</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">3 </B></FONT><A HREF="#lgc_lb_newmod_setup_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">New Mod I/O variables setup page</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">4 </B></FONT><A HREF="#lgc_lb_newmod_def_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">New Mod definition page</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">5 </B></FONT><A HREF="#lgc_lb_icons_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Lego icon editor page</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_lb_modify_module"></A>Librarian: create or modify a module</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Creation (or modification) of legocad process modules is provided by a librarian's tool called New Mod.</P>
+<P ALIGN="JUSTIFY">The New Mod tool provides some interactive utilities to create a new module or to modify modules that already exist and have been previously created by New Mod.</P>
+<P ALIGN="JUSTIFY">If a model was created with an older version of LEGOCAD, New Mod will not be able to modify the module and, the user will have to edit the fortran code directly.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Creating a new LEGOCAD module involves the following step:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">1) Selecting from New Mod pulldown menu <I>Module configuration | input/output variables set-up</I> a dialog is displayed by the tools to configure the basic information of the module i.e. :</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">&#9;&#9;Number of state output variables</P>
+<P ALIGN="JUSTIFY">&#9;&#9;Number of algebraic output variables</P>
+<P ALIGN="JUSTIFY">&#9;&#9;Number of input variables</P>
+<P ALIGN="JUSTIFY">&#9;&#9;Number of geometrical data</P>
+<P ALIGN="JUSTIFY">&#9;&#9;Type of Jacobian computation.</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">2) After the module set-up New Mod displays in the "<I>New Mod definition</I>" window a series of input forms where to insert descriptions, fortran symbols and normalise values for all variables and for defined geometrical or physical data.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">3) Using menu selection <I>Module configuration</I> | <I>Jacobian matrix topology</I> you define which variables are used in which equations.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information provided in step 1) 2) and 3) are automatically converted during fortran code generation (menu selection File | Save and generate FTN).</P>
+<P ALIGN="JUSTIFY">The user generally have to complete code sections constituting LEGOCAD process module code: a series of dialog window are provided for the insertion of user code or additional data (N.B. user code can be added only through dialog window provided; fortran coded directly on module fortran file will be overwritten by fortran automatic generation).</P>
+<P ALIGN="JUSTIFY">The sections have the following inputs:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=360>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial">Data</P>
+<P ALIGN="JUSTIFY">section (I2)</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">added variable declarations</P>
+<P ALIGN="JUSTIFY">added code</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Jacobian</P>
+<P ALIGN="JUSTIFY">section (JC)</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">added variable declarations</P>
+<P ALIGN="JUSTIFY">added code</P>
+<P ALIGN="JUSTIFY">jacobian matrix coefficient</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Residual</P>
+<P ALIGN="JUSTIFY">section</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">added variable declaration</P>
+<P ALIGN="JUSTIFY">added code</P>
+<P ALIGN="JUSTIFY">residual</FONT></TD>
+</TR>
+<TR><TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Equation</P>
+<P ALIGN="JUSTIFY">section (D1)</B></FONT></TD>
+<TD WIDTH="69%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">equation descriptions</P>
+<P ALIGN="JUSTIFY">m.u.</P>
+<P ALIGN="JUSTIFY">normalization constant</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">At the end of module construction the user will be able to write the fortran code from the File's pulldown menu (menu selection File | Save and generate FTN).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information on the New Mod pages layout is available in:</P>
+<B><P ALIGN="JUSTIFY">1</B> </FONT><A HREF="#lgc_lb_newmod_setup_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">I/O variables set-up page layout</U></FONT></A></P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">2</B> </FONT><A HREF="#lgc_lb_newmod_def_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">New module definition page layout</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_lb_copy_module"></A>Librarian: copy a module</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The user can copy a module to his private library from main window pulldown menu by using "Copy From" . The modules are copied from another user (for each library) or from standard libraries. These libraries are :</P>
+<P ALIGN="JUSTIFY">Standard library (only for libreg library);</P>
+<P ALIGN="JUSTIFY">Auxiliary standard library, Nuclear standard library and Special standard library (only for the libut library)</P>
+<P ALIGN="JUSTIFY">When the user choose the "Different user " option, Librarian will display a window named "Module copy" with the filter utility to copy the desired files. Otherwise the same window "Modules list" will be display to select the module from a standard list. This page can carry out three kind of transfers:</P>
+<P ALIGN="JUSTIFY">1 only the module fortran code</P>
+<P ALIGN="JUSTIFY">2 only the associated module icons</P>
+<P ALIGN="JUSTIFY">3 both fortran and icons.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Information on the page layout is available in:</P>
+<B><P ALIGN="JUSTIFY">1</B>&#9;</FONT><A HREF="#lgc_lb_modules_list_pg_ly"><U><FONT FACE="Arial" COLOR="#0000ff">Modules list page</U></FONT></A></P>
+<B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_lb_del_module"></A>Librarian: delete a module</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The user can delete a module by selecting it on the scrolled list and clicking on the Delete's Module pulldown menu. A confirmation dialog box will be displayed. </P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_lb_icons"></A>Librarian: create or modify associated module icons</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The user can create new associated icons or modify already existing ones through Edicole tool by calling the Icons's pulldown menu. </P>
+<P ALIGN="JUSTIFY">Working with the displayed window "Lego icon editor", the user can select the desired icon among the existing ones either change it or create a new using the standard <I>xbitmap</I> utility . </P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_lb_library"></A>Librarian: Create library</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">When the user has finished module (and related icons) setting, he will be able to create the selected library by using Compiling Library pulldown menu. </P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_lb_mw_ly"></A>Librarian layout: main window</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The librarian main window has the following areas:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Pulldown menu area:</P></B></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=394>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P ALIGN="CENTER"><B><FONT FACE="Arial" SIZE=2>Menu</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Active</P>
+<P ALIGN="CENTER">only</B></FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Explanation</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">File</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Quit</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Exits from the activity</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Module</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Call New Mod</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Create</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">(1)</B></FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Creates a new module</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modify</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">(*)</B></FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modifies a module</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Copy From</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Copies module/es from:</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Different user</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Standard library</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">(3)</B></FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Auxiliary standard</P>
+<P ALIGN="JUSTIFY">library</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">(1)</B></FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Nuclear standard </P>
+<P ALIGN="JUSTIFY">library</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">(1)</B></FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Special standard</P>
+<P ALIGN="JUSTIFY">library</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">(1)</B></FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Edit code</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">(*)</B></FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Edits the fortran code </P>
+<P ALIGN="JUSTIFY">of the module</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Delete</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">(*)</B></FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Deletes a selected module</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Icon</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Edit Edicole</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">(*)</B></FONT></TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modify module associated icons</P>
+<P ALIGN="JUSTIFY">through Edicole tools</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Documentation</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">View</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Shows documentation</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Compile</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Library</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="53%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Creates the chosen library</FONT></TD>
+</TR>
+</TABLE>
+
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">(1)</B></FONT><FONT FACE="Arial">&#9;<I>libut</I> chosen</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">(2)&#9;</B></FONT><I><FONT FACE="Arial">libut_reg</I> chosen</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">(3)</B></FONT><FONT FACE="Arial">&#9;<I>libreg</I> chosen</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">(*)&#9;</B></FONT><FONT FACE="Arial">with a selected block</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Option menu for library selection:</P>
+</B><P ALIGN="JUSTIFY">where the user can choose the working library.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Information area:</P>
+</B><P ALIGN="JUSTIFY">with the label the user's library path and module.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Module list:</P>
+</B><P ALIGN="JUSTIFY">with a scrolled window which contains the list of the available modules.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="lg_gloss.htm#lgc_gl_find"><U><FONT FACE="Arial" COLOR="#0000ff">Find area</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Selected module label.</P>
+</B><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Messages area:</P>
+</B><P ALIGN="JUSTIFY">with a scrolled window available to display compilation messages.</P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_lb_modules_list_pg_ly"></A>Librarian layout: modules list page</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">This page allows to select and copy one or more selected blocks; it has the following areas. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Definition area</P>
+</B><P ALIGN="JUSTIFY">with a label that indicates the standard library (from which blocks can be copied).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Copy modality area</P>
+</B><P ALIGN="JUSTIFY">with an option menu offering three options: Copy Fortran, Copy icons, Copy both (default)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">List of available modules area</P>
+</B><P ALIGN="JUSTIFY">with a scrolled window containing the list (name and description) of the modules existing in the library.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="lg_gloss.htm#lgc_gl_find"><U><FONT FACE="Arial" COLOR="#0000ff">Find area</U></FONT></A></P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Confirmation area:</P>
+</B><P ALIGN="JUSTIFY">with the number of the selected blocks and four push buttons:</P>
+<P ALIGN="JUSTIFY">OK to confirm the operations made and close the page, Cancel to close the page and cancel the operation, Select All and Deselect All to select and deselect the blocks of the list. </P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_lb_newmod_setup_pg_ly"></A>Librarian layout: New Mod set-up page</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The New Mod set-up page is a dialog page which contains some text fields to receive basic set-up numbers; these numbers are :</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&#9;&#9;<I>Number of state output variables</P>
+<P ALIGN="JUSTIFY">&#9;&#9;Number of algebraic output variables</P>
+<P ALIGN="JUSTIFY">&#9;&#9;Number of input variables</P>
+<P ALIGN="JUSTIFY">&#9;&#9;Number of geometrical data</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The user can also set the calculation with numerical or analytical jacobians. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The OK and Cancel push button complete the page. </P>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P><A NAME="lgc_lb_newmod_def_pg_ly"></A>Librarian layout: New Mod definition page</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The New Mod definition page (open from "Call New Mod"' in module pulldown menu) has the following areas:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Pulldown menu area:</P></B></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=359>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial" SIZE=2>File</B></FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Save and generate FTN</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Save user-provided information that describe the module (&lt;module_name&gt;.i file) and generates fortran module's code</FONT></TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Quit</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Exits from the page</FONT></TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Module Configuration</B></FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">I/O variable set-up</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Displays the set-up page</FONT></TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Jacobian matrix topology</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">User</B></FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P>Insertion of user's code (not automatically generated) in particular sections of module code:</FONT></TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Data section (I2)</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Jacobian section (JC)</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Residual section</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Equation section</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">View Code</B></FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Partial views of the fortran code generated</FONT></TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Data section (I2)</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Variables list section (I3)</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Subroutine (I4)</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Residual evaluation (C1)</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Jacobian section </FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Residual section</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="46%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Equation section (D1)</FONT></TD>
+<TD WIDTH="54%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Description area:</P>
+</B><P ALIGN="JUSTIFY">featuring two text fields for the name and description of the model.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Selecting data displaying area:</P>
+</B><P ALIGN="JUSTIFY">featuring an option menu containing the following options:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<I><P ALIGN="JUSTIFY">&#9;&#9;State output variables</P>
+<P ALIGN="JUSTIFY">&#9;&#9;Algebraic output variables</P>
+<P ALIGN="JUSTIFY">&#9;&#9;Input variables</P>
+<P ALIGN="JUSTIFY">&#9;&#9;All variables</P>
+<P ALIGN="JUSTIFY">&#9;&#9;Geometrical data</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</I><B><P ALIGN="JUSTIFY">Information area:</P>
+</B><P ALIGN="JUSTIFY">featuring a scrolled list containing (for every kind of data selected) the description, the fortran symbol and the normalized value.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Confirmation area</P>
+</B><P ALIGN="JUSTIFY">featuring the OK push button.</P>
+</FONT><B><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P><A NAME="lgc_lb_icons_pg_ly"></A>Librarian layout: icon editor page</P>
+</B></FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The icon editor page has the following areas:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Pulldown menu area:</P></B></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=385>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial" SIZE=2>File</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Quit</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Exits from the tool</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Edit</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Standard</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Selects standard icon of: ...</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Process modules</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Scheme modules</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modules</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Process modules</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Loads the icons of a selected </P>
+<P ALIGN="JUSTIFY">process module <B>(*)</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Scheme modules</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Loads the icons of a selected </P>
+<P ALIGN="JUSTIFY">regulation module <B>(*)</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Symbol</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Loads symbols</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Bit Map</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Operation on bitmap files</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Modify</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Copy</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Clear</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Icon</B></FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Operation on icons</FONT></TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">New</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Save</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="37%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Delete</FONT></TD>
+<TD WIDTH="63%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">(*) choosing from a list that will be displayed.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">Information area:</P>
+</B><P ALIGN="JUSTIFY">with the name and description of the module being used, the total icon number, the name of the bitmap file related to the icons used and its number. </P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT></BODY>
+</HTML>

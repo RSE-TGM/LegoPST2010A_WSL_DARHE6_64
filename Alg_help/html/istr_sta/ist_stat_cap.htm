@@ -1,0 +1,205 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Instructor Station capabilities</TITLE>
+<META NAME="subject" CONTENT="Documentazione BI Puertollano">
+<META NAME="doccomm" CONTENT="Documentazione relativa alla prima release, consegnata in aprile 96. Vedere sp_bist.doc per specifica completa.">
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_cap_main"><A NAME="_Toc353674624"><A NAME="_Toc353686252"><A NAME="_Toc353756021"><A NAME="_Toc353769401"><A NAME="_Toc353775534"><A NAME="_Toc353787406"><A NAME="_Toc353787610"><A NAME="_Toc353789910"><A NAME="_Toc331818982"><A NAME="_Toc331993476"><A NAME="_Toc331993691"></A>Instructor station capabilities</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The following is the list of the Instructor Station software capabilities:</P>
+<P>&nbsp;</P>
+</FONT><P><A HREF="#ist_stat_cap_priv"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Superuser privileges</U></FONT></A></P>
+<P><A HREF="#ist_stat_cap_updown"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Simulator start-up and shutdown</U></FONT></A></P>
+<P><A HREF="#ist_stat_cap_chgstat"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Change of the simulator state</U></FONT></A></P>
+<P><A HREF="#ist_stat_cap_snman"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Snapshot management</U></FONT></A></P>
+<P><A HREF="#ist_stat_cap_backman"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Backtrack management</U></FONT></A></P>
+<P><A HREF="#ist_stat_cap_recrepl"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Record and replay</U></FONT></A></P>
+<P><A HREF="#ist_stat_cap_timsca"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Time scaling</U></FONT></A></P>
+<P><A HREF="#ist_stat_cap_contrec"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Continuos recording</U></FONT></A><FONT FACE="Arial, helvetica"> </P>
+</FONT><P><A HREF="#ist_stat_cap_conf"><U><FONT FACE="Arial, helvetica" COLOR="#0000ff">Configurability</U></FONT></A></P>
+<FONT FACE="Arial, helvetica"><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_cap_priv"><A NAME="_Toc353674625"><A NAME="_Toc353686253"><A NAME="_Toc353756022"><A NAME="_Toc353769402"><A NAME="_Toc353775535"><A NAME="_Toc353787407"><A NAME="_Toc353787611"><A NAME="_Toc353789911"></A>Superuser privileges</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The startup procedure allows the instructor to activate the simulator as normal user or as superuser. </P>
+<P>In the latter case the instructor has the possibility to protect Initial Conditions, to override these protections and to validate Initial Conditions flagged as invalid after a simulator compilation.</P>
+<P>The protected operations are:</P>
+<P>&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=4 WIDTH=651>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P><FONT FACE="Arial, helvetica">Area</FONT></TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Function</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Snapshot management</FONT></TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>possibility to override the I.C. protection</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>possibility to accept I.C. tagged as invalid</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Options</FONT></TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Possibility to modify the list of the I.C. protected against destruction (but the ones protected by default)</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_cap_updown"><A NAME="_Toc353674626"><A NAME="_Toc353686254"><A NAME="_Toc353756023"><A NAME="_Toc353769403"><A NAME="_Toc353775536"><A NAME="_Toc353787408"><A NAME="_Toc353787612"><A NAME="_Toc353789912"></A>Simulator start-up and shutdown</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>In the simulator configuration, based on three workstations, one will be used as master and the others as slaves.</P>
+<P>The simulator is activated at the master machine with a single command; all the commands and functions needed to initialize, configure and use the simulator are available from the graphical interface of the Instructor Station console.</P>
+<P>The instructor is required to type a command at the keyboard of the Instructor station machine. All the software will be initialized and the simulator will come up in the FREEZE state.</P>
+<P>&nbsp;</P>
+<P>The initialization procedure restores the simulator situation left before the last shutdown: the simulation time is recovered from the recorded files and the last backtrack record can be used to load the last valid database.</P>
+<P>&nbsp;</P>
+<P><A NAME="_Toc353674627"><A NAME="_Toc353686255"><A NAME="_Toc353756024"><A NAME="_Toc353769404"><A NAME="_Toc353775537"><A NAME="_Toc353787409"><A NAME="_Toc353787613"><A NAME="_Toc353789913"></P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_cap_chgstat"></A>Change of the simulator state</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>All the permitted transitions between the states of the simulator are manually driven by the instructor.</P>
+<P>&nbsp;</P>
+<P>While the RUN state is selected, the instructor is prompted to enter a "title" of the session that will start from this moment on, if the selection comes after a database replacement (initial condition or backtrack snapshot loading).</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_cap_snman"><A NAME="_Toc353674628"><A NAME="_Toc353686256"><A NAME="_Toc353756025"><A NAME="_Toc353769405"><A NAME="_Toc353775538"><A NAME="_Toc353787410"><A NAME="_Toc353787614"><A NAME="_Toc353789914"></A>Snapshot management</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The instructor has the possibility to record, load and maintain up to 60 initial conditions. </P>
+<P>&nbsp;</P>
+<P>An appropriate interface is provided that make possible to:</P>
+<P>save a snapshot of the simulator database as an initial condition chosen by the instructor along with a comment. This functionality is available from all the simulator states.</P>
+<P>load the simulator database from a selected initial condition. This functionality is available from the FREEZE state only.</P>
+<P>delete, move and copy initial conditions, as well as modify the comments associated to the initial conditions. This functionality is available from all the simulator states.</P>
+<P>view the values of all the simulator variables as they are recorded into the initial conditions records, on lists provided and maintained through the instructor station interface. This functionality is available from all the simulator states.</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_cap_backman"><A NAME="_Toc353674629"><A NAME="_Toc353686257"><A NAME="_Toc353756026"><A NAME="_Toc353769406"><A NAME="_Toc353775539"><A NAME="_Toc353787411"><A NAME="_Toc353787615"><A NAME="_Toc353789915"></A>Backtrack management</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>An automatic function is provided that, at the time interval specified by the instructor, records the simulator database into a file in circular fashion. The file is sized for 120 records.</P>
+<P>An interface is provided that make possible to:</P>
+<P>view the values of all the simulator variables as they are recorded into the backtrack records, on lists provided and maintained through the instructor station interface. This functionality is available from all the simulator states.</P>
+<P>manually select a backtrack record for loading into the simulator database. The first time such a load is requested the simulator is automatically switched to the backtrack state.</P>
+<P>switch from the BACKTRACK state to the REPLAY state, and back to BACKTRACK state. The REPLAY state stops automatically at the session limit.</P>
+<P>switch from the BACKTRACK state to the FREEZE state in two possible ways:</P>
+<P>by validating the database substitution made while in BACKTRACK state</P>
+<P>recovering the situation left while entering in BACKTRACK state</P>
+<P>The backtrack snapshot list is displayed by record time order, and are clearly pointed out the start and the end of the sessions. </P>
+<P>The file can be cleared by using the appropriate function.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_cap_recrepl"><A NAME="_Toc353674630"><A NAME="_Toc353686258"><A NAME="_Toc353756027"><A NAME="_Toc353769407"><A NAME="_Toc353775540"><A NAME="_Toc353787412"><A NAME="_Toc353787616"><A NAME="_Toc353789916"></A>Record and replay</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>All the events coming from outside the models that affect the simulation (generally: modification of input variables of the models, such as trainee actions) are automatically recorded. In REPLAY mode these "perturbations" are submitted to the models at the appropriate time, so producing an effective "replay" of a previous session. The REPLAY mode stops automatically at the session limit or on instructor’s request.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_cap_timsca"><A NAME="_Toc353674631"><A NAME="_Toc353686259"><A NAME="_Toc353756028"><A NAME="_Toc353769408"><A NAME="_Toc353775541"><A NAME="_Toc353787413"><A NAME="_Toc353787617"><A NAME="_Toc353789917"></A>Time scaling</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>An interface is provided that make possible to modify the "speed" of the simulator by introducing a multiplier of the system clock. Requesting the "maximum speed", the scheduler is forced to run the models at the maximum frequency that don’t causes the delay time to increase.</P>
+<P>This feature is available from all the simulator states.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_cap_contrec"><A NAME="_Toc353674632"><A NAME="_Toc353686260"><A NAME="_Toc353756029"><A NAME="_Toc353769409"><A NAME="_Toc353775542"><A NAME="_Toc353787414"><A NAME="_Toc353787618"><A NAME="_Toc353789918"></A>Continuos recording</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>An interface is provided that make possible to select from the simulator database up to 1000 variables that will be recorded, at a fixed frequency, on an apposite circular file. </P>
+<P>A trend function is available to display the recorded values; an interface permits the configuration of up to 100 trends. The instructor has the possibility to modify on line the preassigned parameters that define the trends (time scale, engineering units and scale of the displayed variables and the variables themselves). All these functions are available from all the simulator states. </P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P><A NAME="ist_stat_cap_conf"><A NAME="_Toc353674633"><A NAME="_Toc353686261"><A NAME="_Toc353756030"><A NAME="_Toc353769410"><A NAME="_Toc353775543"><A NAME="_Toc353787415"><A NAME="_Toc353787619"><A NAME="_Toc353789919"></A>Configurability</A></A></A></A></A></A></A></A></P>
+</B></FONT><FONT FACE="Arial, helvetica"><P>The instructor can configure some of the menus showed by the instructor station.</P>
+<P>&nbsp;</P>
+<P>The feature allows the following selection:</P>
+</FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=4 WIDTH=647>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P><FONT FACE="Arial, helvetica">Area</FONT></TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Function or Menu affected</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Initialization</FONT></TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>availability of the Clear button</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Snapshot Management</FONT></TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>availability of the Snapshot menubar option</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>availability of the Cut &amp; Paste buttons</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>availability of the Copy &amp; Paste buttons</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>I.C. protection</FONT></TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Selection of the protected I.C.</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Recording </FONT></TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>availability of the Recording menubar option</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>availability of the Backtrack button</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>availability of the Continuos recording button </P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Tasks performance</FONT></TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>availability of the Show menubar option</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>Display selection</FONT></TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>possibility to declare up to five possible screens where the continuos recording trends can be displayed</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>User programs</FONT></TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<FONT FACE="Arial, helvetica"><P>possibility to declare up to eight shell commands that will be available through the Programs menu</P>
+<P>&nbsp;</FONT></TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+<TR><TD WIDTH="34%" VALIGN="TOP">
+<P>&nbsp;</TD>
+<TD WIDTH="66%" VALIGN="TOP">
+<P>&nbsp;</TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Courier New"><P ALIGN="JUSTIFY"></A></A></A></P></FONT></BODY>
+</HTML>

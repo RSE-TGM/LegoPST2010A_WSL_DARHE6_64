@@ -1,0 +1,94 @@
+BEV0
+
+Brine evaporator (3 cells)                                                      
+8
+1
+
+t0
+TEMP TMI1 GATU ____ 
+1 -1 1 0 
+t1
+TEMP TMI2 GATU ____ 
+1 -1 1 0 
+t2
+TEMP TMI3 GATU ____ 
+1 -1 1 0 
+t3
+WSTP PRES ____ ____ ____ HSTE ____ ____ 
+-1 1 0 0 0 1 0 0 
+t4
+WDSI PRES PFDS LEVD ____ HDSI ____ HDIS 
+1 -1 -1 -1 0 1 0 -1 
+t5
+WDSO PRES PFDS LEVD ____ HDIS ____ ____ 
+-1 1 1 1 0 1 0 0 
+t6
+WBRI PRES PFBR FNAI HBRI FNAC HBRN LEVB ____ ____ 
+1 -1 -1 1 1 -1 -1 -1 0 0 
+t7
+WBRO PRES PFBR FNAC HBRN ____ ____ LEVB ____ ____ 
+-1 1 1 1 1 0 0 1 0 0 
+
+5
+11
+13
+
+PRES US
+BRINE/STEAM PRESSURE IN CAVITY                                 
+LEVB US
+BRINE LEVEL IN CAVITY                                          
+LEVD US
+DISTILLATE LEVEL IN CAVITY                                     
+FNAC US
+BRINE RESIDENT MASS FRACTION                                   
+TMEC US
+CASING METAL TEMPERATURE                                       
+HBRN UA
+BRINE RESIDENT ENTHALPY                                        
+TEMP UA
+BRINE/STEAM TEMPERATURE                                        
+HDIS UA
+DISTILLATE ENTHALPY                                            
+TDIS UA
+DISTILLATE TEMPERATURE                                         
+WEVA UA
+BRINE EVAPORATION MASS FLOW                                    
+WFLA UA
+DISTILLATE FLASH MASS FLOW                                     
+WCON UA
+DISTILLATE CONDENSING MASS FLOW                                
+PFBR UA
+PRESSURE AT BRINE BOTTOM                                       
+PFDS UA
+PRESSURE AT DISTILLATE BOTTOM                                  
+HSTE UA
+ENTHALPY OF STEAM FOR STRIPPING                                
+GATU UA
+TUBES EXCHANGING COEFFICIENT                                   
+WBRI IN
+BRINE INLET MASS FLOW RATE                                     
+WBRO IN
+BRINE OUTLET MASS FLOW RATE                                    
+FNAI IN
+BRINE INLET MASS FRACTION                                      
+HBRI IN
+BRINE INLET ENTHALPY                                           
+WDSI IN
+DISTILLATE INLET MASS FLOW RATE                                
+WDSO IN
+DISTILLATE OUTLET MASS FLOW RATE                               
+HDSI IN
+DISTILLATE INLET ENTHALPY                                      
+WSTP IN
+STEAM EXTRACTED FOR STRIPPING                                  
+TMI1 IN
+TUBES METAL TEMPERATURE CELL 1                                 
+TMI2 IN
+TUBES METAL TEMPERATURE CELL 2                                 
+TMI3 IN
+TUBES METAL TEMPERATURE CELL 3                                 
+TEXT IN
+EXTERNAL TEMPERATURE                                           
+AGAM IN
+TUBES-STEAM EXCH.COEFF.CORRECTOR                               
+

@@ -1,0 +1,12 @@
+#
+# This makefile was expanded from Makefile.mk-1 by Telelogic.
+# Expanded macros and dependencies may be found at the
+# end of this file
+#
+
+all: ../bin/check_lego
+
+../bin/check_lego: check_lego.sh
+        cp $? $@
+	chmod a+x $@
+# ******* Telelogic expanded section *******

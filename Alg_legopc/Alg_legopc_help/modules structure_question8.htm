@@ -1,0 +1,51 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>THE &quot;xxxxC1&quot; SUBROUTINE</title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<font face="Trebuchet MS, Arial, Helvetica"><font FACE="Arial"></font>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#99CCFF" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center">
+      <font FACE="Arial">The &quot;xxxxC1&quot; subroutine of a LEGOPC process module</font>
+    </font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font face="Trebuchet MS, Arial, Helvetica">
+<font SIZE="3">
+<p align="left">The &quot;xxxxC1&quot; subroutine of a LEGO module is called both by LG3 activity 
+(steady state computation) and LG5 activity (transients simulation); in both the activities, 
+&quot;xxxxC1&quot; is called to perform three different kind of actions, which the subroutine must
+recognize checking the actual value of the IFUN parameter:</p>
+<p align="left"> &nbsp;&nbsp; 1 = assignment of the Jacobian matrix topology (for transients simulation);</p>
+<p align="left"> &nbsp;&nbsp; 2 = computation of the residuals of differential and algebraic equations;</p>
+<p align="left"> &nbsp;&nbsp; 3 = computation of the Jacobian matrix of the block equations.</p>
+<p align="left">The &quot;xxxxC1&quot; may also recognize if it has been called by LG3 or by LG5 
+activity checking the value of the KREGIM logical variable: KREGIM is .TRUE. when &quot;xxxxC1&quot; 
+is called by LG3 activity (steady state computation), and it is .FALSE. when &quot;xxxxC1&quot; 
+is called by LG5 activity (transients simulation).</p>
+<center>
+<p><a href="lg_modu_sez08_01.htm">
+	What does &quot;xxxxC1&quot; have to do when it is called for Jacobian matrix topology setting?</a></p>
+<p><a href="lg_modu_sez08_02.htm">
+	What does &quot;xxxxC1&quot; have to do when it is called for residuals computation?</a></p>
+<p><a href="lg_modu_sez08_03.htm">
+	What does &quot;xxxxC1&quot; have to do when it is called for Jacobian matrix computation?</a></p>
+<p><a href="lg_modu_sez08_04.htm">FORTRAN prescriptions for &quot;xxxxC1&quot; subroutines</a></p>
+<p><a href="lg_modu_sez08_05.htm">The INTEGR common area</a></p>
+<p><a href="lg_modu_sez08_06.htm">The NEQUAZ common area</a></p>
+<p><a href="lg_modu_sez08_07.htm">The NORM common area</a></p>
+<p><a href="lg_modu_sez08_08.htm">The PARPAR common area</a></p>
+<p><a href="lg_modu_sez08_09.htm">The REGIME common area</a></p>
+<p><a href="lg_modu_sez08_10.htm">
+	An example of the &quot;xxxxC1&quot; subroutine in a standard process module (RAVA)</a></p>
+<p><a href="lg_modu_sez08_11.htm">The &quot;xxxxC1&quot; subroutine for configurable LEGO modules</a></p>
+</center>
+</font><!--mstheme--></font></body>
+
+</html>

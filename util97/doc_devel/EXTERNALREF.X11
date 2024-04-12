@@ -1,0 +1,2 @@
+ProtocolsP.h externalref XmProtocolClassRec 	xmProtocolClassRec;
+ProtocolsP.h externalref WidgetClass xmProtocolObjectClass;

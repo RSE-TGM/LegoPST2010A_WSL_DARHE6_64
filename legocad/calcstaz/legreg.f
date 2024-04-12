@@ -1,0 +1,421 @@
+
+      SUBROUTINE LEGREG(IGO,NEQSIS,NBL,ISLB,NUSTA,NUSCI,IPDATI,DATI,
+     $     IP,TN,CDT,XYU,RN,ICONV,SIVAR,MX1,IPVRS,TOLL,RNO,XYO,JACYES,
+     $     NITERJ,NJACMX,IPS,IPVRT,
+CC La riga successiva e' stata aggiunta da max !!!
+     $     NVART,CNXYU,VARI,NPVRT,MX4,NINGR,SYTVAR,MX6,
+CC ----------------------------------------------------
+     $     XY,UU,NU,IPI,IPVRI,FJ,RIGA, NEQAL,TEMPO,AJAC,MX5,NOBLC,
+C*********************** TAVOLE ***************************************
+     $     MX3,RNI,IRJ,ICJ,IKMA28,IWMA28,WMA28,NZMAX,MXCOL,MXROW,NOSUB)
+C*********************** TAVOLE ***************************************
+C      IMPLICIT DOUBLE PRECISION (A-H, O-Z)                              !DBLE
+      DIMENSION ISLB(*),NUSTA(*),NUSCI(*),IPDATI(*),DATI(*),IP(*),
+     $     TN(*),XYU(*),RN(*),ICONV(*),SIVAR(MX1,2),IPVRS(*),
+     $     TOLL(*),RNO(*),XYO(*),IPS(*),IPVRT(*),
+CC La riga successiva e' stata aggiunta da max !!!
+     $     CNXYU(*),NINGR(*),SYTVAR(MX6,2),VARI(MX4,2),
+CC ----------------------------------------------------
+     $     XY(*),UU(*),IPI(*),IPVRI(*),
+     $     FJ(*),RIGA(*), AJAC(MX5,MX5),NOBLC(MX3,2),
+     $     RNI(*),IRJ(*),ICJ(*),IKMA28(*),IWMA28(*),WMA28(*)
+C*********************** TAVOLE ***************************************
+      DIMENSION NOSUB(*)
+C*********************** TAVOLE ***************************************
+C
+C      RISOLVE IL SISTEMA ALGEBRICO COL METODO DI NEWTON-RAPHSON SMORZ.
+C
+C      IGO=1   SISTEMA RISOLTO
+C      IGO=-1  SISTEMA NON RISOLTO
+C
+C     DESCRIZIONE  DEI VETTORI
+C       - MATRICE JACOBIANA -   FJ,IRJ,ICJ
+C       - RESIDUI-SOLUZIONI - TN,   RN ,RNO, XY ,XYO
+C       - INGRESSI  -          UU
+C       - TOLLERANZE -           TOLL
+C       - MATRICE COLLEG. DIRETTA -  IPVRS
+C       - MATRICI COLLEG. INVERSE -  IPS,IPVRT , IPI,IPVRI
+C       - VETTORI IN INGRESSO TIPICI- ISLB,NUSTA,NUSCI,IP,XYU,
+C                                      IPDATI,DATI,SIVAR
+C       - VETTORI DI COMODO  -  RIGA,ICONV,AJAC(MX5,MX5)
+C       -                    IKMA28,IWMA28,WMA28
+C
+C*****************************************************************************
+      PARAMETER (N003=2000,N005=3000,N004=1000)
+      DIMENSION IRESBL(N003),IBLEQZ(N003)
+C
+C
+      PARAMETER (N00XT=50)
+      CHARACTER*8 BLOCCO
+      CHARACTER*8 SYMVAR(100)
+      CHARACTER*50 SIGNEQ(N00XT)
+      CHARACTER*10 UNITEQ(N00XT)
+      DIMENSION ITOPVA(N00XT,100)
+      DIMENSION COSNOR(N00XT)
+C
+      CHARACTER*180 MESG
+C_______ REGISTRAZIONE SU FILE [.PROC]F11.DAT INFORMAZIONI RIGUARDANTI 
+C        IL TRATTAMENTO DELL'OUTPUT DI LG3
+C
+C____ COSTRUZIONE DEI VETTORI PUNTATORI CHE DEFINISCONO LA CORRISPONDENZA
+C     FRA LE EQUAZIONI DEL SISTEMA E I BLOCCHI (IRESBL) E IL NUMERO D'ORDINE
+C     DELL'EQUAZIONE ALL'INTERNO DEL BLOCCO (IBLEQZ)
+C 
+      K=0
+      DO I=1,NBL
+        NE=NUSTA(I)+NUSCI(I)
+        DO J=1,NE
+          K=K+1
+          IRESBL(K)=I
+          IBLEQZ(K)=J
+        ENDDO
+      ENDDO
+C      
+C
+C_____ REGISTRAZIONE INFORMAZIONI "HEADER"
+C
+      OPEN(UNIT=11,FILE='proc/f11.dat',STATUS='NEW',
+     $     FORM='UNFORMATTED')
+      REWIND 11
+      WRITE(11)NEQSIS,(SIVAR(I,1),SIVAR(I,2),XY(I),
+     $         IRESBL(I),IBLEQZ(I),I=1,NEQSIS)
+      WRITE(11)(IPS(I),I=1,NEQSIS+1)
+      WRITE(11)NPVRT,(IPVRT(I),I=1,NPVRT)
+      WRITE(11)NU,(VARI(I,1),VARI(I,2),UU(I),I=1,NU)
+      WRITE(11)NVART,(CNXYU(I),IPVRS(I),I=1,NVART)
+C
+C_____ SCRITTURA DI NEQSIS RECORD CONTENENTI LE INFORMAZIONI 
+C      RELATIVE AL SIGNIFICATO DELLE EQUAZIONI DEL SISTEMA
+C
+      DO 500 I=1,NBL
+      K     =ISLB(I)
+      IPD   =IPDATI(I)
+      NSTATI=NUSTA(I)
+      NUSCIT=NUSCI(I)
+      NINGRE=NINGR(I)
+      NEQUAZ=NSTATI+NUSCIT
+      K1=IP(I)
+      K2=IP(I+1)-1
+      NVARBL=K2-K1+1
+      DO II=1,NVARBL
+      WRITE(SYMVAR(II),'(2A4)')SYTVAR(K1+II-1,1),SYTVAR(K1+II-1,2) 
+      ENDDO
+      IBLOC1=NOBLC(I,1)
+      IBLOC2=NOBLC(I,2)
+      WRITE(BLOCCO,'(2A4)')IBLOC1,IBLOC2
+      MXT=N00XT
+      DO II=1,N00XT
+       COSNOR(II)=0.
+       SIGNEQ(II)(1:50)=' '
+       UNITEQ(II)(1:10)=' '
+       DO J=1,100
+          ITOPVA(II,J)=0.
+       ENDDO
+      ENDDO
+C
+      CALL MODD1(K,BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,DATI,IPD,
+     $           SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)
+C
+C_____ SCRITTURA SU FILE 11 INFO-EQUAZIONI
+C
+C      WRITE(11)NEQUAZ,NVARBL
+      DO II=1,NEQUAZ
+      WRITE(11)NVARBL,SIGNEQ(II),UNITEQ(II),COSNOR(II),
+     $         (ITOPVA(II,J),J=1,NVARBL)
+      ENDDO
+ 500  CONTINUE
+C
+C_____ FINE REGISTRAZIONE INFORMAZIONI "HEADER"
+C
+      MMX1=MX1
+      MMX3=MX3
+      MMX5=MX5
+      UPIV=.1
+      MTMA28=1
+      CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+      CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+      IGO=1
+  999 ITERT=0
+      JACYES=1
+      ITER=0
+      JAC=0
+      BETA=.5
+      IBETA=0
+      VARR=0.
+      IVAR=0
+C***           CALCOLO  RESIDUI
+   1  ICONVE=1
+      CALL RESREG(NBL,ISLB,NUSTA,NUSCI,IPDATI,DATI,IP,TN,CDT,XYU,
+     $      RN,ICONV,SIVAR,MMX1,NEQSIS,IPVRS,TOLL,ICONVE,NOBLC,MMX3,
+C*********************** TAVOLE ***************************************
+     $            RNI,NOSUB)
+C*********************** TAVOLE ***************************************
+C Calcolo della norma
+      VAR=0.
+      DO 10 I=1,NEQSIS
+      VAR=VAR + RN (I)*RN (I)
+  10  CONTINUE
+      VAR=SQRT(VAR)
+      VAR=VAR/NEQSIS
+C
+C_______ REGISTRAZIONE SU FILE [.PROC]F11.DAT INFORMAZIONI RIGUARDANTI 
+C        IL TRATTAMENTO DELL'OUTPUT DI LG3
+C__________ RESIDUI  ====>RECORD FLAG =IRC11 =1 
+C
+      IRC11=1
+      WRITE(11)IRC11
+      WRITE(11)(XY(I),RN(I),ICONV(I),I=1,NEQSIS),
+     $         ITERT,ICONVE,VAR
+C_____________________________________________________________________
+C
+      IF(ICONVE.EQ.1)GO TO 100
+      IF(ITERT.EQ.0)GO TO 15
+      IF(IVAR.EQ.1)GO TO 15
+C
+      IF(VAR.GT.VARR)GO TO 65
+C
+   15 KBETA=0
+      DO 20 I=1,NEQSIS
+      RNO(I)=RN(I)
+      XYO(I)=XY(I)
+  20  CONTINUE
+C
+      VARR=VAR
+      JOK=0
+C
+      IF(IVAR.EQ.1)GO TO 31
+      IF(JACYES.EQ.0)GO TO 30
+      JACYES=0
+      GO TO 35
+   30 IF(ITER.LT.NITERJ)GO TO 45
+   31 IF(JAC.GE.NJACMX)GO TO 150
+      ITER=0
+   35 JAC=JAC+1
+      JOK=1
+C***              CALCOLO  JACOBIANO
+      CALL LEGBL1(NEQSIS,IPS,IPVRT,XYO,XYU)
+      CALL LEGBL1(NU    ,IPI,IPVRI,UU,XYU)
+      CALL JACREG(NBL,ISLB,IPDATI,IP,XYU,DATI,IPVRS,NUSCI,NUSTA,
+     $            NZMAX,NZTER,IRJ,ICJ, FJ,NEQSIS, RIGA,AJAC,
+C*********************** TAVOLE ***************************************
+     $            MMX5,NOBLC,MMX3,RNI,NOSUB)
+C*********************** TAVOLE ***************************************
+C_____________________________________________________________________
+C
+C_______ REGISTRAZIONE SU FILE [.PROC]F11.DAT INFORMAZIONI RIGUARDANTI 
+C        IL TRATTAMENTO DELL'OUTPUT DI LG3
+C__________ JACOBIANO ====>RECORD FLAG =IRC11 =3 
+C
+      write(*,*) 'CMC in legreg passo'
+      IRC11=3
+      WRITE(11)IRC11
+      WRITE(11)NZTER,ITERT,(IRJ(I),ICJ(I),FJ(I),I=1,NZTER)
+      WRITE(*,*) 'JAC. CALC. 1'
+      print*,"CMC in legreg passo"
+      WRITE(MESG,1400)ITERT+1
+      print*,"CMC in legreg passo"
+ 1400 FORMAT(1X,'Jacobian matrix computed at iteration # ',I4,'\0')
+      ID=WR_PIPE(0,MESG)
+      print*,"CMC in legreg passo"
+      WRITE(*,*) 'JAC. CALC. 2'
+C_____________________________________________________________________
+C
+C
+C     FATTORIZZAZIONE
+C
+      CALL MA28A(NEQSIS,NZTER,FJ,MXCOL,IRJ,MXROW,ICJ,UPIV,
+     $           IKMA28,IWMA28,WMA28,IFLAG)
+C
+      WRITE(11)IFLAG
+      IF(IFLAG.EQ.0)GO TO 45
+      CALL ER28A(IFLAG)
+      IF(IFLAG.LE.2)GOTO 45
+C  44  WRITE(6,3528)
+C 3528 FORMAT(10X,'ESECUZIONE INTERROTTA'/10X,'SI CONSIGLIA DI ',
+C     $   'CONTROLLARE LA SCELTA DELLE VARIABILI NOTE E DI QUELLE ',
+C     $   'INCOGNITE'/10X,'TENENDO CONTO DELLE EQUAZIONE DEL MODELLO'/
+C     $   10X,'RIESEGUIRE,TUTTAVIA,L''ATTIVITA ASSEGNANDO ',
+C     $   'TUTTI I SSWTCH'//)
+      STOP
+C
+   45 ITER=ITER+1
+      ITERT=ITERT+1
+C
+C     RISOLUZIONE A/I SISTEMA
+C
+      DO 47 I=1,NEQSIS
+      TN(I)=RN(I)
+   47 CONTINUE
+      CALL MA28C(NEQSIS,FJ,MXCOL,ICJ,IKMA28,TN,WMA28,MTMA28)
+C
+C_____________________________________________________________________
+C
+C_______ REGISTRAZIONE SU FILE [.PROC]F11.DAT INFORMAZIONI RIGUARDANTI 
+C        IL TRATTAMENTO DELL'OUTPUT DI LG3
+C__________ SOLUZIONI SISTEMA LINEARE====>RECORD FLAG =IRC11 =2 
+C
+      IRC11=2
+      WRITE(11)IRC11
+      WRITE(11)ITERT,(TN(I),I=1,NEQSIS)
+C_____________________________________________________________________
+C
+   50 CONTINUE
+      CALL SSWTCH(5,LL)
+      IF(LL.NE.1)GO TO 51
+C      WRITE(6,4501)
+C 4501 FORMAT(//10X,'SOLUZIONI DEL SISTEMA LINEARE')
+C 3901 FORMAT(//10X,'SOLUZIONI NULLE DEL SISTEMA LINEARE')
+C 3900 FORMAT(10X,I6)
+C      WRITE(6,4500)(TN(I),I=1,NEQSIS)
+C      WRITE(6,3901)
+      DO 93 I=1,NEQSIS
+      DEX=ABS(TN(I))
+      IF(DEX.GT.0.)GO TO 93
+C      WRITE(6,3900)I
+   93 CONTINUE
+   51 DO 60 I=1,NEQSIS
+      XY(I)=XY(I)+TN(I)
+   60 CONTINUE
+      CALL SSWTCH(5,LL)
+      IF(LL.NE.1)GO TO 61
+C      WRITE(6,4502)
+C 4502 FORMAT(//10X,'SOLUZIONI DEL SISTEMA NON-LINEARE')
+C      WRITE(6,4500)(XY(I),I=1,NEQSIS)
+C 4500 FORMAT(10(1X,E12.5))
+C
+   61 CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+      CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+      IVAR=0
+      GO TO 1
+C
+C     DIFFICOLTA' DI CONVERGENZA
+C
+   65 CALL SSWTCH(2,LL)
+      IF(LL.NE.1)GO TO 70
+C
+C      WRITE(6,1000)VAR,VARR
+C 1000 FORMAT(///10X,'DIFFICOLTA DI CONVERGENZA N(I)= ',E15.8,1X,
+C     $   '  N(I-1) =',E15.8)
+      WRITE(MESG,1410)VAR,VARR
+ 1410 FORMAT(1X,'Convergence problem N(I)= ',E15.8,1X,
+     $   '  N(I-1) =',E15.8,'\0')
+      ID=WR_PIPE(0,MESG)
+   70 DO 80 I=1,NEQSIS
+      RN(I)= RNO(I)
+C$$$$$$$$$$$$$$$$$$$$$
+      XY(I)=XYO(I)
+C$$$$$$$$$$$$$$$$$$$$$
+   80 CONTINUE
+      IF(JOK.EQ.0)GO TO 31
+      KBETA=KBETA+1
+C
+C     CORREZIONI DELLE SOLUZIONI CON BETA
+C
+      DO  90 I=1,NEQSIS
+      XY(I)= XYO(I) +BETA*(XY(I)-XYO(I))
+   90 CONTINUE
+C_____________________________________________________________________
+C
+C_______ REGISTRAZIONE SU FILE [.PROC]F11.DAT INFORMAZIONI RIGUARDANTI 
+C        IL TRATTAMENTO DELL'OUTPUT DI LG3
+C__________ SMORZAMENTO DELLE SOLUZIONI====>RECORD FLAG =IRC11 =4 
+C
+      IRC11=4
+      WRITE(11)IRC11
+      WRITE(11)ITERT,KBETA,IBETA,(XY(I),I=1,NEQSIS)
+C_____________________________________________________________________
+C
+      CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+      CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+C
+      IF(KBETA.LE.5)GO TO 1
+      IVAR=1
+      IBETA=IBETA+1
+C     IF(IBETA.LE.2)GO TO 1
+C
+      IGO=-1
+C
+C   99 WRITE(6,1003)
+C      WRITE(6,7656)VAR
+C 7656 FORMAT(10X,'NORMA RESIDUI= ',E15.8//)
+   99 ICEF=ICONV(1)
+      IRX=1
+      RMAX=ABS(RN(1))
+      DO 95 I=2,NEQSIS
+      ICEF=ICEF+ICONV(I)
+      RA=ABS(RN(I))
+      IF(RMAX.GE.RA)GO TO 95
+      IRX=I
+      RMAX=RA
+   95 CONTINUE
+C      WRITE(6,1028)RN(IRX),IRX,TOLL(IRX)
+C 1028 FORMAT(//10X,'RESIDUO MASSIMO ',E12.5,' NELL EQUAZIONE',I4/
+C     $   10X,'TOLLERANZA ',E12.5//)
+C      WRITE(6,1030)ICEF
+C 1030 FORMAT(/10X,I4,' EQUAZIONI NON SONO VERIFICATE '//)
+C      WRITE(6,1029)
+C 1029 FORMAT(//10X,'PER CAPIRE L ANDAMENTO ITERATIVO DELLA SOLUZIONE'
+C     $   /10X,'RIPETERE L ESECUZIONE ASSEGNANDO I SSWTCH'
+C     $   /10X,' 1  -STAMPA DELLA TOPOLOGIA '
+C     $   /10X,' 2  -STAMPA DEI RESIDUI '/10X,' 3  -STAMPA JACOBIANI'
+C     $   /10X,' 5  -SOLUZIONI DEL SISTEMA'//)
+C
+C_______ REGISTRAZIONE SU FILE [.PROC]F11.DAT INFORMAZIONI RIGUARDANTI 
+C        IL TRATTAMENTO DELL'OUTPUT DI LG3
+C__________ SEGNALA NON CONVERGENZA ===>RECORD FLAG =IRC11 =6 
+C
+      IRC11=6
+      WRITE(11)IRC11
+      WRITE(11)ICEF,IRX,RN(IRX),TOLL(IRX)
+      ID=WR_PIPE(2,' ')
+C_____________________________________________________________________
+      CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+      CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+C      WRITE(6,3152)ITERT,JAC
+      RETURN
+ 1003 FORMAT(//10X,'NON RIESCO A RISOLVERE IL SISTEMA DI REGIME ')
+ 1001 FORMAT(10X,2I5,E15.8/(1X,I5,E15.8,I5,1X,E15.8))
+ 1002 FORMAT(20X,2A4,2X,E15.8)
+C
+C     IL SISTEMA EST RISOLTO
+C
+  100 CONTINUE
+      CALL LEGBL1(NEQSIS,IPS,IPVRT,XY,XYU)
+      CALL LEGBL1(NU,IPI,IPVRI,UU,XYU)
+C      WRITE(6,3152)ITERT,JAC
+C 3152 FORMAT(//10X,'SOL. SIS.'
+C     $   /10X,'ITER.SOL.-RES.  ',I6/10X,'JACOBIANI',I6//)
+C
+C_______ REGISTRAZIONE SU FILE [.PROC]F11.DAT INFORMAZIONI RIGUARDANTI 
+C        IL TRATTAMENTO DELL'OUTPUT DI LG3
+C__________ TROVATE LE SOLUZIONI====>RECORD FLAG =IRC11 =7 
+C
+      IRC11=7
+      WRITE(11)IRC11
+      WRITE(11)ITERT,JAC,(XY(I),I=1,NEQSIS)
+      CLOSE(11)
+      WRITE(*,*) 'END CONV. 1'
+      WRITE(MESG,1401)ITERT+1,JAC
+ 1401 FORMAT(1X,'Number of iterations ',I4,' with ',I4,
+     $       ' jacobian matrix computed.\0')
+      ID=WR_PIPE(0,MESG)
+      ID=WR_PIPE(1,' ')
+C_____________________________________________________________________
+      RETURN
+C
+C     SUPERAMENTO NUM.MAX.JACOB.
+C
+C  150 WRITE(6,1005)TEMPO
+C 1005 FORMAT(///10X,'SUPERATO IL NUMERO MASSIMO DI JACOBIANI DURANTE ',
+C     $   'LA SOLUZIONE '/10X,'DEL SISTEMA ALG-DIFF AL TEMPO ', F8.3 //)
+C      IGO=-1
+C
+C_______ REGISTRAZIONE SU FILE [.PROC]F11.DAT INFORMAZIONI RIGUARDANTI 
+C        IL TRATTAMENTO DELL'OUTPUT DI LG3
+C__________ SEGNALA SUPERATO MAX JACOBIANI====>RECORD FLAG =IRC11 =5 
+C
+  150 IRC11=5
+      WRITE(11)IRC11
+C_____________________________________________________________________
+      GO TO 99
+      END

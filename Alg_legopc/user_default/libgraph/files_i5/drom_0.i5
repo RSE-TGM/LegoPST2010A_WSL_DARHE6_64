@@ -1,0 +1,33 @@
+DROM
+
+DROM - Branch for Rotor pulsation and angle                                     
+3
+1
+
+t0
+OMEG DELT ____ ____ ____ ____ ____ ____ ____ ____ 
+1 1 0 0 0 0 0 0 0 0 
+t1
+OME1 DEL1 ____ ____ ____ ____ ____ ____ ____ ____ 
+1 1 0 0 0 0 0 0 0 0 
+t2
+OME2 DEL2 ____ ____ ____ ____ ____ ____ ____ ____ 
+1 1 0 0 0 0 0 0 0 0 
+
+0
+4
+2
+
+OME1 UA
+rotor pulsation reference (1)                                  
+DEL1 UA
+rotor angle reference (1)                                      
+OME2 UA
+rotor pulsation reference (2)                                  
+DEL2 UA
+rotor angle reference (2)                                      
+OMEG IN
+rotor reference pulsation                                      
+DELT IN
+rotor reference angle                                          
+

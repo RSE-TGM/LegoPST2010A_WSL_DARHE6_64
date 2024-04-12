@@ -1,0 +1,175 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE AMME</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMME_summ"></A>MODULE AMME CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+</FONT><P><A HREF="#lg_libproc_AMME_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMME_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMME_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMME_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMME_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMME_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMME_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_AMME_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<FONT FACE="Arial, helvetica" SIZE=1><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMME_A"></A>MODULE AMME CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">VARIABLE ADMITTANCE</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The AMME module simulates the beahviour of a passive load, consisting of a variable admittance.</P>
+<P ALIGN="JUSTIFY">The equations of the AMME module are written according to generator set convention, that is considering currents output as positive, and absorbed currents as negative ones.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Equations used are:</P>
+<P ALIGN="JUSTIFY">1) Ohm law</P>
+<P ALIGN="JUSTIFY">2) Current module equation</P>
+<P ALIGN="JUSTIFY">3) Equations of powers</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMME_B"></A>MODULE AMME CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT - OUTPUT SCHEME&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P><IMG SRC="Image65.gif" WIDTH=382 HEIGHT=241></P>
+<FONT FACE="Arial, helvetica"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF MODULE INPUT-OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P>[A]&#9;IR00&#9;&#9;actual load current</P>
+<P>[A] &#9; IX00&#9;&#9;imaginary load current</P>
+<P>[A] &#9;IM00&#9;&#9;load current in module</P>
+<P>[W] &#9;QATT&#9;&#9;active power absorbed by load</P>
+<P>[VAR] &#9;QREA&#9;&#9;reactive power absorbed by load</P>
+<P>[V] &#9;VRCA&#9;&#9;actual phase voltage at load terminals</P>
+<P>[V] &#9;VXCA&#9;&#9;imaginary phase voltage at load terminals</P>
+<P>[V] &#9;VMCA&#9;load voltage between lines in module</P>
+<P>[V] &#9;VR00&#9;&#9;actual phase voltage at bus bar</P>
+<P>[V] &#9;VX00&#9;&#9;imaginary phase voltage at bus bar</P>
+<P>[ ] &#9;FG00&#9;&#9;load conductance multiplier</P>
+<P>[ ] &#9;FB00&#9;&#9;load susceptance multiplier</P>
+<P>&#9;FB00&gt;0. ---&gt; INDUCTIVE LOAD</P>
+<P>&#9;FB00&lt;0. ---&gt; CAPACITIVE LOAD</P>
+<P>[ ] &#9;STAT&#9;&#9;switch status (=1 closed, =0 open)</P>
+<P>[rad/s] OMAI&#9;&#9;pulsation at load input&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMME_C"></A>MODULE AMME CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P>&nbsp;</P>
+<P ALIGN="JUSTIFY">In addition to the initial values of input and output variables of the AMME module, whose meaning has been defined in card B1, the user must assign the following set of data to complete the input required by the module: </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>[V] &#9;VBASE&#9;basic voltage between lines of the system in p.u.</P>
+<P>[W]&#9;QBASE&#9;basic power of the system in p.u.</P>
+<P>[A] &#9;INOM&#9;&#9;load rated current</P>
+<P>[V] &#9;VNOM&#9;load rated voltage between lines</P>
+<P>[W]&#9;QNOM&#9;load active rated power</P>
+<P>[rad/s]&#9;OMBA&#9;basic system pulsation in p.u.</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMME_D"></A>MODULE AMME CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P>&nbsp;</P>
+<P ALIGN="JUSTIFY">No particular prescription is required for the initialization of AMME module variables.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMME_E"></A>MODULE AMME CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">No user’s subprogram is required in the AMME module.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_AMME_F"></A>MODULE AMME CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The equations of the mathematical model, mentioned in card A1, originate the following residuals:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">RNI(1) = IROO-VXCA*BMOD+VRCA*GMOD</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(2) = IXOO+VRCA*BMOD+VXCA*GMOD</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(3) = IM00-SQRT(IR00**2+IX00**2)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(4) = QATT-VRCA*IR00-VXCA*IX00</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(5) = QREA-VXCA*IR00-VRCA*IX00</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(6) = VMCA-SQRT(3.*(VRCA**2+VXCA**2))</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(7) = VR00-VRCA</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(8) = VX00-VXCA</P>
+</B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">These residuals are valid in switch closed conditions. When the switch is open, residuals are:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">RNI(1) = -IROO</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(2) = -IXOO</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(3) = -IM00</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(4) = -QATT</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(5) = -QREA</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(6) = -VMCA</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(7) = -VRCA</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RNI(8) = -VXCA</P>
+</B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">where</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">BMOD = load susceptance</P>
+<P ALIGN="JUSTIFY">GMOD = load conductance</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In particular, for load susceptance we have the following expressions:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">BMOD = FB00*BNOM/OMAI for inductive loads</P>
+<P ALIGN="JUSTIFY">BMOD = FB00*BNOM*OMAI for capacitive loads</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">where</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">BNOM = load rated susceptance</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_AMME_G"></A>MODULE AMME CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">SUBROUTINE AMMEI2&#9;(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,<BR>
+</B>&#9;&#9;&#9;&#9;<B>IBL1,IBL2,IER,CNXYU,TOL)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE AMMEC1&#9;(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE AMMEJC&#9;(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE AMME&#9;(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE AMMEI3&#9;(IFO,IOB,DEBL)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE AMMEI4&#9;(IOB,MOD)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE AMMED1&#9;(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,<BR>
+</B>&#9;&#9;&#9;&#9;<B>IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_AMME_H"></A>MODULE AMME CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P></B></I></FONT></BODY>
+</HTML>

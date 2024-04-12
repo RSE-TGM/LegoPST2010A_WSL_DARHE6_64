@@ -1,0 +1,60 @@
+#!/bin/sh
+#
+#  Script:			run_make
+#  Instance:		5
+#  %version:		1 %
+#  Description:		
+#  %created_by:		lomgr %
+#  %date_created:	Mon Oct 21 14:13:49 1996 %
+echo "Shell provvisoria per la compilazione ricorsiva"
+if [ $# -eq 0 ]
+then
+        echo "inserire  flags tra apici"
+else
+OPTION=$1
+echo "Sto per compilare"
+echo "Flag usati: " $OPTION
+cd ./client_server 
+ccm make $OPTION -f Makefile.mk
+cd ..
+if [ "$OS" != "AIX" ]
+then
+	cd ./client_scada
+	ccm make $OPTION -f Makefile.mk
+	cd ..
+fi
+cd ./config
+ccm  make $OPTION -f config.mk
+if [ "$OS" != "AIX" ]
+then
+        ccm make $OPTION -f configs.mk
+fi
+cd ..
+cd ./draw
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd run_time
+ccm  make $OPTION -f run_time.mk
+if [ "$OS" != "AIX" ]
+then
+        ccm make $OPTION -f run_times.mk
+fi
+cd ..
+cd ./conv_legograf
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./forms
+ccm make $OPTION -f Makefile.mk
+cd ..
+cd ./regolazione
+ccm make $OPTION -f Makefile.mk
+cd ..
+
+if [ "$OS" != "AIX" ]
+then
+	cd ./supervisione
+	ccm make $OPTION -f Makefile.mk
+	cd ..
+fi
+fi
+

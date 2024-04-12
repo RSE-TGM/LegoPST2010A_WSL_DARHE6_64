@@ -1,0 +1,166 @@
+drand48, erand48, jrand48, lcong48, lrand48, mrand48, nrand48, seed48, or srand48 Subroutine
+
+
+
+Purpose
+
+Generate uniformly distributed pseudo-random number sequences.
+
+Library
+
+Standard C Library (libc.a)
+
+Syntax
+
+#include <stdlib.h>
+
+double drand48 (void)
+
+double erand48 (xsubi)
+unsigned short int xsubi[3];
+
+long int jrand48 (xsubi)
+unsigned short int xsubi[3];
+
+void lcong48 (Parameter)
+unsigned short int Parameter[7];
+
+long int lrand48 (void)
+
+long int mrand48 (void)
+
+long int nrand48 (xsubi)
+unsigned short int xsubi[3];
+
+unsigned short int *seed48 (Seed16v)
+unsigned short int Seed16v[3];
+
+void srand48 (SeedValue)
+long int SeedValue;
+
+Description
+
+Attention: Do not use the drand48, erand48, jrand48, lcong48, lrand48,
+mrand48, nrand48, seed48, or srand48 subroutine in a multithreaded
+environment. See the multithread alternatives in the drand48_r, erand48_r,
+jrand48_r, lcong48_r, lrand48_r, mrand48_r, nrand48_r, seed48_r, or
+srand48_r subroutine article.
+
+This family of subroutines generates pseudo-random numbers using the
+linear congruential algorithm and 48-bit integer arithmetic.
+
+The drand48 subroutine and the erand48 subroutine return positive
+double-precision floating-point values uniformly distributed over
+the interval [0.0, 1.0).
+
+The lrand48 subroutine and the nrand48 subroutine return positive
+long integers uniformly distributed over the interval [0,2**31).
+
+The mrand48 subroutine and the jrand48 subroutine return signed long
+integers uniformly distributed over the interval [-2**31, 2**31).
+
+The srand48 subroutine, seed48 subroutine, and lcong48 subroutine
+initialize the random-number generator. Programs must call one of
+them before calling the drand48, lrand48 or mrand48 subroutines. (Although
+it is not recommended, constant default initializer values are supplied
+if the drand48, lrand48 or mrand48 subroutines are called without
+first calling an initialization subroutine.) The erand48, nrand48,
+and jrand48 subroutines do not require that an initialization subroutine
+be called first.
+
+The previous value pointed to by the seed48 subroutine is stored in
+a 48-bit internal buffer, and a pointer to the buffer is returned
+by the seed48 subroutine. This pointer can be ignored if it is not
+needed, or it can be used to allow a program to restart from a given
+point at a later time. In this case, the pointer is accessed to retrieve
+and store the last value pointed to by the seed48 subroutine, and
+this value is then used to reinitialize, by means of the seed48 subroutine,
+when the program is restarted.
+
+All the subroutines work by generating a sequence of 48-bit integer
+values, x[i], according to the linear congruential formula:
+
+x[n+1] = (ax[n] + c)mod m, n is > =*0
+
+The parameter m = 248; hence 48-bit integer arithmetic is performed.
+Unless the lcong48 subroutine has been called, the multiplier value
+a and the addend value c are:
+
+a = 5DEECE66D base 16 = 273673163155 base 8
+
+c = B base 16 = 13 base 8
+
+Parameters
+
+xsubi	Specifies an array of three shorts, which, when concatenated
+together, form a 48-bit integer.
+
+SeedValue	Specifies the initialization value to begin randomization.
+Changing this value changes the randomization pattern.
+
+Seed16v	Specifies another seed value; an array of three unsigned shorts
+that form a 48-bit seed value.
+
+Parameter	Specifies an array of seven shorts, which specifies the
+initial xsubi value, the multiplier value a and the add-in value c.
+
+Return Values
+
+The value returned by the drand48, erand48, jrand48, lrand48, nrand48,
+and mrand48 subroutines is computed by first generating the next 48-bit
+x[i] in the sequence. Then the appropriate number of bits, according
+to the type of data item to be returned, are copied from the high-order
+(most significant) bits of x[i] and transformed into the returned
+value.
+
+The drand48, lrand48, and mrand48 subroutines store the last 48-bit
+x[i] generated into an internal buffer; this is why they must be
+initialized prior to being invoked.
+
+The erand48, jrand48, and nrand48 subroutines require the calling
+program to provide storage for the successive x[i] values in the
+array pointed to by the xsubi parameter. This is why these routines
+do not have to be initialized; the calling program places the desired
+initial value of x[i] into the array and pass it as a parameter.
+
+By using different parameters, the erand48, jrand48, and nrand48 subroutines
+allow separate modules of a large program to generate independent
+sequences of pseudo-random numbers. In other words, the sequence of
+numbers that one module generates does not depend upon how many times
+the subroutines are called by other modules.
+
+The lcong48 subroutine specifies the initial x[i] value, the multiplier
+value a, and the addend value c. The Parameter array elements Parameter
+[0-2] specify x[i], Parameter[3-5] specify the multiplier a, and
+Parameter[6] specifies the 16-bit addend c. After lcong48 has been
+called, a subsequent call to either the srand48 or seed48 subroutine
+restores the standard a and c specified before.
+
+The initializer subroutine seed48 sets the value of x[i] to the
+48-bit value specified in the array pointed to by the Seed16v parameter.
+In addition, seed48 returns a pointer to a 48-bit internal buffer
+that contains the previous value of x[i] that is used only by seed48.
+The returned pointer allows you to restart the pseudo-random sequence
+at a given point. Use the pointer to copy the previous x[i] value
+into a temporary array. Then call seed48 with a pointer to this array
+to resume processing where the original sequence stopped.
+
+The initializer subroutine srand48 sets the high-order 32 bits of
+x[i] to the 32 bits contained in its parameter. The low order 16
+bits of x[i] are set to the arbitrary value 330E16.
+
+Implementation Specifics
+
+These subroutines are part of Base Operating System (BOS) Runtime.
+
+Related Information
+
+The rand, srand subroutine,  random, srandom, initstate, or setstate
+subroutine.
+
+Subroutines Overview in AIX Version 4.1 General Programming Concepts:
+Writing and Debugging Programs.
+
+
+
+

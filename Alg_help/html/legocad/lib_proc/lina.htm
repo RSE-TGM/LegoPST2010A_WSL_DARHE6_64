@@ -1,0 +1,237 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MODULE LINA</TITLE>
+<META NAME="Template" CONTENT="C:\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY>
+
+<B><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_LINA_summ"></A>MODULE LINA&#9;CARD 0</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Summary</P>
+</B></I></FONT><FONT FACE="Arial, helvetica" SIZE=5><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_LINA_A"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">model generalities</U></FONT></A><FONT FACE="Arial, helvetica" SIZE=5>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_LINA_B"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">topological data</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_LINA_C"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">physical and geometrical data</U></FONT></A><FONT FACE="Arial, helvetica" SIZE=5>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_LINA_D"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module variables initialization</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_LINA_E"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">user's subprograms</U></FONT></A><FONT FACE="Arial, helvetica" SIZE=5>&nbsp;</P>
+</FONT><P ALIGN="JUSTIFY"><A HREF="#lg_libproc_LINA_F"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">residuals</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_LINA_G"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">module subprograms</U></FONT></A></P>
+<P ALIGN="JUSTIFY"><A HREF="#lg_libproc_LINA_H"><U><FONT FACE="Arial, helvetica" SIZE=5 COLOR="#0000ff">test cases</U></FONT></A></P>
+<B><FONT FACE="Arial, helvetica" SIZE=1><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_LINA_A"></A>MODULE LINA&#9;CARD A</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Model Generalities</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PI-LINE</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The LINA module simulates the operation of a three-phase line having adjustable length, acting on the KLIN variable.</P>
+<P ALIGN="JUSTIFY">The module employs the representation of a line phase with </FONT><FONT FACE="Symbol">p</FONT><FONT FACE="Arial, helvetica"> circuit Cross parameters consist of conductance equivalent to losses which are proportional to the square of voltage and capacitive susceptance of the line considered as a "capacitor".</P>
+<P ALIGN="JUSTIFY">The longitudinal impedence consists of the line total resistance and reactance.</P>
+<P ALIGN="JUSTIFY">The module can simulate a line where the wave propagation phenomenon is neglectable, that is all lines defined "short" ones.</P>
+<P ALIGN="JUSTIFY">As far as the LINA use is concerned, there is no particular warning.</P>
+<P ALIGN="JUSTIFY">The line output frequency (OMLU) can be used to determine the status of the switches of the line itself. In fact it is put equal to zero in the case one of the two switches is open.</P>
+<P ALIGN="JUSTIFY">Duly connecting the input-output frequencies of the transformer and line modules connected in cascade, the output frequency can be used as logic variable tied to the state of upstream supply (OMLU=0 &lt;--&gt; no upstream supply).</P>
+<P ALIGN="JUSTIFY">This applies only in case of radial network.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In the mathematical model adopted,the following hypothesis are assumed:</P>
+<P ALIGN="JUSTIFY">the dissymetry of the three phases due to the geometrical arrangement of conductors is neglected;</P>
+<P ALIGN="JUSTIFY">the wave propagation along the line is neglected, therefore it is assumed that the line is in synusoidal state for each integration time step (hypothesis "short lines"). </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">As a consequence of this last hypothesis, no load start up transient states can be detected. These last can be obtained entering the current state variables together with the voltage state variable applied to the line.</P>
+<P ALIGN="JUSTIFY">The equations describing the circuit equivalent to </FONT><FONT FACE="Symbol">p</FONT><FONT FACE="Arial, helvetica"> are used in the mathematical model of the line containing also the expressions of its losses.</P>
+<P ALIGN="JUSTIFY">Two internal switches are introduced in the line model through conditions on the equation system.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">RESIDUALS</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If the upstream switch and the downstream switch are closed, then:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">1.&#9;Equation describing the real current output from side 1, according to the real auxiliary current and to the real current obtained from the cross impedence.</P>
+<P ALIGN="JUSTIFY">2.&#9;Equation describing the imaginary current coming out from side 1, according to the imaginary auxiliary current and to the imaginary current obtained from the cross impedence.</P>
+<P ALIGN="JUSTIFY">3.&#9;Equation describing the real current output from side 2, according to the real auxiliary current and to the real current obtained from the cross impedence.</P>
+<P ALIGN="JUSTIFY">4.&#9;Equation describing the imaginary current coming out from side 2, according to the imaginary auxiliary current and to the imaginary current obtained from the cross impedence.</P>
+<P ALIGN="JUSTIFY">5.&#9;Equation required to introduce the real voltage side 1 at the line terminals, different from that of bus bars should the internal switch be open</P>
+<P ALIGN="JUSTIFY">6.&#9;Equation required to introduce the imaginary voltage side 1 at the line terminals, different from that of bus bars should the internal switch be open</P>
+<P ALIGN="JUSTIFY">7.&#9;Equation required to introduce the real voltage side 2 at the line terminals, different from that of bus bars should the internal switch be open</P>
+<P ALIGN="JUSTIFY">8.&#9;Equation required to introduce the imaginary voltage side 2 at the line terminals, different from that of bus bars should the internal switch be open</P>
+<P ALIGN="JUSTIFY">9.&#9;Equation required to introduce equality between the frequency of supply and output from the line in case both the internal switches are closed (note 1).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If the upstream switch is closed and the downstream switch is open:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">1.&#9;Equation describing the real current output from side 1, according to the real current obtained from the cross impedence.</P>
+<P ALIGN="JUSTIFY">2.&#9;Equation describing the imaginary current coming out from side 1, according to the imaginary current obtained from the cross impedence.</P>
+<P ALIGN="JUSTIFY">3.&#9;Equation nullifying the real current coming out from side 2.</P>
+<P ALIGN="JUSTIFY">4.&#9;Equation nullifying the imaginary current coming out from side 2.</P>
+<P ALIGN="JUSTIFY">5.&#9;Equation required to introduce the real voltage side 1 at the line terminals, different from that of bus bars should the internal switch be open</P>
+<P ALIGN="JUSTIFY">6.&#9;Equation required to introduce the imaginary voltage side 1 at the line terminals, different from that of bus bars should the internal switch be open</P>
+<P ALIGN="JUSTIFY">7.&#9;Equation required to introduce the real voltage side 2 at the line terminals, different from that of bus bars should the internal switch be open. In this case the real voltage side 2 is equal to the real voltage side 1.</P>
+<P ALIGN="JUSTIFY">8.&#9;Equation required to introduce the imaginary voltage side 2 at the line terminals, different from that of bus bars should the internal switch be open. In this case the imaginary voltage side 2 is equal to the imaginary voltage side 1.</P>
+<P ALIGN="JUSTIFY">9.&#9;Equation required to nullify the output frequency from the line being a switch open (note 1).&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">If the upstream switch is open and the downstream switch is closed:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">1.&#9;Equation nullifying the real current coming out from side 1.</P>
+<P ALIGN="JUSTIFY">2.&#9;Equation nullifying the imaginary current coming out from side 1.</P>
+<P ALIGN="JUSTIFY">3.&#9;Equation describing the real current coming out from side 2, according to the real current obtained from the cross impedence.</P>
+<P ALIGN="JUSTIFY">4.&#9;Equation desribing the imaginary current coming out from side 2, according to the imaginary current obtained from the cross impedence.</P>
+<P ALIGN="JUSTIFY">5.&#9;Equation required to introduce the real voltage side 1 at the line terminals, different from that of bus bars should the internal switch be open. In this case the real voltage side 1 is equal to the real voltage side 2. In this case the imaginary voltage side 1 is equal to the imaginary voltage side 2.</P>
+<P ALIGN="JUSTIFY">6.&#9;Equation required to introduce the imaginary voltage side 1 at the line terminals, different from that of bus bars should the internal switch be open.</P>
+<P ALIGN="JUSTIFY">7.&#9;Equation required to introduce the real voltage side 2 at the line terminals, different from that of bus bars should the internal switch be open.</P>
+<P ALIGN="JUSTIFY">8.&#9;Equation required to introduce the imaginary voltage side 2 at the line terminals, different from that of bus bars should the internal switch be open.</P>
+<P ALIGN="JUSTIFY">9.&#9;Equation required to nullify the output frequency from the line being a switch open (note 1).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Otherwise if the upstream switch is open and the downstream switch is open, then:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">1.&#9;Equation nullifying the real current coming out from side 1.</P>
+<P ALIGN="JUSTIFY">2.&#9;Equation nullifying the imaginary current coming out from side 1.</P>
+<P ALIGN="JUSTIFY">3.&#9;Equation nullifying the real current coming out from side 2.</P>
+<P ALIGN="JUSTIFY">4.&#9;Equation desribing the imaginary current coming out from side 2.</P>
+<P ALIGN="JUSTIFY">5.&#9;Equation nullifying the real voltage side 1 at the line terminals, side 1.</P>
+<P ALIGN="JUSTIFY">6.&#9;Equation nullifying the imaginary voltage at the line terminals, side 1.</P>
+<P ALIGN="JUSTIFY">7.&#9;Equation nullifying the real voltage at the line terminals side 2.</P>
+<P ALIGN="JUSTIFY">8.&#9;Equation nullifying the imaginary voltage at the line terminals, side 2.</P>
+<P ALIGN="JUSTIFY">9.&#9;Equation required to nullify the output frequency from the line being both the switches open (note 1).</P>
+<P ALIGN="JUSTIFY">10.&#9;Equation determining the drop extent of voltage between lines on the line.</P>
+<P ALIGN="JUSTIFY">11.&#9;Equation determining the active power coming out from side 1 of the line.</P>
+<P ALIGN="JUSTIFY">12.&#9;Equation determining the reactive power coming out from side 1 of the line.</P>
+<P ALIGN="JUSTIFY">13.&#9;Equation determining the active power coming out from side 2 of the line.</P>
+<P ALIGN="JUSTIFY">14.&#9;Equation determining the reactive power coming out from side 2 of the line.</P>
+<P ALIGN="JUSTIFY">&nbsp;&nbsp;</P>
+<P ALIGN="JUSTIFY">Note 1</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">The line output frequency (OMLU) can be used to determine the state of the line switches. In fact it is placed equal zero should one of the two switches be open. Duly connecting the input-output frequencies of line and transformer modules connected in cascade, the output frequency can be used as logic variable tied to the upstream supply state (OMLU=0 &lt;--&gt; no upstream supply).</P>
+<P ALIGN="JUSTIFY">This applies in case of radial network only.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_LINA_B"></A>MODULE LINA&#9;CARD B</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Topological data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">INPUT OUTPUT SCHEME OF THE LINA MODULE</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;<IMG SRC="Image1295.gif" WIDTH=382 HEIGHT=370></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="CENTER">PHYSICAL MEANING OF THE MODULE INPUT- OUTPUT VARIABLES</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[V]&#9;UR01&#9;supply real phase voltage side 1</P>
+<P ALIGN="JUSTIFY">[V]&#9;UX02&#9;supply imaginary phase voltage side 1</P>
+<P ALIGN="JUSTIFY">[V]&#9;UR02&#9;supply real phase voltage side 2</P>
+<P ALIGN="JUSTIFY">[V]&#9;UX02&#9;supply real phase voltage side 2</P>
+<P ALIGN="JUSTIFY">[ ]&#9;STL1&#9;switch state side 1 (1 = on)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;STL2&#9;switch state side 2 (1 = on)</P>
+<P ALIGN="JUSTIFY">[ ]&#9;KLIN&#9;multiplying parameter for line parameters. If KLIN=1 then the line length is not expressely indicated among data, it is the one corresponding to electrical parameters. On the contrary, if KLIN=n then the line length is n times the previous one. If electrical parameters are entered for length unit, then KLIN represents the length of the line</P>
+<P ALIGN="JUSTIFY">[rad/s]&#9;OMLI&#9;line input frequency</P>
+<P ALIGN="JUSTIFY">[A]&#9;IR01&#9;real current coming out from side 1</P>
+<P ALIGN="JUSTIFY">[A]&#9;IX01&#9;imaginary current coming out from side 1</P>
+<P ALIGN="JUSTIFY">[A]&#9;IR02&#9;real current coming out from side 2</P>
+<P ALIGN="JUSTIFY">[A]&#9;IX02&#9;imaginary current coming out from side 2</P>
+<P ALIGN="JUSTIFY">[V]&#9;URL1&#9;real phase voltage at terminals side 1</P>
+<P ALIGN="JUSTIFY">[V]&#9;UXL1&#9;imaginary phase voltage at terminals side 1</P>
+<P ALIGN="JUSTIFY">[V]&#9;URL2&#9;real phase voltage at terminals side 2</P>
+<P ALIGN="JUSTIFY">[V]&#9;UXL2&#9;imaginary phase voltage at terminals side 2</P>
+<P ALIGN="JUSTIFY">[V]&#9;UULM&#9;extent of voltage between lines drop on the line</P>
+<P ALIGN="JUSTIFY">[W]&#9;QP01&#9;active power coming out from side 1</P>
+<P ALIGN="JUSTIFY">[VAR]&#9;QQ01&#9;reactive power coming out from side 1</P>
+<P ALIGN="JUSTIFY">[W]&#9;QP02&#9;active power coming out from side 2</P>
+<P ALIGN="JUSTIFY">[VAR]&#9;QQ02 &#9;reactive power coming out from side 2</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_LINA_C"></A>MODULE LINA&#9;CARD C</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Physical and Geometrical Data</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">In addition to the initial values of input and output variables of the LINA module, whose meaning has been defined in card B2, the user must assign the following set of data to complete the input required by the module:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">[ohm]&#9;&#9;RL&#9;resistance of long line L</P>
+<P ALIGN="JUSTIFY">[ohm]&#9;&#9;XL&#9;reactance of long line at rated frequency</P>
+<P ALIGN="JUSTIFY">[1/ohm]&#9;GTR&#9;conductance of the long line L</P>
+<P ALIGN="JUSTIFY">[1/ohm]&#9;BTR&#9;capacitive susceptance of the long line L at rated frequency</P>
+<P ALIGN="JUSTIFY">[W]&#9;&#9;QBASE&#9;basic power</P>
+<P ALIGN="JUSTIFY">[V]&#9;&#9;VBASE&#9;basic voltage = rated voltage between lines</P>
+<P ALIGN="JUSTIFY">[rad/s]&#9;&#9;OMBA&#9;basic frequency</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=4><P>&nbsp;</P>
+<P ALIGN="CENTER"><A NAME="lg_libproc_LINA_D"></A>MODULE LINA&#9;CARD D</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module Variables Initialization</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">For the calculation of the steady state of the model containing only the LINA module all the module inputs must be known except for an input voltage, for VX01, and an output voltage VR02, and make known the real current side 1 (IR01) and the imaginary current side 2 (IX02). Attention shall be paid to the sign of currents in relation to the sign of the real voltage set, since the generator set conventional coding has been selected for currents. It is not recommended to make known the variables QP01,QQ01,QP02,QP02,VVLM clearing some inputs of the model when you are distant from the desired steady state condition.</P>
+<P ALIGN="JUSTIFY">It is advised in the first phase of steady state calculation to set the variable KLIN=0, that is have a line degenerating in one point to be then gradually increased to obtained the desired length.</P>
+<P ALIGN="JUSTIFY">In the case the energy flow runs from side 1 towards side 2, then the active and reactive power of side 1 (QP01,QQ01) are negative while active powers of side 2 are positive (QP02,QQ02). This applies in case the load downstream is an inductive one, in the contrary instance reactive powers have signe opposite to the above mentioned one.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_LINA_E"></A>MODULE LINA&#9;CARD E</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">User's Subprograms</P>
+</B></I><P>&nbsp;</P>
+<B><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_LINA_F"></A>MODULE LINA&#9;CARD F</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Residuals</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Equations forming the module mathematical model, given in card A, provide the following residuals:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=2><P ALIGN="JUSTIFY">IF (STL1 .AND. STL2) THEN</P>
+<P ALIGN="JUSTIFY">RNI(1) = IR01+IRAU+(VR01*GL-VX01*BCL)</P>
+<P ALIGN="JUSTIFY">RNI(2) = IX01+IXAU+(VR01*BCL+VX01*GL)</P>
+<P ALIGN="JUSTIFY">RNI(3) = IR02-IRAU+(VR02*GL-VX02*BCL)</P>
+<P ALIGN="JUSTIFY">RNI(4) = IX02-IXAU+(VR02*BCL+VX02*GL)</P>
+<P ALIGN="JUSTIFY">RNI(5) = VRL1 - VR01 </P>
+<P ALIGN="JUSTIFY">RNI(6) = VXL1 - VX01 </P>
+<P ALIGN="JUSTIFY">RNI(7) = VRL2 - VR02 </P>
+<P ALIGN="JUSTIFY">RNI(8) = VXL2 - VX02 </P>
+<P ALIGN="JUSTIFY">RNI(9) = OMLU - OMLI </P>
+<P ALIGN="JUSTIFY">ELSE IF (STL1 .AND. .NOT. STL2) THEN</P>
+<P ALIGN="JUSTIFY">RNI(1) = IR01+2.*(VR01*GL-VX01*BCL)</P>
+<P ALIGN="JUSTIFY">RNI(2) = IX01+2.*(VR01*BCL+VX01*GL)</P>
+<P ALIGN="JUSTIFY">RNI(3) = IR02</P>
+<P ALIGN="JUSTIFY">RNI(4) = IX02</P>
+<P ALIGN="JUSTIFY">RNI(5) = VRL1 - VR01 </P>
+<P ALIGN="JUSTIFY">RNI(6) = VXL1 - VX01 </P>
+<P ALIGN="JUSTIFY">RNI(7) = VRL2 - VR01 </P>
+<P ALIGN="JUSTIFY">RNI(8) = VXL2 - VX01 </P>
+<P ALIGN="JUSTIFY">RNI(9) = OMLU </P>
+<P ALIGN="JUSTIFY">ELSE IF(.NOT. STL1 .AND. STL2) THEN</P>
+<P ALIGN="JUSTIFY">RNI(1) = IR01</P>
+<P ALIGN="JUSTIFY">RNI(2) = IX01</P>
+<P ALIGN="JUSTIFY">RNI(3) = IR02+2.*(VR02*GL-VX02*BCL)</P>
+<P ALIGN="JUSTIFY">RNI(4) = IX02+2.*(VR02*BCL+VX02*GL)</P>
+<P ALIGN="JUSTIFY">RNI(5) = VRL1 - VR02 </P>
+<P ALIGN="JUSTIFY">RNI(6) = VXL1 - VX02 </P>
+<P ALIGN="JUSTIFY">RNI(7) = VRL2 - VR02 </P>
+<P ALIGN="JUSTIFY">RNI(8) = VXL2 - VX02 </P>
+<P ALIGN="JUSTIFY">RNI(9) = OMLU </P>
+<P ALIGN="JUSTIFY">ELSE</P>
+<P ALIGN="JUSTIFY">RNI(1) = IR01 </P>
+<P ALIGN="JUSTIFY">RNI(2) = IX01</P>
+<P ALIGN="JUSTIFY">RNI(3) = IR02</P>
+<P ALIGN="JUSTIFY">RNI(4) = IX02</P>
+<P ALIGN="JUSTIFY">RNI(5) = VRL1 </P>
+<P ALIGN="JUSTIFY">RNI(6) = VXL1 </P>
+<P ALIGN="JUSTIFY">RNI(7) = VRL2 </P>
+<P ALIGN="JUSTIFY">RNI(8) = VXL2 </P>
+<P ALIGN="JUSTIFY">RNI(9) = OMLU </P>
+<P ALIGN="JUSTIFY">ENDIF</P>
+<P ALIGN="JUSTIFY">RNI(10) = VVLM-SQRT(3.*((VR01-VR02)**2.+(VX01-VX02)**2.)) </P>
+<P ALIGN="JUSTIFY">RNI(11) = QP01-VR01*IR01-VX01*IX01</P>
+<P ALIGN="JUSTIFY">RNI(12) = QQ01-VX01*IR01+VR01*IX01</P>
+<P ALIGN="JUSTIFY">RNI(13) = QP02-VR02*IR02-VX02*IX02</P>
+<P ALIGN="JUSTIFY">RNI(14) = QQ02-VX02*IR02+VR02*IX02</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_LINA_G"></A>MODULE LINA&#9;CARD G</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Module subprograms</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">SUBROUTINE LINAI2&#9;(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,IBL1,IBL2,</P>
+<P ALIGN="JUSTIFY">IER,CNXYU,TOL)&nbsp;</P>
+<P ALIGN="JUSTIFY">SUBROUTINE LINAC1&#9;(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE LINAJC&#9;(AJAC,MX5,IXYU,XYU,DATI,RNI,IBL1,IBL2)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE LINA&#9;&#9;(IFUN,IXYU,XYU,IPD,DATI,RNI)</P>
+<P ALIGN="JUSTIFY">SUBROUTINE LINAI3&#9;(IFO,IOB,DEBL)</P>
+<P ALIGN="JUSTIFY">&nbsp;SUBROUTINE LINAI4&#9;(IOB,MOD)</P>
+<P ALIGN="JUSTIFY">&nbsp;SUBROUTINE LINAD1&#9;(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,XYU,</P>
+<P ALIGN="JUSTIFY">IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial, helvetica" SIZE=5><P>&nbsp;</P>
+</FONT><FONT FACE="Arial, helvetica" SIZE=4><P ALIGN="CENTER"><A NAME="lg_libproc_LINA_H"></A>MODULE LINA&#9;CARD H</P>
+</FONT><I><FONT FACE="Arial, helvetica"><P ALIGN="CENTER">Test cases</P>
+</B></I><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Reference test cases relevant to this module are in the model library under the tag:</P>
+<P ALIGN="CENTER">"LINA"</P></FONT></BODY>
+</HTML>

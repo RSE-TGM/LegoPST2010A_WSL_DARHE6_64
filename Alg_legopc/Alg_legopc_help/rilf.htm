@@ -1,0 +1,298 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title></title>
+<meta name="Microsoft Theme" content="copy_of_industrial 011, default">
+</head>
+
+<body background="_themes/copy_of_industrial/lego_bg_studs.gif" bgcolor="#FFFFFF" text="#000000" link="#3366CC" vlink="#666666" alink="#996600"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<p ALIGN="left"><b><font SIZE="4"><a name="Top"></a></font></b>
+</p>
+<p ALIGN="left">&nbsp;
+</p>
+<!--mstheme--></font><table border="1" width="100%" bgcolor="#FFCC66" bordercolordark="#000000" bordercolorlight="#666666">
+  <tr>
+    <td width="100%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="center"><b><font SIZE="4">MODULE RILF</font></b>
+    <!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+<b><font SIZE="4">
+<i>
+<p ALIGN="CENTER">Summary</p>
+</i></font></b>
+<blockquote>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card A">model
+  generalities</a> </p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card B">topological
+  data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card C">physical
+  and geometrical data</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card D">module
+  variables initialization</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card E">user's
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card F">residuals</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card G">module
+  subprograms</a></p>
+  <p ALIGN="JUSTIFY"><font FACE="Symbol">·</font> <a href="#card H">test cases</a></p>
+</blockquote>
+<blockquote>
+  <p ALIGN="JUSTIFY">&nbsp;</p>
+</blockquote>
+<p ALIGN="left"><font SIZE="4"><b><a name="card A"></a></b></font> </p>
+<p ALIGN="left">&nbsp; </p>
+<b><font SIZE="4">
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RILF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD A</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><i>
+<p ALIGN="CENTER"><font face="Arial">Model Generalities</font></p>
+</i>
+</font></b>
+<p ALIGN="CENTER"><font face="Arial">VOLTAGE REGULATOR</font></p>
+<p align="left">&nbsp;</p>
+<p align="left"><font face="Arial">The module RILF calculates the value of
+angular velocity in a node, once provided the angular velocity of the reference
+generator and the node voltage (real and imaginary parts).</font></p>
+<p align="left"><font face="Arial">Indeed, the angular velocity in a node (OMEGAn)
+is equal to the reference one (OMEGAr) plus DELTOM and DELTOM is tied to the
+derivatives of the real and imaginary parts of node voltage.</font></p>
+<p align="left"><font face="Arial">If Vm is the module, Vr the real part, Vx the
+imaginary part of the node voltage:</font></p>
+<p align="left"><font FACE="Courier New" SIZE="2"><span lang="IT"><o:p>
+</o:p>
+</span></p>
+<p class="MsoPlainText"><span lang="IT"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Vr<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>dVx<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>Vx<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>dVr</span></p>
+<p class="MsoPlainText"><span lang="IT"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>OMEGAn = OMEGAr + DELTOM = OMEGAr + ----- ---- - ----- ----</span></p>
+<p class="MsoPlainText"><span lang="IT"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Vm**2<span style="mso-spacerun: yes">&nbsp; </span>dt<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>Vm**2<span style="mso-spacerun: yes">&nbsp; </span>dt</span></p>
+</font>
+<p align="left">&nbsp;</p>
+<p align="left"><font face="Arial">Approximating the derivatives with
+incremental ratios:</font><font FACE="Courier New" SIZE="2"><span lang="IT"><o:p>
+</o:p>
+</span></p>
+<p class="MsoPlainText"><span lang="IT"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Vr<span style="mso-spacerun: yes">&nbsp;&nbsp;
+</span>DVx<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>Vx<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>DVr</span></p>
+<p class="MsoPlainText"><span lang="IT"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+</span>OMEGAn = OMEGAr + DELTOM =~ OMEGAr + ----- ---- - ----- ----</span></p>
+<p class="MsoPlainText"><span lang="IT"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Vm**2<span style="mso-spacerun: yes">&nbsp; </span>Dt<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;
+</span>Vm**2<span style="mso-spacerun: yes">&nbsp; </span>Dt</span></p>
+</font><font SIZE="3">
+<p>&nbsp;</p>
+</font>
+<p><font face="Arial">If the node tension is zero, also the angular velocity is
+zero.</font></p>
+<p><font face="Arial">In steady state DELTOM = 0 and OMEGAn = OMEGAr</font></p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><b><font SIZE="4"><a name="card B"></a> </p>
+<!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RILF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD B</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font></b>
+<font FACE="Arial">
+          </font>
+<b><font SIZE="4"><i>
+<p ALIGN="CENTER"><font face="Arial">Topological data</font></p>
+</i></font></b>
+<p ALIGN="CENTER"><font face="Arial">INPUT-OUTPUT SCHEME</font></p>
+<p ALIGN="JUSTIFY">&nbsp;</p>
+<p ALIGN="CENTER"><img SRC="images/Image767.gif" WIDTH="398" HEIGHT="263"></p>
+<p ALIGN="CENTER">&nbsp;</p>
+<p ALIGN="CENTER"><font face="Arial">PHYSICAL MEANING OF MODULE INPUT-OUTPUT
+VARIABLES</font></p>
+<font FACE="Arial">
+<!--mstheme--></font><table border="0" width="100%" height="96">
+  <tr>
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">OMNO</font><!--mstheme--></font></td>
+    <td width="72%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">node angular
+      velocity</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">UR00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">phase real
+      component of node voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">UX00</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">phase
+      imaginary component of node voltage</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">OMGE</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">angular
+      velocity of reference node</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+</font>
+<font FACE="Arial" SIZE="4">
+<b>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card C"></a></font>
+</p>
+            <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RILF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD C</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+</b>
+          </font>
+<font SIZE="4"><b><i>
+<p ALIGN="CENTER"><font face="Arial">Physical and Geometrical Data</font></p>
+</i></b><!--mstheme--></font><table border="0" width="100%" height="46">
+  <tr>
+    <font FACE="Arial">
+    <td width="10%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">[V]</font><!--mstheme--></font></td>
+    <td width="18%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">VBASE&nbsp;</font><!--mstheme--></font></td>
+    <td width="72%" height="1"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">system chained
+      base voltage in p.u.</font><!--mstheme--></font></td>
+</font>
+  </tr>
+  <tr>
+    <font FACE="Arial">
+    <td width="10%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">[rad/s]</font><!--mstheme--></font></td>
+    <td width="18%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">OMBA</font><!--mstheme--></font></td>
+    <td width="72%" height="20"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><font FACE="Courier New" SIZE="2">system base
+      angular velocity in p.u.</font><!--mstheme--></font></td>
+</font>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card D"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RILF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD D</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font><font SIZE="4"><i>
+<p ALIGN="CENTER"><font face="Arial">Module Variables Initialization</font></p>
+</i></font></b>
+<p align="left"><font face="Arial">To initialize the RILF module variables no
+particular prescription is required.</font></p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card E"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RILF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD E&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+          </font></b>
+<font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font SIZE="4"><i>
+<p ALIGN="CENTER"><font face="Arial">User's Subprograms</font></p>
+</i></font></b>
+<p align="left"><font face="Arial">RILF doesn’t prescribe any FORAUS
+subroutine.</font></p>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card F"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RILF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD F&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font SIZE="4"><i>
+<p ALIGN="CENTER"><font face="Arial">Residuals</font></p>
+</i></font></b><font FACE="Courier New" SIZE="2">
+<p align="left">&nbsp;</p>
+<p align="left">Steady state:</p>
+<p align="left">&nbsp;&nbsp;&nbsp; RNI(1) = OMNO-OMGE</p>
+<p align="left">&nbsp;</p>
+<p align="left">In transients:</p>
+<p align="left">&nbsp;&nbsp;&nbsp; If node voltage is negligible:</p>
+<p align="left">&nbsp;&nbsp;&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp; <font FACE="Courier New" SIZE="2">RNI(1)
+= OMNO</p>
+<p align="left">&nbsp;&nbsp;&nbsp; Else:</p>
+<p align="left">&nbsp;&nbsp;&nbsp; RNI(1)=OMNO*OMBA-OMGE*OMBA-(-UX00*(UR00-UR00P)+UR00*(UX00-UX00P))/M1</p>
+<p align="left">&nbsp;&nbsp;&nbsp; where</p>
+<p align="left">&nbsp;&nbsp;&nbsp; M1=(UR00**2.+UX00**2.)*DTINT</p>
+</font>
+<b><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="left"><font SIZE="4"><a name="card G"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RILF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD G&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font FACE="Courier New" SIZE="2">
+        </font></b><font FACE="Tms Rmn" SIZE="1">
+        </font>
+<b><font SIZE="4"><i>
+<p ALIGN="CENTER"><font face="Arial">Module subprograms</font></p>
+</i></font><font FACE="Courier New" SIZE="3">
+<p>&nbsp;</p>
+<p>SUBROUTINE RILFI2(IFUN,VAR,MX1,IV1,IV2,XYU,DATI,ID1,ID2,</p>
+<p>$ IBL1,IBL2,IER,CNXYU,TOL)</p>
+<p>SUBROUTINE RILFI3(IFO,IOB,DEBL)</p>
+<p>SUBROUTINE RILFI4(IOB,MOD)</p>
+<p>SUBROUTINE RILFC1(IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</p>
+<p>SUBROUTINE RILFJC (IFUN,AJAC,MX5,IXYU,XYU,IPD,DATI,RNI,IBL1,IBL2)</p>
+<p>SUBROUTINE RILF (IFUN,IXYU,XYU,IPD,DATI,RNI)</p>
+<p>SUBROUTINE RILFD1(BLOCCO,NEQUAZ,NSTATI,NUSCIT,NINGRE,SYMVAR,</p>
+<p>$ XYU,IXYU,DATI,IPD,SIGNEQ,UNITEQ,COSNOR,ITOPVA,MXT)</p>
+</font><font FACE="Arial" SIZE="4">
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<p ALIGN="JUSTIFY"><font SIZE="4"><a name="card H"></a></font>
+</p>
+        <font SIZE="4"><!--mstheme--></font><table border="0" width="100%" bgcolor="#33CCCC">
+  <tr>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"><b><font SIZE="4">MODULE RILF</font></b><!--mstheme--></font></td>
+    <td width="50%"><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica">
+      <p align="right"><b><font SIZE="4">CARD H&nbsp;</font></b><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Trebuchet MS, Arial, Helvetica"></font>
+        </font><font SIZE="4"><i>
+<p ALIGN="CENTER"><font face="Arial">Test cases</font></p>
+</i></font></b>
+<p align="left"><font face="Arial">Reference test cases related to this module
+aren’t yet available.</font></p>
+<p ALIGN="center"><a href="#Top"><img border="0" src="images/adiv.h1.gif" width="48" height="20"></a></p>
+<!--mstheme--></font></body>
+
+</html>

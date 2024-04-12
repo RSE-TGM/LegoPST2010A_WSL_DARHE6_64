@@ -1,0 +1,43 @@
+SERA_3                                                                          
+SERA                                                                            
+SERA - Gas manifold (3 inputs, 2 outputs)                                       
+                                                                                
+NSTAT = 3
+NUSCI = 0
+NINGR =12
+ 
+NCONF = 1
+ 
+PSER      --US-- AIR/GAS PRESSURE IN THE RESERVOIR                              
+TMET      --US-- TEMPERATURE OF THE RESERVOIR METAL WALL                        
+TSER      --US-- AIR/GAS TEMPERATURE IN THE RESERVOIR                           
+WI_1      --IN-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  1                     
+TI_1      --IN-- AIR/GAS TEMPERATURE IN INLET PIPE N.  1                        
+WI_2      --IN-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  2                     
+TI_2      --IN-- AIR/GAS TEMPERATURE IN INLET PIPE N.  2                        
+WI_3      --IN-- AIR/GAS FLOW RATE THROUGH INLET PIPE N.  3                     
+TI_3      --IN-- AIR/GAS TEMPERATURE IN INLET PIPE N.  3                        
+WU_1      --IN-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  1                    
+TU_1      --IN-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  1 (INV. FLOW)           
+WU_2      --IN-- AIR/GAS FLOW RATE THROUGH OUTLET PIPE N.  2                    
+TU_2      --IN-- AIR/GAS TEMPERATURE IN OUTLET PIPE N.  2 (INV. FLOW)           
+TEST      --IN-- EXTERNAL TEMPERATURE (AMBIENT)                                 
+XCSE      --IN-- THERMAL EXTERNAL EXCHANGING COEFF.                             
+==============================                                                  
+EOF                                                                             
+5
+t1 4
+FlueGas input
+WI_2 PSER TI_2 TSER ____ ____ ____ ____
+t2 4
+FlueGas input
+WI_3 PSER TI_3 TSER ____ ____ ____ ____
+t0 4
+FlueGas input
+WI_1 PSER TI_1 TSER ____ ____ ____ ____
+t4 5
+FlueGas output
+WU_2 PSER TSER TU_2 ____ ____ ____ ____
+t3 5
+FlueGas output
+WU_1 PSER TSER TU_1 ____ ____ ____ ____

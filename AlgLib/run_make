@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+#  Script:			run_make
+#  Instance:		2
+#  %version:		1 %
+#  Description:		
+#  %created_by:		famgr %
+#  %date_created:	Tue Oct 15 15:49:02 1996 %
+echo "Shell provvisoria per la compilazione ricorsiva"
+if [ $# -eq 0 ]
+then 
+	echo "inserire  flags tra apici"
+else
+OPTION=$1
+echo "Sto per compilare"
+echo "Flag usati: " $OPTION
+cd ./libutilx
+ccm make $OPTION -f Makefile.mk 
+cd ..
+cd ./libutil
+ccm make $OPTION -f Makefile.mk 
+cd ..
+cd ./Rt
+ccm make $OPTION -f Makefile.mk 
+cd ..
+cd ./libcom
+ccm make $OPTION -f Makefile.mk 
+cd ..
+cd ./libsim
+ccm make $OPTION -f libsim.mk
+ccm make $OPTION -f libsims.mk
+cd ..
+cd ./libipc
+ccm make $OPTION -f Makefile.mk 
+cd ..
+cd ./libnet
+ccm make $OPTION -f Makefile.mk 
+cd ..
+cd ./libwidget
+ccm make $OPTION -f Makefile.mk 
+cd ..
+cd ./libdispatcher
+ccm make $OPTION -f Makefile.mk 
+cd ..
+cd ./libmanovra
+ccm make $OPTION -f Makefile.mk
+cd ..
+fi

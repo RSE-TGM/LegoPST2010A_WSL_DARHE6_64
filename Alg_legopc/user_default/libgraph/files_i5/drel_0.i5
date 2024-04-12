@@ -1,0 +1,51 @@
+DREL
+
+DREL - Electrical signals branch                                                
+3
+1
+
+t0
+UMOD FASE QATT QREA IFIL ____ ____ ____ ____ ____ 
+1 1 1 1 1 0 0 0 0 0 
+t2
+UMD1 FAS1 QAT1 QRE1 IFI1 ____ ____ ____ ____ ____ 
+1 1 1 1 1 0 0 0 0 0 
+t1
+VMD2 FAS2 QAT2 QRE2 IFI2 ____ ____ ____ ____ ____ 
+1 1 1 1 1 0 0 0 0 0 
+
+0
+10
+5
+
+UMD1 UA
+Voltage                                                        
+FAS1 UA
+Voltage                                                        
+QAT1 UA
+Active                                                         
+QRE1 UA
+Reactive                                                       
+IFI1 UA
+Field                                                          
+VMD2 UA
+Voltage                                                        
+FAS2 UA
+Voltage                                                        
+QAT2 UA
+Active                                                         
+QRE2 UA
+Reactive                                                       
+IFI2 UA
+Field                                                          
+UMOD IN
+Voltage                                                        
+FASE IN
+Volktage                                                       
+QATT IN
+Active                                                         
+QREA IN
+Reactive                                                       
+IFIL IN
+Field                                                          
+

@@ -1,0 +1,19 @@
+****
+BRUJ      BLOCCO (BAU1) - BRUJ - Bruciatore di postcombustione cal
+****
+PPAUX
+****
+BRUJBAU1  BL.-BAU1- **** MODULO BRUJ - BRUJ - Bruciatore di postcombustione cal
+WFUMBAU1  --UA-- Portata fumi in uscita
+TFUMBAU1  --UA-- Temperatura fumi in uscita
+WFINBAU1  --IN-- Portata fumi in ingresso
+TFINBAU1  --IN-- Temperatura fumi in ingresso
+WFUEBAU1  --IN-- Portata combustibile
+HFUEBAU1  --IN-- Potere calorifico inferiore
+****
+****      >>>>>>INGRESSI DI TUTTI I MODULI<<<<<<
+WFINBAU1  --IN-- Portata fumi in ingresso
+TFINBAU1  --IN-- Temperatura fumi in ingresso
+WFUEBAU1  --IN-- Portata combustibile
+HFUEBAU1  --IN-- Potere calorifico inferiore
+****

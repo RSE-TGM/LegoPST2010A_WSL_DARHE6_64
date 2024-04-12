@@ -1,0 +1,364 @@
+# this file created with LEGOPHI rel. 0.2
+800 600
+sera_0
+e
+CANN
+782.0 184.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_2
+n
+CLAN
+831.0 401.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_3
+n
+CLTG
+704.0 554.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_2
+n
+CMSC
+529.0 179.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_2
+n
+CSTO
+307.0 159.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+CTB1
+205.0 292.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+CTB2
+459.0 293.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+CTB3
+213.0 356.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+CTB4
+481.0 356.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+CTB5
+204.0 442.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_0
+n
+CTB6
+479.0 440.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+PILO
+952.0 483.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+PREM
+908.0 622.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+SCAN
+749.0 421.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+sera_1
+n
+STOR
+66.0 139.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubh_0
+n
+TUB1
+79.0 292.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubh_0
+n
+TUB2
+335.0 294.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubh_0
+n
+TUB3
+80.0 357.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubh_0
+n
+TUB4
+344.0 357.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubh_0
+n
+TUB5
+78.0 443.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+tubh_0
+n
+TUB6
+348.0 441.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+e
+VCAN
+782.0 302.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+VPRE
+582.0 441.0
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+VSTO
+418.0 159.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+VSTP
+191.0 139.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+VTGA
+909.0 553.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+vain_0
+n
+VVEN
+584.0 66.999998
+D:/LegoPc/Lavoro/Libgraph/Libraries/Airgas
+****
+sera_0
+CANN
+port1
+busy port3 VCAN
+port0
+free
+++++
+sera_2
+CLAN
+port0
+busy port4 SCAN
+port1
+busy port4 VCAN
+port2
+busy port3 PILO
+port3
+free
+++++
+sera_3
+CLTG
+port0
+busy port4 VPRE
+port1
+busy port3 SCAN
+port2
+busy port3 VTGA
+port3
+busy port3 PREM
+++++
+sera_2
+CMSC
+port0
+free
+port1
+busy port4 VSTO
+port2
+busy port1 TUB1
+port3
+busy port3 VVEN
+++++
+sera_2
+CSTO
+port0
+free
+port1
+busy port4 VSTP
+port2
+busy port3 VSTO
+port3
+free
+++++
+sera_0
+CTB1
+port1
+busy port1 TUB2
+port0
+busy port2 TUB1
+++++
+sera_0
+CTB2
+port1
+busy port1 TUB3
+port0
+busy port2 TUB2
+++++
+sera_0
+CTB3
+port1
+busy port1 TUB4
+port0
+busy port2 TUB3
+++++
+sera_0
+CTB4
+port1
+busy port1 TUB5
+port0
+busy port2 TUB4
+++++
+sera_0
+CTB5
+port1
+busy port1 TUB6
+port0
+busy port2 TUB5
+++++
+sera_0
+CTB6
+port1
+busy port3 VPRE
+port0
+busy port2 TUB6
+++++
+vain_0
+PILO
+port2
+free
+port3
+busy port2 CLAN
+port4
+free
+++++
+vain_0
+PREM
+port2
+free
+port3
+busy port3 CLTG
+port4
+free
+++++
+vain_0
+SCAN
+port2
+free
+port3
+busy port1 CLTG
+port4
+busy port0 CLAN
+++++
+sera_1
+STOR
+port0
+free
+port1
+free
+port2
+busy port3 VSTP
+++++
+tubh_0
+TUB1
+port1
+busy port2 CMSC
+port2
+busy port0 CTB1
+++++
+tubh_0
+TUB2
+port1
+busy port1 CTB1
+port2
+busy port0 CTB2
+++++
+tubh_0
+TUB3
+port1
+busy port1 CTB2
+port2
+busy port0 CTB3
+++++
+tubh_0
+TUB4
+port1
+busy port1 CTB3
+port2
+busy port0 CTB4
+++++
+tubh_0
+TUB5
+port1
+busy port1 CTB4
+port2
+busy port0 CTB5
+++++
+tubh_0
+TUB6
+port1
+busy port1 CTB5
+port2
+busy port0 CTB6
+++++
+vain_0
+VCAN
+port2
+free
+port3
+busy port1 CANN
+port4
+busy port1 CLAN
+++++
+vain_0
+VPRE
+port2
+free
+port3
+busy port1 CTB6
+port4
+busy port0 CLTG
+++++
+vain_0
+VSTO
+port2
+free
+port3
+busy port2 CSTO
+port4
+busy port1 CMSC
+++++
+vain_0
+VSTP
+port2
+free
+port3
+busy port2 STOR
+port4
+busy port1 CSTO
+++++
+vain_0
+VTGA
+port2
+free
+port3
+busy port2 CLTG
+port4
+free
+++++
+vain_0
+VVEN
+port2
+free
+port3
+busy port3 CMSC
+port4
+free
+++++
+****

@@ -1,0 +1,24 @@
+MIXN_1                                                                          
+MIXN                                                                            
+Miscelatore 5 ing                                                               
+                                                                                
+NSTAT = 0
+NUSCI = 2
+NINGR =10
+ 
+NCONF = 1
+ 
+WMIX      --UA-- FLUID FLOW RATE AT THE MIXER OUTPUT                            
+HMIX      --UA-- FLUID ENTHALPY AT THE MIXER OUTPUT                             
+WE_1      --IN-- FLUID FLOW RATE AT THE INLET PIPE N.  1                        
+HE_1      --IN-- FLUID ENTHALPY AT THE INLET PIPE N.  1                         
+WE_2      --IN-- FLUID FLOW RATE AT THE INLET PIPE N.  2                        
+HE_2      --IN-- FLUID ENTHALPY AT THE INLET PIPE N.  2                         
+WE_3      --IN-- FLUID FLOW RATE AT THE INLET PIPE N.  3                        
+HE_3      --IN-- FLUID ENTHALPY AT THE INLET PIPE N.  3                         
+WE_4      --IN-- FLUID FLOW RATE AT THE INLET PIPE N.  4                        
+HE_4      --IN-- FLUID ENTHALPY AT THE INLET PIPE N.  4                         
+WE_5      --IN-- FLUID FLOW RATE AT THE INLET PIPE N.  5                        
+HE_5      --IN-- FLUID ENTHALPY AT THE INLET PIPE N.  5                         
+==============================                                                  
+EOF                                                                             
