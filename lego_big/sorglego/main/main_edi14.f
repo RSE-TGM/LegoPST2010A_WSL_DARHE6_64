@@ -44,7 +44,12 @@ C
       CHARACTER*88 IBV(KN003)
 C
       CHARACTER*100 INPFIL,OLDFIL,OUTFIL
-      DATA IEOF/'EOF'/
+C Guag2024
+C      DATA IEOF/'EOF'/
+      CHARACTER*4 C_IEOF
+      DATA C_IEOF/'EOF'/
+      READ(C_IEOF,'(i4)') IEOF
+
 101      FORMAT(A)
 102      FORMAT(//)
       INPFIL='proc/f14.dat'
@@ -69,11 +74,34 @@ C
       STOP
       END
 C
+C Guag2024
+      INTEGER*4 FUNCTION ICHAR2INT( CH )
+      CHARACTER*(*) CH
+      READ(CH,'(i4)') ICHAR2INT
+      RETURN
+      END
+
 C
 C
       SUBROUTINE PFILE3(NF,NREC,IGO,LINE,IPOSF1)
       DIMENSION LINE(*)
-      DATA IEOF/'EOF'/,ILG/'*LG*'/,IAS/'*'/,IFIS/' FIS'/,IBLO/' BLO'/
+C Guag2024
+C      DATA IEOF/'EOF'/,ILG/'*LG*'/,IAS/'*'/,IFIS/' FIS'/,IBLO/' BLO'/
+      IEOF=ICHAR2INT('EOF')
+      ILG=ICHAR2INT('*LG*')
+      IAS=ICHAR2INT('*')
+      IFIS=ICHAR2INT(' FIS')
+      IBLO=ICHAR2INT(' BLO')
+      
+C Guag2024
+C      CHARACTER*4 C_IEOF
+C      DATA C_IEOF/'EOF'/
+C      READ(C_IEOF,'(i4)') IEOF
+C
+C      CHARACTER*4 C_ILG
+C      DATA C_ILG/'*LG*'/
+C      READ(C_ILG,'(i4)') ILG
+
 C
 C      IGO =1  COMMENTO
 C          =2  VARIABILI
@@ -115,7 +143,7 @@ C
       SUBROUTINE PFILE5(IA,IX,ICD,MX1,NMBL1,NMBL2,IPDT,NBL,NVAR,LINE,
      $                  IAV,IBV)
 C
-C      SUBROUTINE PER LA LETTURA DEI SIMBOLI DEI DATI E DEI VALORI
+C      SUBROUTIN PER LA LETTURA DEI SIMBOLI DEI DATI E DEI VALORI
 C      DAL FILE CONSIDERATO VECCHIO (3)
 C
       DIMENSION LINE(*),IB(3,2),IP(3,3),IA(MX1,2),IX(MX1,3),ICD(*),
@@ -123,8 +151,16 @@ C
       CHARACTER*(*) IAV(*)
       CHARACTER*(*) IBV(*)
       CHARACTER LIN*132
-      DATA ILG/'*LG*'/,IDT/'DATI'/,IEOFR/' '/,IEOF/'EOF'/,
-     $     IAS/'*'/
+C Guag2024
+C      DATA ILG/'*LG*'/,IDT/'DATI'/,IEOFR/' '/,IEOF/'EOF'/,
+C     $     IAS/'*'/
+      
+      ILG=ICHAR2INT('*LG*')
+      IDT=ICHAR2INT('DATI')
+      IEOFR=ICHAR2INT(' ')
+      IEOF=ICHAR2INT('EOF')
+      IAS=ICHAR2INT('*')
+      
       REWIND 3
       DO 1 I=1,4
       READ(3,1000)
@@ -191,7 +227,11 @@ C
       CHARACTER*(*) IAV(1)
       CHARACTER*(*) IBV(1)
       CHARACTER*132 PLIN,LIN
-      DATA IEOFR/' '/,IBL/' '/,IEOFR1/' '/
+C Guag2024
+C      DATA IEOFR/' '/,IBL/' '/,IEOFR1/' '/
+      IEOFR=ICHAR2INT(' ')
+      IEOFR1=IEOFR
+      IBL=IEOFR
 C
       REWIND 3
 C

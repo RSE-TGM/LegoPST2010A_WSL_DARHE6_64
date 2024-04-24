@@ -30,7 +30,8 @@ UIL_COMPILER=/usr/bin/X11/uil
 X_FLAGS=-c -D_NO_PROTO -DSNAPSHOT
 #F_FLAGS=-lfor
 #F_LIB=-L/usr/lib/ -lg2c -lm
-F_LIB=-lg2c -lm
+#F_LIB=-lg2c -lm
+F_LIB=-lm
 MOTIF_VER=11
 HHHOME=$(TOOLS)/hyperhelp
 HYPERHELP_OBJ = $(HHHOME)/winhelp/decaosf/winhelp.o
@@ -44,7 +45,9 @@ CPP=cpp
 #.c.o:
 #	$(CC) -c $(CFLAGS) $< -o $@
 #------------------------ Fortran compiler (g77)
-F_FLAGS=-fno-second-underscore
+#F_FLAGS=-fno-second-underscore
+F_FLAGS=-fno-second-underscore -g -fno-automatic -finit-local-zero -std=legacy
+#
 #
 #       Makefile Header:               Makefile.mk
 #       Subsystem:              56
@@ -70,7 +73,8 @@ all: $(LEGOCAD_BIN)/tables
 
 #versione per i sistemi operativi AIX ULTRIX OSF1
 $(LEGOCAD_BIN)/tables: $(OGGETTI) $(LIBUTIL)
-	cc -o $(LEGOCAD_BIN)/tables \
+	gfortran -o $(LEGOCAD_BIN)/tables \
        $(OGGETTI) \
-	$(LIBSVIL) $(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11
+	$(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11 $(LIBSVIL) /usr/lib/libg2c.so.0
+#	$(LIBSVIL) $(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11
 

@@ -92,7 +92,8 @@ $(LEGO_BIN)/killshrmem: killshrmem.c
 #  nuova regola per precompilare un .pf
 #
 .pf.o:
-	/lib/cpp  $(CPPFLAGS)  -D$(OS)   $< >> $*.f
+	/lib/cpp  $(CPPFLAGS)  -D$(OS)   $< >> $*_0.f
+	perl -0777 -pe 's,/\*.*?\*/,,gs' $*_0.f > $*.f
 	-$(FC) -c $(FFLAGS) $*.f
 	rm -f $*.f
  

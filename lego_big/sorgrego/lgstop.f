@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 C******************************************************************************
 C modulo lgstop.pf
 C tipo 
@@ -15,11 +26,6 @@ C                                                                      C
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
       SUBROUTINE LGSTOP
-
-
-
-
-
 C
 C______ SCRIVE SUL FILE "PROC/LGERR.OUT"
 C       UN FLAG PER DIRE CHE L ESECUZIONE SI E
@@ -37,7 +43,6 @@ C
       CLOSE (13)
       STOP
       END
-
 C            
 C Procedura contenete la variabile per l identificazione della versione
 C        

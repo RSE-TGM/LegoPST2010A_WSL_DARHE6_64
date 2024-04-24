@@ -83,10 +83,10 @@ export M005=`expr $N004 \+ 1`
 #     CONTINUUS ENVIRONEMENT                                      #
 #############################################################
 #
-. /usr/users/ccm_root/.continuus
-OPENWINHOME=/usr/openwin; export OPENWINHOME
-PATH=$PATH:.:$OPENWINHOME/bin:/usr/bin/X11:/usr/sccs:/usr/ucb:/usr/bin:/bin; export PATH
-WA=$HOME/ccm_wa/ALTERLEGO
+#. /usr/users/ccm_root/.continuus
+#OPENWINHOME=/usr/openwin; export OPENWINHOME
+#PATH=$PATH:.:$OPENWINHOME/bin:/usr/bin/X11:/usr/sccs:/usr/ucb:/usr/bin:/bin; export PATH
+#WA=$HOME/ccm_wa/ALTERLEGO
 #
 #########################################################
 #
@@ -141,8 +141,8 @@ export XAPPLRESDIR=~/risorse
 #
 #########################################################
 #
-PATH=/usr/local/gcc-2.95.3/bin:$PATH
-PATH=/usr/local/insight-5.3/bin:$PATH
+#PATH=/usr/local/gcc-2.95.3/bin:$PATH
+#PATH=/usr/local/insight-5.3/bin:$PATH
 #
 #########################################################
 #
@@ -150,7 +150,7 @@ PATH=/usr/local/insight-5.3/bin:$PATH
 #
 #########################################################
 #
-PATH=/usr/local/valgrind-1.0.4/bin:$PATH
+#PATH=/usr/local/valgrind-1.0.4/bin:$PATH
 #
 #########################################################
 #
@@ -158,10 +158,10 @@ PATH=/usr/local/valgrind-1.0.4/bin:$PATH
 #
 #########################################################
 #
-SPLINT=/usr/local/splint-3.0.1.6
-export LARCH_PATH=$SPLINT/share/splint/lib
-export LCLIMPORTDIR=$SPLINT/share/splint/imports
-PATH=$PATH:$SPLINT/bin
+#SPLINT=/usr/local/splint-3.0.1.6
+#export LARCH_PATH=$SPLINT/share/splint/lib
+#export LCLIMPORTDIR=$SPLINT/share/splint/imports
+#PATH=$PATH:$SPLINT/bin
 #
 #########################################################
 #
@@ -169,8 +169,8 @@ PATH=$PATH:$SPLINT/bin
 #
 #########################################################
 #
-export F_FLAGS='-g -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE '
-export FFLAGS='-g -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE '
+export F_FLAGS='-g -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy'
+export FFLAGS='-g -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy'
 export  FC_LIBS=' -lg2c  -lm '
 export DEBUG=YES
 #

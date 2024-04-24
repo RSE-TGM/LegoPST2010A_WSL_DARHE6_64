@@ -54,7 +54,8 @@ $(LEGOCAD_BIN)/clg1a_exe: $(CAD_LEGO_LIB)/cmain_lg1.o $(CAD_LEGO_LIB)/clegolib.a
                         $(CAD_LEGO_LIB)/clegolib.a -lc -o $@
 $(CAD_LEGO_LIB)/cmain_lg1.o: main_lg1.pf $(CAD_LEGO_LIB)/lg_parameter.fh $(CAD_LEGO_LIB)/main_lg1.pf
 	/lib/cpp $(CPPFLAGS) -DLEGOCAD  $(CAD_LEGO_LIB)/main_lg1.pf \
-		         > main_lg1.f
+		         > main_lg1_0.f
+	perl -0777 -pe 's,/\*.*?\*/,,gs' main_lg1_0.f > main_lg1.f
 	$(FC) -c $(FFLAGS) main_lg1.f -o $(CAD_LEGO_LIB)/cmain_lg1.o
 
 $(CAD_LEGO_LIB)/lg_parameter.fh:  lg_parameter.fh

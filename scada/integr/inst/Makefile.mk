@@ -26,7 +26,8 @@ VERSIONE=-DBANCO_MANOVRA -DSCADA -DBACKTRACK -DF22_APPEND -DSNAP_PIAC -DPIACENZA
 LINKER_OPTIONS=-L/usr/users/legor2/xprinter/lib.dec3000
 UXCGEN=run_uxcgen12.sh $@ $<
 SCADA_C_FLAGS=-DWINMMI -DVIRTLBG -DGERARC -DENEL_SIM -DALARM_SIGNAL -DXSCADA_INTERFACE
-THREAD_LIB=-L$(LEGOROOT_LIB)/dcethreads_lib -ldcethreads -ldl
+#THREAD_LIB=-L$(LEGOROOT_LIB)/dcethreads_lib -ldcethreads -ldl
+THREAD_LIB=-L$(LEGOROOT_LIB)/dcethreads_lib -lpthread -ldl
 X_LIBS=$(X_LIB)
 SQLITE_LIB=-I$(LEGOROOT_LIB)/sqlite_include -L$(LEGOROOT_LIB)/sqlite_lib
 #------------------------ C preprocessor

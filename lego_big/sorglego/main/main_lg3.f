@@ -1,37 +1,38 @@
+
+
+
+
 C*********************************************************************
-C       Fortran PreCompile:             main_lg3.pf
-C       Subsystem:              1
-C       Description:
-C       %created_by:    lomgr %
-C       %date_created:  Thu Mar 24 17:57:57 2005 %
+C Fortran PreCompile: main_lg3.pf
+C Subsystem: 1
+C Description:
+C %created_by: lomgr %
+C %date_created: Thu Mar 24 17:57:57 2005 %
 C
 C**********************************************************************
-
-
 C
 C Procedura contenete la variabile per identificare la versione
 C
       BLOCK DATA BDD_main_lg3_pf
-      CHARACTER*80  RepoID
+      CHARACTER*80 RepoID
       COMMON /CM_main_lg3_pf / RepoID
       DATA RepoID/'@(#)1,pfsrc,main_lg3.pf,2'/
       END
 C**********************************************************************
 C******************************************************************************
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-C                                                                      C
-C           LEGO unificato per singola / doppia precisione             C
-C                 e per diverse piattaforme operative                  C
-C                                                                      C
-C   Attivata versione singola precisione per sistema operativo Unix    C
-C                                                                      C
+C C
+C LEGO unificato per singola / doppia precisione C
+C e per diverse piattaforme operative C
+C C
+C Attivata versione singola precisione per sistema operativo Unix C
+C C
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-
 C***********************************************************************
        PROGRAM LG3
 C
-C          PROGRAMMA DI ACQUISIZIONE DATI GEOMETRICI E FISICI
-C          E CALCOLO DEL REGIME STAZIONARIO INIZIALE
+C PROGRAMMA DI ACQUISIZIONE DATI GEOMETRICI E FISICI
+C E CALCOLO DEL REGIME STAZIONARIO INIZIALE
 C
 C***********************************************************************
 C
@@ -43,14 +44,14 @@ C
       COMMON/LGTV01/LGTEMPO,ILEGO,ICOUNT,ICOUNTMX
       COMMON/LGTV02/LGMODULO,LGBLOCCO
 C
-C     Permette la visualizzazione di molti errori sulle tavole
-C     perche' la prima fase e' quella di lettura parametri
+C Permette la visualizzazione di molti errori sulle tavole
+C perche' la prima fase e' quella di lettura parametri
 C
-      ILEGO=1   	
+      ILEGO=1
       ICOUNTMX=1000
       CALL LG3FIL
 C
-C     APERTURA FILE TAVOLE VAPORE
+C APERTURA FILE TAVOLE VAPORE
 C
       CALL INITSM
 C Inizio parte modificata da Furlani
@@ -58,7 +59,7 @@ C Inizio parte modificata da Furlani
       OPEN(UNIT=14,FILE=F14DAT,STATUS='OLD',FORM='FORMATTED')
       OPEN(UNIT=4,FILE=F04DAT,STATUS='UNKNOWN',FORM='UNFORMATTED')
       OPEN(UNIT=44,FILE=N04DAT,STATUS='UNKNOWN',FORM='FORMATTED')
-C      OPEN(UNIT=24,FILE=F24DAT,STATUS='UNKNOWN')
+C OPEN(UNIT=24,FILE=F24DAT,STATUS='UNKNOWN')
       IER=0
 C
 C_________ LETTURA DEI DATI TOPOLOGIGICI,GEOMETRICI E FISICI DEL MODELLO
@@ -98,7 +99,7 @@ C
       LOGICAL LBLOCK,GROW,ABORT1,ABORT2
       COMMON /MA28E/ LP,MP,LBLOCK,GROW
       COMMON /MA28F/ EPS,RMIN,RESID,IRNCP,ICNCP,MINIRN,MINICN,
-     $               IRANK,ABORT1,ABORT2
+     $ IRANK,ABORT1,ABORT2
       DATA EPS/1.0E-4/
       DATA LP/6/,MP/6/
       DATA LBLOCK/.TRUE./,GROW/.TRUE./
@@ -112,4 +113,4 @@ C
       COMMON /MC23B/ LP,NUMNZ,NUM,LARGE,ABORT
       DATA LP/6/,ABORT/.FALSE./
       END
-C            
+C

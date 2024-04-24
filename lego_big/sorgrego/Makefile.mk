@@ -51,7 +51,8 @@ $(LEGO_BIN)/crealtm: crealtm.f
 #
 #
 $(OBJSPF): lgstop.pf
-	$(CPP) $(CPPFLAGS) lgstop.pf > lgstop.f
+	$(CPP) $(CPPFLAGS) lgstop.pf > lgstop_0.f
+	perl -0777 -pe 's,/\*.*?\*/,,gs' lgstop_0.f > lgstop.f
 	$(FC) $(FFLAGS) -c lgstop.f
 $(LEGO_LIB)/regonew.a:$(OBJSPF) $(OBJS_LIB)
 	ar ru $(LEGO_LIB)/regonew.a $(OBJSPF) $(OBJS_LIB)

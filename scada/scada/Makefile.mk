@@ -25,7 +25,13 @@ VERSIONE=-DBANCO_MANOVRA -DSCADA -DBACKTRACK -DF22_APPEND -DSNAP_PIAC -DPIACENZA
 LINKER_OPTIONS=-L/usr/users/legor2/xprinter/lib.dec3000
 UXCGEN=run_uxcgen12.sh $@ $<
 SCADA_C_FLAGS=-DWINMMI -DVIRTLBG -DGERARC -DENEL_SIM -DALARM_SIGNAL -DXSCADA_INTERFACE
-THREAD_LIB=-L$(LEGOROOT_LIB)/dcethreads_lib -ldcethreads -ldl
+#THREAD_LIB=-L$(LEGOROOT_LIB)/dcethreads_lib -ldcethreads -ldl
+#THREAD_LIB=-ldl ../AlgLib/dcethreads_lib/libdcethreads.so /usr/lib/x86_64-linux-gnu/libpthread.so
+##THREAD_LIB=-ldl ../AlgLib/dcethreads_lib/libdcethreads.so  -lpthread
+# Guag2024
+THREAD_LIB=-L$(LEGOROOT_LIB)/dcethreads_lib -ldcethreads -lpthread -ldl
+#THREAD_LIB=-L$(LEGOROOT_LIB)/dcethreads_lib -lpthread -ldl
+
 X_LIBS=$(X_LIB)
 SQLITE_LIB=-I$(LEGOROOT_LIB)/sqlite_include -L$(LEGOROOT_LIB)/sqlite_lib
 #------------------------ C preprocessor
@@ -136,7 +142,7 @@ all: ./libscada.a $(SCADA_BIN)/scada
 .c.a:;
 
 $(SCADA_BIN)/scada: $(OGGETTI) $(LIB)
-	cc -o $(SCADA_BIN)/scada  $(OGGETTI) $(LIB) $(X_LIBS) $(THREAD_LIB) -lm
+	cc -o $(SCADA_BIN)/scada  $(OGGETTI) $(LIB) $(X_LIBS) -lm $(THREAD_LIB)
 
 taggcfg.o: aggcfg/taggcfg.c
 	$(CC) -c $(CFLAGS) aggcfg/taggcfg.c

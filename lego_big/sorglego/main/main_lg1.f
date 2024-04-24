@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 C*********************************************************************
 C       Fortran PreCompile:             main_lg1.pf
 C       Subsystem:              2
@@ -76,12 +87,7 @@ C     APERTURA DEI FILES DI LAVORO
          OPEN(UNIT=8,FILE=LSCHEM,STATUS='OLD')
       ENDIF
       OPEN(UNIT=IF01,FILE=F01DAT,STATUS='OLD')
-
       OPEN(UNIT=2,FILE=F02DAT,STATUS='UNKNOWN',FORM='UNFORMATTED')
-
-
-
-
       OPEN(UNIT=35,FILE=LTMFOR,STATUS='UNKNOWN')
       OPEN(UNIT=34,FILE=CLTMDA,STATUS='UNKNOWN')
 C
@@ -118,7 +124,6 @@ C
       ENDIF
 C
       ITIMOD=1
-
 C
 C____ SE 1 ,VERIFICA SE IL MODELLO E` DI PROCESSO O DI REGOLAZIONE
 C
@@ -147,7 +152,6 @@ C
       CALL LGABRT
 C
  670  CONTINUE
-
 C
 C_________ SI COSTRUISCE UNA LISTA UNICA DI MODULI
 C          AGGIUNGENDO ALLA LISTA DEI MODULI DI PROCESSO

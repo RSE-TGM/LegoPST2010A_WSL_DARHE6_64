@@ -89,6 +89,7 @@ $(LEGO_BIN)/main_modscreg: main_modscreg.o
 .f.o:
 	$(FC) -c $(FFLAGS) $<
 .pf.f:
-	/lib/cpp -P $(CPP_FLAGS) $(PREPROCESSOR_OPTIONS) $< > $*.f
+	/lib/cpp -P $(CPP_FLAGS) $(PREPROCESSOR_OPTIONS) $< > $*_0.f
+	perl -0777 -pe 's,/\*.*?\*/,,gs'  $*_0.f >  $*.f
 
               
