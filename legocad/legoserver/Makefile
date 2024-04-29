@@ -11,7 +11,7 @@ SORGENTI_FOR= $(LEGOCAD_USER)/legocad/libut/modi.f \
 	      $(LEGOCAD_USER)/legocad/libut/forausbase.f 
 OGGETTI_FOR= modi.o \
 	     forausbase.o
-SORGENTI_C= $(LEGOCAD)/legoserver/legoserver.c 
+SORGENTI_C= $(LEGOCAD)/legoserver/legoserver.c
 $(LEGOCAD_USER)/legocad/libut/legoserver: $(OGGETTI_FOR) $(SORGENTI_C)
 	$(CC) $(SORGENTI_C)  $(OGGETTI_FOR) \
               $(LEGOCAD_USER)/legocad/libut/modulilib.a \

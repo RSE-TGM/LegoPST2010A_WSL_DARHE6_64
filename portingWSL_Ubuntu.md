@@ -63,5 +63,37 @@ https://gcc.gnu.org/onlinedocs/gfortran/Fortran-Dialect-Options.html
 gfortran -c -fno-second-underscore -g -fno-automatic -finit-local-zero -std=legacy -fdec-char-conversions  ./blleg1.f ./cercno.f ./errf01.f filpos.f gotoca.f inizbl.f jacreg.f jacto.f leci.f legbl1.f legdyn.f legjac.f lego1.f lego3.f legpri.f legres.f legsis.f legtop.f leou.f leout.f lepert.f letf01.f lg1fil.f lg3fil.f lg5sim.f lgdyns.f lgtops.f lismod.f list1.f ma28.f nomvar.f ordin.f parsim.f passot.f pertur.f plprot.f prepo.f pswtch.f rec24.f recout.f resreg.f rg5sim.f rgdyns.f separ.f serva1.f serva2.f sswtch.f sta2.f stajac.f stato1.f toprid.f topsis.f i2goto.f lgsins.f jflolog.f
 
 https://stackoverflow.com/questions/5703952/data-int-string-problem-when-compiling-with-gfortran
+------
+convertire DATA IS/'SI'/,ISIP/'si'/
+
+      CHARACTER*2 SIMAIUS, SIMINUS
+      DATA SIMAIUS/'SI'/
+      DATA SIMINUS/'si'/
+
+      READ(SIMAIUS,1004) IS
+      READ(SIMINUS,1004) ISIP
+1004 FORMAT(A4)
+-------------------
+
+       fprintf(stderr, "\n#################################################\n");
+       fprintf(stderr, "       LICENSE NOT FOUND!!!\n");
+       fprintf(stderr, "       MA VA BENE LO STESSO\n");
+       fprintf(stderr, "#################################################\n");
+//       GUAG 2024
+//       return ( -1 ) ;
+       return ( 0 ) ;
+
+-P -C -DLINUX -traditional
+
+cancellare commenti da /* fino a */ :
+perl -0777 -pe 's,/\*.*?\*/,,gs' qq.f > qqqq.f
+
+non va : THREAD_LIB=-ldl ../AlgLib/dcethreads_lib/libdcethreads.so  -lpthread
+
+THREAD_LIB=-L$(LEGOROOT_LIB)/dcethreads_lib -lpthread -ldl
+
+
+
+
 
  

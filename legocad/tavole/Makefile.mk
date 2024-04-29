@@ -47,6 +47,7 @@ CPP=cpp
 #------------------------ Fortran compiler (g77)
 #F_FLAGS=-fno-second-underscore
 F_FLAGS=-fno-second-underscore -g -fno-automatic -finit-local-zero -std=legacy
+#F_FLAGS=-fno-underscoring -g -fno-automatic -finit-local-zero -std=legacy
 #
 #
 #       Makefile Header:               Makefile.mk
@@ -72,9 +73,16 @@ all: $(LEGOCAD_BIN)/tables
 
 
 #versione per i sistemi operativi AIX ULTRIX OSF1
+#$(LEGOCAD_BIN)/tables: $(OGGETTI) $(LIBUTIL)
+#	gfortran -o $(LEGOCAD_BIN)/tables \
+#       $(OGGETTI) \
+#	$(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11 $(LIBSVIL) /usr/lib/libg2c.so.0
+#	$(LIBSVIL) $(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11
+
 $(LEGOCAD_BIN)/tables: $(OGGETTI) $(LIBUTIL)
-	gfortran -o $(LEGOCAD_BIN)/tables \
+	gfortran -o ./tables \
        $(OGGETTI) \
-	$(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11 $(LIBSVIL) /usr/lib/libg2c.so.0
+	$(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11 $(LIBSVIL)
+#	$(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11 $(LIBSVIL) /usr/lib/libg2c.so.0
 #	$(LIBSVIL) $(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11
 

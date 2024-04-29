@@ -43,8 +43,9 @@ static char SccsID[] = "@(#)tables.c	1.3\t3/29/95";
 #include <Xm/BulletinB.h>
 #include <Xm/ToggleB.h>
 
+//#include <libutilx.h>
 
-#include <libutilx.h>
+#include  "../../AlgLib/libinclude/libutilx.h"
 #include "tables.h"
 #include "def_tav.h"
 #include "sfondo.px"  /* Bitmap dell'icona dell'applicazione */
@@ -103,12 +104,14 @@ XmString cstring;
 Arg args[20];
 Cardinal nargs;
 
+typedef void* Caddr_t;
+
 /**** visualizza_default 
  * per default visualizza tel tavole del vapore
  * con settato il primo toggle button
  ****/
 
-visualizza_default()
+int visualizza_default()
 {
 
 /* parto con la window delle tavole attiva */
@@ -117,17 +120,19 @@ visualizza_default()
 }
 
 /********  INIZIO MAIN()  ********/
-main (int argc, char **argv)
+int main (int argc, char **argv)
 {
 
 /* Variabile stringa NULLA di comodo ... */
   stringa_nulla = CREATE_CSTRING("");
 
+printf("argc= %d\n",argc);
+
 /* Inizializzazione del Toolkit */
   top_level = XtInitialize(argv[0], "Tables", NULL,  0, &argc, argv);
 
   display = XtDisplay(top_level);
-
+printf("display= %d\n",display);
 /* Definizione titolo e nome icona */
   nargs=0;
   XtSetArg (args[nargs], XtNiconPixmap,
@@ -139,6 +144,7 @@ main (int argc, char **argv)
   XtSetValues (top_level,args,nargs);
 
 /* Creazione della main window */
+printf("nargs= %d",nargs);
   crea_main_window();
 
 /* Creazione della dialog box FUNCTION HISTORY */
@@ -162,12 +168,13 @@ main (int argc, char **argv)
  *** void quit_tables(w, client_data, call_data)
  *** parametri:
  *** Widget w : identificativo del widget che ha effettuato la callback
- *** caddr_t client_data : non utilizzato.
+ *** Caddr_t client_data : non utilizzato.
  *** XmAnyCallbackStruct *call_data : non utilizzato. 
 callback di terminazione dell'applicativo */
 void quit_tables(w, client_data, call_data)
 Widget w;
-caddr_t client_data; 
+
+Caddr_t client_data; 
 XmAnyCallbackStruct *call_data;
 {
   XtCloseDisplay (XtDisplay(w));
@@ -179,12 +186,12 @@ XmAnyCallbackStruct *call_data;
  *** void apri_dialog(w, client_data, call_data)
  *** parametri:
  *** Widget w: identificativo del widget che ha effettuato la callback.
- *** caddr_t client_data               : non utilizzato.
+ *** Caddr_t client_data               : non utilizzato.
  *** XmAnyCallbackStruct *call_data : non utilizzato. 
 callback che visualizza la dialog-box di history. */
 void apri_dialog(w, client_data, call_data)
 Widget w;
-caddr_t client_data; 
+Caddr_t client_data; 
 XmAnyCallbackStruct *call_data;
 {
    Position x,y;  /* variabili per il geometry management */
@@ -215,12 +222,12 @@ XmAnyCallbackStruct *call_data;
  *** void svuota_lista(w, client_data, call_data)
  *** Parametri:
  *** Widget w : identificativo del widget che ha effettuato la callback
- *** caddr_t client_data : non utilizzato.
+ *** Caddr_t client_data : non utilizzato.
  *** XmAnyCallbackStruct *call_data : non utilizzato. 
 Cancella uno ad uno gli elementi dalla lista delle funzioni calcolate. */
 void svuota_lista(w, client_data, call_data)
 Widget w;
-caddr_t client_data; 
+Caddr_t client_data; 
 XmAnyCallbackStruct *call_data;
 {
    while ( row_count_history-- )
@@ -405,7 +412,7 @@ XmTextVerifyCallbackStruct *call_data;
 funzione per la cancellazione dei dati inseriti nei widget text di input */
 void clear_input( w, client_data, call_data)
 Widget w;
-caddr_t client_data;
+Caddr_t client_data;
 XmAnyCallbackStruct *call_data;
 {
    int i;
@@ -434,7 +441,7 @@ input dai widget text relativi, chiama la funzione dell'utente, visualizza
 i risultati ed aggiorna la scroll-list di history. */
 void display_results( w, client_data, call_data)
 Widget w;
-caddr_t client_data;
+Caddr_t client_data;
 XmAnyCallbackStruct *call_data;
 {
    char *str_val, stringa[50];
