@@ -50,7 +50,7 @@ OGGETTI  = virtinv.o virtdisk.o virtini.o printalt.o virtrese.o\
 all:  $(SCADA_LIBUT)/libvirt.a 
 
 $(SCADA_LIBUT)/libvirt.a: $(OGGETTI)
-	ar rvls $(SCADA_LIBUT)/libvirt.a $?
+	ar rvs $(SCADA_LIBUT)/libvirt.a $?
 	@echo libvirt.a aggiornata
 .c.a:;
 

@@ -49,6 +49,6 @@ OGGETTI  = CsPrepMsg.o CsPrepMsgS.o CsRcvToken.o CsRcvTokenS.o CsPrepMsgDel.o Cs
 all:  $(LEGOMMI_LIB)/libCs.a
 
 $(LEGOMMI_LIB)/libCs.a: $(OGGETTI)
-	ar rvls $(LEGOMMI_LIB)/libCs.a $?
+	ar rvs $(LEGOMMI_LIB)/libCs.a $?
 	@echo libCs.a aggiornata
 .c.a:;

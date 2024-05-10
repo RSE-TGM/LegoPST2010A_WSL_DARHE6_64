@@ -49,7 +49,7 @@ OGGETTI  = isa.o isarc.o isadia.o isadescr.o
 all:  libisa.a 
 
 libisa.a: $(OGGETTI)
-	ar rvls libisa.a $?
+	ar rvs libisa.a $?
 	@echo libisa.a aggiornata
 .c.a:;
 

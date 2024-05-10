@@ -38,9 +38,10 @@ extern int path_rel_to_abs(char *,char *);
 /*
    Variabili globali.
 */
-char workfile[200];
-Arg      args[10];
-Cardinal lnargs;
+//Guag2024
+//char workfile[200];
+//Arg      args[10];
+//Cardinal lnargs;
 
 
 /*-------------------------------------------------------------------------

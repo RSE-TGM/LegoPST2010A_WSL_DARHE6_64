@@ -20,7 +20,7 @@ all:
 	cd ./S01_2_f01 ; $(MAKE) -f Makefile.mk
 	cd ./cap ; $(MAKE) -f Makefile.mk
 	cd ./connex2 ; $(MAKE) -f Makefile.mk
-	cd ./dbutil ; $(MAKE) -f Makefile.mk
+#	cd ./dbutil ; $(MAKE) -f Makefile.mk
 	cd ./mmi_collect ; $(MAKE) -f Makefile.mk
 	cd ./pagmod ; $(MAKE) -f Makefile.mk
 	cd ./tag2res ; $(MAKE) -f Makefile.mk

@@ -10,7 +10,7 @@ OS=LINUX
 X_LIB=-L/usr/X11R6/lib -lMrm -lXm -lXt -lX11
 GCC_INCLUDE=
 X_INCLUDE=-I. $(GCC_INCLUDE) 
-C_FLAGS=-g -D_BSD -DLINUX -D_NO_PROTO -DXOPEN_CATALOG -DUNIX -Dmmap=_mmap_32_ $(X_INCLUDE)
+C_FLAGS=-g -fcommon -D_BSD -DLINUX -D_NO_PROTO -DXOPEN_CATALOG -DUNIX -Dmmap=_mmap_32_ $(X_INCLUDE)
 VERSIONE=-DBANCO_MANOVRA -DSCADA -DBACKTRACK -DF22_APPEND -DSNAP_PIAC -DPIACENZA -DREPLAY -DMFFR -DSAVEPERT
 #C_LIB=/lib/libbsd.a
 C_LIB=
@@ -44,7 +44,7 @@ F_FLAGS=-fno-second-underscore -g -fno-automatic -finit-local-zero
 #
 #CCM_MAKE_SERIAL=cc f77 ar ranlib /lib/cpp $(LEGO_BIN)/creatav
 .SUFFIXES:  .pf .o .f .c .sh .h .a
-FFLAGS=$(F_FLAGS)
+FFLAGS=$(F_FLAGS) --std=legacy
 CFLAGS=$(C_FLAGS) -D$(OS) 
 TAVOLE=../bin
 #
@@ -74,7 +74,8 @@ VAPO_FORTRAN_OBJ = initsm.o vapo1.o diagn.o phsat.o
 #Inserito il flag s (in ar) per hash-table su aix, in OSF1 hash viene fatta
 #di default con il comando ar
 $(LEGO_LIB)/vapo.a: $(VAPO_C_OBJ) $(VAPO_FORTRAN_OBJ) 
-	ar -crsvl $(LEGO_LIB)/vapo.a $(VAPO_C_OBJ) $(VAPO_FORTRAN_OBJ)
+	ar -crsv $(LEGO_LIB)/vapo.a $(VAPO_C_OBJ) $(VAPO_FORTRAN_OBJ)
+# guag2024	ar -crsvl $(LEGO_LIB)/vapo.a $(VAPO_C_OBJ) $(VAPO_FORTRAN_OBJ)
 #	ranlib $(LEGO_LIB)/vapo.a 
 #
 $(LEGO_BIN)/provatav: provatav.f $(VAPO_C_OBJ) $(VAPO_FORTRAN_OBJ) 

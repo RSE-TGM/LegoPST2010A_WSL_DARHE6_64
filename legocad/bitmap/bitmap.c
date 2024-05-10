@@ -470,7 +470,7 @@ static char *rcsid_bitmap_c = "$Header: bitmap.c,v 1.26 88/02/19 18:53:24 jim Ex
 /* error handling stuff */
 extern int errno;
 #if !defined VMS && !defined LINUX
-extern char *sys_errlist[];
+// extern char *sys_errlist[];
 extern int _Xdebug;
 #endif
 
@@ -2260,10 +2260,16 @@ int HandleOutputError(e)
   char *tmp_filename;
   if (e == e_rename)
     sprintf (msg1, "Can't rename %s to %s -- %s",
+      filename, backup_filename, strerror(errno));
+/*    sprintf (msg1, "Can't rename %s to %s -- %s",
       filename, backup_filename, sys_errlist[errno]);
+*/
   else
     sprintf (msg1, "Can't write on file %s -- %s",
+      filename, strerror(errno));
+/*    sprintf (msg1, "Can't write on file %s -- %s",
       filename, sys_errlist[errno]);
+*/
   tmp_filename = TmpFileName (filename);
   sprintf (msg2, "Should I write output to file %s?", tmp_filename);
   result = dialog (outer_window, font,

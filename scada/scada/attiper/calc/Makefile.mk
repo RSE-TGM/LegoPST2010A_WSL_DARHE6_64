@@ -55,7 +55,7 @@ OGGETTI  = initcalc.o minimo.o filtro.o setpunt.o massimo.o media.o  \
 all:  $(SCADA_LIB)/libcalc.a
 
 $(SCADA_LIB)/libcalc.a: $(OGGETTI)
-	ar rvls $(SCADA_LIB)/libcalc.a $?
+	ar rvs $(SCADA_LIB)/libcalc.a $?
 	@echo libcalc.a aggiornata
 
 .c.a:;

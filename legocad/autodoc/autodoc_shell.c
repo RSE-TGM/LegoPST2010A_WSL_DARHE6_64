@@ -60,7 +60,7 @@ extern byte num_file_f14;
 /* VARIABILI GLOBALI							*/
 /************************************************************************/
 char *font = "-Adobe-Courier-Bold-R-Normal--14-140-*";
-XFontStruct *finfo;
+XFontStruct *finfo1;
 XmFontList fontList;
 
 Pixmap pixm_noto;
@@ -1033,8 +1033,8 @@ static Widget	_Ux_create_autodoc_shell()
 		   }
 		
 		/* Creazione Font per Text */
-		   finfo = XLoadQueryFont(display,font);
-		   fontList = XmFontListCreate (finfo,XmSTRING_DEFAULT_CHARSET);
+		   finfo1 = XLoadQueryFont(display,font);
+		   fontList = XmFontListCreate (finfo1,XmSTRING_DEFAULT_CHARSET);
 		
 		/* recupera il nome del modello dal file f01.dat */
 		   setta_nome_modello();

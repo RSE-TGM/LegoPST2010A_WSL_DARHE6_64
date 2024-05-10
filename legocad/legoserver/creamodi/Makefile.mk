@@ -41,7 +41,7 @@ CPP=cpp
 #.c.o:
 #	$(CC) -c $(CFLAGS) $< -o $@
 #------------------------ Fortran compiler (g77)
-F_FLAGS=-fno-second-underscore
+F_FLAGS=-fno-second-underscore  -fno-automatic -finit-local-zero --std=legacy
 #
 #       Makefile Header:               %name%
 #       Subsystem:              %subsystem%

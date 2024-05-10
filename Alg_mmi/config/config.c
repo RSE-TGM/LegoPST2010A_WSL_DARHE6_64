@@ -45,7 +45,7 @@ static char SccsID[] = "@(#)config.prj	5.1\t11/13/95";
 
 #include "config.h"
 #include "CAP.h"		/* Serve per la gestione delle licenze software*/
-#include "skey_manager3.h"	/* Serve per la gestione delle licenze hardware*/
+// Guag2024 #include "skey_manager3.h"	/* Serve per la gestione delle licenze hardware*/
 
 #include <sqlite3.h>
 
@@ -108,7 +108,8 @@ int  flag_demo = 0;		/*  0 --> disponibile licenza tipo full
 
 #ifndef DESIGN_TIME
  
-PAGEDIT_CONTEXT *pagedit = NULL;
+//Guag2024 
+//PAGEDIT_CONTEXT *pagedit = NULL;
 
 #endif
 
@@ -162,7 +163,8 @@ int richiestaScrittura;
    Prima la chiave hardware ed eventualmente quella software
 */
        // Controllo chiave hardware
-       richiestaScrittura=KEYWRITE;
+
+/* Guag2024       richiestaScrittura=KEYWRITE;
        errorCode=skey_verifica_e_carica3(richiestaScrittura, KEYLABEL, KEYPASSWD, 
                                          LICCONFIG, &indiceSocieta);
        if(errorCode != 0)
@@ -176,6 +178,7 @@ int richiestaScrittura;
           if(manageLicenseNoTime(Buffer,"config",&flag_demo) == -1)
              exit(1);
           }
+*/
 
        comm_found=0;
        if((argc==2)||(argc>3)) {

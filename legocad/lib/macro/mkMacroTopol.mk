@@ -68,7 +68,7 @@ OGGETTI = $(ODIR)/block_wdg.o $(ODIR)/draw.o $(ODIR)/files.o $(ODIR)/macro.o \
 
 all: $(LEGOCAD_LIB)/macro_topol.a
 $(LEGOCAD_LIB)/macro_topol.a: $(OGGETTI)
-	ar rvls $(LEGOCAD_LIB)/macro_topol.a $?
+	ar rvs $(LEGOCAD_LIB)/macro_topol.a $?
 	@echo fine  creazione libreria macro_topol
 .c.a:;
 

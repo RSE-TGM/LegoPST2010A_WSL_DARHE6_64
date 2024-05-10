@@ -48,7 +48,7 @@ OGGETTI = verifall.o verifalt.o
 all:	$(SCADA_ACQUI)/libacqui.a
 
 $(SCADA_ACQUI)/libacqui.a: $(OGGETTI)
-	ar rvls $(SCADA_ACQUI)/libacqui.a $?
+	ar rvs $(SCADA_ACQUI)/libacqui.a $?
 	@echo libacqui.a aggiornata
 .c.a:;
 

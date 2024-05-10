@@ -41,7 +41,7 @@ OGGETTI  = OlDatabaseTopologia.o  OlCompiler.o \
 all:  $(LEGOMMI_LIB)/libOl.a
 
 $(LEGOMMI_LIB)/libOl.a: $(OGGETTI)
-	ar rvls $(LEGOMMI_LIB)/libOl.a $?
+	ar rvs $(LEGOMMI_LIB)/libOl.a $?
 	@echo libOl.a aggiornata
 .c.a:;
 

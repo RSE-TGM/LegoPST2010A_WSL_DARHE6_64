@@ -50,7 +50,7 @@ OGGETTI = bell.o erase_sc.o \
 all:libassl6.a 
 
 libassl6.a: $(OGGETTI)
-	ar rvls libassl6.a $?
+	ar rvs libassl6.a $?
 	@echo libassl6.a aggiornata
 .c.a:;
 

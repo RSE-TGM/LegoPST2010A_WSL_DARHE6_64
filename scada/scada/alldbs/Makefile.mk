@@ -54,7 +54,7 @@ OGGETTI = alldef.o allcall.o allabzon.o allcval.o alldec.o allric.o \
 all:	$(SCADA_LIB)/liballar.a
 
 $(SCADA_LIB)/liballar.a: $(OGGETTI)
-	ar rvls $(SCADA_LIB)/liballar.a $?
+	ar rvs $(SCADA_LIB)/liballar.a $?
 	@echo liballar.a aggiornata
 .c.a:;
 

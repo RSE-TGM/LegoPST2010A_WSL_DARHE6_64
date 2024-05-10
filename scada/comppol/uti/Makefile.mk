@@ -49,7 +49,7 @@ OGGETTI = intfile.o ins_symb.o sbianca.o scrivisu.o isreale.o isintero.o \
 all:utility.a 
 
 utility.a: $(OGGETTI)
-	ar rvls utility.a $?
+	ar rvs utility.a $?
 	@echo utility.a aggiornata
 .c.a:;
 

@@ -135,9 +135,9 @@ char *lib_macro="macro_reg.a";
 /*
      Variabili con i pathname definiti dal Context.
 */
-char workfile[FILENAME_MAX];
-char envfile[FILENAME_MAX];
-char rtffile[FILENAME_MAX];
+char workfile1[FILENAME_MAX];
+char envfile1[FILENAME_MAX];
+char rtffile1[FILENAME_MAX];
 
 
 
@@ -149,7 +149,7 @@ char rtffile[FILENAME_MAX];
 LST_SCHM *ls_moduletti=NULL;
 LST_SCHM *ls_macromod=NULL;
 LST_SCHM *ls_schemireg=NULL;
-int n_mcro,n_mdlt,n_schm;
+int n_mcro1,n_mdlt,n_schm;
 
 
 
@@ -353,7 +353,7 @@ char tipo_lista[20];
    Se si tratta della compilazione di una sola pagina si caricano le
    i pathname d'ambiente.
 */
-      ret = EstrWorkFile(workfile,envfile,rtffile);
+      ret = EstrWorkFile(workfile1,envfile1,rtffile1);
       if ( ret!=0 )
          {
          fprintf(stderr,"Non sono definite le variabili d'ambiente\n");
@@ -2505,7 +2505,7 @@ char messaggio[100];
       }
    else
       {
-      numero_macro= n_mcro;
+      numero_macro= n_mcro1;
       if ( -1 == schema_presente(ls_macromod,nome_4,numero_macro) )
          in_lista_macro = 0;
       }
@@ -2559,7 +2559,7 @@ char path_pwd[FILENAME_MAX];
 
 /*    Memorizzazione liste */
       n_mdlt= rd_lst_schemi(&ls_moduletti,filerr,nome_file);
-      n_mcro= rd_lst_schemi(&ls_macromod,filerr,lista_macro);
+      n_mcro1= rd_lst_schemi(&ls_macromod,filerr,lista_macro);
       n_schm= rd_lst_schemi(&ls_schemireg,filerr,lista_schemi);
 
 /*    Ritorno directory di partenza */
@@ -2846,7 +2846,7 @@ struct stat buf;
 int stat_ret;
 
 
-   lun        = strlen(pgname) + strlen(workfile);
+   lun        = strlen(pgname) + strlen(workfile1);
    appoggio   = XtMalloc((lun+1)*sizeof(char));
    nomepagina = XtMalloc((lun+1)*sizeof(char));
 /* tiene conto della lunghezza della tag (7 caratteri)
@@ -2854,7 +2854,7 @@ int stat_ret;
 */   
 nome_4     = XtMalloc((lun+21)*sizeof(char));
 
-   strcpy(nomepagina,workfile);
+   strcpy(nomepagina,workfile1);
    strcpy(appoggio,pgname);
    tominus(appoggio);
    strcat(nomepagina,appoggio);
@@ -2865,7 +2865,7 @@ nome_4     = XtMalloc((lun+21)*sizeof(char));
       {
       strcpy(appoggio,pgname);
       nome_underscore(appoggio,nome_4,4);
-      strcpy(appoggio,workfile);
+      strcpy(appoggio,workfile1);
       strcat(appoggio,nome_4);
       strcpy(nome_4,appoggio);
       printf("nome_4=%s\n",nome_4);

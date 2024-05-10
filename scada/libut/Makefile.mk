@@ -49,7 +49,7 @@ OGGETTI  = aggfconf.o allocdb.o bitset.o bitvalue.o ctrlstat.o decnum.o \
 all:  $(SCADA_LIBUT)/libpscs.a 
 
 $(SCADA_LIBUT)/libpscs.a: $(OGGETTI)
-	ar rvls $(SCADA_LIBUT)/libpscs.a $?
+	ar rvs $(SCADA_LIBUT)/libpscs.a $?
 	@echo libpscs.a aggiornata
 .c.a:;
 

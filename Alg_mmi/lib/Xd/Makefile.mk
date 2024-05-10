@@ -38,7 +38,7 @@ OGGETTI  = XdUtil.o XdGeom.o XdCore.o XdLine.o XdRect.o XdCircle.o XdLista.o XdP
 all:  $(LEGOMMI_LIB)/libXd.a
 
 $(LEGOMMI_LIB)/libXd.a: $(OGGETTI)
-	ar rvls $(LEGOMMI_LIB)/libXd.a $?
+	ar rvs $(LEGOMMI_LIB)/libXd.a $?
 	@echo libXd.a aggiornata
 .c.a:;
 

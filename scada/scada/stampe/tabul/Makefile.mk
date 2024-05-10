@@ -49,7 +49,7 @@ OGGETTI = tabper.o readtab.o racdbs.o tabul.o cprint.o lantab.o stfile.o\
 all:  $(SCADA_LIB)/libtabul.a 
 
 $(SCADA_LIB)/libtabul.a: $(OGGETTI)
-	ar rvls $(SCADA_LIB)/libtabul.a $?
+	ar rvs $(SCADA_LIB)/libtabul.a $?
 	@echo libtabul.a aggiornata
 .c.a:;
 

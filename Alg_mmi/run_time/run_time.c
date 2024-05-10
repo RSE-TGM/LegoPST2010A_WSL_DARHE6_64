@@ -48,7 +48,7 @@ static char SccsID[] = "@(#)run_time.prj	5.2\t1/22/96";
 
 #include <Rt/RtMemory.h>
 # include "CAP.h"		/* Serve per la gestione delle licenze */
-#include "skey_manager3.h"	/* Serve per la gestione delle licenze hardware*/
+// Guag2024 #include "skey_manager3.h"	/* Serve per la gestione delle licenze hardware*/
 #include <sqlite3.h>
 
 XtAppContext	UxAppContext;
@@ -148,7 +148,7 @@ int     ret;
    Prima la chiave hardware ed eventualmente quella software
 */
         // Controllo chiave hardware
-        richiestaScrittura=KEYWRITE;
+/* Guag2024        richiestaScrittura=KEYWRITE;
         errorCode=skey_verifica_e_carica3(richiestaScrittura, KEYLABEL, KEYPASSWD,
                                           LICMMI, &indiceSocieta);
 	if(errorCode != 0)
@@ -171,7 +171,9 @@ int     ret;
 		flag_demo=0;
 		tempo_license=10000000;
 	}
-
+*/
+        flag_demo=0;
+        tempo_license=10000000;
 
 
 /*

@@ -53,7 +53,7 @@ OGGETTI = arcopen.o arcwai.o arcwr.o arcfnom.o arcfile.o arclen.o arcrac.o\
 all:	$(SCADA_LIB)/libarchi.a
 
 $(SCADA_LIB)/libarchi.a: $(OGGETTI)
-	ar rvls $(SCADA_LIB)/libarchi.a $?
+	ar rvs $(SCADA_LIB)/libarchi.a $?
 	@echo libarchi.a aggiornata
 .c.a:;
 

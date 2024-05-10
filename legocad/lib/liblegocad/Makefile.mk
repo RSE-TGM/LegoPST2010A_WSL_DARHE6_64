@@ -68,6 +68,6 @@ makefile:Makefile
 
 $(LEGOCAD_LIB)/liblegocad.a: $(OGGETTI)
 #	$(CC) -c $(CFLAGS) $(?:.o=.c)  
-	ar rvls $(LEGOCAD_LIB)/liblegocad.a $?
+	ar rvs $(LEGOCAD_LIB)/liblegocad.a $?
 	@echo liblegocad.a aggiornata
 .c.a:;

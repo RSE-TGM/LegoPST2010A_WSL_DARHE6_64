@@ -64,7 +64,7 @@ makefile:Makefile
 
 $(LEGOCAD_LIB)/libicofile.a: $(OGGETTI)
 #	$(CC) -c $(CFLAGS) $(?:.o=.c)  
-	ar rvls $(LEGOCAD_LIB)/libicofile.a $?
+	ar rvs $(LEGOCAD_LIB)/libicofile.a $?
 	@echo libicofile.a aggiornata
 .c.a:;
 

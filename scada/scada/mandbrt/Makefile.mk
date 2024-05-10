@@ -57,7 +57,7 @@ OGGETTI  = striuk.o
 all:  $(SCADA_LIB)/libmandb.a
 
 $(SCADA_LIB)/libmandb.a: $(OGGETTI)
-	ar rvls $(SCADA_LIB)/libmandb.a $?
+	ar rvs $(SCADA_LIB)/libmandb.a $?
 	@echo libmandb.a aggiornata
 
 .c.a:;

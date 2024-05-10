@@ -7,7 +7,7 @@ GUI_BUILD=/usr/bin/aic
 OS=LINUX
 X_LIB=-lMrm -lXm -lXt -lX11
 X_INCLUDE=-I. 
-C_FLAGS=-g -D_BSD -DLINUX -D_NO_PROTO -DXOPEN_CATALOG -DUNIX -Dmmap=_mmap_32_ -I. -I/usr/local/include -I$(LEGOROOT_LIB)/sqlite_include  -I/usr/include -L$(LEGOROOT_LIB)/sqlite_lib
+C_FLAGS=-g -fcommon -D_BSD -DLINUX -D_NO_PROTO -DXOPEN_CATALOG -DUNIX -Dmmap=_mmap_32_ -I. -I/usr/local/include -I$(LEGOROOT_LIB)/sqlite_include  -I/usr/include -L$(LEGOROOT_LIB)/sqlite_lib
 THREAD_LIB=-L$(LEGOROOT_LIB)/dcethreads_lib -ldcethreads
 SQLITE_LIB=-L$(LEGOROOT_LIB)/sqlite_lib
 VERSIONE=-DBANCO_MANOVRA -DSCADA -DBACKTRACK -DF22_APPEND -DSNAP_PIAC -DPIACENZA -DREPLAY -DMFFR -DSAVEPERT
@@ -23,7 +23,7 @@ OGGETTI = CAProut.o license.o
 all:	../libCAP.a 
 
 ../libCAP.a: $(OGGETTI) 
-	ar rvls ../libCAP.a $?
+	ar rvs ../libCAP.a $?
 	@echo libCAP.a aggiornata
 
 # Sezione per lo sviluppo						1997-03-25

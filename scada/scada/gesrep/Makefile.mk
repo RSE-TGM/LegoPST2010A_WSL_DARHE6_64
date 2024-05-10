@@ -48,7 +48,7 @@ OGGETTI  = reptask.o inviogdc.o repinit.o gesrep.o gdcdia.o\
 all:  librep.a 
 
 librep.a: $(OGGETTI)
-	ar rvls librep.a $?
+	ar rvs librep.a $?
 	@echo librep.a aggiornata
 .c.a:;
 

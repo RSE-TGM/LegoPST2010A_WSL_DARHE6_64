@@ -2238,6 +2238,11 @@ static Widget	_Uxbuild_topLevelShell()
 			XmNwidth, 650,
 			XmNheight, 630,
 			NULL );
+ /* 	mainWindow = XtVaCreateManagedWidget( "mainWindow",
+			xmMainWindowWidgetClass,
+			topLevelShell,
+			NULL ); 
+ */	
 	UxPutContext( mainWindow, (char *) UxTopLevelShellContext );
 
 

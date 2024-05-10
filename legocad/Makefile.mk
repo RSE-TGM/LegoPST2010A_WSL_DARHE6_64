@@ -53,7 +53,7 @@ all:
 	@echo	"Compilation in progress. Wait please...";
 	cd ./lib/libicofile; $(MAKE) -f Makefile.mk
 	cd ./lib/liblegocad; $(MAKE) -f Makefile.mk
-	cd ./lib/macro; $(MAKE) -f Makefile.mk
+#	cd ./lib/macro; $(MAKE) -f Makefile.mk
 	cd ./legoserver/creamodi; $(MAKE) -f Makefile.mk
 	cd ./autodoc; $(MAKE) -f Makefile.mk
 	cd ./bitmap; $(MAKE) -f Makefile.mk

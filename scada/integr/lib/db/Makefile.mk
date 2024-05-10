@@ -48,7 +48,7 @@ OGGETTI  = db.o installa_func.o
 all:  $(SCADA_INTEGR_LIB)/libdb.a 
 
 $(SCADA_INTEGR_LIB)/libdb.a: $(OGGETTI)
-	ar rvls $(SCADA_INTEGR_LIB)/libdb.a $?
+	ar rvs $(SCADA_INTEGR_LIB)/libdb.a $?
 	@echo libdb.a aggiornata
 .c.a:;
 

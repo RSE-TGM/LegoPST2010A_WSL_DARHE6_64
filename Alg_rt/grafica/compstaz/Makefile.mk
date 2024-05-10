@@ -67,7 +67,7 @@ all: libstaz_c.a $(LEGORT_BIN)/compstaz
 
 libstaz_c.a: $(OGGETTI1)
 	$(CC) -c $(CFLAGS) $(?:.o=.c)
-	ar rvls libstaz_c.a $?
+	ar rvs libstaz_c.a $?
 	@echo libstaz_c.a is now up-to-date
 
 $(LEGORT_BIN)/compstaz: $(OGGETTI2) $(LIBUTIL) libstaz_c.a

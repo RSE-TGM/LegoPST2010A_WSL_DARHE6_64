@@ -38,6 +38,7 @@ fi
 #Parte riguardante  la piattaforma linux 64 o 32 bit
 ###################################################################
 PLATFORM=`uname -i`
+PLATFORM=X86_64
 export PLATFORM
 if [ "$PLATFORM" == "i386" ]
 then
