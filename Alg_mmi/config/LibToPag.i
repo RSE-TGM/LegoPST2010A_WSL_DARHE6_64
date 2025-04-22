@@ -82,7 +82,7 @@ FILE *fp;\
 /* recupero la il nome della libreria selezionata */\
  \
 text = XmSelectionBoxGetChild(UxGetWidget(LibToPag),XmDIALOG_TEXT);\
-get_something(text,XmNvalue,&lib);\
+get_something(text,XmNvalue,(char*)&lib);\
 \
 /* costriusco i nomi dei file */ \
 if( getenv(ENVPAG) == NULL)\

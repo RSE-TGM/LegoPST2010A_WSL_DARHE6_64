@@ -286,18 +286,18 @@ XmDrawnButtonCallbackStruct *reason;
 {
    Pixel bg;
 
-   get_something (w,XmNbackground,&bg);
+   get_something (w,XmNbackground,(void*) &bg);
 
    if ( bg == apix[BLACK] )
    {
       num_yes_toggle--;
-      set_something (w,XmNbackground,apix[WHITE]);
+      set_something (w,XmNbackground,(void*) apix[WHITE]);
       jacstruct_ptr->jac_yes = False;
    }
    else
    {
       num_yes_toggle++;
-      set_something (w,XmNbackground,apix[BLACK]);
+      set_something (w,XmNbackground,(void*) apix[BLACK]);
       jacstruct_ptr->jac_yes = True;
    }
 }
@@ -385,13 +385,13 @@ aggiorna_jac_var_labels()
    XmString cstring_var;
    int indice;
 
-   get_something (UxGetWidget(bboard_jac_var), XmNchildren, &wdg);
+   get_something (UxGetWidget(bboard_jac_var), XmNchildren, (void*) &wdg);
 
    for (indice=0; indice < jac_cols; indice++)
    {
       cstring_var = CREATE_CSTRING(variabili[indice].nome);
 
-      set_something (wdg[indice],XmNlabelString, cstring_var);
+      set_something (wdg[indice],XmNlabelString, (void*) cstring_var);
       XmStringFree (cstring_var);
    }
 }
@@ -413,14 +413,14 @@ Widget sw_row,sw_col,sw_val;
    Widget sbar_rows_hor,   sbar_rows_vert;    /* EQUAZIONI */
    Widget sbar_values_hor, sbar_values_vert;  /* MATRICE  */
 
-   get_something( sw_val, XmNverticalScrollBar,   &sbar_values_vert );
-   get_something( sw_val, XmNhorizontalScrollBar, &sbar_values_hor );
+   get_something( sw_val, XmNverticalScrollBar,   (void*) &sbar_values_vert );
+   get_something( sw_val, XmNhorizontalScrollBar, (void*) &sbar_values_hor );
 
-   get_something( sw_row, XmNverticalScrollBar,   &sbar_rows_vert );
-   get_something( sw_row, XmNhorizontalScrollBar, &sbar_rows_hor );
+   get_something( sw_row, XmNverticalScrollBar,   (void*) &sbar_rows_vert );
+   get_something( sw_row, XmNhorizontalScrollBar, (void*) &sbar_rows_hor );
 
-   get_something( sw_col, XmNverticalScrollBar,   &sbar_cols_vert );
-   get_something( sw_col, XmNhorizontalScrollBar, &sbar_cols_hor );
+   get_something( sw_col, XmNverticalScrollBar,   (void*) &sbar_cols_vert );
+   get_something( sw_col, XmNhorizontalScrollBar, (void*) &sbar_cols_hor );
 
 /* Aggiunta callback scrollBar verticali */
    XtAddCallback(sbar_values_vert, XmNincrementCallback, increment,
@@ -524,9 +524,9 @@ chiudi_dialog_equation()
    if ( unlink(file_jac_temp) )
       printf ("Can't delete jacobian temporary file. Failure.\n");
 
-   set_something (UxGetWidget(pb_nmod_varsetup),XmNsensitive,True);
+   set_something (UxGetWidget(pb_nmod_varsetup),XmNsensitive,(void*) True);
    if (nmod_def_initialized && jacobian_type == ANALYTICAL)
-      set_something (UxGetWidget(pb_nmod_JC),XmNsensitive,True);
+      set_something (UxGetWidget(pb_nmod_JC),XmNsensitive,(void*) True);
 }
 
 /*******************************************************************************
@@ -901,9 +901,9 @@ static Widget	_Ux_create_dialog_equation()
 		int i,j;
 		
 		/* Disabilita alcune voci di menu */
-		set_something (UxGetWidget(pb_nmod_varsetup),XmNsensitive,False);
+		set_something (UxGetWidget(pb_nmod_varsetup),XmNsensitive,(void*) False);
 		if (nmod_def_initialized)
-		   set_something (UxGetWidget(pb_nmod_JC),XmNsensitive,False);
+		   set_something (UxGetWidget(pb_nmod_JC),XmNsensitive,(void*) False);
 		rtrn = _Uxbuild_nmod_dialog_equations();
 
 		/* Dimensionamenti Widgets */

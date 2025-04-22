@@ -172,8 +172,8 @@ Arg arg[4];
 XtSetArg( arg[0], XlNportName, &nome_porta);
 
 /* recupero i figli di XlComposite */
-get_something (wid, XmNchildren, &childcomp);
-get_something (wid, XmNnumChildren, &num_childcomp);
+get_something (wid, XmNchildren, (void*) &childcomp);
+get_something (wid, XmNnumChildren, (void*) &num_childcomp);
 
 /*  Controllo tutti i figli della IconReg  */
 for(j=0;j<num_childcomp;j++)

@@ -123,7 +123,7 @@ XmString c_app_str;
 char app_str[80];
 
 XtUnmanageChild(lista);
-get_something(lista,XmNitemCount,&totale);
+get_something(lista,XmNitemCount,(void*) &totale);
 for(k=1;k<=totale;k++,XmListDeletePos(lista,1));
 for( k =1 ; k <= tot_variabili ; k++ )
 {
@@ -138,7 +138,7 @@ str=(char*)XtMalloc(sizeof(char)*(strlen(testo)+20));
 strcpy(str,testo);
 c_str=XmStringCreateLtoR(str,XmSTRING_DEFAULT_CHARSET);
 XmListAddItemUnselected(lista,c_str,0);
-set_something(lista,XmNitemCount,posizione);
+set_something(lista,XmNitemCount,(void*) posizione);
 XSync(display,False);
 XtFree(str);
 XmStringFree(c_str);
@@ -490,8 +490,8 @@ int variab;
 
 XtUnmanageChild(lista_1);
 XtUnmanageChild(lista_2);
-get_something(lista_1,XmNitemCount,&totale_1);
-get_something(lista_2,XmNitemCount,&totale_2);
+get_something(lista_1,XmNitemCount,(void*) &totale_1);
+get_something(lista_2,XmNitemCount,(void*) &totale_2);
 for(k=1;k<=totale_1;k++,XmListDeletePos(lista_1,1));
 for(k=1;k<=totale_2;k++,XmListDeletePos(lista_2,1));
 for( k =0 ; k < _MAX_PERTUR*2 ; k++ )
@@ -879,14 +879,14 @@ tab_perturba();
 if(modo==1)
 	{
 	XtUnmanageChild(lista_1);
-	get_something(lista_1,XmNitemCount,&totale_1);
+	get_something(lista_1,XmNitemCount,(void*) &totale_1);
 	for(k=1;k<=totale_1;k++,XmListDeletePos(lista_1,1));
 	}
 
 if(modo==2)
 	{
 	XtUnmanageChild(lista_2);
-	get_something(lista_2,XmNitemCount,&totale_2);
+	get_something(lista_2,XmNitemCount,(void*) &totale_2);
 	for(k=1;k<=totale_2;k++,XmListDeletePos(lista_2,1));
 	}
 

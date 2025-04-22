@@ -256,14 +256,14 @@ int tipo, op;
           {
              if (tipo != K_OPT_DATI)
              {
-                set_something(wdg_eq[i].text_descr, XmNy, posy_text);
-                set_something(wdg_eq[i].text_simbolo, XmNy, posy_text);
-                set_something(wdg_eq[i].text_valore, XmNy, posy_text);
+                set_something(wdg_eq[i].text_descr, XmNy, (void*) posy_text);
+                set_something(wdg_eq[i].text_simbolo, XmNy, (void*) posy_text);
+                set_something(wdg_eq[i].text_valore, XmNy, (void*) posy_text);
              }
              else
              {
-                set_something(wdg_dati[i].text_dato, XmNy, posy_text);
-                set_something(wdg_dati[i].text_sigla, XmNy, posy_text);
+                set_something(wdg_dati[i].text_dato, XmNy, (void*) posy_text);
+                set_something(wdg_dati[i].text_sigla, XmNy, (void*) posy_text);
              }
              posy_text += 30;
           }
@@ -507,7 +507,7 @@ char *stringa;
     XmString cstring;
 
     cstring = CREATE_CSTRING(stringa);
-    set_something(wdg, XmNlabelString, cstring);
+    set_something(wdg, XmNlabelString, (void*) cstring);
     XmStringFree(cstring);
 }
 

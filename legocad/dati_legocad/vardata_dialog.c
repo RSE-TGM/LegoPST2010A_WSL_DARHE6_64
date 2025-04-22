@@ -1218,13 +1218,13 @@ if(lista_edit_on)
 /*
  Ricava l'indice di widget della scroll bar verticale
 */
-	get_something(UxGetWidget(vardata_sw),XmNverticalScrollBar,&w_bar);
+	get_something(UxGetWidget(vardata_sw),XmNverticalScrollBar,(void*) &w_bar);
 /*
  Ricava dimensione massima e dimensione attuale dello slider
  della scroll bar per determinare la corsa libera dello slider
 */
-	get_something(w_bar,XmNmaximum,&maximum);
-	get_something(w_bar,XmNsliderSize,&dim_slider);
+	get_something(w_bar,XmNmaximum,(void*) &maximum);
+	get_something(w_bar,XmNsliderSize,(void*) &dim_slider);
 	free_slider=maximum-dim_slider;
 /*
  determina la frazione rispetto al totale di cui si deve spostare
@@ -1245,7 +1245,7 @@ if(lista_edit_on)
  esegue la callback relativa allo spostamento effettuato dallo 
  slider
 */ 
-	set_something(w_bar,XmNvalue,pos_slider); 
+	set_something(w_bar,XmNvalue,(void*) pos_slider); 
 	call_data.value=pos_slider;
 	set_selez_lista(poslista);
 
@@ -1584,7 +1584,7 @@ else
 		}
 	set_something(menu_valori,
                      XmNmenuHistory,
-                     sw_sel);
+                     (void*) sw_sel);
 	}
 
 }

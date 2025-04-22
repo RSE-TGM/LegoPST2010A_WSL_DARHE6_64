@@ -629,5 +629,17 @@ int pert_whitenoise(int ,int ,float , float ,float );
 int pert_whitenoise_stop(int ,int ,float );
 int pert_rcv(int );
 int pert_rcv_null(int);
+int msg_rcv(int, void*, size_t, long, int,int);
+
+int msg_snd (int, void*, size_t, int);
+void reg_prolog();
+
+//void reg_wrshm(float (*)[], float (*)[], float (*)[], float (*)[],
+//               int *, int *, int *, int *,
+//               float (*)[], float (*)[]);
+
+void reg_wrshm(float *, float *, float *, float *,
+               int *, int *, int *, int *,
+               float *, float *);               
 
 #endif /* Fine ifndef _sim_types_h */

@@ -271,18 +271,18 @@ static void	activateCB_LoadItem( UxWidget, UxClientData, UxCallbackArg )
 		Input_Message = 1;
 		strcpy (stringa,"Changes not saved!Continue load?\0");
 		Messaggio = XmStringCreate (stringa,XmSTRING_DEFAULT_CHARSET);
-		set_something (Message,XmNdialogType, XmDIALOG_WARNING);
-		set_something (Message, XmNmessageString, Messaggio);
+		set_something (Message,XmNdialogType, (void*) XmDIALOG_WARNING);
+		set_something (Message, XmNmessageString, (void*) Messaggio);
 		UxPopupInterface (Message,no_grab);
 		XmStringFree (Messaggio);
 		}
 	if (Salvato == 1)
 		{
 		fileSelectionBox1 = create_fileSelectionBox1();
-		get_something (Menu_graf, XmNx, &PosX);
-		get_something (Menu_graf, XmNy, &PosY);
-		set_something (fileSelectionBox1, XmNx, PosX+10);
-		set_something (fileSelectionBox1, XmNy, PosY+10);
+		get_something (Menu_graf, XmNx, (void*) &PosX);
+		get_something (Menu_graf, XmNy, (void*) &PosY);
+		set_something (fileSelectionBox1, XmNx, (void*) PosX+10);
+		set_something (fileSelectionBox1, XmNy, (void*) PosY+10);
 		UxPopupInterface(fileSelectionBox1,no_grab);
 		}
 	}
@@ -315,8 +315,8 @@ static void	activateCB_SaveItem( UxWidget, UxClientData, UxCallbackArg )
 		{
 		if (nome_valido != 1) 
 			{
-			get_something (Menu_graf, XmNx, &PosX);
-			get_something (Menu_graf, XmNy, &PosY);
+			get_something (Menu_graf, XmNx, (void*) &PosX);
+			get_something (Menu_graf, XmNy, (void*) &PosY);
 			UxPopupInterface (create_File_Save(NORMAL_SAVE,PosX,PosY,f22source), no_grab);
 			}
 		}
@@ -336,8 +336,8 @@ static void	activateCB_Save_asItem( UxWidget, UxClientData, UxCallbackArg )
 	{
 	Position PosX,PosY;
 	
-	get_something (Menu_graf, XmNx, &PosX);
-	get_something (Menu_graf, XmNy, &PosY);
+	get_something (Menu_graf, XmNx, (void*) &PosX);
+	get_something (Menu_graf, XmNy, (void*) &PosY);
 	UxPopupInterface (create_File_Save(NORMAL_SAVE,PosX,PosY,f22source), no_grab);
 	}
 	UxMenu_grafContext = UxSaveCtx;
@@ -365,16 +365,16 @@ static void	activateCB_AsciiItem( UxWidget, UxClientData, UxCallbackArg )
 			{
 		        strcpy (stringa,"Max selectable variables superated\0");
 	        	Messaggio = XmStringCreate (stringa,XmSTRING_DEFAULT_CHARSET);
-		        set_something (Message, XmNdialogType, XmDIALOG_INFORMATION);
-		        set_something (Message, XmNmessageString, Messaggio);
+		        set_something (Message, XmNdialogType, (void*) XmDIALOG_INFORMATION);
+		        set_something (Message, XmNmessageString, (void*) Messaggio);
 		        UxPopupInterface (Message,no_grab);
 		        XmStringFree (Messaggio);
 			}
 		else
 			{
 			pathAscii = SalvaInAscii (ListaSele,NumSele);
-			get_something (Menu_graf, XmNx, &PosX);
-			get_something (Menu_graf, XmNy, &PosY);
+			get_something (Menu_graf, XmNx, (void*) &PosX);
+			get_something (Menu_graf, XmNy, (void*) &PosY);
 			UxPopupInterface (create_File_Save(ASCII_SAVE,PosX,PosY,pathAscii),
 						no_grab);
 			}
@@ -383,8 +383,8 @@ static void	activateCB_AsciiItem( UxWidget, UxClientData, UxCallbackArg )
 		{
 	        strcpy (stringa,"Must be selected at least one item\0");
 	        Messaggio = XmStringCreate (stringa,XmSTRING_DEFAULT_CHARSET);
-	        set_something (Message, XmNdialogType, XmDIALOG_INFORMATION);
-	        set_something (Message, XmNmessageString, Messaggio);
+	        set_something (Message, XmNdialogType, (void*) XmDIALOG_INFORMATION);
+	        set_something (Message, XmNmessageString, (void*) Messaggio);
 	        UxPopupInterface (Message,no_grab);
 	        XmStringFree (Messaggio);
 		}
@@ -414,7 +414,7 @@ static void	activateCB_UndoItem( UxWidget, UxClientData, UxCallbackArg )
 	strcat (stringa,"\0");
 	system (stringa);
 	Carica_f22 ();
-	set_something (UndoItem, XmNsensitive, False);
+	set_something (UndoItem, XmNsensitive, (void*) False);
 	}
 	UxMenu_grafContext = UxSaveCtx;
 }
@@ -443,11 +443,11 @@ static void	activateCB_ExitItem( UxWidget, UxClientData, UxCallbackArg )
 		strcpy (stringa,"Do you really want to exit Menu Graf?\0");
 		Messaggio = XmStringCreate (stringa, XmSTRING_DEFAULT_CHARSET);
 		}
-	set_something (label_output, XmNlabelString, Messaggio);
-	get_something (Menu_graf, XmNx, &PosX);
-	get_something (Menu_graf, XmNy, &PosY);
-	set_something (Menu_graf_exit, XmNx, PosX+10);
-	set_something (Menu_graf_exit, XmNy, PosY+10);
+	set_something (label_output, XmNlabelString, (void*) Messaggio);
+	get_something (Menu_graf, XmNx, (void*) &PosX);
+	get_something (Menu_graf, XmNy, (void*) &PosY);
+	set_something (Menu_graf_exit, XmNx, (void*) PosX+10);
+	set_something (Menu_graf_exit, XmNy, (void*) PosY+10);
 	UxPopupInterface (Menu_graf_exit, no_grab);
 	XmStringFree (Messaggio);
 	}
@@ -469,7 +469,7 @@ static void	activateCB_CopyItem_V( UxWidget, UxClientData, UxCallbackArg )
 	selezione = XmListGetSelectedPos (lista_var, &lista_sele, &num_sele);
 	if (ControllaValiditaPerClip (selezione,campioni)==0)
 		{
-		set_something (PasteItem_V, XmNsensitive, True);
+		set_something (PasteItem_V, XmNsensitive, (void*) True);
 		nome_clip = XmStringCreateSimple ("Mia Clipboard");
 		Stringa_clip = (char *)Prepara_stringa(lista_sele,num_sele,f22source);
 		ScriviClipboard (Stringa_clip,label13);
@@ -494,7 +494,7 @@ static void	activateCB_CutItem_V( UxWidget, UxClientData, UxCallbackArg )
 	selezione = XmListGetSelectedPos (lista_var, &lista_sele, &num_sele);
 	if (ControllaValiditaPerClip (selezione,campioni) == 0)
 		{
-		set_something (PasteItem_V, XmNsensitive, True);
+		set_something (PasteItem_V, XmNsensitive, (void*) True);
 		nome_clip = XmStringCreateSimple ("Mia Clipboard");
 		Stringa_clip = (char *)Prepara_stringa(lista_sele, num_sele, f22undo);
 		ScriviClipboard (Stringa_clip,label13);
@@ -518,7 +518,7 @@ static void	activateCB_PasteItem_V( UxWidget, UxClientData, UxCallbackArg )
 	LeggiClipboard (&Stringa_clip,label13);
 	Scomponi_stringa (Stringa_clip);
 	F22_PasteVar ();
-	set_something (PasteItem_V, XmNsensitive, False);
+	set_something (PasteItem_V, XmNsensitive, (void*) False);
 	}
 	UxMenu_grafContext = UxSaveCtx;
 }
@@ -542,12 +542,12 @@ static void	activateCB_DescriptionItem( UxWidget, UxClientData, UxCallbackArg )
 	{
 		strcpy (stringa,"Must be selected one item !\0");
 		Messaggio = XmStringCreate (stringa,XmSTRING_DEFAULT_CHARSET);
-		set_something (Message, XmNdialogType, XmDIALOG_ERROR);
-		set_something (Message, XmNmessageString, Messaggio);
+		set_something (Message, XmNdialogType, (void*) XmDIALOG_ERROR);
+		set_something (Message, XmNmessageString, (void*) Messaggio);
 		UxPopupInterface (Message, no_grab);
 	}else
 	{
-		set_something (PasteItem_V, XmNsensitive, False);
+		set_something (PasteItem_V, XmNsensitive, (void*) False);
 		descriz = (char *)XtMalloc(LUN_SIMB+1);
 	 
 		indice = lista_sele[0] - 1;
@@ -562,9 +562,9 @@ static void	activateCB_DescriptionItem( UxWidget, UxClientData, UxCallbackArg )
 		XmTextFieldSetString (textDescription,descriz);
 		XmTextFieldSetString (textNomevar, nomevariabile);
 		Messaggio = XmStringCreate (nomevariabile, XmSTRING_DEFAULT_CHARSET);
-		set_something (labelNomevar, XmNlabelString, Messaggio);
+		set_something (labelNomevar, XmNlabelString, (void*) Messaggio);
 		Messaggio = XmStringCreate (descriz, XmSTRING_DEFAULT_CHARSET);
-		set_something (labelDescription, XmNlabelString, Messaggio);
+		set_something (labelDescription, XmNlabelString, (void*) Messaggio);
 		UxPopupInterface (Description, no_grab);
 	}
 	XmStringFree (Messaggio);
@@ -620,31 +620,31 @@ static void	activateCB_ExtractItem( UxWidget, UxClientData, UxCallbackArg )
 	
 	strcpy (stringa,"EXTRACT TIME\0");
 	AppoStringa = XmStringCreate (stringa,XmSTRING_DEFAULT_CHARSET);
-	set_something (Titolo_edit, XmNlabelString, AppoStringa);
+	set_something (Titolo_edit, XmNlabelString, (void*) AppoStringa);
 	XmStringFree (AppoStringa);
 	
 	strcpy (stringa,"New start time\0");
 	AppoStringa = XmStringCreate (stringa,XmSTRING_DEFAULT_CHARSET);
-	set_something (Etichetta_start, XmNlabelString, AppoStringa);
+	set_something (Etichetta_start, XmNlabelString, (void*) AppoStringa);
 	XmStringFree (AppoStringa);
 	
 	strcpy (stringa,"New stop time\0");
 	AppoStringa = XmStringCreate (stringa,XmSTRING_DEFAULT_CHARSET);
-	set_something (Etichetta_stop, XmNlabelString, AppoStringa);
+	set_something (Etichetta_stop, XmNlabelString, (void*) AppoStringa);
 	XmStringFree (AppoStringa);
 	
-	set_something (textField_Start, XmNsensitive, True);
-	set_something (textField_Stop, XmNsensitive, True);
-	set_something (PasteItem_V, XmNsensitive, False);
+	set_something (textField_Start, XmNsensitive, (void*) True);
+	set_something (textField_Stop, XmNsensitive, (void*) True);
+	set_something (PasteItem_V, XmNsensitive, (void*) False);
 	
-	set_something (Edt_start_time, XmNlabelString, label_start_time);
-	set_something (Edt_stop_time, XmNlabelString, label_stop_time);
+	set_something (Edt_start_time, XmNlabelString, (void*) label_start_time);
+	set_something (Edt_stop_time, XmNlabelString, (void*) label_stop_time);
 	Azzera_text (textField_Start);
 	Azzera_text (textField_Stop);
-	get_something (Menu_graf, XmNx, &PosX);
-	get_something (Menu_graf, XmNy, &PosY);
-	set_something (Edit_Time_Win, XmNx, PosX+10);
-	set_something (Edit_Time_Win, XmNy, PosY+10);
+	get_something (Menu_graf, XmNx, (void*) &PosX);
+	get_something (Menu_graf, XmNy, (void*) &PosY);
+	set_something (Edit_Time_Win, XmNx, (void*) PosX+10);
+	set_something (Edit_Time_Win, XmNy, (void*) PosY+10);
 	UxPopupInterface (Edit_Time_Win,no_grab);
 	Scelta = EXTRACT_TIME;
 	}
@@ -667,31 +667,31 @@ static void	activateCB_ShiftItem( UxWidget, UxClientData, UxCallbackArg )
 	
 	strcpy (stringa, "SHIFT TIME\0");
 	AppoStringa = XmStringCreate (stringa, XmSTRING_DEFAULT_CHARSET);
-	set_something (Titolo_edit, XmNlabelString, AppoStringa);
+	set_something (Titolo_edit, XmNlabelString, (void*) AppoStringa);
 	XmStringFree (AppoStringa);
 	
 	strcpy (stringa, "Shift time value\0");
 	AppoStringa = XmStringCreate (stringa, XmSTRING_DEFAULT_CHARSET);
-	set_something (Etichetta_start, XmNlabelString, AppoStringa);
+	set_something (Etichetta_start, XmNlabelString, (void*) AppoStringa);
 	XmStringFree (AppoStringa);
 	
 	strcpy (stringa, "\0");
 	AppoStringa = XmStringCreate (stringa, XmSTRING_DEFAULT_CHARSET);
-	set_something (Etichetta_stop, XmNlabelString, AppoStringa);
+	set_something (Etichetta_stop, XmNlabelString, (void*) AppoStringa);
 	XmStringFree (AppoStringa);
 	
-	set_something (textField_Start, XmNsensitive, True);
-	set_something (textField_Stop, XmNsensitive, False);
-	set_something (PasteItem_V, XmNsensitive, False);
+	set_something (textField_Start, XmNsensitive, (void*) True);
+	set_something (textField_Stop, XmNsensitive, (void*) False);
+	set_something (PasteItem_V, XmNsensitive, (void*) False);
 	
-	set_something (Edt_start_time, XmNlabelString, label_start_time);
-	set_something (Edt_stop_time, XmNlabelString, label_stop_time);
+	set_something (Edt_start_time, XmNlabelString, (void*) label_start_time);
+	set_something (Edt_stop_time, XmNlabelString, (void*) label_stop_time);
 	Azzera_text (textField_Start);
 	Azzera_text (textField_Stop);
-	get_something (Menu_graf, XmNx, &PosX);
-	get_something (Menu_graf, XmNy, &PosY);
-	set_something (Edit_Time_Win, XmNx, PosX+10);
-	set_something (Edit_Time_Win, XmNy, PosY+10);
+	get_something (Menu_graf, XmNx, (void*) &PosX);
+	get_something (Menu_graf, XmNy, (void*) &PosY);
+	set_something (Edit_Time_Win, XmNx, (void*) PosX+10);
+	set_something (Edit_Time_Win, XmNy, (void*) PosY+10);
 	UxPopupInterface (Edit_Time_Win, no_grab);
 	Scelta = SHIFT_TIME;
 	}
@@ -710,11 +710,11 @@ static void	activateCB_SamplingItem( UxWidget, UxClientData, UxCallbackArg )
 	{
 	Position PosX,PosY;
 	
-	get_something (Menu_graf, XmNx, &PosX);
-	get_something (Menu_graf, XmNy, &PosY);
-	set_something (Sampling, XmNx, PosX+10);
-	set_something (Sampling, XmNy, PosY+10);
-	set_something (PasteItem_V, XmNsensitive, False);
+	get_something (Menu_graf, XmNx, (void*) &PosX);
+	get_something (Menu_graf, XmNy, (void*) &PosY);
+	set_something (Sampling, XmNx, (void*) PosX+10);
+	set_something (Sampling, XmNy, (void*) PosY+10);
+	set_something (PasteItem_V, XmNsensitive, (void*) False);
 	UxPopupInterface (Sampling, no_grab);
 	}
 	UxMenu_grafContext = UxSaveCtx;
@@ -732,11 +732,11 @@ static void	activateCB_ResamplingItem( UxWidget, UxClientData, UxCallbackArg )
 	{
 	Position PosX,PosY;
 	
-	get_something (Menu_graf, XmNx, &PosX);
-	get_something (Menu_graf, XmNy, &PosY);
-	set_something (Resampling, XmNx, PosX+10);
-	set_something (Resampling, XmNy, PosY+10);
-	set_something (PasteItem_V, XmNsensitive, False);
+	get_something (Menu_graf, XmNx, (void*) &PosX);
+	get_something (Menu_graf, XmNy, (void*) &PosY);
+	set_something (Resampling, XmNx, (void*) PosX+10);
+	set_something (Resampling, XmNy, (void*) PosY+10);
+	set_something (PasteItem_V, XmNsensitive, (void*) False);
 	UxPopupInterface (Resampling, no_grab);
 	}
 	UxMenu_grafContext = UxSaveCtx;
@@ -762,15 +762,15 @@ static void	activateCB_FilterItem( UxWidget, UxClientData, UxCallbackArg )
 		{
 		strcpy (stringa,"Must be selected one item!\0");
 		Messaggio = XmStringCreate (stringa, XmSTRING_DEFAULT_CHARSET);
-		set_something (Message, XmNdialogType, XmDIALOG_ERROR);
-		set_something (Message, XmNmessageString, Messaggio);
+		set_something (Message, XmNdialogType, (void*) XmDIALOG_ERROR);
+		set_something (Message, XmNmessageString, (void*) Messaggio);
 		UxPopupInterface (Message, no_grab);
 		XmStringFree (Messaggio);
 		}
 	else
 		{
-		get_something (Menu_graf, XmNx, &px);
-		get_something (Menu_graf, XmNy, &py);
+		get_something (Menu_graf, XmNx, (void*) &px);
+		get_something (Menu_graf, XmNy, (void*) &py);
 		UxPopupInterface (create_FilterWindow(px,py,(lista_sele[0]-1)),
 					 no_grab);
 		}
@@ -797,8 +797,8 @@ static void	activateCB_AxBItem( UxWidget, UxClientData, UxCallbackArg )
 		{
 		strcpy (stringa,"Must be selected one item!\0");
 		Messaggio = XmStringCreate (stringa, XmSTRING_DEFAULT_CHARSET);
-		set_something (Message, XmNdialogType, XmDIALOG_ERROR);
-		set_something (Message, XmNmessageString, Messaggio);
+		set_something (Message, XmNdialogType, (void*) XmDIALOG_ERROR);
+		set_something (Message, XmNmessageString, (void*) Messaggio);
 		UxPopupInterface (Message, no_grab);
 		XmStringFree (Messaggio);
 		}
@@ -832,8 +832,8 @@ static void	activateCB_xyItem( UxWidget, UxClientData, UxCallbackArg )
 		{
 		strcpy (stringa,"Must be selected two item!\0");
 		Messaggio = XmStringCreate (stringa, XmSTRING_DEFAULT_CHARSET);
-		set_something (Message, XmNdialogType, XmDIALOG_ERROR);
-		set_something (Message, XmNmessageString, Messaggio);
+		set_something (Message, XmNdialogType, (void*) XmDIALOG_ERROR);
+		set_something (Message, XmNmessageString, (void*) Messaggio);
 		UxPopupInterface (Message, no_grab);
 		XmStringFree (Messaggio);
 		}
@@ -923,9 +923,9 @@ static void	valueChangedCB_Multiple_Find_Item( UxWidget, UxClientData, UxCallbac
 			(_UxCMenu_graf *) UxGetContext( UxWidget );
 	{
 	Find_sel = MULTIPLO;
-	set_something (Multiple_Find_Item, XmNset, True);
-	set_something (Single_Find_Item, XmNset, False);
-	set_something (lista_var, XmNselectionPolicy, XmMULTIPLE_SELECT);
+	set_something (Multiple_Find_Item, XmNset, (void*) True);
+	set_something (Single_Find_Item, XmNset, (void*) False);
+	set_something (lista_var, XmNselectionPolicy, (void*) XmMULTIPLE_SELECT);
 	}
 	UxMenu_grafContext = UxSaveCtx;
 }
@@ -941,9 +941,9 @@ static void	valueChangedCB_Single_Find_Item( UxWidget, UxClientData, UxCallbackA
 			(_UxCMenu_graf *) UxGetContext( UxWidget );
 	{
 	Find_sel = SINGOLO;
-	set_something (Single_Find_Item, XmNset, True);
-	set_something (Multiple_Find_Item, XmNset, False);
-	set_something (lista_var, XmNselectionPolicy, XmEXTENDED_SELECT);
+	set_something (Single_Find_Item, XmNset, (void*) True);
+	set_something (Multiple_Find_Item, XmNset, (void*) False);
+	set_something (lista_var, XmNselectionPolicy, (void*) XmEXTENDED_SELECT);
 	}
 	UxMenu_grafContext = UxSaveCtx;
 }
@@ -978,13 +978,13 @@ static void	valueChangedCB_textField_find( UxWidget, UxClientData, UxCallbackArg
 	controllo = XmTextFieldGetString (textField_find);
 	if ((controllo[0] != '\0') && (controllo[0] != '\n'))
 		{
-		set_something (Find_Butt_Up, XmNsensitive, True);
-		set_something (Find_Butt_Down, XmNsensitive, True);
+		set_something (Find_Butt_Up, XmNsensitive, (void*) True);
+		set_something (Find_Butt_Down, XmNsensitive, (void*) True);
 		}
 	else
 		{	
-		set_something (Find_Butt_Up, XmNsensitive, False);
-		set_something (Find_Butt_Down, XmNsensitive, False);
+		set_something (Find_Butt_Up, XmNsensitive, (void*) False);
+		set_something (Find_Butt_Down, XmNsensitive, (void*) False);
 		}
 	}
 	UxMenu_grafContext = UxSaveCtx;
@@ -1010,8 +1010,8 @@ static void	activateCB_Find_Butt_Up( UxWidget, UxClientData, UxCallbackArg )
 		{
 		strcpy (stringa,"String not found\0");
 		Messaggio = XmStringCreate (stringa, XmSTRING_DEFAULT_CHARSET);
-		set_something (Message, XmNdialogType, XmDIALOG_INFORMATION);
-		set_something (Message, XmNmessageString, Messaggio);
+		set_something (Message, XmNdialogType, (void*) XmDIALOG_INFORMATION);
+		set_something (Message, XmNmessageString, (void*) Messaggio);
 		UxPopupInterface (Message,no_grab);
 		XmStringFree (Messaggio);
 		}
@@ -1045,8 +1045,8 @@ static void	activateCB_Find_Butt_Down( UxWidget, UxClientData, UxCallbackArg )
 		{
 		strcpy (stringa,"String not found\0");
 		Messaggio = XmStringCreate (stringa, XmSTRING_DEFAULT_CHARSET);
-		set_something (Message, XmNdialogType, XmDIALOG_INFORMATION);
-		set_something (Message, XmNmessageString, Messaggio);
+		set_something (Message, XmNdialogType, (void*) XmDIALOG_INFORMATION);
+		set_something (Message, XmNmessageString, (void*) Messaggio);
 		UxPopupInterface (Message, no_grab);
 		XmStringFree (Messaggio);
 		}
@@ -1072,7 +1072,7 @@ static void	activateCB_Push_Select( UxWidget, UxClientData, UxCallbackArg )
 	int j,i,selezione,*lista_sele,num_sele;
 	
 	selezione = XmListGetSelectedPos (lista_var, &lista_sele, &num_sele);
-	set_something (lista_var, XmNselectionPolicy, XmMULTIPLE_SELECT);
+	set_something (lista_var, XmNselectionPolicy, (void*) XmMULTIPLE_SELECT);
 	if (num_sele != header1.nvar)
 		{
 		if (selezione)
@@ -1089,7 +1089,7 @@ static void	activateCB_Push_Select( UxWidget, UxClientData, UxCallbackArg )
 			 	XmListSelectPos (lista_var,i,1);
 			}
 		}
-	set_something (lista_var, XmNselectionPolicy, XmEXTENDED_SELECT);
+	set_something (lista_var, XmNselectionPolicy, (void*) XmEXTENDED_SELECT);
 	}
 	UxMenu_grafContext = UxSaveCtx;
 }

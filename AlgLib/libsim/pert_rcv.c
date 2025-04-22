@@ -23,14 +23,13 @@ static char SccsID[] = "@(#)pert_rcv.c	5.1\t11/7/95";
 */
 # include <stdio.h>
 # include <errno.h>
-#if defined UNIX
+#include <string.h>
+
 # include <sys/types.h>
 # include <sys/ipc.h>
 # include <sys/msg.h>
-#endif
-#if defined VMS || defined HELIOS
-# include "vmsipc.h"
-#endif
+#include <sys/msg.h>
+
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
@@ -52,6 +51,10 @@ extern int stato_sked;
 extern int tipo_sked;
 
 extern RtDbPuntiOggetto dbpunti;
+
+extern int ins_area_pert_att(int, int, float, float,
+        float, float, float, float, float, float);
+
 
 int pert_rcv(id_msg_pert)
 int id_msg_pert;

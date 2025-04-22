@@ -266,8 +266,8 @@ void SetOptMenu(PAGINA *pag)
    WidgetList ListaButton;
 
    /*  menu' tipo pagina */
-   get_something(menu4,XmNsubMenuId,&Pane);
-   get_something(Pane,XmNchildren,&ListaButton);
+   get_something(menu4,XmNsubMenuId, (void*) &Pane);
+   get_something(Pane,XmNchildren, (void*) &ListaButton);
    
    if(!strcmp(pag->geom.tipo,TIPO_SINOTTICO))
        Bottone = ListaButton[0];
@@ -278,11 +278,11 @@ void SetOptMenu(PAGINA *pag)
    else  /* mi metto al riparo da eventuali sporcate */
        Bottone = ListaButton[0];
 
-   set_something(menu4,XmNmenuHistory,Bottone);
+   set_something(menu4,XmNmenuHistory,(void*) Bottone);
 
   /*  menu' in use */
-   get_something(menu7,XmNsubMenuId,&Pane);
-   get_something(Pane,XmNchildren,&ListaButton);
+   get_something(menu7,XmNsubMenuId,(void*) &Pane);
+   get_something(Pane,XmNchildren,(void*) &ListaButton);
    
    if(pag->in_use==SCHEME_IN_USE)
        Bottone = ListaButton[0];
@@ -291,7 +291,7 @@ void SetOptMenu(PAGINA *pag)
    else  /* mi metto al riparo da eventuali sporcate */
        Bottone = ListaButton[0];
 
-   set_something(menu7,XmNmenuHistory,Bottone); 
+   set_something(menu7,XmNmenuHistory,(void*) Bottone); 
 
 }
 
@@ -424,7 +424,7 @@ printf("activateCB_OkButton:nomepag=%s\n",nomepag);
 	
 	
 	printf("Pagina gerarc=%s\n",pagina->gerarchia);
-	      get_something(menu4,XmNmenuHistory,&WgtOptMenu);
+	      get_something(menu4,XmNmenuHistory, (void*) &WgtOptMenu);
 	      if(WgtOptMenu == menu4_p1_b1)
 	         strcpy(pagina->geom.tipo,TIPO_STAZIONI);   
 	      else if(WgtOptMenu == menu4_p1_b2)
@@ -533,7 +533,7 @@ printf("activateCB_OkButton:nomepag=%s\n",nomepag);
 	      strcpy(pagina->gerarchia,"-1,-1,-1,-1,-1,-1");
 	*/
 	
-	      get_something(menu7,XmNmenuHistory,&WgtOptMenu);
+	      get_something(menu7,XmNmenuHistory, (void*) &WgtOptMenu);
 	      if(WgtOptMenu == In_use)
 		  pagina->in_use=SCHEME_IN_USE;
 	      else if(WgtOptMenu == Not_in_use)
@@ -714,7 +714,7 @@ printf("activateCB_OkButton:nomepag=%s\n",nomepag);
 	
 	      if(tipoPag != TYPE_REGOLAZIONE)
 	      {
-	          get_something(menu4,XmNmenuHistory,&WgtOptMenu);
+	          get_something(menu4,XmNmenuHistory, (void*) &WgtOptMenu);
 	          if(WgtOptMenu == menu4_p1_b1)
 	             strcpy(pagina->geom.tipo,TIPO_STAZIONI);   
 	          else if(WgtOptMenu == menu4_p1_b2)
@@ -728,7 +728,7 @@ printf("activateCB_OkButton:nomepag=%s\n",nomepag);
 	
 	      if(tipoPag == TYPE_REGOLAZIONE)
 	      {
-	          get_something(menu7,XmNmenuHistory,&WgtOptMenu);
+	          get_something(menu7,XmNmenuHistory, (void*) &WgtOptMenu);
 	          if(WgtOptMenu == In_use)
 		      pagina->in_use = SCHEME_IN_USE;
 	            else if(WgtOptMenu == Not_in_use)
@@ -1721,32 +1721,32 @@ Widget	create_PagDialog( _Uxpname, _Uxoper )
 		switch(oper)
 		{
 		   case CREATE_PAGE:
-		      set_something(PagName,XmNmaxLength,MAXCHAR_PAGNAME);
+		      set_something(PagName,XmNmaxLength,(void*) MAXCHAR_PAGNAME);
 		      cstring = XmStringCreateSimple("Data Page Definition");
-		      set_something(labelTitle1,XmNlabelString,cstring);
+		      set_something(labelTitle1,XmNlabelString,(void*) cstring);
 		      pagina_init(nomepag,&pagina,TIPO_PAGINA);
-		      set_something(menu7,XmNsensitive,False); 
-		      set_something(label_in_use,XmNsensitive,False);	
+		      set_something(menu7,XmNsensitive,(void*) False); 
+		      set_something(label_in_use,XmNsensitive,(void*) False);	
 		      pagina_load_file(pagina,TIPO_PAGINA);
 		      PagSetDefaultValue(pagina);
 		      riempi_campi(pagina);
 		      XmStringFree(cstring);
 		   break;
 		   case CREATE_LIBRARY:
-		      set_something(PagName,XmNmaxLength,MAXCHAR_PAGNAME);
+		      set_something(PagName,XmNmaxLength,(void*) MAXCHAR_PAGNAME);
 		      cstring = XmStringCreateSimple("Data Library Definition");
-		      set_something(labelTitle1,XmNlabelString,cstring);
-		      set_something(labelTipo,XmNsensitive,False);
-		      set_something(menu4,XmNsensitive,False);
+		      set_something(labelTitle1,XmNlabelString,(void*) cstring);
+		      set_something(labelTipo,XmNsensitive,(void*) False);
+		      set_something(menu4,XmNsensitive,(void*) False);
 		      XtVaSetValues(menu4_p1_b2,RES_CONVERT(XmNlabelString,"Library"),NULL);
-		      set_something(menu7,XmNsensitive,False);
-		      set_something(label_in_use,XmNsensitive,False);
-		      set_something(pushButton1,XmNsensitive,False);
-		      set_something(PagBackground,XmNsensitive,False);
-		      set_something(RefreshFrequenzy,XmNsensitive,False);
-		      set_something(labelRefreshFrequenzy,XmNsensitive,False);
-		      set_something(Hierarchy,XmNsensitive,False);
-		      set_something(HierarchyLabel,XmNsensitive,False);
+		      set_something(menu7,XmNsensitive,(void*) False);
+		      set_something(label_in_use,XmNsensitive,(void*) False);
+		      set_something(pushButton1,XmNsensitive,(void*) False);
+		      set_something(PagBackground,XmNsensitive,(void*) False);
+		      set_something(RefreshFrequenzy,XmNsensitive,(void*) False);
+		      set_something(labelRefreshFrequenzy,XmNsensitive,(void*) False);
+		      set_something(Hierarchy,XmNsensitive,(void*) False);
+		      set_something(HierarchyLabel,XmNsensitive,(void*) False);
 		      pagina_init(nomepag,&pagina,TIPO_LIBRARY); 
 		      pagina_load_file(pagina,TIPO_LIBRARY);
 		      PagSetDefaultValue(pagina);
@@ -1755,10 +1755,10 @@ Widget	create_PagDialog( _Uxpname, _Uxoper )
 		   break;
 		   case CREATE_REGOLATION:
 		      cstring = XmStringCreateSimple("Data Regolation Definition");
-		      set_something(labelTitle1,XmNlabelString,cstring);
-		      set_something(PagName,XmNmaxLength,MAXREGNAME);    /* nome len max di 4ch */
-		      set_something(labelTipo,XmNsensitive,False);
-		      set_something(menu4,XmNsensitive,False);
+		      set_something(labelTitle1,XmNlabelString,(void*) cstring);
+		      set_something(PagName,XmNmaxLength,(void*) MAXREGNAME);    /* nome len max di 4ch */
+		      set_something(labelTipo,XmNsensitive,(void*) False);
+		      set_something(menu4,XmNsensitive,(void*) False);
 		      XtVaSetValues(menu4_p1_b2,RES_CONVERT(XmNlabelString,"Regolazione"),NULL);
 		
 		      pagina_init(nomepag,&pagina,TIPO_PAGINA);
@@ -1779,17 +1779,17 @@ Widget	create_PagDialog( _Uxpname, _Uxoper )
 		          {
 		             case TYPE_REGOLAZIONE:
 		                cstring = XmStringCreateSimple("Data Regolation Definition");
-		                set_something(labelTitle1,XmNlabelString,cstring);
-		                set_something(labelTipo,XmNsensitive,False);
-		                set_something(menu4,XmNsensitive,False);
+		                set_something(labelTitle1,XmNlabelString,(void*) cstring);
+		                set_something(labelTipo,XmNsensitive,(void*) False);
+		                set_something(menu4,XmNsensitive,(void*) False);
 		                XtVaSetValues(menu4_p1_b2,RES_CONVERT(XmNlabelString,"Regolazione"),NULL);
 		
 		             break;
 		             case TYPE_SINOTTICO:
 		             case TYPE_STAZIONE:
 		             case TYPE_TELEPERM:      
-				set_something(menu7,XmNsensitive,False);
-		      		set_something(label_in_use,XmNsensitive,False);
+				set_something(menu7,XmNsensitive,(void*) False);
+		      		set_something(label_in_use,XmNsensitive,(void*) False);
 		             break;
 		
 		          }
@@ -1801,18 +1801,18 @@ Widget	create_PagDialog( _Uxpname, _Uxoper )
 		   break;
 		   case MODIFY_LIBRARY:
 		     cstring = XmStringCreateSimple("Data Library Definition");
-		     set_something(labelTitle1,XmNlabelString,cstring);
-		     set_something(labelTipo,XmNsensitive,False);
-		     set_something(menu4,XmNsensitive,False);
+		     set_something(labelTitle1,XmNlabelString,(void*) cstring);
+		     set_something(labelTipo,XmNsensitive,(void*) False);
+		     set_something(menu4,XmNsensitive,(void*) False);
 		     XtVaSetValues(menu4_p1_b2,RES_CONVERT(XmNlabelString,"Library"),NULL);
-		     set_something(menu7,XmNsensitive,False);
-		     set_something(label_in_use,XmNsensitive,False);
-		     set_something(pushButton1,XmNsensitive,False);
-		     set_something(PagBackground,XmNsensitive,False);
-		     set_something(RefreshFrequenzy,XmNsensitive,False);
-		     set_something(labelRefreshFrequenzy,XmNsensitive,False);
-		     set_something(Hierarchy,XmNsensitive,False);
-		     set_something(HierarchyLabel,XmNsensitive,False);
+		     set_something(menu7,XmNsensitive,(void*) False);
+		     set_something(label_in_use,XmNsensitive,(void*) False);
+		     set_something(pushButton1,XmNsensitive,(void*) False);
+		     set_something(PagBackground,XmNsensitive,(void*) False);
+		     set_something(RefreshFrequenzy,XmNsensitive,(void*) False);
+		     set_something(labelRefreshFrequenzy,XmNsensitive,(void*) False);
+		     set_something(Hierarchy,XmNsensitive,(void*) False);
+		     set_something(HierarchyLabel,XmNsensitive,(void*) False);
 		     pagina_init(nomepag,&pagina,TIPO_LIBRARY);
 		     pagina_load_file(pagina,TIPO_LIBRARY);
 		     pagina_getres(pagina,&listaobj);
@@ -1824,7 +1824,7 @@ Widget	create_PagDialog( _Uxpname, _Uxoper )
 		   case COPY_PAGE:
 		      {
 		
-		          set_something(PagName,XmNmaxLength,MAXCHAR_PAGNAME);
+		          set_something(PagName,XmNmaxLength,(void*) MAXCHAR_PAGNAME);
 		          pagina_init(nomepag,&pagina,TIPO_PAGINA);
 		          pagina_load_file(pagina,TIPO_PAGINA);
 		          pagina_getres(pagina,&listaobj);
@@ -1833,20 +1833,20 @@ Widget	create_PagDialog( _Uxpname, _Uxoper )
 		          {
 		             case TYPE_REGOLAZIONE:
 		                nome_tmp[4] = 0;
-		                set_something(PagName,XmNmaxLength,MAXREGNAME);    /* nome len max di 4ch */
+		                set_something(PagName,XmNmaxLength,(void*) MAXREGNAME);    /* nome len max di 4ch */
 		                cstring = XmStringCreateSimple("Data Regolation Definition");
-		                set_something(labelTitle1,XmNlabelString,cstring);
-		                set_something(labelTipo,XmNsensitive,False);
-		                set_something(menu4,XmNsensitive,False);
+		                set_something(labelTitle1,XmNlabelString,(void*) cstring);
+		                set_something(labelTipo,XmNsensitive,(void*) False);
+		                set_something(menu4,XmNsensitive,(void*) False);
 		                XmStringFree(cstring);
 		             break; 
 		             case TYPE_STAZIONE:
 		             case TYPE_SINOTTICO:
 			     case TYPE_TELEPERM:
 		                cstring = XmStringCreateSimple("Data Page Definition");
-		                set_something(labelTitle1,XmNlabelString,cstring);     
-		                set_something(menu7,XmNsensitive,False);
-		                set_something(label_in_use,XmNsensitive,False);
+		                set_something(labelTitle1,XmNlabelString,(void*) cstring);     
+		                set_something(menu7,XmNsensitive,(void*) False);
+		                set_something(label_in_use,XmNsensitive,(void*) False);
 		                XmStringFree(cstring);
 		             break;
 		          }

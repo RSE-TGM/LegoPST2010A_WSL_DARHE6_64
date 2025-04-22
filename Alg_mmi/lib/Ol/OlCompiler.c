@@ -393,7 +393,7 @@ else
 		riempe il campo tipo_elab
 	     */
 	
-	  if(strcmp(strin[1].stringa,SUPERVIS))	/* se 2° token !=SUPERVIS */
+	  if(strcmp(strin[1].stringa,SUPERVIS))	/* se 2ï¿½ token !=SUPERVIS */
 	     {
              if(varinp.pdb.indice!= -1)
 		{
@@ -948,10 +948,10 @@ printf("ConvertiVarReg [%s] la tag %s e' connessa ad una int non connessa \n",Xt
  caratteri inziali della task.
 */
         if(XlIsIconReg(w))
-           get_something(w,XlNtagName,&app1_char);
+           get_something(w,XlNtagName, (void*) &app1_char);
         else
           if(XlIsDispReg(w))
-             get_something(XtParent(w),XlNtagName,&app1_char);
+             get_something(XtParent(w),XlNtagName, (void*) &app1_char);
           else
 	     return;
 

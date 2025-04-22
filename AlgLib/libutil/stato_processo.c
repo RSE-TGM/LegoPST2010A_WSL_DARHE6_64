@@ -46,9 +46,11 @@ typedef struct itmlst{
 #define pid_t int
 #endif
 
+
+
 int stato_processo();
 
-stato_processo(pid)
+int stato_processo(pid)
 pid_t pid;
 {
 int ritorno;

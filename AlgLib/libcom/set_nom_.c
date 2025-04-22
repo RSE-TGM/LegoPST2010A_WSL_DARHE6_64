@@ -35,6 +35,7 @@ static char SccsID[] = "@(#)set_nom_.c	5.2\t1/3/96";
 
 #elif defined AIX || defined OSF1 || defined SCO_UNIX || defined LINUX
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>

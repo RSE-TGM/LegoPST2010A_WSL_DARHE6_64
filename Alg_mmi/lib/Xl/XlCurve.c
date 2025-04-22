@@ -1527,8 +1527,8 @@ printf("Refresh: *****************************\n");
 	in due variabili globali e calcolo della posizione di partenza
         della cursor line e reference line.
 */
-            get_something(curvefield, XmNwidth, &width_curvefield);
-            get_something(curvefield, XmNheight, &height_curvefield);
+            get_something(curvefield, XmNwidth, (void*) &width_curvefield);
+            get_something(curvefield, XmNheight, (void*) &height_curvefield);
 	    curs_pos_pixel=(int)width_curvefield*(cursor_line_pos/100.0);
 	    refer_pos_pixel=(int)height_curvefield*(1.0-(ref_line_pos/100.0));
 
@@ -2278,7 +2278,7 @@ static void add_translation(Widget wid,char *stringa)
            switch( *policy )
            {
                case 'r':
-                 set_something(wid, XmNtranslations, tr);
+                 set_something(wid, XmNtranslations, (void*) tr);
                break;
                case 'a':
                   XtAugmentTranslations(wid, tr);

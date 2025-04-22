@@ -127,9 +127,9 @@ int i;
 XmAppo = XmStringCreateSimple (" ");
 for (i=0;i<2;i++)
 	{
-	set_something (TextFi[i], XmNsensitive, False);
+	set_something (TextFi[i], XmNsensitive, (void*) False);
 	XmTextFieldSetString (TextFi[i], "");
-	set_something (Lab[i], XmNlabelString, XmAppo);
+	set_something (Lab[i], XmNlabelString, (void*) XmAppo);
 	}
 XmStringFree (XmAppo);
 }
@@ -216,8 +216,8 @@ j = 0;
 while (strcmp (EditorDefinitions[i],"NULL"))
 	{
 	XmLab = XmStringCreateSimple (EditorDefinitions[i]);
-	set_something (Lab[j], XmNlabelString, XmLab);
-	set_something (TextF[j], XmNsensitive, True);
+	set_something (Lab[j], XmNlabelString, (void*) XmLab);
+	set_something (TextF[j], XmNsensitive, (void*) True);
 	XmStringFree (XmLab);
 	i++;
 	j++;
@@ -249,8 +249,8 @@ j = 0;
 while (strcmp (EditorDefinitions[i],"NULL"))
 	{
 	XmLab = XmStringCreateSimple (EditorDefinitions[i]);
-	set_something (Lab[j], XmNlabelString, XmLab);
-	set_something (TextF[j], XmNsensitive, True);
+	set_something (Lab[j], XmNlabelString, (void*) XmLab);
+	set_something (TextF[j], XmNsensitive, (void*) True);
 	XmStringFree (XmLab);
 	i++;
 	j++;
@@ -325,7 +325,7 @@ int ImpostaOptionMenu (Widget ogg,int Posizione)
                 XmStringFree(StrLab);
                 XtAddCallback (ListaItem[i],XmNactivateCallback, OptPertCB,i);
         }
-        set_something (menu2, XmNmenuHistory, ListaItem[Posizione]);
+        set_something (menu2, XmNmenuHistory, (void*) ListaItem[Posizione]);
         return (OK);
 }
 

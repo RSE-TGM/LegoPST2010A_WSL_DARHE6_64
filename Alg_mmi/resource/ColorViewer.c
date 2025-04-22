@@ -235,11 +235,11 @@ int i;
 
 for (i=0;i<12;i++)
 	{
-	set_something (VettoreBottoni [i], XmNshadowThickness, 2);
-	set_something (VettoreBottoni [i], XmNshadowType, XmSHADOW_ETCHED_IN);
+	set_something (VettoreBottoni [i], XmNshadowThickness, (void*) 2);
+	set_something (VettoreBottoni [i], XmNshadowType, (void*) XmSHADOW_ETCHED_IN);
 	}
-set_something (VettoreBottoni[IndiceSet], XmNshadowThickness, 4);
-set_something (VettoreBottoni[IndiceSet], XmNshadowType, XmSHADOW_IN);
+set_something (VettoreBottoni[IndiceSet], XmNshadowThickness, (void*) 4);
+set_something (VettoreBottoni[IndiceSet], XmNshadowType, (void*) XmSHADOW_IN);
 }
 
 /*******************************************************************************
@@ -250,9 +250,9 @@ static int	Ux_disableBlinkRate( UxThis, pEnv )
 	swidget	UxThis;
 	Environment *	pEnv;
 {
-	set_something(blink_frequency,XmNeditable,False );
-	   set_something(blink_frequency,XmNsensitive,False );
-	   set_something(BlinkRate,XmNsensitive,False );
+	set_something(blink_frequency,XmNeditable,(void*) False );
+	   set_something(blink_frequency,XmNsensitive,(void*) False );
+	   set_something(BlinkRate,XmNsensitive,(void*) False );
 }
 
 static int	_ColorViewer_disableBlinkRate( UxThis, pEnv )
@@ -279,7 +279,7 @@ static void	Ux_displayBlinkRate( UxThis, pEnv )
 	
 	sprintf(sfreq,"%f",blinkFreq);
 	
-	set_something(blink_frequency,XmNvalue,sfreq);
+	set_something(blink_frequency,XmNvalue,(void*) sfreq);
 }
 
 static void	_ColorViewer_displayBlinkRate( UxThis, pEnv )
@@ -299,9 +299,9 @@ static int	Ux_enableBlinkRate( UxThis, pEnv )
 	swidget	UxThis;
 	Environment *	pEnv;
 {
-	set_something(blink_frequency,XmNeditable,True );
-	   set_something(blink_frequency,XmNsensitive,True );
-	   set_something(BlinkRate,XmNsensitive,True );
+	set_something(blink_frequency,XmNeditable,(void*) True );
+	   set_something(blink_frequency,XmNsensitive,(void*) True );
+	   set_something(BlinkRate,XmNsensitive,(void*) True );
 }
 
 static int	_ColorViewer_enableBlinkRate( UxThis, pEnv )
@@ -344,7 +344,7 @@ static	void	activateCB_pushButton3( UxWidget, UxClientData, UxCallbackArg )
 	
 	Str = (char *)XmTextFieldGetString (TextNomeColore);
 	Result = CvtStrToPixel (ButtNomeColore,Str,&PixColor);
-	set_something (ButtNomeColore, XmNbackground, PixColor);
+	set_something (ButtNomeColore, XmNbackground, (void*) PixColor);
 	brate = (char *)XmTextFieldGetString (blink_frequency);
 	
 	blink_rate = atof(brate);
@@ -363,7 +363,7 @@ static	void	activateCB_pushButton3( UxWidget, UxClientData, UxCallbackArg )
 		XmTextFieldSetString (FigliRC[2], strOut);
 		Fatto = CvtStrToPixel (FigliRC[4],Str,&Colore);
 		if (Fatto)
-		  set_something (FigliRC[4],XmNbackground,Colore);
+		  set_something (FigliRC[4],XmNbackground,(void*) Colore);
 		}
 	else if (flagINP == CONFIG_VER)
 		XmTextFieldSetString (FigliRC[1], Str);
@@ -388,8 +388,8 @@ static	void	activateCB_pushButton4( UxWidget, UxClientData, UxCallbackArg )
 	if (flagINP == EDITOR_VER)
 		{
 		/*  Ritorna a sensitive il pushbutton e il textfield chiamante  */
-		set_something (FigliRC[0], XmNsensitive, True);
-		set_something (FigliRC[2], XmNsensitive, True);
+		set_something (FigliRC[0], XmNsensitive, (void*) True);
+		set_something (FigliRC[2], XmNsensitive, (void*) True);
 		}
 	
 	XtDestroyWidget (ColorViewer);
@@ -424,8 +424,8 @@ static	void	activateCB_pushButton2( UxWidget, UxClientData, UxCallbackArg )
 		i = 0;
 		while (Fatto==False)
 			{
-			get_something (VettoreBottoni[j], XmNbackground, &Punto); 
-			set_something (FigliRC[i],XmNbackground,Punto);
+			get_something (VettoreBottoni[j], XmNbackground, (void*) &Punto); 
+			set_something (FigliRC[i],XmNbackground, (void*) Punto);
 			j++;
 			i++;
 			if (i==12)
@@ -438,12 +438,12 @@ static	void	activateCB_pushButton2( UxWidget, UxClientData, UxCallbackArg )
 		}			
 	else if (flagINP == EDITOR_VER)
 		{
-		set_something (FigliRC[0], XmNsensitive, True);
-		set_something (FigliRC[2], XmNsensitive, True);
+		set_something (FigliRC[0], XmNsensitive, (void*) True);
+		set_something (FigliRC[2], XmNsensitive, (void*) True);
 		vstring = (char *)XmTextFieldGetString (TextNomeColore);
 		Fatto = CvtStrToPixel (FigliRC[4],vstring, &Colore);
 		if (Fatto)
-			set_something (FigliRC[4],XmNbackground,Colore);
+			set_something (FigliRC[4],XmNbackground,(void*) Colore);
 	
 	        brate = (char *)XmTextFieldGetString (blink_frequency);
 	
@@ -463,8 +463,8 @@ static	void	activateCB_pushButton2( UxWidget, UxClientData, UxCallbackArg )
 		}
 	else if (flagINP == CONFIG_VER)
 		{
-		set_something (FigliRC[0], XmNsensitive, True);
-		set_something (FigliRC[1], XmNsensitive, True);
+		set_something (FigliRC[0], XmNsensitive, (void*) True);
+		set_something (FigliRC[1], XmNsensitive, (void*) True);
 		vstring = (char *)XmTextFieldGetString (TextNomeColore);
 		XmTextFieldSetString (FigliRC[1], vstring);
 		XtFree (vstring);
@@ -474,7 +474,7 @@ static	void	activateCB_pushButton2( UxWidget, UxClientData, UxCallbackArg )
 	
 	for (i=0;i<12;i++)
 		{
-		get_something (VettoreBottoni[i] , XmNbackground, &Pix.pixel);
+		get_something (VettoreBottoni[i] , XmNbackground, (void*) &Pix.pixel);
 		XQueryColor (UxDisplay, Cmap, &Pix);
 		sprintf (StrPix,"#%04x%04x%04x",Pix.red,Pix.green,Pix.blue);
 		XlSetResourceByWidget (&RisDbColori,VettoreBottoni[i],
@@ -504,21 +504,21 @@ static	void	activateCB_drawnButton12( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 12)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[11], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[11], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 12;
 		RilasciaDrawnButton (11);
 	
-		get_something (VettoreBottoni[11], XmNbackground, &ColoreSfondo.pixel);
+		get_something (VettoreBottoni[11], XmNbackground, (void*) &ColoreSfondo.pixel);
 	
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -541,20 +541,20 @@ static	void	activateCB_drawnButton6( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 6)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[5], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[5], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 6;
 		RilasciaDrawnButton (5);
-		get_something (VettoreBottoni[5], XmNbackground, &ColoreSfondo.pixel);
+		get_something (VettoreBottoni[5], XmNbackground, (void*) &ColoreSfondo.pixel);
 	
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -577,21 +577,21 @@ static	void	activateCB_drawnButton11( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 11)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[10], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[10], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 11;
 		RilasciaDrawnButton (10);
 	
-		get_something (VettoreBottoni[10], XmNbackground, &ColoreSfondo.pixel);
+		get_something (VettoreBottoni[10], XmNbackground, (void*) &ColoreSfondo.pixel);
 	
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -614,20 +614,20 @@ static	void	activateCB_drawnButton5( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 5)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[4], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[4], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 5;
 		RilasciaDrawnButton (4);
-		get_something (VettoreBottoni[4], XmNbackground, &ColoreSfondo.pixel);
+		get_something (VettoreBottoni[4], XmNbackground, (void*) &ColoreSfondo.pixel);
 	
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -650,21 +650,21 @@ static	void	activateCB_drawnButton10( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 10)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[9], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[9], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 10;
 		RilasciaDrawnButton (9);
 	
-		get_something (VettoreBottoni[9], XmNbackground, &ColoreSfondo.pixel);
+		get_something (VettoreBottoni[9], XmNbackground, (void*) &ColoreSfondo.pixel);
 	
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -687,20 +687,20 @@ static	void	activateCB_drawnButton9( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 9)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[8], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[8], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 9;
 		RilasciaDrawnButton (8);
-		get_something (VettoreBottoni[8], XmNbackground, &ColoreSfondo.pixel);
+		get_something (VettoreBottoni[8], XmNbackground, (void*) &ColoreSfondo.pixel);
 	
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -723,20 +723,20 @@ static	void	activateCB_drawnButton8( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 8)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[7], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[7], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 8;
 		RilasciaDrawnButton (7);
-		get_something (VettoreBottoni[7], XmNbackground, &ColoreSfondo.pixel);
+		get_something (VettoreBottoni[7], XmNbackground, (void*) &ColoreSfondo.pixel);
 	
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -759,20 +759,20 @@ static	void	activateCB_drawnButton7( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 7)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[6], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[6], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 7;
 		RilasciaDrawnButton (6);
-		get_something (VettoreBottoni[6], XmNbackground, &ColoreSfondo.pixel);
+		get_something (VettoreBottoni[6], XmNbackground, (void*) &ColoreSfondo.pixel);
 	
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -795,20 +795,20 @@ static	void	activateCB_drawnButton4( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 4)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[3], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[3], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 4;
 		RilasciaDrawnButton (3);
-		get_something (VettoreBottoni[3], XmNbackground, &ColoreSfondo.pixel);
+		get_something (VettoreBottoni[3], XmNbackground, (void*) &ColoreSfondo.pixel);
 	
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -831,21 +831,21 @@ static	void	activateCB_drawnButton3( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 3)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[2], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[2], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 3;
 		RilasciaDrawnButton (2);
 	
-		get_something (VettoreBottoni[2], XmNbackground, &ColoreSfondo.pixel);
+		get_something (VettoreBottoni[2], XmNbackground, (void*) &ColoreSfondo.pixel);
 	 
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -868,20 +868,20 @@ static	void	activateCB_drawnButton2( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 2)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[1], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[1], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 2;
 		RilasciaDrawnButton (1);
-		get_something (VettoreBottoni[1], XmNbackground, &ColoreSfondo.pixel);
+		get_something (VettoreBottoni[1], XmNbackground, (void*) &ColoreSfondo.pixel);
 	
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -904,20 +904,20 @@ static	void	activateCB_drawnButton1( UxWidget, UxClientData, UxCallbackArg )
 	
 	if (Press == 1)
 		{
-		get_something (ButtNomeColore, XmNbackground, &Pal);
-		set_something (VettoreBottoni[0], XmNbackground, Pal);
+		get_something (ButtNomeColore, XmNbackground, (void*) &Pal);
+		set_something (VettoreBottoni[0], XmNbackground, (void*) Pal);
 		}
 	else
 		{
 		Press = 1;
 		RilasciaDrawnButton (0);
 	
-		get_something (VettoreBottoni[0], XmNbackground, &ColoreSfondo.pixel);
-		set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);
+		get_something (VettoreBottoni[0], XmNbackground, (void*) &ColoreSfondo.pixel);
+		set_something (ButtNomeColore, XmNbackground, (void*) ColoreSfondo.pixel);
 		XQueryColor (UxDisplay, Cmap, &ColoreSfondo);
 		sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,
 					ColoreSfondo.blue);
-		set_something (TextNomeColore, XmNvalue, vstring);
+		set_something (TextNomeColore, XmNvalue, (void*) vstring);
 		}
 	}
 	UxColorViewerContext = UxSaveCtx;
@@ -969,7 +969,7 @@ static	void	activateCB_EditItem( UxWidget, UxClientData, UxCallbackArg )
 	Pixel Colore;
 	Widget Creato;
 	
-	get_something (ButtNomeColore, XmNbackground, &Colore);
+	get_something (ButtNomeColore, XmNbackground, (void*) &Colore);
 	
 	Creato = (Widget )create_ColorEditor(&Colore,TextNomeColore,ColorViewer);
 	UxPopupInterface (Creato , no_grab);
@@ -1022,7 +1022,7 @@ static	void	activateCB_GrabItem( UxWidget, UxClientData, UxCallbackArg )
 					{
 					Pix.pixel = XGetPixel (Immagine,0,0);
 					/*  Setta il pixel come sfondo del bottone */
-					set_something (ButtNomeColore,XmNbackground,Pix.pixel);
+					set_something (ButtNomeColore,XmNbackground, (void*) Pix.pixel);
 					/*  Trova le informazioni RGB relative al pixel */
 					XQueryColor (UxDisplay, cmap, &Pix);
 					/*  Crea la stringa con il nome del colore  */
@@ -2130,8 +2130,8 @@ Widget	create_ColorViewer( _UxFlag, _UxStrInput, _UxLabButt, _UxPdb, _UxFigliINP
 		UxPutClassCode( ColorViewer, _UxIfClassId );
 
 		if ( !CvtStrToPixel (TextNomeColore,StrColor,&PixColor) )
-			set_something (EditItem,XmNsensitive,False);
-		else	set_something (EditItem,XmNsensitive,True);
+			set_something (EditItem,XmNsensitive,(void*) False);
+		else	set_something (EditItem,XmNsensitive,(void*) True);
 		
 		VettoreBottoni [0] = drawnButton1;
 		VettoreBottoni [1] = drawnButton2;
@@ -2147,8 +2147,8 @@ Widget	create_ColorViewer( _UxFlag, _UxStrInput, _UxLabButt, _UxPdb, _UxFigliINP
 		VettoreBottoni[11] = drawnButton12;
 			
 		XmTextFieldSetString (TextNomeColore,StrColor);
-		set_something (ButtNomeColore, XmNbackground, PixColor);
-		set_something (labelColorRes, XmNlabelString, LabButt);
+		set_something (ButtNomeColore, XmNbackground, (void*) PixColor);
+		set_something (labelColorRes, XmNlabelString, (void*) LabButt);
 		XrmSetDatabase (UxDisplay,Pdb);
 		
 		/*  Setta la posizione dell'interfaccia rispetto al Parent  */
@@ -2156,8 +2156,8 @@ Widget	create_ColorViewer( _UxFlag, _UxStrInput, _UxLabButt, _UxPdb, _UxFigliINP
 		
 		if (flagINP == CONFIG_VER)
 		  {
-		  set_something (FigliRC[0], XmNsensitive, False);
-		  set_something (FigliRC[1], XmNsensitive, False);
+		  set_something (FigliRC[0], XmNsensitive, (void*) False);
+		  set_something (FigliRC[1], XmNsensitive, (void*) False);
 		  }
 		
 		/* rendo insensitive la label e il Text Field della blink rate
@@ -2171,9 +2171,9 @@ Widget	create_ColorViewer( _UxFlag, _UxStrInput, _UxLabButt, _UxPdb, _UxFigliINP
 		/* set del menu trasparent in base al valore del XlAnimatedColor
 		*/
 		if( transparent )
-		   set_something(trasparentMenu,XmNmenuHistory,transparentYes);
+		   set_something(trasparentMenu,XmNmenuHistory,(void*) transparentYes);
 		else
-		   set_something(trasparentMenu,XmNmenuHistory,transparentNo);
+		   set_something(trasparentMenu,XmNmenuHistory,(void*) transparentNo);
 		
 		
 		return(rtrn);

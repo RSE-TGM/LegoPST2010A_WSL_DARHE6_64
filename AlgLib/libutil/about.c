@@ -42,10 +42,10 @@ char   *getenv ();
 static Widget about_widget;
 extern NOMI_PROCESSI Nome_del_processo;
 
-static about_destroy();
+static void about_destroy();
 
 
-about(topLevel)
+void about(topLevel)
 Widget topLevel;
 {
 int i;
@@ -161,7 +161,7 @@ if(about_widget==NULL)
     XtSetArg (args[i], XmNlabelString, 
 	XmStringCreateLtoR ("    Quit    ", XmSTRING_DEFAULT_CHARSET)); i++;
     wbutton = XmCreatePushButton (wRow, "bottone", args, i);
-    XtAddCallback (wbutton, XmNactivateCallback, about_destroy, NULL);
+    XtAddCallback (wbutton, XmNactivateCallback, (XtCallbackProc)about_destroy, NULL);
     XtManageChild (wbutton);
 
 
@@ -171,7 +171,7 @@ if(about_widget==NULL)
 
 }
 
-static about_destroy(w, info, str)
+static void about_destroy(w, info, str)
         Widget w;
 caddr_t info;
 XmSelectionBoxCallbackStruct * str;

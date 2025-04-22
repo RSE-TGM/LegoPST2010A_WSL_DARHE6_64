@@ -402,7 +402,7 @@ char *testo;
 
    XmStringFree(cstring);
 
-   get_something(wdg, XmNheight, &h);
+   get_something(wdg, XmNheight, (void*) &h);
 
    return((int) h);
 }
@@ -490,7 +490,7 @@ char *stringa;
    XmString cstring;
 
    cstring = CREATE_CSTRING(stringa);
-   set_something(wdg, XmNlabelString, cstring);
+   set_something(wdg, XmNlabelString, (void*) cstring);
    XmStringFree(cstring);
 }
 
@@ -518,7 +518,7 @@ XmAnyCallbackStruct *call_data;
    UxSaveCtx = UxInfo_ashellContext;
    UxInfo_ashellContext = UxContext = (_UxCinfo_ashell *) contesto;
 
-   get_something(w, XmNuserData, &ind);
+   get_something(w, XmNuserData, (void*) &ind);
 
    wb = &widget_blocco[ind];
 
@@ -562,15 +562,15 @@ XmAnyCallbackStruct *call_data;
    UxSaveCtx = UxInfo_ashellContext;
    UxInfo_ashellContext = UxContext = (_UxCinfo_ashell *) contesto;
 
-   get_something(w, XmNuserData, &ind);
+   get_something(w, XmNuserData, (void*) &ind);
 
    wb = &widget_blocco[ind];
 
    str = XmTextGetString(w);
    if (strlen(str))
-      set_something(wb->data.pb_nota, XmNsensitive, True);
+      set_something(wb->data.pb_nota, XmNsensitive, (void*) True);
    else
-      set_something(wb->data.pb_nota, XmNsensitive, False);
+      set_something(wb->data.pb_nota, XmNsensitive, (void*) False);
    XtFree(str);
 
    UxInfo_ashellContext = UxSaveCtx;
@@ -598,7 +598,7 @@ XmToggleButtonCallbackStruct *tg_struct;
    UxSaveCtx = UxInfo_ashellContext;
    UxInfo_ashellContext = UxContext = (_UxCinfo_ashell *) contesto;
 
-   get_something(w, XmNuserData, &ind);
+   get_something(w, XmNuserData, (void*) &ind);
 
    if (last_toggle != w)
    {
@@ -851,7 +851,7 @@ byte verso;
    {
       get_something( UxGetWidget(scrolledWindow2), XmNverticalScrollBar,
 		     &vscrollbar );
-      get_something( wrowcol, XmNheight, &bb_height );
+      get_something( wrowcol, XmNheight, (void*) &bb_height );
 
       nargs = 0;
       XtSetArg( args[nargs], XmNsliderSize, &slider_size ); nargs++;
@@ -878,8 +878,8 @@ byte verso;
 
            case VARIABILI_N_F14:
 		set_something(widget_blocco[ind_ricerca].vars.wnome, XmNbackground, 
-                              color_bg_label);
-		set_something(widget_blocco[i].vars.wnome, XmNbackground, color_select_label);
+                              (void*) color_bg_label);
+		set_something(widget_blocco[i].vars.wnome, XmNbackground, (void*) color_select_label);
                 break;
       }
 
@@ -1838,7 +1838,7 @@ static Widget	_Ux_create_info_ashell( _Uxnome_blocco, _Uxdescr_blocco, _Uxflag_b
 					   callback_ins_nota,
 					   UxGetContext(rtrn));
 		
-		             set_something(wb->data.nota,XmNuserData, num_info);
+		             set_something(wb->data.nota,XmNuserData, (void*) num_info);
 		             wb->data.pb_nota = crea_pb_note(wrowcol,y,num_info,
 							     contesto, !Empty(bdata->note));
 		             num_info++;

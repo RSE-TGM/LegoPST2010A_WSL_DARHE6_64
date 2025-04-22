@@ -287,12 +287,12 @@ static	void	activateCB_pushButton18( UxWidget, UxClientData, UxCallbackArg )
 	  }
 	
 	/*  Prendo i figli del rowcolumn che contiene tutti i dati  */
-	get_something (Cont0, XmNchildren, &ListaFigli);
-	get_something (Cont0, XmNnumChildren, &NumFigli);
+	get_something (Cont0, XmNchildren, (void*) &ListaFigli);
+	get_something (Cont0, XmNnumChildren, (void*) &NumFigli);
 	for (i=0;i<NumFigli;i++)
 	  {
-	  get_something (ListaFigli[i], XmNchildren, &FigliSet);
-	  get_something (ListaFigli[i], XmNnumChildren, &NumFigliSet);
+	  get_something (ListaFigli[i], XmNchildren, (void*) &FigliSet);
+	  get_something (ListaFigli[i], XmNnumChildren, (void*) &NumFigliSet);
 	  if (NumFigliSet > 1)
 	    {
 	    /*  E' una riga con i text filed per i valori  */
@@ -359,7 +359,7 @@ static	void	activateCB_pushButton18( UxWidget, UxClientData, UxCallbackArg )
 	*ValoriInput = NuovaStringa;
 	
 	/*  Rimetto a sensitive il bottone chiamante  */
-	set_something (BottoneTag, XmNsensitive, True);
+	set_something (BottoneTag, XmNsensitive, (void*) True);
 	
 	XtDestroyWidget (TagsInput);
 	}
@@ -378,7 +378,7 @@ static	void	activateCB_pushButton19( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCTagsInput *) UxGetContext( UxWidget );
 	{
 	/*  Rimetto a sensitive il bottone chiamante */
-	set_something (BottoneTag, XmNsensitive, True);
+	set_something (BottoneTag, XmNsensitive, (void*) True);
 	
 	XtDestroyWidget (TagsInput);
 	}
@@ -588,10 +588,10 @@ Widget	create_TagsInput( _UxParente3, _UxBot, _UxFrm, _UxIndex, _UxOggSelezionat
 		rtrn = _Uxbuild_TagsInput();
 
 		/*  Scrivo il titolo della window  */
-		get_something (BottoneTag, XmNlabelString, &Etichetta);
+		get_something (BottoneTag, XmNlabelString, (void*) &Etichetta);
 		XmTit = XmStringCreateSimple ("Tags of ");
 		XmTotale = XmStringConcat (XmTit,Etichetta);
-		set_something (TitoloForm, XmNlabelString, XmTotale);
+		set_something (TitoloForm, XmNlabelString, (void*) XmTotale);
 		XmStringFree (XmTit);
 		XmStringFree (XmTotale);  
 		

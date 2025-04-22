@@ -148,8 +148,8 @@ int num_selez;
 int *item_positions;
 Boolean retval;
 /***********************
-get_something(wlista, XmNselectedItemCount, &num_selez);
-get_something(wlista, XmNselectedItems, &blocchi_selez);
+get_something(wlista, XmNselectedItemCount, (void*) &num_selez);
+get_something(wlista, XmNselectedItems, (void*) &blocchi_selez);
 
 lista = ( XmString *) malloc( (num_selez+1) * sizeof(XmString) );
 for(i=0;i<num_selez;i++)

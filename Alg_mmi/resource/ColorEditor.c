@@ -326,7 +326,7 @@ static	void	activateCB_pushButton8( UxWidget, UxClientData, UxCallbackArg )
 	XQueryColor ( UxDisplay , cmap , &reset );
 	reset.pixel = WorkingPixel;
 	XStoreColor ( UxDisplay , cmap , &reset );
-	set_something (ButtNomeColoreWork, XmNbackground, reset.pixel);
+	set_something (ButtNomeColoreWork, XmNbackground, (void*) reset.pixel);
 	va1 = (int )( reset.red   / 256 );
 	va2 = (int )( reset.green / 256 );
 	va3 = (int )( reset.blue  / 256 );
@@ -355,7 +355,7 @@ static	void	activateCB_pushButton6( UxWidget, UxClientData, UxCallbackArg )
 	XQueryColor ( UxDisplay , cmap , &nuovo );
 	nuovo.pixel = OriginalPixel;
 	XStoreColor(UxDisplay, cmap, &nuovo);
-	set_something (ButtNomeColoreOrig, XmNbackground, nuovo.pixel);
+	set_something (ButtNomeColoreOrig, XmNbackground, (void*) nuovo.pixel);
 	}
 	UxColorEditorContext = UxSaveCtx;
 }
@@ -1000,8 +1000,8 @@ Widget	create_ColorEditor( _UxColoreInput, _UxTestoInp, _UxChiamCEd )
 			newcolor.pixel = OriginalPixel;
 			XStoreColor ( UxDisplay , cmap , &newcolor );
 		
-			set_something (ButtNomeColoreWork, XmNbackground, WorkingPixel);
-			set_something (ButtNomeColoreOrig, XmNbackground, OriginalPixel);
+			set_something (ButtNomeColoreWork, XmNbackground, (void*) WorkingPixel);
+			set_something (ButtNomeColoreOrig, XmNbackground, (void*) OriginalPixel);
 			sprintf (StrColore,"#%04x%04x%04x",TrovaRGB.red,TrovaRGB.green,TrovaRGB.blue);
 			XmTextFieldSetString (textField1, StrColore);
 			newcolor.pixel = WorkingPixel;
@@ -1016,12 +1016,12 @@ Widget	create_ColorEditor( _UxColoreInput, _UxTestoInp, _UxChiamCEd )
 			{
 			strcpy (mess,"Unable to alloc color !");
 			XmTextFieldSetString (textField1, mess);
-			set_something (ScalaRed, XmNsensitive, False);
-			set_something (ScalaGreen, XmNsensitive, False);
-			set_something (ScalaBlue, XmNsensitive, False);
-			set_something (pushButton5, XmNsensitive, False);  /*  OK */
-			set_something (pushButton6, XmNsensitive, False);  /*  APPLY */
-			set_something (pushButton8, XmNsensitive, False);  /*  RESET */
+			set_something (ScalaRed, XmNsensitive, (void*) False);
+			set_something (ScalaGreen, XmNsensitive, (void*) False);
+			set_something (ScalaBlue, XmNsensitive, (void*) False);
+			set_something (pushButton5, XmNsensitive, (void*) False);  /*  OK */
+			set_something (pushButton6, XmNsensitive, (void*) False);  /*  APPLY */
+			set_something (pushButton8, XmNsensitive, (void*) False);  /*  RESET */
 			}
 		
 		/*  Setta la posizione dell'interfaccia rispetto al Parent  */

@@ -115,7 +115,7 @@ mo_var_sel(lista)
 
 /*
    XtUnmanageChild(lista);
-   get_something(lista, XmNitemCount, &totale);
+   get_something(lista, XmNitemCount, (void*) &totale);
    if (totale)
       for (k = 1; k <= totale; k++, XmListDeletePos(lista, 1));
 */
@@ -165,7 +165,7 @@ mo_var_sel(lista)
    sprintf(app_str, "Elenco variabili selezionate [%d]", posizione);
 /* c_app_str=XmStringCreateLtoR(app_str,XmSTRING_DEFAULT_CHARSET);
  * set_something(widget_array[k_elenco_variabili_sel_label],
- * XmNlabelString,c_app_str); XmStringFree(c_app_str); */
+ * XmNlabelString,(void*) c_app_str); XmStringFree(c_app_str); */
 /*
    XtManageChild(lista);
 */
@@ -298,7 +298,7 @@ mo_var(lista)
    XtUnmanageChild(lista);
 */
 /*
-   get_something(lista, XmNitemCount, &totale);
+   get_something(lista, XmNitemCount, (void*) &totale);
    if (totale)
       for (k = 1; k <= totale; k++, XmListDeletePos(lista, 1));
 */
@@ -344,7 +344,7 @@ mo_var(lista)
    sprintf(app_str, "Elenco variabili selezionate [%d]", posizione);
 /* c_app_str=XmStringCreateLtoR(app_str,XmSTRING_DEFAULT_CHARSET);
  * set_something(widget_array[k_elenco_variabili_label],
- * XmNlabelString,c_app_str); XmStringFree(c_app_str); */
+ * XmNlabelString,(void*) c_app_str); XmStringFree(c_app_str); */
 /*
    XtManageChild(lista);
 */
@@ -364,7 +364,7 @@ mo_modelli(lista)
    nmod = numero_modelli(ind_sh_top);
 /*
    XtUnmanageChild(lista);
-   get_something(lista, XmNitemCount, &totale);
+   get_something(lista, XmNitemCount, (void*) &totale);
    if (totale)
       for (k = 1; k <= totale; k++, XmListDeletePos(lista, 1));
 */
@@ -405,7 +405,7 @@ mo_blocchi(lista)
 /*
    XtUnmanageChild(lista);
 
-   get_something(lista, XmNitemCount, &totale);
+   get_something(lista, XmNitemCount, (void*) &totale);
    if (totale)
       for (k = 1; k <= totale; k++, XmListDeletePos(lista, 1));
 */
@@ -631,17 +631,17 @@ paste_var_selez (w, tag, reason)
        sprintf(app_str, "Num. var. sel. >> %d", nu_var_sel);
        c_app_str = XmStringCreateLtoR(app_str, XmSTRING_DEFAULT_CHARSET);
        set_something(widget_array[k_elenco_variabili_nu_var_sel],
-                        XmNlabelString, c_app_str);
+                        XmNlabelString, (void*) c_app_str);
 
    /* aggiorna la label k_elenco_variabili_dialog_label  */
        sprintf(app_str, "File %s ", nome_file_selezione);
        c_app_str = XmStringCreateLtoR(app_str, XmSTRING_DEFAULT_CHARSET);
        set_something(widget_array[k_elenco_variabili_dialog_label],
- 		               XmNlabelString, c_app_str);
+ 		               XmNlabelString, (void*) c_app_str);
        set_something(widget_array[k_elenco_variabili_dialog_label],
- 		               XmNwidth, 630);
+ 		               XmNwidth, (void*) 630);
        set_something(widget_array[k_elenco_variabili_dialog_label],
- 		               XmNheight, 35);
+ 		               XmNheight, (void*) 35);
        XmStringFree(c_app_str);
        }  /* Fine k_elenco_variabili_aggiungi-elimina */
 }
@@ -730,17 +730,17 @@ seleziona_activate(w, tag, reason)
       sprintf(app_str, "Num. var. sel. >> %d", nu_var_sel);
       c_app_str = XmStringCreateLtoR(app_str, XmSTRING_DEFAULT_CHARSET);
       set_something(widget_array[k_elenco_variabili_nu_var_sel],
-                    XmNlabelString, c_app_str);
+                    XmNlabelString, (void*) c_app_str);
 
    /* aggiorna la label k_elenco_variabili_dialog_label  */
       sprintf(app_str, "File %s ", nome_file_selezione);
       c_app_str = XmStringCreateLtoR(app_str, XmSTRING_DEFAULT_CHARSET);
       set_something(widget_array[k_elenco_variabili_dialog_label],
-		    XmNlabelString, c_app_str);
+		    XmNlabelString, (void*) c_app_str);
       set_something(widget_array[k_elenco_variabili_dialog_label],
-		    XmNwidth, 630);
+		    XmNwidth, (void*) 630);
       set_something(widget_array[k_elenco_variabili_dialog_label],
-		    XmNheight, 35);
+		    XmNheight, (void*) 35);
       XmStringFree(c_app_str);
    }
 }
@@ -799,11 +799,11 @@ salva_file(w, tag, reason)
 	   nome_file_selezione);
    c_app_str = XmStringCreateLtoR(app_str, XmSTRING_DEFAULT_CHARSET);
    set_something(widget_array[k_elenco_variabili_dialog_label],
-		 XmNlabelString, c_app_str);
+		 XmNlabelString, (void*) c_app_str);
    set_something(widget_array[k_elenco_variabili_dialog_label],
-		 XmNwidth, 630);
+		 XmNwidth, (void*) 630);
    set_something(widget_array[k_elenco_variabili_dialog_label],
-		 XmNheight, 35);
+		 XmNheight, (void*) 35);
    XmStringFree(c_app_str);
    XtUnmanageChild(widget_array[k_salva_file_dialog]);
 
@@ -851,11 +851,11 @@ seleziona_file(w, tag, reason)
 	   nome_file_selezione);
    c_app_str = XmStringCreateLtoR(app_str, XmSTRING_DEFAULT_CHARSET);
    set_something(widget_array[k_elenco_variabili_dialog_label],
-		 XmNlabelString, c_app_str);
+		 XmNlabelString, (void*) c_app_str);
    set_something(widget_array[k_elenco_variabili_dialog_label],
-		 XmNwidth, 630);
+		 XmNwidth, (void*) 630);
    set_something(widget_array[k_elenco_variabili_dialog_label],
-		 XmNheight, 35);
+		 XmNheight, (void*) 35);
    XmStringFree(c_app_str);
 }
 

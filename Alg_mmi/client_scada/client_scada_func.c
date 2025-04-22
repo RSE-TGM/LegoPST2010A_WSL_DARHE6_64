@@ -11,6 +11,9 @@
 static char *_csrc = "@(#) %filespec: client_scada_func.c-31 %  (%full_filespec: client_scada_func.c-31:csrc:4 %)";
 #endif
 
+#include <stdio.h>
+#include <errno.h>
+
 /*
         Variabile per identificazione della versione
 */
@@ -19,7 +22,6 @@ static char SccsID[] = "@(#)client_scada_func.c	1.20\t5/23/95";
         Fine sezione per SCCS
 */
 #include <pthread.h>
-#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -55,6 +57,8 @@ static int unset_lock_miniASD(void);
 static int set_lock_miniASD(int);
 static int lock_enabled(void);
 static int status_lock_miniASD(void);
+extern int sgancia_shrmem(char *);
+extern void elimina_shrmem(int,char*,int);
 
 typedef struct flag_digitale_st{
                 unsigned short sl : 1;   /* stato logico corrente */

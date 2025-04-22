@@ -221,7 +221,7 @@ XmAnyCallbackStruct *call_data;
    WindowInfoStruct *winfo;
 
 /* verifica che sia stato selezionato un blocco dalla lista */
-   get_something(UxGetWidget(slista_blocchi),XmNselectedItemCount, &num_sel);
+   get_something(UxGetWidget(slista_blocchi),XmNselectedItemCount, (void*) &num_sel);
    
    if ( num_sel == 0 )
    {
@@ -229,7 +229,7 @@ XmAnyCallbackStruct *call_data;
       return;
    }
 
-   get_something(UxGetWidget(slista_blocchi),XmNselectedItems,&items_sel);
+   get_something(UxGetWidget(slista_blocchi),XmNselectedItems,(void*) &items_sel);
 
    str = (char *) extract_string(items_sel[0]);
    nome_blocco = (char *) XtCalloc(9,sizeof(char));

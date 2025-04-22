@@ -106,8 +106,8 @@ else
   S_MAIN_WINDOW = XtParent(parent);
   }
 
-get_something(parent, XmNwidth, &width_grafico);
-get_something(parent, XmNheight, &height_grafico);
+get_something(parent, XmNwidth, (void*) &width_grafico);
+get_something(parent, XmNheight, (void*) &height_grafico);
 width_grafico-=10;
 height_grafico-=10;
 

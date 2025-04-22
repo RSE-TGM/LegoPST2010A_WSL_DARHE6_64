@@ -325,7 +325,7 @@ XmAnyCallbackStruct *call_data;
    Text_find_struct *ptr;
 
 /* Dealloca la memoria */
-   get_something(weditor[indice], XmNuserData, &ptr);
+   get_something(weditor[indice], XmNuserData, (void*) &ptr);
    XtFree(ptr);
  
 /* Cancella file temporaneo */
@@ -435,21 +435,21 @@ salva_e_genera()
 menu_newmod_init()
 {
 /* Disabilita l'accesso alle sezioni USER (I2,JC,D1,resid.,D1) */
-   set_something (UxGetWidget(pb_nmod_I2),XmNsensitive,False);
-   set_something (UxGetWidget(pb_nmod_JC),XmNsensitive, False);
-   set_something (UxGetWidget(pb_nmod_residual),XmNsensitive,False);
-   set_something (UxGetWidget(pb_nmod_D1),XmNsensitive,False);
-   set_something (UxGetWidget(pb_nmod_vI2),XmNsensitive,False);
-   set_something (UxGetWidget(pb_nmod_vJC),XmNsensitive, False);
-   set_something (UxGetWidget(pb_nmod_vMOD),XmNsensitive,False);
-   set_something (UxGetWidget(pb_nmod_vD1),XmNsensitive,False);
-   set_something (UxGetWidget(pb_nmod_vI3),XmNsensitive,False);
-   set_something (UxGetWidget(pb_nmod_vI4),XmNsensitive,False);
-   set_something (UxGetWidget(pb_nmod_vC1),XmNsensitive,False);
+   set_something (UxGetWidget(pb_nmod_I2),XmNsensitive,(void*) False);
+   set_something (UxGetWidget(pb_nmod_JC),XmNsensitive, (void*) False);
+   set_something (UxGetWidget(pb_nmod_residual),XmNsensitive,(void*) False);
+   set_something (UxGetWidget(pb_nmod_D1),XmNsensitive,(void*) False);
+   set_something (UxGetWidget(pb_nmod_vI2),XmNsensitive,(void*) False);
+   set_something (UxGetWidget(pb_nmod_vJC),XmNsensitive, (void*) False);
+   set_something (UxGetWidget(pb_nmod_vMOD),XmNsensitive,(void*) False);
+   set_something (UxGetWidget(pb_nmod_vD1),XmNsensitive,(void*) False);
+   set_something (UxGetWidget(pb_nmod_vI3),XmNsensitive,(void*) False);
+   set_something (UxGetWidget(pb_nmod_vI4),XmNsensitive,(void*) False);
+   set_something (UxGetWidget(pb_nmod_vC1),XmNsensitive,(void*) False);
 
 /* La matrice jacobiana e il salvataggio su file vengono imbibiti */
-   set_something (UxGetWidget(pb_nmod_jactopology), XmNsensitive,False);
-   set_something (UxGetWidget(pb_nmod_save), XmNsensitive,False);
+   set_something (UxGetWidget(pb_nmod_jactopology), XmNsensitive,(void*) False);
+   set_something (UxGetWidget(pb_nmod_save), XmNsensitive,(void*) False);
 
    nmod_def_initialized = False;
 }
@@ -559,26 +559,26 @@ static void	activateCB_nmod_pb_ok( UxWidget, UxClientData, UxCallbackArg )
 	   scrivi_messaggio (message);
 	
 	/* Abilitazione voci di menu jacobiano */
-	   set_something (UxGetWidget(pb_nmod_jactopology),XmNsensitive,True);
-	   set_something (UxGetWidget(pb_nmod_save),XmNsensitive,True);
+	   set_something (UxGetWidget(pb_nmod_jactopology),XmNsensitive,(void*) True);
+	   set_something (UxGetWidget(pb_nmod_save),XmNsensitive,(void*) True);
 	
 	/* Abilitazione voci di menu user sections */
-	   set_something (UxGetWidget(pb_nmod_I2),XmNsensitive,True);
-	   set_something (UxGetWidget(pb_nmod_residual),XmNsensitive,True);
-	   set_something (UxGetWidget(pb_nmod_D1),XmNsensitive,True);
+	   set_something (UxGetWidget(pb_nmod_I2),XmNsensitive,(void*) True);
+	   set_something (UxGetWidget(pb_nmod_residual),XmNsensitive,(void*) True);
+	   set_something (UxGetWidget(pb_nmod_D1),XmNsensitive,(void*) True);
 	
 	/* Se l'utente ha scelto lo jacobiano numerico */
 	/* la sezione JC e' inibita */
 	   set_something (UxGetWidget(pb_nmod_JC), XmNsensitive,
 	                  (jacobian_type == NUMERICAL) ? False : True);
 	
-	   set_something (UxGetWidget(pb_nmod_vI2),XmNsensitive,True);
-	   set_something (UxGetWidget(pb_nmod_vJC),XmNsensitive,True);
-	   set_something (UxGetWidget(pb_nmod_vMOD),XmNsensitive,True);
-	   set_something (UxGetWidget(pb_nmod_vD1),XmNsensitive,True);
-	   set_something (UxGetWidget(pb_nmod_vI3),XmNsensitive,True);
-	   set_something (UxGetWidget(pb_nmod_vI4),XmNsensitive,True);
-	   set_something (UxGetWidget(pb_nmod_vC1),XmNsensitive,True);
+	   set_something (UxGetWidget(pb_nmod_vI2),XmNsensitive,(void*) True);
+	   set_something (UxGetWidget(pb_nmod_vJC),XmNsensitive,(void*) True);
+	   set_something (UxGetWidget(pb_nmod_vMOD),XmNsensitive,(void*) True);
+	   set_something (UxGetWidget(pb_nmod_vD1),XmNsensitive,(void*) True);
+	   set_something (UxGetWidget(pb_nmod_vI3),XmNsensitive,(void*) True);
+	   set_something (UxGetWidget(pb_nmod_vI4),XmNsensitive,(void*) True);
+	   set_something (UxGetWidget(pb_nmod_vC1),XmNsensitive,(void*) True);
 	
 	}
 	}
@@ -808,7 +808,7 @@ static void	activateCB_pb_nmod_vI2( UxWidget, UxClientData, UxCallbackArg )
 	   weditor[0] = (Widget) editor(UxTopLevel, &wtxteditor, nomitmp[0], False,
 	                                font, funz_editor, geom_editor);
 	   cstring = CREATE_CSTRING("VIEW SUBROUTINE I2 (DATA SECTION)");
-	   set_something(weditor[0], XmNdialogTitle, cstring);
+	   set_something(weditor[0], XmNdialogTitle, (void*) cstring);
 	   XmStringFree(cstring);
 	}
 	UxNmod_app_shellContext = UxSaveCtx;
@@ -847,7 +847,7 @@ static void	activateCB_pb_nmod_vI3( UxWidget, UxClientData, UxCallbackArg )
 	   weditor[1] = (Widget) editor(UxTopLevel, &wtxteditor, nomitmp[1], False,
 	                                font, funz_editor, geom_editor);
 	   cstring = CREATE_CSTRING("VIEW SUBROUTINE I3 (VARIABLE LIST SECTION)");
-	   set_something(weditor[1], XmNdialogTitle, cstring);
+	   set_something(weditor[1], XmNdialogTitle, (void*) cstring);
 	   XmStringFree(cstring);
 	
 	}
@@ -886,7 +886,7 @@ static void	activateCB_pb_nmod_vI4( UxWidget, UxClientData, UxCallbackArg )
 	   weditor[2] = (Widget) editor(UxTopLevel, &wtxteditor, nomitmp[2], False,
 	                                font, funz_editor, geom_editor);
 	   cstring = CREATE_CSTRING("VIEW SUBROUTINE I4");
-	   set_something(weditor[2], XmNdialogTitle, cstring);
+	   set_something(weditor[2], XmNdialogTitle, (void*) cstring);
 	   XmStringFree(cstring);
 	}
 	UxNmod_app_shellContext = UxSaveCtx;
@@ -926,7 +926,7 @@ static void	activateCB_pb_nmod_vC1( UxWidget, UxClientData, UxCallbackArg )
 	   weditor[3] = (Widget) editor(UxTopLevel, &wtxteditor, nomitmp[3], False,
 	                                font, funz_editor, geom_editor);
 	   cstring = CREATE_CSTRING("VIEW SUBROUTINE C1 (RESIDUAL EVALUATION)");
-	   set_something(weditor[3], XmNdialogTitle, cstring);
+	   set_something(weditor[3], XmNdialogTitle, (void*) cstring);
 	   XmStringFree(cstring);
 	}
 	UxNmod_app_shellContext = UxSaveCtx;
@@ -966,7 +966,7 @@ static void	activateCB_pb_nmod_vJC( UxWidget, UxClientData, UxCallbackArg )
 	   weditor[4] = (Widget) editor(UxTopLevel, &wtxteditor, nomitmp[4], False,
 	                                font, funz_editor, geom_editor);
 	   cstring = CREATE_CSTRING("VIEW SUBROUTINE JC (JACOBIAN SECTION)");
-	   set_something(weditor[4], XmNdialogTitle, cstring);
+	   set_something(weditor[4], XmNdialogTitle, (void*) cstring);
 	   XmStringFree(cstring);
 	}
 	UxNmod_app_shellContext = UxSaveCtx;
@@ -1006,7 +1006,7 @@ static void	activateCB_pb_nmod_vMOD( UxWidget, UxClientData, UxCallbackArg )
 	   weditor[5] = (Widget) editor(UxTopLevel, &wtxteditor, nomitmp[5], False,
 	                                font, funz_editor, geom_editor);
 	   cstring = CREATE_CSTRING("VIEW SUBROUTINE RESIDUAL");
-	   set_something(weditor[5], XmNdialogTitle, cstring);
+	   set_something(weditor[5], XmNdialogTitle, (void*) cstring);
 	   XmStringFree(cstring);
 	}
 	UxNmod_app_shellContext = UxSaveCtx;
@@ -1046,7 +1046,7 @@ static void	activateCB_pb_nmod_vD1( UxWidget, UxClientData, UxCallbackArg )
 	   weditor[6] = (Widget) editor(UxTopLevel, &wtxteditor, nomitmp[6], False,
 	                                font, funz_editor, geom_editor);
 	   cstring = CREATE_CSTRING("VIEW SUBROUTINE D1 (EQUATION SECTION)");
-	   set_something(weditor[6], XmNdialogTitle, cstring);
+	   set_something(weditor[6], XmNdialogTitle, (void*) cstring);
 	   XmStringFree(cstring);
 	}
 	UxNmod_app_shellContext = UxSaveCtx;

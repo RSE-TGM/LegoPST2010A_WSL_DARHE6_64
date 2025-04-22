@@ -190,7 +190,7 @@ int i,stato_inib;
 p_refr=(DATI_REFRESH *) info;
 p_r02= (TIPO_SET_VALORE *) p_refr->pdati;
 
-get_something(p_refr->w,XmNchildren,&listw);
+get_something(p_refr->w,XmNchildren,(void*) &listw);
 wbutton=(Widget)(listw[0]);
 wedit=(Widget)(listw[1]);
 
@@ -251,7 +251,7 @@ WidgetList listw;
 Widget wtext;
 
 
-get_something(XtParent(w),XmNchildren,&listw);
+get_something(XtParent(w),XmNchildren,(void*) &listw);
 wtext=(Widget)(listw[1]);
 XmTextSetEditable(wtext,True);
 XmTextSetString(wtext,"");
@@ -274,7 +274,7 @@ int iret;
 
 p_refr=(DATI_REFRESH *) info;
 p_r02= (TIPO_SET_VALORE *) p_refr->pdati;
-get_something(XtParent(w),XmNchildren,&listw);
+get_something(XtParent(w),XmNchildren,(void*) &listw);
 wtext=(Widget)(listw[1]);
 /*
  se il testo non e' editabile non accetto il valore attuale

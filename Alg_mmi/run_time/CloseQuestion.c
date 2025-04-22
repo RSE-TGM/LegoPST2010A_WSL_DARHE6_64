@@ -232,10 +232,10 @@ Widget	popup_CloseQuestion( _UxTop, _UxDrawing, _Uxtimer, _Uxkey )
 		rtrn = _Uxbuild_CloseQuestion();
 
 		UxPopupInterface(rtrn, no_grab);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),XmNfontList,FontLabelClose);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),XmNfontList,FontLabelClose);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),XmNfontList,FontLabelClose);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),XmNfontList,FontLabelClose);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,FontLabelClose);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,FontLabelClose);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,FontLabelClose);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),(void*) XmNfontList,FontLabelClose);
 		return(rtrn);
 	}
 }

@@ -157,7 +157,7 @@ char *str;
 XmString c_str;
 int posizione =0;
 
-	get_something(lista,XmNitemCount,(char*)&totale);
+	get_something(lista,XmNitemCount, (void*) &totale);
 	if(totale)
 	for(k=1;k<=totale;k++,XmListDeletePos(lista,1));
 	
@@ -198,7 +198,7 @@ int posizione =0;
 
 
    XmListAddItemUnselected(lista,c_str,0);
-   set_something(lista,XmNitemCount,(char*)posizione);
+   set_something(lista,XmNitemCount, (void*) posizione);
 
    XmStringFree(c_str);
    XtFree(str);
@@ -217,7 +217,7 @@ int posizione =0;
 if(val_agg.stato_sked!=STATO_BACKTRACK)
     {
 
-get_something(lista,XmNitemCount,(char*)&totale);
+get_something(lista,XmNitemCount, (void*) &totale);
 if(totale)
 for(k=1;k<=totale;k++,XmListDeletePos(lista,1));
 
@@ -259,7 +259,7 @@ for (k=1;k<=_MAX_SNAP_SHOT;k++)
 
 
    XmListAddItemUnselected(lista,c_str,0);
-   set_something(lista,XmNitemCount,(char*)posizione);
+   set_something(lista,XmNitemCount, (void*) posizione);
 
    XmStringFree(c_str);
    XtFree(str);
@@ -268,7 +268,7 @@ for (k=1;k<=_MAX_SNAP_SHOT;k++)
 else
 {
 #if defined BACKTRACK
-        get_something(lista,XmNitemCount,(char*)&totale);
+        get_something(lista,XmNitemCount, (void*) &totale);
         if(totale)
         for(k=1;k<=totale;k++,XmListDeletePos(lista,1));
         posizione=0;
@@ -284,7 +284,7 @@ else
    	   strcpy(str,testo);
    	   c_str=XmStringCreate(str,XmSTRING_DEFAULT_CHARSET);
    	   XmListAddItemUnselected(lista,c_str,0);
-   	   set_something(lista,XmNitemCount,(char*)posizione);
+   	   set_something(lista,XmNitemCount, (void*) posizione);
 
            XmStringFree(c_str);
            XtFree(str);
@@ -305,7 +305,7 @@ XmString c_str;
 char *str;
 int posizione =0;
 
-        get_something(lista,XmNitemCount,(char*)&totale);
+        get_something(lista,XmNitemCount, (void*) &totale);
         if(totale)
         for(k=1;k<=totale;k++,XmListDeletePos(lista,1));
         posizione=0;
@@ -346,7 +346,7 @@ printf ("carica_backtrack in esecuzione last_backtrack = %d\n",
 
         strcpy(flag,"*");
 
-        get_something(lista,XmNitemCount,(char*)&totale);
+        get_something(lista,XmNitemCount, (void*) &totale);
         if(totale)
         for(k=1;k<=totale;k++,XmListDeletePos(lista,1));
 
@@ -391,7 +391,7 @@ printf ("carica_backtrack in esecuzione last_backtrack = %d\n",
          XmStringFree(c_str);
          free(str);
 
-/*        set_something(lista,XmNitemCount,(char*)posizione);     */
+/*        set_something(lista,XmNitemCount, (void*) posizione);     */
 
                         if (k == last_backtrack)
                                 {
@@ -478,7 +478,7 @@ printf ("limiti: step selezionato %d\n",step_selezionato);
                 sprintf (app_str,"%d - %d",first_session_bt,last_session_bt);
                 c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
                 set_something(widget_array[k_limiti_bt_val],
-                                             XmNlabelString, c_app_str);
+                                             XmNlabelString, (void*) c_app_str);
                 XmStringFree (c_app_str);
 #endif
 }
@@ -940,11 +940,9 @@ int stato;
 printf ("direzione indietro\n");
         direzione_bt=BT_INDIETRO;
             stato = False;
-            set_something (widget_array[k_bt_indietro], XmNsensitive,
-                  (char *)stato);
+            set_something (widget_array[k_bt_indietro], XmNsensitive, (void*) stato);
             stato = True;
-            set_something (widget_array[k_bt_avanti], XmNsensitive,
-                  (char *)stato);
+            set_something (widget_array[k_bt_avanti], XmNsensitive, (void*) stato);
             prossimo_step();
         return(0);
 #endif
@@ -959,11 +957,9 @@ int stato;
 printf ("direzione avanti\n");
         direzione_bt=BT_AVANTI;
             stato = True;
-            set_something (widget_array[k_bt_indietro], XmNsensitive,
-                  (char *)stato);
+            set_something (widget_array[k_bt_indietro], XmNsensitive, (void*) stato);
             stato = False;
-            set_something (widget_array[k_bt_avanti], XmNsensitive,
-                  (char *)stato);
+            set_something (widget_array[k_bt_avanti], XmNsensitive, (void*) stato);
             prossimo_step();
         return(0);
 #endif
@@ -976,11 +972,9 @@ int bt_in_manuale()
 int stato;
                  modo_bt=BT_MANUALE;
          stato = False;
-            set_something (widget_array[k_bt_manuale], XmNsensitive,
-                  (char *)stato);
+            set_something (widget_array[k_bt_manuale], XmNsensitive, (void*) stato);
             stato = True;
-            set_something (widget_array[k_bt_automatico], XmNsensitive,
-                  (char *)stato);
+            set_something (widget_array[k_bt_automatico], XmNsensitive, (void*) stato);
                                 return(0);
 #endif
 }
@@ -992,11 +986,9 @@ int bt_in_automatico()
 int stato;
                 modo_bt=BT_AUTOMATICO;
             stato = True;
-            set_something (widget_array[k_bt_manuale], XmNsensitive,
-                  (char *)stato);
+            set_something (widget_array[k_bt_manuale], XmNsensitive, (void*) stato);
             stato = False;
-            set_something (widget_array[k_bt_automatico], XmNsensitive,
-                  (char *)stato);
+            set_something (widget_array[k_bt_automatico], XmNsensitive, (void*) stato);
                                 return(0);
 #endif
 }

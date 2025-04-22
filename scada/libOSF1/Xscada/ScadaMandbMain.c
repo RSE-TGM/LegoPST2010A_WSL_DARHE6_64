@@ -5674,7 +5674,7 @@ Pixmap pix;
 
         LoadBitmap(ScadaMandbMain,&pix,MandbIconBitmap_bits,MandbIconBitmap_width,
                 MandbIconBitmap_height);
-        set_something(ScadaMandbMain,XmNiconPixmap,pix);
+        set_something(ScadaMandbMain,XmNiconPixmap,(void*) pix);
 
 	return ( ScadaMandbMain );
 }

@@ -50,12 +50,12 @@ Dimension WidC,WidM,HeiC,HeiM;\
 Ingresso = TipoMsg;\
 Oggetto = Chiamante;\
 OggettoParametro = Par;
-*Message.fcode: get_something (Chiamante, XmNx, &Px);\
-get_something (Chiamante, XmNy, &Py);\
-get_something (Chiamante, XmNwidth, &WidC);\
-get_something (Chiamante, XmNheight, &HeiC);\
-get_something (Message, XmNwidth, &WidM);\
-get_something (Message, XmNheight, &HeiM);\
+*Message.fcode: get_something (Chiamante, XmNx, (char*)&Px);\
+get_something (Chiamante, XmNy, (char*)&Py);\
+get_something (Chiamante, XmNwidth, (char*)&WidC);\
+get_something (Chiamante, XmNheight, (char*)&HeiC);\
+get_something (Message, XmNwidth, (char*)&WidM);\
+get_something (Message, XmNheight, (char*)&HeiM);\
 \
 Px += (Position )(WidC-WidM)/2;\
 Py += (Position )(HeiC-HeiM)/2;\

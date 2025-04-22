@@ -22,8 +22,11 @@ char *nzero();
 char *trim_blank();
 void s_warning();
 void s_error();
-int tomaius();
-int tominus();
+void  tomaius();
+void  tominus();
+
+int IsNumeric(char*);
+void riempi(char*,int);
 
 /* fine utile.h */
 

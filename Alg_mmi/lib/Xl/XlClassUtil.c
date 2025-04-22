@@ -183,8 +183,8 @@ else
 */
 if(XlIsXlComposite(w))
 	{
-	get_something (w,XmNchildren, &child);
-	get_something (w,XmNnumChildren, &num_child);
+	get_something (w,XmNchildren, (void*) &child);
+	get_something (w,XmNnumChildren, (void*) &num_child);
 	for(i=0;i<num_child;i++)
 		XlRedisplay(child[i]);
 	}

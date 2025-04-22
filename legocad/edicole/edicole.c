@@ -277,6 +277,9 @@ static XtResource resources[] = {
           XtRImmediate,
           0 }};
 
+extern void free_array_XmString( XmString, int );
+
+
 /*-----------------------------------------------------------------------*/
 void main(int argc,char **argv)
 {
@@ -377,7 +380,7 @@ printf("flag lib: %d\n", flag_lib);
    cambia_stato_menu (numero_voci, vm_inizio_programma);
 
 /*  Recupera la Colormap e allocca i colori di fg e bg  */
-   get_something(main_window_widget,XmNcolormap,&colormap);
+   get_something(main_window_widget,XmNcolormap,(void*) &colormap);
    get_pixel(names,apix,num_colors);
 
 /*  Registra i ridimensionamenti dell'applicativo per mantenere  */
@@ -386,7 +389,7 @@ printf("flag lib: %d\n", flag_lib);
                      cambio_dim, NULL);
 
 /* Recupera le dimensioni della stringa di label dell'icona */
-   get_something (widget_array[K_ICON_LABEL],XmNfontList,&fontList);
+   get_something (widget_array[K_ICON_LABEL],XmNfontList,(void*) &fontList);
    cstring = CREATE_CSTRING("****");
    size = XmStringWidth(fontList,cstring);
    XmStringFree(cstring);
@@ -459,7 +462,7 @@ Voci_menu *stato_programma;
 
    for (i=0; i<numero_voci; i++)
        set_something (widget_array[stato_programma[i].indice], XmNsensitive,
-    		      stato_programma[i].stato);
+    		      (void*) stato_programma[i].stato);
 }
 
 /*-----------------------------------------------------------------------*/
@@ -529,7 +532,7 @@ XmAnyCallbackStruct *selez;
                         warning_mesg, WCLRBMAP );
           else
              set_something(widget_array[K_ICON_PIXMAP] ,XmNlabelPixmap,
-                           XmUNSPECIFIED_PIXMAP);
+                           (void*) XmUNSPECIFIED_PIXMAP);
 	  break;
 
 /***************************************  activate_proc   **************/
@@ -539,7 +542,7 @@ XmAnyCallbackStruct *selez;
 
 /* Se si stava agendo sui simboli, vengono reimpostati i settaggi */
 /* per le icone "normali" (standard, process, scheme) */
-         set_something(widget_array[K_ICON_LABEL],XmNbackground, apix[WHITE]);
+         set_something(widget_array[K_ICON_LABEL],XmNbackground, (void*) apix[WHITE]);
          if (tipo_icona == TP_SYMBOL)
             icon_defaults();
 
@@ -576,7 +579,7 @@ XmAnyCallbackStruct *selez;
          {
             set_default_config();
             set_something(widget_array[K_ICON_PIXMAP] ,XmNlabelPixmap,
-                          XmUNSPECIFIED_PIXMAP);
+                          (void*) XmUNSPECIFIED_PIXMAP);
             strcpy(only_filebmp_name, "<NO ICONS>");
             pixmap_creata = False;
             cambia_stato_menu (numero_voci, vm_nessuna_icona);
@@ -776,7 +779,7 @@ XmAnyCallbackStruct *selez;
          salva_icona( tipo_icona );
 
          set_something(widget_array[K_ICON_PIXMAP] ,XmNlabelPixmap,
-                       XmUNSPECIFIED_PIXMAP);
+                       (void*) XmUNSPECIFIED_PIXMAP);
          pixmap_creata = False;
         break;
 
@@ -993,9 +996,9 @@ void dialog_proc(w, widget_num, selez)
          {
              wait(&status);
              crea_pixmap( filebitmap ) ;
-	     set_something(widget_array[K_BBOARD_ICON],XmNwidth,icon_width);
+	     set_something(widget_array[K_BBOARD_ICON],XmNwidth,(void*) icon_width);
 	     set_something(widget_array[K_BBOARD_ICON],XmNheight,
-			   icon_height);
+			   (void*) icon_height);
          }
 
 #endif
@@ -1056,13 +1059,13 @@ void drag_proc(w, widget_num, selez)
    switch(*widget_num) {
 
 	case K_ICON_WIDTH:
-	     get_something(widget_array[*widget_num],XmNvalue,&i);
+	     get_something(widget_array[*widget_num],XmNvalue,(void*) &i);
              icon_width = i * STEPPING;
 	     centra_icona_dinamica(WIDTH);
 	break;
 
 	case K_ICON_HEIGHT:
-	     get_something(widget_array[*widget_num],XmNvalue,&i);
+	     get_something(widget_array[*widget_num],XmNvalue,(void*) &i);
              icon_height = i * STEPPING + offset_label;
 	     centra_icona_dinamica(HEIGHT);
 	break;
@@ -1084,35 +1087,35 @@ Boolean boh;
 {
  /* Legge le dimensioni della scrolled window e del bulletin board
     all'interno */
-    get_something(w, XmNwidth, &window_width );
-    get_something(w, XmNheight, &window_height );
+    get_something(w, XmNwidth, (void*) &window_width );
+    get_something(w, XmNheight, (void*) &window_height );
 /***
-    get_something(widget_array[K_BBOARD_ICON], XmNwidth, &bb_width );
-    get_something(widget_array[K_BBOARD_ICON], XmNheight, &bb_height );
+    get_something(widget_array[K_BBOARD_ICON], XmNwidth, (void*) &bb_width );
+    get_something(widget_array[K_BBOARD_ICON], XmNheight, (void*) &bb_height );
 ***/
 
     if (icon_width < window_width)
     {
-        set_something(widget_array[K_BBOARD_WINDOW],XmNwidth,window_width);
+        set_something(widget_array[K_BBOARD_WINDOW],XmNwidth,(void*) window_width);
 	set_something(widget_array[K_BBOARD_ICON],XmNx,
-	                 (window_width-icon_width)/2);
+	                 (void*) (window_width-icon_width)/2);
     }
     else
     {
-        set_something(widget_array[K_BBOARD_WINDOW],XmNwidth,icon_width);
-	set_something(widget_array[K_BBOARD_ICON],XmNx,0);
+        set_something(widget_array[K_BBOARD_WINDOW],XmNwidth,(void*) icon_width);
+	set_something(widget_array[K_BBOARD_ICON],XmNx,(void*) 0);
     }
 
     if (icon_height < window_height)
     {
-        set_something(widget_array[K_BBOARD_WINDOW],XmNheight,window_height);
+        set_something(widget_array[K_BBOARD_WINDOW],XmNheight,(void*) window_height);
 	set_something(widget_array[K_BBOARD_ICON],XmNy,
-                      (window_height-icon_height)/2);
+                      (void*) (window_height-icon_height)/2);
     }
     else
     {
-        set_something(widget_array[K_BBOARD_WINDOW],XmNheight,icon_height);
-        set_something(widget_array[K_BBOARD_ICON],XmNy,0);
+        set_something(widget_array[K_BBOARD_WINDOW],XmNheight,(void*) icon_height);
+        set_something(widget_array[K_BBOARD_ICON],XmNy,(void*) 0);
     }
 }
 
@@ -1157,13 +1160,13 @@ XmAnyCallbackStruct *selez;
 
 	case K_MODULE_P_DIALOG:
              get_something(widget_array[K_MODULE_P_LIST],XmNselectedItems,
-			   &lista_select);
+			   (void*) &lista_select);
              modulo_selezionato(lista_select[0], K_MODULE_P_LIST);
           break;
 
 	case K_MODULE_NP_DIALOG:
              get_something(widget_array[K_MODULE_NP_LIST],XmNselectedItems,
-			   &lista_select);
+			   (void*) &lista_select);
              modulo_selezionato(lista_select[0], K_MODULE_NP_LIST);
           break;
 
@@ -1306,14 +1309,14 @@ int *color_num;
 XmAnyCallbackStruct *selez;
 {
    icon_fg = (short) *color_num;
-   set_something(widget_array[K_ICON_PIXMAP],XmNforeground,apix[icon_fg]);
+   set_something(widget_array[K_ICON_PIXMAP],XmNforeground,(void*) apix[icon_fg]);
    if ( !pixmap_creata )
       return;
 
    XSetForeground (display, gc_icona, apix[icon_fg]);
    XCopyPlane(display, bmap_pixmap, icon_pixmap, gc_icona, 0, 0,
               bmap_width, bmap_height, 0, 0, 1);
-   set_something(widget_array[K_ICON_PIXMAP],XmNlabelPixmap,icon_pixmap);
+   set_something(widget_array[K_ICON_PIXMAP],XmNlabelPixmap,(void*) icon_pixmap);
    XSync(display, False);
 }
 
@@ -1332,14 +1335,14 @@ XmAnyCallbackStruct *selez;
    XmAnyCallbackStruct *selez;
    {
       icon_bg = *color_num;
-      set_something(widget_array[K_ICON_PIXMAP],XmNbackground,apix[icon_bg]);
+      set_something(widget_array[K_ICON_PIXMAP],XmNbackground,(void*) apix[icon_bg]);
       if ( !pixmap_creata )
          return;
 
       XSetBackground (display, gc_icona, apix[icon_bg]);
       XCopyPlane(display, bmap_pixmap, icon_pixmap, gc_icona, 0, 0,
                  bmap_width, bmap_height, 0, 0, 1);
-      set_something(widget_array[K_ICON_PIXMAP],XmNlabelPixmap,icon_pixmap);
+      set_something(widget_array[K_ICON_PIXMAP],XmNlabelPixmap,(void*) icon_pixmap);
    }
 ***/
 
@@ -1360,37 +1363,37 @@ int dimensione;
 	case WIDTH:
 
        /* dimensiona l'icona */
-	   set_something(widget_array[K_BBOARD_ICON],XmNwidth,icon_width);
+	   set_something(widget_array[K_BBOARD_ICON],XmNwidth,(void*) icon_width);
 
        /* centra l'icona */
     	   if (icon_width < window_width)
 	   {
               set_something(widget_array[K_BBOARD_WINDOW],
-		     XmNwidth,window_width);
+		     XmNwidth,(void*) window_width);
 	      set_something(widget_array[K_BBOARD_ICON],XmNx,
-	    	    (window_width-icon_width)/2);
+	    	    (void*) (window_width-icon_width)/2);
 	   }
 	   else
               set_something(widget_array[K_BBOARD_WINDOW],
-		     XmNwidth,icon_width);
+		     XmNwidth,(void*) icon_width);
 	break;
 
 	case HEIGHT:
 
        /* dimensiona l'icona */
-	   set_something(widget_array[K_BBOARD_ICON],XmNheight, icon_height);
+	   set_something(widget_array[K_BBOARD_ICON],XmNheight, (void*) icon_height);
 
        /* centra l'icona */
     	   if (icon_height < window_height)
 	   {
               set_something(widget_array[K_BBOARD_WINDOW],
-		     XmNheight,window_height);
+		     XmNheight,(void*) window_height);
 	      set_something(widget_array[K_BBOARD_ICON],XmNy,
-	    	    (window_height-icon_height)/2);
+	    	    (void*) (window_height-icon_height)/2);
 	   }
 	   else
               set_something(widget_array[K_BBOARD_WINDOW],
-		     XmNheight,icon_height);
+		     XmNheight,(void*) icon_height);
 	break;
     }
 }
@@ -1486,9 +1489,9 @@ char *addr;
  /* Se il file bitmap e' stato creato/modificato allora visualizza la */
  /* bitmap */
     crea_pixmap( filebitmap ) ;
-    set_something(widget_array[K_BBOARD_ICON],XmNwidth,icon_width);
+    set_something(widget_array[K_BBOARD_ICON],XmNwidth,(void*) icon_width);
     set_something(widget_array[K_BBOARD_ICON],XmNheight,
-		  icon_height);
+		  (void*) icon_height);
 
  /* Rende sensibili gli opportuni menu e push button */
     switch (tipo_icona) {
@@ -1542,7 +1545,7 @@ char *filebitmap;
         s_warning( toplevel_widget, &geom_attention, APPLICATION_NAME,
                    warning_mesg, WREADBMAP );
         set_something(widget_array[K_ICON_PIXMAP] ,XmNlabelPixmap,
-                      XmUNSPECIFIED_PIXMAP);
+                      (void*) XmUNSPECIFIED_PIXMAP);
         pixmap_creata = False;
 	return(-1);
    }
@@ -1559,8 +1562,8 @@ char *filebitmap;
               bmap_width, bmap_height, 0, 0, 1);
 
 /* Assegnazione della pixmap creata al widget dell'icona */
-   set_something(w ,XmNlabelPixmap,icon_pixmap);
-   set_something(w ,XmNbackground,apix[icon_bg]); 
+   set_something(w ,XmNlabelPixmap,(void*) icon_pixmap);
+   set_something(w ,XmNbackground,(void*) apix[icon_bg]); 
    pixmap_creata = True;
    return(0);  /* ritorno con successo! */
 }
@@ -1580,7 +1583,7 @@ char   *string;
    XmString compound_str;
 
    compound_str = CREATE_CSTRING(string);
-   set_something(w, XmNlabelString, compound_str);
+   set_something(w, XmNlabelString, (void*) compound_str);
    XmStringFree(compound_str);
 }
 
@@ -1599,8 +1602,8 @@ set_icon_config()
 
 /* Controlla che le dimensioni dell'icona non siano minori dei valori */
 /* minimi stabiliti ( 2x5 per i simboli e 10x5 per i moduli ) */
-   get_something(widget_array[K_ICON_WIDTH],XmNminimum,&min_width);
-   get_something(widget_array[K_ICON_HEIGHT],XmNminimum,&min_height);
+   get_something(widget_array[K_ICON_WIDTH],XmNminimum,(void*) &min_width);
+   get_something(widget_array[K_ICON_HEIGHT],XmNminimum,(void*) &min_height);
    min_width *= STEPPING;
    min_height = min_height * STEPPING + offset_label;
    icon_width = (icon_width > min_width) ? icon_width : min_width;
@@ -1615,22 +1618,22 @@ set_icon_config()
    set_label(widget_array[K_FILE_BITMAP], only_filebmp_name);
 
 /* posiziona correttamente gli slider degli scale-widgets */
-   set_something(widget_array[K_ICON_WIDTH],XmNvalue,icon_width / STEPPING);
+   set_something(widget_array[K_ICON_WIDTH],XmNvalue,(void*) icon_width / STEPPING);
    set_something(widget_array[K_ICON_HEIGHT],
-		 XmNvalue, (icon_height - offset_label) / STEPPING );
+		 XmNvalue, (void*) (icon_height - offset_label) / STEPPING );
 
    centra_icona_dinamica(WIDTH);
    centra_icona_dinamica(HEIGHT);
 
 /* setta le opzioni corrette sui menu-option dei colori fg/bg */
    set_something(widget_array[K_FG_MENU],XmNmenuHistory,
-                 widget_array[K_WHITE_FG + icon_fg]);
+                 (void*) widget_array[K_WHITE_FG + icon_fg]);
 /*   set_something(widget_array[K_BG_MENU],XmNmenuHistory,
-                   widget_array[K_WHITE_BG + icon_bg]);   */
+                   (void*) widget_array[K_WHITE_BG + icon_bg]);   */
 
 /* Setta i colori della label della pixmap */
-   set_something(widget_array[K_ICON_LABEL],XmNbackground, apix[WHITE]);
-   set_something(widget_array[K_ICON_PIXMAP],XmNbackground,apix[icon_bg]); 
+   set_something(widget_array[K_ICON_LABEL],XmNbackground, (void*) apix[WHITE]);
+   set_something(widget_array[K_ICON_PIXMAP],XmNbackground,(void*) apix[icon_bg]); 
 }
 
 /*-----------------------------------------------------------------------*/
@@ -1757,7 +1760,7 @@ int tipo_modulo;
    set_label(widget_array[K_MODULE_NAME], nome_modulo);
    set_label(widget_array[K_MODULE_DESCRIPTION], descr_modulo);
    set_label(widget_array[K_ICON_LABEL],nome_modulo);
-   set_something(widget_array[K_ICON_LABEL],XmNbackground, apix[WHITE]);
+   set_something(widget_array[K_ICON_LABEL],XmNbackground, (void*) apix[WHITE]);
 
 /* Se si stava agendo sui simboli, vengono reimpostati i settaggi */
 /* per le icone "normali" (standard, process, scheme) */
@@ -1826,10 +1829,10 @@ salva_bitmap()
 /***
 printf("vecchie dim. %d , %d\n", bmap_width, bmap_height);
 printf("nuove   dim. %d , %d\n", dimw, dimh);
-get_something(widget_array[K_ICON_PIXMAP], XmNheight, &bbh);
-get_something(widget_array[K_ICON_PIXMAP], XmNwidth, &bbw);
-get_something(widget_array[K_ICON_LABEL], XmNheight, &bbh2);
-get_something(widget_array[K_ICON_LABEL], XmNwidth, &bbw2);
+get_something(widget_array[K_ICON_PIXMAP], XmNheight, (void*) &bbh);
+get_something(widget_array[K_ICON_PIXMAP], XmNwidth, (void*) &bbw);
+get_something(widget_array[K_ICON_LABEL], XmNheight, (void*) &bbh2);
+get_something(widget_array[K_ICON_LABEL], XmNwidth, (void*) &bbw2);
 printf("dim icon pixmap %d , %d label %d, %d\n", bbw, bbh, bbw2, bbh2);
 ***/
 
@@ -2050,7 +2053,7 @@ visualizza_icona_standard()
             {
                set_default_config();
                set_something(widget_array[K_ICON_PIXMAP] ,XmNlabelPixmap,
-                             XmUNSPECIFIED_PIXMAP);
+                             (void*) XmUNSPECIFIED_PIXMAP);
                pixmap_creata = False;
             }
             set_icon_config();
@@ -2059,7 +2062,7 @@ visualizza_icona_standard()
       case TP_SYMBOL	    :
             set_default_symbol();
             set_something(widget_array[K_ICON_PIXMAP] ,XmNlabelPixmap,
-                          XmUNSPECIFIED_PIXMAP);
+                          (void*) XmUNSPECIFIED_PIXMAP);
             pixmap_creata = False;
             set_icon_config();
            break;
@@ -2069,7 +2072,7 @@ visualizza_icona_standard()
       case TP_STD_PROCESS   :
       case TP_STD_SCHEME    :
            set_something(widget_array[K_ICON_PIXMAP] ,XmNlabelPixmap,
-                         XmUNSPECIFIED_PIXMAP);
+                         (void*) XmUNSPECIFIED_PIXMAP);
            pixmap_creata = False;
            break;
    }
@@ -2102,32 +2105,32 @@ void icon_defaults()
     XtSetArg(args[argcount],XmNmarginWidth, 0); argcount++;
     XtSetValues(widget_array[K_ICON_LABEL],args,argcount);
 
-    set_something(widget_array[K_ICON_WIDTH],XmNvalue,scaled_icon_width);
-    set_something(widget_array[K_ICON_WIDTH],XmNminimum,scaled_icon_width);
+    set_something(widget_array[K_ICON_WIDTH],XmNvalue,(void*) scaled_icon_width);
+    set_something(widget_array[K_ICON_WIDTH],XmNminimum,(void*) scaled_icon_width);
     set_something(widget_array[K_ICON_WIDTH],XmNmaximum,
-                  MAX_DIMENSION / STEPPING);
+                  (void*) MAX_DIMENSION / STEPPING);
 
 /* ALTEZZA */
     scaled_icon_height = DEFAULT_ICON_HEIGHT;
     default_icon_height = scaled_icon_height * STEPPING;
 
-    set_something(widget_array[K_ICON_PIXMAP],XmNheight,default_icon_height);
-    set_something(widget_array[K_ICON_PIXMAP],XmNwidth,default_icon_width);
+    set_something(widget_array[K_ICON_PIXMAP],XmNheight,(void*) default_icon_height);
+    set_something(widget_array[K_ICON_PIXMAP],XmNwidth,(void*) default_icon_width);
 
-    set_something(widget_array[K_ICON_HEIGHT],XmNvalue,scaled_icon_height);
-    set_something(widget_array[K_ICON_HEIGHT],XmNminimum,scaled_icon_height);
+    set_something(widget_array[K_ICON_HEIGHT],XmNvalue,(void*) scaled_icon_height);
+    set_something(widget_array[K_ICON_HEIGHT],XmNminimum,(void*) scaled_icon_height);
     set_something(widget_array[K_ICON_HEIGHT],XmNmaximum,
-                  MAX_DIMENSION / STEPPING);
+                  (void*) MAX_DIMENSION / STEPPING);
 
 /* dimensioni icona nulle ... */
     icon_height = 0;
     icon_width = 0;
-    set_something(widget_array[K_BBOARD_ICON], XmNwidth, icon_width );
-    set_something(widget_array[K_BBOARD_ICON], XmNheight, icon_height );
-get_something(widget_array[K_ICON_PIXMAP], XmNheight, &bbh);
-get_something(widget_array[K_ICON_PIXMAP], XmNwidth, &bbw);
-get_something(widget_array[K_ICON_LABEL], XmNheight, &bbh2);
-get_something(widget_array[K_ICON_LABEL], XmNwidth, &bbw2);
+    set_something(widget_array[K_BBOARD_ICON], XmNwidth, (void*) icon_width );
+    set_something(widget_array[K_BBOARD_ICON], XmNheight, (void*) icon_height );
+get_something(widget_array[K_ICON_PIXMAP], XmNheight, (void*) &bbh);
+get_something(widget_array[K_ICON_PIXMAP], XmNwidth, (void*) &bbw);
+get_something(widget_array[K_ICON_LABEL], XmNheight, (void*) &bbh2);
+get_something(widget_array[K_ICON_LABEL], XmNwidth, (void*) &bbw2);
 }
 
 /*-----------------------------------------------------------------------*/
@@ -2150,7 +2153,7 @@ void symbol_defaults()
     XtSetValues(widget_array[K_ICON_LABEL],args,argcount);
 
 /* recupera la dimensione della label (potrebbe non essere 0) */
-    get_something(widget_array[K_ICON_LABEL], XmNheight, &offset_label);
+    get_something(widget_array[K_ICON_LABEL], XmNheight, (void*) &offset_label);
 
     argcount=0;
     XtSetArg(args[argcount],XmNlabelPixmap,XmUNSPECIFIED_PIXMAP);argcount++; 
@@ -2168,11 +2171,11 @@ void symbol_defaults()
 /* Fissa la larghezza della label dell'icona  e aggiorna */
 /* il valore dello Scale della larghezza dell'icona      */
 /* LARGHEZZA */
-    set_something(widget_array[K_ICON_WIDTH],XmNminimum,SYMBOL_MIN_DIMENSION);
-    set_something(widget_array[K_ICON_WIDTH],XmNvalue,SYMBOL_MIN_DIMENSION);
+    set_something(widget_array[K_ICON_WIDTH],XmNminimum,(void*) SYMBOL_MIN_DIMENSION);
+    set_something(widget_array[K_ICON_WIDTH],XmNvalue,(void*) SYMBOL_MIN_DIMENSION);
 /* ALTEZZA */
-    set_something(widget_array[K_ICON_HEIGHT],XmNminimum,SYMBOL_MIN_DIMENSION);
-    set_something(widget_array[K_ICON_HEIGHT],XmNvalue,SYMBOL_MIN_DIMENSION);
+    set_something(widget_array[K_ICON_HEIGHT],XmNminimum,(void*) SYMBOL_MIN_DIMENSION);
+    set_something(widget_array[K_ICON_HEIGHT],XmNvalue,(void*) SYMBOL_MIN_DIMENSION);
 
    icon_width  = SYMBOL_MIN_DIMENSION * STEPPING;
    icon_height = SYMBOL_MIN_DIMENSION * STEPPING;

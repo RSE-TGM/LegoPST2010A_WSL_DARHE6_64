@@ -32,6 +32,8 @@ static char SccsID[] = "@(#)chdefaults.c	5.1\t11/10/95";
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
+#include <unistd.h> 
 #if defined UNIX 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -41,7 +43,7 @@ static char SccsID[] = "@(#)chdefaults.c	5.1\t11/10/95";
 #include <stat.h>
 #endif
 
-chdefaults()
+void chdefaults()
 {
 char *home_dir;
 char path_defaults[FILENAME_MAX];

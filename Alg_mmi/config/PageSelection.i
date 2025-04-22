@@ -232,7 +232,7 @@ PAGINA *pag;			/* CAPPE */\
 /* recupero il children dove c'e' il nome della pagina\
    e carico il suo contenuoto in strpagname */ \
 text = XmSelectionBoxGetChild(UxWidget,XmDIALOG_TEXT);\
-get_something(text,XmNvalue,&pagina);\
+get_something(text,XmNvalue,(char*)&pagina);\
 \
 while((strpagname = estrai_campo(pagina,num))!=NULL)\
 {\

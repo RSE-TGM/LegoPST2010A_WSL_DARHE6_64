@@ -23,6 +23,7 @@ static char SccsID[] = "@(#)statistics.c	5.1\t11/10/95";
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 #if defined UNIX
 #include <sys/time.h>

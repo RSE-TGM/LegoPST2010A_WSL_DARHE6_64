@@ -124,8 +124,8 @@ static	void	cancelCB_selectionBox3( UxWidget, UxClientData, UxCallbackArg )
 	UxFormSelectionContext = UxContext =
 			(_UxCFormSelection *) UxGetContext( UxWidget );
 	{
-	set_something (Riga2[0], XmNsensitive, True);
-	set_something (Riga2[2], XmNsensitive, True);
+	set_something (Riga2[0], XmNsensitive, (void*) True);
+	set_something (Riga2[2], XmNsensitive, (void*) True);
 	
 	XtDestroyWidget (FormSelection);
 	}
@@ -152,8 +152,8 @@ static	void	okCallback_selectionBox3( UxWidget, UxClientData, UxCallbackArg )
 	
 	XmTextFieldSetString (Riga2[2], NomeFile);
 	XtFree (NomeFile);
-	set_something (Riga2[0], XmNsensitive, True);
-	set_something (Riga2[2], XmNsensitive, True);
+	set_something (Riga2[0], XmNsensitive, (void*) True);
+	set_something (Riga2[2], XmNsensitive, (void*) True);
 	
 	XtDestroyWidget (FormSelection);
 	}

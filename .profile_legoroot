@@ -173,8 +173,9 @@ export XAPPLRESDIR=~/risorse
 #
 #########################################################
 #
-export F_FLAGS='-g -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy'
-export FFLAGS='-g -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy'
+export FC=gfortran
+export F_FLAGS='-g -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy  -ffixed-line-length-132'
+export FFLAGS='-g -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy  -ffixed-line-length-132'
 export  FC_LIBS=' -lg2c  -lm '
 export DEBUG=YES
 #

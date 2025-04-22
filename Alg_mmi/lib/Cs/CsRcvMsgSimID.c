@@ -36,6 +36,7 @@ static char SccsID[] = "@(#)CsRcvMsgSimID.c	5.1\t11/13/95";
 #include <sim_param.h>
 #include <Cs/Cs.h>
 
+#include "sim_types.h"
 
 /*
     Riceve da mmi un messaggio con l'indice della SHM da cancellare

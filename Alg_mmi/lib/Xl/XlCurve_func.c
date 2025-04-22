@@ -1295,16 +1295,16 @@ printf("create_xlcurve: ENTRATO!!!");
 
 printf("create_xlcurve: father=%s\n",XtName(father_xlcurve));   
 
-   get_something(xlcurve_obj,XmNwidth,&width_curve);
-   get_something(xlcurve_obj,XmNheight,&height_curve);
+   get_something(xlcurve_obj,XmNwidth, (void*) &width_curve);
+   get_something(xlcurve_obj,XmNheight, (void*) &height_curve);
    width_curve-=10;
    height_curve-=10;
    
 
 printf("create_xlcurve: width_curve=%d\theight_curve=%d\n",width_curve,height_curve);
 /*
-   get_something(xlcurve_obj,XmNx,&xobj);
-   get_something(xlcurve_obj,XmNy,&yobj);
+   get_something(xlcurve_obj,XmNx,(void*) &xobj);
+   get_something(xlcurve_obj,XmNy,(void*) &yobj);
 */   
 
    top_curve = xlcurve_obj;
@@ -1586,7 +1586,7 @@ printf("Creazione widgets fissi costituenti l'oggetto XlCurve!!!\n");
 
         }
         else {
-                set_something(curvefield,XmNtopOffset,2);
+                set_something(curvefield,XmNtopOffset,(void*) 2);
         }
 
         if(xlcurve_obj->curve.s_XLcurve.valueRangeKeys) {
@@ -1715,9 +1715,9 @@ printf("Creazione widgets fissi costituenti l'oggetto XlCurve!!!\n");
 		  	 xlcurve_obj);
         }
         else {
-                set_something(curvefield,XmNrightOffset,220);
+                set_something(curvefield,XmNrightOffset,(void*) 220);
                 if(xlcurve_obj->curve.s_XLcurve.timePeriodKeys)
-                   set_something(changetime,XmNrightOffset,220);
+                   set_something(changetime,XmNrightOffset,(void*) 220);
         }
 
         /* Creation of formvalue */
@@ -2844,7 +2844,7 @@ printf("create_xlcurve: numCurves=%d!!!\n",xlcurve_obj->curve.s_XLcurve.numCurve
                 }
        }
        else {
-          set_something(graphicarea,XmNbottomOffset,5);
+          set_something(graphicarea,XmNbottomOffset,(void*) 5);
        }
        UxTopLevelCurveContext = UxSaveCtx;
 

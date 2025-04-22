@@ -771,7 +771,7 @@ else
 	XFillRectangle(display,stip,gc_grid1,0,0,width,height);
 	XDrawRectangle(display,stip,gc2[0],0,0,width,height);
 	}
-set_something(w,XmNbackgroundPixmap,stip);
+set_something(w,XmNbackgroundPixmap,(void*) stip);
 }
 
 /*
@@ -1503,12 +1503,12 @@ int indice; /* indice della misura da visualizzare */
 switch(widget_num)
 	{
   	case k_draw1:  
-	get_something(w,XmNwidth,(char *)&draw_width);
-	get_something(w,XmNheight,(char *)&draw_height);
+	get_something(w,XmNwidth, (void*) &draw_width);
+	get_something(w,XmNheight, (void*) &draw_height);
 	if(resize)
 		{
-		get_something(w,XmNwidth,(char *)&draw_width);
-		get_something(w,XmNheight,(char *)&draw_height);
+		get_something(w,XmNwidth, (void*) &draw_width);
+		get_something(w,XmNheight, (void*) &draw_height);
 		resize=0;
 		crea_sfondo(w,draw_width,draw_height);
 		}
@@ -1618,7 +1618,7 @@ switch(widget_num)
 	break;
 	
 	case k_tim1:
-	get_something(w,XmNwidth,(char *)&draw_width);
+	get_something(w,XmNwidth, (void*) &draw_width);
 	for(k=0;k<7;k++)
 		{
 		zoom=sg.zoom;
@@ -1648,7 +1648,7 @@ switch(widget_num)
 	break;
 
 	case k_ord1:
-	get_something(widget_array[k_ord1],XmNheight,(char *)&ord_height);
+	get_something(widget_array[k_ord1],XmNheight, (void*) &ord_height);
 	for(i=1;i<4;i++)
 		{
 		if(strcmp(sg.str_ord[0][i],"         ")==0)
@@ -1777,7 +1777,7 @@ switch(*tag)
 		for(i=k_toggle_umis1;i<=k_toggle_umis4;i++)
 			{
 			set_something(widget_array[i],XmNlabelString,
-                	XmStringCreateLtoR(uni_mis[numis].codm[i-k_toggle_umis1],XmSTRING_DEFAULT_CHARSET));
+                	(void*) XmStringCreateLtoR(uni_mis[numis].codm[i-k_toggle_umis1],XmSTRING_DEFAULT_CHARSET));
 			}
 		}
 	break;
@@ -2088,13 +2088,13 @@ if(collima==0)
  */
 /*        stato_zoom=ZOOM_END; */
         XDefineCursor(display,XtWindow(sg.w_draw),cursor_coll);
-        set_something(wcollima,XmNlabelString,x_collima_on);
+        set_something(wcollima,XmNlabelString,(void*) x_collima_on);
         }
 else
         {
         collima=0;
         XUndefineCursor(display,XtWindow(sg.w_draw));
-        set_something(wcollima,XmNlabelString,x_collima_off);
+        set_something(wcollima,XmNlabelString,(void*) x_collima_off);
         }
 }
 
@@ -2105,9 +2105,9 @@ static void zoomord_proc(w,reason)
 {
 zoomord=(!zoomord);
 if(zoomord)
-        set_something(wzoomord,XmNlabelString,x_zoomord_on);
+        set_something(wzoomord,XmNlabelString,(void*) x_zoomord_on);
 else
-        set_something(wzoomord,XmNlabelString,x_zoomord_off);
+        set_something(wzoomord,XmNlabelString,(void*) x_zoomord_off);
 
 }
 
@@ -2117,9 +2117,9 @@ static void secondi_proc(w,reason)
 {
 tempo_sec=(!tempo_sec);
 if(tempo_sec)
-        set_something(wtempo_sec,XmNlabelString,x_secondi_off);
+        set_something(wtempo_sec,XmNlabelString,(void*) x_secondi_off);
 else
-        set_something(wtempo_sec,XmNlabelString,x_secondi_on);
+        set_something(wtempo_sec,XmNlabelString,(void*) x_secondi_on);
 XClearArea(display,XtWindow(sg.w_tim),0,0,0,0,True);
 XClearArea(display,XtWindow(widget_array[k_tempo]),0,0,0,0,True);
 }
@@ -2193,49 +2193,49 @@ int flag;
 static Pixel draw0_bg,draw1_bg,mis1_bg,ord1_bg,tim1_bg,tempo_bg,form_bg,val1_bg;
 if(flag)
 	{
-	get_something(widget_array[k_draw1],XmNbackground,&draw1_bg);
-        get_something(widget_array[k_draw0],XmNbackground,&draw0_bg);
-	get_something(widget_array[k_mis1],XmNbackground,&mis1_bg);
-	get_something(widget_array[k_ord1],XmNbackground,&ord1_bg);
-        get_something(widget_array[k_val1],XmNbackground,&val1_bg);
-	get_something(widget_array[k_tim1],XmNbackground,&tim1_bg);
-	get_something(widget_array[k_tempo],XmNbackground,&tempo_bg);
-	get_something(widget_array[k_form],XmNbackground,&form_bg);
+	get_something(widget_array[k_draw1],XmNbackground,(void*) &draw1_bg);
+        get_something(widget_array[k_draw0],XmNbackground,(void*) &draw0_bg);
+	get_something(widget_array[k_mis1],XmNbackground,(void*) &mis1_bg);
+	get_something(widget_array[k_ord1],XmNbackground,(void*) &ord1_bg);
+        get_something(widget_array[k_val1],XmNbackground,(void*) &val1_bg);
+	get_something(widget_array[k_tim1],XmNbackground,(void*) &tim1_bg);
+	get_something(widget_array[k_tempo],XmNbackground,(void*) &tempo_bg);
+	get_something(widget_array[k_form],XmNbackground,(void*) &form_bg);
 	set_something(widget_array[k_draw1],XmNbackground,
-                      WhitePixel(display,screen_num));
+                      (void*) WhitePixel(display,screen_num));
 	set_something(widget_array[k_mis1],XmNbackground,
-                      WhitePixel(display,screen_num));
+                      (void*) WhitePixel(display,screen_num));
 	set_something(widget_array[k_ord1],XmNbackground,
-                      WhitePixel(display,screen_num));
+                      (void*) WhitePixel(display,screen_num));
         set_something(widget_array[k_tim1],XmNbackground,
-                      WhitePixel(display,screen_num));
+                      (void*) WhitePixel(display,screen_num));
         set_something(widget_array[k_tempo],XmNbackground,
-                      WhitePixel(display,screen_num));
+                      (void*) WhitePixel(display,screen_num));
         set_something(widget_array[k_val1],XmNbackground,
-                      WhitePixel(display,screen_num));
+                      (void*) WhitePixel(display,screen_num));
         set_something(widget_array[k_form],XmNbackground,
-                      WhitePixel(display,screen_num));
+                      (void*) WhitePixel(display,screen_num));
         set_something(widget_array[k_draw0],XmNbackground,
-                      WhitePixel(display,screen_num));
+                      (void*) WhitePixel(display,screen_num));
 	}
 else
 	{
         set_something(widget_array[k_draw1],XmNbackground,
-                      draw1_bg);
+                      (void*) draw1_bg);
         set_something(widget_array[k_mis1],XmNbackground,
-                      mis1_bg);
+                      (void*) mis1_bg);
         set_something(widget_array[k_ord1],XmNbackground,
-                      ord1_bg);
+                      (void*) ord1_bg);
         set_something(widget_array[k_tim1],XmNbackground,
-                      tim1_bg);
+                      (void*) tim1_bg);
         set_something(widget_array[k_tempo],XmNbackground,
-                      tempo_bg); 
+                      (void*) tempo_bg); 
         set_something(widget_array[k_val1],XmNbackground,
-                      val1_bg); 
+                      (void*) val1_bg); 
         set_something(widget_array[k_form],XmNbackground,
-                      form_bg); 
+                      (void*) form_bg); 
         set_something(widget_array[k_draw0],XmNbackground,
-                      draw0_bg); 
+                      (void*) draw0_bg); 
 	}
 }
 
@@ -2270,8 +2270,8 @@ if (widget_array[widget_num] == NULL)
     	    }
         }
 
-get_something(sg.w_draw,XmNy,(char *)&pos_y);
-set_something(widget_array[widget_num],XmNy,(char *)pos_y);
+get_something(sg.w_draw,XmNy, (void*) &pos_y);
+set_something(widget_array[widget_num],XmNy, (void*) pos_y);
 XtManageChild(widget_array[widget_num]);
 
 }
@@ -2301,8 +2301,8 @@ widget_array[widget_num] = w;
 switch(widget_num)
 	{
 	case k_draw1:
-	get_something(w,XmNwidth,(char *)&draw_width);
-	get_something(w,XmNheight,(char *)&draw_height);
+	get_something(w,XmNwidth, (void*) &draw_width);
+	get_something(w,XmNheight, (void*) &draw_height);
 	draw_height-=2;
         handle_motion(w);
 	sg.w_draw=w;
@@ -2364,21 +2364,21 @@ switch(widget_num)
         x_sel_var[widget_num-k_toggle_mis1]=
 	XmStringCopy(sg.x_descr_mis[widget_num-k_toggle_mis1]);
 	set_something(w,XmNlabelString,
- 			x_sel_var[widget_num-k_toggle_mis1]);
+ 			(void*) x_sel_var[widget_num-k_toggle_mis1]);
 	break;
 	case k_toggle2_mis1:
 	case k_toggle2_mis2:
 	case k_toggle2_mis3:
 	case k_toggle2_mis4:
 	x_sel_var[widget_num-k_toggle2_mis1]=sg.x_descr_mis[widget_num-k_toggle2_mis1];
-	set_something(w,XmNlabelString,x_sel_var[widget_num-k_toggle2_mis1]);
+	set_something(w,XmNlabelString,(void*) x_sel_var[widget_num-k_toggle2_mis1]);
 	break;
 	case k_toggle3_mis1:
 	case k_toggle3_mis2:
 	case k_toggle3_mis3:
 	case k_toggle3_mis4:
 	x_sel_var[widget_num-k_toggle3_mis1]=sg.x_descr_mis[widget_num-k_toggle3_mis1];
-	set_something(w,XmNlabelString,x_sel_var[widget_num-k_toggle3_mis1]);
+	set_something(w,XmNlabelString,(void*) x_sel_var[widget_num-k_toggle3_mis1]);
 	break;
 	case k_list_gr:
 	read_gruppi(1);
@@ -2428,7 +2428,7 @@ switch(widget_num)
  		x_sel_var[i-k_toggle_mis1]=
             	XmStringCopy(sg.x_descr_mis[i-k_toggle_mis1]);
        		set_something(widget_array[i],XmNlabelString,
-			x_sel_var[i-k_toggle_mis1]);
+			(void*) x_sel_var[i-k_toggle_mis1]);
 		}
 	break;
 	case k_umis_dialog:
@@ -2438,7 +2438,7 @@ switch(widget_num)
 		{
 		x_sel_var[i-k_toggle2_mis1]=sg.x_descr_mis[i-k_toggle2_mis1];
 		set_something(widget_array[i],XmNlabelString,
-				x_sel_var[i-k_toggle2_mis1]);
+				(void*) x_sel_var[i-k_toggle2_mis1]);
 		}
 	selumis=sg.umis_sel[var_attiva];
 	numis=sg.ind_umis[var_attiva];
@@ -2446,7 +2446,7 @@ switch(widget_num)
 	for(i=k_toggle_umis1;i<=k_toggle_umis4;i++)
 		{
 		set_something(widget_array[i],XmNlabelString,
-                XmStringCreateLtoR(uni_mis[numis].codm[i-k_toggle_umis1],
+                (void*) XmStringCreateLtoR(uni_mis[numis].codm[i-k_toggle_umis1],
                                    XmSTRING_DEFAULT_CHARSET));
 		}
 /* memorizza il settaggio delle unita' di misura come appoggio */
@@ -2457,7 +2457,7 @@ switch(widget_num)
 	for(i=k_toggle3_mis1;i<=k_toggle3_mis4;i++)
 		{
 		x_sel_var[i-k_toggle3_mis1]=sg.x_descr_mis[i-k_toggle3_mis1];
-		set_something(widget_array[i],XmNlabelString,x_sel_var[i-k_toggle3_mis1]);
+		set_something(widget_array[i],XmNlabelString,(void*) x_sel_var[i-k_toggle3_mis1]);
 		}
 	for(i=0;i<4;i++)
 		{
@@ -2503,10 +2503,10 @@ switch(widget_num)
 	break;
 	case k_selgr_dialog:
         x_void = XmStringGenerate(" ",NULL, XmCHARSET_TEXT, NULL);
-	set_something(widget_array[k_label_grmis1],XmNlabelString,x_void);
-	set_something(widget_array[k_label_grmis2],XmNlabelString,x_void);
-	set_something(widget_array[k_label_grmis3],XmNlabelString,x_void);
-	set_something(widget_array[k_label_grmis4],XmNlabelString,x_void);
+	set_something(widget_array[k_label_grmis1],XmNlabelString,(void*) x_void);
+	set_something(widget_array[k_label_grmis2],XmNlabelString,(void*) x_void);
+	set_something(widget_array[k_label_grmis3],XmNlabelString,(void*) x_void);
+	set_something(widget_array[k_label_grmis4],XmNlabelString,(void*) x_void);
 	XmStringFree(x_void);
 	break;
         case k_dir_dialog:
@@ -2981,16 +2981,16 @@ switch(*tag)
     case k_list_gr:
 	indice_gruppo=x_cerca_stringa(selez->item,x_gruppi);
 	set_something(widget_array[k_label_grmis1],XmNlabelString,
-                     XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[0],
+                     (void*) XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[0],
 					NULL, XmCHARSET_TEXT, NULL));
 	set_something(widget_array[k_label_grmis2],XmNlabelString,
-                     XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[1],
+                     (void*) XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[1],
 					NULL, XmCHARSET_TEXT, NULL));
 	set_something(widget_array[k_label_grmis3],XmNlabelString,
-                     XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[2],
+                     (void*) XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[2],
 					NULL, XmCHARSET_TEXT, NULL));
 	set_something(widget_array[k_label_grmis4],XmNlabelString,
-                     XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[3],
+                     (void*) XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[3],
 					NULL, XmCHARSET_TEXT, NULL));
 	break;
 
@@ -3002,14 +3002,14 @@ switch(*tag)
   i indica la variabile da modificare
 */
 	x_sel_var[i]=XmStringGenerate("   ",NULL, XmCHARSET_TEXT, NULL);
-	set_something(widget_array[k_toggle_mis1+i],XmNlabelString,x_sel_var[i]);
+	set_something(widget_array[k_toggle_mis1+i],XmNlabelString,(void*) x_sel_var[i]);
 	break;
     case k_list_defumis:
 	indice_umis=x_cerca_stringa(selez->item,x_codumis);
 	for(i=0;i<4;i++)
 		{
 		x_app=XmStringGenerate(uni_mis[indice_umis].codm[i],NULL, XmCHARSET_TEXT, NULL);
-		set_something(widget_array[k_toggle2_umis1+i],XmNlabelString,x_app);
+		set_something(widget_array[k_toggle2_umis1+i],XmNlabelString,(void*) x_app);
 		XmStringFree(x_app);
 		}
 	XmToggleButtonSetState(widget_array[k_toggle2_umis1+umis_defsel[indice_umis]],True,True);
@@ -3022,7 +3022,7 @@ switch(*tag)
   i indica la variabile da modificare
 */
 	x_sel_var[i]=XmStringCopy(selez->item);
-	set_something(widget_array[k_toggle_mis1+i],XmNlabelString,selez->item);
+	set_something(widget_array[k_toggle_mis1+i],XmNlabelString,(void*) selez->item);
 	break;
     }
 }
@@ -3166,8 +3166,8 @@ if(flag)
 	valore=False;
 else
 	valore=True;
-set_something(widget_array[k_grafici_menu_entry],XmNsensitive,valore);
-set_something(widget_array[k_misure_menu_entry],XmNsensitive,valore);
+set_something(widget_array[k_grafici_menu_entry],XmNsensitive,(void*) valore);
+set_something(widget_array[k_misure_menu_entry],XmNsensitive,(void*) valore);
 }
 
 

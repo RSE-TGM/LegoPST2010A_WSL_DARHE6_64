@@ -183,7 +183,7 @@ static void mostra_selMod( void)
 {
  char z[40];
  int c;
-   get_something( nnF_slistMod, XmNselectedItemCount, &c);
+   get_something( nnF_slistMod, XmNselectedItemCount, (void*) &c);
    sprintf( z, "modules %d, selected %d", nst, c);
    UxPutStrRes( nnF_labMod, XmNlabelString, z);
 }
@@ -193,7 +193,7 @@ static void mostra_selBloc( void)
 {
  char z[40];
  int c;
-   get_something( nnF_slistBloc, XmNselectedItemCount, &c);
+   get_something( nnF_slistBloc, XmNselectedItemCount, (void*) &c);
    sprintf( z, "blocks %d, selected %d", nbl, c);
    UxPutStrRes( nnF_labBloc, XmNlabelString, z);
 }
@@ -305,7 +305,7 @@ static void	createCB_nnF_slistMod( UxWidget, UxClientData, UxCallbackArg )
 	   xs = XmStringCreateSimple( "(none)");
 	   XmListAddItemUnselected( nnF_slistMod, xs, 0);
 	   XmStringFree( xs);
-	   set_something( nnF_slistMod, XmNvisibleItemCount, nst+2);
+	   set_something( nnF_slistMod, XmNvisibleItemCount, (void*) nst+2);
 	}
 	UxNnFilterContext = UxSaveCtx;
 }
@@ -356,7 +356,7 @@ static void	createCB_nnF_slistBloc( UxWidget, UxClientData, UxCallbackArg )
 	      XmListAddItemUnselected( nnF_slistBloc, xs, i+1);
 	      XmStringFree( xs);
 	   }
-	   set_something( nnF_slistBloc, XmNvisibleItemCount, nbl);
+	   set_something( nnF_slistBloc, XmNvisibleItemCount, (void*) nbl);
 	}
 	UxNnFilterContext = UxSaveCtx;
 }
@@ -450,7 +450,7 @@ static void	activateCB_nnF_aroVars( UxWidget, UxClientData, UxCallbackArg )
 	         XmStringFree( xs);
 	      }
 	      set_something( nnF_slistVars,
-	       XmNvisibleItemCount, (cSelVars) ? cSelVars : 1);
+	       XmNvisibleItemCount, (void*) ? cSelVars : 1);
 	   }
 	   mostra_selVars();
 	}

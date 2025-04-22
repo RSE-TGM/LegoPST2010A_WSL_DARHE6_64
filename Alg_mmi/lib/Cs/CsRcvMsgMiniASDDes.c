@@ -22,7 +22,7 @@ static char *_csrc = "@(#) %filespec: CsRcvMsgMiniASDDes.c-1 %  (%full_filespec:
 
 #include <sim_param.h>
 #include <Cs/Cs.h>
-
+#include "sim_types.h"
 
 /*
     Riceve da mmi un messaggio per la richiesta di allarmi per miniASD

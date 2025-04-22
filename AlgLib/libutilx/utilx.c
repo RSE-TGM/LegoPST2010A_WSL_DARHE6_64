@@ -28,6 +28,7 @@ static char SccsID[] = "@(#)utilx.c	5.1\t11/10/95";
 /* routine di utilita' generale */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include "libutilx.h"
 
@@ -44,7 +45,7 @@ static char SccsID[] = "@(#)utilx.c	5.1\t11/10/95";
  ***       free_mem   : (Booleano) indica se bisogna deallocare l'array di
  ***                    stringhe sorgenti.
 Duplica un array di stringhe in un array di compound string */
-converti_stringhe( array_dest, array_sorg, num_item, free_mem )
+void converti_stringhe( array_dest, array_sorg, num_item, free_mem )
 XmString array_dest[];
 char     *array_sorg[];
 int      num_item;
@@ -67,7 +68,7 @@ Bool	 free_mem;
  ***            int      num     : numero di compound string
 funzione utilizzata per deallocare la memoria utilizzata per le compound
 string */
-free_array_XmString( cstrings, num )
+void free_array_XmString( cstrings, num )
 XmString cstrings[];
 int      num;
 {
@@ -83,7 +84,7 @@ int      num;
  ***           char *lista[] : array di stringhe
  ***           int      num  : numero di stringhe
 funzione utilizzata per deallocare la memoria degli array di stringhe */
-free_array_list( lista, num )
+void free_array_list( lista, num )
 char *lista[];
 int      num;
 {

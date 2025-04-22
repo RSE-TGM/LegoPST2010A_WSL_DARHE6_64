@@ -189,10 +189,10 @@ chiudi_dlg_config()
 /* riabilita le voci di menu se e' il caso */
    if (nmod_def_initialized)
    {
-      set_something(UxGetWidget(pb_nmod_jactopology),XmNsensitive,True);
-      set_something(UxGetWidget(pb_nmod_JC),XmNsensitive,True);
-      set_something(UxGetWidget(pb_nmod_residual),XmNsensitive,True);
-      set_something(UxGetWidget(pb_nmod_D1),XmNsensitive,True);
+      set_something(UxGetWidget(pb_nmod_jactopology),XmNsensitive,(void*) True);
+      set_something(UxGetWidget(pb_nmod_JC),XmNsensitive,(void*) True);
+      set_something(UxGetWidget(pb_nmod_residual),XmNsensitive,(void*) True);
+      set_something(UxGetWidget(pb_nmod_D1),XmNsensitive,(void*) True);
    }
 
    bool_dialog_config = True;
@@ -673,10 +673,10 @@ static Widget	_Ux_create_nmod_dialog_config()
 		
 		if (nmod_def_initialized)
 		{
-		   set_something(UxGetWidget(pb_nmod_jactopology),XmNsensitive,False);
-		   set_something(UxGetWidget(pb_nmod_JC),XmNsensitive,False);
-		   set_something(UxGetWidget(pb_nmod_residual),XmNsensitive,False);
-		   set_something(UxGetWidget(pb_nmod_D1),XmNsensitive,False);
+		   set_something(UxGetWidget(pb_nmod_jactopology),XmNsensitive,(void*) False);
+		   set_something(UxGetWidget(pb_nmod_JC),XmNsensitive,(void*) False);
+		   set_something(UxGetWidget(pb_nmod_residual),XmNsensitive,(void*) False);
+		   set_something(UxGetWidget(pb_nmod_D1),XmNsensitive,(void*) False);
 		}
 		rtrn = _Uxbuild_nmod_dialog_config();
 
@@ -696,7 +696,7 @@ static Widget	_Ux_create_nmod_dialog_config()
 		
 		printf("jacobian_type=%d\n",jacobian_type);
 		if(jacobian_type)
-		   set_something(jac_optMenu,XmNmenuHistory,num_jacMenu_pb);
+		   set_something(jac_optMenu,XmNmenuHistory,(void*) num_jacMenu_pb);
 		
 		UxPopupInterface(rtrn, no_grab);
 		return(rtrn);

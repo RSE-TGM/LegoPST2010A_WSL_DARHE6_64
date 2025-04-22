@@ -155,7 +155,7 @@ Dialog_geometry geometry;
        XtManageChild (button1);
        XtAddCallback (button1,XmNactivateCallback,
    	      	      chiama_funz[0].callback,
-   		      chiama_funz[0].parametro);
+                     (XtPointer)chiama_funz[0].parametro);
        bottom_widget = button1;
        XmStringFree(cstring);
    }
@@ -180,7 +180,7 @@ Dialog_geometry geometry;
        XtManageChild (button2);
        XtAddCallback (button2,XmNactivateCallback,
                               chiama_funz[1].callback,
-		              chiama_funz[1].parametro);
+                              (XtPointer)chiama_funz[1].parametro);
        XmStringFree(cstring);
        bottom_widget = button2;
    }
@@ -215,7 +215,7 @@ Dialog_geometry geometry;
        XtManageChild (button3);
        XtAddCallback (button3,XmNactivateCallback,
 	      		      chiama_funz[2].callback,
-	        	      chiama_funz[2].parametro);
+                     (XtPointer)chiama_funz[2].parametro);
        XmStringFree(cstring);
        bottom_widget = button3;
    }
@@ -241,7 +241,7 @@ Dialog_geometry geometry;
    }
    else
       XtSetArg(args[n],XmNbottomAttachment, XmATTACH_FORM); n++;
-   find_form = find_in_a_text(finestra, args, n, parametri);
+   find_form = (Widget)find_in_a_text(finestra, args, n, parametri);
 
 /* Creazione del text-widget */
    n=0;

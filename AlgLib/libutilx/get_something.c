@@ -32,7 +32,8 @@ void get_something();
  */
 void get_something(w, resource, value)
     Widget w;
-    char *resource, *value;
+    char *resource;
+    void *value;
 {
 Arg al[1];
 XtSetArg(al[0], resource, value);

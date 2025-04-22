@@ -361,7 +361,7 @@ if (flagINP == DRAW_VER)\
 	i = 0;\
 	while (Fatto==False)\
 		{\
-		get_something (VettoreBottoni[j], XmNbackground, &Punto); \
+		get_something (VettoreBottoni[j], XmNbackground, (char*)&Punto); \
 		set_something (FigliRC[i],XmNbackground,Punto);\
 		j++;\
 		i++;\
@@ -411,9 +411,9 @@ else if (flagINP == CONFIG_VER)\
 \
 for (i=0;i<12;i++)\
 	{\
-	get_something (VettoreBottoni[i] , XmNbackground, &Pix.pixel);\
+	get_something (VettoreBottoni[i] , XmNbackground, (char*)&Pix.pixel);\
 	XQueryColor (UxDisplay, Cmap, &Pix);\
-	sprintf (StrPix,"#%04x%04x%04x",Pix.red,Pix.green,Pix.blue);\
+	sprintf (StrPix,"#%04x%04x%04x",Pix.red,Pix.green,(char*)Pix.blue);\
 	XlSetResourceByWidget (&RisDbColori,VettoreBottoni[i],\
 					XmNbackground,StrPix);\
 	}\
@@ -612,21 +612,21 @@ Pixel Pal;\
 \
 if (Press == 12)\
 	{\
-	get_something (ButtNomeColore, XmNbackground, &Pal);\
-	set_something (VettoreBottoni[11], XmNbackground, Pal);\
+	get_something (ButtNomeColore, XmNbackground, (char*)&Pal);\
+	set_something (VettoreBottoni[11], XmNbackground, (char*)Pal);\
 	}\
 else\
 	{\
 	Press = 12;\
 	RilasciaDrawnButton (11);\
 \
-	get_something (VettoreBottoni[11], XmNbackground, &ColoreSfondo.pixel);\
+	get_something (VettoreBottoni[11], XmNbackground, (char*)&ColoreSfondo.pixel);\
 \
-	set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);\
+	set_something (ButtNomeColore, XmNbackground, (char*)ColoreSfondo.pixel);\
 	XQueryColor (UxDisplay, Cmap, &ColoreSfondo);\
 	sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,\
 				ColoreSfondo.blue);\
-	set_something (TextNomeColore, XmNvalue, vstring);\
+	set_something (TextNomeColore, XmNvalue, (char*)vstring);\
 	}\
 }
 *drawnButton12.recomputeSize: "false"
@@ -665,8 +665,8 @@ Pixel Pal;\
 \
 if (Press == 6)\
 	{\
-	get_something (ButtNomeColore, XmNbackground, &Pal);\
-	set_something (VettoreBottoni[5], XmNbackground, Pal);\
+	get_something (ButtNomeColore, XmNbackground, (char*)&Pal);\
+	set_something (VettoreBottoni[5], XmNbackground, (char*)Pal);\
 	}\
 else\
 	{\
@@ -716,8 +716,8 @@ Pixel Pal;\
 \
 if (Press == 11)\
 	{\
-	get_something (ButtNomeColore, XmNbackground, &Pal);\
-	set_something (VettoreBottoni[10], XmNbackground, Pal);\
+	get_something (ButtNomeColore, XmNbackground, (char*)&Pal);\
+	set_something (VettoreBottoni[10], XmNbackground, (char*)Pal);\
 	}\
 else\
 	{\
@@ -770,16 +770,16 @@ Pixel Pal;\
 \
 if (Press == 5)\
 	{\
-	get_something (ButtNomeColore, XmNbackground, &Pal);\
-	set_something (VettoreBottoni[4], XmNbackground, Pal);\
+	get_something (ButtNomeColore, XmNbackground, (char*)&Pal);\
+	set_something (VettoreBottoni[4], XmNbackground, (char*)Pal);\
 	}\
 else\
 	{\
 	Press = 5;\
 	RilasciaDrawnButton (4);\
-	get_something (VettoreBottoni[4], XmNbackground, &ColoreSfondo.pixel);\
+	get_something (VettoreBottoni[4], XmNbackground, (char*)&ColoreSfondo.pixel);\
 \
-	set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);\
+	set_something (ButtNomeColore, XmNbackground, (char*)ColoreSfondo.pixel);\
 	XQueryColor (UxDisplay, Cmap, &ColoreSfondo);\
 	sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,\
 				ColoreSfondo.blue);\
@@ -829,9 +829,9 @@ else\
 	Press = 10;\
 	RilasciaDrawnButton (9);\
 \
-	get_something (VettoreBottoni[9], XmNbackground, &ColoreSfondo.pixel);\
+	get_something (VettoreBottoni[9], XmNbackground, (char*)&ColoreSfondo.pixel);\
 \
-	set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);\
+	set_something (ButtNomeColore, XmNbackground, (char*)ColoreSfondo.pixel);\
 	XQueryColor (UxDisplay, Cmap, &ColoreSfondo);\
 	sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,\
 				ColoreSfondo.blue);\
@@ -873,16 +873,16 @@ Pixel Pal;\
 \
 if (Press == 9)\
 	{\
-	get_something (ButtNomeColore, XmNbackground, &Pal);\
-	set_something (VettoreBottoni[8], XmNbackground, Pal);\
+	get_something (ButtNomeColore, XmNbackground, (char*)&Pal);\
+	set_something (VettoreBottoni[8], XmNbackground, (char*)Pal);\
 	}\
 else\
 	{\
 	Press = 9;\
 	RilasciaDrawnButton (8);\
-	get_something (VettoreBottoni[8], XmNbackground, &ColoreSfondo.pixel);\
+	get_something (VettoreBottoni[8], XmNbackground, (char*)&ColoreSfondo.pixel);\
 \
-	set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);\
+	set_something (ButtNomeColore, XmNbackground, (char*)ColoreSfondo.pixel);\
 	XQueryColor (UxDisplay, Cmap, &ColoreSfondo);\
 	sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,\
 				ColoreSfondo.blue);\
@@ -931,9 +931,9 @@ else\
 	{\
 	Press = 8;\
 	RilasciaDrawnButton (7);\
-	get_something (VettoreBottoni[7], XmNbackground, &ColoreSfondo.pixel);\
+	get_something (VettoreBottoni[7], XmNbackground, (char*)&ColoreSfondo.pixel);\
 \
-	set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);\
+	set_something (ButtNomeColore, XmNbackground, (char*)ColoreSfondo.pixel);\
 	XQueryColor (UxDisplay, Cmap, &ColoreSfondo);\
 	sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,\
 				ColoreSfondo.blue);\
@@ -982,9 +982,9 @@ else\
 	{\
 	Press = 7;\
 	RilasciaDrawnButton (6);\
-	get_something (VettoreBottoni[6], XmNbackground, &ColoreSfondo.pixel);\
+	get_something (VettoreBottoni[6], XmNbackground, (char*)&ColoreSfondo.pixel);\
 \
-	set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);\
+	set_something (ButtNomeColore, XmNbackground, (char*)ColoreSfondo.pixel);\
 	XQueryColor (UxDisplay, Cmap, &ColoreSfondo);\
 	sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,\
 				ColoreSfondo.blue);\
@@ -1077,21 +1077,21 @@ Pixel Pal;\
 \
 if (Press == 3)\
 	{\
-	get_something (ButtNomeColore, XmNbackground, &Pal);\
-	set_something (VettoreBottoni[2], XmNbackground, Pal);\
+	get_something (ButtNomeColore, XmNbackground, (char*)&Pal);\
+	set_something (VettoreBottoni[2], XmNbackground, (char*)Pal);\
 	}\
 else\
 	{\
 	Press = 3;\
 	RilasciaDrawnButton (2);\
 \
-	get_something (VettoreBottoni[2], XmNbackground, &ColoreSfondo.pixel);\
+	get_something (VettoreBottoni[2], XmNbackground, (char*)&ColoreSfondo.pixel);\
  \
-	set_something (ButtNomeColore, XmNbackground, ColoreSfondo.pixel);\
+	set_something (ButtNomeColore, XmNbackground, (char*)ColoreSfondo.pixel);\
 	XQueryColor (UxDisplay, Cmap, &ColoreSfondo);\
 	sprintf (vstring,"#%04x%04x%04x",ColoreSfondo.red,ColoreSfondo.green,\
 				ColoreSfondo.blue);\
-	set_something (TextNomeColore, XmNvalue, vstring);\
+	set_something (TextNomeColore, XmNvalue, (char*)vstring);\
 	}\
 }
 *drawnButton3.recomputeSize: "false"
@@ -1129,8 +1129,8 @@ Pixel Pal;\
 \
 if (Press == 2)\
 	{\
-	get_something (ButtNomeColore, XmNbackground, &Pal);\
-	set_something (VettoreBottoni[1], XmNbackground, Pal);\
+	get_something (ButtNomeColore, XmNbackground, (char*)&Pal);\
+	set_something (VettoreBottoni[1], XmNbackground, (char*)Pal);\
 	}\
 else\
 	{\
@@ -1180,8 +1180,8 @@ char vstring[40];\
 \
 if (Press == 1)\
 	{\
-	get_something (ButtNomeColore, XmNbackground, &Pal);\
-	set_something (VettoreBottoni[0], XmNbackground, Pal);\
+	get_something (ButtNomeColore, XmNbackground, (char*)&Pal);\
+	set_something (VettoreBottoni[0], XmNbackground, (char*)Pal);\
 	}\
 else\
 	{\
@@ -1331,7 +1331,7 @@ transparent = True;\
 Pixel Colore;\
 Widget Creato;\
 \
-get_something (ButtNomeColore, XmNbackground, &Colore);\
+get_something (ButtNomeColore, XmNbackground, (char*)&Colore);\
 \
 Creato = (Widget )create_ColorEditor(&Colore,TextNomeColore,ColorViewer);\
 UxPopupInterface (Creato , no_grab);\

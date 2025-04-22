@@ -151,8 +151,8 @@ static	void	okCallback_selectionBox2( UxWidget, UxClientData, UxCallbackArg )
 	
 	XmTextFieldSetString (RigaInp1[2], NomeFile);
 	XtFree (NomeFile);
-	set_something (RigaInp1[0], XmNsensitive, True);
-	set_something (RigaInp1[2], XmNsensitive, True);
+	set_something (RigaInp1[0], XmNsensitive, (void*) True);
+	set_something (RigaInp1[2], XmNsensitive, (void*) True);
 	
 	XtDestroyWidget (DatabaseSelection);
 	}
@@ -170,8 +170,8 @@ static	void	cancelCB_selectionBox2( UxWidget, UxClientData, UxCallbackArg )
 	UxDatabaseSelectionContext = UxContext =
 			(_UxCDatabaseSelection *) UxGetContext( UxWidget );
 	{
-	set_something (RigaInp1[0], XmNsensitive, True);
-	set_something (RigaInp1[2], XmNsensitive, True);
+	set_something (RigaInp1[0], XmNsensitive, (void*) True);
+	set_something (RigaInp1[2], XmNsensitive, (void*) True);
 	
 	XtDestroyWidget (DatabaseSelection);
 	}

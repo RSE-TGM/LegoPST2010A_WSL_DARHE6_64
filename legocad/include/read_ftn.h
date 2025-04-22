@@ -23,4 +23,8 @@ typedef int _INTEGER;
 
 #define DIMTIPO(tipo,n) ((n)*(sizeof(tipo)))
 
+int leggi_record_ftn( int , int , int , char , int , ...);
+
+void crea_array_bidim( char*, char*, int, int );
+
 /*** Fine file read_ftn.h ***/

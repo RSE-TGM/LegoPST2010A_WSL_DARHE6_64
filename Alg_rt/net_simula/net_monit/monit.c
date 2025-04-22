@@ -1536,17 +1536,17 @@ char    app[30];
 		sprintf (app, "File %s\0", nome_file_selezione);
 		c_app = XmStringCreateLtoR (app, XmSTRING_DEFAULT_CHARSET);
 		set_something (widget_array[k_elenco_variabili_dialog_label],
-			XmNlabelString, c_app);
+			XmNlabelString, (void*) c_app);
 		XmStringFree (c_app);
 		set_something (widget_array[k_elenco_variabili_dialog_label],
-			XmNwidth, 300);
+			XmNwidth, (void*) 300);
 		set_something (widget_array[k_elenco_variabili_dialog_label],
-			XmNheight, 35);
+			XmNheight, (void*) 35);
 
 		sprintf (app, "Num. var. sel. >> %d", nu_var_sel);
 		c_app = XmStringCreateLtoR (app, XmSTRING_DEFAULT_CHARSET);
 		set_something (widget_array[k_elenco_variabili_nu_var_sel],
-			XmNlabelString, c_app);
+			XmNlabelString, (void*) c_app);
 		XmStringFree (c_app);
 
 		mo_var (widget_array[k_elenco_variabili]);
@@ -1679,11 +1679,11 @@ char    app[30];
 			&widget_array[k_statistica_dialog], &dummy_class) != MrmSUCCESS)
 		s_error ("can't fetch dialog box");
 	set_something (widget_array[k_statistica_dialog],
-		XmNheight, 25 * numero_modelli (ind_sh_top) + 85);
+		XmNheight, (void*) 25 * numero_modelli (ind_sh_top) + 85);
 	set_something (widget_array[k_statistica_window],
-		XmNheight, 25 * numero_modelli (ind_sh_top) + 5);
+		XmNheight, (void*) 25 * numero_modelli (ind_sh_top) + 5);
 	set_something (widget_array[k_statistica_dialog_fine],
-		XmNy, 25 * numero_modelli (ind_sh_top) + 25);
+		XmNy, (void*) 25 * numero_modelli (ind_sh_top) + 25);
 	XtManageChild (widget_array[k_statistica_dialog]);
 	refresh_stat ();
     }
@@ -2127,7 +2127,7 @@ else
       /*printf("\t\t\t MONIT temposim=%f\n",val_agg.tempo_sim);*/
       sprintf (app_str, "%7.1f", val_agg.tempo_sim);
       c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
-      set_something (widget_array[k_tempo_sim_val], XmNlabelString, c_app_str);
+      set_something (widget_array[k_tempo_sim_val], XmNlabelString, (void*) c_app_str);
       XmStringFree (c_app_str);
       val_agg.tempo_sim_a = 0;
       }
@@ -2236,7 +2236,7 @@ else
                          c_app_str = XmStringCreateLtoR (app_str,
                                                     XmSTRING_DEFAULT_CHARSET);
                          set_something (widget_array[k_lastload_bt_val],
-                                        XmNlabelString, c_app_str);
+                                        XmNlabelString, (void*) c_app_str);
                          XmStringFree (c_app_str);
 
                          break;
@@ -2337,7 +2337,7 @@ else
               strcpy(app_str,"Automatico");
            c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
            set_something (widget_array[k_modo_bt_val], XmNlabelString, 
-                          c_app_str);
+                          (void*) c_app_str);
            XmStringFree (c_app_str);
 
            if (direzione_bt == BT_AVANTI)
@@ -2347,14 +2347,14 @@ else
 
            c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
            set_something (widget_array[k_direz_bt_val], XmNlabelString,
-                          c_app_str);
+                          (void*) c_app_str);
            XmStringFree (c_app_str);
 
 /*         sprintf (app_str, "%d",last_backtrack);   */
            sprintf (app_str, "%d",num_bt_list);
            c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
            set_something (widget_array[k_lastrec_bt_val], XmNlabelString, 
-                          c_app_str);
+                          (void*) c_app_str);
 /*printf("\t\t\t\t SETTO last_backtrack=%d",last_backtrack);*/
            XmStringFree (c_app_str);
 
@@ -2362,13 +2362,13 @@ else
 /*printf(" SETTO last_load_bt=%d\n",last_load_bt);*/
            c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
            set_something (widget_array[k_lastload_bt_val],XmNlabelString, 
-                         c_app_str);
+                         (void*) c_app_str);
            XmStringFree (c_app_str);
 
            sprintf (app_str, "%d",step_selezionato);
            c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
            set_something (widget_array[k_nextstep_bt_val],XmNlabelString, 
-                          c_app_str);
+                          (void*) c_app_str);
            XmStringFree (c_app_str);
            }
 #endif
@@ -2379,7 +2379,7 @@ else
 	sprintf (app_str, "%7.1f", val_agg.tempo_ritardo);
 	c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
 	set_something (widget_array[k_tempo_ritardo_val], XmNlabelString,
-                       c_app_str);
+                       (void*) c_app_str);
 	XmStringFree (c_app_str);
 	val_agg.tempo_ritardo_a = 0;
         }
@@ -2390,7 +2390,7 @@ else
 	sprintf (app_str, "%7.1f", val_agg.tempo_reale);
 	c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
 	set_something (widget_array[k_tempo_reale_val], XmNlabelString,
-                       c_app_str);
+                       (void*) c_app_str);
 	XmStringFree (c_app_str);
 	val_agg.tempo_reale_a = 0;
         }
@@ -2404,7 +2404,7 @@ else
 		sprintf (app_str, "Max. Speed");
 	c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
 	set_something (widget_array[k_timescaling_sim_val], XmNlabelString,
-                       c_app_str);
+                       (void*) c_app_str);
 	XmStringFree (c_app_str);
 	val_agg.timescaling_sim_a = 0;
         }
@@ -2415,7 +2415,7 @@ else
 	if(val_agg.stepscaling_sim>0)
 		sprintf (app_str, "%7.1f", val_agg.stepscaling_sim);
 	c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
-	set_something (widget_array[k_stepscaling_sim_val], XmNlabelString, c_app_str);
+	set_something (widget_array[k_stepscaling_sim_val], XmNlabelString, (void*) c_app_str);
 	XmStringFree (c_app_str);
 	val_agg.stepscaling_sim_a = 0;
         }
@@ -2430,7 +2430,7 @@ else
                 sprintf (app_str, "none");
         c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
         set_something (widget_array[k_endtime_sim_val], XmNlabelString, 
-		       c_app_str);
+		       (void*) c_app_str);
         XmStringFree (c_app_str);
         val_agg.endtime_sim_a = 0;
         }
@@ -2444,7 +2444,7 @@ else
 		sprintf (app_str, "Off");
 	c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
 	set_something (widget_array[k_passo_reg_val], XmNlabelString, 
-                      c_app_str);
+                      (void*) c_app_str);
 	XmStringFree (c_app_str);
 	val_agg.passo_reg_a = 0;
         }
@@ -2455,7 +2455,7 @@ else
 	sprintf (app_str, "%7d", val_agg.grandezze_mem);
 	c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
 	set_something (widget_array[k_grandezze_mem_val], XmNlabelString, 
-                      c_app_str);
+                      (void*) c_app_str);
 	XmStringFree (c_app_str);
 	val_agg.grandezze_mem_a = 0;
         }
@@ -2466,7 +2466,7 @@ else
 	sprintf (app_str, "%7.1f", val_agg.tempo_simMB);
 	c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
 	set_something (widget_array[k_tempo_simMB_val], XmNlabelString,
-                       c_app_str);
+                       (void*) c_app_str);
 	XmStringFree (c_app_str);
 	val_agg.tempo_simMB_a = 0;
         }
@@ -2477,7 +2477,7 @@ else
 	sprintf (app_str, "%7d", val_agg.spazio_dsk);
 	c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
 	set_something (widget_array[k_spazio_dsk_val], XmNlabelString,
-                       c_app_str);
+                       (void*) c_app_str);
 	XmStringFree (c_app_str);
 	val_agg.spazio_dsk_a = 0;
         }
@@ -2606,7 +2606,7 @@ else
 	/* aggiorna label di stato  */
 	sprintf (app_str, "%s", stato_sked_label[val_agg.stato_sked]);
 	c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
-	set_something (widget_array[k_stato_sim_val], XmNlabelString, c_app_str);
+	set_something (widget_array[k_stato_sim_val], XmNlabelString, (void*) c_app_str);
 	XmStringFree (c_app_str);
 
 	/* aggiorna menu	    */
@@ -2617,7 +2617,7 @@ else
 		    cambia_stato_menu (voci_stop);
 		    /* fissa il colore dello sfondo */
 		    set_something (widget_array[k_stato_sim_val],
-			    XmNbackground, pix_val[0]);
+			    XmNbackground, (void*) pix_val[0]);
 		    break;
 		}
 	    case STATO_RUN: 
@@ -2625,7 +2625,7 @@ else
 		    cambia_stato_menu (voci_run);
 		    /* fissa il colore dello sfondo */
 		    set_something (widget_array[k_stato_sim_val],
-			    XmNbackground, pix_val[1]);
+			    XmNbackground, (void*) pix_val[1]);
 		    break;
 		}
 #if defined BACKTRACK
@@ -2646,7 +2646,7 @@ else
                 cambia_stato_menu (voci_backtrack);
                 /* fissa il colore dello sfondo */
                 set_something (widget_array[k_stato_sim_val],
-                        XmNbackground, pix_val[2]);
+                        XmNbackground, (void*) pix_val[2]);
                 break;
                 }
             case STATO_REPLAY:
@@ -2656,7 +2656,7 @@ else
                  cambia_stato_menu (voci_replay);
                  /* fissa il colore dello sfondo */
                  set_something (widget_array[k_stato_sim_val],
-                         XmNbackground, pix_val[1]);
+                         XmNbackground, (void*) pix_val[1]);
                     break;
                 }
 #endif
@@ -2665,7 +2665,7 @@ else
 		    cambia_stato_menu (voci_freeze);
 		    /* fissa il colore dello sfondo */
 		    set_something (widget_array[k_stato_sim_val],
-			    XmNbackground, pix_val[2]);
+			    XmNbackground, (void*) pix_val[2]);
 		    break;
 		}
 	    case STATO_ERRORE: 
@@ -2673,7 +2673,7 @@ else
 		    cambia_stato_menu (voci_errore);
 		    /* fissa il colore dello sfondo */
 		    set_something (widget_array[k_stato_sim_val],
-			    XmNbackground, pix_val[0]);
+			    XmNbackground, (void*) pix_val[0]);
 		    break;
 		}
 	}
@@ -2744,8 +2744,7 @@ if (prima_volta)
 for (i = 0; i < NUMERO_VOCI_MENU; i++)
     {
 	if(widget_array[voci_array[i].ind]!=NULL)
-	set_something (widget_array[voci_array[i].ind], XmNsensitive,
-		(char *) voci_array[i].stato);
+	set_something (widget_array[voci_array[i].ind], XmNsensitive, (void*) voci_array[i].stato);
     }
 }
 

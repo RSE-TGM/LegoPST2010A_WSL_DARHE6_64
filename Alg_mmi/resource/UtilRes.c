@@ -57,11 +57,11 @@ void InterfaceSetPos (Widget DaSpostare,Widget Parente)
 {
 Position PX,PY;
 
-get_something (Parente, XmNx, &PX);
-get_something (Parente, XmNy, &PY);
+get_something (Parente, XmNx, (void*) &PX);
+get_something (Parente, XmNy, (void*) &PY);
 
-set_something (DaSpostare, XmNx, PX+SPIAZZAMENTO);
-set_something (DaSpostare, XmNy, PY+SPIAZZAMENTO);
+set_something (DaSpostare, XmNx, (void*) PX+SPIAZZAMENTO);
+set_something (DaSpostare, XmNy, (void*) PY+SPIAZZAMENTO);
 }
 
 /***************************************************************
@@ -158,7 +158,7 @@ Boolean LoadBitmap(Widget w, Pixmap *stip, char * bits, int width, int height)
 long cnero,cbianco;
 Pixel background;
 
-get_something(w,XmNbackground,&background);
+get_something(w,XmNbackground,(void*) &background);
 
 if((*stip=XCreatePixmapFromBitmapData(XtDisplay(w),
             RootWindow(XtDisplay(w),DefaultScreen(XtDisplay(w))),bits,
@@ -187,8 +187,8 @@ BottoneIMPORT = (Widget )XmSelectionBoxGetChild (Ogg,
 BottoneCANCEL = (Widget )XmSelectionBoxGetChild (Ogg,
       XmDIALOG_CANCEL_BUTTON);
 
-set_something (BottoneIMPORT, XmNsensitive, Valore);
-set_something (BottoneCANCEL, XmNsensitive, Valore);
+set_something (BottoneIMPORT, XmNsensitive, (void*) Valore);
+set_something (BottoneCANCEL, XmNsensitive, (void*) Valore);
 }
 
 /*
@@ -324,7 +324,7 @@ if ( XlIsIconReg (wid) )
   /*  Prendo il puntatore alla form e lo restituisco
 	se la form non e' allocata la risorsa XlNobjectForm
 	e' settata a NULL  */
-  get_something (wid, XlNobjectForm, &IndiceForm);
+  get_something (wid, XlNobjectForm, (void*) &IndiceForm);
   return (IndiceForm);
   }
 if ( (XlIsPort (wid)) || (XlIsDispReg (wid)) )
@@ -339,7 +339,7 @@ if ( (XlIsPort (wid)) || (XlIsDispReg (wid)) )
     /*  Prendo il puntatore alla form e lo restituisco
         se la form non e' allocata la risorsa XlNobjectForm
         e' settata a NULL  */
-    get_something (WidgetPadre, XlNobjectForm, &IndiceForm);
+    get_something (WidgetPadre, XlNobjectForm, (void*) &IndiceForm);
     return (IndiceForm);
     }
   else return (NULL);
@@ -366,8 +366,8 @@ Arg arg[4];
 XtSetArg(arg[0],XlNportName,&nome_porta);
 
 /* recupero i figli di XlComposite */
-get_something (wid,XmNchildren, &childcomp);
-get_something (wid,XmNnumChildren, &num_childcomp);
+get_something (wid,XmNchildren, (void*) &childcomp);
+get_something (wid,XmNnumChildren, (void*) &num_childcomp);
 
 /*  Controllo tutti i figli dell'IconReg  */
 for(j=0;j<num_childcomp;j++)

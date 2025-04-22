@@ -152,7 +152,7 @@ for(i=0;i<CallArg->selected_item_count;i++)
 	   }
 	}
 if(i == 0) strcpy(elenco,"");
-set_something(lista,XmNvalue,elenco);
+set_something(lista,XmNvalue,(void*) elenco);
 XmUpdateDisplay(lista);
 XtFree(elenco);
 }
@@ -237,7 +237,7 @@ static	void	okCallback_PageSelection( UxWidget, UxClientData, UxCallbackArg )
 	/* recupero il children dove c'e' il nome della pagina
 	   e carico il suo contenuoto in strpagname */ 
 	text = XmSelectionBoxGetChild(UxWidget,XmDIALOG_TEXT);
-	get_something(text,XmNvalue,&pagina);
+	get_something(text,XmNvalue, (void*) &pagina);
 	
 	while((strpagname = estrai_campo(pagina,num))!=NULL)
 	{
@@ -678,7 +678,7 @@ Widget	create_PageSelection( _Uxope )
 	
 	ListaFile=XmFileSelectionBoxGetChild(PageSelection,XmDIALOG_LIST);
 	ListaSelezionati=XmFileSelectionBoxGetChild(PageSelection,XmDIALOG_TEXT);
-	set_something(ListaFile,XmNselectionPolicy,XmEXTENDED_SELECT);
+	set_something(ListaFile,XmNselectionPolicy,(void*) XmEXTENDED_SELECT);
 	XtAddCallback(ListaFile,XmNextendedSelectionCallback,SelezioneMultipla,
 			    ListaSelezionati);
 	
@@ -687,13 +687,13 @@ Widget	create_PageSelection( _Uxope )
 	   if(getenv(ENVPAG) != NULL)
            {
               EnvString = XmStringCreateSimple(getenv(ENVPAG));
-   	      set_something(PageSelection,XmNdirSpec,EnvString);
+   	      set_something(PageSelection,XmNdirSpec,(void*) EnvString);
            }	
 	    
 	
 	   appo = XmStringCreateSimple("*.pag");
-	   set_something(PageSelection,XmNpattern,appo);
-	   set_something(PageSelection,XmNdirSpec,appo);
+	   set_something(PageSelection,XmNpattern,(void*) appo);
+	   set_something(PageSelection,XmNdirSpec,(void*) appo);
 	   
 	
 	 
@@ -703,11 +703,11 @@ Widget	create_PageSelection( _Uxope )
 	   if(getenv(ENVLIB) != NULL)
            {
               EnvString = XmStringCreateSimple(getenv(ENVLIB));
-   	      set_something(PageSelection,XmNdirSpec,EnvString);
+   	      set_something(PageSelection,XmNdirSpec,(void*) EnvString);
            }	
 	   appo = XmStringCreateSimple("*.lib");
-	   set_something(PageSelection,XmNpattern,appo);
-	   set_something(PageSelection,XmNdirSpec,appo);
+	   set_something(PageSelection,XmNpattern,(void*) appo);
+	   set_something(PageSelection,XmNdirSpec,(void*) appo);
 	}
 	
 	tip_operaz = ope;

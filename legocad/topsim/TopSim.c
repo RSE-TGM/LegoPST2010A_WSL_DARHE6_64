@@ -2264,8 +2264,8 @@ static Widget	_Ux_create_TopSim()
 		/*** ATTENZIONE --- istruzioni per rilasciare versione ancora in sviluppo  ****/
 		
 		   /* rendo inattivi i bottoni per gestione SCCS */
-		   set_something(MainConfigureSCCS,XmNsensitive,False);
-		   set_something(menu1_p6_b1,XmNsensitive,False); 
+		   set_something(MainConfigureSCCS,XmNsensitive,(void*) False);
+		   set_something(menu1_p6_b1,XmNsensitive,(void*) False); 
 		
 		/*** FINE ****/
 		

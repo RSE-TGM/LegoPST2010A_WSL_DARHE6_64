@@ -204,9 +204,9 @@ XmAnyCallbackStruct *call_data;
    XtManageChild(funct_history);
 
 /* Posizionamento della dialog-box a seconda della posizione della top-level */
-   get_something(top_level,XmNx,&x);
-   get_something(top_level,XmNy,&y);
-   get_something(top_level,XmNheight,&height);
+   get_something(top_level,XmNx,(void*) &x);
+   get_something(top_level,XmNy,(void*) &y);
+   get_something(top_level,XmNheight,(void*) &height);
    nargs=0;
    XtSetArg(args[nargs],XmNx, x); nargs++;
    XtSetArg(args[nargs],XmNy, y+height+40); nargs++;
@@ -267,7 +267,7 @@ XmAnyCallbackStruct *call_data;
 /* Visualizzazione dei toggle-button delle funzioni */
    display_toggle_function();
 
-   set_something(atoggles[0],XmNset,True);
+   set_something(atoggles[0],XmNset,(void*) True);
    cdata.set=1;
    toggle_on(atoggles[0],0,&cdata);
 }
@@ -426,7 +426,7 @@ XmAnyCallbackStruct *call_data;
 
 /* Per ogni label dei risultati viene cancellato il suo contenuto. */
    for (i=0 ; i<tavola_scelta[ toggle_premuto ].num_output ; i++)
-       set_something( aresultlabel[i],  XmNlabelString, stringa_nulla );
+       set_something( aresultlabel[i],  XmNlabelString, (void*) stringa_nulla );
 }
 
 /*----------------------------------------------------------------------*/
@@ -530,7 +530,7 @@ Struct_toggle funzione[];
    cstring = CREATE_CSTRING(stringa);
    XmListAddItemUnselected(function_list,cstring,0);
    XmListSetBottomPos(function_list,0);
-   set_something(function_list,XmNvisibleItemCount,VISIBLE_ITEMS);
+   set_something(function_list,XmNvisibleItemCount,(void*) VISIBLE_ITEMS);
    XmStringFree(cstring);
 }
 
@@ -585,11 +585,11 @@ int num_funzione;
    {
      XBell (display,50);  /* N.B. 100 = massimo volume */
      cstring = CREATE_CSTRING(mesg_errore(K_VAPORE, iret));
-     set_something( info_risultati, XmNlabelString, cstring);
+     set_something( info_risultati, XmNlabelString, (void*) cstring);
      XmStringFree(cstring);
    }
    else
-     set_something( info_risultati, XmNlabelString, stringa_nulla );
+     set_something( info_risultati, XmNlabelString, (void*) stringa_nulla );
 }
 
 /*

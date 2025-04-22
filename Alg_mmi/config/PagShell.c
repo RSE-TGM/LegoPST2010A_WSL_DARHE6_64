@@ -864,20 +864,20 @@ SetItemString(XmString *Xstring,char *nome,char *tipo,char *descr,int in_use,
 
 PageMenuSetInterfaceModeOn()
 {
-   set_something(SaveTmp,XmNsensitive,False);
-   set_something(ConnectMode,XmNsensitive,False);
+   set_something(SaveTmp,XmNsensitive,(void*) False);
+   set_something(ConnectMode,XmNsensitive,(void*) False);
    set_connect(actual_page->drawing,(int)1);
 }
 
 PageMenuSetInterfaceModeOff()
 {
-   set_something(SaveTmp,XmNsensitive,True);
+   set_something(SaveTmp,XmNsensitive,(void*) True);
 }
 
 void SetButtonClosePage(Boolean Stato)
 {
    if( (Stato == False) || (Stato == True))
-      set_something(CloseTmp,XmNsensitive,Stato);
+      set_something(CloseTmp,XmNsensitive,(void*) Stato);
 }
 
 Boolean PagGetConnectMode(Widget w)
@@ -1017,7 +1017,7 @@ static	void	activateCB_menu3Edit( UxWidget, UxClientData, UxCallbackArg )
 	         get_child(widsel,&child,&nchild);
 	         for(i=0;i<nchild;i++)
 	         {
-	            get_something(child[i],XlNwEdit,&edchild);
+	            get_something(child[i],XlNwEdit, (void*) &edchild);
 	            if(edchild != NULL)
 	            {
 	               printf("Cannot open Editor when Children are in Edit\n");
@@ -1030,7 +1030,7 @@ static	void	activateCB_menu3Edit( UxWidget, UxClientData, UxCallbackArg )
 	      }
 	      else if( XlIsXlComposite(XtParent(widsel)) )
 	      {
-	         get_something( XtParent(widsel),XlNwEdit,&edchild);
+	         get_something( XtParent(widsel),XlNwEdit, (void*) &edchild);
 	         if(edchild != NULL)
 	         {
 	            printf("Cannot open Editor when Parent is in Edit\n");
@@ -1042,7 +1042,7 @@ static	void	activateCB_menu3Edit( UxWidget, UxClientData, UxCallbackArg )
 	      }
 	       
 	
-	      get_something(widsel,XlNwEdit,&reswid);
+	      get_something(widsel,XlNwEdit, (void*) &reswid);
 	
 	
 	      if(reswid == NULL)
@@ -2014,7 +2014,7 @@ static	void	activateCB_Edit( UxWidget, UxClientData, UxCallbackArg )
 	         get_child(widsel,&child,&nchild);
 	         for(i=0;i<nchild;i++)
 	         {
-	            get_something(child[i],XlNwEdit,&edchild);
+	            get_something(child[i],XlNwEdit, (void*) &edchild);
 	            if(edchild != NULL)
 	            {
 	               printf("Cannot open Editor when Children are in Edit\n");
@@ -2027,7 +2027,7 @@ static	void	activateCB_Edit( UxWidget, UxClientData, UxCallbackArg )
 	      }
 	      else if( XlIsXlComposite(XtParent(widsel)) )
 	      {
-	         get_something( XtParent(widsel),XlNwEdit,&edchild);
+	         get_something( XtParent(widsel),XlNwEdit, (void*) &edchild);
 	         if(edchild != NULL)
 	         {
 	            printf("Cannot open Editor when Parent is in Edit\n");
@@ -2038,7 +2038,7 @@ static	void	activateCB_Edit( UxWidget, UxClientData, UxCallbackArg )
 	         }      
 	      }
 	
-	      get_something(widsel,XlNwEdit,&reswid);
+	      get_something(widsel,XlNwEdit, (void*) &reswid);
 	      if(reswid == NULL)
 	      {
 	         redit = create_Resource(actual_page,dbtopologia);
@@ -3766,17 +3766,17 @@ Widget	create_PagShell( _Uxnome_pagina, _Uxindice, _Uxtipop )
 		
 		if( tipop == TIPO_LIBRARY)
 		{
-		   set_something(PagPane_top_b4,XmNsensitive,False);
-		   set_something(PagPane_top_b6,XmNsensitive,False);
-		   set_something(FEditForeground,XmNsensitive,False);
-		   set_something(ConnectMode,XmNsensitive,False);
+		   set_something(PagPane_top_b4,XmNsensitive,(void*) False);
+		   set_something(PagPane_top_b6,XmNsensitive,(void*) False);
+		   set_something(FEditForeground,XmNsensitive,(void*) False);
+		   set_something(ConnectMode,XmNsensitive,(void*) False);
 		}
 		else if ( PagGetType(actual_page) == TYPE_REGOLAZIONE)
 			{
 			/**  la risorsa snap e' gestita a livello di pagina
 			DrawSetSnap((Widget )PagDrawingArea,4);
 			**/
-			set_something(FUndo,XmNsensitive,False);
+			set_something(FUndo,XmNsensitive,(void*) False);
 			}
 		else if ( PagGetType(actual_page) != TYPE_REGOLAZIONE)
 			{
@@ -3787,10 +3787,10 @@ Widget	create_PagShell( _Uxnome_pagina, _Uxindice, _Uxtipop )
 			Regolation Error View
 			Set Visual Mode
 		*/
-		        set_something(ConnectMode,XmNsensitive,False);
-			set_something(CompileReg,XmNsensitive,False);
-			set_something(Compile_b4,XmNsensitive,False);
-			set_something(SetVisualMode,XmNsensitive,False);
+		        set_something(ConnectMode,XmNsensitive,(void*) False);
+			set_something(CompileReg,XmNsensitive,(void*) False);
+			set_something(Compile_b4,XmNsensitive,(void*) False);
+			set_something(SetVisualMode,XmNsensitive,(void*) False);
 			}
 		
 		
@@ -3824,10 +3824,10 @@ Widget	create_PagShell( _Uxnome_pagina, _Uxindice, _Uxtipop )
 		
 		strcat(titolo,actual_page->nomepag);
 		
-		set_something(actual_page->topwidget,XmNtitle,titolo);
+		set_something(actual_page->topwidget,XmNtitle,(void*) titolo);
 		/***
 		if(!CompilerOk)
-		   set_something(PagPane_top_b4,XmNsensitive,False);
+		   set_something(PagPane_top_b4,XmNsensitive,(void*) False);
 		***/ 
 		PostOpenPage(actual_page->drawing);
 		
@@ -3835,8 +3835,8 @@ Widget	create_PagShell( _Uxnome_pagina, _Uxindice, _Uxtipop )
 		{
 		   PageMenuSetInterfaceModeOn();
 		/**
-		   set_something(SaveTmp,XmNsensitive,False);
-		   set_something(Option_b2,XmNsensitive,False);
+		   set_something(SaveTmp,XmNsensitive,(void*) False);
+		   set_something(Option_b2,XmNsensitive,(void*) False);
 		   set_connect(actual_page->drawing,(int)1);   
 		*/
 		}

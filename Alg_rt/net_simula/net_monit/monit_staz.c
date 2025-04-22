@@ -85,7 +85,7 @@ char *str;
 XmString c_str;
 int posizione =0;
 if (read_r02() == -1) return;
-get_something(lista,XmNitemCount,(char*)&totale);
+get_something(lista,XmNitemCount, (void*) &totale);
 if(totale)
 for(k=0;k<=totale;k++,XmListDeletePos(lista,1));
 
@@ -94,7 +94,7 @@ for (k=0;k<tot_pagine;k++)
    ++posizione;
    c_str=XmStringCreate(lista_pag[k],XmSTRING_DEFAULT_CHARSET);
    XmListAddItemUnselected(lista,c_str,0);
-   set_something(lista,XmNitemCount,(char*)posizione);
+   set_something(lista,XmNitemCount, (void*) posizione);
 }
 }
 

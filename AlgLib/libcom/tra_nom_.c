@@ -10,6 +10,10 @@
 #ifndef lint
 static char *_csrc = "@(#) %filespec: tra_nom_.c-2 %  (%full_filespec: tra_nom_.c-2:csrc:3 %)";
 #endif
+
+#include <stdio.h>
+#include <string.h>
+
 /*
    modulo tra_nom_.c
    tipo 

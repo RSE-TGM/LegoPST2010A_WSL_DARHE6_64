@@ -60,6 +60,7 @@ static char SccsID[] = "@(#)calcstaz.c	1.12\t3/30/95";
 #include "f11.h"
 
 extern Widget create_fileSelectionBox(); 
+extern void free_array_XmString( XmString, int );
 
 int fd_out, fd_stdout;
 typedef struct {
@@ -358,7 +359,7 @@ void main(int argc,char **argv)
     {
        cambia_stato_menu( numero_voci_menu, voci_non_attivato );
        set_something(widget_array[K_MODEL_NAME], XmNlabelString,
-		     CREATE_CSTRING(model_name));
+		     (void*) CREATE_CSTRING(model_name));
   /* Attiva il push-button corretto ('Start' o 'Step') */
        if (computing_mode == DIRECT_MODE)
           cambia_stato_menu( numero_voci_button, button_direct );
@@ -391,8 +392,7 @@ VOCE_MENU *voci_array;
    short i;
 
    for (i=0; i<nvoci; i++ )
-      set_something(widget_array[voci_array[i].ind],XmNsensitive,
-		    (char *) voci_array[i].stato );
+      set_something(widget_array[voci_array[i].ind],XmNsensitive, (void*) voci_array[i].stato );
 }
 /*-----------------------------------------------------------------------*/
 
@@ -454,7 +454,7 @@ char temp[20];
       sprintf(temp,"%.8lf",tolerance);
       trim_zero(temp);
       set_something( widget_array[K_TOLERANCE_VALUE],
-			XmNlabelString, CREATE_CSTRING(temp));
+			XmNlabelString, (void*) CREATE_CSTRING(temp));
    }
 
    if ( computing_mode != new_mode )
@@ -463,14 +463,14 @@ char temp[20];
       if (computing_mode == DIRECT_MODE)
       {
       	  set_something(widget_array[K_COMPUTING_MODE],
-	   	        XmNlabelString, DIRECT_STRING);
+	   	        XmNlabelString, (void*) DIRECT_STRING);
           if ( !Empty(model_name) )
              cambia_stato_menu( numero_voci_button, button_direct );
       }
       else
       {
 	  set_something(widget_array[K_COMPUTING_MODE],
-	    	        XmNlabelString, INTERACTIVE_STRING);
+	    	        XmNlabelString, (void*) INTERACTIVE_STRING);
           if ( !Empty(model_name) )
              cambia_stato_menu( numero_voci_button, button_interactive );
       }
@@ -917,11 +917,11 @@ unsigned long *reason;
 	 string = XmStringConcat(string,XmStringCreate
 				 (ITERATION_LIST_LABEL_TEXT_2, CS));
 	 set_something (widget_array[K_ITERATION_LABEL], XmNlabelString,
-			string);
+			(void*) string);
 
          sprintf(temp,"%4d",neqsis);
 	 set_something (widget_array[K_NEQSIS_LABEL], XmNlabelString,
-			CREATE_CSTRING(temp));
+			(void*) CREATE_CSTRING(temp));
 
      /* Allocazione della memoria */
          alloca_memoria_x_items(num_calcolo_residui+1);
@@ -1160,7 +1160,7 @@ XmListCallbackStruct *list_info;
 	  sprintf(stringa,
 		  "RESIDUALS HISTORY AT SYSTEM EQUATION # %d",equazione);
           set_something( widget_array[K_ITERATION_EQUATION_WINDOW],
-	   		 XmNdialogTitle,CREATE_CSTRING(stringa)); 
+	   		 XmNdialogTitle,(void*) CREATE_CSTRING(stringa)); 
         
        /* Questa variabile viene settata per recuperare */
        /* il numero dell'equazione di sistema nella visualizzazione */
@@ -1173,27 +1173,27 @@ XmListCallbackStruct *list_info;
      /* Aggiornamento delle label della window */
           copy_n_car(stringa,noblc[ iresbl[equazione]-1 ],8);
           set_something( widget_array[K_BLOCK_VALUE_ITER_EQ_LABEL],
-	 		 XmNlabelString,CREATE_CSTRING(stringa));
+	 		 XmNlabelString,(void*) CREATE_CSTRING(stringa));
 /*
           copy_n_car(stringa,nosub[ iresbl[equazione]-1 ],4);
           set_something( widget_array[K_MODULE_VALUE_ITER_EQ_LABEL],
-	 		 XmNlabelString,CREATE_CSTRING(stringa));
+	 		 XmNlabelString,(void*) CREATE_CSTRING(stringa));
 */
           copy_n_car(stringa,nom_bloc[ iresbl[equazione]-1 ]+39,40);
           set_something( widget_array[K_DESCRIPT_VALUE_ITER_EQ_LABEL],
-	 		 XmNlabelString,CREATE_CSTRING(stringa));
+	 		 XmNlabelString,(void*) CREATE_CSTRING(stringa));
 
           sprintf(stringa,"%4d",ibleqz[ equazione ]);
           set_something( widget_array[K_NUMEQ_VALUE_ITER_EQ_LABEL],
-	 		 XmNlabelString,CREATE_CSTRING(stringa));
+	 		 XmNlabelString,(void*) CREATE_CSTRING(stringa));
 
           copy_n_car(stringa,signeq[ equazione ],50);
           set_something( widget_array[K_MEANING_VALUE_ITER_EQ_LABEL],
-	 		 XmNlabelString,CREATE_CSTRING(stringa));
+	 		 XmNlabelString,(void*) CREATE_CSTRING(stringa));
 
           copy_n_car(stringa,uniteq[ equazione ],10);
           set_something( widget_array[K_UNIT_VALUE_ITER_EQ_LABEL],
-	 		 XmNlabelString,CREATE_CSTRING(stringa));
+	 		 XmNlabelString,(void*) CREATE_CSTRING(stringa));
 
        /* Alloca la memoria */
           alloca_memoria_x_items(num_calcolo_residui);
@@ -1262,7 +1262,7 @@ XmListCallbackStruct *list_info;
 	  sprintf(stringa,
 		  "UNSATISFIED RESIDUALS LIST AT ITERATION # %d",iterazione);
           set_something( widget_array[K_EQUATION_ITERATION_WINDOW],
-	   		 XmNdialogTitle,CREATE_CSTRING(stringa)); 
+	   		 XmNdialogTitle,(void*) CREATE_CSTRING(stringa)); 
         
       /* Lettura dei dati del calcolo dello stazionario dal file F11.DAT */
           lseek(fd_f11, offset_ris_f11, SEEK_SET);
@@ -1381,20 +1381,20 @@ XmListCallbackStruct *list_info;
 	  sprintf (stringa,"VARIABLES VALUE AT THE %s COMPUTING TIME",
 	    	   ordinale(iterazione,temp));
           set_something( widget_array[K_VARIABLE_EQUATION_WINDOW],
-	       		 XmNdialogTitle,CREATE_CSTRING(stringa)); 
+	       		 XmNdialogTitle,(void*) CREATE_CSTRING(stringa)); 
 
      /* Aggiornamento delle label della window */
           copy_n_car(stringa,noblc[ iresbl[equazione]-1 ],8);
           set_something( widget_array[K_BLOCK_VALUE_VAR_EQ_LABEL],
-	 		 XmNlabelString,CREATE_CSTRING(stringa));
+	 		 XmNlabelString,(void*) CREATE_CSTRING(stringa));
 /*
           copy_n_car(stringa,nosub[ iresbl[equazione]-1 ],4);
           set_something( widget_array[K_MODULE_VALUE_VAR_EQ_LABEL],
-	 		 XmNlabelString,CREATE_CSTRING(stringa));
+	 		 XmNlabelString,(void*) CREATE_CSTRING(stringa));
 */
           copy_n_car(stringa,nom_bloc[ iresbl[equazione]-1 ]+39,40);
           set_something( widget_array[K_DESCRIPT_VALUE_VAR_EQ_LABEL],
-	 		 XmNlabelString,CREATE_CSTRING(stringa));
+	 		 XmNlabelString,(void*) CREATE_CSTRING(stringa));
 
       /*  recupera il vettore dei valori delle incognite xy a quella 
           iterazione ( ed il vettore dei coefficienti dello jacobiano ... ) */
@@ -1518,7 +1518,7 @@ unsigned long *reason;
 
        case DISPLAY_VARIABLE	: 
        	    set_something(widget_array[K_DISPLAY_RESULTS_LABEL],
-  		 	       XmNlabelString, DISPLAY_VARIABLE_STRING);
+  		 	       XmNlabelString, (void*) DISPLAY_VARIABLE_STRING);
 
          /* Ricerca il blocco nel vettore noblc */
             for(i=0 ; 
@@ -1630,7 +1630,7 @@ unsigned long *reason;
 
        case DISPLAY_DATA        :
             set_something(widget_array[K_DISPLAY_RESULTS_LABEL],
-			  XmNlabelString, DISPLAY_DATA_STRING);
+			  XmNlabelString, (void*) DISPLAY_DATA_STRING);
             if ( Empty(blocco_selezionato) )
                  break;
 
@@ -2075,13 +2075,13 @@ XmAnyCallbackStruct *selez;
       case K_FIND_BLOCK:
        default_button = widget_array[K_FIND_NEXT_BLOCK];
        set_something (widget_array[K_STEADY_STATE_RESULTS_DIALOG],
-  		      XmNdefaultButton,default_button);
+  		      XmNdefaultButton,(void*) default_button);
      break;
 
      case K_FIND_DATA:
        default_button = widget_array[K_FIND_NEXT_DATA];
        set_something (widget_array[K_STEADY_STATE_RESULTS_DIALOG],
-  		      XmNdefaultButton,default_button);
+  		      XmNdefaultButton,(void*) default_button);
      break;
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
@@ -2164,7 +2164,7 @@ int   label_ID;
             else
             {
                set_something(widget_array[label_ID],XmNlabelString,
-                             messaggio[1]);
+                             (void*) messaggio[1]);
                break;
             }
 
@@ -2172,7 +2172,7 @@ int   label_ID;
             {
                *pos = i;
                set_something(widget_array[label_ID],XmNlabelString,
-                             messaggio[0]);
+                             (void*) messaggio[0]);
                break;
             }
          }
@@ -2189,7 +2189,7 @@ int   label_ID;
             else
             {
                set_something(widget_array[label_ID],XmNlabelString,
-                             messaggio[1]);
+                             (void*) messaggio[1]);
                break;
             }
 
@@ -2197,7 +2197,7 @@ int   label_ID;
             {
                *pos = i;
                set_something(widget_array[label_ID],XmNlabelString,
-                             messaggio[0]);
+                             (void*) messaggio[0]);
                break;
             }
          }

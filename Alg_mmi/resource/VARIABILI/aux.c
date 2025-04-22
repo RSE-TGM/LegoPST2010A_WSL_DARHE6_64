@@ -116,8 +116,8 @@ int no_grab;
 
 XmMessaggio = XmStringCreateSimple (Messaggio);
 Message = create_Message (TipoVis,Padre,OggSel);
-set_something (Message,XmNmessageString, XmMessaggio);
-set_something (Message,XmNdialogType, XmDIALOG_ERROR);
+set_something (Message,XmNmessageString, (void*) XmMessaggio);
+set_something (Message,XmNdialogType, (void*) XmDIALOG_ERROR);
 UxPopupInterface (Message, no_grab);
 XmStringFree (XmMessaggio);
 }
@@ -218,14 +218,14 @@ while (Appo[i] != ' ')
 	}
 AppoggioBlocco[i] = '\0';
 
-get_something (Option, XmNmenuHistory, &VoceSel);
-get_something (VoceSel, XmNlabelString, &NomeVoceSel);
-get_something (Option, XmNsubMenuId, &Pane);
-get_something (Pane, XmNnumChildren, &Numero);
-get_something (Pane, XmNchildren, &OptPane);
+get_something (Option, XmNmenuHistory, (void*) &VoceSel);
+get_something (VoceSel, XmNlabelString, (void*) &NomeVoceSel);
+get_something (Option, XmNsubMenuId, (void*) &Pane);
+get_something (Pane, XmNnumChildren, (void*) &Numero);
+get_something (Pane, XmNchildren, (void*) &OptPane);
 for (i=0;i<Numero;i++)
 	{
-	get_something (OptPane[i], XmNlabelString, &NomeVoce);
+	get_something (OptPane[i], XmNlabelString, (void*) &NomeVoce);
 	uguali = XmStringCompare (NomeVoce,NomeVoceSel);
 	if ( (uguali==True) && (i==0) )
 		strcpy (Elab,"NOP");
@@ -370,8 +370,8 @@ int i,j;
 Boolean Fatto;
 
 /*  Leggo dall'optione menu delle unita di misura la selezione attiva  */
-get_something (OptMenu, XmNmenuHistory, &Settato);
-get_something (Settato, XmNlabelString, &Etichetta);
+get_something (OptMenu, XmNmenuHistory, (void*) &Settato);
+get_something (Settato, XmNlabelString, (void*) &Etichetta);
 Conf = (char *)extract_string (Etichetta);
 
 i=0;
@@ -505,8 +505,8 @@ switch (Tipo)
   }
 
 XmStringa = XmStringCreateSimple (Appo);
-set_something (Bottone,XmNsensitive,ValBot);
-set_something (OpMenu,XmNsensitive,ValOpt);
+set_something (Bottone,XmNsensitive,(void*) ValBot);
+set_something (OpMenu,XmNsensitive,(void*) ValOpt);
 
 /*
 XtFree (Appo);

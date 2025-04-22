@@ -1081,7 +1081,7 @@ printf("Popup Callback Is Called drawing = %d\n",PagDrawingArea);\
          get_child(widsel,&child,&nchild);\
          for(i=0;i<nchild;i++)\
          {\
-            get_something(child[i],XlNwEdit,&edchild);\
+            get_something(child[i],XlNwEdit,(char*)&edchild);\
             if(edchild != NULL)\
             {\
                printf("Cannot open Editor when Children are in Edit\n");\
@@ -1094,7 +1094,7 @@ printf("Popup Callback Is Called drawing = %d\n",PagDrawingArea);\
       }\
       else if( XlIsXlComposite(XtParent(widsel)) )\
       {\
-         get_something( XtParent(widsel),XlNwEdit,&edchild);\
+         get_something( XtParent(widsel),XlNwEdit,(char*)&edchild);\
          if(edchild != NULL)\
          {\
             printf("Cannot open Editor when Parent is in Edit\n");\
@@ -1106,7 +1106,7 @@ printf("Popup Callback Is Called drawing = %d\n",PagDrawingArea);\
       }\
        \
 \
-      get_something(widsel,XlNwEdit,&reswid);\
+      get_something(widsel,XlNwEdit,(char*)&reswid);\
 \
 \
       if(reswid == NULL)\
@@ -1815,7 +1815,7 @@ DrawUngroup(actual_page->drawing);\
          get_child(widsel,&child,&nchild);\
          for(i=0;i<nchild;i++)\
          {\
-            get_something(child[i],XlNwEdit,&edchild);\
+            get_something(child[i],XlNwEdit,(char*)&edchild);\
             if(edchild != NULL)\
             {\
                printf("Cannot open Editor when Children are in Edit\n");\
@@ -1828,7 +1828,7 @@ DrawUngroup(actual_page->drawing);\
       }\
       else if( XlIsXlComposite(XtParent(widsel)) )\
       {\
-         get_something( XtParent(widsel),XlNwEdit,&edchild);\
+         get_something( XtParent(widsel),XlNwEdit,(char*)&edchild);\
          if(edchild != NULL)\
          {\
             printf("Cannot open Editor when Parent is in Edit\n");\
@@ -1839,7 +1839,7 @@ DrawUngroup(actual_page->drawing);\
          }      \
       }\
 \
-      get_something(widsel,XlNwEdit,&reswid);\
+      get_something(widsel,XlNwEdit,(char*)&reswid);\
       if(reswid == NULL)\
       {\
          redit = create_Resource(actual_page,dbtopologia);\

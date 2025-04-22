@@ -422,7 +422,7 @@ int SettaModifica (Widget wid)
 	
 	strcpy (Appo,"|");
 	StrLab = XmStringCreateSimple (Appo);
-	set_something (wid, XmNlabelString, StrLab);
+	set_something (wid, XmNlabelString, (void*) StrLab);
 	XmStringFree (StrLab);
 	return (OK);
 }
@@ -806,7 +806,7 @@ Wid = CreaPushButton (RC,s,StrLab,250);
 XtAddCallback (Wid,XmNactivateCallback,PushVarInpCB,NumRiga);
 XmStringFree (StrLab);
 if (Db == NULL)
-	set_something (Wid, XmNsensitive, False);
+	set_something (Wid, XmNsensitive, (void*) False);
 
 /*  Crea la label   */
 InserisciLabelErr (conf,RC,Padre,TipoP);
@@ -841,7 +841,7 @@ Wid = CreaPushButton (RC,s,StrLab,250);
 XtAddCallback (Wid,XmNactivateCallback,PushVarRegCB,NumRiga);
 XmStringFree (StrLab);
 if (ResGetForm(Padre) == NULL)
-	set_something (Wid, XmNsensitive, False);
+	set_something (Wid, XmNsensitive, (void*) False);
 
 /*  Crea la label   */
 InserisciLabelErr (conf,RC,Padre,TipoP);
@@ -1041,7 +1041,7 @@ Wid = CreaPushButton (RC,s,StrLab,250);
 XtAddCallback (Wid,XmNactivateCallback,PushVarOutCB,NumRiga);
 XmStringFree (StrLab);
 if (Db == NULL)
-	set_something (Wid, XmNsensitive, False);
+	set_something (Wid, XmNsensitive, (void*) False);
 
 /*  Crea la label   */
 InserisciLabelErr (conf,RC,Padre,TipoP);
@@ -1204,7 +1204,7 @@ int ValRet=confi.confinfo_type;
 	e ci si trova su una drawing area che non sia di una libreria
 	blocco tutte le risorse  */
 if ( (XlIsPort (Figlio)) && (TipoPag != TYPE_LIBRERIA) )
-  set_something (RCmom, XmNsensitive, False);
+  set_something (RCmom, XmNsensitive, (void*) False);
 
 /*
  Caso di risorse locked sia livello di pagina
@@ -1215,7 +1215,7 @@ if( confi.confinfo_type > LOCKED_PAG_LIB)
 	ValRet = confi.confinfo_type - LOCKED_PAG_LIB;
 /*  Setto a insensitive il rowcol che contiene gli oggetti
     relativi alla risorsa  */
-        set_something (RCmom, XmNsensitive, False);
+        set_something (RCmom, XmNsensitive, (void*) False);
 	}
 /*
  Caso di risorse locked a livello di libreria
@@ -1225,7 +1225,7 @@ else if ( confi.confinfo_type > LOCKED_LIB)
 	ValRet = confi.confinfo_type - LOCKED_LIB;
 	if(TipoPag == TYPE_LIBRERIA)
 		{
-		set_something (RCmom, XmNsensitive, False);
+		set_something (RCmom, XmNsensitive, (void*) False);
 		}
 	}
 /*
@@ -1241,7 +1241,7 @@ else if ( confi.confinfo_type > LOCKED_PAG )
     case TYPE_REGOLAZIONE:
       /*  Setto a insensitive il rowcol che contiene gli oggetti
 	relativi alla risorsa  */
-      set_something (RCmom, XmNsensitive, False);
+      set_something (RCmom, XmNsensitive, (void*) False);
     break;
     }
   }

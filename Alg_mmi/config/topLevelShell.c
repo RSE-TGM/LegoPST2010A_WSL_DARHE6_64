@@ -440,16 +440,16 @@ void setContextTitle(PAGEDIT_CONTEXT *ped)
    XmString mstring;
 
    mstring = XmStringCreateSimple(ped->fileContext);
-   set_something(ContextLbl,XmNlabelString,mstring);
+   set_something(ContextLbl,XmNlabelString,(void*) mstring);
    XmStringFree(mstring);
 }
 
 void disabilitaMoveMenu()
 {
 /** bottoni che non esistono piu'
-   set_something(menu2_top_b1,XmNsensitive,False);
-   set_something(MovePage,XmNsensitive,False);
-   set_something(MoveIcLib,XmNsensitive,False);
+   set_something(menu2_top_b1,XmNsensitive,(void*) False);
+   set_something(MovePage,XmNsensitive,(void*) False);
+   set_something(MoveIcLib,XmNsensitive,(void*) False);
 **/
 }
 
@@ -458,29 +458,29 @@ void abilitaMoveMenu()
 /**** bottoni che non esistono piu'
    if(npagopen == 0)
    {
-      set_something(menu2_top_b1,XmNsensitive,True);
-      set_something(MovePage,XmNsensitive,True);
-      set_something(MoveIcLib,XmNsensitive,True);
+      set_something(menu2_top_b1,XmNsensitive,(void*) True);
+      set_something(MovePage,XmNsensitive,(void*) True);
+      set_something(MoveIcLib,XmNsensitive,(void*) True);
    }
 ******/
 }
 
 void TopMenuSetInsensitive()
 {
-   set_something(menu1_top_b5,XmNsensitive,False);
-   set_something(menu1_top_b6,XmNsensitive,False);
-/*   set_something(menu2_top_b1,XmNsensitive,False);  non esiste piu'*/
-   set_something(menu2_top_b2,XmNsensitive,False);
-   set_something(menu2_top_b3,XmNsensitive,False);
+   set_something(menu1_top_b5,XmNsensitive,(void*) False);
+   set_something(menu1_top_b6,XmNsensitive,(void*) False);
+/*   set_something(menu2_top_b1,XmNsensitive,(void*) False);  non esiste piu'*/
+   set_something(menu2_top_b2,XmNsensitive,(void*) False);
+   set_something(menu2_top_b3,XmNsensitive,(void*) False);
 }
 
 void TopMenuSetSensitive()
 {
-   set_something(menu1_top_b5,XmNsensitive,True);
-   set_something(menu1_top_b6,XmNsensitive,True);
-/*   set_something(menu2_top_b1,XmNsensitive,True); non esiste piu' */ 
-   set_something(menu2_top_b2,XmNsensitive,True);
-   set_something(menu2_top_b3,XmNsensitive,True);
+   set_something(menu1_top_b5,XmNsensitive,(void*) True);
+   set_something(menu1_top_b6,XmNsensitive,(void*) True);
+/*   set_something(menu2_top_b1,XmNsensitive,(void*) True); non esiste piu' */ 
+   set_something(menu2_top_b2,XmNsensitive,(void*) True);
+   set_something(menu2_top_b3,XmNsensitive,(void*) True);
 }
 
 
@@ -1986,7 +1986,7 @@ static	void	valueChangedCB_Mode( UxWidget, UxClientData, UxCallbackArg )
 	           TopMenuSetInsensitive();
 	     }
 	  } 
-	  set_something(Mode,XmNset,StateInterfaceMode);
+	  set_something(Mode,XmNset,(void*) StateInterfaceMode);
 	}
 	UxTopLevelShellContext = UxSaveCtx;
 }

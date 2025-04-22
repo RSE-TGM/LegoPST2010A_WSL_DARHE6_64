@@ -33,6 +33,7 @@ static char SccsID[] = "@(#)CsRcvMsgSimIDAck.c	5.1\t11/13/95";
 #include <sys/msg.h>
 
 #include "libipc.h"
+#include "sim_types.h"
 #include <sim_param.h>
 #include <Cs/Cs.h>
 

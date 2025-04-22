@@ -477,7 +477,7 @@ Cardinal num_children;
 perc_zoom= 100.0 * fatt_zoom;
 get_child(drawing,&children,&num_children);
 for(i=0;i<num_children;i++)
-      set_something(children[i],XlNfattZoom,perc_zoom);
+      set_something(children[i],XlNfattZoom,(void*) perc_zoom);
 }
 
 /*--------------------------------------------------------
@@ -911,12 +911,12 @@ void pagina_setta_resource(PAGINA *pag)
 {
    Pixel pix;
 
-   set_something(pag->topwidget,XmNx,pag->geom.x);
-   set_something(pag->topwidget,XmNy,pag->geom.y);
-   set_something(pag->topwidget,XmNwidth,pag->geom.width);
-   set_something(pag->topwidget,XmNheight,pag->geom.height);
-   set_something(pag->drawing,XmNwidth,pag->geom.draw_width);
-   set_something(pag->drawing,XmNheight,pag->geom.draw_height);
+   set_something(pag->topwidget,XmNx,(void*) pag->geom.x);
+   set_something(pag->topwidget,XmNy,(void*) pag->geom.y);
+   set_something(pag->topwidget,XmNwidth,(void*) pag->geom.width);
+   set_something(pag->topwidget,XmNheight,(void*) pag->geom.height);
+   set_something(pag->drawing,XmNwidth,(void*) pag->geom.draw_width);
+   set_something(pag->drawing,XmNheight,(void*) pag->geom.draw_height);
    DrawSetSnap(pag->drawing,pag->snap_pag);
 
    /*
@@ -935,10 +935,10 @@ void pagina_setta_resource(PAGINA *pag)
 */
 	if(XlCreatePixmapFromGIF(pag->drawing,pag->geom.background,
 		&pag->sfondo)==True)
-		set_something(pag->drawing,XmNbackgroundPixmap,pag->sfondo);
+		set_something(pag->drawing,XmNbackgroundPixmap,(void*) pag->sfondo);
 	}
    else if( cvtPixelFromString(pag->drawing,pag->geom.background,&pix) )
-      set_something(pag->drawing,XmNbackground,pix);
+      set_something(pag->drawing,XmNbackground,(void*) pix);
 
 }
 
@@ -1233,7 +1233,7 @@ int fpaste(PAGINA *pag)
                         a cui e' connesso */
                      if(XlPortIsConnected(CompChild[j]))
                      {
-                         get_something(CompChild[j],XlNportNameConnect,&PortConnectWith);
+                         get_something(CompChild[j],XlNportNameConnect, (void*) &PortConnectWith);
                          /* ho trovato una porta connessa 
                             adesso devo verificare se esiste nella ClipBoard
                             la porta a cui e' agganciata (connessa)
@@ -1258,7 +1258,7 @@ int fpaste(PAGINA *pag)
 				La porta di Connessione non e' in ClipBoard
 			*/
                             XlSetResourceByWidget(&CuttedDb,CompChild[j],XlNportNameConnect,"");
-			set_something(CompChild[j],XlNportNameConnect,"");
+			set_something(CompChild[j],XlNportNameConnect,(void*) "");
                          }
                           
                      }
@@ -1342,17 +1342,17 @@ int fpaste(PAGINA *pag)
          UxDisplay->db = pag->db;
          new_wid = XtCreateManagedWidget( new_name,XtClass(ClipChild[i]),pag->drawing,NULL,0);
          AddTransWid(pag,new_wid);
-         set_something(new_wid,XlNnome,new_name);
-         set_something(new_wid,XlNselected,True);
+         set_something(new_wid,XlNnome,(void*) new_name);
+         set_something(new_wid,XlNselected,(void*) True);
 
-	set_something(new_wid,XlNfattZoom,perc_zoom);
+	set_something(new_wid,XlNfattZoom,(void*) perc_zoom);
 
          if(XlIsIconReg(new_wid))
          {
 /*
             printf("Ho istanziato e creato una ICONREG \n");
 */
-            get_something(new_wid,XlNiconRegType,&TipoIco);
+            get_something(new_wid,XlNiconRegType, (void*) &TipoIco);
             if(TipoIco == NORMAL_ICONREG)
             {
                PagSetTagReg(pag,new_wid);
@@ -1395,7 +1395,7 @@ int fpaste(PAGINA *pag)
 			trovate porte connesse
 		*/
 /* la porta connessa avra' come riferimento di connessione il vecchio nome della porta */
-                     get_something(CompChild[h],XlNportNameConnect, &PortConnectWith); 
+                     get_something(CompChild[h],XlNportNameConnect, (void*) &PortConnectWith); 
 
 /* ricavo il vecchio nome della porta connessa */
                      get_nomewid(PortConnectWith,appo1);
@@ -1429,7 +1429,7 @@ int fpaste(PAGINA *pag)
  
                           sprintf(appo1,"%s%dc",aggiorna[n].WidNewName,atoi(aggiorna[n].WidNewName)+deltachild); 
                                                          
-                          set_something(CompChild[h],XlNportNameConnect, appo1); 
+                          set_something(CompChild[h],XlNportNameConnect, (void*) appo1); 
                           XlSetResourceByWidget(&pag->db,CompChild[h],XlNportNameConnect,appo1);
                         }
                         
@@ -1982,10 +1982,10 @@ if( pagina_load_file(pag,TIPO_PAGINA)  && pagina_getres(pag,&lista_oggetti) )
                                         CompileBoard,NULL,0);
 		if(XlIsIconReg(wid) && !XlIsInterfaceIconReg(wid))
 			{
-			get_something(wid,XlNtagName,&tag);
+			get_something(wid,XlNtagName, (void*) &tag);
 			strcpy(apptag,tag);
 			strcpy(&apptag[2],pag->tagPag);
-			set_something(wid,XlNtagName,apptag);
+			set_something(wid,XlNtagName,(void*) apptag);
 			XlSetResourceByWidget(&(pag->db),wid,XlNtagName,apptag);
 			}
 		}

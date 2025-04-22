@@ -176,7 +176,7 @@ Widget	create_snap_width_dialog( _Uxwidget_disegno )
 
 		sprintf(str_width,"%d",get_step(widget_disegno));
 		xms= XmStringCreateSimple(str_width);
-		set_something(rtrn, XmNtextString, xms);
+		set_something(rtrn, XmNtextString, (void*) xms);
 		return(rtrn);
 	}
 }

@@ -88,10 +88,10 @@ static void	okCallback_Message( UxWidget, UxClientData, UxCallbackArg )
 		Salvato = 1;
 		Input_Message == 0;
 		fileSelectionBox1 = create_fileSelectionBox1();
-		get_something (Menu_graf, XmNx, &PosX);
-		get_something (Menu_graf, XmNy, &PosY);
-		set_something (fileSelectionBox1, XmNx, PosX+10);
-		set_something (fileSelectionBox1, XmNy, PosY+10);
+		get_something (Menu_graf, XmNx, (void*) &PosX);
+		get_something (Menu_graf, XmNy, (void*) &PosY);
+		set_something (fileSelectionBox1, XmNx, (void*) PosX+10);
+		set_something (fileSelectionBox1, XmNy, (void*) PosY+10);
 		UxPopupInterface(fileSelectionBox1,no_grab);
 	}
 	}

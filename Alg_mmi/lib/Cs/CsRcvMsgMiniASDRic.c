@@ -28,6 +28,7 @@ static char SccsID[] = "@(#)CsRcvMsgAllRic.c	5.1\t11/13/95";
 #include <sim_param.h>
 #include <Cs/Cs.h>
 
+#include "sim_types.h"
 
 /*
     Riceve da mmi un messaggio per la richiesta riconoscimento singolo 

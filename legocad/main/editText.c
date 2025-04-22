@@ -115,9 +115,9 @@ set_titolo(char *title)
 set_editabile(Boolean edi)
 {
    if( edi == True)
-      set_something(scrolledText2,XmNeditable,True);
+      set_something(scrolledText2,XmNeditable,(void*) True);
    else
-      set_something(scrolledText2,XmNeditable,False);
+      set_something(scrolledText2,XmNeditable,(void*) False);
 }
 
 set_text(char *stringa)

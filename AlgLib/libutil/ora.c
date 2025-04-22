@@ -40,9 +40,9 @@ int    *secondi;
 struct tm  *strutt_tempo;
 int     tempo_time;
 
-    time (&tempo_time);
+    time ((time_t *)&tempo_time);
 
-    strutt_tempo = localtime (&tempo_time);
+    strutt_tempo = localtime ((time_t *)&tempo_time);
     if (strutt_tempo == NULL)
 	return (-1);
 

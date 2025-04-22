@@ -313,7 +313,7 @@ Pixmap pix;
 
        LoadBitmap(ScadaLogMain,&pix,LogIconBitmap_bits,LogIconBitmap_width,
                 LogIconBitmap_height);
-        set_something(ScadaLogMain,XmNiconPixmap,pix);
+        set_something(ScadaLogMain,XmNiconPixmap,(void*) pix);
 
 	return ( ScadaLogMain );
 }

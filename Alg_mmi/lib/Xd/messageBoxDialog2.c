@@ -82,16 +82,16 @@ Boolean ConfiguraDialogo(MESSAGGI mes)
    switch(mes.idType)
    {
       case INFMSG:
-         set_something(messageBoxDialog2,XmNdialogType,XmDIALOG_MESSAGE);
-         set_something(messageBoxDialog2,XmNdialogStyle,XmDIALOG_PRIMARY_APPLICATION_MODAL);
+         set_something(messageBoxDialog2,XmNdialogType,(void*) XmDIALOG_MESSAGE);
+         set_something(messageBoxDialog2,XmNdialogStyle,(void*) XmDIALOG_PRIMARY_APPLICATION_MODAL);
       break;
       case WRNMSG:
-         set_something(messageBoxDialog2,XmNdialogType,XmDIALOG_WARNING);
-         set_something(messageBoxDialog2,XmNdialogStyle,XmDIALOG_PRIMARY_APPLICATION_MODAL);
+         set_something(messageBoxDialog2,XmNdialogType,(void*) XmDIALOG_WARNING);
+         set_something(messageBoxDialog2,XmNdialogStyle,(void*) XmDIALOG_PRIMARY_APPLICATION_MODAL);
       break;
       case ERRMSG:
-         set_something(messageBoxDialog2,XmNdialogType,XmDIALOG_ERROR);
-         set_something(messageBoxDialog2,XmNdialogStyle,XmDIALOG_FULL_APPLICATION_MODAL);
+         set_something(messageBoxDialog2,XmNdialogType,(void*) XmDIALOG_ERROR);
+         set_something(messageBoxDialog2,XmNdialogStyle,(void*) XmDIALOG_FULL_APPLICATION_MODAL);
       break;      
    }
 
@@ -102,14 +102,14 @@ Boolean ConfiguraDialogo(MESSAGGI mes)
 
 
    LabOk = XmStringCreateSimple(mes.LabelOk);
-   set_something(messageBoxDialog2,XmNokLabelString,LabOk);
+   set_something(messageBoxDialog2,XmNokLabelString,(void*) LabOk);
 
    if(!mes.CancelButton && WCButton)
       XtDestroyWidget(WCButton);
    else
    {
       LabCancel = XmStringCreateSimple(mes.LabelCancel);
-      set_something(messageBoxDialog2,XmNcancelLabelString,LabCancel);
+      set_something(messageBoxDialog2,XmNcancelLabelString,(void*) LabCancel);
    }
 
    if(!mes.HelpButton && WHButton)
@@ -117,15 +117,15 @@ Boolean ConfiguraDialogo(MESSAGGI mes)
    else
    {
       LabHelp   = XmStringCreateSimple(mes.LabelHelp);
-      set_something(messageBoxDialog2,XmNhelpLabelString,LabHelp);
+      set_something(messageBoxDialog2,XmNhelpLabelString,(void*) LabHelp);
    }
 
 
 /* setto il titolo e il messaggio */
    Messaggio = XmStringCreateSimple(mes.msg);
    Titolo   = XmStringCreateSimple(mes.titolo);
-   set_something(messageBoxDialog2,XmNdialogTitle,Titolo);
-   set_something(messageBoxDialog2,XmNmessageString,Messaggio);
+   set_something(messageBoxDialog2,XmNdialogTitle,(void*) Titolo);
+   set_something(messageBoxDialog2,XmNmessageString,(void*) Messaggio);
 
    return(True);
 }

@@ -88,7 +88,7 @@ Boolean GetSelectedContextName(char *nomeCtxSel)
    char *nomeSel,*appo;
  
    WidName = XmSelectionBoxGetChild(ContextSelection1,XmDIALOG_TEXT);
-   get_something(WidName,XmNvalue,&nomeSel);
+   get_something(WidName,XmNvalue, (void*) &nomeSel);
 
    if(nomeSel != NULL)
    {
@@ -324,9 +324,9 @@ Widget	create_ContextSelection1( _Uxiop )
 		*/
 		
 		if( getenv(ENVCTX) != NULL)
-		   set_something(ContextSelection1,XmNdirSpec,getenv(ENVCTX));
+		   set_something(ContextSelection1,XmNdirSpec,(void*) getenv(ENVCTX));
 		if(iop = 3131)
-		   set_something(ContextSelection1,XmNdirSpec,getenv(ENVICO));
+		   set_something(ContextSelection1,XmNdirSpec,(void*) getenv(ENVICO));
 		
 		
 		return(rtrn);

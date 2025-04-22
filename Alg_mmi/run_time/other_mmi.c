@@ -373,7 +373,7 @@ Info, Plot o Aing
         /*
         Per prima cosa acquisisco la risorsa gerarchia dall' oggetto CaiAll
         */
-        get_something(cw,XlNvarGerarchia,&punt);
+        get_something(cw,XlNvarGerarchia,(void*) &punt);
 
 	if(punt==NULL)
 		{
@@ -424,7 +424,7 @@ Info, Plot o Aing
 	Per prima cosa acquisisco la risorsa gerarchia dall' oggetto Cai
 	*/
 
-	get_something(cw,XlNvarGerarchia,&punt);
+	get_something(cw,XlNvarGerarchia,(void*) &punt);
 printf("Valore di punt=%s\n",punt);
 	if(punt==NULL)
 		{
@@ -513,8 +513,8 @@ METODO provvisorio
       */
       if( XlIsChangePage(cw) ) 
       {
-           get_something(cw,XlNpageName,&pagina);
-           get_something(cw,XlNchangeType,&tipo);
+           get_something(cw,XlNpageName,(void*) &pagina);
+           get_something(cw,XlNchangeType,(void*) &tipo);
            /* se il change page e' di OPEN_EXT2
               chiamo la funzione di apertura della extension2
               passandogli come parametro il parent del changePage
@@ -723,7 +723,7 @@ Boolean LoadBitmap(Widget w, Pixmap *stip, char * bits, int width, int height)
 long cnero,cbianco;
 Pixel background;
 
-get_something(w,XmNbackground,&background);
+get_something(w,XmNbackground,(void*) &background);
 
 if((*stip=XCreatePixmapFromBitmapData(XtDisplay(w),
             RootWindow(XtDisplay(w),DefaultScreen(XtDisplay(w))),bits,
@@ -882,7 +882,7 @@ for(i=0;i<num_confinfo;i++)
           switch(tipo){
 		case XlRTipoVarInp:
 			{
-			get_something(w,confinfo[i].resource_name, &riga_app);
+			get_something(w,confinfo[i].resource_name, (void*) &riga_app);
 	  	   	sprintf(riga,"%s = %s\n",
 			   confinfo[i].confinfo_name,riga_app);
 	  	   	strcat(testo,riga);
@@ -891,7 +891,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRTipoVarOut:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&riga_app);
+				(void*) &riga_app);
 	  	   	sprintf(riga,"%s = %s\n",
 			   confinfo[i].confinfo_name,riga_app);
 	  	   	strcat(testo,riga);
@@ -900,7 +900,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRGerarchia:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&riga_app);
+				(void*) &riga_app);
 	  	   	sprintf(riga,"%s = %s\n",
 			   confinfo[i].confinfo_name,riga_app);
 			printf("\n XLRGERARCHIA:%s\n",testo);
@@ -911,7 +911,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRTipoVarPort:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&riga_app);
+				(void*) &riga_app);
 	  	   	sprintf(riga,"%s = %s\n",
 			   confinfo[i].confinfo_name,riga_app);
 	  	   	strcat(testo,riga);
@@ -923,7 +923,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRSubSystem:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&riga_app);
+				(void*) &riga_app);
 	  	   	sprintf(riga,"%s = %s\n",
 			   confinfo[i].confinfo_name,riga_app);
 	  	   	strcat(testo,riga);
@@ -932,7 +932,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRFloat:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&app_float);
+				(void*) &app_float);
 	  	   	sprintf(riga,"%s = %f\n",
 			   confinfo[i].confinfo_name,app_float);
 	  	   	strcat(testo,riga);
@@ -941,7 +941,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRInt:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&app_int);
+				(void*) &app_int);
 	  	   	sprintf(riga,"%s = %d\n",
 			   confinfo[i].confinfo_name,app_int);
 	  	   	strcat(testo,riga);
@@ -950,7 +950,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlROption:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&app_int);
+				(void*) &app_int);
 			strcpy(opzione,confinfo[i].enum_options);
 			token=strtok(opzione,",");
 			for(k=0;k<app_int;k++)
@@ -1010,7 +1010,7 @@ for(i=0;i<num_confinfo;i++)
           switch(tipo){
 		case XlRTipoVarInp:
 			{
-			get_something(w,confinfo[i].resource_name, &riga_app);
+			get_something(w,confinfo[i].resource_name, (void*) &riga_app);
 	  	   	fprintf(fp,"%s = %s\n",
 			   confinfo[i].confinfo_name,riga_app);
 			break;
@@ -1018,7 +1018,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRTipoVarOut:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&riga_app);
+				(void*) &riga_app);
 	  	   	fprintf(fp,"%s = %s\n",
 			   confinfo[i].confinfo_name,riga_app);
 			break;
@@ -1026,7 +1026,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRGerarchia:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&riga_app);
+				(void*) &riga_app);
 	  	   	fprintf(fp,"%s = %s\n",
 			   confinfo[i].confinfo_name,riga_app);
 			break;
@@ -1035,7 +1035,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRTipoVarPort:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&riga_app);
+				(void*) &riga_app);
 	  	   	fprintf(fp,"%s = %s\n",
 			   confinfo[i].confinfo_name,riga_app);
 			break;
@@ -1046,7 +1046,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRSubSystem:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&riga_app);
+				(void*) &riga_app);
 	  	   	fprintf(fp,"%s = %s\n",
 			   confinfo[i].confinfo_name,riga_app);
 			break;
@@ -1054,7 +1054,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRFloat:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&app_float);
+				(void*) &app_float);
 	  	   	fprintf(fp,"%s = %f\n",
 			   confinfo[i].confinfo_name,app_float);
 			break;
@@ -1062,7 +1062,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlRInt:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&app_int);
+				(void*) &app_int);
 	  	   	fprintf(fp,"%s = %d\n",
 			   confinfo[i].confinfo_name,app_int);
 			break;
@@ -1070,7 +1070,7 @@ for(i=0;i<num_confinfo;i++)
 		case XlROption:
 			{
 			get_something(w,confinfo[i].resource_name,
-				&app_int);
+				(void*) &app_int);
 			strcpy(opzione,confinfo[i].enum_options);
 			token=strtok(opzione,",");
 			for(k=0;k<app_int;k++)
@@ -1526,8 +1526,8 @@ if(!PosMouse(w, &x, &y))
 */
 componente=NULL;
 subsystem=NULL;
-get_something(w,XlNcomponent,&componente);
-get_something(w,XlNsubsystem,&subsystem);
+get_something(w,XlNcomponent,(void*) &componente);
+get_something(w,XlNsubsystem,(void*) &subsystem);
 if(componente==NULL)
 	componente=XtNewString("");
 if(subsystem==NULL)
@@ -2194,8 +2194,8 @@ if(!PosMouse(w, &x, &y))
 */
 componente=NULL;
 subsystem=NULL;
-get_something(w,XlNcomponent,&componente);
-get_something(w,XlNsubsystem,&subsystem);
+get_something(w,XlNcomponent,(void*) &componente);
+get_something(w,XlNsubsystem,(void*) &subsystem);
 if(componente==NULL)
 	componente=XtNewString("");
 if(subsystem==NULL)
@@ -2296,7 +2296,7 @@ else if(XlIsDispReg(w))
    /*
    Vado a ricavare scalamento e offset
    */
-   get_something(w,XlNoffset,&offset);
+   get_something(w,XlNoffset,(void*) &offset);
    strcpy(stringa,"");  
    sprintf(stringa,"%f",offset);
    if(!strlen(stringa))
@@ -2306,7 +2306,7 @@ else if(XlIsDispReg(w))
 
 
 
-   get_something(w,XlNscalamento,&scalamento);
+   get_something(w,XlNscalamento,(void*) &scalamento);
    strcpy(stringa,"");  
 
    sprintf(stringa,"%f",scalamento);
@@ -2343,7 +2343,7 @@ else if ( XlIsIndic(w) || XlIsIndicTelep(w) )
    /*
    Vado a ricavare scalamento e offset
    */
-   get_something(w,XlNoffset,&offset);
+   get_something(w,XlNoffset,(void*) &offset);
    strcpy(stringa,"");  
    sprintf(stringa,"%f",offset);
    if(!strlen(stringa))
@@ -2353,7 +2353,7 @@ else if ( XlIsIndic(w) || XlIsIndicTelep(w) )
 
 
 
-   get_something(w,XlNscalamento,&scalamento);
+   get_something(w,XlNscalamento,(void*) &scalamento);
    strcpy(stringa,"");  
 
    sprintf(stringa,"%f",scalamento);

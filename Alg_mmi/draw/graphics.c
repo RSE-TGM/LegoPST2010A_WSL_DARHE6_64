@@ -170,7 +170,7 @@ Widget wid;
 Pixel pix_sfondo;
 unsigned long valuemask= GCForeground | GCSubwindowMode; 
 XGCValues values;
-get_something(wid, XmNbackground, &pix_sfondo);
+get_something(wid, XmNbackground, (void*) &pix_sfondo);
 values.foreground = pix_sfondo;
 values.subwindow_mode= IncludeInferiors;
 return(XtGetGC (wid, valuemask, &values));
@@ -324,8 +324,8 @@ step= step * get_def_zoom(wid);
 /*
  Ricava le dimensioni della pagina grafica
 */
-get_something(wid, XmNheight, &height);
-get_something(wid, XmNwidth, &width);
+get_something(wid, XmNheight, (void*) &height);
+get_something(wid, XmNwidth, (void*) &width);
 num_x=width/step;
 num_y=height/step;
 num_points= num_x * num_y;
@@ -1073,8 +1073,8 @@ while((dr=ListDragetNext(get_lista(draw_wid))) != NULL)
  Modifica le dimensioni della pagina in corrispondenza dello
  zoom
 */
-get_something(draw_wid, XmNheight, &height);
-get_something(draw_wid, XmNwidth, &width);
+get_something(draw_wid, XmNheight, (void*) &height);
+get_something(draw_wid, XmNwidth, (void*) &width);
 /*
   calcola le dimensioni originali ( a zoom 1.0) della
   window di disegno
@@ -1082,8 +1082,8 @@ get_something(draw_wid, XmNwidth, &width);
 zoom_prec= get_def_zoom(draw_wid);
 height = height / zoom_prec;
 width = width / zoom_prec;
-set_something(draw_wid, XmNheight,(int) (height * zoom));
-set_something(draw_wid, XmNwidth, (int) (width * zoom));
+set_something(draw_wid, XmNheight, (void*) (height * zoom));
+set_something(draw_wid, XmNwidth, (void*) (width * zoom));
 set_def_zoom(draw_wid, zoom);
 
 XClearArea(XtDisplay(draw_wid),XtWindow(draw_wid),0,0,0,0,True);
@@ -1615,8 +1615,8 @@ unsigned long valuemask= GCForeground | GCBackground | GCLineWidth
                          | GCLineStyle | GCSubwindowMode; 
 XGCValues values;
 Pixel pixel_fg, pixel_bg;
-get_something(get_bott_border(draw_wid), XmNbackground, &pixel_fg);
-get_something(get_bott_fill(draw_wid),XmNbackground, &pixel_bg);
+get_something(get_bott_border(draw_wid), XmNbackground, (void*) &pixel_fg);
+get_something(get_bott_fill(draw_wid),XmNbackground, (void*) &pixel_bg);
 values.foreground = pixel_fg;
 values.background = pixel_bg;
 values.line_width = get_line_width(draw_wid);
@@ -2117,7 +2117,7 @@ void add_def_translation(Widget wid,char *stringa)
            switch( *policy )
            {
                case 'r':
-                 set_something(wid, XmNtranslations, tr);
+                 set_something(wid, XmNtranslations, (void*) tr);
                break;
                case 'a':
                   XtAugmentTranslations(wid, tr);

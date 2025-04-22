@@ -245,15 +245,15 @@ static	void	resizeCB_drawingPlot( UxWidget, UxClientData, UxCallbackArg )
 	Dimension w,h;
 	
 	
-	get_something(drawingPlot,XmNwidth,&w);
-	get_something(drawingPlot,XmNheight,&h);
+	get_something(drawingPlot,XmNwidth,(void*) &w);
+	get_something(drawingPlot,XmNheight,(void*) &h);
 	
 	printf("Eseguito resize sulla plot  w=%d  h=%d\n",w,h);
 	w -=20;
 	h -=20;
 	
-	set_something(lista_wid_plot[0],XlNwidth0,w);
-	set_something(lista_wid_plot[0],XlNheight0,h);
+	set_something(lista_wid_plot[0],XlNwidth0,(void*) w);
+	set_something(lista_wid_plot[0],XlNheight0,(void*) h);
 	}
 	UxPlotContext = UxSaveCtx;
 }
@@ -415,13 +415,13 @@ Widget	popup_Plot( _UxrigaPlot, _UxPadrePlot )
 #endif
 		rtrn = _Uxbuild_Plot();
 
-		set_something(ClosePlot,XmNfontList,FontLabelPlot);
+		set_something(ClosePlot,XmNfontList,(void*) FontLabelPlot);
 		
 #ifndef DESIGN_TIME
 		LoadBitmap(drawingPlot,&pix,page_plot_icon_bits,page_plot_icon_width,
 				page_plot_icon_height);
 #endif
-		set_something(rtrn,XmNiconPixmap,pix);
+		set_something(rtrn,XmNiconPixmap,(void*) pix);
 		
 		CreaGrafico(drawingPlot);
 #ifndef DESIGN_TIME

@@ -24,7 +24,7 @@ static char SccsID[] = "@(#)set_something.c	5.1\t11/10/95";
 #include <X11/Xlib.h>
 #include <Mrm/MrmAppl.h>
 
-void set_something();
+//static void set_something(Widget, char*, void*);
 
 /*
  set_something
@@ -32,7 +32,8 @@ void set_something();
  */
 void set_something(w, resource, value)
     Widget w;
-    char *resource, *value;
+    char *resource;
+    void *value;
 {
 Arg al[1];
 XtSetArg(al[0], resource, value);

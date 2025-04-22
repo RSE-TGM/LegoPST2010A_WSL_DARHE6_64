@@ -255,11 +255,11 @@ Widget	create_errorDialog( _UxErrore, _UxTopError )
 		cursor_errore=XlCreateErrCursor(errorDialog);
 		XlSetCursor(errorDialog,cursor_errore);
 		set_something(errorDialog,XmNmessageString,
-				XmStringCreateLtoR(Errore, XmSTRING_DEFAULT_CHARSET));
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),XmNfontList,FontLabelError);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),XmNfontList,FontLabelError);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),XmNfontList,FontLabelError);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),XmNfontList,FontLabelError);
+				(void*) XmStringCreateLtoR(Errore, XmSTRING_DEFAULT_CHARSET));
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,FontLabelError);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,FontLabelError);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,FontLabelError);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),(void*) XmNfontList,FontLabelError);
 		sprintf(message,"%s\n",Errore);
 		show_warning(message);
 		return(rtrn);

@@ -372,7 +372,7 @@ if ( XlIsIconReg (wid) )
   /*  Prendo il puntatore alla form e lo restituisco
         se la form non e' allocata la risorsa XlNobjectForm
         e' settata a NULL  */
-  get_something (wid, XlNobjectForm, &IndiceForm);
+  get_something (wid, XlNobjectForm, (void*) &IndiceForm);
   return (IndiceForm);
   }
 if ( (XlIsPort (wid)) || (XlIsDispReg (wid)) )
@@ -387,7 +387,7 @@ if ( (XlIsPort (wid)) || (XlIsDispReg (wid)) )
     /*  Prendo il puntatore alla form e lo restituisco
         se la form non e' allocata la risorsa XlNobjectForm
         e' settata a NULL  */
-    get_something (WidgetPadre, XlNobjectForm, &IndiceForm);
+    get_something (WidgetPadre, XlNobjectForm, (void*) &IndiceForm);
     return (IndiceForm);
     }
   else return (NULL);

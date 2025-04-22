@@ -34,7 +34,10 @@ static Boolean riconosciAllarmiMiniASD(OlDatabasePuntiObject,unsigned char *,int
 static Boolean riconosciManualiMiniASD(OlDatabasePuntiObject,unsigned char *,int,short,short,int,int);
 static Boolean GetDatiMiniASD(OlDatabasePuntiObject ,
         DATI_ALLARMI_SHM *, DATI_ALLARMI_SHM *,int );
-/*
+
+extern int sgancia_shrmem(char *);
+
+        /*
 Funzione che inizializza strutture shm associate alla OW
 Passo database Punti.
 Nessun ritorno

@@ -15,6 +15,8 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include <string.h>
 #include <malloc.h>
 #include <Rt/Rt.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 
 #define DIM_TAPPO_RTMEMORY	16
@@ -323,7 +325,7 @@ char *RtNewString(char *stringa,char *file, int line)
 char *ret;
 
 if(stringa == NULL)
-        return;
+        return(NULL);
 
 ret = RtMalloc(strlen(stringa)+1,file,line);
 strcpy(ret,stringa);

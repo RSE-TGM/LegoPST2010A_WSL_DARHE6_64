@@ -182,7 +182,7 @@ XmAnyCallbackStruct *call_data;
 {
    UnitaMisura *umis;
 
-   get_something(w, XmNuserData, &umis);
+   get_something(w, XmNuserData, (void*) &umis);
    umis->ind_selez = ind_dim;
 }
 

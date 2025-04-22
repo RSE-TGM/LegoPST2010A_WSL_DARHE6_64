@@ -56,7 +56,7 @@ una singola WRITE, aggiunge dei byte all'inizio del record.Di qui la
 necessita' di utilizzare un flag (nuovo record) per sapere se tratto
 un nuovo record o meno. */
 
-leggi_record_ftn( int fd, int dim, int num_elem, char nuovo_record, int narg, ...)
+int leggi_record_ftn( int fd, int dim, int num_elem, char nuovo_record, int narg, ...)
 {
    char    unita[10], buffer[BUFSIZE], *ptr;
    int     i, j, val, pos, bytes_tot, bytes_letti;
@@ -124,7 +124,7 @@ leggi_record_ftn( int fd, int dim, int num_elem, char nuovo_record, int narg, ..
  ***             num_elem : numero di puntatori in array_bd
  ***             size_elemento : ampiezza in byte (char) di ciascun elemento
 la funzione aggiusta i puntatori dell'array array_bd in array_mono */ 
-crea_array_bidim( array_bd, array_mono, num_elem, size_elemento )
+void crea_array_bidim( array_bd, array_mono, num_elem, size_elemento )
 char *array_bd[], array_mono[];
 int  num_elem, size_elemento;
 {

@@ -171,7 +171,7 @@ Widget list_find_form;
   set_something(UxGetWidget(scrolledList_moduli),XmNselectionPolicy,\
                                                  tipo_selezione);\
   set_label(UxGetWidget(label_lista_mod),titolo_finestra);\
-\
+  extern void free_array_XmString( XmString, int );\
 /* Inserimento find di libreria */\
 \
   parametri_list.ID_lista = UxGetWidget(scrolledList_moduli);\

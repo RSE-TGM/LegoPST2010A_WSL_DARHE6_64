@@ -37,6 +37,7 @@ typedef void (*sighandler_t)(int);
 
 # include "sim_ipc.h"
 # include "libipc.h"
+#include "sim_types.h"
 
 
 

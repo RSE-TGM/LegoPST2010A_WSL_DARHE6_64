@@ -58,7 +58,7 @@ Boolean GetSelectedContextName(char *nomeCtxSel)\
    char *nomeSel,*appo;\
  \
    WidName = XmSelectionBoxGetChild(ContextSelection1,XmDIALOG_TEXT);\
-   get_something(WidName,XmNvalue,&nomeSel);\
+   get_something(WidName,XmNvalue,(char*)&nomeSel);\
 \
    if(nomeSel != NULL)\
    {\

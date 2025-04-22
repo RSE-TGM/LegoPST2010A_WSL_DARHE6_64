@@ -147,7 +147,7 @@ static	void	okCallback_LibToPag( UxWidget, UxClientData, UxCallbackArg )
 	/* recupero la il nome della libreria selezionata */
 	 
 	text = XmSelectionBoxGetChild(UxGetWidget(LibToPag),XmDIALOG_TEXT);
-	get_something(text,XmNvalue,&lib);
+	get_something(text,XmNvalue, (void*) &lib);
 	
 	/* costriusco i nomi dei file */ 
 	if( getenv(ENVPAG) == NULL)

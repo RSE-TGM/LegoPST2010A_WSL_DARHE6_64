@@ -156,7 +156,7 @@ static	void	activateCB_pushButton11( UxWidget, UxClientData, UxCallbackArg )
 	XmString *ListaItem;
 	
 	selezione = XmListGetSelectedPos (scrolledList2,&ListaSel,&NumSel);
-	get_something (scrolledList2, XmNitems, &ListaItem);
+	get_something (scrolledList2, XmNitems, (void*) &ListaItem);
 	
 	if (selezione)
 		{
@@ -164,7 +164,7 @@ static	void	activateCB_pushButton11( UxWidget, UxClientData, UxCallbackArg )
 		Nome = XtNewString ((char *)extract_string(ListaItem[pos]));
 		XmTextFieldSetString (PadChiam[1],Nome );
 		XmTextFieldSetString (PadChiam[2],"");
-		set_something (PadChiam[0], XmNsensitive, True);
+		set_something (PadChiam[0], XmNsensitive, (void*) True);
 		if (pos != 0)
 		  {
 #ifndef ON_MMI
@@ -189,7 +189,7 @@ static	void	activateCB_pushButton11( UxWidget, UxClientData, UxCallbackArg )
 		Nome = XtNewString ((char *)extract_string(ListaItem[0]));
 		XmTextFieldSetString (PadChiam[1],Nome);
 		XmTextFieldSetString (PadChiam[2],"");
-		set_something (PadChiam[0], XmNsensitive, True);
+		set_something (PadChiam[0], XmNsensitive, (void*) True);
 		free (Nome);
 		}
 	
@@ -212,7 +212,7 @@ static	void	activateCB_pushButton12( UxWidget, UxClientData, UxCallbackArg )
 	UxTwoListContext = UxContext =
 			(_UxCTwoList *) UxGetContext( UxWidget );
 	{
-	set_something (PadChiam[0], XmNsensitive, True);
+	set_something (PadChiam[0], XmNsensitive, (void*) True);
 	free (PadChiam);
 	XtDestroyWidget (TwoList);
 	}
@@ -238,8 +238,8 @@ static	void	activateCB_arrowButton3( UxWidget, UxClientData, UxCallbackArg )
 	Ricerca = XmTextFieldGetString (textField3);
 	XmRicerca = XmStringCreateSimple (Ricerca);
 	
-	get_something (scrolledList2, XmNitems, &XmRicercaList);
-	get_something (scrolledList2, XmNitemCount, &NumeroElementi);
+	get_something (scrolledList2, XmNitems, (void*) &XmRicercaList);
+	get_something (scrolledList2, XmNitemCount, (void*) &NumeroElementi);
 	
 	Selezionato = XmListGetSelectedPos (scrolledList2, &ListaSel, &NumSel);
 	if (Selezionato)
@@ -280,8 +280,8 @@ static	void	activateCB_arrowButton4( UxWidget, UxClientData, UxCallbackArg )
 	Ricerca = XmTextFieldGetString (textField3);
 	XmRicerca = XmStringCreateSimple (Ricerca);
 	
-	get_something (scrolledList2, XmNitems, &XmRicercaList);
-	get_something (scrolledList2, XmNitemCount, &NumeroElementi);
+	get_something (scrolledList2, XmNitems, (void*) &XmRicercaList);
+	get_something (scrolledList2, XmNitemCount, (void*) &NumeroElementi);
 	
 	Selezionato = XmListGetSelectedPos (scrolledList2, &ListaSel, &NumSel);
 	if (Selezionato)
@@ -324,7 +324,7 @@ static	void	activateCB_pushButton16( UxWidget, UxClientData, UxCallbackArg )
 	selezionato = 0;
 	NomeMod = XmTextFieldGetString (PadChiam[3]);
 	selezionato = XmListGetSelectedPos (scrolledList3, &ListaSel, &NumSel);
-	get_something (scrolledList3, XmNitems, &ListaXm);
+	get_something (scrolledList3, XmNitems, (void*) &ListaXm);
 	
 	if ( (selezionato==1) && (ListaSel[0] != 1) )
 	  {
@@ -381,7 +381,7 @@ static	void	activateCB_pushButton16( UxWidget, UxClientData, UxCallbackArg )
 	else
 		{
 		strcpy (Appo," ALL ---->");
-		get_something (scrolledList3, XmNitems, &ListaXm);
+		get_something (scrolledList3, XmNitems, (void*) &ListaXm);
 		pos = ListaSel[0]-1;
 		Appoggio = XtNewString (extract_string (ListaXm[pos]) );
 		strcat (Appo,Appoggio);
@@ -848,13 +848,13 @@ Widget	create_TwoList( _UxParent2, _UxDbTop, _UxPadInp, _UxModuli, _UxBlocchi, _
 		Dbt = DbTop;
 		Oggetto2 = OggSel;
 		
-		set_something (PadChiam[0], XmNsensitive, False);
+		set_something (PadChiam[0], XmNsensitive, (void*) False);
 		rtrn = _Uxbuild_TwoList();
 
 		if (ListaDeiModuli == NULL)
 			{
-			set_something (scrolledList3, XmNsensitive, False);
-			set_something (pushButton16, XmNsensitive, False);
+			set_something (scrolledList3, XmNsensitive, (void*) False);
+			set_something (pushButton16, XmNsensitive, (void*) False);
 			}
 		else
 			CaricaLista (scrolledList3,ListaDeiModuli,5,GENERALE);

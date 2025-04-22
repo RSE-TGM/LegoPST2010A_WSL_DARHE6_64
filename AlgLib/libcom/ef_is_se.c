@@ -10,6 +10,10 @@
 #ifndef lint
 static char *_csrc = "@(#) %filespec: ef_is_se.c-2 %  (%full_filespec: ef_is_se.c-2:csrc:3 %)";
 #endif
+
+#include <stdio.h>
+#include <errno.h>
+
 /*
 	Variabile per identificazione della versione
 */

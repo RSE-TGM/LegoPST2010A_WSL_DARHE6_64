@@ -219,7 +219,7 @@ Widget	create_SaveSelection( _UxPadre )
 #ifndef ON_PAGEDIT
 		NomeFile = XtNewString (nome_file_draw);
 		XmTesto = XmStringCreateSimple (NomeFile);
-		set_something (SaveSelection, XmNtextString, XmTesto);
+		set_something (SaveSelection, XmNtextString, (void*) XmTesto);
 		XtFree (NomeFile);
 #endif
 		return(rtrn);

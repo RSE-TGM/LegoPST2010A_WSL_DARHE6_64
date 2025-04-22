@@ -138,8 +138,8 @@ static	void	activateCB_pushButton9( UxWidget, UxClientData, UxCallbackArg )
 	XmString *ListaItem;
 	
 	selezione = XmListGetSelectedPos (scrolledList1,&ListaSel,&NumSel);
-	get_something (scrolledList1, XmNitems, &ListaItem);
-	get_something (scrolledList1, XmNitemCount, &NumItem);
+	get_something (scrolledList1, XmNitems, (void*) &ListaItem);
+	get_something (scrolledList1, XmNitemCount, (void*) &NumItem);
 	
 	/*  Prendo la posizione dell'elemento selezionato se c'e' altrimenti
 		prendo la posizione 0 come posizione di default  */
@@ -156,16 +156,16 @@ static	void	activateCB_pushButton9( UxWidget, UxClientData, UxCallbackArg )
 	  if (ModOrVar == MODELLI)
 	    {
 	    XmTextFieldSetString (PadroneChiam[3],Nome );
-	    set_something (PadroneChiam[0], XmNsensitive, True);
-	    set_something (PadroneChiam[1], XmNsensitive, True);
-	    set_something (PadroneChiam[2], XmNsensitive, True);
+	    set_something (PadroneChiam[0], XmNsensitive, (void*) True);
+	    set_something (PadroneChiam[1], XmNsensitive, (void*) True);
+	    set_something (PadroneChiam[2], XmNsensitive, (void*) True);
 	    XmTextFieldSetString (PadroneChiam[4],Def);
 	    XmTextFieldSetString (PadroneChiam[5],"");
 	    }
 	  else
 	    {
 	    XmTextFieldSetString (PadroneChiam[1], Nome);
-	    set_something (PadroneChiam[0], XmNsensitive, True);
+	    set_something (PadroneChiam[0], XmNsensitive, (void*) True);
 	    }
 	  }
 	else
@@ -200,9 +200,9 @@ static	void	activateCB_pushButton10( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCOneList *) UxGetContext( UxWidget );
 	{
 	if (ModOrVar == MODELLI)
-	  set_something (PadroneChiam[0], XmNsensitive, True);
+	  set_something (PadroneChiam[0], XmNsensitive, (void*) True);
 	else
-	  set_something (PadroneChiam[0], XmNsensitive, True);
+	  set_something (PadroneChiam[0], XmNsensitive, (void*) True);
 	free (PadroneChiam);
 	XtDestroyWidget (OneList);
 	}
@@ -228,8 +228,8 @@ static	void	activateCB_arrowButton1( UxWidget, UxClientData, UxCallbackArg )
 	Ricerca = XmTextFieldGetString (textField2);
 	XmRicerca = XmStringCreateSimple (Ricerca);
 	
-	get_something (scrolledList1, XmNitems, &XmRicercaList);
-	get_something (scrolledList1, XmNitemCount, &NumeroElementi);
+	get_something (scrolledList1, XmNitems, (void*) &XmRicercaList);
+	get_something (scrolledList1, XmNitemCount, (void*) &NumeroElementi);
 	
 	Selezionato = XmListGetSelectedPos (scrolledList1, &ListaSel, &NumSel);
 	if (Selezionato)
@@ -270,8 +270,8 @@ static	void	activateCB_arrowButton2( UxWidget, UxClientData, UxCallbackArg )
 	Ricerca = XmTextFieldGetString (textField2);
 	XmRicerca = XmStringCreateSimple (Ricerca);
 	
-	get_something (scrolledList1, XmNitems, &XmRicercaList);
-	get_something (scrolledList1, XmNitemCount, &NumeroElementi);
+	get_something (scrolledList1, XmNitems, (void*) &XmRicercaList);
+	get_something (scrolledList1, XmNitemCount, (void*) &NumeroElementi);
 	
 	Selezionato = XmListGetSelectedPos (scrolledList1, &ListaSel, &NumSel);
 	if (Selezionato)
@@ -566,7 +566,7 @@ Widget	create_OneList( _UxParent1, _UxPadrone, _UxTipoLista, _UxLista )
 		PadroneChiam = Padrone;
 		ModOrVar = TipoLista;
 		
-		set_something (PadroneChiam[0], XmNsensitive, False);
+		set_something (PadroneChiam[0], XmNsensitive, (void*) False);
 		rtrn = _Uxbuild_OneList();
 
 		if (ModOrVar == MODELLI)

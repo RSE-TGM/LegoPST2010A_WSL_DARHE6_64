@@ -120,8 +120,8 @@ printf("RecoveryLoadInfo: str_end[%d]=%s\n",i,str_end[i]);\
 /*\
 	Setto il valore del tipo di unita' di misura nell'option menu.\
 */\
-      get_something(optionMenu1,XmNsubMenuId,&Pane);\
-      get_something(Pane,XmNchildren,&ListaButton);\
+      get_something(optionMenu1,XmNsubMenuId,(char*)&Pane);\
+      get_something(Pane,XmNchildren,(char*)&ListaButton);\
       if(strcmp(str_end[6],PERCENT)==0)\
          Button = ListaButton[1];\
       else if(strcmp(str_end[6],PERUNIT)==0)\
@@ -148,8 +148,8 @@ printf("RecoveryLoadInfo: str_end[%d]=%s\n",i,str_end[i]);\
       XmTextFieldSetString(textField5,"");\
       XmTextFieldSetString(textField6,"");\
 \
-      get_something(optionMenu1,XmNsubMenuId,&Pane);\
-      get_something(Pane,XmNchildren,&ListaButton);\
+      get_something(optionMenu1,XmNsubMenuId,(char*)&Pane);\
+      get_something(Pane,XmNchildren,(char*)&ListaButton);\
       Button = ListaButton[0];\
       set_something(optionMenu1,XmNmenuHistory,Button);\
    }\
@@ -187,9 +187,9 @@ printf("RestoreInfo: ENTRATO!!!\n");\
    single_info[4]=XmTextFieldGetString(textField5);\
    single_info[5]=XmTextFieldGetString(textField6);\
 \
-   get_something(optionMenu1,XmNmenuHistory,&WgtSelMenu);\
-   get_something(optionMenu1,XmNsubMenuId,&Pane);\
-   get_something(Pane,XmNchildren,&ListaButton);\
+   get_something(optionMenu1,XmNmenuHistory,(char*)&WgtSelMenu);\
+   get_something(optionMenu1,XmNsubMenuId,(char*)&Pane);\
+   get_something(Pane,XmNchildren,(char*)&ListaButton);\
    single_info[6] = (char *)calloc(4,sizeof(char));\
    if(WgtSelMenu == ListaButton[0])\
       strcpy(single_info[6],ENGINEER);\

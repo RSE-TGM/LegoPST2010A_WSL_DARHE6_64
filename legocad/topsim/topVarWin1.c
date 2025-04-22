@@ -321,7 +321,7 @@ int cancella_var_conn(Widget wtop,CONNMODEL *connext)
              /* recupero gli id dei frame degli ingressi
                ( i quali a loro volta contengono un row_col )
              */
-             get_something(ingList1,XmNchildren,&wids);
+             get_something(ingList1,XmNchildren,(void*) &wids);
 
              /* per determinare quale frame contiene la connessione applico
                 la formula
@@ -343,10 +343,10 @@ int cancella_var_conn(Widget wtop,CONNMODEL *connext)
              irc =  ning - (tot- connext->var_esterna);
 
              /* recupero i row_col */
-             get_something(wids[irc],XmNchildren,&wch);
+             get_something(wids[irc],XmNchildren,(void*) &wch);
 
              /* recupero ciascuna label interna all'item */
-             get_something(wch[0],XmNchildren,&wids);
+             get_something(wch[0],XmNchildren,(void*) &wids);
 
          } /* enf if == INGRESSO */
          else
@@ -355,13 +355,13 @@ int cancella_var_conn(Widget wtop,CONNMODEL *connext)
              /* recupero gli id dei frame degli ingressi
                ( i quali a loro volta contengono un row_col )
              */
-             get_something(uscList1,XmNchildren,&wids);
+             get_something(uscList1,XmNchildren,(void*) &wids);
 
              /* recupero il row_col */
-             get_something(wids[connext->var_esterna],XmNchildren,&wch);
+             get_something(wids[connext->var_esterna],XmNchildren,(void*) &wch);
 
              /* recupero ciascuna label interna all'item */
-             get_something(wch[0],XmNchildren,&wids);
+             get_something(wch[0],XmNchildren,(void*) &wids);
          }
 
        } /* end if == blocco */
@@ -658,12 +658,12 @@ show_connections( int variabile, Widget var_wid)
 ***/
         if (!count)
         {
-           get_something(lb,XmNy,&swap);
-           get_something(lb,XmNheight,&he);
+           get_something(lb,XmNy,(void*) &swap);
+           get_something(lb,XmNheight,(void*) &he);
         }
 
         swap += he;
-        set_something(lb,XmNy,swap);
+        set_something(lb,XmNy,(void*) swap);
 
         count++;
       }
@@ -862,7 +862,7 @@ set_var_pixmap(Widget w,char *nome)
 
    UxPutLabelPixmap( wids[1], nome );
 
-   set_something(wids[1],XmNx,2);
+   set_something(wids[1],XmNx,(void*) 2);
 }
 
 
@@ -1174,7 +1174,7 @@ int change_active_block(MODELLO *ttask,int in_blocco,Widget thiswin)
 
    show_on = False;
  
-   get_something(ingList1,XmNbackground,&bck);
+   get_something(ingList1,XmNbackground,(void*) &bck);
 
    set_title(ttask->blocchi[in_blocco]);
 
@@ -1182,7 +1182,7 @@ int change_active_block(MODELLO *ttask,int in_blocco,Widget thiswin)
    clear_list(uscList1);
    add_variables(ttask->blocchi[in_blocco]);
 
-   set_something(ingList1,XmNbackground,bck);
+   set_something(ingList1,XmNbackground,(void*) bck);
 
    reset_var_win_list_context(salva_context);
  
@@ -1572,7 +1572,7 @@ printf("make_var_entry ind_var = %d ",ind_var);
   UxPutForeground(pm,fore);
   wid = UxCreateWidget( pm );
 
-  set_something(pm,XmNx,20);
+  set_something(pm,XmNx,(void*) 20);
 
 #ifndef DESIGN_TIME
   UxPutContext(wid, (char *) UxTopVarWin1Context );
@@ -1609,7 +1609,7 @@ printf("make_var_entry ind_var = %d ",ind_var);
   UxPutForeground(pmconn,fore);
   wid = UxCreateWidget( pmconn );
 
-  set_something(pmconn,XmNx,2);
+  set_something(pmconn,XmNx,(void*) 2);
 
 #ifndef DESIGN_TIME
   UxPutContext(wid, (char *) UxTopVarWin1Context );
@@ -1651,7 +1651,7 @@ printf("make_var_entry ind_var = %d ",ind_var);
   UxPutLabelString( lb, str );
   UxPutHighlightThickness( lb, 3 );
 
-  set_something(lb,XmNx,40);
+  set_something(lb,XmNx,(void*) 40);
 
 
   /*

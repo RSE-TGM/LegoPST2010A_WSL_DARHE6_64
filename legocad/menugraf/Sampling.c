@@ -97,14 +97,14 @@ static void	activateCB_arrowButtonGadget1( UxWidget, UxClientData, UxCallbackArg
 	UxSamplingContext = UxContext =
 			(_UxCSampling *) UxGetContext( UxWidget );
 	{
-	get_something (text_New_Sampl, XmNvalue, &New_Sampl_stringa);
+	get_something (text_New_Sampl, XmNvalue, (void*) &New_Sampl_stringa);
 	New_Sampl = atoi (New_Sampl_stringa);
 	if (New_Sampl > 1) 
 	{
 		New_Sampl--;
 		sprintf (New_Sampl_stringa,"%d",New_Sampl);
 	}
-	set_something (text_New_Sampl, XmNvalue, New_Sampl_stringa);
+	set_something (text_New_Sampl, XmNvalue, (void*) New_Sampl_stringa);
 	}
 	UxSamplingContext = UxSaveCtx;
 }
@@ -119,14 +119,14 @@ static void	activateCB_arrowButtonGadget2( UxWidget, UxClientData, UxCallbackArg
 	UxSamplingContext = UxContext =
 			(_UxCSampling *) UxGetContext( UxWidget );
 	{
-	get_something (text_New_Sampl, XmNvalue, &New_Sampl_stringa);
+	get_something (text_New_Sampl, XmNvalue, (void*) &New_Sampl_stringa);
 	New_Sampl = atoi (New_Sampl_stringa);
 	if (New_Sampl < (numero_campioni/4))
 	{
 		New_Sampl ++;
 		sprintf (New_Sampl_stringa,"%d",New_Sampl);
 	}
-	set_something (text_New_Sampl, XmNvalue, New_Sampl_stringa);
+	set_something (text_New_Sampl, XmNvalue, (void*) New_Sampl_stringa);
 	}
 	UxSamplingContext = UxSaveCtx;
 }
@@ -150,8 +150,8 @@ static void	activateCB_pushButton7( UxWidget, UxClientData, UxCallbackArg )
 		{
 		strcpy (stringa, "Input value is not valid\0");
 		Messaggio = XmStringCreate (stringa, XmSTRING_DEFAULT_CHARSET);
-		set_something (Message, XmNdialogType, XmDIALOG_ERROR);
-		set_something (Message, XmNmessageString, Messaggio);
+		set_something (Message, XmNdialogType, (void*) XmDIALOG_ERROR);
+		set_something (Message, XmNmessageString, (void*) Messaggio);
 		UxPopupInterface (Message, no_grab);
 		XmStringFree (Messaggio);
 		}

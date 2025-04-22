@@ -288,8 +288,8 @@ Widget	create_IconShell( _UxLibname )
 		/*
 		 *  setta le dimensioni della drawing area
 		 */
-		set_something(IconDrawingArea,XmNwidth,Plib->draw_width);
-		set_something(IconDrawingArea,XmNheight,Plib->draw_height);
+		set_something(IconDrawingArea,XmNwidth,(void*) Plib->draw_width);
+		set_something(IconDrawingArea,XmNheight,(void*) Plib->draw_height);
 		
 		iconlib_create_widget(Plib,lista_icone);
 		iconlib_def_translation(Plib);

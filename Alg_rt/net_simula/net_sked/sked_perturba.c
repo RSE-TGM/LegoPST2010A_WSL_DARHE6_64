@@ -365,7 +365,7 @@ init_area_pert()
    }
 }
 
-ins_area_pert_att(tipo, indirizzo, valore_delta, rateo_durata,
+int ins_area_pert_att(tipo, indirizzo, valore_delta, rateo_durata,
 		  period, phase, meanvalue, wide, t_null_var, t)
    int      tipo, indirizzo;
    float    valore_delta, rateo_durata, period, phase, meanvalue, 

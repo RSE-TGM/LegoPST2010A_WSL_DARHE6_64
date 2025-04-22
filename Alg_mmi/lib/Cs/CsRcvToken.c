@@ -40,6 +40,7 @@ static char SccsID[] = "@(#)CsRcvToken.c	5.1\t11/13/95";
 #include <Cs/Cs.h>
 
 #include "libipc.h"
+#include "sim_types.h"
 
 /*
     Riceve il messaggio di richiesta di una nupova pagina,

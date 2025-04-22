@@ -47,6 +47,8 @@ char *crea_shrmem(int,int,int *);
 static int sizeFromHead(RtDbPuntiOggetto);
 static void showErrorNoDb(char *);
 static int sizeDati(RtDbPuntiOggetto);
+extern int sgancia_shrmem(char *);
+extern void elimina_shrmem(int,char*,int);
 
 
 /* dichiarazioni di strutture ad uso interno  */
@@ -145,7 +147,7 @@ else
                                 "InitializeDbPunti");
                else
                    {
-                   sgancia_shrmem(dbpunti->rtDbPunti.punt_head);
+                   sgancia_shrmem((char*)dbpunti->rtDbPunti.punt_head);
                    }
                return(False);
                }
@@ -287,9 +289,9 @@ if(dbpunti->rtDbPunti.errore_privato)
 	cancella le shared memory
 */
 elimina_shrmem(dbpunti->rtDbPunti.id_head,
-	dbpunti->rtDbPunti.punt_head, sizeof(HEAD_DBPUNTI));
+	(char*)dbpunti->rtDbPunti.punt_head, sizeof(HEAD_DBPUNTI));
 elimina_shrmem(dbpunti->rtDbPunti.id_data,
-	dbpunti->rtDbPunti.punt_data, dbpunti->rtDbPunti.size);
+	(char*)dbpunti->rtDbPunti.punt_data, dbpunti->rtDbPunti.size);
 		
 if(dbpunti != NULL)
 	{
@@ -1058,7 +1060,7 @@ if((mod>=dbpunti->rtDbPunti.punt_head->n_task)||(mod <0))
 	{
 	RtShowErrore(dbpunti->rtDbPunti.errore,
 		RT_ERRORE_NO_MODEL,"RtDbPGetTimeTask");
-	return(NULL);
+	return(False);
 	}
 
 memcpy(tempo,&(dbpunti->rtDbPunti.punt_statistics->tempo_task[mod]),
@@ -1079,7 +1081,7 @@ if((mod>=dbpunti->rtDbPunti.punt_head->n_task)||(mod <0))
 	{
 	RtShowErrore(dbpunti->rtDbPunti.errore,
 		RT_ERRORE_NO_MODEL,"RtDbPPutTimeTask");
-	return(NULL);
+	return(False);
 	}
 
 dbpunti->rtDbPunti.punt_statistics->tempo_task[mod] = tempo;

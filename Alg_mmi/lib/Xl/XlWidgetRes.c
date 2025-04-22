@@ -182,7 +182,7 @@ Pixel app_pix;
                 case XlRTipoVarPort:
                 case XlRGerarchia:
                         {
-                        get_something(w,confinfo[i].resource_name, &riga_app);
+                        get_something(w,confinfo[i].resource_name, (void*) &riga_app);
 			strcpy(pres->valore,riga_app);
                         break;
                         }
@@ -191,44 +191,43 @@ Pixel app_pix;
                 case XlRComponent:
                 case XlRSubSystem:
                         {
-                        get_something(w,confinfo[i].resource_name, &riga_app);
+                        get_something(w,confinfo[i].resource_name, (void*) &riga_app);
 			strcpy(pres->valore,riga_app);
                         break;
                         }
                 case XlRFloat:
                         {
-                        get_something(w,confinfo[i].resource_name, &app_float);
+                        get_something(w,confinfo[i].resource_name, (void*) &app_float);
                         sprintf(pres->valore,"%f",app_float);
                         break;
                         }
                 case XlRInt:
                         {
-                        get_something(w,confinfo[i].resource_name, &app_int);
+                        get_something(w,confinfo[i].resource_name, (void*) &app_int);
                         sprintf(pres->valore,"%d",app_int);
                         break;
                         }
                 case XlRPosition:
                         {
-                        get_something(w,confinfo[i].resource_name, &app_pos);
+                        get_something(w,confinfo[i].resource_name, (void*) &app_pos);
                         sprintf(pres->valore,"%d",app_pos);
                         break;
                         }
                 case XlRColor:
                         {
-                        get_something(w,confinfo[i].resource_name, &app_pix);
+                        get_something(w,confinfo[i].resource_name, (void*) &app_pix);
                         sprintf(pres->valore,"%s",PixelToString(w,app_pix));
                         break;
                         }
                 case XlRDimension:
                         {
-                        get_something(w,confinfo[i].resource_name, &app_dim);
+                        get_something(w,confinfo[i].resource_name, (void*) &app_dim);
                         sprintf(pres->valore,"%d",app_dim);
                         break;
                         }
                 case XlROption:
                         {
-                        get_something(w,confinfo[i].resource_name,
-                                &app_int);
+                        get_something(w,confinfo[i].resource_name, (void*) &app_int);
                         strcpy(opzione,confinfo[i].enum_options);
                         token=strtok(opzione,",");
                         for(k=0;k<app_int;k++)

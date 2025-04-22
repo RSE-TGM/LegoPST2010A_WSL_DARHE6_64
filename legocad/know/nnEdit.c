@@ -1059,8 +1059,8 @@ static void	valueChangedCB_nnE_scale( UxWidget, UxClientData, UxCallbackArg )
 	   XtSetValues( nnE_sWinLout, a, 1);
 	   XtSetValues( nnE_sWinLinp, a, 1);
 	*/
-	   set_something( nnE_sWinLout, XmNrightPosition, pA->value);
-	   set_something( nnE_sWinLinp, XmNrightPosition, pA->value);
+	   set_something( nnE_sWinLout, XmNrightPosition, (void*) pA->value);
+	   set_something( nnE_sWinLinp, XmNrightPosition, (void*) pA->value);
 	}
 	UxNnEditContext = UxSaveCtx;
 }
@@ -1110,7 +1110,7 @@ static void	activateCB_nnE_pbOadd( UxWidget, UxClientData, UxCallbackArg )
 	      loStato |=NN_CHG_NN;
 	   }
 	   XtFree( (char *) aiPos);
-	   set_something( nnE_sListMout, XmNvisibleItemCount, cMout);
+	   set_something( nnE_sListMout, XmNvisibleItemCount, (void*) cMout);
 	   mostra_cLMP();
 	   XmListDeselectAllItems( nnE_sListLout);
 	   XtSetSensitive( UxWidget, False);
@@ -1185,8 +1185,8 @@ static void	activateCB_nnE_pbOdel( UxWidget, UxClientData, UxCallbackArg )
 	      }
 	   }
 	   XmListDeselectAllItems( nnE_sListMout);
-	   set_something( nnE_sListMout, XmNvisibleItemCount, cMout ? cMout : 1);
-	   set_something( nnE_sListMinp, XmNvisibleItemCount, cMinp ? cMinp : 1);
+	   set_something( nnE_sListMout, XmNvisibleItemCount, (void*) cMout ? cMout : 1);
+	   set_something( nnE_sListMinp, XmNvisibleItemCount, (void*) cMinp ? cMinp : 1);
 	   mostra_cLMP();
 	   XtFree( (char *) aiPos);
 	   }
@@ -1209,7 +1209,7 @@ static void	singleSelectionCB_nnE_sListLout( UxWidget, UxClientData, UxCallbackA
 	 XmListCallbackStruct *pA =
 	(XmListCallbackStruct *)UxCallbackArg;
 	   int cSel;
-	   get_something( UxWidget, XmNselectedItemCount, &cSel );
+	   get_something( UxWidget, XmNselectedItemCount, (void*) &cSel );
 	   XmListDeselectAllItems( nnE_sListMout);
 	   XtSetSensitive( nnE_pbOdel, False);
 	   if (cSel && ceInElencoInt( pA->item_position -1, cMout, aiMout))
@@ -1235,7 +1235,7 @@ static void	singleSelectionCB_nnE_sListMout( UxWidget, UxClientData, UxCallbackA
 	if (loStato & NN_MODE_NN) {
 	/* modo Normal: da marcare 'non-nota' */
 	   int cSel;
-	   get_something( UxWidget, XmNselectedItemCount, &cSel );
+	   get_something( UxWidget, XmNselectedItemCount, (void*) &cSel );
 	   XmListDeselectAllItems( nnE_sListLout);
 	   if (cSel && ceInElencoInt( pA->item_position, cPair, aiPout))
 	      msgOn( ennEmsg_pairDel );
@@ -1244,7 +1244,7 @@ static void	singleSelectionCB_nnE_sListMout( UxWidget, UxClientData, UxCallbackA
 	} else {
 	/* modo Pairs: */
 	 int cS, iP;
-	   get_something( UxWidget, XmNselectedItemCount, &cS);
+	   get_something( UxWidget, XmNselectedItemCount, (void*) &cS);
 	   iP =ceInElencoInt( pA->item_position, cPout, aiPout);
 	   iPoutSel = (cS) ? ((iP) ? -iP : pA->item_position) : 0;
 	   if (iPinpSel<0
@@ -1352,7 +1352,7 @@ static void	activateCB_nnE_pbIadd( UxWidget, UxClientData, UxCallbackArg )
 	      loStato |= NN_CHG_NN;
 	   }
 	   XtFree( (char *) aiPos);
-	   set_something( nnE_sListMinp, XmNvisibleItemCount, cMinp);
+	   set_something( nnE_sListMinp, XmNvisibleItemCount, (void*) cMinp);
 	   mostra_cLMP();
 	   XmListDeselectAllItems( nnE_sListLinp);
 	   XtSetSensitive( UxWidget, False);
@@ -1427,8 +1427,8 @@ static void	activateCB_nnE_pbIdel( UxWidget, UxClientData, UxCallbackArg )
 	      }
 	   }
 	   XmListDeselectAllItems( nnE_sListMinp);
-	   set_something( nnE_sListMinp, XmNvisibleItemCount, cMinp ? cMinp : 1);
-	   set_something( nnE_sListMout, XmNvisibleItemCount, cMout ? cMout : 1);
+	   set_something( nnE_sListMinp, XmNvisibleItemCount, (void*) cMinp ? cMinp : 1);
+	   set_something( nnE_sListMout, XmNvisibleItemCount, (void*) cMout ? cMout : 1);
 	   mostra_cLMP();
 	   XtFree( (char *) aiPos);
 	   }
@@ -1451,7 +1451,7 @@ static void	singleSelectionCB_nnE_sListLinp( UxWidget, UxClientData, UxCallbackA
 	 XmListCallbackStruct *pA =
 	(XmListCallbackStruct *)UxCallbackArg;
 	   int cSel;
-	   get_something( UxWidget, XmNselectedItemCount, &cSel );
+	   get_something( UxWidget, XmNselectedItemCount, (void*) &cSel );
 	   XmListDeselectAllItems( nnE_sListMinp );
 	   XtSetSensitive( nnE_pbIdel, False);
 	   if (cSel && ceInElencoInt( pA->item_position -1, cMinp, aiMinp))
@@ -1477,7 +1477,7 @@ static void	singleSelectionCB_nnE_sListMinp( UxWidget, UxClientData, UxCallbackA
 	if (loStato & NN_MODE_NN) {
 	/* modo Normal: da marcare 'nota' */
 	   int cSel;
-	   get_something( UxWidget, XmNselectedItemCount, &cSel );
+	   get_something( UxWidget, XmNselectedItemCount, (void*) &cSel );
 	   XmListDeselectAllItems( nnE_sListLinp);
 	   if (cSel && ceInElencoInt( pA->item_position, cPair, aiPinp))
 	      msgOn( ennEmsg_pairDel );
@@ -1486,7 +1486,7 @@ static void	singleSelectionCB_nnE_sListMinp( UxWidget, UxClientData, UxCallbackA
 	} else {
 	/* modo Pairs: */
 	 int cS, iP;
-	   get_something( UxWidget, XmNselectedItemCount, &cS);
+	   get_something( UxWidget, XmNselectedItemCount, (void*) &cS);
 	   iP =ceInElencoInt( pA->item_position, cPinp, aiPinp);
 	   iPinpSel = (cS) ? ((iP) ? -iP : pA->item_position) : 0;
 	   if (iPoutSel<0

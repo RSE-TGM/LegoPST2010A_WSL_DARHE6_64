@@ -83,7 +83,7 @@ switch(Oper)\
    case LOAD_CONTEXT:\
       TopMenuSetSensitive();\
       text = XmSelectionBoxGetChild(UxWidget,XmDIALOG_TEXT);\
-      get_something(text,XmNvalue,&nomeCtxSel);\
+      get_something(text,XmNvalue,(char*)&nomeCtxSel);\
 \
       printf("Load file Context %s\n",nomeCtxSel);\
 \
@@ -94,10 +94,10 @@ switch(Oper)\
          if( pagedit_context_getres(pagedit) != False )\
 	 {\
 /* annullo la lista delle pagina e librerie nella topLevelShell (se ce ne sono) */\
-            get_something(ListPagine, XmNitemCount, &nitem);\
+            get_something(ListPagine, XmNitemCount,(char*)&nitem);\
             if(nitem > 0)\
                XmListDeleteAllItems(ListPagine);    \
-            get_something(LibraryList, XmNitemCount, &nitem);\
+            get_something(LibraryList, XmNitemCount, (char*)&nitem);\
             if(nitem > 0)\
                XmListDeleteAllItems(LibraryList);\
     \
@@ -148,7 +148,7 @@ switch(Oper)\
    break;\
    case SAVE_CONTEXT:\
       text = XmSelectionBoxGetChild(UxWidget,XmDIALOG_TEXT);\
-      get_something(text,XmNvalue,&nomeCtxSel);\
+      get_something(text,XmNvalue,(char*)&nomeCtxSel);\
       printf("Save on  file Context %s\n",nomeCtxSel);\
       strcpy(pagedit->fileContext,nomeCtxSel);\
       new_save_context(pagedit);\
@@ -156,7 +156,7 @@ switch(Oper)\
    break;\
    case DEF_CONTEXT:\
       text = XmSelectionBoxGetChild(UxWidget,XmDIALOG_TEXT);\
-      get_something(text,XmNvalue,&nomeCtxSel);\
+      get_something(text,XmNvalue,(char*)&nomeCtxSel);\
       if( (fp = fopen(nomeCtxSel,"r")) == NULL)\
       {\
          printf("Define New Context\n");\

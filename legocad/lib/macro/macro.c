@@ -331,7 +331,7 @@ Widget toplevel_appl, listaBlocchi;
    cursore_a_crocetta = XCreateFontCursor(display, XC_crosshair);
 
 /* Recupera la Colormap e allocca i colori di fg e bg  */
-   get_something(top_level,XmNcolormap,&colormap);
+   get_something(top_level,XmNcolormap,(void*) &colormap);
    get_pixel(names,apix,num_colors);
 
 /* recupera il nome del modello */
@@ -403,7 +403,7 @@ XmAnyCallbackStruct *call_data;
               cstring = CREATE_CSTRING("Snap on");
               snap_val = PIXEL_STEP;
            }
-           set_something(w, XmNlabelString, cstring);
+           set_something(w, XmNlabelString, (void*) cstring);
            XmStringFree(cstring);
            snap_status = !snap_status;
            break;
@@ -414,7 +414,7 @@ XmAnyCallbackStruct *call_data;
            else
               cstring = CREATE_CSTRING("Yes");
            disegna_freccia = !disegna_freccia;
-           set_something(toggle_arrow, XmNlabelString, cstring);
+           set_something(toggle_arrow, XmNlabelString, (void*) cstring);
            XmStringFree(cstring);
            break;
    }
@@ -703,10 +703,10 @@ extern int seleziona_blocco_lista();
                int num_items;
                char *nome_modulo;
 
-               get_something( lista_moduli, XmNselectedItemCount, &num_items);
+               get_something( lista_moduli, XmNselectedItemCount, (void*) &num_items);
                if (num_items)
                {
-                  get_something( lista_moduli, XmNselectedItems, &items);
+                  get_something( lista_moduli, XmNselectedItems, (void*) &items);
                   nome_modulo=extract_string(items[0]);
                   sprintf(nome_modulo,"%.4s",nome_modulo);
                   carica_icone_modulo(nome_modulo, FROM_ADD_BLOCK);
@@ -940,7 +940,7 @@ void add_process_block(Widget w,int ind_macro,XmAnyCallbackStruct *call_data)
 
    XmTextSetString( text_nome_blocco , "" );
    XmTextSetString( text_descr_blocco, "" );
-   set_something( text_nome_blocco, XmNeditable, True);
+   set_something( text_nome_blocco, XmNeditable, (void*) True);
    carica_lista_moduli(TP_BLOCK);
    XtManageChild(dbx_nuovo_blocco);
    XmListSelectPos(lista_moduli,1,True);
@@ -953,7 +953,7 @@ void add_regolation_block(Widget w,int ind_macro,XmAnyCallbackStruct *call_data)
       dialog_nuovo_blocco();
 
    printf("test stamp add_regolation block\n");
-   set_something( text_nome_blocco, XmNeditable, False);
+   set_something( text_nome_blocco, XmNeditable, (void*) False);
    XmTextSetString( text_nome_blocco , "" );
    XmTextSetString( text_descr_blocco, "" );
    carica_lista_moduli(TP_BLOCK_REG);
@@ -992,7 +992,7 @@ XmAnyCallbackStruct *call_data;
    }
 
 /* Setta il flag di modifica */
-   set_something(macroblocks[ind_macro].wwinblock, XmNuserData, True);
+   set_something(macroblocks[ind_macro].wwinblock, XmNuserData, (void*) True);
 
    if (blocks[indici[0]].tipo == TP_BLOCK ||
        blocks[indici[0]].tipo == TP_BLOCK_REG)
@@ -1148,8 +1148,8 @@ XmAnyCallbackStruct *call_data;
        dim_widgets[i].indice = ind;
        dim_widgets[i].x = blocks[ind].pos_icona.posx-posx0;
        dim_widgets[i].y = blocks[ind].pos_icona.posy-posy0;
-       get_something( blocks[ind].wblock, XmNwidth, &dim_widgets[i].width );
-       get_something( blocks[ind].wblock, XmNheight, &dim_widgets[i].height );
+       get_something( blocks[ind].wblock, XmNwidth, (void*) &dim_widgets[i].width );
+       get_something( blocks[ind].wblock, XmNheight, (void*) &dim_widgets[i].height );
    }
    num_dim_wdg = ptr_macro1->num_blocchi_selez;
 
@@ -1203,7 +1203,7 @@ XmAnyCallbackStruct *call_data;
       return;
    }
 
-   get_something( wdg, XmNuserData, (MacroBlockType *) &ptr_macro2 );
+   get_something( wdg, XmNuserData, (void*) &ptr_macro2 );
 
    if (ptr_macro2 != NULL && wdg == ptr_macro2->wtavblock && 
        ptr_macro2 != ptr_macro1 )         /* ok! il puntatore e' nella */
@@ -1960,22 +1960,22 @@ void cambia_edit_mcr_menu()
 {
 #ifdef DATI
    set_something(pop_edit_macro[K_OPEN_MACRO], XmNsensitive,
-                 (num_macro_selez > 0 ) ? True : False );
+                 (void*) (num_macro_selez > 0 ) ? True : False );
    set_something(menu_edit_macro[K_OPEN_MACRO], XmNsensitive,
-                 (num_macro_selez > 0 ) ? True : False );
+                 (void*) (num_macro_selez > 0 ) ? True : False );
 #else
    set_something(menu_edit_macro[K_MODIFY_MACRO], XmNsensitive,
-                 (num_macro_selez == 1) ? True : False );
+                 (void*) (num_macro_selez == 1) ? True : False );
    set_something(menu_edit_macro[K_OPEN_MACRO], XmNsensitive,
-                 (num_macro_selez > 0 ) ? True : False );
+                 (void*) (num_macro_selez > 0 ) ? True : False );
    set_something(menu_edit_macro[K_DELETE_MACRO], XmNsensitive,
-                 (num_macro_selez > 0 ) ? True : False );
+                 (void*) (num_macro_selez > 0 ) ? True : False );
    set_something(pop_edit_macro[K_MODIFY_MACRO], XmNsensitive,
-                 (num_macro_selez == 1) ? True : False );
+                 (void*) (num_macro_selez == 1) ? True : False );
    set_something(pop_edit_macro[K_OPEN_MACRO], XmNsensitive,
-                 (num_macro_selez > 0 ) ? True : False );
+                 (void*) (num_macro_selez > 0 ) ? True : False );
    set_something(pop_edit_macro[K_DELETE_MACRO], XmNsensitive,
-                 (num_macro_selez > 0 ) ? True : False );
+                 (void*) (num_macro_selez > 0 ) ? True : False );
 #endif
 }
 
@@ -2082,7 +2082,7 @@ String string;
    XmString compound_str;
 
    compound_str = CREATE_CSTRING(string);
-   set_something(w, XmNlabelString, compound_str);
+   set_something(w, XmNlabelString, (void*) compound_str);
    XmStringFree(compound_str);
 }
 
@@ -2109,7 +2109,7 @@ String  t;
            switch( *policy )
            {
                case 'r':
-                         set_something(w, XtNtranslations, tr);
+                         set_something(w, XtNtranslations, (void*) tr);
                          break;
                case 'a':
                          XtAugmentTranslations(w, tr);

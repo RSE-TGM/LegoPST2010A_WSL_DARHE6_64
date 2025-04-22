@@ -31,7 +31,7 @@ end_nom_log_s()
 }
 
 #elif defined AIX || defined OSF1 || defined SCO_UNIX || defined LINUX
-end_nom_log_s()
+int end_nom_log_s()
 {
         return(0);
 }

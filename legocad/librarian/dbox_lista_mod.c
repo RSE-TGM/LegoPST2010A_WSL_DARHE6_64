@@ -201,6 +201,7 @@ Widget	create_lista_moduli();
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
+extern void free_array_XmString( XmString, int );
 
 /***********************************************************************/
 /*** riempi_lista_moduli (file, lista_moduli)
@@ -1083,7 +1084,7 @@ static void	multipleSelectionCB_scrolledList_moduli( UxWidget, UxClientData, UxC
 	
 	sprintf (item_label,"%3d",selected_item);
 	cstring = CREATE_CSTRING(item_label);
-	set_something (UxGetWidget(label_select_item), XmNlabelString, cstring);
+	set_something (UxGetWidget(label_select_item), XmNlabelString, (void*) cstring);
 	XmStringFree(cstring);
 	}
 	UxDbox_lista_modContext = UxSaveCtx;
@@ -1106,7 +1107,7 @@ static void	singleSelectionCB_scrolledList_moduli( UxWidget, UxClientData, UxCal
 	
 	sprintf (item_label,"%3d",selected_item);
 	cstring = CREATE_CSTRING(item_label);
-	set_something (UxGetWidget(label_select_item),XmNlabelString, cstring);
+	set_something (UxGetWidget(label_select_item),XmNlabelString, (void*) cstring);
 	XmStringFree(cstring);
 	}
 	UxDbox_lista_modContext = UxSaveCtx;
@@ -1167,7 +1168,7 @@ static void	activateCB_select_all_pb( UxWidget, UxClientData, UxCallbackArg )
 	int num_items, i;
 	
 	/* Seleziona tutti gli item della scrolledList dei moduli */
-	get_something (UxGetWidget(scrolledList_moduli),XmNitemCount,&num_items);
+	get_something (UxGetWidget(scrolledList_moduli),XmNitemCount,(void*) &num_items);
 	
 	for (i=0; i<num_items; i++)
 	   XmListSelectPos (UxGetWidget(scrolledList_moduli),i,True);
@@ -1648,7 +1649,7 @@ static Widget	_Ux_create_lista_moduli( _Uxfp, _Uxtipo_libreria, _Uxflag_list, _U
 		  {
 		  /* Label contatore inizializzata "0" */
 		     cstring = CREATE_CSTRING("  0  ");
-		     set_something (UxGetWidget(label_select_item), XmNlabelString, cstring);
+		     set_something (UxGetWidget(label_select_item), XmNlabelString, (void*) cstring);
 		     XmStringFree(cstring);
 		  }
 		

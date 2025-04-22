@@ -10,6 +10,11 @@
 #ifndef lint
 static char *_csrc = "@(#) %filespec: ef_clust.c-2 %  (%full_filespec: ef_clust.c-2:csrc:3 %)";
 #endif
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+
 /*
 	Variabile per identificazione della versione
 */
@@ -38,7 +43,9 @@ char* sked_cluster="SKED$$";
 int efbase[2];
 
 #elif defined AIX || defined OSF1 || defined SCO_UNIX || defined LINUX
+#include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
@@ -116,6 +123,7 @@ return(0);
 #define NUM_SEM_AUX 22 /* numero semafori ausiliari (per compatibi_
                           lita' con sked ansaldo */
 key_t getkey();
+static int isnumber(register char *);
 int ef_cluster()
 {
 int i,j;

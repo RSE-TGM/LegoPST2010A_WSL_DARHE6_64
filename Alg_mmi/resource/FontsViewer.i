@@ -219,13 +219,13 @@ return (buffer);\
 *FontSample5.armCallback: {\
 XmFontList Fontl;\
 \
-set_something (FontSample1, XmNset, False);\
-set_something (FontSample2, XmNset, False);\
-set_something (FontSample3, XmNset, False);\
-set_something (FontSample4, XmNset, False);\
+set_something (FontSample1, XmNset, (char*)False);\
+set_something (FontSample2, XmNset, (char*)False);\
+set_something (FontSample3, XmNset, (char*)False);\
+set_something (FontSample4, XmNset, (char*)False);\
 \
-get_something (FontSample5, XmNfontList, &Fontl);\
-set_something (LabelFont , XmNfontList, Fontl);\
+get_something (FontSample5, XmNfontList, (char*)&Fontl);\
+set_something (LabelFont , XmNfontList, (char*)Fontl);\
 \
 XmTextFieldSetString (TextNomeFont, VettoreFont[4]);\
 }
@@ -254,13 +254,13 @@ XmTextFieldSetString (TextNomeFont, VettoreFont[4]);\
 *FontSample4.armCallback: {\
 XmFontList Fontl;\
 \
-set_something (FontSample1, XmNset, False);\
-set_something (FontSample2, XmNset, False);\
-set_something (FontSample3, XmNset, False);\
-set_something (FontSample5, XmNset, False);\
+set_something (FontSample1, XmNset, (char*)False);\
+set_something (FontSample2, XmNset, (char*)False);\
+set_something (FontSample3, XmNset, (char*)False);\
+set_something (FontSample5, XmNset, (char*)False);\
 \
-get_something (FontSample4, XmNfontList, &Fontl);\
-set_something (LabelFont, XmNfontList, Fontl);\
+get_something (FontSample4, XmNfontList, (char*)&Fontl);\
+set_something (LabelFont, XmNfontList, (char*)Fontl);\
 \
 XmTextFieldSetString (TextNomeFont, VettoreFont[3]);\
 }
@@ -294,8 +294,8 @@ set_something (FontSample2, XmNset, False);\
 set_something (FontSample4, XmNset, False);\
 set_something (FontSample5, XmNset, False);\
 \
-get_something (FontSample3, XmNfontList , &Fontl);\
-set_something (LabelFont, XmNfontList, Fontl);\
+get_something (FontSample3, XmNfontList , (char*)&Fontl);\
+set_something (LabelFont, XmNfontList, (char*)Fontl);\
 \
 XmTextFieldSetString (TextNomeFont , VettoreFont[2]);\
 }
@@ -324,13 +324,13 @@ XmTextFieldSetString (TextNomeFont , VettoreFont[2]);\
 *FontSample2.armCallback: {\
 XmFontList Fontl;\
 \
-set_something (FontSample1, XmNset, False);\
-set_something (FontSample3, XmNset, False);\
-set_something (FontSample4, XmNset, False);\
-set_something (FontSample5, XmNset, False);\
+set_something (FontSample1, XmNset, (char*)False);\
+set_something (FontSample3, XmNset, (char*)False);\
+set_something (FontSample4, XmNset, (char*)False);\
+set_something (FontSample5, XmNset, (char*)False);\
 \
-get_something (FontSample2, XmNfontList, &Fontl);\
-set_something (LabelFont, XmNfontList, Fontl); \
+get_something (FontSample2, XmNfontList, (char*)&Fontl);\
+set_something (LabelFont, XmNfontList, (char*)Fontl); \
 \
 XmTextFieldSetString (TextNomeFont , VettoreFont[1]);\
 }
@@ -362,13 +362,13 @@ XmTextFieldSetString (TextNomeFont , VettoreFont[1]);\
 *FontSample1.armCallback: {\
 XmFontList Fontl;\
 \
-set_something (FontSample2, XmNset, False);\
-set_something (FontSample3, XmNset, False);\
-set_something (FontSample4, XmNset, False);\
-set_something (FontSample5, XmNset, False);\
+set_something (FontSample2, XmNset, (char*)False);\
+set_something (FontSample3, XmNset, (char*)False);\
+set_something (FontSample4, XmNset, (char*)False);\
+set_something (FontSample5, XmNset, (char*)False);\
 \
-get_something (FontSample1, XmNfontList , &Fontl);\
-set_something (LabelFont, XmNfontList, Fontl);\
+get_something (FontSample1, XmNfontList , (char*)&Fontl);\
+set_something (LabelFont, XmNfontList, (char*)Fontl);\
 \
 XmTextFieldSetString (TextNomeFont, VettoreFont[0]);\
 }
@@ -456,8 +456,8 @@ XmTextFieldSetString (TextNomeFont, VettoreFont[0]);\
 *pushButton10.labelString: "CANCEL"
 *pushButton10.activateCallback: {\
 /*  Ritorna a sensitive il pushbutton e il textfield chiamante */\
-set_something (ListaRC[0], XmNsensitive, True);\
-set_something (ListaRC[2], XmNsensitive, True);\
+set_something (ListaRC[0], XmNsensitive, (char*)True);\
+set_something (ListaRC[2], XmNsensitive, (char*)True);\
 \
 XtDestroyWidget (FontsViewer);\
 }
@@ -513,28 +513,28 @@ if ( (FontInfo = XLoadQueryFont (UxDisplay,StrFont) ) == NULL)\
 else\
 	{\
 	FontList = XmFontListCreate (FontInfo, XmSTRING_DEFAULT_CHARSET);\
-	set_something (LabelFont , XmNfontList, FontList);\
+	set_something (LabelFont , XmNfontList, (char*)FontList);\
 	XmTextFieldSetString (ListaRC[2], StrFont);\
 	switch (SettaFont)\
 	{\
 	case 1:\
-		set_something (FontSample1,XmNfontList,FontList);\
+		set_something (FontSample1,XmNfontList,(char*)FontList);\
 		strcpy (VettoreFont[0],StrFont);\
 	break;\
 	case 2:\
-		set_something (FontSample2,XmNfontList,FontList);\
+		set_something (FontSample2,XmNfontList,(char*)FontList);\
 		strcpy (VettoreFont[1],StrFont);\
 	break;\
 	case 3:\
-		set_something (FontSample3,XmNfontList,FontList);\
+		set_something (FontSample3,XmNfontList,(char*)FontList);\
 		strcpy (VettoreFont[2],StrFont);\
 	break;\
 	case 4:\
-		set_something (FontSample4,XmNfontList,FontList);\
+		set_something (FontSample4,XmNfontList,(char*)FontList);\
 		strcpy (VettoreFont[3],StrFont);\
 	break;\
 	case 5:\
-		set_something (FontSample5,XmNfontList,FontList);\
+		set_something (FontSample5,XmNfontList,(char*)FontList);\
 		strcpy (VettoreFont[4],StrFont);\
 	break;\
 	}\
@@ -559,8 +559,8 @@ Stringa = (char *)XmTextFieldGetString (TextNomeFont);\
 XmTextFieldSetString (ListaRC[2], Stringa);\
 \
 /*  Ritorna a sensitive il pushButton e il textfield chiamante */\
-set_something (ListaRC[0], XmNsensitive, True);\
-set_something (ListaRC[2], XmNsensitive, True);\
+set_something (ListaRC[0], XmNsensitive, (char*)True);\
+set_something (ListaRC[2], XmNsensitive, (char*)True);\
 \
 XlSetResourceByWidget (&RisDbFonts,FontSample1,XmNfontList,VettoreFont[0]);\
 XlSetResourceByWidget (&RisDbFonts,FontSample2,XmNfontList,VettoreFont[1]);\

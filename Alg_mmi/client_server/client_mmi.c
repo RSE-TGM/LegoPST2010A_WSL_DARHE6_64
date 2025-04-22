@@ -77,6 +77,8 @@ static int abilita_richiesta_connessione(char *);
 static int write_shm(TAB_SHARED, float *);
 
 char *crea_shrmem(int,int,int *);
+extern int sgancia_shrmem(char *);
+extern void elimina_shrmem(int,char*,int);
 
 pid_t client_command = 0,
       client_data = 0,

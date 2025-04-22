@@ -150,10 +150,10 @@ if ( (XlIsIconReg(WS)) || (XlIsDispReg(WS)) )
   if(XlIsDispReg(WS))
         WS=XtParent(WS);
   /*  Prendo tutta la lista delle variabili  */
-  get_something (WS, XlNinputValue, &Stringa); 
+  get_something (WS, XlNinputValue, (void*) &Stringa); 
 
   /*  Prendo dall'oggetto il puntatore alla form  */
-  get_something (WS, XlNobjectForm, &PuntForm);
+  get_something (WS, XlNobjectForm, (void*) &PuntForm);
 
   /*  Ricavo il numero delle linee della form delle variabili  */
   NumLinee = OlGetNumLines (PuntForm,0);
@@ -186,10 +186,10 @@ else if (XlIsPort(WS))
   Fater = XtParent (WS);
 
   /*  Prendo il puntatore allo stringone delle tag  */
-  get_something (Fater, XlNinputValue, &Stringa);
+  get_something (Fater, XlNinputValue, (void*) &Stringa);
 
   /*  Prendo ul puntatore alla form  */
-  get_something (Fater, XlNobjectForm, &PuntForm);
+  get_something (Fater, XlNobjectForm, (void*) &PuntForm);
 
   /*  Prendo le tags della form delle variabili  */
   ListaTag = OlGetTags (PuntForm,0);  
@@ -261,10 +261,10 @@ if (XlIsPort(WS))
   Fater = XtParent (WS);
 
   /*  Prendo il puntatore allo stringone delle tag  */
-  get_something (Fater, XlNinputValue, &Stringa);
+  get_something (Fater, XlNinputValue, (void*) &Stringa);
 
   /*  Prendo ul puntatore alla form  */
-  get_something (Fater, XlNobjectForm, &PuntForm);
+  get_something (Fater, XlNobjectForm, (void*) &PuntForm);
 
   /*  Prendo le tags della form delle variabili  */
   ListaTag = OlGetTags (PuntForm,0);  
@@ -349,7 +349,7 @@ static	void	activateCB_pushButton20( UxWidget, UxClientData, UxCallbackArg )
 	    {
 	    /*  Prende dall'oggetto lista l'elenco degli item sotto
 			forma di lista di XmString  */
-	    get_something (AvailList, XmNitems, &ListaXm);
+	    get_something (AvailList, XmNitems, (void*) &ListaXm);
 	    Posizione = PosSelected[0]-1;
 	    strcpy ( ItemSel,extract_string (ListaXm[Posizione]) );
 	    strncpy (Ritorno,ItemSel,2);
@@ -360,8 +360,8 @@ static	void	activateCB_pushButton20( UxWidget, UxClientData, UxCallbackArg )
 	  }
 	
 	/*  Rimetto a sensitive i bottoni chiamanti  */
-	set_something (ListaWidgetRC[0], XmNsensitive, True);
-	set_something (ListaWidgetRC[2], XmNsensitive, True);
+	set_something (ListaWidgetRC[0], XmNsensitive, (void*) True);
+	set_something (ListaWidgetRC[2], XmNsensitive, (void*) True);
 	
 	XtDestroyWidget (VariablesSelection);
 	}
@@ -380,8 +380,8 @@ static	void	activateCB_pushButton21( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCVariablesSelection *) UxGetContext( UxWidget );
 	{
 	/*  Rimetto a sensitive i bottoni chiamanti  */
-	set_something (ListaWidgetRC[0], XmNsensitive, True);
-	set_something (ListaWidgetRC[2], XmNsensitive, True);
+	set_something (ListaWidgetRC[0], XmNsensitive, (void*) True);
+	set_something (ListaWidgetRC[2], XmNsensitive, (void*) True);
 	
 	XtDestroyWidget (VariablesSelection);
 	}
@@ -724,7 +724,7 @@ Widget	create_VariablesSelection( _UxPar5, _UxListaRCInp, _UxWSel )
 		/*  Imposto la label per il tipo della variabile  */
 		if ( XlIsPort (OSelezionato) )
 		  {
-		  get_something (OSelezionato, XlNtipoPort, &Tipo);
+		  get_something (OSelezionato, XlNtipoPort, (void*) &Tipo);
 		  switch (Tipo)
 		    {
 		    case INPUT_PORT_A:
@@ -757,7 +757,7 @@ Widget	create_VariablesSelection( _UxPar5, _UxListaRCInp, _UxWSel )
 		
 		/*  Setto la label del titolo relativo al tipo della variabile
 			visualizzata  */
-		set_something (TipoVar, XmNlabelString, XmStringCreateSimple(LabTitolo));
+		set_something (TipoVar, XmNlabelString, (void*) XmStringCreateSimple(LabTitolo));
 		
 		InterfaceSetPos (VariablesSelection,Parent5);
 		

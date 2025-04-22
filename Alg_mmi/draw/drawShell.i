@@ -292,12 +292,12 @@ int i;\
 \
 for(i=0; i< 12; i++)\
 	{\
-	get_something(vett_border[i],XmNbackground,&pixel);\
-	set_something(vett_fill[i],XmNbackground,pixel);\
-	get_something(vett_border[i],XmNtopShadowColor,&pixel);\
-	set_something(vett_fill[i],XmNtopShadowColor,pixel);\
-	get_something(vett_border[i],XmNbottomShadowColor,&pixel);\
-	set_something(vett_fill[i],XmNbottomShadowColor,pixel);\
+	get_something(vett_border[i],XmNbackground,(char*)&pixel);\
+	set_something(vett_fill[i],XmNbackground,(char*)pixel);\
+	get_something(vett_border[i],XmNtopShadowColor,(char*)&pixel);\
+	set_something(vett_fill[i],XmNtopShadowColor,(char*)pixel);\
+	get_something(vett_border[i],XmNbottomShadowColor,(char*)&pixel);\
+	set_something(vett_fill[i],XmNbottomShadowColor,(char*)pixel);\
 	\
 	}\
 }\

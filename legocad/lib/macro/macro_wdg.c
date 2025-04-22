@@ -278,7 +278,7 @@ Cardinal *num_params;
        if (macroblocks[i].selezionato && !macroblocks[i].cancellato)
        {
           macroblocks[i].selezionato = False;
-          set_something(macroblocks[i].wmacro, XmNbackground, apix[WHITE]);
+          set_something(macroblocks[i].wmacro, XmNbackground, (void*) apix[WHITE]);
 /*
  la condizione seguente e' stata aggiunta come patch da L.Castiglioni
 */
@@ -328,9 +328,9 @@ printf("\n MACROBLOCCO SELEZIONATO = %d",macroblocks[ ind_macro ].selezionato);
 
 /* Seleziona il macroblocco corrente e resetta il precedente (COLOR_BG) */
    if ( macroblocks[ ind_macro ].selezionato ) 
-      set_something(w, XmNbackground, apix[MACRO_SELEZ_BG]);
+      set_something(w, XmNbackground, (void*) apix[MACRO_SELEZ_BG]);
    else
-      set_something(w, XmNbackground, apix[WHITE]);
+      set_something(w, XmNbackground, (void*) apix[WHITE]);
 }
 
 /*------------------------------------------------------------------*/
@@ -373,9 +373,9 @@ Boolean boh;
                 dim_widgets[i].x = macroblocks[ind].pos_icona.posx;
                 dim_widgets[i].y = macroblocks[ind].pos_icona.posy;
                 get_something( macroblocks[ind].wmacro, XmNwidth,
-                               &dim_widgets[i].width );
+                               (void*) &dim_widgets[i].width );
                 get_something( macroblocks[ind].wmacro, XmNheight,
-                               &dim_widgets[i].height );
+                               (void*) &dim_widgets[i].height );
             }
             num_dim_wdg = num_macro_selez;
             XtFree(indici);

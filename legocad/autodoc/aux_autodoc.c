@@ -66,6 +66,8 @@ extern int num_blocchi;
 extern UnitaMisura unimis[];
 extern int num_unita_misura;
 
+extern void free_array_XmString( XmString, int );
+
 /****************************************************************/
 /* VARIABILI GLOBALI						*/
 /****************************************************************/

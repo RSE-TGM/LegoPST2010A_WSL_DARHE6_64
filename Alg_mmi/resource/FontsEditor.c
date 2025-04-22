@@ -368,7 +368,7 @@ static void put_font()
 	} 
 
 	StrutturaFont = XLoadQueryFont (UxDisplay, font);
-	set_something (display_text, XmNfontList, XmFontListCreate (StrutturaFont,
+	set_something (display_text, XmNfontList, (void*) XmFontListCreate (StrutturaFont,
 			XmSTRING_DEFAULT_CHARSET));
 	XmTextSetString (fontname_text, font); 
 } 
@@ -432,7 +432,7 @@ static void load_list2 ()
 	} else { 
 		sel = 0; 
 	}
-	get_something (font_list_2, XmNitemCount, &Numero);
+	get_something (font_list_2, XmNitemCount, (void*) &Numero);
 	if ( (second_len != 0) || (Numero != 0)) { 
 		put_list_items (font_list_2, second_list, second_len, sel); 
 	} 
@@ -481,7 +481,7 @@ static void load_list3 ()
 	} else { 
 		sel = 0;
 	}
-	get_something (font_list_3, XmNitemCount, &Numero); 
+	get_something (font_list_3, XmNitemCount, (void*) &Numero); 
 	if ( (third_len != 0) || (Numero != 0)) { 
 		put_list_items (font_list_3, third_list, third_len, sel); 
 	} 

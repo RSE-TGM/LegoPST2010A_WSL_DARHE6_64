@@ -368,60 +368,60 @@ XtUnmanageChild(text_7);
 if(menu_aing[sel]._campo_1)
 	{
 	set_something(campo_1,XmNlabelString,
-                 XmStringCreateLtoR(menu_aing[sel].descr_1,XmSTRING_DEFAULT_CHARSET));
+                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_1,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_1);
 	XtManageChild(text_1);
 	}
 if(menu_aing[sel]._campo_2)
 	{
 	set_something(campo_2,XmNlabelString,
-                 XmStringCreateLtoR(menu_aing[sel].descr_2,XmSTRING_DEFAULT_CHARSET));
+                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_2,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_2);
 	XtManageChild(text_2);
 	}
 if(menu_aing[sel]._campo_3)
 	{
 	set_something(campo_3,XmNlabelString,
-                 XmStringCreateLtoR(menu_aing[sel].descr_3,XmSTRING_DEFAULT_CHARSET));
+                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_3,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_3);
 	XtManageChild(text_3);
 	}
 if(menu_aing[sel]._campo_4)
 	{
 	set_something(campo_4,XmNlabelString,
-                 XmStringCreateLtoR(menu_aing[sel].descr_4,XmSTRING_DEFAULT_CHARSET));
+                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_4,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_4);
 	XtManageChild(text_4);
 	}
 if(menu_aing[sel]._campo_5)
 	{
 	set_something(campo_5,XmNlabelString,
-                 XmStringCreateLtoR(menu_aing[sel].descr_5,XmSTRING_DEFAULT_CHARSET));
+                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_5,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_5);
 	XtManageChild(text_5);
 	}
 if(menu_aing[sel]._campo_6)
 	{
 	set_something(campo_6,XmNlabelString,
-                 XmStringCreateLtoR(menu_aing[sel].descr_6,XmSTRING_DEFAULT_CHARSET));
+                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_6,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_6);
 	XtManageChild(text_6);
 	}
 if(menu_aing[sel]._campo_7)
 	{
 	set_something(campo_7,XmNlabelString,
-                 XmStringCreateLtoR(menu_aing[sel].descr_7,XmSTRING_DEFAULT_CHARSET));
+                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_7,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_7);
 	XtManageChild(text_7);
 	}
 if(menu_aing[sel]._Start)
-	set_something(Start,XmNsensitive,True);
+	set_something(Start,XmNsensitive,(void*) True);
 else
-	set_something(Start,XmNsensitive,False);
+	set_something(Start,XmNsensitive,(void*) False);
 if(menu_aing[sel]._Stop)
-	set_something(Stop,XmNsensitive,True);
+	set_something(Stop,XmNsensitive,(void*) True);
 else
-	set_something(Stop,XmNsensitive,False);
+	set_something(Stop,XmNsensitive,(void*) False);
 
 UxAingContext = UxSaveCtx;
 #endif
@@ -1625,19 +1625,19 @@ Widget	create_Aing( _UxrigaAing, _UxPadreAing )
 		rtrn = _Uxbuild_Aing();
 		UxPutClassCode( Aing, _UxIfClassId );
 
-		set_something(tag,XmNfontList,FontLabelAing);
-		set_something(unimis,XmNfontList,FontLabelAing);
-		set_something(Start,XmNfontList,FontLabelAing);
-		set_something(Stop,XmNfontList,FontLabelAing);
+		set_something(tag,XmNfontList,(void*) FontLabelAing);
+		set_something(unimis,XmNfontList,(void*) FontLabelAing);
+		set_something(Start,XmNfontList,(void*) FontLabelAing);
+		set_something(Stop,XmNfontList,(void*) FontLabelAing);
 		set_something(tag,XmNlabelString,
-		                 XmStringCreateLtoR(tagSelect,XmSTRING_DEFAULT_CHARSET));
+		                 (void*) XmStringCreateLtoR(tagSelect,XmSTRING_DEFAULT_CHARSET));
 		set_something(unimis,XmNlabelString,
-		                 XmStringCreateLtoR(unimisSelect,XmSTRING_DEFAULT_CHARSET));
+		                 (void*) XmStringCreateLtoR(unimisSelect,XmSTRING_DEFAULT_CHARSET));
 #ifndef DESIGN_TIME
 		LoadBitmap(testata,&pix,page_aing_icon_bits,page_aing_icon_width,
 				page_aing_icon_height);
 #endif
-		set_something(rtrn,XmNiconPixmap,pix);
+		set_something(rtrn,XmNiconPixmap,(void*) pix);
 		CreaIndicatore(drawingAing);
 #ifndef DESIGN_TIME
 		if((key_refresh_aing=

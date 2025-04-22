@@ -126,8 +126,8 @@ display= XtDisplay(wid);
  per ottenere un disegno in nero deve tener conto del background
  della window su cui si sta disegnando
 */
-get_something(wid, XmNbackground, &Colore.pixel);
-get_something(wid, XmNcolormap, &cmap);
+get_something(wid, XmNbackground, (void*) &Colore.pixel);
+get_something(wid, XmNcolormap, (void*) &cmap);
 XQueryColor (display, cmap, &Colore);
 values.function = GXxor;
 sommaColor= Colore.red + Colore.green + Colore.blue;
@@ -1456,11 +1456,11 @@ void assegna_whfisiche(XrmDatabase db,Widget wid,Dimension w,Dimension h)
    Position w0,h0;
    char appo[100];
 
-   set_something(wid,XmNwidth,w);
-   set_something(wid,XmNheight,h);
+   set_something(wid,XmNwidth,(void*) w);
+   set_something(wid,XmNheight,(void*) h);
 
-   get_something(wid,XlNwidth0,&w0);
-   get_something(wid,XlNheight0,&h0);
+   get_something(wid,XlNwidth0, (void*) &w0);
+   get_something(wid,XlNheight0, (void*) &h0);
 
 
    sprintf(appo,"%d",w0);
@@ -1479,11 +1479,11 @@ void assegna_xyfisiche(XrmDatabase db,Widget wid,Position x,Position y)
    Position x0,y0;
    char appo[100];
 
-   set_something(wid,XmNx,x);
-   set_something(wid,XmNy,y);
+   set_something(wid,XmNx,(void*) x);
+   set_something(wid,XmNy,(void*) y);
 
-   get_something(wid,XlNx0,&x0);
-   get_something(wid,XlNy0,&y0);
+   get_something(wid,XlNx0, (void*) &x0);
+   get_something(wid,XlNy0, (void*) &y0);
 
 
    sprintf(appo,"%d",x0);
@@ -2094,7 +2094,7 @@ void add_def_translation(Widget wid,char *stringa)
            switch( *policy )
            {
                case 'r':
-                 set_something(wid, XtNtranslations, tr);
+                 set_something(wid, XtNtranslations, (void*) tr);
                break;
                case 'a':
                   XtAugmentTranslations(wid, tr);
@@ -2601,11 +2601,11 @@ void do_rubber(ICONLIB *plib,WidgetClass wid_class,Widget wid,Dimension w,Dimens
 */
       new_wid = XtCreateWidget(new_name, wid_class,parent, NULL,0);
 
-      set_something(new_wid,XmNx,wx);  
-      set_something(new_wid,XmNy,wy);  
+      set_something(new_wid,XmNx,(void*) wx);  
+      set_something(new_wid,XmNy,(void*) wy);  
      
-      get_something(new_wid,XlNx0,&x0);  
-      get_something(new_wid,XlNy0,&y0);  
+      get_something(new_wid,XlNx0, (void*) &x0);  
+      get_something(new_wid,XlNy0, (void*) &y0);  
 
       sprintf(appo,"%d",x0);
       XlSetResourceByName(&pagina->db,new_name,XlNx0,appo);
@@ -2617,10 +2617,10 @@ void do_rubber(ICONLIB *plib,WidgetClass wid_class,Widget wid,Dimension w,Dimens
       */
       if(XlIsXlComposite(parent))
       {
-      get_something(parent,XlNrotate,&parent_rotate);  
-      get_something(parent,XlNassRotate,&parent_ass_rotate);  
-      get_something(new_wid,XlNrotate,&app_rotate);  
-      get_something(new_wid,XlNassRotate,&app_ass_rotate);  
+      get_something(parent,XlNrotate, (void*) &parent_rotate);  
+      get_something(parent,XlNassRotate, (void*) &parent_ass_rotate);  
+      get_something(new_wid,XlNrotate, (void*) &app_rotate);  
+      get_something(new_wid,XlNassRotate, (void*) &app_ass_rotate);  
       if((parent_rotate != ROTATE_0) || (parent_ass_rotate!=NO_Y_ASS_ROTATE))
 	{
 	app_rotate = app_rotate - parent_rotate ;
@@ -2636,10 +2636,10 @@ void do_rubber(ICONLIB *plib,WidgetClass wid_class,Widget wid,Dimension w,Dimens
 		if(app_rotate >= ROTATE_COMPLETO)
 			app_rotate -= ROTATE_COMPLETO;
 		}
-        set_something(new_wid,XlNrotate,&app_rotate);  
+        set_something(new_wid,XlNrotate,(void*) &app_rotate);  
         sprintf(appo,"%d",app_rotate);
         XlSetResourceByName(&pagina->db,new_name,XlNrotate,appo);
-        set_something(new_wid,XlNassRotate,&app_ass_rotate);  
+        set_something(new_wid,XlNassRotate,(void*) &app_ass_rotate);  
         sprintf(appo,"%d",app_ass_rotate);
         XlSetResourceByName(&pagina->db,new_name,XlNassRotate,appo);
 	}
@@ -2713,8 +2713,8 @@ void do_rubber(ICONLIB *plib,WidgetClass wid_class,Widget wid,Dimension w,Dimens
 					parent, NULL,0);
 	f_zoom= get_def_zoom(pagina->drawing);
 	perc_zoom =100.0 * f_zoom;
-      set_something(new_wid,XmNwidth,(Dimension)(w*f_zoom));  
-      set_something(new_wid,XmNheight,(Dimension)(h*f_zoom));  
+      set_something(new_wid,XmNwidth, (void*) (w*f_zoom));  
+      set_something(new_wid,XmNheight, (void*) (h*f_zoom));  
       }
       else
       {
@@ -2725,12 +2725,12 @@ void do_rubber(ICONLIB *plib,WidgetClass wid_class,Widget wid,Dimension w,Dimens
       new_wid = XtCreateManagedWidget(new_name, wid_class,parent, NULL,0);
 	f_zoom= get_def_zoom(pagina->drawing);
 	perc_zoom =100.0 * f_zoom;
-      set_something(new_wid,XmNx,(Position)(wx/f_zoom));  
-      set_something(new_wid,XmNy,(Position)(wy/f_zoom));  
-        set_something(new_wid,XlNfattZoom,perc_zoom);
+      set_something(new_wid,XmNx, (void*) (wx/f_zoom));  
+      set_something(new_wid,XmNy, (void*) (wy/f_zoom));  
+        set_something(new_wid,XlNfattZoom,(void*) perc_zoom);
 
-      get_something(new_wid,XlNx0,&x0);  
-      get_something(new_wid,XlNy0,&y0);  
+      get_something(new_wid,XlNx0, (void*) &x0);  
+      get_something(new_wid,XlNy0, (void*) &y0);  
 
       sprintf(appo,"%d",x0);
       XlSetResourceByName(&pagina->db,new_name,XlNx0,appo);
@@ -2740,7 +2740,7 @@ void do_rubber(ICONLIB *plib,WidgetClass wid_class,Widget wid,Dimension w,Dimens
 
       if(XlIsIconReg(new_wid))
       {
-         get_something(new_wid,XlNiconRegType,&TipoIco);
+         get_something(new_wid,XlNiconRegType, (void*) &TipoIco);
          if(TipoIco == NORMAL_ICONREG)
          {
             PagSetTagReg(pagina,new_wid);
@@ -2813,8 +2813,8 @@ void istanzia_widget(Widget wid,XEvent *eve,String *param,Cardinal *nparam)
 
    sscanf(param[0],"%lx",&plib);
    classe = XtClass(wid); 
-   get_something(wid,XmNwidth,&w);
-   get_something(wid,XmNheight,&h);
+   get_something(wid,XmNwidth, (void*) &w);
+   get_something(wid,XmNheight, (void*) &h);
    do_rubber(plib,classe,wid,w,h);
 }
 
@@ -3126,7 +3126,7 @@ void proc_deselect(Widget wgtsel)
 
          pag_deselect_all(drawing);
          DeselectAllDraget(drawing);
-         set_something(wgtsel,XlNselected,True);
+         set_something(wgtsel,XlNselected,(void*) True);
       }
    }
 }
@@ -4234,13 +4234,13 @@ for(i=0;i<num_figli;i++)
   for(j=0;j<num_nipoti;j++)
 	{
 	if((pag->dispreg_visual_mode != dispReg) && XlIsDispReg(m_nipoti[j]))
-	    set_something(m_nipoti[j],XlNdispRegMode,dispReg);
+	    set_something(m_nipoti[j],XlNdispRegMode,(void*) dispReg);
 	if((pag->port_visual_mode != port) && XlIsPort(m_nipoti[j]) && 
 		!XlIsInterfacePort(m_nipoti[j]))
-	    	set_something(m_nipoti[j],XlNvisibleMode,port);
+	    	set_something(m_nipoti[j],XlNvisibleMode,(void*) port);
 	if((pag->interfaceport_visual_mode != interfacePort) &&  
 		XlIsInterfacePort(m_nipoti[j]))
-	    	set_something(m_nipoti[j],XlNvisibleMode,interfacePort);
+	    	set_something(m_nipoti[j],XlNvisibleMode,(void*) interfacePort);
 	}
   XtFree(m_nipoti);
   }
@@ -4280,22 +4280,22 @@ else
 	}
 
 if(XlIsDispReg(w))
-    set_something(w,XlNdispRegMode,dispReg);
+    set_something(w,XlNdispRegMode,(void*) dispReg);
 if(XlIsPort(w) && !XlIsInterfacePort(w))
-    	set_something(w,XlNvisibleMode,port);
+    	set_something(w,XlNvisibleMode,(void*) port);
 if(XlIsInterfacePort(w))
-    	set_something(w,XlNvisibleMode,interfacePort);
+    	set_something(w,XlNvisibleMode,(void*) interfacePort);
 if(XlIsIconReg(w))
   {
   get_child(w,&figli,&num_figli);
   for(i=0;i<num_figli;i++)
 	{
 	if(XlIsDispReg(figli[i]))
-    		set_something(figli[i],XlNdispRegMode,dispReg);
+    		set_something(figli[i],XlNdispRegMode,(void*) dispReg);
 	if(XlIsPort(figli[i]) && !XlIsInterfacePort(figli[i]))
-    		set_something(figli[i],XlNvisibleMode,port);
+    		set_something(figli[i],XlNvisibleMode,(void*) port);
 	if(XlIsInterfacePort(figli[i]))
-    		set_something(figli[i],XlNvisibleMode,interfacePort);
+    		set_something(figli[i],XlNvisibleMode,(void*) interfacePort);
 	}
   }
 }

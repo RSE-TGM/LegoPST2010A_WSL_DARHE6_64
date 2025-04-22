@@ -467,7 +467,7 @@ static void	activateCB_FindDownButton( UxWidget, UxClientData, UxCallbackArg )
 	   
 	/* costruisco la lista di riferimento */
 	
-	   get_something(UxGetWidget(listaBlocchi),XmNitemCount,&num_item);
+	   get_something(UxGetWidget(listaBlocchi),XmNitemCount,(void*) &num_item);
 	   lista    = (char **) calloc( num_item, sizeof(char *));
 	   for(i=0;i<num_item;i++)
 	   {
@@ -537,7 +537,7 @@ static void	activateCB_FindUpButton( UxWidget, UxClientData, UxCallbackArg )
 	
 	/* acquisisco il numero di item in lista */
 	 
-	   get_something(UxGetWidget(listaBlocchi),XmNitemCount,&num_item);   
+	   get_something(UxGetWidget(listaBlocchi),XmNitemCount,(void*) &num_item);   
 	   lista = (char **) calloc( num_item, sizeof(char *));
 	   for(i=0;i<num_item;i++)
 	   {

@@ -22,16 +22,16 @@ static char SccsID[] = "@(#)testata.c	5.1\t11/10/95";
    reserved @(#)testata.c	5.1
 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "versione_processi.h"
 
-char   *getenv ();
+//char   *getenv ();
 
 int numero_processi = (sizeof nomi_processi / sizeof nomi_processi[0]);
 NOMI_PROCESSI Nome_del_processo;
 
-
-testata (nome,sccs_versione)
+void testata (nome,sccs_versione)
 char     nome[50];
 char     sccs_versione[80];
 {

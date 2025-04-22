@@ -1703,7 +1703,7 @@ static void add_translation(Widget wid,char *stringa)
            switch( *policy )
            {
                case 'r':
-                 set_something(wid, XmNtranslations, tr);
+                 set_something(wid, XmNtranslations, (void*) tr);
                break;
                case 'a':
                   XtAugmentTranslations(wid, tr);

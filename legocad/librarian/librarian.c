@@ -287,7 +287,7 @@ main(argc,argv)
            fclose(fp);
         }
 
-        set_something (UxTopLevel,XmNtitle,"LEGO MODULES EDITOR");
+        set_something (UxTopLevel,XmNtitle,(void*) "LEGO MODULES EDITOR");
 
         /* Disinnesco dei menu finche' non si sceglie un modulo */
         menu_modulo_non_attivo();
@@ -296,7 +296,7 @@ main(argc,argv)
         attention_wdg = (Widget) attention(UxTopLevel,"",CREA,geom_attention);
 
         /*  Recupera la Colormap e allocca i colori di fg e bg  */
-        get_something(UxGetWidget(mainWindow1),XmNcolormap,&colormap);
+        get_something(UxGetWidget(mainWindow1),XmNcolormap,(void*) &colormap);
         get_pixel(names,apix,num_colors);
     
 

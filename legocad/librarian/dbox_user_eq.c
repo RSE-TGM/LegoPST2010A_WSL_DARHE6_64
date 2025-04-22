@@ -284,8 +284,8 @@ Boolean boh;
 {
    Dimension width;
 
-    get_something( UxGetWidget(form_labels_eq), XmNwidth, &width );
-    set_something( UxGetWidget(form_eq_scroll), XmNwidth, width-20 );
+    get_something( UxGetWidget(form_labels_eq), XmNwidth, (void*) &width );
+    set_something( UxGetWidget(form_eq_scroll), XmNwidth, (void*) width-20 );
 }
 
 

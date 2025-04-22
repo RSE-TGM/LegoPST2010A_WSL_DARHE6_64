@@ -921,7 +921,7 @@ Boolean crea_elenco_display(XtAppContext app_context)
 			elenco_display[i].nome);
 
 		popup_errorDialog(testo_display,topLevelShellMain);
-		set_something(elenco_display[i].wb,XmNsensitive,False);
+		set_something(elenco_display[i].wb,XmNsensitive,(void*) False);
 
 	}
 	else
@@ -1933,17 +1933,17 @@ Widget	popup_topLevelShellMain()
 #ifndef DESIGN_TIME
 		LoadBitmap(form4,&pix,legommi_icon_bits,legommi_icon_width,legommi_icon_height);
 #endif
-		set_something(rtrn,XmNiconPixmap,pix);
+		set_something(rtrn,XmNiconPixmap,(void*) pix);
 		set_something(labelDescrizione,XmNlabelString,
-			 XmStringCreateLtoR(descrizione_impianto,XmSTRING_DEFAULT_CHARSET));
-		set_something(listPage,XmNfontList,FontLista);
-		set_something(menu2_AllPages,XmNfontList,FontLabel);
-		set_something(menu2_Sinottici,XmNfontList,FontLabel);
-		set_something(menu2_Stazioni,XmNfontList,FontLabel);
-		set_something(pushButtonQuit,XmNfontList,FontLabel);
-		set_something(XmOptionLabelGadget(menuDisplay),XmNfontList,FontLabel);
-		set_something(XmOptionLabelGadget(menuTipoPagina),XmNfontList,FontLabel);
-		set_something(buttonOpenPage,XmNfontList,FontLabel);
+			 (void*) XmStringCreateLtoR(descrizione_impianto,XmSTRING_DEFAULT_CHARSET));
+		set_something(listPage,XmNfontList,(void*) FontLista);
+		set_something(menu2_AllPages,XmNfontList,(void*) FontLabel);
+		set_something(menu2_Sinottici,XmNfontList,(void*) FontLabel);
+		set_something(menu2_Stazioni,XmNfontList,(void*) FontLabel);
+		set_something(pushButtonQuit,XmNfontList,(void*) FontLabel);
+		set_something(XmOptionLabelGadget(menuDisplay),XmNfontList,(void*) FontLabel);
+		set_something(XmOptionLabelGadget(menuTipoPagina),XmNfontList,(void*) FontLabel);
+		set_something(buttonOpenPage,XmNfontList,(void*) FontLabel);
 		
 		
 		/* set hostbame della machhina dove Þ partito legommi
@@ -1959,7 +1959,7 @@ Widget	popup_topLevelShellMain()
 		
 		
 		set_something(labelMain,XmNlabelString,
-			 XmStringCreateLtoR(app_testata,XmSTRING_DEFAULT_CHARSET));
+			 (void*) XmStringCreateLtoR(app_testata,XmSTRING_DEFAULT_CHARSET));
 		time(&time_end);
 		printf("\n\n Prima di setta elenco display=%ld\n",(time_end-time_start));
 		time(&time_start);

@@ -342,7 +342,7 @@ BlockType *ptr_block;
      ptr_macro->num_blocchi_selez--;
      if (ptr_block->wblock != NULL)
      {
-        set_something(ptr_block->wblock,XmNborderColor, apix[BLOCKS_TABLE_BG]);
+        set_something(ptr_block->wblock,XmNborderColor, (void*) apix[BLOCKS_TABLE_BG]);
        cambia_edit_blk_menu(ptr_macro);  /* Abilita/disabilita voci menu pop-up */
      }
   }
@@ -424,7 +424,7 @@ Boolean boh;
    else
       return;
 
-   get_something( w, XmNuserData, &pointer_block );
+   get_something( w, XmNuserData, (void*) &pointer_block );
    if (pointer_block->tipo == TP_REMARK)
       widget_icona = w; /* widget label of remark */
    else
@@ -471,9 +471,9 @@ Boolean boh;
 	       dim_widgets[i].x = blocks[ind].pos_icona.posx;
                dim_widgets[i].y = blocks[ind].pos_icona.posy;
                get_something( blocks[ind].wblock, XmNwidth,
-			      &dim_widgets[i].width );
+			      (void*) &dim_widgets[i].width );
                get_something( blocks[ind].wblock, XmNheight,
-			      &dim_widgets[i].height );
+			      (void*) &dim_widgets[i].height );
            }
            num_dim_wdg = ptr_macro->num_blocchi_selez;
            XtFree(indici);
@@ -545,7 +545,7 @@ Boolean boh;
    if (bottone_premuto == -1)
       return;
 
-   get_something( w, XmNuserData, &pointer_block );
+   get_something( w, XmNuserData, (void*) &pointer_block );
 
    switch (bottone_premuto)
    {
@@ -1717,7 +1717,7 @@ int ind_macro, ind_blk;
 
            ptr_macro = &macroblocks[ind_macro];
 
-           set_something(icon_pixmap,XmNuserData, &ptr_macro->blocks[ind_blk]);
+           set_something(icon_pixmap,XmNuserData, (void*) &ptr_macro->blocks[ind_blk]);
 
         /* aggiorna la struttura del blocco */
            ptr_macro->blocks[ind_blk].wblock  = form_icona;
@@ -1754,7 +1754,7 @@ PixmapInfo *new_pixmap;
    if ( new_pixmap != NULL)
    {
    /* recupera l'altezza della label del nome del blocco */
-      get_something(ptr_block->wlabel, XmNheight, &label_height);
+      get_something(ptr_block->wlabel, XmNheight, (void*) &label_height);
 
       nargs = 0;
       XtSetArg(args[nargs],XmNwidth, new_pixmap->width); nargs++;
@@ -1803,7 +1803,7 @@ Boolean boh;
     if (wdg_ico_selez != NULL)
        set_something (XtParent(wdg_ico_selez), XmNborderColor,
 		      apix[BLOCKS_TABLE_BG]);
-    set_something( XtParent(w), XmNborderColor, apix[ RED ]);
+    set_something( XtParent(w), XmNborderColor, (void*) apix[ RED ]);
     wdg_ico_selez = w;
     pixm_ico_selez = pixm_info;
 }
@@ -1835,7 +1835,7 @@ Boolean boh;
    extern DimWidgets *dim_widgets;
    extern int num_dim_wdg;
 
-   get_something( XtParent(XtParent(w)), XmNuserData, &tipo );
+   get_something( XtParent(XtParent(w)), XmNuserData, (void*) &tipo );
 
    if ( tipo == TP_BLOCK || tipo == TP_BLOCK_REG)
    {
@@ -1900,10 +1900,10 @@ Boolean boh;
 /* Attiva il rubber-band */
    num_dim_wdg = 1;
    dim_widgets = (DimWidgets *) calloc_mem(1, sizeof(DimWidgets));
-   get_something( w, XmNwidth, &dim_widgets[0].width );
-   get_something( w, XmNheight, &dim_widgets[0].height );
-   get_something( w, XmNx, &dim_widgets[0].x );
-   get_something( w, XmNy, &dim_widgets[0].y );
+   get_something( w, XmNwidth, (void*) &dim_widgets[0].width );
+   get_something( w, XmNheight, (void*) &dim_widgets[0].height );
+   get_something( w, XmNx, (void*) &dim_widgets[0].x );
+   get_something( w, XmNy, (void*) &dim_widgets[0].y );
    
    start_rubberband( ev, RootWindow(display, screen), dim_widgets,
 		     num_dim_wdg, True );
@@ -1943,7 +1943,7 @@ Boolean boh;
    if ( (wdg = XtWindowToWidget( display, ev2.xbutton.window)) == NULL)
       return;
 
-   get_something( wdg, XmNuserData, (MacroBlockType *) &pointer_macro );
+   get_something( wdg, XmNuserData, (void*) &pointer_macro );
 
    if ( pointer_macro != NULL &&
         pointer_macro >= macroblocks && 
@@ -2111,7 +2111,7 @@ Widget widget_sup;
    if (find_form == NULL)
        find_form = find_kit(dbx_nuovo_blocco,args,nargs,&find_module);
 
-   set_something (find_module.ID_testo,XmNbackground,apix[WHITE]);
+   set_something (find_module.ID_testo,XmNbackground,(void*) apix[WHITE]);
    return(find_form);
 }
 
@@ -2126,21 +2126,21 @@ MacroBlockType *ptr;
 
 #ifdef DATI
    set_something(ptr->menu_edit_blocchi[K_VAR_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0) ? True : False );
    set_something(ptr->menu_edit_blocchi[K_DATA_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0) ? True : False );
    set_something(ptr->menu_edit_blocchi[K_KNOW_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0) ? True : False );
    set_something(ptr->menu_edit_blocchi[K_NORM_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_VAR_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_DATA_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_KNOW_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_NORM_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0) ? True : False );
 #elif TOPOLOGIA
 
   if(ptr->num_blocchi_selez == 1)
@@ -2150,53 +2150,53 @@ MacroBlockType *ptr;
   
 
   set_something(ptr->pop_edit_blocchi[K_VARIABLES_BLOCK], XmNsensitive,
-                         ( (ptr->num_blocchi_selez == 1  && tipo == TP_BLOCK) ) ? True : False );
+                         (void*) ( (ptr->num_blocchi_selez == 1  && tipo == TP_BLOCK) ) ? True : False );
   set_something(ptr->pop_edit_blocchi[K_NEW_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez == 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez == 0) ? True : False );
   set_something(ptr->pop_edit_blocchi[K_NEW_PROCESS_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez == 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez == 0) ? True : False );
   set_something(ptr->pop_edit_blocchi[K_NEW_REGULATION_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez == 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez == 0) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_MODIFY_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez == 1) ? True : False );
+                         (void*) (ptr->num_blocchi_selez == 1) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_DELETE_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0 ) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0 ) ? True : False );
 
   set_something(ptr->menu_edit_blocchi[K_VARIABLES_BLOCK], XmNsensitive,
-                         ((ptr->num_blocchi_selez == 1 && tipo == TP_BLOCK)) ? True : False );
+                         (void*) ((ptr->num_blocchi_selez == 1 && tipo == TP_BLOCK)) ? True : False );
   set_something(ptr->menu_edit_blocchi[K_NEW_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez == 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez == 0) ? True : False );
   set_something(ptr->menu_edit_blocchi[K_NEW_PROCESS_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez == 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez == 0) ? True : False );
   set_something(ptr->menu_edit_blocchi[K_NEW_REGULATION_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez == 0) ? True : False );
+                         (void*) (ptr->num_blocchi_selez == 0) ? True : False );
    set_something(ptr->menu_edit_blocchi[K_MODIFY_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez == 1) ? True : False );
+                         (void*) (ptr->num_blocchi_selez == 1) ? True : False );
    set_something(ptr->menu_edit_blocchi[K_DELETE_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0 ) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0 ) ? True : False );
 /******************************************************************************
    set_something(ptr->menu_edit_blocchi[K_MOVE_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0 ) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0 ) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_MODIFY_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez == 1) ? True : False );
+                         (void*) (ptr->num_blocchi_selez == 1) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_DELETE_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0 ) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0 ) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_MOVE_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0 ) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0 ) ? True : False );
 *******************************************************************************/
 #else
    set_something(ptr->menu_edit_blocchi[K_MODIFY_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez == 1) ? True : False );
+                         (void*) (ptr->num_blocchi_selez == 1) ? True : False );
    set_something(ptr->menu_edit_blocchi[K_DELETE_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0 ) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0 ) ? True : False );
    set_something(ptr->menu_edit_blocchi[K_MOVE_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0 ) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0 ) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_MODIFY_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez == 1) ? True : False );
+                         (void*) (ptr->num_blocchi_selez == 1) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_MOVE_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0 ) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0 ) ? True : False );
    set_something(ptr->pop_edit_blocchi[K_DELETE_BLOCK], XmNsensitive,
-                         (ptr->num_blocchi_selez > 0 ) ? True : False );
+                         (void*) (ptr->num_blocchi_selez > 0 ) ? True : False );
 #endif
 }
 
@@ -2297,8 +2297,8 @@ Boolean boh;
 				/* considerati. */
          continue;
 
-      get_something(blocks[i].wblock, XmNheight, &height);
-      get_something(blocks[i].wblock, XmNwidth, &width);
+      get_something(blocks[i].wblock, XmNheight, (void*) &height);
+      get_something(blocks[i].wblock, XmNwidth, (void*) &width);
       if ( blocks[i].pos_icona.posx >= minx &&
            blocks[i].pos_icona.posx + width < maxx &&
            blocks[i].pos_icona.posy >= miny &&
@@ -2343,7 +2343,7 @@ Boolean flag;
       macro->num_blocchi_selez++;
       if( blocco->wblock != NULL )
       {
-         set_something (blocco->wblock, XmNborderColor, apix[ RED ]);
+         set_something (blocco->wblock, XmNborderColor, (void*) apix[ RED ]);
       }
 #ifdef TOPOLOGIA
       if(blocco->tipo == TP_BLOCK || blocco->tipo == TP_BLOCK_REG)
@@ -2354,7 +2354,7 @@ Boolean flag;
    {
       macro->num_blocchi_selez--;
       if( blocco->wblock  != NULL )
-         set_something (blocco->wblock, XmNborderColor, apix[BLOCKS_TABLE_BG]);
+         set_something (blocco->wblock, XmNborderColor, (void*) apix[BLOCKS_TABLE_BG]);
 #ifdef TOPOLOGIA
       if(blocco->tipo == TP_BLOCK || blocco->tipo == TP_BLOCK_REG)
          Ideselect_this_block_from_list(widget_list_blocchi,blocco->nome_blocco);
@@ -2475,7 +2475,7 @@ display_icone_selezionate(ind_macro)
    if ( !XtIsManaged(widget_list_blocchi) )
       return;
                
-   get_something(widget_list_blocchi, XmNselectedItemCount, &num_blk_selez);
+   get_something(widget_list_blocchi, XmNselectedItemCount, (void*) &num_blk_selez);
    if ( !num_blk_selez )
       return;
 
@@ -2484,7 +2484,7 @@ display_icone_selezionate(ind_macro)
    {
       for( j=0 ; j<macroblocks[ind_macro].num_blocchi; j++ )
          if ( blocks[j].tipo == TP_BLOCK && blocks[j].selezionato )
-            set_something (blocks[j].wblock, XmNborderColor, apix[ RED ]);
+            set_something (blocks[j].wblock, XmNborderColor, (void*) apix[ RED ]);
    }
 
 }

@@ -28,6 +28,10 @@ static char SccsID[] = "@(#)utile.c	5.1\t11/10/95";
 /* routine di utilita' generale */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <X11/Intrinsic.h>
 #if defined UNIX
 #include <unistd.h>
 #include <fcntl.h>
@@ -48,7 +52,7 @@ int path_rel_to_abs(char *,char *);
   str : stringa di caratteri (r)
  ritorna 1 se la stringa contiene solo caratteri numerici tipo 1..9,.
  altrimenti 0 */
-IsNumeric(str)
+int IsNumeric(str)
 char *str;
 {
   for ( ; *str ; str++ )
@@ -79,7 +83,7 @@ char *str;
  controlla se una stringa e' vuota (cioe' contiene solo blank o tab)
  la stringa viene controllata fino al terminatore '\0' oppure fino al
  carattere di newline '\n' */
-Empty(stringa)
+int Empty(stringa)
 char *stringa;
 {
    for(; *stringa && *stringa != '\n';stringa++)
@@ -95,7 +99,7 @@ char *stringa;
   n    : numero caratteri da copiare (r)
   copia n caratteri della stringa str2 in str1 terminando str1 con il
   terminatore ( '\0' ). Il newline e' considerato fine-stringa. */
-copy_n_car(str1,str2,n)
+void copy_n_car(str1,str2,n)
 char *str1,*str2;
 int n;
 {
@@ -110,7 +114,7 @@ int n;
   n    : numero caratteri da copiare (r)
   appende n caratteri della stringa str2 alla fine di str1 terminando str1
   con il terminatore */
-app_n_car(str1,str2,n)
+void app_n_car(str1,str2,n)
 char *str1,*str2;
 int n;
 {
@@ -126,7 +130,7 @@ int n;
  *** parametri:
  ***            stringa: stringa di caratteri numerici
 la funzione rimuovi gli zeri finali di una stringa numerica decimale */
-trim_zero(stringa)
+void trim_zero(stringa)
 char *stringa;
 {
    int i, point = 0;
@@ -152,7 +156,7 @@ char *stringa;
 Funzione che esegue la ricerca dicotomica in un array ( l'array deve essere
  ordinato!). La funzione ritorna il numero della posizione nell'array se 
 l'elemento e' stato trovato, altrimenti ritorna -1 */
-cerca_elemento( ar,num, el)
+int cerca_elemento( ar,num, el)
 int ar[], num, el;
 {
    int i, imin, imax;
@@ -196,7 +200,7 @@ int ar[], num, el;
  stringa altrimenti ritorna 1.
  appende una serie di blank alla fine di una stringa finquando la 
  stringa str non raggiunge la lunghezza 'lunghezza' */
-app_n_blank(str,lunghezza)
+int app_n_blank(str,lunghezza)
 char *str;
 short lunghezza;
 {
@@ -216,7 +220,7 @@ short lunghezza;
  nBlank : numero di spazi vuoti                                    (r)
 
 funzione che riempe una stringa di blank e la termina con '\0' */
-riempi(str,nBlank)
+void riempi(str,nBlank)
 char *str;
 int nBlank;
 {
@@ -231,7 +235,7 @@ int nBlank;
  ***     file_dest : file destinazione.
 copia il file sorgente nel file destinazione.Ritorna 0 se tutto e' OK,
 altrimenti ritorna -1 (se c'e' stato qualche errore.. ). */
-copy_file(file_sorg, file_dest)
+int copy_file(file_sorg, file_dest)
 char *file_sorg, *file_dest;
 {
    FILE *fp_sorg, *fp_dest;
@@ -277,7 +281,7 @@ char   *formato,*zero;
 }
 
 /*-----------------------------------------------------------------------*/
-print_file (filename)
+int print_file (filename)
 char * filename;
 {
    char *command;  /*  'command' = "lp " + filename + null terminator  */
@@ -285,7 +289,7 @@ char * filename;
 
    command = (char *) XtMalloc(strlen(filename) + 4);
    sprintf(command, "lp %s", filename);
-   if (system(command) != (int)NULL)
+   if (system(command) != 0)
    {
       fprintf(stderr, "Print failed.");
       errore = -1;
@@ -338,7 +342,7 @@ char *str;
  file1: file sorgente
  file2: file destinazione
 copia il file1 in file2 */
-copia_file(file1, file2)
+int copia_file(file1, file2)
 char *file1, *file2;
 {
 #define BUFFER_SIZE	512
@@ -367,7 +371,7 @@ char *file1, *file2;
  *** Parametri:
  *** char *stringa: stringa di caratteri
 converte una stringa in caratteri minuscoli */
-tominus(stringa)
+void tominus(stringa)
 char *stringa;
 {
    for( ; *stringa ; stringa++ )
@@ -379,7 +383,7 @@ char *stringa;
  *** Parametri:
  *** char *stringa: stringa di caratteri
 converte una stringa in caratteri maiuscoli */
-tomaius(stringa)
+void tomaius(stringa)
 char *stringa;
 {
    for( ; *stringa ; stringa++ )
@@ -389,7 +393,7 @@ char *stringa;
 /*-----------------------------------------------------------------------*/
 /* funzione contiene_blanks(stringa)
  stringa : stringa di caratteri da controllare (r) */
-contiene_blanks(stringa)
+int contiene_blanks(stringa)
 char *stringa;
 {
    for(; *stringa ;stringa++)
@@ -405,7 +409,7 @@ char *stringa;
  ***     int num_bytes;
 Crea una area vuota di num_bytes nel file puntato da FP nella posizione
 corrente (il resto viene shiftato). ***/
-shift_file_bytes(fp, num_bytes)
+int shift_file_bytes(fp, num_bytes)
 FILE *fp;
 int num_bytes;
 {

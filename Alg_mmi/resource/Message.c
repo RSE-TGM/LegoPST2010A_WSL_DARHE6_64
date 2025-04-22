@@ -224,18 +224,18 @@ Widget	create_Message( _UxTipoMsg, _UxChiamante, _UxPar )
 		OggettoParametro = Par;
 		rtrn = _Uxbuild_Message();
 
-		get_something (Chiamante, XmNx, &Px);
-		get_something (Chiamante, XmNy, &Py);
-		get_something (Chiamante, XmNwidth, &WidC);
-		get_something (Chiamante, XmNheight, &HeiC);
-		get_something (Message, XmNwidth, &WidM);
-		get_something (Message, XmNheight, &HeiM);
+		get_something (Chiamante, XmNx, (void*) &Px);
+		get_something (Chiamante, XmNy, (void*) &Py);
+		get_something (Chiamante, XmNwidth, (void*) &WidC);
+		get_something (Chiamante, XmNheight, (void*) &HeiC);
+		get_something (Message, XmNwidth, (void*) &WidM);
+		get_something (Message, XmNheight, (void*) &HeiM);
 		
 		Px += (Position )(WidC-WidM)/2;
 		Py += (Position )(HeiC-HeiM)/2;
 		
-		set_something (rtrn, XmNx, Px);
-		set_something (rtrn, XmNy, Py);
+		set_something (rtrn, XmNx, (void*) Px);
+		set_something (rtrn, XmNy, (void*) Py);
 		
 		return(rtrn);
 	}

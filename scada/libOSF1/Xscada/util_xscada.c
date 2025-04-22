@@ -750,7 +750,7 @@ for(i=0;i<strlen(testo);i++)
  get_something
     legge un singolo attributo di un Widget
  */
-void get_something(w, resource, value)
+void get_something(w, resource, (void*) value)
     Widget w;
     char *resource, *value;
 {
@@ -763,7 +763,7 @@ XtGetValues(w, al, 1);
  set_something
     setta un singolo attributo di un Widget
  */
-void set_something(w, resource, value)
+void set_something(w, resource, (void*) value)
     Widget w;
     char *resource, *value;
 {
@@ -799,7 +799,7 @@ Boolean LoadBitmap
 long cnero,cbianco;
 Pixel background;
 
-get_something(w,XmNbackground,&background);
+get_something(w,XmNbackground,(void*) &background);
 background=CvtStrToPixel(w,"#00007b7b0202");
 
 if((*stip=XCreatePixmapFromBitmapData(XtDisplay(w),

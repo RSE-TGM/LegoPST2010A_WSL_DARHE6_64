@@ -159,14 +159,14 @@ trasparent=(Boolean)trasparent_int;
   *************/
   case XlROption:
     /*  Legge l'indice della voce selezionata  */
-    get_something (RowCol[2], XmNmenuHistory, &VoceSel);
-    get_something (VoceSel, XmNlabelString, &NomeVoceSel);
-    get_something (RowCol[2], XmNsubMenuId, &Pane);
-    get_something (Pane, XmNnumChildren, &Numero);
-    get_something (Pane, XmNchildren, &OptPane);
+    get_something (RowCol[2], XmNmenuHistory, (void*) &VoceSel);
+    get_something (VoceSel, XmNlabelString, (void*) &NomeVoceSel);
+    get_something (RowCol[2], XmNsubMenuId, (void*) &Pane);
+    get_something (Pane, XmNnumChildren, (void*) &Numero);
+    get_something (Pane, XmNchildren, (void*) &OptPane);
     for (k=0;k<Numero;k++)
       {
-      get_something (OptPane[k], XmNlabelString, &NomeVoce);
+      get_something (OptPane[k], XmNlabelString, (void*) &NomeVoce);
       if (XmStringCompare (NomeVoce, NomeVoceSel))
         {
         ValoreStringa = (char *)XtCalloc (4,sizeof(char));
@@ -181,7 +181,7 @@ trasparent=(Boolean)trasparent_int;
 	*/
 	if(XlIsPort(WdgSel) && strcmp(Confinfo.resource_name,XlNtipoPort)==0)
 		{
-    		get_something (WdgSel, Confinfo.resource_name, &old_option);
+    		get_something (WdgSel, Confinfo.resource_name, (void*) &old_option);
 		if(old_option!=k)
 			{
 			Modificata_opt = True;
@@ -383,10 +383,10 @@ trasparent=(Boolean)trasparent_int;
     ValoreStringa = (char *)XmTextFieldGetString (RowCol[2]);
     RtRecord(ValoreStringa);
     /*  Controllo se il nome del file e' uguale al precedente  */
-    get_something (WdgSel, XlNmodulName, &Confronto);
+    get_something (WdgSel, XlNmodulName, (void*) &Confronto);
     if (strcmp (Confronto,ValoreStringa) != 0)
       {
-      set_something (WdgSel, XlNmodulName, ValoreStringa);
+      set_something (WdgSel, XlNmodulName, (void*) ValoreStringa);
       Modificata = True; /* notifica la modifica della form associata */
       }
     else Modificata = False;
@@ -451,8 +451,8 @@ trasparent=(Boolean)trasparent_int;
         quindi le associazioni porte-variabili possono essere
         incongruenti. 
       */
-      get_something (WdgSel, XmNchildren, &ListaPorte);
-      get_something (WdgSel, XmNnumChildren, &NumPorte);
+      get_something (WdgSel, XmNchildren, (void*) &ListaPorte);
+      get_something (WdgSel, XmNnumChildren, (void*) &NumPorte);
       for (kk=0;kk<NumPorte;kk++)
         {
         if ( XlIsPort(ListaPorte[kk]) )
@@ -480,7 +480,7 @@ trasparent=(Boolean)trasparent_int;
     /*  Legge il valore della risorsa  */
     ValoreStringa = (char *)XmTextFieldGetString (RowCol[2]);
     RtRecord(ValoreStringa);
-    get_something (WdgSel, Confinfo.resource_name, &Confronto);
+    get_something (WdgSel, Confinfo.resource_name, (void*) &Confronto);
     /*
 	e' stato modificato il tipo di porta e viene quindi annullatto
 	il campo nome della porta

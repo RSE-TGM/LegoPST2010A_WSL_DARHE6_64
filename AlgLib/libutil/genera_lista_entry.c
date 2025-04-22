@@ -63,6 +63,7 @@ exit(1);
 #else
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <dirent.h>
 #include <Xm/Xm.h>
 #include <sys/types.h>
@@ -71,7 +72,7 @@ exit(1);
 
 
 
-genera_lista_entry( path, filter, nitems, items )
+void genera_lista_entry( path, filter, nitems, items )
 char *path;
 int  (*filter)( char* );
 int  *nitems;
@@ -150,7 +151,7 @@ char ***items;
 
 
 
-libera_lista_entry(items,nitems)
+void libera_lista_entry(items,nitems)
 char **items;
 int nitems;
 {

@@ -32,6 +32,7 @@ static char SccsID[] = "@(#)find_in_text.c	5.1\t11/10/95";
 #include <Xm/ArrowB.h>
 #include <Xm/RowColumn.h>
 #include <Xm/Label.h>
+#include <Xm/Form.h> // <--- AGGIUNGI QUESTO HEADER
 
 #include "libutilx.h"
 
@@ -43,7 +44,7 @@ void cerca_stringa_text();
 
 Widget find_in_a_text (padre,args,n,parametri)
 Widget padre;
-Arg args[];
+ArgList args;
 int n;
 Text_find_struct *parametri;
 {
@@ -160,7 +161,7 @@ XmAnyCallbackStruct *data;
        return;
    iniz_testo = testo = XmTextGetString (user->ID_text);
    ins_pos = XmTextGetInsertionPosition (user->ID_text);
-   get_something( w, XmNuserData, &verso_ricerca);
+   get_something( w, XmNuserData, (void*) &verso_ricerca);
 
    switch (verso_ricerca)
    {
@@ -182,7 +183,7 @@ XmAnyCallbackStruct *data;
    }
 
    if (testo == NULL)
-       set_something(user->ID_label,XmNlabelString,notfound);
+       set_something(user->ID_label,XmNlabelString,(void*) notfound);
    else
    {
    /* Evidenziare con XmTextSetSelection la stringa trovata */
@@ -194,7 +195,7 @@ XmAnyCallbackStruct *data;
       if (verso_ricerca == INDIETRO)
          XmTextSetInsertionPosition(user->ID_text,testo-iniz_testo);
 
-      set_something(user->ID_label,XmNlabelString,nulla);
+      set_something(user->ID_label,XmNlabelString,(void*) nulla);
    }
    XtFree (stringa);
    XtFree (iniz_testo);

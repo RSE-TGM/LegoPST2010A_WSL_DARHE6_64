@@ -344,8 +344,8 @@ XmAnyCallbackStruct *call_data;
    BlockType blocks_tmp[1000];
 
    /* Leggo il nome/i del blocco/i selezionato/i  e il loro numero */
-   get_something (block_list, XmNselectedItemCount, &num_items);
-   get_something (block_list,XmNselectedItems,&cstrings);
+   get_something (block_list, XmNselectedItemCount, (void*) &num_items);
+   get_something (block_list,XmNselectedItems,(void*) &cstrings);
  
    if (num_items == 0 || num_lista_blocchi == 0)
    {
@@ -355,7 +355,7 @@ XmAnyCallbackStruct *call_data;
    }
 
    /* Verifico qual'e' il macroblocco selezionato */
-   get_something (macro_list,XmNselectedItemCount,&num_macro);
+   get_something (macro_list,XmNselectedItemCount,(void*) &num_macro);
 
    if (!num_macro)
    {
@@ -546,8 +546,8 @@ XmAnyCallbackStruct *call_data;
    XtSetValues (macro_list, args, nargs);
 
    /* Cancella i contenuti dei Text dei macroblocchi & loro descrizione */
-   set_something (macro_text,XmNvalue,"");
-   set_something (macro_descr_text,XmNvalue,"");
+   set_something (macro_text,XmNvalue,(void*) "");
+   set_something (macro_descr_text,XmNvalue,(void*) "");
 
    /* Legge da capo il contenuto del file f01.dat e lo schiaffa */
    /* nella lista dei blocchi */
@@ -582,7 +582,7 @@ XmAnyCallbackStruct *call_data;
    switch (parameter) {
 
      case True: /* SELEZIONARE TUTTO */
-          get_something (block_list,XmNitemCount,&num_items);
+          get_something (block_list,XmNitemCount,(void*) &num_items);
           for (i=0; i<num_items; i++)
 	      XmListSelectPos (block_list,i,True);
      break;
@@ -663,7 +663,7 @@ int num_lista_blocchi;
      pos_block.posy = 2*PIXEL_STEP; 
 
 /* Leggo il nome/i del blocco/i residuo/i */
-   get_something (block_to_add,XmNitems,&cstrings);
+   get_something (block_to_add,XmNitems,(void*) &cstrings);
    for(i=0; i < num_lista_blocchi; i++)
    {
       nome_blocco = extract_string(cstrings[i]);
@@ -757,7 +757,7 @@ aggiorna_lista_blocchi()
    XtSetValues (block_list, args, nargs);
 
    cstring = CREATE_CSTRING(nome_modello);
-   set_something (label_nome_modello,XmNlabelString,cstring);
+   set_something (label_nome_modello,XmNlabelString,(void*) cstring);
    XmStringFree(cstring);
 }
 
@@ -790,7 +790,7 @@ Widget widget_sup;
    if (find_form == NULL)
        find_form = find_kit(form_widget,args,nargs,&find_block);
 
-   set_something (find_block.ID_testo,XmNbackground,1);
+   set_something (find_block.ID_testo,XmNbackground,(void*) 1);
    return(find_form);
 }
 

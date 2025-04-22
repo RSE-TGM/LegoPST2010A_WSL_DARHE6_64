@@ -10,7 +10,7 @@
 #include "autodoc.h"\
 #include "unita.h"\
 #endif\
-\
+extern void free_array_XmString( XmString, int );\
 \
 /************************************************************************/\
 /* VARIABILI GLOBALI ESTERNE						*/\

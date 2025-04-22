@@ -23,6 +23,8 @@ static char SccsID[] = "@(#)converti_tempo.c	5.3\t2/21/96";
 */
 #include <stdio.h>
 
+int AnnoBis(long );
+
 /*
     converti_tempo
 
@@ -124,7 +126,7 @@ long appoggio;
 
    9 Dicembre 1992
 */
-AnnoBis(anno)
+int AnnoBis(long anno)
 {
    if(!(anno % 4) && (anno % 100) || !(anno % 400)) return(1);
    return(0);

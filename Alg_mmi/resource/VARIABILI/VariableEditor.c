@@ -286,13 +286,13 @@ if ( (!Trovata) || (Iniziale == '\0') )
     }
   }
 
-set_something (Unit, XmNmenuHistory, Push[Indice]);
+set_something (Unit, XmNmenuHistory, (void*) Push[Indice]);
 
 if (Trovata)
   {
-  set_something (Unit, XmNsensitive, True);
+  set_something (Unit, XmNsensitive, (void*) True);
   }
-else set_something (Unit, XmNsensitive, False);
+else set_something (Unit, XmNsensitive, (void*) False);
 }
 
 /*******************************************************************************
@@ -326,14 +326,14 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	UniMisura = NULL;
 	
 	XmStrTipo = (XmString )ControllaTipoVar (TipoVariabile,pushButton6,Elab);
-	set_something (labVariableType,XmNlabelString,XmStrTipo);
+	set_something (labVariableType,XmNlabelString,(void*) XmStrTipo);
 	XmStringFree (XmStrTipo);
 	
 #ifdef ON_MMI
 	Corretta = False;
 	
 	/*  Disabilito il bottone di Grab della variabile  */
-	set_something (pushButton13, XmNsensitive, False);
+	set_something (pushButton13, XmNsensitive, (void*) False);
 	
 	  /*  Leggo dalla lista degli oggetti in input le label per i
 		component e per i subsystem  */
@@ -341,24 +341,24 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	  Subs = XmTextFieldGetString (RowColInp[1]);
 	  
 	  /*  Setta le label dei component e subsystem  */
-	  get_something (menu1, XmNsubMenuId, &Pane);
-	  get_something (Pane, XmNchildren, &ListaB);
+	  get_something (menu1, XmNsubMenuId, (void*) &Pane);
+	  get_something (Pane, XmNchildren, (void*) &ListaB);
 	
 	  if (Comp[0] == '\0')
-	    set_something (ListaB[1], XmNsensitive, False);
+	    set_something (ListaB[1], XmNsensitive, (void*) False);
 	  else
-	    set_something (ListaB[1], XmNsensitive, True);
+	    set_something (ListaB[1], XmNsensitive, (void*) True);
 	
 	  if (Subs[0] == '\0')
-	    set_something (ListaB[2], XmNsensitive, False);
+	    set_something (ListaB[2], XmNsensitive, (void*) False);
 	  else
-	    set_something (ListaB[2], XmNsensitive, True);
+	    set_something (ListaB[2], XmNsensitive, (void*) True);
 	
 	  XmStr = XmStringCreateSimple (Comp);
-	  set_something (labComponent, XmNlabelString, XmStr);
+	  set_something (labComponent, XmNlabelString, (void*) XmStr);
 	  XmStringFree (XmStr);
 	  XmStr = XmStringCreateSimple (Subs);
-	  set_something (labSubSystem, XmNlabelString, XmStr);
+	  set_something (labSubSystem, XmNlabelString, (void*) XmStr);
 	  XmStringFree (XmStr);
 	
 	/*  Leggo dal textfield ls stringa della definizione della variabile
@@ -388,36 +388,36 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	    XtSetArg (arg[0], XlNcomponent, &Comp);
 	    XtSetArg (arg[1], XlNsubsystem, &Subs);
 	    XtGetValues (OggettoSelezionato, arg, 2);
-	    get_something (menu1, XmNsubMenuId, &Pane);
-	    get_something (Pane, XmNchildren, &ListaB);
+	    get_something (menu1, XmNsubMenuId, (void*) &Pane);
+	    get_something (Pane, XmNchildren, (void*) &ListaB);
 	
 	    if (Comp[0] == '\0')
-	       set_something (ListaB[1], XmNsensitive, False);
+	       set_something (ListaB[1], XmNsensitive, (void*) False);
 	    else
-	       set_something (ListaB[1], XmNsensitive, True);
+	       set_something (ListaB[1], XmNsensitive, (void*) True);
 	
 	    if (Subs[0] == '\0')
-	      set_something (ListaB[2], XmNsensitive, False);
+	      set_something (ListaB[2], XmNsensitive, (void*) False);
 	    else
-	      set_something (ListaB[2], XmNsensitive, True);
+	      set_something (ListaB[2], XmNsensitive, (void*) True);
 	
 	    XmStr = XmStringCreateSimple (Comp);
-	    set_something (labComponent, XmNlabelString, XmStr);
+	    set_something (labComponent, XmNlabelString, (void*) XmStr);
 	    XmStringFree (XmStr);
 	    XmStr = XmStringCreateSimple (Subs);
-	    set_something (labSubSystem, XmNlabelString, XmStr);
+	    set_something (labSubSystem, XmNlabelString, (void*) XmStr);
 	    XmStringFree (XmStr);
 	    }
 	  else
 	    {
 	    XmStr = XmStringCreateSimple (" ");
-	    set_something (labComponent, XmNlabelString, XmStr);
-	    set_something (labSubSystem, XmNlabelString, XmStr);
+	    set_something (labComponent, XmNlabelString, (void*) XmStr);
+	    set_something (labSubSystem, XmNlabelString, (void*) XmStr);
 	    XmStringFree (XmStr);
-	    get_something (menu1, XmNsubMenuId, &Pane);
-	    get_something (Pane, XmNchildren, &ListaB);
-	    set_something (ListaB[1], XmNsensitive, False);
-	    set_something (ListaB[2], XmNsensitive, False);
+	    get_something (menu1, XmNsubMenuId, (void*) &Pane);
+	    get_something (Pane, XmNchildren, (void*) &ListaB);
+	    set_something (ListaB[1], XmNsensitive, (void*) False);
+	    set_something (ListaB[2], XmNsensitive, (void*) False);
 	    }
 	  Giusto = OlReadVariableString (Dbf,Description,&NomeModello,
 	                                &NomeBlocco,&NomeVar,&Perturba,&UniMisura,
@@ -440,23 +440,23 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	    XtSetArg (arg[1], XlNsubsystem, &Subs);
 	    XtGetValues (OggettoSelezionato, arg, 2);
 	
-	    get_something (menu1, XmNsubMenuId, &Pane);
-	    get_something (Pane, XmNchildren, &ListaB);
+	    get_something (menu1, XmNsubMenuId, (void*) &Pane);
+	    get_something (Pane, XmNchildren, (void*) &ListaB);
 	    if (Comp[0] == '\0')
-	      set_something (ListaB[1], XmNsensitive, False);
+	      set_something (ListaB[1], XmNsensitive, (void*) False);
 	    else
-	      set_something (ListaB[1], XmNsensitive, True);
+	      set_something (ListaB[1], XmNsensitive, (void*) True);
 	
 	    if (Subs[0] == '\0')
-	      set_something (ListaB[2], XmNsensitive, False);
+	      set_something (ListaB[2], XmNsensitive, (void*) False);
 	    else
-	      set_something (ListaB[2], XmNsensitive, True);
+	      set_something (ListaB[2], XmNsensitive, (void*) True);
 	
 	    XmStr = XmStringCreateSimple (Comp);
-	    set_something (labComponent, XmNlabelString, XmStr);
+	    set_something (labComponent, XmNlabelString, (void*) XmStr);
 	    XmStringFree (XmStr);
 	    XmStr = XmStringCreateSimple (Subs);
-	    set_something (labSubSystem, XmNlabelString, XmStr);
+	    set_something (labSubSystem, XmNlabelString, (void*) XmStr);
 	    XmStringFree (XmStr);
 	    }
 	if(XlIsAnimateIcon(OggettoSelezionato) || XlIsIndic(OggettoSelezionato) )
@@ -479,13 +479,13 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	  else
 	    {
 	    XmStr = XmStringCreateSimple (" ");
-	    set_something (labComponent, XmNlabelString, XmStr);
-	    set_something (labSubSystem, XmNlabelString, XmStr);
+	    set_something (labComponent, XmNlabelString, (void*) XmStr);
+	    set_something (labSubSystem, XmNlabelString, (void*) XmStr);
 	    XmStringFree (XmStr);
-	    get_something (menu1, XmNsubMenuId, &Pane);
-	    get_something (Pane, XmNchildren, &ListaB);
-	    set_something (ListaB[1], XmNsensitive, False);
-	    set_something (ListaB[2], XmNsensitive, False);
+	    get_something (menu1, XmNsubMenuId, (void*) &Pane);
+	    get_something (Pane, XmNchildren, (void*) &ListaB);
+	    set_something (ListaB[1], XmNsensitive, (void*) False);
+	    set_something (ListaB[2], XmNsensitive, (void*) False);
 	    NomeModello = XtCalloc (1,sizeof(char));
 	    NomeBlocco = XtCalloc (1,sizeof(char));
 	    NomeVar = XtCalloc (1,sizeof(char));
@@ -499,8 +499,8 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	/*  Setta a True i bottoni dei blocchi e delle variabili  */
 	if (NomeModello[0] != '\0')
 	  {
-	  set_something (pushButton4, XmNsensitive, True);
-	  set_something (pushButton5, XmNsensitive, True);
+	  set_something (pushButton4, XmNsensitive, (void*) True);
+	  set_something (pushButton5, XmNsensitive, (void*) True);
 	  }
 #ifdef SCADA_MMI
 	/*
@@ -525,57 +525,57 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	 Riposizionamento degli oggetti
 	 rimanenti
 	*/
-	set_something(XtParent(VariableEditor),XmNheight,260);
+	set_something(XtParent(VariableEditor),XmNheight,(void*) 260);
 	
-	set_something(label2, XmNtopPosition, 2);
+	set_something(label2, XmNtopPosition, (void*) 2);
 	/* modifica la label BLOCK nella label TYPE  */
 	XmStr = XmStringCreateSimple ("TYPE:");
-	set_something(label2, XmNlabelString,XmStr);
+	set_something(label2, XmNlabelString,(void*) XmStr);
 	XmStringFree (XmStr);
-	set_something(label2, XmNbottomPosition, 10);
+	set_something(label2, XmNbottomPosition, (void*) 10);
 	
-	set_something(textNomeBlocco, XmNtopPosition, 2);
-	set_something(textNomeBlocco, XmNbottomPosition, 15);
-	set_something(pushButton4, XmNtopPosition, 2);
-	set_something(pushButton4, XmNbottomPosition, 15);
+	set_something(textNomeBlocco, XmNtopPosition, (void*) 2);
+	set_something(textNomeBlocco, XmNbottomPosition, (void*) 15);
+	set_something(pushButton4, XmNtopPosition, (void*) 2);
+	set_something(pushButton4, XmNbottomPosition, (void*) 15);
 	
-	set_something(label3, XmNtopPosition, 19);
-	set_something(label3, XmNbottomPosition, 32);
-	set_something(textNomeVariabile, XmNtopPosition, 19);
-	set_something(textNomeVariabile, XmNbottomPosition, 32);
-	set_something(pushButton5, XmNtopPosition, 19);
-	set_something(pushButton5, XmNbottomPosition, 32);
+	set_something(label3, XmNtopPosition, (void*) 19);
+	set_something(label3, XmNbottomPosition, (void*) 32);
+	set_something(textNomeVariabile, XmNtopPosition, (void*) 19);
+	set_something(textNomeVariabile, XmNbottomPosition, (void*) 32);
+	set_something(pushButton5, XmNtopPosition, (void*) 19);
+	set_something(pushButton5, XmNbottomPosition, (void*) 32);
 	
-	set_something(pushButton6, XmNtopPosition, 35);
-	set_something(pushButton6, XmNbottomPosition, 48);
-	set_something(textNomePerturbazione, XmNtopPosition, 35);
-	set_something(textNomePerturbazione, XmNbottomPosition, 48);
+	set_something(pushButton6, XmNtopPosition, (void*) 35);
+	set_something(pushButton6, XmNbottomPosition, (void*) 48);
+	set_something(textNomePerturbazione, XmNtopPosition, (void*) 35);
+	set_something(textNomePerturbazione, XmNbottomPosition, (void*) 48);
 	
-	set_something(label8,XmNtopPosition, 54);
-	set_something(label8,XmNbottomPosition, 60);
-	set_something(label8,XmNleftPosition, 2);
-	set_something(label8,XmNrightPosition,45);
-	set_something(Elab,XmNtopPosition, 51);
-	set_something(Elab,XmNbottomPosition,63);
-	set_something(Elab,XmNleftPosition,45);
-	set_something(Elab,XmNrightPosition,70);
+	set_something(label8,XmNtopPosition, (void*) 54);
+	set_something(label8,XmNbottomPosition, (void*) 60);
+	set_something(label8,XmNleftPosition, (void*) 2);
+	set_something(label8,XmNrightPosition,(void*) 45);
+	set_something(Elab,XmNtopPosition, (void*) 51);
+	set_something(Elab,XmNbottomPosition,(void*) 63);
+	set_something(Elab,XmNleftPosition,(void*) 45);
+	set_something(Elab,XmNrightPosition,(void*) 70);
 	
-	set_something(separator6,XmNtopPosition ,64);
-	set_something(separator6,XmNbottomPosition, 67);
+	set_something(separator6,XmNtopPosition ,(void*) 64);
+	set_something(separator6,XmNbottomPosition, (void*) 67);
 	
-	set_something(pushButton13,XmNtopPosition,68);
-	set_something(pushButton13,XmNbottomPosition,78);
+	set_something(pushButton13,XmNtopPosition,(void*) 68);
+	set_something(pushButton13,XmNbottomPosition,(void*) 78);
 	
 	
 	
-	set_something(separator2,XmNtopPosition ,79);
-	set_something(separator2,XmNbottomPosition, 83);
+	set_something(separator2,XmNtopPosition ,(void*) 79);
+	set_something(separator2,XmNbottomPosition, (void*) 83);
 	
-	set_something(pushButton7,XmNtopPosition ,85);
-	set_something(pushButton7,XmNbottomPosition ,96);
+	set_something(pushButton7,XmNtopPosition ,(void*) 85);
+	set_something(pushButton7,XmNbottomPosition ,(void*) 96);
 	
-	set_something(pushButton8,XmNtopPosition ,85);
-	set_something(pushButton8,XmNbottomPosition ,96);
+	set_something(pushButton8,XmNtopPosition ,(void*) 85);
+	set_something(pushButton8,XmNbottomPosition ,(void*) 96);
 	
 	 
 	/*
@@ -589,15 +589,15 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	   XtFree(NomeBlocco);
 	   NomeModello=XtNewString("SUPERVIS");
 	   NomeBlocco=XtNewString("ALL");
-	   set_something (pushButton4, XmNsensitive, True);
-	   set_something (pushButton5, XmNsensitive, True);
+	   set_something (pushButton4, XmNsensitive, (void*) True);
+	   set_something (pushButton5, XmNsensitive, (void*) True);
 	   }
 #ifdef ON_MMI
 	/*
 	 Rende impossibile modificare il tipo di variabile
 	*/
-	set_something (pushButton3, XmNsensitive,False);
-	set_something (pushButton4, XmNsensitive,False);
+	set_something (pushButton3, XmNsensitive,(void*) False);
+	set_something (pushButton4, XmNsensitive,(void*) False);
 #endif
 #endif
 	/*  Setta i textField  */
@@ -613,16 +613,16 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	  uguali = strncmp (Perturba,"NOP",3);
 	  if (uguali == 0)
 	    {
-	    get_something (Elab, XmNsubMenuId, &Pane);
-	    get_something (Pane, XmNchildren, &ListaB);
-	    set_something (Elab, XmNmenuHistory, ListaB[0]);
+	    get_something (Elab, XmNsubMenuId, (void*) &Pane);
+	    get_something (Pane, XmNchildren, (void*) &ListaB);
+	    set_something (Elab, XmNmenuHistory, (void*) ListaB[0]);
 	    }
 	  uguali = strncmp (Perturba,"NOT",3);
 	  if (uguali == 0)
 	    {
-	    get_something (Elab, XmNsubMenuId, &Pane);
-	    get_something (Pane, XmNchildren, &ListaB);
-	    set_something (Elab, XmNmenuHistory, ListaB[1]);
+	    get_something (Elab, XmNsubMenuId, (void*) &Pane);
+	    get_something (Pane, XmNchildren, (void*) &ListaB);
+	    set_something (Elab, XmNmenuHistory, (void*) ListaB[1]);
 	    }
 	  }
 	
@@ -654,15 +654,15 @@ static	void	activateCB_pushButton3( UxWidget, UxClientData, UxCallbackArg )
 	char *ConfrontoComponent="Component";
 	char *ConfrontoSubSystem="Sub System";
 	
-	get_something (menu1, XmNmenuHistory, &Selezionato);
-	get_something (Selezionato, XmNlabelString, &XmSel);
+	get_something (menu1, XmNmenuHistory, (void*) &Selezionato);
+	get_something (Selezionato, XmNlabelString, (void*) &XmSel);
 	Sel = (char *)extract_string (XmSel);
 	
 	risul = strcmp (ConfrontoSubSystem,Sel);
 	if (risul == 0)
 		{
 		TipoOption = SUBSYSTEM;
-		get_something (labSubSystem, XmNlabelString, &XmSel);
+		get_something (labSubSystem, XmNlabelString, (void*) &XmSel);
 		Sel = (char *)extract_string (XmSel);
 		ListaModelli = (char *)OlGetModelFromSubSystem (Dbf,Sel);	
 		}
@@ -699,8 +699,8 @@ static	void	activateCB_pushButton8( UxWidget, UxClientData, UxCallbackArg )
 #ifdef ON_MMI
 		XtDestroyWidget ( XtParent(VariableEditor) );
 #else
-		set_something (RowColInp[0], XmNsensitive, True);
-		set_something (RowColInp[2], XmNsensitive, True);
+		set_something (RowColInp[0], XmNsensitive, (void*) True);
+		set_something (RowColInp[2], XmNsensitive, (void*) True);
 		UxPopdownInterface (VariableEditor);
 #endif
 	}
@@ -762,8 +762,8 @@ static	void	activateCB_pushButton7( UxWidget, UxClientData, UxCallbackArg )
 		  }
 #else
 		XmTextFieldSetString (RowColInp[2], Stringa);
-		set_something (RowColInp[0], XmNsensitive, True);
-		set_something (RowColInp[2], XmNsensitive, True);
+		set_something (RowColInp[0], XmNsensitive, (void*) True);
+		set_something (RowColInp[2], XmNsensitive, (void*) True);
 #endif
 		XtFree (Stringa);
 		XtFree (modello);
@@ -795,8 +795,8 @@ static	void	activateCB_pushButton7( UxWidget, UxClientData, UxCallbackArg )
 		Stringa = (char *)WriteUniMisura (Stringa,Unit);
 	
 		XmTextFieldSetString (RowColInp[2], Stringa);
-		set_something (RowColInp[0], XmNsensitive, True);
-		set_something (RowColInp[2], XmNsensitive, True);
+		set_something (RowColInp[0], XmNsensitive, (void*) True);
+		set_something (RowColInp[2], XmNsensitive, (void*) True);
 		XtFree (Stringa);
 		XtFree (modello);
 		XtFree (blocco);
@@ -855,14 +855,14 @@ static	void	activateCB_pushButton4( UxWidget, UxClientData, UxCallbackArg )
 	
 	NomeModello = XmTextFieldGetString (textNomeModello);
 	
-	get_something (menu1, XmNmenuHistory, &Selezionato);
-	get_something (Selezionato, XmNlabelString, &XmSel);
+	get_something (menu1, XmNmenuHistory, (void*) &Selezionato);
+	get_something (Selezionato, XmNlabelString, (void*) &XmSel);
 	Sel = (char *)extract_string (XmSel);
 	
 	if (strcmp (ConfrontoComponent,Sel) == 0)
 		{
 		TipoOption = COMPONENT;
-		get_something (labComponent, XmNlabelString, &XmSel);
+		get_something (labComponent, XmNlabelString, (void*) &XmSel);
 		Sel2 = (char *)extract_string (XmSel);
 		ListaModuli = (char *)OlElencoModuli (Dbf, NomeModello, Sel2);
 		ListaModuliFilter = (char *)OlGetModulFromComponent (Dbf,Sel2);
@@ -893,7 +893,7 @@ static	void	activateCB_pushButton4( UxWidget, UxClientData, UxCallbackArg )
 	if (strcmp (ConfrontoSubSystem,Sel) == 0)
 		{
 		TipoOption = SUBSYSTEM;
-		get_something (labSubSystem, XmNlabelString, &XmSel);
+		get_something (labSubSystem, XmNlabelString, (void*) &XmSel);
 		Sel2 = (char *)extract_string (XmSel);
 		ListaBlocchi = (char *)OlGetBlocksFromSubSystem (Dbf,NomeModello,Sel2);
 		ListaModuli = NULL;
@@ -1092,10 +1092,10 @@ static	void	activateCB_pushButton13( UxWidget, UxClientData, UxCallbackArg )
 	    XtSetArg (arg[1], XlNsubsystem, &Subs);
 	    XtGetValues (Odg, arg, 2);
 	    XmStr = XmStringCreateSimple (Comp);
-	    set_something (labComponent, XmNlabelString, XmStr);
+	    set_something (labComponent, XmNlabelString, (void*) XmStr);
 	    XmStringFree (XmStr);
 	    XmStr = XmStringCreateSimple (Subs);
-	    set_something (labSubSystem, XmNlabelString, XmStr);
+	    set_something (labSubSystem, XmNlabelString, (void*) XmStr);
 	    XmStringFree (XmStr);
 	    }
 	/*
@@ -1128,20 +1128,20 @@ static	void	activateCB_pushButton13( UxWidget, UxClientData, UxCallbackArg )
 		  uguali = strncmp (Pert,"NOP",3);
 		  if (uguali == 0)
 		    {
-		    get_something (Elab, XmNsubMenuId, &Pane);
-		    get_something (Pane, XmNchildren, &ListaB);
-		    set_something (Elab, XmNmenuHistory, ListaB[1]);
+		    get_something (Elab, XmNsubMenuId, (void*) &Pane);
+		    get_something (Pane, XmNchildren, (void*) &ListaB);
+		    set_something (Elab, XmNmenuHistory, (void*) ListaB[1]);
 		    }
 		  uguali = strncmp (Pert,"NOT",3);
 		  if (uguali == 0)
 		    {
-		    get_something (Elab, XmNsubMenuId, &Pane);
-		    get_something (Pane, XmNchildren, &ListaB);
-		    set_something (Elab, XmNmenuHistory, ListaB[0]);
+		    get_something (Elab, XmNsubMenuId, (void*) &Pane);
+		    get_something (Pane, XmNchildren, (void*) &ListaB);
+		    set_something (Elab, XmNmenuHistory, (void*) ListaB[0]);
 		    }
 		  }
-		set_something (pushButton4,XmNsensitive,True);
-		set_something (pushButton5,XmNsensitive,True);
+		set_something (pushButton4,XmNsensitive,(void*) True);
+		set_something (pushButton5,XmNsensitive,(void*) True);
 		}
 	      else
 	        {

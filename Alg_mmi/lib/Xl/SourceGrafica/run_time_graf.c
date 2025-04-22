@@ -138,7 +138,7 @@ if (InRunTime)
   {
   /*  Allocazione del vettore dei punti per il grafico pari alla
         larghezza della finestra che lo deve contenere  */
-  get_something (widget_array[k_form], XmNwidth, &NumPix);
+  get_something (widget_array[k_form], XmNwidth, (void*) &NumPix);
   points[0] = (XPoint *)calloc (NumPix+1,sizeof(XPoint));
   points[1] = (XPoint *)calloc (NumPix+1,sizeof(XPoint));
   points[2] = (XPoint *)calloc (NumPix+1,sizeof(XPoint));
@@ -169,7 +169,7 @@ if (InRunTime)
   {
   /*  Allocazione del vettore dei punti per il grafico pari alla
         larghezza della finestra che lo deve contenere  */
-  get_something (widget_array[k_form], XmNwidth, &NumPix);
+  get_something (widget_array[k_form], XmNwidth, (void*) &NumPix);
   points[0] = (XPoint *)calloc (NumPix+1,sizeof(XPoint));
   }
 
@@ -295,12 +295,12 @@ switch(widget_num)
   /****  Prepara il grafico  ****/
   /****/
   case k_draw1:
-  get_something(w,XmNwidth,&draw_width);
-  get_something(w,XmNheight,&draw_height);
+  get_something(w,XmNwidth, (void*) &draw_width);
+  get_something(w,XmNheight, (void*) &draw_height);
   if(resize)
     {
-    get_something(w,XmNwidth,&draw_width);
-    get_something(w,XmNheight,&draw_height);
+    get_something(w,XmNwidth, (void*) &draw_width);
+    get_something(w,XmNheight, (void*) &draw_height);
     resize=0;
     crea_sfondo(w,draw_width,draw_height);
     }
@@ -431,7 +431,7 @@ switch(widget_num)
   /****  Scrive i valori delle misure a fianco della griglia  ****/
   /****/
   case k_ord1:
-  get_something(widget_array[k_ord1],XmNheight,(char *)&ord_height);
+  get_something(widget_array[k_ord1],XmNheight, (void*) &ord_height);
   for(i=1;i<4;i++)
     {
     if(strcmp(sg.str_ord[0][i],"         ")==0)
@@ -479,7 +479,7 @@ switch(widget_num)
   /**** Setta i valori dei tempi nella barra sottostante la griglia ****/
   /****/
   case k_tim1:
-  get_something(w,XmNwidth,(char *)&draw_width);
+  get_something(w,XmNwidth, (void*) &draw_width);
   for(k=0;k<7;k++)
     {
     zoom=sg.zoom;

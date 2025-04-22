@@ -639,45 +639,45 @@ static Widget	_Ux_create_CalcWindow( _UxNumero )
 
 		if (TypeCalc == ELAB_LINEARE)
 			{
-			set_something (textFieldParA, XmNsensitive, True);
-			set_something (textFieldParB, XmNsensitive, True);
+			set_something (textFieldParA, XmNsensitive, (void*) True);
+			set_something (textFieldParB, XmNsensitive, (void*) True);
 			indVar = Numero[0] - 1;
 			parametro = XmStringCreate (simboli[indVar], XmSTRING_DEFAULT_CHARSET);
-			set_something (labSourceVar1, XmNlabelString, parametro);
+			set_something (labSourceVar1, XmNlabelString, (void*) parametro);
 			strcpy (strPara,"Ax + B\0");
 			parametro = XmStringCreate (strPara, XmSTRING_DEFAULT_CHARSET);
-			set_something (labOpType, XmNlabelString, parametro);
+			set_something (labOpType, XmNlabelString, (void*) parametro);
 			strcpy (strPara,"                \0");
 			parametro = XmStringCreate (strPara, XmSTRING_DEFAULT_CHARSET);
-			set_something (labSourceVar2, XmNlabelString, parametro);
+			set_something (labSourceVar2, XmNlabelString, (void*) parametro);
 			strcpy (strPara,"Parameter:\0");
 			parametro = XmStringCreate (strPara, XmSTRING_DEFAULT_CHARSET);
-			set_something (labParameter, XmNlabelString, parametro);
+			set_something (labParameter, XmNlabelString, (void*) parametro);
 			strcpy (strPara,"A:\0");
 			parametro = XmStringCreate (strPara, XmSTRING_DEFAULT_CHARSET);
-			set_something (labParamA, XmNlabelString, parametro);
+			set_something (labParamA, XmNlabelString, (void*) parametro);
 			strcpy (strPara,"B:\0");
 			parametro = XmStringCreate (strPara, XmSTRING_DEFAULT_CHARSET);
-			set_something (labParamB, XmNlabelString, parametro);
+			set_something (labParamB, XmNlabelString, (void*) parametro);
 			}
 		if (TypeCalc == SOMMA_ALGEBRICA)
 			{
-			set_something (textFieldParA, XmNsensitive, False);
-			set_something (textFieldParB, XmNsensitive, False);
+			set_something (textFieldParA, XmNsensitive, (void*) False);
+			set_something (textFieldParB, XmNsensitive, (void*) False);
 			strcpy (strPara,"x + y\0");
 			parametro = XmStringCreate (strPara, XmSTRING_DEFAULT_CHARSET);
-			set_something (labOpType, XmNlabelString, parametro);
+			set_something (labOpType, XmNlabelString, (void*) parametro);
 			indVar = Numero[0] - 1;
 			parametro = XmStringCreate (simboli[indVar], XmSTRING_DEFAULT_CHARSET);
-			set_something (labSourceVar1, XmNlabelString, parametro);
+			set_something (labSourceVar1, XmNlabelString, (void*) parametro);
 			indVar = Numero[1] - 1;
 			parametro = XmStringCreate (simboli[indVar], XmSTRING_DEFAULT_CHARSET);
-			set_something (labSourceVar2, XmNlabelString, parametro);
+			set_something (labSourceVar2, XmNlabelString, (void*) parametro);
 			strcpy (strPara,"          \0");
 			parametro = XmStringCreate (strPara, XmSTRING_DEFAULT_CHARSET);
-			set_something (labParameter, XmNlabelString, parametro);
-			set_something (labParamA, XmNlabelString, parametro);
-			set_something (labParamB, XmNlabelString, parametro);	
+			set_something (labParameter, XmNlabelString, (void*) parametro);
+			set_something (labParamA, XmNlabelString, (void*) parametro);
+			set_something (labParamB, XmNlabelString, (void*) parametro);	
 			}
 		return(rtrn);
 	}

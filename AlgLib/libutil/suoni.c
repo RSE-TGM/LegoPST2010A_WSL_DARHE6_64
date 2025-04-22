@@ -22,15 +22,16 @@ static char SccsID[] = "@(#)suoni.c	5.1\t11/10/95";
    reserved @(#)suoni.c	5.1
 */
 #include <stdio.h>
+#include <unistd.h>
 
 
-beep()
+void beep()
 {
 int c=7;
 	printf("%c",c);
 }
 
-suono_errore()
+void suono_errore()
 {
 	beep();
 	beep();
@@ -39,7 +40,7 @@ suono_errore()
 	beep();
 }
 
-suono_warning()
+void suono_warning()
 {
 	beep();
 }

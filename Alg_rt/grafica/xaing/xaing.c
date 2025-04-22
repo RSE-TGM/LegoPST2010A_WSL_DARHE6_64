@@ -355,7 +355,7 @@ topLevel = XtAppInitialize(&app_context, "xaing",
 
     for(j=0;j<numero_display;j++)
 {
-    set_something (elenco_display[j].topLevel, XmNiconic, True);
+    set_something (elenco_display[j].topLevel, XmNiconic, (void*) True);
     i = 0;
     XtSetArg (args[i], XmNwidth, 150);
     i++;

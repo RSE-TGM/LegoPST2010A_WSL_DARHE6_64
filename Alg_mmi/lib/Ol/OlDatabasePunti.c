@@ -40,6 +40,7 @@ static char *_csrc = "@(#) %filespec: OlDatabasePunti.c-40 %  (%full_filespec: O
 # include "vmsipc.h"
 #endif
 #include <time.h>
+#include "sim_types.h"
 
 char path_sim_correct[FILENAME_MAX];
 /* lista delle risorse  */
@@ -2505,30 +2506,30 @@ char app_var[300];
 int num_mis;
 
  
- get_something(w,XlNarchiveFile,&nome_file);
+ get_something(w,XlNarchiveFile, (void*) &nome_file);
  codice_trend=atoi(nome_file);
  printf("richiediTrend  %s  %d\n",nome_file,codice_trend);
  if(codice_trend<=0)
 	return(-1);
- get_something(w,XlNvarName1,&s1);
+ get_something(w,XlNvarName1, (void*) &s1);
  strcpy(app_var,s1);
  app=strstr(app_var," ");
  if(app!=NULL) *app=NULL;
  strcpy(sigla_1,app_var);
  
- get_something(w,XlNvarName2,&s2);
+ get_something(w,XlNvarName2, (void*) &s2);
  strcpy(app_var,s2);
  app=strstr(app_var," ");
  if(app!=NULL) *app=NULL;
  strcpy(sigla_2,app_var);
  
- get_something(w,XlNvarName3,&s3);
+ get_something(w,XlNvarName3, (void*) &s3);
  strcpy(app_var,s3);
  app=strstr(app_var," ");
  if(app!=NULL) *app=NULL;
  strcpy(sigla_3,app_var);
  
- get_something(w,XlNvarName4,&s4);
+ get_something(w,XlNvarName4, (void*) &s4);
  strcpy(app_var,s4);
  app=strstr(app_var," ");
  if(app!=NULL) *app=NULL;
@@ -2553,7 +2554,7 @@ int num_mis;
 
  sprintf(nome_trend,"Archivio_%d_%s_%s_%d.dat",
 		codice_trend,nome_pagina,XtName(w),id_shm);
- set_something(w,XlNarchiveFile,nome_trend);
+ set_something(w,XlNarchiveFile,(void*) nome_trend);
  printf("Richiedo i dati del trend widget %s pagina %s id = %d <%s>\n",
 		XtName(w),nome_pagina,id_shm,nome_trend);
  printf("s1 = <%s> - s2 = <%s> - s3 = <%s> - s4 = <%s> \n",

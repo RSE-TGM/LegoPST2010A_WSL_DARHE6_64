@@ -181,7 +181,7 @@ Widget	create_line_width_dialog( _Uxwid_disegno )
 
 		sprintf(str_width,"%d",get_line_width(wid_disegno));
 		xms= XmStringCreateSimple(str_width);
-		set_something(rtrn, XmNtextString, xms);
+		set_something(rtrn, XmNtextString, (void*) xms);
 		return(rtrn);
 	}
 }

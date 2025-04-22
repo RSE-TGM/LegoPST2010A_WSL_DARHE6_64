@@ -259,8 +259,8 @@ display= XtDisplay(wid);
  per ottenere un disegno in nero deve tener conto del background
  della window su cui si sta disegnando
 */
-get_something(wid, XmNbackground, &Colore.pixel);
-get_something(wid, XmNcolormap, &cmap);
+get_something(wid, XmNbackground, (void*) &Colore.pixel);
+get_something(wid, XmNcolormap, (void*) &cmap);
 XQueryColor (display, cmap, &Colore);
 values.function = GXxor;
 printf("DEBUG: XdGeom back red =%x green=%x blue=%x\n",Colore.red,Colore.green,Colore.blue);
@@ -329,8 +329,8 @@ display= XtDisplay(wid);
  per ottenere un disegno in nero deve tener conto del background
  della window su cui si sta disegnando
 */
-get_something(wid, XmNbackground, &Colore.pixel);
-get_something(wid, XmNcolormap, &cmap);
+get_something(wid, XmNbackground, (void*) &Colore.pixel);
+get_something(wid, XmNcolormap, (void*) &cmap);
 XQueryColor (display, cmap, &Colore);
 values.function = GXcopy;
 sommaColor= Colore.red + Colore.green + Colore.blue;

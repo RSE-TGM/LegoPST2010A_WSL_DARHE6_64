@@ -119,7 +119,7 @@ static	void	okCallback_password( UxWidget, UxClientData, UxCallbackArg )
 	extern void quit_proc();
 	extern void telep_chiudi_pag();
 	
-	get_something(password,XmNtextString,&ret);
+	get_something(password,XmNtextString,(void*) &ret);
 	pass=extract_string(ret);
 	
 	/* GESTIONE TELEPERM
@@ -245,11 +245,11 @@ Widget	popup_password( _UxPadrePassword )
 		password_ok = 0;
 		rtrn = _Uxbuild_password();
 
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),XmNfontList,FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),XmNfontList,FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),XmNfontList,FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_SELECTION_LABEL),XmNfontList,FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_TEXT),XmNfontList,FontLabel);
+		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,FontLabel);
+		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,FontLabel);
+		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,FontLabel);
+		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_SELECTION_LABEL),(void*) XmNfontList,FontLabel);
+		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_TEXT),(void*) XmNfontList,FontLabel);
 #ifndef DESIGN_TIME
 		XtVaSetValues(XmSelectionBoxGetChild(rtrn,XmDIALOG_TEXT),
 			RES_CONVERT( XmNbackground, "white" ),

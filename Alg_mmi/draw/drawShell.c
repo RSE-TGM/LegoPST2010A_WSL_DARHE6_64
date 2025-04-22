@@ -520,7 +520,7 @@ vett_draw[6]= drawpoli_bt;
 vett_draw[7]= drawfree_bt;
 LoadDrawPixmap(vett_pix,vett_draw[0]);
 for(i=0; i<8 ; i++)
-	set_something(vett_draw[i],XmNlabelPixmap,vett_pix[i]);
+	set_something(vett_draw[i],XmNlabelPixmap,(void*) vett_pix[i]);
 }
 
 
@@ -531,12 +531,12 @@ int i;
 
 for(i=0; i< 12; i++)
 	{
-	get_something(vett_border[i],XmNbackground,&pixel);
-	set_something(vett_fill[i],XmNbackground,pixel);
-	get_something(vett_border[i],XmNtopShadowColor,&pixel);
-	set_something(vett_fill[i],XmNtopShadowColor,pixel);
-	get_something(vett_border[i],XmNbottomShadowColor,&pixel);
-	set_something(vett_fill[i],XmNbottomShadowColor,pixel);
+	get_something(vett_border[i],XmNbackground, (void*) &pixel);
+	set_something(vett_fill[i],XmNbackground, (void*) pixel);
+	get_something(vett_border[i],XmNtopShadowColor, (void*) &pixel);
+	set_something(vett_fill[i],XmNtopShadowColor, (void*) pixel);
+	get_something(vett_border[i],XmNbottomShadowColor, (void*) &pixel);
+	set_something(vett_fill[i],XmNbottomShadowColor, (void*) pixel);
 	
 	}
 }
@@ -561,9 +561,9 @@ int indice;
 int i;
 for(i=0; i< 8; i++)
 	{
-	set_something( vett_draw[i], XmNshadowType, XmSHADOW_OUT);
+	set_something( vett_draw[i], XmNshadowType, (void*) XmSHADOW_OUT);
 	}
-set_something( vett_draw[indice], XmNshadowType, XmSHADOW_IN);
+set_something( vett_draw[indice], XmNshadowType, (void*) XmSHADOW_IN);
 }
 
 wselez_bott_fill(wid)
@@ -572,11 +572,11 @@ swidget wid;
 int i;
 for(i=0; i< 16; i++)
 	{
-	set_something( vett_fill[i], XmNshadowThickness, 2);
-	set_something( vett_fill[i], XmNshadowType, XmSHADOW_ETCHED_IN);
+	set_something( vett_fill[i], XmNshadowThickness, (void*) 2);
+	set_something( vett_fill[i], XmNshadowType, (void*) XmSHADOW_ETCHED_IN);
 	}
-set_something( wid , XmNshadowType, XmSHADOW_IN);
-set_something( wid , XmNshadowThickness, 4);
+set_something( wid , XmNshadowType, (void*) XmSHADOW_IN);
+set_something( wid , XmNshadowThickness, (void*) 4);
 /* bott_fill_selected=wid; */
 set_bott_fill(draw_wid,wid);
 }
@@ -587,11 +587,11 @@ swidget wid;
 int i;
 for(i=0; i< 16; i++)
 	{
-	set_something( vett_border[i], XmNshadowThickness, 2);
-	set_something( vett_border[i], XmNshadowType, XmSHADOW_ETCHED_IN);
+	set_something( vett_border[i], XmNshadowThickness, (void*) 2);
+	set_something( vett_border[i], XmNshadowType, (void*) XmSHADOW_ETCHED_IN);
 	}
-set_something( wid, XmNshadowThickness, 4);
-set_something( wid, XmNshadowType, XmSHADOW_IN);
+set_something( wid, XmNshadowThickness, (void*) 4);
+set_something( wid, XmNshadowType, (void*) XmSHADOW_IN);
 /* bott_border_selected = wid; */
 set_bott_border(draw_wid,wid);
 }
@@ -609,51 +609,51 @@ UxDrawShellContext = UxContext =
 switch (line_width)
 	{
 	case 0:
-		set_something(thiny_bt, XmNset, True);
-		set_something(pix_1_bt, XmNset, False);
-		set_something(pix_2_bt, XmNset, False);
-		set_something(pix_3_bt, XmNset, False);
-		set_something(pix_6_bt, XmNset, False);
+		set_something(thiny_bt, XmNset, (void*) True);
+		set_something(pix_1_bt, XmNset, (void*) False);
+		set_something(pix_2_bt, XmNset, (void*) False);
+		set_something(pix_3_bt, XmNset, (void*) False);
+		set_something(pix_6_bt, XmNset, (void*) False);
 	break;
 	case 1:
-		set_something(thiny_bt, XmNset, False);
-		set_something(pix_1_bt, XmNset, True);
-		set_something(pix_2_bt, XmNset, False);
-		set_something(pix_3_bt, XmNset, False);
-		set_something(pix_6_bt, XmNset, False);
+		set_something(thiny_bt, XmNset, (void*) False);
+		set_something(pix_1_bt, XmNset, (void*) True);
+		set_something(pix_2_bt, XmNset, (void*) False);
+		set_something(pix_3_bt, XmNset, (void*) False);
+		set_something(pix_6_bt, XmNset, (void*) False);
 	break;
 	case 2:
-		set_something(thiny_bt, XmNset, False);
-		set_something(pix_1_bt, XmNset, False);
-		set_something(pix_2_bt, XmNset, True);
-		set_something(pix_3_bt, XmNset, False);
-		set_something(pix_6_bt, XmNset, False);
+		set_something(thiny_bt, XmNset, (void*) False);
+		set_something(pix_1_bt, XmNset, (void*) False);
+		set_something(pix_2_bt, XmNset, (void*) True);
+		set_something(pix_3_bt, XmNset, (void*) False);
+		set_something(pix_6_bt, XmNset, (void*) False);
 	break;
 	case 3:
-		set_something(thiny_bt, XmNset, False);
-		set_something(pix_1_bt, XmNset, False);
-		set_something(pix_2_bt, XmNset, False);
-		set_something(pix_3_bt, XmNset, True);
-		set_something(pix_6_bt, XmNset, False);
+		set_something(thiny_bt, XmNset, (void*) False);
+		set_something(pix_1_bt, XmNset, (void*) False);
+		set_something(pix_2_bt, XmNset, (void*) False);
+		set_something(pix_3_bt, XmNset, (void*) True);
+		set_something(pix_6_bt, XmNset, (void*) False);
 	break;
 	case 4:
-		set_something(thiny_bt, XmNset, False);
-		set_something(pix_1_bt, XmNset, False);
-		set_something(pix_2_bt, XmNset, False);
-		set_something(pix_3_bt, XmNset, False);
-		set_something(pix_6_bt, XmNset, True);
+		set_something(thiny_bt, XmNset, (void*) False);
+		set_something(pix_1_bt, XmNset, (void*) False);
+		set_something(pix_2_bt, XmNset, (void*) False);
+		set_something(pix_3_bt, XmNset, (void*) False);
+		set_something(pix_6_bt, XmNset, (void*) True);
 	break;
 	}
 
 switch (line_style)
 	{
 	case LineSolid:
-		set_something(solid_bt, XmNset, True);
-		set_something(dashed_bt, XmNset, False);
+		set_something(solid_bt, XmNset, (void*) True);
+		set_something(dashed_bt, XmNset, (void*) False);
 	break;
 	case LineOnOffDash:
-		set_something(solid_bt, XmNset, False);
-		set_something(dashed_bt, XmNset, True);
+		set_something(solid_bt, XmNset, (void*) False);
+		set_something(dashed_bt, XmNset, (void*) True);
 	break;
 	}
 #ifndef DESIGN_TIME
@@ -4107,16 +4107,16 @@ Widget	create_drawShell( _Uxpassed_wid, _Uxnome )
 		*/
 		strcpy(str_title,"DRAW - on page: ");
 		strcat(str_title,nome);
-		set_something(saveButton,XmNsensitive, False);
-		set_something(saveAsButton, XmNsensitive, False);
-		set_something(editCascade,XmNsensitive, False);
-		set_something(viewCascade,XmNsensitive, False);
+		set_something(saveButton,XmNsensitive, (void*) False);
+		set_something(saveAsButton, XmNsensitive, (void*) False);
+		set_something(editCascade,XmNsensitive, (void*) False);
+		set_something(viewCascade,XmNsensitive, (void*) False);
 #endif
 #if defined ON_PAGEDIT || !defined XPRINTER_USED
-		set_something(prtButton,XmNsensitive, False);
-		set_something(prtSetupButton, XmNsensitive, False);
+		set_something(prtButton,XmNsensitive, (void*) False);
+		set_something(prtSetupButton, XmNsensitive, (void*) False);
 #endif
-		set_something(rtrn,XmNtitle,str_title);
+		set_something(rtrn,XmNtitle,(void*) str_title);
 		return(rtrn);
 	}
 }

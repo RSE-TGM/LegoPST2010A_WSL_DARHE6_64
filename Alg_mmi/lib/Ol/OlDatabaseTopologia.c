@@ -52,6 +52,7 @@ char   *nome_modello (char *, int);
 char *sim_shvar(int,int);
 
 
+
 /* lista delle risorse  */
 static XlResources resources[]= {
         {
@@ -127,6 +128,9 @@ static int NumBlocchi();
 static int NumVariabili();
 static VARIABILI * ProgToVar();
 static int IndToMod();
+
+extern int sgancia_shrmem(char *);
+extern void elimina_shrmem(int,char*,int);
 
 /* Inizializzazione del class record */
 OlDatabaseTopologiaClassRec olDatabaseTopologiaClassRec = {

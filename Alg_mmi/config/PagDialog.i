@@ -319,8 +319,8 @@ void SetOptMenu(PAGINA *pag)\
    WidgetList ListaButton;\
 \
    /*  menu' tipo pagina */\
-   get_something(menu4,XmNsubMenuId,&Pane);\
-   get_something(Pane,XmNchildren,&ListaButton);\
+   get_something(menu4,XmNsubMenuId,(char*)&Pane);\
+   get_something(Pane,XmNchildren,(char*)&ListaButton);\
    \
    if(!strcmp(pag->geom.tipo,TIPO_SINOTTICO))\
        Bottone = ListaButton[0];\
@@ -334,8 +334,8 @@ void SetOptMenu(PAGINA *pag)\
    set_something(menu4,XmNmenuHistory,Bottone);\
 \
   /*  menu' in use */\
-   get_something(menu7,XmNsubMenuId,&Pane);\
-   get_something(Pane,XmNchildren,&ListaButton);\
+   get_something(menu7,XmNsubMenuId,(char*)&Pane);\
+   get_something(Pane,XmNchildren,(char*)&ListaButton);\
    \
    if(pag->in_use==SCHEME_IN_USE)\
        Bottone = ListaButton[0];\
@@ -583,7 +583,7 @@ by fabio\
 \
 \
 printf("Pagina gerarc=%s\n",pagina->gerarchia);\
-      get_something(menu4,XmNmenuHistory,&WgtOptMenu);\
+      get_something(menu4,XmNmenuHistory,(char*)&WgtOptMenu);\
       if(WgtOptMenu == menu4_p1_b1)\
          strcpy(pagina->geom.tipo,TIPO_STAZIONI);   \
       else if(WgtOptMenu == menu4_p1_b2)\
@@ -692,7 +692,7 @@ printf("Pagina gerarc=%s\n",pagina->gerarchia);\
       strcpy(pagina->gerarchia,"-1,-1,-1,-1,-1,-1");\
 */\
 \
-      get_something(menu7,XmNmenuHistory,&WgtOptMenu);\
+      get_something(menu7,XmNmenuHistory,(char*)&WgtOptMenu);\
       if(WgtOptMenu == In_use)\
 	  pagina->in_use=SCHEME_IN_USE;\
       else if(WgtOptMenu == Not_in_use)\
@@ -873,7 +873,7 @@ printf("Gerarchia modificata=%s\n",pagina->gerarchia);\
 \
       if(tipoPag != TYPE_REGOLAZIONE)\
       {\
-          get_something(menu4,XmNmenuHistory,&WgtOptMenu);\
+          get_something(menu4,XmNmenuHistory,(char*)&WgtOptMenu);\
           if(WgtOptMenu == menu4_p1_b1)\
              strcpy(pagina->geom.tipo,TIPO_STAZIONI);   \
           else if(WgtOptMenu == menu4_p1_b2)\
@@ -887,7 +887,7 @@ printf("Gerarchia modificata=%s\n",pagina->gerarchia);\
 \
       if(tipoPag == TYPE_REGOLAZIONE)\
       {\
-          get_something(menu7,XmNmenuHistory,&WgtOptMenu);\
+          get_something(menu7,XmNmenuHistory,(char*)&WgtOptMenu);\
           if(WgtOptMenu == In_use)\
 	      pagina->in_use = SCHEME_IN_USE;\
             else if(WgtOptMenu == Not_in_use)\

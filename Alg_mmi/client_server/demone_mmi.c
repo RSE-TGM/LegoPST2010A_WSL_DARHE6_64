@@ -47,6 +47,7 @@ static char SccsID[] = "@(#)demone_mmi.c	1.10\t4/12/96";
 
 #include <Cs/Cs.h>
 #include "sim_param.h"
+#include "sim_types.h"
 #include "sim_ipc.h"
 #include "libnet.h"
 #include "demone_mmi.h"

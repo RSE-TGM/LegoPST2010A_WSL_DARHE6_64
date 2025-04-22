@@ -99,7 +99,7 @@ Find_struct *parametri;
    XtManageChild(find_text);
 
    drawing_background=0x277676;
-   set_something(find_text,XmNbackground,drawing_background);
+   set_something(find_text,XmNbackground, (void*) drawing_background);
 
 
 /* Arrow button di ricerca INDIETRO */
@@ -176,14 +176,14 @@ XmAnyCallbackStruct *data;
 
    stringa = XmTextGetString(user->ID_testo);
 
-   get_something (user->ID_lista,XmNitemCount,&(user->num_elem));
+   get_something (user->ID_lista,XmNitemCount, (void*) &(user->num_elem));
 
-   get_something (user->ID_lista,XmNitems,&c_strings);
+   get_something (user->ID_lista,XmNitems, (void*) &c_strings);
 
 /* for (i=0; i<user->num_elem; i++)
      printf ("%s \n", extract_string(c_strings[i])); */
 
-   get_something( w, XmNuserData, &verso_ricerca);
+   get_something( w, XmNuserData, (void*) &verso_ricerca);
 
    switch (verso_ricerca) {
      case INDIETRO:
@@ -194,14 +194,14 @@ XmAnyCallbackStruct *data;
                i--;
              else
              {
- 	        set_something(user->ID_label,XmNlabelString,notfound);
+ 	        set_something(user->ID_label,XmNlabelString, (void*) notfound);
                 break;
              }
 
              if(Utstrstr(extract_string(c_strings[i]),stringa)!=NULL)
              {
                 user->pos = i;
-                set_something(user->ID_label,XmNlabelString,nulla);
+                set_something(user->ID_label,XmNlabelString, (void*) nulla);
                 break;
              }
           }
@@ -217,14 +217,14 @@ XmAnyCallbackStruct *data;
                 i++;
              else
              {
-                set_something(user->ID_label,XmNlabelString,notfound);
+                set_something(user->ID_label,XmNlabelString, (void*) notfound);
                 break;
              }
  
              if(Utstrstr(extract_string(c_strings[i]),stringa)!=NULL)
              {
                 user->pos = i;
-                set_something(user->ID_label,XmNlabelString,nulla);
+                set_something(user->ID_label,XmNlabelString, (void*) nulla);
                 break;
              }
           }

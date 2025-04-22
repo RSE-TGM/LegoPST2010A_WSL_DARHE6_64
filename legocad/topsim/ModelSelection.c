@@ -177,7 +177,7 @@ static Widget	_Ux_create_ModelSelection( _Uxparent )
 		rtrn = _Uxbuild_ModelSelection();
 
 		xstring = XmStringCreateSimple(inidir);
-		set_something(ModelSelection,XmNdirectory,xstring);
+		set_something(ModelSelection,XmNdirectory,(void*) xstring);
 		
 		
 		return(rtrn);

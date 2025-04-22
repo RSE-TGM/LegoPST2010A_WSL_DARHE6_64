@@ -75,7 +75,7 @@ _UxCAttesa *Context;
 	Context->Uxvalore = Context->Uxvalore + delta;
 	if(Context->Uxvalore > 100)
 		Context->Uxvalore = 0;
-	set_something(Context->UxscaleAttesa,XmNvalue,Context->Uxvalore);
+	set_something(Context->UxscaleAttesa,XmNvalue,(void*) Context->Uxvalore);
 
 #endif
 }

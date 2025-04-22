@@ -711,4 +711,7 @@ Boolean PutResPaginaDb(PAGINA *,XrmDatabase *);
 Boolean GetResPaginaDb(PAGINA *,XrmDatabase , Boolean);
 #endif   
 
+
+void testata(char *, char *);
+
 /* fine config.h */

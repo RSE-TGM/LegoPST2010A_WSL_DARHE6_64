@@ -82,11 +82,10 @@ Elenco_callback chiama_funz;
 /* Accetta i parametri per l'OK_BUTTON  */
    if (chiama_funz[0].button_label != NULL)
    {
-      set_something (finestra,XmNokLabelString,
-                     CREATE_CSTRING(chiama_funz[0].button_label));
+      set_something (finestra,XmNokLabelString, (void*) CREATE_CSTRING(chiama_funz[0].button_label));
       XtAddCallback (finestra,XmNokCallback,
  		     chiama_funz[0].callback,
-		     chiama_funz[0].parametro);
+		     (XtPointer)chiama_funz[0].parametro);
    }
    else
      XtUnmanageChild (XmMessageBoxGetChild(finestra, XmDIALOG_OK_BUTTON));
@@ -94,11 +93,10 @@ Elenco_callback chiama_funz;
 /* Accetta i parametri per il CANCEL_BUTTON  */
    if (chiama_funz[1].button_label != NULL)
    {
-      set_something (finestra,XmNcancelLabelString,
-	             CREATE_CSTRING(chiama_funz[1].button_label));
+      set_something (finestra,XmNcancelLabelString, (void*) CREATE_CSTRING(chiama_funz[1].button_label));
       XtAddCallback (finestra,XmNcancelCallback,
                      chiama_funz[1].callback,
-		     chiama_funz[1].parametro);
+		     (XtPointer)chiama_funz[1].parametro);
    }
    else
       XtUnmanageChild (XmMessageBoxGetChild(finestra,XmDIALOG_CANCEL_BUTTON));
@@ -106,11 +104,10 @@ Elenco_callback chiama_funz;
 /* Accetta i parametri per l`HELP_BUTTON  */
    if (chiama_funz[2].button_label != NULL)
    {
-      set_something (finestra,XmNhelpLabelString,
-	             CREATE_CSTRING(chiama_funz[2].button_label));
+      set_something (finestra,XmNhelpLabelString, (void*) CREATE_CSTRING(chiama_funz[2].button_label));
       XtAddCallback (finestra,XmNhelpCallback,
 		     chiama_funz[2].callback,
-		     chiama_funz[2].parametro);
+		     (XtPointer)chiama_funz[2].parametro);
    }
    else
      XtUnmanageChild (XmMessageBoxGetChild(finestra,XmDIALOG_HELP_BUTTON));
@@ -151,11 +148,10 @@ Elenco_callback chiama_funz;
 /* Accetta i parametri per l'OK_BUTTON  */
    if (chiama_funz[0].button_label != NULL)
    {
-      set_something (finestra,XmNokLabelString,
-                     CREATE_CSTRING(chiama_funz[0].button_label));
+      set_something (finestra,XmNokLabelString, (void*) CREATE_CSTRING(chiama_funz[0].button_label));
       XtAddCallback (finestra,XmNokCallback,
  		     chiama_funz[0].callback,
-		     chiama_funz[0].parametro);
+            (XtPointer)chiama_funz[0].parametro);
    }
    else
      XtUnmanageChild (XmMessageBoxGetChild(finestra, XmDIALOG_OK_BUTTON));
@@ -163,11 +159,10 @@ Elenco_callback chiama_funz;
 /* Accetta i parametri per il CANCEL_BUTTON  */
    if (chiama_funz[1].button_label != NULL)
    {
-      set_something (finestra,XmNcancelLabelString,
-	             CREATE_CSTRING(chiama_funz[1].button_label));
+      set_something (finestra,XmNcancelLabelString, (void*) CREATE_CSTRING(chiama_funz[1].button_label));
       XtAddCallback (finestra,XmNcancelCallback,
                      chiama_funz[1].callback,
-		     chiama_funz[1].parametro);
+                     (XtPointer)chiama_funz[1].parametro);
    }
    else
       XtUnmanageChild (XmMessageBoxGetChild(finestra,XmDIALOG_CANCEL_BUTTON));
@@ -175,11 +170,10 @@ Elenco_callback chiama_funz;
 /* Accetta i parametri per l`HELP_BUTTON  */
    if (chiama_funz[2].button_label != NULL)
    {
-      set_something (finestra,XmNhelpLabelString,
-	             CREATE_CSTRING(chiama_funz[2].button_label));
+      set_something (finestra,XmNhelpLabelString, (void*) CREATE_CSTRING(chiama_funz[2].button_label));
       XtAddCallback (finestra,XmNhelpCallback,
 		     chiama_funz[2].callback,
-		     chiama_funz[2].parametro);
+		     (XtPointer)chiama_funz[2].parametro);
    }
    else
      XtUnmanageChild (XmMessageBoxGetChild(finestra,XmDIALOG_HELP_BUTTON));

@@ -78,10 +78,11 @@ char *Utstrstr(char *,char *);
 Widget attesa(Widget,char *,int);
 void def_cursore(Widget,int);
 void undef_cursore(Widget);
-/*
+
 void get_something(Widget,char *,char * );
-void set_something(Widget,char *,chat * );
-void get_something();
+void set_something(Widget,char *,char * );
+/*
+ void get_something();
 void set_something();
 */
 void UtListaScroll(Widget,int,int,int);
@@ -97,4 +98,8 @@ Widget errore(Widget,char *,int);
 int UtStatoWidget(Widget);
 void commento(char *);
 int spazio_disco(char *);
+Widget find_in_a_text (Widget,ArgList,int,Text_find_struct*);
+
+void chdefaults();
+
 #endif

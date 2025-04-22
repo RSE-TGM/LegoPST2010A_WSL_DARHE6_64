@@ -35,7 +35,8 @@ static char SccsID[] = "@(#)RtErrore.c	5.1\t11/10/95";
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
-
+#include <sys/types.h>
+#include <unistd.h>
 
 #include <Rt/Rt.h>
 #include <Rt/RtErroreP.h>  /* inclusione header privato */

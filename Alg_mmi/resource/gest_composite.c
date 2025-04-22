@@ -57,21 +57,21 @@ Position child_x,new_child_x;
 Dimension old_width;
 Widget *children;
 
-get_something(wid,XmNwidth,&old_width);
+get_something(wid,XmNwidth, (void*) &old_width);
 if (old_width != new_width)
 {
 	/*
 	 Ricava numero e indici di widget dei figli
 	*/
-	get_something(wid,XmNnumChildren,&num_children);
-	get_something(wid,XmNchildren,&children);
+	get_something(wid,XmNnumChildren, (void*) &num_children);
+	get_something(wid,XmNchildren, (void*) &children);
 	for(i=0;i<num_children;i++)
 	{
 	/*
 	 Ricava x e width del figlio
 	*/
-		get_something(children[i],XmNx,&child_x);
-		get_something(children[i],XmNwidth,&child_width);
+		get_something(children[i],XmNx, (void*) &child_x);
+		get_something(children[i],XmNwidth, (void*) &child_width);
 	
 	/*
 	 Normalizza rispetto alle dimensione di composite le dimensioni
@@ -114,21 +114,21 @@ Position child_y,new_child_y;
 Dimension old_height;
 Widget *children;
 
-get_something(wid,XmNheight,&old_height);
+get_something(wid,XmNheight, (void*) &old_height);
 if (old_height != new_height)
 {
 /*
  Ricava numero e indici di widget dei figli
 */
-get_something(wid,XmNnumChildren,&num_children);
-get_something(wid,XmNchildren,&children);
+get_something(wid,XmNnumChildren, (void*) &num_children);
+get_something(wid,XmNchildren, (void*) &children);
 for(i=0;i<num_children;i++)
 	{
 /*
  Ricava y e height del figlio
 */
-	get_something(children[i],XmNy,&child_y);
-	get_something(children[i],XmNheight,&child_height);
+	get_something(children[i],XmNy, (void*) &child_y);
+	get_something(children[i],XmNheight, (void*) &child_height);
 	
 /*
  Normalizza rispetto alle dimensione di composite le dimensioni

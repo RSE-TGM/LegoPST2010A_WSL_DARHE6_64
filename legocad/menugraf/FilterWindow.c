@@ -239,8 +239,8 @@ static void	activateCB_pushButton17( UxWidget, UxClientData, UxCallbackArg )
 	else
 		{
 		Messaggio = XmStringCreate (ritorno, XmSTRING_DEFAULT_CHARSET);
-		set_something (Message, XmNmessageString, Messaggio);
-		set_something (Message, XmNdialogType, XmDIALOG_ERROR);
+		set_something (Message, XmNmessageString, (void*) Messaggio);
+		set_something (Message, XmNdialogType, (void*) XmDIALOG_ERROR);
 		UxPopupInterface (Message, no_grab);
 		XmStringFree (Messaggio);
 		XtFree (ritorno);
@@ -679,7 +679,7 @@ static Widget	_Ux_create_FilterWindow( _Uxx, _Uxy, _UxInd )
 		rtrn = _Uxbuild_FilterWindow();
 
 		Stringa = XmStringCreate (simboli[Index], XmSTRING_DEFAULT_CHARSET);
-		set_something (labSourceVarF, XmNlabelString, Stringa);
+		set_something (labSourceVarF, XmNlabelString, (void*) Stringa);
 		
 #ifndef DESIGN_TIME
 		XmTextFieldSetString (textFieldVarF, nomi_var[Index]);
@@ -693,8 +693,8 @@ static Widget	_Ux_create_FilterWindow( _Uxx, _Uxy, _UxInd )
 		XmTextFieldSetString (textFieldDescrF,descriz);
 #endif
 		
-		set_something (FilterWindow, XmNx, x+10);
-		set_something (FilterWindow, XmNy, y+10);
+		set_something (FilterWindow, XmNx, (void*) x+10);
+		set_something (FilterWindow, XmNy, (void*) y+10);
 		
 		return(rtrn);
 	}

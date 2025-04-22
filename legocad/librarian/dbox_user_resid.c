@@ -676,7 +676,7 @@ static Widget	_Ux_create_dbox_userresid()
 		dbox_userresid_managed = True;
 		
 		/* Dimensionamento dell'altezza della form dei text */
-		set_something (UxGetWidget(resid_resid_form),XmNheight,height);
+		set_something (UxGetWidget(resid_resid_form),XmNheight,(void*) height);
 		
 		/* Aggiorna i text dichiarazione e codice */
 		if ( str_dichMOD != NULL )
