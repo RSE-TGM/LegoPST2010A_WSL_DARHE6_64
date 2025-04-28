@@ -74,7 +74,7 @@ char   *nome_modello (char *, int);
 
 /* restituisce il numero del modello con in ingressi il puntatore
    all'inizio della shared memory e l'indirizzo della variabile */
-int   ind_modello (char *, int, VARIABILI *);
+static int   ind_modello (char *, int, VARIABILI *);
 
 /* restituisce il nome di un blocco con in ingressi il puntatore
    all'inizio della shared memory e il numero del modello e del

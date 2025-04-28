@@ -26,7 +26,10 @@ static char *_csrc = "@(#) %filespec: OlDatabasePunti.c-40 %  (%full_filespec: O
 #include <Cs/Cs.h>
 
 #include <Ol/OlDatabasePuntiP.h>
+#include <Ol/OlDatabasePunti.h>
 #include <Ol/OlTree.h>
+#include <Cs/Cs.h>
+
 #if defined UNIX
 # include <sys/types.h>
 # include <sys/ipc.h>
@@ -41,6 +44,11 @@ static char *_csrc = "@(#) %filespec: OlDatabasePunti.c-40 %  (%full_filespec: O
 #endif
 #include <time.h>
 #include "sim_types.h"
+#include "libipc.h"
+#include "libutilx.h"
+
+
+Boolean XlIsAllarmi(Widget );
 
 char path_sim_correct[FILENAME_MAX];
 /* lista delle risorse  */
@@ -624,7 +632,7 @@ Chiamo metodo di OlTree che, dalla gerarchia mi restituisce indice pagina
 
 printf("OlJumpPage:POS_INFO_PAGE=%d\n",pos_info_page);
 OlTreeJumpPage(start_page,pagina_fittizia,&num_page,tipo_all);
-if(sgancia_shrmem(pagina_fittizia)==-1)
+if(sgancia_shrmem((char*)pagina_fittizia)==-1)
 	{
 	 XlWarning("OlDatabasePunti","OlJumpPage",
                    "Impossibile accedere shm PAGINA_CAI");
@@ -2193,7 +2201,7 @@ if(indice!=-1)
   if((database->oldatabasePunti.pagine_db[indice].id_shmS!=-1))
 	{
 /*printf("OlUn:ind=%d id_shmS=%d\n",indice,database->oldatabasePunti.pagine_db[indice].id_shmS);*/
-	if(sgancia_shrmem(database->oldatabasePunti.varS)<0)
+	if(sgancia_shrmem((char*)database->oldatabasePunti.varS)<0)
 		{
 		printf("OlUnsetDataPage:sgancia_shrmem di varS ko\n");
 		return(False);
@@ -2204,7 +2212,7 @@ if(indice!=-1)
   if((database->oldatabasePunti.pagine_db[indice].id_shm!=-1))
 	{
 /*printf("OlUn:ind=%d id_shm=%d\n",indice,database->oldatabasePunti.pagine_db[indice].id_shm);*/
-	if(sgancia_shrmem(database->oldatabasePunti.var)<0)
+	if(sgancia_shrmem((char*)database->oldatabasePunti.var)<0)
                 {
                 printf("OlUnsetDataPage:sgancia_shrmem di varS ko\n");
                 return(False);

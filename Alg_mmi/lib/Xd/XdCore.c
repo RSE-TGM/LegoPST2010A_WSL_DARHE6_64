@@ -20,7 +20,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include <stdlib.h>
 #include <Xd/Xd.h>
 #include <Xd/XdCoreP.h>
-#include <Xl/Xl.h>
+//#include <Xl/Xl.h>
 
 /*
  Dichiarazione dei metodi
@@ -38,6 +38,10 @@ static void Write();
 static void Print();
 #endif
 static void DeleteRegions();
+void XdFilterAnimated(int,char*);
+
+//static void Write(Draget,FILE *);
+
 
 #define FILTRA_READ  0
 #define FILTRA_WRITE 1
@@ -70,7 +74,7 @@ XdCoreClassRec xdCoreClassRec = {
 	  /* crea_regions */    NULL,
 	  /* delete_regions */  DeleteRegions,
 	  /* read	*/	Read,
-	  /* write	*/	Write,
+	  /* write	*/	(void *)Write,
  	  /* get_size   */      NULL,
 	  /* modify     */      NULL,
           /* copy       */      NULL,
@@ -114,11 +118,11 @@ if(dr->xdcore.select_region)
 for(i=0;i <dr->xdcore.num_move_regions; i++)
 	if(dr->xdcore.move_regions[i])
 		XDestroyRegion(dr->xdcore.move_regions[i]);
-XtFree(dr->xdcore.move_regions);
+XtFree((char*)dr->xdcore.move_regions);
 for(i=0;i <dr->xdcore.num_resize_regions; i++)
 	if(dr->xdcore.resize_regions[i])
 		XDestroyRegion(dr->xdcore.resize_regions[i]);
-XtFree(dr->xdcore.resize_regions);
+XtFree((char*)dr->xdcore.resize_regions);
 }
 
 static void Initialize(dr)
@@ -406,7 +410,7 @@ else
   	Questa routine va sostituita in caso vengano modificati i falsi
 	colori.
 */
-XdFilterAnimated(type,str_color)
+void XdFilterAnimated(type,str_color)
 int type;
 char *str_color;
 {

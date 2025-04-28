@@ -74,6 +74,14 @@ extern XdLista get_lista();
 extern XdLista get_lista_undo();
 extern XdListaUndo get_lista_liste_undo();
 extern void CreaUndoList();
+extern void XdStartMove(Draget);
+extern void XdWriteDraget(Draget,FILE *);
+extern void XdPrintDraget(Draget);
+void XdGetSize(Draget,int *,int*,int*,int*);
+void XdModify(Draget,int,int,int,int,XEvent *);
+extern void XdDestroyDraget(Draget);
+
+
 
 #ifdef ON_PAGEDIT
 extern XdLista clip_get_lista();

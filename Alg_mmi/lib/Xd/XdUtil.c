@@ -28,6 +28,7 @@ static char *_csrc = "@(#) %filespec: XdUtil.c-2.1.3 %  (%full_filespec: XdUtil.
 #include <Xd/XdConnP.h>
 #include <Xd/XdGroupP.h>
 #include <Rt/RtMemory.h>
+#include <X11/Intrinsic.h>
 
 /*
 	dichiarazione funzione rint per VMS
@@ -35,6 +36,12 @@ static char *_csrc = "@(#) %filespec: XdUtil.c-2.1.3 %  (%full_filespec: XdUtil.
 #if defined VMS
 static double rint();
 #endif
+
+void XdSnap(Draget,XEvent*);
+void XdCreaGCs(Widget,XdGC  *,GC *,GC *);
+void XdDestroyDraget(Draget);
+static DragetClass XdTagToClass(char*);
+
 
 
 DragetClass XdClass(dr)
@@ -71,7 +78,7 @@ else
 }
 
 
-XdStartMove(dr)
+void XdStartMove(dr)
 Draget dr;
 {
 dr->xdcore.moving=True;
@@ -96,7 +103,7 @@ dr->xdcore.gc_bg=gc_bg;
 class->xdcore_class.clear(dr);
 }
 
-XdSetSnap(dr,snap)
+void XdSetSnap(dr,snap)
 Draget dr;
 int snap;
 {
@@ -126,7 +133,7 @@ dr->xdcore.step=snap;
  trattamento di tutte le connessioni che interessano l'icona di
  regolazione.
 */
-XdSetManaged(dr,flag)
+void XdSetManaged(dr,flag)
 Draget dr;
 Boolean flag;
 {
@@ -164,7 +171,7 @@ if(XtIsRealized(dr->xdcore.wid))
 	class->xdcore_class.clear(dr);
 	}
 class->xdcore_class.delete_regions(dr);
-XtFree(dr);
+XtFree((char*)dr);
 }
 
 
@@ -189,7 +196,7 @@ if(XdIsGroup(dr))
 class=dr->xdcore.draget_class;
 class->xdcore_class.destroy(dr);
 class->xdcore_class.delete_regions(dr);
-XtFree(dr);
+XtFree((char*)dr);
 }
 
 
@@ -493,7 +500,7 @@ retval=class->xdcore_class.last_point(dr,ev);
 return(retval);
 }
 
-XdSnap(dr,eve)
+void XdSnap(dr,eve)
 Draget dr;
 XEvent *eve;
 {
@@ -526,7 +533,7 @@ switch(eve->type)
 
 }
 
-XdWriteDraget(dr,fp)
+void XdWriteDraget(dr,fp)
 Draget dr;
 FILE *fp;
 {
@@ -546,7 +553,7 @@ class->xdcore_class.write(dr,fp);
 }
 
 #ifdef XPRINTER_USED
-XdPrintDraget(dr)
+void XdPrintDraget(dr)
 Draget dr;
 {
 extern DragetClass xdCoreDragetClass;
@@ -571,7 +578,7 @@ xdCoreDragetClass->xdcore_class.print(dr,False);
 }
 #endif
 
-XdGetSize(dr,xmin,ymin,xmax,ymax)
+void XdGetSize(dr,xmin,ymin,xmax,ymax)
 Draget dr;
 int *xmin,*ymin,*xmax,*ymax;
 {
@@ -580,7 +587,7 @@ class = XdClass(dr);
 class->xdcore_class.get_size(dr,xmin,ymin,xmax,ymax);
 }
 
-XdModify(dr,dx,dy,dw,dh,ev)
+void XdModify(dr,dx,dy,dw,dh,ev)
 Draget dr;
 int dx,dy,dw,dh;
 XEvent *ev;
@@ -607,20 +614,20 @@ extern XdGroupClassRec xdGroupClassRec;
 switch(tag[0])
 	{
 	case 'l':
-	return(&xdLineClassRec);
+	return((DragetClass)&xdLineClassRec);
 	break;
 	case 'r':
-	return(&xdRectClassRec);
+	return((DragetClass)&xdRectClassRec);
 	break;
 	case 'c':
-	return(&xdCircleClassRec);
+	return((DragetClass)&xdCircleClassRec);
 	break;
 	case 'p':
-	return(&xdPoliClassRec);
+	return((DragetClass)&xdPoliClassRec);
 	case 'C':
-	return(&xdConnClassRec);
+	return((DragetClass)&xdConnClassRec);
 	case 'g':
-	return(&xdGroupClassRec);
+	return((DragetClass)&xdGroupClassRec);
 	}
 }
 	
@@ -671,7 +678,7 @@ else
 	return(NULL);
 }
 
-XdCreaGCs(wid,xdgc,gc,gc_bg)
+void XdCreaGCs(wid,xdgc,gc,gc_bg)
 Widget wid;
 XdGC *xdgc;
 GC *gc;

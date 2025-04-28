@@ -111,6 +111,7 @@ void load_variables(int,char**,Widget);
 
 void d2free(char**);
 void prep_str_tim(float,float);
+void XdSetManaged();
 
 
 

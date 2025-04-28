@@ -37,6 +37,9 @@ static char SccsID[] = "@(#)XdLista.c	5.1\t11/13/95";
 /*
  Dichiarazione dei metodi
 */
+void XdDestroyDraget(Draget);
+static int inc_ind(XdLista);
+
 
 XdListaClassRec xdListaClassRec = {
 	0
@@ -77,9 +80,9 @@ printf("XdDestroyListaUndo: ENTRATO\n");
          for(i=0;i<l->num_draget;i++)
             XdDestroyDraget(l->ListaDraget[i]);
       }
-      XtFree(l->ListaDraget);
+      XtFree((char*)l->ListaDraget);
    }
-   XtFree(l);
+   XtFree((char*)l);
 printf("XdDestroyListaUndo: USCITO\n");
 return(True);
 }
@@ -99,7 +102,7 @@ printf("XdDestroyListaUndoLast: ENTRATO\n");
          for(i=0;i<l->num_draget;i++)
             XdDestroyDraget(l->ListaDraget[i]);
       }
-      XtFree(l->ListaDraget);
+      XtFree((char*)l->ListaDraget);
    }
 printf("XdDestroyListaUndoLast: USCITO\n");
 return(True);
@@ -115,9 +118,9 @@ XdLista l;
 
 printf("XdDestroyLista: ENTRATO\n");
    if(l->ListaDraget) {
-      XtFree(l->ListaDraget);
+      XtFree((char*)l->ListaDraget);
    }
-   XtFree(l);
+   XtFree((char*)l);
 printf("XdDestroyLista: USCITO\n");
 
 return(True);
@@ -142,7 +145,7 @@ l->num_draget++;
 if(l->ListaDraget==NULL)
         l->ListaDraget=(Draget *)XtMalloc(sizeof(Draget));
 else
-        l->ListaDraget=(Draget *)XtRealloc(l->ListaDraget,sizeof(Draget)*l->num_draget);
+        l->ListaDraget=(Draget *)XtRealloc((char*)l->ListaDraget,sizeof(Draget)*l->num_draget);
 l->ListaDraget[l->num_draget-1]=dr;
 }
 
@@ -329,7 +332,7 @@ num_selected=0;
 while (dr=ListDragetNext(l))
 	{
 	num_selected++;
-	*drlist=(Draget *)XtRealloc(*drlist,num_selected*sizeof(Draget));
+	*drlist=(Draget *)XtRealloc((char*)*drlist,num_selected*sizeof(Draget));
 	(*drlist)[num_selected-1]=dr;
 	}
 return(num_selected);
@@ -360,7 +363,7 @@ while (dr=ListDragetNext(l))
 	if(XdIsSelected(dr))
 		{
 		num_selected++;
-		*drlist=(Draget *)XtRealloc(*drlist,num_selected*sizeof(Draget));
+		*drlist=(Draget *)XtRealloc((char*)*drlist,num_selected*sizeof(Draget));
 		(*drlist)[num_selected-1]=dr;
 		}
 	}

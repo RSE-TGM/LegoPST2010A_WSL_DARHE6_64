@@ -15,12 +15,14 @@
    reserved @(#)forme.h	5.1
 */
 /* Macro definita per la lettura del file delle forms */
-#define out_close(stringa,file_point,num)\
-                  {fprintf(stderr,\
-                   "La linea del file non riconosciuta corrisponde a:\
-                    \n<%s>\nLinea numero <%d>\n",stringa,num);\
-                    close(file_point);\
-                    return(False);}
+#include <stdio.h>
+#include <unistd.h>
+// #define out_close(stringa,file_point,num)\
+//                   {fprintf(stderr,\
+//                    "La linea del file non riconosciuta corrisponde a:\
+//                     \n<%s>\nLinea numero <%d>\n",stringa,num);\
+//                     close(file_point);\
+//                     return(False);}
 
 /*
    Elenco di define per la costruzione del file delle forms

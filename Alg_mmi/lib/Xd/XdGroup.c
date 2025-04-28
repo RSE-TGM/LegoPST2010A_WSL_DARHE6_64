@@ -67,6 +67,11 @@ static void Print();
  funzioni di utilita'
 */
 static void draw_rect();
+extern void XdCreaGCs(Widget,XdGC *,GC *,GC *);
+extern DragetClass XdTagToClass(char*);
+
+extern void SetMsg();
+
 /*
  Inizializzazione del class record
 */
@@ -90,13 +95,13 @@ XdGroupClassRec  xdGroupClassRec = {
 	  /* first_point */	FirstPoint,
 	  /* last_point  */	LastPoint,
 	  /* first_draw  */     FirstDraw,
-          /* pick       */ 	_XdInheritPick,
-	  /* select     */	_XdInheritSelect,
+          /* pick       */ 	(void *)_XdInheritPick,
+	  /* select     */	(void *)_XdInheritSelect,
 	  /* clear      */      Clear,
 	  /* crea_regions */    CreaRegions,
 	  /* delete_regions */  _XdInheritDeleteRegions,
 	  /* read	*/	Read,
-	  /* write	*/	Write,
+	  /* write	*/	(void *)Write,
 	  /* get_size   */      GetSize,
 	  /* modify     */      Modify,
 	  /* copy       */      Copy,
@@ -686,7 +691,7 @@ for(i=0; i<dr->xdgroup.num_draget; i++)
 /*
  il nome della classe corrisponde con la tag usata nel file
 */
-        	drf=XdCreateDraget(wid,XdTagToClass(buf),gc,gc_bg);
+        	drf=XdCreateDraget((Draget)wid,(DragetClass)XdTagToClass(buf),gc,gc_bg);
 /*
 richiama il metodo per la lettura dei parametri dell'oggetto
 */
@@ -753,7 +758,7 @@ while((drf=ListDragetNext(dr->xdgroup.dr_list)) != NULL)
 /*
  Crea il duplicato dei figli
 */
-	drfnew=XdCreateDraget(wid,classf,drf->xdcore.gc,drf->xdcore.gc_bg);
+	drfnew=XdCreateDraget((Draget)wid,classf,drf->xdcore.gc,drf->xdcore.gc_bg);
 	classf->xdcore_class.copy(drf,drfnew);
 	drfnew->xdcore.selected= False;
         ListDragetAdd(dr_dest->xdgroup.dr_list,drfnew);
@@ -906,7 +911,7 @@ GC gc_bg;
 Draget dr;
 DragetClass class;
 class=(DragetClass)&xdGroupClassRec;
-dr = (Draget)XdCreateDraget(wid,class,gc,gc_bg);
+dr = (Draget)XdCreateDraget((Draget)wid,class,gc,gc_bg);
 return(dr);
 }
 
@@ -952,7 +957,7 @@ snap=list_dr_sel[0]->xdcore.step;
 /*
  Crea il draget vuoto
 */
-dr=(XdGroupDraget)XdCreateDraget(wid,class,NULL,NULL);
+dr=(XdGroupDraget)XdCreateDraget((Draget)wid,class,NULL,NULL);
 /*
  Alloca lo spazio necessario per contenere la lista
 */
@@ -982,7 +987,7 @@ for(i=0;i<num_selected; i++)
 		ListDeleteDraget(dr_lista,list_dr_sel[i]);
 		}
         }
-XtFree(list_dr_sel);
+XtFree((char*)list_dr_sel);
 /*
  Crea le regions di selezione, move e resize
 */
@@ -1048,10 +1053,10 @@ if(XtIsRealized(dr_group->xdcore.wid))
 /*
  Elimina dalla lista il gruppo
 */
-ListDeleteDraget(dr_lista,dr_group);
+ListDeleteDraget(dr_lista,(Draget)dr_group);
 class->xdcore_class.destroy(dr_group);
 class->xdcore_class.delete_regions(dr_group);
-XtFree(dr_group);
+XtFree((char*)dr_group);
 }
 
 
@@ -1065,7 +1070,7 @@ DragetClass class;
 int iret,i;
 Region select_region;
 short delta=4;
-class=XdClass(dr);
+class=XdClass((Draget)dr);
 z = class->xdcore_class.zoom;
 if(z>= 0.5) delta *= z;
 /*

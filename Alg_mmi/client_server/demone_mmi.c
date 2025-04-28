@@ -69,7 +69,7 @@ void fineFIGLIO();                  /* gestione dello stop di un processo server
 
 int offset_daemon=0 ;    /* offset per porta e msg con server */
 
-main(argc,argv)
+int main(argc,argv)
 int argc;
 char **argv;
 {
@@ -193,7 +193,7 @@ char buffer_pwd[FILENAME_MAX];
  la coppia client-server
 */
 memset((char*)&client,0,sizeof(client));
-if((newsd=accept(fp,&client,&size_info_client)) == -1)
+if((newsd=accept(fp,(struct sockaddr * restrict)&client,&size_info_client)) == -1)
 	{
 	perror("demone_mmi: scoda_comendi ");
 	errore("accept in scoda_comandi"); 
@@ -362,7 +362,7 @@ char *task_envp[4];
 pid_t pid_server;
 int id_msg;
 MSG_DEMONE_PORT messaggio_porta;
-static prog_server = 0;
+static int prog_server = 0;
 int kk;
 
 

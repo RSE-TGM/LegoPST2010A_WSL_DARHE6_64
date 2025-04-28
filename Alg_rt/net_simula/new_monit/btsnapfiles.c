@@ -60,6 +60,8 @@ extern int size_blocco_bktk;
 extern Widget areaMessaggi;
 extern Widget masterMenu;
 extern int stato_sim;
+
+extern  int   ind_modello (char *, int, VARIABILI *);
 /********************************************************************/
 /*
  * Legge il valore della variabile puntata da p e n e la restituisce in 

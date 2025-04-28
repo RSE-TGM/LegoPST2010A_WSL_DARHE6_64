@@ -58,6 +58,14 @@ static void GetSize();
 static void Modify();
 static void CreaRegions();
 static void Copy();
+
+static void draw_poli_off(XdPoliDraget, GC, int,int);
+static void draw_poli(XdPoliDraget);
+
+
+
+
+
 #ifdef XPRINTER_USED
 static void Print();
 #endif
@@ -85,13 +93,13 @@ XdPoliClassRec xdPoliClassRec = {
 	  /* first_point */	FirstPoint,
 	  /* last_point  */	LastPoint,
 	  /* first_draw  */     FirstDraw,
-          /* pick       */ 	_XdInheritPick,
-	  /* select     */	_XdInheritSelect,
+          /* pick       */ 	(void*)_XdInheritPick,
+	  /* select     */	(void*)_XdInheritSelect,
 	  /* clear      */      Clear,
 	  /* crea_regions */    CreaRegions,
 	  /* delete_regions */  _XdInheritDeleteRegions,
 	  /* read	*/	Read,
-	  /* write	*/	Write,
+	  /* write	*/	(void*)Write,
 	  /* get_size   */      GetSize,
           /* modify     */      Modify,
           /* copy       */      Copy,
@@ -124,7 +132,7 @@ XdPoliDraget dr;
 dr=(XdPoliDraget)dra;
 dr->xdcore.managed= False; /* impedisce che venga effettuato
 			il redraw su oggetto in cancellazione */
-XtFree(dr->xdpoli.points);
+XtFree((char*)dr->xdpoli.points);
 }
 
 /*
@@ -433,7 +441,7 @@ if(dr->xdpoli.npoints &&
 	}
 
 dr->xdpoli.npoints++;
-dr->xdpoli.points=(XPoint *)XtRealloc(dr->xdpoli.points, 
+dr->xdpoli.points=(XPoint *)XtRealloc((char*)dr->xdpoli.points, 
 			dr->xdpoli.npoints*sizeof(XPoint));
 /*
  Inserisce nel vettore dei punti quello appena allocato
@@ -482,7 +490,7 @@ if(dr->xdpoli.npoints > 1 &&
 else  /* inserisce l'ultimo punto */
 	{
 	dr->xdpoli.npoints++;
-	dr->xdpoli.points=(XPoint *)XtRealloc(dr->xdpoli.points, 
+	dr->xdpoli.points=(XPoint *)XtRealloc((char*)dr->xdpoli.points, 
 			dr->xdpoli.npoints*sizeof(XPoint));
 /*
  Inserisce nel vettore dei punti quello appena allocato
@@ -760,7 +768,7 @@ GC gc_bg;
 Draget dr;
 DragetClass class;
 class=(DragetClass)&xdPoliClassRec;
-return(XdCreateDraget(wid,class,gc,gc_bg));
+return(XdCreateDraget((Draget)wid,class,gc,gc_bg));
 }
 
 
@@ -773,7 +781,7 @@ DragetClass class;
 int iret,i;
 Region select_region;
 short delta=4;
-class=XdClass(dr);
+class=XdClass((Draget)dr);
 z = class->xdcore_class.zoom;
 if(z>= 0.5) delta *= z;
 /*
@@ -821,14 +829,14 @@ for(i=0; i< (dr->xdpoli.npoints); i++)
                 dr->xdcore.select_region);
 }
 
-draw_poli(dr)
+void draw_poli(dr)
 XdPoliDraget dr;
 {
 DragetClass class;
 int i;
 float z;
 XPoint *points;
-class=XdClass(dr);
+class=XdClass((Draget)dr);
 z = class->xdcore_class.zoom;
 if(z==1)
 	{
@@ -863,7 +871,7 @@ else
 	}
 }
 
-draw_poli_off(dr, drawGC, offx,offy)
+void draw_poli_off(dr, drawGC, offx,offy)
 XdPoliDraget dr;
 GC drawGC;
 int offx,offy;
@@ -872,7 +880,7 @@ float z;
 int i;
 XPoint *points;
 DragetClass class;
-class= XdClass(dr);
+class= XdClass((Draget)dr);
 z = class->xdcore_class.zoom;
 points=(XPoint *)XtCalloc(dr->xdpoli.npoints, 
 					sizeof(XPoint));
@@ -890,7 +898,7 @@ if(dr->xdcore.filled)
 XDrawLines(XtDisplay(dr->xdcore.wid), XtWindow(dr->xdcore.wid),
                 drawGC,points, dr->xdpoli.npoints,
 		CoordModeOrigin);
-XtFree(points);
+XtFree((char*)points);
 }
 
 

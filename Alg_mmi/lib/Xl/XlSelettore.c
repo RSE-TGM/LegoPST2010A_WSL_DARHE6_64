@@ -637,6 +637,7 @@ Widget w;
 FILE *fp;
 {
 printf("\n richiamato metodo di read selettore");
+return(True);
 }
 
 static Boolean Write(w,fp)
@@ -644,6 +645,7 @@ Widget w;
 FILE *fp;
 {
 printf("\n richiamato metodo di write selettore");
+return(True);
 }
 
 static min(a,b)

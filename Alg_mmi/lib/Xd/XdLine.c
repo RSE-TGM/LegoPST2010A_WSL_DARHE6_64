@@ -85,13 +85,13 @@ XdLineClassRec xdLineClassRec = {
 	  /* first_point */	FirstPoint,
 	  /* last_point  */	LastPoint,
 	  /* first_draw  */     FirstDraw,
-          /* pick       */ 	_XdInheritPick,
-	  /* select     */	_XdInheritSelect,
+          /* pick       */ 	(void *)_XdInheritPick,
+	  /* select     */	(void *)_XdInheritSelect,
 	  /* clear      */      Clear,
 	  /* crea_regions */    CreaRegions,
 	  /* delete_regions */  _XdInheritDeleteRegions,
 	  /* read	*/	Read,
-	  /* write	*/	Write,
+	  /* write	*/	(void *)Write,
 	  /* get_size   */      GetSize,
           /* modify     */      Modify,
 	  /* copy       */	Copy,
@@ -699,7 +699,7 @@ GC gc_bg;
 Draget dr;
 DragetClass class;
 class=(DragetClass)&xdLineClassRec;
-return(XdCreateDraget(wid,class,gc,gc_bg));
+return(XdCreateDraget((Draget)wid,class,gc,gc_bg));
 }
 
 
@@ -712,7 +712,7 @@ DragetClass class;
 int iret;
 Region select_region;
 short delta=4;
-class=XdClass(dr);
+class=XdClass((Draget)dr);
 z = class->xdcore_class.zoom;
 /*
 if(z>= 0.5) delta *= z;

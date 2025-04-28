@@ -713,5 +713,5 @@ Boolean GetResPaginaDb(PAGINA *,XrmDatabase , Boolean);
 
 
 void testata(char *, char *);
-
+void XlErrComp(char* ,char *,char *,char *);
 /* fine config.h */

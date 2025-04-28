@@ -18,6 +18,7 @@ static char *_csrc = "@(#) %filespec: OlTree.c-16 %  (%full_filespec: OlTree.c-1
 #include "sdi_conf.h" /* Per maschere gestione allarmi */
 
 #include <Ol/OlTreeP.h>
+#include <X11/Intrinsic.h>
 
 /* funzioni di utilita' */
 Boolean hier_to_calc(char *,char *);
@@ -324,7 +325,7 @@ assert(pagina_fittizia);
 assert(root);
 curr_node=root;
 if(curr_node==NULL)
-	return;
+	return(False);
 curr_child=(OlTreeObject)curr_node->oltree.p_child;
 
 if(curr_child!=NULL)

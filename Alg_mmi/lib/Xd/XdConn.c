@@ -59,6 +59,14 @@ static void GetSize();
 static void Modify();
 static void CreaRegions();
 static void Copy();
+
+static void draw_conn_off(XdConnDraget, GC, int,int);
+static void draw_conn(XdConnDraget);
+static void DisegnaCroce(Display *,Drawable,GC,int,int);
+
+
+
+
 #ifdef XPRINTER_USED
 static void Print();
 #endif
@@ -86,13 +94,13 @@ XdConnClassRec xdConnClassRec = {
 	  /* first_point */	FirstPoint,
 	  /* last_point  */	LastPoint,
 	  /* first_draw  */     FirstDraw,
-          /* pick       */ 	_XdInheritPick,
-	  /* select     */	_XdInheritSelect,
+          /* pick       */ 	(void*)_XdInheritPick,
+	  /* select     */	(void*)_XdInheritSelect,
 	  /* clear      */      Clear,
 	  /* crea_regions */    CreaRegions,
 	  /* delete_regions */  _XdInheritDeleteRegions,
 	  /* read	*/	Read,
-	  /* write	*/	Write,
+	  /* write	*/	(void*)Write,
 	  /* get_size   */      GetSize,
           /* modify     */      Modify,
           /* Copy       */      Copy,
@@ -140,7 +148,7 @@ if(*xdConnClassRec.xdconn_class.deleteConn != NULL)
 	(int)(dr->xdconn.points[0].x*z),(int)(dr->xdconn.points[0].y*z),
 	(int)(dr->xdconn.points[last].x*z),(int)(dr->xdconn.points[last].y*z));
 	}
-XtFree(dr->xdconn.points);
+XtFree((char*)dr->xdconn.points);
 /********
 XtReleaseGC(dr->xdcore.wid,dr->xdcore.gc);
 XtReleaseGC(dr->xdcore.wid,dr->xdcore.gc_bg);
@@ -174,7 +182,7 @@ npunto=dr->xdcore.num_resize;
  In corrispondenza dei punti estremi non si effettua il resize
 */
 if(npunto == 0 || npunto == (dr->xdconn.npoints-1))
-	return;
+	return(True);
 npunto_prec= npunto-1;
 npunto_succ= npunto+1;
 
@@ -227,7 +235,7 @@ npunto=dr->xdcore.num_resize;
  In corrispondenza dei punti estremi non si effettua il resize
 */
 if(npunto == 0 || npunto == (dr->xdconn.npoints-1))
-	return;
+	return(True);
 z = class->xdcore_class.zoom;
 /*
  se non e' stato eseguito alcun movimento esce subito
@@ -281,7 +289,7 @@ int xfix,yfix;
 Display *display;
 XdConnDraget dr;
 DragetClass class;
-return;
+// return;     GUAG2025 perchè c'era return???? lo commento
 class=XdClass(dra);
 z = class->xdcore_class.zoom;
 dr=(XdConnDraget)dra;
@@ -422,7 +430,8 @@ XSetRegion(display,class->xdcore_class.gcsel,region);
 XSetRegion(display,dr->xdcore.gc_bg,region);
 
 fine clipping **********/
-draw_conn(dr,dr->xdcore.gc);
+//draw_conn(dr,dr->xdcore.gc);
+draw_conn(dr);  //forse è così?  GUAG2025
 
 /*
  Se l'oggetto e' nello stato selezionato disegna i rettangolini
@@ -492,7 +501,7 @@ if(dr->xdconn.npoints > 0)
 	     (int)(z*dr->xdcore.y));
     }
 dr->xdconn.npoints++;
-dr->xdconn.points=(XPoint *)XtRealloc(dr->xdconn.points, 
+dr->xdconn.points=(XPoint *)XtRealloc((char *)dr->xdconn.points, 
 			dr->xdconn.npoints*sizeof(XPoint));
 /*
  Inserisce nel vettore dei punti quello appena allocato
@@ -553,7 +562,7 @@ if(dr->xdconn.npoints > 1 &&
 else  /* inserisce l'ultimo punto */
 	{
 	dr->xdconn.npoints++;
-	dr->xdconn.points=(XPoint *)XtRealloc(dr->xdconn.points, 
+	dr->xdconn.points=(XPoint *)XtRealloc((char *)dr->xdconn.points, 
 			dr->xdconn.npoints*sizeof(XPoint));
 /*
  Inserisce nel vettore dei punti quello appena allocato
@@ -599,7 +608,7 @@ XEvent *ev;
 {
 Boolean bWarp;
 int deltax,deltay;
-static direz;
+static int direz;
 Display *display;
 XdConnDraget dr;
 float z;
@@ -919,7 +928,7 @@ GC gc_bg;
 Draget dr;
 DragetClass class;
 class=(DragetClass)&xdConnClassRec;
-return(XdCreateDraget(wid,class,gc,gc_bg));
+return(XdCreateDraget((Draget)wid,class,gc,gc_bg));
 }
 
 
@@ -932,7 +941,7 @@ DragetClass class;
 int iret,i;
 Region select_region;
 short delta=4;
-class=XdClass(dr);
+class=XdClass((Draget)dr);
 z = class->xdcore_class.zoom;
 if(z>= 0.5) delta *= z;
 /*
@@ -980,14 +989,14 @@ for(i=0; i< (dr->xdconn.npoints); i++)
                 dr->xdcore.select_region);
 }
 
-draw_conn(dr)
+void draw_conn(dr)
 XdConnDraget dr;
 {
 DragetClass class;
 int i;
 float z;
 XPoint *points;
-class=XdClass(dr);
+class=XdClass((Draget)dr);
 z = class->xdcore_class.zoom;
 if(z==1)
 	{
@@ -1022,7 +1031,7 @@ else
 	}
 }
 
-draw_conn_off(dr, drawGC, offx,offy)
+void draw_conn_off(dr, drawGC, offx,offy)
 XdConnDraget dr;
 GC drawGC;
 int offx,offy;
@@ -1031,7 +1040,7 @@ float z;
 int i;
 XPoint *points;
 DragetClass class;
-class= XdClass(dr);
+class= XdClass((Draget)dr);
 z = class->xdcore_class.zoom;
 points=(XPoint *)XtCalloc(dr->xdconn.npoints, 
 					sizeof(XPoint));
@@ -1049,11 +1058,11 @@ if(dr->xdcore.filled)
 XDrawLines(XtDisplay(dr->xdcore.wid), XtWindow(dr->xdcore.wid),
                 drawGC,points, dr->xdconn.npoints,
 		CoordModeOrigin);
-XtFree(points);
+XtFree((char*)points);
 }
 
 
-DisegnaCroce(display,win,gc,x,y)
+void DisegnaCroce(display,win,gc,x,y)
 Display *display;
 Drawable win;
 GC gc;

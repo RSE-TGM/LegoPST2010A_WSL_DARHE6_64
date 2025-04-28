@@ -399,7 +399,7 @@ int send_mmi_ret_ack(int ,int );
 int tab_piena(TAB_SHARED *);
 
 
-#if defined SCADA_MMI
+//#if defined SCADA_MMI
 int CsPrepMsgTrendReq(int, int,char *, int ,char *,int ,
 		 char *,char *,char *,char *);
 
@@ -410,7 +410,7 @@ int CsRcvMsgSimIDAck(int ,int *);
 int CsPrepMsgSimIDAck(int ,int  );
 
 
-#endif
+//#endif
 int CsPrepMsgAllCommand(int , int ,int );
 int CsPrepMsgAllReq(int , int *zone,int );
 int CsRcvMsgAllReq(int ,MSG_ALL_REQ_MMI *);

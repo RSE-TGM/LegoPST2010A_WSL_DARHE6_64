@@ -14,7 +14,7 @@
    data 2/14/96
    reserved @(#)sim_types.h	5.2
 */
-
+#include "sim_param.h"
 #ifndef _sim_types_h_
 #define _sim_types_h_
 
@@ -778,6 +778,13 @@ int SD_editic (int , SNTAB *, int , int );
 
 int converti_tempo(float,long  *,long  *,long  *,long  *,long  *,long  *);
 
+char *crea_shrmem(int,int,int*);
+int sgancia_shrmem(char *);
+int stato_processo();
+int CsPrepMsgDel(int , int );
+int nega(float);
+int CsPrepMsgS(char *, int , int , int , int tipo, int , int );
+int     msgesist (int);
 
 
 

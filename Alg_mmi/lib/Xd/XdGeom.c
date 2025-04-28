@@ -34,6 +34,7 @@ static char SccsID[] = "@(#)XdGeom.c	5.1\t11/13/95";
 #include <stdlib.h>
 #include <math.h>
 #include <Rt/RtMemory.h>
+#include "libutilx.h"
 
 Region RegionIntorno(Position,Position,float);
 Region RegionIntorno(Position x,Position y,float z)

@@ -31,6 +31,8 @@ static char SccsID[] = "@(#)OlDatabaseTopologia.c	5.3\t3/6/96";
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <Xl/XlResources.h>
 #include <Xl/XlGraficoP.h>
 
@@ -50,6 +52,11 @@ static char SccsID[] = "@(#)OlDatabaseTopologia.c	5.3\t3/6/96";
 
 char   *nome_modello (char *, int);
 char *sim_shvar(int,int);
+extern int   ind_modello (char *, int, VARIABILI *);
+extern int   numero_modello (char*, int, char*);
+extern 	char   *nome_blocco (char*, int, int);
+extern int  numero_blocco(char *ind, int nmod, char *nome);
+
 
 
 
@@ -537,7 +544,7 @@ return(nvar);
 /*
 	ritorna il massimo fra i due valori
 */
-static int max(a,b)
+static int max(int a,int b)
 {
 if(a>b)
 	return(a);

@@ -49,6 +49,7 @@ static char SccsID[] = "@(#)OlForm.c	5.1\t11/13/95";
 # include "vmsipc.h"
 #endif
 # include <forme.h>
+#include "utile.h"
 
 /* dichiarazioni funzioni varie */
 static Boolean IsFormAllocated(); /* verifica se la form e' allocata */
@@ -166,7 +167,7 @@ else
  OlGetNumForms
  Restituisce il numero delle form dell'oggetto.
 */
-OlGetNumForms(OlFormObject form)
+int OlGetNumForms(OlFormObject form)
 {
 return(olFormClassRec.olform_class.get_num_forms(form));
 }
@@ -177,7 +178,7 @@ return(olFormClassRec.olform_class.get_num_forms(form));
  Restituisce il numero delle linee della form -ind- 
  dell'oggetto.
 */
-OlGetNumLines(OlFormObject form, int ind)
+int OlGetNumLines(OlFormObject form, int ind)
 {
 return(olFormClassRec.olform_class.get_num_lines(form,ind));
 }
@@ -189,7 +190,7 @@ return(olFormClassRec.olform_class.get_num_lines(form,ind));
  Restituisce il numero delle tags della form -ind- 
  dell'oggetto.
 */
-OlGetNumTags(OlFormObject form, int ind)
+int OlGetNumTags(OlFormObject form, int ind)
 {
 return(olFormClassRec.olform_class.get_num_tags(form,ind));
 }
@@ -883,7 +884,12 @@ return(True);
 
 /* ============================================ */
 
-
+Boolean out_close(char *stringa,FILE *file_point,int num)\
+                  {fprintf(stderr,\
+                   "La linea del file non riconosciuta corrisponde a:\
+                    \n<%s>\nLinea numero <%d>\n",stringa,num);\
+                    fclose(file_point);\
+                    return(False);}
 
 /*
  Read
@@ -994,7 +1000,7 @@ char *ret;
            break;
        if(eofile==EOF)
           {
-          close(fp);
+          fclose(fp);
           return(eofile);
           }
        eofile = fscanf(fp,"%s",str);

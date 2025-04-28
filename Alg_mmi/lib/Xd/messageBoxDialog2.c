@@ -36,6 +36,7 @@
 
 #include <Xm/Xm.h>
 #include "message.h"
+#include "libutilx.h"
 
 
 /*******************************************************************************
@@ -130,7 +131,7 @@ Boolean ConfiguraDialogo(MESSAGGI mes)
    return(True);
 }
 
-SetMsg(swidget WParent,int id,int err_level,char *shtitle,char *msg,char *lOk,Boolean Cancel,char *lCancel,Boolean Help,char *lHelp)
+void SetMsg(swidget WParent,int id,int err_level,char *shtitle,char *msg,char *lOk,Boolean Cancel,char *lCancel,Boolean Help,char *lHelp)
 {
    swidget ShMsg;
    MESSAGGI mesg;

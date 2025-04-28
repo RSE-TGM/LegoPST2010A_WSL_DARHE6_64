@@ -36,6 +36,8 @@ return(l_undo);
 
 }
 
+extern Boolean XdDestroyListaUndoLast(XdLista);
+
 
 /*********************************************************************/
 /*                                                                   */
@@ -59,7 +61,7 @@ int i;
       if(l_undo->ListeUndo==NULL)
          l_undo->ListeUndo=(XdLista)XtMalloc(sizeof(XdListaRec));
       else
-         l_undo->ListeUndo=(XdLista)XtRealloc(l_undo->ListeUndo,sizeof(XdListaRec)*l_undo->num_liste);
+         l_undo->ListeUndo=(XdLista)XtRealloc((char*)l_undo->ListeUndo,sizeof(XdListaRec)*l_undo->num_liste);
    }
 
 /*
@@ -120,7 +122,7 @@ int i;
          XtFree(l_undo->ListeUndo[(l_undo->num_liste-i-1)]);
 */
    }
-   XtFree(l_undo->ListeUndo);
-   XtFree(l_undo);
+   XtFree((char*)l_undo->ListeUndo);
+   XtFree((char*)l_undo);
 
 }

@@ -31,9 +31,13 @@ DEPEND=$(LEGOROOT)/install/makedepend
 CFLAGSINCL= -I$(LEGOROOT_INCLUDE) -I$(LEGORT_INCLUDE) -I$(LEGOMMI_INCLUDE) $(X_INCLUDE) -I$(LEGOMMI_LIB) -I$(LEGOROOT_LIB)
 CFLAGS = $(C_FLAGS) $(CFLAGSINCL) -D$(OS) $(VERSIONE)
 
-SORGENTI = XdUtil.c XdGeom.c XdCore.c XdLine.c XdRect.c XdCircle.c XdLista.c XdPoli.c XdConn.c XdGroup.c XdUndo.c messageBoxDialog2.c
+# GUAG2025 Tolgo messageBoxDialog2 per il problema del UxNewContext
+#SORGENTI = XdUtil.c XdGeom.c XdCore.c XdLine.c XdRect.c XdCircle.c XdLista.c XdPoli.c XdConn.c XdGroup.c XdUndo.c messageBoxDialog2.c
+#OGGETTI  = XdUtil.o XdGeom.o XdCore.o XdLine.o XdRect.o XdCircle.o XdLista.o XdPoli.o XdConn.o XdGroup.o XdUndo.o messageBoxDialog2.o
+SORGENTI = XdUtil.c XdGeom.c XdCore.c XdLine.c XdRect.c XdCircle.c XdLista.c XdPoli.c XdConn.c XdGroup.c XdUndo.c 
+OGGETTI  = XdUtil.o XdGeom.o XdCore.o XdLine.o XdRect.o XdCircle.o XdLista.o XdPoli.o XdConn.o XdGroup.o XdUndo.o 
 
-OGGETTI  = XdUtil.o XdGeom.o XdCore.o XdLine.o XdRect.o XdCircle.o XdLista.o XdPoli.o XdConn.o XdGroup.o XdUndo.o messageBoxDialog2.o
+
 
 all:  $(LEGOMMI_LIB)/libXd.a
 

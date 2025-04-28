@@ -35,6 +35,7 @@ static char SccsID[] = "@(#)OlConn.c	5.4\t2/16/96";
 #include <stdlib.h>
 #include <math.h>
 #include <Ol/OlConnP.h>
+#include "utile.h"
 
 
 /* dichiarazioni funzioni varie */

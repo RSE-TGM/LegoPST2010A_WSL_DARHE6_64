@@ -1073,6 +1073,7 @@ Widget w;
 FILE *fp;
 {
 printf("\n richiamato metodo di read composite");
+return(True);
 }
 
 static Boolean Write(w,fp)
@@ -1080,6 +1081,7 @@ Widget w;
 FILE *fp;
 {
 printf("\n richiamato metodo di write composite");
+return(True);
 }
 
 

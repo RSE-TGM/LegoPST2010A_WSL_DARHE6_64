@@ -67,6 +67,7 @@ extern void assign_name();
 extern swidget topLevelShell;
 
 static Boolean CreoNuovaInterfaccia();
+extern  void draw_conn(XdConnDraget);
 
 /*
 	oggetto OlConn per la gestione delle connessioni di

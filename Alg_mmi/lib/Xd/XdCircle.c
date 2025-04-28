@@ -59,6 +59,8 @@ static void GetSize();
 static void Modify();
 static void CreaRegions();
 static void Copy();
+
+
 #ifdef XPRINTER_USED
 static void Print();
 #endif
@@ -68,6 +70,12 @@ static void Print();
 static void draw_arc();
 static void draw_arc_first();
 static void draw_circle();
+extern Region RegionRectIntorno(Position,Position,Position,Position,float);
+static void   get_real_limits(XdCircleDraget,int*,int*,int*,int*);
+static void   get_circle_coord(XdCircleDraget,int*,int*,int*,int*);
+
+static void get_first_arc_coord(int,int,int,int,int*,int*,int*,int*,int*,int*);
+ 
 /*
  Inizializzazione del class record
 */
@@ -91,13 +99,13 @@ XdCircleClassRec xdCircleClassRec = {
 	  /* first_point */	FirstPoint,
 	  /* last_point  */	LastPoint,
 	  /* first_draw  */     FirstDraw,
-          /* pick       */ 	_XdInheritPick,
-	  /* select     */	_XdInheritSelect,
+          /* pick       */ 	(void *)_XdInheritPick,
+	  /* select     */	(void *)_XdInheritSelect,
 	  /* clear      */      Clear,
 	  /* crea_regions */    CreaRegions,
 	  /* delete_regions */  _XdInheritDeleteRegions,
 	  /* read	*/	Read,
-	  /* write	*/	Write,
+	  /* write	*/	(void *)Write,
 	  /* get_size   */      GetSize,
 	  /* modify     */      Modify,
 	  /* copy       */      Copy,
@@ -809,9 +817,9 @@ GC gc_bg;
 XdCircleDraget dr;
 DragetClass class;
 class=(DragetClass)&xdCircleClassRec;
-dr=(XdCircleDraget)XdCreateDraget(wid,class,gc,gc_bg);
+dr=(XdCircleDraget)XdCreateDraget((Draget)wid,class,gc,gc_bg);
 dr->xdcircle.type= XD_TY_CIRCLE;
-return(dr);
+return((Draget)dr);
 }
 
 Draget XdCreateArcDraget(wid, gc, gc_bg)
@@ -822,9 +830,9 @@ GC gc_bg;
 XdCircleDraget dr;
 DragetClass class;
 class=(DragetClass)&xdCircleClassRec;
-dr=(XdCircleDraget)XdCreateDraget(wid,class,gc,gc_bg);
+dr=(XdCircleDraget)XdCreateDraget((Draget)wid,class,gc,gc_bg);
 dr->xdcircle.type= XD_TY_ARC;
-return(dr);
+return((Draget)dr);
 }
 
 
@@ -838,7 +846,7 @@ DragetClass class;
 int iret;
 Region select_region;
 short delta=4;
-class=XdClass(dr);
+class=XdClass((Draget)dr);
 z = class->xdcore_class.zoom;
 if(z>= 0.5) delta *= z;
 /*
@@ -955,7 +963,7 @@ static void draw_arc(dr, drawGC,filled, x1, y1, x2, y2, a1, a2)
  Calcola i limiti reali dell'arco tenendo conto che occupa solo
  una parte dello spazio occupato dal cerchio 
 */
-get_real_limits(dr,xmin,ymin,xmax,ymax)
+void get_real_limits(dr,xmin,ymin,xmax,ymax)
 XdCircleDraget dr;
 int *xmin, *ymin, *xmax, *ymax;
 {
@@ -1006,7 +1014,7 @@ else if(dr->xdcircle.a1 == (270 *64) && dr->xdcircle.a2 == (90*64))
  calcola i limite del cerchio in base ai punti estremi dell'arco
 */
 
-get_circle_coord(dr, xmin,ymin,xmax,ymax)
+void get_circle_coord(dr, xmin,ymin,xmax,ymax)
 XdCircleDraget dr;
 int *xmin, *ymin, *xmax, *ymax;
 {
@@ -1047,7 +1055,7 @@ else if(dr->xdcircle.a1 == (270 *64) && dr->xdcircle.a2 == (90*64))
 
 
 
-get_first_arc_coord(x1,y1,x2,y2,topx,topy,width,height,a1,a2)
+void get_first_arc_coord(x1,y1,x2,y2,topx,topy,width,height,a1,a2)
 int x1,y1,x2,y2;
 int *topx,*topy,*width,*height,*a1,*a2;
 {

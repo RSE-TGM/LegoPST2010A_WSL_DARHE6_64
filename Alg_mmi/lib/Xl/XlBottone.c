@@ -1006,6 +1006,7 @@ Widget w;
 FILE *fp;
 {
 printf("\n richiamato metodo di read bottone");
+return(True);
 }
 
 static Boolean Write(w,fp)
@@ -1013,6 +1014,7 @@ Widget w;
 FILE *fp;
 {
 printf("\n richiamato metodo di write bottone");
+return (True);
 }
 
 int min(a,b)

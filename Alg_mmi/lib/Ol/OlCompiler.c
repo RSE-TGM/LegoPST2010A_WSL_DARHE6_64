@@ -40,8 +40,15 @@ static char SccsID[] = "@(#)OlCompiler.c	5.2\t2/5/96";
 #include <Xl/XlCoreP.h>
 #include <Xl/XlManagerP.h>
 #include <Xl/XlPort.h>
-
+#include <Xl/XlIconReg.h>
+#include <Xl/XlDispReg.h>
 #include <Ol/OlCompilerP.h>
+
+
+void XlErrComp(char* ,char *,char *,char *);
+
+#include "libutilx.h"
+#include "utile.h"
 
 /*
 	define per l'accesso al database; il nome dell'oggetto compilatore
@@ -78,6 +85,8 @@ static XlResources resources[]= {
 /* dichiarazione di procedure varie */
 static void separa_str();
 static Boolean controlla_confinfo();
+static int exec_dbmftc(char*,char*);
+
 
 /* typedef per separa_str() */
 typedef struct {
@@ -321,7 +330,7 @@ printf("CompileConfinfo DEBUG: tag_dbm = #%s#\n", tag_dbm);
 */
          if(!CompileVar (compilatore,tag_dbm,&(varinp.pdb), confinfo[i].confinfo_type))
             {
-               XlErrComp(w,"CompileConfinfo","Input tag sostituita per regolazione not found",tag_dbm);
+               XlErrComp((char*)w,"CompileConfinfo","Input tag sostituita per regolazione not found",tag_dbm);
                varout.pdb.nmod= -1;
                varout.pdb.indice= -1;
                varout.pdb.tipo= -1;
@@ -336,22 +345,22 @@ printf("CompileConfinfo DEBUG: tag_dbm = #%s#\n", tag_dbm);
             }
          break;
       case 1:
-         XlErrComp(w,"CompileConfinfo","External program input parameter error","dbmftc2");
+         XlErrComp((char*)w,"CompileConfinfo","External program input parameter error","dbmftc2");
          ret=False;
          break;
       case 2:
-         XlErrComp(w,"CompileConfinfo","Database not found","REG_INT_CONN_DB");
+         XlErrComp((char*)w,"CompileConfinfo","Database not found","REG_INT_CONN_DB");
          ret=False;
          break;
       case 3:
 /*
 printf("CompileConfinfo DEBUG: sono in case 3\n");
 */
-         XlErrComp(w,"CompileConfinfo","Input tag not found",strin[0].stringa);
+         XlErrComp((char*)w,"CompileConfinfo","Input tag not found",strin[0].stringa);
          ret=False;
          break;
       case -1:
-         XlErrComp(w,"CompileConfinfo","External program not found","dbmftc2");
+         XlErrComp((char*)w,"CompileConfinfo","External program not found","dbmftc2");
          ret=False;
          break;
    }
@@ -359,7 +368,7 @@ printf("CompileConfinfo DEBUG: sono in case 3\n");
 }
 else
 {
-		  XlErrComp(w,"CompileConfinfo","Input tag not found",strin[0].stringa);
+		  XlErrComp((char*)w,"CompileConfinfo","Input tag not found",strin[0].stringa);
                   if( SCADA_DEBUG && (varinp.pdb.origin==SCADAID))
                   {
                      CompileVar (compilatore," ",&(varinp.pdb), confinfo[i].confinfo_type);
@@ -489,7 +498,7 @@ else
 		varout.tipo_pert= -1;
 	     if(varout.tipo_pert == -2)
 		{
-		XlErrComp(w,"CompileConfinfo","Pert not found",strin[3].stringa);
+		XlErrComp((char*)w,"CompileConfinfo","Pert not found",strin[3].stringa);
 		ret=False;
 		varout.tipo_pert= -1;
 		}
@@ -518,7 +527,7 @@ else
                if(!CompileVar(compilatore,strin[0].stringa,&(varout.pdb),
 			confinfo[i].confinfo_type))
                   {
-                  XlErrComp(w,"CompileConfinfo","Output tag not found",strin[0].stringa);
+                  XlErrComp((char*)w,"CompileConfinfo","Output tag not found",strin[0].stringa);
                   varout.pdb.nmod= -1;
                   varout.pdb.indice= -1;
                   varout.pdb.tipo= -1;
@@ -746,7 +755,7 @@ printf("separa_str DEBUG: strin[%d] = %s\n", i, strin[i].stringa);
 }
 
 
-exec_dbmftc(comando,tag_dbm)
+int exec_dbmftc(comando,tag_dbm)
 char *comando;
 char *tag_dbm;
 {
