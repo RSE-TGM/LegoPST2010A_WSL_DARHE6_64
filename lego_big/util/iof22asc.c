@@ -34,14 +34,14 @@ void leggi_testa_asc()
    int j;
    char stringa[101];
       f22 = fopen("f22.asc","r");
-      fgets( variabili_.titolo, 101, f22);
+      fgets( variabili_.titolo, 80, f22);
       fgets( stringa, 101, f22);
       variabili_.numvar = atoi(stringa);
       for (i=0; i<variabili_.numvar; i++)
       {
           fgets(variabili_.nomi_misure[i], 80, f22);
       }
-      fgets( variabili_.model, 101, f22);
+      fgets( variabili_.model, 8, f22);
       fgets( stringa, 101, f22);
       variabili_.numsimb = atoi(stringa);
       for (i=0; i<variabili_.numsimb; i++)

@@ -10,6 +10,7 @@
 #include <Xm/DialogS.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
+#include "libutilx.h"
 
 #include <Xm/MessageB.h>
 

@@ -92,3 +92,72 @@ typedef struct {
                } PROG_DATA;
 
 #endif
+
+void VisualizzaMessageBox (int ,Widget ,char *,Widget );
+int SettaModifica (Widget );
+void apply_gest_conn2(Widget);
+void SetSetMode(Widget);
+void apply_gest_conn2(Widget);
+void InterfaceSetPos (Widget ,Widget );
+Boolean NumIntVerifica(char *);
+PROG_DATA *EseguiNuovoBitmap (char *,char *,char *,Widget );
+Boolean CvtStrToPixel (Widget ,char *,Pixel *);
+int XlSetResourceByWidget(XrmDatabase *,Widget w,char *,char *);
+int UxNewClassId();
+int UxMethodRegister(int , char *, void (*) ());
+int	UxPutClassCode( Widget , int );
+void* UxMethodLookup(Widget , int , char*);
+
+extern  void *		UxNewContext();
+
+Boolean LoadBitmap(Widget , Pixmap *, char * , int , int );
+int XlSetResCompositeWidth(Widget,Dimension,XrmDatabase);
+void XlSetResCompositeHeight(Widget,Dimension,XrmDatabase);
+int EseguiLoadResources();
+void SettaBottoni (Boolean ,Widget );
+PROG_DATA *EseguiBitmap (char *,Widget );
+PROG_DATA *EseguiIcona (char *,Widget ,char *,Widget );
+XmString ControllaTipoVar (int ,Widget ,Widget );
+Boolean XlIsAnimateIcon (Widget );
+
+//char *WriteOutVariableString (OlDatabaseTopologiaObject,char*,char*,char*,char*);
+char *WriteOutVariableString ();
+
+//char *OlElencoModuli (OlDatabaseTopologiaObject, char *,char *componente);
+char *OlElencoModuli ();
+
+//char *OlGetModulFromComponent (OlDatabaseTopologiaObject ,char *);
+char *OlGetModulFromComponent ();
+
+char *FilterList (char *,char *);
+
+//char *OlElencoBlocchi (OlDatabaseTopologiaObject, char *,char *);
+char *OlElencoBlocchi ();
+
+char *BlocksFilterFromComponent (char *,char *);
+//char *OlGetBlocksFromSubSystem (OlDatabaseTopologiaObject , char *,char *);
+char *OlGetBlocksFromSubSystem ();
+int RicercaXmString (XmString *,XmString,int,int,int);
+void CaricaLista (Widget,char *,int,int);
+
+//char *OlGetDefVarCC (OlDatabaseTopologiaObject , char *, char *, char *);
+char *OlGetDefVarCC ();
+
+//int ActiveProgWithParameter ();
+int ActiveProgWithParameter (char * , ...);
+
+Boolean NumFloVerifica(char *);
+//char *OlGetBlockName (OlDatabaseTopologiaObject ,char *, char *);
+char *OlGetBlockName ();
+char *OlGetNameVar (Widget ,char *,int );
+
+#ifndef DEBUG_MALLOC
+void *RtRecord(void *punt);
+#endif
+
+void SettaErrore (Widget );
+int EComposite (Widget );
+Boolean is_tag_in_port(Widget , char *);
+void apply_gest_conn2(Widget);
+
+

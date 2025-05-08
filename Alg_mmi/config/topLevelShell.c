@@ -72,6 +72,10 @@
 */
 #include "libutilx.h"
 
+#ifndef DEBUG_MALLOC
+void *RtRecord(void *punt);
+#endif
+
 // XtAppContext CompileAppContext = NULL;
 extern XtAppContext CompileAppContext ;
 Display *CompileDisplay;
@@ -92,6 +96,7 @@ extern int gestMessageBox();   /* gestione conferma operazioni */
 extern int pagedit_context_init();
 extern char *OlEstrRegTaskName(char *, char *);
 extern  void *		UxNewContext();
+extern XdLista clip_get_lista();
 
 /* lista widget e indici pagine aperte 
 */
@@ -150,7 +155,7 @@ int clear_topLevel( );
 Boolean AlignResPageContext();
 void PrintAllPages();
 int CheckOlTree();
-extern int compile_all_pag();
+extern void compile_all_pag();
 extern int info_top_schemi();
 extern void SetItemString();
 extern OlDatabaseTopologiaObject OlCreateDatabaseTopologia(char *, char *, int , char *,char *,char *);

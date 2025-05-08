@@ -10,12 +10,19 @@
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
 
+#include <Xm/List.h>
 #include <Xm/SelectioB.h>
 #include <Xm/CascadeB.h>
 #include <Xm/PushB.h>
 #include <Xm/RowColumn.h>
 #include <Xm/MainW.h>
 #include <X11/Shell.h>
+#include <Xm/Text.h>
+#include <Xm/TextF.h> // <--- AGGIUNGI QUESTO HEADER
+
+
+#include "libutilx.h"
+#include "res_edit.h"
 
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:

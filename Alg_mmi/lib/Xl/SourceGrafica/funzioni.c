@@ -105,15 +105,16 @@ extern Widget create_selgr_dialog();
 extern Widget create_defumis_dialog();
 extern Widget create_dir_dialog();
 extern int read_22datGR(char,S_XLGRAFICO*);
-static void prep_str_timGR(float,float,Widget);
+ void prep_str_timGR(float,float,Widget);
 static int cerca_stringa(char*,char **);
 extern int rew_dati(S_XLGRAFICO *);
-static void set_scala_unica(S_XLGRAFICO *);
-static void formatta(char*,float);
-static void reverse_draw(int);
+ void set_scala_unica(S_XLGRAFICO *);
+ void formatta(char*,float);
+ void reverse_draw(int);
 extern int read_gruppi(int);
-static void crea_lista_umis();
-static void GetPuntXlGrafico (Widget);
+ void crea_lista_umis();
+ void GetPuntXlGrafico (Widget);
+extern void init_umis();
 
 
 
@@ -226,7 +227,7 @@ void timer_proc();
 void find_proc();
 void HC_proc();
 extern int cerca_umis(char*);
-static int init_application(void);
+ int init_application(void);
 extern  void open_path();
 extern int open_gruppi();
 
@@ -235,18 +236,18 @@ static int font_unit = 400;
 char *getenv();
 Widget  create_S_MAIN_WINDOW();
 int set_scala(int,S_XLGRAFICO *);
-static int set_ordinate(int,S_XLGRAFICO *);
-static void crea_sfondo(Widget,Dimension,Dimension);
-static int cerca_nome(char*);
+ int set_ordinate(int,S_XLGRAFICO *);
+ void crea_sfondo(Widget,Dimension,Dimension);
+ int cerca_nome(char*);
 extern  int converti_tempo(float,long  *,long  *,long  *,long  *,long  *,long  *);
-static void prep_draw(float,float,S_MIN_MAX *,Widget);
-static void draw_grid(Display*,Window,Position,Position);
-static int zoomed(XPoint,XPoint);
+ void prep_draw(float,float,S_MIN_MAX *,Widget);
+ void draw_grid(Display*,Window,Position,Position);
+ int zoomed(XPoint,XPoint);
 extern void agg_umis();
-static void free_lista_umis();
+ void free_lista_umis();
 extern void close_gruppi();
 extern int write_gruppo(int);
-extern  void set_min_max(S_DATI *,S_XLGRAFICO *);
+void set_min_max(S_DATI *,S_XLGRAFICO *);
 
 
 
@@ -3085,4 +3086,55 @@ for(i=0;i<num_umis;i++)
         {
         XtFree((char*)x_codumis[i]);
         }
+}
+
+/**********************************************************
+ *  set_min_max
+ *      aggiorna i valori di minimo e massimo per ogni variabile 
+ *      appartenente al record.
+ *		se il parametro passato come argomento e' =NULL inizializza
+ *      a valori estremi i valori di minimo e massimo.
+ **********************************************************/
+void set_min_max(rec,pXlGraf)
+S_DATI *rec;   /* record dati */
+S_XLGRAFICO *pXlGraf;
+{
+register int i;
+float delta;
+int variato;
+for(i=0;i<4;i++)
+  {
+  if(rec==NULL)
+    {
+    sg.var_min_max[i].max=(-1.0E-37);
+    sg.var_min_max[i].min=1.0E+38;
+    }
+  else
+    {
+    variato=0;
+    if(sg.var_min_max[i].min>rec->mis[sg.ind_mis[i]])
+      {
+      sg.var_min_max[i].min=rec->mis[sg.ind_mis[i]];
+      variato=1;
+      }
+
+    if(sg.var_min_max[i].max<rec->mis[sg.ind_mis[i]])
+      {
+      sg.var_min_max[i].max=rec->mis[sg.ind_mis[i]];
+      variato=1;
+      }
+
+    if(variato && (sg.var_min_max[i].max>=sg.var_min_max[i].min)
+          && (sg.var_min_max[i].max-sg.var_min_max[i].min)<=
+			(0.001*sg.var_min_max[i].max))
+      {
+      delta=sg.var_min_max[i].max * 0.001; 
+      if(delta <0.001)
+        delta=0.001;
+      sg.var_min_max[i].max+=delta;
+      sg.var_min_max[i].min-=delta;
+      }
+    }
+  }
+
 }

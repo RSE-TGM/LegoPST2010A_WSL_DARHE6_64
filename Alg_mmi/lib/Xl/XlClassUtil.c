@@ -145,7 +145,7 @@ WidgetClass XlGetClassWid(char *str_class_name)
    return(NULL);
 }
 
-XlRedisplay(Widget w)
+void XlRedisplay(Widget w)
 {
 XlCoreWidget cw= (XlCoreWidget)w;
 XlManagerWidget mw= (XlManagerWidget)w;

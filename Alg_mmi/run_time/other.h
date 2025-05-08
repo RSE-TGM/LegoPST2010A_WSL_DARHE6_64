@@ -243,8 +243,8 @@ void SalvaContextBin();
 Boolean CaricaContextBin();
 void AllocaColoriSfondo(Widget ,BCK_OBJ *);
 Boolean ActivatePlot(Widget,Widget , char *,Widget *);
-Boolean ActivateAing(Widget ,Widget , char *,Widget *);
-Boolean ActivateChangeVar(Widget ,Widget ,Widget *);
+   Boolean ActivateAing(Widget ,Widget , char *,Widget *);
+   Boolean ActivateChangeVar(Widget ,Widget ,Widget *);
 void ActivateVarAing(Widget *);
 void ActivateVarPlot(Widget *);
 int SettaIndicAing(Widget, char*,float,float);
@@ -253,11 +253,11 @@ Boolean PosMouse(Widget , int *, int *);
 Boolean CloseAllPages(AN_DISPLAY *, int);
 Boolean PaginaAperta(Widget , char* );
 int NumPagineAperte();
-Boolean CanOpenPage();
+   Boolean CanOpenPage();
 void CheckMmiStatus();
 void ripulisci_files();
 Boolean AcceptAing(Widget );
-Boolean AcceptPlot(Widget );
+   Boolean AcceptPlot(Widget );
 int SettaGrafPlot(Widget, char*,float,float);
 void WriteDbPlot();
 void WriteDbAing();
@@ -266,5 +266,18 @@ Boolean RaisePlotAing();
 Boolean CanClosePage(char *);
 
 **********************/
+
+Boolean ActivateChangeVar(Widget ,Widget ,Widget *);
+Widget popup_errorDialog(char *, Widget );
+Widget	popup_formInfo();
+Boolean AcceptAing(Widget w);
+Boolean ActivateAing(Widget ,Widget , char *,Widget *);
+Boolean AcceptPlot(Widget );
+Boolean ActivatePlot(Widget  ,Widget ,char *, Widget *);
+Boolean PaginaAperta(Widget ,char* );
+Boolean CanOpenPage();
+Widget	popup_Attesa( Widget );
+void SettaAttesa(Widget ,int );
+
 
 #endif

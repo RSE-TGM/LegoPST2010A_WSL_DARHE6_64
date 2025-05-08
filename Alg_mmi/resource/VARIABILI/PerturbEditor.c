@@ -18,6 +18,8 @@
 #include <Xm/Form.h>
 #include <X11/Shell.h>
 
+#include "libutilx.h"
+
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
@@ -323,7 +325,7 @@ int ImpostaOptionMenu (Widget ogg,int Posizione)
 		UxPutContext (ListaItem[i], (char *) UxPerturbEditorContext);
 #endif
                 XmStringFree(StrLab);
-                XtAddCallback (ListaItem[i],XmNactivateCallback, OptPertCB,i);
+                XtAddCallback (ListaItem[i],XmNactivateCallback, (XtCallbackProc)OptPertCB,(XtPointer)i);
         }
         set_something (menu2, XmNmenuHistory, (void*) ListaItem[Posizione]);
         return (OK);

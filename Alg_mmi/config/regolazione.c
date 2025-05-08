@@ -40,6 +40,7 @@ static char SccsID[] = "@(#)regolazione.c	5.9\t3/19/96";
 #include <Xm/Xm.h>
 #include <UxXt.h>
 #include "config.h"
+#include "utile.h"
 #include "message.h"
 #include "forme.h"     /* per topologia schemi regolazione */
 #include "top_icon.h"  /* per topologia schemi regolazione */

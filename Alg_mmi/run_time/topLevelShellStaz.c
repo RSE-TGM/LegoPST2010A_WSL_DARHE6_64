@@ -72,6 +72,7 @@
 #include "page_staz_icon.bmp"
 
 #include "other.h"
+#include "res_edit.h"
 
 
 extern OlDatabasePuntiObject database_simulatore;

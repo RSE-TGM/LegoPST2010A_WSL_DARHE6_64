@@ -46,6 +46,7 @@
 #include "VarEdit.h"
 #include "res_edit.h"
 #include "sim_param.h"
+#include "libutilx.h"
 
 
 /*******************************************************************************
@@ -243,9 +244,9 @@ static	void	activateCB_arrowButton3( UxWidget, UxClientData, UxCallbackArg )
 	
 	Selezionato = XmListGetSelectedPos (scrolledList2, &ListaSel, &NumSel);
 	if (Selezionato)
-		Posizione = RicercaXmString (XmRicercaList,XmRicerca,NumeroElementi,
+		Posizione = RicercaXmString (XmRicercaList,(XmString)XmRicerca,NumeroElementi,
 					SU,ListaSel[NumSel-1]);
-	else 	Posizione = RicercaXmString (XmRicercaList,XmRicerca,NumeroElementi,
+	else 	Posizione = RicercaXmString (XmRicercaList,(XmString)XmRicerca,NumeroElementi,
 					SU,NumeroElementi+1);
 	if (Posizione == 0)
 		{
@@ -285,9 +286,9 @@ static	void	activateCB_arrowButton4( UxWidget, UxClientData, UxCallbackArg )
 	
 	Selezionato = XmListGetSelectedPos (scrolledList2, &ListaSel, &NumSel);
 	if (Selezionato)
-		Posizione = RicercaXmString (XmRicercaList,XmRicerca,NumeroElementi,
+		Posizione = RicercaXmString (XmRicercaList,(XmString)XmRicerca,NumeroElementi,
 					GIU,ListaSel[NumSel-1]);
-	else 	Posizione = RicercaXmString (XmRicercaList,XmRicerca,NumeroElementi,
+	else 	Posizione = RicercaXmString (XmRicercaList,(XmString)XmRicerca,NumeroElementi,
 					GIU,0);
 	if (Posizione == 0)
 		{
@@ -366,7 +367,7 @@ static	void	activateCB_pushButton16( UxWidget, UxClientData, UxCallbackArg )
 	  XtFree (Stringa);
 	  }
 	XmListDeleteAllItems (scrolledList2);
-	XtFree (ListaSel);
+	XtFree ((char*)ListaSel);
 	
 	/********************
 		Lettura dalla lista dei moduli della voce selezionata
@@ -415,7 +416,7 @@ static	void	activateCB_pushButton16( UxWidget, UxClientData, UxCallbackArg )
 	
 	CaricaLista (scrolledList2,ListaBl,MAX_LUN_NOME_BLOCCO,GENERALE);
 	XtFree (NomeMod);
-	XtFree (ListaSel);
+	XtFree ((char*)ListaSel);
 	}
 	UxTwoListContext = UxSaveCtx;
 }

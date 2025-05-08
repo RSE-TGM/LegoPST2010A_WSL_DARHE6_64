@@ -35,9 +35,9 @@ static char SccsID[] = "@(#)gestmem.c	5.1\t11/13/95";
 #include <stdlib.h>
 #include <Xm/Xm.h>
 #include "message.h"
-#include <config.h>
+#include "config.h"
 
-extern Boolean SetMsg();
+//extern Boolean SetMsg();
 
 /***************** end of file gestmem.c **************/
 

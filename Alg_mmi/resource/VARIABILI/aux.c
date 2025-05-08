@@ -37,12 +37,18 @@ static char SccsID[] = "@(#)aux.c	5.2\t2/6/96";
 #include <string.h>
 #include <math.h>
 #include <Xm/Xm.h>
+#include <Xm/List.h>
 #include <Xl/Xl.h>
 #include <Xl/XlGraficoP.h>
 #include "sim_param.h"
 #include <Ol/OlDatabaseTopologia.h>
 #include "VarEdit.h"
 #include "ImpPert.h"
+
+#include "UxXt.h"
+#include "libutilx.h"
+#include "res_edit.h"
+
 
 extern SELEZIONE_UNI_MIS SelUniMis[];
 
@@ -710,7 +716,7 @@ if (num==7)
   Wdg->grafico.input[0].unimis.a = ParA;
   Wdg->grafico.input[0].unimis.b = ParB;
   strcpy (Wdg->grafico.input[0].unimis.descr,DescrUM);
-  Descrizione = OlGetNameVar (Wdg,NomeV,0);
+  Descrizione = OlGetNameVar ((Widget)Wdg,NomeV,0);
   XtFree (Wdg->grafico.descr_var[0]);
   Wdg->grafico.descr_var[0] = XtNewString (Descrizione);
   XtFree (Descrizione);

@@ -38,10 +38,18 @@ static char SccsID[] = "@(#)Apply.c	5.2\t2/13/96";
 #include <stdio.h>
 #include <string.h>
 #include <Xm/Xm.h>
+#include <Xm/TextF.h>
 #include <Xl/Xl.h>
 #include <Xl/XlIconReg.h>
 #include <Xl/XlPort.h>
 #include <Ol/OlForm.h>
+#include <Rt/RtMemory.h>
+#include "libutilx.h"
+#include "res_edit.h"
+
+OlFormObject ResGetForm (Widget );
+
+
 /*
  Esegue un controllo su tutti i campi appartenenti al
  Row column passato come parametro (la routine dovra' essere chiamata 
@@ -101,7 +109,7 @@ if (strlen(ValoreStringa) > 1)
 }
 else
 {
-    colore[0]=NULL;
+    colore[0]=0;
     blink_rate=0.0;
     trasparent_int=0;
 }
@@ -113,7 +121,7 @@ trasparent=(Boolean)trasparent_int;
 // printf(" trasparent_int=[%d]\n",trasparent_int );
 // printf(" trasparent=[%d]\n",trasparent );
 
-    if (!CvtStrToPixel (RowCol[2],colore,&PixAppo))
+    if (!CvtStrToPixel (RowCol[2],colore,(Pixel *)&PixAppo))
     {
       SettaErrore(RowCol[1]); /* Trasforma l'indicazione di risorsa
                                  modificata in indicazione di errore
@@ -137,7 +145,7 @@ trasparent=(Boolean)trasparent_int;
     /*  Legge il valore della risorsa   */
     ValoreStringa = (char *)XmTextFieldGetString (RowCol[2]);
     RtRecord(ValoreStringa);
-    if (!CvtStrToPixel (RowCol[2],ValoreStringa,&PixAppo))
+    if (!CvtStrToPixel (RowCol[2],ValoreStringa,(Pixel *)&PixAppo))
       {
       SettaErrore(RowCol[1]); /* Trasforma l'indicazione di risorsa
                                  modificata in indicazione di errore

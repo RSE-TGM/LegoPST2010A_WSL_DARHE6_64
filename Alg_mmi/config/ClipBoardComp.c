@@ -37,6 +37,8 @@
 #include <Xm/Xm.h>
 #include <Xd/Xd.h>
 
+extern  void *		UxNewContext();
+
 /*******************************************************************************
        The definition of the context structure:
        If you create multiple copies of your interface, the context

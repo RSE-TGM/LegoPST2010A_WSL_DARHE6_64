@@ -12,8 +12,13 @@
 
 #include <Xm/SelectioB.h>
 #include <Xm/MainW.h>
+#include <Xm/List.h>
+#include <Xm/Text.h>
+#include <Xm/TextF.h>
 #include <X11/Shell.h>
 
+#include "res_edit.h"
+#include "libutilx.h"
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/

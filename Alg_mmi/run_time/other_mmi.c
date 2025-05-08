@@ -133,6 +133,7 @@ Funzioni esportate
 */
 Widget ActivateVarAing(Widget *);
 void ActivateVarPlot(Widget *);
+extern Boolean XlSetSomething(WidgetList ,Cardinal ,char * , char * , char * );
 
 /*
 	Verifico l'esistenza della pagina
@@ -1738,9 +1739,9 @@ return wid_ret;
 
 
 /*
-	il nome di questa funzione e' falso e tendenzioso; verrà cambiato in
+	il nome di questa funzione e' falso e tendenzioso; verrï¿½ cambiato in
 	seguito.
-	Lo scopo di questa funzione è ququello di terminare il processo padre
+	Lo scopo di questa funzione ï¿½ ququello di terminare il processo padre
 	dell'mmi prima dell'uscita corretta
 
 
@@ -1769,7 +1770,7 @@ return(XQueryPointer(XtDisplay(w), XtWindow(w), &root_return, &child_return,
 /*
 	chiamata nulla per connessione con il VariableEditor
 */
-EseguiLoadResources()
+int EseguiLoadResources()
 {
 }
 

@@ -19,6 +19,8 @@
 #include <Xm/Form.h>
 #include <X11/Shell.h>
 
+#include "libutilx.h"
+
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
@@ -233,9 +235,9 @@ static	void	activateCB_arrowButton1( UxWidget, UxClientData, UxCallbackArg )
 	
 	Selezionato = XmListGetSelectedPos (scrolledList1, &ListaSel, &NumSel);
 	if (Selezionato)
-		Posizione = RicercaXmString (XmRicercaList,XmRicerca,NumeroElementi,
+		Posizione = RicercaXmString (XmRicercaList,(XmString)XmRicerca,NumeroElementi,
 					SU,ListaSel[NumSel-1]);
-	else 	Posizione = RicercaXmString (XmRicercaList,XmRicerca,NumeroElementi,
+	else 	Posizione = RicercaXmString (XmRicercaList,(XmString)XmRicerca,NumeroElementi,
 					SU,NumeroElementi+1);
 	if (Posizione == 0)
 		{
@@ -275,9 +277,9 @@ static	void	activateCB_arrowButton2( UxWidget, UxClientData, UxCallbackArg )
 	
 	Selezionato = XmListGetSelectedPos (scrolledList1, &ListaSel, &NumSel);
 	if (Selezionato)
-		Posizione = RicercaXmString (XmRicercaList,XmRicerca,NumeroElementi,
+		Posizione = RicercaXmString (XmRicercaList,(XmString)XmRicerca,NumeroElementi,
 					GIU,ListaSel[NumSel-1]);
-	else 	Posizione = RicercaXmString (XmRicercaList,XmRicerca,NumeroElementi,
+	else 	Posizione = RicercaXmString (XmRicercaList,(XmString)XmRicerca,NumeroElementi,
 					GIU,0);
 	if (Posizione == 0)
 		{

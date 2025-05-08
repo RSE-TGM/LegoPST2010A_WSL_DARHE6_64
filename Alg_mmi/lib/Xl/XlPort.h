@@ -134,6 +134,7 @@
 #define TAG_POSITION_BOTTOM	2
 #define TAG_POSITION_DEFAULT 	TAG_POSITION_CENTER
 
+#define ICONREG_1 1
 
 /* declare the class constant */
 extern WidgetClass xlPortWidgetClass;

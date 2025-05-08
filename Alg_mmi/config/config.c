@@ -102,7 +102,7 @@ extern swidget errorDialog;
 extern swidget create_errorDialog();
 
 
-extern int compile_all_pag();
+extern void compile_all_pag();
 extern void destroy_conn();
 
 extern FILE *fpLogMsg;

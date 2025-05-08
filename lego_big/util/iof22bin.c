@@ -23,7 +23,7 @@ struct common_variabili {
 
 typedef struct common_variabili VARIABILE;
 
-VARIABILE variabili_;
+extern VARIABILE variabili_;
 
 FILE  *file22, *file22out;
 

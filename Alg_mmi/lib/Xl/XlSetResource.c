@@ -53,7 +53,7 @@ static char SccsID[] = "@(#)XlSetResource.c	5.1\t11/13/95";
  * Date: 13 Gennaio 1993	Ver: 1.0                           *
  *-----------------------------------------------------------------*/
 
-XlSetResourceByName(XrmDatabase *pRisDb,String nome_oggetto,char *resource_name,char *value)
+int XlSetResourceByName(XrmDatabase *pRisDb,String nome_oggetto,char *resource_name,char *value)
 {
    char str_risorsa[250];
 

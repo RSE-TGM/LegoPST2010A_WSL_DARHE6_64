@@ -74,7 +74,7 @@
 #include "other.h"
 #include "pagresdef.h"
 #include "legommi_icon.bmp"
-
+#include "res_edit.h"
 
 Widget listDrawing[MAX_PAGE];
 OlDatabasePuntiObject database_simulatore;

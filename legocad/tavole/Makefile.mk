@@ -80,7 +80,7 @@ all: $(LEGOCAD_BIN)/tables
 #	$(LIBSVIL) $(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11
 
 $(LEGOCAD_BIN)/tables: $(OGGETTI) $(LIBUTIL)
-	gfortran -o ./tables \
+	$(FC) -o ./tables \
        $(OGGETTI) \
 	$(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11 $(LIBSVIL)
 #	$(LIBUTIL) -lm $(LIBOTS) $(F_LIB)  -lX11 $(LIBSVIL) /usr/lib/libg2c.so.0

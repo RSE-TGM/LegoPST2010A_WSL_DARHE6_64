@@ -17,7 +17,11 @@
 #include <Xm/Label.h>
 #include <Xm/Form.h>
 #include <Xm/MainW.h>
+#include <Xm/Text.h>
+#include <Xm/TextF.h>
 #include <X11/Shell.h>
+
+
 
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
@@ -46,10 +50,45 @@
   2) delle variabili di cambio colore appartenenti a icon reg
   3) delle variabili in input a oggetto DisplayReg
 */
+
 #include <Xl/XlIconReg.h>
 #include <Xl/XlPort.h>
+#include <Xl/XlDispReg.h>
 #include <Ol/OlForm.h>
 #include <Ol/OlForm_regol.h>
+
+#include "libutilx.h"
+#include "res_edit.h"
+
+
+//#include <Xl/Xl.h>
+//#include <Xl/XlIconReg.h>
+//#include <Xl/XlPort.h>
+//#include <Ol/OlConn.h>
+//#include <Ol/OlCompiler.h>
+//#include <Ol/OlDatabaseTopologia.h>
+//#include <Ol/OlForm.h>
+//#include <Ol/OlForm_regol.h>
+
+/*
+#include <Ol/OlCompiler.h>
+#include <Ol/OlCompilerP.h>
+#include <Ol/OlConn.h>
+#include <Ol/OlConnP.h>
+#include <Ol/OlDatabasePunti.h>
+#include <Ol/OlDatabasePuntiP.h>
+#include <Ol/OlDatabaseTopologia.h>
+#include <Ol/OlDatabaseTopologiaP.h>
+#include <Ol/OlForm.h>
+#include <Ol/OlFormP.h>
+#include <Ol/OlForm_regol.h>
+#include <Ol/OlPert.h>
+#include <Ol/OlPertP.h>
+#include <Ol/OlTree.h>
+#include <Ol/OlTreeP.h>
+*/
+
+
 #include "res_edit.h"
 
 void InserisciAvVar ( );
@@ -355,7 +394,7 @@ static	void	activateCB_pushButton20( UxWidget, UxClientData, UxCallbackArg )
 	    strncpy (Ritorno,ItemSel,2);
 	    Ritorno[2] = '\0';
 	    XmTextFieldSetString (ListaWidgetRC[2],Ritorno);
-	    XtFree (PosSelected);
+	    XtFree ((char*)PosSelected);
 	    }
 	  }
 	

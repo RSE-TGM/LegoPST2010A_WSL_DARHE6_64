@@ -17,6 +17,8 @@
 #include <Xm/MainW.h>
 #include <X11/Shell.h>
 
+#include "libutilx.h"
+
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
@@ -429,7 +431,7 @@ Widget	create_ValueSelection( _UxPad, _UxRCR, _UxOggettoSel, _UxFormInput )
 #ifndef DESIGN_TIME
 		  UxPutContext (Bottone, (char *)UxValueSelectionContext );
 #endif
-		  XtAddCallback (Bottone, XmNactivateCallback, PushTagCB, i);
+		  XtAddCallback (Bottone, XmNactivateCallback, (XtCallbackProc)PushTagCB, (XtPointer)i);
 		
 		  XmStringFree (XmTit);
 		  }

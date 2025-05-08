@@ -1898,7 +1898,7 @@ else\
 *CompilePag.labelString: "Page"
 *CompilePag.activateCallback: {\
 #ifndef DESIGN_TIME\
-extern int compile_page();\
+extern void compile_page();\
     \
       compile_page(actual_page);\
 #endif\

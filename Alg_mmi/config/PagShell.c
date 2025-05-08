@@ -1127,7 +1127,7 @@ static	void	activateCB_menu3DuplicateAll( UxWidget, UxClientData, UxCallbackArg 
 	   int i;
 	   float f_zoom;
 	   extern float get_def_zoom();   
-	   extern int draget_duplicate();
+	   extern void draget_duplicate();
 	   extern int copy_new();
 	   WidgetList wsel;
 	   Cardinal nwsel;
@@ -1193,7 +1193,7 @@ static	void	activateCB_menu3DeleteAll( UxWidget, UxClientData, UxCallbackArg )
 #ifndef DESIGN_TIME
 	
 	   extern int delete_widget();
-	   extern int DrawDelete();
+	   extern void DrawDelete();
 	
 	   if(WidSelectedAreInEdit(actual_page) == False)
 	   {
@@ -1221,11 +1221,11 @@ static	void	activateCB_menu3CutAll( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	   extern int draget_cut();
+	   extern void draget_cut();
 	
 	   extern int select_connections();
 	   extern Widget ClipBoardForCopy;
-	   extern int WriteBackground();
+	   extern void WriteBackground();
 	   WidgetList wsel;
 	   Cardinal nwsel; 
 	   extern int fcut();
@@ -1264,7 +1264,7 @@ static	void	activateCB_menu3CopyAll( UxWidget, UxClientData, UxCallbackArg )
 	{
 #ifndef DESIGN_TIME
 	   extern int fcopy();
-	   extern int draget_copy();
+	   extern void draget_copy();
 	   extern int select_connections(); 
 	   extern Widget ClipBoardForCopy;
 	   WidgetList wsel;
@@ -1293,7 +1293,7 @@ static	void	activateCB_menu3PasteAll( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	  extern int draget_paste();
+	  extern void draget_paste();
 	  extern int fpaste();
 	
 	  fpaste(actual_page);
@@ -1375,7 +1375,7 @@ static	void	activateCB_menu3BCut( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	   extern int draget_cut();
+	   extern void draget_cut();
 	   extern Widget ClipBoardForCopy;
 	
 	   draget_cut(actual_page->drawing,ClipBoardForCopy);
@@ -1396,7 +1396,7 @@ static	void	activateCB_menu3BCopy( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	   extern int draget_copy();
+	   extern void draget_copy();
 	   extern Widget ClipBoardForCopy;
 	
 	   draget_copy(actual_page->drawing,ClipBoardForCopy);
@@ -1417,7 +1417,7 @@ static	void	activateCB_menu3BPaste( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	  extern int draget_paste();
+	  extern void draget_paste();
 	
 	  draget_paste(actual_page->drawing); 
 #endif
@@ -1437,7 +1437,7 @@ static	void	activateCB_menu3BPutBottom( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	   extern int DrawPutBottom();
+	   extern void DrawPutBottom();
 	
 	   DrawPutBottom(actual_page->drawing);
 #endif
@@ -1457,7 +1457,7 @@ static	void	activateCB_menu3BPutTop( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	   extern int DrawPutTop();
+	   extern void DrawPutTop();
 	
 	   DrawPutTop(actual_page->drawing);
 #endif
@@ -1494,7 +1494,7 @@ static	void	activateCB_SaveTmp( UxWidget, UxClientData, UxCallbackArg )
 	{
 	   extern PAGEDIT_CONTEXT *pagedit;
 	   extern Boolean pagina_save();
-	   extern int WriteBackground();
+	   extern void WriteBackground();
 	   char fileback[MAXLENFILENAME];
 	
 	   extern Boolean CompressData();
@@ -1632,7 +1632,7 @@ static	void	activateCB_FDuplicateAll( UxWidget, UxClientData, UxCallbackArg )
 	   int i;
 	   float f_zoom;
 	   extern float get_def_zoom();   
-	   extern int draget_duplicate();
+	   extern void draget_duplicate();
 	   extern int copy_new();
 	   WidgetList wsel;
 	   Cardinal nwsel;
@@ -1698,7 +1698,7 @@ static	void	activateCB_FDeleteAll( UxWidget, UxClientData, UxCallbackArg )
 #ifndef DESIGN_TIME
 	
 	   extern int delete_widget();
-	   extern int DrawDelete();
+	   extern void DrawDelete();
 	
 	   if(WidSelectedAreInEdit(actual_page) == False)
 	   {
@@ -1725,12 +1725,12 @@ static	void	activateCB_FCutAll( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	   extern int draget_cut();
+	   extern void draget_cut();
 	
 	   extern int fcut();
 	   extern int select_connections();
 	   extern Widget ClipBoardForCopy;
-	   extern int WriteBackground();
+	   extern void WriteBackground();
 	   WidgetList wsel;
 	   Cardinal nwsel;
 	   
@@ -1768,7 +1768,7 @@ static	void	activateCB_FCopyAll( UxWidget, UxClientData, UxCallbackArg )
 	{
 #ifndef DESIGN_TIME
 	   extern int fcopy();
-	   extern int draget_copy();
+	   extern void draget_copy();
 	   extern int select_connections(); 
 	   extern Widget ClipBoardForCopy;
 	   WidgetList wsel;
@@ -1799,7 +1799,7 @@ static	void	activateCB_FPasteAll( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	  extern int draget_paste();
+	  extern void draget_paste();
 	  extern int fpaste();
 	
 	  fpaste(actual_page);
@@ -1881,7 +1881,7 @@ static	void	activateCB_BgCut( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	   extern int draget_cut();
+	   extern void draget_cut();
 	   extern Widget ClipBoardForCopy;
 	
 	   draget_cut(actual_page->drawing,ClipBoardForCopy);
@@ -1902,7 +1902,7 @@ static	void	activateCB_BgCopy( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	   extern int draget_copy();
+	   extern void draget_copy();
 	   extern Widget ClipBoardForCopy;
 	
 	   draget_copy(actual_page->drawing,ClipBoardForCopy);
@@ -1923,7 +1923,7 @@ static	void	activateCB_BgPaste( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	  extern int draget_paste();
+	  extern void draget_paste();
 	
 	  draget_paste(actual_page->drawing); 
 #endif
@@ -1943,7 +1943,7 @@ static	void	activateCB_BgPutBottom( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	   extern int DrawPutBottom();
+	   extern void DrawPutBottom();
 	
 	   DrawPutBottom(actual_page->drawing);
 #endif
@@ -1963,7 +1963,7 @@ static	void	activateCB_BgPutTop( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	   extern int DrawPutTop();
+	   extern void DrawPutTop();
 	
 	   DrawPutTop(actual_page->drawing);
 #endif
@@ -2115,7 +2115,7 @@ static	void	activateCB_CompilePag( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagShell *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	extern int compile_page();
+	extern void compile_page();
 	    
 	      compile_page(actual_page);
 #endif

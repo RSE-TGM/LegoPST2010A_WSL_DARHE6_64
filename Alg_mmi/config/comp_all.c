@@ -61,7 +61,7 @@ static char SccsID[] = "@(#)comp_all.c	5.13\t2/16/96";
 #include "message.h"
 #include "forme.h"     /* per topologia schemi regolazione */
 #include "top_icon.h"  /* per topologia schemi regolazione */
-
+#include "utile.h"
 
 #define NOT_IN_LIB 1
 
@@ -74,7 +74,7 @@ extern XtAppContext UxAppContext;
 extern Display *UxDisplay;
 extern Boolean StateInterfaceMode;
 extern OlConnObject conn_obj; /* oggetto OlConn (gestione connessioni) */
-extern *lista_macro;
+extern char *lista_macro;
 extern int comm_found;
 
 /* 
@@ -100,7 +100,7 @@ static int sche_in_lib=0;
 /* 
   Prototyping funzioni contenute
 */
-int compile_all_reg();
+void compile_all_reg();
 Boolean NewDataBase(char *);
 Boolean IsPaginaCompiled(char *, int, int *);
 int DataFile(char *);
@@ -113,6 +113,7 @@ extern Boolean PagGetInUses(PAGINA *);
   Prototyping funzioni esterne
 */
 int FileNameLoc(char *, char *, char *);
+extern XdLista clip_get_lista();
 
 
 
@@ -120,7 +121,7 @@ int FileNameLoc(char *, char *, char *);
 /*
     Compilazione di tutte le pagine di regolazione
 */
-int compile_all_reg()
+void compile_all_reg()
 {
 
 int numero=0;
@@ -133,7 +134,7 @@ Boolean read_db;
 
 
 XEvent event;
-extern int compila_reg(PAGINA *, int, int);
+//extern int compila_reg(PAGINA *, int, int);
 int macrobl=0;
 Widget CompileBoard;
 extern Cardinal lnargs;
@@ -342,7 +343,7 @@ UxDisplay->db = defdb;
 /*
          compilazione di tutte le pagine nel context 
 */
-int compile_all_pag()
+void compile_all_pag()
 {
 extern swidget topLevelShell;
 Widget *array_wid;
@@ -464,7 +465,7 @@ int causa_comp_pag;
 
          if(pag->num_widget > 0)
             {
-            if( (lista=alloca_memoria(pag->num_widget,sizeof(Widget)))==NULL )
+            if( (lista=(WidgetList)alloca_memoria(pag->num_widget,sizeof(Widget)))==NULL )
                 return;
 
             UxDisplay->db = pag->db;
@@ -614,7 +615,7 @@ int causa_comp_pag;
 /*
     Compila la singola pagina
 */
-int compile_page(PAGINA *actual_page)
+void compile_page(PAGINA *actual_page)
 {
 
            extern Cardinal lnargs;

@@ -17,6 +17,8 @@
 #include <Xm/Form.h>
 #include <X11/Shell.h>
 
+extern  void *		UxNewContext();
+
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/

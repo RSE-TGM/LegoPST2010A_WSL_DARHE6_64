@@ -27,6 +27,14 @@ void  tominus();
 
 int IsNumeric(char*);
 void riempi(char*,int);
+void copy_n_car(char *,char *,int);
+int     data (int*, int*, int*);
+int     ora (int*, int*, int*);
+int tempo_file_touch(char *);
+int tempo_file_eq(char *,char *);
+
+
+
 
 /* fine utile.h */
 

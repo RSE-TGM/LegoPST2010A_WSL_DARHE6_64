@@ -56,8 +56,8 @@ static char SccsID[] = "@(#)othercnf.c	5.2\t1/11/96";
 #include <Xd/Xd.h>
 #include <Xd/XdConn.h>
 #include <Ol/OlForm.h>
+#include <Ol/OlForm_regol.h>
 #include <Ol/OlConn.h>
-
 
 #include "libutilx.h"
 
@@ -75,6 +75,16 @@ extern void draw_conn(XdConnDraget);
 extern int OlFindConnectionByPort(OlConnObject , char *, char* ,char *);
 extern void get_child();
 Boolean OlDelConnection(OlConnObject , int );
+extern Boolean XlSetSomething(WidgetList ,Cardinal ,char * , char * , char * );
+extern void modifica_conn(Widget,int,int,int,int,int);
+void DrawSelectConn(Widget,int,int);
+void manage_all_conn(Widget);
+void select_conn_icon(Widget,XRectangle,int);
+
+
+
+
+
 /*
 	oggetto OlConn per la gestione delle connessioni di
 	interfaccia
@@ -1835,7 +1845,7 @@ void delete_interface(PAGINA *pag)
  *-----------------------------------------------------*/
 int delete_widget(PAGINA *pag)
 {
-   extern int DrawDelete();
+   extern void DrawDelete();
    extern Boolean StateInterfaceMode;
    extern void delete_interface();
    extern int PagGetType();
@@ -3363,7 +3373,7 @@ return(True);
  get_punto_porta
  calcola il punto in cui parte la connessione
 */
-get_punto_porta(w,xpunto,ypunto)
+void get_punto_porta(w,xpunto,ypunto)
 Widget w; /* widget della porta */
 int *xpunto;
 int *ypunto;
@@ -3389,7 +3399,7 @@ XtGetValues(XtParent(w),arg,2);
  calcola la posizione della porta rispetto all'origine della
  drawing area
 */
-get_posiz_porta(w,xpunto,ypunto)
+void get_posiz_porta(w,xpunto,ypunto)
 Widget w; /* widget della porta */
 int *xpunto;
 int *ypunto;
@@ -3437,7 +3447,7 @@ else
  connessa ad una stringa di lunghezza nulla
  
 */
-sconnetti(wid)
+void sconnetti(wid)
 Widget wid; /* porta da sconnettere */
 {
    extern Widget ClipBoardForCopy;
@@ -3524,10 +3534,10 @@ int set;
 	*/
 	{
 	XlSetSomething(children,num_children,"Port",
-                XlNconnectMode,CONNESSIONE_PORTE_ATTIVA);
+                XlNconnectMode,(char*)CONNESSIONE_PORTE_ATTIVA);
 	XlSetSomething(children,num_children,NULL, XlNselected,0);
 	XlSetSomething(children,num_children,"Port", XlNselectable,0);
-	XlSetSomething(children,num_children,"IconReg", XlNselectable,1);
+	XlSetSomething(children,num_children,"IconReg", XlNselectable,(char*)ICONREG_1);
 	}
    else
         /*
@@ -3536,11 +3546,11 @@ int set;
 	{
 	XlSetSomething(children,num_children,"Port",
                 XlNconnectMode,CONNESSIONE_PORTE_NON_ATTIVA);
-	XlSetSomething(children,num_children,NULL, XlNselectable,1);
+	XlSetSomething(children,num_children,NULL, XlNselectable,(char*)CONNESSIONE_PORTE_ATTIVA);
 	}
 } 
 
-trasla_conn(wid,xnew,ynew)
+void trasla_conn(wid,xnew,ynew)
 Widget wid;
 int xnew,ynew;
 {
@@ -3555,7 +3565,7 @@ draw_wid=XtParent(XtParent(wid));
 modifica_conn(draw_wid,xfilo,yfilo,dx,dy,TRASLA_CONN);
 }
  
-seleziona_conn(wid)
+void seleziona_conn(wid)
 Widget wid;
 {
 int xfilo,yfilo;
@@ -3564,7 +3574,7 @@ DrawSelectConn(XtParent(XtParent(wid)),xfilo,yfilo);
 }
 
 
-resize_conn(wid,xnew,ynew)
+void resize_conn(wid,xnew,ynew)
 Widget wid;
 int xnew,ynew;
 {
@@ -3601,7 +3611,7 @@ typedef struct s_pos_porta {
 		} S_POS_PORTA;
 S_POS_PORTA *p_pos_porta;
 
-apply_gest_conn1(wid)
+void apply_gest_conn1(wid)
 Widget wid; /* icon di regolazione */
 {
 WidgetList childcomp;
@@ -3630,7 +3640,7 @@ for(j=0;j<num_childcomp;j++)
 	}
 }
 
-apply_gest_conn2(wid)
+void apply_gest_conn2(wid)
 Widget wid; /* icon di regolazione */
 {
 WidgetList childcomp;
@@ -3693,7 +3703,7 @@ if(operazione == RECTMOVE && num_selected)
       manage_all_conn(XtParent(selected[0]));
 }
 
-select_conn_icon(selected,rubber,operazione)
+void select_conn_icon(selected,rubber,operazione)
 Widget selected; /* icona di regolazione */
 XRectangle rubber; /* rettangolo corrispondente alla posizione
                        che l'icona di regolazione andra' a occupare dopo
@@ -4079,7 +4089,7 @@ Boolean getPortList(Widget Icon,WidgetList *Porte,Cardinal *nPorte)
 /* assegno l'id di ciascuna porta al vettore di input */
    for(i=0;i<nChild;i++)
       if(XlIsPort(listaChild[i]))
-         Porte[i]=listaChild[i];
+         Porte[i]=(Widget*)listaChild[i];
  
    return(True);
 }
@@ -4154,7 +4164,7 @@ Boolean getListNamePortConnession(Widget Icon,LISTACONN listaConn[],int *nConn)
                else
                {
                   if( !numconn )
-                    listaConn = alloca_memoria(1,sizeof(LISTACONN));
+                    listaConn = (LISTACONN*)alloca_memoria(1,sizeof(LISTACONN));
                   else
                     listaConn = XtRealloc( listaConn, (sizeof(LISTACONN ) * numconn) );    
 
@@ -4503,3 +4513,19 @@ return(True);
 return(False);
 #endif
 }
+
+// /*-----------------------------------------------------------------------*/
+// /* funzione copy_n_car(str1,str2,n)
+//   str1 : stringa destinazione        (w)
+//   str2 : stringa sorgente            (r)
+//   n    : numero caratteri da copiare (r)
+//   copia n caratteri della stringa str2 in str1 terminando str1 con il
+//   terminatore ( '\0' ). Il newline e' considerato fine-stringa. */
+//   void copy_n_car(str1,str2,n)
+//   char *str1,*str2;
+//   int n;
+//   {
+//      while( n-- && *str2 != '\n' && (*(str1++) = *(str2++)));
+//      *str1='\0';
+//   }
+  

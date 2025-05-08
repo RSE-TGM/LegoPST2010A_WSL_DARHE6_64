@@ -2,13 +2,14 @@
     grafics
 ****************************************************************************/
 
-#include "windows.h"
+//#include "windows.h"
 #include "resource.h"
 #include "definit.h"
 #include "stdio.h" 
 #include "stdlib.h"
 #include "string.h"
 #include "math.h"
+typedef char* LPSTR; typedef unsigned char* LPBYTE; 
 
 LPSTR PrgName = "Grafics";
 
@@ -1681,7 +1682,7 @@ LPARAM lParam;
 	                        YY = YY1 + 2*textmetric.tmHeight - 6;
                         else if (nselect == 3)
 	                        YY = YY1 + textmetric.tmHeight + 1;
-                        else if (nselect == 4)      //  per Value -- in questo caso  MAXSELECT è = 4
+                        else if (nselect == 4)      //  per Value -- in questo caso  MAXSELECT ï¿½ = 4
 	                        YY = YY1 + textmetric.tmHeight + 2; // era - 4 per Value
 
                         for (i=0; i<nselect; i++)

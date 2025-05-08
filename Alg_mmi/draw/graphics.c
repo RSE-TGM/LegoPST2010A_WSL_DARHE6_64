@@ -25,6 +25,7 @@ static char *_csrc = "@(#) %filespec: graphics.c-10 %  (%full_filespec: graphics
 #include <X11/keysym.h>
 #include <Xm/Xm.h>
 #include <Xm/DrawingA.h>
+#include <Xm/Text.h>
 
 #include <Xd/XdCore.h>
 #include <Xd/XdConn.h>
@@ -35,6 +36,9 @@ static char *_csrc = "@(#) %filespec: graphics.c-10 %  (%full_filespec: graphics
 #include <Xd/Xd.h>
 #include <Xd/XdListaP.h>
 #include <Xd/XdUndoP.h>
+
+#include <Xl/Xl.h>
+#include <Xl/XlPort.h>
 #include "libutilx.h"
 
 /*
@@ -48,7 +52,7 @@ static char *_csrc = "@(#) %filespec: graphics.c-10 %  (%full_filespec: graphics
 #include "poli.bm"
 #include "rectangle.bm"
 #include "zoom.bm" 
-#include "draw.h"
+//#include "draw.h"
 
 #define COMPRESSIONE 1
 
@@ -80,6 +84,15 @@ extern void XdPrintDraget(Draget);
 void XdGetSize(Draget,int *,int*,int*,int*);
 void XdModify(Draget,int,int,int,int,XEvent *);
 extern void XdDestroyDraget(Draget);
+int UxSetDrawFont(char*, Widget);
+extern Widget	create_ClipBoardUndo();
+void DrawGrid(Widget);
+extern Draget XdFirstGroupDraget();
+void draget_copy();
+void draget_cut();
+void undo_draget_paste(Draget);
+extern void set_region(Widget , Region );
+
 
 
 
@@ -112,8 +125,18 @@ void		DrawDelete(),
 		ExtPick(),
 		UxDrawText(), UxNextLine(),
 		UxLastPoint(), UxFirstText(), UxToggleFontCursor();
+
+extern void get_child();
 		
 static void	erase_text();
+
+extern void reset_line_def(int,int,Widget);
+
+
+#include "draw.h"
+#include "res_edit.h"
+
+
 
 void UxInitGraphics()
 {
@@ -122,7 +145,7 @@ void UxInitGraphics()
 
 	static XtActionsRec  actions[]=
 		{	
-			{"draw_delete",		DrawDelete},
+			{"draw_delete",		(void (*)(struct _WidgetRec *, XEvent *, char **, Cardinal *))DrawDelete},
 			{"move_tasti",		MoveTasti},
 			{"start_pick", 		StartPick},
 			{"move_pick",		MovePick},
@@ -285,7 +308,7 @@ for(i=0;i<num_children;i++)
  definizione funzione di print
 */
 #ifdef XPRINTER_USED
-print_callback(w)
+void print_callback(w)
 Widget w;
 {
 Draget dr;
@@ -379,7 +402,7 @@ if(get_grid_on(wid) && !bFirst)
 bFirst=False;
 }
 
-DrawSetGrid(wid)
+void DrawSetGrid(wid)
 Widget wid;
 {
 if(get_grid_on(wid) == 0)   /* setta la griglia e pone a 1 grid on */
@@ -397,7 +420,7 @@ XClearArea(XtDisplay(wid),XtWindow(wid),0,0,0,0,True);
  appende la funzione di ridisegno alla drawing area su cui si sta
  operando
 */
-append_redraw(wid)
+void append_redraw(wid)
 Widget wid;
 {
 XtAddCallback(wid,XmNexposeCallback,disegna_callback,NULL);
@@ -963,7 +986,7 @@ while((dr=ListDragetNext(get_lista(wid))) != NULL)
 /*
  Scrittura di tutto il disegno su file
 */
-WriteBackground(wid,nome_file)
+void WriteBackground(wid,nome_file)
 Widget wid;
 char *nome_file;
 {
@@ -1020,7 +1043,7 @@ fclose(fp);
 /*
  Lettura del disegno da file
 */
-ReadBackground(wid,nome_file)
+void ReadBackground(wid,nome_file)
 Widget wid;
 char *nome_file;
 {
@@ -1040,7 +1063,7 @@ fscanf(fp,"%s %d\n",buf,&ymin);
 fscanf(fp,"%s %d\n",buf,&xmax);
 fscanf(fp,"%s %d\n",buf,&ymax);
 fscanf(fp,"%s %d",buf,&numero_draget);
-while((dr=XdReadRecord(wid,&xdgc,fp))!=NULL)
+while((dr=XdReadRecord((Draget)wid,&xdgc,fp))!=NULL)
 	{
         ListDragetAdd(get_lista(wid),dr);
 	XdSetSnap(dr,get_step(wid));
@@ -1055,7 +1078,7 @@ set_arrow_mode(wid);
 }
 
 
-SelectDragetRect(wid,rect)
+void SelectDragetRect(wid,rect)
 Widget wid;
 XRectangle *rect;
 {
@@ -1068,7 +1091,7 @@ while((dr=ListDragetNext(get_lista(wid))) != NULL)
 	}
 }
 
-DrawSetZoom(draw_wid,zoom)
+void DrawSetZoom(draw_wid,zoom)
 Widget draw_wid;
 float zoom;
 {
@@ -1263,7 +1286,7 @@ XdSetSnap(dr,curr_step);
 }
 
 
-DrawUngroup(draw_wid)
+void DrawUngroup(draw_wid)
 Widget draw_wid;
 {
 int dr_num_sel;
@@ -1507,7 +1530,7 @@ static int add_to_string(ev, wid)
 	KeySym		info;
 	char		key[5];
 
-	XLookupString(ev, key, 4, &info, NULL);
+	XLookupString((XKeyEvent *)ev, key, 4, &info, NULL);
 
 	if(!isprint(key[0]) || (key[0] < ' '))
 	{	/* must be a special key: ignore it */
@@ -1612,7 +1635,7 @@ void UxLastPoint()
 	drawtext= False;
 }
 
-set_current_gcs(draw_wid)
+int  set_current_gcs(draw_wid)
 Widget draw_wid;
 {
 Widget bott_fill_def,bott_border_def;
@@ -1670,7 +1693,7 @@ else
 	setta lo stile di disegno per l'oggetto selezionato o per il
 	default a disegno filled o not filled
 */
-set_current_filled(draw_wid,flag)
+void set_current_filled(draw_wid,flag)
 Widget draw_wid;
 Boolean flag;  /* se True disegno filled */
 {
@@ -1759,14 +1782,11 @@ if(num_selected=ListGetAll(get_lista(draw_wid),&list_dr_sel))
  draget_copy
  Copia i draget selezionati nell'area di disegno in clipboard
 */
-#ifdef ON_PAGEDIT
-draget_copy(draw_wid,draw_clip)
+// #ifdef ON_PAGEDIT
+void draget_copy(draw_wid,draw_clip)
 Widget draw_wid;
 Widget draw_clip;                /* id drawing area della clipboard */
-#else 
-draget_copy(draw_wid)
-Widget draw_wid;
-#endif
+
 {
 FILE *fp;
 Draget dr;
@@ -1774,7 +1794,7 @@ char file_name[200];
 int num_selected,i;
 Draget *list_dr_sel; /* lista dei Draget selezionati */
 
-#ifdef ON_PAGEDIT
+
 XdClipDelete();
 if(num_selected=ListGetSelected(get_lista(draw_wid),&list_dr_sel))
         {
@@ -1785,7 +1805,21 @@ if(num_selected=ListGetSelected(get_lista(draw_wid),&list_dr_sel))
 		}
 	XtFree((char *)list_dr_sel);
         }
-#else
+
+}
+
+// non in ON_PAGEDIT
+void draget_copyS(draw_wid)
+Widget draw_wid;
+
+{
+FILE *fp;
+Draget dr;
+char file_name[200];
+int num_selected,i;
+Draget *list_dr_sel; /* lista dei Draget selezionati */
+
+
 if(get_name_clip(file_name,"clip.bkg") == False)
 	return;
 
@@ -1799,7 +1833,7 @@ if(num_selected=ListGetSelected(get_lista(draw_wid),&list_dr_sel))
 	undo_flag = 1;
         }
 fclose(fp);
-#endif
+
 }
 
 
@@ -1808,14 +1842,11 @@ fclose(fp);
  Copia i draget selezionati nell'area di disegno in clipboard
  e successivamente li cancella.
 */
-#ifdef ON_PAGEDIT
-draget_cut(draw_wid,draw_clip)
+// #ifdef ON_PAGEDIT
+void draget_cut(draw_wid,draw_clip)
 Widget draw_wid;
 Widget draw_clip;              /* id drawing area della clipboard */
-#else
-draget_cut(draw_wid)
-Widget draw_wid;
-#endif
+
 {
 FILE *fp;
 char file_name[200];
@@ -1824,7 +1855,7 @@ Draget dr;
 int num_selected,i;
 Draget *list_dr_sel; /* lista dei Draget selezionati */
 
-#ifdef ON_PAGEDIT
+
 XdClipDelete();
 if(num_selected=ListGetSelected(get_lista(draw_wid),&list_dr_sel))
         {
@@ -1837,7 +1868,24 @@ if(num_selected=ListGetSelected(get_lista(draw_wid),&list_dr_sel))
                 }
 	XtFree((char *)list_dr_sel);
         }
-#else
+
+undo_flag = 1;
+}
+
+
+// non in ON_PAGEDIT
+void draget_cutS(draw_wid)
+Widget draw_wid;
+{
+FILE *fp;
+char file_name[200];
+Draget dr;
+
+int num_selected,i;
+Draget *list_dr_sel; /* lista dei Draget selezionati */
+
+
+
 if(get_name_clip(file_name,"clip.bkg") == False)
 	return;
 
@@ -1854,9 +1902,10 @@ if(num_selected=ListGetSelected(get_lista(draw_wid),&list_dr_sel))
 	XtFree((char *)list_dr_sel);
         }
 fclose(fp);
-#endif
+
 undo_flag = 1;
 }
+
 
 
 /*
@@ -1864,7 +1913,7 @@ undo_flag = 1;
  Copia i draget presenti in clipboard nell'area di disegno in
  corrispondenza di una undo
 */
-undo_draget_paste(draw_wid)
+void undo_draget_paste(draw_wid)
 Draget draw_wid;
 {
 int num_selected,i;
@@ -1907,10 +1956,10 @@ if(num_selected=ListGetAll(get_lista_undo(draw_wid),&list_dr_sel))
         {
         for(i=0;i <num_selected; i++)
                 {
-                dr=XdDuplicateDraget(list_dr_sel[i],draw_wid);
+                dr=XdDuplicateDraget(list_dr_sel[i],(struct _WidgetRec *)draw_wid);
                 ListDragetAdd(get_lista(draw_wid),dr);
 		XdDeselectDraget(dr, False);		
-                XdSetSnap(dr,get_step(draw_wid));
+                XdSetSnap(dr,get_step((Widget)draw_wid));
                 }
 	XtFree((char *)list_dr_sel);
 	}
@@ -1934,7 +1983,7 @@ undo_lista_draget->in_use =
    lista_liste_undo->ListeUndo[lista_liste_undo->num_liste-1].in_use;
 }
 
-	XClearArea(XtDisplay(draw_wid),XtWindow(draw_wid),0,0,0,0,True);
+	XClearArea(XtDisplay((Widget)draw_wid),XtWindow((Widget)draw_wid),0,0,0,0,True);
 }
 }
 
@@ -1944,7 +1993,7 @@ undo_lista_draget->in_use =
  draget_paste
  Copia i draget presenti in clipboard nell'area di disegno
 */
-draget_paste(draw_wid)
+void draget_paste(draw_wid)
 Widget draw_wid;
 {
 float def_zoom;
@@ -1999,7 +2048,7 @@ undo_flag = 1;
  draget_duplicate
  copia & paste sulla stessa pagina
 */
-draget_duplicate(draw_wid,dx,dy)
+void draget_duplicate(draw_wid,dx,dy)
 Widget draw_wid;
 int dx,dy;
 {
@@ -2080,7 +2129,7 @@ undo_flag = 1;
 }
 
 
-reset_bott_def(Widget draw_wid)
+void reset_bott_def(Widget draw_wid)
 {
 Widget bott_border_def, bott_border_selected;
 Widget bott_fill_def, bott_fill_selected;
@@ -2148,7 +2197,7 @@ void add_def_translation(Widget wid,char *stringa)
  LoadDrawPixmap
 	carica i bitmap per i bottoni di comando
 */
-LoadDrawPixmap(vett_pix,wid)
+void LoadDrawPixmap(vett_pix,wid)
 Pixmap *vett_pix; /* vettore dei bitmap */
 Widget wid;
 {
@@ -2206,7 +2255,7 @@ return(NULL);
  viene utilizzata una volta terminata la gestione dello
  spostamento delle connessione per una icona di regolazione
 */
-manage_all_conn(w)
+void manage_all_conn(w)
 Widget w; /* drawing area */
 {
 Draget dr;
@@ -2219,7 +2268,7 @@ while((dr=ListDragetNext(get_lista(w))) != NULL)
 }
 
 
-modifica_conn(wid,xfilo,yfilo,dx,dy,mode)
+void modifica_conn(wid,xfilo,yfilo,dx,dy,mode)
 Widget wid; /* drawing area */
 int xfilo,yfilo;
 int dx,dy;
@@ -2241,7 +2290,7 @@ if(dr=find_conn(wid,xfilo,yfilo,&num_estr))
 	}
 }
 
-DrawSelectConn(wid,x,y)
+void DrawSelectConn(wid,x,y)
 Widget wid;
 int x,y;
 {

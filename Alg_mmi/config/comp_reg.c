@@ -23,6 +23,9 @@ static char *_csrc = "@(#) %filespec: comp_reg.c-3 %  (%full_filespec: comp_reg.
 
 #include <sqlite3.h>
 
+extern int setvarenv_appl(char *,char *);
+extern Widget	create_ClipBoardComp();
+
 XtAppContext    UxAppContext;
 Widget          UxTopLevel;
 Display         *UxDisplay;
@@ -31,7 +34,7 @@ int             UxScreen;
 sqlite3 *db;
 
 
-main(argc,argv)
+int main(argc,argv)
 int	argc;
 char	*argv[];
 {

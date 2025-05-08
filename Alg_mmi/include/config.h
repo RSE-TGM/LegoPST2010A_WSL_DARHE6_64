@@ -17,6 +17,7 @@
 
 #include "pagresdef.h"
 #include <Xl/Xl.h>
+#include <Xd/XdLista.h>
 #include <Rt/RtMemory.h>
 
 
@@ -735,7 +736,7 @@ void * RtIntRecord(void *, char *, int);
 /*
 	ridefinizione delle chiamate 
 */
-#define RtRecord(punt)  RtIntRecord(punt,__FILE__,__LINE__)
+//#define RtRecord(punt)  RtIntRecord(punt,__FILE__,__LINE__)
 #define malloc(size)	RtMalloc(size,__FILE__,__LINE__)
 #define free(punt)	RtFree(punt,__FILE__,__LINE__)
 #define realloc(punt,size)	RtRealloc(punt,size,__FILE__,__LINE__)
@@ -745,13 +746,13 @@ void * RtIntRecord(void *, char *, int);
 #define XtFree(punt)	RtFree(punt,__FILE__,__LINE__)
 #define XtRealloc(punt,size)	RtRealloc(punt,size,__FILE__,__LINE__)
 #define XtCalloc(num_elet,size_ele)	RtCalloc(num_elet,size_ele,__FILE__,__LINE__)
-#define XtNewString(stringa)	RtNewString(stringa,__FILE__,__LINE__)
+//#define XtNewString(stringa)	RtNewString(stringa,__FILE__,__LINE__)
 // fine Estratto da RtMemory 
 
 char *alloca_memoria(int , int );
 int libera_memoria(char *);
 int new_save_context(PAGEDIT_CONTEXT *);
-int compile_all_reg();
+void compile_all_reg();
 Boolean ContextLoad();
 void SetMsg();
 void iconlib_buttCB(Widget ,int , XmAnyCallbackStruct *);
@@ -815,7 +816,31 @@ void get_punto_porta(Widget,int*,int*);
 int delete_estr_conn(Widget,int,int,int*,int*,int*,int*);
 void AddTransWid(PAGINA *,Widget );
 void DeselectAllDraget(Widget, Boolean);
-
+void FirstPointConn(Widget,XEvent *,GC);
+void EndDrawConn(Widget,XEvent *);
+Widget get_wid_icon_conn(Widget ,char *);
+ int compila_reg(PAGINA *, int, int);
+ Widget get_wid_port(Widget ,char *);
+ int dbcopy(XrmDatabase *,XrmDatabase *,Widget );
+ //void get_child(Widget ,WidgetList *,Cardinal *);
+ void get_child();
+ void XlOpenFileErrComp(char *);
+ void XlSetFileErrComp(char *);
+ //void copy_n_car(char *,char *,int);
+ void XlHeaderFileErrCompTask(char *);
+ void change_database();
+ int EstrWorkFile(char *, char *, char *);
+ int FileNameInproc(char *, char *, char *);
+ int esegui_comando(char*);
+ Boolean OlSetCompiler(WidgetList ,Cardinal num_widgets,OlCompilerObject );
+ void PostOpenPage2(Widget , char * , XrmDatabase );
+ Boolean XlCompilaWidget(XrmDatabase ,char * , WidgetList ,Cardinal );
+ void clip_set_lista(XdLista );
+ int UxGetIfClassCode( Widget  );
+ void XlHeaderFileErrComp(char *);
+ int file_no_exe_filter( char* );
+ void apply_gest_conn1(Widget);
+ 
 
 
 

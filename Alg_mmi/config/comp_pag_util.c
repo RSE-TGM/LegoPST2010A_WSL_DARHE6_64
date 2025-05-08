@@ -15,6 +15,7 @@ static char *_csrc = "@(#) %filespec: comp_pag_util.c-8 %  (%full_filespec: comp
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -162,7 +163,7 @@ int libera_memoria(char *punt)
 Boolean pagina_init(char *nomepag,PAGINA **pag ,int tipo)
 {
 
-   if( (*pag = alloca_memoria(1,sizeof(PAGINA))) == NULL)
+   if( (*pag = (PAGINA *)alloca_memoria(1,sizeof(PAGINA))) == NULL)
       return(False);
    /*
         setta a "" il campo elenco_wid
@@ -251,7 +252,7 @@ pag->snap_pag=get_step(pag->drawing);
 printf("PutResPaginaDb: snap_pag = %d\n",pag->snap_pag);
 */
 if(pag==NULL)
-        return;
+        return(False);
 
 for(i=0;i<num_res;i++)
         {
@@ -472,7 +473,7 @@ retval=GetResPaginaDb(pagina,pagina->db,True);
 
       /* inizializzazione dei descrittori degli widget sulla iconlib */
 
-      if( (*listaobj = alloca_memoria(pagina->num_widget,sizeof(AN_OBJ))) == NULL)
+      if( (*listaobj = (AN_OBJ *)alloca_memoria(pagina->num_widget,sizeof(AN_OBJ))) == NULL)
          return(False);
 
 

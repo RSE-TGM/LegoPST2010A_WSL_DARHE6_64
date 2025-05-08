@@ -19,6 +19,8 @@
 #include <Xm/Form.h>
 #include <Xm/Form.h>
 
+#include "libutilx.h"
+
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
@@ -53,6 +55,15 @@ extern swidget create_OneList();
 extern swidget create_TwoList();
 extern swidget create_PerturbEditor();
 Widget XlGetSelectedWidget (Widget );
+
+char *OlElencoVariabili (OlDatabaseTopologiaObject ,char *,char *,int );
+Boolean OlReadVariableString (OlDatabaseTopologiaObject ,char *, char **,char **,char **,char **, char **,int );
+char *XlGetFirstVcc (Widget );
+char *OlGetModelFromSubSystem (OlDatabaseTopologiaObject ,char *);
+char *OlElencoModelli (OlDatabaseTopologiaObject );
+char *WriteInpVariableString (OlDatabaseTopologiaObject,char *,char *,char *,Widget);
+char *WriteUniMisura (char *,Widget );
+
 
 
 /*******************************************************************************
@@ -421,7 +432,7 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	    set_something (ListaB[2], XmNsensitive, (void*) False);
 	    }
 	  Giusto = OlReadVariableString (Dbf,Description,&NomeModello,
-	                                &NomeBlocco,&NomeVar,&Perturba,&UniMisura,
+	                                &NomeBlocco,&NomeVar,&Perturba,(char**)&UniMisura,
 					TipoVariabile);
 	  }
 	else
@@ -466,7 +477,7 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	    strcpy (Description,(char *)XlGetFirstVcc (OggettoSelezionato));
 	    if (Description[0] != '\0')
 	      Giusto = OlReadVariableString (Dbf,Description,&NomeModello,
-	                                &NomeBlocco,&NomeVar,&Perturba,&UniMisura,
+	                                &NomeBlocco,&NomeVar,&Perturba,(char**)&UniMisura,
 					TipoVariabile);
 	    else
 	      {
@@ -1114,7 +1125,7 @@ static	void	activateCB_pushButton13( UxWidget, UxClientData, UxCallbackArg )
 	    else
 	      {
 	      Giusto = OlReadVariableString (Dbf,Stringa,&NomeMod,&NomeBl,&NomeVa,
-	                                       &Pert,&UniMisura,TipoVariabile);
+	                                       &Pert,(char**)&UniMisura,TipoVariabile);
 	      if (Giusto)
 	        {
 		XmTextFieldSetString (textNomeModello,NomeMod);

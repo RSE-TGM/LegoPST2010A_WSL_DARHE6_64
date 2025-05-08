@@ -32,12 +32,12 @@ static char SccsID[] = "@(#)uni_mis.c	5.1\t11/10/95";
 #include <stdlib.h>
 #include <uni_mis_val.h>
 #include <ctype.h>
+#include "sim_types.h"
 
 //#include <sim_types.h>
-static void init_umis();
-static int cerca_num_umis();
-static void agg_umis();
-static int cerca_umis(char*);
+ void init_umis();
+ void agg_umis();
+ int cerca_umis(char*);
 
 
 /*

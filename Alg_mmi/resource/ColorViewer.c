@@ -45,7 +45,8 @@
 #include <string.h>
 #include <Xm/Xm.h>
 #include "res_edit.h"
-
+#include "libutilx.h"
+extern  void *		UxNewContext();
 
 extern Display *UxDisplay;
 extern swidget create_ColorEditor();
@@ -229,7 +230,7 @@ static int	_ColorViewer_enableBlinkRate();
 Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-RilasciaDrawnButton (int IndiceSet)
+void RilasciaDrawnButton (int IndiceSet)
 {
 int i;
 
@@ -2082,13 +2083,13 @@ Widget	create_ColorViewer( _UxFlag, _UxStrInput, _UxLabButt, _UxPdb, _UxFigliINP
 		_UxIfClassId = UxNewClassId();
 		UxColorViewer_disableBlinkRate_Id = UxMethodRegister( _UxIfClassId,
 					UxColorViewer_disableBlinkRate_Name,
-					_ColorViewer_disableBlinkRate );
+					(void (*)())_ColorViewer_disableBlinkRate );
 		UxColorViewer_displayBlinkRate_Id = UxMethodRegister( _UxIfClassId,
 					UxColorViewer_displayBlinkRate_Name,
-					_ColorViewer_displayBlinkRate );
+					(void (*)())_ColorViewer_displayBlinkRate );
 		UxColorViewer_enableBlinkRate_Id = UxMethodRegister( _UxIfClassId,
 					UxColorViewer_enableBlinkRate_Name,
-					_ColorViewer_enableBlinkRate );
+					(void (*)())_ColorViewer_enableBlinkRate );
 		_Uxinit = 1;
 	}
 

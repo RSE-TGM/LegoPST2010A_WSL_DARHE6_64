@@ -389,11 +389,14 @@ int UxMethodRegister(int cid, char *name, void 	(*function) ())
  * LAST REV:	August 1994 fix5808 created
  *------------------------------------------------------------------------*/
 
+
+
+ static int UxGetIfClassCode( Widget  );
 #ifdef _NO_PROTO
 int	UxGetSwidgetClassCode(sw)
 	swidget sw;
 #else /* _NO_PROTO */
-int	UxGetSwidgetClassCode(swidget sw)
+int	UxGetSwidgetClassCode(swidget sw);
 #endif /* _NO_PROTO */
 {
 	if (sw)
@@ -401,6 +404,7 @@ int	UxGetSwidgetClassCode(swidget sw)
 
 	return -1;
 }
+
 
 /*------------------------------------------------------------------------
  * NAME:  UxGetClassCode
@@ -416,6 +420,10 @@ int	UxGetSwidgetClassCode(swidget sw)
  *
  * LAST REV:
  *------------------------------------------------------------------------*/
+
+ 
+
+ static int	UxGetClassCode(swidget );
 
 #ifdef _NO_PROTO
 int	UxGetClassCode(sw)

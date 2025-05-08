@@ -91,7 +91,8 @@
 
 #include "other.h"
 #include "ric_aing.h"
- 
+#include "res_edit.h"
+  
 
 extern Widget listDrawing[MAX_PAGE];
 extern swidget popup_topLevelShellStaz();
@@ -106,6 +107,7 @@ extern Boolean EsistePagina();
 static void refresh_page( );
 void SetCursorWait( );
 void UnsetCursorWait( );
+extern Boolean XlSetSomething(WidgetList ,Cardinal ,char * , char * , char * );
 
 
 /*******************************************************************************
@@ -250,7 +252,8 @@ static _UxCtopLevelShell1      *UxTopLevelShell1Context;
        The following function is an event-handler for posting menus.
 *******************************************************************************/
 
-static void	_UxtopLevelShell1MenuPost( wgt, client_data, event, ctd )
+//static void	_UxtopLevelShell1MenuPost( wgt, client_data, event, ctd )
+static void	_UxtopLevelShell1MenuPost( wgt, client_data, event)
 	Widget		wgt;
 	XtPointer	client_data;
 	XEvent		*event;

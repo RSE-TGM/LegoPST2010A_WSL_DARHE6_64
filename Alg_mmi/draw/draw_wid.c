@@ -48,7 +48,7 @@ gs_draw_ris(w,DR_REGION,&ret,False);
 return(ret);
 }
 
-set_region(Widget w, Region value)
+void set_region(Widget w, Region value)
 {
 gs_draw_ris(w,DR_REGION,&value,True);
 }
@@ -61,7 +61,7 @@ gs_draw_ris(w,DR_LINE_STYLE,&ret,False);
 return(ret);
 }
 
-set_line_style(Widget w, int value)
+void set_line_style(Widget w, int value)
 {
 gs_draw_ris(w,DR_LINE_STYLE,&value,True);
 }
@@ -73,7 +73,7 @@ gs_draw_ris(w,DR_LINE_WIDTH,&ret,False);
 return(ret);
 }
 
-set_line_width(Widget w, int value)
+int set_line_width(Widget w, int value)
 {
 gs_draw_ris(w,DR_LINE_WIDTH,&value,True);
 }
@@ -85,7 +85,7 @@ gs_draw_ris(w,DR_DEF_LINE_STYLE,&ret,False);
 return(ret);
 }
 
-set_def_line_style(Widget w, int value)
+int set_def_line_style(Widget w, int value)
 {
 gs_draw_ris(w,DR_DEF_LINE_STYLE,&value,True);
 }
@@ -97,7 +97,7 @@ gs_draw_ris(w,DR_DEF_LINE_WIDTH,&ret,False);
 return(ret);
 }
 
-set_def_line_width(Widget w, int value)
+int set_def_line_width(Widget w, int value)
 {
 gs_draw_ris(w,DR_DEF_LINE_WIDTH,&value,True);
 }
@@ -109,7 +109,7 @@ gs_draw_ris(w,DR_STEP,&ret,False);
 return(ret);
 }
 
-set_step(Widget w, int value)
+int set_step(Widget w, int value)
 {
 gs_draw_ris(w,DR_STEP,&value,True);
 }
@@ -121,7 +121,7 @@ gs_draw_ris(w,DR_GRID_ON,&ret,False);
 return(ret);
 }
 
-set_grid_on(Widget w, int value)
+int  set_grid_on(Widget w, int value)
 {
 gs_draw_ris(w,DR_GRID_ON,&value,True);
 }
@@ -133,7 +133,7 @@ gs_draw_ris(w,DR_DEF_FILLED,&ret,False);
 return(ret);
 }
 
-set_def_filled(Widget w, int value)
+int set_def_filled(Widget w, int value)
 {
 gs_draw_ris(w,DR_DEF_FILLED,&value,True);
 }
@@ -145,7 +145,7 @@ gs_draw_ris(w,DR_DEF_ZOOM,&ret,False);
 return(ret);
 }
 
-set_def_zoom(Widget w, float value)
+int set_def_zoom(Widget w, float value)
 {
 gs_draw_ris(w,DR_DEF_ZOOM,&value,True);
 }
@@ -157,7 +157,7 @@ gs_draw_ris(w,DR_GC,&ret,False);
 return(ret);
 }
 
-set_gc(Widget w, GC value)
+int set_gc(Widget w, GC value)
 {
 gs_draw_ris(w,DR_GC,&value,True);
 }
@@ -169,7 +169,7 @@ gs_draw_ris(w,DR_GC_BG,&ret,False);
 return(ret);
 }
 
-set_gc_bg(Widget w, GC value)
+int set_gc_bg(Widget w, GC value)
 {
 gs_draw_ris(w,DR_GC_BG,&value,True);
 }
@@ -181,7 +181,7 @@ gs_draw_ris(w,DR_DEF_GC,&ret,False);
 return(ret);
 }
 
-set_def_gc(Widget w, GC value)
+int set_def_gc(Widget w, GC value)
 {
 gs_draw_ris(w,DR_DEF_GC,&value,True);
 }
@@ -193,7 +193,7 @@ gs_draw_ris(w,DR_DEF_GC_BG,&ret,False);
 return(ret);
 }
 
-set_def_gc_bg(Widget w, GC value)
+int set_def_gc_bg(Widget w, GC value)
 {
 gs_draw_ris(w,DR_DEF_GC_BG,&value,True);
 }
@@ -205,7 +205,7 @@ gs_draw_ris(w,DR_BOTT_FILL,&ret,False);
 return(ret);
 }
 
-set_bott_fill(Widget w, Widget value)
+int set_bott_fill(Widget w, Widget value)
 {
 gs_draw_ris(w,DR_BOTT_FILL,&value,True);
 }
@@ -217,7 +217,7 @@ gs_draw_ris(w,DR_BOTT_BORDER,&ret,False);
 return(ret);
 }
 
-set_bott_border(Widget w, Widget value)
+int set_bott_border(Widget w, Widget value)
 {
 gs_draw_ris(w,DR_BOTT_BORDER,&value,True);
 }
@@ -229,7 +229,7 @@ gs_draw_ris(w,DR_DEF_BOTT_FILL,&ret,False);
 return(ret);
 }
 
-set_def_bott_fill(Widget w, Widget value)
+int set_def_bott_fill(Widget w, Widget value)
 {
 gs_draw_ris(w,DR_DEF_BOTT_FILL,&value,True);
 }
@@ -241,7 +241,7 @@ gs_draw_ris(w,DR_DEF_BOTT_BORDER,&ret,False);
 return(ret);
 }
 
-set_def_bott_border(Widget w, Widget value)
+int set_def_bott_border(Widget w, Widget value)
 {
 gs_draw_ris(w,DR_DEF_BOTT_BORDER,&value,True);
 }
@@ -253,13 +253,13 @@ gs_draw_ris(w,DR_BOTT_ARROW,&ret,False);
 return(ret);
 }
 
-set_bott_arrow(Widget w, Widget value)
+int set_bott_arrow(Widget w, Widget value)
 {
 gs_draw_ris(w,DR_BOTT_ARROW,&value,True);
 }
 
 
-init_st_draw(ST_DRAW_WID *st_draw)
+int init_st_draw(ST_DRAW_WID *st_draw)
 {
 st_draw->region= NULL;
 st_draw->def_zoom=1.0;

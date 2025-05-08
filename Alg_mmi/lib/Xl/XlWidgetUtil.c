@@ -1347,7 +1347,7 @@ else
  *								   *
  * Date: 27 Novembre 1995	Ver: 2.0
  *
- * (Rispetto alla versione precedente è stato aggiunto il parametro *
+ * (Rispetto alla versione precedente ï¿½ stato aggiunto il parametro *
  * frequenza)			   *
  *-----------------------------------------------------------------*/
 
@@ -1427,7 +1427,7 @@ Verifica se esistono altri oggetti con la stessa frequenza
 		else			
 			{
 /*
-counter=semiperiodo/BLANK_RATE(in ms):(cioè counter=n° di volte che XlBlink 
+counter=semiperiodo/BLANK_RATE(in ms):(cioï¿½ counter=nï¿½ di volte che XlBlink 
 viene invocata senza cambiare lo stato  di Blink dell' oggetto)
 */
 			lista_blink[i].counter=1000/(2*frequenza*BLINK_RATE);
@@ -1516,7 +1516,7 @@ int i;
 float XlGetBlink(Widget w,int ind)
 {
 /*
-fuzione utilizzata per vedere se un oggetto è già stato inserito
+fuzione utilizzata per vedere se un oggetto ï¿½ giï¿½ stato inserito
 nella lista_blink.Restituisce la frequenza dell' oggetto se trovato,
 altrimenti restituisce 0*/
 register int i;

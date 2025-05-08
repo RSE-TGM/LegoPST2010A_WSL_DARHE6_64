@@ -89,7 +89,7 @@ static void   expose_drawing( );
 void sistema_figli();
 Boolean CreaPagina();
 static Widget * CreoOggetti();
-get_punto_porta();
+static void get_punto_porta(Widget,int*,int*);
 Boolean su_porta();
 OlFormObject ResGetForm (Widget );
 void get_child();

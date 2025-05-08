@@ -36,17 +36,22 @@ static char SccsID[] = "@(#)UtilRes.c	5.2\t2/13/96";
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#if defined VMS
 #include <ctype.h>
-#endif
+
 #include <Xm/Xm.h>
 #include <Xm/Text.h>
+#include <Xm/List.h>
+#include <Xm/SelectioB.h>
 #include <X11/StringDefs.h>
 #include <X11/Intrinsic.h>
 #include <Xl/XlIconReg.h>
 #include <Xl/XlPort.h>
+#include <Xl/XlDispReg.h>
+
 #include <Ol/OlForm.h>
 #include "res_edit.h"
+
+#include "libutilx.h"
 
 
 /***************************************************************
@@ -207,7 +212,7 @@ strcpy (Misura,Larghezza);
 strcat (Misura,"x");
 strcat (Misura,Altezza);
 #ifndef VMS
-pdata = ActiveProgWithParameter ("bitmap",Nomefile,Misura,NULL);
+pdata = (PROG_DATA *)ActiveProgWithParameter ("bitmap",Nomefile,Misura,NULL);
 #else
 pdata = ActiveProgWithParameter (Ogg,"bitmap",Nomefile,Misura,NULL);
 #endif
@@ -233,7 +238,7 @@ if (XlIsIconReg(OSel))
   {
   printf ("Esegui Icona su IconReg\n");
 #ifndef VMS
-  pdata = ActiveProgWithParameter ("draw",Nomefile,"8","-bg",Colore,NULL);
+  pdata = (PROG_DATA *)ActiveProgWithParameter ("draw",Nomefile,"8","-bg",Colore,NULL);
 #else
   pdata = ActiveProgWithParameter (OSel,"draw",Nomefile,"8","-bg",Colore,NULL);
 #endif
@@ -242,7 +247,7 @@ else
   {
   printf ("Esegui Icona generica\n");
 #ifndef VMS
-  pdata = ActiveProgWithParameter ("draw","-bg",Colore,Nomefile,NULL);
+  pdata = (PROG_DATA *)ActiveProgWithParameter ("draw","-bg",Colore,Nomefile,NULL);
 #else
   pdata = ActiveProgWithParameter (OSel,"draw","-bg",Colore,Nomefile,NULL);
 #endif
@@ -263,7 +268,7 @@ PROG_DATA *EseguiBitmap (char *Nomefile,Widget Ogg)
 PROG_DATA *pdata;
 #ifndef ON_MMI 
 #ifndef VMS
-pdata = ActiveProgWithParameter ("bitmap",Nomefile,NULL);
+pdata = (PROG_DATA *)ActiveProgWithParameter ("bitmap",Nomefile,NULL);
 #else
 pdata = ActiveProgWithParameter (Ogg,"bitmap",Nomefile,NULL);
 #endif

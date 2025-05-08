@@ -455,7 +455,7 @@ static	void	activateCB_CutButton( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCapplicationShell1 *) UxGetContext( UxWidget );
 	{
 #ifndef ON_PAGEDIT
-	draget_cut(FinestraDraw);
+	draget_cutS(FinestraDraw);
 #endif
 	}
 	UxApplicationShell1Context = UxSaveCtx;
@@ -473,7 +473,7 @@ static	void	activateCB_CopyButton( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCapplicationShell1 *) UxGetContext( UxWidget );
 	{
 #ifndef ON_PAGEDIT
-	draget_copy(FinestraDraw);
+	draget_copyS(FinestraDraw);
 #endif
 	}
 	UxApplicationShell1Context = UxSaveCtx;

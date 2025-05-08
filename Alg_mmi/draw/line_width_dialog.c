@@ -13,6 +13,9 @@
 
 #include <Xm/SelectioB.h>
 
+#include <draw.h>
+#include "libutilx.h"
+
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
@@ -65,6 +68,8 @@ static _UxCline_width_dialog   *UxLine_width_dialogContext;
 *******************************************************************************/
 
 Widget	create_line_width_dialog();
+extern int set_line_width(Widget  , int );
+
 
 /*******************************************************************************
        The following are callback functions.

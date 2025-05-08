@@ -10,6 +10,9 @@
 #include <Xm/DialogS.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
+#include "draw.h"
+#include "libutilx.h"
+extern  void *		UxNewContext();
 
 #include <Xm/SelectioB.h>
 
@@ -65,6 +68,8 @@ static _UxCsnap_width_dialog   *UxSnap_width_dialogContext;
 *******************************************************************************/
 
 Widget	create_snap_width_dialog();
+void DrawSetSnap(Widget,int);
+extern int set_line_width(Widget  , int );
 
 /*******************************************************************************
        The following are callback functions.

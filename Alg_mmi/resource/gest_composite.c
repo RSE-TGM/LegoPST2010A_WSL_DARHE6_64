@@ -29,9 +29,16 @@ static char SccsID[] = "@(#)gest_composite.c	5.2\t2/13/96";
 */
 
 #include <stdio.h>
+
+
 #include <X11/Intrinsic.h>
 #include <Xm/Xm.h>
 #include <Rt/RtMemory.h>
+#include "libutilx.h"
+#include "res_edit.h"
+
+int XlSetResCompositeWidth(Widget,Dimension,XrmDatabase);
+int XlSetResourceByName(XrmDatabase *,String ,char *,char *);
 
 /*
  Ridimensione x e width di tutti i figli di un composite
@@ -44,7 +51,7 @@ static char SccsID[] = "@(#)gest_composite.c	5.2\t2/13/96";
  (gestione interna all'oggetto Composite) ma non viene
  riportata la modifica a livello di risorse.
 */
-XlSetResCompositeWidth(wid,new_width,Pdb)
+int XlSetResCompositeWidth(wid,new_width,Pdb)
 Widget wid;
 Dimension new_width;
 XrmDatabase Pdb;
@@ -101,7 +108,7 @@ if (old_width != new_width)
  a seguito del ridimensionamento del composite stesso
 */
 
-XlSetResCompositeHeight(wid,new_height,Pdb)
+void XlSetResCompositeHeight(wid,new_height,Pdb)
 Widget wid;
 Dimension new_height;
 XrmDatabase Pdb;

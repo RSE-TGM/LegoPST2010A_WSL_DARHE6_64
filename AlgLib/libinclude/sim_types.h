@@ -785,7 +785,6 @@ int CsPrepMsgDel(int , int );
 int nega(float);
 int CsPrepMsgS(char *, int , int , int , int tipo, int , int );
 int     msgesist (int);
-
-
+//void LoadBitmap(Widget);
 
 #endif /* Fine ifndef _sim_types_h */

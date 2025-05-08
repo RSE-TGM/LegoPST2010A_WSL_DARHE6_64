@@ -78,6 +78,7 @@ static int UndefinedMethod ();
 #else /* _NO_PROTO */
 static int UndefinedMethod (void);
 #endif /* _NO_PROTO */
+static int UxGetIfClassCode( Widget  );
 
 #ifdef XT_CODE
 static  XContext        xcontext_mid = 0;
@@ -98,6 +99,9 @@ static  XContext        xcontext_mid = 0;
  *	
  * LAST REV:	Feb 93	fix3910		Add support for subclassing.
  *------------------------------------------------------------------------*/
+
+ static int	UxGetClassCode(swidget );
+ static int UxMessageIndex(char*);
 
 #ifdef _NO_PROTO
 void* UxMethodLookup(sw, mid, mname) 

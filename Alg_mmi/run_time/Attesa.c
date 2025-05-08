@@ -66,7 +66,7 @@ Widget	popup_Attesa();
 Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-SettaAttesa(Widget wid,int delta)
+void SettaAttesa(Widget wid,int delta)
 {
 #ifndef DESIGN_TIME
 _UxCAttesa *Context;

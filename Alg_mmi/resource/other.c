@@ -34,6 +34,8 @@ static char SccsID[] = "@(#)other.c	5.3\t2/16/96";
 	File contenente tutte le routine di appoggio elaborate
 	esternamente a Uimx 
 ****************************************************************/
+#include <sys/types.h>
+#include <unistd.h> 
 #include <stdio.h>
 #include <stdarg.h>
 #include <signal.h>
@@ -50,13 +52,16 @@ static char SccsID[] = "@(#)other.c	5.3\t2/16/96";
 #include <Xm/TextF.h>
 #include <Xl/Xl.h>
 #include <Ol/OlDatabaseTopologia.h>
+#include <Ol/OlForm.h>
 #include <Xl/XlCoreP.h>
 #include <Xl/XlPort.h>
 #include <Xl/XlManager.h>
 #include <Xl/XlCompositeP.h>
 #include "res_edit.h"
 #include "config.h"
+#include "libutilx.h"
 #include "Lucchetto.bmp"
+//#include "other.h"
 
 extern int PushColorCB(),PushFontCB(),OptMenuCB(),OptResCB();
 extern int PushResCB(),TextResCB(),PushIconCB();
@@ -65,6 +70,7 @@ extern int PushCompCB(),PushSubSCB();
 extern int PushFormCB(),PushInputCB();
 extern Widget CreaPushButton(),CreaTextField();
 extern char *CvtPixToStr();
+OlFormObject ResGetForm (Widget );
 
 int NumGruppi = 7;
 char *Gruppi_resource [] = {	"Geometric",
@@ -444,7 +450,7 @@ Dimension width;
 	XtSetArg (args[narg], XmNmarginHeight, 0); narg++;
 	XtSetArg (args[narg], XmNmarginTop, 0); narg++;
 	XtSetArg (args[narg], XmNmarginBottom, 0); narg++;
-	if (width != NULL)
+	if (width != 0)
 	{
 		XtSetArg (args[narg], XmNrecomputeSize, FALSE ); narg++;
 		XtSetArg (args[narg], XmNwidth, width ); narg++;
@@ -525,7 +531,7 @@ char appo[300], immo[300];
 strcpy (s,"pushButt");
 StrLab=XmStringCreateSimple(conf.confinfo_name);
 Wid = CreaPushButton (RC,s,StrLab,250);
-XtAddCallback (Wid,XmNactivateCallback,PushColorCB,NumRiga);
+XtAddCallback (Wid,XmNactivateCallback,(XtCallbackProc)PushColorCB,(XtPointer)NumRiga);
 XmStringFree (StrLab);
 
 /*  Crea la label   */
@@ -555,7 +561,7 @@ sprintf(appo, "%s %f %d", Value, AnCol.blink_rate, AnCol.trasparent);
 printf("InserisciXlRAnimatedColor: contenuto = %s %f %d ", Value, AnCol.blink_rate, AnCol.trasparent);
 
 Wid = CreaTextField (RC,s,appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Value);
 
@@ -588,7 +594,7 @@ XmString StrLab;
 strcpy (s,"pushButt");
 StrLab=XmStringCreateSimple(conf.confinfo_name);
 Wid = CreaPushButton (RC,s,StrLab,250);
-XtAddCallback (Wid,XmNactivateCallback,PushColorCB,NumRiga);
+XtAddCallback (Wid,XmNactivateCallback,(XtCallbackProc)PushColorCB,(XtPointer)NumRiga);
 XmStringFree (StrLab);
 
 /*  Crea la label   */
@@ -598,7 +604,7 @@ InserisciLabelErr (conf,RC,Padre,TipoP);
 strcpy (s,"textfield");
 Value = (char *)CvtPixToStr (Padre,conf.resource_name);
 Wid = CreaTextField (RC,s,Value,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Value);
 }
@@ -619,7 +625,7 @@ Arg args[1];
 strcpy (s,"pushButt");
 StrLab=XmStringCreateSimple(conf.confinfo_name);
 Wid = CreaPushButton (RC,s,StrLab,250);
-XtAddCallback (Wid,XmNactivateCallback,PushFontCB,NumRiga);
+XtAddCallback (Wid,XmNactivateCallback,(XtCallbackProc)PushFontCB,(XtPointer)NumRiga);
 XmStringFree (StrLab);
 
 /*  Crea la label   */
@@ -631,7 +637,7 @@ XtSetArg (args[0], conf.resource_name,&Value);
 XtGetValues (Padre,args,1);
 Appo = XtNewString (Value);
 Wid = CreaTextField (RC,s,Appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Appo);
 }
@@ -688,7 +694,7 @@ while (token != NULL)
         strcpy (s2,"opt");
         StrLab = XmStringCreateSimple (token);
         Wid_push[k]=CreaPushButton(menu1_p1,s2,StrLab,NULL);
-        XtAddCallback (Wid_push[k],XmNactivateCallback,OptResCB,NumRiga);
+        XtAddCallback (Wid_push[k],XmNactivateCallback,(XtCallbackProc)OptResCB,(XtPointer)NumRiga);
         token = strtok (NULL,",");
         k++;
 	XmStringFree (StrLab);
@@ -743,7 +749,7 @@ XtGetValues (Padre,args,1);
 Value = (char *)XtCalloc (10,sizeof(char));
 sprintf (Value,"%d",dimen);
 Wid = CreaTextField (RC,s,Value,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Value);
 }
@@ -777,7 +783,7 @@ XtGetValues (Padre,args,1);
 Value = (char *)XtCalloc (10,sizeof(char));
 sprintf (Value,"%d",posiz);
 Wid = CreaTextField (RC,s,Value,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Value);
 }
@@ -803,7 +809,7 @@ Arg args[1];
 strcpy (s,"pushButt");
 StrLab=XmStringCreateSimple(conf.confinfo_name);
 Wid = CreaPushButton (RC,s,StrLab,250);
-XtAddCallback (Wid,XmNactivateCallback,PushVarInpCB,NumRiga);
+XtAddCallback (Wid,XmNactivateCallback,(XtCallbackProc)PushVarInpCB,(XtPointer)NumRiga);
 XmStringFree (StrLab);
 if (Db == NULL)
 	set_something (Wid, XmNsensitive, (void*) False);
@@ -817,7 +823,7 @@ XtSetArg (args[0], conf.resource_name,&Value);
 XtGetValues (Padre,args,1);
 Appo = XtNewString (Value);
 Wid = CreaTextField (RC,s,Appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Appo);
 }
@@ -838,7 +844,7 @@ Arg args[1];
 strcpy (s,"pushButt");
 StrLab=XmStringCreateSimple(conf.confinfo_name);
 Wid = CreaPushButton (RC,s,StrLab,250);
-XtAddCallback (Wid,XmNactivateCallback,PushVarRegCB,NumRiga);
+XtAddCallback (Wid,XmNactivateCallback,(XtCallbackProc)PushVarRegCB,(XtPointer)NumRiga);
 XmStringFree (StrLab);
 if (ResGetForm(Padre) == NULL)
 	set_something (Wid, XmNsensitive, (void*) False);
@@ -852,7 +858,7 @@ XtSetArg (args[0], conf.resource_name,&Value);
 XtGetValues (Padre,args,1);
 Appo = XtNewString (Value);
 Wid = CreaTextField (RC,s,Appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Appo);
 }
@@ -873,7 +879,7 @@ Arg args[1];
 strcpy (s,"pushButt");
 StrLab=XmStringCreateSimple(conf.confinfo_name);
 Wid = CreaPushButton (RC,s,StrLab,250);
-XtAddCallback (Wid,XmNactivateCallback,PushIconCB,NumRiga);
+XtAddCallback (Wid,XmNactivateCallback,(XtCallbackProc)PushIconCB,(XtPointer)NumRiga);
 XmStringFree (StrLab);
 
 /*  Crea la label   */
@@ -885,7 +891,7 @@ XtSetArg (args[0], conf.resource_name,&Value);
 XtGetValues (Padre,args,1);
 Appo = XtNewString (Value);
 Wid = CreaTextField (RC,s,Appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Appo);
 }
@@ -906,7 +912,7 @@ Arg args[1];
 strcpy (s,"pushButt");
 StrLab=XmStringCreateSimple(conf.confinfo_name);
 Wid = CreaPushButton (RC,s,StrLab,250);
-XtAddCallback (Wid,XmNactivateCallback,PushInputCB,NumRiga);
+XtAddCallback (Wid,XmNactivateCallback,(XtCallbackProc)PushInputCB,(XtPointer)NumRiga);
 XmStringFree (StrLab);
 
 /*  Crea la label   */
@@ -918,7 +924,7 @@ XtSetArg (args[0], conf.resource_name,&Value);
 XtGetValues (Padre,args,1);
 Appo = XtNewString (Value);
 Wid = CreaTextField (RC,s,Appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Appo);
 }
@@ -939,7 +945,7 @@ Arg args[1];
 strcpy (s,"pushButt");
 StrLab=XmStringCreateSimple(conf.confinfo_name);
 Wid = CreaPushButton (RC,s,StrLab,250);
-XtAddCallback (Wid,XmNactivateCallback,PushFormCB,NumRiga);
+XtAddCallback (Wid,XmNactivateCallback,(XtCallbackProc)PushFormCB,(XtPointer)NumRiga);
 XmStringFree (StrLab);
 
 /*  Crea la label   */
@@ -951,7 +957,7 @@ XtSetArg (args[0], conf.resource_name,&Value);
 XtGetValues (Padre,args,1);
 Appo = XtNewString (Value);
 Wid = CreaTextField (RC,s,Appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Appo);
 }
@@ -972,7 +978,7 @@ Arg args[1];
 strcpy (s,"pushButt");
 StrLab=XmStringCreateSimple(conf.confinfo_name);
 Wid = CreaPushButton (RC,s,StrLab,250);
-XtAddCallback (Wid,XmNactivateCallback,PushSubSCB,NumRiga);
+XtAddCallback (Wid,XmNactivateCallback,(XtCallbackProc)PushSubSCB,(XtPointer)NumRiga);
 XmStringFree (StrLab);
 
 /*  Crea la label   */
@@ -984,7 +990,7 @@ XtSetArg (args[0], conf.resource_name,&Value);
 XtGetValues (Padre,args,1);
 Appo = XtNewString (Value);
 Wid = CreaTextField (RC,s,Appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Appo);
 }
@@ -1005,7 +1011,7 @@ Arg args[1];
 strcpy (s,"pushButt");
 StrLab=XmStringCreateSimple(conf.confinfo_name);
 Wid = CreaPushButton (RC,s,StrLab,250);
-XtAddCallback (Wid,XmNactivateCallback,PushCompCB,NumRiga);
+XtAddCallback (Wid,XmNactivateCallback,(XtCallbackProc)PushCompCB,(XtPointer)NumRiga);
 XmStringFree (StrLab);
 
 /*  Crea la label   */
@@ -1017,7 +1023,7 @@ XtSetArg (args[0], conf.resource_name,&Value);
 XtGetValues (Padre,args,1);
 Appo = XtNewString (Value);
 Wid = CreaTextField (RC,s,Appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Appo);
 }
@@ -1038,7 +1044,7 @@ Arg args[1];
 strcpy (s,"pushButt");
 StrLab=XmStringCreateSimple(conf.confinfo_name);
 Wid = CreaPushButton (RC,s,StrLab,250);
-XtAddCallback (Wid,XmNactivateCallback,PushVarOutCB,NumRiga);
+XtAddCallback (Wid,XmNactivateCallback,(XtCallbackProc)PushVarOutCB,(XtPointer)NumRiga);
 XmStringFree (StrLab);
 if (Db == NULL)
 	set_something (Wid, XmNsensitive, (void*) False);
@@ -1052,7 +1058,7 @@ XtSetArg (args[0], conf.resource_name,&Value);
 XtGetValues (Padre,args,1);
 Appo = XtNewString (Value);
 Wid = CreaTextField (RC,s,Appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Appo);
 }
@@ -1084,7 +1090,7 @@ XtSetArg (args[0], conf.resource_name,&Value);
 XtGetValues (Padre,args,1);
 Appo = XtNewString (Value);
 Wid = CreaTextField (RC,s,Appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Appo);
 }
@@ -1118,7 +1124,7 @@ XtSetArg (args[0], conf.resource_name,&Valore);
 XtGetValues (Padre,args,1);
 sprintf (Value,"%g",Valore);
 Wid = CreaTextField (RC,s,Value,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Value);
 }
@@ -1152,7 +1158,7 @@ XtSetArg (args[0], conf.resource_name,&Valore);
 XtGetValues (Padre,args,1);
 sprintf (Value,"%d",Valore);
 Wid = CreaTextField (RC,s,Value,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Value);
 }
@@ -1184,7 +1190,7 @@ XtSetArg (args[0], conf.resource_name,&Value);
 XtGetValues (Padre,args,1);
 Appo = XtNewString (Value);
 Wid = CreaTextField (RC,s,Appo,100);
-XtAddCallback (Wid,XmNvalueChangedCallback,TextResCB,NumRiga);
+XtAddCallback (Wid,XmNvalueChangedCallback,(XtCallbackProc)TextResCB,(XtPointer)NumRiga);
 
 XtFree (Appo);
 }
@@ -1253,7 +1259,7 @@ return (ValRet);
         delle risorse appartenenti
 	al gruppo passato come parametro (Es: Geometric, Specific ...)
 *************************************************************/
-PrepListaRes (Widget Widres_rc, /* row column contenitore degli oggetti
+void PrepListaRes (Widget Widres_rc, /* row column contenitore degli oggetti
                                    descriventi il gruppo; es: 
 				   Geometric_RC     */
               Widget Figlio,    /* oggetto selezionato nella drawing area */

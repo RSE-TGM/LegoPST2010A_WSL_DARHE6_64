@@ -25,6 +25,9 @@
 #include <Xm/MainW.h>
 #include <X11/Shell.h>
 
+#include "libutilx.h"
+#include "draw.h"
+
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
@@ -1550,7 +1553,7 @@ static	void	activateCB_cutButton( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCdrawShell *) UxGetContext( UxWidget );
 	{
 	  printf("Cut!\n");
-	draget_cut(draw_wid);
+	draget_cutS(draw_wid);
 	}
 	UxDrawShellContext = UxSaveCtx;
 }
@@ -1567,7 +1570,7 @@ static	void	activateCB_copyButton( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCdrawShell *) UxGetContext( UxWidget );
 	{
 	  printf("Copy!\n");
-	  draget_copy(draw_wid);
+	  draget_copyS(draw_wid);
 	}
 	UxDrawShellContext = UxSaveCtx;
 }

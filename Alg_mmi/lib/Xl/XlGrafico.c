@@ -700,7 +700,8 @@ static void Seleziona();
 static void AddSelez();
 static void DoLayout();
 static void PopupInterno();
-extern void set_min_max(S_DATI *,S_XLGRAFICO *);
+static void set_min_maxGR(S_DATI *,S_XLGRAFICO *);
+extern void prep_str_timGR(float,float,Widget);
 
 
 #define POPUP_MENU_TRANS "#override <Btn2Down>: PopupInterno(%ld)"
@@ -1478,7 +1479,7 @@ else if (cw->grafico.tipo==RUN_GRAF)
   {
   if (cw->grafico.primo_refresh)
     {
-    set_min_max(NULL,pXlGraf);
+    set_min_maxGR(NULL,pXlGraf);
     argc = 0;
     /*  Ricavo i nomi delle variabili definite  */
     if(strlen (cw->grafico.nome_var[0]) != 0) 
@@ -1530,7 +1531,7 @@ else if (cw->grafico.tipo==RUN_GRAF)
     /*  Setto il valore del tempo finale  */
     t_finale = t_iniziale + cw->grafico.delta_tempo;
 
-    prep_str_tim (t_iniziale,t_finale,sg.w_draw);
+    prep_str_timGR (t_iniziale,t_finale,sg.w_draw);
     XClearArea (XtDisplay(sg.w_tim),XtWindow(sg.w_tim),0,0,0,0,True);
 
     strcpy (file_vis,cw->grafico.titolo_graf);
@@ -1555,7 +1556,7 @@ else if (cw->grafico.tipo==PLOT_GRAF)
   {
   if (cw->grafico.primo_refresh)
     {
-    set_min_max(NULL,pXlGraf);
+    set_min_maxGR(NULL,pXlGraf);
     argc = 0;
     /*  Ricavo i nomi delle variabili definite  */
     if(strlen (cw->grafico.nome_var[0]) != 0)
@@ -1585,7 +1586,7 @@ else if (cw->grafico.tipo==PLOT_GRAF)
     t_finale = t_iniziale + cw->grafico.delta_tempo;
     t_corrente = t_iniziale;
 
-    prep_str_tim (t_iniziale,t_finale,sg.w_draw);
+    prep_str_timGR (t_iniziale,t_finale,sg.w_draw);
     XClearArea (XtDisplay(sg.w_tim),XtWindow(sg.w_tim),0,0,0,0,True);
 
     strcpy (file_vis,cw->grafico.titolo_graf);
@@ -1999,7 +2000,7 @@ if ( UpdateBufdati (cw) )
 printf("RefreshRUN_GRAF DEBUG: t_iniziale = %f\tt_finale = %f\n",
        t_iniziale, t_finale);
 */
-  prep_str_tim (t_iniziale,t_finale,sg.w_draw);
+  prep_str_timGR (t_iniziale,t_finale,sg.w_draw);
   XClearArea (XtDisplay(sg.w_tim),XtWindow(sg.w_tim),0,0,0,0,True);
   XClearArea(XtDisplay (sg.w_draw),XtWindow(sg.w_draw),0,0,0,0,True);
   }
@@ -2284,7 +2285,7 @@ if( ind_buf == 0 || bufdati[ind_buf-1].t!= t_corrente)
 	if (sg.ind_mis[1] != -1) buf.mis[1] = bufdati[ind_buf-1].mis[1];
 	if (sg.ind_mis[2] != -1) buf.mis[2] = bufdati[ind_buf-1].mis[2];
 	if (sg.ind_mis[3] != -1) buf.mis[3] = bufdati[ind_buf-1].mis[3];
-	set_min_max (&buf,pXlGraf);
+	set_min_maxGR (&buf,pXlGraf);
 	if (sg.ind_mis[0] != -1) bufdati[ind_buf-1].mis[0] = buf.mis[0];
 	if (sg.ind_mis[1] != -1) bufdati[ind_buf-1].mis[1] = buf.mis[1];
 	if (sg.ind_mis[2] != -1) bufdati[ind_buf-1].mis[2] = buf.mis[2];
@@ -2404,4 +2405,54 @@ Wdg->grafico.input[0].pdb.nmod=modello;
 Wdg->grafico.input[0].pdb.origin=SIMULAID;
 
 return(True);
+}
+/**********************************************************
+ *  set_min_max
+ *      aggiorna i valori di minimo e massimo per ogni variabile 
+ *      appartenente al record.
+ *		se il parametro passato come argomento e' =NULL inizializza
+ *      a valori estremi i valori di minimo e massimo.
+ **********************************************************/
+void set_min_maxGR(rec,pXlGraf)
+S_DATI *rec;   /* record dati */
+S_XLGRAFICO *pXlGraf;
+{
+register int i;
+float delta;
+int variato;
+for(i=0;i<4;i++)
+  {
+  if(rec==NULL)
+    {
+    sg.var_min_max[i].max=(-1.0E-37);
+    sg.var_min_max[i].min=1.0E+38;
+    }
+  else
+    {
+    variato=0;
+    if(sg.var_min_max[i].min>rec->mis[sg.ind_mis[i]])
+      {
+      sg.var_min_max[i].min=rec->mis[sg.ind_mis[i]];
+      variato=1;
+      }
+
+    if(sg.var_min_max[i].max<rec->mis[sg.ind_mis[i]])
+      {
+      sg.var_min_max[i].max=rec->mis[sg.ind_mis[i]];
+      variato=1;
+      }
+
+    if(variato && (sg.var_min_max[i].max>=sg.var_min_max[i].min)
+          && (sg.var_min_max[i].max-sg.var_min_max[i].min)<=
+			(0.001*sg.var_min_max[i].max))
+      {
+      delta=sg.var_min_max[i].max * 0.001; 
+      if(delta <0.001)
+        delta=0.001;
+      sg.var_min_max[i].max+=delta;
+      sg.var_min_max[i].min-=delta;
+      }
+    }
+  }
+
 }

@@ -15,6 +15,29 @@
 #include <Xm/PushB.h>
 #include <Xm/RowColumn.h>
 #include <Xm/MainW.h>
+#include <Xm/Text.h>
+#include <Xm/TextF.h> // <--- AGGIUNGI QUESTO HEADER
+#include <Xm/List.h>
+
+/*
+#include <Xm/Xm.h>
+#include <Xm/XmP.h>
+#include <Xm/MwmUtil.h>
+#include <Xm/MenuShell.h>
+#include <Xm/CascadeB.h>
+#include <Xm/PushB.h>
+#include <Xm/RowColumn.h>
+#include <Xm/Label.h>
+#include <Xm/List.h>
+#include <Xm/Text.h>
+#include <Xm/TextF.h> // <--- AGGIUNGI QUESTO HEADER
+#include <Xm/ScrolledW.h>
+#include <Xm/Form.h>
+#include <Xm/PanedW.h>
+#include <Xm/MainW.h>
+*/
+
+
 #include <X11/Shell.h>
 
 /*******************************************************************************
@@ -44,9 +67,12 @@
  */
 
 #include <Ol/OlDatabaseTopologia.h>
+#include "libutilx.h"
 #include "res_edit.h"
 
 void InserisciElementi ( );
+char *OlGetSubSystem (OlDatabaseTopologiaObject );
+char *OlGetComponent (OlDatabaseTopologiaObject );
 
 
 /*******************************************************************************

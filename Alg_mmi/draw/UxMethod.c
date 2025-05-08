@@ -54,7 +54,7 @@ static char sccsid[] = "@(#)81	1.5  com/design/UxMethod.c, aic, aic324, 9322324 
 #	include "UxLib.h"
 #	include "method.h"
 #endif /* XT_CODE */
-
+static int UxGetIfClassCode( Widget wgt );
 
 #ifdef DESIGN_TIME
 #include "veos.h"

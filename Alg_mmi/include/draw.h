@@ -14,6 +14,10 @@
    data 11/13/95
    reserved @(#)draw.h	5.1
 */
+
+
+
+
 #ifndef _DRAW_H
 #define _DRAW_H
 #define LOCAL_GC_SET 0
@@ -76,9 +80,9 @@ enum ris_draw_wid {DR_REGION,
  risorse di draw_wid
 */
 extern Region get_region(Widget );
-extern int set_region(Widget , Region );
+extern void set_region(Widget , Region );
 extern int get_line_style(Widget );
-extern int set_line_style(Widget  , int );
+extern void set_line_style(Widget  , int );
 extern int get_line_width(Widget );
 extern int set_line_width(Widget  , int );
 extern int get_def_line_style(Widget );
@@ -113,5 +117,71 @@ extern Widget get_bott_arrow(Widget );
 extern int set_bott_arrow(Widget  , Widget );
 
 extern int init_st_draw(ST_DRAW_WID * );
+int set_current_gcs(Widget);
+
+extern  void *		UxNewContext();
+void LoadDrawPixmap(Pixmap *,Widget);
+void wselez_bott_fill(Widget);
+void add_def_translation(Widget ,char *);
+
+void wselez_bott_border(Widget);
+void aggiungi_pagedit_translation(Widget );
+void DeselectAllDraget(Widget, Boolean);
+void draget_duplicate(Widget,int,int);
+void draget_cut();
+void draget_cutS();
+//void draget_copy(Widget);
+void draget_paste(Widget);
+void DrawDelete(Widget,XEvent *);
+void DrawPutTop(Widget);
+void DrawPutBottom(Widget);
+void DrawGroup(Widget);
+void DrawUngroup(Widget);
+void DrawSetZoom(Widget,float);
+void DrawSetGrid(Widget);
+void set_current_filled(Widget,Boolean);
+void DrawSetSnap(Widget,int);
+void DrawSetSnap(Widget,int);
+//Widget	create_ColorViewer( int, unsigned char	*, XmString, XrmDatabase, Widget	*, Widget );
+Widget	create_ColorViewer();
+void undo_draget_copy(Widget,Widget);
+//void get_child(Widget ,WidgetList *,Cardinal *);
+void get_geometry(Widget ,Position *,Position *,Dimension  *,Dimension *);
+void XlRedisplay(Widget );
+void print_callback(Widget );
+void XdSetSnap();
+void append_redraw(Widget);
+void reset_bott_def(Widget );
+void XdSetFilled();
+void XdSetZoom();
+void set_arrow_mode(Widget);
+ void set_draw_translations();
+ void ListSetPosByDraget();
+ void SelectDragetRect();
+ void WriteBackground(Widget,char *);
+ int ListGetNumAllDraget();
+ void ReadBackground(Widget,char *);
+ void DrawSetZoom(Widget,float);
+ void XdChangeZoom();
+ int ListGetAll();
+ void XdDestroyDragetNoClear();
+ void XdRedrawDraget();
+ void XdRedrawDraget();
+ void XdClearDraget();
+ Boolean XdUngroupDraget();
+ Boolean XdMoveDraget();
+ Boolean XdEndMoveDraget();
+ void XdSetGC();
+ void draget_copy();
+ void draget_copyS();
+ int gs_draw_ris(Widget ,enum ris_draw_wid , void *,Boolean );
+ 
+
+
+
+
+
+
+
 
 #endif   /* _DRAW_H */

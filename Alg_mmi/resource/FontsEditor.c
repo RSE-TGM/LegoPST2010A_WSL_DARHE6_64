@@ -15,10 +15,13 @@
 #include <Xm/ScrolledW.h>
 #include <Xm/Label.h>
 #include <Xm/Text.h>
+#include <Xm/TextF.h> // <--- AGGIUNGI QUESTO HEADER
 #include <Xm/Frame.h>
 #include <Xm/PushBG.h>
 #include <Xm/Form.h>
 #include <X11/Shell.h>
+
+#include"libutilx.h"
 
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
@@ -250,7 +253,7 @@ char ** unique_nth_parts (fonts, fonts_len, nth, result_len)
  */ 
  
 /* compare the font strings. */ 
-comp(arg1,arg2) 
+int comp(arg1,arg2) 
         char **arg1; 
         char **arg2; 
 { 
@@ -530,7 +533,7 @@ static	void	singleSelectionCB_font_list_3( UxWidget, UxClientData, UxCallbackArg
 		char pattern[MAX_BUFSIZE];
 		XmListCallbackStruct *cbs = (XmListCallbackStruct *)UxCallbackArg;
 	
-		XmStringGetLtoR(cbs->item, XmSTRING_DEFAULT_CHARSET, &third_sel);
+		XmStringGetLtoR(cbs->item, XmSTRING_DEFAULT_CHARSET, (char **)&third_sel);
 		put_font (); 
 	}
 	UxFontsEditorContext = UxSaveCtx;
@@ -551,7 +554,7 @@ static	void	singleSelectionCB_font_list_2( UxWidget, UxClientData, UxCallbackArg
 		XmListCallbackStruct *cbs = (XmListCallbackStruct *)UxCallbackArg;
 	
 		/* Small memory leak */ 
-		XmStringGetLtoR(cbs->item, XmSTRING_DEFAULT_CHARSET, &second_sel);
+		XmStringGetLtoR(cbs->item, XmSTRING_DEFAULT_CHARSET, (char **)&second_sel);
 		
 		/* Set up list 3 */
 		load_list3();
@@ -574,7 +577,7 @@ static	void	singleSelectionCB_font_list_1( UxWidget, UxClientData, UxCallbackArg
 	{
 		XmListCallbackStruct *cbs = (XmListCallbackStruct *)UxCallbackArg;
 	
-		XmStringGetLtoR(cbs->item, XmSTRING_DEFAULT_CHARSET, &first_sel);
+		XmStringGetLtoR(cbs->item, XmSTRING_DEFAULT_CHARSET, (char **)&first_sel);
 		
 		/* Set up list 2 */
 		load_list2(); 

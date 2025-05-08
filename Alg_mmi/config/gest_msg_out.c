@@ -21,6 +21,11 @@ static char *_csrc = "@(#) %filespec: gest_msg_out.c-5 %  (%full_filespec: gest_
 #include <X11/Xlib.h>
 #include <X11/Intrinsic.h>
 
+#include <Xm/Xm.h>
+#include <Xm/Text.h>
+#include "config.h"
+#include "libutilx.h"
+
 /*
  Esecuzione di comando di shell con intercettazione dell'output
  e sua visualizzazione tramite la routine lc_errore
@@ -34,7 +39,7 @@ static char str[1001],mess[1001];
 extern int comm_found;
 
 
-gest_errore( char * StringaErrore, ... )
+int gest_errore( char * StringaErrore, ... )
 {
    va_list args;
 
@@ -101,7 +106,7 @@ gest_errore( char * StringaErrore, ... )
 
 
 
-esegui_comando(comando)
+int esegui_comando(comando)
 char *comando;
 {
 /*

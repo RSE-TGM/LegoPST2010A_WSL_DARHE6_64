@@ -169,8 +169,8 @@ LNKOBJ          = Resource.o\
 		  VariablesSelection.o\
                   snap_width_dialog.o\
                   line_width_dialog.o\
-                  drawShell.o\
 		  graphics.o\
+                  drawShell.o\
 		  ClipBoardUndo.o draw_wid.o
 
 
@@ -178,7 +178,10 @@ LIBRERIE = $(LEGOMMI_LIB)/libXl.a $(LEGOMMI_LIB)/libOl.a $(LEGOMMI_LIB)/libXd.a\
 		$(LEGOMMI_LIB)/libCs.a $(LEGOROOT_LIB)/libsmartkey.a
 
 
-OBJS = $(MAIN:.c=.o) $(INTERFACES:.c=.o) $(APPL_OBJS) $(LNK_OBJ)
+OBJS =   $(LNKOBJ) $(APPL_OBJS) $(INTERFACES:.c=.o) $(MAIN:.c=.o) 
+$(info -------->  DEBUG ALL_OBJS impostata a = $(OBJS))
+$(info -------->  )
+
 OBJS_REG = $(MAINREGCOMP:.c=.o) $(APPLREG_OBJS) 
 IFILES= $(INTERFACES:.c=.i) $(RESINTERFACES:.c=.i) $(VARINTERFACES:.c=.i) $(DRAWINTERFACES:.c=.i)
 all: $(EXECUTABLE) $(INTERFACES) $(RESINTERFACES) $(VARINTERFACES) \
@@ -191,7 +194,7 @@ all: $(EXECUTABLE) $(INTERFACES) $(RESINTERFACES) $(VARINTERFACES) \
 #
 
 $(EXECUTABLE): $(OBJS) $(LIBRERIE) $(LNKOBJ)
-	$(CC) $(LINKER_OPTIONS) $(OBJS)  $(LNKOBJ)  $(LIBPATH) $(LIBS) -o $(EXECUTABLE)
+	$(CC) $(LINKER_OPTIONS)  $(OBJS) $(LIBPATH) $(LIBS) -o $(EXECUTABLE)
 $(EXECREGCOMP): $(OBJS_REG)  $(LIBRERIE) 
 	$(CC) $(LINKER_OPTIONS) $(OBJS_REG) $(LIBPATH) $(LIBS) -o $(EXECREGCOMP)
 	@echo "done"

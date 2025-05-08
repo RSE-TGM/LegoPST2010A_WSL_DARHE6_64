@@ -62,6 +62,8 @@ static char SccsID[] = "@(#)regolazione.c	5.9\t3/19/96";
 #include <unixlib.h>
 #endif
 
+#include "libutilx.h"
+#include "utile.h"
 
 typedef struct s_porte {
 	int tipo;
@@ -110,7 +112,7 @@ int schema_presente(LST_SCHM *, char *, int );
 int rd_lst_schemi(LST_SCHM **, char *, char *);
 int wr_lst_schemi(LST_SCHM *lst, int ,char *);
 int compara_lst(LST_SCHM * , LST_SCHM *);
-int elimina_da_lista(char *, int, char *); 
+void elimina_da_lista(char *, int, char *); 
 int trova_in_lista(char *, char *, int, int);
 
 
@@ -513,7 +515,7 @@ get_child(pag->drawing,&children_get,&num_children);
 */
 children=(WidgetList)XtMalloc(num_children * sizeof(Widget));
 memcpy(children,children_get,num_children * sizeof(Widget));
-qsort(children, num_children, sizeof(Widget), Widgetcmp);
+qsort(children, num_children, sizeof(Widget), (__compar_fn_t)Widgetcmp);
 
 if( num_children==0 )
       {
@@ -1262,7 +1264,7 @@ char file_a[FILENAME_MAX];
       }
    fclose (f14);
 
-   qsort (varsch, nv, sizeof(VARS), strcmp);
+   qsort (varsch, nv, sizeof(VARS), (__compar_fn_t)strcmp);
    (*valori_letti) = nv;
 
    return(1);
@@ -1923,7 +1925,7 @@ FILE *fp;
     fp=fopen(file_lst,"w");
 
 /*  Ordinamento */
-    qsort(lst,nsche,sizeof(LST_SCHM),compara_lst);
+    qsort(lst,nsche,sizeof(LST_SCHM),(__compar_fn_t)compara_lst);
 
 /*  Scrittura */
     for(i=0;i<nsche;i++)
@@ -2084,7 +2086,7 @@ LST_SCHM *lst;
     dello schema presenti nel direttorio di lavoro; elimina il modulo 
     dalla libreria.
 */
-int elimina_da_lista(char *nome_pag, int tipo, char *filerr)
+void elimina_da_lista(char *nome_pag, int tipo, char *filerr)
 {
 LST_SCHM *lista;
 int numero_schemi;

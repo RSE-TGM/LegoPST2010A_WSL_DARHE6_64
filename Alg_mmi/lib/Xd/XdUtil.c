@@ -40,7 +40,7 @@ static double rint();
 void XdSnap(Draget,XEvent*);
 void XdCreaGCs(Widget,XdGC  *,GC *,GC *);
 void XdDestroyDraget(Draget);
-static DragetClass XdTagToClass(char*);
+ DragetClass XdTagToClass(char*);
 
 
 

@@ -63,6 +63,7 @@ static char SccsID[] = "@(#)iconinterf.c	5.4\t2/5/96";
 #include <Xm/DrawingA.h>
 
 #include "config.h"
+#include "utile.h"
 #include "message.h"
 #include "forme.h"     /* per topologia schemi regolazione */
 #include "top_icon.h"  /* per topologia schemi regolazione */
@@ -78,7 +79,7 @@ extern XtAppContext UxAppContext;
 extern Display *UxDisplay;
 extern Boolean StateInterfaceMode;
 extern OlConnObject conn_obj; /* oggetto OlConn (gestione connessioni) */
-extern *lista_macro;
+extern char*lista_macro;
 extern Boolean comm_found;
 
 /* 
@@ -99,7 +100,7 @@ extern char *OlEstrRegTaskName(char *, char *);
 extern Boolean PagIsOpen(char *);
 extern Boolean PagGetInUses(PAGINA *);
 extern Boolean GetInUseFromName(char *);
-extern copia_n(char *, char *, int );
+extern char *copia_n(char *, char *, int );
 extern char *getpul (char *, int , FILE *);
 extern int nome_underscore(char *, char *, int );
 extern int rd_lst_schemi(LST_SCHM **, char *, char *);

@@ -45,6 +45,7 @@ CFLAGS=$(C_FLAGS) -g
 #N.B. versione senza main_refresh.c
 .SUFFIXES:  .pf .o .f .c .sh .h .a
 FFLAGS=$(F_FLAGS)
+#echo $FFLAGS
 CFLAGS = -D$(OS) $(VERSIONE) -DUNIX
 #
 all: $(LEGO_BIN)/lg1a_exe $(LEGO_BIN)/lg4_exe $(LEGO_BIN)/edi14_exe \

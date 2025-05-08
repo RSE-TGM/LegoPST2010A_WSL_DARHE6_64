@@ -69,7 +69,9 @@ int    mmiMaxConErr=3;
 
 sqlite3 *db;
 
-main(argc,argv)
+void read_argv(int , char **);
+
+int main(argc,argv)
 	int 	argc;
 	char 	*argv[];
 {

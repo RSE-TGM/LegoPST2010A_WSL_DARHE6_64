@@ -61,7 +61,7 @@ extern void add_def_translation();
 
 
 extern int estrai_nome(char *, char *);
-extern int elimina_da_lista(char *, int, char *);
+extern void elimina_da_lista(char *, int, char *);
 extern char *alloca_memoria();
 
 extern XdLista get_lista();
@@ -484,7 +484,7 @@ Cardinal num_children;
 perc_zoom= 100.0 * fatt_zoom;
 get_child(drawing,&children,&num_children);
 for(i=0;i<num_children;i++)
-      set_something(children[i],XlNfattZoom,(char*) perc_zoom);
+      set_something(children[i],XlNfattZoom,(void*) perc_zoom);
 }
 
 /*--------------------------------------------------------
@@ -918,12 +918,12 @@ void pagina_setta_resource(PAGINA *pag)
 {
    Pixel pix;
 
-   set_something(pag->topwidget,XmNx,(char*) pag->geom.x);
-   set_something(pag->topwidget,XmNy,(char*) pag->geom.y);
-   set_something(pag->topwidget,XmNwidth,(char*) pag->geom.width);
-   set_something(pag->topwidget,XmNheight,(char*) pag->geom.height);
-   set_something(pag->drawing,XmNwidth,(char*) pag->geom.draw_width);
-   set_something(pag->drawing,XmNheight,(char*) pag->geom.draw_height);
+   set_something(pag->topwidget,XmNx,(void*) pag->geom.x);
+   set_something(pag->topwidget,XmNy,(void*) pag->geom.y);
+   set_something(pag->topwidget,XmNwidth,(void*) pag->geom.width);
+   set_something(pag->topwidget,XmNheight,(void*) pag->geom.height);
+   set_something(pag->drawing,XmNwidth,(void*) pag->geom.draw_width);
+   set_something(pag->drawing,XmNheight,(void*) pag->geom.draw_height);
    DrawSetSnap(pag->drawing,pag->snap_pag);
 
    /*

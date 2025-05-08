@@ -18,6 +18,9 @@
 #include <Xm/MainW.h>
 #include <X11/Shell.h>
 
+#include "libutilx.h"
+#include "res_edit.h"
+
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/

@@ -5,21 +5,31 @@
 *******************************************************************************/
 
 #include <stdio.h>
+
 #include <Xm/Xm.h>
+#include <Xm/XmP.h>
 #include <Xm/MwmUtil.h>
 #include <Xm/MenuShell.h>
-#include "UxXt.h"
-
 #include <Xm/CascadeB.h>
 #include <Xm/PushB.h>
 #include <Xm/RowColumn.h>
 #include <Xm/Label.h>
 #include <Xm/List.h>
+#include <Xm/Text.h>
+#include <Xm/TextF.h> // <--- AGGIUNGI QUESTO HEADER
 #include <Xm/ScrolledW.h>
 #include <Xm/Form.h>
 #include <Xm/PanedW.h>
 #include <Xm/MainW.h>
+
 #include <X11/Shell.h>
+#include "UxXtGets.h"
+
+#include "UxXt.h"
+
+
+extern char *CvtPixToStr (Widget ,char *);
+Boolean XlIsPixvar( Widget  );
 
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
@@ -55,6 +65,8 @@
 #include <Xl/XlPixvar.h>
 #include <Ol/OlDatabaseTopologia.h>
 #include <Ol/OlForm.h>
+
+#include "libutilx.h"
 #include "res_edit.h"
 #include "config.h"
 
@@ -182,6 +194,9 @@ Widget	CoreItem;
 
 Widget	create_Resource();
 
+void PrepListaRes (Widget , Widget ,  int ,  OlDatabaseTopologiaObject Dbt, int );
+int EseguiControlliInput (XlConfInfo,XrmDatabase,Widget,Widget*);
+ 
 /*******************************************************************************
 Auxiliary code from the Declarations Editor:
 *******************************************************************************/
@@ -1120,7 +1135,7 @@ Dimension width;
         XtSetArg (args[narg], XmNmarginHeight, 0); narg++;
         XtSetArg (args[narg], XmNmarginTop, 0); narg++;
         XtSetArg (args[narg], XmNmarginBottom, 0); narg++;
-        if (width != NULL)
+        if (width != 0)
         {
                 XtSetArg (args[narg], XmNrecomputeSize, FALSE ); narg++;
                 XtSetArg (args[narg], XmNwidth, width ); narg++;
@@ -1160,7 +1175,7 @@ printf("CreaOptionMenu: Gruppi_resource[%d]=%s \n", i, Gruppi_resource[i]);
                 StrLab = XmStringCreateSimple (label_butt);
                 ButtGruppi[i] = (Widget )CreaPushButton (ogg, "optbt",
 					StrLab, NULL);
-                XtAddCallback (ButtGruppi[i],XmNactivateCallback, OptMenuCB,i);
+                XtAddCallback (ButtGruppi[i],XmNactivateCallback, (XtCallbackProc)OptMenuCB,(XtPointer)i);
 		XtFree (label_butt);
 		XmStringFree (StrLab);
         }
