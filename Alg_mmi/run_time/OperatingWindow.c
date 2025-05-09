@@ -76,6 +76,18 @@ static void no_closeMWM();
 static Widget CreoOggettiOW();
 static Boolean CreaPaginaOW();
 
+extern void* UxMethodLookup(Widget , int , char*);
+Boolean OlGetDatiMiniASD(OlDatabasePuntiObject , DATI_ALLARMI_SHM *, DATI_ALLARMI_SHM *,int );
+Boolean OlSetDatabasePunti(WidgetList ,Cardinal ,OlDatabasePuntiObject );
+Boolean XlIsOperableKeysImp( Widget  );
+Boolean XlIsOperableKeysExec( Widget  );
+Boolean XlIsOperableKeysExec( Widget );
+int OlElimina_shmMiniASD(OlDatabasePuntiObject ,int );
+int UxNewClassId();
+int UxMethodRegister(int , char *, void (*) ());
+int	UxPutClassCode( Widget , int );
+
+
 extern AN_PAG *pagine;
 extern PAGINE_APERTE *el_pagine;
 extern int num_el_pagine;
@@ -1466,7 +1478,7 @@ static void	Ux_chPage( UxThis, pEnv, w, nomePg, tipoApertura )
 	
 	      ind_pag=NumeroPagina(nomePg);
 	    
-	      if( (Detail = (Widget *)XtRealloc( Detail, sizeof(Widget) * (numDetail+1))) == NULL)
+	      if( (Detail = (Widget *)XtRealloc( (char*)Detail, sizeof(Widget) * (numDetail+1))) == NULL)
 	      {
 	          fprintf(stderr,"OW: Error in allocation of Detail list\n");
 	          return;
@@ -1664,9 +1676,9 @@ static int	Ux_DestroyExt1( UxThis, pEnv )
 	if(num_allarm)
 	   {  
 	    XtDestroyWidget(formAllarm);
-	    XtFree(all_caiAll_form);
-	    XtFree(all_label);
-	    XtFree(all_caiAll);
+	    XtFree((char*)all_caiAll_form);
+	    XtFree((char*)all_label);
+	    XtFree((char*)all_caiAll);
 	   /*
 	   Metto a 0 num_allarm per bloccare XlRefresh
 	   */
@@ -1682,9 +1694,9 @@ static int	Ux_DestroyExt1( UxThis, pEnv )
 	if(num_manual)
 	   {  
 	    XtDestroyWidget(formManual);
-	    XtFree(all_caiMan_form);
-	    XtFree(man_label);
-	    XtFree(all_caiMan);
+	    XtFree((char*)all_caiMan_form);
+	    XtFree((char*)man_label);
+	    XtFree((char*)all_caiMan);
 	   /*
 	   Metto a 0 num_manual per bloccare XlRefresh
 	   */
@@ -1780,7 +1792,7 @@ static Boolean	Ux_closeOW( UxThis, pEnv )
 	if(flag_aperture && (indice>=0))
 	      {
 	       if((OlElimina_shmMiniASD(database_simulatore,indice)<0))
-	          printf(stderr,"ERROR: impossible to destroy shm for this O.W indice=%d\n",indice);
+	          fprintf(stderr,"ERROR: impossible to destroy shm for this O.W indice=%d\n",indice);
 	      }
 	/* 
 	chiudo la finestra 
@@ -2184,12 +2196,12 @@ static	void	activateCB_bOpenExt1( UxWidget, UxClientData, UxCallbackArg )
 	   if(indice>=0)
 	      {
 	       if((OlElimina_shmMiniASD(database_simulatore,indice)<0))
-	          printf(stderr,"ERROR: impossible to destroy shm for this O.W indice=%d\n",indice);
+	          fprintf(stderr,"ERROR: impossible to destroy shm for this O.W indice=%d\n",indice);
 	      indice=-1;
 	      }
 	
 	   flag_aperture=0; 
-	   XtFree(gerarchie);
+	   XtFree((char*)gerarchie);
 	/*
 	Chiamo il metodo con cui  distruggo widget contenuti nella EW1
 	*/
@@ -2787,43 +2799,43 @@ Widget	create_OperatingWindow( _UxUxParent, _Uxopw, _UxOWpag, _UxParentDb )
 		_UxIfClassId = UxNewClassId();
 		UxOperatingWindow_reqAlarms_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_reqAlarms_Name,
-					_OperatingWindow_reqAlarms );
+					(void (*)())_OperatingWindow_reqAlarms );
 		UxOperatingWindow_CreateExt1_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_CreateExt1_Name,
-					_OperatingWindow_CreateExt1 );
+					(void (*)())_OperatingWindow_CreateExt1 );
 		UxOperatingWindow_OpenExt1_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_OpenExt1_Name,
-					_OperatingWindow_OpenExt1 );
+					(void (*)())_OperatingWindow_OpenExt1 );
 		UxOperatingWindow_OpenExt2_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_OpenExt2_Name,
-					_OperatingWindow_OpenExt2 );
+					(void (*)())_OperatingWindow_OpenExt2 );
 		UxOperatingWindow_configBottoni_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_configBottoni_Name,
-					_OperatingWindow_configBottoni );
+					(void (*)())_OperatingWindow_configBottoni );
 		UxOperatingWindow_chPage_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_chPage_Name,
-					_OperatingWindow_chPage );
+					(void (*)())_OperatingWindow_chPage );
 		UxOperatingWindow_SetDescr_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_SetDescr_Name,
-					_OperatingWindow_SetDescr );
+					(void (*)())_OperatingWindow_SetDescr );
 		UxOperatingWindow_decorationToggle_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_decorationToggle_Name,
-					_OperatingWindow_decorationToggle );
+					(void (*)())_OperatingWindow_decorationToggle );
 		UxOperatingWindow_DestroyExt1_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_DestroyExt1_Name,
-					_OperatingWindow_DestroyExt1 );
+					(void (*)())_OperatingWindow_DestroyExt1 );
 		UxOperatingWindow_closeOW_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_closeOW_Name,
-					_OperatingWindow_closeOW );
+					(void (*)())_OperatingWindow_closeOW );
 		UxOperatingWindow_debug_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_debug_Name,
-					_OperatingWindow_debug );
+					(void (*)())_OperatingWindow_debug );
 		UxOperatingWindow_abilitaOpKeys_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_abilitaOpKeys_Name,
-					_OperatingWindow_abilitaOpKeys );
+					(void (*)())_OperatingWindow_abilitaOpKeys );
 		UxOperatingWindow_ricMiniASD_Id = UxMethodRegister( _UxIfClassId,
 					UxOperatingWindow_ricMiniASD_Name,
-					_OperatingWindow_ricMiniASD );
+					(void (*)())_OperatingWindow_ricMiniASD );
 		UxLoadResources( "OperatingWindow.rf" );
 		_Uxinit = 1;
 	}
@@ -2935,12 +2947,12 @@ Widget	create_OperatingWindow( _UxUxParent, _Uxopw, _UxOWpag, _UxParentDb )
 		/* mi serve solo per caricare il time_ref
 		*/
 		if(!GetResTopLevel(opw,&OWtop_x,&OWtop_y,&OWtop_width,&OWtop_height,&OWtime_ref,
-				&OWtop_tipo,&OWtop_descrizione))
+				(char **)&OWtop_tipo,(char **)&OWtop_descrizione))
 			return(False);
 		
 		/* recupero le risorse della drawing area
 		*/
-		if(!GetResDrawing(opw,&drawing_width,&drawing_height,&drawing_background,&drawing_pixmap))
+		if(!GetResDrawing(opw,&drawing_width,&drawing_height,(Pixel *)&drawing_background,&drawing_pixmap))
 				return(False);
 		
 		/* recupero la dimensione della extension2 dalla risorsa

@@ -38,6 +38,7 @@ static char SccsID[] = "@(#)OlSetRes.c	5.1\t11/13/95";
 #include <Xl/XlCoreP.h>
 #include <Xl/XlManagerP.h>
 
+
 Boolean OlSetPert(WidgetList widget,Cardinal num_widgets,OlPertObject pert)
 {
    XlCoreClassRec *wCoreClass;

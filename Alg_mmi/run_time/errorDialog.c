@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+//#include <Xl/Xl.h>
 #include <Xm/Xm.h>
 #include <Xm/MwmUtil.h>
 #include <Xm/DialogS.h>
@@ -12,6 +13,11 @@
 #include "UxXt.h"
 
 #include <Xm/MessageB.h>
+
+#include <Ol/OlPert.h>
+
+#include <Ol/OlDatabasePunti.h>
+
 
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
@@ -83,7 +89,7 @@ Widget	create_errorDialog();
 Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-CursorErrFree(Widget wid,Cursor cur)
+void CursorErrFree(Widget wid,Cursor cur)
 {
 XlUnsetCursor(wid);
 XlFreeCursor(wid,cur);
@@ -256,10 +262,10 @@ Widget	create_errorDialog( _UxErrore, _UxTopError )
 		XlSetCursor(errorDialog,cursor_errore);
 		set_something(errorDialog,XmNmessageString,
 				(void*) XmStringCreateLtoR(Errore, XmSTRING_DEFAULT_CHARSET));
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,FontLabelError);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,FontLabelError);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,FontLabelError);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),(void*) XmNfontList,FontLabelError);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,(char*)FontLabelError);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,(char*)FontLabelError);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,(char*)FontLabelError);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),(void*) XmNfontList,(char*)FontLabelError);
 		sprintf(message,"%s\n",Errore);
 		show_warning(message);
 		return(rtrn);

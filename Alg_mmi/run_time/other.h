@@ -21,6 +21,8 @@
 
 #include <Rt/RtMemory.h>
 
+#include "libutilx.h"
+
 
 /*
 	definizioni per i parametri sulla linea di comando
@@ -221,36 +223,36 @@ typedef struct pagine_aperte_st{
 /************* Carlo 14-11-96
 
 Boolean EsistePagina(char*);
-int NumeroPagina(char*);
-Boolean CreaPagina(Widget, WidgetList *, int *);
-Boolean DistruggiPagina(WidgetList , int );
-XrmDatabase CaricaDB(Display *,char*);
-Boolean GetResTopLevel(Widget ,int *, int *, int *, int *, int*, char **, char **);
-Boolean GetResDrawing(Widget, int *,int *, Pixel *);
+   int NumeroPagina(char*);
+   Boolean CreaPagina(Widget, WidgetList *, int *);
+   Boolean DistruggiPagina(WidgetList , int );
+   XrmDatabase CaricaDB(Display *,char*);
+   Boolean GetResTopLevel(Widget ,int *, int *, int *, int *, int*, char **, char **);
+   Boolean GetResDrawing(Widget, int *,int *, Pixel *);
 Boolean GetDescrPag(Widget, char* , char **, char **);
-Boolean LoadBitmap(Widget, Pixmap * ,char *, int, int);
-int InsElencoPagine(char *, WidgetList , int, int);
-Boolean DelElencoPagine(int,Widget);
-Boolean PreparaTestoInfo(Widget, char *);
+    Boolean LoadBitmap(Widget, Pixmap * ,char *, int, int);
+    int InsElencoPagine(char *, WidgetList , int, int);
+    Boolean DelElencoPagine(int,Widget);
+    Boolean PreparaTestoInfo(Widget, char *);
 Boolean ScriviTestoInfo(Widget,FILE  *);
-Boolean LoadFont(char *, XmFontList *, Display *);
-Boolean FreeFont(XmFontList, Display *);
-Boolean SettaSelect();
-Boolean PrintScreen(Widget, char *, char*, Boolean, BCK_OBJ *);
-Widget PrintSetup(Widget);
+   Boolean LoadFont(char *, XmFontList *, Display *);
+   Boolean FreeFont(XmFontList, Display *);
+   Boolean SettaSelect();
+   Boolean PrintScreen(Widget, char *, char*, Boolean, BCK_OBJ *);
+   Widget PrintSetup(Widget);
 void show_warning(char*);
-void SalvaContextBin();
-Boolean CaricaContextBin();
-void AllocaColoriSfondo(Widget ,BCK_OBJ *);
+   void SalvaContextBin();
+   Boolean CaricaContextBin();
+   void AllocaColoriSfondo(Widget ,BCK_OBJ *);
 Boolean ActivatePlot(Widget,Widget , char *,Widget *);
    Boolean ActivateAing(Widget ,Widget , char *,Widget *);
    Boolean ActivateChangeVar(Widget ,Widget ,Widget *);
 void ActivateVarAing(Widget *);
 void ActivateVarPlot(Widget *);
 int SettaIndicAing(Widget, char*,float,float);
-void StopAing();
+   void StopAing();
 Boolean PosMouse(Widget , int *, int *);
-Boolean CloseAllPages(AN_DISPLAY *, int);
+   Boolean CloseAllPages(AN_DISPLAY *, int);
 Boolean PaginaAperta(Widget , char* );
 int NumPagineAperte();
    Boolean CanOpenPage();
@@ -262,10 +264,11 @@ int SettaGrafPlot(Widget, char*,float,float);
 void WriteDbPlot();
 void WriteDbAing();
 Widget ToTopLevel(Widget);
-Boolean RaisePlotAing();
-Boolean CanClosePage(char *);
+   Boolean RaisePlotAing();
+   Boolean CanClosePage(char *);
 
 **********************/
+
 
 Boolean ActivateChangeVar(Widget ,Widget ,Widget *);
 Widget popup_errorDialog(char *, Widget );
@@ -278,6 +281,62 @@ Boolean PaginaAperta(Widget ,char* );
 Boolean CanOpenPage();
 Widget	popup_Attesa( Widget );
 void SettaAttesa(Widget ,int );
+void show_warning(char*);
+int XlRefreshWidget(WidgetList ,Cardinal );
+XrmDatabase CaricaDB(Display *,char*);
+Boolean DistruggiPagina(WidgetList , int );
+Boolean CreaPagina(Widget, WidgetList *, int *);
+int NumeroPagina(char*);
+Boolean DelElencoPagine(int,Widget);
+void ClosePageSin(Widget );
+Boolean CanClosePage(char *);
+Widget	popup_CloseQuestion();
+Boolean PrintScreen(Widget, char *, char*, Boolean, BCK_OBJ *);
+Widget PrintSetup(Widget);
+Boolean GetResTopLevel(Widget ,int *, int *, int *, int *, int*, char **, char **);
+//Boolean GetResDrawing(Widget, int *,int *, Pixel *);
+Boolean GetResDrawing(Widget , int *, int *, Pixel *,Pixmap *);
+void AllocaColoriSfondo(Widget ,BCK_OBJ *);
+Boolean LoadFont(char *, XmFontList *, Display *);
+int InsElencoPagine(char *, WidgetList , int, int);
+Boolean RaisePlotAing();
+Boolean PreparaTestoInfo(Widget, char *);
+Boolean FreeFont(XmFontList, Display *);
+Boolean XlIsXlCore(Widget );
+Boolean XlIsXlComposite(Widget );
+void CursorErrFree(Widget ,Cursor );
+void XlUnsetCursor(Widget );
+Boolean XlFreeCursor(Widget , Cursor );
+Boolean PutPagBackground();
+
+extern  void *		UxNewContext();
+void StopAing();
+Widget ToTopLevel(Widget );
+Cursor XlCreateErrCursor(Widget wid);
+void XlSetCursor(Widget , Cursor );
+int creaOlDbPunti(char *,Widget);
+Widget popup_Warning_sim(char *, Widget );
+Boolean CloseAllPages(AN_DISPLAY *, int);
+
+Boolean OlDestroyPert( );
+int OlDatabasePuntiType( );
+OlPertObject OlCreatePert( );
+
+Boolean CaricaContextBin();
+void SalvaContextBin();
+Boolean SettaSelect();
+Boolean Build_OlTree( );
+Widget	create_topLevelShell1();
+void ClosePageStaz(Widget );
+
+int pert_malfunction_stop(int ,int ,float );
+void WriteDbPlot();
+int SettaGrafPlot(Widget , char *,float , float );
+Boolean LoadBitmap(Widget, Pixmap * ,char *, int, int);
+
+
+
+
 
 
 #endif

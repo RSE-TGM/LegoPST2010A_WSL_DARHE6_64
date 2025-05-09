@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <Xm/MwmUtil.h>
 #include <Xm/MenuShell.h>
@@ -254,7 +255,7 @@ Boolean alldisp=False;   /* la prima startup page va su tutti i
                             display configurati (default No)*/
 
 extern char path_sim_correct[FILENAME_MAX];
-extern popup_Warning_sim();
+// extern popup_Warning_sim();
 
 
 static	int _UxIfClassId;
@@ -365,6 +366,7 @@ static void	_UxtopLevelShellMainMenuPost( wgt, client_data, event, ctd )
 	Widget		wgt;
 	XtPointer	client_data;
 	XEvent		*event;
+	int		ctd;
 
 {
 	Widget	menu = (Widget) client_data;
@@ -980,7 +982,7 @@ if(XmListGetSelectedPos(listPage,&items,&num))
 	RtRecord(items);
 	printf("Selezionato item n = %d\n",items[0]);
 	OpenNewPage(items[0]);
-	XtFree(items);
+	XtFree((char*)items);
 	}
 else
 	popup_errorDialog("No item selected",listPage);
@@ -1864,7 +1866,7 @@ Widget	popup_topLevelShellMain()
 		_UxIfClassId = UxNewClassId();
 		UxtopLevelShellMain_createOlDbPunti_Id = UxMethodRegister( _UxIfClassId,
 					UxtopLevelShellMain_createOlDbPunti_Name,
-					_topLevelShellMain_createOlDbPunti );
+					(void (*)())_topLevelShellMain_createOlDbPunti );
 		_Uxinit = 1;
 	}
 

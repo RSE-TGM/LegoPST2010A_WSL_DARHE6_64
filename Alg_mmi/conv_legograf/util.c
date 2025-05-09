@@ -38,6 +38,17 @@ extern char path_pag[255];
 int num_obj=0;
 char elenco_wid[8000];
 
+void read_polyline(FILE *,FILE *);
+void read_solid(FILE *,FILE *);
+void read_circle(FILE *,FILE *);
+void sistema_file(char *);
+void legge_sfondo(FILE *fp, char *nome);
+void insert_icona(FILE *,FILE *);
+void insert_text(FILE *,FILE *);
+int dim_x_icona(char*);
+int dim_y_icona(char*);
+
+
 
 int legge_riga(fp,riga)
  char riga [MAXRIGA];
@@ -62,7 +73,7 @@ int legge_riga(fp,riga)
 return(1);
 }
 
-skip_header(fp)
+void skip_header(fp)
 FILE *fp;
 {
 char riga[MAXRIGA];
@@ -77,7 +88,7 @@ while(strcmp(riga,"ENDSEC")!=0)
 }
 
 
-legge_icona(fp,nome)
+void legge_icona(fp,nome)
 FILE *fp;
 char *nome;
 {
@@ -122,7 +133,7 @@ if(esiste_icona==0)
 }
 
 
-read_polyline(fp_in,fp_out)
+void read_polyline(fp_in,fp_out)
 FILE *fp_in;
 FILE *fp_out;
 {
@@ -193,7 +204,7 @@ fprintf(fp_out," %d %d",x[0],y[0]);
 fprintf(fp_out,"\n");
 }
 
-sistema_file(nome)
+void sistema_file(nome)
 char *nome;
 {
 FILE *fp;
@@ -270,7 +281,7 @@ sprintf(comando,"rm _xxx.ico");
 system(comando);
 }
 
-read_solid(fp_in,fp_out)
+void read_solid(fp_in,fp_out)
 FILE *fp_in;
 FILE *fp_out;
 {
@@ -333,7 +344,7 @@ printf("SOLID  (%d,%d) (%d,%d) (%d,%d) (%d,%d)\n",x1,y1, x2,y2, x3,y3, x4,y4);
 ********/
 }
 
-read_circle(fp_in,fp_out)
+void read_circle(fp_in,fp_out)
 FILE *fp_in;
 FILE *fp_out;
 {
@@ -379,7 +390,7 @@ fprintf(fp_out,"circ %d %d %d %d 0 23040\n",
 }
 
 
-legge_sfondo(fp,nome)
+void legge_sfondo(fp,nome)
 FILE *fp;
 char *nome;
 {
@@ -438,7 +449,7 @@ fclose(fp_pag);
 sistema_file(nome_file);
 }
 
-insert_icona(fp_in,fp_out)
+void insert_icona(fp_in,fp_out)
 FILE *fp_in;
 FILE *fp_out;
 {
@@ -620,7 +631,7 @@ return(max_x-min_x);
 fclose(fp);
 }
 
-insert_text(fp_in,fp_out)
+void insert_text(fp_in,fp_out)
 FILE *fp_in;
 FILE *fp_out;
 {

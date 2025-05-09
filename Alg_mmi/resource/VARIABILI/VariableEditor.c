@@ -63,6 +63,9 @@ char *OlGetModelFromSubSystem (OlDatabaseTopologiaObject ,char *);
 char *OlElencoModelli (OlDatabaseTopologiaObject );
 char *WriteInpVariableString (OlDatabaseTopologiaObject,char *,char *,char *,Widget);
 char *WriteUniMisura (char *,Widget );
+void RisettaVariabile(char *,Widget );
+void ActivateVarAing(Widget *);
+void ActivateVarPlot(Widget *);
 
 
 
@@ -378,7 +381,7 @@ static	void	mapCB_VariableEditor( UxWidget, UxClientData, UxCallbackArg )
 	Interpretare = XmTextFieldGetString (RowColInp[2]);
 	
 	Corretta = OlReadVariableString (Dbf,Interpretare, &NomeModello, &NomeBlocco,
-		&NomeVar, &Perturba, &UniMisura, TipoVariabile);
+		&NomeVar, &Perturba, (char **)&UniMisura, TipoVariabile);
 	
 #else
 	

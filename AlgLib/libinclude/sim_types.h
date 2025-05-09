@@ -50,7 +50,7 @@
 //     } S_DATI;
 
 
-//#include "sim_param_h"
+// #include "res_edit.h"
 
 
    /* 

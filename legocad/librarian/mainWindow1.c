@@ -1288,7 +1288,7 @@ char *mess;
  ***      Visualizza un messaggio di warning nella window dei messaggi
  ***      (chiamata da esegui_comando() -> lc_errore())
  ***/
-show_warning(mess)
+void show_warning(mess)
 char *mess;
 {
    scrivi_messaggio(mess);

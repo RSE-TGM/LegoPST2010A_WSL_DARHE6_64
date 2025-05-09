@@ -45,6 +45,14 @@
 #include <Ol/OlDatabasePunti.h>
 #include <Xm/Protocols.h>
 #include "aing_def.h"
+#include "res_edit.h"
+
+#include <Ol/OlDatabasePunti.h>
+#include <Ol/OlDatabaseTopologia.h>
+#include <Ol/OlTree.h> 
+#include <Ol/OlPert.h>
+#include <Ol/OlPertP.h>
+
 
 #ifndef DESIGN_TIME
 #include "other.h"
@@ -60,6 +68,8 @@
 #include "sim_ipc.h"
 #include "page_aing_icon.bmp"
 
+extern void WriteDbAing();
+extern int SettaIndicAing(Widget , char *,float , float );
 
 extern OlDatabasePuntiObject database_simulatore;
 int msg_pert;
@@ -69,7 +79,8 @@ void DestroyAing( );
 static void refresh_aing( );
 void ConfigureAing( );
 static void activateCB_QuitAing();
-int AingStartEnable(Widget, int);
+void AingStartEnable(Widget, int);
+int pert_malfunction(int ,int ,float ,float ,float );
 
 
 static	int _UxIfClassId;
@@ -236,6 +247,7 @@ static void	_UxAingMenuPost( wgt, client_data, event, ctd )
 	Widget		wgt;
 	XtPointer	client_data;
 	XEvent		*event;
+	int		ctd;
 
 {
 	Widget	menu = (Widget) client_data;
@@ -308,7 +320,7 @@ if(!OlUnsetDataPage(database_simulatore,Context->Uxkey_refresh_aing))
 */
 Context->Uxtimer_refresh_aing = XtAppAddTimeOut (
             XtWidgetToApplicationContext (Context->UxAing),
-            (unsigned long) REFRESH_AING ,refresh_aing, Context);
+            (unsigned long) REFRESH_AING ,(XtTimerCallbackProc)refresh_aing, Context);
 #endif	
 }
 
@@ -428,7 +440,7 @@ UxAingContext = UxSaveCtx;
 }
 
 
-AingStartEnable(w,enable)
+void AingStartEnable(w,enable)
 Widget w;
 int enable;
 {
@@ -1600,7 +1612,7 @@ Widget	create_Aing( _UxrigaAing, _UxPadreAing )
 		_UxIfClassId = UxNewClassId();
 		UxAing_start_enable_Id = UxMethodRegister( _UxIfClassId,
 					UxAing_start_enable_Name,
-					_Aing_start_enable );
+					(void (*)())_Aing_start_enable );
 		_Uxinit = 1;
 	}
 
@@ -1651,7 +1663,7 @@ Widget	create_Aing( _UxrigaAing, _UxPadreAing )
 #ifndef DESIGN_TIME
 		timer_refresh_aing = XtAppAddTimeOut (
 		            XtWidgetToApplicationContext (PadreAing),
-		            (unsigned long) REFRESH_AING ,refresh_aing, UxContext);
+		            (unsigned long) REFRESH_AING ,(XtTimerCallbackProc)refresh_aing, UxContext);
 #endif
 		WM_DELETE_WINDOW=XmInternAtom(XtDisplay(Aing),"WM_DELETE_WINDOW",False);
 		XmAddWMProtocolCallback(Aing,WM_DELETE_WINDOW,activateCB_QuitAing,NULL);

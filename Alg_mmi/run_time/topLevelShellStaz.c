@@ -175,6 +175,7 @@ static void	_UxtopLevelShellStazMenuPost( wgt, client_data, event, ctd )
 	Widget		wgt;
 	XtPointer	client_data;
 	XEvent		*event;
+	int ctd;
 
 {
 	Widget	menu = (Widget) client_data;
@@ -316,7 +317,7 @@ if(!OlUnsetDataPage(database_simulatore,Context->Uxkey_refresh_staz))
 Context->Uxtimer_refresh_staz = XtAppAddTimeOut (
             XtWidgetToApplicationContext (Context->UxtopLevelShellStaz),
             (unsigned long) (Context->Uxtime_ref_staz*100) ,
-		refresh_page, Context);
+		(XtTimerCallbackProc)refresh_page, Context);
 #endif
 }
 
@@ -369,7 +370,7 @@ UnsetCursorWaitStaz(Context->UxdrawingAreaStaz);
 #endif	
 }
 
-ClosePageStaz(Widget w)
+void ClosePageStaz(Widget w)
 {
 #ifndef DESIGN_TIME
 _UxCtopLevelShellStaz *Context;
@@ -722,7 +723,7 @@ Widget	popup_topLevelShellStaz( _UxPaginaStaz, _UxPadreStaz, _Uxnome_dispStaz, _
 		if(!GetResTopLevel(PadreStaz,&top_x,&top_y,&top_width,&top_height,&time_ref_staz,
 				&top_tipo,&top_descrizione))
 			return(False);
-		if(!GetResDrawing(PadreStaz,&drawing_width,&drawing_height,&drawing_background, &drawing_pixmap))
+		if(!GetResDrawing(PadreStaz,&drawing_width,&drawing_height,(Pixel *)&drawing_background, &drawing_pixmap))
 				return(False);
 #endif
 		printf("Caricate le risorse\n");
@@ -791,7 +792,7 @@ Widget	popup_topLevelShellStaz( _UxPaginaStaz, _UxPadreStaz, _Uxnome_dispStaz, _
 		attesa_staz = 0;
 		timer_refresh_staz = XtAppAddTimeOut (
 		            XtWidgetToApplicationContext (topLevelShellStaz),
-		            (unsigned long) (time_ref_staz*100) ,refresh_page, UxContext);
+		            (unsigned long) (time_ref_staz*100) ,(XtTimerCallbackProc)refresh_page, UxContext);
 		RaisePlotAing();
 		/*
 		Quando uso la close della MWM della decorazione attivo la finestra di close

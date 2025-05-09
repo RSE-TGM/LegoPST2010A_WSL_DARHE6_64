@@ -55,6 +55,7 @@ static char SccsID[] = "@(#)other_mmi.c	5.3\t1/22/96";
 #include <Xl/XlIndicP.h>
 #include <Xl/XlDispReg.h>
 #include <Xl/XlPort.h>
+#include <Xl/XlIconReg.h>
 #include <Ol/OlDatabasePunti.h>
 #include <Ol/OlDatabaseTopologia.h>
 #include <Ol/OlPertP.h>
@@ -81,10 +82,35 @@ void ripulisci_files();
 Boolean PosMouse( );
 void show_warning( );
 Boolean RaisePlotAing();
+Boolean XlSetConfigOff(WidgetList ,Cardinal );
+Boolean OlSetDatabasePunti(WidgetList ,Cardinal , OlDatabasePuntiObject );
+Boolean OlSetDatabaseTopologia(WidgetList ,Cardinal ,OlDatabaseTopologiaObject );
+Boolean OlSetPert(WidgetList ,Cardinal ,OlPertObject );
+Boolean XlCreatePixmapFromGIF(Widget, char*, Pixmap *);
+Boolean XlCvtStrToPixel (Display *,char *,Pixel *,unsigned short *,unsigned short *, unsigned short *);
+char *XlGetFirstVarGraf (Widget );
+
+Widget	create_VariableEditor( swidget, Widget, Widget, int*, OlDatabaseTopologiaObject );
+
+
+char *XlGetFirstVcc (Widget );
+Boolean XlIsIndicTelep (Widget );
+Widget	create_Aing( unsigned char	*, Widget );
+void DestroyAing(Widget );
+void telep_chiudi_pag( Widget );
+int getTimeLicense(double *);
+void	quit_proc();
+Boolean RtCheckPointer(void *);
+void *RtRecord(void *punt);
+Boolean XlIsAnimateIcon (Widget );
+Boolean XlSetVarGrafico(Widget, char *,int ,int, int);
+
+
+
 
 extern Widget listDrawing[MAX_PAGE];
 extern OlDatabasePuntiObject database_simulatore;
-static errori_database_simulatore=0;
+static int errori_database_simulatore=0;
 extern OlDatabaseTopologiaObject database_topologia;
 
 extern OlTreeObject root_oltree;	/* CAPPE oggetto OlTree */
@@ -126,7 +152,7 @@ extern void PageSelect();
 extern void PageStazSelect();
 extern int teleperm_IcoSelect();
 extern int teleperm_apriStaz();
-extern int AingStartEnable(Widget, int);
+extern void AingStartEnable(Widget, int);
 
 extern double tempo_license;/*
 Funzioni esportate
@@ -134,6 +160,24 @@ Funzioni esportate
 Widget ActivateVarAing(Widget *);
 void ActivateVarPlot(Widget *);
 extern Boolean XlSetSomething(WidgetList ,Cardinal ,char * , char * , char * );
+extern void XlSetSelectRunTime();
+//void XlOperableKeysSendPert( Widget  );
+int teleperm_ApplSelect( Widget , Environment *, Widget );
+Boolean XlIsOperableKeys( Widget);
+Boolean XlIsOperableKeysDirect( Widget  );
+Boolean XlIsCaiAll (Widget );
+extern void teleperm_naviga();
+void XlOperableKeysSendPert( Widget  );
+Boolean XlIsOperableKeysImp( Widget  );
+Boolean XlIsOperableKeysExec( Widget  );
+Boolean XlIsCai (Widget );
+int OlJumpPage(OlDatabasePuntiObject ,char *,char );
+Boolean XlIsChangePage( Widget );
+Boolean XlIsInterfaceIconReg(Widget );
+char * XlGetInterfaceIconRegPagConnect(Widget);
+size_t RtMemoryAllocated(void *);
+Widget	popup_Plot( unsigned char	*, Widget );
+
 
 /*
 	Verifico l'esistenza della pagina
@@ -248,14 +292,14 @@ XlSetConfigOff(*widgetlist, *num_widget);
 	eventuali oggetti DispReg presenti nella pagina
 */
 XlSetSomething(*widgetlist,*num_widget,"DispReg",
-		XlNdispRegMode,DISP_VALUE_MODE);
+		XlNdispRegMode,(char*)DISP_VALUE_MODE);
 
 /*
 	impongo la risorsa XlNvisibleMode a VISIBLE_PORT_ON per gli
 	eventuali oggetti Port presenti nella pagina
 */
 XlSetSomething(*widgetlist,*num_widget,"Port",
-		XlNvisibleMode,VISIBLE_PORT_ON);
+		XlNvisibleMode,(char*)VISIBLE_PORT_ON);
 
 /*
 	libero la lista
@@ -297,7 +341,7 @@ static int SelectRunTime(Widget cw)
    extern void OperatingWindow_OpenPage();
    extern void apriExt2();
    extern void store_pert();
-   extern XlOperableKeysSendPert();
+   //extern XlOperableKeysSendPert();
    Widget drawing;
    char *pagina;
    char app_pag[300];
@@ -753,7 +797,7 @@ for(i=0;i<num_el_pagine;i++)
 if(i==num_el_pagine)
 	{
 	++num_el_pagine;
-	el_pagine=(PAGINE_APERTE*)XtRealloc(el_pagine,sizeof(PAGINE_APERTE)*num_el_pagine);
+	el_pagine=(PAGINE_APERTE*)XtRealloc((char *)el_pagine,sizeof(PAGINE_APERTE)*num_el_pagine);
 	i= num_el_pagine-1;
 	}
 
@@ -1115,7 +1159,7 @@ if(!XmFontListInitFontContext(&context,font_list))
 	return(False);
 */
 
-if(!XmFontListGetNextFont(context,XmSTRING_DEFAULT_CHARSET,&font))
+if(!XmFontListGetNextFont(context,(char**)XmSTRING_DEFAULT_CHARSET,&font))
 	return(False);
 
 XFreeFont(display,font);
@@ -1233,7 +1277,7 @@ char *mess;
 	fprintf(fpLog,"%s",mess);
 
   str = XmTextGetString( MessageText );
-  RtRecord(str);
+  RtRecord((void*)str);
   new_str = (char*) malloc ( sizeof(char*) * ( strlen(mess)+strlen(str)+1 ) );
   strcpy( new_str, str );
 
@@ -1361,7 +1405,7 @@ for(i=0;i<totale_pagine;i++)
         if(!context_ok)
 	   if(tempo_file(nome_file,nome_pagina)==0)
 		{
-		XtFree(pagine);
+		XtFree((char*)pagine);
 		fclose(fp);
 		totale_pagine=0;
                 printf("WARNING pag=%s aggiornata !!! \n",nome_pagina);
@@ -1486,7 +1530,7 @@ ListaWid[4]=XmCreateTextField(drawing,"_text__4",NULL,0);
 ListaWid[5]=XmCreateTextField(drawing,"_text__5",NULL,0);
 ListaWid[6]=XmCreateTextField(drawing,"_text__6",NULL,0);
 
-ret=(Widget)create_VariableEditor(w,ListaWid,drawing,&tipo_var,
+ret=(Widget)create_VariableEditor(w,(Widget)ListaWid,drawing,&tipo_var,
         database_topologia);
 XtManageChild(ret);
 
@@ -1993,7 +2037,7 @@ printf("Totale memoria allocata = %d\n",RtMemoryAllocated(NULL));
 	}
 	timer_id = XtAppAddTimeOut (
             XtWidgetToApplicationContext ((Widget)client_data),
-            (unsigned long) 1000, CheckMmiStatus, (Widget)client_data);
+            (unsigned long) 1000, (XtTimerCallbackProc)CheckMmiStatus, (Widget)client_data);
 }
 
 void read_argv(int argc, char **argv)

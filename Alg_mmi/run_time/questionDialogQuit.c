@@ -34,9 +34,31 @@
         Fine sezione per SCCS
 */
 
+#include "libutilx.h"
+extern  void *		UxNewContext();
 
+/*
+	font utilizzati
+*/
+#define FONT_TASTI "-adobe-helvetica-bold-r-normal--14-100-100-100-p-82-iso8859-1"
+#define FONT_LISTA "-adobe-helvetica-bold-r-normal--14-100-100-100-p-82-iso8859-1"
+#define FONT_LABEL "-adobe-helvetica-bold-r-normal--14-100-100-100-p-82-iso8859-1"
+#define OPERAZIONE_NOP			0
+#define OPERAZIONE_XAING		1
+#define OPERAZIONE_XPLOT		2
+#define OPERAZIONE_XSTAZ		3
+#define OPERAZIONE_INFO			4
+#define OPERAZIONE_REG			5
 
-#include "other.h"
+#define REFRESH_AING			1000
+#define REFRESH_PLOT			1000
+#define DELTA_PLOT			120
+#define COLOR_PLOT			"yellow"
+
+Boolean LoadFont(char *, XmFontList *, Display *);
+
+//#include "other.h"
+
 
 extern int password_ok;
 
@@ -188,10 +210,10 @@ Widget	create_questionDialogQuit( _Ux_PadreDialogQuit, _Uxscada_on )
 #endif
 		rtrn = _Uxbuild_questionDialogQuit();
 
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,FontLabel);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,FontLabel);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,FontLabel);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),(void*) XmNfontList,FontLabel);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,(char*)FontLabel);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,(char*)FontLabel);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,(char*)FontLabel);
+		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),(void*) XmNfontList,(char*)FontLabel);
 		UxPopupInterface(rtrn, no_grab);
 		
 		if(scada_on)

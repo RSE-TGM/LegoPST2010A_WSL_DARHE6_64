@@ -22,6 +22,8 @@
 #include <Xm/Form.h>
 #include <X11/Shell.h>
 
+#include "libutilx.h"
+
 /*******************************************************************************
        Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
@@ -582,7 +584,7 @@ if(!OlUnsetDataPage(database_simulatore,Context->Uxkey_refresh))
 */
 Context->Uxtimer_refresh = XtAppAddTimeOut (
             XtWidgetToApplicationContext (Context->UxtopLevelShell1),
-            (unsigned long) (Context->Uxtime_ref*100) ,refresh_page, Context);
+            (unsigned long) (Context->Uxtime_ref*100) ,(XtTimerCallbackProc)refresh_page, Context);
 #endif
 }
 
@@ -611,7 +613,7 @@ if((tipoApertura == CHANGE_PAGE)&& sostituzione)
 		UnsetCursorWait(Context->UxdrawingSinottico);
 		return;
 		}
-	XtFree(Context->Uxbkg_sin);
+	XtFree((char*)Context->Uxbkg_sin);
 	leggi_file_bck(w,nomePagina,"bkg",&(Context->Uxbkg_sin),dim);
  	Context->Uxregion_sin=NULL;
  	DistruggiPagina(Context->Uxlista_wid,Context->Uxnum_wid);
@@ -661,7 +663,7 @@ UnsetCursorWait(Context->UxdrawingSinottico);
 #endif	
 }
 
-ClosePageSin(Widget w)
+void ClosePageSin(Widget w)
 {
         _UxCtopLevelShell1      *UxSaveCtx, *UxContext;
 
@@ -939,7 +941,7 @@ static	void	activateCB_DispTagModeButton( UxWidget, UxClientData, UxCallbackArg 
 	UxSaveCtx = UxTopLevelShell1Context;
 	UxTopLevelShell1Context = UxContext =
 			(_UxCtopLevelShell1 *) UxGetContext( UxWidget );
-	XlSetSomething(lista_wid,num_wid,"DispReg",XlNdispRegMode,DISP_TAG_MODE);
+	XlSetSomething(lista_wid,num_wid,"DispReg",XlNdispRegMode,(char*)DISP_TAG_MODE);
 	UxTopLevelShell1Context = UxSaveCtx;
 }
 
@@ -953,7 +955,7 @@ static	void	activateCB_DispValueModeButton( UxWidget, UxClientData, UxCallbackAr
 	UxSaveCtx = UxTopLevelShell1Context;
 	UxTopLevelShell1Context = UxContext =
 			(_UxCtopLevelShell1 *) UxGetContext( UxWidget );
-	XlSetSomething(lista_wid,num_wid,"DispReg",XlNdispRegMode,DISP_VALUE_MODE);
+	XlSetSomething(lista_wid,num_wid,"DispReg",XlNdispRegMode,(char*)DISP_VALUE_MODE);
 	UxTopLevelShell1Context = UxSaveCtx;
 }
 
@@ -981,7 +983,7 @@ static	void	activateCB_DispPortModeButton( UxWidget, UxClientData, UxCallbackArg
 	UxSaveCtx = UxTopLevelShell1Context;
 	UxTopLevelShell1Context = UxContext =
 			(_UxCtopLevelShell1 *) UxGetContext( UxWidget );
-	XlSetSomething(lista_wid,num_wid,"Port",XlNvisibleMode,VISIBLE_PORT_ON);
+	XlSetSomething(lista_wid,num_wid,"Port",XlNvisibleMode,(char*)VISIBLE_PORT_ON);
 	UxTopLevelShell1Context = UxSaveCtx;
 }
 
@@ -1813,7 +1815,7 @@ Widget	create_topLevelShell1( _UxPagina, _UxPadre, _Uxnome_disp, _Uxsfondo_sin )
 		if(!GetResTopLevel(Padre,&top_x,&top_y,&top_width,&top_height,&time_ref,
 				&top_tipo,&top_descrizione))
 			return(False);
-		if(!GetResDrawing(Padre,&drawing_width,&drawing_height,&drawing_background,&drawing_pixmap))
+		if(!GetResDrawing(Padre,&drawing_width,&drawing_height,(Pixel*)&drawing_background,&drawing_pixmap))
 				return(False);
 		if(strcmp(top_tipo,"Stazioni")==0)
 			return(popup_topLevelShellStaz(Pagina,Padre,nome_disp,sfondo_sin));
@@ -1930,7 +1932,7 @@ Widget	create_topLevelShell1( _UxPagina, _UxPadre, _Uxnome_disp, _Uxsfondo_sin )
 		
 		timer_refresh = XtAppAddTimeOut (
 		            XtWidgetToApplicationContext (topLevelShell1),
-		            (unsigned long) (time_ref*100) ,refresh_page, UxContext);
+		            (unsigned long) (time_ref*100) ,(XtTimerCallbackProc)refresh_page, UxContext);
 		RaisePlotAing();
 		
 		/*

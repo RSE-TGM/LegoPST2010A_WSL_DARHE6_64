@@ -56,6 +56,8 @@
 #include <Xm/MwmUtil.h>
 #endif
 
+
+#include <Ol/OlPert.h>
 #include "other.h"
 
 #include "page_plot_icon.bmp"
@@ -132,6 +134,7 @@ static void	_UxPlotMenuPost( wgt, client_data, event, ctd )
 	Widget		wgt;
 	XtPointer	client_data;
 	XEvent		*event;
+	int		ctd;
 
 {
 	Widget	menu = (Widget) client_data;
@@ -223,7 +226,7 @@ if(!OlUnsetDataPage(database_simulatore,Context->Uxkey_refresh_plot))
 */
 Context->Uxtimer_refresh_plot = XtAppAddTimeOut (
             XtWidgetToApplicationContext (Context->UxPlot),
-            (unsigned long) REFRESH_PLOT ,refresh_plot, Context);
+            (unsigned long) REFRESH_PLOT ,(XtTimerCallbackProc)refresh_plot, Context);
 #endif	
 }
 
@@ -435,7 +438,7 @@ Widget	popup_Plot( _UxrigaPlot, _UxPadrePlot )
 #ifndef DESIGN_TIME
 		timer_refresh_plot = XtAppAddTimeOut (
 		            XtWidgetToApplicationContext (PadrePlot),
-		            (unsigned long) REFRESH_PLOT ,refresh_plot, UxContext);
+		            (unsigned long) REFRESH_PLOT ,(XtTimerCallbackProc)refresh_plot, UxContext);
 #endif
 		
 		

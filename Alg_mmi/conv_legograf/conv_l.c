@@ -25,10 +25,17 @@ static char SccsID[] = "@(#)conv_l.c	1.3\t3/20/95";
         Fine sezione per SCCS
 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 
 #include "util.h"
+
+void skip_header(FILE *);
+int legge_riga(FILE *fp, char *riga);
+void legge_icona(FILE *fp, char *nome);
+void legge_sfondo(FILE *fp, char *nome);
+
 
 char nome_file_input[100];
 char path_ico[255];
@@ -36,11 +43,11 @@ char path_pag[255];
 
 FILE *fp_input;
 
-main(argc,argv)
+int main(argc,argv)
 int argc;
 char **argv;
 {
-int riga[MAXRIGA];
+char riga[MAXRIGA];
 
 
 if(argc!=4)

@@ -17,6 +17,7 @@
        Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
 
+#include <Ol/OlPert.h>
 #include "other.h"
 
 int password_ok;
@@ -245,11 +246,11 @@ Widget	popup_password( _UxPadrePassword )
 		password_ok = 0;
 		rtrn = _Uxbuild_password();
 
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_SELECTION_LABEL),(void*) XmNfontList,FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_TEXT),(void*) XmNfontList,FontLabel);
+		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,(char*)FontLabel);
+		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,(char*)FontLabel);
+		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,(char*)FontLabel);
+		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_SELECTION_LABEL),(void*) XmNfontList,(char*)FontLabel);
+		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_TEXT),(void*) XmNfontList,(char*)FontLabel);
 #ifndef DESIGN_TIME
 		XtVaSetValues(XmSelectionBoxGetChild(rtrn,XmDIALOG_TEXT),
 			RES_CONVERT( XmNbackground, "white" ),

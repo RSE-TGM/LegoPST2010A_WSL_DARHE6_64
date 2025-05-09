@@ -42,14 +42,24 @@
 #include <X11/Intrinsic.h>
 #include <X11/StringDefs.h>
 #include <X11/Xlib.h>
+#include <Xl/XlComposite.h>
+
+#include <Ol/OlDatabasePunti.h>
+#include <Ol/OlDatabaseTopologia.h>
+#include <Ol/OlTree.h> 
+#include <Ol/OlPert.h>
+#include <Ol/OlPertP.h>
 
 
+#include "libutilx.h"
 #include "other.h"
 
 
 Widget PadreInfo;
 
 static void InserisciTesto();
+
+extern  void *		UxNewContext();
 
 
 /*******************************************************************************

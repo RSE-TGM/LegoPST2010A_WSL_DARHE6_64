@@ -55,8 +55,8 @@ extern OlDatabasePuntiObject database_simulatore;
 extern Boolean topologia_on;
 extern char path_sim_correct[FILENAME_MAX];
 extern int shr_usr_key;
-extern CursorErrFree(Widget ,Cursor );
-extern creaOlDbPunti(char *,Widget);
+//extern CursorErrFree(Widget ,Cursor );
+//extern int creaOlDbPunti(char *,Widget);
 
 
 /*******************************************************************************

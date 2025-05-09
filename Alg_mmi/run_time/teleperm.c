@@ -6,10 +6,11 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <Xm/MwmUtil.h>
 #include <Xm/MenuShell.h>
-#include "UxXt.h"
+//#include "UxXt.h"
 
 #include <Xm/DrawingA.h>
 #include <Xm/Label.h>
@@ -35,14 +36,22 @@
 #include <time.h>
 #include <Ol/OlTree.h>	         /* per gestione OlTree teleperm */
 #include <Ol/OlDatabasePunti.h>  /* per gestione DatabasePunti */
+//#include <Ol/OlDatabasePuntiP.h>
+//#include <Ol/OlDatabaseTopologia.h>
 #include <Xl/XlChangePage.h>     /* per gestione oggetto XlChangePage */
 #include <Xl/XlPictograph.h>    
+
+#include <Ol/OlPert.h>
 #include "other.h"
+
 #include <Xl/XlCai.h>
 #include <Xl/XlCaiAll.h>
 #ifndef DESIGN_TIME
 #include <Xl/Xl.h>
 #endif
+
+#include "UxXt.h"
+
 #include <other.h>
 #include <Cs/Cs.h>	/* per comunocazioni per AlarmPage */
 
@@ -68,14 +77,24 @@ static void conver_time(float tempoSim,char *ora);
 extern swidget create_topLevelShell1();
 extern swidget popup_topLevelShellStaz();
 extern Boolean PrintAllarmi();
-extern ClosePageStaz();
+extern void ClosePageStaz();
 
-extern ScriviTestoInfo();
+extern Boolean ScriviTestoInfo();
  
 extern Boolean EsistePagina();
 
 int  getSubLevel();
 void set_titleLabel();
+void* UxMethodLookup(Widget , int , char*);
+Boolean XlIsCurve (Widget );
+extern int PagIsTeleperm();
+Boolean OlSetDatabasePunti(WidgetList ,Cardinal , OlDatabasePuntiObject );
+int OlTreeGetPosInfo(OlTreeObject ,int *);
+extern int  data2 (int*, int*, int*);
+int UxNewClassId();
+int UxMethodRegister(int , char *, void (*) ());
+int	UxPutClassCode( Widget , int );
+
 
 static void teleperm_refreshTime();
 static void teleperm_refreshCai();
@@ -1311,7 +1330,7 @@ int getSubLevel(OlTreeObject level,int **lista_ind,int *npag)
    }       
    else
    {
-      XtFree(*lista_ind);
+      XtFree((char *)*lista_ind);
       *lista_ind = NULL;
       *npag = 0;     
       return(False);
@@ -1610,7 +1629,7 @@ Vado a vedere quali nodi del primo livello sono attivi
 memset(selectable_zone,0,NUMMAXZONE*sizeof(int));
 num_telepag=0;
 if( getSubLevel(root_oltree,&lista_fa,&num_fa) != True )
-    return;
+    return(-1);
 printf("numero di fa=%d\n",num_fa);
 /*
 Vado a determinare le zone attive
@@ -1624,7 +1643,7 @@ if(num_fa)
                          printf("SEVERE ERROR: functional area associated with a notteleperm page\n");
                          printf(" ERROR: functional area=%d -- notteleperm page=%s\n",i,pagine[lista_fa[i]].nome);
                          printf("###############################################################\n");
-                        return;
+                        return(-1);
                         }
                 strcpy(appo,pagine[lista_fa[i]].gerarchia);
                 strtok(appo,",");
@@ -1666,7 +1685,7 @@ else if(( last_indice_fa>25) && (last_indice_fa<31))
       {
       num_zone=HEADERCINQUERIGHE;    /* 5 righe di bottoni */
       }                 
-XtFree(lista_fa);
+XtFree((char*)lista_fa);
 return(1);                                
 }
 
@@ -2322,9 +2341,9 @@ static int	Ux_navigation( UxThis, pEnv, direction, pag_ind, screen_selected, cal
 		UxDestroyInterface(*pullDownActive);
 	        if(scada_on)
 	           {
-	            XtFree(listaCaiVr);
-	            XtFree(listaCaiFormVr);
-	            XtFree(listaPushButton);
+	            XtFree((char*)listaCaiVr);
+	            XtFree((char*)listaCaiFormVr);
+	            XtFree((char*)listaPushButton);
 	           }
 		pullDownActive=NULL;
 		}
@@ -2773,17 +2792,17 @@ static Boolean	Ux_close_allPage( UxThis, pEnv )
 	Parte destinata a liberazione memoria oggetti multipli
 	***********/
 	
-	XtFree(lista_header_form);
-	XtFree(lista_header_button);
-	XtFree(lista_header_rowColumn); 
-	XtFree(lista_header_label); 
-	XtFree(all_caiAll_form); 
+	XtFree((char*)lista_header_form);
+	XtFree((char*)lista_header_button);
+	XtFree((char*)lista_header_rowColumn); 
+	XtFree((char*)lista_header_label); 
+	XtFree((char*)all_caiAll_form); 
 	
-	XtFree(all_caiAll);
-	XtFree(all_name_label); 
-	XtFree(all_descr_label); 
+	XtFree((char*)all_caiAll);
+	XtFree((char*)all_name_label); 
+	XtFree((char*)all_descr_label); 
 	
-	XtFree(all_data_label); 
+	XtFree((char*)all_data_label); 
 	memset(&old_allarmi,0,sizeof(DATI_ALLARMI_SHM)); /*vecchi allarmi azzerati */
 		
 				
@@ -3255,7 +3274,7 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 	
 	TAG| KKS  | |   Descrizione principale                | 1a sec| 2a secondaria
 	
-	  S_JR0400$A                       Turbo ALTERNATORE  |1o all | °k/cm. 
+	  S_JR0400$A                       Turbo ALTERNATORE  |1o all | ï¿½k/cm. 
 			
 	*/
 				str=strtok((char *)NULL,"$");	
@@ -3503,7 +3522,9 @@ static int	Ux_ridisegna( UxThis, pEnv, ind_pag )
 	
 	/* distruggo il db delle risorse precedente
 	*/
-	XrmDestroyDatabase( (Display *)(XtDisplay(UxThis))->db);
+
+	// GUAG2025:  XrmDestroyDatabase( (Display *)(XtDisplay(UxThis))->db);
+	XrmDestroyDatabase( (XrmDatabase)(XtDisplay(UxThis))->db);
 	
 	
 	/*
@@ -3522,7 +3543,7 @@ static int	Ux_ridisegna( UxThis, pEnv, ind_pag )
 	/* mi serve solo per caricare il time_ref
 	*/
 	if(!GetResTopLevel(UxParent,&top_x,&top_y,&top_width,&top_height,&time_ref,
-			&top_tipo,&top_descrizione))
+			(char **)&top_tipo,(char **)&top_descrizione))
 		return(False);
 	/*
 	 Se nella pagina visualizzata era presente un pixmap di sfondo
@@ -3535,7 +3556,7 @@ static int	Ux_ridisegna( UxThis, pEnv, ind_pag )
 		}
 	/* recupero le risorse della drawing area
 	*/
-	if(!GetResDrawing(UxParent,&drawing_width,&drawing_height,&drawing_background, &drawing_pixmap))
+	if(!GetResDrawing(UxParent,&drawing_width,&drawing_height,(Pixel *)&drawing_background, &drawing_pixmap))
 	   return(1);
 	
 	/* aggiornamento elenchi pagine per refresh
@@ -3545,7 +3566,7 @@ static int	Ux_ridisegna( UxThis, pEnv, ind_pag )
 		DelElencoPagine(key_refresh, drawingArea);
 		XSync(XtDisplay(drawingArea),False);
 		XtRemoveTimeOut(timer_refresh);
-	        XtFree(lista_wid);
+	        XtFree((char*)lista_wid);
 		}
 	/* inizializza la regione di ridisegno
 	*/
@@ -4060,7 +4081,7 @@ static int	Ux_aggTitleArea( UxThis, pEnv )
 	   set_something(orizHierButton,XmNsensitive,(void*) False); 
 	
 	if(lista_ind)
-	   XtFree(lista_ind);
+	   XtFree((char*)lista_ind);
 	
 	/* set menu jerarqia vertical
 	*/
@@ -4073,7 +4094,7 @@ static int	Ux_aggTitleArea( UxThis, pEnv )
 	else
 	   set_something(vertHierButton,XmNsensitive,(void*) False);   
 	if(lista_ind)
-	   XtFree(lista_ind);
+	   XtFree((char*)lista_ind);
 	
 	return(True);
 }
@@ -4229,7 +4250,7 @@ static void	Ux_closePag( UxThis, pEnv, w )
 	
 	                XSync(XtDisplay(w),False);
 	                XtRemoveTimeOut(timer_refresh);
-	                XtFree(lista_wid);
+	                XtFree((char*)lista_wid);
 	                }
 	        else if(allPageOnScreen==SINCROCLOSEALLPAG)
 	           allPageOnScreen=-1;
@@ -4247,9 +4268,9 @@ static void	Ux_closePag( UxThis, pEnv, w )
 	                UxDestroyInterface(*pullDownActive);
 	                if(scada_on)
 	                   {
-	                    XtFree(listaCaiVr);
-	                    XtFree(listaCaiFormVr);
-	                    XtFree(listaPushButton);
+	                    XtFree((char*)listaCaiVr);
+	                    XtFree((char*)listaCaiFormVr);
+	                    XtFree((char*)listaPushButton);
 	                   }
 	                pullDownActive=NULL;
 	                }
@@ -4396,9 +4417,9 @@ static int	Ux_create_allPage( UxThis, pEnv )
 	                {
 	                XtRemoveTimeOut(timer_timerefreshCai);
 	                UxDestroyInterface(*pullDownActive);
-	                XtFree(listaCaiVr);
-	                XtFree(listaCaiFormVr);
-	                XtFree(listaPushButton);
+	                XtFree((char*)listaCaiVr);
+	                XtFree((char*)listaCaiFormVr);
+	                XtFree((char*)listaPushButton);
 	                pullDownActive=NULL;
 	                }
 	
@@ -4499,7 +4520,7 @@ static int	Ux_create_allPage( UxThis, pEnv )
 		XSync(XtDisplay(drawingArea),False);
 		XtRemoveTimeOut(timer_refresh);
 		XtDestroyWidget( drawingArea);
-	        XtFree(lista_wid);
+	        XtFree((char*)lista_wid);
 		}
 	/*Eliminazione della pagina precedente */
 	all_form_topLevelShell=XtVaCreateManagedWidget( "all_form_topLevelShell",
@@ -4546,7 +4567,7 @@ static int	Ux_create_allPage( UxThis, pEnv )
 	        UxPutContext( all_new_button, (char *) UxTelepermContext  );
 	
 		XtAddCallback(all_new_button, XmNactivateCallback,
-	                    (XtCallbackProc)command_alarm,OL_MODO_ALLARMI);
+	                    (XtCallbackProc)command_alarm,(XtPointer)OL_MODO_ALLARMI);
 	
 	        /* Creation of label all new */
 	all_new = XtVaCreateManagedWidget( "all_new",
@@ -4580,7 +4601,7 @@ static int	Ux_create_allPage( UxThis, pEnv )
 	 UxPutContext( all_old_button, (char *) UxTelepermContext  );
 	
 		XtAddCallback(all_old_button, XmNactivateCallback,
-	                    (XtCallbackProc)command_alarm,OL_MODO_ARCHIVIO);
+	                    (XtCallbackProc)command_alarm,(XtPointer)OL_MODO_ARCHIVIO);
 	all_old = XtVaCreateManagedWidget( "all_old",
 	                        xmLabelWidgetClass,
 	                        all_form_title,
@@ -4739,7 +4760,7 @@ static int	Ux_create_allPage( UxThis, pEnv )
 	Acquisisco valori dei colori dei bottoni
 	*/
 	    	  XtAddCallback(lista_header_button[i], XmNactivateCallback,
-	                    (XtCallbackProc)select_zone,i);
+	                    (XtCallbackProc)select_zone,(XtPointer)i);
 	
 	/* rowColumn per indicatori per ogni zona */
 	          strcpy(nomeWidget,"");
@@ -4849,7 +4870,7 @@ static int	Ux_create_allPage( UxThis, pEnv )
 		  lista_header_label[i*4+3]=NULL;
 		  }
 	
-		XtFree(nomeWidget);	
+		XtFree((char*)nomeWidget);	
 	
 		} /* end for X header */                                                              
 	/*
@@ -5069,7 +5090,7 @@ static int	Ux_create_allPage( UxThis, pEnv )
 	
 	        UxPutContext( all_data_label[i], (char *) UxTelepermContext );
 		
-		XtFree(nomeWidget);
+		XtFree((char*)nomeWidget);
 		}
 	/*
 	Creazione bottoni per scorrimento pagina allarmi
@@ -5090,7 +5111,7 @@ static int	Ux_create_allPage( UxThis, pEnv )
 	Callaback per comandi allarmi
 	*/
 		XtAddCallback(all_button_minus, XmNactivateCallback,
-	                    (XtCallbackProc)command_alarm,OL_INDIETRO_ALLARMI);
+	                    (XtCallbackProc)command_alarm,(XtPointer)OL_INDIETRO_ALLARMI);
 	
 	        all_button_plus = XtVaCreateManagedWidget( "all_button_plus",
 	                        xmPushButtonWidgetClass,
@@ -5108,7 +5129,7 @@ static int	Ux_create_allPage( UxThis, pEnv )
 	        UxPutContext( all_button_plus, (char *) UxTelepermContext );
 		
 	        XtAddCallback(all_button_plus, XmNactivateCallback,
-	                    (XtCallbackProc)command_alarm,OL_AVANTI_ALLARMI);
+	                    (XtCallbackProc)command_alarm,(XtPointer)OL_AVANTI_ALLARMI);
 	
 		all_button_n = XtVaCreateManagedWidget( "all_button_n",
 	                        xmPushButtonWidgetClass,
@@ -5159,7 +5180,7 @@ static int	Ux_create_allPage( UxThis, pEnv )
 	      OlTeleperm_richiediAllarmi(database_simulatore,zone_status);
 	      prima_apertura_all=False;
 	      }
-	XtFree(nome_header);
+	XtFree((char*)nome_header);
         
 
 return 1;
@@ -5283,7 +5304,7 @@ static int	Ux_WidgetSelect( UxThis, pEnv, w )
 	
 	   /* alloco spazio per la lista delle pagine figlie
 	   */
-	   if( (ChildPagList = (Widget *) XtRealloc( ChildPagList,
+	   if( (ChildPagList = (Widget *) XtRealloc( (char *)ChildPagList,
 	           sizeof( Widget ) * (numChildPagList+1) )) == NULL )
 	   {
 	      fprintf(stderr,"Teleperm: Error in allocation of childPag list\n");
@@ -5745,7 +5766,7 @@ static	void	activateCB_hardcopy( UxWidget, UxClientData, UxCallbackArg )
 	{
 	
 	
-	if(!PrintScreen(drawingArea,"nome_disp","Pagina","False",Pag->sfondo))
+	if(!PrintScreen(drawingArea,"nome_disp","Pagina",False,Pag->sfondo))
 	   fprintf(stderr,"Hardcopy error\n");
 	}
 	
@@ -6001,10 +6022,10 @@ static	void	activateCB_plantButton( UxWidget, UxClientData, UxCallbackArg )
 			{
 			XtRemoveTimeOut(timer_timerefreshCai);
 			UxDestroyInterface(*pullDownActive);
-			XtFree(listaCaiVr);
-			XtFree(listaCaiFormVr);		
-	                XtFree(listaPushButtonPlant);
-	                XtFree(listaPlantAsd);
+			XtFree((char*)listaCaiVr);
+			XtFree((char*)listaCaiFormVr);		
+	                XtFree((char*)listaPushButtonPlant);
+	                XtFree((char*)listaPlantAsd);
 			pullDownActive=NULL;
 		        pullMenuOn=0;
 			return;
@@ -6014,9 +6035,9 @@ static	void	activateCB_plantButton( UxWidget, UxClientData, UxCallbackArg )
 					/* elimino altro pullDownMenu */
 			XtRemoveTimeOut(timer_timerefreshCai);
 			UxDestroyInterface(*pullDownActive); /* other pullDownMenu Type */
-			XtFree(listaCaiVr);
-			XtFree(listaCaiFormVr);
-	                XtFree(listaPushButton);
+			XtFree((char*)listaCaiVr);
+			XtFree((char*)listaCaiFormVr);
+	                XtFree((char*)listaPushButton);
 			pullDownActive=NULL;
 			}
 		
@@ -6032,7 +6053,7 @@ static	void	activateCB_plantButton( UxWidget, UxClientData, UxCallbackArg )
 	Assegno al puntatore dell' interfaccia listaPushButton listaPushButtonVr
 	cosi' da poterlo poi eliminare da qualunque interfaccia
 	*/
-	listaPushButton=listaPushButtonPlant;
+	listaPushButton=(int*)listaPushButtonPlant;
 	if( (listaCaiVr = (Widget *) XtCalloc(1, num_telepag *MAXNUMCAIXLINE*sizeof(Widget)) ) == NULL)
 	{
 	   printf("plantMenu. Error in malloc: listaCai\n");
@@ -6158,7 +6179,7 @@ static	void	activateCB_plantButton( UxWidget, UxClientData, UxCallbackArg )
 	   UxPutContext( listaPushButtonPlant[i], (char *) UxTelepermContext );
 	
 	   XtAddCallback(listaPushButtonPlant[i], XmNactivateCallback,
-	                    (XtCallbackProc)view_fa,selectable_zone[kk] ); 
+	                    (XtCallbackProc)view_fa,(XtPointer)selectable_zone[kk] ); 
 	
 	
 	/*
@@ -6197,18 +6218,18 @@ static	void	activateCB_plantButton( UxWidget, UxClientData, UxCallbackArg )
 	UxPutContext( listaPlantAsd[i], (char *) UxTelepermContext );
 	
 	XtAddCallback(listaPlantAsd[i], XmNactivateCallback,
-	                    (XtCallbackProc)open_allPag_fa,kk ); 
+	                    (XtCallbackProc)open_allPag_fa,(XtPointer)kk ); 
 	
 	build_cai(listaCaiVr,nomeLabel,listaCaiFormVr[i],listaPlantAsd[i],gerarchiaValore,i);
 	
 	
 	
-	   XtFree(nomePushButton);  
-	   XtFree(nomeLabel);
+	   XtFree((char*)nomePushButton);  
+	   XtFree((char*)nomeLabel);
 	if(gerarchiaNome)
-	   XtFree(gerarchiaNome);
+	   XtFree((char*)gerarchiaNome);
 	if(gerarchiaValore)
-	   XtFree(gerarchiaValore);
+	   XtFree((char*)gerarchiaValore);
 	  i++; /*incremento contatore lista oggetti */
 	   /*printf("i=%d selectable_zone[%d]=%d\n",i,kk,selectable_zone[kk]);*/
 	  }/* end if selectable_zone */
@@ -6294,9 +6315,9 @@ static	void	activateCB_vertHierButton( UxWidget, UxClientData, UxCallbackArg )
 			if(scada_on)
 				XtRemoveTimeOut(timer_timerefreshCai);
 			UxDestroyInterface(*pullDownActive);
-			XtFree(listaCaiVr);
-			XtFree(listaCaiFormVr);
-			XtFree(listaPushButton);
+			XtFree((char*)listaCaiVr);
+			XtFree((char*)listaCaiFormVr);
+			XtFree((char*)listaPushButton);
 			pullDownActive=NULL;
 		        pullMenuOn=0;
 			return;
@@ -6307,9 +6328,9 @@ static	void	activateCB_vertHierButton( UxWidget, UxClientData, UxCallbackArg )
 			if(scada_on)
 				XtRemoveTimeOut(timer_timerefreshCai);
 			UxDestroyInterface(*pullDownActive); /* other pullDownMenu Type */
-			XtFree(listaCaiVr);
-			XtFree(listaCaiFormVr);
-			XtFree(listaPushButton);
+			XtFree((char*)listaCaiVr);
+			XtFree((char*)listaCaiFormVr);
+			XtFree((char*)listaPushButton);
 			pullDownActive=NULL;
 			}
 		
@@ -6330,7 +6351,7 @@ static	void	activateCB_vertHierButton( UxWidget, UxClientData, UxCallbackArg )
 	Assegno al puntatore dell' interfaccia listaPushButton listaPushButtonVr
 	cosi' da poterlo poi eliminare da qualunque interfaccia
 	*/
-	listaPushButton=listaPushButtonVr;
+	listaPushButton=(int*)listaPushButtonVr;
 	if( (listaCaiVr = (Widget *) XtCalloc(1, npag *MAXNUMCAIXLINE*sizeof(Widget)) ) == NULL)
 	{
 	   printf("vertHierMenu. Error in malloc: listaCai\n");
@@ -6452,7 +6473,7 @@ static	void	activateCB_vertHierButton( UxWidget, UxClientData, UxCallbackArg )
 	   UxPutContext( listaPushButtonVr[i], (char *) UxTelepermContext );
 	
 	   XtAddCallback(listaPushButtonVr[i], XmNactivateCallback,
-	                    (XtCallbackProc)view_fa,lista_ind[i] ); 
+	                    (XtCallbackProc)view_fa,(XtPointer)lista_ind[i] ); 
 	
 	/*
 	Costruisco Nome form dei Cai
@@ -6472,13 +6493,13 @@ static	void	activateCB_vertHierButton( UxWidget, UxClientData, UxCallbackArg )
 	if(scada_on)
 	      build_cai(listaCaiVr,nomeLabel,listaCaiFormVr[i],listaCaiFormVr[i],gerarchiaValore,i);
 	  
-	   XtFree(nomePushButton);
-	   XtFree(nomeLabel);
+	   XtFree((char*)nomePushButton);
+	   XtFree((char*)nomeLabel);
 	
 	if(gerarchiaNome)
-	   XtFree(gerarchiaNome);
+	   XtFree((char*)gerarchiaNome);
 	if(gerarchiaValore)
-	   XtFree(gerarchiaValore);
+	   XtFree((char*)gerarchiaValore);
 	}/* end for */
 	/* Innesco refresh dei cai solo se esistono */
 	if(scada_on)
@@ -6495,7 +6516,7 @@ static	void	activateCB_vertHierButton( UxWidget, UxClientData, UxCallbackArg )
 		}  
 	UxPopupInterface(VertMenu,no_grab);
 	
-	XtFree(lista_ind);
+	XtFree((char*)lista_ind);
 	
 	
 	}
@@ -6535,9 +6556,9 @@ static	void	activateCB_orizHierButton( UxWidget, UxClientData, UxCallbackArg )
 			if(scada_on)
 				XtRemoveTimeOut(timer_timerefreshCai);
 			UxDestroyInterface(*pullDownActive);
-			XtFree(listaCaiVr);
-			XtFree(listaCaiFormVr);
-			XtFree(listaPushButton);
+			XtFree((char*)listaCaiVr);
+			XtFree((char*)listaCaiFormVr);
+			XtFree((char*)listaPushButton);
 			pullDownActive=NULL;
 			return;
 			}
@@ -6547,9 +6568,9 @@ static	void	activateCB_orizHierButton( UxWidget, UxClientData, UxCallbackArg )
 			if(scada_on)
 				XtRemoveTimeOut(timer_timerefreshCai);
 			UxDestroyInterface(*pullDownActive); /* other pullDownMenu Type */
-			XtFree(listaCaiVr);
-			XtFree(listaCaiFormVr);
-			XtFree(listaPushButton);
+			XtFree((char*)listaCaiVr);
+			XtFree((char*)listaCaiFormVr);
+			XtFree((char*)listaPushButton);
 			pullDownActive=NULL;
 			}
 		
@@ -6572,7 +6593,7 @@ static	void	activateCB_orizHierButton( UxWidget, UxClientData, UxCallbackArg )
 	Assegno al puntatore dell' interfaccia listaPushButton listaPushButtonVr
 	cosi' da poterlo poi eliminare da qualunque interfaccia
 	*/
-	listaPushButton=listaPushButtonOr;
+	listaPushButton=(int*)listaPushButtonOr;
 	if( (listaCaiVr = (Widget *) XtCalloc(1, npag *MAXNUMCAIXLINE*sizeof(Widget)) ) == NULL)
 	{
 	   printf("orizHierMenu. Error in malloc: listaCaiVr\n");
@@ -6689,7 +6710,7 @@ static	void	activateCB_orizHierButton( UxWidget, UxClientData, UxCallbackArg )
 	   UxPutContext( listaPushButtonOr[i], (char *) UxTelepermContext );
 	
 	   XtAddCallback(listaPushButtonOr[i], XmNactivateCallback,
-	                    (XtCallbackProc)view_fa,lista_ind[i] ); 
+	                    (XtCallbackProc)view_fa,(XtPointer)lista_ind[i] ); 
 	/*
 	Costruisco Nome form dei Cai
 	*/
@@ -6707,14 +6728,14 @@ static	void	activateCB_orizHierButton( UxWidget, UxClientData, UxCallbackArg )
 	if(scada_on)
 	      build_cai(listaCaiVr,nomeLabel,listaCaiFormVr[i],listaCaiFormVr[i],gerarchiaValore,i);
 	
-	   XtFree(nomePushButton);
+	   XtFree((char*)nomePushButton);
 	
-	   XtFree(nomeLabel);
+	   XtFree((char*)nomeLabel);
 	
 	   if(gerarchiaNome)
-	      XtFree(gerarchiaNome);
+	      XtFree((char*)gerarchiaNome);
 	   if(gerarchiaValore)
-	      XtFree(gerarchiaValore);
+	      XtFree((char*)gerarchiaValore);
 	}/* end for */
 	
 	/* Innesco refresh dei cai solo se esistono */
@@ -6731,7 +6752,7 @@ static	void	activateCB_orizHierButton( UxWidget, UxClientData, UxCallbackArg )
 	      }
 	
 	UxPopupInterface(OrizMenu,no_grab);
-	XtFree(lista_ind);
+	XtFree((char*)lista_ind);
 	
 	}
 	UxTelepermContext = UxSaveCtx;
@@ -7558,109 +7579,109 @@ Widget	create_teleperm( _UxUxParent, _UxPag, _Uxnome_display )
 		_UxIfClassId = UxNewClassId();
 		Uxteleperm_orizHier_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_orizHier_Name,
-					_teleperm_orizHier );
+					(void (*)())_teleperm_orizHier );
 		Uxteleperm_drawPush_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_drawPush_Name,
-					_teleperm_drawPush );
+					(void (*)())_teleperm_drawPush );
 		Uxteleperm_openStaz_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_openStaz_Name,
-					_teleperm_openStaz );
+					(void (*)())_teleperm_openStaz );
 		Uxteleperm_aggHeaderArea_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_aggHeaderArea_Name,
-					_teleperm_aggHeaderArea );
+					(void (*)())_teleperm_aggHeaderArea );
 		Uxteleperm_switchScreen_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_switchScreen_Name,
-					_teleperm_switchScreen );
+					(void (*)())_teleperm_switchScreen );
 		Uxteleperm_moveleft_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_moveleft_Name,
-					_teleperm_moveleft );
+					(void (*)())_teleperm_moveleft );
 		Uxteleperm_moveup_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_moveup_Name,
-					_teleperm_moveup );
+					(void (*)())_teleperm_moveup );
 		Uxteleperm_openTopProcDisplay_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_openTopProcDisplay_Name,
-					_teleperm_openTopProcDisplay );
+					(void (*)())_teleperm_openTopProcDisplay );
 		Uxteleperm_navigation_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_navigation_Name,
-					_teleperm_navigation );
+					(void (*)())_teleperm_navigation );
 		Uxteleperm_decorationToggle_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_decorationToggle_Name,
-					_teleperm_decorationToggle );
+					(void (*)())_teleperm_decorationToggle );
 		Uxteleperm_createCaiHeader_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_createCaiHeader_Name,
-					_teleperm_createCaiHeader );
+					(void (*)())_teleperm_createCaiHeader );
 		Uxteleperm_createButtonPixmap_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_createButtonPixmap_Name,
-					_teleperm_createButtonPixmap );
+					(void (*)())_teleperm_createButtonPixmap );
 		Uxteleperm_moveroot_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_moveroot_Name,
-					_teleperm_moveroot );
+					(void (*)())_teleperm_moveroot );
 		Uxteleperm_closeOW_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_closeOW_Name,
-					_teleperm_closeOW );
+					(void (*)())_teleperm_closeOW );
 		Uxteleperm_close_allPage_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_close_allPage_Name,
-					_teleperm_close_allPage );
+					(void (*)())_teleperm_close_allPage );
 		Uxteleperm_xaing_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_xaing_Name,
-					_teleperm_xaing );
+					(void (*)())_teleperm_xaing );
 		Uxteleperm_refreshAllPageWidgets_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_refreshAllPageWidgets_Name,
-					_teleperm_refreshAllPageWidgets );
+					(void (*)())_teleperm_refreshAllPageWidgets );
 		Uxteleperm_popupPage_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_popupPage_Name,
-					_teleperm_popupPage );
+					(void (*)())_teleperm_popupPage );
 		Uxteleperm_ridisegna_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_ridisegna_Name,
-					_teleperm_ridisegna );
+					(void (*)())_teleperm_ridisegna );
 		Uxteleperm_gotopag_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_gotopag_Name,
-					_teleperm_gotopag );
+					(void (*)())_teleperm_gotopag );
 		Uxteleperm_xplot_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_xplot_Name,
-					_teleperm_xplot );
+					(void (*)())_teleperm_xplot );
 		Uxteleperm_application_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_application_Name,
-					_teleperm_application );
+					(void (*)())_teleperm_application );
 		Uxteleperm_previousPag_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_previousPag_Name,
-					_teleperm_previousPag );
+					(void (*)())_teleperm_previousPag );
 		Uxteleperm_isOldAlarmPage_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_isOldAlarmPage_Name,
-					_teleperm_isOldAlarmPage );
+					(void (*)())_teleperm_isOldAlarmPage );
 		Uxteleperm_moveright_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_moveright_Name,
-					_teleperm_moveright );
+					(void (*)())_teleperm_moveright );
 		Uxteleperm_chPage_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_chPage_Name,
-					_teleperm_chPage );
+					(void (*)())_teleperm_chPage );
 		Uxteleperm_aggTitleArea_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_aggTitleArea_Name,
-					_teleperm_aggTitleArea );
+					(void (*)())_teleperm_aggTitleArea );
 		Uxteleperm_aggListChild_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_aggListChild_Name,
-					_teleperm_aggListChild );
+					(void (*)())_teleperm_aggListChild );
 		Uxteleperm_dispData_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_dispData_Name,
-					_teleperm_dispData );
+					(void (*)())_teleperm_dispData );
 		Uxteleperm_closePag_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_closePag_Name,
-					_teleperm_closePag );
+					(void (*)())_teleperm_closePag );
 		Uxteleperm_create_allPage_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_create_allPage_Name,
-					_teleperm_create_allPage );
+					(void (*)())_teleperm_create_allPage );
 		Uxteleperm_WidgetSelect_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_WidgetSelect_Name,
-					_teleperm_WidgetSelect );
+					(void (*)())_teleperm_WidgetSelect );
 		Uxteleperm_info_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_info_Name,
-					_teleperm_info );
+					(void (*)())_teleperm_info );
 		Uxteleperm_dispTime_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_dispTime_Name,
-					_teleperm_dispTime );
+					(void (*)())_teleperm_dispTime );
 		Uxteleperm_vertHier_Id = UxMethodRegister( _UxIfClassId,
 					Uxteleperm_vertHier_Name,
-					_teleperm_vertHier );
+					(void (*)())_teleperm_vertHier );
 		UxLoadResources( "teleperm.rf" );
 		_Uxinit = 1;
 	}
@@ -7777,12 +7798,12 @@ Widget	create_teleperm( _UxUxParent, _UxPag, _Uxnome_display )
 		/* mi serve solo per caricare il time_ref
 		*/
 		if(!GetResTopLevel(UxParent,&top_x,&top_y,&top_width,&top_height,&time_ref,
-				&top_tipo,&top_descrizione))
+				(char **)&top_tipo,(char **)&top_descrizione))
 			return(False);
 		
 		/* recupero le risorse della drawing area
 		*/
-		   if(!GetResDrawing(UxParent,&drawing_width,&drawing_height,&drawing_background,&drawing_pixmap))
+		   if(!GetResDrawing(UxParent,&drawing_width,&drawing_height,(Pixel *)&drawing_background,&drawing_pixmap))
 				return(False);
 		
 		operazione_attiva=OPERAZIONE_NOP;

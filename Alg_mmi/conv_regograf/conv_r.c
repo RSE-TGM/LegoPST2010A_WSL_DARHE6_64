@@ -95,6 +95,9 @@ OlFormObject ResGetForm (Widget );
 void get_child();
 char *copia_n ();
 char *getpul ();
+extern void sistema_file(char *);
+void legge_sfondo(FILE *fp, char *nome);
+int rd_f14 (int , int *, int *);
 
 extern CONNESSIONI conn[3000];
 extern int num_conn;
@@ -147,7 +150,7 @@ int num_vardati;
 
 sqlite3 *db; 
 
-main(argc,argv)
+int main(argc,argv)
 int argc;
 char **argv;
 {
