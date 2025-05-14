@@ -41,7 +41,8 @@ static char SccsID[] = "@(#)graphics.c	1.7\t2/9/96";
 #include <Xm/ScrollBar.h>
 #include <Xm/MessageB.h>
 #include <Mrm/MrmPublic.h>         
-
+#include <Xm/ToggleB.h>
+#include <Xm/List.h>
 
 #include "libutilx.h"
 #include "uni_mis.h"
@@ -461,6 +462,33 @@ static  void draw_grid(Window);
 extern int read_gruppi(int);
 extern  void close_path();
 
+extern  void open_path();
+void init_gcs();
+void load_file_header(char*);
+static void load_variables2(int,char*[]);
+extern int open_22dat_circ();
+extern int read_22dat_circ(char);
+void close_22dat_circ();
+void load_font(XFontStruct **);
+void clr_cur_wait();
+int zoomed(XPoint,XPoint);
+void abilita_menu_selez(int);
+void reverse_draw(int);
+extern int open_gruppi();
+void handle_motion(Widget);
+void crea_lista_umis();
+void agg_umis();
+void free_lista_umis();
+int write_gruppo(int);
+void reload_f22();
+
+
+
+
+
+
+
+
 /* The names and addresses of things that DwtDrm.has to bind.  The names do
  * not have to be in alphabetical order.  */
 
@@ -490,7 +518,7 @@ static MRMRegisterArg reglist[] = {
 
 
 static int reglist_num = (sizeof reglist / sizeof reglist [0]);
-static font_unit = 400;
+static int font_unit = 400;
 
 
 /*
@@ -648,14 +676,14 @@ if(argc>1)
  Se il file specificato esiste 
  */
 	if(!nofile)
-		load_variables(argc-(2+scala_unica),&argv[2+scala_unica]);
+		load_variables2(argc-(2+scala_unica),&argv[2+scala_unica]);
 	}
 XtMainLoop();
 }
 
 
 
-load_file_header(nome_file)
+void load_file_header(nome_file)
 char *nome_file;
 {
 int flag;
@@ -695,7 +723,7 @@ abilita_menu(nofile);
 	
 }
 
-load_variables(num_nomi,nome)
+void load_variables2(num_nomi,nome)
 int num_nomi;
 char *nome[];
 {
@@ -788,7 +816,7 @@ if(read_22dat_circ(flag)==1)  /* legge tutti i dati dall'inizio del file */
                         nofile=1;
                         }
                 }
-        ();
+        set_scala_unica();
 }
 t_old=0.0;
 timer=XtAppAddTimeOut(XtWidgetToApplicationContext(main_window_widget),(unsigned long)1,timer_proc,NULL);
@@ -799,7 +827,7 @@ XClearArea(display,XtWindow(s->w_mis),0,0,0,0,True);
 
 
 
-crea_sfondo(w,width,height)
+void crea_sfondo(w,width,height)
 Widget w;
 Dimension width,height;
 {
@@ -862,7 +890,7 @@ x_secondi_off=XmStringCreateLtoR("Disabilita tempo in secondi",XmSTRING_DEFAULT_
 /*
  * Inizializzazione dei GC utilizzati per le misure
  */
-init_gcs()
+void init_gcs()
 {
 XGCValues values;
 XColor color,excolor;
@@ -1049,7 +1077,7 @@ gc_zoom=XCreateGC(display,RootWindow(display,screen_num),valuemask,
  * Utilities utilizzate in fase di inizializzazione.
  */
 
-load_font(font_info)
+void load_font(font_info)
 XFontStruct **font_info;
 {
 char *font_name = "fixed";
@@ -1069,7 +1097,7 @@ if((*font_info = XLoadQueryFont(display,font_name)) == NULL)
  *      torna 1 se e' stato effettuato cambiamento di scala
  */
 
-set_scala(indice)
+int set_scala(indice)
 int indice;   /* indice della variabile all'interno del gruppo
 				 (da 0 a 3)    */
 {
@@ -1172,7 +1200,7 @@ for(i=0;i<4;i++)
  *    in modo conforme ai valori di minimo e massimo
  */
 
-set_ordinate(ind)
+int set_ordinate(ind)
 int ind;    /* indice che individua la variabile all'interno del
                        grafico (valori da 0 a 3)       */
 {
@@ -1464,7 +1492,7 @@ timer= XtAppAddTimeOut(XtWidgetToApplicationContext(main_window_widget),
  inserisce nelle stringhe della scala dei tempi i valori calcolati
  in base all'ultimo tempo acquisito 
 */
-prep_str_tim(t_ini,t_fin)
+void prep_str_tim(t_ini,t_fin)
 float t_ini,t_fin;
 {
 int i;
@@ -1951,14 +1979,14 @@ switch(*tag)
 }
 
 
-set_cur_wait()
+void set_cur_wait()
 {
 XDefineCursor(display,XtWindow(toplevel_widget)
         ,/*RootWindow(display,screen_num)*/cursor_wait);
 XSync(display,False);
 }
 
-clr_cur_wait()
+void clr_cur_wait()
 {
 XUndefineCursor(display,XtWindow(toplevel_widget));
 XSync(display,False);
@@ -2048,7 +2076,7 @@ if(freeza && event->button == Button1 )
  * routine per la preparazione della grafica zoomata
  */
 
-zoomed(z_ini,z_fin)
+int zoomed(z_ini,z_fin)
 XPoint z_ini;
 XPoint z_fin;
 {
@@ -2325,7 +2353,7 @@ else    /* fine zoom */
 }
 
 
-reverse_draw(flag)
+void reverse_draw(flag)
 int flag;
 {
 static Pixel draw0_bg,draw1_bg,mis1_bg,ord1_bg,tim1_bg,tempo_bg,form_bg,val1_bg;
@@ -2702,7 +2730,7 @@ else
 /* gestisce il movimento del mouse nella
    window del grafico (per visualizzazione
    valore e per zoom */
-handle_motion(w)
+void handle_motion(w)
 Widget w;
 {
 XtAddEventHandler(w,PointerMotionMask,False,MoveMouse,NULL);
@@ -3382,7 +3410,7 @@ XClearArea(display,XtWindow(widget_array[k_tempo]),0,0,0,0,True);
 */
 }
 
-abilita_menu(flag)
+void abilita_menu(flag)
 int flag;
 {
 int valore;
@@ -3398,7 +3426,7 @@ set_something(widget_array[k_misure_menu_entry],XmNsensitive,(void*) valore);
  abilita/disabilita i menu per la selezione di variabili e/o gruppi
  durante le operazioni di zoom 
 */
-abilita_menu_selez(flag)
+void abilita_menu_selez(flag)
 int flag;
 {
 int valore;
@@ -3416,7 +3444,7 @@ set_something(widget_array[k_selgra_control_button],XmNsensitive,(void*) valore)
  *  crea_lista_umis
  *     crea le lista dei codici delle unita' di misura
  */
-crea_lista_umis()
+void crea_lista_umis()
 {
 int i;
 for(i=0;i<num_umis;i++)
@@ -3424,7 +3452,7 @@ for(i=0;i<num_umis;i++)
 x_codumis[num_umis]=NULL;
 }
 
-free_lista_umis()
+void free_lista_umis()
 {
 int i;
 for(i=0;i<num_umis;i++)
@@ -3433,7 +3461,7 @@ for(i=0;i<num_umis;i++)
         }
 }
 
-reset_graphics()
+void reset_graphics()
 {
 /*
   elimina il timeout di refresh
@@ -3452,7 +3480,7 @@ reload_f22();
  funzione utilizzata nel caso siano variate le veriabili
  in selezione in f22
 */
-reload_f22()
+void reload_f22()
 {
 int i,k;
 

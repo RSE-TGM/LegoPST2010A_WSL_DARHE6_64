@@ -23,12 +23,13 @@ static char SccsID[] = "@(#)sked_timer.c	5.1\t11/7/95";
 */
 # include <stdio.h>
 # include <errno.h>
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "comandi.h"
 # include "sked.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
+# include "sked_fun.h"
 
 extern double   tempo_sim;	/* tempo della simulazione */
 extern double   tempo_reale;	/* tempo reale   */
@@ -48,7 +49,7 @@ extern RtDbPuntiOggetto dbpunti;
 
 double          gettim();
 
-sked_timer(int agg_dbpunti)
+void sked_timer(int agg_dbpunti)
 {
    double          tempo_impiegato;
    int             nnrip;

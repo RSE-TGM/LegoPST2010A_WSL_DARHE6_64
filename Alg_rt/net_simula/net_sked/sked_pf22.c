@@ -49,7 +49,7 @@ extern int      tipo_sked;	/* definisce il tipo di sked SLAVE=0 MASTER=1        
 
 
 
-sked_pf22(modo)
+void sked_pf22(modo)
    int             modo;
 {
    MSG_AUS         messaggio_aus;

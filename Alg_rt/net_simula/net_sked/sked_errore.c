@@ -34,13 +34,14 @@ static char SccsID[] = "@(#)sked_errore.c	5.1\t11/7/95";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+#include <Rt/RtDbPunti.h>
+#include <Rt/RtMemory.h>
 #include "sim_param.h"
 #include "sim_types.h"
 #include "sim_ipc.h"
 #include "sked.h"
+#include "sked_fun.h"
 #include "comandi.h"
-#include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 extern int      stato_sked;
 
@@ -62,7 +63,7 @@ extern int      nmod;		/* numero modelli */
 extern RtDbPuntiOggetto dbpunti;
 
 
-sked_errore()
+void sked_errore()
 {
    MSG_NET         messaggio;
    int             i;
@@ -81,7 +82,7 @@ sked_errore()
 	 if (fp_ordini[i] > 0)
 	 {
 	    printf("prima scrittura in rete\n");
-	    if (writen(fp_ordini[i], &messaggio.header_net,
+	    if (writen(fp_ordini[i], (char*)&messaggio.header_net,
 		       sizeof(HEADER_NET)) < 0)
 	    {
 	       printf("Impossibile comunicare con %d\n", i);

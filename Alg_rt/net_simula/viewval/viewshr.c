@@ -67,6 +67,7 @@ char *ind_sh_top;          /* puntatore inizio shared memory sh_var */
 int id_sh;                 /* identificatore sh_var */
 
 int cerca_indirizzo ();
+void costruisci_var (char**, VARIABILI **, int*);
 
 double gettim();
 
@@ -304,7 +305,7 @@ while ( fgets(dirbuff,DIMDIRBUFF,fpop) != NULL )
 				   {
 // DEBUG				   fprintf(stderr, "PATH = %s\n",dirbuff+4);
                 		   retval=pclose(fpop);
-				   dirbuff[strlen(dirbuff)-1]=NULL;
+				   dirbuff[strlen(dirbuff)-1]=0;
                 		   return ( dirbuff+4 );
 				   }
 			 }

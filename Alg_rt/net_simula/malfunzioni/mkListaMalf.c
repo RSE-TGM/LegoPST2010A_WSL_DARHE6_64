@@ -50,7 +50,15 @@ FILE *FileOpen();
 char *estraiRadice();
 char *estraiKKS();
 
-main (int argc, char *argv[])
+int existFile (char *);
+int checkClassiEsistenti (FILE *, char *, int *,int *);
+int cercaClasseLibera (int *, int );
+int alreadyIncluded (char *, char *, char *);
+int aggiungiIstanzaMalf (char *, char *, int , char *);
+
+
+
+int main (int argc, char *argv[])
 {
 char homePath[MAX_LUN_RIGA];
 int indiceParametro;

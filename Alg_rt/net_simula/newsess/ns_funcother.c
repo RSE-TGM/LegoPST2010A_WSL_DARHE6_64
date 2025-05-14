@@ -22,8 +22,10 @@ static char SccsID[] = "@(#)ns_funcother.c	1.9\t2/5/96";
    reserved @(#)ns_funcother.c	1.9
 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <errno.h>
 #include <string.h>
+#include <unistd.h>
 #if defined UNIX
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -55,6 +57,7 @@ static char SccsID[] = "@(#)ns_funcother.c	1.9\t2/5/96";
    Boolean nsRemove(char * );
    Boolean nsCopy(char * , char * );
    static int ComparaCampioni3(SCIRC_DATI *,SCIRC_DATI *);
+   static int ConfrontaFinestre(float , float , float , float );
 
 
 
@@ -193,7 +196,7 @@ free(valori);
 
 if(camp>0)
         {
-        qsort(*dati,camp,sizeof(SCIRC_SEL_DATI),ComparaCampioni3);
+        qsort(*dati,camp,sizeof(SCIRC_SEL_DATI),(__compar_fn_t)ComparaCampioni3);
         *tempo = (*dati)[camp-1].tempo.tempo;
         ultimo_tempo = *tempo;
         primo_tempo = (*dati)[0].tempo.tempo;

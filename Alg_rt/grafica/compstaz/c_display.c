@@ -32,7 +32,7 @@ static char SccsID[] = "@(#)c_display.c	1.3\t3/23/95";
 #include "sim_param.h"
 #include "sim_types.h"
 #include "xstaz.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 
 // void legge_riga( char *riga, int *lun, int *nriga );
 // void separa_str( char *riga, int lun, int nstr, STRIN_ST strin[]);

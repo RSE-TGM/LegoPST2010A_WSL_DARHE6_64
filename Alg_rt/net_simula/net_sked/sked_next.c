@@ -34,14 +34,15 @@ static char SccsID[] = "@(#)sked_next.c	5.1\t11/7/95";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "comandi.h"
 # include "sked.h"
+# include "sked_fun.h"
 # include "dispatcher.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 extern int      tipo_sked;	/* definisce il tipo di sked SLAVE=0 MASTER=1          */
 extern int      nmod;
@@ -58,7 +59,7 @@ extern int      iterazione_successiva;
 
 extern RtDbPuntiOggetto dbpunti;
 
-sked_next()
+void sked_next()
 {
    int             i;
    float app_tempo;
@@ -73,7 +74,7 @@ sked_next()
       for (i = 0; i < nmod; i++)
 	 if (fp_ordini[i] > 0)
 	 {
-	    if (writen(fp_ordini[i], &messaggio_master.header_net,
+	    if (writen(fp_ordini[i], (char*)&messaggio_master.header_net,
 		       sizeof(HEADER_NET)) < 0)
 	    {
 	       sked_stato(STATO_ERRORE);
@@ -81,7 +82,7 @@ sked_next()
 	       sked_errore();
 	    }
 	    RtDbPGetTime(dbpunti,&app_tempo);
-	    if (writen(fp_ordini[i], &app_tempo, sizeof(float)) < 0)
+	    if (writen(fp_ordini[i], (char*)&app_tempo, sizeof(float)) < 0)
 	    {
 	       sked_stato(STATO_ERRORE);
 	       printf("Impossibile com %d\n", i);

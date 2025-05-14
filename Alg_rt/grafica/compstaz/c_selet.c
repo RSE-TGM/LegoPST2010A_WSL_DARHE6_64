@@ -32,7 +32,7 @@ static char SccsID[] = "@(#)c_selet.c	1.3\t3/23/95";
 #include "sim_param.h"
 #include "sim_types.h"
 #include "xstaz.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 
 // void legge_riga( char *riga, int *lun, int *nriga );
 // void separa_str( char *riga, int lun, int nstr, STRIN_ST strin[]);
@@ -48,7 +48,7 @@ extern  int nriga;
 extern	char *stipo_perturb[];
 
 
-c_selet(p_r02)
+int c_selet(p_r02)
 TIPO_SELETTORE *p_r02;
 {
 int i,lun,nstr,j,imu,index;

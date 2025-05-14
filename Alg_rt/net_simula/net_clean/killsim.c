@@ -24,6 +24,7 @@ static char SccsID[] = "@(#)killsim.c	5.4\t3/14/96";
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h> 
 #include <sim_param.h>
 #include <sim_ipc.h>
 #include <Cs/Cs.h>
@@ -41,11 +42,13 @@ typedef struct strin_st {
   int lun_stringa;
   } STRIN_ST;
 
+extern void testata(char *, char *);
+static int legge_riga_bin_k(char*,FILE*);
+static void separa_str(char *, int , STRIN_ST []);
+int elimina_processo(char *, int *, char *);
 
 
-int legge_riga_bin(riga,fp)
- char *riga;
- FILE *fp;
+static int legge_riga_bin_k(char*riga,FILE*fp)
 {
  int c, k;
 
@@ -64,7 +67,7 @@ int legge_riga_bin(riga,fp)
 
 
 
-separa_str(char *riga, int nstr, STRIN_ST strin[])
+static void separa_str(char *riga, int nstr, STRIN_ST strin[])
 {
 char *s;
 int i;
@@ -95,7 +98,7 @@ char appoggio[MAXRIGA];
 
 
 
-main()
+int main()
 {
 FILE *fp;
 int k = 0;
@@ -212,7 +215,7 @@ if((fp=fopen(path_tmp,"r"))==NULL) {
 */
 while(1)
 	{
-	ret = legge_riga_bin(riga,fp);
+	ret = legge_riga_bin_k(riga,fp);
         if( ret==0 )
            break;
         strcpy(appoggio,riga);
@@ -312,7 +315,7 @@ if((fp=fopen(path_tmp,"r"))==NULL) {
 k=0;
 while(1)
 	{
-	ret = legge_riga_bin(riga,fp);
+	ret = legge_riga_bin_k(riga,fp);
         if( ret==0 )
            break;
 	strcpy(app_riga,riga);
@@ -380,7 +383,7 @@ if((fp=fopen(path_tmp,"r"))==NULL) {
 k=0;
 while(1)
 	{
-	ret = legge_riga_bin(riga,fp);
+	ret = legge_riga_bin_k(riga,fp);
         if( ret==0 )
            break;
         strcpy(app_riga,riga);
@@ -434,7 +437,7 @@ if((fp=fopen(path_tmp,"r"))==NULL) {
 k=0;
 while(1)
 	{
-	ret = legge_riga_bin(riga,fp);
+	ret = legge_riga_bin_k(riga,fp);
         if( ret==0 )
            break;
         strcpy(app_riga,riga);
@@ -493,7 +496,7 @@ if((fp=fopen(file_temp,"r"))==NULL) {
 }
 while(1)
 	{
-        ret = legge_riga_bin(riga,fp);
+        ret = legge_riga_bin_k(riga,fp);
         if( ret==0 )
             break;
 /*

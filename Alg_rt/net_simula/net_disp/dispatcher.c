@@ -137,7 +137,31 @@ SIMULATOR *simpar;
 
 int errdisp,errsked,errshm;
 
-main(int argc, char **argv)
+extern void testata(char *, char *);
+void net_disp_prolog();
+int ControlParam(int processo);
+int ControlSHM();
+int from_someone(int , int , int , int , char *, int );
+int net_disp_scoda_sked();
+int net_disp_scoda_monit_e_banco();
+int net_disp_scoda_super();
+int net_disp_scoda_BM();
+int net_disp_scoda_tast();
+void net_disp_fine();
+void net_disp_prolog();
+int load_stato_cr(STATO_CR *);
+void net_disp_fine();
+int net_disp_scoda_monit_e_banco();
+static int to_someone(int, int, int, int, char*, int);
+static int to_sked(int, char*);
+static void snap_tab_read();
+static void bktk_tab_read();
+void bktk_tab_read();
+int read_sommari_snapshot(int);
+int AnalisiPar(HEADER_REGISTRAZIONI , int );
+
+
+int main(int argc, char **argv)
 {
 int i;
 int sem_val;
@@ -195,7 +219,7 @@ printf("DISPATCHER : parto7 id_msg_from_sked=%d id_msg_to_sked=%d\n",id_msg_from
 fflush(stdout);
 
    from_someone(id_msg_from_sked, id_msg_to_sked, 1, 1, 
-                &errsked, sizeof(int));
+                (char*)&errsked, sizeof(int));
 printf("DISPATCHER : parto8\n");
 fflush(stdout);
 
@@ -250,7 +274,7 @@ int count_sem_wait;
 }
 
 
-net_disp_prolog()
+void net_disp_prolog()
 {
 int i;
 
@@ -323,7 +347,7 @@ int i;
 
 
 
-net_disp_fine()
+void net_disp_fine()
 {
 //   printf("Chiusura code messaggi processo dispatcher\n");
    msg_close(id_msg_to_monit);
@@ -348,7 +372,7 @@ net_disp_fine()
    exit(0);
 }
 
-net_disp_scoda_monit_e_banco()
+int net_disp_scoda_monit_e_banco()
 {
    int             comando_ricevuto_monit = 0;
    int             comando_ricevuto_banco = 0;
@@ -590,7 +614,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	 to_someone(id_msg_to, id_msg_from,
 		    DATI_DISPATCHER,
 	     messaggio_dispatcher.comando_dispatcher.tipo,
-		    &snapshot[k - 1], sizeof(SNTAB));
+		    (char*)&snapshot[k - 1], sizeof(SNTAB));
 	 break;
       }
    case COMANDO_EDITIC:
@@ -608,7 +632,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	    to_someone(id_msg_to, id_msg_from,
 		       DATI_DISPATCHER,
                        messaggio_dispatcher.comando_dispatcher.tipo,
-		       &snapshot[i], sizeof(SNTAB) );
+		       (char*)&snapshot[i], sizeof(SNTAB) );
 	 }
 	 break;
       }
@@ -657,7 +681,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
                    }
                to_someone(id_msg_to, id_msg_from, DATI_DISPATCHER,
                           messaggio_dispatcher.comando_dispatcher.tipo,
-                          &pert_in_spedizione[i], 
+                          (char*)&pert_in_spedizione[i], 
                           sizeof(TIPO_PERT) * num_sped);
                }
             free(pert_in_spedizione);
@@ -700,7 +724,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	 to_someone(id_msg_to, id_msg_from,
 		    DATI_DISPATCHER,
                     messaggio_dispatcher.comando_dispatcher.tipo,
-		    &backtrack[k - 1], sizeof(BKTAB));
+		    (char*)&backtrack[k - 1], sizeof(BKTAB));
 	 break;
       }
    case COMANDO_EDITBT:
@@ -718,7 +742,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	    to_someone(id_msg_to, id_msg_from,
 		       DATI_DISPATCHER,
                        messaggio_dispatcher.comando_dispatcher.tipo,
-		       &backtrack[i], sizeof(BKTAB));
+		       (char*)&backtrack[i], sizeof(BKTAB));
 	 }
 	 break;
       }
@@ -913,7 +937,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	 totale = sizeof(int) + n * (sizeof(int) + sizeof(float));
 	 for (k = 0; k < totale / MAX_LUN_COMANDI_DISPATCHER; k++)
 	 {
-	    memcpy(app_varupd[k * MAX_LUN_COMANDI_DISPATCHER],
+	    memcpy((void * restrict)app_varupd[k * MAX_LUN_COMANDI_DISPATCHER],
 	     messaggio_dispatcher.comando_dispatcher.dati,
 		   MAX_LUN_COMANDI_DISPATCHER);
 	    msg_ack.ret = 1;
@@ -1040,7 +1064,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	 to_someone(id_msg_to, id_msg_from,
 		    DATI_DISPATCHER,
 		    DATI_DISPATCHER,
-		 &(stato_cr.last_snap_save), sizeof(int));
+		 (char*)&(stato_cr.last_snap_save), sizeof(int));
 	 break;
       }
    case COMANDO_LSNAPLOAD:
@@ -1052,7 +1076,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	 to_someone(id_msg_to, id_msg_from,
 		    DATI_DISPATCHER,
 		    DATI_DISPATCHER,
-		 &(stato_cr.last_snap_load), sizeof(int));
+		 (char*)&(stato_cr.last_snap_load), sizeof(int));
 	 break;
       }
 #if defined BACKTRACK
@@ -1071,7 +1095,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	 to_someone(id_msg_to, id_msg_from,
 		    DATI_DISPATCHER,
 		    DATI_DISPATCHER,
-		 &(stato_cr.last_bktk_save), sizeof(int));
+		 (char*)&(stato_cr.last_bktk_save), sizeof(int));
 	 break;
       }
    case COMANDO_LBTLOAD:
@@ -1083,7 +1107,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	 to_someone(id_msg_to, id_msg_from,
 		    DATI_DISPATCHER,
 		    DATI_DISPATCHER,
-		 &(stato_cr.last_bktk_load), sizeof(int));
+		 (char*)&(stato_cr.last_bktk_load), sizeof(int));
 	 break;
       }
 #endif
@@ -1097,7 +1121,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	 to_someone(id_msg_to, id_msg_from,
 		    DATI_ASINCRONI,
 		    DATI_DISPATCHER,
-	       &nuova_statistica_sked, sizeof(STATISTICA_SKED));
+	       (char*)&nuova_statistica_sked, sizeof(STATISTICA_SKED));
 	 break;
       }
    case COMANDO_LISTACI:
@@ -1157,7 +1181,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	 to_someone(id_msg_to, id_msg_from,
 		    DATI_DISPATCHER,
 	     messaggio_dispatcher.comando_dispatcher.tipo,
-		    &righe, sizeof(int));
+		    (char*)&righe, sizeof(int));
 	 i = 0;
 	 size_dati = righe * LUN_RIGA_F14;
 	 for (k = 0; k < (size_dati / MAX_LUN_COMANDI_DISPATCHER); k++)
@@ -1167,7 +1191,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	    to_someone(id_msg_to, id_msg_from,
 		       DATI_DISPATCHER,
 	     messaggio_dispatcher.comando_dispatcher.tipo,
-		&app_char[i], MAX_LUN_COMANDI_DISPATCHER);
+		(char*)&app_char[i], MAX_LUN_COMANDI_DISPATCHER);
 	    i += MAX_LUN_COMANDI_DISPATCHER;
 	 }
 	 k = size_dati - k * MAX_LUN_COMANDI_DISPATCHER;
@@ -1176,7 +1200,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 	 to_someone(id_msg_to, id_msg_from,
 		    DATI_DISPATCHER,
 	     messaggio_dispatcher.comando_dispatcher.tipo,
-		    &app_char[i], k);
+		    (char*)&app_char[i], k);
 	 free(app_char);
 	 break;
       }
@@ -1221,7 +1245,7 @@ printf("in net_disp_scoda_monit_e_banco comando = %d\n", comando);
 return(1);
 }
 
-net_disp_scoda_super()
+int net_disp_scoda_super()
 {
    int             comando_ricevuto = 0;
    int             comando;
@@ -1255,10 +1279,10 @@ net_disp_scoda_super()
 		       DATI_ASINCRONI, START_SCADA, 0, 0);
 	    to_someone(id_msg_to_super, id_msg_from_super,
 		       DATI_ASINCRONI, LOADCI,
-		       &cond_ind, sizeof(int));
+		       (char*)&cond_ind, sizeof(int));
 	    to_someone(id_msg_to_super, id_msg_from_super,
 		       DATI_ASINCRONI, SIM_TIME_EXTRA,
-		       &tempo_sim, sizeof(float));
+		       (char*)&tempo_sim, sizeof(float));
 	    to_someone(id_msg_to_super, id_msg_from_super,
 		       DATI_ASINCRONI, DB_ALL, 0, 0);
 	    to_someone(id_msg_to_super, id_msg_from_super,
@@ -1294,7 +1318,7 @@ net_disp_scoda_super()
 return(1);
 }
 
-net_disp_scoda_BM()
+int net_disp_scoda_BM()
 {
 #if defined BANCO_MANOVRA
    int             comando;
@@ -1357,7 +1381,7 @@ return(1);
 }
 
 
-net_disp_scoda_sked()
+int net_disp_scoda_sked()
 {
    int             comando_ricevuto = 0;
    int             comando;
@@ -1401,7 +1425,7 @@ net_disp_scoda_sked()
 	 if (super_agganciato == 1)
 	 {
 	    to_someone(id_msg_to_super, id_msg_from_super, DATI_ASINCRONI,
-		 SIM_TIME_INT, &tempo_sim, sizeof(float));
+		 SIM_TIME_INT, (char*)&tempo_sim, sizeof(float));
 	 }
 	 break;
       }
@@ -1445,7 +1469,7 @@ printf("net_disp_scoda_sked: SKDIS_STATO!!!\n");
 	 {
 	    to_someone(id_msg_to_bm, id_msg_from_bm,
 		       DATI_ASINCRONI, stato_sked,
-		       &operazione, sizeof(int));
+		       (char*)&operazione, sizeof(int));
 	 }
 	 if (super_agganciato == 1)
 	 {
@@ -1495,10 +1519,10 @@ printf("net_disp_scoda_sked: da sked STATO_FREEZE!!!\n");
 **/
 			to_someone(id_msg_to_super, id_msg_from_super,
 				   DATI_ASINCRONI, LOADCI,
-			    &num_operazione, sizeof(int));
+			    (char*)&num_operazione, sizeof(int));
 			to_someone(id_msg_to_super, id_msg_from_super,
 			   DATI_ASINCRONI, SIM_TIME_EXTRA,
-			       &tempo_sim, sizeof(float));
+			       (char*)&tempo_sim, sizeof(float));
 			to_someone(id_msg_to_super, id_msg_from_super,
 			    DATI_ASINCRONI, DB_ALL, 0, 0);
 			to_someone(id_msg_to_super, id_msg_from_super,
@@ -1580,7 +1604,7 @@ printf("net_disp_scoda_sked: da sked STATO_FREEZE!!!\n");
 			    DATI_ASINCRONI, DB_ANA, 0, 0);
 		     to_someone(id_msg_to_super, id_msg_from_super,
 			   DATI_ASINCRONI, SIM_TIME_EXTRA,
-				&tempo_sim, sizeof(float));
+				(char*)&tempo_sim, sizeof(float));
 		     to_someone(id_msg_to_super, id_msg_from_super,
 			      DATI_ASINCRONI, STEP, 0, 0);
 		     break;
@@ -1597,18 +1621,18 @@ printf("net_disp_scoda_sked: da sked STATO_FREEZE!!!\n");
                      if (stato_sked == STATO_BACKTRACK)
                         to_someone(id_msg_to_super, id_msg_from_super,
                                    DATI_ASINCRONI, LOADBT,
-                            &num_operazione, sizeof(int));
+                            (char*)&num_operazione, sizeof(int));
                      else
                         {
                         if (stato_sked != STATO_REPLAY)
                           to_someone(id_msg_to_super, id_msg_from_super,
                                    DATI_ASINCRONI, LOADCI,
-                            &num_operazione, sizeof(int));
+                            (char*)&num_operazione, sizeof(int));
 printf("Inviata LOADCI\n");
                         }
                      to_someone(id_msg_to_super, id_msg_from_super,
                            DATI_ASINCRONI, SIM_TIME_EXTRA,
-                                &tempo_sim, sizeof(float));
+                                (char*)&tempo_sim, sizeof(float));
                      to_someone(id_msg_to_super, id_msg_from_super,
                             DATI_ASINCRONI, DB_ALL, 0, 0);
                      if (stato_sked == STATO_BACKTRACK)
@@ -1639,7 +1663,7 @@ printf("Inviata LOADCI\n");
 	    if (tempo_sim != tempo_sim_old)
 	    {
 	       to_someone(id_msg_to_super, id_msg_from_super, DATI_ASINCRONI,
-		     SIM_TIME, &tempo_sim, sizeof(float));
+		     SIM_TIME, (char*)&tempo_sim, sizeof(float));
 	    }
 	 }
 	 break;
@@ -1655,7 +1679,7 @@ printf("Inviata LOADCI\n");
    return (1);
 }
 
-net_disp_scoda_tast()
+int net_disp_scoda_tast()
 {
    int             comando_ricevuto = 0;
    int             comando;
@@ -1726,7 +1750,7 @@ printf("in dispatcher: max sim time = |%f| \n", messaggio_dispatcher.comando_dis
 	    to_someone(id_msg_to_tast, id_msg_from_tast,
 		       DATI_DISPATCHER,
 	     messaggio_dispatcher.comando_dispatcher.tipo,
-		       &snapshot[i], sizeof(SNTAB));
+		       (char*)&snapshot[i], sizeof(SNTAB));
 	 }
 	 break;
       }
@@ -1802,7 +1826,7 @@ int to_sked(comando, dati)
    Questa funzione inserisce nella parte dati la size passata come parametro
    ma nel campo size del messaggio aggiunge anche 5 interi.
 */
-to_someone(id, id_ret, tipo_dati, comando, dati, size)
+int to_someone(id, id_ret, tipo_dati, comando, dati, size)
    int             id;
    int             id_ret;
    int             tipo_dati;
@@ -1837,7 +1861,7 @@ to_someone(id, id_ret, tipo_dati, comando, dati, size)
  * shared memory 
  */
 
-snap_tab_read()
+void snap_tab_read()
 {
 static int      prima = 1;
 int             i, ret, offset;
@@ -1881,7 +1905,7 @@ HEADER_REGISTRAZIONI hreg_snap;
  * shared memory 
  * COSI' COME E' NON FA NULLA !!!!
  */
-bktk_tab_read()
+void bktk_tab_read()
 {
    static int      prima = 1;
    int             i, ret, offset;
@@ -1917,7 +1941,7 @@ bktk_tab_read()
 }
 
 
-read_sommari_snapshot(posizione)
+int read_sommari_snapshot(posizione)
    int             posizione;
 {
    int             offset;
@@ -1956,7 +1980,7 @@ read_sommari_snapshot(posizione)
 }
 
 
-read_sommari_backtrack(posizione)
+int read_sommari_backtrack(posizione)
    int             posizione;
 {
    int             offset;
@@ -2089,7 +2113,7 @@ int i,ret;
 int zero=0;
 int scrivi_file=0;
 FILE *fpedf;
-char messaggio[FILENAME_MAX]={NULL};
+char messaggio[FILENAME_MAX]="";
 char tipolog[2][20]={"DB_PUNTI_INT",
                    "DB_PUNTI_SHARED"};
 

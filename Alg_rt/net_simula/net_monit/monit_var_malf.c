@@ -67,6 +67,17 @@ static char SccsID[] = "@(#)monit_var_malf.c	5.4\t2/19/96";
 
 char   *nome_modello (char *, int);
 
+int carica_dati_malf();
+int titolo();
+int tasti_comando();
+static int leggi_riga(FILE *, char *);
+int estrai_dati (char *, char *, char *);
+int inserisci_sistema (Widget , int );
+int presa_dati(int );
+int next_down(int );
+int test_sistema (char *);
+int leggi_dati(int  , int );
+
 extern SOMMARIO_MF sommario_mf;
 
 int sistema_selezionato;   /* sistema scelto 0/n  */
@@ -139,6 +150,9 @@ void exit_ricerca();     /* termina l' attuale colloquio */
 void inserisci_somm();   /* inserisce la mf selezionata in sommario       */
 void seleziona_sistema_mf(); /* seleziona un sistema mf ed estrae le var. */
 void seleziona_var_mf(); /* seleziona una variabile da lista        */
+int next_up(int p);
+
+
 
 extern float leggi_valore(int p);
 extern Widget PostDialog();
@@ -675,7 +689,7 @@ int i;
 
 	if (find_malf.n > 0)
 		{
-		if (!strcmp(tag,"UP"))
+		if (!strcmp((char*)tag,"UP"))
 			{
 			next_pos = next_up(pos);
 /*			printf ("UP:pos = %d next = %d\n",pos,find_malf.pos[next_pos]); */
@@ -1086,7 +1100,7 @@ char *s;
 		if (!strcmp(variabili[i].nome,s))
 			{
 			if (strncmp(variabili[i].nome,"JIMA",4) == 0)
-				return;
+				return(0);
 			if ((sist = test_sistema(variabili[i].nome)) >= 0)
 				leggi_dati(sist,i);
 			}

@@ -22,6 +22,10 @@ static char SccsID[] = "@(#)monit_staz.c	5.1\t11/7/95";
    reserved @(#)monit_staz.c	5.1
 */
 # include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <signal.h>
+
 # include <math.h>
 # include <string.h>
 #if defined UNIX
@@ -63,6 +67,8 @@ void seleziona_staz(); /* funzione di callback per la selezione di uno
 			 pagina dalla lista                        */
 void activate_staz(); /* funzione di callback per tutti i bottoni delle 
 			dialog box relative alle stazioni  */
+
+int read_r02();
 
 /* elenco variabili per la lista delle pagine di stazioni */
 
@@ -236,7 +242,7 @@ printf("Prima vfork\n");
 	routine lettura di lettura dal file r02.dat dei descrittori 
         delle pagine di stazioni 
 */
-read_r02()
+int read_r02()
 {
 FILE *fp;
 int  i, col, ilista;

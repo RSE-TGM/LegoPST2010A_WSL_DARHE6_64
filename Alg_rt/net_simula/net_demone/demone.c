@@ -21,9 +21,16 @@ static char SccsID[] = "@(#)demone.c	2.5\t1/19/96";
    data 1/19/96
    reserved @(#)demone.c	2.5
 */
+
+#include <sys/types.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <errno.h>
+#include <string.h>
+#include <math.h>
 #include <signal.h>
+
+
 #if defined UNIX
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -40,12 +47,13 @@ static char SccsID[] = "@(#)demone.c	2.5\t1/19/96";
 #include <inet.h>
 #include <ucx$inetdef.h>
 #endif
+#include <Rt/RtMemory.h>
 #include "sim_param.h"
 #include "sim_types.h"
 #include "demone.h"
 #include "libnet.h"
 #include "comandi.h"
-#include <Rt/RtMemory.h>
+//#include "net_compi_fun.h"
 
 
 #define  NUMPAR         25         /* numero parametri per execve (old=11)*/
@@ -63,10 +71,13 @@ void scoda_ordini();
 
 void sig_child();
 
+extern void testata(char *, char *);
+int  genera_demone();
+
 MSG_DEMONE messaggio;
 int socd;
 
-main(argc, argv)
+int main(argc, argv)
 int argc;
 char *argv[];
 {
@@ -178,7 +189,7 @@ printf("Sistema operativo %s formato dati %s\n",
            {
            ls = sizeof(server);
            if(( rval=recvfrom(socd, &messaggio,sizeof(MSG_DEMONE),
-                              0, &client /*server*/, &ls))<= 0)
+                              0, (struct sockaddr * restrict)&client /*server*/, &ls))<= 0)
                {
                perror("reading datagram message");
                exit(1);
@@ -441,7 +452,7 @@ int fp;
            }
 }
 
-genera_demone()
+int  genera_demone()
 {
 int pid;
 

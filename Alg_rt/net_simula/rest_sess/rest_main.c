@@ -12,17 +12,19 @@ static char *_csrc = "@(#) %filespec: rest_main.c-2 %  (%full_filespec: rest_mai
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <errno.h>
 #include <string.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
 
-# include "sim_param.h"
-# include "sim_types.h"
-# include "sim_ipc.h"
-# include "comandi.h"
-# include "sked.h"
+#include "sim_param.h"
+#include "sim_types.h"
+#include "sim_ipc.h"
+#include "comandi.h"
+#include "sked.h"
 
 
 #define	MAX_NAME_DIR	200
@@ -42,7 +44,7 @@ static char *_csrc = "@(#) %filespec: rest_main.c-2 %  (%full_filespec: rest_mai
 
 
 
-main(argc,argv)
+int main(argc,argv)
 int argc;
 char *argv[];
 {
@@ -150,8 +152,25 @@ printf("***********************************************************\n");
 /*
    Ripristino andato a buon fine.
 */
+     
      printf("\nDo you want to move the restored files in the simulation directory?(y/n): ");
-     gets(selection);
+     // GUAG2025
+     // gets(selection);
+     // Usa fgets invece:
+     if (fgets(selection, sizeof(selection), stdin) != NULL) {
+         // fgets può includere il carattere di newline ('\n') se c'è spazio.
+         // Dobbiamo rimuoverlo se presente, altrimenti strcmp("y") fallirà.
+         char *newline = strchr(selection, '\n');
+         if (newline != NULL) {
+             *newline = '\0'; // Sostituisci il newline con il terminatore di stringa
+         }
+     } else {
+         // Errore nella lettura o EOF, gestisci come preferisci
+         // Ad esempio, assumi 'n' o esci
+         fprintf(stderr, "Errore nella lettura dell'input o EOF.\n");
+         strcpy(selection, "n"); // Assumi 'no' come default in caso di errore
+     }
+    
      if(strcmp(selection,"y")==0) {
         rest_move(dir_archive);
 printf("\n***********************************************************\n");

@@ -10,7 +10,7 @@
 #include "sim_types.h"
 #include "xstaz.h"
 #include "conv_mmi.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 
 
 extern FILE *fp_staz[MAX_PAG];

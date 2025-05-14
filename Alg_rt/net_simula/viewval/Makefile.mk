@@ -52,7 +52,7 @@ OGGETTI = main_viewval.o viewshr.o
 
 
 
-all: $(PATHBIN)/viewval $(OGGETTI) Makefile
+all: $(PATHBIN)/viewval $(OGGETTI) Makefile.mk
 
 
 $(PATHBIN)/viewval: $(OGGETTI)

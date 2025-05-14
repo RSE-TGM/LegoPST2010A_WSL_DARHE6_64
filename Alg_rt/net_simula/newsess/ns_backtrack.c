@@ -33,13 +33,17 @@ static char SccsID[] = "@(#)ns_backtrack.c	1.8\t2/5/96";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+#include <X11/Xlib.h>
+#include <X11/Intrinsic.h>
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
+
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "comandi.h"
 # include "sked.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
+
 
 #include "ns_macro.h"
 
@@ -80,7 +84,8 @@ static char SccsID[] = "@(#)ns_backtrack.c	1.8\t2/5/96";
    extern Boolean nsRemove(char *);
    extern Boolean nsCopy(char *,char *);
 
-
+   extern int load_stato_cr(STATO_CR *);
+   extern int save_stato_cr(STATO_CR *);
 /*
     Genera la nuova sessione di file di backtrack
     Input       backtrack.dat
@@ -144,7 +149,7 @@ int ret;
 /* Creazione e caricamento del file backtrackn.dat */
    crea_new_backtrack();
 
-   XtFree(bk_trasfer);
+   XtFree((char*)bk_trasfer);
 
 return(1);
 }
@@ -312,12 +317,12 @@ SNAP_SKED	sommari_backtrack;
    strcat(path_rel, NAME_BACKN);
    if (!(fp_bktk_n = fopen(path_rel, "w")))
       {
-      fprintf(" Non si puo' aprire il file:\n\t%s\n",path_rel);
+      printf(" Non si puo' aprire il file:\n\t%s\n",path_rel);
       return(-1);
       }
    if (!(fp_bktk = fopen(NAME_BACK, "r")))
       {
-      fprintf(" Non si puo' aprire il file:\n\t%s\n",NAME_BACK);
+      printf(" Non si puo' aprire il file:\n\t%s\n",NAME_BACK);
       return(-1);
       }
    /* Caricamento in backtrackn.dat della parte di header:         */

@@ -33,6 +33,7 @@ static char SccsID[] = "@(#)am1_r.c	1.4\t3/23/95";
 #include <Xm/Separator.h>
 #include "sim_param.h"
 #include "xstaz.h"
+#include "compstaz.h"
 
 
 #include "am1.bmp"
@@ -95,8 +96,11 @@ float estr_sh();
 XPoint am1_posiz[]={{0,90},  /* minimo del valore */
                     {73,23},  /* massimo valore */
 		    {19,45}}; /* valore intermedio */	
-#define PIGRECO 3.141592
-staz_am1_r(flag,is,ip3)
+			
+//#define PIGRECO 3.14159265358979323846
+#define PIGRECO 3.1415926535897932384665358979323846
+
+int staz_am1_r(flag,is,ip3)
 int *flag;   /* flag */
 int *is;   /* indice stazione associata */
 int *ip3;  /* indice nel descrittore pagine visualizzate */

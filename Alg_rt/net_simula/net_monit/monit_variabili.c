@@ -39,6 +39,7 @@ static char SccsID[] = "@(#)monit_variabili.c	5.3\t2/13/96";
 # include <Xm/List.h>
 # include <Xm/Text.h>
 # include <Xm/Xm.h>
+# include "libutilx.h"
 # include "sim_param.h"		/* parametri generali LEGO          */
 # include "sim_types.h"		/* tipi e costanti LEGO             */
 # include "monit.h"

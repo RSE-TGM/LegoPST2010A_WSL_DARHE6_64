@@ -31,7 +31,7 @@ static char SccsID[] = "@(#)c_tasto.c	1.3\t3/23/95";
 #include "sim_param.h"
 #include "sim_types.h"
 #include "xstaz.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 
 extern float get_valore();
 // void legge_riga( char *riga, int *lun, int *nriga );

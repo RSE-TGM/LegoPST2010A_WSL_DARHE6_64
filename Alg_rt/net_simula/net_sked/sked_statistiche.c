@@ -22,6 +22,7 @@ static char SccsID[] = "@(#)sked_statistiche.c	5.1\t11/7/95";
    reserved @(#)sked_statistiche.c	5.1
 */
 # include <stdio.h>
+# include <string.h>
 # include <errno.h>
 #if defined UNIX
 # include <sys/types.h>
@@ -32,13 +33,14 @@ static char SccsID[] = "@(#)sked_statistiche.c	5.1\t11/7/95";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "sked.h"
+# include "sked_fun.h"
 # include "comandi.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 extern int      nmod;		/* numero_modelli */
 
@@ -72,7 +74,7 @@ extern int      id_msg_task[MAX_MODEL];
 extern int      id_msg_rettask;
 
 
-sked_statistiche()
+void sked_statistiche()
 {
    int             i, k;
    MSG_NET         messaggio;
@@ -175,8 +177,7 @@ sked_statistiche()
 }
 
 
-int
-sked_stato_task()
+int sked_stato_task()
 {
    int             i, ret;
    MESSAGGI_TASK   messaggi_task;

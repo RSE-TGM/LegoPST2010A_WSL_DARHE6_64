@@ -33,13 +33,14 @@ static char SccsID[] = "@(#)sked_ingressi.c	5.2\t3/8/96";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"		/* parametri generali LEGO       */
 # include "sim_types.h"		/* parametri generali LEGO       */
 # include "sim_ipc.h"		/* parametri generali LEGO       */
 # include "comandi.h"
 # include "sked.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
+# include "sked_fun.h"
 
 extern S02      s02_;
 extern COLLEGAMENTO collegamento[MAX_MODEL][MAX_MODEL];
@@ -64,7 +65,7 @@ void            sked_ingressi();
 void            sked_trasmette();
 void            sked_riceve();
 void            scoda_buffer();
-extern          costruisci_pacchetto();
+//extern          costruisci_pacchetto();
 extern RtDbPuntiOggetto dbpunti;
 
 

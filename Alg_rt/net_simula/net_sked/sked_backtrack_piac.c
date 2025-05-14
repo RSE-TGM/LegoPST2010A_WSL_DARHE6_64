@@ -23,6 +23,7 @@ static char SccsID[] = "@(#)sked_backtrack_piac.c	5.1\t11/7/95";
 */
 #if defined BACKTRACK
 # include <stdio.h>
+# include <string.h>
 # include <errno.h>
 #if defined UNIX
 # include <sys/types.h>
@@ -34,15 +35,16 @@ static char SccsID[] = "@(#)sked_backtrack_piac.c	5.1\t11/7/95";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "sked.h"
+# include "sked_fun.h"
 # include "comandi.h"
 # include "dispatcher.h"
 # include "libnet.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 #define TESTO_PROVA "Maurizio Zanetta prova dell'area spare in backtrack"
 #define MAX_DATI_NET2 1
@@ -104,9 +106,14 @@ int   dati_scritti;
 
 extern int modo_backtrack;
 extern int attiva_listaci;
-extern sked_raccogli_datisnap(int , int , PACCHETTO_NET *, int );
+//extern sked_raccogli_datisnap(int , int , PACCHETTO_NET *, int );
 
-sked_backtrack_piac(azione, numero)
+int bktk_load_piac(int );
+int bktk_save_piac(int );
+int bktk_del_piac(int );
+
+
+void sked_backtrack_piac(azione, numero)
    int             azione;
    short           numero;
 {
@@ -158,7 +165,7 @@ TIPO_PERT *pert_tmp;
       for (i = 0; i < nmod; i++)
 	 if (fp_ordini[i] > 0)
 	 {
-	    if (writen(fp_ordini[i], &messaggio_net.header_net,
+	    if (writen(fp_ordini[i], (char*)&messaggio_net.header_net,
 		       sizeof(HEADER_NET)) < 0)
 	    {
 	       sked_stato(STATO_ERRORE);
@@ -254,7 +261,7 @@ TIPO_PERT *pert_tmp;
  * file non esiste lo crea. 
  */
 
-bktk_tab_read_piac()
+int bktk_tab_read_piac()
 {
    int             i, ret, offset;
    int             size_bktk, size_file;
@@ -288,7 +295,7 @@ bktk_tab_read_piac()
 	 backtrack_hea[i - 1].forzato = 0;
 	 backtrack_hea[i - 1].tempo   = 0.;
 	 backtrack_hea[i - 1].mod     = 0.;
-         strcpy(backtrack_hea[i - 1].val,"0\00");
+         strcpy((char*)backtrack_hea[i - 1].val,"0\00");
 	 strcpy(backtrack_hea[i - 1].descr, " >>>>    BACKTRACK FREE    <<<<\00");
 	 strcpy(backtrack_hea[i - 1].datasn, "00/00/00\00");
 	 strcpy(backtrack_hea[i - 1].temposn, "0\00");
@@ -620,7 +627,7 @@ int bktk_del_piac(int posizione)
 /*
  * Riempie la tabella dei valori caratteristici di ogni singolo backtrack 
  */
-bktk_slot_piac(pos, variabile, num_bktk)
+int bktk_slot_piac(pos, variabile, num_bktk)
    int             variabile, pos, num_bktk;
 {
    int             i;
@@ -665,7 +672,7 @@ bktk_slot_piac(pos, variabile, num_bktk)
 }
 
 
-ins_tacca_bktk_piac(valore)
+int ins_tacca_bktk_piac(valore)
    int             valore;
 {
 FILE *fp;
@@ -690,7 +697,7 @@ int  offset=0;
 }
 
 
-del_tacca_bktk_piac()
+int del_tacca_bktk_piac()
 {
 FILE *fp;
 int  offset=0;
@@ -716,7 +723,7 @@ if (stato_cr.last_bktk_save > 0)
       }
 }
 
-bktk_clear_piac()
+void bktk_clear_piac()
 {
    int             pos, i;
    int             offset;

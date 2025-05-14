@@ -41,7 +41,7 @@ static char SccsID[] = "@(#)XlDrawingUtil.c	5.1\t11/13/95";
 
 #define DEFAULTWIDTH  50
 #define DEFAULTHEIGHT 50
-#define PIGRECO 3.141592
+#define PIGRECO 3.14159265358979323846
 
 #if defined LINUX
 Display *printer=NULL;

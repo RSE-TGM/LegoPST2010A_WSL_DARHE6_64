@@ -33,6 +33,7 @@ static char SccsID[] = "@(#)mandb.c	5.1\t11/7/95";
 #include <Xm/Text.h>
 #include <Xm/DrawingA.h>
 #include <Xm/List.h>
+#include <Xm/ToggleB.h>
 
 #include "libutilx.h"
 
@@ -55,16 +56,37 @@ static char SccsID[] = "@(#)mandb.c	5.1\t11/7/95";
  exit( puts( "ATTENZIONE: compilare con -DAIX (o -DVMS / -DULTRIX)"));
 #endif
 
+//#define IPC_NOWAIT      0004000         /* error if request must wait */
                                              
 #include "sim_param.h"
 #include "sim_types.h"
 #include "sim_ipc.h"
 #include "sked.h"
+#include "sim_types.h"
 #include "mandb.h"
 #include <Rt/RtDbPunti.h>
 #include <Rt/RtErrore.h>
-# include <Rt/RtMemory.h>
+#include <Rt/RtMemory.h>
 #include <sqlite3.h>
+
+#define RtRecord(punt)  RtIntRecord(punt,__FILE__,__LINE__);
+void * RtIntRecord(void *, char *, int);
+
+int read_all_page_mandb();
+int s_error(char*);
+void init_color();
+void lista_var(Widget);
+void crea_lista_valori(int);
+void crea_lista_page(Widget);
+void cerca_pagina(Widget) ;
+void aggiungi_var(int,int);
+int read_page_mandb(int);
+void crea_lista_pagevis(Widget);
+int write_page_mandb(int,int);
+void cancella_var(int);
+void reset_valori_sp();
+	
+
 
 
 /*
@@ -404,6 +426,9 @@ float old_time= -1;
 
 int num_pagevis = 0;
 
+void testata(char *, char *);
+void costruisci_var (char**, VARIABILI **, int*);
+
 unsigned int main(argc, argv)
     unsigned int argc;   /* Command line argument count */
     char *argv[];        /* Pointers to command line args. */
@@ -532,7 +557,10 @@ for (i=0; i<tot_variabili; i++)
 
 	idsem_locale = sem_create(shr_usr_key+ID_SEM_MDB_4,1); 
 	if (idsem_locale == -1 )
-		exit(" impossibile creare semaforo locale ");
+		fprintf(stderr, " impossibile creare semaforo locale ");
+		exit(99);
+
+
 /*
 	legge il file delle pagine di mandb 
 */
@@ -597,14 +625,14 @@ if (MrmOpenHierarchy(db_filename_num, /* Number of files. */
 
     msg_acqmandb.mtype=MSG_START;
     strcpy(msg_acqmandb.mtext,"messaggio start");
-    if (msg_snd(msgqid,&msg_acqmandb,LUN_MSG_MAX,!IPC_NOWAIT,0) == -1)
+    if (msg_snd(msgqid,&msg_acqmandb,LUN_MSG_MAX,!IPC_NOWAIT) == -1)
             perror ("accodamento ");
 
     XtMainLoop();
 }
 
 
-init_color()
+void init_color()
 {
 XColor color;
 Colormap default_cmap;
@@ -796,7 +824,7 @@ if (str->set)
 		mod_val.indice_var=variabili[p_indvar[indice]].addr;
 		msg_acqmandb.mtype=MSG_MOD_VALORI;
 		memcpy(&msg_acqmandb.mtext[0],&mod_val.indice_var,sizeof (MOD_VALORI));
-       		 if (msg_snd(msgqid,&msg_acqmandb,sizeof (MOD_VALORI),IPC_NOWAIT,0) != -1 )
+       		 if (msg_snd(msgqid,&msg_acqmandb,sizeof (MOD_VALORI),IPC_NOWAIT) != -1 )
 		{
 
 		p_valori_sp[indice]=mod_val.valore;
@@ -950,7 +978,7 @@ switch(*tag)
                 XtDestroyWidget(p_pagcur->pogg[k_mempag_dialog]);
                 p_pagcur->pogg[k_mempag_dialog]=NULL;
 	        if (!flag_retsavepage)
-                	XtCallCallbacks(p_pagcur->pogg[k_close_page],XmNactivateCallback,k_close_page);
+                	XtCallCallbacks(p_pagcur->pogg[k_close_page],XmNactivateCallback,(XtPointer)k_close_page);
 
         break;
 
@@ -1035,7 +1063,7 @@ switch (widget_num)
 	 stato_agg=1;
         time_id=XtAppAddTimeOut(XtWidgetToApplicationContext(main_window_widget),(unsigned long)500,timer_proc,NULL);
           set_something(w,XmNbackground,(void*) excolor[5].pixel);
-          set_something(XtNameToWidget(XtParent(w),"stop_mandb"),(void*) XmNbackground,excolor[1].pixel);
+          set_something(XtNameToWidget(XtParent(w),"stop_mandb"),(void*) XmNbackground,(char*)excolor[1].pixel);
 	}
 	break;
 	
@@ -1045,7 +1073,7 @@ switch (widget_num)
 	XtRemoveTimeOut(time_id);
 	stato_agg=0;
 	time_id =0;
-          set_something(XtNameToWidget(XtParent(w),"start_mandb"),(void*) XmNbackground,excolor[1].pixel);
+          set_something(XtNameToWidget(XtParent(w),"start_mandb"),(void*) XmNbackground,(char*)excolor[1].pixel);
           set_something(w,XmNbackground,(void*) excolor[5].pixel);
 	}
 	break;
@@ -1089,7 +1117,7 @@ switch (widget_num)
 		chiude la pagina corrente
 	  */
 /*		XtRemoveEventHandler(p_pagcur->w,ButtonPressMask,False,PostIt,k_bull_main);*/
-		XtFree(p_pagcur->pogg);	
+		XtFree((char*)p_pagcur->pogg);	
                 XtDestroyWidget(p_pagcur->w);
 		p_pagcur->w=0;
 		crea_lista_pagevis(widget_list_pagevis);
@@ -1305,7 +1333,7 @@ switch(*tag)
         p_pagcur->pogg[k_mempag_dialog]=NULL;
 	p_pagcur->modifica_var=0;
 	if (!flag_retsavepage)
-        	XtCallCallbacks(p_pagcur->pogg[k_close_page],XmNactivateCallback,k_close_page);
+        	XtCallCallbacks(p_pagcur->pogg[k_close_page],XmNactivateCallback,(XtPointer)k_close_page);
         break;
 
         case k_selpag_dialog:
@@ -1384,14 +1412,14 @@ relativi tempi di tutte le pagine */
     per errori FATALI : stampa un messaggio ed esce dall'applicazione
  */
 
-s_error(problem_string)
+int s_error(problem_string)
     char *problem_string;
 {
     printf("%s\n", problem_string);
     exit(0);
 }
 
-lista_var(lista)
+void lista_var(lista)
 Widget lista;
 /* *************** Definizione variabili locali  ***************** */
 {
@@ -1509,7 +1537,7 @@ val=RtDbPGetValueD(dbpunti,indice);
 return(val);
 }
 
-crea_lista_page(w)
+void crea_lista_page(w)
 Widget w;
 {
 int i;
@@ -1530,7 +1558,7 @@ for (i=0; i< MAX_PAGINE; i++)
 }
 
 
-crea_lista_pagevis(w)
+void crea_lista_pagevis(w)
 Widget w;
 {
 int i,pos;
@@ -1576,7 +1604,7 @@ if (num_pagevis == 1)
 */
 
 
-crea_lista_valori(indvar)
+void crea_lista_valori(indvar)
 int indvar;
 {
 int i;
@@ -1599,7 +1627,7 @@ for (i=0; i< MAX_CAMPIONI; i++)
 	cerca pagina
 	sistema tutti i puntatori alla pagina corrente 
 */
-cerca_pagina(w) 
+void cerca_pagina(w) 
 Widget w;
 {
 int ipag;
@@ -1619,13 +1647,13 @@ for (ipag=0; ipag<MAX_PAGINE; ipag++)
 	     break;
 	}
 }
-if (ipag == MAX_PAGINE) { printf("PAGINA NON ESISTENTE \n");exit (" grave errore ");}
+if (ipag == MAX_PAGINE) { printf("PAGINA NON ESISTENTE \n");exit (puts(" grave errore "));}
 }
 
 /*
 	cancella dalla pagina in visualizzazione una variabile
 */
-cancella_var(indice)
+void cancella_var(indice)
 int indice;
 {
 XmString x_app;
@@ -1665,7 +1693,7 @@ int j;
 	toggle_attivo 
 */
 
-aggiungi_var(posiz,indice_sel)
+void aggiungi_var(posiz,indice_sel)
 int posiz;		/* posizione all' interno della pagaina */
 int indice_sel;		/* indice variabile selezionata nella lista */
 {

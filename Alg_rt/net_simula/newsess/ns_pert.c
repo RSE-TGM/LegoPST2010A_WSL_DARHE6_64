@@ -24,6 +24,7 @@ static char SccsID[] = "@(#)ns_pert.c	1.3\t9/12/96";
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
+#include <unistd.h>
 #if defined UNIX
 #include <sys/types.h>
 #include <sys/ipc.h>

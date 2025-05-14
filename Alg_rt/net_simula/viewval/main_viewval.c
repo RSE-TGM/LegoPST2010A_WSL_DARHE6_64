@@ -8,14 +8,25 @@
 #define TIMEMIN 0.01
 #define TIMEMAX 30
 #include "viewshr.h"
+#include "sim_types.h"
 #include "sked.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 #include <sqlite3.h>
 #include "uni_mis.h"
+//#include "libutilx.h"
 
 extern int cerca_umis(char*);
+extern void init_umis();
+
+int usage ();
+void SetUp (int, char**);
+void chdefaults();
+void effetto();
+void sospendi(unsigned int );
+void costruisci_var (char**, VARIABILI **, int*);
+
 
 double timeloop, timeprint, conta;
 int passo;
@@ -37,7 +48,7 @@ sqlite3 *db;
 #define stampa_server(str,val1,val2) printf("%f  %s  %f\n",val1,str,val2)
 #define stampa_server_gen(str,val1,val2) printf(FormatoStampa,val1,str,val2)
 
-usage ()
+int usage ()
 {
    
 
@@ -70,7 +81,7 @@ usage ()
     exit (1);
 }
 
-main(argc, argv)
+int main(argc, argv)
 int argc;
 char **argv;
  {
@@ -185,7 +196,7 @@ chdir(pathloc);
 
 }
 
-SetUp (argc, argv)
+void SetUp (argc, argv)
   int argc;
   char **argv;
   {
@@ -271,7 +282,8 @@ SetUp (argc, argv)
     	  strcpy(nomevar,argv[1]);	   
      }
   }
-effetto()
+
+void effetto()
 {
 #define NUMEFF 4
     const char *tabeff[]= { "\|","\\","\-","\/" };

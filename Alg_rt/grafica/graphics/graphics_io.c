@@ -129,6 +129,17 @@ int dim_bufdati;
 int check_header();
 static int read_nomi_circ(F22CIRC_HD *);
 extern int read_gruppi(int);
+void set_min_max_circ(int , float *);
+void modif_min_max(int , int *, S_SEL_DATI *);
+int scrivi_gruppi();
+void close_gruppi();
+int write_gruppo(int);
+int write_gruppo_noascii(int);
+int    ControlName();
+void d2free(char**);
+void set_cur_wait();
+void reset_graphics();
+extern void clr_cur_wait();
 
 
 extern int    _MAX_SNAP_SHOT;
@@ -144,7 +155,7 @@ extern int    RileggiF22Par;
    Apre i file f22circ.dat e il file selezionato
    Usa la open con gli identificatori interi !!!!!!!
 */
-open_22dat_circ()
+int open_22dat_circ()
 {
 int i,fi,fj;
 char *punt;
@@ -171,7 +182,7 @@ char *punt;
    Chiude i file f22circ.dat e il file selezionato
    Usa la close !!!!!!!
 */
-close_22dat_circ()
+void close_22dat_circ()
 {
 }
 
@@ -185,7 +196,7 @@ close_22dat_circ()
     appartenente al record.  Se il parametro passato come argomento
     e' =NULL inizializza a valori estremi i valori di minimo e massimo.
 */
-set_min_max_circ(int nvar, float *valori_var)
+void set_min_max_circ(int nvar, float *valori_var)
 {
 register int i;
 float delta;
@@ -231,7 +242,7 @@ for(i=0;i<nvar;i++)
     In questo modo si coregge la scala del primo valore rappresentato
     nel buffer circolare.
 */
-modif_min_max(int ncamp, int *ind_mis, S_SEL_DATI *buf)
+void modif_min_max(int ncamp, int *ind_mis, S_SEL_DATI *buf)
 {
 int i,k;
 float delta;
@@ -454,12 +465,12 @@ return(0);
 }
 
 
-close_gruppi()
+void close_gruppi()
 {
 int i;
 for(i=0;i<NUM_GRUPPI;i++)
 	{
-	XtFree(x_gruppi[i]);
+	XtFree((char*)x_gruppi[i]);
 	}
 fclose(fpGR);
 }
@@ -472,7 +483,7 @@ fclose(fpGR);
      Effettua la lettura del vecchio file, sostituisce il gruppo
      da eliminare e riscrive il file.
 */
-write_gruppo(indice)
+int write_gruppo(indice)
 int indice;
 {
 REC_GRUPPO gruppo_tmp;
@@ -557,7 +568,7 @@ int menouno = -1;
 }
 
 
-write_gruppo_noascii(indice)
+int write_gruppo_noascii(indice)
 int indice;
 {
 unsigned long offset;
@@ -578,7 +589,7 @@ else
  */
 FILE *fpPATH;	        
 extern char path[NUM_PATH_FILES][FILENAME_MAX];
-open_path()
+void open_path()
 {
 int i;
 fpPATH=fopen("f22_files.edf","r");
@@ -623,7 +634,9 @@ int i;
 
 fpPATH=fopen("f22_files.edf","r+");
 fseek(fpPATH,0,0);
-ControlName(path);
+// GUAG2025
+//ControlName(path);
+ControlName();
 for(i=0;i<NUM_PATH_FILES;i++)
         {
 	/*fwrite(path[i],FILENAME_MAX,1,fpPATH);*/
@@ -656,11 +669,11 @@ char *blank;
      free(blank);
 }
 
-d2free(prow) 
+void d2free(prow) 
 char **prow;
 {
-XtFree(*prow);
-XtFree(prow);
+XtFree((char*)*prow);
+XtFree((char*)prow);
 }
 
 
@@ -673,7 +686,7 @@ XtFree(prow);
     Legge dal file ASCII dei gruppi i dati da caricare
     nelle strutture descrittive di ciascun gruppo.
 */
-read_gruppi(flag)
+int read_gruppi(flag)
 int flag;  /*  flag == 1 se si desidera la lista per fase di inserimento
                gruppi  */
 {
@@ -734,7 +747,7 @@ return(ngr);
 }
 
 
-read_22dat_circ(flag)
+int read_22dat_circ(flag)
 char flag;
 {
 int i;
@@ -824,7 +837,7 @@ else  /* caso di lettura per aggiornamento  */
  Elimina il timeout e ricarica il file f22
 */
 		reset_graphics();
-		return;
+		return(0);
 		}
 
 /**

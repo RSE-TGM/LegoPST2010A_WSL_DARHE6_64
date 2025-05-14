@@ -22,7 +22,11 @@ static char SccsID[] = "@(#)sked_s02.c	5.2\t2/7/96";
    reserved @(#)sked_s02.c	5.2
 */
 # include <stdio.h>
+# include <unistd.h>
+# include <netdb.h>
+# include <string.h>
 # include <errno.h>
+# include <signal.h>
 #if defined UNIX
 # include <sys/types.h>
 # include <sys/ipc.h>
@@ -34,13 +38,14 @@ static char SccsID[] = "@(#)sked_s02.c	5.2\t2/7/96";
 # include"vmsipc.h"
 # include <stat.h>
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "comandi.h"
 # include "sked.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
+# include "sked_fun.h"
 
 #if defined SCO_UNIX
 #define vfork() fork()
@@ -90,7 +95,7 @@ extern char   _SCADA_NAME[MAX_LUN_HOST];
 #define PARARGV 21
 #define DEBUG_STAMPE_HOST 21
 
-sked_s02()
+void sked_s02()
 {
    PACCHETTO_NET   messaggio;
    MSG_LEGOGRAF    messaggio_legograf;

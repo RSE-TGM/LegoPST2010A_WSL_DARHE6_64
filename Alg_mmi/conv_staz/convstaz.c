@@ -28,7 +28,7 @@ per LEGOMMI
 #include "sim_types.h"
 #include "xstaz.h"
 #include "conv_mmi.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 /*
 	Include la tabella di definizione delle nuove stazioni 
 */

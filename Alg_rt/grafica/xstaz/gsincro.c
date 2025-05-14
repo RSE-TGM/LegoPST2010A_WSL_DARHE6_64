@@ -64,7 +64,7 @@ float estr_sh();
 
 GC	gc_sincro[2];
 
-#define PIGRECO 3.141592
+#define PIGRECO 3.14159265358979323846
 
 crsincro(istaz,wbox,p_ogg,p_r02,ltot)
 int	istaz;		/* indice stazione */

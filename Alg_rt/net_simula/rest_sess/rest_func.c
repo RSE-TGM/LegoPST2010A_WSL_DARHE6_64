@@ -12,6 +12,8 @@ static char *_csrc = "@(#) %filespec: rest_func.c-1.1.1 %  (%full_filespec: rest
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 
 #include "sim_param.h"

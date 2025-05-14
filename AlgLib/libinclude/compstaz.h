@@ -6,6 +6,7 @@
    reserved @(#)compstaz.inc    1.1
 */
 #include <stdio.h>
+
 typedef struct collega {
   char coll [MAX_COLL] [8];
   } COLLEG_ST;

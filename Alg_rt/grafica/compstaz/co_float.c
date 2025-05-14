@@ -26,7 +26,7 @@ static char SccsID[] = "@(#)co_float.c	1.3\t3/23/95";
 
 #include "sim_param.h"
 #include "sim_types.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 
 /*
         conv_float

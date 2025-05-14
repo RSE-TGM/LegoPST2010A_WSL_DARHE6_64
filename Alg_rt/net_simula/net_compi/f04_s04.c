@@ -25,7 +25,8 @@ static char SccsID[] = "@(#)f04_s04.c	5.1\t11/7/95";
         Fine sezione per SCCS
 */
 # include <stdio.h>
-#include <stdlib.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include <string.h>
 #if defined UNIX
 #include <sys/types.h>
@@ -40,6 +41,7 @@ static char SccsID[] = "@(#)f04_s04.c	5.1\t11/7/95";
 #include <limits.h>     /* definition of OPEN_MAX */
 # include "sim_param.h"
 # include "sim_types.h"
+# include "net_compi_fun.h"
 #include <sqlite3.h>
 
 
@@ -56,7 +58,7 @@ extern sqlite3 *db;
 
 extern char path_svil[MAX_MODEL][80];
 
-read_f04_write_s04(varlego,k,model)
+void read_f04_write_s04(varlego,k,model)
 
    VARLEGO *varlego;
    int k;

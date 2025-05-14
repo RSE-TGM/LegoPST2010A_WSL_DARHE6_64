@@ -11,7 +11,7 @@ static char SccsID[] = "@(#)stazgenc.c	1.2\t6/16/93";
 */
 #include "sim_param.h"
 #include "sim_types.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 
 // int staz_am1_c(int,int,int);
 // int staz_am2_c(int,int,int);

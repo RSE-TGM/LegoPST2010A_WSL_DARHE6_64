@@ -99,6 +99,8 @@ static int read_nomi(FILE*,int *);
 static int read_multi(char*);
 static int set_min_max(S_DATI *);
 static void close_path();
+void open_path();
+int    ControlName();
 
 
 open_22dat()
@@ -819,7 +821,7 @@ else
  */
 FILE *fpPATH;	        
 extern char path[NUM_PATH_FILES][LUN_PATH_FILES];
-open_path()
+void open_path()
 {
 int i;
 fpPATH=fopen("f22_files.dat","r");

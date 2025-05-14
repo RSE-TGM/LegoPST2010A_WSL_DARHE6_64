@@ -30,6 +30,7 @@ static char SccsID[] = "@(#)co_main.c	5.2\t12/15/95";
 #include <sqlite3.h>
 
 
+
 typedef struct strin_st {
   char *stringa;
   int lun_stringa;
@@ -38,6 +39,10 @@ typedef struct strin_st {
 typedef struct collega {
   char coll [MAX_COLL] [8];
   } COLLEG_ST;
+
+#include "net_compi_fun.h"
+
+void separa_str( char riga[], int lun, int nstr, STRIN_ST strin[]);
 
 int id_sh;                     /* identificatore sh_var */
 VARIABILI *variabili;        /* database variabili di tutti i modelli */
@@ -96,7 +101,7 @@ COLLEG_ST colleg [MAX_MODEL];
 
 char **cdim2(int,int);
 
-main(argc,argv) 
+int main(argc,argv) 
 int argc;
 char **argv;
 {
@@ -154,21 +159,21 @@ if(speed_version)
 /* ripulisce la directory dai file pre esistenti */
 #if defined UNIX
 if (!(fp = fopen( "S02_AIX", "r")))
-        close(fp);
+        fclose(fp);
 else
         system("rm S02_AIX");
 if (!(fp = fopen( "S02_VMS", "r")))
-        close(fp);
+        fclose(fp);
 else
         system("rm S02_VMS");
 if (!(fp = fopen( "S02_ULTRIX", "r")))
-        close(fp);
+        fclose(fp);
 else
         system("rm S02_ULTRIX");
 if(!speed_version)
 {
 	if (!(fp = fopen( "variabili.rtf", "r")))
-        	close(fp);
+        	fclose(fp);
 	else
 #if defined UNIX
         	system("rm variabili.rtf");
@@ -177,7 +182,7 @@ if(!speed_version)
 		system("delete/noconf variabili.rtf;*");
 #endif
 	if (!(fp = fopen( "variabili.edf", "r")))
-        	close(fp);
+        	fclose(fp);
 	else
 #if defined UNIX
         	system("rm variabili.edf");
@@ -187,36 +192,36 @@ if(!speed_version)
 #endif
 }
 if (!(fp = fopen( "recorder.rtf", "r")))
-        close(fp);
+        fclose(fp);
 else
         system("rm recorder.rtf");
 #endif
 #if defined VMS
 if (!(fp = fopen( "S02_AIX", "r")))
-	close(fp);
+	fclose(fp);
 else
 	system("delete/noconf S02_AIX;*");
 if (!(fp = fopen( "S02_VMS", "r")))
-	close(fp);
+	fclose(fp);
 else
 	system("delete/noconf S02_VMS;*");
 if (!(fp = fopen( "S02_ULTRIX", "r")))
-	close(fp);
+	fclose(fp);
 else
 	system("delete/noconf S02_ULTRIX;*");
 if(!speed_version)
 {
 	if (!(fp = fopen( "variabili.rtf", "r")))
-		close(fp);
+		fclose(fp);
 	else
 		system("delete/noconf variabili.rtf;*");
 	if (!(fp = fopen( "variabili.edf", "r")))
-		close(fp);
+		fclose(fp);
 	else
 		system("delete/noconf variabili.edf;*");
 }
 if (!(fp = fopen( "recorder.rtf", "r")))
-	close(fp);
+	fclose(fp);
 else
 	system("delete/noconf recorder.rtf;*");
 #endif

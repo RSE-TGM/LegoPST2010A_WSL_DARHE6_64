@@ -76,7 +76,7 @@ extern int _NUM_VAR;
 extern int _MAX_PERTUR;
 extern int _SPARE_SNAP;
 
-sked_tempo_iniziale()
+int sked_tempo_iniziale()
 {
    FILE           *fp;
    float           tempo_app;
@@ -158,7 +158,7 @@ sked_tempo_iniziale()
 
    tempo_iniziale = gettim();
    tempo_reale = tempo_iniziale;
-   return;
+   return(1);
 #endif
 #if defined F22_APPEND && !defined PIACENZA
    /* Legge se esiste il file circolare oppure f22 */

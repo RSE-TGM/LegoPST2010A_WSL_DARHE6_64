@@ -2797,8 +2797,8 @@ void tab_backtrack ()
 }
 #endif
 
-void
-tab_perturba ()
+
+void tab_perturba()
 {
     if(SD_editpert (MONIT, perturbazioni,0,_MAX_PERTUR)<0)
         vis_messaggio ("Error pert table not received",1);

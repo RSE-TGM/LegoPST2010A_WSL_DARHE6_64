@@ -24,12 +24,13 @@ static char SccsID[] = "%W%\t%G%";
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 #include "sim_param.h"
 #include "sim_types.h"
 # include "sked.h"
+# include "sked_fun.h"
 # include "comandi.h"
-#include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 extern RtDbPuntiOggetto dbpunti;
 extern RtDbPuntiOggetto dbpunti_ext;
@@ -50,7 +51,9 @@ int modi_periodic(TIPO_PERT *p, int , int , float ,
                   float, float, float , float );
 int agg_filepert(TIPO_PERT , float , float , FILE *);
 int ResettaMalf(float );
-
+void remove_backtrack_updown(int *, float *);
+int ins_area_pert(int, int, float, float,
+	      float, float, float, float, float, float, float);
 
 #if defined SAVEPERT
 FILE           *fp_pert;
@@ -110,7 +113,7 @@ int             k;
     Nega il valore, non elimina la perturbazione, non mette in memoria
     il nuovo valore tanto si usa in fase di snapshot.
 */
-remove_updown(punt)
+void remove_updown(punt)
    float          *punt;
 {
    int             k;
@@ -139,7 +142,7 @@ remove_updown(punt)
     il nuovo valore tanto si usa in fase di snapshot.
     Chiamata da sked_banco (se non e' entrato in replay).
 */
-int rm_updown_from_pert()
+void rm_updown_from_pert()
 {
 int        k;
 TIPO_PERT *pert,*pert_att;
@@ -178,7 +181,7 @@ float valore;
 /*
    Vecchia gestione updown
 */
-remove_backtrack_updown(int *ind_updown, float *val_updown)
+void remove_backtrack_updown(int *ind_updown, float *val_updown)
 {
    int             i;
    float valore;
@@ -206,7 +209,7 @@ remove_backtrack_updown(int *ind_updown, float *val_updown)
 /*
     Vecchia gestione updown.
 */
-int prepara_lista_updown(int *ind, float *val)
+void prepara_lista_updown(int *ind, float *val)
 {
    int             i, k;
    TIPO_PERT *pert;
@@ -249,7 +252,7 @@ remove_updown_slave()
     in funzione del numero del modello.
     Non elimina invece gli updown in corso. 
 */
-remove_updown_slave(punt, modello)
+void remove_updown_slave(punt, modello)
    float          *punt;
    int             modello;
 {
@@ -320,13 +323,13 @@ int i,h,mod;
     return(0);
 }
 
-remove_pert(pos)
+int remove_pert(pos)
    int             pos;
 {
    TIPO_PERT *pert_att;
   
    if((pert_att=RtDbPGetPuntPertAtt(dbpunti))==NULL)
-		return;
+		return(0);
 
    printf("remove_pert in attesa (%d) (tipo[pos-1]=%d)\n", 
            pos,pert_att[pos - 1].tipo);
@@ -340,7 +343,7 @@ remove_pert(pos)
 }
 
 
-init_area_pert()
+void init_area_pert()
 {
    int             k;
    extern int      id_msg_pert;
@@ -376,7 +379,7 @@ int ins_area_pert_att(tipo, indirizzo, valore_delta, rateo_durata,
    TIPO_PERT *pert_att;
   
    if((pert_att=RtDbPGetPuntPertAtt(dbpunti))==NULL)
-		return;
+		return(0);
 /*
     fprintf(stderr,"\t SKED: tp=%d ind=%d val=%f rt=%f t=%f\n",
       tipo,indirizzo,valore_delta,rateo_durata,t); 
@@ -448,7 +451,7 @@ int ins_area_pert_att(tipo, indirizzo, valore_delta, rateo_durata,
 /*
     -1 : non inserisce, poi inserira' tra quelle in attesa
 */
-ins_area_pert(tipo, indirizzo, valore_delta, rateo_durata,
+int ins_area_pert(tipo, indirizzo, valore_delta, rateo_durata,
 	      period, phase, meanvalue, wide, t_null_var, t, dt)
    int     tipo, indirizzo;
    float   valore_delta, rateo_durata, period, phase, meanvalue, 
@@ -752,7 +755,7 @@ float app_rateo_cont;
    return (1);
 }
 
-show_area_pert(int attesa)
+void show_area_pert(int attesa)
 {
    int        k;
    TIPO_PERT *pert;
@@ -797,7 +800,7 @@ show_area_pert(int attesa)
 
 }
 
-gest_area_pert(modello, dt)
+int gest_area_pert(modello, dt)
    int             modello;
    float           dt;
 {
@@ -810,9 +813,9 @@ gest_area_pert(modello, dt)
 
   
    if((pert=RtDbPGetPuntPert(dbpunti))==NULL)
-		return;
+		return(0);
    if((pert_att=RtDbPGetPuntPertAtt(dbpunti))==NULL)
-		return;
+		return(0);
 
 
    dt = dt * fattore_step;
@@ -1393,7 +1396,7 @@ reinserisci_updown(int indirizzo)
 /*
    Elimina l'eventuale updown anche dalle pert in attesa
 */
-cut_updown()
+void cut_updown()
 {
    int             k;
    TIPO_PERT *pert,*pert_att;

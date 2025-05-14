@@ -554,7 +554,7 @@ static int finestra_fuori = 0;
 
          if (check_in_corso == 1)
             {
-            if (SD_allinea(MONIT,&lista_comp) == NO_ALLINEA )
+            if (SD_allinea(MONIT,(char*)&lista_comp) == NO_ALLINEA )
                {
                vis_messaggio ("Banco manovra non configurato",0);
                check_in_corso = 0;
@@ -576,7 +576,7 @@ static int finestra_fuori = 0;
                    return;
                    }
                sprintf(app,"allineamento_dialog");
-               dialog_proc(k_allineamento_dialog,app);
+               dialog_proc((Widget)k_allineamento_dialog,(int*)app);
                carica_lista_comp(widget_array[k_caricamento_lista_comp],&ncomp);
                                  finestra_fuori = 1;
                }
@@ -614,7 +614,7 @@ SNTAB snapshot_sked;
 MSG_SKDIS messaggio;
 SNTAB app_snap;
 char prova[30];
-static qq='A';
+//static char qq='A';
 int ret;
 
 
@@ -700,7 +700,7 @@ switch (widget_num)
 		i=0;
 #if defined MFFR
 		sommari_to_snap();
-		if(SD_saveic(MONIT,&i,testo_p,&sommari)>0)
+		if(SD_saveic(MONIT,&i,testo_p,(char*)&sommari)>0)
 #else
 		if(SD_saveic(MONIT,&i,testo_p,NULL)>0)
 #endif
@@ -726,7 +726,7 @@ switch (widget_num)
 		/* verifica che sia stato selezionato uno snapshot valido */
 		if(snapshot[snapshot_selezionato-1].stat==1)
 		{
-		  vis_messaggio("Command REMOVE I.C. send");
+		  vis_messaggio("Command REMOVE I.C. send",0);
 		  snapshot_sked.prog=snapshot_selezionato;
 		  memcpy(app_1,&snapshot_sked,sizeof(SNTAB));
 		   def_cursore (toplevel_widget, OROLOGIO);
@@ -763,7 +763,7 @@ SNTAB snapshot_sked;
 MSG_SKDIS messaggio;
 SNTAB app_snap;
 char prova[30];
-static qq='A';
+// static qq='A';
 int stato;
 int ret;
 

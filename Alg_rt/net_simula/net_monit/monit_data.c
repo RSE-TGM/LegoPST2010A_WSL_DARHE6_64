@@ -54,8 +54,8 @@ static char SccsID[] = "@(#)monit_data.c	5.2\t1/24/96";
 # include <Rt/RtMemory.h>
 
 
-extern modello_selezionato;
-extern blocco_selezionato;
+extern int modello_selezionato;
+extern int blocco_selezionato;
 
 extern Display *display;
 
@@ -86,7 +86,12 @@ VEDI_DATI *riga=NULL;
 
 char *piniz=NULL;
 
-
+void distruggi_figli(int *, VEDI_DATI *);
+void riga_dati(char *, VEDI_DATI *);
+void memorizza_dati(int , VEDI_DATI *, char *, char *);
+int blank_string(char *);
+void riga_dati2(char *, VEDI_DATI *);
+int cerca_blocco_file(char *,char *,FILE **);
 
 void seleziona_data(w, tag, reason)
 Widget w;
@@ -412,7 +417,7 @@ if (*tag==k_data_dialog_canc)
 /*
      Salvataggio della zona dati modificata 
 */
-memorizza_dati(int numero, VEDI_DATI *linea, char *pout, char *pin)
+void memorizza_dati(int numero, VEDI_DATI *linea, char *pout, char *pin)
 {
 #define STRNBLANK "          "
 int k;
@@ -530,7 +535,7 @@ printf("USCITA DA MEMORIZZA DATI\n");
 
 
 
-riga_dati(char *piniz, VEDI_DATI *linea)
+void riga_dati(char *piniz, VEDI_DATI *linea)
 {
 char riga_f14[150];
 int lun;
@@ -675,7 +680,7 @@ printf("----------fine riga_dati-------------\n");
 
 
 /*****************************************/
-riga_dati2(char *piniz, VEDI_DATI *linea)
+void riga_dati2(char *piniz, VEDI_DATI *linea)
 {
 char riga_f14[LUN_RIGA_F14];
 int lun;
@@ -769,7 +774,7 @@ return(i);
 
 
 
-distruggi_figli(int *numero, VEDI_DATI *riga_distr)
+void distruggi_figli(int *numero, VEDI_DATI *riga_distr)
 {
 int k;
 int i;
@@ -914,7 +919,7 @@ int n_md;
    Cerca nel file specificato la zona con i dati del blocco nome_bl
    posizionandosi alla riga precedente l'inizio della zona dati.
 */
-cerca_blocco_file(char *path_f14,char *nome_bl,FILE **ffp_f14)
+int cerca_blocco_file(char *path_f14,char *nome_bl,FILE **ffp_f14)
 {
 FILE *fp_f14;
 char riga_f14[LUN_RIGA_F14];

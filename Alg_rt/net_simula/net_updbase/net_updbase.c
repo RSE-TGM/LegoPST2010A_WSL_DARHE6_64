@@ -21,10 +21,17 @@ static char SccsID[] = "@(#)net_updbase.c	5.2\t3/4/96";
    data 3/4/96
    reserved @(#)net_updbase.c	5.2
 */
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
+
+
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <errno.h>
+#include <string.h>
+#include <math.h>
 #include <signal.h>
+
+
 #if defined UNIX
 # include <sys/types.h>
 # include <sys/ipc.h>
@@ -62,11 +69,15 @@ RtDbPuntiOggetto dbpunti_ext;
 RtErroreOggetto errore;
 
 float *area_dati;        /* puntatore all'inizio dell'area dati delle task */
-int numero_modelli;
+int numero_mod;
 
-main(argc,argv)
+extern void testata(char *, char *);
+extern int socketlettura(char*,int);
+extern int socketscrittura(char*,int);
+
+int main(argc,argv)
 int argc;
-char **argv[];
+char **argv;
 {
 MSG_NET messaggio_net;
 MSG_LEGOGRAF messaggio_legograf;
@@ -113,7 +124,7 @@ if(tipo!=0)
    dbpunti_ext = RtCreateDbPunti(errore,NULL,DB_PUNTI_SHARED,sim);
 free(sim);
 
-numero_modelli = RtDbPNumeroModelli(dbpunti);
+numero_mod = RtDbPNumeroModelli(dbpunti);
 
 printf("coda di messaggi di net_updbase=%d\n",shr_usr_key+ID_MSG_SKED);
 
@@ -140,7 +151,7 @@ msg_rcv(id_msg_leg,&messaggio_legograf,sizeof(TIPO_LEGOGRAF),(long)LEGOGRAF,
 memcpy(&conf_lego,&messaggio_legograf.dati,sizeof(TIPO_LEGOGRAF));
 
 printf("---------------------RICEVUTA CONF. NET_UPDBASE\n");
-for(i=0;i<numero_modelli;i++)
+for(i=0;i<numero_mod;i++)
 	{
 	if(conf_lego.sezione[i]==1)
 		{
@@ -159,7 +170,7 @@ if(tipo!=0)
 	{
 	readn(fp,app,dimensione_pacchetto);
 	k=0;
-	for(i=0;i<numero_modelli;i++)
+	for(i=0;i<numero_mod;i++)
 		{
 		ini_task = RtDbPInizioModelli(dbpunti_ext,i);
 		area_dati = RtDbPPuntData(dbpunti_ext);
@@ -191,7 +202,7 @@ else
                 !IPC_NOWAIT,TIMEOUT_INF);
 	k=0;
 /*      Invia i dati a net_updbase master */
-	for(i=0;i<numero_modelli;i++)
+	for(i=0;i<numero_mod;i++)
 	   {
 		if(conf_lego.sezione[i]==1)
 		{

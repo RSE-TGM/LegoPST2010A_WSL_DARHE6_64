@@ -23,6 +23,7 @@ static char SccsID[] = "@(#)sked_snapshot.c	5.2\t2/20/96";
 */
 # include <stdio.h>
 # include <errno.h>
+# include <string.h>
 #if defined UNIX
 # include <sys/types.h>
 # include <sys/ipc.h>
@@ -32,15 +33,16 @@ static char SccsID[] = "@(#)sked_snapshot.c	5.2\t2/20/96";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "sked.h"
+# include "sked_fun.h"
 # include "comandi.h"
 # include "dispatcher.h"
 # include "libnet.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 /*
     PER COMPATIBILITA CON LA NUOVA STRUTTURA CHE HA ELIMINATO
@@ -106,11 +108,12 @@ SNAP_SKED       sommari_snapshot;
 #endif
 #if defined BACKTRACK
 extern int      ins_tacca_bktk();
-extern int      del_tacca_bktk();
+//extern int      del_tacca_bktk();
 #endif
 
+int snap_load(int);
 
-sked_snapshot(azione, numero)
+void sked_snapshot(azione, numero)
    int             azione;
    short           numero;
 {
@@ -157,7 +160,7 @@ sked_snapshot(azione, numero)
       for (i = 0; i < nmod; i++)
 	 if (fp_ordini[i] > 0)
 	 {
-	    if (writen(fp_ordini[i], &messaggio_net.header_net,
+	    if (writen(fp_ordini[i], (char*)&messaggio_net.header_net,
 		       sizeof(HEADER_NET)) < 0)
 	    {
 	       sked_stato(STATO_ERRORE);
@@ -192,7 +195,7 @@ sked_snapshot(azione, numero)
 		  ini_task = RtDbPInizioModelli(dbpunti,i);
 		  memcpy(&(pacchetto_snap->dato[0]),
 			 &area_dati[ini_task],size_task);
-		  if (writen(fp_com[i], pacchetto_snap,
+		  if (writen(fp_com[i], (char*)pacchetto_snap,
 		   sizeof(HEADER_NET) + pacchetto_snap->header_net.lun) < 0)
 		  {
 		     fprintf(stderr, "Errore impossibile scrivere su nodo MASTER\n");
@@ -265,7 +268,7 @@ sked_snapshot(azione, numero)
 		  ini_task = RtDbPInizioModelli(dbpunti,i);
 		  memcpy(&(pacchetto_snap->dato[0]),
 			 &area_dati[ini_task],size_task);
-		  if (writen(fp_master, pacchetto_snap,
+		  if (writen(fp_master, (char*)pacchetto_snap,
 		   sizeof(HEADER_NET) + pacchetto_snap->header_net.lun) < 0)
 		  {
 		     fprintf(stderr, "Errore impossibile scrivere su nodo MASTER\n");
@@ -302,7 +305,7 @@ sked_snapshot(azione, numero)
  * file non esiste lo crea 
  */
 
-snap_tab_read()
+void snap_tab_read()
 {
    int             i, ret, offset;
    FILE           *fp_snap;	/* descrittore del file snapshot.dat */
@@ -320,7 +323,7 @@ snap_tab_read()
 	 snapshot_hea[i - 1].pos = -1;
          snapshot_hea[i - 1].forzato = 0;
          snapshot_hea[i - 1].tempo = 0;
-         strcpy(snapshot_hea[i - 1].val, "0\00");
+         strcpy((char*)snapshot_hea[i - 1].val, "0\00");
 	 strcpy(snapshot_hea[i - 1].descr, " >>>>    SNAPSHOT FREE    <<<<\00");
 	 strcpy(snapshot_hea[i - 1].datasn, "00/00/00\00");
 	 strcpy(snapshot_hea[i - 1].temposn, "0\00");
@@ -354,7 +357,7 @@ snap_tab_read()
  * salva la copia della shared memory in coda al file La posizione va
  * conteggiata da 1 a MAX_SNAPSHOT 
  */
-snap_save(posizione)
+int snap_save(posizione)
    int             posizione;
 {
    char           *app;
@@ -418,7 +421,7 @@ snap_save(posizione)
  * Copia nella shared memory lo snapshot La posizione va conteggiata da 1 a
  * MAX_SNAPSHOT 
  */
-snap_load(posizione)
+int snap_load(posizione)
    int             posizione;
 {
    int             offset;
@@ -471,7 +474,7 @@ snap_load(posizione)
  * Elimina lo snapshot identificato da posizione La posizione va conteggiata
  * da 1 a MAX_SNAPSHOT 
  */
-snap_del(posizione)
+int snap_del(posizione)
    int             posizione;
 {
    int             pos, i;
@@ -544,7 +547,7 @@ snap_del(posizione)
 /*
  * riempie la tabella dei valori caratteristici di ogni singolo snapshot 
  */
-snap_slot(pos, variabile, num_snap)
+void snap_slot(pos, variabile, num_snap)
    int             variabile, pos, num_snap;
 {
    int             i;
@@ -586,7 +589,7 @@ snap_slot(pos, variabile, num_snap)
    fclose(fp_snap);
 }
 
-sked_snap_mod_descr(int pos, char *descr)
+void sked_snap_mod_descr(int pos, char *descr)
 {
    FILE           *fp_snap;	/* descrittore del file snapshot.dat */
    int             offset;

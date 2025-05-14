@@ -83,6 +83,28 @@ static void gestione_frem();
 extern int aggiorna_valori_sommari();
 extern int aggiorna_valori_mf();
 extern int aggiorna_valori_fr();
+int attiva_timer_fr (Widget );
+int crea_sommario_frem();
+int crea_top_frem();
+int crea_bottoni_comando_frem();
+int attiva_timer_gestione_fr (Widget );
+int attivazione_fr();
+int disattivazione_fr();
+int cancellazione_fr();
+int fine_sommario_fr();
+int cancella_riga_sommario_fr (int );
+int impacca_sommario_fr();
+int sposta_riga_sommario_fr (int , int );
+int copia_riga_sommario_fr (int , int );
+int frem_management();
+int inserisci_riga_sommario_fr(int );
+int disinserisci_riga_sommario_fr(int );
+int attiva_riga_sommario_fr(int );
+int seleziona_riga_sommario_fr(int );
+int perturba_riga_sommario_fr (int, float, float);
+
+
+
 /********************************************************************/
 /*
  * definizioni funzioni remote
@@ -126,7 +148,7 @@ int     widget_num = *tag;
 int i;
 static Screen *screen;
 static Pixmap pixmap;
-static prima_volta = 1;
+static int prima_volta = 1;
 Window window;
 Widget vert_scroll_w;
 XmString label_title;
@@ -649,7 +671,7 @@ int i;
       sommario_fr.rampa[i] = RAMPA_DEFAULT;
       sommario_fr.target[i] = TARGET_DEFAULT;
       sommario_fr.attuale[i] = 0.0;
-      strcpy (sommario_fr.stato,  "");
+      strcpy ((char*)sommario_fr.stato,  "");
       sommario_fr.marcato[i] = NON_MARCATO;
 		sommario_fr.occupato[i] = NON_OCCUPATO;
 		sommario_fr.da_riattivare[i] = 0;

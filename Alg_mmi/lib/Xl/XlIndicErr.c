@@ -40,7 +40,7 @@ static char SccsID[] = "@(#)XlIndicErr.c	5.1\t11/13/95";
 
 #define DEFAULTWIDTH  5
 #define DEFAULTHEIGHT 5
-#define PIGRECO 3.141592
+#define PIGRECO 3.14159265358979323846
 
 
 /* lista delle risorse  */

@@ -41,12 +41,22 @@ extern VARIABILI *variabili;
 extern int      tot_variabili;
 extern int      num_var_graf;
 extern 
-leggi_header(F22CIRC_HD *, int);
+int leggi_header(F22CIRC_HD *, int);
+int ControlParam(int );
+void pf_prolog();
+int pf_selcirc();
+void  pf_wrif22circ();
+int     ora(int*, int*, int*);
+int     data(int*, int*, int*);
+int risel_indici();
+int TipoDiRiselezione(int , int , int );
+int pf_back(int *, int , float *);
+int error_conditions(int , int , int , int , int , int );
 
 extern int      id_sh;		/* identificatore sh_var */
 extern int      id_msg_prep;
 extern float   *variabili_grafiche;
-extern          append_mode;
+extern   int       append_mode;
 extern int      variabili_registrate; /* numero delle variabili effettivamente
                                      registrate     */
 
@@ -432,7 +442,7 @@ else
       ret3 = scrivi(&valore[ii], sizeof(float), 1, fpda);
       fluscia(fpda);
       if ((ret1 != 0) || (ret2 != 0) || (ret3 != 1))
-        error_conditions(ret1, ret2, ret3, j, i);
+        error_conditions(ret1, ret2, ret3, j, i, i);
     }
     i++;
     ret4 = fseek(fpda, offheader + i * (variabili_registrate + 1) *

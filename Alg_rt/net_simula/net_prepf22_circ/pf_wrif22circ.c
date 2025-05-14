@@ -68,8 +68,9 @@ int             file_full = 0;
 int             prima_volta_wr = 1;
 int             offheader;
 
+int leggi_header(F22CIRC_HD * , int );
 
-pf_wrif22circ()
+void  pf_wrif22circ()
 {
 static int      iniz_mem;
 static int      fine_mem;

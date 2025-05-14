@@ -11,6 +11,7 @@
 static char *_csrc = "@(#) %filespec: net_prova.c-5 %  (%full_filespec: net_prova.c-5:csrc:1 %)";
 #endif
 # include <stdio.h>
+# include <string.h>
 # include <errno.h>
 # include <math.h>
 # include <sys/types.h>
@@ -86,8 +87,12 @@ int    _PERT_CLEAR;
 
 
 double          gettim();
+char *io_sono(void);
+static int replay();
+int msg_close_fam_sim(int);
+void init_area_pert();
 
-main(argc, argv)
+int main(argc, argv)
    int             argc;
    char           *argv[];
 {
@@ -309,7 +314,7 @@ printf("\t\t Dopo di RtDbPGetTime tempo=%f\n\n",tempo);
 }/* main */
 
 
-init_area_pert()
+void init_area_pert()
 {
    int             k;
    TIPO_PERT *pert, *pert_att;

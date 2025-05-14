@@ -35,13 +35,16 @@ typedef struct strin_st {
   int lun_stringa;
   } STRIN_ST;
 
+#include "net_compi_fun.h"
+void separa_str( char riga[], int lun, int nstr, STRIN_ST strin[]);
+
 extern FILE *fp_n04;
 extern int riga_n04;
 extern FILE *fp_s04;
 
 char **cdim2(int,int);
 
-read_n04_write_s04(varlego,k,model)
+void read_n04_write_s04(varlego,k,model)
  VARLEGO *varlego;
  int k;
  MODEL model[MAX_MODEL];

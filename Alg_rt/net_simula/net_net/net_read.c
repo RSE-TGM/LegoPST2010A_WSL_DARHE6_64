@@ -21,11 +21,12 @@ static char SccsID[] = "@(#)net_read.c	5.2\t2/7/96";
    data 2/7/96
    reserved @(#)net_read.c	5.2
 */
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
+#include <stdio.h>
+#include <errno.h>
+#include <string.h>
 #include <unistd.h>
 #include <signal.h>
+#include <sys/socket.h>
 #if defined UNIX
 # include <sys/types.h>
 # include <sys/ipc.h>
@@ -37,12 +38,12 @@ static char SccsID[] = "@(#)net_read.c	5.2\t2/7/96";
 #endif
 #include "sim_param.h"
 #include "sim_types.h"
-# include "sim_ipc.h"
-# include "comandi.h"
-# include "libnet.h"
+#include "sim_ipc.h"
+#include "comandi.h"
+#include "libnet.h"
 #include <Rt/RtDbPunti.h>
 #include <Rt/RtErrore.h>
-# include <Rt/RtMemory.h>
+#include <Rt/RtMemory.h>
 
 #define MAXHOSTNAMELEN 256
 
@@ -82,9 +83,17 @@ int        _PERT_CLEAR;
 SIMULATOR *simpar;
 
 
-main(argc,argv)
+extern void testata(char *, char *);
+extern int socketlettura(char*,int);
+extern int socketscrittura(char*,int);
+int ConvFloatPert(float *, TIPO_PERT *, int , int );
+int ConvertiPert(TIPO_PERT *,int );
+int InserisciPert(TIPO_PERT *, int );
+
+
+int main(argc,argv)
 int argc;
-char **argv[];
+char **argv;
 {
 int formato_dati;
 float i;
@@ -182,7 +191,7 @@ fp=socketlettura(argv[1],0);
 while(1)
 {
 	/* legge dalla rete */
-	dati_letti=readn(fp,&messaggio.header_net,sizeof(HEADER_NET));
+	dati_letti=readn(fp,(char *)&messaggio.header_net,sizeof(HEADER_NET));
 	memcpy(&messaggio.header_net.lun,converti_int_f
 			(&(messaggio.header_net.lun),RICEZIONE,formato_dati),
 			sizeof(int));
@@ -269,7 +278,7 @@ if(dati_letti==sizeof(HEADER_NET))
         for(ii=1;ii<numero_ricezioni;ii++)
            {
 /*         3.1) Lettura header */
-	   dati_letti=readn(fp,&messaggio.header_net,sizeof(HEADER_NET));
+	   dati_letti=readn(fp,(char*)&messaggio.header_net,sizeof(HEADER_NET));
            if(dati_letti!=sizeof(HEADER_NET))
 	       {
                fprintf(stderr,"net_read: errore lettura n. %d header_snap\n",
@@ -322,7 +331,7 @@ if(dati_letti==sizeof(HEADER_NET))
         parte dati organizzati a blocchi di TIPO_PERT..
 */
 /*      5.1) Lettura header */
-	dati_letti=readn(fp,&messaggio.header_net,sizeof(HEADER_NET));
+	dati_letti=readn(fp,(char*)&messaggio.header_net,sizeof(HEADER_NET));
         if(dati_letti!=sizeof(HEADER_NET))
 	   {
            fprintf(stderr,"net_read: errore lettura perturbazioni\n",
@@ -345,7 +354,7 @@ if(dati_letti==sizeof(HEADER_NET))
                    nblocchiread);
 #endif
            pert_float = (float*)calloc(messaggio.header_net.lun,sizeof(float));
-           dati_letti=readn(fp, pert_float,
+           dati_letti=readn(fp, (char*)pert_float,
                             messaggio.header_net.lun);
 
 /*         5.3) Conversione globale dati ricevuti */
@@ -382,7 +391,7 @@ if(dati_letti==sizeof(HEADER_NET))
 /*         5.4) Lettura header eseguita numero_ricezioni-1 volte */
            if ( ii<numero_ricezioni-1 )
               {
-              dati_letti=readn(fp,&messaggio.header_net,sizeof(HEADER_NET));
+              dati_letti=readn(fp,(char*)&messaggio.header_net,sizeof(HEADER_NET));
               if(dati_letti!=sizeof(HEADER_NET))
                   fprintf(stderr,"net_read: errore lettura n. %d header_snap\n",
                           ii+1);
@@ -403,7 +412,7 @@ if(dati_letti==sizeof(HEADER_NET))
 
      if (messaggio.header_net.tipo==DATIPERT)
 	{
-	dati_letti=readn(fp,&messaggio_pert,
+	dati_letti=readn(fp,(char*)&messaggio_pert,
 			messaggio.header_net.lun);
 /*      Convert eventualmente i dati */
 #if defined REPLAY
@@ -520,7 +529,7 @@ printf("RICEVUTA PERTURBAZIONE tipo=%d %f\n",
      }
   else
      {
-     dati_letti=readn(fp,&messaggio.dato[0],messaggio.header_net.lun);
+     dati_letti=readn(fp,(char*)&messaggio.dato[0],messaggio.header_net.lun);
      for(j=0;j<(messaggio.header_net.lun/sizeof(float));j++)
          {
          memcpy(&messaggio.dato[j],converti_float_f(&messaggio.dato[j],

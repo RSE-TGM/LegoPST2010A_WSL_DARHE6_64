@@ -33,7 +33,7 @@ static char SccsID[] = "@(#)sked_aggiornamento.c	5.1\t11/7/95";
 int             tipo_sked;	/* tipo di sked */
 
 
-sked_aggiornamento()
+void sked_aggiornamento()
 {
    FILE           *fp;
    char           *getenv();	/* funzioni utilizzate           */

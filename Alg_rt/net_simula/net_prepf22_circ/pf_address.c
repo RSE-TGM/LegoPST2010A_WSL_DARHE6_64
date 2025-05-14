@@ -21,8 +21,9 @@ static char SccsID[] = "@(#)pf_address.c	5.3\t11/30/95";
    data 11/30/95
    reserved @(#)pf_address.c	5.3
 */
-# include <stdio.h>
-# include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #if defined UNIX
 # include <sys/types.h>
 # include <sys/ipc.h>
@@ -31,9 +32,9 @@ static char SccsID[] = "@(#)pf_address.c	5.3\t11/30/95";
 #if defined VMS
 #include "vmsipc.h"
 #endif
-# include "sim_param.h"		/* parametri generali LEGO          */
-# include "sim_types.h"		/* tipi e costanti LEGO             */
-# include "pf_macro.h"          /* macro per switch VMS-UNIX    */
+#include "sim_param.h"		/* parametri generali LEGO          */
+#include "sim_types.h"		/* tipi e costanti LEGO             */
+#include "pf_macro.h"          /* macro per switch VMS-UNIX    */
 
 
 int             tot_variabili;	/* numero totale variabili dei modelli      */
@@ -43,7 +44,9 @@ int             id_sh;		/* identificatore sh_var */
 FLAG_SEL        flag_sel = SEL_REG;
 int             nu_var_sel;
 
-pf_address()
+void costruisci_var (char**, VARIABILI **, int*);
+
+void pf_address()
 {
   char           *nome_file;
   int             shr_usr_key;	/* chiave utenti shared  */

@@ -25,25 +25,23 @@ static char SccsID[] = "@(#)sked.c	5.1\t11/7/95";
 # include <errno.h>
 # include <math.h>
 # include <unistd.h>
-#if defined UNIX
+# include <string.h>
 # include <sys/types.h>
 # include <sys/ipc.h>
 # include <sys/msg.h>
-#endif
-#if defined VMS
-# include"vmsipc.h"
-#endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "comandi.h"
 # include "sked.h"
 # include "dispatcher.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 # include "CAP.h"		/* Serve per la gestione delle licenze */
 #include "skey_manager3.h"	/* Serve per la gestione delle licenze hardware*/
 #include <sqlite3.h>
+
+#include "sked_fun.h"
 
 #define     MAXHOSTNAMELEN 256
 
@@ -116,7 +114,7 @@ int    flag_demo = 0;       /* 0 ---> disponibile licenza tipo 'full'
 sqlite3 *db;
 
 
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 int    i,err,ret;
 int    shr_usr_key;
@@ -139,7 +137,7 @@ double tempo_corr;
                                           LICRUNTIME, &indiceSocieta);
 	if(errorCode != 0)
 	{
-		skey_stampa_errore(errorCode, &messaggioErrore);
+		skey_stampa_errore(errorCode, (char*)&messaggioErrore);
 		printf("NET_SKED:%s \n", messaggioErrore);
 
 		//provo l'eventuale chiave software
@@ -290,7 +288,7 @@ printf("net_sked main DEBUG: flag_demo = %d\ttempo_license = %lf\n",
       id_sem_disp = sem_create(shr_usr_key + ID_SEM_DISP, 0);
 printf("main sked.c: 0 GUAG prima di to_someone \n");
 fflush(stdout);
-      to_someone(id_msg_from_sked, id_msg_to_sked, 1, 1, &err, sizeof(int));
+      to_someone(id_msg_from_sked, id_msg_to_sked, 1, 1, (char*)&err, sizeof(int));
       }
 
 /* Attende il comando di initialize */

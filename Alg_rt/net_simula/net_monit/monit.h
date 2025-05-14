@@ -169,7 +169,21 @@ int     SD_stepscaling (int, float*);
 int     SD_goup ();
 int     SD_listaci (int, char*, int);
 int     SD_lsnapreg (int);
-int     SD_lsnapload ( int);  
+int     SD_lsnapload ( int);
+int     SD_allinea (int, char*);
+int     SD_loadic ();
+int     SD_modic (int, int*, char*);
+int     SD_removeic ();
+int     SD_validatebt (int);
+int     SD_lbtload (int);
+int     SD_loadbt ();
+int SD_editbt ();
+int SD_editpert ();
+int     SD_removepert (int, int*);
+int     SD_editdata (int, int,int,char**,int*);
+int     SD_modidata (int, char*, int);
+int     SD_varupd (int, char*, int);
+  
 
 
 void   mo_var(Widget);
@@ -185,14 +199,45 @@ void elenca_staz(Widget);
 int attiva_graphics();
 void about(Widget);
 int monit_aggiorna(VALORI_AGG *);
+
 void bt_al_centro();
-int     SD_lbtload (int);
+int bt_indietro();
+int bt_avanti();
+int bt_in_automatico();
+int bt_in_manuale();
+
+
 void limiti_sessione();
-int     SD_loadbt ();
+
 int snap_to_sommari();
 int cambia_stato_menu ();
 Boolean RtCheckPointer(void *);
-int SD_editbt ();
-int SD_editpert ();
 
+char   *nome_blocco(char *,int,int);
 
+void dialog_proc();
+int prossimo_step();
+int setta_colori();
+int setta_colori();
+int aggiorna_riga_sommario_fr(int );
+
+void select_frem_proc();
+int tasto_sbloccato (Widget);
+int stop_pert_riga_sommario_fr (int);
+int aggiorna_riga_sommario(int riga);
+void select_malf_proc();
+int dati_blocco_malf (int*, unsigned short *, int *, unsigned short *);
+int taglia_descr(char *);
+int dati_blocco_frem (int*, unsigned short *, int *, unsigned short *);
+int tasto_bloccato (Widget,char*);
+int aggiorna_valori_mf();
+int isdigital (char *);
+int aggiorna_valori_fr();
+int lista_sistemi();
+int lista_variabili();
+int selezione_variabile();
+int posiziona_lista ();
+int cambia_colori_mf (Pixel , int );
+int pulisci_lista (Widget );
+int cambia_colori_fr (Pixel , int );
+int elenco_sistemi();

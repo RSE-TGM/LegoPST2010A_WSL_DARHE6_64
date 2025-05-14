@@ -26,9 +26,13 @@ reserved @(#)monit_perturba.c	5.4
 *     legge la lista delle variabili di ingresso e le mostra all'utente
 *     per la scelta delle variabili da perturbare  */
 
+#include <sys/types.h>
+#include <unistd.h>
 # include <stdio.h>
 # include <string.h>
 # include <math.h>
+#include	<signal.h>
+
 #if defined UNIX
 # include <sys/types.h>
 # include <sys/ipc.h>
@@ -94,8 +98,9 @@ void elenca_pert();
 void elenca_modpert();
 void seleziona_inputstat();
 void seleziona_inputstat_activate();
-extern tab_perturba();
+extern void tab_perturba();
 void aing();
+void  stringa_pert();
 
 
 extern int _MAX_SNAP_SHOT;
@@ -858,8 +863,7 @@ Dialog_geometry geom;
         }
 }
 
-void elenca_modpert(lista_1,lista_2,modo)
-Widget lista_1,lista_2;
+void elenca_modpert(Widget lista_1,Widget lista_2,int modo)
 /* *************** Definizione variabili locali  ***************** */
 {
 int k, i;
@@ -958,7 +962,7 @@ if(modo==2)
 }
 
 
-stringa_pert(testo,perturbazione,label)
+void  stringa_pert(testo,perturbazione,label)
 char *testo,*label;
 TIPO_PERT perturbazione;
 {

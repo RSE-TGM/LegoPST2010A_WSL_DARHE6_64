@@ -27,11 +27,12 @@ static char SccsID[] = "@(#)checkvar.c	1.3\t3/23/95";
 	specificato in input e ritorna l'indice ; se non esiste termina
 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "sim_param.h"
 #include "sim_types.h"
-#include "compstaz.inc"
+#include "compstaz.h"
  
 extern	int	nriga;
 extern	int  tot_modelli,tot_variabili;
@@ -41,7 +42,7 @@ extern  int id_sh;
 extern VARIABILI *variabili;
 
 
-check_model(
+int check_model(
  char *stringa,
  int *imu)
 {
@@ -62,7 +63,7 @@ if (strcmp(stringa,"modello"))
 */
 	distruggi_var(id_sh);
 	printf("\n IL MODELLO %s CITATO ALLA RIGA %d  NON ESISTE\n ",stringa,nriga);
-	exit("COMPILAZIONE TERMINATA CON ERRORE ");
+	exit(puts("COMPILAZIONE TERMINATA CON ERRORE "));
 }
 else *imu=0;
 }
@@ -73,7 +74,7 @@ else *imu=0;
         specificato
 */
 
-check_output(
+int check_output(
  char *nomevar,
  int imu,
  int *iu)
@@ -102,7 +103,7 @@ if (strcmp(nomevar,"variabil"))
         p_modelli = (NOMI_MODELLI *) (ind_sh_top + sizeof(int) + (imu-1)*sizeof(NOMI_MODELLI));
         printf("\n LA VARIABILE %s NON E' USCITA DEL MODELLO %s (RIGA: %d ) ",nomevar,p_modelli->nome,nriga);
         distruggi_var(id_sh);
-        exit("COMPILAZIONE TERMINATA CON ERRORE ");
+        exit(puts("COMPILAZIONE TERMINATA CON ERRORE "));
 
 }
 else *iu=0;
@@ -115,7 +116,7 @@ else *iu=0;
         specificato e se e' un ingresso non connesso
 */
 
-check_input(
+int check_input(
  char *nomevar,
  int imu,
  int *iu)
@@ -144,7 +145,7 @@ if (strcmp(nomevar,"variabil"))
         p_modelli = (NOMI_MODELLI *) (ind_sh_top + sizeof(int) + (imu-1)*sizeof(NOMI_MODELLI));
         printf("\n LA VARIABILE %s NON E' UN INGRESSO  DEL MODELLO %s (RIGA : %d) ",nomevar,p_modelli->nome,nriga);
         distruggi_var(id_sh);
-        exit("COMPILAZIONE TERMINATA CON ERRORE ");
+        exit(puts("COMPILAZIONE TERMINATA CON ERRORE "));
 
 }
 else *iu=0;

@@ -31,8 +31,10 @@ static char SccsID[] = "@(#)check_o.c	5.1\t11/7/95";
 #include <string.h>
 #include "sim_param.h"
 #include "sim_types.h"
+#include "net_compi_fun.h"
 
-check_output(
+
+void check_output(
  char *stringa,
  int imu,
  int *iu,

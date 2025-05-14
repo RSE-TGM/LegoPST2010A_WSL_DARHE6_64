@@ -23,6 +23,7 @@ static char SccsID[] = "@(#)sked_backtrack.c	5.1\t11/7/95";
 */
 #if defined BACKTRACK
 # include <stdio.h>
+# include <string.h>
 # include <errno.h>
 #if defined UNIX
 # include <sys/types.h>
@@ -33,15 +34,16 @@ static char SccsID[] = "@(#)sked_backtrack.c	5.1\t11/7/95";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "sked.h"
+# include "sked_fun.h"
 # include "comandi.h"
 # include "dispatcher.h"
 # include "libnet.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 /*
     PER COMPATIBILITA CON LA NUOVA STRUTTURA CHE HA ELIMINATO
@@ -105,7 +107,7 @@ STATO_CR        stato_cr;
 SNAP_SKED       sommari_backtrack;
 
 
-sked_backtrack(azione, numero)
+int sked_backtrack(azione, numero)
    int             azione;
    short           numero;
 {
@@ -151,7 +153,7 @@ sked_backtrack(azione, numero)
       for (i = 0; i < nmod; i++)
 	 if (fp_ordini[i] > 0)
 	 {
-	    if (writen(fp_ordini[i], &messaggio_net.header_net,
+	    if (writen(fp_ordini[i], (char*)&messaggio_net.header_net,
 		       sizeof(HEADER_NET)) < 0)
 	    {
 	       sked_stato(STATO_ERRORE);
@@ -186,7 +188,7 @@ sked_backtrack(azione, numero)
 		  ini_task = RtDbPInizioModelli(dbpunti,i);
 		  memcpy(&(pacchetto_bktk->dato[0]),
 			&area_dati[ini_task],size_task);
-		  if (writen(fp_com[i], pacchetto_bktk,
+		  if (writen(fp_com[i], (char*)pacchetto_bktk,
 		   sizeof(HEADER_NET) + pacchetto_bktk->header_net.lun) < 0)
 		  {
 		     fprintf(stderr, "Errore impossibile scrivere su nodo MASTER\n");
@@ -259,7 +261,7 @@ sked_backtrack(azione, numero)
 		  ini_task = RtDbPInizioModelli(dbpunti,i);
 		  memcpy(&(pacchetto_bktk->dato[0]),
 			&area_dati[ini_task],size_task);
-		  if (writen(fp_master, pacchetto_bktk,
+		  if (writen(fp_master, (char*)pacchetto_bktk,
 		   sizeof(HEADER_NET) + pacchetto_bktk->header_net.lun) < 0)
 		  {
 		     fprintf(stderr, "Errore impossibile scrivere su nodo MASTER\n");
@@ -300,7 +302,7 @@ sked_backtrack(azione, numero)
  * file non esiste lo crea 
  */
 
-bktk_tab_read()
+void bktk_tab_read()
 {
    int             i, ret, offset;
 
@@ -317,7 +319,7 @@ bktk_tab_read()
 	 backtrack_hea[i - 1].pos = -1;
 	 backtrack_hea[i - 1].forzato = 0;
          backtrack_hea[i - 1].tempo   = 0.;
-         strcpy(backtrack_hea[i - 1].val,"0\00");
+         strcpy((char*)backtrack_hea[i - 1].val,"0\00");
 	 strcpy(backtrack_hea[i - 1].descr, " >>>>    BACKTRACK FREE    <<<<\00");
 	 strcpy(backtrack_hea[i - 1].datasn, "00/00/00\00");
 	 strcpy(backtrack_hea[i - 1].temposn, "0\00");
@@ -352,7 +354,7 @@ bktk_tab_read()
  * salva la copia della shared memory in coda al file La posizione va
  * conteggiata da 1 a MAX_BACK_TRACK 
  */
-bktk_save(posizione)
+int bktk_save(posizione)
    int             posizione;
 {
    char           *app;
@@ -402,7 +404,7 @@ bktk_save(posizione)
  * Copia nella shared memory il backtrack La posizione va conteggiata da 1 a
  * MAX_BACK_TRACK 
  */
-bktk_load(posizione)
+int bktk_load(posizione)
    int             posizione;
 {
    int             offset;
@@ -431,7 +433,7 @@ bktk_load(posizione)
  * Elimina il backtrack identificato da posizione La posizione va conteggiata
  * da 1 a MAX_BACK_TRACK 
  */
-bktk_del(posizione)
+int bktk_del(posizione)
    int             posizione;
 {
    int             pos, i;
@@ -493,7 +495,7 @@ bktk_del(posizione)
 /*
  * riempie la tabella dei valori caratteristici di ogni singolo backtrack 
  */
-bktk_slot(pos, variabile, num_bktk)
+int bktk_slot(pos, variabile, num_bktk)
    int             variabile, pos, num_bktk;
 {
    int             i;
@@ -533,7 +535,7 @@ bktk_slot(pos, variabile, num_bktk)
 }
 
 
-ins_tacca_bktk(valore)
+int ins_tacca_bktk(valore)
    int             valore;
 {
    FILE           *fp;
@@ -549,7 +551,7 @@ ins_tacca_bktk(valore)
    }
 }
 
-del_tacca_bktk()
+void del_tacca_bktk()
 {
    FILE           *fp;
 

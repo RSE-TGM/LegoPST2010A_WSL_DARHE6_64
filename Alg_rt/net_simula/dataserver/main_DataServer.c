@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 #include "viewshr.h"
 #include "sked.h"
 #include <stdlib.h>
@@ -71,7 +74,7 @@ int viewshr();
 
                 
 // MAIN
-main (int argc, char **argv)
+int main (int argc, char **argv)
 {
     long numvaloriPert, numvaloriIn, ltimeCurr, ltimeCurr0, ltimeCurrPw, ltimeCurrPp, ltimeCurrPr, 
 	ltimeCurrPa, ltimeCurrPl, il, iltime, jciclo;

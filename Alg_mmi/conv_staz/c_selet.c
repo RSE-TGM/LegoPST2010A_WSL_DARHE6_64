@@ -20,7 +20,7 @@ static char SccsID[] = "@(#)c_selet.c	1.2\t6/16/93";
 #include "sim_param.h"
 #include "sim_types.h"
 #include "xstaz.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 #include "conv_mmi.h"
 
 

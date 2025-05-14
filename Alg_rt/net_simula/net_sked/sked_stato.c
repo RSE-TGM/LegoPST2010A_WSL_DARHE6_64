@@ -22,6 +22,7 @@ static char SccsID[] = "@(#)sked_stato.c	5.4\t2/20/96";
    reserved @(#)sked_stato.c	5.4
 */
 # include <stdio.h>
+# include <string.h>
 # include <errno.h>
 # include <time.h>
 #if defined UNIX
@@ -33,15 +34,16 @@ static char SccsID[] = "@(#)sked_stato.c	5.4\t2/20/96";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "comandi.h"
 # include "libnet.h"
 # include "sked.h"
+# include "sked_fun.h"
 # include "dispatcher.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 #include "libipc.h"
 
@@ -97,7 +99,7 @@ double          gettim();
 double          tempo_agg_stat = 0.0;
 double          tempo_agg_stat_int = 0.0;
 
-sked_stato(stato)
+void sked_stato(stato)
    int             stato;
 {
    char            app[MAX_LUN_COMANDI_SKDIS];
@@ -296,7 +298,7 @@ printf("sked_stato: sem_val = %d\n",sem_val);
 
 
 
-sked_stato_intermedio()
+void sked_stato_intermedio()
 {
    char            app[MAX_LUN_COMANDI_SKDIS];
    int             i;

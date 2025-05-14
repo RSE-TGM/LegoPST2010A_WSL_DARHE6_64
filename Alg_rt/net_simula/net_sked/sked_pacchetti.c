@@ -36,7 +36,7 @@ PACCHETTO_NET   pacchetto_net;
 
 
 
-costruisci_pacchetto(modello_a, modello_b, tab)
+void costruisci_pacchetto(modello_a, modello_b, tab)
    int             modello_a;
    int             modello_b;
    int             tab;

@@ -22,6 +22,7 @@ static char SccsID[] = "@(#)sked_task.c	5.1\t11/7/95";
    reserved @(#)sked_task.c	5.1
 */
 # include <stdio.h>
+# include <string.h>
 #if defined UNIX
 # include <sys/types.h>
 # include <sys/ipc.h>
@@ -31,22 +32,24 @@ static char SccsID[] = "@(#)sked_task.c	5.1\t11/7/95";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "dispatcher.h"
 # include "comandi.h"
 # include "sked.h"
+# include "sked_fun.h"
 #if defined BANCO_MANOVRA
 # include "libmanovra.h"
 # include "agg_manovra.h"
 #endif
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 
 void            attende_task();
 void            sveglia_task();
+int invia_messaggio_bm(int);
 
 extern RtDbPuntiOggetto dbpunti;
 extern RtDbPuntiOggetto dbpunti_ext;
@@ -100,7 +103,7 @@ extern double   tempo_sim;
 
 extern char     _NO_PRIOLO[10];
 
-sked_task()
+void sked_task()
 {
    int             i, k;
    int             itab;	/* indice variabile tabella sincronizzazione */
@@ -483,7 +486,7 @@ sveglia_task(tab)
 
 
 #if defined BANCO_MANOVRA
-invia_messaggio_bm(modo)
+int invia_messaggio_bm(modo)
    int             modo;
 {
    static MESSAGGI_TASKBM messaggi_taskbm;

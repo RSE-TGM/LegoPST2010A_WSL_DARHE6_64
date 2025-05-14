@@ -28,6 +28,7 @@ Compila il file descrittore delle stazioni r01.dat e produce
 *********************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include <X11/Xlib.h>
@@ -36,7 +37,7 @@ Compila il file descrittore delle stazioni r01.dat e produce
 #include "sim_param.h"
 #include "sim_types.h"
 #include "xstaz.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 /*
 	Include la tabella di definizione delle nuove stazioni 
 */
@@ -84,7 +85,9 @@ FILE *fo;
 
 sqlite3 *db;
 
-main()
+void costruisci_var (char**, VARIABILI **, int*);
+
+int main()
 {
 char aux[80];
 char file [50];
@@ -409,7 +412,7 @@ return(0);
 	Completa la descrione delle pagine
 ***********************************************************************/
 
-fill_pagina(scomp)
+int fill_pagina(scomp)
 S_COMP_PAGINA *scomp;
 {
 int i, j, ipag, istaz;
@@ -475,7 +478,7 @@ return(0);
 	check_pagina()
 ********************************************************************/
 
-check_pagina(scomp)
+int check_pagina(scomp)
 S_COMP_PAGINA *scomp;
 {
 int ipag, istaz,  j, m, k, ipx0, ipy0, ipx1, ipy1;

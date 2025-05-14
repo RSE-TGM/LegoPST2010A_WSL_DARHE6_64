@@ -31,8 +31,9 @@ static char SccsID[] = "@(#)check_i.c	5.1\t11/7/95";
 #include <string.h>
 #include "sim_param.h"
 #include "sim_types.h"
+#include "net_compi_fun.h"
 
-check_input(
+void check_input(
  char *stringa,
  int imi,
  int *ii,

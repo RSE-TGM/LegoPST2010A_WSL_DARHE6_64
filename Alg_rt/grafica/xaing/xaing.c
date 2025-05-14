@@ -26,6 +26,7 @@ static char SccsID[] = "@(#)xaing.c	1.17\t6/18/96";
  *   processo aing realizzato sotto DEC_Windows
  */
 #include <stdio.h>
+#include <unistd.h> 
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -206,7 +207,31 @@ int disp_sel=0;
 int versione_mmi;
 char * nome_file_context;
 
-main (argc, argv)
+
+
+void init_aing ();
+void costruisci_var (char**, VARIABILI **, int*);
+void init_gc (int );
+int new_aing (int);
+int del_refresh (void*);
+int cerca_umis(char*);
+void agg_stato (int);
+int add_refresh (XtCallbackProc, void*);
+int pert_malfunction(int ,int ,float ,float ,float );
+int pert_malfunction_stop(int ,int ,float );
+void agg_stato (int);
+int add_refresh (XtCallbackProc, void*);
+void load_font (XFontStruct **,int);
+
+
+
+
+
+
+
+
+
+int main (argc, argv)
 unsigned int    argc;	/* Command line argument count. */
 char   *argv[];		/* Pointers to command line args. */
 {
@@ -338,7 +363,7 @@ topLevel = XtAppInitialize(&app_context, "xaing",
 /*
  lettura file delle unita' di misura 
  */
-    if (getcwd (pathdir, 100) == (int)NULL)
+    if (getcwd (pathdir, 100) == 0)
 	printf ("\n errore in lettura path");
     chdefaults ();
     init_umis ();
@@ -500,7 +525,7 @@ struct sigcontext  *scp;
     exit (0);
 }
 
-new_aing (ip3)
+int new_aing (ip3)
 int     ip3;
 {
     Widget wTopLev;
@@ -1431,7 +1456,7 @@ XtManageChild(wapp);
     XtSetArg (args[i], XmNfont, font_list[disp_sel]); i++;
     XtSetArg (args[i], XmNlabelString, XmStringCreateLtoR ("Normal:", XmSTRING_DEFAULT_CHARSET)); i++;
     aing[ip3].sw[k_tipo_normal] = XmCreatePushButton (aing[ip3].sw[k_tipo_pull], "tipo_option_normal", args, i);
-    XtAddCallback (aing[ip3].sw[k_tipo_normal], XmNactivateCallback, tipo_normal_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_tipo_normal], XmNactivateCallback, tipo_normal_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_tipo_normal]);
 
 /*
@@ -1442,7 +1467,7 @@ XtManageChild(wapp);
     XtSetArg (args[i], XmNfont, font_list[disp_sel]); i++;
     XtSetArg (args[i], XmNlabelString, XmStringCreateLtoR ("Periodic:", XmSTRING_DEFAULT_CHARSET)); i++;
     aing[ip3].sw[k_tipo_periodic] = XmCreatePushButton (aing[ip3].sw[k_tipo_pull], "tipo_option_periodic", args, i);
-    XtAddCallback (aing[ip3].sw[k_tipo_periodic], XmNactivateCallback, tipo_periodic_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_tipo_periodic], XmNactivateCallback, tipo_periodic_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_tipo_periodic]);
 
 /*
@@ -1453,7 +1478,7 @@ XtManageChild(wapp);
     XtSetArg (args[i], XmNfont, font_list[disp_sel]); i++;
     XtSetArg (args[i], XmNlabelString, XmStringCreateLtoR ("Noise :", XmSTRING_DEFAULT_CHARSET)); i++;
     aing[ip3].sw[k_tipo_noise] = XmCreatePushButton (aing[ip3].sw[k_tipo_pull], "tipo_option_noise", args, i);
-    XtAddCallback (aing[ip3].sw[k_tipo_noise], XmNactivateCallback, tipo_noise_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_tipo_noise], XmNactivateCallback, tipo_noise_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_tipo_noise]);
 
 /*
@@ -1464,7 +1489,7 @@ XtManageChild(wapp);
     XtSetArg (args[i], XmNfont, font_list[disp_sel]); i++;
     XtSetArg (args[i], XmNlabelString, XmStringCreateLtoR ("Malf. :", XmSTRING_DEFAULT_CHARSET)); i++;
     aing[ip3].sw[k_tipo_malfunction] = XmCreatePushButton (aing[ip3].sw[k_tipo_pull], "tipo_option_malf", args, i);
-    XtAddCallback (aing[ip3].sw[k_tipo_malfunction], XmNactivateCallback, tipo_malf_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_tipo_malfunction], XmNactivateCallback, tipo_malf_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_tipo_malfunction]);
 
     i = 0;
@@ -1476,7 +1501,7 @@ XtManageChild(wapp);
     aing[ip3].sw[k_tipo_option] = XmCreateOptionMenu (wRow, "tipo_option_menu", args, i);
     XtManageChild (aing[ip3].sw[k_tipo_option]);
 set_something(XmOptionLabelGadget(aing[ip3].sw[k_tipo_option]),
-	XmNlabelString,XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
+	XmNlabelString,(char *)XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
 /*
 	fine scelta fra perturbazioni normali e periodiche
 */
@@ -1502,7 +1527,7 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_tipo_option]),
     XtSetArg (args[i], XmNlabelString, XmStringCreateLtoR ("Delay:", XmSTRING_DEFAULT_CHARSET));
     i++;
     aing[ip3].sw[k_time_delta] = XmCreatePushButton (aing[ip3].sw[k_time_pull], "time_option_dt", args, i);
-    XtAddCallback (aing[ip3].sw[k_time_delta], XmNactivateCallback, delta_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_time_delta], XmNactivateCallback, delta_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_time_delta]);
 
 /*
@@ -1516,7 +1541,7 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_tipo_option]),
     XtSetArg (args[i], XmNlabelString, XmStringCreateLtoR ("Start at:", XmSTRING_DEFAULT_CHARSET));
     i++;
     aing[ip3].sw[k_time_time] = XmCreatePushButton (aing[ip3].sw[k_time_pull], "time_option_dt", args, i);
-    XtAddCallback (aing[ip3].sw[k_time_time], XmNactivateCallback, time_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_time_time], XmNactivateCallback, time_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_time_time]);
 
 /*
@@ -1530,7 +1555,7 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_tipo_option]),
     XtSetArg (args[i], XmNlabelString, XmStringCreateLtoR ("Time:", XmSTRING_DEFAULT_CHARSET));
     i++;
     aing[ip3].sw[k_time_tinc] = XmCreatePushButton (aing[ip3].sw[k_time_pull], "time_option_dt", args, i);
-    XtAddCallback (aing[ip3].sw[k_time_tinc], XmNactivateCallback, tinc_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_time_tinc], XmNactivateCallback, tinc_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_time_tinc]);
 
     i = 0;
@@ -1547,7 +1572,7 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_tipo_option]),
     aing[ip3].sw[k_time_option] = XmCreateOptionMenu (wRow, "time_option_menu", args, i);
     XtManageChild (aing[ip3].sw[k_time_option]);
 set_something(XmOptionLabelGadget(aing[ip3].sw[k_time_option]),
-	XmNlabelString,XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
+	XmNlabelString,(char*)XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
 /*
     Fine menu' option per la scelta del tipo di delay
 */
@@ -1688,7 +1713,7 @@ if ((modifica == 1) && (perturbazione.tipo == PERT_TO ))
     XtSetArg (args[i], XmNlabelString, XmStringCreateLtoR ("Delta:", XmSTRING_DEFAULT_CHARSET));
     i++;
     aing[ip3].sw[k_rampa_delta] = XmCreatePushButton (aing[ip3].sw[k_rampa_pull], "option_dt", args, i);
-    XtAddCallback (aing[ip3].sw[k_rampa_delta], XmNactivateCallback, rampa_delta_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_rampa_delta], XmNactivateCallback, rampa_delta_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_rampa_delta]);
 
     i = 0;
@@ -1700,7 +1725,7 @@ if ((modifica == 1) && (perturbazione.tipo == PERT_TO ))
     i++;
     aing[ip3].sw[k_rampa_grad] =
 	XmCreatePushButton (aing[ip3].sw[k_rampa_pull], "option_grad", args, i);
-    XtAddCallback (aing[ip3].sw[k_rampa_grad], XmNactivateCallback, rampa_grad_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_rampa_grad], XmNactivateCallback, rampa_grad_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_rampa_grad]);
     }
 else
@@ -1714,7 +1739,7 @@ else
     i++;
     aing[ip3].sw[k_rampa_grad] =
 	XmCreatePushButton (aing[ip3].sw[k_rampa_pull], "option_grad", args, i);
-    XtAddCallback (aing[ip3].sw[k_rampa_grad], XmNactivateCallback, rampa_grad_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_rampa_grad], XmNactivateCallback, rampa_grad_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_rampa_grad]);
 
 /*
@@ -1728,7 +1753,7 @@ else
     XtSetArg (args[i], XmNlabelString, XmStringCreateLtoR ("Delta:", XmSTRING_DEFAULT_CHARSET));
     i++;
     aing[ip3].sw[k_rampa_delta] = XmCreatePushButton (aing[ip3].sw[k_rampa_pull], "option_dt", args, i);
-    XtAddCallback (aing[ip3].sw[k_rampa_delta], XmNactivateCallback, rampa_delta_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_rampa_delta], XmNactivateCallback, rampa_delta_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_rampa_delta]);
     }
 
@@ -1740,7 +1765,7 @@ else
     XtSetArg (args[i], XmNlabelString, XmStringCreateLtoR ("Time:", XmSTRING_DEFAULT_CHARSET));
     i++;
     aing[ip3].sw[k_rampa_time] = XmCreatePushButton (aing[ip3].sw[k_rampa_pull], "option_dt", args, i);
-    XtAddCallback (aing[ip3].sw[k_rampa_time], XmNactivateCallback, rampa_time_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_rampa_time], XmNactivateCallback, rampa_time_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_rampa_time]);
 
     i = 0;
@@ -1760,7 +1785,7 @@ XtSetArg(args[i],XmNlabelString,XmStringCreateLtoR("",XmSTRING_DEFAULT_CHARSET))
     aing[ip3].sw[k_rampa_option] = XmCreateOptionMenu (wRow, "option_menu", args, i);
     XtManageChild (aing[ip3].sw[k_rampa_option]);
 set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
-	XmNlabelString,XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
+	XmNlabelString,(char*)XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
 /*
     Fine creazione menu' option per la scelta del tipo di rampa
 */
@@ -1823,9 +1848,9 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
     XtSetArg (args[i], XmNbackground, excolor[disp_sel][1].pixel);
     i++;
     aing[ip3].sw[k_but_imp] = XmCreatePushButton (wRow, "button", args, i);
-    XtAddCallback (aing[ip3].sw[k_but_imp], XmNactivateCallback, impulso_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_but_imp], XmNactivateCallback, impulso_callback, (XtPointer)ip3);
     if(modifica == 1)
-    XtAddCallback (aing[ip3].sw[k_but_imp], XmNactivateCallback, pag_del_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_but_imp], XmNactivateCallback, pag_del_callback, (XtPointer)ip3);
 
     XtManageChild (aing[ip3].sw[k_but_imp]);
 
@@ -1844,9 +1869,9 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
     XtSetArg (args[i], XmNbackground, excolor[disp_sel][1].pixel);
     i++;
     aing[ip3].sw[k_sin_start] = XmCreatePushButton (wRow, "button", args, i);
-    XtAddCallback (aing[ip3].sw[k_sin_start], XmNactivateCallback, sinusoidal_start_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_sin_start], XmNactivateCallback, sinusoidal_start_callback, (XtPointer)ip3);
     if(modifica == 1)
-    XtAddCallback (aing[ip3].sw[k_sin_start], XmNactivateCallback, pag_del_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_sin_start], XmNactivateCallback, pag_del_callback, (XtPointer)ip3);
 
 
 
@@ -1865,9 +1890,9 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
     XtSetArg (args[i], XmNbackground, excolor[disp_sel][1].pixel);
     i++;
     aing[ip3].sw[k_whitenoise_start] = XmCreatePushButton (wRow, "button", args, i);
-    XtAddCallback (aing[ip3].sw[k_whitenoise_start], XmNactivateCallback, whitenoise_start_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_whitenoise_start], XmNactivateCallback, whitenoise_start_callback, (XtPointer)ip3);
     if(modifica == 1)
-    XtAddCallback (aing[ip3].sw[k_whitenoise_start], XmNactivateCallback, pag_del_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_whitenoise_start], XmNactivateCallback, pag_del_callback, (XtPointer)ip3);
 
 /*
 	STOP WHITE NOISE
@@ -1884,9 +1909,9 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
     XtSetArg (args[i], XmNbackground, excolor[disp_sel][1].pixel);
     i++;
     aing[ip3].sw[k_whitenoise_stop] = XmCreatePushButton (wRow, "button", args, i);
-    XtAddCallback (aing[ip3].sw[k_whitenoise_stop], XmNactivateCallback, whitenoise_stop_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_whitenoise_stop], XmNactivateCallback, whitenoise_stop_callback, (XtPointer)ip3);
     if(modifica == 1)
-    XtAddCallback (aing[ip3].sw[k_whitenoise_stop], XmNactivateCallback, pag_del_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_whitenoise_stop], XmNactivateCallback, pag_del_callback, (XtPointer)ip3);
 
 
 /*
@@ -1906,10 +1931,10 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
     aing[ip3].sw[k_malfunction_start] = 
               XmCreatePushButton (wRow, "button", args, i);
     XtAddCallback (aing[ip3].sw[k_malfunction_start], 
-                   XmNactivateCallback, malfunction_start_callback, ip3);
+                   XmNactivateCallback, malfunction_start_callback, (XtPointer)ip3);
     if(modifica == 1)
         XtAddCallback (aing[ip3].sw[k_malfunction_start], XmNactivateCallback, 
-                       pag_del_callback, ip3);
+                       pag_del_callback, (XtPointer)ip3);
 
 /*
 	STOP MALFUNCTION
@@ -1928,10 +1953,10 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
     aing[ip3].sw[k_malfunction_stop] = 
               XmCreatePushButton (wRow, "button", args, i);
     XtAddCallback (aing[ip3].sw[k_malfunction_stop], 
-                   XmNactivateCallback, malfunction_stop_callback, ip3);
+                   XmNactivateCallback, malfunction_stop_callback, (XtPointer)ip3);
     if(modifica == 1)
        XtAddCallback (aing[ip3].sw[k_malfunction_stop], 
-                      XmNactivateCallback, pag_del_callback, ip3);
+                      XmNactivateCallback, pag_del_callback, (XtPointer)ip3);
 
 /*
 	STOP IMPULSO
@@ -1948,9 +1973,9 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
     XtSetArg (args[i], XmNbackground, excolor[disp_sel][1].pixel);
     i++;
     aing[ip3].sw[k_but_impstop] = XmCreatePushButton (wRow, "button", args, i);
-    XtAddCallback (aing[ip3].sw[k_but_impstop], XmNactivateCallback, impulsostop_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_but_impstop], XmNactivateCallback, impulsostop_callback, (XtPointer)ip3);
     if(modifica == 1)
-    XtAddCallback (aing[ip3].sw[k_but_impstop], XmNactivateCallback, pag_del_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_but_impstop], XmNactivateCallback, pag_del_callback, (XtPointer)ip3);
 
     XtManageChild (aing[ip3].sw[k_but_impstop]);
 
@@ -1970,9 +1995,9 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
     XtSetArg (args[i], XmNbackground, excolor[disp_sel][1].pixel);
     i++;
     aing[ip3].sw[k_sin_stop] = XmCreatePushButton (wRow, "button", args, i);
-    XtAddCallback (aing[ip3].sw[k_sin_stop], XmNactivateCallback, sinusoidal_stop_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_sin_stop], XmNactivateCallback, sinusoidal_stop_callback, (XtPointer)ip3);
     if(modifica == 1)
-    XtAddCallback (aing[ip3].sw[k_sin_stop], XmNactivateCallback, pag_del_callback, ip3);
+    XtAddCallback (aing[ip3].sw[k_sin_stop], XmNactivateCallback, pag_del_callback, (XtPointer)ip3);
 
 
 
@@ -2018,9 +2043,9 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
 	XtSetArg (args[i], XmNbackground, excolor[disp_sel][1].pixel);
 	i++;
 	aing[ip3].sw[k_trap_start] = XmCreatePushButton (wRow, "button", args, i);
-	XtAddCallback (aing[ip3].sw[k_trap_start], XmNactivateCallback, trapezoidal_start_callback, ip3);
+	XtAddCallback (aing[ip3].sw[k_trap_start], XmNactivateCallback, trapezoidal_start_callback, (XtPointer)ip3);
     if(modifica == 1)
-	XtAddCallback (aing[ip3].sw[k_trap_start], XmNactivateCallback, pag_del_callback, ip3);
+	XtAddCallback (aing[ip3].sw[k_trap_start], XmNactivateCallback, pag_del_callback, (XtPointer)ip3);
 /*
 	STOP TRAPEZOIDALE
 */
@@ -2037,10 +2062,10 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
 	i++;
 	aing[ip3].sw[k_trap_stop] = XmCreatePushButton (wRow, "button", args, i);
 	XtAddCallback (aing[ip3].sw[k_trap_stop], XmNactivateCallback,
-		trapezoidal_stop_callback, ip3);
+		trapezoidal_stop_callback, (XtPointer)ip3);
     if(modifica == 1)
 	XtAddCallback (aing[ip3].sw[k_trap_stop], XmNactivateCallback,
-		pag_del_callback, ip3);
+		pag_del_callback, (XtPointer)ip3);
 
 
 
@@ -2063,9 +2088,9 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
 	XtSetArg (args[i], XmNbackground, excolor[disp_sel][1].pixel);
 	i++;
 	aing[ip3].sw[k_but_start] = XmCreatePushButton (wRow, "button", args, i);
-	XtAddCallback (aing[ip3].sw[k_but_start], XmNactivateCallback, start_callback, ip3);
+	XtAddCallback (aing[ip3].sw[k_but_start], XmNactivateCallback, start_callback, (XtPointer)ip3);
     if(modifica == 1)
-	XtAddCallback (aing[ip3].sw[k_but_start], XmNactivateCallback, pag_del_callback, ip3);
+	XtAddCallback (aing[ip3].sw[k_but_start], XmNactivateCallback, pag_del_callback, (XtPointer)ip3);
 
 	XtManageChild (aing[ip3].sw[k_but_start]);
 
@@ -2085,10 +2110,10 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
 	i++;
 	aing[ip3].sw[k_but_stop] = XmCreatePushButton (wRow, "button", args, i);
 	XtAddCallback (aing[ip3].sw[k_but_stop], XmNactivateCallback,
-		stop_callback, ip3);
+		stop_callback, (XtPointer)ip3);
     if(modifica == 1)
 	XtAddCallback (aing[ip3].sw[k_but_stop], XmNactivateCallback,
-		pag_del_callback, ip3);
+		pag_del_callback, (XtPointer)ip3);
 
 	XtManageChild (aing[ip3].sw[k_but_stop]);
     }
@@ -2109,10 +2134,10 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
     i++;
     aing[ip3].sw[k_but_invia] = XmCreatePushButton (wRow, "button", args, i);
     XtAddCallback (aing[ip3].sw[k_but_invia], XmNactivateCallback,
-	    invia_callback, ip3);
+	    invia_callback, (XtPointer)ip3);
     if(modifica == 1)
     XtAddCallback (aing[ip3].sw[k_but_invia], XmNactivateCallback,
-	    pag_del_callback, ip3);
+	    pag_del_callback, (XtPointer)ip3);
     XtManageChild (aing[ip3].sw[k_but_invia]);
 
 /*
@@ -2134,10 +2159,10 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
 	i++;
 	aing[ip3].sw[k_not] = XmCreatePushButton (wRow, "button", args, i);
 	XtAddCallback (aing[ip3].sw[k_not], XmNactivateCallback,
-		not_callback, ip3);
+		not_callback, (XtPointer)ip3);
     if(modifica == 1)
 	XtAddCallback (aing[ip3].sw[k_not], XmNactivateCallback,
-		pag_del_callback, ip3);
+		pag_del_callback, (XtPointer)ip3);
 	XtManageChild (aing[ip3].sw[k_not]);
     }
 
@@ -2160,12 +2185,12 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
 	i++;
 	aing[ip3].sw[k_updown] = XmCreatePushButton (wRow, "button", args, i);
 	XtAddCallback (aing[ip3].sw[k_updown], XmNarmCallback,
-		up_callback, ip3);
+		up_callback, (XtPointer)ip3);
     if(modifica == 1)
 	XtAddCallback (aing[ip3].sw[k_updown], XmNarmCallback,
-		pag_del_callback, ip3);
+		pag_del_callback, (XtPointer)ip3);
 	XtAddCallback (aing[ip3].sw[k_updown], XmNdisarmCallback,
-		down_callback, ip3);
+		down_callback, (XtPointer)ip3);
 	XtManageChild (aing[ip3].sw[k_updown]);
     }
 
@@ -2183,9 +2208,9 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
     wbutton = XmCreatePushButton (wpopup, " bottone", args, i);
     XtManageChild (wbutton);
     aing[ip3].sw[k_quit]=wbutton;
-    XtAddCallback (wbutton, XmNactivateCallback, pag_del_callback, ip3);
+    XtAddCallback (wbutton, XmNactivateCallback, pag_del_callback, (XtPointer)ip3);
     XtAddEventHandler (aing[ip3].w, ButtonPressMask, False, PostIt, wpopup);
-    if (add_refresh ((void*) aing_refresh, ip3) == -1)
+    if (add_refresh ((void*) aing_refresh, (void *)ip3) == -1)
 	printf ("\n errore : refresh non aggiunto");
 
 
@@ -3428,7 +3453,7 @@ float   valore;
     editing relativi alla rampa in base allo stato di START
     o STOP della rampa stessa
 */
-agg_stato (is)
+void agg_stato (is)
 int     is;
 {
     if (0)
@@ -3528,7 +3553,7 @@ XButtonEvent * event;
 
 
 
-init_aing ()
+void init_aing ()
 {
 int     i;
     for (i = 0; i < MAX_AING; i++)
@@ -3543,7 +3568,7 @@ int     i;
     verra' generalmente associata una routine di refresh per ogni
     stazione creata
  */
-add_refresh (proc, closure)
+int add_refresh (proc, closure)
 XtCallbackProc proc;
 void * closure;
 {
@@ -3552,8 +3577,9 @@ int     i;
     {
 	if (t_call[i].closure == (void *) (-1))
 	{
-
-	    t_call[i].callback = ((XtCallbackProc) proc);
+// GUAG2025
+//	    t_call[i].callback = (XtCallbackProc)proc;
+        t_call[i].callback = (void (*)(void *)) proc;
 	    t_call[i].closure = closure;
 	    return (0);
 	}
@@ -3566,7 +3592,7 @@ int     i;
   elimina la funzione di refresh associata ad una stazione
  */
 
-del_refresh (closure)
+int del_refresh (closure)
 void * closure;
 {
 int     i;
@@ -3583,7 +3609,7 @@ int     i;
 }
 
 
-init_gc (int disp)
+void init_gc (int disp)
 {
     XGCValues values;
     XColor color;
@@ -3658,7 +3684,7 @@ unsigned long   valuemask = GCForeground | GCBackground | GCLineWidth
 }
 
 
-load_font (font_info,disp)
+void load_font (font_info,disp)
 XFontStruct ** font_info;
 int disp;
 {

@@ -23,6 +23,7 @@ static char SccsID[] = "@(#)ns_main.c	1.13\t2/5/96";
 */
 /*  Copiato da sked_pf22.c */
 # include <stdio.h>
+# include <string.h>
 # include <errno.h>
 #if defined UNIX
 # include <sys/types.h>
@@ -33,12 +34,15 @@ static char SccsID[] = "@(#)ns_main.c	1.13\t2/5/96";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+#include <X11/Xlib.h>
+#include <X11/Intrinsic.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "comandi.h"
 # include "sked.h"
 # include <Rt/RtDbPunti.h>
+# include <Rt/Rt.h>
 # include <Rt/RtMemory.h>
 
 #define separatore printf("********************************************************\n");
@@ -70,11 +74,12 @@ static char SccsID[] = "@(#)ns_main.c	1.13\t2/5/96";
    extern int ns_backtrack(float, float);
    extern int ns_f22(float, float);
    extern int ns_pert(float, float);
+   extern int bktk_tab_read_piac();
 
 
 
 
-main(argc, argv)
+int main(argc, argv)
 int argc;
 char *argv[];
 {

@@ -72,6 +72,8 @@ int cerca_indirizzo ();
 
 double gettim();
 
+void costruisci_var (char**, VARIABILI **, int*);
+
 #define FILEOUT "VAR.LOG"
 #define FILEIN  "LISTA_VIEWSHR"
 FILE   *fplog;
@@ -302,7 +304,7 @@ while ( fgets(dirbuff,DIMDIRBUFF,fpop) != NULL )
 				   {
 // DEBUG				   fprintf(stderr, "PATH = %s\n",dirbuff+4);
                 		   retval=pclose(fpop);
-				   dirbuff[strlen(dirbuff)-1]=NULL;
+				   dirbuff[strlen(dirbuff)-1]=0;
                 		   return ( dirbuff+4 );
 				   }
 			 }

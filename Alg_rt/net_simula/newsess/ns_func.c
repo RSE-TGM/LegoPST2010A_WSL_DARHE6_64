@@ -36,6 +36,10 @@ static char SccsID[] = "@(#)ns_func.c	1.16\t2/5/96";
 #include <unixio.h>
 #include <file.h>
 #endif
+#include <X11/Xlib.h>
+#include <X11/Intrinsic.h>
+#include <Rt/RtDbPunti.h>
+#include <Rt/RtMemory.h>
 
 #include "sim_param.h"
 #include "sim_types.h"
@@ -44,9 +48,8 @@ static char SccsID[] = "@(#)ns_func.c	1.16\t2/5/96";
 #include "sked.h"
 #include "f22_circ.h"
 #include "grsf22.h"
-#include <Rt/RtDbPunti.h>
-#include <Rt/RtMemory.h>
 #include "ns_macro.h"
+//#include "libutilx.h"
 
 
 #define MAXRIGA 85
@@ -74,6 +77,10 @@ static char SccsID[] = "@(#)ns_func.c	1.16\t2/5/96";
                       float *tempo, SCIRC_SEL_DATI **,
                       int , int , int , int );
    static int ComparaCampioni(SCIRC_DATI *,SCIRC_DATI *);
+
+   //static int legge_riga(FILE *, char *);
+   static int legge_riga(char  [], int *);
+   static void separa_str( char [], int , int , STRIN_ST []);
 
 /* 
    Prototyping funzioni esterne
@@ -191,10 +198,10 @@ int inserimenti=0;
             inserimenti);
 
 /*  Liberazione strutture */
-    XtFree(var_eff);
+    XtFree((char*)var_eff);
     for(i=0; i<nmodelli; i++) 
        cfree2(blocchi[i].blocchi);
-    XtFree(blocchi);
+    XtFree((char*)blocchi);
 }
 
 
@@ -893,7 +900,7 @@ static int prima_stampa=1;
 
 /*
 */
-legge_riga(char riga [MAXRIGA], int *lun)
+int legge_riga(char riga [MAXRIGA], int *lun)
 {
 int c, k;
 
@@ -940,7 +947,7 @@ int c, k;
 
 /*
 */
-separa_str( char riga[], int lun, int nstr, STRIN_ST strin[])
+void separa_str( char riga[], int lun, int nstr, STRIN_ST strin[])
 {
 char *s;
 int i;
@@ -1100,7 +1107,7 @@ free(valori);
 
 if(camp>0)
         {
-        qsort(*dati,camp,sizeof(SCIRC_SEL_DATI),ComparaCampioni);
+        qsort(*dati,camp,sizeof(SCIRC_SEL_DATI),(__compar_fn_t)ComparaCampioni);
         *tempo = (*dati)[camp-1].tempo.tempo;
 
         printf("Ultimo tempo leggo = %f\n",*tempo);

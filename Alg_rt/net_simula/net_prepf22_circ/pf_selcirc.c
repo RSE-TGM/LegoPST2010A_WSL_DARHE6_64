@@ -30,14 +30,15 @@ static char SccsID[] = "@(#)pf_selcirc.c	5.2\t11/30/95";
 # include <unixio.h>
 # include <file.h>
 #endif   /* VMS */
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtErrore.h>
+
 # include "sim_param.h"		/* parametri generali LEGO       */
 # include "sim_types.h"		/* tipi di uso LEGO              */
 # include "sim_ipc.h"		/* parametri per semafori        */
 # include "f22_circ.h"
 # include "pf_macro.h"          /* macro per switch VMS-UNIX    */
 
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtErrore.h>
 
 RtDbPuntiOggetto dbpunti;
 
@@ -59,6 +60,9 @@ F22CIRC_HD      header;		/* Struttura degli header              */
 int             append_mode;
 extern int      num_campioni; 
 extern int      num_var; 
+
+int     ora(int*, int*, int*);
+int     data(int*, int*, int*);
 
 
 /*

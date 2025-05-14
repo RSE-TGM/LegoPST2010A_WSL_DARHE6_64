@@ -31,7 +31,7 @@ MOTIF_VER=11
 #
 all:
 	cd ./graphics; $(MAKE) -f Makefile.mk
-	-cd ./grafics; $(MAKE) -f Makefile.mk
+##	-cd ./grafics; $(MAKE) -f Makefile.mk
 	cd ./xaing; $(MAKE) -f Makefile.mk 
 	cd ./compstaz; $(MAKE) -f Makefile.mk
 	cd ./xstaz; $(MAKE) -f Makefile.mk 

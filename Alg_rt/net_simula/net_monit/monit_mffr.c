@@ -53,6 +53,7 @@ static char SccsID[] = "@(#)monit_mffr.c	5.2\t1/24/96";
 # include <Xm/RowColumn.h>
 # include <Xm/Form.h>
 # include <Xm/Xm.h>
+# include <Xm/MessageB.h>
 # include "monit.h"
 # include "monituil.h"
 # include "libutilx.h"
@@ -77,6 +78,19 @@ extern VALORI_AGG val_agg;
 
 float leggi_valore(int p);  /* legge il valore di una variabile dal database */
 Widget PostDialod();
+
+int clear_readmf();
+int clear_readfr();
+int sommario_mf_to_snap();
+int sommario_fr_to_snap();
+int snap_to_sommario_mf();
+int snap_to_sommario_fr();
+int aggiorna_grafica();
+int aggiorna_sommario_mf();
+int aggiorna_sommario_fr();
+
+
+
 /*****************************************************************/
 int clear_snap_sked()
 {
@@ -340,7 +354,7 @@ int size;
 	agg.n = 1;
 	agg.updvar[0].indirizzo = addr;
 	size = sizeof(int)+agg.n*(sizeof(int)+sizeof(float));
-	if (SD_varupd(MONIT,&agg,size) < 0)
+	if (SD_varupd(MONIT,(char*)&agg,size) < 0)
          printf ("MONIT: errore lettura valore singolo\n");
 
 	return (agg.updvar[0].valore);
@@ -371,7 +385,7 @@ if ((val_agg.stato_sked != STATO_STOP) &&
          agg.updvar[i].indirizzo = sommario_mf.address[i];
 
    	size = sizeof(int)+agg.n*(sizeof(int)+sizeof(float));
-   	if (SD_varupd(MONIT,&agg,size) < 0)
+   	if (SD_varupd(MONIT,(char*)&agg,size) < 0)
          printf ("MONIT: errore SD_varupd agg malf\n");
 
 		for (i=0; i<agg.n; i++)
@@ -409,7 +423,7 @@ if ((val_agg.stato_sked != STATO_STOP) &&
          agg.updvar[i].indirizzo = sommario_fr.address[i];
 
    	size = sizeof(int)+agg.n*(sizeof(int)+sizeof(float));
-   	if (SD_varupd(MONIT,&agg,size) < 0)
+   	if (SD_varupd(MONIT,(char*)&agg,size) < 0)
          printf ("MONIT: errore SD_varupd agg frem\n");
 
    	for (i=0; i<agg.n; i++)

@@ -41,7 +41,7 @@ static char SccsID[] = "@(#)XlSincro.c	1.5\t1/9/96";
 
 #define DEFAULTWIDTH  5
 #define DEFAULTHEIGHT 5
-#define PIGRECO 3.141592
+#define PIGRECO 3.14159265358979323846
 
 
 /* lista delle risorse  */

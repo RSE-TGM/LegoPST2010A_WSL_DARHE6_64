@@ -139,6 +139,20 @@ void inserisci_somm_fr();   /* inserisce la fr selezionata in sommario       */
 void seleziona_sistema_fr(); /* seleziona un sistema mf ed estrae le var. */
 void seleziona_var_fr(); /* seleziona una variabile da lista        */
 
+int carica_dati_frem();
+int titolo_fr();
+int lista_sistemi_fr();
+int lista_variabili_fr();
+int selezione_variabile_fr();
+int tasti_comando_fr();
+int next_up_fr(int );
+int next_down_fr(int );
+int inserisci_sistema_fr (Widget , int );
+int presa_dati_fr(int );
+int test_sistema_fr (char *);
+int leggi_dati_fr(int  , int );
+
+
 extern float leggi_valore(int p);
 extern Widget PostDialog();
 /********************************************************************/
@@ -585,7 +599,7 @@ int i;
 
 	if (find_frem.n > 0)
 		{
-		if (!strcmp(tag,"UP"))
+		if (!strcmp((char*)tag,"UP"))
 			{
 			next_pos = next_up_fr(pos);
 			}

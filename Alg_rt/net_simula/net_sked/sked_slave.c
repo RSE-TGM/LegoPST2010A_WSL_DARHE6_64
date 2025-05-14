@@ -22,6 +22,7 @@ static char SccsID[] = "@(#)sked_slave.c	5.2\t3/7/96";
    reserved @(#)sked_slave.c	5.2
 */
 # include <stdio.h>
+# include <unistd.h>
 # include <errno.h>
 # include <math.h>
 # include <time.h>
@@ -34,14 +35,15 @@ static char SccsID[] = "@(#)sked_slave.c	5.2\t3/7/96";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "comandi.h"
 # include "sked.h"
+# include "sked_fun.h"
 # include "dispatcher.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 extern int      id_msg_sked;
 
@@ -81,7 +83,7 @@ extern int    _MAX_PERTUR;
 extern int    _SPARE_SNAP;
 extern int    _PERT_CLEAR;
 
-sked_slave()
+void sked_slave()
 {
    int             operazione;
 
@@ -159,14 +161,24 @@ sked_slave()
 	 /* sked_snapshot(SAVESNAP);         */
 	 /* per rimozione up_down su slave                          */
 	 modo_backtrack = 0;
-	 sked_snapshot_piac(SAVESNAP);
+
+    // GUAG2025 invento il numero identificativo dello snapshot
+    // sked_snapshot_piac(SAVESNAP); 
+    short nn=1;
+	 sked_snapshot_piac(SAVESNAP,nn);
+    //
 	 break;
       }
    case LOADSNAP:
       {
 	 iterazione_successiva = 0;
 	 /* sked_snapshot(LOADSNAP); 29-8-96 */
-	 sked_snapshot_piac(LOADSNAP);
+
+    // GUAG2025 invento il numero identificativo dello snapshot
+    // sked_snapshot_piac(LOADSNAP); 
+    short nn=1;
+	 sked_snapshot_piac(LOADSNAP, nn);
+    //
 	 /*init_area_pert();*/
 /*       In modalita' _PERT_CLEAR si azzerano le perturbazioni */
          if ( _PERT_CLEAR==1 )
@@ -182,14 +194,23 @@ sked_slave()
 	 /* sked_snapshot(SAVESNAP);    */
 	 /* per rimozione up_down su slave                          */
 	 modo_backtrack = 1;
-	 sked_snapshot_piac(SAVESNAP);
+// GUAG2025 invento il numero identificativo dello snapshot
+//	 sked_snapshot_piac(SAVESNAP);
+   short nn=1;
+	 sked_snapshot_piac(SAVESNAP,nn);
+//
 	 break;
       }
    case LOADBKTK:
       {
 	 iterazione_successiva = 0;
 	 /* sked_snapshot(LOADSNAP);  29-8-96 */
-	 sked_snapshot_piac(LOADSNAP);
+// GUAG2025 invento il numero identificativo dello snapshot
+//	 sked_snapshot_piac(LOADSNAP);
+    short nn=1;
+	 sked_snapshot_piac(LOADSNAP,nn);
+//
+
 /*       In modalita' _PERT_CLEAR si azzerano le perturbazioni */
          if ( _PERT_CLEAR==1 )
             {

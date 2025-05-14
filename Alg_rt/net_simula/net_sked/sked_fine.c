@@ -22,6 +22,7 @@ static char SccsID[] = "@(#)sked_fine.c	5.5\t3/14/96";
    reserved @(#)sked_fine.c	5.5
 */
 #include <stdio.h>
+#include <unistd.h>
 #include <string.h>
 #include <signal.h>
 #if defined UNIX
@@ -33,15 +34,20 @@ static char SccsID[] = "@(#)sked_fine.c	5.5\t3/14/96";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+#include <sys/socket.h>
 #include <errno.h>
+#include <Rt/RtDbPunti.h>
+#include <Rt/RtMemory.h>
 #include "sim_param.h"
 #include "sim_types.h"
 #include "sim_ipc.h"
 #include "sked.h"
+#include "sked_fun.h"
 #include "comandi.h"
 #include "demone.h"
-#include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
+
+int processi_terminati(int *, int );
+static int legge_riga_bin1(char*,FILE *);
 
 #define MAXRIGA 200
 typedef struct strin_st {
@@ -107,7 +113,7 @@ extern int TimeoutTask;
 
 #define DEBUG_CHIUSURA 1
 
-sked_fine()
+int sked_fine()
 {
    char path_link[FILENAME_MAX];
    char *path_iniziale;
@@ -135,7 +141,7 @@ sked_fine()
       for (i = 0; i < nmod; i++)
          if (fp_ordini[i] > 0)
             {
-            if (writen(fp_ordini[i], &messaggio_net.header_net,
+            if (writen(fp_ordini[i], (char*)&messaggio_net.header_net,
             sizeof(HEADER_NET)) < 0)
             perror("Operazioni chiusura");
             }
@@ -237,7 +243,8 @@ sked_fine()
    if ((tipo_sked == MASTER) && (s02_.host_bm[0] != NULL))
       {
       printf("sked_fine: invio messaggio datagram a %s\n", host_bm_master);
-      do_demone(SLAVE, host_bm_master, host, DEMONE_STOP_BM, "spare1", "spare2");
+      HEADER_REGISTRAZIONI h_reg;
+      do_demone(SLAVE, host_bm_master, host, DEMONE_STOP_BM, "spare1", "spare2",&h_reg);
       }
 #endif
 
@@ -411,7 +418,7 @@ sked_fine()
 }
 
 
-int legge_riga_bin(riga,fp)
+int legge_riga_bin1(riga,fp)
  char riga [MAXRIGA];
  FILE *fp;
 {
@@ -485,7 +492,7 @@ int trovati=0;
 fp=fopen("lista.proc","r");
 while(1)
 	{
-	ret = legge_riga_bin(riga,fp);
+	ret = legge_riga_bin1(riga,fp);
         if( ret==0 )
            break;
 	strcpy(app_riga,riga);

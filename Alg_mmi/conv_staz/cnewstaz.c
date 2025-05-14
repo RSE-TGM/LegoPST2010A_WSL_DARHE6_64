@@ -19,7 +19,7 @@ static char SccsID[] = "@(#)cnewstaz.c	1.3\t10/20/93";
 #include "sim_param.h"
 #include "sim_types.h"
 #include "xstaz.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 #include "conv_mmi.h"
 
 // void legge_riga( char *riga, int *lun, int *nriga );

@@ -43,8 +43,10 @@ static char SccsID[] = "@(#)pf_prolog.c	5.2\t11/30/95";
 RtDbPuntiOggetto dbpunti;
 RtErroreOggetto errore;
 
-pf_prolog()
+void pf_address();
 
+
+void pf_prolog()
 {
 SIMULATOR *sim;
 

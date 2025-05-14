@@ -46,7 +46,7 @@ static char SccsID[] = "@(#)acqmandb.c	5.1\t11/7/95";
 # include "vmsipc.h"
 
 #else
- exit( puts( "ATTENZIONE: compilare con -DAIX (o -DVMS / -DULTRIX)"));
+ exit(puts("ATTENZIONE: compilare con -DAIX (o -DVMS / -DULTRIX)"));
 #endif
 
 #include "sim_param.h"
@@ -61,6 +61,10 @@ static char SccsID[] = "@(#)acqmandb.c	5.1\t11/7/95";
 
 
 float estr_sh();
+void testata(char *, char *);
+void costruisci_var (char**, VARIABILI **, int*);
+extern int aggancia_sem_shr();
+int write_sh(int,float);
 
 int id_msg_to_mandb, id_msg_from_mandb;
 
@@ -146,7 +150,7 @@ printf("\n ATTIVATO ");
       idsem_locale = sem_create(shr_usr_key+ID_SEM_MDB_4,1); 
       sem_set(idsem_locale,1);
 
-	if (idsem_locale == -1 ) exit("errore creazione semaforo");
+	if (idsem_locale == -1 ) exit(puts("errore creazione semaforo"));
 
 /* attiva la routine di risposta all' interupt di kill */
 
@@ -252,7 +256,7 @@ val= RtDbPGetValueD(dbpunti,indice);
 return(val);
 }
 
-write_sh(indice,val)
+int write_sh(indice,val)
 int indice;
 float val;
 {

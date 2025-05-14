@@ -34,7 +34,7 @@ static char SccsID[] = "@(#)XlAllarmi.c	5.2\t1/5/96";
 
 #define DEFAULTWIDTH  5
 #define DEFAULTHEIGHT 5
-#define PIGRECO 3.141592
+#define PIGRECO 3.14159265358979323846
 
 
 

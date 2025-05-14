@@ -32,7 +32,7 @@ static char SccsID[] = "@(#)sd1_c.c	1.3\t3/23/95";
 #include "sim_param.h"
 #include "sim_types.h"
 #include "xstaz.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 
 // void legge_riga( char *riga, int *lun, int *nriga );
 // void separa_str( char *riga, int lun, int nstr, STRIN_ST strin[]);
@@ -46,7 +46,7 @@ extern	S_STAZIONI staz;
 extern	char riga [80];
 extern	int nriga;
 
-staz_sd1_c(istaz,itipo,nmod)
+int staz_sd1_c(istaz,itipo,nmod)
 int istaz;
 int itipo;
 int nmod;

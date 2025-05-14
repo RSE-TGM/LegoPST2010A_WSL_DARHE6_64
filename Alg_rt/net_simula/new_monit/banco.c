@@ -97,7 +97,11 @@ char *FILES_PATH;
 
 sqlite3 *db;
 
-main(argc,argv)
+int main_init(int,char*[]);
+int attiva_timer_mainIface (Widget);
+
+
+int main(argc,argv)
 	int 	argc;
 	char 	*argv[];
 {

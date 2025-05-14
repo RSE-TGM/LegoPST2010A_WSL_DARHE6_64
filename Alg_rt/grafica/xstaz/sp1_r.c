@@ -93,7 +93,7 @@ float estr_sh();
 XPoint sp1_posiz[]={{0,90},  /* minimo del valore */
                     {73,23},  /* massimo valore */
 		    {19,45}}; /* valore intermedio */	
-#define PIGRECO 3.141592
+#define PIGRECO 3.14159265358979323846
 staz_sp1_r(flag,is,ip3)
 int *flag;   /* flag */
 int *is;   /* indice stazione associata */

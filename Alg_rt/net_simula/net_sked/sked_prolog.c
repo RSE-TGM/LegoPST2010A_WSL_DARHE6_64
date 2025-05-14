@@ -36,11 +36,12 @@ static char SccsID[] = "@(#)sked_prolog.c	5.1\t11/7/95";
 # include "sim_ipc.h"
 # include "comandi.h"
 # include "sked.h"
+
 #include <Rt/RtDbPunti.h>
 #include <Rt/RtErrore.h>
 # include <Rt/RtMemory.h>
 #include <statistics.h>
-
+# include "sked_fun.h"
 
 extern int      tipo_sked;	/* definisce il tipo di sked SLAVE=0 MASTER=1 */
 
@@ -69,7 +70,7 @@ char           *ind_sh_top;	/* puntatore inizio shared memory sh_var */
 int             shr_usr_key;	/* chiave utente per shared  */
 extern int      shmvid;		/* identificativo shm  varabili */
 
-extern          slot_snap[MAX_VAL_SNAP];	/* indirizzi delle variabili
+extern int        slot_snap[MAX_VAL_SNAP];	/* indirizzi delle variabili
 						 * caratteristiche degli
 						 * snapshot */
 
@@ -77,7 +78,7 @@ STATO_CR        stato_cr;	/* struttura contenete lo stato dei backtrack
 				 * e degli snapshot */
 
 #if defined BACKTRACK
-extern          slot_bktk[MAX_VAL_SNAP];	/* indirizzi delle variabili
+extern  int        slot_bktk[MAX_VAL_SNAP];	/* indirizzi delle variabili
 						 * caratteristiche dei
 						 * backtrack */
 #endif
@@ -106,7 +107,7 @@ RtDbPuntiOggetto dbpunti_ext;
 RtErroreOggetto errore;
 
 
-sked_prolog()
+void sked_prolog()
 {
 int        k;
 FILE      *fp;
@@ -240,7 +241,7 @@ SIMULATOR *simpar;
 
 }
 
-sked_prolog_code()
+void sked_prolog_code()
 {
    /* decodifica SHR_USR_KEY */
    shr_usr_key = atoi((char *) getenv("SHR_USR_KEY"));

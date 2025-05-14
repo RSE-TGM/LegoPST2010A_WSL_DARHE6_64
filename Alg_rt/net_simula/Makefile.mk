@@ -43,10 +43,10 @@ all:
 	cd ./net_disp; $(MAKE) -f Makefile.mk
 	cd ./net_prova; $(MAKE) -f Makefile.mk
 ####	cd ./agg_scada; $(MAKE) -f Makefile.mk
-	cd ./new_monit;$(MAKE) -f Makefile.mk
-	cd ./newsess;$(MAKE) -f Makefile.mk
-	cd ./rest_sess;$(MAKE) -f Makefile.mk
-	cd ./net_tast; $(MAKE) -f Makefile.mk
-	cd ./net_operator; $(MAKE) -f Makefile
+####	cd ./new_monit;$(MAKE) -f Makefile.mk
+##	cd ./newsess;$(MAKE) -f Makefile.mk
+##	cd ./rest_sess;$(MAKE) -f Makefile.mk
+####	cd ./net_tast; $(MAKE) -f Makefile.mk
+####	cd ./net_operator; $(MAKE) -f Makefile
 	cd ./dataserver;  $(MAKE) -f Makefile.mk
-	cd ./viewval;  $(MAKE) -f Makefile
+	cd ./viewval;  $(MAKE) -f Makefile.mk

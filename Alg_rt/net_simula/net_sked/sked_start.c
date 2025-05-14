@@ -31,6 +31,7 @@ static char SccsID[] = "@(#)sked_start.c	5.3\t2/7/96";
 # include <siginfo.h>
 #endif
 # include <sys/types.h>
+#include <sys/wait.h>
 # include <sys/ipc.h>
 # include <sys/msg.h>
 # include <sys/shm.h>
@@ -40,16 +41,17 @@ static char SccsID[] = "@(#)sked_start.c	5.3\t2/7/96";
 # include <sys/stat.h>
 #endif
 # include <errno.h>
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "comandi.h"
 # include "sked.h"
+# include "sked_fun.h"
 # include "libmanovra.h"
 # include "demone.h"
 # include "f22_circ.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 #if defined SCO_UNIX
 #define vfork() fork()
@@ -142,6 +144,7 @@ extern int    stato_sked;		/* Inserito per restart task */
 extern double tempo_sim;		/* Inserito per restart task */
 extern int    fp_ordini[MAX_MODEL];
 
+int ParAttesa();
 
 void restart_task()
 {
@@ -414,7 +417,7 @@ printf("SIGCHILD_HANDLER: sip->si_code = %d\n", sip->si_code);
 }
 
 
-sked_start()
+void sked_start()
 {
    char *p_path_out;
    char *p_model_dir;
@@ -948,7 +951,7 @@ printf("sked_start: pid[%d] = %d\n", i, fpid);
       {
          stat_proc = RtDbPGetPuntAusStat(dbpunti,PREP_F22 - 1);
          stat_proc-> pid =  -1;
-	 signal(SIGKILL, pidgr);
+	 signal(SIGKILL, (__sighandler_t)pidgr);
       }
    }
    /* lancio processo demone  per la connessione con l'mmi */
@@ -983,7 +986,7 @@ printf("sked_start: pid[%d] = %d\n", i, fpid);
       {
          stat_proc = RtDbPGetPuntAusStat(dbpunti,AGG_MANOVRA);
          stat_proc-> pid =  -1;
-	 signal(SIGKILL, pid_bm_master);
+	 signal(SIGKILL, (__sighandler_t)pid_bm_master);
       }
 #endif
 #if defined SCADA
@@ -994,7 +997,7 @@ printf("sked_start: pid[%d] = %d\n", i, fpid);
 				     &messaggio_aus, sizeof(TIPO_AUS),
                                      (long)(AGG_SCADA + OFFSET_AUS), !IPC_NOWAIT, 1000))
       {
-	 signal(SIGKILL, pid_scada);
+	 signal(SIGKILL, (__sighandler_t)pid_scada);
       }
    printf("Start-up scada terminato\n");
 #endif

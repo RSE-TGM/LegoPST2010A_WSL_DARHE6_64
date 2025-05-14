@@ -30,6 +30,7 @@ static char SccsID[] = "@(#)monit_malf.c	5.2\t1/24/96";
 # include <string.h>
 #if defined UNIX
 # include <sys/types.h>
+# include <ctype.h>
 # include <sys/ipc.h>
 # include <sys/msg.h>
 # include <sys/timeb.h>
@@ -82,6 +83,30 @@ static void gestione_malf();
 extern int aggiorna_valori_sommari();
 extern int aggiorna_valori_mf();
 extern int aggiorna_valori_fr();
+
+int attiva_timer (Widget );
+int crea_sommario_malf();
+int crea_top_malf();
+int crea_bottoni_comando();
+int attiva_timer_gestione_mf (Widget w);
+int stop_pert_riga_sommario_mf ();
+int attivazione_mf();
+int disattivazione_mf();
+int cancellazione_mf();
+int fine_sommario_mf();
+int cancella_riga_sommario (int riga);
+int impacca_sommario();
+int sposta_riga_sommario (int , int );
+int copia_riga_sommario (int , int );
+int malf_management();
+int inserisci_riga_sommario(int );
+int disinserisci_riga_sommario(int );
+int perturba_riga_sommario_mf (int, float, float);
+int attiva_riga_sommario (int );
+int aggiorna_delay (int );
+int aggiorna_durata (int riga);
+int seleziona_riga_sommario(int );
+
 /********************************************************************/
 /*
  * definizioni malfunzioni
@@ -129,7 +154,7 @@ int     widget_num = *tag;
 int i;
 static Screen *screen;
 static Pixmap pixmap;
-static prima_volta = 1;
+static int prima_volta = 1;
 Window window;
 Widget vert_scroll_w;
 

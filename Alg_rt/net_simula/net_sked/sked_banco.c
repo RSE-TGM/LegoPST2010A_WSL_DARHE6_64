@@ -22,6 +22,9 @@ static char SccsID[] = "@(#)sked_banco.c	5.5\t3/14/96";
    reserved @(#)sked_banco.c	5.5
 */
 # include <stdio.h>
+# include <string.h>
+#include <sys/wait.h>
+#include <unistd.h>
 # include <errno.h>
 # include <math.h>
 # include <time.h>
@@ -36,16 +39,17 @@ static char SccsID[] = "@(#)sked_banco.c	5.5\t3/14/96";
 # include"vmsipc.h"
 # include <stat.h>
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include <sim_param.h>
 # include <sim_types.h>
 # include <sim_ipc.h>
 # include "comandi.h"
 # include "sked.h"
+# include "sked_fun.h"
 # include "dispatcher.h"
 # include "libnet.h"
 # include "mod_data.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 #include "libipc.h"
 
@@ -181,7 +185,7 @@ float 	   dt, max_dt, max_sim_time=-1.0;
 
 extern  int converti_tempo(float,long  *,long  *,long  *,long  *,long  *,long  *);
 
-sked_banco(int modo, char *dati)
+int sked_banco(int modo, char *dati)
 {
    int             ret;
    int             check;
@@ -269,7 +273,7 @@ sked_banco(int modo, char *dati)
 	       exit(0);
 	 }
 	 tipo_attesa = !IPC_NOWAIT;
-	 return;
+	 return(1);
       }
    }
 /*
@@ -430,7 +434,7 @@ sked_banco(int modo, char *dati)
 		     if (fp_ordini[i] > 0)
 		     {
 			if (writen(fp_ordini[i],
-				   &messaggio_master,
+				   (char*)&messaggio_master,
 				   sizeof(HEADER_NET) +
 				   messaggio_master.header_net.lun) < 0)
 			{
@@ -467,7 +471,7 @@ sked_banco(int modo, char *dati)
 		     if (fp_ordini[i] > 0)
 		     {
 			if (writen(fp_ordini[i],
-				   &messaggio_master,
+				   (char*)&messaggio_master,
 				   sizeof(HEADER_NET) +
 				   messaggio_master.header_net.lun) < 0)
 			{
@@ -561,7 +565,7 @@ memoria shared.
                        for (i = 0; i < nmod; i++)
 		       if (fp_ordini[i] > 0)
                            {
-                           if (writen(fp_ordini[i], &messaggio_master,
+                           if (writen(fp_ordini[i], (char*)&messaggio_master,
                                       sizeof(HEADER_NET) +
                                       messaggio_master.header_net.lun) < 0)
                               {
@@ -746,7 +750,7 @@ memoria shared.
 		     if (fp_ordini[i] > 0)
 		     {
 			if (writen(fp_ordini[i],
-				   &messaggio_master,
+				   (char*)&messaggio_master,
 				   sizeof(HEADER_NET) +
 				   messaggio_master.header_net.lun) < 0)
 			{
@@ -858,7 +862,7 @@ memoria shared.
                for (i = 0; i < nmod; i++)
                    if (fp_ordini[i] > 0)
                       {
-                      if (writen(fp_ordini[i], &messaggio_master,
+                      if (writen(fp_ordini[i], (char*)&messaggio_master,
                                  sizeof(HEADER_NET) +
                                  messaggio_master.header_net.lun) < 0)
                          {
@@ -1267,7 +1271,7 @@ memoria shared.
 		     if (fp_ordini[i] > 0)
 		     {
 			if (writen(fp_ordini[i],
-				   &messaggio_master,
+				   (char *)&messaggio_master,
 				   sizeof(HEADER_NET) +
 				   messaggio_master.header_net.lun) < 0)
 			{
@@ -1302,7 +1306,7 @@ memoria shared.
 		     if (fp_ordini[i] > 0)
 		     {
 			if (writen(fp_ordini[i],
-				   &messaggio_master,
+				   (char*)&messaggio_master,
 				   sizeof(HEADER_NET) +
 				   messaggio_master.header_net.lun) < 0)
 			{
@@ -1401,7 +1405,7 @@ memoria shared.
 	       }
 	       sked_banco_ack(1);
 	       to_someone(id_msg_from_sked, id_msg_to_sked, 1, 1,
-			  &nrighe, MAX_LUN_COMANDI_DISPATCHER);
+			  (char*)&nrighe, MAX_LUN_COMANDI_DISPATCHER);
 	       i = 0;
 	       for (k = 0;
 		(k <= (nrighe * LUN_RIGA_F14) / MAX_LUN_COMANDI_DISPATCHER);
@@ -1734,7 +1738,7 @@ int             last_save = stato_cr.last_bktk_save;
 }
 #endif
 
-to_someone(id, id_ret, tipo_dati, comando, dati, size)
+void to_someone(id, id_ret, tipo_dati, comando, dati, size)
    int             id;
    int             id_ret;
    int             tipo_dati;

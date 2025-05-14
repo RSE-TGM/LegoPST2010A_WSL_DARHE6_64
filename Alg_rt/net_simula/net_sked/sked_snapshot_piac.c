@@ -22,6 +22,7 @@ static char SccsID[] = "@(#)sked_snapshot_piac.c	5.3\t2/20/96";
    reserved @(#)sked_snapshot_piac.c	5.3
 */
 # include <stdio.h>
+# include <string.h>
 # include <errno.h>
 #if defined UNIX
 # include <sys/types.h>
@@ -33,15 +34,16 @@ static char SccsID[] = "@(#)sked_snapshot_piac.c	5.3\t2/20/96";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "sked.h"
+# include "sked_fun.h"
 # include "comandi.h"
 # include "dispatcher.h"
 # include "libnet.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
 
 #define TESTO_PROVA "Testo di prova dell'area spare in snapshot S.d.I. 01/97"
 
@@ -107,7 +109,12 @@ extern int      attiva_listaci;
 
 extern  int converti_tempo(float,long  *,long  *,long  *,long  *,long  *,long  *);
 
-sked_snapshot_piac(azione, numero)
+int snap_load_piac(int);
+int snap_save_piac(int );
+int snap_del_piac(int);
+int ConvPertFloat(float **, TIPO_PERT *, int );
+
+void sked_snapshot_piac(azione, numero)
    int             azione;
    short           numero;
 {
@@ -160,7 +167,7 @@ TIPO_PERT *pert_tmp;
       for (i = 0; i < nmod; i++)
 	 if (fp_ordini[i] > 0)
 	 {
-	    if (writen(fp_ordini[i], &messaggio_net.header_net,
+	    if (writen(fp_ordini[i], (char*)&messaggio_net.header_net,
 		       sizeof(HEADER_NET)) < 0)
 	    {
 	       sked_stato(STATO_ERRORE);
@@ -254,7 +261,7 @@ TIPO_PERT *pert_tmp;
  * il file non esiste lo crea. 
  */
 
-snap_tab_read_piac()
+void snap_tab_read_piac()
 {
    int             i;
    int             size_snap, size_file;
@@ -282,7 +289,7 @@ snap_tab_read_piac()
 	 snapshot_hea[i - 1].mod  = 0;
          snapshot_hea[i - 1].forzato = 0;
          snapshot_hea[i - 1].tempo = 0;
-         strcpy(snapshot_hea[i - 1].val, "0\00"); 
+         strcpy((char*)snapshot_hea[i - 1].val, "0\00"); 
 	 strcpy(snapshot_hea[i - 1].descr, " >>>>    SNAPSHOT FREE    <<<<\00");
 	 strcpy(snapshot_hea[i - 1].datasn, "00/00/00\00");
 	 strcpy(snapshot_hea[i - 1].temposn, "0\00");
@@ -643,7 +650,7 @@ TIPO_PERT *pert_mem;
  * Elimina lo snapshot identificato da posizione modificando il solo Header.
  * La posizione va conteggiata da 1 a MAX_SNAPSHOT. 
  */
-snap_del_piac(posizione)
+int snap_del_piac(posizione)
    int             posizione;
 {
    FILE           *fp_snap;	/* descrittore del file snapshot.dat */
@@ -679,7 +686,7 @@ snap_del_piac(posizione)
 /*
  * riempie la tabella dei valori caratteristici di ogni singolo snapshot 
  */
-snap_slot_piac(int pos, int variabile, int num_snap)
+int snap_slot_piac(int pos, int variabile, int num_snap)
 {
 int    i;
 FILE  *fp_snap;
@@ -728,7 +735,7 @@ int    inizio, fine;
 }
 
 
-export_db()
+void export_db()
 {
 int             i, ret;
 MSG_NET         messaggio_net;
@@ -744,7 +751,7 @@ PACCHETTO_NET *p_snap;
          for (i = 0; i < nmod; i++)
             if (fp_ordini[i] > 0)
                {
-               if (writen(fp_ordini[i], &messaggio_net.header_net,
+               if (writen(fp_ordini[i], (char*)&messaggio_net.header_net,
                           sizeof(HEADER_NET)) < 0)
                   {
                   sked_stato(STATO_ERRORE);
@@ -913,7 +920,7 @@ int ret;
 		        remove_updown_slave(
                                (float *) (&(pc->dato[0])), i);
 */
-                     if ( (dati_scritti = writen(fp_trasmittente, pc,
+                     if ( (dati_scritti = writen(fp_trasmittente, (char*)pc,
                                                  sizeof(HEADER_NET) +
                                                  pc->header_net.lun)) < 0)
                         {
@@ -1035,7 +1042,7 @@ int ret;
                      printf(" fp_trasm.=%d fp_com[i]=%d (fp_master=%d)\n",
                              fp_trasmittente,fp_com[i],fp_master);
 #endif
-                     if ( (dati_scritti = writen(fp_trasmittente, pc,
+                     if ( (dati_scritti = writen(fp_trasmittente, (char*)pc,
                                                  sizeof(HEADER_NET) +
                                                  pc->header_net.lun)) < 0)
                         {
@@ -1089,7 +1096,7 @@ int ret;
 
 
 
-sked_prepara_header_reg(HEADER_REGISTRAZIONI *h_reg)
+int sked_prepara_header_reg(HEADER_REGISTRAZIONI *h_reg)
 {
 int nmodelli;
 int size_head;

@@ -34,13 +34,14 @@ static char SccsID[] = "@(#)sked_replay.c	5.2\t1/19/96";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+# include <Rt/RtDbPunti.h>
+# include <Rt/RtMemory.h>
 # include "sim_param.h"
 # include "sim_types.h"
 # include "sim_ipc.h"
 # include "comandi.h"
 # include "sked.h"
-# include <Rt/RtDbPunti.h>
-# include <Rt/RtMemory.h>
+# include "sked_fun.h"
 
 #define DELTA_REPLAY	10
 
@@ -64,6 +65,7 @@ extern int      fp_ordini[MAX_MODEL];	/* puntatori dei socket a cui spedire
 
 extern int      nmod;
 
+int ins_file_replay(TIPO_PERT *, int);
 
 /*
  * 0 chiude il file perturbazioni.dat e lo riapre in lettura 1 legge le
@@ -237,7 +239,7 @@ printf("sked_replay[5]: dopo pert_snd\n");
    return (1);
 }
 
-sked_raccogli_pert()
+int sked_raccogli_pert()
 {
    PACCHETTO_NET   pacchetto_net;
    MSG_NET         messaggio_net;
@@ -334,7 +336,7 @@ sked_raccogli_pert()
 	 pacchetto_net.header_net.tipo = DATIREPLAY;
 	 pacchetto_net.header_net.flag = (-1);
 	 pacchetto_net.header_net.lun = pert_da_spedire * sizeof(TIPO_PERT);
-	 if (writen(fp_master, &pacchetto_net,
+	 if (writen(fp_master, (char*)&pacchetto_net,
 		    sizeof(HEADER_NET) + pacchetto_net.header_net.lun) < 0)
 	 {
 	    printf("Errore impossibile scrivere su nodo MASTER\n");
@@ -360,8 +362,7 @@ sked_raccogli_pert()
 }
 
 
-int
-ins_file_replay(pert, num)
+int ins_file_replay(pert, num)
    TIPO_PERT      *pert;
    int             num;
 {
@@ -427,7 +428,7 @@ ins_file_replay(pert, num)
 /*
      Vecchia gestione updown
 */
-sked_raccogli_updown(int *ind_updown, float *val_updown)
+void sked_raccogli_updown(int *ind_updown, float *val_updown)
 {
    PACCHETTO_NET   pacchetto_net;
    MSG_NET         messaggio_net;
@@ -497,7 +498,7 @@ sked_raccogli_updown(int *ind_updown, float *val_updown)
       pacchetto_net.header_net.flag = (-1);
       pacchetto_net.header_net.lun = MAX_UPDOWN * (sizeof(float) + sizeof(int));
       printf("Invio le perturbazioni al master\n");
-      if (writen(fp_master, &pacchetto_net,
+      if (writen(fp_master, (char*)&pacchetto_net,
 		 sizeof(HEADER_NET) + pacchetto_net.header_net.lun) < 0)
       {
 	 printf("Errore impossibile scrivere su nodo MASTER\n");

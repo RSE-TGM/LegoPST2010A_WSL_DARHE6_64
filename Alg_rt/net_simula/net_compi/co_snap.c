@@ -32,7 +32,7 @@ static char SccsID[] = "@(#)co_snap.c	5.1\t11/7/95";
    Per l'attribuzione del parametro _MAX_SNAP_SHOT ci si basa
    sulla lettura del file nella parte di header.
 */
-co_snap()
+void co_snap()
 {
 FILE *fp;
 SNTAB *snapshot;

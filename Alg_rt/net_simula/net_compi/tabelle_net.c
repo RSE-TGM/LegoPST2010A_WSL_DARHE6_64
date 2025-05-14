@@ -28,7 +28,7 @@ extern SCAMBIO scambio[MAX_MODEL][MAX_DT_DEC];
 extern COLLEGAMENTO collegamento[MAX_MODEL][MAX_MODEL];
 extern S02 s02_;
 
-tabelle_net(
+void tabelle_net(
  int nmod,
  int nrip)
 {

@@ -99,7 +99,7 @@ XPoint am2_posiz[]={{10,90},  /* minimo del valore */
                     {45,28}}; /* massimo errore */
 
 
-#define PIGRECO 3.141592
+#define PIGRECO 3.14159265358979323846
 staz_am2_r(flag,is,ip3)
 int *flag;   /* flag */
 int *is;   /* indice stazione associata */

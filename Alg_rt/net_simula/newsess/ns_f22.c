@@ -22,6 +22,8 @@ static char SccsID[] = "@(#)ns_f22.c	1.16\t2/5/96";
    reserved @(#)ns_f22.c	1.16
 */
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h> 
 #include <errno.h>
 #include <string.h>
 #if defined UNIX

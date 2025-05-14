@@ -22,6 +22,7 @@ static char SccsID[] = "@(#)sked_legograf.c	5.1\t11/7/95";
    reserved @(#)sked_legograf.c	5.1
 */
 # include <stdio.h>
+# include <string.h>
 # include <errno.h>
 #if defined UNIX
 # include <sys/types.h>
@@ -58,7 +59,7 @@ extern RtDbPuntiOggetto dbpunti_ext;
 extern float *area_dati;
 extern float *area_dati_ext;
 
-sked_legograf(float off_time)
+void sked_legograf(float off_time)
 {
    MSG_LEGOGRAF    messaggio_legograf;
    int             i, j, app_int;

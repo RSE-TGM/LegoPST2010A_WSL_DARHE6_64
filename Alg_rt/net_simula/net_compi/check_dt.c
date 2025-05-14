@@ -31,7 +31,7 @@ static char SccsID[] = "@(#)check_dt.c	5.1\t11/7/95";
 #include "sim_param.h"
 #include "sim_types.h"
 
-check_dt(
+void check_dt(
  MODEL model[],
  int nmod,
  int *nrip)

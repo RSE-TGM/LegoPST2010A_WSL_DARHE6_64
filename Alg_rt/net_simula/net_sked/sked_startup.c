@@ -24,6 +24,7 @@ static char SccsID[] = "@(#)sked_startup.c	5.2\t2/7/96";
 #include <stdio.h>
 #include <string.h>
 # include <errno.h>
+#include <unistd.h>
 #if defined UNIX
 # include <sys/types.h>
 # include <sys/ipc.h>
@@ -33,12 +34,13 @@ static char SccsID[] = "@(#)sked_startup.c	5.2\t2/7/96";
 #if defined VMS
 # include"vmsipc.h"
 #endif
+#include <Rt/RtMemory.h>
 #include "sim_param.h"
 #include "sim_types.h"
 #include "sim_ipc.h"
-#include "sked.h"
 #include "comandi.h"
-# include <Rt/RtMemory.h>
+#include "sked.h"
+#include "sked_fun.h"
 
 #if defined SCO_UNIX
 #define vfork() fork()
@@ -105,7 +107,7 @@ extern int    _PERT_CLEAR;
 #define MAXARGV 22
 #define MAXHOSTNAMELEN 256
 
-sked_startup()
+void sked_startup()
 {
    int             i, j, k;
    int		   kk;

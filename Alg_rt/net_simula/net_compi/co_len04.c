@@ -34,7 +34,7 @@ static char SccsID[] = "@(#)co_len04.c	5.1\t11/7/95";
  extern FILE *fp_n04;
  extern int riga_n04;
 
-legge_riga_n04(riga,lun)
+void legge_riga_n04(riga,lun)
  char *riga;
  int *lun;
 {

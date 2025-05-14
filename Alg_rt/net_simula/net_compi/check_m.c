@@ -27,11 +27,12 @@ static char SccsID[] = "@(#)check_m.c	5.1\t11/7/95";
 */
 	/* rimuovere se inserita in compi.c */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "sim_param.h"
 #include "sim_types.h"
 
-check_model(
+void check_model(
  char *stringa,
  int imi,
  int *imu,

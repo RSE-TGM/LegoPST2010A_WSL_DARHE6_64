@@ -27,6 +27,7 @@ static char SccsID[] = "@(#)mandb_io.c	5.1\t11/7/95";
 
 #include <stdio.h>                              /* For printf and so on. */
 #include <string.h>                              /* For printf and so on. */
+#include <stdlib.h> 
 
 #include <X11/Xlib.h>
 #include <Mrm/MrmAppl.h>
@@ -51,8 +52,10 @@ extern int tot_variabili;
 
 long offset_descr,offset_indvar,offset_sigle,offset_valori,offset_tempi;
 
+int cerca_var(char*);
 
-read_all_page_mandb()
+
+int read_all_page_mandb()
 {
 int i,j, k, *p_indvar, flag, new_ind;
 char stringa[60];
@@ -189,7 +192,7 @@ for (j=0; j< tot_variabili; j++)
 return(-1);
 }
 
-write_page_mandb(indice_rec,flag)
+int write_page_mandb(indice_rec,flag)
 int indice_rec;		/* indice pagina da salvare */
 int flag;	        /* se 1 salva tutta la pagina, se 0 salva
 			   solo i valori */
@@ -230,7 +233,7 @@ return(0);
 }
 
 
-read_page_mandb(indice_rec)
+int read_page_mandb(indice_rec)
 int indice_rec;         /* indice pagina da salvare */
 
 {
@@ -270,7 +273,7 @@ return(0);
 /*
 	routine di reset dei valori di forzamento per tutte le pagine
 */
-reset_valori_sp()
+void reset_valori_sp()
 {
 int i;
         

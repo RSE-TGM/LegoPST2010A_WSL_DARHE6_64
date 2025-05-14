@@ -31,7 +31,7 @@ static char SccsID[] = "@(#)cnewstaz.c	1.4\t3/23/95";
 #include "sim_param.h"
 #include "sim_types.h"
 #include "xstaz.h"
-#include "compstaz.inc"
+#include "compstaz.h"
 
 // void legge_riga( char *riga, int *lun, int *nriga );
 // void separa_str( char *riga, int lun, int nstr, STRIN_ST strin[]);
@@ -193,7 +193,7 @@ TIPO_LED *p_r;
  riconosce se si desidera una variabile negata in ingresso
  (parola chiave NOT)
 */
-is_neg(str)
+int is_neg(str)
 char *str;
 {
 if(str==NULL) return(0);
