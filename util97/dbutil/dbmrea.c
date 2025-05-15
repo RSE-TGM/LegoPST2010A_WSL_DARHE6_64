@@ -27,7 +27,7 @@ char	Con[1024];
 
 
 /*----------------------------------------------------------------------*/
-main( argc, argv )
+int main( argc, argv )
 int	argc;
 char**	argv;
 {

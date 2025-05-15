@@ -31,16 +31,25 @@ static char SccsID[] = "@(#)f03.c	2.2\t2/13/95";
 #define  FALSE	0
 
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include <fcntl.h>
 
 #include "read_ftn.h"
 #include "f03.h"
 
+int leggi_record_ftn( int , int , int , char , int , ...);
+int dim_array_f03();
+void crea_array_bidim( char*[], char[], int, int );
+
+
 /*** read_file_f03() */
 /* funzione che inizializza le variabili e gli array opportuni leggendo */
 /* le informazioni dal file f03.dat. Ritorna 0 se tutto ok, altrimenti */
 /* ritorna -1 se c'e' stato qualche errore (errore di apertura del file) */
-read_file_f03()
+int read_file_f03()
 {
    int  fd_f03, flag, dim_buffer;
    char unita[4];
@@ -149,7 +158,7 @@ read_file_f03()
 /* funzione che alloca dinamicamente memoria per gli array utilizzati nella */
 /* lettura del file f03.dat. */
 /* Ritorna 0 se tutto ok, altrimenti -1 */
-dim_array_f03()
+int dim_array_f03()
 {
    nosl        = (char *)  calloc( nst, DIMTIPO(char,4));
    nosub       = (char **) calloc( nbl, sizeof(char *));

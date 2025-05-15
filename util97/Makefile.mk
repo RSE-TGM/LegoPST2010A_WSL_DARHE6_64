@@ -21,11 +21,11 @@ all:
 	cd ./cap ; $(MAKE) -f Makefile.mk
 	cd ./connex2 ; $(MAKE) -f Makefile.mk
 #	cd ./dbutil ; $(MAKE) -f Makefile.mk
-	cd ./mmi_collect ; $(MAKE) -f Makefile.mk
-	cd ./pagmod ; $(MAKE) -f Makefile.mk
-	cd ./tag2res ; $(MAKE) -f Makefile.mk
+#	cd ./mmi_collect ; $(MAKE) -f Makefile.mk
+#	cd ./pagmod ; $(MAKE) -f Makefile.mk
+#	cd ./tag2res ; $(MAKE) -f Makefile.mk
 	cd ./procedure ; $(MAKE) -f Makefile.mk
-	cd ./utilities ; $(MAKE) -f Makefile.mk
+#       cd ./utilities ; $(MAKE) -f Makefile.mk
 	cd ./mf ; $(MAKE) -f Makefile.mk
 	cd ./place ; $(MAKE) -f Makefile.mk
 

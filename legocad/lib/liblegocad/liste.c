@@ -31,7 +31,7 @@ aggiunge alla lista un elemento che viene passato come buffer di caratteri
 SENZA TERMINATORE. La routine provvede ad aggiungere il terminatore servendosi
 di un buffer di appoggio allocato dinamicamente all'interno della routine stessa
 */
-aggiungi_item_n(lista,buf,dim)
+void aggiungi_item_n(lista,buf,dim)
 Widget lista;
 char *buf;
 int dim;
@@ -54,7 +54,7 @@ XmStringFree(item);
 free(str);
 }
 
-update_lista()
+void update_lista()
 {
 extern Display *UxDisplay;
 XSync(UxDisplay,False);

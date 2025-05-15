@@ -64,11 +64,14 @@ static char SccsID[] = "@(#)autodoc.c	1.10\t3/31/95";
 #include <locale.h>
 #endif
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 #include <X11/Intrinsic.h>
 #include <X11/StringDefs.h>
 #include <Xm/Xm.h>
 
-#include <unistd.h>
 
 /*---------------------------------------------------- 
  * UxXt.h needs to be included only when compiling a 
@@ -116,7 +119,10 @@ byte tipo_stampante = PRINTER_ASCII;
 char page_prefix_dati[6];
 char page_prefix_var[6];
 
-main(argc,argv)
+int leggi_file_unita();
+int copia_file(char*, char*);
+
+int main(argc,argv)
 	int 	argc;
 	char 	*argv[];
 {

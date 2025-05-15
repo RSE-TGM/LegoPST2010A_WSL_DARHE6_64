@@ -138,7 +138,7 @@ int *n_blocchi;
  ***   Descrizione:
  ***      Ordina per modulo la lista dei blocchi.
  ***/
-ordina_blocchi(blocchi, n_blocchi)
+void ordina_blocchi(blocchi, n_blocchi)
 ModelBlockStruct *blocchi;
 int n_blocchi;
 {

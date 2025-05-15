@@ -43,7 +43,7 @@ CPP=cpp
 #.c.o:
 #	$(CC) -c $(CFLAGS) $< -o $@
 #------------------------ Fortran compiler (g77)
-F_FLAGS=-fno-second-underscore
+#F_FLAGS=-fno-second-underscore
 # @(#)48	1.3  com/config/xtmake.tem.m4, aic, aic322, 9239322 9/30/92 16:31:08
  
 #  COMPONENT_NAME: AIC     AIXwindows Interface Composer

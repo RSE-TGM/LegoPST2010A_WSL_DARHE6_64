@@ -72,6 +72,9 @@ REVISIONI:
 ***/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include <ctype.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -94,6 +97,7 @@ REVISIONI:
 #endif
 
 #include "file_icone.h"
+
 #include "aggiunte.h"
 
 #define APPLICATION_NAME	"LIBICOFILE"
@@ -121,6 +125,13 @@ static char *icofile_error[] = {
 static char *icofile_warning[] = {
 			           "can't open temporary file!",
 		       	         };
+
+
+#include "utile.h"
+//#include "file_icone.h"
+// void s_error();
+int copia_file(char*, char*);
+
 
 /*-----------------------------------------------------------------------*/
 /*** FILE *apri_file_icoproc(flag_crea, flag_lib)
@@ -382,7 +393,7 @@ char flag_lib;
 scrive un record del tipo IconFileRec nel file puntato da *fp.
 Il record deve avere settato il nome del modulo e la sua descrizione, la
 funzione azzera i record delle icone e salva nel file. */
-scrivi_empty_record_file_ico( fp, record )
+int scrivi_empty_record_file_ico( fp, record )
 FILE *fp;
 IconFileRec *record;
 {
@@ -530,7 +541,7 @@ IconFileRec *record;
  ***     IconFileRec *record: record del file icon_file_?p.dat 
  ***     FILE *fp           : file pointer del file icon_file_?p.dat
 legge un record nel file alla posizione corrente */
-leggi_record_file_ico(fp, record)
+int leggi_record_file_ico(fp, record)
 FILE *fp;
 IconFileRec *record;
 {

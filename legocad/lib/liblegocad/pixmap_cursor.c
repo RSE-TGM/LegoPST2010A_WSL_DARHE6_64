@@ -19,6 +19,9 @@ static char SccsID[] = "@(#)pixmap_cursor.c	2.2\t2/13/95";
 */
 
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <X11/Intrinsic.h>
@@ -34,7 +37,7 @@ static LISTA_CURSORI *lista_cursori=NULL;
 
 
 
-make_pixmap_cursor( wid, name, fg_color, bg_color )
+void make_pixmap_cursor( wid, name, fg_color, bg_color )
 Widget wid;
 char *name, *fg_color, *bg_color;
 {
@@ -112,7 +115,7 @@ char *name, *fg_color, *bg_color;
      }
    }
    else
-     msk = NULL;
+     msk = (Pixmap)NULL;
    
 
    /* Setta il corsore */
@@ -139,7 +142,7 @@ char *name, *fg_color, *bg_color;
 
 
 
-set_pixmap_cursor ( wid, cursor )
+void set_pixmap_cursor ( wid, cursor )
 Widget wid;
 char   *cursor;
 {
@@ -162,7 +165,7 @@ char   *cursor;
 
 
 
-get_pixmap_cursor ( cur_name, cursor )
+void get_pixmap_cursor ( cur_name, cursor )
 char   *cur_name;
 Cursor *cursor;
 {

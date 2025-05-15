@@ -8,6 +8,7 @@
  * 1997-04-21
  */
 
+//#include <math.h>
 
 extern char logbf [ ] ;
 

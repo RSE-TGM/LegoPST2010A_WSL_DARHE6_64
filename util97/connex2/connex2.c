@@ -41,6 +41,8 @@
 # include <string.h>
 # include <errno.h>
 # include <string.h>
+#include <ctype.h>
+
 # ifndef LINE_LEN
 #   define LINE_LEN 500 /* Buffer for fgets. */
 # endif

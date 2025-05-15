@@ -253,7 +253,7 @@ UU0401CO  --UA-- saio04 0TAL02CF632  TEK02 INLET AL FLOW  kg/sec
 
  */
 
-filter_f01()
+void filter_f01()
 {
 struct	VarEntry	Varkey;
 struct	VarEntry*	Varppp;
@@ -348,7 +348,7 @@ OMPMLCDF  LPSREG0   UD0O37LP  ! @#K@0HAG61AP001 ROTATIONAL SPEED "ACTUATOR"
 WE_1ICR2  STS000NG  WVALSCR3  ! @#K@XLBC80CF701
 */
 
-parse_S01()
+void parse_S01()
 {
 char*		ppp;
 char*		iii;
@@ -478,8 +478,7 @@ printf("%s   %s   %s   %s\n\n",VarTbl[VarTbln-1].Name, VarTbl[VarTbln].TName,
 /*----------------------------------------------------------------------*/
 /*	Lettura f01.dat / aggiunta tag / scrittura f01.S01		*/
 
-void
-rdwr_f01( tname, fpath )
+void rdwr_f01( tname, fpath )
 char*	tname;
 char*	fpath;
 {
@@ -558,7 +557,7 @@ char*		ppp;
 /*----------------------------------------------------------------------*/
 /*	Lettura e analisi del file S01					*/
 
-read_S01()
+void read_S01()
 {
 char*		ppp;
 
@@ -659,7 +658,7 @@ char    str2[TASK_NAME_LEN+VAR_NAME_LEN];
 /*======================================================================*/
 /*		MAIN							*/
 
-main( argc, argv )
+int main( argc, argv )
 int	argc;
 char**	argv;
 {
@@ -704,7 +703,7 @@ int		j;
 /*......................................................................*/
 /*	Lettura file: S01						*/
 
-	read_S01();
+	void read_S01();
 
 	IF( 'T' )
 	{

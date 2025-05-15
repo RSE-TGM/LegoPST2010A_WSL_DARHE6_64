@@ -25,8 +25,12 @@ static char SccsID[] = "@(#)lc_UxXt.c	2.2\t2/13/95";
 #include <Xm/List.h>
 #include <Xm/RowColumn.h>
 #include <Xm/MainW.h>
+#include <Xm/Frame.h>
+#include <Xm/Label.h>
 
-void lcDispatchEvent(event)
+#include "UxXtPuts.h"
+
+Widget lcDispatchEvent(event)
 XEvent *event;
 {
     XtDispatchEvent(event);
@@ -189,7 +193,7 @@ Widget parent;
    XmCreateLabel(parent,name,NULL,0);
 }
 
-lcDestroySwidget(wgt)
+void lcDestroySwidget(wgt)
 Widget wgt;
 {
 XtDestroyWidget(wgt);

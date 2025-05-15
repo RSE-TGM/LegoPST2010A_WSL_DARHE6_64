@@ -24,7 +24,12 @@ static char SccsID[] = "@(#)modpag.c	1.1\t1/8/96";
 #include<stdio.h>
 #include<string.h>
 
-extern t;
+int rinombak(char *,char *,char *);
+int menu();
+void sostituisci(char*,char*,char**,int,int,char*);
+
+
+extern int t;
 
 #define DIM 200        /*dimensione max della linea da leggere da file*/
 
@@ -49,7 +54,7 @@ char *XlConvPathVms();
 #endif
 
 
-main (argc,argv)
+int main (argc,argv)
 int argc;
 char *argv[];
 { 
@@ -172,7 +177,7 @@ rename (appbak2,pathnomepagina);
 }
 
 
-menu()
+int menu()
 /*gestisce il primo menu dopo la richiesta di immissione path pagina */
 {
 printf("0-EXIT\n");

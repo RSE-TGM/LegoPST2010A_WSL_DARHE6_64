@@ -46,7 +46,7 @@ CPP=cpp
 #	$(CC) -c $(CFLAGS) $< -o $@
 #------------------------ Fortran compiler (g77)
 #F_FLAGS=-fno-second-underscore
-F_FLAGS=-fno-second-underscore -g -fno-automatic -finit-local-zero -std=legacy
+#F_FLAGS=-fno-second-underscore -g -fno-automatic -finit-local-zero -std=legacy
 #F_FLAGS=-fno-underscoring -g -fno-automatic -finit-local-zero -std=legacy
 #
 #

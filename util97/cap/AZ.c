@@ -6,6 +6,7 @@
 #include	<memory.h>
 #include	<ctype.h>
 #include	<errno.h>
+#include <getopt.h>
 
 #define		PLAINTEXT_MAX	100
 #define		LF		0x0a

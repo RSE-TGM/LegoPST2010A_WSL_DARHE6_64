@@ -35,9 +35,18 @@ static char SccsID[] = "@(#)f11.c	2.2\t2/13/95";
 
 #include <stdio.h>
 #include <fcntl.h>
+#include <unistd.h>
+#include <X11/Intrinsic.h>
 
 #include "read_ftn.h"
 #include "f11.h"
+
+int leggi_record_ftn( int , int , int , char , int , ...);
+int dim_array_f11(_INTEGER,_INTEGER,_INTEGER,_INTEGER);
+void crea_array_bidim( char*[], char[], int, int );
+// void crea_array_bidim( array_bd, array_mono, num_elem, size_elemento )
+// char *array_bd[], array_mono[];
+// int  num_elem, size_elemento;
 
 /*-------------------------------------------------------------------*/
 /*** read_header_f11( fd_f11 )
@@ -144,7 +153,7 @@ di spostare il puntatore del file alla fine dell'header del file (E' suf=
 ficiente ,comunque, chiamare prima la funzione che legge l'header e,
 successivamente, questa funzione).
 Ritorna 0 se tutto ok, ritorna 1 se si e' raggiunti la fine del file */
-read_data_f11( fd_f11 )
+int read_data_f11( fd_f11 )
 int fd_f11;
 {
    int uscita, dim_buffer;
@@ -240,7 +249,7 @@ int fd_f11;
 /* lettura del file f11.dat. Tale procedura deve essere chiamata prima della */
 /* lettura dei dati del file. */
 /* Ritorna -1 se c'e stato errore di allocazione della memoria. */
-dim_array_f11(neqsis,npvrt,nu,nvart)
+int dim_array_f11(neqsis,npvrt,nu,nvart)
 _INTEGER neqsis,nu,nvart,npvrt;
 {
    varsi       = (char **) XtCalloc( neqsis, sizeof(char *));
@@ -291,7 +300,7 @@ _INTEGER neqsis,nu,nvart,npvrt;
    crea_array_bidim( varno, varno[0], nu, DIMTIPO(char,8));
    crea_array_bidim( signeq, signeq[0], neqsis, DIMTIPO(char,50));
    crea_array_bidim( uniteq, uniteq[0], neqsis, DIMTIPO(char,10));
-   crea_array_bidim( itopva, itopva[0], neqsis, DIMTIPO(_INTEGER,nu+neqsis));
+   crea_array_bidim( (char **)itopva, (char*)itopva[0], neqsis, DIMTIPO(_INTEGER,nu+neqsis));
    return(0);
 }
 

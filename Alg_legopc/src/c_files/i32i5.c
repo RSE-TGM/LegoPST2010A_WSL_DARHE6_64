@@ -62,8 +62,8 @@ void essit(char *mesg)
 /* findmvtype4fvname - accetta in input un nome di var. fisica	*/
 /* e restituisce:						*/
 /*	 0 - la var. non compare tra quelle matematiche		*/
-/*	 1 - la var. Š una var. matematica di ingresso		*/
-/*	-1 - la var. Š una var. matematica di uscita		*/
+/*	 1 - la var. ï¿½ una var. matematica di ingresso		*/
+/*	-1 - la var. ï¿½ una var. matematica di uscita		*/
 
 int findmvtype4fvname(int cfg, char *fvname)
 
@@ -124,7 +124,7 @@ void put2infnum(int cfg, char *fvname)
   int fv, nfv, fp;
 
   for (fp=0; fp<nfport; fp++)
-    if (fplist[fp].fptype % 2 == 0)		/* la porta Š di ingresso */
+    if (fplist[fp].fptype % 2 == 0)		/* la porta ï¿½ di ingresso */
     {
       nfv = fpvnum[fplist[fp].fptype];
 
@@ -141,7 +141,7 @@ void put2infnum(int cfg, char *fvname)
 /*                      MAIN program                            */
 /*                                                              */
 
-main (int argc, char **argv)
+int main (int argc, char **argv)
 
 {
   FILE *fpI3, *fpI5;
@@ -275,7 +275,7 @@ printf("i5name=%s tempstr=%s\n",i5name,tempstr);
     /* tratta porte fisiche di ingresso */
 
     for (fp=0; fp<nfport; fp++)
-      if (fplist[fp].fptype % 2 == 0)		/* la porta Š di ingresso */
+      if (fplist[fp].fptype % 2 == 0)		/* la porta ï¿½ di ingresso */
       {
         nfv = fpvnum[fplist[fp].fptype];
 
@@ -304,7 +304,7 @@ printf("i5name=%s tempstr=%s\n",i5name,tempstr);
     /* tratta porte fisiche di uscita */
 
     for (fp=0; fp<nfport; fp++)
-      if (fplist[fp].fptype % 2 != 0)		/* la porta Š di uscita */
+      if (fplist[fp].fptype % 2 != 0)		/* la porta ï¿½ di uscita */
       {
         nfv = fpvnum[fplist[fp].fptype];
 
@@ -354,7 +354,7 @@ printf("i5name=%s tempstr=%s\n",i5name,tempstr);
 
 	if (allequal == 1)			/* in numbase mettiamo il valore delle tre config. */
 	  fplist[fp].fnum[CFGBASESLOT][fv] = fplist[fp].fnum[0][fv];
-	else					/* la var. Š indeterminata: mettiamo 3 */
+	else					/* la var. ï¿½ indeterminata: mettiamo 3 */
 	  fplist[fp].fnum[CFGBASESLOT][fv] = 3;
       }
     }

@@ -12,6 +12,8 @@
         Fine sezione per SCCS
 */
 #include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "db.h"
 #include "installa.h"

@@ -12,6 +12,8 @@ sudo dnf install motif-devel
 sudo dnf install sqlite-devel
 sudo dnf install libbsd-devel
 sudo dnf install ncurses-devel
+sudo dnf install gdbm-devel
+sudo dnf install tcl tk tix
 
 per avere un f77 fortran:
 gfortran -c -std=legacy -ffixed-form -ffixed-line-length-132 \

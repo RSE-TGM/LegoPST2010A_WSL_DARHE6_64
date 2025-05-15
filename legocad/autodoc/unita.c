@@ -31,13 +31,15 @@ static char SccsID[] = "@(#)unita.c	1.12\t3/31/95";
 extern UnitaMisura unimis[];
 extern int num_unita_misura;
 
+int copia_file(char*, char*);
+
 /*** leggi_file_unita()
  ***
  ***    Descrizione:
  ***      legge dal file unimis_doc.dat le unita di misura selezionate
  ***      per ogni tipo di variabile 
  ***/
-leggi_file_unita()
+int leggi_file_unita()
 {
    int n, i, fd;
    RecordUmis rec_umis;

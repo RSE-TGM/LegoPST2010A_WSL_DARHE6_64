@@ -1,5 +1,5 @@
 # ******* Telelogic expanded section *******
-
+$(info -------->  DEBUG Makefile.mk: F_FLAGS impostata a = $(F_FLAGS))
 # make_macros from makefile "Makefile.mk-1"
 FFLAGS=$(F_FLAGS)
 LEGO_BIN=../../bin

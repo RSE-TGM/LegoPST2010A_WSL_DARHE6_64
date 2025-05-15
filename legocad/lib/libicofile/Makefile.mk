@@ -4,7 +4,7 @@
 LEGOROOT_LIB=../AlgLib
 LEGORT_LIB=../AlgLib
 LEGOROOT_INCLUDE=../AlgLib/libinclude
-LEGORT_INCLUDE=../AlgLib/libinclude
+LEGORT_INCLUDE=../../AlgLib/libinclude
 C_LIB=/lib/libbsd.a
 LEGOCAD_LIB=..
 LEGOCAD_INCLUDE=../../include
@@ -38,7 +38,7 @@ CPP=cpp
 #.c.o:
 #	$(CC) -c $(CFLAGS) $< -o $@
 #------------------------ Fortran compiler (g77)
-F_FLAGS=-fno-second-underscore
+#F_FLAGS=-fno-second-underscore
 #
 #       Makefile Header:               Makefile.mk
 #       Subsystem:              63

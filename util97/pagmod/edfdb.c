@@ -1,4 +1,7 @@
-# include "edfdb.h"
+
+#include <string.h>
+#include "edfdb.h"
+
 void CreateKeyString ( char * KeyString ,
                        const struct Edf * Data )
   {

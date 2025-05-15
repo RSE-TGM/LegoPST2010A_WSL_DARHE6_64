@@ -67,7 +67,23 @@ HEADER_DATI *header_dati; /* tabella parallela a nom_bloc che per ogni
 extern char **nom_bloc;
 extern int cerca_umis(char*);
 
-read_file_f14(neqsis,nu)
+void crea_array_valori_f14(int,int);
+void read_valori_f14(FILE*,int,int);
+int crea_array_dati_f14(FILE*);
+void read_dati_f14(FILE*);
+void elim_newline(char*);
+void set_defaults_norm();
+void estr_dati(char*,VAL_VAR *);
+void stampa_dati(int,int);
+void pr_float(FILE*,float);
+void spr_float(char*,float);
+
+
+
+
+
+
+int read_file_f14(neqsis,nu)
 int neqsis;    /* numero eq del sistema (= no.uscite) */
 int nu;        /* numero ingressi */
 {
@@ -87,7 +103,7 @@ fclose(fp_f14);
 return(0);
 }
 
-read_valori_f14(fp_f14,neqsis,nu)
+void read_valori_f14(fp_f14,neqsis,nu)
 FILE *fp_f14;  /* file pointer al file f14 in lettura) */
 int neqsis;    /* numero eq del sistema (= no.uscite) */
 int nu;        /* numero ingressi */
@@ -187,7 +203,7 @@ printf("\n RIGA DI INTESTAZIONE LETTA 3= %s",riga_intesta);
 #endif
 }
 
-estr_dati(temp,val)
+void estr_dati(temp,val)
 char *temp;
 VAL_VAR *val;
 {
@@ -211,7 +227,7 @@ strapp[1]=0;
         val->sel_umis=0;
 }
    
-stampa_dati(neqsis,nu)
+void stampa_dati(neqsis,nu)
 int neqsis;
 int nu;
 {
@@ -240,7 +256,7 @@ printf("\n VARIABILI DI INGRESSO ");
         }
 }
 
-pr_float(fp,val)
+void pr_float(fp,val)
 FILE *fp;
 float val;
 {
@@ -250,7 +266,7 @@ else
 	fprintf(fp,"%-.4E",val);
 }
 
-crea_array_valori_f14(neqsis,nu)
+void crea_array_valori_f14(neqsis,nu)
 int neqsis;   /* numero eq del sistema (= no.uscite) */
 int nu;	      /* numero ingressi */
 {
@@ -258,7 +274,7 @@ valout=(VAL_VAR *) calloc(neqsis,sizeof(VAL_VAR));
 valinp=(VAL_VAR *) calloc(nu,sizeof(VAL_VAR));
 }
 
-crea_array_dati_f14(fp_f14)
+int crea_array_dati_f14(fp_f14)
 FILE *fp_f14;
 {
 char temp[L_RIGA_F14+1];  /* buffer per lettura f14 (riga per riga:
@@ -355,7 +371,7 @@ array_descr= (DATO_DESCR *)calloc(tot_descr+1,sizeof(DATO_DESCR));
 fseek(fp_f14,f_posiz,0);
 }
 
-read_dati_f14(fp_f14)
+void read_dati_f14(fp_f14)
 FILE *fp_f14;
 {
 int i;
@@ -444,7 +460,7 @@ if( tot_righe_dati )
 /*
  scrittura del file f14.dat
 */
-write_file_f14(fp)
+void write_file_f14(fp)
 FILE *fp;
 {
 char app[12];
@@ -610,7 +626,7 @@ fprintf(fp,EOF_F14);
 fprintf(fp,"\n");
 }
 
-spr_float(string,val)
+void spr_float(string,val)
 char *string;
 float val;
 {
@@ -622,7 +638,7 @@ else  /* valore negativo -> deve lasciare spazio per il segno */
 	sprintf(string,"%-10.3E",val);
 }
 
-elim_newline(str)
+void elim_newline(str)
 char *str;
 {
 char *pnewline;
@@ -630,7 +646,7 @@ pnewline=strchr(str,'\n');
 if(pnewline) *pnewline='\0';
 }
 
-set_defaults_norm()
+void set_defaults_norm()
 {
 int i;
 static char *str_defaults[]={ DATI_NORM_P0,

@@ -6,9 +6,9 @@
 				f01totom -a <file di tipo f01>		--> viene letto il file in input in modo non  interattivo ( deve esistere f01totom.inp)
 
  * Il programma legge un file f01.dat e lo traduce nel formato topologico "tom"
- * di LegoPC. Durante la fase di conversione interattivamente è richiesta la scelta di istanze di moduli Lego
- * che ammettono configurazioni diverse. La scelta è salvata in un file "f01totom.inp" che viene
- * riletto nei successivi run del programma e che può essere eventualmente modificato 
+ * di LegoPC. Durante la fase di conversione interattivamente ï¿½ richiesta la scelta di istanze di moduli Lego
+ * che ammettono configurazioni diverse. La scelta ï¿½ salvata in un file "f01totom.inp" che viene
+ * riletto nei successivi run del programma e che puï¿½ essere eventualmente modificato 
  * in maniera non interettiva per scegliere altre impostazioni.
  * Durante la fase interattiva di richiesta della configurazione del blocco da utilizzare,
  * se si inposta '-a' viene utilizzato il file f01totom.inp
@@ -305,12 +305,12 @@ printf( "\n-------------------------------\nFASE 3 - Ricerca nei file i5 e scelt
 
 			   strcat(lpFileName, buff);
 //			   strcat(lpFileName,"*.*");
-//	printf("Ilfilei5 da cercare è %s \n",lpFileName);
+//	printf("Ilfilei5 da cercare ï¿½ %s \n",lpFileName);
 
 			   retfind=glob(lpFileName, GLOB_DOOFFS, NULL, &lpFindFileData);
 
 			   if( retfind == 0 ) {// modulo trovato
-	printf("Ilfilei5 scelto %s è nella libreria %s\n",f01r->nomei5[curblo],nomelibr[i]);
+	printf("Ilfilei5 scelto %s ï¿½ nella libreria %s\n",f01r->nomei5[curblo],nomelibr[i]);
 				strcpy(f01r->nomelibr[curblo],nomelibr[i]);
 				modtrovato=1;
 				break;
@@ -377,7 +377,7 @@ printf( "\n-------------------------------\nFASE 4 - Ricerca connessioni tra i b
 				for ( ik=0; ik< f01r->porte[curblo]->porta[i]->num; ik++) { // per ogni var della porta
 
 					if((f01r->porte[curblo]->porta[i]->tipo[ik] == US) ||
-							(f01r->porte[curblo]->porta[i]->tipo[ik] == UA)) {  // è un uscita
+							(f01r->porte[curblo]->porta[i]->tipo[ik] == UA)) {  // ï¿½ un uscita
 						nousc=0;
 						okconnusc=0;
 						for (remblo=0;remblo<f01r->totblo;remblo++) {
@@ -432,35 +432,35 @@ printf( "\n-------------------------------\nFASE 4 - Ricerca connessioni tra i b
 						trovato=-1;
 						ik=0;
 						if((f01r->porte[curblo]->porta[i]->tipo[ik] == US) ||
-							(f01r->porte[curblo]->porta[i]->tipo[ik] == UA)) {  // è un uscita
+							(f01r->porte[curblo]->porta[i]->tipo[ik] == UA)) {  // ï¿½ un uscita
 							for (iii=0;iii<f01r->blo[remblo]->numvar;iii++) { // per ogni variabile del blocco remoto
 								if( strcmp(f01r->blo[remblo]->varconn[iii],f01r->porte[curblo]->porta[i]->nome[ik]) == 0) {
-									break; // trovato: la variabile è iii
+									break; // trovato: la variabile ï¿½ iii
 								}
 							}
 
 							for ( ii=0;ii<f01r->porte[remblo]->porta[kk]->num; ii++) { // per ogni var della porta remota
 								if( strcmp(f01r->porte[remblo]->porta[kk]->nome[ii],f01r->blo[remblo]->varblo[iii]) == 0) {
 									trovato=kk;
-									break; // trovato: la porta è kk
+									break; // trovato: la porta ï¿½ kk
 								}
 							}
 
 						}
 						ik=0;
 						if((f01r->porte[curblo]->porta[i]->tipo[ik] == ING) ||
-							(f01r->porte[curblo]->porta[i]->tipo[ik] == CO)) {  // è un uscita
+							(f01r->porte[curblo]->porta[i]->tipo[ik] == CO)) {  // ï¿½ un uscita
 
 							for (iii=0;iii<f01r->blo[curblo]->numvar; iii++) { // per ogni variabile del blocco corrente
 								if( strcmp(f01r->blo[curblo]->varconn[iii],f01r->porte[remblo]->porta[kk]->nome[ik]) == 0) {
-									break; // trovato: la variabile è iii
+									break; // trovato: la variabile ï¿½ iii
 								}
 							}
 
 							for ( ii=0;ii<f01r->porte[remblo]->porta[kk]->num; ii++) { // per ogni var della porta remota
 								if( strcmp(f01r->porte[remblo]->porta[kk]->nome[ii],f01r->blo[curblo]->varblo[iii]) == 0) {
 									trovato=kk;
-									break; // trovato: la porta è kk
+									break; // trovato: la porta ï¿½ kk
 								}
 							}
 
@@ -486,7 +486,7 @@ printf( "\n-------------------------------\nFASE 5 - Scrittura del file tom\n---
 	scrivi_tom(f01r);
 
 // fine
-	printf( "\n\n-->f01totom terminato, Il file tom è %s\n", filf01totom);
+	printf( "\n\n-->f01totom terminato, Il file tom ï¿½ %s\n", filf01totom);
 
 //free della memoria allocata
 	free(f01r);
@@ -606,7 +606,7 @@ void scrivi_tom(HEADF01 *f01r)
 
 		}
 
-// lettura del file macroblocks se c'è
+// lettura del file macroblocks se c'ï¿½
 	pos_automatiche=0;
 	if (leggi_macroblocks(f01r) == 0) pos_automatiche=1;
 
@@ -732,7 +732,8 @@ void cercai5(HEADF01 *f01r,int curblo, char *path)
 		for (i=0;i<conta;i++) printf("%d - %s\n",i,nomi[i]);
 		printf ("seleziona[%s]?=",f01r->nomei5[curblo]);
 
-		if( gets(buff) == NULL) scelta=-1;
+//		if( gets(buff) == NULL) scelta=-1;
+		if( fgets(buff, MAXL,stdin) == NULL) scelta=-1;
 		scelta=atoi(buff);
 		if( buff[0]=='a') alldef=1, scelta=-1;
 	}
@@ -782,7 +783,7 @@ int leggi_macroblocks( HEADF01 *f01r ){
 
 //		for (curblo=0;curblo< f01r->totblo; curblo++) strcpy(f01r->blo[curblo].posx=;
 	f01r->totpag=1;	
-	if((fpmacro=fopen("macroblocks.dat","r")) == NULL) return(0); // il file non c'è
+	if((fpmacro=fopen("macroblocks.dat","r")) == NULL) return(0); // il file non c'ï¿½
 // leggo il file macroblocks e carico f0ir con posx posy e pag
 		
 		for (i=0;i<5;i++) fgets(buff,MAXL,fpmacro);

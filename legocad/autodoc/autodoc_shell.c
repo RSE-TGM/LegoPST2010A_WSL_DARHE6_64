@@ -5,6 +5,9 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -19,6 +22,8 @@
 #include <Xm/RowColumn.h>
 #include <Xm/MainW.h>
 #include <X11/Shell.h>
+
+#include "libutilx.h"
 
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:
@@ -40,7 +45,12 @@
 
 #include "autodoc.h"
 #include "noto_xbm.h"
+#include "UxXt.h"
 
+void lcDestroySwidget(Widget);
+void ordina_blocchi(ModelBlockStruct *, int);
+
+ 
 /************************************************************************/
 /* VARIABILI GLOBALI ESTERNE						*/
 /************************************************************************/
@@ -81,6 +91,10 @@ int num_blocchi;
 
 char *note_modello = NULL;
 
+void copy_n_car(char *,char *,int);
+int copia_file(char*, char*);
+
+
 /*******************************************************************************
 	The following function is an event-handler for posting menus.
 *******************************************************************************/
@@ -98,7 +112,7 @@ static void	_Uxautodoc_shellMenuPost( wgt, client_data, event, ctd )
 
 	if ( event->xbutton.button == which_button )
 	{
-		XmMenuPosition( menu, event );
+		XmMenuPosition( menu, (XButtonPressedEvent *)event );
 		XtManageChild( menu );
 	}
 }

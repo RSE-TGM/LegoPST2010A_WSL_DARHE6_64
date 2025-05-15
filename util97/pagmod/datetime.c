@@ -1,5 +1,6 @@
 /*@(#)datetime.c	Date-Time			1997-04-21	*/
 
+#include	<stdio.h>
 #include	<errno.h>
 #include	<time.h>
 #include	<sys/types.h>

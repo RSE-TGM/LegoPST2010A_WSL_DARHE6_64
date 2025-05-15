@@ -26,11 +26,20 @@ static char SccsID[] = "@(#)lc_errore.c	2.2\t2/13/95";
  WARNING ed ERROR). 
 */
 
+#include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+
+
 #include "lc_errore.h"
 static char str[2001],mess[2001];
 
-lc_errore ( char * StringaErrore, ... )
+void show_warning(char*);
+
+
+void lc_errore ( char * StringaErrore, ... )
 {
    va_list args;
 
@@ -43,7 +52,7 @@ lc_errore ( char * StringaErrore, ... )
 
    char* format_save;
 
-   extern show_error( char * );
+   extern void show_error( char * );
 
    extern ERR_LEVEL err_level;
 

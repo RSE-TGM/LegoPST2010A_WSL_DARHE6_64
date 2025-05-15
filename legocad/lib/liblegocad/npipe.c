@@ -17,6 +17,9 @@ static char SccsID[] = "@(#)npipe.c	2.3\t4/26/95";
 /*
         Fine sezione per SCCS
 */
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 #include <fcntl.h>
 typedef char byte;
 
@@ -30,6 +33,9 @@ char *messaggio;
 
 int uscita;
 void attesa();
+
+extern int send_message( int, char*, int, char*, int );
+
 
 int wr_pipe_(cod,msg)
 int *cod;

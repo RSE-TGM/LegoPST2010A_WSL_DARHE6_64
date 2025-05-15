@@ -18,15 +18,21 @@
  * ScanScriptFile
  * WhichKeyword
  */
-# include "script.h"
-# include "widgets.h"
-# include "util.h"
-# include "iconregmod.h"
-# include "pagcompiler.h"
-# include <stdio.h>
-# include <string.h>
-# include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <libgen.h>
+#include <ctype.h>
+#include "script.h"
+#include "widgets.h"
+#include "util.h"
+#include "iconregmod.h"
+#include "pagcompiler.h"
+
+void	AppendToFileList( char* );
+
+
 enum Keyword 
   {
   ANYVALUEKEY ,

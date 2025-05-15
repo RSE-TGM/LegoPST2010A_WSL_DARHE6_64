@@ -43,6 +43,8 @@ static char SccsID[] = "@(#)lc_comandi.c	2.4\t2/13/95";
 #include "legocad.h"  /* definizioni generali per legocad e le sue
                          sottoattivita' */
 #include "lc_errore.h"
+void lc_errore ( char * , ... );
+int lancia_comando(Display *, char*);
 
 /*
  Esecuzione di comando di shell con intercettazione dell'output
@@ -51,7 +53,7 @@ static char SccsID[] = "@(#)lc_comandi.c	2.4\t2/13/95";
 static char riga[2001]; /* la dimensione e' notevole perche' l'output
                            puo' essere composto da comandi di link o
                            di creazione librerie notevolmente lunghi */
-esegui_comando(comando)
+int esegui_comando(comando)
 char *comando;
 {
 extern ERR_LEVEL err_level;
@@ -71,7 +73,7 @@ return(WEXITSTATUS(retval));
 
 /* La funzione lancia_comando e' simile alla funzione esegui comando */
 /* con l'eccezione che viene effettuato il dispatch degli eventi. */
-lancia_comando(display, comando)
+int lancia_comando(display, comando)
 Display *display;
 char *comando;
 {
@@ -91,7 +93,7 @@ char *comando;
        show_warning(riga);
 */
 
-       while (XCheckIfEvent(display, &evento, predicate_proc, NULL))
+       while (XCheckIfEvent(display, &evento, (int (*)(Display *, XEvent *, char *))predicate_proc, NULL))
            XtDispatchEvent(&evento);
 
    }

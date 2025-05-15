@@ -22,6 +22,8 @@ static char SccsID[] = "@(#)lc_varie.c	2.2\t2/13/95";
 	utilita' varie.
 */
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
@@ -32,7 +34,7 @@ static char SccsID[] = "@(#)lc_varie.c	2.2\t2/13/95";
 #include "legocad.h"  /* definizioni generali per legocad e le sue
                          sottoattivita' */
 
-esiste_file(path)
+int esiste_file(path)
 char *path;
 {
 struct stat buf;
@@ -88,7 +90,7 @@ for(i=0;i<strlen(str);i++)
  str_cut(str)
         elimina eventuali blank in coda ad una stringa
 */
-str_cut(str)
+void str_cut(str)
 char *str;
 {
 int i;

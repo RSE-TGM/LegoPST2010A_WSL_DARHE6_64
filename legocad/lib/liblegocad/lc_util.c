@@ -19,6 +19,7 @@ static char SccsID[] = "@(#)lc_util.c	2.4\t7/13/95";
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <stdarg.h>
 #include <signal.h>
@@ -120,7 +121,7 @@ return(1);
 /*
  uccisione di processo
 */
-uccidi_processo(pid)
+void uccidi_processo(pid)
 pid_t pid;
 {
 kill(pid,SIGKILL);

@@ -1567,7 +1567,7 @@ int n;
  controlla se una stringa e' vuota (cioe' contiene solo blank o tab)
  la stringa viene controllata fino al terminatore '\0' oppure fino al
  carattere di newline '\n' */
-Empty(stringa)
+int Empty(stringa)
 char *stringa;
 {
    for(; *stringa && *stringa != '\n';stringa++)

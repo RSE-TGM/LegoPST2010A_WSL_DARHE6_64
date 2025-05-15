@@ -107,9 +107,9 @@ return(s1);
 
 
 #ifdef VMS
-rinombak(char *salva,char *path)
+int rinombak(char *salva,char *path)
 #else
-rinombak(char *salva,char *path,char *bak2)
+int rinombak(char *salva,char *path,char *bak2)
 #endif
 {
 int lungpag,i,ren;
@@ -263,7 +263,7 @@ tiposoglia(int ritornomenu,char *colore,char *path,char *salva,char *bak2,int co
  Sostuisci : sostituisce nel file .pag la risorsa relativa alla
  parola chiave passata come parametro
 */
-sostituisci(pagina,salva,findword,numword,tipoopz,colore)
+void sostituisci(pagina,salva,findword,numword,tipoopz,colore)
 char *pagina;    /* path name completo della pagina .bak che
                     viene aperta in sola lettura  */
 char *salva;     /* path name completo della nuova pagina */

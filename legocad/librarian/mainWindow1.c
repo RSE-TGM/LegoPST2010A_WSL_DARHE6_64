@@ -1274,7 +1274,7 @@ cad_crealg1()
  ***      Visualizza un messaggio di errore nella window dei messaggi
  ***      (chiamata da esegui_comando() -> lc_errore())
  ***/
-show_error(mess)
+void show_error(mess)
 char *mess;
 {
    scrivi_messaggio(mess);

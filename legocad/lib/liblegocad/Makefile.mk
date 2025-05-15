@@ -8,7 +8,7 @@ LEGORT_INCLUDE=../../AlgLib/libinclude
 C_LIB=/lib/libbsd.a
 LEGOCAD_LIB=..
 LEGOCAD_INCLUDE=../../include
-
+RT_INCLUDE=../../AlgLib
 
 # make_macros from project "legocad-2007A1_RHE4_lomgr
 GUI_BUILD=/usr/bin/aic
@@ -39,7 +39,7 @@ CPP=cpp
 #.c.o:
 #	$(CC) -c $(CFLAGS) $< -o $@
 #------------------------ Fortran compiler (g77)
-F_FLAGS=-fno-second-underscore
+#F_FLAGS=-fno-second-underscore
 #
 #       Makefile Header:               %name%
 #       Subsystem:              %subsystem%
@@ -50,7 +50,7 @@ F_FLAGS=-fno-second-underscore
 #
 
 UILINCLUDE = $(UIL_INCLUDE) 
-CFLAGSINCL= -I$(LEGOROOT_INCLUDE) -I$(LEGOCAD_INCLUDE) $(X_INCLUDE) -I$(UX_DIR)/include
+CFLAGSINCL= -I$(LEGOROOT_INCLUDE) -I$(LEGOCAD_INCLUDE) $(X_INCLUDE) -I$(UX_DIR)/include -I$(RT_INCLUDE)
 CFLAGS = $(C_FLAGS) $(CFLAGSINCL) 
 
 SORGENTI = ipcom.c f03.c f14.c liste.c pixmap_cursor.c\

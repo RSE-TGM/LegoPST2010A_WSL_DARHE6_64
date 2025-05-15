@@ -5,6 +5,9 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -19,6 +22,16 @@
 #include <Xm/PushB.h>
 #include <Xm/Form.h>
 #include <X11/Shell.h>
+#include <Xm/ScrollBar.h>
+
+#include "libutilx.h"
+#include "autodoc.h"
+void lcDestroySwidget(Widget);
+int leggi_all_var_f14(char*,InfoBlock **,int*,int*);
+int Empty(char*);
+
+
+
 
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:
@@ -43,6 +56,10 @@
 #include <X11/Intrinsic.h>
 
 #include "autodoc.h"
+
+int copia_file(char*, char*);
+void cancella_testi(HeaderNote **);
+
 
 /************************************************************************/
 /* VARIABILI GLOBALI ESTERNE                                            */
@@ -850,7 +867,7 @@ byte verso;
    if ( i >= 0 && i < num_info )
    {
       get_something( UxGetWidget(scrolledWindow2), XmNverticalScrollBar,
-		     &vscrollbar );
+		     (char*)&vscrollbar );
       get_something( wrowcol, XmNheight, (void*) &bb_height );
 
       nargs = 0;
@@ -936,7 +953,7 @@ void chiudi_info_ashell()
       }
    }
 
-   XtFree(widget_blocco);
+   XtFree((char*)widget_blocco);
    UxDestroySwidget(info_ashell);
 #endif
 }
@@ -1861,7 +1878,7 @@ static Widget	_Ux_create_info_ashell( _Uxnome_blocco, _Uxdescr_blocco, _Uxflag_b
 		      free(wtoggle);
 		   }
 		
-		   XtFree(dati_blocco);
+		   XtFree((char*)dati_blocco);
 		
 		   XtManageChild(wrowcol);
 		
