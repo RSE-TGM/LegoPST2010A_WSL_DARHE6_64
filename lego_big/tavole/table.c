@@ -16,17 +16,20 @@ static char *_csrc = "@(#) %filespec: table.c-10 %  (%full_filespec: table.c-10:
  * ***************************************************************** */
 
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
 # include <errno.h>
 # include <math.h>
 # include "tavpar.h"           /* strutture common delle tavole      */
 
 /* ************* DEFINIZIONE VARIABILI GLOBALI ********************* */
 
-   struct B tabl_ ;
-    CCO cont_ ;
+   extern struct B tabl_ ;
+   extern CCO cont_ ;
    extern struct D init_ ;
 
-   struct K
+   extern struct K
     {
      int id;
      int ip;
@@ -37,10 +40,12 @@ static char *_csrc = "@(#) %filespec: table.c-10 %  (%full_filespec: table.c-10:
      float pai;
     } inte_ ;
 
+  int diagn_io_();
+int diagn_();
 
    /* ************  DEFINIZIONE DELLA SUBROUTINE  ****************** */
 
- table_()
+void  table_()
 
    {
     int i,n;

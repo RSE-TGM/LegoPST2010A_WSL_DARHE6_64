@@ -27,12 +27,16 @@ static char *_csrc = "@(#) %filespec: calsr.c-10 %  (%full_filespec: calsr.c-10:
 # include "tavpar.h"           /* strutture common delle tavole      */
 
 
+void newt_(int*,float*);
+int diagn_io_();
+int diagn_();
+
 /* ************* DEFINIZIONE VARIABILI GLOBALI ********************* */
 
    float (*valda)[];
 
-    CCO cont_ ;
-   extern struct D init_ ;
+   extern CCO cont_ ;        // inizializzato nel fortran
+   extern struct D init_ ;   // inizializzato nel fortran
 
    struct K
     {
@@ -50,12 +54,13 @@ static char *_csrc = "@(#) %filespec: calsr.c-10 %  (%full_filespec: calsr.c-10:
      int ipha;
      int in;
      float titre;
+     int idumm;
     } ther_ ;
 
 
    /* ************  DEFINIZIONE DELLA SUBROUTINE  ****************** */
 
- calsr_()
+ void calsr_()
 
    {
     int i,j,n,new;

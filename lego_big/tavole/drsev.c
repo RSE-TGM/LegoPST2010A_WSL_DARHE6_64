@@ -16,6 +16,9 @@ static char *_csrc = "@(#) %filespec: drsev.c-10 %  (%full_filespec: drsev.c-10:
  * **************************************************************** */
 
 # include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+
 # include <errno.h>
 # include <math.h>
 # include "tavpar.h"           /* strutture common delle tavole     */
@@ -23,11 +26,11 @@ static char *_csrc = "@(#) %filespec: drsev.c-10 %  (%full_filespec: drsev.c-10:
 
 /* ************* DEFINIZIONE VARIABILI GLOBALI ******************** */
 
-   float (*valda)[];
+   extern float (*valda)[];
 
-    CCO cont_ ;
+   extern CCO cont_ ;
 
-   struct K
+   extern struct K
     {
      int id;
      int ip;
@@ -39,13 +42,13 @@ static char *_csrc = "@(#) %filespec: drsev.c-10 %  (%full_filespec: drsev.c-10:
     } inte_ ;
 
 
+    int diagn_();
+    void  table_();
+    void newt_(int*,float*);
+
    /* ************  DEFINIZIONE DELLA SUBROUTINE  ***************** */
 
- drsev_(p,ncal,res1,res2)
-
-   int *ncal;
-   float *p,*res1,*res2;
-
+ void drsev_(float * p,int* ncal,float* res1,float* res2)
    {
     int i,in;
     int n,new;

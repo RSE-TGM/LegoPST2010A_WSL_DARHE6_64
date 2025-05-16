@@ -126,6 +126,8 @@
    #include <string.h>
 #endif
 
+#include <ctype.h>
+
 #include "letters.h"
 
 

@@ -16,7 +16,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
+#include <ctype.h>
+#include <math.h>
+
 
 #define MARG 100
 #define MAX_DIM_MODELS 800
@@ -30,7 +34,7 @@ int  exists(char line[], char block[][5],int nitems,int *ind);
 char *calculate_new_name(char c[],char block[][5],
 						 struct oldnew newnames[],int nnames);
 
-main (int argc, char **argv)
+int main (int argc, char **argv)
 
 {
 

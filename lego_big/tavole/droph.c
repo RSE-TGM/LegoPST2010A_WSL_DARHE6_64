@@ -20,14 +20,16 @@ static char *_csrc = "@(#) %filespec: droph.c-10 %  (%full_filespec: droph.c-10:
 # include <math.h>
 # include "tavpar.h"           /* strutture common delle tavole     */
 
+void  table_();
+void  diagn_();
 
 /* ************* DEFINIZIONE VARIABILI GLOBALI ******************** */
 
-   float (*valda)[];
+   extern float (*valda)[];
 
-    CCO cont_ ;
+    extern CCO cont_ ;
 
-   struct K
+   extern struct K
     {
      int id;
      int ip;
@@ -41,7 +43,7 @@ static char *_csrc = "@(#) %filespec: droph.c-10 %  (%full_filespec: droph.c-10:
 
    /* ************  DEFINIZIONE DELLA SUBROUTINE  ***************** */
 
- droph_(p,ncal,res1,res2,res3)
+ void droph_(p,ncal,res1,res2,res3)
 
    int *ncal;
    float *p,*res1,*res2,*res3;

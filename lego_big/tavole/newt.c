@@ -23,7 +23,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 /* ************* DEFINIZIONE VARIABILI GLOBALI ********************* */
 
-   float (*valda)[];
+   extern float (*valda)[];
 
    extern struct K
     {
@@ -39,10 +39,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
    /* ************  DEFINIZIONE DELLA SUBROUTINE  ****************** */
 
- newt_(new,fonc)
-
-   int *new;
-   float *fonc;
+ void newt_(int* new,float *fonc)
 
    {
     int jj,i,j;

@@ -34,17 +34,18 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 # define NVAL 129690                /* dimensione tavole in float   */
 
+void read_tav();
+
    /* ************  DEFINIZIONE VARIABILI GLOBALI ***************** */
 
 int shmtid;                       /* identificativo shm tavole     */
-float (*valda)[];                  /* dati numerici TAVOLE         */
+extern float (*valda)[];                  /* dati numerici TAVOLE         */
 
    /* ************************************************************ */
 
  
-ism01_(iret)
-   int *iret;
-   {
+void ism01_(int *iret)
+{
     int shm_size;                  /* ampiezza area memoria shared  */
     int shmflg;                    /* flag per attach alla shm      */
     char *ind;                     /* indirizzo generico per shm    */
@@ -89,7 +90,7 @@ ism01_(iret)
     shmflg    = ! ( SHM_RND );
     ind       = (char*) shmat(shmtid, 0, shmflg);
     valda     = (float (*)[]) ind;
-   }
+}
 /* FINE DELLA ism01 */
 
 

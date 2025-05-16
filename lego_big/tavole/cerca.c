@@ -20,15 +20,20 @@ static char *_csrc = "@(#) %filespec: cerca.c-10 %  (%full_filespec: cerca.c-10:
 # include <math.h>
 # include "tavpar.h"           /* strutture common delle tavole      */
 
+void newt_(int* ,float *);
+void cerca_(float* ,float* ,int* );
+int diagn_io_();
+int diagn_();
 
 /* ************* DEFINIZIONE VARIABILI GLOBALI ********************* */
 
-   float (*valda)[];
+   extern float (*valda)[];
 
-    CCO cont_ ;
+   extern CCO cont_ ;
+
    extern struct D init_ ;
 
-   struct K
+   extern struct K
     {
      int id;
      int ip;
@@ -39,7 +44,7 @@ static char *_csrc = "@(#) %filespec: cerca.c-10 %  (%full_filespec: cerca.c-10:
      float pai;
     } inte_ ;
 
-   struct L
+   extern struct L
     {
      int ipha;
      int in;
@@ -49,11 +54,7 @@ static char *_csrc = "@(#) %filespec: cerca.c-10 %  (%full_filespec: cerca.c-10:
 
    /* ************  DEFINIZIONE DELLA SUBROUTINE  ****************** */
 
- cerca_(hd,s0,non)
-
-   float *hd,*s0;
-   int   *non;
-
+ void cerca_(float* hd,float* s0,int* non)
    {
     int i,icic,j,k,jj,kj,is,incr4;
     float isfl,idfl,infl,nnpfl,incr4fl;

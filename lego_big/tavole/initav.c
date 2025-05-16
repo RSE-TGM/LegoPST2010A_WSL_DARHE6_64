@@ -11,18 +11,24 @@
 static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #endif
 
+#include <stdio.h>
+
+float (*valda)[];
+void ism01_(int*);
+
+
 /*
  initav.c
  Alloca in memoria e legge le tavole del vapore presenti nel file TAVOLE.DAT
 */
 int main()
 {
-int iret;
-ism01_(&iret);
-if(iret == 98)
+int *iret;
+ism01_(iret);
+if(*iret == 98)
 	printf("\nATTENZIONE: la shared memory non e' stata caricata!!!");
 else
-if(iret == 97)
+if(*iret == 97)
 	printf("\n TAVOLE DEL VAPORE GIA` PRESENTI\n\n");
 else
 	printf("\n TAVOLE DEL VAPORE CARICATE CORRETTAMENTE\n\n");

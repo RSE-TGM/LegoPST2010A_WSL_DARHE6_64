@@ -26,7 +26,8 @@ int dim_rec[NUM_REGIONI]={41,44,48,47,48,49,49,51,52,53,54,57,59,62,66,
 #define K_DIM_REG (6*11)  /* costante per cui moltiplicare le sopra riportate 
                              dimensioni delle regioni */
 extern float (*valda)[];
-read_tav()
+
+void read_tav()
 {
 int i;
 FILE *fp;

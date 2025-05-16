@@ -24,9 +24,9 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 /* ************* DEFINIZIONE VARIABILI GLOBALI ******************** */
 
-   float (*valda)[];
+   extern float (*valda)[];
 
-   struct B tabl_ ;
+   extern struct B tabl_ ;
    extern struct D init_ ;
 
 

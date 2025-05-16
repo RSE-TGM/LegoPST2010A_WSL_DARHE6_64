@@ -112,7 +112,7 @@ viene fatta nel fortran initsm.f
 
    /* ************  DEFINIZIONE DELLA SUBROUTINE  ***************** */
 
- conlis_()
+ void conlis_()
 
    {
    }

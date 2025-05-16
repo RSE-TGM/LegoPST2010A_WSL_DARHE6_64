@@ -23,11 +23,11 @@ static char *_csrc = "@(#) %filespec: trova.c-10 %  (%full_filespec: trova.c-10:
 
 /* ************* DEFINIZIONE VARIABILI GLOBALI ******************** */
 
-   float (*valda)[];
+   extern float (*valda)[];
 
-    CCO cont_ ;
+    extern CCO cont_ ;
 
-   struct K
+   extern struct K
     {
      int id;
      int ip;
@@ -41,10 +41,7 @@ static char *_csrc = "@(#) %filespec: trova.c-10 %  (%full_filespec: trova.c-10:
 
    /* ************  DEFINIZIONE DELLA SUBROUTINE  ***************** */
 
- trova_(hd,s0)
-
-   float *hd,*s0;
-
+ void trova_(float* hd,float* s0)
    {
     int i,j,jj;
     float aa,bb,cc,csi;
