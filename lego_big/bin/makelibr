@@ -10,13 +10,14 @@
 .SUFFIXES:  .pf .o .f .c .sh .h .a
 FFLAGS=$(F_FLAGS) 
 CFLAGS=$(C_FLAGS) 
+CFLIBS=$(FC_LIBS) 
 
 all: $(LIBRERIA)($(LISTA))
 
 .pf.f:
 	/lib/cpp -P $(CPP_FLAGS) $(PREPROCESSOR_OPTIONS) $< >> $*.f
 .c.o:
-	$(CC) -c $(CFLAGS) $<
+	$(CC) -c $(CFLAGS) $(CFLIBS) $<
 .f.o:
 	$(FC) -c $(FFLAGS) $<
 .f.a:

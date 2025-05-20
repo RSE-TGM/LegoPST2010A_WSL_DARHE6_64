@@ -56,7 +56,7 @@ C********************************
       END
       FUNCTION ROEV (P,S,NFL)
       COMMON/INTE/ID,IP,XY(4),INCR,PAE,PAI
-      COMMON/THER/IPHA,IN,TITRE
+      COMMON/THER/IPHA,IN,TITRE,IDUMM
       DIMENSION V(2)
       CALL CONTRO (P,S)
       ID=IN+1
@@ -74,7 +74,7 @@ C********************************
       END
       FUNCTION TEV (P,S,NFL)
       COMMON/INTE/ID,IP,XY(4),INCR,PAE,PAI
-      COMMON/THER/IPHA,IN,TITRE
+      COMMON/THER/IPHA,IN,TITRE,IDUMM
       CALL CONTRO (P,S)
       ID=IN+2
       NWT=1
@@ -85,7 +85,7 @@ C********************************
       END
       FUNCTION HEV (P,S,NFL)
       COMMON/INTE/ID,IP,XY(4),INCR,PAE,PAI
-      COMMON/THER/IPHA,IN,TITRE
+      COMMON/THER/IPHA,IN,TITRE,IDUMM
       DIMENSION V(2)
       CALL CONTRO (P,S)
       ID=IN+3
@@ -103,7 +103,7 @@ C********************************
       END
       FUNCTION A2EV (P,S,NFL)
       COMMON/INTE/ID,IP,XY(4),INCR,PAE,PAI
-      COMMON/THER/IPHA,IN,TITRE
+      COMMON/THER/IPHA,IN,TITRE,IDUMM
       DIMENSION V(2)
       CALL CONTRO (P,S)
       IF(IPHA.EQ.1) GO TO 3
@@ -127,7 +127,7 @@ C********************************
       END
       FUNCTION BEV (P,S,NFL)
       COMMON/INTE/ID,IP,XY(4),INCR,PAE,PAI
-      COMMON/THER/IPHA,IN,TITRE
+      COMMON/THER/IPHA,IN,TITRE,IDUMM
       DIMENSION V(2)
       CALL CONTRO (P,S)
       IF(IPHA.EQ.1) GO TO 3
@@ -153,7 +153,7 @@ C********************************
       END
       FUNCTION CPEV (P,S,Y,YC,NFL)
       COMMON/INTE/ID,IP,XY(4),INCR,PAE,PAI
-      COMMON/THER/IPHA,IN,TITRE
+      COMMON/THER/IPHA,IN,TITRE,IDUMM
       CALL CONTRO (P,S)
       IF(IPHA.EQ.1) GO TO 3
       I=1
@@ -167,7 +167,7 @@ C********************************
       GO TO 2
       END
       FUNCTION YEV (P,S,NFL)
-      COMMON/THER/IPHA,IN,TITRE
+      COMMON/THER/IPHA,IN,TITRE,IDUMM
       CALL CONTRO (P,S)
       YEV=TITRE
       RETURN
@@ -213,8 +213,8 @@ C********************************
       END
       FUNCTION ETEV(P,T,R,RA,Y,YC,NFL)
       DOUBLE PRECISION  A,B,C,D,COE1,COE2,COE3,ETA1,ETA2
-      COMMON/VISC/A(5),B(3),C(3),D(3),COE1,COE2,COE3,ETA1,ETA2,ET1(14),E
-     &T2(14),ET3(14),ET4(10)
+      COMMON/VISC/A(5),B(3),C(3),D(3),COE1,COE2,COE3,ETA1,ETA2,ET1(14),
+     &ET2(14),ET3(14),ET4(10)
       COMMON/COMU/PTS(23),TES(14)
       IT=1
       TETA=T/647.3
@@ -273,7 +273,7 @@ C********************************
    24 TE=573.15
    25 CONTINUE
       IF (ABS(TS-TE).LE.1.E-5) THEN
-	ETEV=ETS
+	    ETEV=ETS
       ELSE
         ETEV=(((ETS-ETE)/(TS-TE)*(T-TE))+ETE)
       ENDIF
@@ -281,8 +281,8 @@ C********************************
       END
       FUNCTION ALEV (P,T,R,RA,Y,YC,NFL)
       DOUBLE PRECISION PA,PB,PC,ALAM,ALBM,ALCM
-      COMMON/COND/PA(5),PB(4),PC(4),ALE(9),ALV(10),AL2(21),ALAM,ALBM,ALC
-     &M
+      COMMON/COND/PA(5),PB(4),PC(4),ALE(9),ALV(10),AL2(21),ALAM,ALBM,
+     &            ALCM
       COMMON/COMU/PTS(23),TES(14)
       IT=1
       TETA=T/647.3
@@ -379,7 +379,7 @@ C********************************
 C
 C  CALCOLA S(P,H) CON LE TAVOLE COMPLETE
 C
-      COMMON/THER/IPHA,IN,TITRE
+      COMMON/THER/IPHA,IN,TITRE,IDUMM
       COMMON/CONT/PD,SD
       COMMON/INTE/ID,IP,XY(4),INCR,PAE,PAI
       DIMENSION SWV(2)
@@ -392,8 +392,6 @@ C
 C  INDIVIDUA L'ISOCLINA E CALCOLA IL TITOLO
 C
       CALL CERCA(H,S0,NON)
-	pippo=H+1.
-	pippo=S0+1.
 C--- NON =1 SE FUORI DALLE TAVOLE
       IF(NON.EQ.1) THEN
         SD=S0
@@ -484,22 +482,22 @@ C
 	      STEV = ENTROP(P,T,TSAT)
       else
 C
-	        CALL SATUR(P,7,TSAT,Z,N)
-		IF(Y.EQ.0.) THEN
+	      CALL SATUR(P,7,TSAT,Z,N)
+		    IF(Y.EQ.0.) THEN
 C--- ACQUA SOTTORAFFREDDATA O SATURA
 		      	IF(T.GT.TSAT) T=TSAT
 	      		STEV = ENTROP(P,T-1.E-4,TSAT)
 C      
-		ELSE IF(Y.EQ.1.) THEN
+		    ELSE IF(Y.EQ.1.) THEN
 C--- VAPORE SURRISCALDATO O SATURO
 	      		IF(T.LT.TSAT) T=TSAT
 	      		STEV = ENTROP(P,T+1.E-4,TSAT)
 C
-      		ELSE
+      	ELSE
 C--- MISCELA
-                CALL SATUR(P,1,SA,SV,N)
+          CALL SATUR(P,1,SA,SV,N)
 	        STEV =  SA*(1.-Y)+SV*Y
-	        ENDIF
+	      ENDIF
 C
       endif
       RETURN

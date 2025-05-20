@@ -456,7 +456,7 @@ export LIBOTS=" "
 #############################################################
 fi
 
-export  FC_LIBS=' -lm -L$(PLAT_LIB) -lg2c'
+export  FC_LIBS=' -lm -L$(PLAT_LIB) -lgfortran '
 
 #############################################################
 # Inizializzazione tavole del vapore

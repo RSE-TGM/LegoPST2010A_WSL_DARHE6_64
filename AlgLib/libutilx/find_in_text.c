@@ -40,7 +40,8 @@ static char SccsID[] = "@(#)find_in_text.c	5.1\t11/10/95";
 #define AVANTI          1
 
 /* CALLBACKS */
-void cerca_stringa_text();
+void cerca_stringa_kit(Widget, Find_struct *,XmAnyCallbackStruct *);
+void cerca_stringa_text(Widget,Text_find_struct *,XmAnyCallbackStruct *);
 
 Widget find_in_a_text (padre,args,n,parametri)
 Widget padre;
@@ -95,7 +96,7 @@ Text_find_struct *parametri;
    XtSetArg(args[n], XmNuserData, INDIETRO); n++;
    find_previous = XmCreateArrowButton(find_form,"Find",args,n);
    XtManageChild(find_previous);
-   XtAddCallback (find_previous,XmNactivateCallback,cerca_stringa_text,
+   XtAddCallback (find_previous,XmNactivateCallback,(XtCallbackProc)cerca_stringa_text,
                   parametri);
 
 /* Arrow button di ricerca AVANTI */
@@ -111,7 +112,7 @@ Text_find_struct *parametri;
    XtSetArg(args[n], XmNuserData, AVANTI); n++;
    find_next = XmCreateArrowButton(find_form,"Find",args,n);
    XtManageChild(find_next);
-   XtAddCallback(find_next,XmNactivateCallback,cerca_stringa_text, parametri);
+   XtAddCallback(find_next,XmNactivateCallback,(XtCallbackProc)cerca_stringa_text, parametri);
 
 /* Creazione della label sull'esito della ricerca  */
    cstring = XmStringCreateLtoR

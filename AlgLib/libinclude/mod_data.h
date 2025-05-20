@@ -58,7 +58,7 @@ int nskip;
 int inizoff;
 #if defined UNIX
 float *bufdati;
-#else
-float bufdati[N007];
+// #else
+// float bufdati[N007];
 #endif
 } BUF_I2;

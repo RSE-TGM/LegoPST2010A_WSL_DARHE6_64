@@ -47,9 +47,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
    extern int _M005;
 #endif
 
-main(argc,argv)
-int argc;
-char **argv;
+void costruisci_var (char **, VARIABILI **, int *);
+int refresh_dati_shm(char *, VARIABILI *,int , char *, int );
+
+int main(int argc,char **argv)
 {
 VARIABILI *variabili;      /* database variabili di tutti i modelli  */
 int shr_usr_key;           /* chiave utente per shared               */

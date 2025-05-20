@@ -27,9 +27,22 @@ if [ "$OS" = "Linux" ]
 then
 ##################################################################
 echo $0
-echo "--->  Setting the path of the script $BASH_SOURCE as LEGOROOT path ..."
+echo $1
+  if [ -z ${1+x} ]
+  then 
+  echo "--->  Force LEGOROOT path  is unset"
+  echo "--->  Setting the path of the script $BASH_SOURCE as LEGOROOT path ..."
 #LEGOROOT=$(realpath $(dirname $0))
-LEGOROOT=$(realpath $(dirname $BASH_SOURCE))
+  LEGOROOT=$(realpath $(dirname $BASH_SOURCE))
+  else 
+  echo "---> LEGOROOT path is set to '$1'"
+  export LEGOROOT=$1
+  fi
+# if ["$1" != ""]
+# then
+# echo "---> parametro $1"
+# fi
+
 #LEGOROOT=/home/antonio/svn_wa/branches/LegoPST2010A_WSL_DARHE6_64
 ##################################################################
 #LEGOROOT=/usr/users/guag/ccm_wa/ALTERLEGO/Alg_global-2005C_RHE3_guag/Alg_global
@@ -53,6 +66,7 @@ export LEGOCAD_STARTUP=YES
 export ALG_FPE=YES
 #export ALTERLEGO_CAP_DIR=/etc/alterlego/lic_rhe4
 export ALTERLEGO_CAP_DIR=/etc/alterlego/lic_ubuntu20_04
+
 
 unset ALGENV_SET
         if [ ! "$ALGENV_SET" ]
@@ -176,7 +190,7 @@ export XAPPLRESDIR=~/risorse
 export FC=gfortran
 export F_FLAGS='-g -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy  -ffixed-line-length-132'
 export FFLAGS='-g -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy  -ffixed-line-length-132'
-export  FC_LIBS=' -lg2c  -lm '
+export  FC_LIBS=' -lgfortran -lm '
 export DEBUG=YES
 #
 #########################################################
@@ -202,4 +216,13 @@ export DEBUG=YES
 alias lgpcloc='/usr/users/guag/work/tcltktix/bin/tixwish8.1.8.3 $LG_TIX/legopc.tix'
 alias lgpclocult='/usr/users/guag/work/tcltktixultimo/bin/wish8.4 $LG_TIX/legopc.tix'
 alias llgpc='export LG_TIX=/usr/users/testguag/bin_lgtixloc ; wish $LG_TIX/legopc.tix'
-xhost +
+# In .profile_legoroot
+if [ -n "$DISPLAY" ] && [ -S "/tmp/.X11-unix/X${DISPLAY#:*.}" ]; then
+    echo "Display $DISPLAY trovato, eseguo xhost..."
+    xhost +
+#    xhost +SI:localuser:$(whoami) # O qualsiasi comando xhost tu stia usando
+else
+    echo "Nessun display X11 valido trovato o DISPLAY non impostato, salto xhost."
+fi
+#
+#xhost +

@@ -49,6 +49,7 @@ int diagn_();
      int ipha;
      int in;
      float titre;
+     int idumm;
     } ther_ ;
 
 

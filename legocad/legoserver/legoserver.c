@@ -13,13 +13,16 @@ static char *_csrc = "@(#) %filespec: legoserver.c-3 %  (%full_filespec: legoser
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <fcntl.h>
 #include <math.h>
 char buff[1024];
 char buf4[4];
 char buf80[80];
 
-main(argc,argv)
+void modi3_();
+
+int main(argc,argv)
 int     argc;
 char    *argv[];
 {

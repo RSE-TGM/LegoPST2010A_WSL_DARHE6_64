@@ -1,0 +1,55 @@
+
+Platform:  fedora41   WSL
+https://github.com/WhitewaterFoundry/Fedora-Remix-for-WSL/releases
+download Fedora 41 -  https://github.com/WhitewaterFoundry/Fedora-Remix-for-WSL/releases/download/41.0.0/Fedora-Remix-for-WSL-SL_41.0.0.0_x64_arm64.msixbundle
+download Fedora 42 - https://github.com/WhitewaterFoundry/Fedora-Remix-for-WSL/releases/download/42.0.0.0/Fedora-Remix-for-WSL-SL_42.0.0.0_x64_arm64.msixbundle
+
+
+---------------------------------
+Ginst:
+sudo dnf update -y
+sudo dnf install -y git
+sudo dnf install -y fastfetch
+sudo dnf install -y f77
+sudo dnf install -y gcc
+sudo dnf install -y gfortran
+sudo dnf install -y xclock
+sudo dnf install -y xhost
+
+sudo dnf install -y libX11-devel
+sudo dnf install -y motif-devel
+sudo dnf install -y sqlite-devel
+sudo dnf install -y libbsd-devel
+sudo dnf install -y ncurses-devel
+sudo dnf install -y gdbm-devel
+sudo dnf install -y tcl tk tix
+sudo dnf install -y xterm
+
+-------------------------------
+installazione docker : https://docs.docker.com/engine/install/fedora/
+
+sudo dnf -y install dnf-plugins-core
+sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+sudo systemctl enable --now docker   (dopo aver attitavo systemd con 'aggiuta in /etc/wsl.conf di:
+[boot]
+systemd=true
+
+verifica: sudo docker run hello-world
+-------------
+
+
+
+iii avere un f77 fortran:
+gfortran -c -std=legacy -ffixed-form -ffixed-line-length-132 \
+         -fno-automatic -finit-local-zero \
+         my_f77_code.f -o my_f77_code.o
+
+modifica questo script fortran in modo che le variabili di tipo integer usate per contenere caratteri e stringhe di caratteri siano convertite in CHARACTER*N dove N è la dimensione più adatta. Il formato del file modificato finale deve essere Fortran 77
+
+differanza tra due file sui primi 50 caratteri di ogni linea:
+diff <(cut -c -50 f14.out) <(cut -c -50 proc/f14.dat)
+
+documentazione funzioni. https://www.die.net/

@@ -14,13 +14,15 @@
    data 2/14/96
    reserved @(#)sim_types.h	5.2
 */
-#include "sim_param.h"
-#ifndef _sim_types_h_
-#define _sim_types_h_
 
 #include <stdio.h>
 #include <stddef.h>
 #include <stdint.h>
+
+#include "sim_param.h"
+#ifndef _sim_types_h_
+#define _sim_types_h_
+
 
 #if defined MFFR
 #include "buffer_mffr.h"
@@ -277,9 +279,9 @@ struct nomi_st
 #if defined UNIX
 	 char **nom_bloc[MAX_MODEL];
          int **num_dati_bloc;
-#else
-	 char nom_bloc[MAX_MODEL][N002][MAX_LUN_NOME_BLOCCO];
-         int num_dati_bloc[MAX_MODEL][N002+1];
+// #else
+// 	 char nom_bloc[MAX_MODEL][N002][MAX_LUN_NOME_BLOCCO];
+//          int num_dati_bloc[MAX_MODEL][N002+1];
 #endif
 	};
 typedef struct nomi_st NOMI;
@@ -341,22 +343,22 @@ struct f04_st     {
                    int *iout_sivar;
                    char **nom_vari;
                    int *iout_vari;
-#else
-                   char nom_bloc[N002][MAX_LUN_NOME_BLOCCO];
-                   int ip[M003];
-                   int ipvrs[N005];
-                   char nom_sivar[N003][100];
-                   int iout_sivar[N003];
-                   char nom_vari[N004][100];
-                   int iout_vari[N004];
+// #else
+//                    char nom_bloc[N002][MAX_LUN_NOME_BLOCCO];
+//                    int ip[M003];
+//                    int ipvrs[N005];
+//                    char nom_sivar[N003][100];
+//                    int iout_sivar[N003];
+//                    char nom_vari[N004][100];
+//                    int iout_vari[N004];
 #endif
                    int ndati;
                    int lun_path;
                    char path[90];
 #if defined UNIX
                    int *ipdati;
-#else
-                   int ipdati[N002+1];
+// #else
+//                    int ipdati[N002+1];
 #endif
                   } ;
 typedef struct f04_st F04;
@@ -375,9 +377,9 @@ struct varlego_st {
 #if defined UNIX
 		   char **nom_sivar;
                    char **nom_vari;
-#else
-		   char nom_sivar[N003][100];
-                   char nom_vari[N004][100];
+// #else
+// 		   char nom_sivar[N003][100];
+//                    char nom_vari[N004][100];
 #endif
                   } ;
 typedef struct varlego_st VARLEGO;

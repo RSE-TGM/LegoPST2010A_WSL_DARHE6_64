@@ -1,0 +1,7 @@
+#! /bin/bash
+#
+# Lancia il container LegoPST ed apre un terminale bash
+#
+### docker run --rm -it  -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix aguagliardi/legopst:1.0 /bin/bash
+docker run --rm -it  -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix aguagliardi/legopst:1.0 bash -c "source /home/legoroot_fedora41/.profile_legoroot && exec /bin/bash -l"
+# docker compose run --rm LegoPSTServ /bin/bash

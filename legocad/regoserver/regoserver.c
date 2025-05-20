@@ -40,7 +40,10 @@ float dati[50];
 		regoserver N V
  genera la lista delle variabili per il modulo N-esimo.
 */
-main(argc,argv)
+void modrdat_();
+void modrvar_();
+
+int main(argc,argv)
 int     argc;
 char    *argv[];
 {
