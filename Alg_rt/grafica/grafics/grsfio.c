@@ -97,51 +97,54 @@ extern int linguaggio_eseguibile;
 
 static int read_nomi(FILE*,int *);
 static int read_multi(char*);
-static int set_min_max(S_DATI *);
+static int set_min_max0(S_DATI *);
 static void close_path();
 void open_path();
 int    ControlName();
+extern void set_cur_wait();
+void clr_cur_wait();
+void d2free(char**);
 
 
-open_22dat()
+int open_22dat()
 {
 int i;
 int intero_iniziale;
 
 i=strlen(path_22dat)-1;
 strcpy(path_name,path_22dat);
-#if defined VMS || VMS_FORTRAN
-while(path_22dat[i]!=']' && path_22dat[i]!=':' ) i--;
-#else
-while(path_22dat[i]!='/' ) i--;
-#endif
-i++;
-if(i>0) path_name[i]=0;
-#if defined (VMS_FORTRAN)
-fpDAT=open(path_22dat,O_RDWR,0,"ctx=rec","mrs=0","tmo=100",
-            "rop=tmo","rfm=var","shr=upd");
-if(fpDAT==-1)
-        {
-        return(1);
-        }
-#elif defined VMS 
-i=open(path_22dat,O_RDONLY,0004|0002,
-                "ctx=rec","rfm=var","shr=put");
-printf("Apertura VMS file %s fp=%d\n",path_22dat,i);
-fpDAT=fdopen(i,"r");
-fseek(fpDAT,0,0);
-if(fpDAT==NULL)
-        {
-        return(1);
-        }
-#endif
-#if defined UNIX
+// #if defined VMS || VMS_FORTRAN
+// while(path_22dat[i]!=']' && path_22dat[i]!=':' ) i--;
+// #else
+// while(path_22dat[i]!='/' ) i--;
+// #endif
+// i++;
+// if(i>0) path_name[i]=0;
+// #if defined (VMS_FORTRAN)
+// fpDAT=open(path_22dat,O_RDWR,0,"ctx=rec","mrs=0","tmo=100",
+//             "rop=tmo","rfm=var","shr=upd");
+// if(fpDAT==-1)
+//         {
+//         return(1);
+//         }
+// #elif defined VMS 
+// i=open(path_22dat,O_RDONLY,0004|0002,
+//                 "ctx=rec","rfm=var","shr=put");
+// printf("Apertura VMS file %s fp=%d\n",path_22dat,i);
+// fpDAT=fdopen(i,"r");
+// fseek(fpDAT,0,0);
+// if(fpDAT==NULL)
+//         {
+//         return(1);
+//         }
+// #endif
+// #if defined UNIX
 fpDAT=fopen(path_22dat,"r");
 if(fpDAT==NULL)
         {
         return(1);
         }
-#endif
+// #endif
 
 if ( fread( &intero_iniziale, sizeof(intero_iniziale), 1, fpDAT) != 1)
      {
@@ -165,7 +168,7 @@ return(0);
  close_22dat
    chiude il file f22.dat
 */
-close_22dat()
+void close_22dat()
 {
 #if defined VMS_FORTRAN
 close(fpDAT);
@@ -176,7 +179,7 @@ fclose(fpDAT);
 
 
 /*
- read_22dat
+ read_22dat1
     legge i dati relativi a tutte le misure;
 	- flag : AGGIORNA    aggiorna l'area dati con gli ultimi dati acquisiti
 	         TUTTI       trasferisce nell'area dati tutti i campioni 
@@ -192,8 +195,8 @@ int lun_parziale;  /* lunghezza lettura parziale dati */
 int num_complete;  /* numero di letture complete */
 int b_wait;        /* segnala che e' stato settato il cursore di wait */
 
-read_22dat(flag)
-char flag;
+int read_22dat1(char flag)
+//char flag;
 {
 static S_DATI buf;   /* buffer di appoggio per la lettura del record dati */
 char *pb;
@@ -250,12 +253,12 @@ if(flag==TUTTI)
 /*
   inizializza il buffer dei minimi e massimi a valori estremi
 */
-	set_min_max(NULL);
+	set_min_max0(NULL);
 /*
   lettura del primo campione: ad esso dovra' corrispondere un tempo
   pari a 0.0 secondi.
 */	
-	if((iret=read_multi(&buf.t))==0)
+	if((iret=read_multi((char*)&buf.t))==0)
               {
               printf("\n dati non presenti in F22.DAT (read_multi)");
               exit(1);
@@ -265,7 +268,7 @@ if(flag==TUTTI)
   aggiorna se necessario i valori di minimo e di massimo
 */
 	t_iniziale=buf.t;
-	while(read_multi(&buf.t)==lun_rec_dati)
+	while(read_multi((char*)&buf.t)==lun_rec_dati)
 		{
 		if(ind >= DIM_BUFDATI)
 			{
@@ -279,7 +282,7 @@ if(flag==TUTTI)
 			return(3);
 			}
 		bufdati[ind].t=buf.t; 
-		set_min_max(&buf); 
+		set_min_max0(&buf); 
 		ind++;
 		}
 
@@ -292,7 +295,7 @@ else  /* caso di lettura per aggiornamento  */
 		b_wait=1;
 		set_cur_wait();
 		}
-	while(read_multi(&buf.t)==lun_rec_dati)
+	while(read_multi((char*)&buf.t)==lun_rec_dati)
 		{
 /*
  testa il caso in cui si e' riempito il buffer dati
@@ -309,7 +312,7 @@ else  /* caso di lettura per aggiornamento  */
 			return(3);
 			}
                 off_f22+=lun_rec_dati;
-                set_min_max(&buf);
+                set_min_max0(&buf);
 		for(i=0;i<4;i++)
 			{
 			if(sg.ind_mis[i]!=-1)
@@ -426,14 +429,14 @@ if(ret!=0)
 
 
 /*
- *  set_min_max
+ *  set_min_max0
  *      aggiorna i valori di minimo e massimo per ogni variabile 
  *      appartenente al record.
  *		se il parametro passato come argomento e' =NULL inizializza
  *      a valori estremi i valori di minimo e massimo.
  */
 
-set_min_max(rec)
+int  set_min_max0(rec)
 S_DATI *rec;   /* record dati */
 {
 register int i;
@@ -630,7 +633,7 @@ XtFree(pbuf);
 return(0);
 }
 #else
-read_nomi(fp,offset)
+int read_nomi(fp,offset)
 int *offset;
 FILE *fp;
 {
@@ -643,7 +646,7 @@ int nvar;
 */
 if (linguaggio_eseguibile == F22_C)
     {
-    if((fread(&header1_C,sizeof(S_HEAD1_C),1,fp))==(int)NULL)
+    if((fread(&header1_C,sizeof(S_HEAD1_C),1,fp))== 0)
         {
         printf("\n dati non presenti in F22.DAT (lettura S_HEAD1_C)");
         exit(1);
@@ -653,7 +656,7 @@ if (linguaggio_eseguibile == F22_C)
     }
 else
     {
-    if((fread(&header1_FORTRAN,sizeof(S_HEAD1_FORTRAN),1,fp))==(int)NULL)
+    if((fread(&header1_FORTRAN,sizeof(S_HEAD1_FORTRAN),1,fp))==0)
         {
         printf("\n dati non presenti in F22.DAT (lettura S_HEAD1_FORTRAN)");
         exit(1);
@@ -768,7 +771,7 @@ return(0);
 }
 
 
-close_gruppi()
+void close_gruppi()
 {
 int i;
 for(i=0;i<NUM_GRUPPI;i++)
@@ -779,7 +782,7 @@ fclose(fpGR);
 }
 
 
-read_gruppi(flag)
+int read_gruppi(flag)
 int flag;  /*  flag == 1 se si desidera la lista per fase di inserimento
                gruppi  */
 {
@@ -803,7 +806,7 @@ x_gruppi[i]=NULL;
 return(ngr);
 }
 
-write_gruppo(indice)
+int write_gruppo(indice)
 int indice;
 {
 unsigned long offset;
@@ -864,10 +867,10 @@ fclose(fpPATH);
                                                   
 
 
-d2free(prow) 
+void d2free(prow) 
 char **prow;
 {
                              
 XtFree(*prow);
-XtFree(prow);
+XtFree((char*)prow);
 }

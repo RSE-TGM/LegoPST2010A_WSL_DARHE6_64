@@ -82,7 +82,7 @@ if ( punt->fp != (FILE *)NULL)
         }
 else
         {
-	return(0);
+	return(0); // errore in apertura del file
         }
 }
 
@@ -193,18 +193,18 @@ else
 */
 if(leggi(header,sizeof(F22CIRC_HD),1,punt.fp)<=0) { 
 /*
-   printf("header: p_iniz=%d - p_fine=%d - num_campioni=%d num_var_graf=%d\n",
+   printf("DEBUG: f22_leggo_header header: p_iniz=%d - p_fine=%d - num_campioni=%d num_var_graf=%d\n",
 		header->p_iniz,header->p_fine,header->num_campioni,
 		header->num_var_graf);
 */
    return(0);
 }
 else {
-/*
-   printf("header: p_iniz=%d - p_fine=%d - num_campioni=%d num_var_graf=%d\n",
+
+   printf("DEBUG: f22_leggo_header header: p_iniz=%d - p_fine=%d - num_campioni=%d num_var_graf=%d\n",
                 header->p_iniz,header->p_fine,header->num_campioni,
                 header->num_var_graf);
-*/
+
    return(1);
 }
 }
@@ -389,9 +389,9 @@ while(1)
  Legge i valori
 */
 	leggi(valori,sizeof(float),header.num_var_graf,punt.fp);
-/*
-printf("t_22.tempo=%f  campione=%d\n",t_22.tempo,campione);
-*/
+
+// printf("DEBUG: f22_leggi_campioni - t_22.tempo=%f  campione=%d\n",t_22.tempo,campione);
+
 
 	if(t_22.tempo <= *tempo)
 		break;
@@ -819,7 +819,7 @@ F22CIRC_HD header;
 SCIRC_SEL_DATI *dati_f22 = NULL;
 
 if(f22_open_file(nome_file_f22, &file_f22)==0)
-        return(-1.0);
+        return(-1.0); //errore in apertura
 if(f22_leggo_header(&header,file_f22, zero, NULL)==0)
         return(-1.0);
 f22_leggi_campioni(file_f22,header, &tempo,&dati_f22,-1,-1,-1,-1);

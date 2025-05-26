@@ -37,6 +37,8 @@ static char SccsID[] = "@(#)grafics.c	1.10\t11/23/95";
 #include <Xm/DrawingA.h>
 #include <Xm/ScrollBar.h>
 #include <Xm/MessageB.h>
+#include <Xm/ToggleB.h>
+#include <Xm/List.h>
 #include <Mrm/MrmPublic.h>         
 
 #include "libutilx.h"
@@ -444,7 +446,7 @@ static void find_proc();
 static void HC_proc();
 extern int cerca_umis(char*);
 static int init_application();
-static void load_file(char*);
+//static void load_file(char*);
 static int cerca_stringa(char*,char **);
 extern void rew_dati(void);
 static int set_scala(int);
@@ -457,6 +459,23 @@ static void prep_draw(float,float,S_MIN_MAX *);
 static void draw_grid(Window);
 extern int read_gruppi(int);
 extern void close_path();
+void load_variables1(int ,char *[]);
+extern int open_22dat();
+extern int read_22dat1(char flag);
+extern void close_22dat();
+void load_font(XFontStruct ** font_info);
+void set_cur_wait();
+void clr_cur_wait();
+int zoomed(XPoint z_ini,XPoint z_fin);
+void reverse_draw(int);
+extern int open_gruppi();
+void handle_motion(Widget);
+void crea_lista_umis();
+extern void agg_umis();
+void free_lista_umis();
+void close_gruppi();
+extern int write_gruppo(int);
+void abilita_menu(int);
 
 
 /* The names and addresses of things that DwtDrm.has to bind.  The names do
@@ -488,10 +507,11 @@ static MRMRegisterArg reglist[] = {
 
 
 static int reglist_num = (sizeof reglist / sizeof reglist [0]);
-static font_unit = 400;
+static int font_unit = 400;
 
 
 char *getenv();
+void testata(char *, char *);
 
 /*
  * OS transfer point.  The main routine does all the one-time setup and
@@ -531,9 +551,9 @@ if (argc > 1)
 		printf("\n Uso corretto:  grafics path_file nome_var");
 		exit(0);
 		}
-	printf("\n numero argomenti = %d",argc);
+	printf("\n numero argomenti = %d\n",argc);
 	for(i=1;i<argc;i++)
-		printf("\n argomento = %s",argv[i]);
+		printf("\n argomento = %s\n",argv[i]);
 	}
 /* Open the UID files (the output of the UIL compiler) in the hierarchy*/
 #if defined (VMS)
@@ -573,7 +593,7 @@ open_path();
  */
 display=XtDisplay(toplevel_widget);
 screen_num=DefaultScreen(display);
-init_gcs();
+void init_gcs();
 
 /* Register the items MRM needs to bind for us. */
 
@@ -626,7 +646,7 @@ if(argc>1)
  Se il file specificato esiste
  */
 	if(!nofile)
-		load_variables(argc-(2+scala_unica),&argv[2+scala_unica]);
+		load_variables1(argc-(2+scala_unica),&argv[2+scala_unica]);
 	}
 XtMainLoop();
 }
@@ -651,12 +671,12 @@ if(open_22dat())
       }
 nofile=0;
 flag=TUTTI;
-result= read_22dat(flag);
+result= read_22dat1(flag);
 if(result==1)  /* legge tutti i dati dall'inizio del file */
                 {
                 close_22dat();
                 open_22dat();
-                if(read_22dat(flag)==1)
+                if(read_22dat1(flag)==1)
                         {
 /*
    file non esistente
@@ -686,9 +706,9 @@ if(nofile==0)
 	}
 }
 
-load_variables(num_nomi,nome)
-int num_nomi;
-char *nome[];
+void load_variables1(int num_nomi,char *nome[])
+// int num_nomi;
+// char *nome[];
 {
 int i,j;
 int indice;
@@ -752,7 +772,7 @@ for(i=0;i<4;i++)
 		}
 	}
 if(scala_unica && loaded)
-	set_scala_unica(0);
+	set_scala_unica();
 t_old=0.0;
 rew_dati();
 timer=XtAppAddTimeOut(XtWidgetToApplicationContext(main_window_widget),(unsigned long)1,timer_proc,NULL);
@@ -823,7 +843,7 @@ x_secondi_off=XmStringCreateLtoR("Disabilita tempo in secondi",XmSTRING_DEFAULT_
 /*
  * Inizializzazione dei GC utilizzati per le misure
  */
-init_gcs()
+void init_gcs()
 {
 XGCValues values;
 XColor color,excolor;
@@ -1001,8 +1021,8 @@ gc_zoom=XCreateGC(display,RootWindow(display,screen_num),valuemask,
  * Utilities utilizzate in fase di inizializzazione.
  */
 
-load_font(font_info)
-XFontStruct **font_info;
+void load_font(XFontStruct ** font_info)
+//XFontStruct **font_info;
 {
 char *font_name = "fixed";
 /* Carica il font ottenendo la descrizione del font stesso */
@@ -1021,7 +1041,7 @@ if((*font_info = XLoadQueryFont(display,font_name)) == NULL)
  *      torna 1 se e' stato effettuato cambiamento di scala
  */
 
-set_scala(indice)
+int set_scala(indice)
 int indice;   /* indice della variabile all'interno del gruppo
 				 (da 0 a 3)    */
 {
@@ -1124,9 +1144,9 @@ for(i=0;i<4;i++)
  *    in modo conforme ai valori di minimo e massimo
  */
 
-set_ordinate(ind)
-int ind;    /* indice che individua la variabile all'interno del
-                       grafico (valori da 0 a 3)       */
+int set_ordinate(int ind)
+//int ind;     indice che individua la variabile all'interno del
+//                       grafico (valori da 0 a 3)       
 {
 int uguali,ord_scritta;
 int lun;
@@ -1313,7 +1333,7 @@ int y_pix;  /* posizione in pixel delle ordinate */
 int indice; /* indice della misura da visualizzare */
 int ind_buf;
 
-result=read_22dat(AGGIORNA);
+result=read_22dat1(AGGIORNA);
 if(result == 3)
 	{
 	WidErrore(main_window_widget,err_too_many_data,MAPPA);
@@ -1850,14 +1870,14 @@ switch(*tag)
 }
 
 
-set_cur_wait()
+void set_cur_wait()
 {
 XDefineCursor(display,XtWindow(toplevel_widget)
         ,/*RootWindow(display,screen_num)*/cursor_wait);
 XSync(display,False);
 }
 
-clr_cur_wait()
+void clr_cur_wait()
 {
 XUndefineCursor(display,XtWindow(toplevel_widget));
 XSync(display,False);
@@ -1940,9 +1960,9 @@ if(freeza && event->button == Button1 )
  * routine per la preparazione della grafica zoomata
  */
 
-zoomed(z_ini,z_fin)
-XPoint z_ini;
-XPoint z_fin;
+int zoomed(XPoint z_ini,XPoint z_fin)
+// XPoint z_ini;
+// XPoint z_fin;
 {
 int ind_buf;
 int ultimo;
@@ -2201,7 +2221,7 @@ else    /* fine zoom */
 }
 
 
-reverse_draw(flag)
+void reverse_draw(flag)
 int flag;
 {
 static Pixel draw0_bg,draw1_bg,mis1_bg,ord1_bg,tim1_bg,tempo_bg,form_bg,val1_bg;
@@ -2548,7 +2568,7 @@ else
 /* gestisce il movimento del mouse nella
    window del grafico (per visualizzazione
    valore e per zoom */
-handle_motion(w)
+void handle_motion(w)
 Widget w;
 {
 XtAddEventHandler(w,PointerMotionMask,False,MoveMouse,NULL);
@@ -2891,13 +2911,13 @@ zzate */
 /* se e' gia' aperto un file obbliga l'uscita */
 /*        nofile=0; */
         flag=TUTTI;
-	result=read_22dat(flag);
+	result=read_22dat1(flag);
         if(result==1)  /* legge tutti i dati dall'inizio
  del file */
                 {
                 close_22dat();
                 open_22dat();
-                if(read_22dat(flag)==1)
+                if(read_22dat1(flag)==1)
                         {
 /*
    file non esistente
@@ -3108,6 +3128,24 @@ switch(*tag)
 XtFree(pstr);
 }
 
+/*********************************************************
+ * close_path()
+ *    salva i valori attuali dei path names e chiude il file 
+ *    F22_FILES.DAT
+ *********************************************************/
+void close_path()
+{
+int i;
+FILE *fpPATH;
+fpPATH=fopen("f22_files.dat","r+");
+fseek(fpPATH,0,0);
+for(i=0;i<NUM_PATH_FILES;i++)
+  fwrite(path[i],LUN_PATH_FILES,1,fpPATH);
+fclose(fpPATH);
+}
+
+
+
 /*
  * The user pushed the quit button, so the application exits.
  */
@@ -3172,7 +3210,7 @@ XClearArea(display,XtWindow(widget_array[k_tempo]),0,0,0,0,True);
 */
 }
 
-abilita_menu(flag)
+void abilita_menu(flag)
 int flag;
 {
 int valore;
@@ -3189,7 +3227,7 @@ set_something(widget_array[k_misure_menu_entry],XmNsensitive,(void*) valore);
  *  crea_lista_umis
  *     crea le lista dei codici delle unita' di misura
  */
-crea_lista_umis()
+void crea_lista_umis()
 {
 int i;
 for(i=0;i<num_umis;i++)
@@ -3197,7 +3235,7 @@ for(i=0;i<num_umis;i++)
 x_codumis[num_umis]=NULL;
 }
 
-free_lista_umis()
+void free_lista_umis()
 {
 int i;
 for(i=0;i<num_umis;i++)

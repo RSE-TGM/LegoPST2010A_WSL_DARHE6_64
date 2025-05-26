@@ -24,6 +24,7 @@ static char SccsID[] = "@(#)co_main.c	5.2\t12/15/95";
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "sim_param.h"
 #include "sim_types.h"
 #include "libnet.h"
@@ -158,44 +159,18 @@ if(speed_version)
 
 /* ripulisce la directory dai file pre esistenti */
 #if defined UNIX
-if (!(fp = fopen( "S02_AIX", "r")))
-        fclose(fp);
-else
-        system("rm S02_AIX");
-if (!(fp = fopen( "S02_VMS", "r")))
-        fclose(fp);
-else
-        system("rm S02_VMS");
-if (!(fp = fopen( "S02_ULTRIX", "r")))
-        fclose(fp);
-else
-        system("rm S02_ULTRIX");
+if (access("S02_AIX", F_OK) == 0) {system("rm S02_AIX");} 
+if (access("S02_VMS", F_OK) == 0) {system("rm S02_VMS");} 
+if (access("S02_ULTRIX", F_OK) == 0) {system("rm S02_ULTRIX");} 
 if(!speed_version)
 {
-	if (!(fp = fopen( "variabili.rtf", "r")))
-        	fclose(fp);
-	else
-#if defined UNIX
-        	system("rm variabili.rtf");
-#endif
-#if defined VMS
-		system("delete/noconf variabili.rtf;*");
-#endif
-	if (!(fp = fopen( "variabili.edf", "r")))
-        	fclose(fp);
-	else
-#if defined UNIX
-        	system("rm variabili.edf");
-#endif
-#if defined VMS
-		system("delete/noconf variabili.edf;*");
-#endif
+	if (access("variabili.rtf", F_OK) == 0) {system("rm variabili.rtf");}
+  if (access("variabili.edf", F_OK) == 0) {system("rm variabili.edf");}
+
 }
-if (!(fp = fopen( "recorder.rtf", "r")))
-        fclose(fp);
-else
-        system("rm recorder.rtf");
+if (access("recorder.rtf", F_OK) == 0) {system("rm recorder.rtf");}
 #endif
+
 #if defined VMS
 if (!(fp = fopen( "S02_AIX", "r")))
 	fclose(fp);
@@ -797,7 +772,7 @@ if (strncmp( strin[0].stringa, "BM", 2)!=0)
 if((strlen(strin[1].stringa)==1)&&(strin[1].stringa[0]=' '))
 	{
 	printf("banco manovra non configurato\n");
-	s02_.host_bm[0]=(char )NULL;
+	s02_.host_bm[0]=(char)NULL;
 	}
 else
 	{

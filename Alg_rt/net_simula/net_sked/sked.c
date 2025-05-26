@@ -313,7 +313,7 @@ fflush(stdout);
 // printf("prima di sked_s02 \n");
    sked_s02();
 // printf("dopo di sked_s02 \n");
-
+printf(" DEBUG main sked: check env:   N001=%s \n",getenv("N001"));
 /* Esecuzione lancio task */
    sked_start();
 

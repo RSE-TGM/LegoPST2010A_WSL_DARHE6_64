@@ -50,8 +50,10 @@ static char SccsID[] = "@(#)gen_stazionario.c	5.2\t11/30/95";
  char *compila = "xlf -c -qextname";
  char *linka= "xlf -o";
 #else
- char *compila = "f77 -O -c ";
- char *linka= "f77 -o";
+ char *compila = "gfortran -c -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy  -ffixed-line-length-132";
+ char *linka= "gfortran -o -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy  -ffixed-line-length-132";
+// char *compila = "f77 -O -c ";
+// char *linka= "f77 -o";
 #endif
 
 void XlOpenFileErrComp(char *nomeFile);

@@ -1,4 +1,5 @@
 
+REM solo Windows
 f77    -s -N109 -N3 edi14.for
 f77    -s -N109 -N3 lg1.for ..\libs_dir\legolib\legolib.lib
 f77 -c -s -N109 -N3 lg2.for

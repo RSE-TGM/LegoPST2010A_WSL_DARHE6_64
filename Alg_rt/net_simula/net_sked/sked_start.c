@@ -146,6 +146,103 @@ extern int    fp_ordini[MAX_MODEL];
 
 int ParAttesa();
 
+static void update_envir(char**,char[][FILENAME_MAX], char**, int, char*);
+
+static void update_envir(char **envir, char envp[][FILENAME_MAX], char** task_envp, int env_idx, char* reinit)
+{
+printf("-----------------------> DEBUG update_envir: inizio - N001=%s \n",getenv("N001"));
+  // Copia le variabili d'ambiente esistenti in task_envp, saltando LD_LIBRARY_PATH
+   for (char **env = envir; *env != NULL && env_idx < MAXENVVAR - 10; ++env) { // -10 per lasciare spazio
+printf("-----------------------> DEBUG update_envir: N001=%s *env=%s\n",getenv("N001"), *env);
+       if (strncmp(*env, "LD_LIBRARY_PATH=", strlen("LD_LIBRARY_PATH=")) == 0) {
+           printf("update_envir: Rimuovo LD_LIBRARY_PATH: %s \n", *env);
+           // Salva il valore se necessario
+           char* ld_path_value = index(*env, '=');
+           if (ld_path_value != NULL) {
+               strcpy(ld_library_path_save, ld_path_value + 1);
+               printf("update_envir: ld_library_path_save = %s \n", ld_library_path_save);
+           }
+       } else {
+           // Copia la stringa nel buffer envp e il puntatore in task_envp
+           if (strlen(*env) < FILENAME_MAX) {
+printf("-----------------------> DEBUG update_envir: N001=%s *env=%s env_idx=%d\n",getenv("N001"), *env, env_idx);
+            strcpy(envp[env_idx], *env);
+printf("-----------------------> DEBUG update_envir: DOPO strcoy N001=%s *env=%s env_idx=%d\n",getenv("N001"), *env, env_idx);
+
+            task_envp[env_idx] = envp[env_idx];
+               env_idx++;
+           } else {
+               printf("WARNING: Variabile d'ambiente troppo lunga: %s\n", *env);
+           }
+       }
+   }
+
+   // Aggiungi le tue variabili specifiche
+   // Assicurati che FILENAME_MAX sia sufficiente per queste stringhe!
+   //
+   // commento NUMMOD, l'ho già messo prima di chiamare questa function update_envir
+   // sprintf(envp[env_idx], "NUMMOD=%d", nmod); // Rimuovi \00, sprintf aggiunge il terminatore
+   // task_envp[env_idx] = envp[env_idx];
+   // env_idx++;
+
+   // Nota: le tue variabili SIM_NUM_MOD, SIM_VAR_INI, WORK_DIR, e il NUOVO LD_LIBRARY_PATH
+   // vengono impostate DOPO, quando prepari per ogni singola task.
+   // Questo è corretto perché sono specifiche per ogni task.
+
+   sprintf(envp[env_idx], "_MAX_SNAP_SHOT=%d", _MAX_SNAP_SHOT);
+   task_envp[env_idx] = envp[env_idx];
+   env_idx++;
+   sprintf(envp[env_idx], "_MAX_BACK_TRACK=%d", _MAX_BACK_TRACK);
+   task_envp[env_idx] = envp[env_idx];
+   env_idx++;
+   sprintf(envp[env_idx], "_MAX_CAMPIONI=%d", _MAX_CAMPIONI);
+   task_envp[env_idx] = envp[env_idx];
+   env_idx++;
+   sprintf(envp[env_idx], "_NUM_VAR=%d", _NUM_VAR);
+   task_envp[env_idx] = envp[env_idx];
+   env_idx++;
+   sprintf(envp[env_idx], "_MAX_PERTUR=%d", _MAX_PERTUR);
+   task_envp[env_idx] = envp[env_idx];
+   env_idx++;
+   sprintf(envp[env_idx], "_SPARE_SNAP=%d", _SPARE_SNAP);
+   task_envp[env_idx] = envp[env_idx];
+   env_idx++;
+   sprintf(envp[env_idx], "_PERT_CLEAR=%d", _PERT_CLEAR);
+   task_envp[env_idx] = envp[env_idx];
+   env_idx++;
+   sprintf(envp[env_idx], "REINITTASK=%s", reinit); // appoggio (reinit) era "NO"
+   task_envp[env_idx] = envp[env_idx];
+   env_idx++;
+
+   // Termina l'array task_envp con NULL
+   task_envp[env_idx] = NULL;
+   
+   return;
+   
+   // Ora 'task_envp' contiene l'ambiente desiderato per execve,
+   // e 'environ' del processo corrente è rimasto intatto.
+
+   // Quando prepari l'ambiente per ogni task specifica (più avanti nel codice):
+   // char specific_task_envp_storage[MAXENVVAR][FILENAME_MAX];
+   // char *specific_task_envp[MAXENVVAR];
+   // int specific_idx = 0;
+   // for (int k=0; task_envp[k] != NULL && specific_idx < MAXENVVAR - 5; ++k) {
+   //     strcpy(specific_task_envp_storage[specific_idx], task_envp[k]);
+   //     specific_task_envp[specific_idx] = specific_task_envp_storage[specific_idx];
+   //     specific_idx++;
+   // }
+   // sprintf(specific_task_envp_storage[specific_idx], "SIM_NUM_MOD=%d", i + 1); specific_task_envp[specific_idx++] = ...;
+   // sprintf(specific_task_envp_storage[specific_idx], "SIM_VAR_INI=%d", ip); specific_task_envp[specific_idx++] = ...;
+   // sprintf(specific_task_envp_storage[specific_idx], "WORK_DIR=%s", path); specific_task_envp[specific_idx++] = ...;
+   // sprintf(specific_task_envp_storage[specific_idx], "LD_LIBRARY_PATH=%s:%s", path_proc, ld_library_path_save); specific_task_envp[specific_idx++] = ...;
+   // specific_task_envp[specific_idx] = NULL;
+   // execve(task_name, task_argv, specific_task_envp);
+
+// ... (resto del codice sked_start)
+
+}
+
+
 void restart_task()
 {
 int             i, j, ip, fpid;
@@ -187,40 +284,46 @@ char sicre_appo[200],*sicrep,*sicrepp;
    strcpy(appoggio,"YES");
 
 i=7; /* Salto le prime 7 celle gi�riempite */
-while(*environ)
-   {
-   // elimino la variabile d'ambiente LD_LIBRARY_PATH e salvo temporaneamente il contenuto in ld_library_path_save
-   if ( strncmp(*environ,"LD_LIBRARY_PATH",strlen("LD_LIBRARY_PATH")))
-   {
-      strcpy(task_envp[i],*environ);
-      i++;
-   }
-   else
-   {
-   	printf("restart_task: tolgo LD_LIBRARY_PATH: %s \n", *environ);
-	strcpy(ld_library_path_save, (index(*environ,'=')+1));
-   	printf("restart_task: ld_library_path_save = %s \n", ld_library_path_save);
-   }
 
-   *environ++;   /*
-   Controllo che No di var di ambiente non sia > di MAXENVVAR
-   */
-   if(i>MAXENVVAR-10)
-      {
-      printf("ERROR: Too many environment variables in restart_task\n");
-      printf("ERROR: MAXENVVAR =%d  \n",MAXENVVAR); 
-      break;
-      }
-   }
-   sprintf(task_envp[i++], "_MAX_SNAP_SHOT=%d\00", _MAX_SNAP_SHOT);
-   sprintf(task_envp[i++], "_MAX_BACK_TRACK=%d\00",_MAX_BACK_TRACK);
-   sprintf(task_envp[i++], "_MAX_CAMPIONI=%d\00",  _MAX_CAMPIONI);
-   sprintf(task_envp[i++], "_NUM_VAR=%d\00",       _NUM_VAR);
-   sprintf(task_envp[i++], "_MAX_PERTUR=%d\00",    _MAX_PERTUR);
-   sprintf(task_envp[i++], "_SPARE_SNAP=%d\00",    _SPARE_SNAP);
-   sprintf(task_envp[i++], "_PERT_CLEAR=%d\00",    _PERT_CLEAR);
-   sprintf(task_envp[i++], "REINITTASK=%s\00", appoggio);
-   task_envp[i] = NULL;
+
+//--- nuova funzione update_envir 
+update_envir(environ, envp, task_envp, i, appoggio);
+
+//  codice sostituito ...
+// while(*environ)
+//    {
+//    // elimino la variabile d'ambiente LD_LIBRARY_PATH e salvo temporaneamente il contenuto in ld_library_path_save
+//    if ( strncmp(*environ,"LD_LIBRARY_PATH",strlen("LD_LIBRARY_PATH")))
+//    {
+//       strcpy(task_envp[i],*environ);
+//       i++;
+//    }
+//    else
+//    {
+//    	printf("restart_task: tolgo LD_LIBRARY_PATH: %s \n", *environ);
+// 	strcpy(ld_library_path_save, (index(*environ,'=')+1));
+//    	printf("restart_task: ld_library_path_save = %s \n", ld_library_path_save);
+//    }
+
+//    *environ++;   /*
+//    Controllo che No di var di ambiente non sia > di MAXENVVAR
+//    */
+//    if(i>MAXENVVAR-10)
+//       {
+//       printf("ERROR: Too many environment variables in restart_task\n");
+//       printf("ERROR: MAXENVVAR =%d  \n",MAXENVVAR); 
+//       break;
+//       }
+//    }
+//    sprintf(task_envp[i++], "_MAX_SNAP_SHOT=%d\00", _MAX_SNAP_SHOT);
+//    sprintf(task_envp[i++], "_MAX_BACK_TRACK=%d\00",_MAX_BACK_TRACK);
+//    sprintf(task_envp[i++], "_MAX_CAMPIONI=%d\00",  _MAX_CAMPIONI);
+//    sprintf(task_envp[i++], "_NUM_VAR=%d\00",       _NUM_VAR);
+//    sprintf(task_envp[i++], "_MAX_PERTUR=%d\00",    _MAX_PERTUR);
+//    sprintf(task_envp[i++], "_SPARE_SNAP=%d\00",    _SPARE_SNAP);
+//    sprintf(task_envp[i++], "_PERT_CLEAR=%d\00",    _PERT_CLEAR);
+//    sprintf(task_envp[i++], "REINITTASK=%s\00", appoggio);
+//    task_envp[i] = NULL;
 
 /*
 for (jjjj=0; jjjj<i; jjjj++)
@@ -452,6 +555,7 @@ void sked_start()
    char            appoggio[10];
    int		jjjj;
 
+printf("-----------------------> DEBUG sked_start: Inizio - N001=%s \n",getenv("N001"));
 
    path = (char *) malloc(FILENAME_MAX+1);
    app = (char *) malloc(FILENAME_MAX+1);
@@ -518,6 +622,8 @@ DEBUG
    /* esecuzione startup  */
    sked_startup();
 
+printf("-----------------------> DEBUG sked_start: Dopo Sked_startup - N001=%s \n",getenv("N001"));
+
    /* codifica variabili */
    task_argv[0] = argv[0];
    task_argv[1] = argv[1];
@@ -534,52 +640,61 @@ DEBUG
 
    strcpy(appoggio,"NO");
 
-i=7; /* Salto le prime 6 celle gi�riempite */
-while(*environ)
-   {
-  /* printf("env[%d]=%s\n",i,*environ);*/
-   // elimino la variabile d'ambiente LD_LIBRARY_PATH e salvo temporaneamente il contenuto in ld_library_path_save
-   if ( strncmp(*environ,"LD_LIBRARY_PATH",strlen("LD_LIBRARY_PATH")))
-   {
-      strcpy(task_envp[i],*environ);
-      i++;
-   }
-   else
-   {
-   	printf("sked_start: tolgo LD_LIBRARY_PATH: %s \n", *environ);
-	strcpy(ld_library_path_save, (index(*environ,'=')+1));
-   	printf("sked_start: ld_library_path_save = %s \n", ld_library_path_save);		   
-   }   
-    
-   
-   *environ++;
-   /*
-   Controllo che No di var di ambiente non sia > di MAXENVVAR
-   */
-   if(i>MAXENVVAR-10)
-      {
-      printf("ERROR: Too many environment (%d) variables in sked_start\n",i );
-      printf("ERROR: MAXENVVAR =%d  \n",MAXENVVAR);
-      break;
-      }
-   }
-   sprintf(task_envp[i++], "_MAX_SNAP_SHOT=%d\00", _MAX_SNAP_SHOT);
-   sprintf(task_envp[i++], "_MAX_BACK_TRACK=%d\00",_MAX_BACK_TRACK);
-   sprintf(task_envp[i++], "_MAX_CAMPIONI=%d\00",  _MAX_CAMPIONI);
-   sprintf(task_envp[i++], "_NUM_VAR=%d\00",       _NUM_VAR);
-   sprintf(task_envp[i++], "_MAX_PERTUR=%d\00",    _MAX_PERTUR);
-   sprintf(task_envp[i++], "_SPARE_SNAP=%d\00",    _SPARE_SNAP);
-   sprintf(task_envp[i++], "_PERT_CLEAR=%d\00",    _PERT_CLEAR);
-   sprintf(task_envp[i++], "REINITTASK=%s\00",    appoggio);
-   task_envp[i] = NULL;
+i=7; /* Salto le prime 6 celle già riempite */
+
+printf("-----------------------> DEBUG sked_start: prima di while - N001=%s \n",getenv("N001"));
+
+//--- nuova funzione update_envir 
+update_envir(environ, envp, task_envp, i, appoggio);
+
+//  codice sostituito ...
+// while(*environ)
+//    {
+//   /* printf("env[%d]=%s\n",i,*environ);*/
+//    // elimino la variabile d'ambiente LD_LIBRARY_PATH e salvo temporaneamente il contenuto in ld_library_path_save
+// printf("-----------------------> DEBUG sked_start: DENTRO while - N001=%s *environ=%s\n",getenv("N001"), *environ);
+
+//    if ( strncmp(*environ,"LD_LIBRARY_PATH",strlen("LD_LIBRARY_PATH")))
+//    {
+//       strcpy(task_envp[i],*environ);
+//       i++;
+//    }
+//    else
+//    {
+//    	printf("sked_start: tolgo LD_LIBRARY_PATH: %s \n", *environ);
+// 	strcpy(ld_library_path_save, (index(*environ,'=')+1));
+//    	printf("sked_start: ld_library_path_save = %s \n", ld_library_path_save);		   
+//    }   
+
+//    *environ++;
+//    /*
+//    Controllo che No di var di ambiente non sia > di MAXENVVAR
+//    */
+//    if(i>MAXENVVAR-10)
+//       {
+//       printf("ERROR: Too many environment (%d) variables in sked_start\n",i );
+//       printf("ERROR: MAXENVVAR =%d  \n",MAXENVVAR);
+//       break;
+//       }
+//    }
+//    sprintf(task_envp[i++], "_MAX_SNAP_SHOT=%d\00", _MAX_SNAP_SHOT);
+//    sprintf(task_envp[i++], "_MAX_BACK_TRACK=%d\00",_MAX_BACK_TRACK);
+//    sprintf(task_envp[i++], "_MAX_CAMPIONI=%d\00",  _MAX_CAMPIONI);
+//    sprintf(task_envp[i++], "_NUM_VAR=%d\00",       _NUM_VAR);
+//    sprintf(task_envp[i++], "_MAX_PERTUR=%d\00",    _MAX_PERTUR);
+//    sprintf(task_envp[i++], "_SPARE_SNAP=%d\00",    _SPARE_SNAP);
+//    sprintf(task_envp[i++], "_PERT_CLEAR=%d\00",    _PERT_CLEAR);
+//    sprintf(task_envp[i++], "REINITTASK=%s\00",    appoggio);
+//    task_envp[i] = NULL;
+//  FINE codice sostituito ...
+
 
 /*
 for (jjjj=0; jjjj<i; jjjj++)
    printf("(task_envp[%d]=%s\n",jjjj,task_envp[jjjj]);
 */
 
-printf(" lancio process  N001=%s \n",getenv("N001"));
-
+printf("-----------------------> DEBUG sked_start: lancio processi N001=%s N007=%s \n",getenv("N001"),getenv("N007"));
 /* 
        lancio processi 
    1)  agg_manovra       MASTER   hostbm
@@ -751,7 +866,7 @@ printf("Attivazione task\n");
 */
  if(mkdir(path_out,S_IRWXU|S_IRGRP|S_IROTH))
 		{
-		perror("\n sked_start: creazione path per files .out");
+		perror("\n sked_start: creazione path per files .out - 1");
 /*
 		exit(1);
 */
@@ -820,7 +935,7 @@ printf("Attivazione task\n");
 
 	 sprintf(task_name, "%s/lg5sk\00", path_proc);
 printf("------>%s\n",task_name);
-printf(" -------> TASK N001=%s \n",getenv("N001"));
+printf("-----------------------> DEBUG Sked_start - check di una variable di env.: N001=%s \n",getenv("N001"));
 	 sprintf(task_argv[0], "%s\00","lg5sk");
 
 	 sprintf(task_argv[1], "%s\00", (char *) s02_.model[i].name);
@@ -828,7 +943,7 @@ printf(" -------> TASK N001=%s \n",getenv("N001"));
 	 sprintf(task_envp[3], "SIM_NUM_MOD=%d\00", i + 1);
 	 sprintf(task_envp[4], "SIM_VAR_INI=%d\00", ip);
 	 sprintf(task_envp[5], "WORK_DIR=%s\00", path);
-         sprintf(task_envp[6], "LD_LIBRARY_PATH=%s:%s\00", path_proc, ld_library_path_save);
+    sprintf(task_envp[6], "LD_LIBRARY_PATH=%s:%s\00", path_proc, ld_library_path_save);
 printf("\n LD_LIBRARY_PATH: %s\n",task_envp[6]);
 
 	 RtDbPPutDt(dbpunti,i,s02_.model[i].dt);
@@ -842,9 +957,10 @@ printf("\n LD_LIBRARY_PATH: %s\n",task_envp[6]);
 	 if(p_path_out[0]=='$')
 		p_path_out[0]='_';
 */
+         printf("\n DEBUG: path_out=%s\n",path_out);
          if(mkdir(path_out,S_IRWXU|S_IRGRP|S_IROTH))
 		{
-		perror("\n sked_start: creazione path per files .out");
+		perror("\n sked_start: creazione path per files .out - 2 path_out\n");
 /*
 		exit(1);
 */
@@ -870,12 +986,11 @@ printf("\n LINK SYM tra %s e %s\n",path_proc,path_link);
 		exit(1);
 		}
 
+printf("-----------------------> DEBUG - sked_sstart -  Prima di vfork (Parent)-  N001=%s \n",getenv("N001"));
 	 fpid = vfork();
-	 if (fpid == 0)
+	if (fpid == 0) // child process, la task
 	 {
-
-printf("sked_start DEBUG: CHILD: child process pid = %d genitore = %d\n",
-       getpid(), getppid()); 
+printf("----------------------> sked_start DEBUG: CHILD: child process pid = %d genitore = %d\n", getpid(), getppid()); 
 
 #ifndef SCO_UNIX
 	    sigsetmask(0);	/* sblocca tutti i segnali */
@@ -893,14 +1008,13 @@ printf(" ATTIVA TASK N001=%s \n",getenv("N001"));
 	    fprintf(stderr, "sked_start: Task n. %d %s", i, s02_.model[i].name);
 	    fprintf(stderr, "sked_start: pid  %d  errore n. %d\n\n", getpid(), errno);
 	    _exit(0);
-	 }
-         else
-         {
+	 } 
+   else    // parent process
+    {
 
-printf("sked_start: pid[%d] = %d\n", i, fpid);
-
+printf("sked_start: PARENT - pid[%d] = %d\n", i, fpid);
             pid_task[i]=fpid;
-         } 
+    } 
 	 chdir(path_iniziale);
 	 stat_proc = RtDbPGetPuntTaskStat(dbpunti,i);
 	 stat_proc-> pid = fpid;

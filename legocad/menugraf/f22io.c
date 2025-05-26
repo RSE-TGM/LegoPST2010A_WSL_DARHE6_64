@@ -140,7 +140,7 @@ fclose(fpDAT);
 
 
 /*
- read_22dat
+ read_22dat1
     legge i dati relativi a tutte le misure;
 	- flag : AGGIORNA    aggiorna l'area dati con gli ultimi dati acquisiti
 	         TUTTI       trasferisce nell'area dati tutti i campioni 
@@ -155,8 +155,8 @@ int lun_rec_dati;  /* lunghezza record dati */
 int lun_parziale;  /* lunghezza lettura parziale dati */
 int num_complete;  /* numero di letture complete */
 
-read_22dat(flag)
-char flag;
+int read_22dat1(char flag)
+//char flag;
 {
 static S_DATI buf;   /* buffer di appoggio per la lettura del record dati */
 char *pb;
@@ -904,7 +904,7 @@ Carica_f22()
 /*	Apertura e lettura del file f22  */
 
 	open_22dat ();
-	read_22dat (1);
+	read_22dat1 (1);
 
 /*	Abilitazione delle voci del menu principale
 	in seguito alla apertura ed alla lettura di

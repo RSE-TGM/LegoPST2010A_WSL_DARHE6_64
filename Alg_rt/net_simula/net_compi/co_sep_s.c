@@ -28,9 +28,9 @@ static char SccsID[] = "@(#)co_sep_s.c	5.1\t11/7/95";
 	/* rimuovere se inserita in compi.c */
 
 
-#include <stdio.h>>
-#include <stdlib.h>>
-#include <string.h>>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include <X11/Xlib.h>
 #include <Mrm/MrmAppl.h>

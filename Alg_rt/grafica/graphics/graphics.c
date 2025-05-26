@@ -40,9 +40,11 @@ static char SccsID[] = "@(#)graphics.c	1.7\t2/9/96";
 #include <Xm/DrawingA.h>
 #include <Xm/ScrollBar.h>
 #include <Xm/MessageB.h>
-#include <Mrm/MrmPublic.h>         
-#include <Xm/ToggleB.h>
-#include <Xm/List.h>
+#include <Mrm/MrmPublic.h>
+#include <Xm/ToggleB.h> // <--- AGGIUNGI QUESTO HEADER
+#include <Xm/List.h>         
+
+
 
 #include "libutilx.h"
 #include "uni_mis.h"
@@ -52,6 +54,7 @@ static char SccsID[] = "@(#)graphics.c	1.7\t2/9/96";
 #include "f22_circ.h"
 #include <Rt/RtMemory.h>
 
+typedef char* caddr_t;
 
 /***** #define NUM_VAR 6000 *****/
 
@@ -437,7 +440,7 @@ static void zoom_proc();
 static void map_proc();
 static void PostIt();
 static void MoveMouse();
-static void draw_proc();
+static void draw_proc(Widget , int *, XmDrawingAreaCallbackStruct *);
 static void resize_proc();
 static void create_proc();
 static void quit_proc();
@@ -448,46 +451,45 @@ static void apply_proc();
 static void timer_proc();
 static void find_proc();
 static void HC_proc();
-extern int cerca_umis(char*);
+int cerca_umis();
 static int init_application();
-static int cerca_stringa(char*,char **);
+Widget WidAttenzione(Widget,char*,int);
+void d2free(char**);
 extern int set_scala(int);
 static int set_ordinate(int);
-extern  void set_scala_unica(void);
+static void set_scala_unica();
+static void crea_sfondo(Widget,Dimension,Dimension);
 static void formatta(char*,float);
+static int x_cerca_stringa(XmString,XmString*);
 static int cerca_nome(char*);
 extern int converti_tempo(float,long  *,long  *,long  *,long  *,long  *,long  *);
-static int prep_draw(float,float,S_MIN_MAX *);
-static  void draw_grid(Window);
-extern int read_gruppi(int);
-extern  void close_path();
+static  int prep_draw(float,float,S_MIN_MAX *);
+static  int draw_grid(Window);
+extern void set_cur_wait();
+void clr_cur_waitGR();
+static int zoomed(XPoint,XPoint);
+extern int open_gruppiGR();
+extern int read_gruppiGR(int);
+static void crea_lista_umis();
+static  void handle_motion(Widget);
+extern void agg_umis();
+static void free_lista_umis();
+extern int write_gruppo(int);
+extern   void close_path();
+extern Widget WidErrore(Widget,char*,int);
 
-extern  void open_path();
 void init_gcs();
-void load_file_header(char*);
-static void load_variables2(int,char*[]);
-extern int open_22dat_circ();
-extern int read_22dat_circ(char);
+void load_file_header(char *nome_file);
+void load_variablesGR(int num_nomi,char*nome);
+int open_22dat_circGR();
+int read_22dat_circGR(char flag);
 void close_22dat_circ();
-void load_font(XFontStruct **);
-void clr_cur_wait();
-int zoomed(XPoint,XPoint);
+int cerca_stringa(char *stringa,char** lista);
+void load_font(XFontStruct **font_info);
+void prep_str_tim(float,float);
 void abilita_menu_selez(int);
-void reverse_draw(int);
-extern int open_gruppi();
-void handle_motion(Widget);
-void crea_lista_umis();
-void agg_umis();
-void free_lista_umis();
-int write_gruppo(int);
+void abilita_menu(int flag);
 void reload_f22();
-
-
-
-
-
-
-
 
 /* The names and addresses of things that DwtDrm.has to bind.  The names do
  * not have to be in alphabetical order.  */
@@ -614,7 +616,7 @@ num_umis=cerca_num_umis();
 umis_defsel= (int*) calloc (num_umis, sizeof (int));
 x_codumis=(XmString *)XtCalloc(num_umis+1, sizeof(XmString));
 
-open_path();
+void open_path();
 /*
  *  Ricava i valori delle variabili necessarie per la creazione
  *  dei Grafic Context (GC)
@@ -676,22 +678,22 @@ if(argc>1)
  Se il file specificato esiste 
  */
 	if(!nofile)
-		load_variables2(argc-(2+scala_unica),&argv[2+scala_unica]);
+		load_variablesGR(argc-(2+scala_unica),argv[2+scala_unica]);
 	}
 XtMainLoop();
 }
 
 
 
-void load_file_header(nome_file)
-char *nome_file;
+void load_file_header(char *nome_file)
+//char *nome_file;
 {
 int flag;
 
 path_22dat=XtMalloc(strlen(nome_file)+1);
 strcpy(path_22dat,nome_file);
 strcpy(file_vis,path_22dat);
-if(open_22dat_circ())
+if(open_22dat_circGR())
       {
       WidAttenzione(main_window_widget,err_file_nones,MAPPA);
       nofile=1;
@@ -700,11 +702,11 @@ if(open_22dat_circ())
       }
 nofile=0;
 flag=TUTTI;
-if(read_22dat_circ(flag)==1)  /* lettura dell'header */
+if(read_22dat_circGR(flag)==1)  /* lettura dell'header */
                 {
                 close_22dat_circ();
-                open_22dat_circ();
-                if(read_22dat_circ(flag)==1)
+                open_22dat_circGR();
+                if(read_22dat_circGR(flag)==1)
                         {
 /*
    file non esistente
@@ -723,9 +725,9 @@ abilita_menu(nofile);
 	
 }
 
-void load_variables2(num_nomi,nome)
-int num_nomi;
-char *nome[];
+void load_variablesGR(int num_nomi,char*nome)
+//int num_nomi;
+//char *nome[];
 {
 int i,j,flag;
 int indice;
@@ -740,7 +742,9 @@ for(i=0;i<4;i++)
 */
 	if(i<num_nomi)
 		{
-		indice=cerca_stringa(nome[i],simboli);
+// GUAG2025
+// indice=cerca_stringa(nome[i],simboli);
+		indice=cerca_stringa(&nome[i],simboli);
 		}
 	else
 		indice= -1;
@@ -792,7 +796,7 @@ for(i=0;i<4;i++)
 		}
 	}
 if(scala_unica && loaded) {
-if(open_22dat_circ())
+if(open_22dat_circGR())
       {
       WidAttenzione(main_window_widget,err_file_nones,MAPPA);
       nofile=1;
@@ -800,11 +804,11 @@ if(open_22dat_circ())
       return; /* esce se errore in apertura */
       }
 flag = AGGIORNA;
-if(read_22dat_circ(flag)==1)  /* legge tutti i dati dall'inizio del file */
+if(read_22dat_circGR(flag)==1)  /* legge tutti i dati dall'inizio del file */
                 {
                 close_22dat_circ();
-                open_22dat_circ();
-                if(read_22dat_circ(flag)==1)
+                open_22dat_circGR();
+                if(read_22dat_circGR(flag)==1)
                         {
 /*
    file non esistente
@@ -852,7 +856,7 @@ else
 	XFillRectangle(display,stip,gc_grid1,0,0,width,height);
 	XDrawRectangle(display,stip,gc2[0],0,0,width,height);
 	}
-set_something(w,XmNbackgroundPixmap,(void*) stip);
+set_something(w,XmNbackgroundPixmap,(char*)stip);
 }
 
 /*
@@ -1077,8 +1081,8 @@ gc_zoom=XCreateGC(display,RootWindow(display,screen_num),valuemask,
  * Utilities utilizzate in fase di inizializzazione.
  */
 
-void load_font(font_info)
-XFontStruct **font_info;
+void load_font(XFontStruct **font_info)
+//XFontStruct **font_info;
 {
 char *font_name = "fixed";
 /* Carica il font ottenendo la descrizione del font stesso */
@@ -1097,9 +1101,9 @@ if((*font_info = XLoadQueryFont(display,font_name)) == NULL)
  *      torna 1 se e' stato effettuato cambiamento di scala
  */
 
-int set_scala(indice)
-int indice;   /* indice della variabile all'interno del gruppo
-				 (da 0 a 3)    */
+int set_scala(int indice)
+//int indice;   indice della variabile all'interno del gruppo
+//				 (da 0 a 3)    */
 {
 S_GRAFICO *s;
 s=(&sg);
@@ -1200,9 +1204,9 @@ for(i=0;i<4;i++)
  *    in modo conforme ai valori di minimo e massimo
  */
 
-int set_ordinate(ind)
-int ind;    /* indice che individua la variabile all'interno del
-                       grafico (valori da 0 a 3)       */
+int set_ordinate(int ind)
+//int ind;    indice che individua la variabile all'interno del
+//                       grafico (valori da 0 a 3)       */
 {
 int uguali,ord_scritta;
 int lun;
@@ -1285,9 +1289,9 @@ for(i=0;i<5;i++)
  * (la lista deve essere terminata da un NULL).
  */
 
-int x_cerca_stringa(x_stringa,x_lista)
-XmString x_stringa;
-XmString *x_lista;
+int x_cerca_stringa(XmString x_stringa,XmString*x_lista)
+//XmString x_stringa;
+//XmString *x_lista;
 {
 int i=0;
 while(x_lista[i]!=NULL)
@@ -1299,9 +1303,9 @@ while(x_lista[i]!=NULL)
 return(-1);
 }
 
-int cerca_stringa(stringa,lista)
-char *stringa;
-char *lista[];
+int cerca_stringa(char *stringa,char** lista)
+//char *stringa;
+//char *lista[];
 {
 int i=0;
 while(lista[i]!=NULL && i<header2.ncasi)
@@ -1393,7 +1397,7 @@ if(freeza)
 	timer=0;
 	return;
 	}
-read_22dat_circ(AGGIORNA);
+read_22dat_circGR(AGGIORNA);
 /*
  legge tempo finale e tempo iniziale dal buffer dei dati
 */
@@ -1532,9 +1536,9 @@ for(i=0;i<7;i++)
  prep_draw
  preparazione del vettore dei punti da disegnare
 */
-int prep_draw(t_iniziale,t_finale,min_max)
-float t_iniziale,t_finale;
-S_MIN_MAX *min_max;
+int prep_draw(float t_iniziale,float t_finale,S_MIN_MAX *min_max)
+//float t_iniziale,t_finale;
+//S_MIN_MAX *min_max;
 {
 float f_pix;
 int x_pix,x_pixprec;  /* posizione in pixel del tempo sull-asse delle ascisse */
@@ -1547,7 +1551,7 @@ int indice,i;
 
 if(t_iniziale == t_finale)
 	{
-	return(0);
+	return(1);
 	}
 /*
   step in pixel per un decimo di secondo
@@ -1602,10 +1606,10 @@ while(x_pix<draw_width && ind_buf<=n_last)
         }
 }
 
-static void draw_proc(w, tag, str)
-Widget w;
-int *tag;
-XmDrawingAreaCallbackStruct *str;
+static void draw_proc(Widget w, int *tag, XmDrawingAreaCallbackStruct *str)
+//Widget w;
+//int *tag;
+//XmDrawingAreaCallbackStruct *str;
 {
 int ord_unica;
 char appstr[50];
@@ -1625,12 +1629,12 @@ long anno,mese,giorno,ora,min,sec;
 switch(widget_num)
 	{
   	case k_draw1:  
-	get_something(w,XmNwidth, (void*) &draw_width);
-	get_something(w,XmNheight, (void*) &draw_height);
+	get_something(w,XmNwidth,(char *)&draw_width);
+	get_something(w,XmNheight,(char *)&draw_height);
 	if(resize)
 		{
-		get_something(w,XmNwidth, (void*) &draw_width);
-		get_something(w,XmNheight, (void*) &draw_height);
+		get_something(w,XmNwidth,(char *)&draw_width);
+		get_something(w,XmNheight,(char *)&draw_height);
 		resize=0;
 		crea_sfondo(w,draw_width,draw_height);
 		}
@@ -1758,7 +1762,7 @@ switch(widget_num)
 	break;
 	
 	case k_tim1:
-	get_something(w,XmNwidth, (void*) &draw_width);
+	get_something(w,XmNwidth,(char *)&draw_width);
 	for(k=0;k<7;k++)
 		{
 		zoom=sg.zoom;
@@ -1788,7 +1792,7 @@ switch(widget_num)
 	break;
 
 	case k_ord1:
-	get_something(widget_array[k_ord1],XmNheight, (void*) &ord_height);
+	get_something(widget_array[k_ord1],XmNheight,(char *)&ord_height);
 	for(i=1;i<4;i++)
 		{
 		if(strcmp(sg.str_ord[0][i],"         ")==0)
@@ -1828,7 +1832,7 @@ switch(widget_num)
 /*
  * Disegna la griglia di riferimento (per HC)
  */
-void draw_grid(win)
+int draw_grid(win)
 Window win;
 {
 float dy,dx; /* ampiezza rettangoli griglia su asse y e su asse x */
@@ -1919,7 +1923,7 @@ switch(*tag)
 		for(i=k_toggle_umis1;i<=k_toggle_umis4;i++)
 			{
                         app = XmStringCreateLtoR(uni_mis[numis].codm[i-k_toggle_umis1],XmSTRING_DEFAULT_CHARSET);
-			set_something(widget_array[i],XmNlabelString, (void*) app);
+			set_something(widget_array[i],XmNlabelString, (char*)app);
                         XmStringFree(app);
 			}
 		}
@@ -1986,7 +1990,7 @@ XDefineCursor(display,XtWindow(toplevel_widget)
 XSync(display,False);
 }
 
-void clr_cur_wait()
+void clr_cur_waitGR()
 {
 XUndefineCursor(display,XtWindow(toplevel_widget));
 XSync(display,False);
@@ -2254,13 +2258,13 @@ if(collima==0)
  */
 /*        stato_zoom=ZOOM_END; */
         XDefineCursor(display,XtWindow(sg.w_draw),cursor_coll);
-        set_something(wcollima,XmNlabelString,(void*) x_collima_on);
+        set_something(wcollima,XmNlabelString,(char*)x_collima_on);
         }
 else
         {
         collima=0;
         XUndefineCursor(display,XtWindow(sg.w_draw));
-        set_something(wcollima,XmNlabelString,(void*) x_collima_off);
+        set_something(wcollima,XmNlabelString,(char*)x_collima_off);
         }
 }
 
@@ -2271,9 +2275,9 @@ static void zoomord_proc(w,reason)
 {
 zoomord=(!zoomord);
 if(zoomord)
-        set_something(wzoomord,XmNlabelString,(void*) x_zoomord_on);
+        set_something(wzoomord,XmNlabelString,(char*)x_zoomord_on);
 else
-        set_something(wzoomord,XmNlabelString,(void*) x_zoomord_off);
+        set_something(wzoomord,XmNlabelString,(char*)x_zoomord_off);
 
 }
 
@@ -2283,9 +2287,9 @@ static void secondi_proc(w,reason)
 {
 tempo_sec=(!tempo_sec);
 if(tempo_sec)
-        set_something(wtempo_sec,XmNlabelString,(void*) x_secondi_off);
+        set_something(wtempo_sec,XmNlabelString,(char*)x_secondi_off);
 else
-        set_something(wtempo_sec,XmNlabelString,(void*) x_secondi_on);
+        set_something(wtempo_sec,XmNlabelString,(char*)x_secondi_on);
 XClearArea(display,XtWindow(sg.w_tim),0,0,0,0,True);
 XClearArea(display,XtWindow(widget_array[k_tempo]),0,0,0,0,True);
 }
@@ -2359,49 +2363,49 @@ int flag;
 static Pixel draw0_bg,draw1_bg,mis1_bg,ord1_bg,tim1_bg,tempo_bg,form_bg,val1_bg;
 if(flag)
 	{
-	get_something(widget_array[k_draw1],XmNbackground,(void*) &draw1_bg);
-        get_something(widget_array[k_draw0],XmNbackground,(void*) &draw0_bg);
-	get_something(widget_array[k_mis1],XmNbackground,(void*) &mis1_bg);
-	get_something(widget_array[k_ord1],XmNbackground,(void*) &ord1_bg);
-        get_something(widget_array[k_val1],XmNbackground,(void*) &val1_bg);
-	get_something(widget_array[k_tim1],XmNbackground,(void*) &tim1_bg);
-	get_something(widget_array[k_tempo],XmNbackground,(void*) &tempo_bg);
-	get_something(widget_array[k_form],XmNbackground,(void*) &form_bg);
+	get_something(widget_array[k_draw1],XmNbackground,(char*)&draw1_bg);
+        get_something(widget_array[k_draw0],XmNbackground,(char*)&draw0_bg);
+	get_something(widget_array[k_mis1],XmNbackground,(char*)&mis1_bg);
+	get_something(widget_array[k_ord1],XmNbackground,(char*)&ord1_bg);
+        get_something(widget_array[k_val1],XmNbackground,(char*)&val1_bg);
+	get_something(widget_array[k_tim1],XmNbackground,(char*)&tim1_bg);
+	get_something(widget_array[k_tempo],XmNbackground,(char*)&tempo_bg);
+	get_something(widget_array[k_form],XmNbackground,(char*)&form_bg);
 	set_something(widget_array[k_draw1],XmNbackground,
-                      (void*) WhitePixel(display,screen_num));
+                      (char*)WhitePixel(display,screen_num));
 	set_something(widget_array[k_mis1],XmNbackground,
-                      (void*) WhitePixel(display,screen_num));
+                      (char*)WhitePixel(display,screen_num));
 	set_something(widget_array[k_ord1],XmNbackground,
-                      (void*) WhitePixel(display,screen_num));
+                      (char*)WhitePixel(display,screen_num));
         set_something(widget_array[k_tim1],XmNbackground,
-                      (void*) WhitePixel(display,screen_num));
+                      (char*)WhitePixel(display,screen_num));
         set_something(widget_array[k_tempo],XmNbackground,
-                      (void*) WhitePixel(display,screen_num));
+                      (char*)WhitePixel(display,screen_num));
         set_something(widget_array[k_val1],XmNbackground,
-                      (void*) WhitePixel(display,screen_num));
+                      (char*)WhitePixel(display,screen_num));
         set_something(widget_array[k_form],XmNbackground,
-                      (void*) WhitePixel(display,screen_num));
+                      (char*)WhitePixel(display,screen_num));
         set_something(widget_array[k_draw0],XmNbackground,
-                      (void*) WhitePixel(display,screen_num));
+                      (char*)WhitePixel(display,screen_num));
 	}
 else
 	{
         set_something(widget_array[k_draw1],XmNbackground,
-                      (void*) draw1_bg);
+                      (char*)draw1_bg);
         set_something(widget_array[k_mis1],XmNbackground,
-                      (void*) mis1_bg);
+                      (char*)mis1_bg);
         set_something(widget_array[k_ord1],XmNbackground,
-                      (void*) ord1_bg);
+                      (char*)ord1_bg);
         set_something(widget_array[k_tim1],XmNbackground,
-                      (void*) tim1_bg);
+                      (char*)tim1_bg);
         set_something(widget_array[k_tempo],XmNbackground,
-                      (void*) tempo_bg); 
+                      (char*)tempo_bg); 
         set_something(widget_array[k_val1],XmNbackground,
-                      (void*) val1_bg); 
+                      (char*)val1_bg); 
         set_something(widget_array[k_form],XmNbackground,
-                      (void*) form_bg); 
+                      (char*)form_bg); 
         set_something(widget_array[k_draw0],XmNbackground,
-                      (void*) draw0_bg); 
+                      (char*)draw0_bg); 
 	}
 }
 
@@ -2420,7 +2424,7 @@ switch(widget_num)
 /*
  se errore in apertura files gruppi
 */
-		if(open_gruppi())  
+		if(open_gruppiGR())  
 			{
 			WidErrore(main_window_widget,err_crea_gruppi,MAPPA);
 			return;
@@ -2437,8 +2441,8 @@ if (widget_array[widget_num] == NULL)
     	    }
         }
 
-get_something(sg.w_draw,XmNy, (void*) &pos_y);
-set_something(widget_array[widget_num],XmNy, (void*) pos_y);
+get_something(sg.w_draw,XmNy,(char *)&pos_y);
+set_something(widget_array[widget_num],XmNy,(char *)pos_y);
 XtManageChild(widget_array[widget_num]);
 
 }
@@ -2467,8 +2471,8 @@ widget_array[widget_num] = w;
 switch(widget_num)
 	{
 	case k_draw1:
-	get_something(w,XmNwidth, (void*) &draw_width);
-	get_something(w,XmNheight, (void*) &draw_height);
+	get_something(w,XmNwidth,(char *)&draw_width);
+	get_something(w,XmNheight,(char *)&draw_height);
 	draw_height-=2;
         handle_motion(w);
 	sg.w_draw=w;
@@ -2528,7 +2532,7 @@ switch(widget_num)
                 {
                 XmListAddItem(w,x_simboli[i],0); 
                 }
-        clr_cur_wait();
+        clr_cur_waitGR();
 	break;
 
 	case k_toggle_mis1:
@@ -2539,7 +2543,7 @@ switch(widget_num)
         x_sel_var[widget_num-k_toggle_mis1]=
 	XmStringCopy(sg.x_descr_mis[widget_num-k_toggle_mis1]);
 	set_something(w,XmNlabelString,
- 			(void*) x_sel_var[widget_num-k_toggle_mis1]);
+ 			(char*)x_sel_var[widget_num-k_toggle_mis1]);
 	break;
 
 	case k_toggle2_mis1:
@@ -2548,7 +2552,7 @@ switch(widget_num)
 	case k_toggle2_mis4:
         XmStringFree(x_sel_var[widget_num-k_toggle2_mis1]);
         x_sel_var[widget_num-k_toggle2_mis1]=XmStringCopy(sg.x_descr_mis[widget_num-k_toggle2_mis1]);
-	set_something(w,XmNlabelString,(void*) x_sel_var[widget_num-k_toggle2_mis1]);
+	set_something(w,XmNlabelString,(char*)x_sel_var[widget_num-k_toggle2_mis1]);
 	break;
 
 	case k_toggle3_mis1:
@@ -2557,12 +2561,12 @@ switch(widget_num)
 	case k_toggle3_mis4:
         XmStringFree(x_sel_var[widget_num-k_toggle3_mis1]);
         x_sel_var[widget_num-k_toggle3_mis1]=XmStringCopy(sg.x_descr_mis[widget_num-k_toggle3_mis1]);
-	set_something(w,XmNlabelString,(void*) x_sel_var[widget_num-k_toggle3_mis1]);
+	set_something(w,XmNlabelString,(char*)x_sel_var[widget_num-k_toggle3_mis1]);
 	break;
 
 	case k_list_gr:
 	gruppo_selezionato = -1;
-	read_gruppi(1);
+	read_gruppiGR(1);
         for(i=0;i<NUM_GRUPPI;i++)
         	{
 		XmListAddItem(widget_array[k_list_gr],x_gruppi[i],0);
@@ -2570,7 +2574,7 @@ switch(widget_num)
 	break;
 
 	case k_list_memgr:
-	read_gruppi(1);
+	read_gruppiGR(1);
         for(i=0;i<NUM_GRUPPI;i++)   /* per VMS   */
         	{
 		XmListAddItem(widget_array[k_list_memgr],x_gruppi[i],0);
@@ -2617,7 +2621,7 @@ switch(widget_num)
  		x_sel_var[i-k_toggle_mis1]=
             	XmStringCopy(sg.x_descr_mis[i-k_toggle_mis1]);
        		set_something(widget_array[i],XmNlabelString,
-			(void*) x_sel_var[i-k_toggle_mis1]);
+			(char*)x_sel_var[i-k_toggle_mis1]);
 		}
 	break;
 
@@ -2629,7 +2633,7 @@ switch(widget_num)
                 XmStringFree(x_sel_var[i-k_toggle2_mis1]);
                 x_sel_var[i-k_toggle2_mis1]=XmStringCopy(sg.x_descr_mis[i-k_toggle2_mis1]);
 		set_something(widget_array[i],XmNlabelString,
-				(void*) x_sel_var[i-k_toggle2_mis1]);
+				(char*)x_sel_var[i-k_toggle2_mis1]);
 		}
 	selumis=sg.umis_sel[var_attiva];
 	numis=sg.ind_umis[var_attiva];
@@ -2638,7 +2642,7 @@ switch(widget_num)
 		{
                 app = XmStringCreateLtoR(uni_mis[numis].codm[i-k_toggle_umis1],
                                          XmSTRING_DEFAULT_CHARSET); 
-		set_something(widget_array[i],XmNlabelString, (void*) app);
+		set_something(widget_array[i],XmNlabelString, (char*)app);
                 XmStringFree(app);
 		}
 /* memorizza il settaggio delle unita' di misura come appoggio */
@@ -2651,7 +2655,7 @@ switch(widget_num)
 		{
                 XmStringFree(x_sel_var[i-k_toggle3_mis1]);
                 x_sel_var[i-k_toggle3_mis1]=XmStringCopy(sg.x_descr_mis[i-k_toggle3_mis1]);
-		set_something(widget_array[i],XmNlabelString,(void*) x_sel_var[i-k_toggle3_mis1]);
+		set_something(widget_array[i],XmNlabelString,(char*)x_sel_var[i-k_toggle3_mis1]);
 		}
 	for(i=0;i<4;i++)
 		{
@@ -2698,10 +2702,10 @@ switch(widget_num)
 
 	case k_selgr_dialog:
         x_void = XmStringGenerate(" ",NULL, XmCHARSET_TEXT, NULL);
-	set_something(widget_array[k_label_grmis1],XmNlabelString,(void*) x_void);
-	set_something(widget_array[k_label_grmis2],XmNlabelString,(void*) x_void);
-	set_something(widget_array[k_label_grmis3],XmNlabelString,(void*) x_void);
-	set_something(widget_array[k_label_grmis4],XmNlabelString,(void*) x_void);
+	set_something(widget_array[k_label_grmis1],XmNlabelString,(char*)x_void);
+	set_something(widget_array[k_label_grmis2],XmNlabelString,(char*)x_void);
+	set_something(widget_array[k_label_grmis3],XmNlabelString,(char*)x_void);
+	set_something(widget_array[k_label_grmis4],XmNlabelString,(char*)x_void);
 	XmStringFree(x_void);
 	break;
 
@@ -3104,7 +3108,7 @@ else
 /*      Fisso il flag di rilettura dei parametri */
         RileggiF22Par = 1;
         /*fprintf(stderr,"\t open_22dat_cir (k_dir_dialog RileggiF22Par)\n");*/
-        if(open_22dat_circ())
+        if(open_22dat_circGR())
                 {
                 WidAttenzione(main_window_widget,err_file_nones,MAPPA);
                 nofile=1;
@@ -3117,11 +3121,11 @@ else
 /*        nofile=0; */
         flag=TUTTI;
         /*printf("\t LETTURA FILE HEADER\n");*/
-        if(read_22dat_circ(flag)==1)  /* legge tutti i dati da inizio file */
+        if(read_22dat_circGR(flag)==1)  /* legge tutti i dati da inizio file */
                 {
                 close_22dat_circ();
-                open_22dat_circ();
-                if(read_22dat_circ(flag)==1)
+                open_22dat_circGR();
+                if(read_22dat_circGR(flag)==1)
                         {
 /*                      file non esistente */
                         close_22dat_circ();
@@ -3129,7 +3133,7 @@ else
                         widget_array[k_selmis_dialog]=0;
                         strcpy(file_vis,no_file_sel);
                         nofile=1;
-			clr_cur_wait();
+			clr_cur_waitGR();
 			break;
                         }
                 }
@@ -3222,22 +3226,22 @@ switch(*tag)
 
         x_app = XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[0],NULL,
                                    XmCHARSET_TEXT, NULL);
-	set_something(widget_array[k_label_grmis1],XmNlabelString,(void*) x_app);
+	set_something(widget_array[k_label_grmis1],XmNlabelString,(char*)x_app);
         XmStringFree(x_app);
 
         x_app = XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[1],NULL,
                                    XmCHARSET_TEXT, NULL);
-	set_something(widget_array[k_label_grmis2],XmNlabelString,(void*) x_app);
+	set_something(widget_array[k_label_grmis2],XmNlabelString,(char*)x_app);
         XmStringFree(x_app);
 
         x_app = XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[2],NULL,
                                    XmCHARSET_TEXT, NULL);
-	set_something(widget_array[k_label_grmis3],XmNlabelString,(void*) x_app);
+	set_something(widget_array[k_label_grmis3],XmNlabelString,(char*)x_app);
         XmStringFree(x_app);
 
         x_app = XmStringGenerate(gruppi[indice_gruppo].gr.descr_mis[3],NULL,
                                    XmCHARSET_TEXT, NULL);
-	set_something(widget_array[k_label_grmis4],XmNlabelString,(void*) x_app);
+	set_something(widget_array[k_label_grmis4],XmNlabelString,(char*)x_app);
         XmStringFree(x_app);
 	break;
 
@@ -3250,7 +3254,7 @@ switch(*tag)
 */
         XmStringFree(x_sel_var[i]);
 	x_sel_var[i]=XmStringCreateLtoR("   ",XmSTRING_DEFAULT_CHARSET);
-	set_something(widget_array[k_toggle_mis1+i],XmNlabelString,(void*) x_sel_var[i]);
+	set_something(widget_array[k_toggle_mis1+i],XmNlabelString,(char*)x_sel_var[i]);
 	break;
     case k_list_defumis:
 	indice_umis=x_cerca_stringa(selez->item,x_codumis);
@@ -3258,7 +3262,7 @@ switch(*tag)
 		{
 		x_app=XmStringCreateLtoR(uni_mis[indice_umis].codm[i],
                                          XmSTRING_DEFAULT_CHARSET);
-		set_something(widget_array[k_toggle2_umis1+i],XmNlabelString,(void*) x_app);
+		set_something(widget_array[k_toggle2_umis1+i],XmNlabelString,(char*)x_app);
 		XmStringFree(x_app);
 		}
 	XmToggleButtonSetState(widget_array[k_toggle2_umis1+umis_defsel[indice_umis]],True,True);
@@ -3274,7 +3278,7 @@ switch(*tag)
 
         XmStringFree(x_sel_var[i]);
 	x_sel_var[i]=XmStringCopy(selez->item);
-	set_something(widget_array[k_toggle_mis1+i],XmNlabelString,(void*) selez->item);
+	set_something(widget_array[k_toggle_mis1+i],XmNlabelString,(char*)selez->item);
 	break;
     }
 }
@@ -3410,16 +3414,16 @@ XClearArea(display,XtWindow(widget_array[k_tempo]),0,0,0,0,True);
 */
 }
 
-void abilita_menu(flag)
-int flag;
+void abilita_menu(int flag)
+//int flag;
 {
 int valore;
 if(flag)
 	valore=False;
 else
 	valore=True;
-set_something(widget_array[k_grafici_menu_entry],XmNsensitive,(void*) valore);
-set_something(widget_array[k_misure_menu_entry],XmNsensitive,(void*) valore);
+set_something(widget_array[k_grafici_menu_entry],XmNsensitive,(char*)valore);
+set_something(widget_array[k_misure_menu_entry],XmNsensitive,(char*)valore);
 }
 
 /*
@@ -3435,10 +3439,10 @@ if(flag)
 else
 	valore=False;
 
-set_something(widget_array[k_selmis_control_button],XmNsensitive,(void*) valore);
-set_something(widget_array[k_fsca_control_button],XmNsensitive,(void*) valore);
-set_something(widget_array[k_umis_control_button],XmNsensitive,(void*) valore);
-set_something(widget_array[k_selgra_control_button],XmNsensitive,(void*) valore);
+set_something(widget_array[k_selmis_control_button],XmNsensitive,(char*)valore);
+set_something(widget_array[k_fsca_control_button],XmNsensitive,(char*)valore);
+set_something(widget_array[k_umis_control_button],XmNsensitive,(char*)valore);
+set_something(widget_array[k_selgra_control_button],XmNsensitive,(char*)valore);
 }
 /*
  *  crea_lista_umis
@@ -3523,14 +3527,14 @@ XClearArea(display,XtWindow(widget_array[k_tempo]),
     Fisso il flag di rilettura dei parametri
 */
 RileggiF22Par = 1;
-if(open_22dat_circ())
+if(open_22dat_circGR())
       {
       return; /* esce se errore in apertura */
       }
 /*
         legge tutti i dati da inizio file
 */
-if(read_22dat_circ(TUTTI)==1)
+if(read_22dat_circGR(TUTTI)==1)
       {
       return;
       }

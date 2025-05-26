@@ -37,13 +37,13 @@ FROM fedora:41
 RUN dnf update -y && \
     dnf install -y \
         git \
-        f77 \
         # f77 è obsoleto, gfortran dovrebbe essere sufficiente per il codice Fortran 77
         # Se 'f77' è un pacchetto specifico che ti serve, assicurati che esista con quel nome in Fedora 41
         # Altrimenti, gfortran è il compilatore Fortran moderno.
         gcc \
         gfortran \
         fastfetch \
+        xterm \
         xclock \
         xhost \
         hostname \
@@ -54,6 +54,7 @@ RUN dnf update -y && \
         libbsd-devel \
         tcl tk tix \
         ncurses-devel \
+        leafpad \
         gdbm-devel \
         which && \
     dnf clean all # Pulisci la cache di dnf per ridurre la dimensione dell immagine

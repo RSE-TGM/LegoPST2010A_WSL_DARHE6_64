@@ -67,10 +67,10 @@ static int read_nomi(FILE*,int *);
 static int read_nomi_circ(F22CIRC_HD *, char *);
 static int read_multi(char*,S_XLGRAFICO *,float);
 extern int f22_leggi_ultimo(PUNT_FILE_F22 ,F22CIRC_HD ,float *,float *);
-static void set_min_max(S_DATI *,S_XLGRAFICO *);
+static void set_min_max1(S_DATI *,S_XLGRAFICO *);
 
 /**************************************************
- open_22dat
+ open_22datGR
    apre il file f22.dat
 **************************************************/
 int open_22datGR(pXlGraf)
@@ -213,7 +213,7 @@ printf("read_22datGR read_nomi_circ ritorno corretto\n");
   printf("Lunghezza del record dati: %d\n",lun_rec_dati);
 
   /* inizializza il buffer dei minimi e massimi a valori estremi */
-  set_min_max(NULL,pXlGraf);
+  set_min_max1(NULL,pXlGraf);
 
   /* lettura del primo campione:dovra' corrispondere un tempo a 0.0 secondi */	
   if((iret=read_multi((char*)&buf.t,pXlGraf,0.0))==0)
@@ -231,7 +231,7 @@ printf("read_22datGR read_nomi_circ ritorno corretto\n");
     if (ind < n_elementi_bufdati)
       {
       bufdati[ind].t=buf.t;
-      set_min_max(&buf,pXlGraf);
+      set_min_max1(&buf,pXlGraf);
       ind++;
       }
     else
@@ -260,7 +260,7 @@ else  /* caso di lettura per aggiornamento  */
   while(read_multi((char*)&buf.t,pXlGraf,ultimo_tempo)==lun_rec_dati)
     {
     off_f22+=lun_rec_dati;
-    set_min_max(&buf,pXlGraf);
+    set_min_max1(&buf,pXlGraf);
     ultimo_tempo = buf.t;
     if (ind < n_elementi_bufdati)
       {
@@ -368,13 +368,13 @@ if(ret!=0)
 
 
 /**********************************************************
- *  set_min_max
+ *  set_min_max1
  *      aggiorna i valori di minimo e massimo per ogni variabile 
  *      appartenente al record.
  *		se il parametro passato come argomento e' =NULL inizializza
  *      a valori estremi i valori di minimo e massimo.
  **********************************************************/
-void set_min_max(rec,pXlGraf)
+void set_min_max1(rec,pXlGraf)
 S_DATI *rec;   /* record dati */
 S_XLGRAFICO *pXlGraf;
 {

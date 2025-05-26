@@ -92,3 +92,6 @@ typedef struct s_grafico {
 			} S_GRAFICO;
 
 
+void init_umis();
+int cerca_num_umis();
+extern  void open_path();

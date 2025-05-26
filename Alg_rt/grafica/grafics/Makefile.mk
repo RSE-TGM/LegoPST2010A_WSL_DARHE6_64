@@ -45,7 +45,7 @@ LIBUTIL = $(LEGORT_LIB)/libsim.a $(LEGOROOT_LIB)/libutilx.a \
 	  $(LEGOROOT_LIB)/libRt.a $(LEGORT_LIB)/libsim.a 
                                                             
 SORGENTI = grafics.c grsfio.c
-OGGETTI = grafics.o grsfio.o
+OGGETTI = grsfio.o grafics.o 
 FABIO_O = fabio.o
 all:  $(LEGORT_UID)/grafics.uid $(LEGORT_BIN)/grafics 
 

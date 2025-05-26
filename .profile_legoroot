@@ -74,7 +74,8 @@ unset ALGENV_SET
               . $LEGOROOT/Alg_env.sh
               export ALGENV_SET="YES"
         fi
-export LG_TEXTEDITOR=nedit
+#export LG_TEXTEDITOR=nedit
+export LG_TEXTEDITOR=leafpad
 #############PRODUCTINSTEND##########
 ######     NET_COMPI PARAMETERS    ######
 export N000=70

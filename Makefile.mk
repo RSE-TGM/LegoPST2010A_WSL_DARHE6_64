@@ -19,6 +19,7 @@ all:
 	cd ./util97; $(MAKE) -f Makefile.mk
 	cd ./Alg_legopc; $(MAKE) -f Makefile.mk
 	cd ./util2007; $(MAKE) -f Makefile.mk
+	cd ./docker; $(MAKE) -f Makefile.mk
 #	$(info -------->  DEBUG Makefile.mk: F_FLAGS impostata a = $(F_FLAGS))
 
 clean:

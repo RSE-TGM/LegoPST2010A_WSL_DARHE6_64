@@ -201,5 +201,6 @@ void initialize_syncronization( INTERFACE_VAR * );
 #define LICENSE_TIME_FACT       86400.0  /* Numero di secondi in un giorno; 
                                             fattore utilizzato nella gestione
                                             della licenza a tempo          */
-#define TIME_CHK_LIC            1000.0   /* Intervallo (in ms) di controllo
+#define TIME_CHK_LIC            1.E20   /* Intervallo (in ms) di controllo
                                             dello stato della licenza      */ 
+// GUAG205 controllo delle licenza disattivato con TIME_CHK_LIC =1.E20

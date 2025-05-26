@@ -42,19 +42,19 @@ static char SccsID[] = "@(#)gf22.c	5.1\t11/7/95";
 #include <Rt/RtMemory.h>
 
 
-#if defined AIX || VMS
-DATI_GRAF *pshrf22;             /* puntatore buffer circolare */
+// #if defined AIX || VMS
+// DATI_GRAF *pshrf22;             /* puntatore buffer circolare */
                  
-int id_sh_f22;                 /* identificatore buffer circolare  */
-extern S_MIS *bufdati;  	/* buffer circolare contenente i campioni letti 				   da file   */
-#endif
+// int id_sh_f22;                 /* identificatore buffer circolare  */
+// extern S_MIS *bufdati;  	/* buffer circolare contenente i campioni letti 				   da file   */
+// #endif
 
-#if defined UNIX && !defined AIX
+// #if defined UNIX && !defined AIX
 extern S_DATI bufdati[];
 S_HEAD1 header1;
 S_HEAD2 header2;
 FILE *fpDAT;
-#endif
+// #endif
 
 /*
  variabili di uso comune alle routines di I/O
@@ -73,24 +73,24 @@ static void read_nomi(FILE*,unsigned long *);
 static void set_min_max(S_DATI *);
 
 
-void open_22dat()
+int open_22dat()
 {
 int shr_usr_key;
+// GUAG2025 solo LINUX e UNIX
+// #if defined AIX || VMS
+// shr_usr_key = atoi((char *)getenv("SHR_USR_KEY"));
+// pshrf22 = (DATI_GRAF *) crea_shrmem(shr_usr_key+ID_SHM_GRAF,sizeof(DATI_GRAF),&id_sh_f22);
+// bufdati=(S_MIS *) &pshrf22->ord[0][0];
+// #endif
 
-#if defined AIX || VMS
-shr_usr_key = atoi((char *)getenv("SHR_USR_KEY"));
-pshrf22 = (DATI_GRAF *) crea_shrmem(shr_usr_key+ID_SHM_GRAF,sizeof(DATI_GRAF),&id_sh_f22);
-bufdati=(S_MIS *) &pshrf22->ord[0][0];
-#endif
-
-#if defined UNIX && !defined AIX
+// #if defined UNIX && !defined AIX
 fpDAT=fopen("f22","r");
 if(fpDAT==NULL)
         {
         printf("\n apertura non riuscita file f22");
         exit(1);
         }
-#endif
+// #endif
 }
 
 /*
@@ -99,13 +99,13 @@ if(fpDAT==NULL)
 */
 void close_22dat()
 {
-#if defined AIX || VMS
-   distruggi_shrmem(id_sh_f22);
-#endif
+// #if defined AIX || VMS
+//    distruggi_shrmem(id_sh_f22);
+// #endif
 
-#if defined UNIX && !defined AIX
+// #if defined UNIX && !defined AIX
 	fclose(fpDAT);
-#endif
+// #endif
 }
 
 
@@ -116,82 +116,82 @@ void close_22dat()
 	         TUTTI       trasferisce nell'area dati tutti i campioni presenti
 */
 
-#if defined AIX || VMS
+// #if defined AIX || VMS
 
-float tsec;   /* tempo in secondi da memorizzare nel buffer dati; 
-         	 viene incrementato di INC_SEC secondi per ogni campione*/
-int read_22dat(flag,dim_bufcirc,num_camp_z0,inc_sec)
-char flag;
-int dim_bufcirc;	/* dimensione massima buffer circolare DIM_BUFCIRC*/
-int num_camp_z0;	/* utili solo versione ULTRIX*/
-int inc_sec;		/*   "     "     "       "   */
-{
-static S_DATI buf;   /* buffer di appoggio per la lettura del record dati */
-float step,correz;
-int ultimo;
-int i,lun;
-int ind;      /* indice che scorre il buffer di memorizzazione dati
-				 bufval   */
-int pieno;   /* indica se il buffer e' stato completamente riempito 
-				(variabile utilizzata in fase di prima lettura) */
+// float tsec;   /* tempo in secondi da memorizzare nel buffer dati; 
+//          	 viene incrementato di INC_SEC secondi per ogni campione*/
+// int read_22dat(flag,dim_bufcirc,num_camp_z0,inc_sec)
+// char flag;
+// int dim_bufcirc;	/* dimensione massima buffer circolare DIM_BUFCIRC*/
+// int num_camp_z0;	/* utili solo versione ULTRIX*/
+// int inc_sec;		/*   "     "     "       "   */
+// {
+// static S_DATI buf;   /* buffer di appoggio per la lettura del record dati */
+// float step,correz;
+// int ultimo;
+// int i,lun;
+// int ind;      /* indice che scorre il buffer di memorizzazione dati
+// 				 bufval   */
+// int pieno;   /* indica se il buffer e' stato completamente riempito 
+// 				(variabile utilizzata in fase di prima lettura) */
 
-int kk;
+// int kk;
 
-if(flag==TUTTI)
-	{
-	tsec=0.0;
-	n_last=pshrf22->npu;
-	if(n_last<0)
-		n_last=dim_bufcirc-1;
-	ind=0;
-	pieno=0;
-/*
-  inizializza il buffer dei minimi e massimi a valori estremi
-*/
-	set_min_max(NULL);
+// if(flag==TUTTI)
+// 	{
+// 	tsec=0.0;
+// 	n_last=pshrf22->npu;
+// 	if(n_last<0)
+// 		n_last=dim_bufcirc-1;
+// 	ind=0;
+// 	pieno=0;
+// /*
+//   inizializza il buffer dei minimi e massimi a valori estremi
+// */
+// 	set_min_max(NULL);
 
-/*
- calcola i valori di minimo e massimo su tutto il buffer circolare
-*/
-	ultimo=n_last-1;
-	if(ultimo<0) ultimo=dim_bufcirc-1;
-	while(n_last!=ultimo)
-		{
-		memcpy(&buf.mis[0],&pshrf22->ord[n_last][0],sizeof(S_MIS));
-		buf.t=pshrf22->asc[n_last];
-		if(!(buf.t==0 && n_last!=0))
-			set_min_max(&buf);
-		if(n_last<dim_bufcirc-1)
-			n_last++;
-		else
-			n_last=0;
-		}
-	}
-else  /* caso di lettura per aggiornamento  */
-	{
-/* esamina nel buffer circolare condiviso tutte le nuove variabili
-   acquisite aggiornando i valori di massimo e minimo
-*/
-	ultimo=pshrf22->npu-1;
-	if(ultimo<0)  /*  modifica 26-8-91 da : ultimo=dim_bufcirc; */
-		ultimo=dim_bufcirc-1;
-	while(n_last!=ultimo)
-		{
-		memcpy(&buf.mis[0],&pshrf22->ord[n_last][0],sizeof(S_MIS));
-		buf.t=pshrf22->asc[n_last];
-		if(!(buf.t==0 && n_last!=0))
-			set_min_max(&buf);
-		if(n_last<dim_bufcirc-1)
-			n_last++;
-		else
-			n_last=0;
-		}
-	}
-return(0);
-}
-#endif
+// /*
+//  calcola i valori di minimo e massimo su tutto il buffer circolare
+// */
+// 	ultimo=n_last-1;
+// 	if(ultimo<0) ultimo=dim_bufcirc-1;
+// 	while(n_last!=ultimo)
+// 		{
+// 		memcpy(&buf.mis[0],&pshrf22->ord[n_last][0],sizeof(S_MIS));
+// 		buf.t=pshrf22->asc[n_last];
+// 		if(!(buf.t==0 && n_last!=0))
+// 			set_min_max(&buf);
+// 		if(n_last<dim_bufcirc-1)
+// 			n_last++;
+// 		else
+// 			n_last=0;
+// 		}
+// 	}
+// else  /* caso di lettura per aggiornamento  */
+// 	{
+// /* esamina nel buffer circolare condiviso tutte le nuove variabili
+//    acquisite aggiornando i valori di massimo e minimo
+// */
+// 	ultimo=pshrf22->npu-1;
+// 	if(ultimo<0)  /*  modifica 26-8-91 da : ultimo=dim_bufcirc; */
+// 		ultimo=dim_bufcirc-1;
+// 	while(n_last!=ultimo)
+// 		{
+// 		memcpy(&buf.mis[0],&pshrf22->ord[n_last][0],sizeof(S_MIS));
+// 		buf.t=pshrf22->asc[n_last];
+// 		if(!(buf.t==0 && n_last!=0))
+// 			set_min_max(&buf);
+// 		if(n_last<dim_bufcirc-1)
+// 			n_last++;
+// 		else
+// 			n_last=0;
+// 		}
+// 	}
+// return(0);
+// }
+// #endif
 
-#if defined UNIX && !defined AIX
+// #if defined UNIX && !defined AIX
 
 float tsec;   /* tempo in secondi da memorizzare nel buffer dati; 
          	 viene incrementato di INC_SEC secondi per ogni campione*/
@@ -346,7 +346,7 @@ if((fread(&header2,sizeof(S_HEAD2),1,fp))==NULL)
         }
 (*offset)+=sizeof(S_HEAD2) + (LUN_SIMB*header2.ncasi);
 }
-#endif                        
+// #endif                        
 
 
 /*

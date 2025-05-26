@@ -127,19 +127,10 @@ int b_wait;        /* segnala che e' stato settato il cursore di wait */
 int alloca_bufdati();
 int dim_bufdati;
 int check_header();
-static int read_nomi_circ(F22CIRC_HD *);
-extern int read_gruppi(int);
-void set_min_max_circ(int , float *);
-void modif_min_max(int , int *, S_SEL_DATI *);
-int scrivi_gruppi();
-void close_gruppi();
-int write_gruppo(int);
-int write_gruppo_noascii(int);
-int    ControlName();
-void d2free(char**);
-void set_cur_wait();
-void reset_graphics();
-extern void clr_cur_wait();
+extern void clr_cur_waitGR();
+int open_gruppiGR();
+int read_gruppiGR(int);
+extern void close_path();
 
 
 extern int    _MAX_SNAP_SHOT;
@@ -151,11 +142,20 @@ extern int    _SPARE_SNAP;
 extern int    _PERT_CLEAR;
 extern int    RileggiF22Par;
 
+extern void set_cur_wait();
+static int read_nomi_circ(F22CIRC_HD *);
+static void open_path();
+void modif_min_max(int , int *, S_SEL_DATI *);
+int scrivi_gruppi();
+int ControlName();
+extern void reset_graphics();
+
+
 /*
    Apre i file f22circ.dat e il file selezionato
    Usa la open con gli identificatori interi !!!!!!!
 */
-int open_22dat_circ()
+int open_22dat_circGR()
 {
 int i,fi,fj;
 char *punt;
@@ -307,7 +307,7 @@ for(i=0;i<4;i++)
     la sezione header.
     Il file e' gia' aperti.
 */
-int read_nomi_circ(F22CIRC_HD *head)
+static int read_nomi_circ(F22CIRC_HD *head)
 {
 int row,col;
 char *pdata;
@@ -429,7 +429,7 @@ static int Prima_volta=1;
  *   informazioni relative ai gruppi: se l'apertura in lettura non 
  *   riesce viene creato un nuovo file per gruppi inizializzato a 0.
  */
-int open_gruppi()
+int open_gruppiGR()
 {
 int i,k,j;
 char appoggio[FILENAME_MAX];
@@ -491,7 +491,7 @@ unsigned long offset;
 int ret, flag=0;
    rewind(fpGR);
    memcpy(&gruppo_tmp,&gruppi[indice],sizeof(REC_GRUPPO));
-   read_gruppi(flag);
+   read_gruppiGR(flag);
    rewind(fpGR);
    memcpy(&gruppi[indice],&gruppo_tmp,sizeof(REC_GRUPPO));
    ret = scrivi_gruppi();
@@ -669,8 +669,8 @@ char *blank;
      free(blank);
 }
 
-void d2free(prow) 
-char **prow;
+void d2free(char **prow) 
+//char **prow;
 {
 XtFree((char*)*prow);
 XtFree((char*)prow);
@@ -686,7 +686,7 @@ XtFree((char*)prow);
     Legge dal file ASCII dei gruppi i dati da caricare
     nelle strutture descrittive di ciascun gruppo.
 */
-int read_gruppi(flag)
+int read_gruppiGR(flag)
 int flag;  /*  flag == 1 se si desidera la lista per fase di inserimento
                gruppi  */
 {
@@ -747,8 +747,8 @@ return(ngr);
 }
 
 
-int read_22dat_circ(flag)
-char flag;
+int read_22dat_circGR(char flag)
+//char flag;
 {
 int i;
 int ind;      /* indice che scorre il buffer di memorizzazione dati
@@ -837,7 +837,7 @@ else  /* caso di lettura per aggiornamento  */
  Elimina il timeout e ricarica il file f22
 */
 		reset_graphics();
-		return(0);
+		return(1);
 		}
 
 /**
@@ -911,7 +911,7 @@ FINE:
 if(b_wait)
 	{
 	b_wait=0;
-	clr_cur_wait();
+	clr_cur_waitGR();
 	}
 /*
  Posiziona n_last sull'ultimo dato valido inserito

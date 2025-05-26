@@ -247,7 +247,7 @@ extern void agg_umis();
  void free_lista_umis();
 extern void close_gruppi();
 extern int write_gruppo(int);
-void set_min_max(S_DATI *,S_XLGRAFICO *);
+void set_min_max1(S_DATI *,S_XLGRAFICO *);
 
 
 
@@ -506,7 +506,7 @@ for(i=0;i<4;i++)
  per le variabili selezionate
 */
 rew_dati(pXlGraf);
-set_min_max(NULL,pXlGraf);
+set_min_max1(NULL,pXlGraf);
 read_22datGR(AGGIORNA,pXlGraf);
 
 if(notify_overflow == True)
@@ -2503,7 +2503,7 @@ switch(ind_widget)
  per le variabili selezionate
 */
 	rew_dati(pXlGraf);
-	set_min_max(NULL,pXlGraf);
+	set_min_max1(NULL,pXlGraf);
 	read_22datGR(AGGIORNA,pXlGraf);
 
 	if(notify_overflow == True)
@@ -2649,7 +2649,7 @@ fmax=(fmax-uni_mis[s->ind_umis[i]].B[s->umis_sel[i]])/
  per le variabili selezionate
 */
 	rew_dati(pXlGraf);
-	set_min_max(NULL,pXlGraf);
+	set_min_max1(NULL,pXlGraf);
 	read_22datGR(AGGIORNA,pXlGraf);
 	if(notify_overflow == True)
 	WidAttenzione(topLevel_set,"Too many data for trend buffer!",MAPPA);
@@ -3089,13 +3089,13 @@ for(i=0;i<num_umis;i++)
 }
 
 /**********************************************************
- *  set_min_max
+ *  set_min_max1
  *      aggiorna i valori di minimo e massimo per ogni variabile 
  *      appartenente al record.
  *		se il parametro passato come argomento e' =NULL inizializza
  *      a valori estremi i valori di minimo e massimo.
  **********************************************************/
-void set_min_max(rec,pXlGraf)
+void set_min_max1(rec,pXlGraf)
 S_DATI *rec;   /* record dati */
 S_XLGRAFICO *pXlGraf;
 {

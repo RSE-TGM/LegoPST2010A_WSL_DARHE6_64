@@ -738,7 +738,7 @@ void fill_space (char*, int);
 int  writen(int,char*,int);
 int readn(int,char*,int);
 
-void open_22dat(void);
+int open_22dat(void);
 void close_22dat(void);
 void read_22dat(char,int,int,int);
 //void read_nomi(FILE*,unsigned long *);
