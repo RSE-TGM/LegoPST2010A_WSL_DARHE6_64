@@ -1665,7 +1665,7 @@ void addDISN(int modid, char *mvname, int numocc)
     if ((modlist[modnum]->mvlist[SYSTEM_CONF][mv] = (mvdesc *)malloc(sizeof(mvdesc))) == NULL)
       essit("malloc failed in mvdesc-DISN allocation\n");
 
-    sprintf(handin_name, "U_%d_M%03d", mv+1, disnnum);
+    snprintf(handin_name, sizeof(handin_name), "U_%d_M%03d", (mv+1)%10, (disnnum)%1000); 
 
     strcpy(modlist[modnum]->mvlist[SYSTEM_CONF][mv]->fullmvname, handin_name);
     strcpy(modlist[modnum]->mvlist[SYSTEM_CONF][mv]->mvtype, "UA");
@@ -2131,7 +2131,7 @@ printf("%s %s\n",modlist[modcur]->modname, modlist[modcur]->fullmodname+FULLMODN
 
     fscanf(fpI5, "%s\n", partmodname);
 
-    lbuf = fgets(modlist[m]->modcomment, MAXLINELENGTH-1, fpI5);        /* leggi il commento del  modulo */
+    lbuf = fgets(modlist[m]->modcomment, COMMENTNCH-1, fpI5);        /* leggi il commento del  modulo */
     modlist[m]->modcomment[strlen(modlist[m]->modcomment)-1] = '\0';
 
 // Guag feb 2008 - test per i moduli di tipo REGOL.    

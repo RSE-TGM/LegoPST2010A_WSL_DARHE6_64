@@ -451,7 +451,7 @@ static void apply_proc();
 static void timer_proc();
 static void find_proc();
 static void HC_proc();
-int cerca_umis();
+int cerca_umis(char*);
 static int init_application();
 Widget WidAttenzione(Widget,char*,int);
 void d2free(char**);
@@ -775,8 +775,19 @@ for(i=0;i<4;i++)
 		(s->ind_umis[i])=cerca_umis(s->descr_mis[i]);
 		if(s->ind_umis[i]==-1)
 			{
-			s->ind_umis[i]=num_umis-1;
+// GUAG2025 s->ind_umis[i]=num_umis-1;
+			s->ind_umis[i]=0; // Usa prima unità invece dell'ultima
+            printf("AVVISO: load_variablesGR: unità di misura non trovata per variabile %d, uso default\n", i);			
 			} 
+
+			// Verifica che l'unità di misura sia inizializzata
+	if(uni_mis[s->ind_umis[i]].A[s->umis_sel[i]] == 0 && 
+   		uni_mis[s->ind_umis[i]].B[s->umis_sel[i]] == 0) {
+   		 printf("ERRORE: load_variablesGR: unità di misura non inizializzata correttamente\n");
+    // Imposta valori di default
+   		 uni_mis[s->ind_umis[i]].A[s->umis_sel[i]] = 1.0;
+    		uni_mis[s->ind_umis[i]].B[s->umis_sel[i]] = 0.0;
+	}
 		s->autoscaling[i]=1;
 /*
   e' settato l'autoscaling: forza la ricerca di minimo e massimo
@@ -1204,80 +1215,82 @@ for(i=0;i<4;i++)
  *    in modo conforme ai valori di minimo e massimo
  */
 
+// 2. Aggiungere controlli in set_ordinate()
 int set_ordinate(int ind)
-//int ind;    indice che individua la variabile all'interno del
-//                       grafico (valori da 0 a 3)       */
 {
-int uguali,ord_scritta;
-int lun;
-float delta;
-float ord;
-float min; /* minimo nell'unita' di misura prescelta */
-float max; /* massimo nell'unita' di misura prescelta */
-int i,j;
-S_GRAFICO *s;
-s=(&sg);
+    int uguali,ord_scritta;
+    int lun;
+    float delta;
+    float ord;
+    float min; /* minimo nell'unita' di misura prescelta */
+    float max; /* massimo nell'unita' di misura prescelta */
+    int i,j;
+    S_GRAFICO *s;
+    s=(&sg);
 
-if(s->ind_mis[ind]==-1)
-        {
+    if(s->ind_mis[ind]==-1)
+    {
         for(i=0;i<5;i++)
-                sprintf(s->str_ord[i][ind],"         ");
+            sprintf(s->str_ord[i][ind],"         ");
         return(1);
+    }
+    
+    // Verifica che l'unità di misura sia valida
+    if(s->ind_umis[ind] < 0 || s->ind_umis[ind] >= num_umis) {
+        printf("ERRORE: ind_umis[%d] = %d non valido\n", ind, s->ind_umis[ind]);
+        s->ind_umis[ind] = 0; // Default all'unità di misura 0
+    }
+    
+    // Verifica che umis_sel sia valido
+    if(s->umis_sel[ind] < 0 || s->umis_sel[ind] >= 4) {
+        printf("ERRORE: umis_sel[%d] = %d non valido\n", ind, s->umis_sel[ind]);
+        s->umis_sel[ind] = 0;
+    }
+    
+    // Debug: stampa i valori prima della conversione
+    printf("DEBUG set_ordinate(%d):\n", ind);
+    printf("  sel_min_max: min=%f, max=%f\n", 
+           s->sel_min_max[ind].min, s->sel_min_max[ind].max);
+    printf("  ind_umis=%d, umis_sel=%d\n", 
+           s->ind_umis[ind], s->umis_sel[ind]);
+    printf("  A=%f, B=%f\n", 
+           uni_mis[s->ind_umis[ind]].A[s->umis_sel[ind]],
+           uni_mis[s->ind_umis[ind]].B[s->umis_sel[ind]]);
+    
+    // [Resto del codice esistente con le conversioni...]
+    
+    min=s->sel_min_max[ind].min *
+         uni_mis[s->ind_umis[ind]].A[s->umis_sel[ind]]+
+         uni_mis[s->ind_umis[ind]].B[s->umis_sel[ind]];
+    max=s->sel_min_max[ind].max *
+         uni_mis[s->ind_umis[ind]].A[s->umis_sel[ind]]+
+         uni_mis[s->ind_umis[ind]].B[s->umis_sel[ind]];
+    
+    printf("  min convertito=%f, max convertito=%f\n", min, max);
+    
+    // Controllo valori validi
+    if(min == max) {
+        // Se min e max sono uguali, crea un range artificiale
+        if(min == 0.0) {
+            min = -1.0;
+            max = 1.0;
+        } else {
+            float delta_range = fabs(min) * 0.1;
+            if(delta_range < 0.1) delta_range = 0.1;
+            min -= delta_range;
+            max += delta_range;
         }
-/*
- esamina se i fondo scala delle 4 misure sono uguali; in
- tal caso vengono esaminati solo i fondo scala relativi
- alla prima misura.
-*/
-uguali=0;
-ord_scritta=0;
-/*
-  esamina se e' stata scritta almeno una ordinata
-*/
-for(i=ind;i>=0;i--)
-        {
-        if(s->ind_mis[i]!=-1) ord_scritta=1;
-        }
-if(ind>0 && ord_scritta)
-        {
-        uguali=1;
-        for(i=0;i<4;i++)
-                {
-		if(s->ind_mis[i]!=(-1) &&(
-(s->ind_umis[i]!=s->ind_umis[ind])||
-                   (s->umis_sel[i]!=s->umis_sel[ind])||
-                   (s->sel_min_max[i].max!=s->sel_min_max[ind].max) ||
-                    (s->sel_min_max[i].min!=s->sel_min_max[ind].min)))
-                        uguali=0;
-                }
-        if (s->ind_mis[0]== -1) uguali=0;
-        if(uguali)
-                {
-                for(i=0;i<5;i++)
-                        {
-                        for(j=1;j<4;j++)
-                                sprintf(s->str_ord[i][j],"         ");
-                        }
-                return(1);
-                }
-        }
-       
-
-min=s->sel_min_max[ind].min *
-     uni_mis[s->ind_umis[ind]].A[s->umis_sel[ind]]+
-     uni_mis[s->ind_umis[ind]].B[s->umis_sel[ind]];
-max=s->sel_min_max[ind].max *
-     uni_mis[s->ind_umis[ind]].A[s->umis_sel[ind]]+
-     uni_mis[s->ind_umis[ind]].B[s->umis_sel[ind]];
-
-delta=(max-min)/4.0;
-ord=max;
-for(i=0;i<5;i++)
-        {
+    }
+    
+    delta=(max-min)/4.0;
+    ord=max;
+    for(i=0;i<5;i++)
+    {
         formatta(s->str_ord[i][ind],ord);
         ord-=delta;
-        }
-
+    }
+    
+    return(0);
 }
              
 
@@ -1486,6 +1499,36 @@ XClearArea(display,XtWindow(sg.w_val),0,0,0,0,True);
 XClearArea(display,XtWindow(sg.w_tim),0,0,0,0,True);
 XClearArea(display,XtWindow(sg.w_mis),0,0,0,0,True);
 XClearArea(display,XtWindow(widget_array[k_tempo]),0,0,0,0,True);
+
+//GUAG2025 
+    // Forza il redraw chiamando direttamente draw_proc
+    if(sg.w_ord && XtWindow(sg.w_ord))
+    {
+        XmDrawingAreaCallbackStruct cb_data;
+        int tag = k_ord1;
+        cb_data.window = XtWindow(sg.w_ord);
+        cb_data.event = NULL;
+        cb_data.reason = XmCR_EXPOSE;
+        draw_proc(sg.w_ord, &tag, &cb_data);
+    }
+    
+    if(sg.w_tim && XtWindow(sg.w_tim))
+    {
+        XmDrawingAreaCallbackStruct cb_data;
+        int tag = k_tim1;
+        cb_data.window = XtWindow(sg.w_tim);
+        cb_data.event = NULL;
+        cb_data.reason = XmCR_EXPOSE;
+        draw_proc(sg.w_tim, &tag, &cb_data);
+    }
+    
+    // Forza il flush
+    XFlush(display);
+    XSync(display, False);
+    
+// GUAG2025 FINE
+
+
 timer= XtAppAddTimeOut(XtWidgetToApplicationContext(main_window_widget),
                        (unsigned long)4000,timer_proc,NULL);
 }
@@ -1499,37 +1542,49 @@ timer= XtAppAddTimeOut(XtWidgetToApplicationContext(main_window_widget),
 void prep_str_tim(t_ini,t_fin)
 float t_ini,t_fin;
 {
-int i;
-float t_delta; /* intervallo di tempo per scrittura stringhe
-                asse delle ascisse */
-float t_asc;
-int t_ore,t_minuti,t_secondi;
-long    ora,min,sec,giorno,mese,anno;
+    int i;
+    float t_delta;
+    float t_asc;
+    int t_ore,t_minuti,t_secondi;
+    long ora,min,sec,giorno,mese,anno;
 
-
-
-t_delta=(t_fin-t_ini)/6;
-t_asc=t_ini;
-for(i=0;i<7;i++)
-        {
-	anno=0;
+    // Debug
+    printf("DEBUG prep_str_tim: t_ini=%f, t_fin=%f\n", t_ini, t_fin);
+    
+    // Controllo validità tempi
+    if(t_fin <= t_ini) {
+        printf("ERRORE: t_fin(%f) <= t_ini(%f)\n", t_fin, t_ini);
+        t_fin = t_ini + 1.0; // Forza almeno 1 secondo di differenza
+    }
+    
+    t_delta=(t_fin-t_ini)/6;
+    t_asc=t_ini;
+    
+    for(i=0;i<7;i++)
+    {
+        anno=0;
         mese=1;
         giorno=1;
         ora=0;
         min=0;
         sec=0;
-        converti_tempo(t_asc,&ora,&min,&sec,&giorno,&mese,&anno);
-        sprintf(str_tims[i],"%.2f",t_asc);
-        t_ore=((((int)t_asc)%86400)/60)/60;
-        t_minuti=(((int)t_asc)/60)%60;
-        t_secondi=((int)t_asc)%60;
-        sprintf(str_tim[i],"%.2d:%.02d:%.02d",ora,min,sec);
-        if(i==0)
-				sprintf(str_tim[i],"%s [%.2d-%.2d-%.4d]",
-						str_tim[i],giorno,mese,anno);
-        t_asc+=t_delta;
+        
+        // Verifica valore valido prima di convertire
+        if(t_asc < 0 || t_asc > 1e9) {
+            printf("ERRORE: t_asc non valido: %f\n", t_asc);
+            sprintf(str_tims[i],"ERR");
+            sprintf(str_tim[i],"ERR");
+        } else {
+            converti_tempo(t_asc,&ora,&min,&sec,&giorno,&mese,&anno);
+            sprintf(str_tims[i],"%.2f",t_asc);
+            sprintf(str_tim[i],"%.2d:%.02d:%.02d",ora,min,sec);
+            if(i==0)
+                sprintf(str_tim[i],"%s [%.2d-%.2d-%.4d]",
+                        str_tim[i],giorno,mese,anno);
         }
-}           
+        t_asc+=t_delta;
+    }
+}
 
 
 /*
@@ -1791,41 +1846,84 @@ switch(widget_num)
                 }
 	break;
 
+	// case k_ord1:
+	// get_something(widget_array[k_ord1],XmNheight,(char *)&ord_height);
+	// for(i=1;i<4;i++)
+	// 	{
+	// 	if(strcmp(sg.str_ord[0][i],"         ")==0)
+	// 		ord_unica=1;
+	// 	else
+	// 		{
+	// 		ord_unica=0;
+	// 		break;
+	// 		}
+	// 	}
+	// for(k=0;k<5;k++)
+	// 	{
+	// 	y_line=k*((ord_height-5*font_height)/4);
+	// 	for(i=0;i<4;i++)
+	// 		{
+	// 		if(ord_unica)
+	// 			y_line+=(font_height*3);
+	// 		else
+	// 			y_line+=font_height;
+    //                     if(sg.ind_mis[i]==-1) continue;
+	// 		if(HC_on)
+    //         			XDrawString(display,win,gc2[0],20,y_line,
+    //                			sg.str_ord[k][i],
+	// 				strlen(sg.str_ord[k][i]));
+	// 		else
+	// 			XDrawString(display,win,gc[i],20,y_line,
+    //                                    sg.str_ord[k][i],
+	// 				strlen(sg.str_ord[k][i]));
+	// 		}
+	// 	}
+	// break;
+
 	case k_ord1:
-	get_something(widget_array[k_ord1],XmNheight,(char *)&ord_height);
-	for(i=1;i<4;i++)
-		{
-		if(strcmp(sg.str_ord[0][i],"         ")==0)
-			ord_unica=1;
-		else
-			{
-			ord_unica=0;
-			break;
-			}
-		}
-	for(k=0;k<5;k++)
-		{
-		y_line=k*((ord_height-5*font_height)/4);
-		for(i=0;i<4;i++)
-			{
-			if(ord_unica)
-				y_line+=(font_height*3);
-			else
-				y_line+=font_height;
-                        if(sg.ind_mis[i]==-1) continue;
-			if(HC_on)
-            			XDrawString(display,win,gc2[0],20,y_line,
-                   			sg.str_ord[k][i],
-					strlen(sg.str_ord[k][i]));
-			else
-				XDrawString(display,win,gc[i],20,y_line,
-                                       sg.str_ord[k][i],
-					strlen(sg.str_ord[k][i]));
-			}
-		}
-	break;
+    get_something(widget_array[k_ord1],XmNheight,(char *)&ord_height);
+    
+    // Calcolo semplificato delle posizioni
+    for(k=0;k<5;k++)
+    {
+        // Posizione base per ogni linea di ordinata
+        y_line = (k + 1) * ((ord_height - font_height) / 5);
+        
+        for(i=0;i<4;i++)
+        {
+            if(sg.ind_mis[i]==-1) continue;
+            
+            // Se non c'è scala unica o è la prima variabile, disegna
+            if(!ord_unica || i==0)
+            {
+                if(HC_on)
+                    XDrawString(display,win,gc2[0],20,y_line,
+                               sg.str_ord[k][i],
+                               strlen(sg.str_ord[k][i]));
+                else
+                    XDrawString(display,win,gc[i],20,y_line,
+                               sg.str_ord[k][i],
+                               strlen(sg.str_ord[k][i]));
+            }
+        }
+    }
+    break;
+
+
+
+
+
+
+
+
+
+
 	}  
 }
+
+
+
+
 
 
 
@@ -2723,9 +2821,15 @@ void formatta(str,fval)
 char *str;
 float fval;
 {
-if(fval>999999.9 || fval<-99999.9 || (fval<0.01 && fval>-0.01))
+    // Aggiungi controllo per valore esattamente zero
+    if(fval == 0.0) {
+        sprintf(str,"   0.0000");
+        return;
+    }
+
+	if(fval>999999.9 || fval<-99999.9 || (fval<0.01 && fval>-0.01))
         sprintf(str,"%9.4E",fval);
-else
+	else
         sprintf(str,"%9.4f",fval);
 }
 

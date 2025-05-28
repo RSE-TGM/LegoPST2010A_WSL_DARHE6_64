@@ -10,7 +10,7 @@
 
 /* ************************ Parametri LEGO  ************************ */
 
-#define N000              70                    /* MOLTIPLICATORE    */
+#define N000              160                    /* MOLTIPLICATORE    */
 #define N001              N000*10               /* N. MODULI         */
 #define N002              N000*25               /* N. BLOCCHI        */
 #define N003              N000*60               /* N. STATI + ALG. =

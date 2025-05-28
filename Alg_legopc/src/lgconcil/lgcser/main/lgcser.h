@@ -2,7 +2,7 @@
 #include <string.h>
 #include <windows.h>
 
-#define N000 70
+#define N000 160
 #define N005 N000*100
 #define MAXSENS 200
 

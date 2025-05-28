@@ -78,7 +78,7 @@ unset ALGENV_SET
 export LG_TEXTEDITOR=leafpad
 #############PRODUCTINSTEND##########
 ######     NET_COMPI PARAMETERS    ######
-export N000=70
+export N000=160
 export N001=`expr $N000 \* 10`
 export N002=`expr $N000 \* 25`
 export N003=60000

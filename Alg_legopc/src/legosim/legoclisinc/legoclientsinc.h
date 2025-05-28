@@ -1,4 +1,4 @@
-#define N000 70
+#define N000 160
  
 #define N003 N000*50
 #define N004 N000*25 

@@ -101,16 +101,26 @@ int cerca_umis(descr)
 char *descr;
 {
 int i,num_umis;
+
+    // Verifica parametro valido
+    if(descr == NULL || descr[0] == '\0') {
+        printf("ERRORE: cerca_umis:  chiamato con descrizione vuota\n");
+        return 0; // Ritorna prima unità di misura come default
+    }
+
 num_umis=cerca_num_umis();
 for(i=0;i<num_umis;i++)
 	{
 	if(toupper(descr[0]) == (int) uni_mis[i].type)
 		return(i);
 	}
+printf("AVVISO: unità di misura non trovata per '%s', uso default\n", descr);
 return(num_umis-1); /* se non e' stata trovata l'unita' di misura
                        assume come umis l'ultima in tabella che 
                        corrisponde al caso di undefined */  
 }
+
+
 
 /*
    ricerca quante unita' di misura sono previste
