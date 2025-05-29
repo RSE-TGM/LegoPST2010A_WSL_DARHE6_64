@@ -236,7 +236,7 @@ static void	activateCB_menu2_index( UxWidget, UxClientData, UxCallbackArg )
 	str = leggi_pagina(fp_doc, max_righe);
 	
 	XmTextSetString(UxGetWidget(text_documentation), str);
-	free(str);
+	free((void*)str);
 	
 	sprintf(buf, "%d", pag_ini);
 	set_label(UxGetWidget(label_page_no),buf);
@@ -810,7 +810,7 @@ static Widget	_Ux_create_ashell_print( _Uxtipo_doc )
 		              }
 		
 		        if (genera)
-		           crea_sstate_doc(&max_page_doc);
+		           crea_sstate_doc((int)&max_page_doc);
 		        else
 		           max_page_doc = conta_pagine_doc(DOC_SSTATE_MODELLO, num_lines_horiz);
 		
@@ -826,7 +826,7 @@ static Widget	_Ux_create_ashell_print( _Uxtipo_doc )
 		if ((fp_doc = fopen(nome_file_doc,"r")) == NULL)
 		{
 		   crea_errorDialog("error while opening documentation file.\n");
-		   return;
+		   return(NULL);
 		}
 		
 		if (tipo_doc == DOC_STAZIONARI)

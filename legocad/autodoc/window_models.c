@@ -48,6 +48,8 @@ extern byte num_varianti, num_file_f14;
 
 extern Boolean open_window_models;
 
+extern void lcDestroySwidget(Widget);
+
 /*******************************************************************************
 	The definition of the context structure:
 	If you create multiple instances of your interface, the context
@@ -128,7 +130,7 @@ Widget	create_window_models();
  ***   Descrizione: 
  ***      Salva i settaggi relativi alle versioni dello stazionario.
  ***/
-salva_steady_version()
+void salva_steady_version()
 {
    char *str;
 
@@ -150,10 +152,10 @@ salva_steady_version()
       if (varianti_modello[0].abilitato)
          num_file_f14++;
    strcpy(varianti_modello[0].percorso, str);
-   XmStringFree(str);
+   XmStringFree((XmString)str);
    str = XmTextFieldGetString(UxGetWidget(text_title1));
    strcpy(varianti_modello[0].titolo, str);
-   XmStringFree(str);
+   XmStringFree((XmString)str);
 
    str = XmTextFieldGetString(UxGetWidget(text_path2));
    if ( varianti_modello[1].abilitato && access(str, F_OK) != 0 )
@@ -165,10 +167,10 @@ salva_steady_version()
       if (varianti_modello[1].abilitato)
          num_file_f14++;
    strcpy(varianti_modello[1].percorso, str);
-   XmStringFree(str);
+   XmStringFree((XmString)str);
    str = XmTextFieldGetString(UxGetWidget(text_title2));
    strcpy(varianti_modello[1].titolo, str);
-   XmStringFree(str);
+   XmStringFree((XmString)str);
 
    str = XmTextFieldGetString(UxGetWidget(text_path3));
    if ( varianti_modello[2].abilitato && access(str, F_OK) != 0 )
@@ -180,10 +182,10 @@ salva_steady_version()
       if (varianti_modello[2].abilitato)
          num_file_f14++;
    strcpy(varianti_modello[2].percorso, str);
-   XmStringFree(str);
+   XmStringFree((XmString)str);
    str = XmTextFieldGetString(UxGetWidget(text_title3));
    strcpy(varianti_modello[2].titolo, str);
-   XmStringFree(str);
+   XmStringFree((XmString)str);
 
    str = XmTextFieldGetString(UxGetWidget(text_path4));
    if ( varianti_modello[3].abilitato && access(str, F_OK) != 0 )
@@ -195,10 +197,10 @@ salva_steady_version()
       if (varianti_modello[3].abilitato)
          num_file_f14++;
    strcpy(varianti_modello[3].percorso, str);
-   XmStringFree(str);
+   XmStringFree((XmString)str);
    str = XmTextFieldGetString(UxGetWidget(text_title4));
    strcpy(varianti_modello[3].titolo, str);
-   XmStringFree(str);
+   XmStringFree((XmString)str);
 
    str = XmTextFieldGetString(UxGetWidget(text_path5));
    if ( varianti_modello[4].abilitato && access(str, F_OK) != 0 )
@@ -210,10 +212,10 @@ salva_steady_version()
       if (varianti_modello[4].abilitato)
          num_file_f14++;
    strcpy(varianti_modello[4].percorso, str);
-   XmStringFree(str);
+   XmStringFree((XmString)str);
    str = XmTextFieldGetString(UxGetWidget(text_title5));
    strcpy(varianti_modello[4].titolo, str);
-   XmStringFree(str);
+   XmStringFree((XmString)str);
 }
 
 /*******************************************************************************

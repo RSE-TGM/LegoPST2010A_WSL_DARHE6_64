@@ -288,6 +288,17 @@ long vai_alla_pagina();
 long pagina_prec();
 long pagina_succ();
 
+
+void lcDestroySwidget(Widget);
+void free(void *);
+int confronta_date(char*, char*);
+int crea_docdati(int*, int*);
+
+int conta_pagine_doc(char*, int);
+int crea_docvar(int*, int*);
+int crea_sstate_doc(int);
+ 
+
 #include "note.h"
 
 #endif

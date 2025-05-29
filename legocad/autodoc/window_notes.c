@@ -94,6 +94,7 @@ Widget	create_window_notes();
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
+void lcDestroySwidget(Widget);
 
 /*** void conferma_note_inserite(testo_nota, chiudi)
  ***    Parametri:

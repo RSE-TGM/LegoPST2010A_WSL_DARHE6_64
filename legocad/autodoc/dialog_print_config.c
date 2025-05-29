@@ -5,6 +5,8 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <unistd.h>
+
 #include <Xm/Xm.h>
 #include <Xm/DialogS.h>
 #include <Xm/MenuShell.h>
@@ -34,9 +36,11 @@
 /*
         Fine sezione per SCCS
 */
-
-
+#include "libutilx.h"
+#include "utile.h"
 #include "autodoc.h"
+
+extern void lcDestroySwidget(Widget);
 
 /************************************************************************/
 /* VARIABILI GLOBALI ESTERNE						*/
@@ -139,7 +143,7 @@ static void	activateCB_pb_ok_print_config( UxWidget, UxClientData, UxCallbackArg
 	str = XmTextFieldGetString(UxGetWidget(text_num_righe_vr));
 	if (IsNumeric(str))
 	   sscanf(str,"%d",&num);
-	XmStringFree(str);
+	XmStringFree((XmString)str);
 	
 	/* cancella i file di documentazione cosi' il programma e' costretto a */
 	/* ricrearli con i nuovi parametri */
@@ -154,7 +158,7 @@ static void	activateCB_pb_ok_print_config( UxWidget, UxClientData, UxCallbackArg
 	str = XmTextFieldGetString(UxGetWidget(text_num_righe_or));
 	if (IsNumeric(str))
 	   sscanf(str,"%d",&num);
-	XmStringFree(str);
+	XmStringFree((XmString)str);
 	
 	/* cancella i file di documentazione cosi' il programma e' costretto a */
 	/* ricrearli con i nuovi parametri */
@@ -167,11 +171,11 @@ static void	activateCB_pb_ok_print_config( UxWidget, UxClientData, UxCallbackArg
 	 
 	str = XmTextFieldGetString(UxGetWidget(text_prefix_dati));
 	strcpy(page_prefix_dati, str);
-	XmStringFree(str);
+	XmStringFree((XmString)str);
 	 
 	str = XmTextFieldGetString(UxGetWidget(text_prefix_var));
 	strcpy(page_prefix_var, str);
-	XmStringFree(str);
+	XmStringFree((XmString)str);
 	
 	tipo_stampante = temp_tipo_stampante;
 	
@@ -614,10 +618,10 @@ static Widget	_Ux_create_dialog_print_config()
 		
 		if (tipo_stampante == PRINTER_ASCII)
 		   set_something(UxGetWidget(opt_printer), XmNmenuHistory,
-		                 UxGetWidget(opt_printer_ascii));
+		                 UxGetWidget((char*)opt_printer_ascii));
 		else
 		   set_something(UxGetWidget(opt_printer), XmNmenuHistory,
-		                 UxGetWidget(opt_printer_altro));
+		                 (char*)UxGetWidget(opt_printer_altro));
 		
 		UxPopupInterface(rtrn, no_grab);
 		return(rtrn);

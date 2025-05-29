@@ -88,8 +88,12 @@ Widget UxCreateMenuOption(char *,Widget);
 #define UxCreateWidget(wgt) \
         lcCreateWidget(wgt)
 
+void lcDestroySwidget(Widget);
+
 #define UxDestroySwidget(wgt) \
 	lcDestroySwidget(wgt)
+
+
 
 #define UxAddCallback(wgt,callb_name,callb_proc,c_data) \
 	XtAddCallback(wgt,callb_name,callb_proc,c_data)

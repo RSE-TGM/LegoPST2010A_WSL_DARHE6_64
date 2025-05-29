@@ -34,12 +34,13 @@
 /*
         Fine sezione per SCCS
 */
-
+#include <stdlib.h>
 
 #include <Xm/RowColumn.h>
 
 #include "autodoc.h"
 #include "unita.h"
+#include "libutilx.h"
 
 /************************************************************************/
 /* VARIABILI GLOBALI ESTERNE						*/
@@ -104,6 +105,9 @@ static _UxCwindow_unita	*UxWindow_unitaContext;
 *******************************************************************************/
 
 Widget	create_window_unita();
+int Empty(char*);
+void free(void*);
+int salva_unita_misura();
 
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
@@ -143,7 +147,7 @@ int indice, y;
          XtSetArg(args[nargs], XmNuserData, &unimis[indice]); nargs++;
          XtSetArg(args[nargs], XmNrecomputeSize, False); nargs++;
          wpb[i] = XmCreatePushButton(wpull, "PushBdimUnita", args, nargs);
-         XtAddCallback(wpb[i], XmNactivateCallback, cambia_dim_unita, i);
+         XtAddCallback(wpb[i], XmNactivateCallback, cambia_dim_unita, (XtPointer)i);
          XtManageChild(wpb[i]);
 
          XmStringFree(cstring);

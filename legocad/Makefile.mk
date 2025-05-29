@@ -55,10 +55,10 @@ all:
 	cd ./lib/liblegocad; $(MAKE) -f Makefile.mk
 #	cd ./lib/macro; $(MAKE) -f Makefile.mk
 	cd ./legoserver/creamodi; $(MAKE) -f Makefile.mk
-	cd ./autodoc; $(MAKE) -f Makefile.mk
-	cd ./bitmap; $(MAKE) -f Makefile.mk
-	cd ./calcstaz; $(MAKE) -f Makefile.mk
-	cd ./dati_legocad; $(MAKE) -f Makefile.mk
+#	cd ./autodoc; $(MAKE) -f Makefile.mk
+#	cd ./bitmap; $(MAKE) -f Makefile.mk
+#	cd ./calcstaz; $(MAKE) -f Makefile.mk
+#	cd ./dati_legocad; $(MAKE) -f Makefile.mk
 	cd ./edicole; $(MAKE) -f Makefile.mk
 	cd ./editf01; $(MAKE) -f Makefile.mk
 	cd ./filtri; $(MAKE) -f Makefile.mk

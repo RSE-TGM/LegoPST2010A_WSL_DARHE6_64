@@ -35,6 +35,9 @@
         Fine sezione per SCCS
 */
 
+#include "autodoc.h"
+
+int copia_file(char*, char*);
 
 #define TOGGLE_ALL_PAGES	0
 #define TOGGLE_DA_PAGE_A_PAGE	1
@@ -110,6 +113,9 @@ static _UxCbb_conferma_print	*UxBb_conferma_printContext;
 *******************************************************************************/
 
 Widget	create_bb_conferma_print();
+
+Widget	crea_errorDialog( unsigned char	* );
+
 
 /*******************************************************************************
 	The following are callback functions.
