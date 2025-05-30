@@ -7,7 +7,8 @@ DOCKERFILE := Dockerfile_LegoPST
 BUILD_SCRIPT := ./BuildImage
 
 # Dipendenze per la regola di build dell'immagine
-BUILD_DEPENDENCIES := $(DOCKERFILE) lgrun lgrun_compose startDock
+#BUILD_DEPENDENCIES := $(DOCKERFILE) lgrun lgrun_compose startDock
+BUILD_DEPENDENCIES := $(DOCKERFILE) lgrun 
 
 # Target principale, spesso chiamato 'all' o il nome dell'eseguibile/immagine principale
 # In questo caso, potremmo considerare il risultato di BuildImage come un file "segnaposto"
