@@ -92,7 +92,7 @@ if(!ind->cancellato)
   in base alla selezione effettuata sullo schema grafico aggiorna la
   selezione in lista
 */
-seleziona_blocco_lista(macro,blocco,flag)
+void seleziona_blocco_lista(macro,blocco,flag)
 MacroBlockType *macro;
 BlockType *blocco;
 Boolean flag;

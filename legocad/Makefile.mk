@@ -59,17 +59,17 @@ all:
 #	cd ./bitmap; $(MAKE) -f Makefile.mk
 #	cd ./calcstaz; $(MAKE) -f Makefile.mk
 #	cd ./dati_legocad; $(MAKE) -f Makefile.mk
-	cd ./edicole; $(MAKE) -f Makefile.mk
-	cd ./editf01; $(MAKE) -f Makefile.mk
-	cd ./filtri; $(MAKE) -f Makefile.mk
-	cd ./iconvert; $(MAKE) -f Makefile.mk
-	cd ./info; $(MAKE) -f Makefile.mk
-	cd ./librarian; $(MAKE) -f Makefile.mk
-	cd ./main; $(MAKE) -f Makefile.mk
-	cd ./tavole; $(MAKE) -f Makefile.mk
-	cd ./topologia; $(MAKE) -f Makefile.mk
-#	cd ./topsim; $(MAKE) -f Makefile.mk
-	cd ./know; $(MAKE) -f Makefile.mk
-	cd ./utility; $(MAKE) -f Makefile.mk
+#	cd ./edicole; $(MAKE) -f Makefile.mk
+#	cd ./editf01; $(MAKE) -f Makefile.mk
+# 	cd ./filtri; $(MAKE) -f Makefile.mk
+# 	cd ./iconvert; $(MAKE) -f Makefile.mk
+# 	cd ./info; $(MAKE) -f Makefile.mk
+# 	cd ./librarian; $(MAKE) -f Makefile.mk
+# 	cd ./main; $(MAKE) -f Makefile.mk
+# 	cd ./tavole; $(MAKE) -f Makefile.mk
+# 	cd ./topologia; $(MAKE) -f Makefile.mk
+# #	cd ./topsim; $(MAKE) -f Makefile.mk
+# 	cd ./know; $(MAKE) -f Makefile.mk
+# 	cd ./utility; $(MAKE) -f Makefile.mk
 	@echo	"Compilation Successfull";
 #---end of file ---

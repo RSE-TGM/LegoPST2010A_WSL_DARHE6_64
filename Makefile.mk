@@ -14,7 +14,7 @@ all:
 	cd ./Alg_mmi; $(MAKE) -f Makefile.mk
 	cd ./Alg_rt; $(MAKE) -f Makefile.mk
 	cd ./legocad/lego_big; $(MAKE) -f Makefile.mk
-#	cd ./legocad; $(MAKE) -f Makefile.mk
+	cd ./legocad; $(MAKE) -f Makefile.mk
 #	cd ./scada; $(MAKE) -f Makefile.mk
 	cd ./util97; $(MAKE) -f Makefile.mk
 	cd ./Alg_legopc; $(MAKE) -f Makefile.mk

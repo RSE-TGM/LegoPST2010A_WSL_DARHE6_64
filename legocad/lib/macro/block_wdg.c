@@ -52,6 +52,7 @@ static char SccsID[] = "@(#)block_wdg.c	2.15\t4/11/95";
 #include <Xm/PushB.h>
 #include <Xm/BulletinB.h>
 #include <Xm/ToggleB.h>
+#include <Xm/CascadeBG.h>
 
 #include "macro.h"
 #include "file_icone.h"
@@ -223,13 +224,13 @@ int ind_macro;
    macroblocks[ind_macro].wtavblock = XmCreateDrawingArea(scroll_block,
 				                "Block_tavola",args,nargs);
    XtAddEventHandler(macroblocks[ind_macro].wtavblock, ButtonPressMask,
-		     False, start_select, ind_macro);
+		     False, start_select, (XtPointer)ind_macro);
    XtAddEventHandler(macroblocks[ind_macro].wtavblock, ButtonMotionMask,
-		     False, continue_select, ind_macro);
+		     False, continue_select, (XtPointer)ind_macro);
    XtAddEventHandler(macroblocks[ind_macro].wtavblock, ButtonReleaseMask,
-		     False, end_select, ind_macro);
+		     False, end_select, (XtPointer)ind_macro);
    XtAddEventHandler(macroblocks[ind_macro].wtavblock, ExposureMask,
-		     False, funz_expose, ind_macro);
+		     False, funz_expose, (XtPointer)ind_macro);
    popup_block(ind_macro);
    XtManageChild (macroblocks[ind_macro].wtavblock);
 #ifdef DATI
@@ -366,13 +367,8 @@ BlockType *ptr_block;
  ***   char *nome_modulo : nome del modulo (NULL se simbolo o commento)
 inserisce un nuovo blocco/simbolo/commento nella lista blocks[] del 
 macroblocco. Ritorna l'indice del nuovo blocco inserito */
-int alloca_nuovo_blocco(ptr_macro, posx, posy, tipo, selez, pixm_info,
-			nome_blocco, descr_blocco, nome_modulo )
-MacroBlockType *ptr_macro;
-int posx, posy;
-short int tipo;
-PixmapInfo *pixm_info;
-char *nome_blocco, *descr_blocco, *nome_modulo;
+int alloca_nuovo_blocco(MacroBlockType *ptr_macro, int posx, int posy, short int tipo, PixmapInfo *pixm_info,
+			char*nome_blocco, char*descr_blocco, char*nome_modulo )
 {
    int i;
 
@@ -381,7 +377,7 @@ char *nome_blocco, *descr_blocco, *nome_modulo;
 
    i = ++ptr_macro->num_blocchi;
    if ( i >= ptr_macro->num_blocchi_alloc )
-      ptr_macro->blocks = (BlockType *) realloc_mem( ptr_macro->blocks,
+      ptr_macro->blocks = (BlockType *) realloc_mem( (char *)ptr_macro->blocks,
 				     ptr_macro->num_blocchi_alloc += 100,
                                      sizeof(BlockType) );
 
@@ -476,7 +472,7 @@ Boolean boh;
 			      (void*) &dim_widgets[i].height );
            }
            num_dim_wdg = ptr_macro->num_blocchi_selez;
-           XtFree(indici);
+           XtFree((char *)indici);
            start_rubberband( ev, XtWindow(ptr_macro->wtavblock), dim_widgets,
 			     num_dim_wdg, False );
            break;
@@ -569,7 +565,7 @@ Boolean boh;
               blocks[ind].pos_icona.posx = dim_widgets[i].x;
               blocks[ind].pos_icona.posy = dim_widgets[i].y;
            }
-           XtFree(dim_widgets);
+           XtFree((char *)dim_widgets);
            num_dim_wdg = 0;
            break;
 
@@ -589,7 +585,7 @@ Boolean boh;
  ***   Parametri:
  ***     int inf_macro : indice in macroblocs[].
 crea le icone dei blocchi. */
-display_icone_macro( ind_macro )
+void display_icone_macro( ind_macro )
 int ind_macro;
 {
    int i, num_icona;
@@ -712,7 +708,7 @@ int ind_macro;
 #else
    pushb = XmCreatePushButton (pulldown,"Quit",NULL,0);
 #endif
-   XtAddCallback (pushb,XmNactivateCallback,chiudi_window_blocchi,ind_macro);
+   XtAddCallback (pushb,XmNactivateCallback,chiudi_window_blocchi,(XtPointer)ind_macro);
    XtManageChild (pushb);
 
    nargs=0;
@@ -743,11 +739,11 @@ int ind_macro;
    pulldown = XmCreatePulldownMenu (w,"Pulldown",NULL,0);
 
    pushb = XmCreatePushButton (pulldown,"Add symbol",NULL,0);
-   XtAddCallback (pushb,XmNactivateCallback,add_symbol,ind_macro);
+   XtAddCallback (pushb,XmNactivateCallback,add_symbol,(XtPointer)ind_macro);
    XtManageChild (pushb);
                          
    pushb = XmCreatePushButton (pulldown,"Add remark",NULL,0);
-   XtAddCallback (pushb,XmNactivateCallback,add_remark,ind_macro);
+   XtAddCallback (pushb,XmNactivateCallback,add_remark,(XtPointer)ind_macro);
    XtManageChild (pushb);
 
 /* creazione sottomenu disegno linee */
@@ -755,15 +751,15 @@ int ind_macro;
  
    nargs=0;
    XtSetArg(args[nargs],XmNsubMenuId,submenu1); nargs++;
-   cascadesub1 = XmCreateCascadeButtonGadget (pulldown,"Add line",args,nargs);
+   cascadesub1 = (Widget)XmCreateCascadeButtonGadget (pulldown,"Add line",args,nargs);
    XtManageChild (cascadesub1);
 
    pushb = XmCreatePushButton (submenu1,"Draw",NULL,0);
-   XtAddCallback (pushb,XmNactivateCallback,funz_draw_line,ind_macro);
+   XtAddCallback (pushb,XmNactivateCallback,funz_draw_line,(XtPointer)ind_macro);
    XtManageChild (pushb);
 
    pushb = XmCreatePushButton (submenu1,"Delete",NULL,0);
-   XtAddCallback (pushb,XmNactivateCallback,delete_line,ind_macro);
+   XtAddCallback (pushb,XmNactivateCallback,delete_line,(XtPointer)ind_macro);
    XtManageChild (pushb);
 
    pushb = XmCreatePushButton (submenu1,"Setup...",NULL,0);
@@ -779,7 +775,7 @@ int ind_macro;
    XtManageChild (cascade);
 
    pushb = XmCreatePushButton (pulldown,"Move",NULL,0);
-   XtAddCallback (pushb,XmNactivateCallback, move_selected_blocks,ind_macro);
+   XtAddCallback (pushb,XmNactivateCallback, move_selected_blocks,(XtPointer)ind_macro);
    XtManageChild (pushb);
 #else   
 #ifndef DATI
@@ -942,7 +938,7 @@ void dialog_setup_line()
    for ( i=0 ; i<6 ; i++ )
    {
        pushb = XmCreatePushButton(sub_menu, names[i], NULL, 0);
-       XtAddCallback( pushb, XmNactivateCallback, scelta_colore, i);
+       XtAddCallback( pushb, XmNactivateCallback, scelta_colore, (XtPointer)i);
        XtManageChild( pushb );
    }
 
@@ -977,7 +973,7 @@ void dialog_setup_line()
    XtSetArg(args[nargs], XmNlabelString, CREATE_CSTRING("Yes")); nargs++;
    toggle_arrow = XmCreateToggleButton(dbx_setup_line, "Toggle",args,nargs);
    XtAddCallback( toggle_arrow, XmNvalueChangedCallback, toggle_proc, 
-							 K_ARROW_TOGGLE );
+							 (XtPointer)K_ARROW_TOGGLE );
    XtManageChild (toggle_arrow);
 
    nargs = 0;
@@ -1009,11 +1005,11 @@ void dialog_setup_line()
    row_col = XmCreateRowColumn(dbx_setup_line, "RadioBox", args, nargs );
 
    pushb = XmCreatePushButton (row_col,"Ok", NULL, 0);
-   XtAddCallback(pushb, XmNactivateCallback, ok_proc, DBOX_SETUP_LINE);
+   XtAddCallback(pushb, XmNactivateCallback, ok_proc, (XtPointer)DBOX_SETUP_LINE);
    XtManageChild(pushb);
 
    pushb = XmCreatePushButton (row_col,"Apply", NULL, 0);
-   XtAddCallback(pushb, XmNactivateCallback, ok_proc, DBOX_SETUP_LINE_APPLY);
+   XtAddCallback(pushb, XmNactivateCallback, ok_proc, (XtPointer)DBOX_SETUP_LINE_APPLY);
    XtManageChild(pushb);
 
    pushb = XmCreatePushButton (row_col,"Cancel", NULL, 0);
@@ -1121,7 +1117,7 @@ void dialog_nuovo_blocco()
    ok_nuovo_blocco = XmCreatePushButton (dbx_nuovo_blocco,"Finestra_blocchi",
 					 args,nargs);
    XtAddCallback (ok_nuovo_blocco,XmNactivateCallback,ok_proc,
-                  DBOX_NEW_BLOCK);
+                  (XtPointer)DBOX_NEW_BLOCK);
    XtManageChild (ok_nuovo_blocco);
 
 /* button 'Cancel' */
@@ -1135,7 +1131,7 @@ void dialog_nuovo_blocco()
    cancel_nuovo_blocco = XmCreatePushButton 
 			(dbx_nuovo_blocco,"Finestra_blocchi",args,nargs);
    XtAddCallback (cancel_nuovo_blocco,XmNactivateCallback,ok_proc,
-                  DBOX_NEW_BLOCK);
+                  (XtPointer)DBOX_NEW_BLOCK);
    XtManageChild (cancel_nuovo_blocco);
 
 /* Separatore */
@@ -1300,7 +1296,7 @@ void dialog_modify_block()
    XtSetArg(args[nargs],XmNlabelString,CREATE_CSTRING("Ok")); nargs++;
    ok_button = XmCreatePushButton (dbx_modify_block,"Finestra_blocchi",
 		 	           args,nargs);
-   XtAddCallback (ok_button,XmNactivateCallback,ok_proc, DBOX_MODIFY_BLOCK);
+   XtAddCallback (ok_button,XmNactivateCallback,ok_proc, (XtPointer)DBOX_MODIFY_BLOCK);
    XtManageChild (ok_button);
 
 /* button 'Cancel' */
@@ -1477,7 +1473,7 @@ short int tipo;
    {
    for( i=0 ; i<num_moduli ; i++ )
       XmStringFree(cstrings[i]);
-   XtFree(cstrings);
+   XtFree((char*)cstrings);
    }
 }
 
@@ -1534,7 +1530,7 @@ short int flag;
    for ( i = 0 ; i < pixm_module->num_icone ; i++)
    {
       crea_icona( *tav_ico, &pixm_module->pixmap_info[i], nome_modulo,
-		  xx, yy, flag, NULL, NULL );
+		  xx, yy, flag, 0, 0 );
       xx += pixm_module->pixmap_info[i].width + 20;
    }
 }
@@ -1600,13 +1596,7 @@ int ind_blk;
  ***               Ha significato se flag e' False
  ***                   
 crea e visualizza l'icona nella tavola di selezione. */
-crea_icona( wdest, pixmap_info, nome_modulo, x, y, flag , ind_macro, ind_blk )
-Widget wdest;
-PixmapInfo *pixmap_info;
-char *nome_modulo;
-int x, y;
-short int flag;
-int ind_macro, ind_blk;
+int crea_icona( Widget wdest, PixmapInfo *pixmap_info, char *nome_modulo, int x, int y, short int flag ,int ind_macro,int ind_blk )
 {
    Widget form_icona, icon_pixmap, icon_label;
    int  base = 0, altezza = 0;
@@ -1626,7 +1616,7 @@ int ind_macro, ind_blk;
    {
       base = 50;
       altezza = 50;
-      pixm = NULL;
+      pixm = 0;
    }
 
    base = (base <= 0) ? 50 : base;
@@ -1802,7 +1792,7 @@ Boolean boh;
 
     if (wdg_ico_selez != NULL)
        set_something (XtParent(wdg_ico_selez), XmNborderColor,
-		      apix[BLOCKS_TABLE_BG]);
+		      (char*)apix[BLOCKS_TABLE_BG]);
     set_something( XtParent(w), XmNborderColor, (void*) apix[ RED ]);
     wdg_ico_selez = w;
     pixm_ico_selez = pixm_info;
@@ -2321,7 +2311,7 @@ Boolean boh;
  ***     blocco: struttura blocks[] in macroblocks[]
  ***     flag : indica se bisogna selezionare o deselezionare
 seleziona/deseleziona un blocco ***/
-seleziona_blocco( macro, blocco, flag )
+void seleziona_blocco( macro, blocco, flag )
 MacroBlockType *macro;
 BlockType *blocco;
 Boolean flag;

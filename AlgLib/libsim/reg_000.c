@@ -142,7 +142,7 @@ case 1:
 
   reinit = getenv("REINITTASK");
   if(strcmp(reinit,"NO")==0) {
-     (var->xy,var->uu,var->px,var->dati,var->neqsis,var->nu,var->neqdif,var->ndati,var->cnxy,var->cnuu);
+    reg_wrshm(var->xy,var->uu,var->px,var->dati,var->neqsis,var->nu,var->neqdif,var->ndati,var->cnxy,var->cnuu);
 //     printf("reg000: write in shrmem!!! NO REINIT\n");
   }
 
@@ -483,12 +483,12 @@ var.itert=itert;
 var.tsim=&t_sim;
 var.tasksicre=&task_sicre;
 
-// printf("prima di sync_task\n");
+// printf("DEBUG reg000_ : prima di sync_task\n");
 
 sync_task(&var);
 
 
-// printf("dopo di sync_task\n");
+// printf("DEBUG reg000_ : dopo di sync_task\n");
 
 }
 

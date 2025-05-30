@@ -297,7 +297,7 @@ void def_handler_block();
 void def_translations_block();
 void seleziona_window();
 void cancella_blocco();
-int alloca_nuovo_blocco();
+//int alloca_nuovo_blocco();
 
 /* FUNZIONI DI CALLBACK */
 void quit_block();
@@ -326,6 +326,22 @@ void start_draw_line();
 void cont_draw_line();
 void end_draw_line();
 void delete_line();
+
+char *realloc_mem(char*, int, int);
+char *calloc_mem(int, int);
+void  tomaius();
+void s_warning();
+
+
+void seleziona_blocco(MacroBlockType *,BlockType *,Boolean);
+int alloca_nuovo_blocco(MacroBlockType *, int , int , short int , PixmapInfo *,
+			char*, char*, char* );
+void display_icone_macro(int);
+int crea_icona( Widget , PixmapInfo *, char *, int , int , short int  ,int ,int  );
+
+
+
+
 #ifdef TOPOLOGIA
 void variables_block();
 void add_process_block();
