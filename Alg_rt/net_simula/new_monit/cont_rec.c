@@ -17,8 +17,11 @@ static char *_csrc = "@(#) %filespec: cont_rec.c-7.1.1 %  (%full_filespec: cont_
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <malloc.h>
 #include <string.h>
+#include <ctype.h>
+
 
 #include <X11/Xlib.h>
 #include <Xm/List.h>
@@ -40,7 +43,7 @@ static char *_csrc = "@(#) %filespec: cont_rec.c-7.1.1 %  (%full_filespec: cont_
 #include "bistrutt.h"
 #include "cursore.h"
 #include "option.h"
-
+#include "tabelle_malf.h"
 #include "filtri.h"
 #include "banco_globals.h"
 #include "selVarCr.h"
@@ -72,7 +75,35 @@ extern   VAL val;
 
 char   *nome_modello (char *, int);
 char   *nome_blocco(char *,int,int);
-legge_sel(char *);
+void legge_sel(char *);
+int display_lista_blocchi (Widget);
+int get_kks_filter (Widget);
+int visualizzaConfMalf (Widget ,int ,int , int , int ,int );
+int liste_modblock (int,int,int**,int*,int*,int**,int*,int*,int);
+int preset_display_item_cr (Widget, int*, int, int**, int*, int);
+int elimina_doppie (Widget, int**, int*, int*, int);
+int update_labels (Widget,int,Widget,int);
+int rialloca_puntatore (int**,int,int*,int);
+int check_kks (int, char*);
+int check_tipo (int, FILTRO_TIPI);
+int add_lista (Widget, int);
+int test_tipo (char*, FILTRO_TIPI);
+int test_inout (char*, FILTRO_TIPI, int);
+int string_exist (char*, char*);
+int is_aingable (int);
+int lista_match_to_sel (Widget,char*,Boolean *);
+int lista_match_to_unsel (Widget,char*,Boolean *);
+int selezione_file (Widget,int,int,char*);
+int init_sel_var_cr (Widget,char*);
+char *Utstrstr(char *,char *);
+int next_match (Boolean *, int, int, int*);
+int	create_richiestaDati( Widget , unsigned char *, unsigned char *, unsigned char * );
+int     SD_stepcr ();
+
+
+
+
+
 
 
 int *punt_var_sel;   /* vettore dei puntatori delle variabili selezionate */
@@ -1614,12 +1645,14 @@ int i,k;
 char label[MAX_LUN_NOME_VAR];
   
    strcpy (label,variabili[indx].nome);
-	if ((test_tipo(label,f,indx) > 0) && (test_inout(label,f,indx) > 0))
+// GUAG2025
+//   if ((test_tipo(label,f,indx) > 0) && (test_inout(label,f,indx) > 0))
+	if ((test_tipo(label,f) > 0) && (test_inout(label,f,indx) > 0))
 		return (1);
 	return (-1);
 }
 /**********************************************************/
-int test_tipo (stringa, f, n)
+int test_tipo (stringa, f)
 char *stringa;
 FILTRO_TIPI f;
 {
@@ -1693,6 +1726,7 @@ int test;
 int test_inout (stringa, f, n)
 char *stringa;
 FILTRO_TIPI f;
+int n;
 {
 char s[10];
 int match = -1;

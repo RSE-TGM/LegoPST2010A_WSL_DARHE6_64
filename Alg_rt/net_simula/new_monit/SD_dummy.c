@@ -24,6 +24,9 @@ static char *_csrc = "@(#) %filespec: SD_dummy.c-4 %  (%full_filespec: SD_dummy.
 #include "option.h"
 #include "archivi.h"
 #include "bistrutt.h"
+
+int write_options(char*,Boolean *);
+
 /*
  * dummy function
  */
@@ -52,5 +55,15 @@ char *dati;
 {
    printf ("DUMMY function SD_sessione:%s:\n",dati);
    return (1);
+}
+
+int SD_optsave (processo, dati)
+int processo;
+char *dati;
+{
+	Boolean res;
+	if (write_options(dati,&res) == 0)
+		return(1);
+	return(0);
 }
 /****************************************************************/

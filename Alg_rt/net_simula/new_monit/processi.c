@@ -20,6 +20,7 @@ static char *_csrc = "@(#) %filespec: processi.c-9 %  (%full_filespec: processi.
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 # include <sys/types.h>
 # include <sys/ipc.h>
 # include <sys/msg.h>
@@ -48,7 +49,9 @@ extern int id_sh;
 extern int nmod;
 extern int tot_variabili;
 extern OPTIONS_FLAGS options;
+
 void act_selection_display ();
+int get_label_indx (char*);
 
 RICHIESTA_AING richiesta_aing;  /* struttura per richiesta aing */
 int stato_aing=0; /* 1 processo aing gia' attivato */

@@ -16,6 +16,7 @@ static char *_csrc = "@(#) %filespec: messaggi.c-3 %  (%full_filespec: messaggi.
  */
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -30,6 +31,10 @@ extern char *FILES_PATH;
 char *getMessageString();
 char *getVar();
 char *getVarMessage();
+int strcpyMalloc (char **, char *);
+int existFile (char *);
+int loadMessagesString (char *, int );
+int freeMessageStrings ();
 
 /******************************************************************/
 int initMessStruct ()

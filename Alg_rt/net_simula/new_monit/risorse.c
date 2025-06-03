@@ -35,6 +35,13 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "risorse_default.h"
 #include "parametri.h"
 
+#include "sim_types.h"
+#include "bistrutt.h"
+#include "option.h"
+#include "filtri.h"
+#include "tabelle_malf.h"
+#include "banco_globals.h"
+
 extern RESOURCE_DEF *Rdef;
 
 XrmDatabase NewXdb;
@@ -63,6 +70,12 @@ char *getRisorsaValRes ();
 char *getRisorsaValDefRes ();
 char *getRisorsaClassRes ();
 void selectResourceCategory ();
+
+int displayCategorieRisorse (Widget w);
+int getNumResCat (RESOURCE_DEF *, int );
+int creaResEntry (Widget , RESOURCE_DEF *, int , int );
+int getNumeroCategorieRes (RESOURCE_DEF *);
+int getIndxCategoriaRes (RESOURCE_DEF *, int );
 
 /********************************************************************/
 /*
@@ -247,10 +260,10 @@ printf ("N-entries = %d\n",Ctx->Uxn_entries);
  */
 	if (Ctx->Uxn_entries > 0)
 		{
-		XtFree (Ctx->UxresForm);
-		XtFree (Ctx->UxresLabel);
-		XtFree (Ctx->UxresText);
-		XtFree (Ctx->UxresMoreButton);
+		XtFree ((char*)Ctx->UxresForm);
+		XtFree ((char*)Ctx->UxresLabel);
+		XtFree ((char*)Ctx->UxresText);
+		XtFree ((char*)Ctx->UxresMoreButton);
 		free (Ctx->Uxindx);
 		}
 /*

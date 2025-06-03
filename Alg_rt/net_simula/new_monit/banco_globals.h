@@ -13,6 +13,7 @@
  * contains all the global definition
  */
 #include <stdio.h>
+
 #ifndef NO_PARENT
 #define NO_PARENT    ((swidget)0)
 #endif
@@ -90,7 +91,7 @@ int applyResource (Widget );
 int caricaDatiRisorse (Widget );
 int displayRisorse (Widget);
 int attenzione (Widget,char*);
-int add_message (Widget,char*, int);
+//int add_message (Widget,char*, int);
 int SD_savebt (int,int*,char*,char*);
 int freeze_sim();
 int btload_ok (Widget);
@@ -121,7 +122,15 @@ int SD_stato (int, RICHIESTA_STAT *);
 void costruisci_var (char**, VARIABILI **, int*);
 int simulatorShutdown (Widget );
 int clear_lista (Widget );
-
+int attiva_timer_scenarioMalf (Widget );
+int lettura_filtro_kks (Widget);
+int carica_filtro_tipo ();
+int lettura_filtro_tipo (Widget);
+int display_lista_var (Widget,int,int,int,int);
+int display_var (Widget,int,int,int,int);
+int get_byte_kks (Widget,char*);
+int     SD_newvarcr (int);
+int get_label_indx (char*);
 
 
 

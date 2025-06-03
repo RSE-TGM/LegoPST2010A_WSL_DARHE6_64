@@ -12,10 +12,12 @@ static char *_csrc = "@(#) %filespec: SD_functions.c-4 %  (%full_filespec: SD_fu
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <X11/Xlib.h>
 #include <Xm/List.h>
 #include <Xm/Text.h>
 #include <Xm/Xm.h>
+
 
 #include "sim_param.h"
 #include "sim_types.h"
@@ -31,6 +33,7 @@ extern int _MAX_SNAP_SHOT;
 #include "btsnapfiles.h"
 #include "messaggi.h"
 #include "refresh.h"
+//#include "banco_globals.h"
 
 SNTAB		header_snap_copy;
 char     *dati_snap_copy;
@@ -42,6 +45,17 @@ extern   int size_blocco_snap;
 extern   VAL val;           /* struttura per display         */
 
 extern char *FILES_PATH;
+
+
+int clear_scenari (SCENARI *);
+int read_scenari (FILE*, SCENARI *);
+int write_options(char*,Boolean *);
+int lettura_opzioni(char*, Boolean *);
+int leggi_da_ci (FILE*, int, float*, int);
+int leggi_da_bt (FILE*, int, float*, int);
+
+
+
 /****************************************************************/
 /*
  legge da file gli scenari registrati e li carica nella struttura puntata

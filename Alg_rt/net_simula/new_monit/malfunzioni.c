@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+#include <ctype.h>
 
 #include <X11/Xlib.h>
 #include <Xm/List.h>
@@ -18,6 +19,8 @@
 #include "Rt/RtErrore.h"
 #include "Rt/RtMemory.h"
 
+
+//#include "sim_types.h"
 #include "UxXt.h"
 #include "sim_param.h"
 #include "sim_types.h"
@@ -28,6 +31,7 @@
 #include "tabelle_malf.h"
 #include "refresh.h"
 #include "cont_rec.h"
+#include "dataRequest.h"
 
 extern VAL val;
 extern VARIABILI *variabili;
@@ -117,6 +121,67 @@ int add_item_list (Widget,char*);
 int caricaTipologiaMalf (Widget,int);
 int carica_conf_malf(Widget,int);
 int completa_conf_malf (Widget, int, M_COMPONENT *, MALF_SET *, M_COMP_TYPE *);
+int getMalfType (Widget,FILE*,int,M_COMP_TYPE *);
+int getMalfSet (Widget,FILE*,int,MALF_SET *);
+int getCampoStringa (char *, char *, int *, char *);
+int getCampoStringa (char *, char *, int *, char *);
+int validaStrNumber (char *, char *);
+int getMalfConf (Widget,FILE*,int,M_COMPONENT *);
+int get_label_addr_ind(char*,int*,int,int);
+int display_conf_malf (Widget, M_COMPONENT *, MALF_SET *, M_COMP_TYPE *, int, int, int, int);
+int listaMalfModBloc (M_COMPONENT *,int,int,int**,int*,int*,int);
+int lista_kks_malf_conf (int*,int,int*,int*,char*,M_COMPONENT *);
+int rialloca_puntatore (int**,int,int*,int);
+int check_kks_malf_conf (int, char*,M_COMPONENT *);
+//int test_tipo (char*, FILTRO_TIPI);
+int varGiaInScenario (Widget ,SCENARIO *, int , M_COMPONENT *);
+int addMalfScenEntry (Widget ,SCENARIO *, int , M_COMPONENT *);
+int crea_scen_malf_entry (Widget,int,SCENARIO *,M_COMPONENT *,MALF_SET *,M_COMP_TYPE *);
+int updateRigaScenario (Widget , int );
+int lista_tipo_malf_conf (int*,int,int*,int*,FILTRO_TIPI,M_COMPONENT *);
+int display_item_malf_conf (Widget, int*, int, int**, int*, int, M_COMPONENT *, MALF_SET *, M_COMP_TYPE *);
+int check_tipo_malf_conf (int, FILTRO_TIPI, M_COMPONENT *);
+int test_tipo (char*, FILTRO_TIPI);
+int checkMalfConf (M_COMPONENT *, char *);
+int get_m_type_from_m_comp (int,M_COMPONENT *,M_COMP_TYPE *);
+int get_m_set_from_m_comp (int,int*,M_COMPONENT *,MALF_SET *);
+int getCompType (M_COMP_TYPE *, int );
+int assegnaTipoPert (char *);
+int set_sensitive_scenario (Widget);
+int eliminaItemScenario (Widget , int );
+int removeScenMalfEntry (Widget , int );
+int copia_scenario (Widget,SCENARI *,SCENARIO *,int);
+int SD_savescenari (int,int,SCENARI *);
+int malfCurrentlyActive (TIPO_PERT *,int n, M_COMPONENT *);
+int addMalfScenEntryDummy (Widget ,SCENARIO *, int );
+int updateRigaSommario (Widget , int );
+int malfPertInCorso (int , TIPO_PERT *, int );
+int primoScenarioLibero (SCENARIO *);
+int get_addr_indx (int );
+int string_exist (char*, char*);
+int mfConfToScenMalf (Widget , int , SCENARIO *, int );
+int applyTbState (Widget , int , SCENARIO *, int );
+int stopMalfunzione (int );
+int pert_malfunction(int ,int ,float ,float ,float );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 struct riga_val_st
@@ -1486,7 +1551,9 @@ int i,k;
 char label[MAX_LUN_NOME_VAR];
  
    strcpy (label,m[indx].label_main_var);
-   return (test_tipo(label,f,indx));
+   // GUAG2025
+//   return (test_tipo(label,f,indx));
+   return (test_tipo(label,f));
 }
 /**********************************************************/
 int display_item_malf_conf (w, p_in, n_in, p_disp, n_disp, dim, m, m_s, m_t)

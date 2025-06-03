@@ -42,6 +42,9 @@ extern int _MAX_SNAP_SHOT;
 #include "parametri.h"
 #include "messaggi.h"
 #include "bistrutt.h"
+#include "option.h"
+#include "filtri.h"
+#include "tabelle_malf.h"
 #include "banco_globals.h"
 #include "btsnapfiles.h"
 

@@ -42,6 +42,9 @@ static char *_csrc = "@(#) %filespec: file_select.c-4 %  (%full_filespec: file_s
 #include "bistrutt.h"
 #include "cursore.h"
 
+#include "option.h"
+#include "filtri.h"
+#include "tabelle_malf.h"
 #include "banco_globals.h"
 #include "selVarCr.h"
 #include "cont_rec.h"
@@ -51,6 +54,11 @@ static char *_csrc = "@(#) %filespec: file_select.c-4 %  (%full_filespec: file_s
 char *full_path();
 
 char *fileSelectionCb();
+
+int check_file_select (Widget,int, int, char*);
+
+
+
 extern Widget areaMessaggi;
 extern int modello_selezionato;
 extern int blocco_selezionato;

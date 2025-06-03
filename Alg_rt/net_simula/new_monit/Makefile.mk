@@ -102,10 +102,16 @@ INTERFACES	= 	masterMenu.c \
 	resourceSetting.c \
 	archiveSess.c
 
-APPL_OBJS	= UxXt.o UxMethod.o snapshot.o backtrack.o get_colors.o options.o comuni.o \
+APPL_OBJS	= UxXt.o UxMethod.o snapshot.o backtrack.o get_colors.o SD_dummy.o options.o comuni.o \
                         preview.o archivio.o cursore.o refresh.o connessioni.o malfunzioni.o \
                         cont_rec.o  file_select.o btsnapfiles.o processi.o statistiche.o \
-                        SD_dummy.o SD_functions.o perturbazioni.o risorse.o messaggi.o
+                        SD_functions.o perturbazioni.o risorse.o messaggi.o
+
+# APPL_OBJS	= UxXt.o UxMethod.o snapshot.o backtrack.o get_colors.o options.o comuni.o \
+#                         preview.o archivio.o cursore.o refresh.o connessioni.o malfunzioni.o \
+#                         cont_rec.o  file_select.o btsnapfiles.o processi.o statistiche.o \
+#                         SD_dummy.o SD_functions.o perturbazioni.o risorse.o messaggi.o
+
 ##eliminato UX_DIR		= /usr/lpp/aic12
 UX_LIBPATH	= $(UX_DIR)/lib
 ##eliminato UX_INCLUDES     = -I$(UX_DIR)/include

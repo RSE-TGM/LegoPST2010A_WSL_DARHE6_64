@@ -12,6 +12,7 @@ static char *_csrc = "@(#) %filespec: perturbazioni.c-4.1.1 %  (%full_filespec: 
 #endif
 #include <stdio.h>
 #include <malloc.h>
+#include <math.h>
 
 #include <X11/Xlib.h>
 #include <Xm/List.h>
@@ -34,6 +35,10 @@ extern int tot_variabili;
 extern VAL val;
 extern Widget      areaMessaggi;
 extern int editPertRate;
+
+int clear_lista (Widget );
+int	create_richiestaDati( Widget _Uxw, unsigned char *_Uxlabel_string, unsigned char *_Uxact, unsigned char *_Uxnew );
+int add_message (Widget,char*, int);
 
 int displayPert (Widget padre)
 {
