@@ -27,6 +27,9 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "sim_types.h"
 #include "libnet.h"
 #include "mod_data.h"
+
+#include <sqlite3.h>
+
 #define NMAXDATI 500
 
 /*
@@ -49,6 +52,9 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 void costruisci_var (char **, VARIABILI **, int *);
 int refresh_dati_shm(char *, VARIABILI *,int , char *, int );
+
+sqlite3 *db;
+
 
 int main(int argc,char **argv)
 {

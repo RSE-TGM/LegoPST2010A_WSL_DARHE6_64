@@ -233,9 +233,9 @@ C     Modificato per leggere IKO separatamente e allineare con le var CHARACTER*
 C     Riga *LG* trovata, l'ultima lettura era l'inizio dei dati o blocchi
       N=N-1
       IF(IA(N+1,1).NE.IDT) THEN
-         PRINT *, '*** ERRORE PFILE5: Attesa riga *LG*DATI dopo variabili'
-         PRINT *, '*** Trovato invece: ', IA(N+1,1)
-         STOP 'Errore formato file sorgente in PFILE5 (1)'
+       PRINT*, '*** ERRORE PFILE5: Attesa riga *LG*DATI dopo variabili'
+       PRINT*, '*** Trovato invece: ', IA(N+1,1)
+       STOP 'Errore formato file sorgente in PFILE5 (1)'
       ENDIF
 C
 C      LETTURA DATI DEI BLOCCHI
@@ -269,7 +269,7 @@ C------DATI DI UN BLOCCO
       IF(IB(2,1).NE.IEOFR)M=2
       IF(IB(3,1).NE.IEOFR)M=3
       IF (KBL .EQ. 0) THEN
-         PRINT *, '*** ERRORE PFILE5: Trovati dati prima di un blocco *LG*'
+         PRINT*,'ERRORE PFILE5: Trovati dati prima di un blocco *LG*'
          STOP 'Errore formato file sorgente in PFILE5 (2)'
       ENDIF
       IPDT(KBL+1)=IPDT(KBL+1)+M ! Incrementa puntatore fine blocco
@@ -450,7 +450,7 @@ C
  3005 FORMAT(//5X,'ESECUZIONE TERMINATA')
       RETURN
 C
- 900  PRINT *, '*** PFILE6: Fine file inattesa leggendo F14.DAT (unita 1)'
+ 900  PRINT *,'*PFILE6: Fine file inattesa leggendo F14.DAT (unita 1)'
       STOP 'Errore lettura file F14.DAT'
       END
 C
@@ -581,8 +581,8 @@ C   riga (LINEA) a quella riga precedente (II)
 C             IBL trovato come destinazione nella riga II.
 C             Leggi la prossima destinazione dalla riga corrente (LINEA).
              IF (I+4 .GT. lunlin .OR. LINEA(I+4:I+4) .NE. ',') THEN
-                 PRINT *, '*** edi14: Errore formato (virgola mancante?)'
-                 PRINT *, '*** Riga: ', LINEA(1:lunlin)
+                 PRINT*,'** edi14: Errore formato (virgola mancante?)'
+                 PRINT*,'** Riga: ', LINEA(1:lunlin)
                  GOTO 50 ! Errore formato, salta riga
              ENDIF
              IF (I+5+3 .GT. lunlin) THEN
@@ -650,14 +650,15 @@ C       Scrivi il file di output con le eccezioni lette
 
  2000   ICEFILE=0
         PRINT*, ' '
-        PRINT*, '*** edi14: ATTENZIONE! File edi14_eccezioni.inp',
+        PRINT*, '* edi14: ATTENZIONE! File edi14_eccezioni.inp',
      &          ' non trovato.'
-        PRINT*, '***         Nessuna eccezione di copia verra'' applicata.'
+        PRINT*, '* Nessuna eccezione di copia verra'' applicata.'
         PRINT*, ' '
         RETURN
  2010   ICEFILE=0
-        PRINT*, '*** edi14: ERRORE! Impossibile creare il file output ', FOUT
-        CLOSE(UNIT=27, STATUS='KEEP') ! Prova a chiudere l'unità 27
-C        IF (UNIT=27) CLOSE(27) ! Chiudi input se era aperto
+        PRINT*, '* edi14: ERRORE! Imposs creare il file output', FOUT
+C        Prova a chiudere l'unità 27
+        CLOSE(UNIT=27, STATUS='KEEP') 
+C        IF (UNIT=27) CLOSE(27)      Chiudi input se era aperto
         RETURN
         end
