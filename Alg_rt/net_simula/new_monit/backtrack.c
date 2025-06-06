@@ -61,7 +61,8 @@ extern int inizializzazione;  /* flag per eventuale cambio sessione       */
 
 extern int _MAX_BACK_TRACK;
 
-int SD_editbt (int,BKTAB *,int);
+//int SD_editbt (int,BKTAB *,int);
+int SD_editbt (int , BKTAB *, int , int );
 int crea_cambio_sessione (Widget,char*);
 int crea_backtrack_entry(Widget,int);
 int displayDatiRecordBt (BKTAB *, int );
@@ -102,7 +103,7 @@ static int primo_giro = 1;
 int read_lista_bt (BKTAB *bthead)
 {
 
-	if (SD_editbt(BANCO, bthead, _MAX_BACK_TRACK) > 0)
+	if (SD_editbt(BANCO, bthead, 0, _MAX_BACK_TRACK) > 0)
 		return(0);
 	return (-1);
 }

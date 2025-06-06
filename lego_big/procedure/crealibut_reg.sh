@@ -1,4 +1,4 @@
-#!/bin/ksh
+#!/bin/bash
 #
 #  Script:                      crealibut_reg.sh
 #  Subsystem:           1
@@ -19,12 +19,26 @@
 #  creazione procedura modidat.f per svincolo i2 (per inserimento in lib)
 $LEGO_BIN/svinri2
 
-LISTA=`ls *.f |grep -v forausbase | cut -f1 -d. | while read var 
-do
-  echo ''$var'.o'
-done`
-echo $LISTA
+LISTA_ARRAY=() # In ksh o bash, per array
+for f in *.f; do
+  if [[ "$f" != "forausbase.f" ]]; then # Evita forausbase.f
+    basename="${f%.f}" # Rimuove .f
+    LISTA_ARRAY+=("${basename}.o")
+  fi
+done
+LISTA="${LISTA_ARRAY[*]}" # Converte l'array in una stringa separata da spazi
+
+echo "LISTA generata: [$LISTA]" # Debug
 export LISTA
+
+
+#LISTA=`ls *.f |grep -v forausbase | cut -f1 -d. | while read var 
+#do
+#  echo ''$var'.o'
+#done`
+#echo $LISTA
+#export LISTA
+
 NOME_LIB='schemi_reg.a'
 LIBRERIA='schemi_reg.a'
 export NOME_LIB

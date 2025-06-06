@@ -2279,7 +2279,7 @@ else
 
 #if defined MFFR
               if( SD_loadbt(MONIT,&backtrack_selezionato,
-                           &sommari) >0 )
+                           (char*)&sommari) >0 )
 #else
               if( SD_loadbt(MONIT,&backtrack_selezionato,
                            NULL) >0 )

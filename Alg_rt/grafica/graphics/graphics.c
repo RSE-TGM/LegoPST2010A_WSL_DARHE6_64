@@ -464,7 +464,7 @@ static void crea_sfondo(Widget,Dimension,Dimension);
 static void formatta(char*,float);
 static int x_cerca_stringa(XmString,XmString*);
 static int cerca_nome(char*);
-static int converti_tempoGR(float,long  *,long  *,long  *,long  *,long  *,long  *);
+int converti_tempoGR(float,long  *,long  *,long  *,long  *,long  *,long  *);
 static int AnnoBisGR(long anno);
 static  int prep_draw(float,float,S_MIN_MAX *);
 static  int draw_grid(Window);
@@ -3665,7 +3665,7 @@ t_finale=bufdati[n_last].t;
 t_iniziale=bufdati[0].t;
 }
 
-int AnnoBis(long );
+//int AnnoBis(long );
 
 /*
     converti_tempoGR
@@ -3687,10 +3687,11 @@ int AnnoBis(long );
 
 */
 
-static int converti_tempoGR(temposim,ora,min,sec,gior,mes,anno)
+int converti_tempoGR(temposim,ora,min,sec,gior,mes,anno)
 float temposim;
 long  *ora,*min,*sec,*gior,*mes,*anno;
 {
+#define BISESTO(year) !(year % 4) && (year % 100) || !(year % 400)
 float tsim;
 short i,incr; 
 short giorni;
@@ -3735,7 +3736,8 @@ long appoggio;
 
    lastgiorno=giomese[(short)appoggio];
 
-   if(AnnoBisGR((*anno)) && (*mes)==2) lastgiorno++;
+//   if(AnnoBis_new_monit((*anno)) && (*mes)==2) lastgiorno++;
+   if(BISESTO(*anno) && (*mes)==2) lastgiorno++;
    for (i=0;i<giorni;i++)
    {
       (*gior)++;
@@ -3749,28 +3751,9 @@ long appoggio;
             (*anno)++;
          }
          lastgiorno=giomese[(short)(*mes)-1];
-         if(AnnoBis((*anno)) && (*mes)==2) lastgiorno++;
+//         if(AnnoBis_new_monit((*anno)) && (*mes)==2) lastgiorno++;
+         if(BISESTO(*anno) && (*mes)==2) lastgiorno++;
       }
    }
 }
-
-
-/*
-   AnnoBis()
-      Dato un anno verifica se e' bisestile.
-
-   Parametri:
-      short anno: anno da analizzare
-
-   Ritorno:
-      0:     anno non bisestile
-      1:     anno bisestile
-
-   9 Dicembre 1992
-*/
-static int AnnoBisGR(long anno)
-{
-   if(!(anno % 4) && (anno % 100) || !(anno % 400)) return(1);
-   return(0);
-}
-
+//

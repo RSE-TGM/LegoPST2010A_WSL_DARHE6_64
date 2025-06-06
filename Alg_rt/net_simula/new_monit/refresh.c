@@ -100,6 +100,8 @@ static void refresh_listaScenari();
 static void refresh_sommarioMalf();
 static void refresh_malfConfig();
 extern void refresh_scenarioMalf();
+int converti_tempo_new_monit(float,long*,long*,long*,long*,long*,long*);
+//int AnnoBis_new_monit(long );
 
 
 float intervallo_backtrack;
@@ -955,7 +957,7 @@ long ora, minuti, secondi, giorno, mese, anno;
       giorno  = 1;
       mese    = 1;
       anno    = 2000;
-		converti_tempo (val.actual.tempo_sim,
+		converti_tempo_new_monit (val.actual.tempo_sim,
 					&ora, &minuti, &secondi, &giorno, &mese, &anno);
 		sprintf (stringa,"%2d:%2d:%2d.%d",ora,minuti,secondi,t_cent);
 /**
@@ -1562,3 +1564,79 @@ char  *list_par[4];
          	}
       	}
 }
+
+
+int converti_tempo_new_monit(temposim,ora,min,sec,gior,mes,anno)
+float temposim;
+long  *ora,*min,*sec,*gior,*mes,*anno;
+{
+#define BISESTO(year) !(year % 4) && (year % 100) || !(year % 400)
+float tsim;
+short i,incr; 
+short giorni;
+short lastgiorno;
+static short giomese[]={31,28,31,30,31,30,31,31,30,31,30,31};
+long appoggio;
+
+
+   giorni=(short)(temposim/86400.);           /* giorni trascorsi */
+   tsim=temposim-giorni*86400.; 		
+   incr=(short)(tsim/3600.);              /* ore trascorse */
+   (*ora)=(*ora)+(long)incr;
+   tsim=tsim-incr*3600.; 		
+   incr=(short)(tsim/60.);                /* minuti trascorsi */
+   (*min)=(*min)+(long)incr;
+   incr=(short)(tsim-incr*60.); 		
+   (*sec)=(*sec)+(long)incr;                           /* secondi trascorsi */
+   
+/*
+   test overflow
+*/
+   if((*sec)>=60)          /* secondi */
+   {
+      (*sec)=0;
+      (*min)++;
+   }
+   if((*min)>=60)           /* minuti */
+   {
+      (*min)=0;
+      (*ora)++;
+   }
+   if((*ora)>=24)              /* ore */
+   {
+      (*ora)=(*ora)-24;
+      giorni++;
+   }
+
+/*
+   data
+*/   
+   appoggio = (*mes) - 1;
+
+   lastgiorno=giomese[(short)appoggio];
+
+//   if(AnnoBis_new_monit((*anno)) && (*mes)==2) lastgiorno++;
+   if(BISESTO(*anno) && (*mes)==2) lastgiorno++;
+   for (i=0;i<giorni;i++)
+   {
+      (*gior)++;
+      if((*gior)>lastgiorno)        /* giorno */
+      {
+         (*gior)=1;
+         (*mes)++;
+         if((*mes)>12)                          /* mese */
+         {
+            (*mes)=1;
+            (*anno)++;
+         }
+         lastgiorno=giomese[(short)(*mes)-1];
+//         if(AnnoBis_new_monit((*anno)) && (*mes)==2) lastgiorno++;
+         if(BISESTO(*anno) && (*mes)==2) lastgiorno++;
+      }
+   }
+}
+// int AnnoBis_new_monit(long anno)
+// {
+//    if(!(anno % 4) && (anno % 100) || !(anno % 400)) return(1);
+//    return(0);
+// }

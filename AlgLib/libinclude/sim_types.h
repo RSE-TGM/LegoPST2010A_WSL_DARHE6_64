@@ -575,7 +575,7 @@ typedef struct sntab_st SNTAB;
     *   15)
     *   Analoga alla SNTAB ma per i backtrack.
     */
-#if defined BACKTRACK
+//#if defined BACKTRACK
 struct bktab_st {
                  int stat;
                  int pos;
@@ -589,7 +589,7 @@ struct bktab_st {
                  char temposn[TEMPO_SNAP];
                 } ;
 typedef struct bktab_st BKTAB;
-#endif
+//#endif
 
 
    /*

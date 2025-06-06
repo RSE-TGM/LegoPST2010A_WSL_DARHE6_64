@@ -368,22 +368,19 @@ void init_area_pert()
    }
 }
 
-int ins_area_pert_att(tipo, indirizzo, valore_delta, rateo_durata,
-		  period, phase, meanvalue, wide, t_null_var, t)
-   int      tipo, indirizzo;
-   float    valore_delta, rateo_durata, period, phase, meanvalue, 
-            wide, t_null_var, t;
+int ins_area_pert_att(int tipo,int indirizzo, float valore_delta, float rateo_durata,
+		  float period, float phase,float meanvalue, float wide, float t_null_var, float t)
 {
-   int             k;
+   int  k;
    float tempo;
    TIPO_PERT *pert_att;
   
    if((pert_att=RtDbPGetPuntPertAtt(dbpunti))==NULL)
 		return(0);
-/*
-    fprintf(stderr,"\t SKED: tp=%d ind=%d val=%f rt=%f t=%f\n",
+
+    fprintf(stderr,"DEBUG -----> ins_area_pert_att \t SKED: tp=%d ind=%d valore_delta=%f rt=%f t=%f\n",
       tipo,indirizzo,valore_delta,rateo_durata,t); 
-*/
+
    /*
     * cerca una posizione libera 
     */

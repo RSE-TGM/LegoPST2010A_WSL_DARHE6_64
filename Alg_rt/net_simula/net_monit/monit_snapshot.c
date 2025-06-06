@@ -782,7 +782,7 @@ switch (widget_num){
                vis_messaggio("Command LOAD B.T. send",0);
                def_cursore (toplevel_widget, OROLOGIO);
 #if defined MFFR
-               if( SD_loadbt(MONIT,&backtrack_selezionato,&sommari)>0 )
+               if( SD_loadbt(MONIT,&backtrack_selezionato,(char*)&sommari)>0 )
 #else
                if( SD_loadbt(MONIT,&backtrack_selezionato,NULL)>0 )
 #endif

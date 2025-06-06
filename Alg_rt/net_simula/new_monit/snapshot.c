@@ -78,7 +78,7 @@ int carica_lista_bt ();
 int backtrack_sim();
 int salva_ci(Widget, int);
 int not_executable (Widget);
-int SD_loadbt (int,int*,int);
+int SD_loadbt (int,int*,char*);
 int stampa (char *, int );
 int SD_cancellaic (int,int*);
 int SD_checkci (int,int*);
@@ -306,7 +306,7 @@ int esito;
 
 	messaggio = (char *)malloc (strlen(LOAD_BT)+strlen(OPER_FALLITA) + 20);
 printf ("carica_bt passa %d\n",bt_num);
-  if (SD_loadbt (BANCO,&bt_num, (int)&old_mffr) > 0)
+  if (SD_loadbt (BANCO,&bt_num, (char*)&old_mffr) > 0)
 		{
 		sprintf (messaggio,"%s %d",LOAD_BT,bt_num);
 		inizializzazione = 1;
@@ -367,7 +367,7 @@ int esito;
 
    messaggio = (char *)malloc (strlen(LOAD_BT)+strlen(OPER_FALLITA) + 20);
 printf ("init_from_bt passa %d\n",bt_num);
-  if (SD_loadbt (BANCO,&bt_num, (int)&old_mffr) > 0)
+  if (SD_loadbt (BANCO,&bt_num, (char*)&old_mffr) > 0)
       {
       sprintf (messaggio,"%s %d",LOAD_BT,bt_num);
       inizializzazione = 1;

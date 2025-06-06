@@ -25,6 +25,7 @@ all:
 
 clean:
 	find . -type f -name "*.o" -exec rm -f {} \;
+	find . -type f -name "*.a" -exec rm -f {} \;
 
 $(info -------->  FINE COMPILAZIONE!)
 

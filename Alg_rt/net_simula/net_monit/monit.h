@@ -176,7 +176,7 @@ int     SD_modic (int, int*, char*);
 int     SD_removeic ();
 int     SD_validatebt (int);
 int     SD_lbtload (int);
-int     SD_loadbt ();
+int     SD_loadbt (int, int*, char*);
 int SD_editbt ();
 int SD_editpert ();
 int     SD_removepert (int, int*);

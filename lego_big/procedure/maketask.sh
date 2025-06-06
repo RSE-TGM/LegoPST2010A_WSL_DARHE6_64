@@ -199,24 +199,24 @@ proc:
 CFLAGS = -I$(LEGORT_INCLUDE) -D$(OS) $(VERSIONE) $(X_INCLUDE)
 
 main_refresh_l: $(LEGO)/sorglego/main/main_refresh.o forausbase.o
-	cc -o refresh_dati  $(LEGO)/sorglego/main/main_refresh.o forausbase.o \
+	cc -o refresh_dati  $(FC_LIBS) -lsqlite3 $(LEGO)/sorglego/main/main_refresh.o forausbase.o \
     $(LEGORT_LIB)/libsim.a \
 	$(LEGOROOT_LIB)/libutil.a  $(LEGOROOT_LIB)/libRt.a $(LEGORT_LIB)/libsim.a\
-    $(LEGORT_LIB)/libnet.a  modulilib.a $(LEGO_LIB)/vapo.a  -lm $(F_LIB)
+    $(LEGORT_LIB)/libnet.a  modulilib.a $(LEGO_LIB)/vapo.a  -lm 
 	rm forausbase.o
 
 main_refresh_r: $(LEGO)/sorglego/main/main_refresh.o forausbase.o
-	cc -o refresh_dati  $(LEGO)/sorglego/main/main_refresh.o forausbase.o \
+	cc -o refresh_dati  $(FC_LIBS) -lsqlite3 $(LEGO)/sorglego/main/main_refresh.o forausbase.o \
     $(LEGORT_LIB)/libsim.a \
 	$(LEGOROOT_LIB)/libutil.a  $(LEGOROOT_LIB)/libRt.a $(LEGORT_LIB)/libsim.a\
     $(LEGORT_LIB)/libnet.a  schemi_reg.a libreg/reglib.a \
-    $(LEGO_LIB)/vapo.a  -lm $(F_LIB) 
+    $(LEGO_LIB)/vapo.a  -lm  
 	rm forausbase.o
 
 main_refresh_mr: $(LEGO)/sorglego/main/main_refresh.o 
-	cc -o refresh_dati  $(LEGO)/sorglego/main/main_refresh.o \
+	cc -o refresh_dati $(FC_LIBS) -lsqlite3  $(LEGO)/sorglego/main/main_refresh.o \
     $(LEGORT_LIB)/libsim.a \
 	$(LEGOROOT_LIB)/libutil.a  $(LEGOROOT_LIB)/libRt.a $(LEGORT_LIB)/libsim.a\
     $(LEGORT_LIB)/libnet.a  schemi_reg.a \
     $(LEGOCAD_USER)/legocad/libut_reg/libreg/reglib.a \
-    $(LEGO_LIB)/legolib.a $(LEGO_LIB)/vapo.a  -lm $(F_LIB) 
+    $(LEGO_LIB)/legolib.a $(LEGO_LIB)/vapo.a  -lm 
