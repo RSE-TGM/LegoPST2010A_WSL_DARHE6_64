@@ -35,7 +35,7 @@ C**   N008= N. DI EQUAZIONI DI UN BLOCCO
 C**   NR00= N. DI TERMINI #0 PER OGNI EQUAZIONE
 C**   NP00= N. DI PERTURBAZIONI
 C
-C GUAG2025: Nuovi parametri
+C GUAG2025: Nuovi parametri (cambiare qui lg_parameter.fh, sim_param.h, e .profile_legoroot)
       PARAMETER (N000=250,
      $           N001=N000*10, N002=N000*25, N003=N000*100,
      $           N004=N000*80, N005=N000*180, N006=150, NT006=N003+N004,

@@ -9,7 +9,8 @@
 **********************************************************************/
 
 /* ************************ Parametri LEGO  ************************ */
-// GUAG 2025
+// GUAG2025: Nuovi parametri (cambiare lg_parameter.fh, qui sim_param.h, e .profile_legoroot)
+//
 #define N000              250                    /* MOLTIPLICATORE    */
 #define N001              N000*10               /* N. MODULI         */
 #define N002              N000*25               /* N. BLOCCHI        */
