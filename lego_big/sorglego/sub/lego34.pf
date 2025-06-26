@@ -63,7 +63,8 @@ C
       COMMON/DIMAJA/NRXJC,NCXJC
       COMMON/REGIME/KREGIM
       LOGICAL KREGIM
-#ifdef LEGOCAD      
+#ifdef LEGOCAD
+C*** Versione per LEGOCAD ***      
       CHARACTER*20  CTOLLE
 #endif
 C
@@ -86,10 +87,10 @@ C
       CHARACTER*8 VAVA
 C
       DATA SI/'SI'/,SIP/'si'/
-      DATA IBLK/' '/,ISSO/'SI'/,ISTAR/'****'/
+C      DATA IBLK/' '/,ISSO/'SI'/,ISTAR/'****'/
       DATA PZERO/20000000./,HZERO/1000000. /,QZERO/1000./
       DATA TZERO/1000./,ROZERO/100./
-      DATA LG/'LG'/,IS/'SI'/
+C      DATA LG/'LG'/,IS/'SI'/
 C
 C  Setta il contatore errori tavole ad un valore che provoca uscita
 C  immediata
@@ -122,6 +123,7 @@ C
  1000 FORMAT(1H1,/,/,10X,
      $       'PROGRAMMA LEGO - CALCOLO DEL REGIME INIZIALE',/,/)
 #ifdef LEGOCAD
+C*** Versione per LEGOCAD ***      
       KSW(1)=1
       KSW(2)=2
 #else
@@ -136,6 +138,7 @@ C
 C_______________ ASSEGNAZIONE DELLA TOLLERANZA PER IL CALCOLO.
 C
 #ifdef LEGOCAD
+C*** Versione per LEGOCAD ***      
       CALL GETARG(1,CTOLLE)
       READ(CTOLLE,'(F10.0)') TOLLER
 #else
@@ -312,6 +315,7 @@ C
      $             NUSTA,NUSCI,IPDATI,DATI,IP,TN,CDT,XYU,RN,ICONV,
      $ SIVAR,NX3,IPVRS,TOLL,RNO,XYO,JACYES,NITERJ,NJACMX,IPS,IPVRT,
 #ifdef LEGOCAD
+C*** Versione per LEGOCAD ***      
      $     NVART,CNXYU,VARI,NPVRT,NX4,NINGR,SYTVAR,NX6,
 #endif
      $ XY,UU,NU,IPI,IPVRI,FJ,RIGA, NEQAL,TEMPO,AJAC,NX8,NOBLC,

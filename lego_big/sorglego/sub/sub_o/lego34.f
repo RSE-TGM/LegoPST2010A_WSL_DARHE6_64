@@ -1,11 +1,9 @@
-
-
 C*********************************************************************
-C Fortran PreCompile: lego34.pf
-C Subsystem: 1
-C Description:
-C %created_by: lomgr %
-C %date_created: Thu Mar 24 18:11:42 2005 %
+C       Fortran PreCompile:             lego34.pf
+C       Subsystem:              1
+C       Description:
+C       %created_by:    lomgr %
+C       %date_created:  Thu Mar 24 18:11:42 2005 %
 C
 C**********************************************************************
 
@@ -14,99 +12,128 @@ C
 C Procedura contenete la variabile per l identificazione della versione
 C
       BLOCK DATA BDD_lego34_pf
-      CHARACTER*80 RepoID
+      CHARACTER*80  RepoID
       COMMON /CM_lego34_pf / RepoID
       DATA RepoID/'@(#)1,pfsrc,lego34.pf,2'/
       END
 C**********************************************************************
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-C C
-C LEGO unificato per singola / doppia precisione C
-C e per diverse piattaforme operative C
-C C
-C Attivata versione singola precisione per sistema operativo Unix C
-C C
+C                                                                      C
+C           LEGO unificato per singola / doppia precisione             C
+C                 e per diverse piattaforme operative                  C
+C                                                                      C
+C   Attivata versione singola precisione per sistema operativo Unix    C
+C                                                                      C
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
-      SUBROUTINE LEGO34
+      SUBROUTINE  LEGO34
 C
-C PROGRAMMA L E G O 3 4
+C      PROGRAMMA  L E G O 3 4
 C
-C
-C**********************************************************************
-C Fortran include file: lg_parameter.fh
-C Subsystem: 1
-C Description:
-C %created_by: lomgr %
-C %date_created: Mon Oct 27 12:17:21 2003 %
 C
 C**********************************************************************
+C       Fortran include file:   lg_parameter.fh
+C       Subsystem:              1
+C       Description:
+C       %created_by:    lomgr %
+C       %date_created:  Mon Oct 27 12:17:21 2003 %
+C
+C**********************************************************************
+
 C******************************************************************************
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-C C
-C LEGO unificato per singola / doppia precisione C
-C e per diverse piattaforme operative C
-C C
-C Attivata versione singola precisione per sistema operativo Unix C
-C C
+C                                                                      C
+C           LEGO unificato per singola / doppia precisione             C
+C                 e per diverse piattaforme operative                  C
+C                                                                      C
+C   Attivata versione singola precisione per sistema operativo Unix    C
+C                                                                      C
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 C
-C 'LG1_PARAMETER.F'
+C     'LG1_PARAMETER.F'
 C
-C** Descrizione delle parameter di LG1
+C**   Descrizione delle parameter di LG1
 C**
-C** N000= MOLTIPLICATORE
+C**   N000= MOLTIPLICATORE
 C**
-C** N001= N. MODULI
-C** N002= N. BLOCCHI
-C** N003= N.STATI+ALG. = ORDINE MASSIMO SISTEMA ALGEBRICO
-C** N004= N. INGRESSI
-C** N005= N. VARIABILI
-C** N006= N. VAR. DI 1 BLOCCO (di processo)
-C** NT006= N. VAR. DI 1 BLOCCO (di regolazione)
-C** N007= N. DI DATI
-C** N008= N. DI EQUAZIONI DI UN BLOCCO
-C** NR00= N. DI TERMINI #0 PER OGNI EQUAZIONE
-C** NP00= N. DI PERTURBAZIONI
+C**   N001= N. MODULI
+C**   N002= N. BLOCCHI
+C**   N003= N.STATI+ALG. = ORDINE MASSIMO SISTEMA ALGEBRICO
+C**   N004= N. INGRESSI
+C**   N005= N. VARIABILI
+C**   N006= N. VAR. DI 1 BLOCCO (di processo)
+C**   NT006= N. VAR. DI 1 BLOCCO (di regolazione)
+C**   N007= N. DI DATI
+C**   N008= N. DI EQUAZIONI DI UN BLOCCO
+C**   NR00= N. DI TERMINI #0 PER OGNI EQUAZIONE
+C**   NP00= N. DI PERTURBAZIONI
 C
+C GUAG2025: Nuovi parametri
       PARAMETER (N000=160,
-     $ N001=N000*10, N002=N000*25, N003=N000*75,
-     $ N004=N000*50, N005=N000*180, N006=150, NT006=N003+N004,
-     $ N007=N000*500, N008=80, NR00=25, NP00=10)
+     $           N001=N000*10, N002=N000*25, N003=N000*100,
+     $           N004=N000*80, N005=N000*180, N006=150, NT006=N003+N004,
+     $           N007=N000*500, N008=80, NR00=25, NP00=10)
 C
-C** M001= N. TOTALE INGRESSI =N005-N003
-C** M002= N. INGRESSI = USCITE =M001-N004
+C**   M001= N. TOTALE INGRESSI    =N005-N003
+C** GUAG2025:
+C**   M002= era N. INGRESSI - USCITE  =M001-N004 ora M002=M001: si dimensiona ila task con ingressi_connessi=ingressi
 C
-      PARAMETER (M001=N005-N003, M002=M001-N004, M003=N002+1,
-     $ M004=N003+1, M005=N004+1,
-     $ MP01=NP00+1, MP02=NP00*200)
+      PARAMETER (M001=N005-N003, M002=M001, M003=N002+1,
+     $           M004=N003+1, M005=N004+1,
+     $           MP01=NP00+1, MP02=NP00*200)
 C
-C M006=N.TERMINI # 0 DELLO JACOBIANO DEL SISTEMA
-C M007=N.TERMINI # 0 DELLO JACOBIANO FATTORIZZATO
-C M010 = N.VARIABILI IN OUTPUT
+C     M006=N.TERMINI # 0 DELLO JACOBIANO DEL SISTEMA
+C     M007=N.TERMINI # 0 DELLO JACOBIANO FATTORIZZATO
+C     M010 = N.VARIABILI IN OUTPUT
 C
 C
-      PARAMETER (M006=N003*NR00, M007=2*M006, M008=8*N003,
-     $ M009 = 8*N003, M010 = N004+N003)
+      PARAMETER (M006=N003*NR00, M007=2*M006, M008=8*N003, 
+     $           M009 = 8*N003, M010 = N004+N003)
 C
 C
       PARAMETER (MN005=2*N005)
+
+
+
+
+C      PARAMETER (N000=160,
+C     $           N001=N000*10, N002=N000*25, N003=N000*75,
+C     $           N004=N000*50, N005=N000*180, N006=150, NT006=N003+N004,
+C     $           N007=N000*500, N008=80, NR00=25, NP00=10)
+CC
+CC**   M001= N. TOTALE INGRESSI    =N005-N003
+CC**   M002= N. INGRESSI = USCITE  =M001-N004
+CC
+C      PARAMETER (M001=N005-N003, M002=M001-N004, M003=N002+1,
+C     $           M004=N003+1, M005=N004+1,
+C     $           MP01=NP00+1, MP02=NP00*200)
+CC
+CC     M006=N.TERMINI # 0 DELLO JACOBIANO DEL SISTEMA
+CC     M007=N.TERMINI # 0 DELLO JACOBIANO FATTORIZZATO
+CC     M010 = N.VARIABILI IN OUTPUT
+CC
+CC
+C      PARAMETER (M006=N003*NR00, M007=2*M006, M008=8*N003, 
+C     $           M009 = 8*N003, M010 = N004+N003)
+CC
+CC
+C      PARAMETER (MN005=2*N005)
 C
 C
       DIMENSION NOSL(N001),NOSUB(N002),NOBLC(N002,2),
-     $ NUSTA(N002),NUSCI(N002),NINGR(N002),ISLB(N002),
-     $ IP(M003),IPVRS(N005),
-     $ IPS(M004),IPVRT(N005),IPI(M005),IPVRI(M001)
+     $          NUSTA(N002),NUSCI(N002),NINGR(N002),ISLB(N002),
+     $          IP(M003),IPVRS(N005),
+     $          IPS(M004),IPVRT(N005),IPI(M005),IPVRI(M001)
       DIMENSION XY(N003),UU(N004),XYU(N005),DATI(N007),IPDATI(M003),
-     $ CNXYU(N005),TOLO(N003),RN(N003),RNO(N003),TOLL(N003),
-     $ XYO(N003),TN(N003),RIGA(N003),AJAC(N008,N006),RNI(N003),
-     $ ICONV(N003),FJ(M007),IRJ(M007),ICJ(M007),IKMA28(M008),
-     $ IWMA28(M008),WMA28(N003),XBL(NT006,3)
+     $          CNXYU(N005),TOLO(N003),RN(N003),RNO(N003),TOLL(N003),
+     $          XYO(N003),TN(N003),RIGA(N003),AJAC(N008,N006),RNI(N003),
+     $          ICONV(N003),FJ(M007),IRJ(M007),ICJ(M007),IKMA28(M008),
+     $          IWMA28(M008),WMA28(N003),XBL(NT006,3)
       CHARACTER*8 VARI(N004),VAR(N005),SIVAR(N003),VARBL(NT006,3)
 C
-      CHARACTER*100 NMSIVA(N003)
-      CHARACTER*100 NMVARI(N004)
-      CHARACTER*80 NMBLOC(N002)
+      CHARACTER*100  NMSIVA(N003)
+      CHARACTER*100  NMVARI(N004)
+      CHARACTER*80   NMBLOC(N002)
       DIMENSION IOUSIV(N003),IOUVAR(N004)
       DIMENSION SYTVAR(NT006,2)
 C
@@ -128,12 +155,12 @@ C
 C_____ NBLSE = NUMERO DI BLOCCHI (I PRIMI) CHE NON HANNO EQUAZIONI
 C
 C******************* TAVOLE *****************************************
-C ILEGO = INDICATORE DEL PROGRAMMA CHIAMANTE LE TAVOLE
-C =1 LEGO E` IL PROGRAMMA CHIAMANTE
-C =0 NON E` IL LEGO IL PROGRAMMA CHIAMANTE
+C       ILEGO = INDICATORE DEL PROGRAMMA CHIAMANTE LE TAVOLE
+C             =1 LEGO E` IL PROGRAMMA CHIAMANTE
+C             =0 NON E` IL LEGO IL PROGRAMMA CHIAMANTE
 C
-C ICNTMX = CONTATORE STABILITO DAL PROGRAMMA CHIAMANTE LE TAVOLE
-C SUPERATO IL QUALE VIENE DECRETATO LO STOP .
+C       ICNTMX = CONTATORE STABILITO DAL PROGRAMMA CHIAMANTE LE TAVOLE
+C                  SUPERATO IL QUALE VIENE DECRETATO LO STOP .
 C
       COMMON/LGTV01/LGTEMP,ILEGO,ICOUNT,ICNTMX
       COMMON/LGTV02/LGMODU,LGBLOC
@@ -147,11 +174,11 @@ C      DATA IBLK/' '/,ISSO/'SI'/,ISTAR/'****'/
       DATA TZERO/1000./,ROZERO/100./
 C      DATA LG/'LG'/,IS/'SI'/
 C
-C Setta il contatore errori tavole ad un valore che provoca uscita
-C immediata
+C  Setta il contatore errori tavole ad un valore che provoca uscita
+C  immediata
 C
-      ILEGO = 1
-      LGTEMP = 0.
+      ILEGO    = 1
+      LGTEMP  = 0.
 C******************* TAVOLE *****************************************
       NX1=N001
       NX2=N002
@@ -172,11 +199,11 @@ C
       NJACMX=10
       KREGIM=.TRUE.
 C
-C PROGRAMMA CHE CALCOLA IL REGIME DELL IMPIANTO
+C     PROGRAMMA CHE CALCOLA IL REGIME DELL IMPIANTO
 C
       WRITE(6,1000)
  1000 FORMAT(1H1,/,/,10X,
-     $ 'PROGRAMMA LEGO - CALCOLO DEL REGIME INIZIALE',/,/)
+     $       'PROGRAMMA LEGO - CALCOLO DEL REGIME INIZIALE',/,/)
       KS=9
       CALL SSWTCH(KS,LL)
       IF(KS.EQ.9)GO TO 798
@@ -195,28 +222,28 @@ C
  6722 FORMAT(/,/,10X,'TOLLERANZA PER IL CALCOLO = ',E12.5,/,/)
       WRITE(6,6722)FATOLL
 C
-C LETTURA DATI DA FILE 04 DI LEGO3
+C     LETTURA DATI DA FILE 04 DI LEGO3
 C
       REWIND 4
       READ(4)NBL,NEQAL,NBL1,NVART,NEQSIS,NEQS1,NPVRT,NU,NU1,NVRI
       READ(4)ISSIS,NBTRI,NST,SIGLA,(NOSL(I),I=1,NST)
       READ(4)(NOSUB(I),NOBLC(I,1),NOBLC(I,2),NUSTA(I),NUSCI(I),
-     $ NINGR(I),ISLB(I),NMBLOC(I),I=1,NBL)
+     $       NINGR(I),ISLB(I),NMBLOC(I),I=1,NBL)
       READ(4)(IP(I),I=1,NBL1),(VAR(I),IPVRS(I),I=1,NVART)
       READ(4)
       READ(4)
       READ(4)P0,H0,T0,Q0,R0,AL0,V0,DP0
       READ(4)(PS,I=1,NEQSIS),(PS,I=1,NU),(XYU(I),I=1,NVART)
       READ(4)NDATI,(IPDATI(I),I=1,NBL1),(DATI(I),I=1,NDATI),
-     $ (CNXYU(I),I=1,NVART),(TOLO(I),I=1,NEQSIS)
+     $             (CNXYU(I),I=1,NVART),(TOLO(I),I=1,NEQSIS)
       READ(4)IREGIM
       IF(IREGIM.NE.0)GO TO 10
       WRITE(6,3300)SIGLA
  3300 FORMAT(/,/,10X,'IL REGIME DELL'' IMPIANTO ',A8,
-     $ '  E'' GIA'' STATO CALCOLATO')
+     $   '  E'' GIA'' STATO CALCOLATO')
       RETURN
 C
-C STAMPA DELLE CONDIZIONI INIZIALI PER IL CALCOLO
+C      STAMPA DELLE CONDIZIONI INIZIALI PER IL CALCOLO
 C
    10 WRITE(6,5050)SIGLA
  5050 FORMAT(/,/,10X,'IMPIANTO ',A8,/,/,10X)
@@ -227,9 +254,9 @@ C
       FJ(I)=XYU(I)*CNXYU(I)
    40 CONTINUE
       CALL STA2(NBL,NOBLC,NOSUB,NUSTA,NUSCI,NINGR,
-     $ IP,VAR,NX2,NX5,FJ,NX6,VARBL,XBL)
+     $          IP,VAR,NX2,NX5,FJ,NX6,VARBL,XBL)
 C
-C INIZIO DELLA PROCEDURA DI CALCOLO
+C      INIZIO DELLA PROCEDURA DI CALCOLO
 C
       READ(4)(VARI(I),UU(I),I=1,NU),(SIVAR(I),XY(I),I=1,NEQSIS)
       WRITE(6,3000)
@@ -237,7 +264,7 @@ C
       WRITE(6,3001)(VARI(I),I=1,NU)
  3001 FORMAT(10(1X,A8))
 C
-C DEFINIZIONE DELLE MATRICI DI COLLEGAMENTO/
+C      DEFINIZIONE DELLE MATRICI DI COLLEGAMENTO/
 C
       DO 140 J=1,NVART
       VAVA=VAR(J)
@@ -250,7 +277,7 @@ C
       IER=1
       WRITE(6,3313)VAVA
  3313 FORMAT(//10X,'ER- SUB. LEGO 2. ERRORE DURANTE DEF.PUNT.',
-     $ 'INGR.BLOCC.'/10X,'VAR = ',A8 /)
+     $   'INGR.BLOCC.'/10X,'VAR = ',A8 /)
       GO TO 140
   136 IPVRS(J)=K
       GO TO 140
@@ -259,8 +286,8 @@ C
   150 CONTINUE
       IF(IER.EQ.1)RETURN
 C
-C DEFINIZIONE DEL PUNTATORE DELLE VARIABILI DEL SISTEMA (SIVAR)
-C VERSO LE VARIABILI DI OGNI BLOCCO
+C     DEFINIZIONE DEL PUNTATORE DELLE VARIABILI DEL SISTEMA (SIVAR)
+C     VERSO LE VARIABILI DI OGNI BLOCCO
 C
       N=0
       IPS(1)=0
@@ -276,8 +303,8 @@ C
   200 CONTINUE
       IPS(NEQSIS+1)=N+1
 C
-C DEFINIZIONE DEL PUNTATORE DEGLI INGRESSI DEL SISTEMA VERSO
-C IL VETTORE VAR (VARIABILI DI OGNI BLOCCO)
+C     DEFINIZIONE DEL PUNTATORE DEGLI INGRESSI DEL SISTEMA VERSO
+C     IL VETTORE VAR (VARIABILI DI OGNI BLOCCO)
 C
       N=0
       IPI(1)=0
@@ -293,7 +320,7 @@ C
   220 CONTINUE
       IPI(NU+1)=N+1
 C
-C STAMPE OPZIONALI
+C     STAMPE OPZIONALI
 C
       CALL SSWTCH(4,LL)
       IF(LL.NE.1)GO TO 231
@@ -301,7 +328,7 @@ C
  2000 FORMAT(1H1,/,/,10X,'STAMPE DA SSWTCH 4   ',/,/)
       DO 230 I=1,NBL
       WRITE(6,2001) NOSUB(I),NOBLC(I,1),NOBLC(I,2),NUSTA(I),NUSCI(I),
-     $ NINGR(I),ISLB(I),IP(I)
+     $              NINGR(I),ISLB(I),IP(I)
  2001 FORMAT(10X,A4,2X,2A4,5I6)
   230 CONTINUE
       WRITE(6,2002)IP(NBL+1)
@@ -334,9 +361,9 @@ C
       K1=IP(I)
       K2=K1+NY-1
       WRITE(6,3003) NOBLC(I,1),NOBLC(I,2),NOSUB(I),
-     $ NUSTA(I),NUSCI(I),(K,VAR(K1+K-I1),K=I1,I2)
+     $              NUSTA(I),NUSCI(I),(K,VAR(K1+K-I1),K=I1,I2)
  3003 FORMAT(2X,2A4,' (',A4,') ',2I3,6X,6(2X,I5,1X,A8)/
-     $ (30X,6(2X,I5,1X,A8)))
+     $       (30X,6(2X,I5,1X,A8)))
   235 CONTINUE
 C
       WRITE(6,3004)
@@ -352,17 +379,17 @@ C
   301 CONTINUE
 C
 C
-C RISOLUZIONE DEL SISTEMA ALGEBRICO DI REGIME
+C      RISOLUZIONE DEL SISTEMA ALGEBRICO DI REGIME
 C
-      CALL LEGREG(IGO,NEQSIS, NBL,ISLB,
-     $ NUSTA,NUSCI,IPDATI,DATI,IP,TN,CDT,XYU,RN,ICONV,
+      CALL  LEGREG(IGO,NEQSIS, NBL,ISLB,
+     $             NUSTA,NUSCI,IPDATI,DATI,IP,TN,CDT,XYU,RN,ICONV,
      $ SIVAR,NX3,IPVRS,TOLL,RNO,XYO,JACYES,NITERJ,NJACMX,IPS,IPVRT,
      $ XY,UU,NU,IPI,IPVRI,FJ,RIGA, NEQAL,TEMPO,AJAC,NX8,NOBLC,
 C************************** TAVOLE ***********************************
      $ NX2,RNI,IRJ,ICJ,IKMA28,IWMA28,WMA28,NZMAX,MXCOL,MXROW,NOSUB)
 C************************** TAVOLE ***********************************
 C
-C STAMPE RISULTATI
+C      STAMPE RISULTATI
 C
       IF(IGO.NE.1) THEN
       WRITE(6,8560)
@@ -377,31 +404,31 @@ C
       WRITE(6,5055)
  5055 FORMAT(/,/,10X,'CONDIZIONI DI REGIME CALCOLATE',/,/)
 C
-C REGISTRAZIONE DEL FILE 04 CON I RISULTATI OTTENUTI
+C      REGISTRAZIONE DEL FILE 04 CON I RISULTATI OTTENUTI
 C
-C VIENE RILETTA LA TOPOLOGIA DEL MODELLO DINAMICO (IP, IPVRS)
+C      VIENE RILETTA LA TOPOLOGIA DEL MODELLO DINAMICO (IP, IPVRS)
 C
-      REWIND 4
+      REWIND  4
       READ(4)
       READ(4)
       READ(4)
       READ(4)(IP(I),I=1,NBL1),(VAR(I),IPVRS(I),I=1,NVART)
 C
       READ(4)(NPS,I=1,NEQS1),(SIVAR(I),NMSIVA(I),
-     $ IOUSIV(I),I=1,NEQSIS)
+     $        IOUSIV(I),I=1,NEQSIS)
       READ(4)(NPS,I=1,NU1),(VARI(I),NMVARI(I),
-     $ IOUVAR(I),I=1,NU)
+     $        IOUVAR(I),I=1,NU)
 C
       READ(4)
 C
 C______ SE NEL MODELLO ESISTONO BLOCCHI SENZA EQUAZIONI (REGOLATORI)
-C VENGONO RICHIAMATI AFFINCHE` CALCOLINO LE CONDIZIONI INIZIALI
-C DELLE LORO VARIABILI INTERNE
+C       VENGONO RICHIAMATI AFFINCHE` CALCOLINO LE CONDIZIONI INIZIALI
+C       DELLE LORO VARIABILI INTERNE
 C
       IF(NBLSE.GT.0) THEN
 C
       CALL INIZBL(ISLB,IPDATI,DATI,IP,XYU,IPVRS,NOBLC,NX2,
-     $ NUSTA,NUSCI,NVART)
+     $               NUSTA,NUSCI,NVART)
       ENDIF
 C
       DO 400 I=1,NVART
@@ -417,11 +444,11 @@ C
       WRITE(4)(XY(I),I=1,NEQSIS),(UU(I),I=1,NU),(XYU(I),I=1,NVART)
       IREGIM=0
       WRITE(4)NDATI,(IPDATI(I),I=1,NBL1),(DATI(I),I=1,NDATI),
-     $ (CNXYU(I),I=1,NVART),(TOLO(I),I=1,NEQSIS)
+     $              (CNXYU(I),I=1,NVART),(TOLO(I),I=1,NEQSIS)
 C
       WRITE(4)IREGIM
 C
-C REGISTRAZIONE SU FILE 24 DEL REGIME CALCOLATO
+C  REGISTRAZIONE SU FILE 24 DEL REGIME CALCOLATO
 C
       OPEN(UNIT=24,FILE=F24DAT,STATUS='UNKNOWN',FORM='FORMATTED')
       CALL REC24(NEQSIS,XYO,NU,TN)
@@ -430,11 +457,11 @@ C
       FJ(I)=XYU(I)*CNXYU(I)
   420 CONTINUE
       CALL STA2(NBL,NOBLC,NOSUB,NUSTA,NUSCI,NINGR,
-     $ IP,VAR,NX2,NX5,FJ,NX6,VARBL,XBL)
+     $          IP,VAR,NX2,NX5,FJ,NX6,VARBL,XBL)
       WRITE(6,4521)
  4521 FORMAT(//10X,'IL PROGRAMMA DA RICHIAMARE PER CONTINUARE LO STUDIO'
      $/10X,'E''  -LEGO4-')
 C
       RETURN
       END
-C
+C            

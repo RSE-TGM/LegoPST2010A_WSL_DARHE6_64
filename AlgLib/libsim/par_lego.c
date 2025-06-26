@@ -27,6 +27,8 @@ static char SccsID[] = "@(#)par_lego.c	5.1\t11/10/95";
 #include <malloc.h>
 #include <Rt/RtMemory.h>
 
+// questi sono i default, i parametri correnti vengono letti da ambiente
+// se non sono presenti vengono usati questi
 #define DEF_N000  	160
 #define DEF_N001	DEF_N000*10
 #define DEF_N002	DEF_N000*25

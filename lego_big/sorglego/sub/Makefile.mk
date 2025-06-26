@@ -21,13 +21,17 @@ C_LIB=
 OTHER_LIB=-lm
 MOTIF_VER=11
 #PREPROCESSOR_OPTIONS=-C -DOSF1
-PREPROCESSOR_OPTIONS= -C
+# GUAG2025
+#PREPROCESSOR_OPTIONS= -C
 UIL_INCLUDE=-I/usr/include/uil
 UIL_COMPILER=/usr/X11R6/bin/uil
 X_FLAGS=-c  -DSNAPSHOT
 #------------------------ C preprocessor
 CPP=cpp
-CPPFLAGS=-P -C -DLINUX -traditional
+# GUAG2025
+CPPFLAGS= -traditional-cpp -C -P -nostdinc -DLINUX
+PREPROCESSOR_OPTIONS=$(CPPFLAGS)
+#CPPFLAGS=-P -C -DLINUX -traditional
 #------------------------ C compiler
 #CC=cc
 CFLAGS=$(C_FLAGS) -g
@@ -80,8 +84,8 @@ $(PATHCADOBJ)/legreg.o $(PATHCADOBJ)/lgabrt.o $(PATHCADOBJ)/lgstop.o
 
 all: $(LEGO_LIB)/legolib.a $(LEGO_LIB)/clegolib.a
 
-.c.o:
-	$(CC) -c $(CFLAGS) $<
+# .c.o:
+# 	$(CC) -c $(CFLAGS) $<
 
 $(OBJFILES): $(FFILES)
 	$(FC) -c $(FFLAGS) $(FFILES)
