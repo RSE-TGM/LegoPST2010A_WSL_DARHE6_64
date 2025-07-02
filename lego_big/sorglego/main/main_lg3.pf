@@ -83,7 +83,7 @@ C
       CALL LEGO34
 C
       CALL LGSTOP
-      STOP
+C      STOP
       END
 C
 C

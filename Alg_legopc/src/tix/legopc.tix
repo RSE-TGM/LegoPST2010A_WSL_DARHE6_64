@@ -3292,17 +3292,112 @@ proc lancia_PostProc {} {
 }
 
 proc CreateBanner {} {
+   # Dichiara le variabili globali necessarie. 'version' conterrà
+   # la stringa finale formattata da mostrare nella GUI.
+   global env version
+
+   # Evita di creare finestre duplicate
+   if {[winfo exists .relinfo]} {
+       return
+   }
+
+   # --- INIZIO PARSING DEL FILE version.h ---
+
+   # Imposta valori di default. Utili se il file non esiste o è incompleto.
+   set git_version "N/A"
+   set build_number "N/A"
+   set build_date "N/A"
+
+   set version_file "$env(LEGOROOT)/version.h"
+
+   if {[file exists $version_file]} {
+       set f [open $version_file r]
+       # Legge il file riga per riga
+       while {[gets $f line] >= 0} {
+           # Cerca la riga di GIT_VERSION_STRING e cattura il valore tra virgolette
+           if {[regexp {^#define\s+GIT_VERSION_STRING\s+"([^"]+)"} $line -> local_git_version]} {
+               set git_version $local_git_version
+
+           # Cerca la riga di BUILD_NUMBER e cattura il valore numerico
+           } elseif {[regexp {^#define\s+BUILD_NUMBER\s+(\d+)} $line -> local_build_number]} {
+               set build_number $local_build_number
+
+           # Cerca la riga di BUILD_DATE_STRING e cattura il valore tra virgolette
+           } elseif {[regexp {^#define\s+BUILD_DATE_STRING\s+"([^"]+)"} $line -> local_build_date]} {
+               set build_date $local_build_date
+           }
+       }
+       close $f
+   }
+
+   # --- FINE PARSING ---
+
+   # --- FORMATTAZIONE DELL'OUTPUT PER LA GUI ---
+   # Crea la stringa finale multilinea da mostrare nella label.
+   # La variabile globale 'version' viene ora popolata con la stringa formattata.
+   set version "LEGOPST\n"
+   append version "LegoPc System\n\n"
+   append version "Build:\t$build_number\n"
+   append version "Commit:\t$git_version\n"
+   append version "Data:\t$build_date"
+   
+   # --- CREAZIONE DELLA FINESTRA (GUI) ---
+
+   toplevel .relinfo
+   wm title .relinfo "LegoPc Release Info"
+   frame .relinfo.frame 
+
+   catch {image delete imglego}
+   image create photo imglego -file "$env(LG_TIX)/img/lego.gif"
+   
+   label .relinfo.frame.imglego -image imglego -bd 1 -relief sunken
+   
+   # La label usa la variabile globale 'version' che ora contiene il testo formattato
+   label .relinfo.frame.text -justify left -padx 2m -pady 5m -font "Times 14" -textvariable version
+
+   pack .relinfo.frame.imglego .relinfo.frame.text -side left -padx 1m -pady 1m
+   pack .relinfo.frame -side top -pady 1m	   
+
+   frame .relinfo.but
+   button .relinfo.but.ok -text "OK" -width 8 -font "Times 12" -command "destroy .relinfo"
+   
+   set editor $env(LG_TEXTEDITOR)
+   # È buona pratica usare file nativename per la compatibilità tra OS (es. Windows usa \)
+   set file [file nativename $env(LG_INSTALL)/relnotes.txt]
+	      
+   # MODIFICA CHIAVE: Usa le virgolette doppie per il -command
+   button .relinfo.but.rn -text "Release Notes" -width 12 -font "Times 12" \
+          -command "catch {exec $editor \"$file\" &}"
+
+#          -command {catch {exec $env(LG_LEGO)/edita.bat [file nativename $env(LG_INSTALL)/relnotes.txt] &}}
+          
+   pack .relinfo.but.rn .relinfo.but.ok -side left -padx 8m
+   pack .relinfo.frame .relinfo.but -side top -pady 1m
+}
+
+proc CreateBanner_old {} {
    global env
    toplevel .relinfo
    wm title .relinfo "LegoPc Release Info"
    frame .relinfo.frame 
+# leggo il file della versione di $LEGOROOT
+   set f [open $env(LEGOROOT)/version.h r]
+   set version [read $f]
+   close $f
+#
    catch {image delete imglego}
    image create photo imglego -file $env(LG_TIX)/img/lego.gif
    label .relinfo.frame.imglego -image imglego -bd 1 -relief sunken
-   label .relinfo.frame.text -justify left -padx 2m -pady 5m -font "Times 16 bold" \
-               -text "\n\nLegoPc System\n\nBuild: 7.1\n\n\n"
-   pack .relinfo.frame.imglego .relinfo.frame.text -side left -padx 1m
-#   frame .relinfo.but  -relief ridge -borderwidth 2
+   #set version "\n\nLegoPc System\n\nBuild: 7.1\n\n\n"
+   label .relinfo.frame.text -justify left -padx 2m -pady 5m -font "Times 16 bold" -textvariable version
+#label .relinfo.frame.text -justify left -padx 2m -pady 5m -font "Times 16 bold" \
+#               -text "\n\nLegoPc System\n\nBuild: 7.1\n\n\n" 
+	tk_messageBox -message "CreateBanner: $version" -type ok -icon info
+
+	pack .relinfo.frame.imglego .relinfo.frame.text -side left -padx 1m
+    pack .relinfo.frame -side top -pady 1m	   
+#  pack .relinfo.frame.imglego .relinfo.frame.text -side left -padx 1m
+##   frame .relinfo.but  -relief ridge -borderwidth 2
    frame .relinfo.but  
    button .relinfo.but.ok -text "OK" -width 8 -font "Times 12" -command "destroy .relinfo"
    button .relinfo.but.rn -text "Release Notes" -width 12 -font "Times 12" \

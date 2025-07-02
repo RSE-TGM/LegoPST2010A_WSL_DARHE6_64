@@ -246,6 +246,8 @@ C
       J=J+1
       IRN(J)=I
       ICN(J)=ICJ(K)
+C GUAG2025 Stampe pe trovare errore DUPLICATE
+C      CALL stampe9999_LEGSIS (J,I,I1,I2,K,ICN)
    36 CONTINUE
    38 CONTINUE
 C
@@ -485,3 +487,15 @@ C
       GO TO 93
       END
 C            
+      SUBROUTINE stampe9999_LEGSIS (J,I,I1,I2,K,ICN)
+      DIMENSION ICN(*)
+      IF(ICN(J).EQ.9999)THEN
+C      IF(J.EQ.1528)THEN
+         PRINT*,'LEGSIS-------------'
+         PRINT*, 'ICN(',K,')=',ICN(K)
+         PRINT*, 'I=',I,'J=',J,'K=',K
+         PRINT*, 'I1=',I1,'I2=',I2
+         Print*, '-------------------'
+      ENDIF
+      RETURN
+      END

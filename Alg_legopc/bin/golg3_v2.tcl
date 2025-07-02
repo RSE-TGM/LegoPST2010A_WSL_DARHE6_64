@@ -179,9 +179,9 @@ global env
 
      if {$::tcl_platform(os) != "Linux"} {
         if {$MODE == "drift"} {
-           exec $SLV/lg4_exe <$lg4drift >lg4.out
+           catch {exec $SLV/lg4_exe <$lg4drift >lg4.out}
         } else {
-           exec $SLV/lg4_exe <lg4.inp >lg4.out
+           catch {exec $SLV/lg4_exe <lg4.inp >lg4.out}
         }
      } else {
         if {$MODE == "drift"} {
@@ -190,7 +190,9 @@ global env
            exec lg4_exe <lg4.inp >lg4.out
         }
      }
-
+# GUAG2025 aggiunta una pausa prima dll'esecuzione di lg5
+#tk_messageBox -icon info -message "lancio lg5 fra 3 secondi"
+#after 3000
      if { $::tcl_platform(os) == "Linux" } {
 #        exec make -f $SLV/crea_solver lg5
         set comm1 "crealg5"
@@ -206,9 +208,9 @@ global env
         catch {exec $SLV/lgser.bat}
      }
      if {$MODE == "drift"} {
-        exec proc/lg5 <$lg5drift >lg5.out
+        catch {exec proc/lg5 <$lg5drift >lg5.out}
      } else {
-        exec proc/lg5 <lg5.inp >lg5.out
+        catch {exec proc/lg5 <lg5.inp >lg5.out}
      }
 
 

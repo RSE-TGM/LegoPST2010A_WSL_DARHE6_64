@@ -19,5 +19,6 @@ trapfpe ()
   /* Enable some exceptions.  At startup all exceptions are masked.  */
 
   feenableexcept (FE_INVALID|FE_DIVBYZERO|FE_OVERFLOW);
+  fedisableexcept(FE_UNDERFLOW );
 }
 

@@ -1,6 +1,6 @@
 /**********************************************************************
 *
-*       C Header:               sim_param.h
+// *       C Header:               sim_param.h
 *       Subsystem:              3
 *       Description:
 *       %created_by:    lomgr %

@@ -109,6 +109,9 @@ C$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       K1=IPVRS(I0+J)
       J1=IPCJ(K1)
       J2=IPCJ(K1+1)-1
+C GUAG2025 Stampe per trovare errore DUPLICATE 
+C      call STAMPE9999_LEGJAC(J1,K1,J2,IPCJ,ICJ,LGBLOC)
+C
       DO 210 JK= J1,J2
       ICB=ICBJ(JK)
       FJ(JK)=AJAC(J,ICB)
@@ -134,3 +137,25 @@ C
       RETURN
       END
 C            
+      SUBROUTINE STAMPE9999_LEGJAC(J1,K1,J2,IPCJ,ICJ,LGBLOC)
+               DIMENSION IPCJ(*),ICJ(*)
+               CHARACTER*8 LGBLOC
+               INTEGER KK(11)
+   
+      DATA KK/66, 72, 99, 2793, 2821, 5157, 5267, 7750, 
+     &      7794, 10000, 10004/
+
+  
+      do i = 1, size(KK)
+         K1= KK(i)
+         PRINT*,'LEGJAC-------------K1=',K1
+         PRINT*, 'J1',J1,'K1=',K1
+         PRINT*, 'J2',J2,'K1+1=',K1+1
+         PRINT*, 'ICJ(',J2,')=',ICJ(J2)
+         PRINT*, 'IPCJ(',J2,')=',IPCJ(J2)
+         PRINT*, 'LGBLOC=',LGBLOC
+         Print*, '-------------------'
+      end do
+
+      RETURN
+      END 

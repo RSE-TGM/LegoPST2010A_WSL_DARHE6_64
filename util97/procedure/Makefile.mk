@@ -22,7 +22,14 @@ all:../bin/creasim ../bin/creastazsim ../bin/direct.sh ../bin/mkstaz \
     ../bin/lego_back ../bin/listacai ../bin/mkdtw ../bin/mkstaz2 \
     ../bin/mod2pag ../bin/modoff ../bin/modrtf ../bin/newval.sh \
     ../bin/numcifre ../bin/pulipag ../bin/punt2canc.sh ../bin/sosti.sh \
-    ../bin/tab2sem.sh ../bin/tab2sem_all.sh
+    ../bin/tab2sem.sh ../bin/tab2sem_all.sh \
+	../bin/lgswitch ../bin/lgversion
+#
+../bin/lgversion: lgversion.sh
+	cp lgversion.sh ../bin/lgversion;chmod 777 ../bin/lgversion ;
+#
+../bin/lgswitch: lgswitch.sh
+	cp lgswitch.sh ../bin/lgswitch;chmod 777 ../bin/lgswitch ;
 #
 ../bin/creasim: creasim.sh
 	cp creasim.sh ../bin/creasim;chmod 777 ../bin/creasim ;
