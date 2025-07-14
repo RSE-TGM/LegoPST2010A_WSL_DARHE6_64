@@ -49,7 +49,7 @@ extern swidget topLevelShell;
 
 static void SelezioneMultipla( );
 extern Boolean file_exist(char *);
-extern void SetItemString();
+//extern void SetItemString();
 
 
 /*******************************************************************************

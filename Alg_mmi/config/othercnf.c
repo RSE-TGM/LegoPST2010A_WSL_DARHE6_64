@@ -43,6 +43,7 @@ static char SccsID[] = "@(#)othercnf.c	5.2\t1/11/96";
 #include <Xm/Xm.h>
 #include <UxXt.h>
 #include "config.h"
+#include "pagresdef.h"
 #include <draw.h>
 #include "message.h"
 #include "top_icon.h"  /* per topologia schemi regolazione */
@@ -3156,8 +3157,8 @@ void proc_deselect(Widget wgtsel)
          pag_deselect_all(drawing);
 
 //         DeselectAllDraget(drawing);
-// GUAG2025 forse True
-         DeselectAllDraget(drawing, True);
+// GUAG2025 forse False
+         DeselectAllDraget(drawing, False);
          set_something(wgtsel,XlNselected,(char*) True);
       }
    }

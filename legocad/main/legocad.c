@@ -160,7 +160,7 @@ int richiestaScrittura;
                                          LICLEGOCAD, &indiceSocieta);
        if(errorCode != 0)
          {
-          skey_stampa_errore(errorCode, &messaggioErrore);
+          skey_stampa_errore(errorCode, messaggioErrore);
           printf("LEGOCAD:%s \n", messaggioErrore);
           //provo l'eventuale chiave software
           if(CAP(LEGOCAD_LIC, Buffer) == -1) {

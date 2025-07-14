@@ -37,6 +37,24 @@ static char SccsID[] = "@(#)gen_f01task.c	5.2\t2/20/96";
 #include <malloc.h>
 #include <top_icon.h>
 
+extern char *OlEstrRegTaskName(char *, char *);
+extern void XlOpenFileErrComp(char *);
+extern void XlErrComp(char *, char *, char *, char *);
+extern void XlSetFileErrComp(char *);
+// #include <X11/Intrinsic.h>
+// #include <X11/StringDefs.h>
+// #include <X11/Xresource.h>
+// #include <Xm/Xm.h>
+// #include <UxXt.h>
+// #include <Xl/Xl.h>
+// #include <Xl/XlPort.h>
+// #include <Xl/XlIconReg.h>
+// #include <Xd/Xd.h>
+// #include <Ol/OlConn.h>
+// #include <Ol/OlDatabaseTopologia.h>
+// #include <Xm/DrawingA.h>
+// #include <Ol/OlForm.h>
+// #include <Ol/OlForm_regol.h>     
 
 /*       VARIABILI RELATIVE A CONNESSIONI FRA SCHEMI LETTE DA FILE */
 char int_sche[NSCHEMI][NINTE][9];   /* Vettorializzato NSCHEMI [NINTE]*/
@@ -65,10 +83,6 @@ int completa_nome(char *, char *);
 char *strupr(),*strlwr();
 void array();
 char *getpul (char *, int , FILE *);
-
-void XlOpenFileErrComp(char *nomeFile);
-void XlErrComp(char* ,char *,char *,char *);
-void XlSetFileErrComp(char *);
 
 char con_sche[NSCHEMI][NINTE][9];   /* Vettorializzato NSCHEMI e letto
                                        da schemi.dsc contiene il nome

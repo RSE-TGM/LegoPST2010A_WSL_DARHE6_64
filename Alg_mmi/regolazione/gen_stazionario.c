@@ -50,15 +50,15 @@ static char SccsID[] = "@(#)gen_stazionario.c	5.2\t11/30/95";
  char *compila = "xlf -c -qextname";
  char *linka= "xlf -o";
 #else
- char *compila = "gfortran -c -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy  -ffixed-line-length-132";
- char *linka= "gfortran -o -fno-second-underscore -fdollar-ok -fno-automatic -finit-local-zero -fPIE -std=legacy  -ffixed-line-length-132";
-// char *compila = "f77 -O -c ";
-// char *linka= "f77 -o";
+ char *compila = "gfortran -c ";
+ char *linka= "gfortran -o";
 #endif
 
-void XlOpenFileErrComp(char *nomeFile);
-void XlErrComp(char* ,char *,char *,char *);
-void XlSetFileErrComp(char *);
+extern char *OlEstrRegTaskName(char *, char *);
+extern void XlOpenFileErrComp(char *);
+extern void XlErrComp(char *, char *, char *, char *);
+extern void XlSetFileErrComp(char *);
+
 
 int main(argc, argv)
 int argc;
@@ -105,7 +105,7 @@ struct stat st;
           strcpy(libmacro,"");
 
 /*      Compilazione di lg3reg.f */
-   	sprintf(buf,"%s -g -o %s/lg3reg.o %s/lg3reg.f", 
+   	sprintf(buf,"%s -g  -o %s/lg3reg.o %s/lg3reg.f -lgfortran -lm", 
                 compila,work_path,work_path);
 	/*
         printf("\t Frase di compilazione: [%s] (%d)\n\n",buf,strlen(buf));

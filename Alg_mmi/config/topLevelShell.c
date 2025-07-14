@@ -141,7 +141,7 @@ void TopMenuSetSensitive( );
 int display_resources( );
 int gest_conf_op( );
 Boolean LibraryIsOpen( );
-int open_page( );
+int open_page();
 int modify_page( );
 int duplicate_page( );
 int del_page( );
@@ -157,7 +157,7 @@ void PrintAllPages();
 int CheckOlTree();
 extern void compile_all_pag();
 extern int info_top_schemi();
-extern void SetItemString();
+//extern int SetItemString();
 extern OlDatabaseTopologiaObject OlCreateDatabaseTopologia(char *, char *, int , char *,char *,char *);
 
 /*******************************************************************************
@@ -367,11 +367,7 @@ static _UxCtopLevelShell       *UxTopLevelShellContext;
        The following function is an event-handler for posting menus.
 *******************************************************************************/
 
-static void	_UxtopLevelShellMenuPost( wgt, client_data, event )
-	Widget		wgt;
-	XtPointer	client_data;
-	XEvent		*event;
-
+static void	_UxtopLevelShellMenuPost(Widget wgt,XtPointer client_data, XEvent*event )
 {
 	Widget	menu = (Widget) client_data;
 	int 	which_button;

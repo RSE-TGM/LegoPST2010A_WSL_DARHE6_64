@@ -84,7 +84,7 @@ extern int flag_demo;
 
 int PrintClosePag();
 void close_page();
-extern void SetItemString();
+//extern void SetItemString();
 extern void EliminaDraget(PAGINA *pag);
 
 //extern  void *		UxNewContext();
@@ -855,7 +855,7 @@ void close_page(char *pagname)
 pagina_free(pappo);
 }
 
-void SetItemString(XmString *Xstring,char *nome,char *tipo,char *descr,int in_use,
+int SetItemString(XmString *Xstring,char *nome,char *tipo,char *descr,int in_use,
 	char *tag)
 {
    char *Cstring;

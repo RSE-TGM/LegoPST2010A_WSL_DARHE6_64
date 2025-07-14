@@ -137,7 +137,9 @@ double tempo_corr;
                                           LICRUNTIME, &indiceSocieta);
 	if(errorCode != 0)
 	{
-		skey_stampa_errore(errorCode, (char*)&messaggioErrore);
+// GUAG2025
+//		skey_stampa_errore(errorCode, (char*)&messaggioErrore);
+		skey_stampa_errore(errorCode, messaggioErrore);
 		printf("NET_SKED:%s \n", messaggioErrore);
 
 		//provo l'eventuale chiave software

@@ -43,17 +43,18 @@ static char SccsID[] = "@(#)gen_topologia.c	5.1\t11/13/95";
 #include <memory.h>
 #endif
 
-// #include <Rt/RtMemory.h>
-// #include "config.h"
 
-void XlOpenFileErrComp(char *nomeFile);
-void XlErrComp(char* ,char *,char *,char *);
-void XlSetFileErrComp(char *);
+
+extern char *OlEstrRegTaskName(char *, char *);
+extern void XlOpenFileErrComp(char *);
+extern void XlErrComp(char *, char *, char *, char *);
+extern void XlSetFileErrComp(char *);
 
 /*
   Dichiarazione delle variabili che vengono caricate dalla lettura
   del file di input contenete i dati topologici
 */
+
         char pag_ds[LUNDESC];
         int short icn_nm;         /* numero di icone */
         char icn_sigl[NICON][5];  /* sigla icona  */
@@ -76,7 +77,6 @@ void XlSetFileErrComp(char *);
 
 char *minuscolo (char *);
 char *maiuscolo (char *);
-char *OlEstrRegTaskName(char *, char *);
 
 
 char id_task[3];

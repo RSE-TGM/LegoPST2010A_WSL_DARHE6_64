@@ -44,7 +44,6 @@ FILE *fpErrCom;
 int numErrCom;
 int numErrComWidget;
 
-void XlHeaderFileErrCompTask(char *);
 
 void XlErrComp(char* w,char *procedura,char *commentoA,char *commentoB)
 {

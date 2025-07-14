@@ -37,11 +37,6 @@ static char SccsID[] = "@(#)gen_f14.c	5.1\t11/13/95";
 #define IRIGA 500
 #define URIGA 500
 
-void XlOpenFileErrComp(char *nomeFile);
-void XlErrComp(char* ,char *,char *,char *);
-void XlSetFileErrComp(char *);
-int read_topologia(char *);
-
 char riga[256];
 char fpath[50], mpath[50];
 
@@ -107,6 +102,13 @@ char *minuscolo (char *);
 char *maiuscolo (char *);
 char *copia_n (char *, char *, int );
 char *getpul (char *, int, FILE *);
+int read_topologia(char *);
+
+extern char *OlEstrRegTaskName(char *, char *);
+extern void XlOpenFileErrComp(char *);
+extern void XlErrComp(char *, char *, char *, char *);
+extern void XlSetFileErrComp(char *);
+extern void XlOpenFileErrComp(char *);
 
 /* ------------------- INIZIO DEL MAIN ------------------------- */
 

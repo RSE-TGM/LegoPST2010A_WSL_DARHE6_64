@@ -42,7 +42,7 @@
 	strutture e define per la richiesta e l'aggiornamento delle
 	pagine
 */
-#define MAXCHAR_PAGNAME		50
+#define MAXCHAR_PAGNAME		60
 
 #define MAX_OPERAZIONI		200
 

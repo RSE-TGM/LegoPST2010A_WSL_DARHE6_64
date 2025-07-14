@@ -348,7 +348,8 @@ static	void	activateCB_OkButton( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCPagDialog *) UxGetContext( UxWidget );
 	{
 #ifndef DESIGN_TIME
-	extern void  SetItemString();
+	// extern void  SetItemString();
+	int SetItemString(XmString *,char *,char *,char *,int ,char *);
 	extern int TagPagSetNew();
 	extern void PaginaSetTagPag();
 	extern Arg args[];

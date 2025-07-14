@@ -108,7 +108,7 @@ double  tempo_corr;
                                           LICSCADA, &indiceSocieta);
 	if(errorCode != 0)
 	{
-		skey_stampa_errore(errorCode, &messaggioErrore);
+		skey_stampa_errore(errorCode, messaggioErrore);
 		printf("scada:%s \n", messaggioErrore);
 
 		//provo l'eventuale chiave software

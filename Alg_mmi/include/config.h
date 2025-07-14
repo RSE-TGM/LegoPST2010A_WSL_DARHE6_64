@@ -61,7 +61,7 @@
 #define L_CLASSE_OGGETTI 20     /* lunghezza classe oggetti */
 #define TIPO_DRAWING    1       /* identificazione tipi oggetto */
 #define TIPO_OBJLIB     2
-#define MAXCHAR_PAGNAME 50      /* lunghezza massima nomi pagina */
+#define MAXCHAR_PAGNAME 60      /* lunghezza massima nomi pagina */
 #define MAXLENFILENAME  150      /* lunghezza massima nomi file pagina */
 #define MAXCHARDISPLAY  15      /* lunghezza massima nomi display */
 
@@ -840,6 +840,9 @@ Widget get_wid_icon_conn(Widget ,char *);
  void XlHeaderFileErrComp(char *);
  int file_no_exe_filter( char* );
  void apply_gest_conn1(Widget);
+ int skey_stampa_errore(int , char * );
+ Boolean file_exist(char *);
+ int SetItemString(XmString *,char *,char *,char *,int ,char *);
  
 
 
