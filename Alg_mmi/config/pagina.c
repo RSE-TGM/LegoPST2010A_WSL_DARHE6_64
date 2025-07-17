@@ -73,6 +73,60 @@ extern Boolean XdSetDeleteConn(void * );
 extern int OlFindConnectionByPort(OlConnObject , char *, char* ,char *);
 extern void undoListDeleteAll(XdListaUndo);
 
+    void PagSetTagReg();
+   extern void get_child();
+   extern XrmDatabase CuttedDb;
+
+// Definiamo la translation table per gli oggetti spostabili.
+// Btn2Down: Inizia lo spostamento.
+// Btn2Motion: Continua lo spostamento.
+// Btn2Up: Termina lo spostamento.
+// Definiamo la translation table per gli oggetti spostabili.
+// Btn1Down: Seleziona e prepara lo spostamento.
+// Btn1Motion: Sposta.
+// Btn1Up: Finalizza.
+static char object_translations[] =
+    "#override\n\
+     <Btn1Down>:   StartOrSelect() \n\
+     <Btn1Motion>: MoveIt() \n\
+     <Btn1Up>:     EndMove()";
+
+
+/*-------------------------------------
+ *
+ * AllPagWidSetTransation
+ *
+ * set delle translation su tutti gli widget della pagina
+ *
+ *-------------------------------------*/
+
+// Sostituisci completamente la tua funzione AllPagWidSetTranslation con questa
+void AllPagWidSetTranslation(PAGINA *pagina)
+{
+   extern void get_child();
+   extern void set_draw_translations();
+   WidgetList children;
+   Cardinal num_children;
+   int i;
+
+   // La drawing area gestisce solo la selezione di un'area vuota.
+   // Il parametro (%p) passa il puntatore 'pagina' alla action.
+   add_def_translation(pagina->drawing, "#override <Btn1Down>: select_zone(%p)", pagina);
+   
+   // Applica le translation di spostamento a tutti i widget figli
+   get_child(pagina->drawing, &children, &num_children);
+   for(i = 0; i < num_children; i++)
+   {
+      add_def_translation(children[i], object_translations);
+   }
+
+   set_draw_translations(pagina->drawing); // Per le funzioni del tool di disegno
+}
+
+
+int isinlimit(Window win,XRectangle area,XRectangle limite);
+
+
 
 Boolean WidSelectedAreInEdit(PAGINA *pag)
 {
@@ -299,30 +353,71 @@ Boolean pagina_save(PAGINA *pag,int tipo,int modo)
    }
 
 
-   if(num_children) 
-   {
-   if((lista = alloca_memoria(num_children*(L_NOME_OGGETTI+L_CLASSE_OGGETTI+5),sizeof(char))) == NULL )
-               return(False);
-   for(j=0;j<num_children;j++)
-         {
-         classe = XtClass(children[j]);
-         nome_classe = XlGetClassName(classe);
-         nome_widget = XtName(children[j]);
-    /*
-		elimino dagli oggetti le label delle porte
-		di interfaccia
-    */
-         if(strcmp(nome_widget,NOME_LABEL_PORTE_INTERFACCIA)==0)
-		{
-		++ num_label;
-		continue;
-		}
+   // if(num_children) 
+   // {
+   // if((lista = alloca_memoria(num_children*(L_NOME_OGGETTI+L_CLASSE_OGGETTI+5),sizeof(char))) == NULL )
+   //             return(False);
+   // for(j=0;j<num_children;j++)
+   //       {
+   //       classe = XtClass(children[j]);
+   //       nome_classe = XlGetClassName(classe);
+   //       nome_widget = XtName(children[j]);
+   //  /*
+	// 	elimino dagli oggetti le label delle porte
+	// 	di interfaccia
+   //  */
+   //       if(strcmp(nome_widget,NOME_LABEL_PORTE_INTERFACCIA)==0)
+	// 	{
+	// 	++ num_label;
+	// 	continue;
+	// 	}
 
-         strcat(lista," ");
-         strcat(lista,nome_widget);
-         strcat(lista," ");
-         strcat(lista,nome_classe);
+         // strcat(lista," ");
+         // strcat(lista,nome_widget);
+         // strcat(lista," ");
+         // strcat(lista,nome_classe);
+         // }
+   if (num_children)
+   {
+      // -------- INIZIO CODICE CORRETTO --------
+      size_t total_len = 0;
+      int widgets_to_save = 0;
+
+      // 1. Calcola la dimensione totale necessaria
+      for (j = 0; j < num_children; j++)
+      {
+         if (strcmp(XtName(children[j]), NOME_LABEL_PORTE_INTERFACCIA) != 0)
+         {
+            total_len += strlen(XtName(children[j]));
+            total_len += strlen(XlGetClassName(XtClass(children[j])));
+            total_len += 2; // Per i due spazi
+            widgets_to_save++;
          }
+      }
+      total_len += 1; // Per il terminatore nullo
+
+      // 2. Alloca la memoria esatta
+      if ((lista = alloca_memoria(total_len, sizeof(char))) == NULL)
+         return (False);
+      
+      lista[0] = '\0'; // Inizializza come stringa vuota per strcat
+
+      // 3. Costruisci la stringa in modo sicuro
+      for (j = 0; j < num_children; j++)
+      {
+         if (strcmp(XtName(children[j]), NOME_LABEL_PORTE_INTERFACCIA) == 0)
+         {
+            num_label++; // Continua a contare le label per il totale finale
+            continue;
+         }
+
+         strcat(lista, " ");
+         strcat(lista, XtName(children[j]));
+         strcat(lista, " ");
+         strcat(lista, XlGetClassName(XtClass(children[j])));
+      }
+      // -------- FINE CODICE CORRETTO --------
+
    /*
 	setto il campo elenco_wid della struttura pag
    */
@@ -394,75 +489,66 @@ void AddTransCompositeWid(Widget wid,char* stringa)
 	}
 }
 
-/*------------------------------------------
- * AddTransWid
- *
- * definisce le opportune translation ad uno
- * widget posto su una data drawing area 
- *
- *------------------------------------------*/
+// /*------------------------------------------
+//  * AddTransWid
+//  *
+//  * definisce le opportune translation ad uno
+//  * widget posto su una data drawing area 
+//  *
+//  *------------------------------------------*/
 
-void AddTransWid(PAGINA *pag,Widget wid)
+// void AddTransWid(PAGINA *pag, Widget wid)
+// {
+//    extern void get_child();
+//    char stringa[200];
+//    WidgetList children;
+//    Cardinal nchildren;
+//    int i;
+
+//    // 3. Applica la translation di SPOSTAMENTO al widget corrente (Btn2)
+//    //    La funzione `move_or_resize` verrà chiamata quando si preme Btn2 su questo widget.
+//    sprintf(stringa, MOVE_WIDGET_TRANS, pag);
+//    add_def_translation(wid, stringa);
+
+//    // 4. Se è un composite, propaga ricorsivamente ai figli
+//    if (XtIsComposite(wid))
+//    {
+//        get_child(wid, &children, &nchildren);
+//        for(i = 0; i < nchildren; i++)
+//        {
+//            // La chiamata ricorsiva è fondamentale
+//            AddTransWid(pag, children[i]);
+//        }
+//    }
+// }
+
+
+
+// Modifica AddTransWid per applicare la translation corretta
+void AddTransWid(PAGINA *pag, Widget wid)
 {
    extern void get_child();
-   char stringa[200];
-   WidgetList children,nipoti,figli_nipoti;
-   Cardinal nchildren,nnipoti,nfigli_nipoti;
-   int i,j,k;
+   WidgetList children;
+   Cardinal nchildren;
+   int i;
 
+   // 1. Applica la translation di spostamento al widget corrente (wid).
+   //    Questo permette al widget di essere selezionato e trascinato.
+   add_def_translation(wid, object_translations);
 
-   sprintf(stringa,MOVE_WIDGET_TRANS,pag);
-   add_def_translation(wid,stringa);
-
-   if( XlIsXlManager(wid) )
+   // 2. Se il widget è un composite (come XlIconReg o XlComposite),
+   //    propaga ricorsivamente le translation ai suoi figli.
+   //    Questo è cruciale perché gli eventi del mouse potrebbero essere
+   //    catturati da un figlio (es. una porta) invece che dal padre.
+   if (XtIsComposite(wid))
    {
-      get_child(wid,&children,&nchildren);
-
-/*
-      sprintf(stringa,MOVE_WIDGET_TRANS,pag);
-*/
-      for(i=0;i<nchildren;i++)
+      get_child(wid, &children, &nchildren);
+      for(i = 0; i < nchildren; i++)
       {
-         add_def_translation(children[i],stringa);
-/* a sua volta puo' essere un XlManager */
-         if(XlIsXlManager(children[i]))
-            AddTransWid(pag,children[i]);
-/* a sua volta puo' essere un XtComposite */
-	AddTransCompositeWid(children[i],stringa);
+         // Chiamata ricorsiva per applicare le translation a ogni figlio.
+         AddTransWid(pag, children[i]);
       }
    }
-}
-
-
-
-/*-------------------------------------
- *
- * AllPagWidSetTransation
- *
- * set delle translation su tutti gli widget della pagina
- *
- *-------------------------------------*/
-
-void AllPagWidSetTranslation(PAGINA *pagina)
-{
-   extern void get_child();
-   extern void set_draw_translations();
-   char stringa[200];
-   int i,j;
-   WidgetList children;
-   Cardinal num_children;
-
-
-   i=0;
-   sprintf(stringa,SELECT_ZONE_TRANS,pagina,i);
-   add_def_translation(pagina->drawing,stringa);
-
-   get_child(pagina->drawing,&children,&num_children);
-   for(i=0;i<num_children;i++)
-      AddTransWid(pagina,children[i]);
-
-/* set translation per interfaccia draw */
-   set_draw_translations(pagina->drawing);
 }
 
 /*
@@ -1133,9 +1219,9 @@ void get_nomechild(char *nome,char *id)
 
 int fpaste(PAGINA *pag)
 {
-   extern void PagSetTagReg();
-   extern void get_child();
-   extern XrmDatabase CuttedDb;
+   //  void PagSetTagReg();
+   // extern void get_child();
+   // extern XrmDatabase CuttedDb;
    WidgetList ClipChild,CompChild,newChild;
    Cardinal nClipChild,nCompChild,nnewChild;
    Widget new_wid;
@@ -1275,76 +1361,139 @@ int fpaste(PAGINA *pag)
 
             UxDisplay->db = pag->db;
 
-            if(nCompChild > 0)
-            {
-               /* devo resettare la listaChildren del XlComposite perche' devo cambiare nome 
-                  ai suoi children il numero dei children invece resta inalterato */
+            // if(nCompChild > 0)
+            // {
+            //    /* devo resettare la listaChildren del XlComposite perche' devo cambiare nome 
+            //       ai suoi children il numero dei children invece resta inalterato */
             
 
-               /* genero i figli ed aggiorno la lista dei figli */
-               for(j=0;j<nCompChild;j++)
-               {
-                  strcpy(ChildNameVecchio,XtName(CompChild[j]));
+            //    /* genero i figli ed aggiorno la lista dei figli */
+            //    for(j=0;j<nCompChild;j++)
+            //    {
+            //       strcpy(ChildNameVecchio,XtName(CompChild[j]));
 
-                  /* assegno il nome corretto al figlio */
+            //       /* assegno il nome corretto al figlio */
  
-                  strcpy(new_child_name,new_name);
-                  sprintf(nome_figlio,"%d",pag->next_num);
-                  strcat(new_child_name,nome_figlio);
-                  strcat(new_child_name,"c");
-                  pag->next_num++;
+            //       strcpy(new_child_name,new_name);
+            //       sprintf(nome_figlio,"%d",pag->next_num);
+            //       strcat(new_child_name,nome_figlio);
+            //       strcat(new_child_name,"c");
+            //       pag->next_num++;
 
-                  strcpy(ChildNameNuovo,new_child_name);
+            //       strcpy(ChildNameNuovo,new_child_name);
 
 
-                  strcpy(nome_classe , XlGetClassName(XtClass(CompChild[j])) );
+            //       strcpy(nome_classe , XlGetClassName(XtClass(CompChild[j])) );
 
-                  /* alloco spazione per la lista dei figli */
-                  if( j==0 )
-                  {
-                     if( (lista_figli = alloca_memoria((strlen(new_child_name)+strlen(nome_classe)+8 ),sizeof(char))) == NULL)
-                        return(False);  
-                  }
-                  else
-                  {
-                     if( (lista_figli = realloc( lista_figli,sizeof(char)*(strlen(lista_figli)+strlen(new_child_name)+strlen(nome_classe)+8))) == NULL)
-                        return(False);
-                  }
+            //       /* alloco spazione per la lista dei figli */
+            //       if( j==0 )
+            //       {
+            //          if( (lista_figli = alloca_memoria((strlen(new_child_name)+strlen(nome_classe)+8 ),sizeof(char))) == NULL)
+            //             return(False);  
+            //       }
+            //       else
+            //       {
+            //          if( (lista_figli = realloc( lista_figli,sizeof(char)*(strlen(lista_figli)+strlen(new_child_name)+strlen(nome_classe)+8))) == NULL)
+            //             return(False);
+            //       }
 
-                  if(j == 0)
-                     strcpy(lista_figli,new_child_name);
-                  else
-                  {
-                     strcat(lista_figli," ");
-                     strcat(lista_figli,new_child_name);
-                  }
+            //       if(j == 0)
+            //          strcpy(lista_figli,new_child_name);
+            //       else
+            //       {
+            //          strcat(lista_figli," ");
+            //          strcat(lista_figli,new_child_name);
+            //       }
 
-                  strcat(lista_figli," ");
-                  strcat(lista_figli,nome_classe);
+            //       strcat(lista_figli," ");
+            //       strcat(lista_figli,nome_classe);
 
-                  strcpy(str_rischild_sorg, XtName(CompChild[j]) );
-                  strcat(str_rischild_sorg,".");
+            //       strcpy(str_rischild_sorg, XtName(CompChild[j]) );
+            //       strcat(str_rischild_sorg,".");
 
-                  strcpy(str_rischild_dest,"*");
-                  strcat(str_rischild_dest,new_child_name );
-                  strcat(str_rischild_dest,".");
+            //       strcpy(str_rischild_dest,"*");
+            //       strcat(str_rischild_dest,new_child_name );
+            //       strcat(str_rischild_dest,".");
 
                   
-                  /* trasferisco le risorse dei figli */
-                  XlTransferResource( &CuttedDb, &pag->db, CompChild[j],str_rischild_sorg,str_rischild_dest );
-                  XlSetResourceByName(&pag->db,new_child_name,XlNnome,new_child_name);
+            //       /* trasferisco le risorse dei figli */
+            //       XlTransferResource( &CuttedDb, &pag->db, CompChild[j],str_rischild_sorg,str_rischild_dest );
+            //       XlSetResourceByName(&pag->db,new_child_name,XlNnome,new_child_name);
 
-                  num_figli++;
+            //       num_figli++;
          
+            //    }
+                
+            //    sprintf(appo,"%d",num_figli);
+                
+            //    XlSetResourceByName(&pag->db,new_name,"numFigli",appo);
+            //    XlSetResourceByName(&pag->db,new_name,"listChildren",lista_figli);
+            // }
+
+            
+            if(nCompChild > 0)
+            {
+               // -------- INIZIO CODICE CORRETTO --------
+               size_t total_len = 0;
+               char **new_child_names = XtMalloc(nCompChild * sizeof(char*));
+               char **child_class_names = XtMalloc(nCompChild * sizeof(char*));
+
+               // 1. Prima genera tutti i nuovi nomi e calcola la lunghezza totale
+               for (j = 0; j < nCompChild; j++) {
+                   // Assegna il nuovo nome al figlio
+                   sprintf(nome_figlio, "%s%dc", new_name, pag->next_num);
+                   pag->next_num++;
+                   new_child_names[j] = XtNewString(nome_figlio);
+                   child_class_names[j] = XtNewString(XlGetClassName(XtClass(CompChild[j])));
+                   
+                   // Aggiungi la lunghezza del nome, della classe e di uno spazio
+                   total_len += strlen(new_child_names[j]) + strlen(child_class_names[j]) + 2;
                }
-                
-               sprintf(appo,"%d",num_figli);
-                
-               XlSetResourceByName(&pag->db,new_name,"numFigli",appo);
-               XlSetResourceByName(&pag->db,new_name,"listChildren",lista_figli);
-            }
-         
-         }
+
+               // 2. Alloca il buffer una sola volta
+               lista_figli = alloca_memoria(total_len, sizeof(char));
+               if (lista_figli == NULL) return(False);
+               lista_figli[0] = '\0'; // Inizializza come stringa vuota
+
+               // 3. Costruisci la stringa e trasferisci le risorse
+               for (j = 0; j < nCompChild; j++) {
+                   if (j > 0) {
+                       strcat(lista_figli, " ");
+                   }
+                   strcat(lista_figli, new_child_names[j]);
+                   strcat(lista_figli, " ");
+                   strcat(lista_figli, child_class_names[j]);
+
+                   strcpy(str_rischild_sorg, XtName(CompChild[j]));
+                   strcat(str_rischild_sorg, ".");
+                   
+                   strcpy(str_rischild_dest, "*");
+                   strcat(str_rischild_dest, new_child_names[j]);
+                   strcat(str_rischild_dest, ".");
+
+                   // Trasferisci le risorse
+                   XlTransferResource(&CuttedDb, &pag->db, CompChild[j], str_rischild_sorg, str_rischild_dest);
+                   XlSetResourceByName(&pag->db, new_child_names[j], XlNnome, new_child_names[j]);
+
+                   // Libera la memoria temporanea
+                   XtFree(new_child_names[j]);
+                   XtFree(child_class_names[j]);
+               }
+
+               XtFree((char*)new_child_names);
+               XtFree((char*)child_class_names);
+
+               // Imposta le risorse sul widget padre
+               sprintf(appo, "%d", nCompChild);
+               XlSetResourceByName(&pag->db, new_name, "numFigli", appo);
+               XlSetResourceByName(&pag->db, new_name, "listChildren", lista_figli);
+               
+               // Libera la stringa costruita, dato che XlSetResourceByName ne fa una copia
+               libera_memoria(lista_figli);
+               // -------- FINE CODICE CORRETTO --------
+
+
+         } // fine if (XlIsXlComposite)
 
          UxDisplay->db = pag->db;
          new_wid = XtCreateManagedWidget( new_name,XtClass(ClipChild[i]),pag->drawing,NULL,0);
@@ -1459,7 +1608,9 @@ if(PagGetType(pag) == TYPE_REGOLAZIONE)
    if( PagGetConnectMode(pag->drawing) == True )
        set_connect(pag->drawing,True);
 }
-
+   // Forza un aggiornamento della display list di Motif
+   XmUpdateDisplay(pag->drawing);
+}
 /*----------------------------------------------
  * fcut
  *

@@ -84,13 +84,25 @@ char *error_msg[] = {
                        "File Context.ctx not found, no Context Loaded"
                    };
 
+// Prototipi per le nuove actions che implementeremo in graphics.c
+// Prototipi per le nuove actions (andranno in un header o dichiarati extern)
+// Prototipi per le actions che implementeremo in graphics.c
+extern void StartOrSelect(Widget, XEvent*, String*, Cardinal*);
+extern void MoveIt(Widget, XEvent*, String*, Cardinal*);
+extern void EndMove(Widget, XEvent*, String*, Cardinal*);
+
 XtActionsRec actions[] = {
-                            { "istanzia_widget_parent_parent",istanzia_widget_parent_parent },
-                            { "istanzia_widget_parent",istanzia_widget_parent },
-                            { "istanzia_widget",istanzia_widget },
-                            { "select_zone",select_zone},
-                            { "move_or_resize",move_or_resize} 
-                         };
+    {"istanzia_widget_parent_parent", (XtActionProc)istanzia_widget_parent_parent},
+    {"istanzia_widget_parent",        (XtActionProc)istanzia_widget_parent},
+    {"istanzia_widget",               (XtActionProc)istanzia_widget},
+    {"select_zone",                   (XtActionProc)select_zone},
+    // Rimuoviamo la vecchia e problematica 'move_or_resize'
+    
+    // NUOVE ACTIONS PER LO SPOSTAMENTO
+    {"StartOrSelect", StartOrSelect},
+    {"MoveIt",        MoveIt},
+    {"EndMove",       EndMove}
+};
 
 /*----------------------------------------------
  * Insert application global declarations here

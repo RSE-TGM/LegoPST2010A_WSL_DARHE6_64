@@ -843,8 +843,26 @@ Widget get_wid_icon_conn(Widget ,char *);
  int skey_stampa_errore(int , char * );
  Boolean file_exist(char *);
  int SetItemString(XmString *,char *,char *,char *,int ,char *);
+ void StartPick(), MovePick();
+ //void EndPick(Widget wid, XEvent *ev, String *params, Cardinal *num_params);
+ Boolean iswidsel(Widget wid);
+ void pag_deselect_all(Widget drawing);
  
+// Tabella di translation per l'operazione di spostamento
+static char moveTranslationTable[] =
+    "<Btn2Motion>: move_pick() \n\
+     <Btn2Up>:     end_pick()";
 
+// Tabella di translation di default per la drawing area
+static char defaultTranslationTable[] = 
+    "<Btn1Down>: select_zone(%lx, %lx)"; // Adatta questa alla tua originale
 
+// Definiamo le nuove tabelle come statiche globali nel file per accedervi facilmente
+static char pag_default_translations[] =
+    "<Btn1Down>: start_pick(%lx) \n\
+     <Btn2Down>: Menu()"; // Assumiamo che il tasto destro apra un menu
 
+static char pag_move_translations[] =
+    "<Btn1Motion>: move_pick() \n\
+     <Btn1Up>:     end_pick()";
 /* fine config.h */

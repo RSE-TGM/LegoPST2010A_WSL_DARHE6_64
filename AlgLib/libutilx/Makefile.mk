@@ -24,14 +24,14 @@ UILINCLUDE = $(UIL_INCLUDE)
 CFLAGSINCL=-D$(OS) -I$(LEGOROOT_INCLUDE) $(X_INCLUDE)
 CFLAGS =$(X_FLAGS) $(CFLAGSINCL) -D$(OS) $(VERSIONE) $(C_FLAGS)
 
-SORGENTI = utstatowidget.c get_something.c set_something.c attesa.c\
-           def_cursore.c attenzione.c errore.c utlistascroll.c utstrstr.c\
+SORGENTI = utstatowidget.c get_something.c set_something.c get_something_val.c set_something_val.c \
+           attesa.c def_cursore.c attenzione.c errore.c utlistascroll.c utstrstr.c\
 	   commento.c undef_cursore.c conferma.c \
            extract_string.c editor.c attention.c information.c \
            find_kit.c find_in_text.c utilx.c
            
-OGGETTI = utstatowidget.o get_something.o set_something.o attesa.o\
-           def_cursore.o attenzione.o errore.o utlistascroll.o utstrstr.o\
+OGGETTI = utstatowidget.o get_something.o set_something.o get_something_val.o set_something_val.o \
+           attesa.o def_cursore.o attenzione.o errore.o utlistascroll.o utstrstr.o\
 	   commento.o undef_cursore.o conferma.o \
            extract_string.o editor.o attention.o information.o \
            find_kit.o find_in_text.o utilx.o

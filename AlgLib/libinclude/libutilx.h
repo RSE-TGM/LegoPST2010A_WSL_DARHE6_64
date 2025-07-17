@@ -81,6 +81,20 @@ void undef_cursore(Widget);
 
 void get_something(Widget,char *,char * );
 void set_something(Widget,char *,char * );
+// -------- INIZIO NUOVE FUNZIONI --------
+/**
+ * Imposta una risorsa di un widget a un valore scalare (non un puntatore).
+ * Il valore è di tipo XtArgVal, che può contenere interi o puntatori.
+ */
+void set_something_val(Widget wid, String resource_name, XtArgVal value);
+
+/**
+ * Recupera un valore scalare da una risorsa di un widget.
+ * 'value_ptr' deve essere un puntatore alla variabile di destinazione.
+ */
+void get_something_val(Widget wid, String resource_name, XtPointer value_ptr);
+// -------- FINE NUOVE FUNZIONI --------
+
 /*
  void get_something();
 void set_something();
