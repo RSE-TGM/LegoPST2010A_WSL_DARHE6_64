@@ -99,7 +99,7 @@ Find_struct *parametri;
    XtManageChild(find_text);
 
    drawing_background=0x277676;
-   set_something(find_text,XmNbackground, (void*) drawing_background);
+   set_something_val(find_text,XmNbackground, (XtArgVal) drawing_background);
 
 
 /* Arrow button di ricerca INDIETRO */
@@ -194,14 +194,14 @@ XmAnyCallbackStruct *data;
                i--;
              else
              {
- 	        set_something(user->ID_label,XmNlabelString, (void*) notfound);
+ 	        set_something_val(user->ID_label,XmNlabelString, (XtArgVal) notfound);
                 break;
              }
 
              if(Utstrstr(extract_string(c_strings[i]),stringa)!=NULL)
              {
                 user->pos = i;
-                set_something(user->ID_label,XmNlabelString, (void*) nulla);
+                set_something_val(user->ID_label,XmNlabelString, (XtArgVal) nulla);
                 break;
              }
           }
@@ -217,14 +217,14 @@ XmAnyCallbackStruct *data;
                 i++;
              else
              {
-                set_something(user->ID_label,XmNlabelString, (void*) notfound);
+                set_something_val(user->ID_label,XmNlabelString, (XtArgVal) notfound);
                 break;
              }
  
              if(Utstrstr(extract_string(c_strings[i]),stringa)!=NULL)
              {
                 user->pos = i;
-                set_something(user->ID_label,XmNlabelString, (void*) nulla);
+                set_something_val(user->ID_label,XmNlabelString, (XtArgVal) nulla);
                 break;
              }
           }

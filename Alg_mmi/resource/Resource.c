@@ -415,8 +415,8 @@ if ( (OggettoS != NULL) && (!Occupato) )
 	XtSetArg (arg[0], XlNinEdit, True);
 	XtSetArg (arg[1], XlNwEdit, Resource);
 	XtSetValues (OggettoS, arg, 2);
-	set_something (ResetItem, XmNsensitive, (void*) True);
-	set_something (pushButton1, XmNsensitive, (void*) True);
+	set_something_val (ResetItem, XmNsensitive, (XtArgVal) True);
+	set_something_val (pushButton1, XmNsensitive, (XtArgVal) True);
 	/*  Carico il nome e la classe dell'oggetto selezionato  */
 	strcpy (appoggio,WidGetName(OggettoS));
 	strcat (appoggio,"  ----  ");
@@ -470,8 +470,8 @@ else
 	if (!Occupato)
 	  {
 	  XmListDeleteAllItems (scrolledList1);
-	  set_something (ResetItem, XmNsensitive, (void*) False);
-	  set_something (pushButton1, XmNsensitive, (void*) False);
+	  set_something_val (ResetItem, XmNsensitive, (XtArgVal)False);
+	  set_something_val (pushButton1, XmNsensitive, (XtArgVal)False);
 	  strcpy (appoggio,"No Widget selected");
 	  StrLab = XmStringCreateSimple (appoggio);
 	  XmListAddItemUnselected (scrolledList1, StrLab, 0);
@@ -492,7 +492,7 @@ char stringa[3];
 
 strcpy (stringa,"X");
 Errore = XmStringCreateSimple (stringa);
-set_something (Wid , XmNlabelString, (void*) Errore);
+set_something_val (Wid , XmNlabelString, (XtArgVal)Errore);
 XmStringFree (Errore);
 }
 
@@ -521,7 +521,7 @@ for ( i = 0 ; i < NumFigli ; i++ )
 	get_something (Riga[i], XmNchildren, (void*) &Ogget);
 
 	/*  Azzera la stringa delle modifiche effettuate  */
-	set_something (Ogget[1], XmNlabelString, (void*) StrLab);
+	set_something_val (Ogget[1], XmNlabelString, (XtArgVal)StrLab);
 
 	/*  Legge l'indice della confinfo relativa alla risorsa 
             memorizzata come nome dell'oggetto nascosto */
@@ -568,8 +568,8 @@ int PushColorCB (swidget wid,int ind_res, XmAnyCallbackStruct *call_data)
 
 	/*  Setta a False l'attributo sensitive del textfield
 		che sta per essere aggiornato     */
-	set_something (RCOgget[2], XmNsensitive, (void*) False);
-	set_something (RCOgget[0], XmNsensitive, (void*) False);
+	set_something_val (RCOgget[2], XmNsensitive, (XtArgVal)False);
+	set_something_val (RCOgget[0], XmNsensitive, (XtArgVal)False);
 
 	/*  Legge la label del bottone  */
 	get_something (RCOgget[0], XmNlabelString, (void*) &StrLab);
@@ -615,8 +615,8 @@ int PushVarInpCB (swidget wid,int ind_res, XmAnyCallbackStruct *call_data)
 
 	/*  Setta a False l'attributo sensitive del textfield
 		che sta per essere aggiornato     */
-	set_something (RCOgget[2], XmNsensitive, (void*) False);
-	set_something (RCOgget[0], XmNsensitive, (void*) False);
+	set_something_val (RCOgget[2], XmNsensitive, (XtArgVal)False);
+	set_something_val (RCOgget[0], XmNsensitive, (XtArgVal)False);
 
 	/*  Legge l'indice della confinfo dal textField nascosto */
 /************************************************/
@@ -673,8 +673,8 @@ int PushVarOutCB (swidget wid,int ind_res, XmAnyCallbackStruct *call_data)
 
 	/*  Setta a False l'attributo sensitive del textfield
 		che sta per essere aggiornato     */
-	set_something (RCOgget[2], XmNsensitive, (void*) False);
-	set_something (RCOgget[0], XmNsensitive, (void*) False);
+	set_something_val (RCOgget[2], XmNsensitive, (XtArgVal)False);
+	set_something_val (RCOgget[0], XmNsensitive, (XtArgVal)False);
 
 	/*  Legge l'indice della confinfo dal textField nascosto */
 /***********************************/
@@ -728,8 +728,8 @@ int PushFontCB (swidget wid,int ind_res, XmAnyCallbackStruct *call_data)
 
 	/*  Setta a False l'attributo sensitive del textfield
 		che sta per essere aggiornato     */
-	set_something (RCOgget[2], XmNsensitive, (void*) False);
-	set_something (RCOgget[0], XmNsensitive, (void*) False);
+	set_something_val (RCOgget[2], XmNsensitive, (XtArgVal)False);
+	set_something_val (RCOgget[0], XmNsensitive, (XtArgVal)False);
 
 	/*  Legge la label del bottone  */
 	s = (char *)XmTextFieldGetString (RCOgget[2]);
@@ -779,8 +779,8 @@ int PushIconCB (swidget wid,int ind_res, XmAnyCallbackStruct *call_data)
 
 	/*  Setta a False l'attributo sensitive del textfield
 		che sta per essere aggiornato     */
-	set_something (RCOgget[2], XmNsensitive, (void*) False);
-	set_something (RCOgget[0], XmNsensitive, (void*) False);
+	set_something_val (RCOgget[2], XmNsensitive, (XtArgVal)False);
+	set_something_val (RCOgget[0], XmNsensitive, (XtArgVal)False);
 
 	Stringa = (char *)CvtPixToStr (OggettoS,XmNbackground);
 /*
@@ -841,8 +841,8 @@ int PushFormCB (swidget wid,int ind_res, XmAnyCallbackStruct *call_data)
 
 	/*  Setta a False l'attributo sensitive del textfield
 		che sta per essere aggiornato     */
-	set_something (RCOgget[2], XmNsensitive, (void*) False);
-	set_something (RCOgget[0], XmNsensitive, (void*) False);
+	set_something_val (RCOgget[2], XmNsensitive, (XtArgVal)False);
+	set_something_val (RCOgget[0], XmNsensitive, (XtArgVal)False);
 
 	Creato = (Widget )create_FormSelection(Resource,RCOgget);
 
@@ -878,8 +878,8 @@ int PushVarRegCB (swidget wid,int ind_res, XmAnyCallbackStruct *call_data)
 
 	/*  Setta a False l'attributo sensitive del textfield
 		che sta per essere aggiornato     */
-	set_something (RCOgget[2], XmNsensitive, (void*) False);
-	set_something (RCOgget[0], XmNsensitive, (void*) False);
+	set_something_val (RCOgget[2], XmNsensitive, (XtArgVal)False);
+	set_something_val (RCOgget[0], XmNsensitive, (XtArgVal)False);
 
 	Creato = (Widget )create_VariablesSelection(Resource,RCOgget,
 		OggettoS);
@@ -926,8 +926,8 @@ int PushInputCB (swidget wid,int ind_res, XmAnyCallbackStruct *call_data)
 
 	  /*  Setta a False l'attributo sensitive del textfield
 		che sta per essere aggiornato     */
-	  set_something (RCOgget[2], XmNsensitive, (void*) False);
-	  set_something (RCOgget[0], XmNsensitive, (void*) False);
+	  set_something_val (RCOgget[2], XmNsensitive, (XtArgVal)False);
+	  set_something_val (RCOgget[0], XmNsensitive, (XtArgVal)False);
 
 	  Creato = (Widget )create_ValueSelection (Resource,RCOgget,OggettoS,PuntatoreForm);
 	  UxPopupInterface (Creato, no_grab);
@@ -982,8 +982,8 @@ int PushCompCB (swidget wid,int ind_res, XmAnyCallbackStruct *call_data)
 
 	/*  Setta a False l'attributo sensitive del textfield
 		che sta per essere aggiornato     */
-	set_something (RCOgget[2], XmNsensitive, (void*) False);
-	set_something (RCOgget[0], XmNsensitive, (void*) False);
+	set_something_val (RCOgget[2], XmNsensitive, (XtArgVal)False);
+	set_something_val (RCOgget[0], XmNsensitive, (XtArgVal)False);
 
 	Creato = (Widget )create_DatabaseSelection(Resource,SEL_COMP,RCOgget,
 					DataBaseTo);
@@ -1020,8 +1020,8 @@ int PushSubSCB (swidget wid,int ind_res, XmAnyCallbackStruct *call_data)
 
 	/*  Setta a False l'attributo sensitive del textfield
 		che sta per essere aggiornato     */
-	set_something (RCOgget[2], XmNsensitive, (void*) False);
-	set_something (RCOgget[0], XmNsensitive, (void*) False);
+	set_something_val (RCOgget[2], XmNsensitive, (XtArgVal)False);
+	set_something_val (RCOgget[0], XmNsensitive, (XtArgVal)False);
 
 	Creato = (Widget )create_DatabaseSelection(Resource,SEL_SUBS,RCOgget,
 					DataBaseTo);
@@ -1179,7 +1179,7 @@ printf("CreaOptionMenu: Gruppi_resource[%d]=%s \n", i, Gruppi_resource[i]);
 		XtFree (label_butt);
 		XmStringFree (StrLab);
         }
-        set_something (Padre, XmNmenuHistory, (void*) ButtGruppi[1]);
+        set_something_val (Padre, XmNmenuHistory, (XtArgVal)ButtGruppi[1]);
         return (OK);
 }
 
@@ -1224,10 +1224,10 @@ Dimension width;
 **********************************************/   
 void disableButton()
 {
-   set_something(pushButton15,XmNsensitive,(void*) False); /* load button*/
-   set_something(LoadItem,XmNsensitive,(void*) False);     /* load item menu */ 
-   set_something(CloseItem,XmNsensitive,(void*) False);    /* close item menu */
-   set_something(ResetItem,XmNsensitive,(void*) False);    /* reset item menu */ 
+   set_something_val(pushButton15,XmNsensitive,(XtArgVal)False); /* load button*/
+   set_something_val(LoadItem,XmNsensitive,(XtArgVal)False);     /* load item menu */ 
+   set_something_val(CloseItem,XmNsensitive,(XtArgVal)False);    /* close item menu */
+   set_something_val(ResetItem,XmNsensitive,(XtArgVal)False);    /* reset item menu */ 
 }
 
 /*********************************************
@@ -1237,10 +1237,10 @@ void disableButton()
 **********************************************/   
 void riableButton()
 {
-   set_something(pushButton15,XmNsensitive,(void*) True); /* load button*/
-   set_something(LoadItem,XmNsensitive,(void*) True);     /* load item menu */ 
-   set_something(CloseItem,XmNsensitive,(void*) True);    /* close item menu */
-   set_something(ResetItem,XmNsensitive,(void*) True);    /* reset item menu */ 
+   set_something_val(pushButton15,XmNsensitive,(XtArgVal)True); /* load button*/
+   set_something_val(LoadItem,XmNsensitive,(XtArgVal)True);     /* load item menu */ 
+   set_something_val(CloseItem,XmNsensitive,(XtArgVal)True);    /* close item menu */
+   set_something_val(ResetItem,XmNsensitive,(XtArgVal)True);    /* reset item menu */ 
 }
 
 /*******************************************************************************
@@ -1368,7 +1368,7 @@ static	void	activateCB_pushButton1( UxWidget, UxClientData, UxCallbackArg )
 		if(XlIsXlComposite(XtParent(OggettoS))==False)
 			{
 			perc_zoom=100.0 * get_def_zoom(PagConf->drawing);
-			set_something(OggettoS,XlNfattZoom,(void*) perc_zoom);
+			set_something_val(OggettoS,XlNfattZoom,(XtArgVal)perc_zoom);
 			}
 	
 		if(XlIsIconReg(OggettoS))
@@ -2144,7 +2144,7 @@ Widget	create_Resource( _UxStrutture, _UxDbase )
 printf("create_Resource:inizio \n");
 		strcpy (TitoloPag,"Widget Resource Editor on page: ");
 		strcat (TitoloPag,PagConf->nomepag);
-		set_something (Resource, XmNtitle, (void*) TitoloPag);
+		set_something_val (Resource, XmNtitle, (XtArgVal)TitoloPag);
 		
 		/*  Creazione dei rowcolumn di pagina  */
 		CreaRowColumnRisorse (Widres_rc);
@@ -2163,8 +2163,8 @@ printf("create_Resource:inizio \n");
 			XtSetArg (arg[1], XlNwEdit, Resource);
 			XtSetValues (OggettoS, arg, 2);
 			/*  Setta l'attributo sensitive */
-			set_something (pushButton1, XmNsensitive, (void*) True);
-			set_something (ResetItem, XmNsensitive, (void*) True);
+			set_something_val (pushButton1, XmNsensitive, (XtArgVal)True);
+			set_something_val (ResetItem, XmNsensitive, (XtArgVal)True);
 			PrepListaRes (Geometric_RC, OggettoS, XlRGrGeom, DataBaseTo,
 							PagGetType(PagConf));
 			PrepListaRes (Specific_RC, OggettoS, XlRGrIo, DataBaseTo,
@@ -2190,8 +2190,8 @@ printf("create_Resource:inizio \n");
 		else
 			{
 			strcpy (appoggio,"No Widget selected");
-			set_something (ResetItem, XmNsensitive, (void*) False);
-			set_something (pushButton1, XmNsensitive, (void*) False);
+			set_something_val (ResetItem, XmNsensitive, (XtArgVal)False);
+			set_something_val (pushButton1, XmNsensitive, (XtArgVal)False);
 			}
 		
 		/*  Crea l'OptionMenu che contiene le voci dei gruppi

@@ -923,7 +923,7 @@ Boolean crea_elenco_display(XtAppContext app_context)
 			elenco_display[i].nome);
 
 		popup_errorDialog(testo_display,topLevelShellMain);
-		set_something(elenco_display[i].wb,XmNsensitive,(void*) False);
+		set_something_val(elenco_display[i].wb,XmNsensitive,(XtArgVal) False);
 
 	}
 	else
@@ -1935,17 +1935,17 @@ Widget	popup_topLevelShellMain()
 #ifndef DESIGN_TIME
 		LoadBitmap(form4,&pix,legommi_icon_bits,legommi_icon_width,legommi_icon_height);
 #endif
-		set_something(rtrn,XmNiconPixmap,(void*) pix);
-		set_something(labelDescrizione,XmNlabelString,
-			 (void*) XmStringCreateLtoR(descrizione_impianto,XmSTRING_DEFAULT_CHARSET));
-		set_something(listPage,XmNfontList,(void*) FontLista);
-		set_something(menu2_AllPages,XmNfontList,(void*) FontLabel);
-		set_something(menu2_Sinottici,XmNfontList,(void*) FontLabel);
-		set_something(menu2_Stazioni,XmNfontList,(void*) FontLabel);
-		set_something(pushButtonQuit,XmNfontList,(void*) FontLabel);
-		set_something(XmOptionLabelGadget(menuDisplay),XmNfontList,(void*) FontLabel);
-		set_something(XmOptionLabelGadget(menuTipoPagina),XmNfontList,(void*) FontLabel);
-		set_something(buttonOpenPage,XmNfontList,(void*) FontLabel);
+		set_something_val(rtrn,XmNiconPixmap,(XtArgVal) pix);
+		set_something_val(labelDescrizione,XmNlabelString,
+			 (XtArgVal)XmStringCreateLtoR(descrizione_impianto,XmSTRING_DEFAULT_CHARSET));
+		set_something_val(listPage,XmNfontList,(XtArgVal) FontLista);
+		set_something_val(menu2_AllPages,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(menu2_Sinottici,XmNfontList,(XtArgVal) FontLabel);
+		set_something_val(menu2_Stazioni,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(pushButtonQuit,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(XmOptionLabelGadget(menuDisplay),XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(XmOptionLabelGadget(menuTipoPagina),XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(buttonOpenPage,XmNfontList,(XtArgVal)FontLabel);
 		
 		
 		/* set hostbame della machhina dove � partito legommi
@@ -1960,8 +1960,8 @@ Widget	popup_topLevelShellMain()
 		sprintf(app_testata,"Lego-MMI - %s",lochostname);
 		
 		
-		set_something(labelMain,XmNlabelString,
-			 (void*) XmStringCreateLtoR(app_testata,XmSTRING_DEFAULT_CHARSET));
+		set_something_val(labelMain,XmNlabelString,
+			 (XtArgVal)XmStringCreateLtoR(app_testata,XmSTRING_DEFAULT_CHARSET));
 		time(&time_end);
 		printf("\n\n Prima di setta elenco display=%ld\n",(time_end-time_start));
 		time(&time_start);

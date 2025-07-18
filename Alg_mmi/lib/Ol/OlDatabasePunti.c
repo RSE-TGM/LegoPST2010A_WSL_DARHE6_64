@@ -2562,7 +2562,7 @@ int num_mis;
 
  sprintf(nome_trend,"Archivio_%d_%s_%s_%d.dat",
 		codice_trend,nome_pagina,XtName(w),id_shm);
- set_something(w,XlNarchiveFile,(void*) nome_trend);
+ set_something_val(w,XlNarchiveFile,(XtArgVal)nome_trend);
  printf("Richiedo i dati del trend widget %s pagina %s id = %d <%s>\n",
 		XtName(w),nome_pagina,id_shm,nome_trend);
  printf("s1 = <%s> - s2 = <%s> - s3 = <%s> - s4 = <%s> \n",

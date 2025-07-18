@@ -718,7 +718,7 @@ static	void	disarmCB_drawnButtonClose( UxWidget, UxClientData, UxCallbackArg )
 	UxTopLevelShell1Context = UxContext =
 			(_UxCtopLevelShell1 *) UxGetContext( UxWidget );
 	{
-	set_something( drawnButtonClose, XmNshadowType, (void*) XmSHADOW_OUT);
+	set_something_val( drawnButtonClose, XmNshadowType, (XtArgVal) XmSHADOW_OUT);
 	}
 	UxTopLevelShell1Context = UxSaveCtx;
 }
@@ -758,7 +758,7 @@ static	void	armCB_drawnButtonClose( UxWidget, UxClientData, UxCallbackArg )
 	UxTopLevelShell1Context = UxContext =
 			(_UxCtopLevelShell1 *) UxGetContext( UxWidget );
 	{
-	set_something( drawnButtonClose, XmNshadowType, (void*) XmSHADOW_IN);
+	set_something_val( drawnButtonClose, XmNshadowType, (XtArgVal)XmSHADOW_IN);
 	}
 	UxTopLevelShell1Context = UxSaveCtx;
 }
@@ -776,12 +776,12 @@ static	void	activateCB_drawnButtonXaing( UxWidget, UxClientData, UxCallbackArg )
 	{
 	printf("Premuto bottone AING\n");
 	operazione_attiva=OPERAZIONE_XAING;
-	set_something( drawnButtonXaing, XmNshadowType, (void*) XmSHADOW_IN);
-	set_something( drawnButtonXstaz, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonInfo, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonNop, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonXplot, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonReg, XmNshadowType, (void*) XmSHADOW_OUT);
+	set_something_val( drawnButtonXaing, XmNshadowType, (XtArgVal)XmSHADOW_IN);
+	set_something_val( drawnButtonXstaz, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonInfo, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonNop, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonXplot, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonReg, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
 	
 	
 	}
@@ -801,12 +801,12 @@ static	void	activateCB_drawnButtonXstaz( UxWidget, UxClientData, UxCallbackArg )
 	{
 	printf("premuto il bottone display\n");
 	operazione_attiva=OPERAZIONE_XSTAZ;
-	set_something( drawnButtonXaing, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonXstaz, XmNshadowType, (void*) XmSHADOW_IN);
-	set_something( drawnButtonInfo, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonNop, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonXplot, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonReg, XmNshadowType, (void*) XmSHADOW_OUT);
+	set_something_val( drawnButtonXaing, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonXstaz, XmNshadowType, (XtArgVal)XmSHADOW_IN);
+	set_something_val( drawnButtonInfo, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonNop, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonXplot, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonReg, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
 	
 	}
 	UxTopLevelShell1Context = UxSaveCtx;
@@ -825,12 +825,12 @@ static	void	activateCB_drawnButtonInfo( UxWidget, UxClientData, UxCallbackArg )
 	{
 	printf("premuto bottone info\n");
 	operazione_attiva=OPERAZIONE_INFO;
-	set_something( drawnButtonXaing, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonXstaz, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonInfo, XmNshadowType, (void*) XmSHADOW_IN);
-	set_something( drawnButtonNop, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonXplot, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonReg, XmNshadowType, (void*) XmSHADOW_OUT);
+	set_something_val( drawnButtonXaing, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonXstaz, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonInfo, XmNshadowType, (XtArgVal)XmSHADOW_IN);
+	set_something_val( drawnButtonNop, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonXplot, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonReg, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
 	
 	
 	}
@@ -852,12 +852,12 @@ static	void	activateCB_drawnButtonNop( UxWidget, UxClientData, UxCallbackArg )
 #ifndef DESIGN_TIME
 	operazione_attiva=OPERAZIONE_NOP;
 #endif
-	set_something( drawnButtonXaing, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonXstaz, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonInfo, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonNop, XmNshadowType, (void*) XmSHADOW_IN);
-	set_something( drawnButtonXplot, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonReg, XmNshadowType, (void*) XmSHADOW_OUT);
+	set_something_val( drawnButtonXaing, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonXstaz, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonInfo, XmNshadowType, (XtArgVal) XmSHADOW_OUT);
+	set_something_val( drawnButtonNop, XmNshadowType, (XtArgVal)XmSHADOW_IN);
+	set_something_val( drawnButtonXplot, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonReg, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
 	
 	}
 	UxTopLevelShell1Context = UxSaveCtx;
@@ -876,12 +876,12 @@ static	void	activateCB_drawnButtonXplot( UxWidget, UxClientData, UxCallbackArg )
 	{
 	printf("Premuto bottone PLOT\n");
 	operazione_attiva=OPERAZIONE_XPLOT;
-	set_something( drawnButtonXplot, XmNshadowType, (void*) XmSHADOW_IN);
-	set_something( drawnButtonXstaz, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonInfo, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonNop, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonXaing, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonReg, XmNshadowType, (void*) XmSHADOW_OUT);
+	set_something_val( drawnButtonXplot, XmNshadowType, (XtArgVal)XmSHADOW_IN);
+	set_something_val( drawnButtonXstaz, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonInfo, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonNop, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonXaing, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonReg, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
 	
 	}
 	UxTopLevelShell1Context = UxSaveCtx;
@@ -900,12 +900,12 @@ static	void	activateCB_drawnButtonReg( UxWidget, UxClientData, UxCallbackArg )
 	{
 	printf("premuto il bottone display\n");
 	operazione_attiva=OPERAZIONE_REG;
-	set_something( drawnButtonReg, XmNshadowType, (void*) XmSHADOW_IN);
-	set_something( drawnButtonXaing, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonXstaz, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonInfo, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonNop, XmNshadowType, (void*) XmSHADOW_OUT);
-	set_something( drawnButtonXplot, XmNshadowType, (void*) XmSHADOW_OUT);
+	set_something_val( drawnButtonReg, XmNshadowType, (XtArgVal) XmSHADOW_IN);
+	set_something_val( drawnButtonXaing, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonXstaz, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonInfo, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonNop, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
+	set_something_val( drawnButtonXplot, XmNshadowType, (XtArgVal)XmSHADOW_OUT);
 	}
 	UxTopLevelShell1Context = UxSaveCtx;
 }
@@ -1843,72 +1843,72 @@ Widget	create_topLevelShell1( _UxPagina, _UxPadre, _Uxnome_disp, _Uxsfondo_sin )
 		region_sin=NULL;
 		
 		/* setto il nome della pagina */
-		set_something(topLevelShell1,XmNtitle,(void*) Pagina);
-		set_something(topLevelShell1,XmNiconName,(void*) Pagina);
-		set_something(topLevelShell1,XmNx,(void*) top_x);
-		set_something(topLevelShell1,XmNy,(void*) top_y);
-		set_something(topLevelShell1,XmNwidth,(void*) top_width+50);
-		set_something(topLevelShell1,XmNheight,(void*) top_height);
-		set_something(drawingSinottico,XmNwidth,(void*) drawing_width);
-		set_something(drawingSinottico,XmNheight,(void*) drawing_height);
+		set_something_val(topLevelShell1,XmNtitle,(XtArgVal)Pagina);
+		set_something_val(topLevelShell1,XmNiconName,(XtArgVal)Pagina);
+		set_something_val(topLevelShell1,XmNx,(XtArgVal)top_x);
+		set_something_val(topLevelShell1,XmNy,(XtArgVal)top_y);
+		set_something_val(topLevelShell1,XmNwidth,(XtArgVal)top_width+50);
+		set_something_val(topLevelShell1,XmNheight,(XtArgVal)top_height);
+		set_something_val(drawingSinottico,XmNwidth,(XtArgVal)drawing_width);
+		set_something_val(drawingSinottico,XmNheight,(XtArgVal)drawing_height);
 		if(drawing_pixmap)
-			set_something(drawingSinottico,XmNbackgroundPixmap,(void*) drawing_pixmap);
+			set_something_val(drawingSinottico,XmNbackgroundPixmap,(XtArgVal)drawing_pixmap);
 		else	
-			set_something(drawingSinottico,XmNbackground,(void*) drawing_background);
+			set_something_val(drawingSinottico,XmNbackground,(XtArgVal)drawing_background);
 		
 		
 		LoadBitmap(formMenu,&pix,page_sin_icon_bits,page_sin_icon_width,page_sin_icon_height);
-		set_something(rtrn,XmNiconPixmap,(void*) pix);
+		set_something_val(rtrn,XmNiconPixmap,(XtArgVal)pix);
 		
 		LoadBitmap(drawnButtonNop,&pix,nop_button_bits,nop_button_width,nop_button_height);
-		set_something(drawnButtonNop,XmNlabelPixmap,(void*) pix);
+		set_something_val(drawnButtonNop,XmNlabelPixmap,(XtArgVal)pix);
 		/*
 		Inserisco controllo su abilitazione bottoni
 		*/
-		set_something(drawnButtonXaing,XmNsensitive,(void*) topologia_on);
+		set_something_val(drawnButtonXaing,XmNsensitive,(XtArgVal)topologia_on);
 		LoadBitmap(drawnButtonXaing,&pix,xaing_button_bits,xaing_button_width,xaing_button_height);
-		set_something(drawnButtonXaing,XmNlabelPixmap,(void*) pix);
+		set_something_val(drawnButtonXaing,XmNlabelPixmap,(XtArgVal)pix);
 		
 		/*
 		Staz e' sempre abilitato
 		*/
 		LoadBitmap(drawnButtonXstaz,&pix,xstaz_button_bits,xstaz_button_width,xstaz_button_height);
-		set_something(drawnButtonXstaz,XmNlabelPixmap,(void*) pix);
+		set_something_val(drawnButtonXstaz,XmNlabelPixmap,(XtArgVal)pix);
 		
-		set_something(drawnButtonXplot,XmNsensitive,(void*) topologia_on);
+		set_something_val(drawnButtonXplot,XmNsensitive,(XtArgVal)topologia_on);
 		LoadBitmap(drawnButtonXplot,&pix,xplot_button_bits,xplot_button_width,xplot_button_height);
-		set_something(drawnButtonXplot,XmNlabelPixmap,(void*) pix);
+		set_something_val(drawnButtonXplot,XmNlabelPixmap,(XtArgVal)pix);
 		
 		LoadBitmap(drawnButtonInfo,&pix,info_button_bits,info_button_width,info_button_height);
-		set_something(drawnButtonInfo,XmNlabelPixmap,(void*) pix);
+		set_something_val(drawnButtonInfo,XmNlabelPixmap,(XtArgVal)pix);
 		
 		LoadBitmap(drawnButtonClose,&pix,close_button_bits,close_button_width,close_button_height);
-		set_something(drawnButtonClose,XmNlabelPixmap,(void*) pix);
+		set_something_val(drawnButtonClose,XmNlabelPixmap,(XtArgVal)pix);
 		
 		LoadBitmap(drawnButtonReg,&pix,xreg_button_bits,xreg_button_width,xreg_button_height);
-		set_something(drawnButtonReg,XmNlabelPixmap,(void*) pix);
+		set_something_val(drawnButtonReg,XmNlabelPixmap,(XtArgVal)pix);
 		
 #ifndef DESIGN_TIME
 		LoadFont(FONT_TASTI,&FontTasti,XtDisplay(rtrn));
 		LoadFont(FONT_LABEL,&FontLabel,XtDisplay(rtrn));
 #endif
-		set_something(label1,XmNfontList,(void*) FontTasti);
-		set_something(label2,XmNfontList,(void*) FontTasti);
-		set_something(label3,XmNfontList,(void*) FontTasti);
-		set_something(label4,XmNfontList,(void*) FontTasti);
-		set_something(label5,XmNfontList,(void*) FontTasti);
-		set_something(label6,XmNfontList,(void*) FontTasti);
-		set_something(menu2_p2_b1,XmNfontList,(void*) FontLabel);
-		set_something(menu2_p2_b3,XmNfontList,(void*) FontLabel);
-		set_something(menu2_p3_b1,XmNfontList,(void*) FontLabel);
-		set_something(menu2_p3_b2,XmNfontList,(void*) FontLabel);
-		set_something(DispTagModeButton,XmNfontList,(void*) FontLabel);
-		set_something(DispValueModeButton,XmNfontList,(void*) FontLabel);
-		set_something(DispUnmanagedModeButton,XmNfontList,(void*) FontLabel);
-		set_something(MenuRegMode,XmNfontList,(void*) FontLabel);
-		set_something(MenuPortMode,XmNfontList,(void*) FontLabel);
-		set_something(DispPortModeButton,XmNfontList,(void*) FontLabel);
-		set_something(NoDispPortModeButton,XmNfontList,(void*) FontLabel);
+		set_something_val(label1,XmNfontList,(XtArgVal)FontTasti);
+		set_something_val(label2,XmNfontList,(XtArgVal)FontTasti);
+		set_something_val(label3,XmNfontList,(XtArgVal)FontTasti);
+		set_something_val(label4,XmNfontList,(XtArgVal)FontTasti);
+		set_something_val(label5,XmNfontList,(XtArgVal)FontTasti);
+		set_something_val(label6,XmNfontList,(XtArgVal)FontTasti);
+		set_something_val(menu2_p2_b1,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(menu2_p2_b3,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(menu2_p3_b1,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(menu2_p3_b2,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(DispTagModeButton,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(DispValueModeButton,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(DispUnmanagedModeButton,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(MenuRegMode,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(MenuPortMode,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(DispPortModeButton,XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(NoDispPortModeButton,XmNfontList,(XtArgVal)FontLabel);
 #ifndef DESIGN_TIME 
 		if(!CreaPagina(drawingSinottico,&lista_wid, &num_wid))
 			return(NULL);

@@ -1586,7 +1586,7 @@ printf("Creazione widgets fissi costituenti l'oggetto XlCurve!!!\n");
 
         }
         else {
-                set_something(curvefield,XmNtopOffset,(void*) 2);
+                set_something_val(curvefield,XmNtopOffset,(XtArgVal) 2);
         }
 
         if(xlcurve_obj->curve.s_XLcurve.valueRangeKeys) {
@@ -1715,9 +1715,9 @@ printf("Creazione widgets fissi costituenti l'oggetto XlCurve!!!\n");
 		  	 xlcurve_obj);
         }
         else {
-                set_something(curvefield,XmNrightOffset,(void*) 220);
+                set_something_val(curvefield,XmNrightOffset,(XtArgVal)220);
                 if(xlcurve_obj->curve.s_XLcurve.timePeriodKeys)
-                   set_something(changetime,XmNrightOffset,(void*) 220);
+                   set_something_val(changetime,XmNrightOffset,(XtArgVal)220);
         }
 
         /* Creation of formvalue */
@@ -2844,7 +2844,7 @@ printf("create_xlcurve: numCurves=%d!!!\n",xlcurve_obj->curve.s_XLcurve.numCurve
                 }
        }
        else {
-          set_something(graphicarea,XmNbottomOffset,(void*) 5);
+          set_something_val(graphicarea,XmNbottomOffset,(XtArgVal)5);
        }
        UxTopLevelCurveContext = UxSaveCtx;
 

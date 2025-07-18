@@ -246,11 +246,11 @@ Widget	popup_password( _UxPadrePassword )
 		password_ok = 0;
 		rtrn = _Uxbuild_password();
 
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,(char*)FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,(char*)FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,(char*)FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_SELECTION_LABEL),(void*) XmNfontList,(char*)FontLabel);
-		set_something(XmSelectionBoxGetChild(rtrn,XmDIALOG_TEXT),(void*) XmNfontList,(char*)FontLabel);
+		set_something_val(XmSelectionBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(XmSelectionBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(XmSelectionBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(XmSelectionBoxGetChild(rtrn,XmDIALOG_SELECTION_LABEL),(void*) XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(XmSelectionBoxGetChild(rtrn,XmDIALOG_TEXT),(void*) XmNfontList,(XtArgVal)FontLabel);
 #ifndef DESIGN_TIME
 		XtVaSetValues(XmSelectionBoxGetChild(rtrn,XmDIALOG_TEXT),
 			RES_CONVERT( XmNbackground, "white" ),

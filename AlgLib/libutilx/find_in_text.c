@@ -184,7 +184,7 @@ XmAnyCallbackStruct *data;
    }
 
    if (testo == NULL)
-       set_something(user->ID_label,XmNlabelString,(void*) notfound);
+       set_something_val(user->ID_label,XmNlabelString,(XtArgVal)  notfound);
    else
    {
    /* Evidenziare con XmTextSetSelection la stringa trovata */
@@ -196,7 +196,7 @@ XmAnyCallbackStruct *data;
       if (verso_ricerca == INDIETRO)
          XmTextSetInsertionPosition(user->ID_text,testo-iniz_testo);
 
-      set_something(user->ID_label,XmNlabelString,(void*) nulla);
+      set_something_val(user->ID_label,XmNlabelString,(XtArgVal) nulla);
    }
    XtFree (stringa);
    XtFree (iniz_testo);

@@ -868,9 +868,9 @@ Widget	create_applicationShell1()
 			if(curr_step >1)
 				set_grid_on(drawingArea3,True);
 			}
-		set_something(rtrn,XmNx,(void*) 0);
-		set_something(rtrn,XmNy,(void*) 403);
-		set_something(rtrn,XmNtitle,(void*) nome_file_draw);
+		set_something_val(rtrn,XmNx,(XtArgVal) 0);
+		set_something_val(rtrn,XmNy,(XtArgVal) 403);
+		set_something_val(rtrn,XmNtitle,(XtArgVal) nome_file_draw);
 #endif
 		return(rtrn);
 	}

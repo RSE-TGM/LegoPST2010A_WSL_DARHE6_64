@@ -255,8 +255,8 @@ static	void	resizeCB_drawingPlot( UxWidget, UxClientData, UxCallbackArg )
 	w -=20;
 	h -=20;
 	
-	set_something(lista_wid_plot[0],XlNwidth0,(void*) w);
-	set_something(lista_wid_plot[0],XlNheight0,(void*) h);
+	set_something_val(lista_wid_plot[0],XlNwidth0,(XtArgVal) w);
+	set_something_val(lista_wid_plot[0],XlNheight0,(XtArgVal)h);
 	}
 	UxPlotContext = UxSaveCtx;
 }
@@ -418,13 +418,13 @@ Widget	popup_Plot( _UxrigaPlot, _UxPadrePlot )
 #endif
 		rtrn = _Uxbuild_Plot();
 
-		set_something(ClosePlot,XmNfontList,(void*) FontLabelPlot);
+		set_something_val(ClosePlot,XmNfontList,(XtArgVal)FontLabelPlot);
 		
 #ifndef DESIGN_TIME
 		LoadBitmap(drawingPlot,&pix,page_plot_icon_bits,page_plot_icon_width,
 				page_plot_icon_height);
 #endif
-		set_something(rtrn,XmNiconPixmap,(void*) pix);
+		set_something_val(rtrn,XmNiconPixmap,(XtArgVal)pix);
 		
 		CreaGrafico(drawingPlot);
 #ifndef DESIGN_TIME

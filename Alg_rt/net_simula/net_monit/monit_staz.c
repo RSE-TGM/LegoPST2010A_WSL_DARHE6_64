@@ -100,7 +100,7 @@ for (k=0;k<tot_pagine;k++)
    ++posizione;
    c_str=XmStringCreate(lista_pag[k],XmSTRING_DEFAULT_CHARSET);
    XmListAddItemUnselected(lista,c_str,0);
-   set_something(lista,XmNitemCount, (void*) posizione);
+   set_something_val(lista,XmNitemCount, (XtArgVal)posizione);
 }
 }
 

@@ -379,61 +379,61 @@ XtUnmanageChild(text_7);
 #ifndef DESIGN_TIME
 if(menu_aing[sel]._campo_1)
 	{
-	set_something(campo_1,XmNlabelString,
-                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_1,XmSTRING_DEFAULT_CHARSET));
+	set_something_val(campo_1,XmNlabelString,
+                 (XtArgVal)XmStringCreateLtoR(menu_aing[sel].descr_1,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_1);
 	XtManageChild(text_1);
 	}
 if(menu_aing[sel]._campo_2)
 	{
-	set_something(campo_2,XmNlabelString,
-                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_2,XmSTRING_DEFAULT_CHARSET));
+	set_something_val(campo_2,XmNlabelString,
+                 (XtArgVal)XmStringCreateLtoR(menu_aing[sel].descr_2,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_2);
 	XtManageChild(text_2);
 	}
 if(menu_aing[sel]._campo_3)
 	{
-	set_something(campo_3,XmNlabelString,
-                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_3,XmSTRING_DEFAULT_CHARSET));
+	set_something_val(campo_3,XmNlabelString,
+                 (XtArgVal)XmStringCreateLtoR(menu_aing[sel].descr_3,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_3);
 	XtManageChild(text_3);
 	}
 if(menu_aing[sel]._campo_4)
 	{
-	set_something(campo_4,XmNlabelString,
-                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_4,XmSTRING_DEFAULT_CHARSET));
+	set_something_val(campo_4,XmNlabelString,
+                 (XtArgVal)XmStringCreateLtoR(menu_aing[sel].descr_4,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_4);
 	XtManageChild(text_4);
 	}
 if(menu_aing[sel]._campo_5)
 	{
-	set_something(campo_5,XmNlabelString,
-                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_5,XmSTRING_DEFAULT_CHARSET));
+	set_something_val(campo_5,XmNlabelString,
+                 (XtArgVal)XmStringCreateLtoR(menu_aing[sel].descr_5,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_5);
 	XtManageChild(text_5);
 	}
 if(menu_aing[sel]._campo_6)
 	{
-	set_something(campo_6,XmNlabelString,
-                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_6,XmSTRING_DEFAULT_CHARSET));
+	set_something_val(campo_6,XmNlabelString,
+                 (XtArgVal)XmStringCreateLtoR(menu_aing[sel].descr_6,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_6);
 	XtManageChild(text_6);
 	}
 if(menu_aing[sel]._campo_7)
 	{
-	set_something(campo_7,XmNlabelString,
-                 (void*) XmStringCreateLtoR(menu_aing[sel].descr_7,XmSTRING_DEFAULT_CHARSET));
+	set_something_val(campo_7,XmNlabelString,
+                 (XtArgVal)XmStringCreateLtoR(menu_aing[sel].descr_7,XmSTRING_DEFAULT_CHARSET));
 	XtManageChild(campo_7);
 	XtManageChild(text_7);
 	}
 if(menu_aing[sel]._Start)
-	set_something(Start,XmNsensitive,(void*) True);
+	set_something_val(Start,XmNsensitive,(XtArgVal)True);
 else
-	set_something(Start,XmNsensitive,(void*) False);
+	set_something_val(Start,XmNsensitive,(XtArgVal)False);
 if(menu_aing[sel]._Stop)
-	set_something(Stop,XmNsensitive,(void*) True);
+	set_something_val(Stop,XmNsensitive,(XtArgVal)True);
 else
-	set_something(Stop,XmNsensitive,(void*) False);
+	set_something_val(Stop,XmNsensitive,(XtArgVal)False);
 
 UxAingContext = UxSaveCtx;
 #endif
@@ -1637,19 +1637,19 @@ Widget	create_Aing( _UxrigaAing, _UxPadreAing )
 		rtrn = _Uxbuild_Aing();
 		UxPutClassCode( Aing, _UxIfClassId );
 
-		set_something(tag,XmNfontList,(void*) FontLabelAing);
-		set_something(unimis,XmNfontList,(void*) FontLabelAing);
-		set_something(Start,XmNfontList,(void*) FontLabelAing);
-		set_something(Stop,XmNfontList,(void*) FontLabelAing);
-		set_something(tag,XmNlabelString,
-		                 (void*) XmStringCreateLtoR(tagSelect,XmSTRING_DEFAULT_CHARSET));
-		set_something(unimis,XmNlabelString,
-		                 (void*) XmStringCreateLtoR(unimisSelect,XmSTRING_DEFAULT_CHARSET));
+		set_something_val(tag,XmNfontList,(XtArgVal)FontLabelAing);
+		set_something_val(unimis,XmNfontList,(XtArgVal) FontLabelAing);
+		set_something_val(Start,XmNfontList,(XtArgVal)FontLabelAing);
+		set_something_val(Stop,XmNfontList,(XtArgVal)FontLabelAing);
+		set_something_val(tag,XmNlabelString,
+		                 (XtArgVal)XmStringCreateLtoR(tagSelect,XmSTRING_DEFAULT_CHARSET));
+		set_something_val(unimis,XmNlabelString,
+		                 (XtArgVal)XmStringCreateLtoR(unimisSelect,XmSTRING_DEFAULT_CHARSET));
 #ifndef DESIGN_TIME
 		LoadBitmap(testata,&pix,page_aing_icon_bits,page_aing_icon_width,
 				page_aing_icon_height);
 #endif
-		set_something(rtrn,XmNiconPixmap,(void*) pix);
+		set_something_val(rtrn,XmNiconPixmap,(XtArgVal)pix);
 		CreaIndicatore(drawingAing);
 #ifndef DESIGN_TIME
 		if((key_refresh_aing=

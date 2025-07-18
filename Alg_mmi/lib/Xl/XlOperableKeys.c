@@ -1339,7 +1339,7 @@ static void add_translation(Widget wid,char *stringa)
            switch( *policy )
            {
                case 'r':
-                 set_something(wid, XmNtranslations, (void*) tr);
+                 set_something_val(wid, XmNtranslations, (XtArgVal)tr);
                break;
                case 'a':
                   XtAugmentTranslations(wid, tr);

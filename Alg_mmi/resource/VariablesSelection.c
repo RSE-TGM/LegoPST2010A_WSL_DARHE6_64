@@ -399,8 +399,8 @@ static	void	activateCB_pushButton20( UxWidget, UxClientData, UxCallbackArg )
 	  }
 	
 	/*  Rimetto a sensitive i bottoni chiamanti  */
-	set_something (ListaWidgetRC[0], XmNsensitive, (void*) True);
-	set_something (ListaWidgetRC[2], XmNsensitive, (void*) True);
+	set_something_val (ListaWidgetRC[0], XmNsensitive, (XtArgVal)True);
+	set_something_val (ListaWidgetRC[2], XmNsensitive, (XtArgVal)True);
 	
 	XtDestroyWidget (VariablesSelection);
 	}
@@ -419,8 +419,8 @@ static	void	activateCB_pushButton21( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCVariablesSelection *) UxGetContext( UxWidget );
 	{
 	/*  Rimetto a sensitive i bottoni chiamanti  */
-	set_something (ListaWidgetRC[0], XmNsensitive, (void*) True);
-	set_something (ListaWidgetRC[2], XmNsensitive, (void*) True);
+	set_something_val (ListaWidgetRC[0], XmNsensitive, (XtArgVal)True);
+	set_something_val (ListaWidgetRC[2], XmNsensitive, (XtArgVal)True);
 	
 	XtDestroyWidget (VariablesSelection);
 	}
@@ -796,7 +796,7 @@ Widget	create_VariablesSelection( _UxPar5, _UxListaRCInp, _UxWSel )
 		
 		/*  Setto la label del titolo relativo al tipo della variabile
 			visualizzata  */
-		set_something (TipoVar, XmNlabelString, (void*) XmStringCreateSimple(LabTitolo));
+		set_something_val (TipoVar, XmNlabelString, (XtArgVal)XmStringCreateSimple(LabTitolo));
 		
 		InterfaceSetPos (VariablesSelection,Parent5);
 		

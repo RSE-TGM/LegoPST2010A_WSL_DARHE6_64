@@ -140,7 +140,7 @@ static int PushTagCB (swidget wid,int ind_tag, XmAnyCallbackStruct *call_data)
 #endif
 
 	/*  Setta a False l'attributo sensitive del bottone */
-	set_something (wid, XmNsensitive, (void*) False);
+	set_something_val (wid, XmNsensitive, (XtArgVal)False);
 
 	Creato = (Widget )create_TagsInput(ValueSelection,wid,
 			FormDiConfigurazione,ind_tag,WdgSel,&Lista);
@@ -169,8 +169,8 @@ static	void	activateCB_pushButton16( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCValueSelection *) UxGetContext( UxWidget );
 	{
 	/*  Rimetto a sensitive i bottoni del widget chiamante  */
-	set_something (InpRC[0], XmNsensitive, (void*) True);
-	set_something (InpRC[2], XmNsensitive, (void*) True);
+	set_something_val (InpRC[0], XmNsensitive, (XtArgVal) True);
+	set_something_val (InpRC[2], XmNsensitive, (XtArgVal)True);
 	
 	XmTextFieldSetString (InpRC[2], Lista);
 	
@@ -191,8 +191,8 @@ static	void	activateCB_pushButton17( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCValueSelection *) UxGetContext( UxWidget );
 	{
 	/*  Rimetto a sensitive i bottoni del padre  */
-	set_something (InpRC[0], XmNsensitive, (void*) True);
-	set_something (InpRC[2], XmNsensitive, (void*) True);
+	set_something_val (InpRC[0], XmNsensitive, (XtArgVal) True);
+	set_something_val (InpRC[2], XmNsensitive, (XtArgVal)True);
 	
 	XtDestroyWidget (ValueSelection);
 	}
@@ -393,7 +393,7 @@ Widget	create_ValueSelection( _UxPad, _UxRCR, _UxOggettoSel, _UxFormInput )
 		get_something (OggettoSel, XlNmodulName, (void*) &Nome);
 		strcpy (PerTitolo,"FORM NAME: ");
 		strcat (PerTitolo,Nome);
-		set_something (Titolo, XmNlabelString, (void*) XmStringCreateSimple (PerTitolo));
+		set_something_val (Titolo, XmNlabelString, (XtArgVal) XmStringCreateSimple (PerTitolo));
 		
 		/*  Costruisco il RowColumn contenente tutti i PushButton */
 		Contenitore = XtVaCreateManagedWidget ("Contenitore",
@@ -468,7 +468,7 @@ Widget	create_ValueSelection( _UxPad, _UxRCR, _UxOggettoSel, _UxFormInput )
 		
 		/*  Ridimensiono la toplevelshell in modo da contenere 
 			tutti i bottoni inseriti  */
-		set_something (ValueSelection, XmNheight, (void*) 130+Scarto);
+		set_something_val (ValueSelection, XmNheight, (XtArgVal) 130+Scarto);
 		
 		/*  Setto la posizione della toplevel secondo il parent  */
 		InterfaceSetPos (ValueSelection, Pad);

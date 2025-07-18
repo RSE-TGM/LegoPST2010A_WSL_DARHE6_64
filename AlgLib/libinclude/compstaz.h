@@ -179,6 +179,7 @@ void init_staz();
 void LoadColor(Widget);
 void get_something(Widget,char *,char * );
 void set_something(Widget,char *,char * );
+void set_something_val(Widget wid, String resource_name, XtArgVal value);
 void init_gc();
 int ef_is_set(int,int);
 int set_ef(int,int);

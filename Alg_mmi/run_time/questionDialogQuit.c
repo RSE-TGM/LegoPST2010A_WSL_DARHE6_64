@@ -210,10 +210,10 @@ Widget	create_questionDialogQuit( _Ux_PadreDialogQuit, _Uxscada_on )
 #endif
 		rtrn = _Uxbuild_questionDialogQuit();
 
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,(char*)FontLabel);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,(char*)FontLabel);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,(char*)FontLabel);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),(void*) XmNfontList,(char*)FontLabel);
+		set_something_val(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,(XtArgVal)FontLabel);
+		set_something_val(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),(void*) XmNfontList,(XtArgVal)FontLabel);
 		UxPopupInterface(rtrn, no_grab);
 		
 		if(scada_on)

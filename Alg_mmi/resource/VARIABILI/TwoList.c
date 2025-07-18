@@ -165,7 +165,7 @@ static	void	activateCB_pushButton11( UxWidget, UxClientData, UxCallbackArg )
 		Nome = XtNewString ((char *)extract_string(ListaItem[pos]));
 		XmTextFieldSetString (PadChiam[1],Nome );
 		XmTextFieldSetString (PadChiam[2],"");
-		set_something (PadChiam[0], XmNsensitive, (void*) True);
+		set_something_val (PadChiam[0], XmNsensitive, (XtArgVal)True);
 		if (pos != 0)
 		  {
 #ifndef ON_MMI
@@ -190,7 +190,7 @@ static	void	activateCB_pushButton11( UxWidget, UxClientData, UxCallbackArg )
 		Nome = XtNewString ((char *)extract_string(ListaItem[0]));
 		XmTextFieldSetString (PadChiam[1],Nome);
 		XmTextFieldSetString (PadChiam[2],"");
-		set_something (PadChiam[0], XmNsensitive, (void*) True);
+		set_something_val (PadChiam[0], XmNsensitive, (XtArgVal)True);
 		free (Nome);
 		}
 	
@@ -213,7 +213,7 @@ static	void	activateCB_pushButton12( UxWidget, UxClientData, UxCallbackArg )
 	UxTwoListContext = UxContext =
 			(_UxCTwoList *) UxGetContext( UxWidget );
 	{
-	set_something (PadChiam[0], XmNsensitive, (void*) True);
+	set_something_val (PadChiam[0], XmNsensitive, (XtArgVal)True);
 	free (PadChiam);
 	XtDestroyWidget (TwoList);
 	}
@@ -849,13 +849,13 @@ Widget	create_TwoList( _UxParent2, _UxDbTop, _UxPadInp, _UxModuli, _UxBlocchi, _
 		Dbt = DbTop;
 		Oggetto2 = OggSel;
 		
-		set_something (PadChiam[0], XmNsensitive, (void*) False);
+		set_something_val (PadChiam[0], XmNsensitive, (XtArgVal)False);
 		rtrn = _Uxbuild_TwoList();
 
 		if (ListaDeiModuli == NULL)
 			{
-			set_something (scrolledList3, XmNsensitive, (void*) False);
-			set_something (pushButton16, XmNsensitive, (void*) False);
+			set_something_val (scrolledList3, XmNsensitive, (XtArgVal)False);
+			set_something_val (pushButton16, XmNsensitive, (XtArgVal)False);
 			}
 		else
 			CaricaLista (scrolledList3,ListaDeiModuli,5,GENERALE);

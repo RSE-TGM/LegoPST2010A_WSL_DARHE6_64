@@ -362,7 +362,7 @@ static	void	activateCB_pushButton18( UxWidget, UxClientData, UxCallbackArg )
 	*ValoriInput = NuovaStringa;
 	
 	/*  Rimetto a sensitive il bottone chiamante  */
-	set_something (BottoneTag, XmNsensitive, (void*) True);
+	set_something_val (BottoneTag, XmNsensitive, (XtArgVal)True);
 	
 	XtDestroyWidget (TagsInput);
 	}
@@ -381,7 +381,7 @@ static	void	activateCB_pushButton19( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCTagsInput *) UxGetContext( UxWidget );
 	{
 	/*  Rimetto a sensitive il bottone chiamante */
-	set_something (BottoneTag, XmNsensitive, (void*) True);
+	set_something_val (BottoneTag, XmNsensitive, (XtArgVal)True);
 	
 	XtDestroyWidget (TagsInput);
 	}
@@ -594,7 +594,7 @@ Widget	create_TagsInput( _UxParente3, _UxBot, _UxFrm, _UxIndex, _UxOggSelezionat
 		get_something (BottoneTag, XmNlabelString, (void*) &Etichetta);
 		XmTit = XmStringCreateSimple ("Tags of ");
 		XmTotale = XmStringConcat (XmTit,Etichetta);
-		set_something (TitoloForm, XmNlabelString, (void*) XmTotale);
+		set_something_val (TitoloForm, XmNlabelString, (XtArgVal)XmTotale);
 		XmStringFree (XmTit);
 		XmStringFree (XmTotale);  
 		

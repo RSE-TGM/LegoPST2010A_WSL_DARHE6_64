@@ -158,16 +158,16 @@ static	void	activateCB_pushButton9( UxWidget, UxClientData, UxCallbackArg )
 	  if (ModOrVar == MODELLI)
 	    {
 	    XmTextFieldSetString (PadroneChiam[3],Nome );
-	    set_something (PadroneChiam[0], XmNsensitive, (void*) True);
-	    set_something (PadroneChiam[1], XmNsensitive, (void*) True);
-	    set_something (PadroneChiam[2], XmNsensitive, (void*) True);
+	    set_something_val (PadroneChiam[0], XmNsensitive, (XtArgVal)True);
+	    set_something_val (PadroneChiam[1], XmNsensitive, (XtArgVal)True);
+	    set_something_val (PadroneChiam[2], XmNsensitive, (XtArgVal)True);
 	    XmTextFieldSetString (PadroneChiam[4],Def);
 	    XmTextFieldSetString (PadroneChiam[5],"");
 	    }
 	  else
 	    {
 	    XmTextFieldSetString (PadroneChiam[1], Nome);
-	    set_something (PadroneChiam[0], XmNsensitive, (void*) True);
+	    set_something_val (PadroneChiam[0], XmNsensitive, (XtArgVal)True);
 	    }
 	  }
 	else
@@ -202,9 +202,9 @@ static	void	activateCB_pushButton10( UxWidget, UxClientData, UxCallbackArg )
 			(_UxCOneList *) UxGetContext( UxWidget );
 	{
 	if (ModOrVar == MODELLI)
-	  set_something (PadroneChiam[0], XmNsensitive, (void*) True);
+	  set_something_val (PadroneChiam[0], XmNsensitive, (XtArgVal)True);
 	else
-	  set_something (PadroneChiam[0], XmNsensitive, (void*) True);
+	  set_something_val (PadroneChiam[0], XmNsensitive, (XtArgVal)True);
 	free (PadroneChiam);
 	XtDestroyWidget (OneList);
 	}
@@ -568,7 +568,7 @@ Widget	create_OneList( _UxParent1, _UxPadrone, _UxTipoLista, _UxLista )
 		PadroneChiam = Padrone;
 		ModOrVar = TipoLista;
 		
-		set_something (PadroneChiam[0], XmNsensitive, (void*) False);
+		set_something_val (PadroneChiam[0], XmNsensitive, (XtArgVal)False);
 		rtrn = _Uxbuild_OneList();
 
 		if (ModOrVar == MODELLI)

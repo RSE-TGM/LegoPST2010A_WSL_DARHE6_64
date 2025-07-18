@@ -746,29 +746,29 @@ Widget	popup_topLevelShellStaz( _UxPaginaStaz, _UxPadreStaz, _Uxnome_dispStaz, _
 		
 		region_staz=NULL;
 		/* setto il nome della pagina */
-		set_something(topLevelShellStaz,XmNtitle,(void*) PaginaStaz);
-		set_something(topLevelShellStaz,XmNiconName,(void*) PaginaStaz);
-		set_something(topLevelShellStaz,XmNx,(void*) top_x);
-		set_something(topLevelShellStaz,XmNy,(void*) top_y);
-		set_something(topLevelShellStaz,XmNwidth,(void*) top_width);
-		set_something(topLevelShellStaz,XmNheight,(void*) top_height);
-		set_something(drawingAreaStaz,XmNwidth,(void*) drawing_width);
-		set_something(drawingAreaStaz,XmNheight,(void*) drawing_height);
+		set_something_val(topLevelShellStaz,XmNtitle,(XtArgVal)PaginaStaz);
+		set_something_val(topLevelShellStaz,XmNiconName,(XtArgVal)PaginaStaz);
+		set_something_val(topLevelShellStaz,XmNx,(XtArgVal)top_x);
+		set_something_val(topLevelShellStaz,XmNy,(XtArgVal)top_y);
+		set_something_val(topLevelShellStaz,XmNwidth,(XtArgVal)top_width);
+		set_something_val(topLevelShellStaz,XmNheight,(XtArgVal)top_height);
+		set_something_val(drawingAreaStaz,XmNwidth,(XtArgVal)drawing_width);
+		set_something_val(drawingAreaStaz,XmNheight,(XtArgVal)drawing_height);
 		if(drawing_pixmap)
-			set_something(drawingAreaStaz,XmNbackgroundPixmap,(void*) drawing_pixmap);
+			set_something_val(drawingAreaStaz,XmNbackgroundPixmap,(XtArgVal)drawing_pixmap);
 		else
-			set_something(drawingAreaStaz,XmNbackground,(void*) drawing_background);
+			set_something_val(drawingAreaStaz,XmNbackground,(XtArgVal)drawing_background);
 #ifndef DESIGN_TIME
 		LoadBitmap(scrolledWindowStaz,&pix,page_staz_icon_bits,page_staz_icon_width,page_staz_icon_height);
 #endif
-		set_something(rtrn,XmNiconPixmap,(void*) pix);
+		set_something_val(rtrn,XmNiconPixmap,(XtArgVal)pix);
 #ifndef DESIGN_TIME
 		LoadFont(FONT_LABEL,&FontLabelStaz,XtDisplay(rtrn));
 #endif
-		set_something(menu1_p1_b1,XmNfontList,(void*) FontLabelStaz);
-		set_something(menu1_p1_b3,XmNfontList,(void*) FontLabelStaz);
-		set_something(menu1_p2_b1,XmNfontList,(void*) FontLabelStaz);
-		set_something(menu1_p2_b2,XmNfontList,(void*) FontLabelStaz);
+		set_something_val(menu1_p1_b1,XmNfontList,(XtArgVal)FontLabelStaz);
+		set_something_val(menu1_p1_b3,XmNfontList,(XtArgVal)FontLabelStaz);
+		set_something_val(menu1_p2_b1,XmNfontList,(XtArgVal)FontLabelStaz);
+		set_something_val(menu1_p2_b2,XmNfontList,(XtArgVal)FontLabelStaz);
 		
 		
 #ifndef DESIGN_TIME

@@ -384,7 +384,7 @@ topLevel = XtAppInitialize(&app_context, "xaing",
 
     for(j=0;j<numero_display;j++)
 {
-    set_something (elenco_display[j].topLevel, XmNiconic, (void*) True);
+    set_something_val (elenco_display[j].topLevel, XmNiconic, (XtArgVal) True);
     i = 0;
     XtSetArg (args[i], XmNwidth, 150);
     i++;
@@ -1504,8 +1504,8 @@ XtManageChild(wapp);
    XtSetArg (args[i], XmNfont, font_list[disp_sel]); i++;
     aing[ip3].sw[k_tipo_option] = XmCreateOptionMenu (wRow, "tipo_option_menu", args, i);
     XtManageChild (aing[ip3].sw[k_tipo_option]);
-set_something(XmOptionLabelGadget(aing[ip3].sw[k_tipo_option]),
-	XmNlabelString,(char *)XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
+set_something_val(XmOptionLabelGadget(aing[ip3].sw[k_tipo_option]),
+	XmNlabelString,(XtArgVal)XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
 /*
 	fine scelta fra perturbazioni normali e periodiche
 */
@@ -1575,8 +1575,8 @@ set_something(XmOptionLabelGadget(aing[ip3].sw[k_tipo_option]),
     i++;
     aing[ip3].sw[k_time_option] = XmCreateOptionMenu (wRow, "time_option_menu", args, i);
     XtManageChild (aing[ip3].sw[k_time_option]);
-set_something(XmOptionLabelGadget(aing[ip3].sw[k_time_option]),
-	XmNlabelString,(char*)XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
+set_something_val(XmOptionLabelGadget(aing[ip3].sw[k_time_option]),
+	XmNlabelString,(XtArgVal)XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
 /*
     Fine menu' option per la scelta del tipo di delay
 */
@@ -1788,8 +1788,8 @@ XtSetArg(args[i],XmNlabelString,XmStringCreateLtoR("",XmSTRING_DEFAULT_CHARSET))
 */
     aing[ip3].sw[k_rampa_option] = XmCreateOptionMenu (wRow, "option_menu", args, i);
     XtManageChild (aing[ip3].sw[k_rampa_option]);
-set_something(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
-	XmNlabelString,(char*)XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
+set_something_val(XmOptionLabelGadget(aing[ip3].sw[k_rampa_option]),
+	XmNlabelString,(XtArgVal)XmStringCreateLtoR ("", XmSTRING_DEFAULT_CHARSET));
 /*
     Fine creazione menu' option per la scelta del tipo di rampa
 */

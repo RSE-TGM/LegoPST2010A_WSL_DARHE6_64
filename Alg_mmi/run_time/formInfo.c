@@ -124,7 +124,7 @@ char testo[10000];
 printf("Inserisci testo %s\n",XtName(oggettoSel));
 if(!PreparaTestoInfo(oggettoSel,testo))
 	return;
-set_something(scrolledTextInfo,XmNvalue,(void*) testo);
+set_something_val(scrolledTextInfo,XmNvalue,(XtArgVal) testo);
 #endif
 }
 
@@ -367,9 +367,9 @@ Widget	popup_formInfo( _Uxwid, _UxPadreForminfo )
 #endif
 		rtrn = _Uxbuild_formInfo();
 
-		set_something(labelInfo,XmNfontList,(void*) FontLabelFormInfo);
-		set_something(pushButtonInfo,XmNfontList,(void*) FontLabelFormInfo);
-		set_something(scrolledTextInfo,XmNfontList,(void*) FontListaFormInfo);
+		set_something_val(labelInfo,XmNfontList,(XtArgVal)FontLabelFormInfo);
+		set_something_val(pushButtonInfo,XmNfontList,(XtArgVal)FontLabelFormInfo);
+		set_something_val(scrolledTextInfo,XmNfontList,(XtArgVal)FontListaFormInfo);
 		UxPopupInterface(rtrn, no_grab);
 		InserisciTesto(wid);
 		return(rtrn);

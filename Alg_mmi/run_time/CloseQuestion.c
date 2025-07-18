@@ -236,10 +236,10 @@ Widget	popup_CloseQuestion( _UxTop, _UxDrawing, _Uxtimer, _Uxkey )
 		rtrn = _Uxbuild_CloseQuestion();
 
 		UxPopupInterface(rtrn, no_grab);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,(char*)FontLabelClose);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,(char*)FontLabelClose);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,(char*)FontLabelClose);
-		set_something(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),(void*) XmNfontList,(char*)FontLabelClose);
+		set_something_val(XmMessageBoxGetChild(rtrn,XmDIALOG_CANCEL_BUTTON),(void*) XmNfontList,(XtArgVal)FontLabelClose);
+		set_something_val(XmMessageBoxGetChild(rtrn,XmDIALOG_HELP_BUTTON),(void*) XmNfontList,(XtArgVal)FontLabelClose);
+		set_something_val(XmMessageBoxGetChild(rtrn,XmDIALOG_OK_BUTTON),(void*) XmNfontList,(XtArgVal)FontLabelClose);
+		set_something_val(XmMessageBoxGetChild(rtrn,XmDIALOG_MESSAGE_LABEL),(void*) XmNfontList,(XtArgVal)FontLabelClose);
 		return(rtrn);
 	}
 }

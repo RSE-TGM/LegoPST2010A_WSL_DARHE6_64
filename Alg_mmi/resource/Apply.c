@@ -394,7 +394,7 @@ trasparent=(Boolean)trasparent_int;
     get_something (WdgSel, XlNmodulName, (void*) &Confronto);
     if (strcmp (Confronto,ValoreStringa) != 0)
       {
-      set_something (WdgSel, XlNmodulName, (void*) ValoreStringa);
+      set_something_val (WdgSel, XlNmodulName, (XtArgVal) ValoreStringa);
       Modificata = True; /* notifica la modifica della form associata */
       }
     else Modificata = False;

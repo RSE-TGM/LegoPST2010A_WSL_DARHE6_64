@@ -261,8 +261,8 @@ Widget	create_popup_warning_sim( _UxWarningString, _UxUxParent )
 		UxPopupInterface(rtrn, no_grab);
 		cursor_warning=XlCreateErrCursor(popup_warning_sim);
 		XlSetCursor(popup_warning_sim,cursor_warning);
-		set_something(popup_warning_sim,XmNmessageString,
-				(void*) XmStringCreateLtoR(WarningString, XmSTRING_DEFAULT_CHARSET));
+		set_something_val(popup_warning_sim,XmNmessageString,
+				(XtArgVal)XmStringCreateLtoR(WarningString, XmSTRING_DEFAULT_CHARSET));
 		
 		return(rtrn);
 	}

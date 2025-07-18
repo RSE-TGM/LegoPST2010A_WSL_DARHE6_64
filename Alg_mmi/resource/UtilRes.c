@@ -65,8 +65,8 @@ Position PX,PY;
 get_something (Parente, XmNx, (void*) &PX);
 get_something (Parente, XmNy, (void*) &PY);
 
-set_something (DaSpostare, XmNx, (void*) PX+SPIAZZAMENTO);
-set_something (DaSpostare, XmNy, (void*) PY+SPIAZZAMENTO);
+set_something_val (DaSpostare, XmNx, (XtArgVal)PX+SPIAZZAMENTO);
+set_something_val (DaSpostare, XmNy, (XtArgVal)PY+SPIAZZAMENTO);
 }
 
 /***************************************************************
@@ -192,8 +192,8 @@ BottoneIMPORT = (Widget )XmSelectionBoxGetChild (Ogg,
 BottoneCANCEL = (Widget )XmSelectionBoxGetChild (Ogg,
       XmDIALOG_CANCEL_BUTTON);
 
-set_something (BottoneIMPORT, XmNsensitive, (void*) Valore);
-set_something (BottoneCANCEL, XmNsensitive, (void*) Valore);
+set_something_val (BottoneIMPORT, XmNsensitive, (XtArgVal)Valore);
+set_something_val (BottoneCANCEL, XmNsensitive, (XtArgVal)Valore);
 }
 
 /*

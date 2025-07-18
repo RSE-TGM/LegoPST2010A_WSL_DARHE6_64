@@ -173,8 +173,8 @@ void rimuovi_callback()
  ****************************************/
 void disableButtonIcSel()
 {
-   set_something(EditIconItem,XmNsensitive,(void*) False);
-   set_something(CreateIconItem,XmNsensitive,(void*) False);
+   set_something_val(EditIconItem,XmNsensitive,(XtArgVal) False);
+   set_something_val(CreateIconItem,XmNsensitive,(XtArgVal) False);
 }
 
 /*****************************************
@@ -182,8 +182,8 @@ void disableButtonIcSel()
  ****************************************/
 void riableButtonIcSel()
 {
-   set_something(EditIconItem,XmNsensitive,(void*) True);
-   set_something(CreateIconItem,XmNsensitive,(void*) True);
+   set_something_val(EditIconItem,XmNsensitive,(XtArgVal) True);
+   set_something_val(CreateIconItem,XmNsensitive,(XtArgVal) True);
 }
 
 void InserisciItem (char *lista_ele,Widget Lista)
@@ -382,8 +382,8 @@ static	void	cancelCB_selectionBox1( UxWidget, UxClientData, UxCallbackArg )
 	{
 	char comando[200];
 	
-	set_something (ListaF[0], XmNsensitive, (void*) True);
-	set_something (ListaF[2], XmNsensitive, (void*) True);
+	set_something_val (ListaF[0], XmNsensitive, (XtArgVal) True);
+	set_something_val (ListaF[2], XmNsensitive, (XtArgVal) True);
 	XtDestroyWidget (AnimateIconSelection);
 	}
 	UxAnimateIconSelectionContext = UxSaveCtx;
@@ -411,8 +411,8 @@ static	void	okCallback_selectionBox1( UxWidget, UxClientData, UxCallbackArg )
 	
 	XmTextFieldSetString (ListaF[2], NomeFile);
 	XtFree (NomeFile);
-	set_something (ListaF[0], XmNsensitive, (void*) True);
-	set_something (ListaF[2], XmNsensitive, (void*) True);
+	set_something_val (ListaF[0], XmNsensitive, (XtArgVal) True);
+	set_something_val (ListaF[2], XmNsensitive, (XtArgVal) True);
 	XtDestroyWidget (AnimateIconSelection);
 	}
 	UxAnimateIconSelectionContext = UxSaveCtx;

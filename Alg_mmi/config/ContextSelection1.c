@@ -326,9 +326,9 @@ Widget	create_ContextSelection1( _Uxiop )
 		*/
 		
 		if( getenv(ENVCTX) != NULL)
-		   set_something(ContextSelection1,XmNdirSpec,(void*) getenv(ENVCTX));
+		   set_something_val(ContextSelection1,XmNdirSpec,(XtArgVal)  getenv(ENVCTX));
 		if(iop = 3131)
-		   set_something(ContextSelection1,XmNdirSpec,(void*) getenv(ENVICO));
+		   set_something_val(ContextSelection1,XmNdirSpec,(XtArgVal) getenv(ENVICO));
 		
 		
 		return(rtrn);

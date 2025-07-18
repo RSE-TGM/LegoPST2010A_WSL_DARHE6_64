@@ -198,7 +198,7 @@ Widget	create_MessageBox( _UxChia, _UxNFile )
 
 		/*  Setto il messaggio da visualizzare  */
 		XmMess = XmStringCreateSimple ("File already exist! Overwrite?");
-		set_something (MessageBox, XmNmessageString, (void*) XmMess);
+		set_something_val (MessageBox, XmNmessageString, (XtArgVal) XmMess);
 		return(rtrn);
 	}
 }

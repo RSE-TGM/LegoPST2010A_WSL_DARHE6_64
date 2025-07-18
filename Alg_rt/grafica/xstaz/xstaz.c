@@ -314,7 +314,7 @@ topLevel= XtInitialize("xstaz","Xstaz",NULL,0,
                              &argc,argv);
 
 LoadColor(topLevel);
-set_something(topLevel,XmNiconic,(void*) True);
+set_something_val(topLevel,XmNiconic,(XtArgVal)True);
 display=XtDisplay(topLevel);
 screen_num=DefaultScreen(display);
 

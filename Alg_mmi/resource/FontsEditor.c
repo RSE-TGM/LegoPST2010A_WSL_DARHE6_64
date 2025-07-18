@@ -371,7 +371,7 @@ static void put_font()
 	} 
 
 	StrutturaFont = XLoadQueryFont (UxDisplay, font);
-	set_something (display_text, XmNfontList, (void*) XmFontListCreate (StrutturaFont,
+	set_something_val (display_text, XmNfontList, (XtArgVal) XmFontListCreate (StrutturaFont,
 			XmSTRING_DEFAULT_CHARSET));
 	XmTextSetString (fontname_text, font); 
 } 

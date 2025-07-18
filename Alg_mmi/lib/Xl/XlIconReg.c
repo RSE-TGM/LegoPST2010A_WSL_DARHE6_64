@@ -2370,7 +2370,7 @@ if(pos_sfondo == -1)
                 {
                 *width = 100;
                 *height = 100;
-                set_something(cw,XmNborderWidth,(void*) 1);
+                set_something_val(cw,XmNborderWidth,(XtArgVal)1);
                 return;
                 }
 /*

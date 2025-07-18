@@ -122,8 +122,8 @@ int no_grab;
 
 XmMessaggio = XmStringCreateSimple (Messaggio);
 Message = create_Message (TipoVis,Padre,OggSel);
-set_something (Message,XmNmessageString, (void*) XmMessaggio);
-set_something (Message,XmNdialogType, (void*) XmDIALOG_ERROR);
+set_something_val (Message,XmNmessageString, (XtArgVal) XmMessaggio);
+set_something_val (Message,XmNdialogType, (XtArgVal)XmDIALOG_ERROR);
 UxPopupInterface (Message, no_grab);
 XmStringFree (XmMessaggio);
 }
@@ -511,8 +511,8 @@ switch (Tipo)
   }
 
 XmStringa = XmStringCreateSimple (Appo);
-set_something (Bottone,XmNsensitive,(void*) ValBot);
-set_something (OpMenu,XmNsensitive,(void*) ValOpt);
+set_something_val (Bottone,XmNsensitive,(XtArgVal)ValBot);
+set_something_val (OpMenu,XmNsensitive,(XtArgVal)ValOpt);
 
 /*
 XtFree (Appo);

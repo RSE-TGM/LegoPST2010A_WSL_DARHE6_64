@@ -880,20 +880,20 @@ int SetItemString(XmString *Xstring,char *nome,char *tipo,char *descr,int in_use
 
 void PageMenuSetInterfaceModeOn()
 {
-   set_something(SaveTmp,XmNsensitive,(void*) False);
-   set_something(ConnectMode,XmNsensitive,(void*) False);
+   set_something_val(SaveTmp,XmNsensitive,(XtArgVal)  False);
+   set_something_val(ConnectMode,XmNsensitive,(XtArgVal) False);
    set_connect(actual_page->drawing,(int)1);
 }
 
 void PageMenuSetInterfaceModeOff()
 {
-   set_something(SaveTmp,XmNsensitive,(void*) True);
+   set_something_val(SaveTmp,XmNsensitive,(XtArgVal) True);
 }
 
 void SetButtonClosePage(Boolean Stato)
 {
    if( (Stato == False) || (Stato == True))
-      set_something(CloseTmp,XmNsensitive,(void*) Stato);
+      set_something_val(CloseTmp,XmNsensitive,(XtArgVal) Stato);
 }
 
 Boolean PagGetConnectMode(Widget w)
@@ -3782,17 +3782,17 @@ Widget	create_PagShell( _Uxnome_pagina, _Uxindice, _Uxtipop )
 		
 		if( tipop == TIPO_LIBRARY)
 		{
-		   set_something(PagPane_top_b4,XmNsensitive,(void*) False);
-		   set_something(PagPane_top_b6,XmNsensitive,(void*) False);
-		   set_something(FEditForeground,XmNsensitive,(void*) False);
-		   set_something(ConnectMode,XmNsensitive,(void*) False);
+		   set_something_val(PagPane_top_b4,XmNsensitive,(XtArgVal) False);
+		   set_something_val(PagPane_top_b6,XmNsensitive,(XtArgVal) False);
+		   set_something_val(FEditForeground,XmNsensitive,(XtArgVal) False);
+		   set_something_val(ConnectMode,XmNsensitive,(XtArgVal) False);
 		}
 		else if ( PagGetType(actual_page) == TYPE_REGOLAZIONE)
 			{
 			/**  la risorsa snap e' gestita a livello di pagina
 			DrawSetSnap((Widget )PagDrawingArea,4);
 			**/
-			set_something(FUndo,XmNsensitive,(void*) False);
+			set_something_val(FUndo,XmNsensitive,(XtArgVal) False);
 			}
 		else if ( PagGetType(actual_page) != TYPE_REGOLAZIONE)
 			{
@@ -3803,10 +3803,10 @@ Widget	create_PagShell( _Uxnome_pagina, _Uxindice, _Uxtipop )
 			Regolation Error View
 			Set Visual Mode
 		*/
-		        set_something(ConnectMode,XmNsensitive,(void*) False);
-			set_something(CompileReg,XmNsensitive,(void*) False);
-			set_something(Compile_b4,XmNsensitive,(void*) False);
-			set_something(SetVisualMode,XmNsensitive,(void*) False);
+		        set_something_val(ConnectMode,XmNsensitive,(XtArgVal) False);
+			set_something_val(CompileReg,XmNsensitive,(XtArgVal) False);
+			set_something_val(Compile_b4,XmNsensitive,(XtArgVal) False);
+			set_something_val(SetVisualMode,XmNsensitive,(XtArgVal) False);
 			}
 		
 		
@@ -3840,7 +3840,7 @@ Widget	create_PagShell( _Uxnome_pagina, _Uxindice, _Uxtipop )
 		
 		strcat(titolo,actual_page->nomepag);
 		
-		set_something(actual_page->topwidget,XmNtitle,(void*) titolo);
+		set_something_val(actual_page->topwidget,XmNtitle,(XtArgVal) titolo);
 		/***
 		if(!CompilerOk)
 		   set_something(PagPane_top_b4,XmNsensitive,(void*) False);

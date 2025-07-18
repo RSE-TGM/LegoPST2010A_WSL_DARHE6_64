@@ -725,7 +725,7 @@ switch (widget_num)
 	   strcat (stringa,"  -  ");
 	   strcat(stringa,variabili[p_indvar[p_pagcur->toggle_attivo]].descr);
            x_app=XmStringCreateLtoR(stringa,XmSTRING_DEFAULT_CHARSET);
-	   set_something(w,XmNlabelString,(void*) x_app);
+	   set_something_val(w,XmNlabelString,(XtArgVal) x_app);
 	   XmStringFree(x_app);
 	break;
 
@@ -734,7 +734,7 @@ switch (widget_num)
 
             sprintf(stringa,"Salvare la pagina n.  %d  come ",indice_pagina+1);
            x_app=XmStringCreateLtoR(stringa,XmSTRING_DEFAULT_CHARSET);
-           set_something(w,XmNlabelString,(void*) x_app);
+           set_something_val(w,XmNlabelString,(XtArgVal) x_app);
            XmStringFree(x_app);
 	break;
 
@@ -745,7 +745,7 @@ switch (widget_num)
 	break;
 
 	case k_stop:
-          set_something(w,XmNbackground,(void*) excolor[5].pixel);
+          set_something_val(w,XmNbackground,(XtArgVal) excolor[5].pixel);
         break;
 
 	case k_bull_main:
@@ -832,8 +832,8 @@ if (str->set)
 			&(p_tempi_sp[indice]));
        		 sprintf(stringa,"%6.2f",p_tempi_sp[indice]);
        		 x_app=XmStringCreateLtoR(stringa,XmSTRING_DEFAULT_CHARSET);
-       		 set_something(p_pagcur->pogg[k_tempo_sp1+indice],XmNlabelString,(void*) x_app);
-       		 set_something(p_pagcur->pogg[k_tempo_sp1+indice],XmNborderWidth,(void*) 1);
+       		 set_something_val(p_pagcur->pogg[k_tempo_sp1+indice],XmNlabelString,(XtArgVal) x_app);
+       		 set_something_val(p_pagcur->pogg[k_tempo_sp1+indice],XmNborderWidth,(XtArgVal)1);
 		XmStringFree(x_app);
 	        XmTextSetEditable(p_pagcur->pogg[k_valore_sp1+indice],False);
 	        }
@@ -1011,7 +1011,7 @@ switch (widget_num)
                        &widget_selmis_dialog, &dummy_class) != MrmSUCCESS)
               s_error("can't fetch dialog box");
          XtManageChild(widget_selmis_dialog);
-/*         set_something(XtNameToWidget(main_window_widget,"m_select_button"),(void*) XmNsensitive,False);*/
+/*         set_something_val(XtNameToWidget(main_window_widget,"m_select_button"),(void*) XmNsensitive,False);*/
          break;
 
       case k_selpag_dialog:
@@ -1062,8 +1062,8 @@ switch (widget_num)
 	{
 	 stato_agg=1;
         time_id=XtAppAddTimeOut(XtWidgetToApplicationContext(main_window_widget),(unsigned long)500,timer_proc,NULL);
-          set_something(w,XmNbackground,(void*) excolor[5].pixel);
-          set_something(XtNameToWidget(XtParent(w),"stop_mandb"),(void*) XmNbackground,(char*)excolor[1].pixel);
+          set_something_val(w,XmNbackground,(XtArgVal)excolor[5].pixel);
+          set_something_val(XtNameToWidget(XtParent(w),"stop_mandb"),(void*) XmNbackground,(XtArgVal)excolor[1].pixel);
 	}
 	break;
 	
@@ -1073,8 +1073,8 @@ switch (widget_num)
 	XtRemoveTimeOut(time_id);
 	stato_agg=0;
 	time_id =0;
-          set_something(XtNameToWidget(XtParent(w),"start_mandb"),(void*) XmNbackground,(char*)excolor[1].pixel);
-          set_something(w,XmNbackground,(void*) excolor[5].pixel);
+          set_something_val(XtNameToWidget(XtParent(w),"start_mandb"),(void*) XmNbackground,(XtArgVal)excolor[1].pixel);
+          set_something_val(w,XmNbackground,(XtArgVal)excolor[5].pixel);
 	}
 	break;
 
@@ -1187,21 +1187,21 @@ switch(widget_num)
             strcpy(stringa2,"                                                ");
             strcpy(stringa3,"        ");
             strcpy(stringa4,"     ");
-            set_something(p_pagcur->pogg[i+k_valore_var1],XmNbackground,(void*) excolor[1].pixel);
+            set_something_val(p_pagcur->pogg[i+k_valore_var1],XmNbackground,(XtArgVal)excolor[1].pixel);
 	    gborder=0;
 
 	  }
            x_app=XmStringCreateLtoR(stringa,XmSTRING_DEFAULT_CHARSET);
-           set_something(p_pagcur->pogg[i+k_toggle_var1],XmNlabelString,(void*) x_app);
+           set_something_val(p_pagcur->pogg[i+k_toggle_var1],XmNlabelString,(XtArgVal)x_app);
 	XmStringFree(x_app);
            x_app=XmStringCreateLtoR(stringa2,XmSTRING_DEFAULT_CHARSET);
-           set_something(p_pagcur->pogg[i+k_descr_var1],XmNlabelString,(void*) x_app);
-           set_something(p_pagcur->pogg[i+k_valore_var1],XmNlabelString,(void*) x_blank);
+           set_something_val(p_pagcur->pogg[i+k_descr_var1],XmNlabelString,(XtArgVal)x_app);
+           set_something_val(p_pagcur->pogg[i+k_valore_var1],XmNlabelString,(XtArgVal)x_blank);
 	XmStringFree(x_app);
 	    XmTextSetString(p_pagcur->pogg[i+k_valore_sp1],stringa3);
 	   x_app=XmStringCreateLtoR(stringa4,XmSTRING_DEFAULT_CHARSET);
-           set_something(p_pagcur->pogg[i+k_tempo_sp1],XmNlabelString,(void*) x_app);
-          set_something(p_pagcur->pogg[i+k_tempo_sp1],XmNborderWidth,(void*) gborder);
+           set_something_val(p_pagcur->pogg[i+k_tempo_sp1],XmNlabelString,(XtArgVal)x_app);
+          set_something_val(p_pagcur->pogg[i+k_tempo_sp1],XmNborderWidth,(XtArgVal)gborder);
 	XmStringFree(x_app);
 	}
 	if (p_pagcur->toggle_attivo == -1 ) p_pagcur->toggle_attivo=0;
@@ -1211,7 +1211,7 @@ switch(widget_num)
         else
                         strcat(stringa2,"  disponibile  ");
         x_app=XmStringCreateLtoR(stringa2,XmSTRING_DEFAULT_CHARSET);
-        set_something(p_pagcur->w,XmNdialogTitle,(void*) x_app);
+        set_something_val(p_pagcur->w,XmNdialogTitle,(XtArgVal)x_app);
         XmToggleButtonSetState(p_pagcur->pogg[k_toggle_var1+p_pagcur->toggle_attivo],True,True);
 	XmStringFree(x_app);
 	XmStringFree(x_blank);
@@ -1323,7 +1323,7 @@ switch(*tag)
         {
         case k_selmis_dialog:
         XtUnmanageChild (widget_selmis_dialog);
-/*         set_something(XtNameToWidget(main_window_widget,"m_select_button"),(void*) XmNsensitive,True); */
+/*         set_something_val(XtNameToWidget(main_window_widget,"m_select_button"),(void*) XmNsensitive,True); */
         break;
 
         case k_mempag_dialog:
@@ -1672,12 +1672,12 @@ int j;
         }
 
 	x_app = XmStringCreateLtoR("                         ",XmSTRING_DEFAULT_CHARSET);
-	set_something(p_pagcur->pogg[k_toggle_var1+indice],XmNlabelString,(void*) x_app);
-	set_something(p_pagcur->pogg[k_descr_var1+indice],XmNlabelString,(void*) x_app);
-        set_something(p_pagcur->pogg[k_valore_var1+indice],XmNlabelString,(void*) x_app);
-        set_something(p_pagcur->pogg[k_valore_var1+indice],XmNbackground,(void*) excolor[1].pixel);
-        set_something(p_pagcur->pogg[k_tempo_sp1+indice],XmNlabelString, (void*) x_app);
-        set_something(p_pagcur->pogg[k_tempo_sp1+indice],XmNborderWidth,(void*) 0);
+	set_something_val(p_pagcur->pogg[k_toggle_var1+indice],XmNlabelString,(XtArgVal)x_app);
+	set_something_val(p_pagcur->pogg[k_descr_var1+indice],XmNlabelString,(XtArgVal)x_app);
+        set_something_val(p_pagcur->pogg[k_valore_var1+indice],XmNlabelString,(XtArgVal)x_app);
+        set_something_val(p_pagcur->pogg[k_valore_var1+indice],XmNbackground,(XtArgVal)excolor[1].pixel);
+        set_something_val(p_pagcur->pogg[k_tempo_sp1+indice],XmNlabelString, (XtArgVal)x_app);
+        set_something_val(p_pagcur->pogg[k_tempo_sp1+indice],XmNborderWidth,(XtArgVal)0);
 	XmTextSetString(p_pagcur->pogg[k_valore_sp1+indice],"");
         p_indvar[indice] = -1;
         p_valori_sp[indice]=0.;
@@ -1715,17 +1715,17 @@ if (p_indvar[posiz] != -1)
 	}
 
 x_app=XmStringCreateLtoR(variabili[indice_sel].nome,XmSTRING_DEFAULT_CHARSET);
-set_something(p_pagcur->pogg[k_toggle_var1+posiz],XmNlabelString,(void*) x_app);
+set_something_val(p_pagcur->pogg[k_toggle_var1+posiz],XmNlabelString,(XtArgVal)x_app);
 XmStringFree(x_app);
 
 x_app=XmStringCreateLtoR(variabili[indice_sel].descr,XmSTRING_DEFAULT_CHARSET);
-set_something(p_pagcur->pogg[k_descr_var1+posiz],XmNlabelString,(void*) x_app);
+set_something_val(p_pagcur->pogg[k_descr_var1+posiz],XmNlabelString,(XtArgVal)x_app);
 XmStringFree(x_app);
 
 x_app=XmStringCreateLtoR("",XmSTRING_DEFAULT_CHARSET);
 XmTextSetString(p_pagcur->pogg[k_valore_sp1+posiz],"");
-set_something(p_pagcur->pogg[k_tempo_sp1+posiz],XmNlabelString,(void*) x_app);
-set_something(p_pagcur->pogg[k_tempo_sp1+posiz],XmNborderWidth,(void*) 0);
+set_something_val(p_pagcur->pogg[k_tempo_sp1+posiz],XmNlabelString,(XtArgVal)x_app);
+set_something_val(p_pagcur->pogg[k_tempo_sp1+posiz],XmNborderWidth,(XtArgVal)0);
 XmStringFree(x_app);
 p_valori_sp[posiz]=0.;
 p_tempi_sp[posiz]= -1.;

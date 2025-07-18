@@ -1600,7 +1600,7 @@ void set_titleLabel(char *descr)
    XmString xstr;
   
    xstr = XmStringCreateSimple(descr);   
-   set_something(titleLabel,XmNlabelString,(void*) xstr);
+   set_something_val(titleLabel,XmNlabelString,(XtArgVal)xstr);
    XmStringFree(xstr);
 }
 
@@ -2917,17 +2917,17 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 	                        if((app_allarmi.descr[kk][0]==NULL) || !zone_attive )
 	                                {
 	                                stringa=XmStringCreateSimple("");
-	                                set_something(all_name_label[kk],XmNlabelString,(void*) stringa);
-	                                set_something(all_name_label[kk],XmNlabelString,(void*) stringa);
-	                                set_something(all_descr_label[kk],XmNlabelString,(void*) stringa);
+	                                set_something_val(all_name_label[kk],XmNlabelString,(XtArgVal)stringa);
+	                                set_something_val(all_name_label[kk],XmNlabelString,(XtArgVal)stringa);
+	                                set_something_val(all_descr_label[kk],XmNlabelString,(XtArgVal)stringa);
 	                                XmStringFree(stringa);
 	                                XtVaSetValues(all_name_label[kk],XmNbackground,def_background_butt,NULL);
 	                                XtVaSetValues(all_descr_label[kk],XmNbackground,def_background_butt,NULL);
 	                                XtVaSetValues(all_caiAll_form[kk],XmNbackground,def_background_butt,NULL);
 	                                XtVaSetValues(all_data_label[kk],XmNbackground,def_background_butt,NULL);
 	
-	                                set_something(all_caiAll[kk],XlNstatus, (void*) SPENTO);
-	                                set_something(all_caiAll[kk],XlNvarGerarchia,(void*) "[-1][-1][-1][-1][-1][-1]");
+	                                set_something_val(all_caiAll[kk],XlNstatus, (XtArgVal)SPENTO);
+	                                set_something_val(all_caiAll[kk],XlNvarGerarchia,(XtArgVal) "[-1][-1][-1][-1][-1][-1]");
 	                                }
 	                        /*
 	                        setto a zero la vecchia SHM per innescare l' eventuale refresh
@@ -3151,11 +3151,11 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 			}
 	        sprintf(appo,"%d",tot_all_da_ric);
 	        stringa=XmStringCreateSimple(appo);
-	        set_something(all_new,XmNlabelString,(void*) stringa);
+	        set_something_val(all_new,XmNlabelString,(XtArgVal)stringa);
 	        XmStringFree(stringa);
 	        sprintf(appo,"%d",tot_all_arc);
 	        stringa=XmStringCreateSimple(appo);
-	        set_something(all_old,XmNlabelString,(void*) stringa);
+	        set_something_val(all_old,XmNlabelString,(XtArgVal)stringa);
 	        XmStringFree(stringa);
 	/*
 	Parte riguardante la visualizzazione del numero di allarmi archiviati e pendenti per ogni
@@ -3168,12 +3168,12 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 				{
 	       		        sprintf(appo,"%d",app_allarmi.n_all_pen[kk]);
 	                 	stringa=XmStringCreateSimple(appo);
-	                	set_something(lista_header_label[kk*4+1],XmNlabelString,(void*) stringa);
+	                	set_something_val(lista_header_label[kk*4+1],XmNlabelString,(XtArgVal)stringa);
 	
 	 	                sprintf(appo,"%d",app_allarmi.n_all_arc[kk]);
 	                        XmStringFree(stringa);
 	        	        stringa=XmStringCreateSimple(appo);
-	                	set_something(lista_header_label[kk*4+3],XmNlabelString,(void*) stringa);
+	                	set_something_val(lista_header_label[kk*4+3],XmNlabelString,(XtArgVal)stringa);
 	                        XmStringFree(stringa);
 				}
 	                }
@@ -3197,13 +3197,13 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 			if((app_allarmi.descr[kk][0]==NULL) || !zone_attive )
 				{
 				stringa=XmStringCreateSimple("");
-				set_something(all_name_label[kk],XmNlabelString,(void*) stringa);
-				set_something(all_descr_label[kk],XmNlabelString,(void*) stringa);
-				set_something(all_data_label[kk],XmNlabelString,(void*) stringa);	
+				set_something_val(all_name_label[kk],XmNlabelString,(XtArgVal)stringa);
+				set_something_val(all_descr_label[kk],XmNlabelString,(XtArgVal)stringa);
+				set_something_val(all_data_label[kk],XmNlabelString,(XtArgVal)stringa);	
 	                        XmStringFree(stringa);
 	
-				set_something(all_caiAll[kk],XlNstatus, (void*) SPENTO);	
-				set_something(all_caiAll[kk],XlNvarGerarchia,(void*) "[-1][-1][-1][-1][-1][-1]");
+				set_something_val(all_caiAll[kk],XlNstatus, (XtArgVal) SPENTO);	
+				set_something_val(all_caiAll[kk],XlNvarGerarchia,(XtArgVal)"[-1][-1][-1][-1][-1][-1]");
 				XtVaSetValues(all_name_label[kk],XmNbackground,def_background_butt,NULL);
 	                        XtVaSetValues(all_descr_label[kk],XmNbackground,def_background_butt,NULL);
 	                        XtVaSetValues(all_caiAll_form[kk],XmNbackground,def_background_butt,NULL);
@@ -3232,7 +3232,7 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 	                        	}
 				/*printf("gerarchiaValore=%s\n",gerarchiaValoreAll[kk]);*/
 	
-				set_something(all_caiAll[kk],XlNvarGerarchia,(void*) gerarchiaValoreAll[kk]);
+				set_something_val(all_caiAll[kk],XlNvarGerarchia,(XtArgVal)gerarchiaValoreAll[kk]);
 	
 				/*
 				Analisi descrizione
@@ -3252,7 +3252,7 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 					XtVaSetValues(all_name_label[kk],RES_CONVERT(XmNbackground,def_background_emission), NULL);
 				else if(app_allarmi.emission[kk]==RIENTRO)
 	                		XtVaSetValues(all_name_label[kk],RES_CONVERT(XmNbackground, def_background_acknowledge),NULL);
-				set_something(all_name_label[kk],XmNlabelString,(void*) stringa);
+				set_something_val(all_name_label[kk],XmNlabelString,(XtArgVal) stringa);
 	                        XmStringFree(stringa);
 	
 				strcpy(appo_descr,"");
@@ -3261,7 +3261,7 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 			*/
 				tipo_cai=strchr(app_allarmi.descr[kk],'$');
 				if(tipo_cai)
-					set_something(all_caiAll[kk],XlNtipoCaiAll, (void*) ( *(tipo_cai+1) ));
+					set_something_val(all_caiAll[kk],XlNtipoCaiAll, (XtArgVal) ( *(tipo_cai+1) ));
 			
 			/*
 			Filtro il KKS prima e dopo la DESCRIZIONE
@@ -3322,7 +3322,7 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 					Setto lo stato del CaiAll associato
 					*/
 					if(tipo_cai)
-						set_something(all_caiAll[kk],XlNstatus, (void*) (app_allarmi.emission[kk]));
+						set_something_val(all_caiAll[kk],XlNstatus, (XtArgVal) (app_allarmi.emission[kk]));
 						
 	        		        if(app_allarmi.emission[kk]==EMISSIONE)
 						{
@@ -3334,7 +3334,7 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 	                			XtVaSetValues(all_descr_label[kk],RES_CONVERT(XmNbackground, def_background_acknowledge),NULL);
 	                			XtVaSetValues(all_caiAll_form[kk],RES_CONVERT(XmNbackground, def_background_acknowledge),NULL);
 						}
-					set_something(all_descr_label[kk],XmNlabelString,(void*) stringa);
+					set_something_val(all_descr_label[kk],XmNlabelString,(XtArgVal)stringa);
 	                        XmStringFree(stringa);
 				}/* end if(str) per 2a parte descr */
 			else
@@ -3359,7 +3359,7 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 
 				      strcpy(appo_descr,str);
 				      stringa=XmStringCreateSimple(appo_descr);
-				      set_something(all_descr_label[kk],XmNlabelString,(void*) stringa);
+				      set_something_val(all_descr_label[kk],XmNlabelString,(XtArgVal)stringa);
 	                              XmStringFree(stringa);
 	        		        if(app_allarmi.emission[kk]==EMISSIONE)
 						{
@@ -3376,7 +3376,7 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
                                    {
 				      strcpy(appo_descr," ");
 				      stringa=XmStringCreateSimple(appo_descr);
-				      set_something(all_descr_label[kk],XmNlabelString,(void*) stringa);
+				      set_something_val(all_descr_label[kk],XmNlabelString,(XtArgVal) stringa);
 	                              XmStringFree(stringa);
 				   }
 				}
@@ -3392,8 +3392,8 @@ static int	Ux_refreshAllPageWidgets( UxThis, pEnv )
 						XtVaSetValues(all_data_label[kk],RES_CONVERT(XmNbackground, def_background_emission),NULL);
 					else if(app_allarmi.emission[kk]==RIENTRO)
 	                			XtVaSetValues(all_data_label[kk],RES_CONVERT(XmNbackground, def_background_acknowledge),NULL);
-				set_something(all_data_label[kk],XmNalignment,(void*) XmALIGNMENT_END);
-				set_something(all_data_label[kk],XmNlabelString,(void*) stringa);
+				set_something_val(all_data_label[kk],XmNalignment,(XtArgVal)XmALIGNMENT_END);
+				set_something_val(all_data_label[kk],XmNlabelString,(XtArgVal)stringa);
 	                        XmStringFree(stringa);
 				}  /* end else sulla descr e zone_attive*/
 			} /*end for*/
@@ -3616,9 +3616,9 @@ static int	Ux_ridisegna( UxThis, pEnv, ind_pag )
 	   setto il background della drawingArea
 	*/
 	if(drawing_pixmap)
-	       set_something(drawingArea,XmNbackgroundPixmap,(void*) drawing_pixmap);
+	       set_something_val(drawingArea,XmNbackgroundPixmap,(XtArgVal)drawing_pixmap);
 	else
-		set_something(drawingArea,XmNbackground,(void*) drawing_background);
+		set_something_val(drawingArea,XmNbackground,(XtArgVal)drawing_background);
 	/*
 	   set callback per ridisegno background
 	*/
@@ -4074,11 +4074,11 @@ static int	Ux_aggTitleArea( UxThis, pEnv )
 	teleperm_orizHier(teleperm,&UxEnv,&lista_ind,&npag);
 	if(  npag> 0 )
 	   {
-	   set_something(orizHierButton,XmNsensitive,(void*) True); 
+	   set_something_val(orizHierButton,XmNsensitive,(XtArgVal)True); 
 	   
 	   }
 	else
-	   set_something(orizHierButton,XmNsensitive,(void*) False); 
+	   set_something_val(orizHierButton,XmNsensitive,(XtArgVal)False); 
 	
 	if(lista_ind)
 	   XtFree((char*)lista_ind);
@@ -4088,11 +4088,11 @@ static int	Ux_aggTitleArea( UxThis, pEnv )
 	teleperm_vertHier(teleperm,&UxEnv,&lista_ind,&npag);
 	if(  npag> 0 )
 	   { 
-	   set_something(vertHierButton,XmNsensitive,(void*) True);   
+	   set_something_val(vertHierButton,XmNsensitive,(XtArgVal)True);   
 	   
 	   }
 	else
-	   set_something(vertHierButton,XmNsensitive,(void*) False);   
+	   set_something_val(vertHierButton,XmNsensitive,(XtArgVal)False);   
 	if(lista_ind)
 	   XtFree((char*)lista_ind);
 	
@@ -4174,7 +4174,7 @@ static int	Ux_dispData( UxThis, pEnv )
 	
 	   xstr = XmStringCreateSimple(data_oggi);
 	
-	   set_something(Data,XmNlabelString,(void*) xstr);
+	   set_something_val(Data,XmNlabelString,(XtArgVal)xstr);
 	   
 	   XmStringFree(xstr); 
 	
@@ -5506,7 +5506,7 @@ static int	Ux_dispTime( UxThis, pEnv, tempoSim )
 	conver_time(tempoSim,ora);
 	
 	xstr = XmStringCreateSimple(ora);
-	set_something(Ora,XmNlabelString,(void*) xstr);
+	set_something_val(Ora,XmNlabelString,(XtArgVal) xstr);
 	XmStringFree(xstr);
 	return(True);
 }
@@ -7897,10 +7897,10 @@ Widget	create_teleperm( _UxUxParent, _UxPag, _Uxnome_display )
 		*/
 		if(drawing_pixmap)
 			{
-			set_something(drawingArea,XmNbackgroundPixmap,(void*) drawing_pixmap);
+			set_something_val(drawingArea,XmNbackgroundPixmap,(XtArgVal)drawing_pixmap);
 			}
 		else
-			set_something(drawingArea,XmNbackground,(void*) drawing_background);
+			set_something_val(drawingArea,XmNbackground,(XtArgVal)drawing_background);
 		
 		/* inizia la gestione della pagina come sinottico
 		*/
@@ -7973,7 +7973,7 @@ Widget	create_teleperm( _UxUxParent, _UxPag, _Uxnome_display )
 		                
 		
 		if( elenco_display[0].num_screens < 2 )
-		   set_something(swscreen,XmNsensitive,(void*) False);
+		   set_something_val(swscreen,XmNsensitive,(XtArgVal)False);
 		
 		pos_pag_new = pos_pag_curr;
 		
@@ -7988,18 +7988,18 @@ Widget	create_teleperm( _UxUxParent, _UxPag, _Uxnome_display )
 		
 		else
 			{	
-			set_something(plantButton,XmNsensitive,(void*) False);
-			/*set_something(orizHierButton,XmNsensitive,(void*) False);
-			set_something(vertHierButton,XmNsensitive,(void*) False);*/
-			set_something(isa,XmNsensitive,(void*) False);
+			set_something_val(plantButton,XmNsensitive,(XtArgVal)False);
+			/*set_something_val(orizHierButton,XmNsensitive,(void*) False);
+			set_something_val(vertHierButton,XmNsensitive,(void*) False);*/
+			set_something_val(isa,XmNsensitive,(XtArgVal)False);
 			}
 		/*
 		Se mmi senza -Topologia, disattiva bottoni Plot ed Aing
 		*/ 
 		if(!topologia_on)
 		  {
-		  set_something(plot,XmNsensitive,(void*) False);
-		  set_something(aing,XmNsensitive,(void*) False);
+		  set_something_val(plot,XmNsensitive,(XtArgVal)False);
+		  set_something_val(aing,XmNsensitive,(XtArgVal)False);
 		  }
 		else
 		  {

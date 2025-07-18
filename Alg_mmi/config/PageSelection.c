@@ -161,7 +161,7 @@ for(i=0;i<CallArg->selected_item_count;i++)
 	   }
 	}
 if(i == 0) strcpy(elenco,"");
-set_something(lista,XmNvalue,(void*) elenco);
+set_something_val(lista, XmNvalue, (XtArgVal) elenco);
 XmUpdateDisplay(lista);
 XtFree(elenco);
 }
@@ -687,7 +687,7 @@ Widget	create_PageSelection( _Uxope )
 	
 	ListaFile=XmFileSelectionBoxGetChild(PageSelection,XmDIALOG_LIST);
 	ListaSelezionati=XmFileSelectionBoxGetChild(PageSelection,XmDIALOG_TEXT);
-	set_something(ListaFile,XmNselectionPolicy,(void*) XmEXTENDED_SELECT);
+	set_something_val(ListaFile, XmNselectionPolicy, (XtArgVal) XmEXTENDED_SELECT);
 	XtAddCallback(ListaFile,XmNextendedSelectionCallback,SelezioneMultipla,
 			    ListaSelezionati);
 	
@@ -696,13 +696,13 @@ Widget	create_PageSelection( _Uxope )
 	   if(getenv(ENVPAG) != NULL)
            {
               EnvString = XmStringCreateSimple(getenv(ENVPAG));
-   	      set_something(PageSelection,XmNdirSpec,(void*) EnvString);
+   	      set_something_val(PageSelection,XmNdirSpec,(XtArgVal) EnvString);
            }	
 	    
 	
 	   appo = XmStringCreateSimple("*.pag");
-	   set_something(PageSelection,XmNpattern,(void*) appo);
-	   set_something(PageSelection,XmNdirSpec,(void*) appo);
+	   set_something_val(PageSelection,XmNpattern,(XtArgVal) appo);
+	   set_something_val(PageSelection,XmNdirSpec,(XtArgVal) appo);
 	   
 	
 	 
@@ -712,11 +712,11 @@ Widget	create_PageSelection( _Uxope )
 	   if(getenv(ENVLIB) != NULL)
            {
               EnvString = XmStringCreateSimple(getenv(ENVLIB));
-   	      set_something(PageSelection,XmNdirSpec,(void*) EnvString);
+   	      set_something_val(PageSelection,XmNdirSpec,(XtArgVal) EnvString);
            }	
 	   appo = XmStringCreateSimple("*.lib");
-	   set_something(PageSelection,XmNpattern,(void*) appo);
-	   set_something(PageSelection,XmNdirSpec,(void*) appo);
+	   set_something_val(PageSelection,XmNpattern,(XtArgVal) appo);
+	   set_something_val(PageSelection,XmNdirSpec,(XtArgVal) appo);
 	}
 	
 	tip_operaz = ope;

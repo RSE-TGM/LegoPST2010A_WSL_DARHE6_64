@@ -237,7 +237,7 @@ printf("RecoveryLoadInfo: str_end[%d]=%s\n",i,str_end[i]);
       else
          Button = ListaButton[0];
 
-      set_something(optionMenu1,XmNmenuHistory,(void*) Button);	
+      set_something_val(optionMenu1,XmNmenuHistory,(XtArgVal)Button);	
 /*
 	Libero la struttura str_end allocata dinamicamente.
 */
@@ -259,7 +259,7 @@ printf("RecoveryLoadInfo: str_end[%d]=%s\n",i,str_end[i]);
       get_something(optionMenu1,XmNsubMenuId, (void*) &Pane);
       get_something(Pane,XmNchildren, (void*) &ListaButton);
       Button = ListaButton[0];
-      set_something(optionMenu1,XmNmenuHistory, (void*) Button);
+      set_something_val(optionMenu1,XmNmenuHistory, (XtArgVal)Button);
    }
    UxConfVarContext = UxSaveCtx;
 printf("RecoveryLoadInfo: USCITO!!!\n");

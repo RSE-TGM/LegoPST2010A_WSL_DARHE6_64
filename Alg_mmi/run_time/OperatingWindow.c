@@ -715,14 +715,14 @@ static int	Ux_CreateExt1( UxThis, pEnv )
 	Abilito bottoni di riconoscimento solo se il No di all>0
 	*/
 	if (num_allarm > 0)
-	    set_something(dummy_ric_all,XmNsensitive,(void*) True);
+	    set_something_val(dummy_ric_all,XmNsensitive,(XtArgVal)True);
 	else 
-	    set_something(dummy_ric_all,XmNsensitive,(void*) False);
+	    set_something_val(dummy_ric_all,XmNsensitive,(XtArgVal)False);
 	    
 	if (num_manual > 0)
-	    set_something(dummy_ric_manual,XmNsensitive,(void*) True);
+	    set_something_val(dummy_ric_manual,XmNsensitive,(XtArgVal)True);
 	else 
-	    set_something(dummy_ric_manual,XmNsensitive,(void*) False);
+	    set_something_val(dummy_ric_manual,XmNsensitive,(XtArgVal)False);
 	/*
 	Spazio per allocazione dinamica oggetti per miniASD
 	*/
@@ -2247,7 +2247,7 @@ static	void	activateCB_dummy_ric_all( UxWidget, UxClientData, UxCallbackArg )
 	      return;
 	      }
 	   /* Disabilito bottone  e ne setto le dimensioni*/
-	   set_something(dummy_ric_all,XmNsensitive,(void*) False);
+	   set_something_val(dummy_ric_all,XmNsensitive,(XtArgVal) False);
 	
 	   }
 	}
@@ -2276,7 +2276,7 @@ static	void	activateCB_dummy_ric_manual( UxWidget, UxClientData, UxCallbackArg )
 	      return;
 	      }
 	
-	   set_something(dummy_ric_manual,XmNsensitive,(void*) False);
+	   set_something_val(dummy_ric_manual,XmNsensitive,(XtArgVal)False);
 	   }
 	}
 	UxOperatingWindowContext = UxSaveCtx;
@@ -3049,17 +3049,17 @@ Widget	create_OperatingWindow( _UxUxParent, _Uxopw, _UxOWpag, _UxParentDb )
 		}
 		
 		/* set titolo blank*/
-		set_something(OperatingWindow,XmNtitle,(void*) " ");
+		set_something_val(OperatingWindow,XmNtitle,(XtArgVal) " ");
 		/*
-		set_something(OperatingWindow,XmNtitle,(void*) OWpag->nome);
+		set_something_val(OperatingWindow,XmNtitle,(void*) OWpag->nome);
 		*/
 		
 		/* setto il background della drawingArea
 		*/
 		if(drawing_pixmap)
-			set_something(drawingAreaOW,XmNbackgroundPixmap,(void*) drawing_pixmap);
+			set_something_val(drawingAreaOW,XmNbackgroundPixmap,(XtArgVal)drawing_pixmap);
 		else
-			set_something(drawingAreaOW,XmNbackground,(void*) drawing_background);
+			set_something_val(drawingAreaOW,XmNbackground,(XtArgVal)drawing_background);
 		
 		if(!CreaPagina(drawingAreaOW,&OWlista_wid, &OWnum_wid))
 			return(NULL);

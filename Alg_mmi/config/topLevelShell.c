@@ -453,7 +453,7 @@ void setContextTitle(PAGEDIT_CONTEXT *ped)
    XmString mstring;
 
    mstring = XmStringCreateSimple(ped->fileContext);
-   set_something(ContextLbl,XmNlabelString,(void*) mstring);
+   set_something_val(ContextLbl,XmNlabelString,(XtArgVal) mstring);
    XmStringFree(mstring);
 }
 
@@ -480,20 +480,20 @@ void abilitaMoveMenu()
 
 void TopMenuSetInsensitive()
 {
-   set_something(menu1_top_b5,XmNsensitive,(void*) False);
-   set_something(menu1_top_b6,XmNsensitive,(void*) False);
+   set_something_val(menu1_top_b5,XmNsensitive,(XtArgVal) False);
+   set_something_val(menu1_top_b6,XmNsensitive,(XtArgVal) False);
 /*   set_something(menu2_top_b1,XmNsensitive,(void*) False);  non esiste piu'*/
-   set_something(menu2_top_b2,XmNsensitive,(void*) False);
-   set_something(menu2_top_b3,XmNsensitive,(void*) False);
+   set_something_val(menu2_top_b2,XmNsensitive,(XtArgVal) False);
+   set_something_val(menu2_top_b3,XmNsensitive,(XtArgVal) False);
 }
 
 void TopMenuSetSensitive()
 {
-   set_something(menu1_top_b5,XmNsensitive,(void*) True);
-   set_something(menu1_top_b6,XmNsensitive,(void*) True);
+   set_something_val(menu1_top_b5,XmNsensitive,(XtArgVal) True);
+   set_something_val(menu1_top_b6,XmNsensitive,(XtArgVal) True);
 /*   set_something(menu2_top_b1,XmNsensitive,(void*) True); non esiste piu' */ 
-   set_something(menu2_top_b2,XmNsensitive,(void*) True);
-   set_something(menu2_top_b3,XmNsensitive,(void*) True);
+   set_something_val(menu2_top_b2,XmNsensitive,(XtArgVal) True);
+   set_something_val(menu2_top_b3,XmNsensitive,(XtArgVal) True);
 }
 
 
@@ -1999,7 +1999,7 @@ static	void	valueChangedCB_Mode( UxWidget, UxClientData, UxCallbackArg )
 	           TopMenuSetInsensitive();
 	     }
 	  } 
-	  set_something(Mode,XmNset,(void*) StateInterfaceMode);
+	  set_something_val(Mode,XmNset,(XtArgVal) StateInterfaceMode);
 	}
 	UxTopLevelShellContext = UxSaveCtx;
 }

@@ -235,8 +235,8 @@ Widget	create_Message( _UxTipoMsg, _UxChiamante, _UxPar )
 		Px += (Position )(WidC-WidM)/2;
 		Py += (Position )(HeiC-HeiM)/2;
 		
-		set_something (rtrn, XmNx, (void*) Px);
-		set_something (rtrn, XmNy, (void*) Py);
+		set_something_val (rtrn, XmNx, (XtArgVal) Px);
+		set_something_val (rtrn, XmNy, (XtArgVal)  Py);
 		
 		return(rtrn);
 	}

@@ -311,7 +311,7 @@ Widget	creat_ContextSelection( _Uxidop )
 		rtrn = _Uxbuild_ContextSelection();
 
 		if( getenv(ENVCTX) != NULL)
-		   set_something(ContextSelection,XmNdirSpec,(void*) getenv(ENVCTX));
+		   set_something_val(ContextSelection,XmNdirSpec,(XtArgVal)  getenv(ENVCTX));
 		return(rtrn);
 	}
 }

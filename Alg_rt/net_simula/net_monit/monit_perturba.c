@@ -143,7 +143,7 @@ str=(char*)XtMalloc(sizeof(char)*(strlen(testo)+20));
 strcpy(str,testo);
 c_str=XmStringCreateLtoR(str,XmSTRING_DEFAULT_CHARSET);
 XmListAddItemUnselected(lista,c_str,0);
-set_something(lista,XmNitemCount,(void*) posizione);
+set_something_val(lista,XmNitemCount,(XtArgVal) posizione);
 XSync(display,False);
 XtFree(str);
 XmStringFree(c_str);

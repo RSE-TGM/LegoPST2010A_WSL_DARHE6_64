@@ -198,7 +198,7 @@ int posizione =0;
 
 
    XmListAddItemUnselected(lista,c_str,0);
-   set_something(lista,XmNitemCount, (void*) posizione);
+   set_something_val(lista,XmNitemCount, (XtArgVal)posizione);
 
    XmStringFree(c_str);
    XtFree(str);
@@ -259,7 +259,7 @@ for (k=1;k<=_MAX_SNAP_SHOT;k++)
 
 
    XmListAddItemUnselected(lista,c_str,0);
-   set_something(lista,XmNitemCount, (void*) posizione);
+   set_something_val(lista,XmNitemCount, (XtArgVal)posizione);
 
    XmStringFree(c_str);
    XtFree(str);
@@ -284,7 +284,7 @@ else
    	   strcpy(str,testo);
    	   c_str=XmStringCreate(str,XmSTRING_DEFAULT_CHARSET);
    	   XmListAddItemUnselected(lista,c_str,0);
-   	   set_something(lista,XmNitemCount, (void*) posizione);
+   	   set_something_val(lista,XmNitemCount, (XtArgVal)posizione);
 
            XmStringFree(c_str);
            XtFree(str);
@@ -391,7 +391,7 @@ printf ("carica_backtrack in esecuzione last_backtrack = %d\n",
          XmStringFree(c_str);
          free(str);
 
-/*        set_something(lista,XmNitemCount, (void*) posizione);     */
+/*        set_something_val(lista,XmNitemCount, (void*) posizione);     */
 
                         if (k == last_backtrack)
                                 {
@@ -477,8 +477,8 @@ printf ("limiti: step selezionato %d\n",step_selezionato);
                                         first_session_bt,last_session_bt,num_bt_list,i);
                 sprintf (app_str,"%d - %d",first_session_bt,last_session_bt);
                 c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
-                set_something(widget_array[k_limiti_bt_val],
-                                             XmNlabelString, (void*) c_app_str);
+                set_something_val(widget_array[k_limiti_bt_val],
+                                             XmNlabelString, (XtArgVal)c_app_str);
                 XmStringFree (c_app_str);
 #endif
 }
@@ -940,9 +940,9 @@ int stato;
 printf ("direzione indietro\n");
         direzione_bt=BT_INDIETRO;
             stato = False;
-            set_something (widget_array[k_bt_indietro], XmNsensitive, (void*) stato);
+            set_something_val (widget_array[k_bt_indietro], XmNsensitive, (XtArgVal)stato);
             stato = True;
-            set_something (widget_array[k_bt_avanti], XmNsensitive, (void*) stato);
+            set_something_val (widget_array[k_bt_avanti], XmNsensitive, (XtArgVal)stato);
             prossimo_step();
         return(0);
 #endif
@@ -957,9 +957,9 @@ int stato;
 printf ("direzione avanti\n");
         direzione_bt=BT_AVANTI;
             stato = True;
-            set_something (widget_array[k_bt_indietro], XmNsensitive, (void*) stato);
+            set_something_val (widget_array[k_bt_indietro], XmNsensitive, (XtArgVal) stato);
             stato = False;
-            set_something (widget_array[k_bt_avanti], XmNsensitive, (void*) stato);
+            set_something_val (widget_array[k_bt_avanti], XmNsensitive, (XtArgVal)stato);
             prossimo_step();
         return(0);
 #endif
@@ -972,9 +972,9 @@ int bt_in_manuale()
 int stato;
                  modo_bt=BT_MANUALE;
          stato = False;
-            set_something (widget_array[k_bt_manuale], XmNsensitive, (void*) stato);
+            set_something_val (widget_array[k_bt_manuale], XmNsensitive, (XtArgVal)stato);
             stato = True;
-            set_something (widget_array[k_bt_automatico], XmNsensitive, (void*) stato);
+            set_something_val (widget_array[k_bt_automatico], XmNsensitive, (XtArgVal)stato);
                                 return(0);
 #endif
 }
@@ -986,9 +986,9 @@ int bt_in_automatico()
 int stato;
                 modo_bt=BT_AUTOMATICO;
             stato = True;
-            set_something (widget_array[k_bt_manuale], XmNsensitive, (void*) stato);
+            set_something_val (widget_array[k_bt_manuale], XmNsensitive, (XtArgVal)stato);
             stato = False;
-            set_something (widget_array[k_bt_automatico], XmNsensitive, (void*) stato);
+            set_something_val (widget_array[k_bt_automatico], XmNsensitive, (XtArgVal)stato);
                                 return(0);
 #endif
 }
