@@ -117,9 +117,10 @@ else
 
 char *XlConvPathVms(char *path_in)
 {
+static char path[1024];
 #if defined VMS
 char app_path[1024];
-static char path[1024];
+
 char *app;
 int cont,k;
 strcpy(path,path_in);
@@ -153,7 +154,8 @@ app[1]=0;
 strcat(path,app_path);
 return(path);
 #else
-return(path_in);
+strncpy(path,path_in,sizeof(path)-1);
+return(path);
 #endif
 }
 

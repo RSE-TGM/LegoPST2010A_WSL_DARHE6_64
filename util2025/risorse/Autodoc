@@ -1,0 +1,11 @@
+autodoc*title:			LEGOCAD MODEL DOCUMENTATION
+autodoc*iconName:		AUTODOC
+autodoc*fontList:-adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+autodoc*text*fontList:-Adobe-Courier-Bold-R-Normal--14-140-75-75-M-90-ISO8859-1
+autodoc*background:		#4f9f9f
+autodoc*foreground:		black
+autodoc*TextInfoReadonly.background:		#4f8f8f
+autodoc*menuCursor:		hand1
+autodoc*buttonBindings:        	DefaultButtonBindings
+autodoc*keyBindings:           	DefaultKeyBindings
+autodoc*geometry:		+25+75

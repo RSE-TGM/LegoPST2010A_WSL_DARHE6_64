@@ -1,0 +1,13 @@
+Config*highlightColor:              #000000
+*dragInitiatorProtocolStyle:    DRAG_NONE
+Config*foreground:                  #f6f6f6
+Config*background:                  #3e8888
+Config*XmScrolledWindow*background: #277676
+Config*XmText.background:           #277676
+Config*XmTextField.background:      #277676
+
+Config*XmList.fontList: -adobe-courier-bold-r-normal--14-*
+
+Config*fontList:        -adobe-helvetica-bold-r-normal--14-*
+*fontList:  -adobe-helvetica-bold-r-normal--14-*
+

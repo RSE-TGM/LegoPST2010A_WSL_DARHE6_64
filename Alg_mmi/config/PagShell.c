@@ -2134,7 +2134,7 @@ static	void	activateCB_CompilePag( UxWidget, UxClientData, UxCallbackArg )
 	   if(compilatore_severe == NULL)
 		{
 		SetMsg(NULL,NULL,ERRMSG,"ConfigInfo",
-	               "Topology database not defined",
+	               "PagShell.c: Topology database not defined",
 	                NULL,False,NULL,False,NULL);
 		return;
 		}

@@ -1,0 +1,27 @@
+!edicole*fontList:			HelvB14
+edicole*fontList:			-adobe-helvetica-bold-r-normal--12-120-75-75-p-70-iso8859-1
+edicole*icon_label*fontList:		fixed
+edicole*module_p_list*fontList:		-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-1
+edicole*module_np_list*fontList:	-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-1
+edicole*icon_files_list*fontList:	-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-1
+edicole*background:			lime green
+edicole*foreground:			black
+edicole*menuCursor:			hand1
+edicole*buttonBindings:        		DefaultButtonBindings
+edicole*keyBindings:           		DefaultKeyBindings
+edicole*geometry:			+50+150
+edicole*module_name_iniz*foreground:	blue
+edicole*module_description_iniz*foreground:	blue
+edicole*icon_module_label*foreground:	blue
+edicole*file_bitmap_label*foreground:	blue
+edicole*order_of_icons_label*background:	white
+edicole*icons_of_module_label*background:	white
+!edicole*window_bboard*background:	forest green
+edicole*foreground:                  #f6f6f6
+edicole*background:                  #3d8093
+edicole*Background:                  #3d8093
+edicole*XmScrolledWindow*background: #396674
+edicole*XmText.background:           #396674
+edicole*XmTextField.background:      #396674
+edicole*XmLabel.foreground:      black
+edicole*XmList.fontList: -adobe-courier-bold-r-normal--14-*

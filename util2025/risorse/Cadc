@@ -1,0 +1,11 @@
+Cadc*foreground:                  #f6f6f6
+Cadc*background:                  #3d8093
+Cadc*XmScrolledWindow*background: #396674
+Cadc*XmText.background:           #396674
+Cadc*XmTextField.background:      #396674
+Cadc*XmTextField.foregound:       #ff00ff
+
+Cadc*XmList.fontList: -adobe-courier-bold-r-normal--14-*
+
+Cadc*fontList:        -adobe-helvetica-bold-r-normal--14-*
+

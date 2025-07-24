@@ -13,7 +13,8 @@ TOOLS=../../Tools
 GUI_BUILD=/usr/bin/aic
 OS=LINUX
 SQLITE_LIB=-L$(LEGOROOT_LIB)/sqlite_lib -lsqlite3
-THREAD_LIB=-L$(LEGOROOT_LIB)/dcethreads_lib -ldcethreads -ldl
+#THREAD_LIB=-L$(LEGOROOT_LIB)/dcethreads_lib -ldcethreads -ldl
+THREAD_LIB=-pthread -ldl
 X_LIB=-L/usr/X11R6/lib -lMrm -lXm -lXt -lX11
 X_INCLUDE=-I. -I/usr/local/include -I/usr/lib/gcc-lib/i386-redhat-linux/2.96/include -I/usr/include -I/usr/include/uil -I/usr/include/Xt -I/usr/include/lib 
 C_FLAGS=-g -fpermissive -fcommon -DLINUX  -DXT_CODE -DXOPEN_CATALOG -DUNIX -Dmmap=_mmap_32_ -DXPRINTER_USED -DXLIB_ILLEGAL_ACCESS -I$(LEGOROOT_LIB)/dcethreads_include -I$(LEGOROOT_LIB)/sqlite_include  -I/usr/include
@@ -38,7 +39,7 @@ APPL_INCLUDE      = -I$(LEGOCAD_INCLUDE) -I$(LEGOROOT_INCLUDE) -I$(X_INCLUDE)\
 X_CFLAGS        = -I/usr/include/ $(X_INCLUDE) $(APPL_INCL)
 
 
-CFLAGS = $(C_FLAGS) $(X_CFLAGS) -D$(OS) $(VERSIONE) $(APPL_INCLUDE)
+CFLAGS = $(C_FLAGS) $(THREAD_LIB) $(X_CFLAGS) -D$(OS) $(VERSIONE) $(APPL_INCLUDE)
 
 SORGENTI = UxMethod.c XlAnObjList.c  XlCore.c XlLed.c XlCai.c XlCaiAll.c \
 	XlCaiVar.c XlBottone.c XlSetResource.c \

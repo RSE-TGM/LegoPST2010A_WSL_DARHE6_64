@@ -387,7 +387,7 @@ if(dbtopologia!=NULL)
 
    sprintf(comando,"%s %s %s %s %s %s",
            "gen_f01task",task,task_dir,labour_dir,nomefile,file_err);
-
+printf("info_top_schemi: comando=%s\n",comando);
    ret_sy = system(comando);
 #if defined UNIX
    ret = W_EXITSTATUS(ret_sy);

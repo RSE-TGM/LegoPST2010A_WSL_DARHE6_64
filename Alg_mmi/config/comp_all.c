@@ -633,7 +633,7 @@ void compile_page(PAGINA *actual_page)
            if(compilatore_severe == NULL)
                 {
                 SetMsg(NULL,NULL,ERRMSG,"ConfigInfo",
-                       "Topology database not defined",
+                       "comp_all.c: Topology database not defined",
                         NULL,False,NULL,False,NULL);
                 return;
                 }

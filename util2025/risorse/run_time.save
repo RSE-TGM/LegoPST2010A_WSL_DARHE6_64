@@ -1,0 +1,464 @@
+
+!	teleperm.rf
+!       (Generated from interface file teleperm.i)
+!       This resource file is loaded by teleperm.c
+
+
+*.topLevelShellMain*foreground: black
+
+*.teleperm.mwmMenu: 
+
+*.teleperm.decorazioni: 0
+
+*.teleperm.topProcDisplay: Prova_indic
+
+*.screenFooterForm.background: #a0a050
+
+*.rcFooter.background: #a0a050
+
+*.previous.background: #ffefd5
+
+*.left.background: #ffefd5
+
+*.up.background: #ffefd5
+
+*.right.background: #ffefd5
+
+*.swscreen.background: #ffefd5
+
+*.ackaud.background: #ffefd5
+
+*.ackal.background: #ffefd5
+
+*.hardcopy.background: #ffefd5
+
+*.help.background: #ffefd5
+
+*.screenHeaderForm.background: #a0a050
+
+*.rcProcess.background: #8fbc8f
+
+*.proceso.labelString: Proceso
+*.proceso.background: PapayaWhip
+
+*.processDisplay.background: PapayaWhip
+
+*.menuSystem_csbutt.background: #ffefd5
+
+*.rcData.background: DarkSeaGreen
+
+*.Data.background: DarkSeaGreen
+*.Data.foreground: yellow
+*.Data.fontList: -adobe-courier-medium-o-normal--10-100-75-75-m-60-iso8859-1
+
+*.Ora.background: #8fbc8f
+*.Ora.foreground: yellow
+
+*.formCaiPlant.background: DarkSeaGreen
+
+*.rcPlant.background: #8fbc8f
+
+*.formPlanta.background: #8fbc8f
+
+*.plantOverview.background: #8fbc8f
+
+*.isa.labelString: ISA
+*.isa.background: SpringGreen3
+
+*.rcCAI.background: #8fbc8f
+
+*.alA.labelString: A
+*.alA.background: #8fbc8f
+
+*.alP.labelString: P
+*.alP.background: #8fbc8f
+
+*.alF.labelString: F
+*.alF.background: #8fbc8f
+
+*.alT.labelString: T
+*.alT.background: #8fbc8f
+
+*.alC.labelString: C
+*.alC.background: #8fbc8f
+
+*.proceso1.labelString: IC-ASD
+*.proceso1.background: SpringGreen3
+
+*.titleAreaform.background: #a0a050
+
+*.rcHierarchy.background: #a0a050
+
+!*.formOriz.background: #8fbc8f
+!*.formVert.background: #8fbc8f
+
+*.titleLabel.labelString: display title
+*.titleLabel.fontList: -adobe-courier-medium-o-normal--18-180-75-75-m-110-iso8859-1
+*.titleLabel.background: #a0a050
+
+!*.OrizTop.background:  #ffefd5
+!*.VertTop.background:  #ffefd5
+
+
+*stringAlarm_A:		A
+*stringAlarm_W:		P
+*stringAlarm_T:		T
+*stringAlarm_F:		F
+*stringAlarm_M:		S
+*stringAlarm_S:		X
+
+*Cai.foreAllTypeA:		#ffffffffffff
+*Cai.backAllTypeA:		#ffff00000000
+*Cai.foreAllTypeW:		#000000000000
+*Cai.backAllTypeW:		#ffffffff0000
+*Cai.foreAllTypeT:		#000000000000
+*Cai.backAllTypeT:		#00000000ffff
+*Cai.foreAllTypeS:		#ff00ff00ff00
+*Cai.backAllTypeS:		#ff0000000000
+*Cai.foreAllTypeM:		#000000000000
+*Cai.backAllTypeM:		#ffffffffffff
+*Cai.foreAllTypeF:		#ffff00000000
+*Cai.backAllTypeF:		#000000000000
+*Cai.colorBord:			#ff00ff00ff00
+
+*Cai.x0:	3
+*Cai.y0:	3
+*Cai.width0:	22
+*Cai.height0:   22
+*Cai.frequenza1:   2
+*Cai.frequenza2:   0.5
+! Definizioni colori allPage
+! Parte risevata a sfondo a dx pag allarmi
+*.all_form_topLevelShell.background: #000000000000
+*.all_form_title.*background: #cb2bcb2bcb2b
+*.all_header_mainForm.background: gray
+*.all_formAll.background: #cb2bcb2bcb2b
+
+!RowColumn contenenti allarmi visualizzati dimensioni e background
+*.all_rowColumn_CaiAll.*background: #cb2bcb2bcb2b
+*.all_rowColumn_nameAll.background: #cb2bcb2bcb2b
+*.all_rowColumn_nameAll.*width: 200
+*.all_rowColumn_descrAll.background: #cb2bcb2bcb2b
+*.all_rowColumn_descrAll.*width: 750
+*.all_rowColumn_data.background: #cb2bcb2bcb2b
+*.all_rowColumn_data.*width: 170
+
+!RowColumn contenenti allarmi visualizzati: colori oggetti interni e font
+*.all_rowColumn_CaiAll.*borderColor: #828484
+*.all_rowColumn_nameAll.*fontList: -adobe-courier-bold-r-normal--18-180-75-75-m-110-iso8859-1
+*.all_rowColumn_nameAll.*borderColor: #828484
+*.all_rowColumn_descrAll.*fontList: -adobe-courier-bold-r-normal--18-180-75-75-m-110-iso8859-1
+*.all_rowColumn_descrAll.*borderColor: #828484
+*.all_rowColumn_data.*fontList: -adobe-courier-bold-r-normal--18-180-75-75-m-110-iso8859-1
+*.all_rowColumn_data.*borderColor: #828484
+
+
+
+*.header_rowColumn.*XmPushButton.background: #cb2bcb2bcb2b
+*.header_rowColumn.*XmPushButton.armColor: #a0a050
+*.header_rowColumn.*XmForm.background: #cb2bcb2bcb2b
+*.header_rowColumn.*XmLabel.fontList: fixed
+*.header_rowColumn.background: #000000000000
+
+*teleperm.sfondo_all:  #cb2bcb2bcb2b
+
+!Risorse per colore linea all. emissione ed in rientro
+*teleperm.emission : #6b6b6b6b6b6b
+*teleperm.ack :      #c9c9c9c9c9c9
+
+
+
+
+
+*.all_old_button.labelString:	Antiguo:
+*.all_new_button.labelString:	Nuevo:
+*.all_title_label.labelString:	Ind.secuencia alarma
+*.plantButton.background:	#cb2bcb2bcb2b
+*.plantButton.*labelString:	ISA
+
+*.0header_labelNew.labelString: Nuevo:
+*.1header_labelNew.labelString: Nuevo:
+*.2header_labelNew.labelString: Nuevo:
+*.3header_labelNew.labelString: Nuevo:
+*.4header_labelNew.labelString: Nuevo:
+*.5header_labelNew.labelString: Nuevo:
+*.6header_labelNew.labelString: Nuevo:
+*.7header_labelNew.labelString: Nuevo:
+*.8header_labelNew.labelString: Nuevo:
+*.9header_labelNew.labelString: Nuevo:
+*.10header_labelNew.labelString: Nuevo:
+*.11header_labelNew.labelString: Nuevo:
+*.12header_labelNew.labelString: Nuevo:
+*.13header_labelNew.labelString: Nuevo:
+*.14header_labelNew.labelString: Nuevo:
+*.15header_labelNew.labelString: Nuevo:
+*.16header_labelNew.labelString: Nuevo:
+*.17header_labelNew.labelString: Nuevo:
+*.18header_labelNew.labelString: Nuevo:
+*.19header_labelNew.labelString: Nuevo:
+*.20header_labelNew.labelString: Nuevo:
+*.21header_labelNew.labelString: Nuevo:
+*.22header_labelNew.labelString: Nuevo:
+*.23header_labelNew.labelString: Nuevo:
+*.24header_labelNew.labelString: Nuevo:
+*.25header_labelNew.labelString: Nuevo:
+*.26header_labelNew.labelString: Nuevo:
+*.27header_labelNew.labelString: Nuevo:
+*.28header_labelNew.labelString: Nuevo:
+*.29header_labelNew.labelString: Nuevo:
+*.30header_labelNew.labelString: Nuevo:
+
+*.0header_labelNew.background: #a0a050
+*.1header_labelNew.background: #a0a050
+*.2header_labelNew.background: #a0a050
+*.3header_labelNew.background: #a0a050
+*.4header_labelNew.background: #a0a050
+*.5header_labelNew.background: #a0a050
+*.6header_labelNew.background: #a0a050
+*.7header_labelNew.background: #a0a050
+*.8header_labelNew.background: #a0a050
+*.9header_labelNew.background: #a0a050
+*.10header_labelNew.background: #a0a050
+*.11header_labelNew.background: #a0a050
+*.12header_labelNew.background: #a0a050
+*.13header_labelNew.background: #a0a050
+*.14header_labelNew.background: #a0a050
+*.15header_labelNew.background: #a0a050
+*.16header_labelNew.background: #a0a050
+*.17header_labelNew.background: #a0a050
+*.18header_labelNew.background: #a0a050
+*.19header_labelNew.background: #a0a050
+*.20header_labelNew.background: #a0a050
+*.21header_labelNew.background: #a0a050
+*.22header_labelNew.background: #a0a050
+*.23header_labelNew.background: #a0a050
+*.24header_labelNew.background: #a0a050
+*.25header_labelNew.background: #a0a050
+*.26header_labelNew.background: #a0a050
+*.27header_labelNew.background: #a0a050
+*.28header_labelNew.background: #a0a050
+*.29header_labelNew.background: #a0a050
+
+
+
+
+*.0header_labelOld.labelString: Antiguo:
+*.1header_labelOld.labelString: Antiguo:
+*.2header_labelOld.labelString: Antiguo:
+*.3header_labelOld.labelString: Antiguo:
+*.4header_labelOld.labelString: Antiguo:
+*.5header_labelOld.labelString: Antiguo:
+*.6header_labelOld.labelString: Antiguo:
+*.7header_labelOld.labelString: Antiguo:
+*.8header_labelOld.labelString: Antiguo:
+*.9header_labelOld.labelString: Antiguo:
+*.10header_labelOld.labelString: Antiguo:
+*.11header_labelOld.labelString: Antiguo:
+*.12header_labelOld.labelString: Antiguo:
+*.13header_labelOld.labelString: Antiguo:
+*.14header_labelOld.labelString: Antiguo:
+*.15header_labelOld.labelString: Antiguo:
+*.16header_labelOld.labelString: Antiguo:
+*.17header_labelOld.labelString: Antiguo:
+*.18header_labelOld.labelString: Antiguo:
+*.19header_labelOld.labelString: Antiguo:
+*.20header_labelOld.labelString: Antiguo:
+*.21header_labelOld.labelString: Antiguo:
+*.22header_labelOld.labelString: Antiguo:
+*.23header_labelOld.labelString: Antiguo:
+*.24header_labelOld.labelString: Antiguo:
+*.25header_labelOld.labelString: Antiguo:
+*.26header_labelOld.labelString: Antiguo:
+*.27header_labelOld.labelString: Antiguo:
+*.28header_labelOld.labelString: Antiguo:
+*.29header_labelOld.labelString: Antiguo:
+*.30header_labelOld.labelString: Antiguo:
+
+*.0header_labelOld.background: #a0a050
+*.1header_labelOld.background: #a0a050
+*.2header_labelOld.background: #a0a050
+*.3header_labelOld.background: #a0a050
+*.4header_labelOld.background: #a0a050
+*.5header_labelOld.background: #a0a050
+*.6header_labelOld.background: #a0a050
+*.7header_labelOld.background: #a0a050
+*.8header_labelOld.background: #a0a050
+*.9header_labelOld.background: #a0a050
+*.10header_labelOld.background: #a0a050
+*.11header_labelOld.background: #a0a050
+*.12header_labelOld.background: #a0a050
+*.13header_labelOld.background: #a0a050
+*.14header_labelOld.background: #a0a050
+*.15header_labelOld.background: #a0a050
+*.16header_labelOld.background: #a0a050
+*.17header_labelOld.background: #a0a050
+*.18header_labelOld.background: #a0a050
+*.19header_labelOld.background: #a0a050
+*.20header_labelOld.background: #a0a050
+*.21header_labelOld.background: #a0a050
+*.22header_labelOld.background: #a0a050
+*.23header_labelOld.background: #a0a050
+*.24header_labelOld.background: #a0a050
+*.25header_labelOld.background: #a0a050
+*.26header_labelOld.background: #a0a050
+*.27header_labelOld.background: #a0a050
+*.28header_labelOld.background: #a0a050
+*.29header_labelOld.background: #a0a050
+
+*.0header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.1header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.2header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.3header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.4header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.5header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.6header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.7header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.8header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.9header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.10header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.11header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.12header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.13header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.14header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.15header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.16header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.17header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.18header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.19header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.20header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.21header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.22header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.23header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.24header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.25header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.26header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.27header_labelOldDisplay.background: #cb2bcb2bcb2b
+*.28header_labelOldDisplay.background: #cb2bcb2bcb2b
+
+*.0header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.1header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.2header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.3header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.4header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.5header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.6header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.7header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.8header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.9header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.10header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.11header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.12header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.13header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.14header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.15header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.16header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.17header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.18header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.19header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.20header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.21header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.22header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.23header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.24header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.25header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.26header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.27header_labelNewDisplay.background: #cb2bcb2bcb2b
+*.28header_labelNewDisplay.background: #cb2bcb2bcb2b
+
+
+*CaiAll.foreAllTypeA:		#ffffffffffff
+*CaiAll.backAllTypeA:		#ffff00000000
+*CaiAll.foreAllTypeW:		#000000000000
+*CaiAll.backAllTypeW:		#ffffffff0000
+*CaiAll.foreAllTypeT:		#000000000000
+*CaiAll.backAllTypeT:		#00000000ffff
+*CaiAll.foreAllTypeS:		#ff00ff00ff00
+*CaiAll.backAllTypeS:		#ff0000000000
+*CaiAll.foreAllTypeM:		#000000000000
+*CaiAll.backAllTypeM:		#ffffffffffff
+*CaiAll.foreAllTypeF:		#ffff00000000
+*CaiAll.backAllTypeF:		#000000000000
+*CaiAll.colorBord:			#ff00ff00ff00
+
+*CaiAll.x0:	3
+*CaiAll.y0:	3
+*CaiAll.width0:	22
+*CaiAll.height0:   22
+*CaiAll.frequenza1:   2
+*CaiAll.frequenza2:   0.5
+*CaiAll.leftOffset:  4
+*CaiAll.topOffset:   4
+
+!Parte per OW
+
+*OperatingWindow*.mainForm.background:   #02029797a4a4
+*OperatingWindow*Ejecutar.foreground:  white 
+*OperatingWindow*IMP.foreground:  white 
+*OperatingWindow*Cerrar.foreground:  white 
+*OperatingWindow*Cerrar.background:  yellow 
+
+!Parte per  miniASD
+!
+!Parte per Alarm
+*OperatingWindow*.formAllarm.background: midnight blue
+*OperatingWindow*.formAllarm.width: 610
+*OperatingWindow*.rowColumnAllarmCai.width: 30
+!*OperatingWindow*.rowColumnAllarmCai.background: cyan
+!*OperatingWindow*.rowColumnAllarmCai.*XmForm.background: Papaya Whip
+*OperatingWindow*.rowColumnAllarmCai.*CaiAll.leftOffset:  4
+*OperatingWindow*.rowColumnAllarmCai.*CaiAll.topOffset:  4
+*OperatingWindow*.rowColumnAllarmCai.*CaiAll.width0:  18
+*OperatingWindow*.rowColumnAllarmCai.*CaiAll.height0:  18
+*OperatingWindow*.rowColumnAllarm.width: 600
+!*OperatingWindow*.rowColumnAllarm.background: forest green
+*OperatingWindow*.rowColumnAllarm.*XmLabel.width: 600
+*OperatingWindow*.rowColumnAllarm.*XmLabel.background: light steel blue
+*OperatingWindow*.rowColumnAllarm.*XmLabel.fontList: courier_bold10
+
+!Parte per Manual
+
+*OperatingWindow*.formManual.background: midnight blue
+*OperatingWindow*.formManual.width: 610
+*OperatingWindow*.rowColumnManualCai.width: 30
+!*OperatingWindow*.rowColumnManualCai.background: cyan
+!*OperatingWindow*.rowColumnManualCai.*XmForm.background: Papaya Whip
+*OperatingWindow*.rowColumnManualCai.*CaiAll.leftOffset:  4
+*OperatingWindow*.rowColumnManualCai.*CaiAll.topOffset:  4
+*OperatingWindow*.rowColumnManualCai.*CaiAll.width0:  18
+*OperatingWindow*.rowColumnManualCai.*CaiAll.height0:  18
+*OperatingWindow*.rowColumnManual.width: 600
+*OperatingWindow*.rowColumnManual.*XmLabel.width: 600
+*OperatingWindow*.rowColumnManual.*XmLabel.background: light steel blue
+*OperatingWindow*.rowColumnManual.*XmLabel.fontList: courier_bold10
+*OperatingWindow*.dummy_ric_all.background: ivory
+*OperatingWindow*.dummy_ric_manual.background: ivory
+
+
+
+
+*.commonAck.labelPixmap: /usr/users/lomgr/ccm_wa/ALTERLEGO/Alg_global-2.0_alpha_carlo/Alg_global/legocad/icons/commack.bmp
+*.logSelection.labelPixmap: /usr/users/lomgr/ccm_wa/ALTERLEGO/Alg_global-2.0_alpha_carlo/Alg_global/legocad/icons/logsel.bmp
+*.IncidentRew.labelPixmap: /usr/users/carlo/ccm_wa/ALTERLEGO/Alg_global-2.0_alpha_carlo/Alg_global/legocad/icons/incident.bmp
+*.longTermArc.labelPixmap: /usr/users/carlo/ccm_wa/ALTERLEGO/Alg_global-2.0_alpha_carlo/Alg_global/legocad/icons/longarc.bmp
+*.unknow.labelPixmap: /usr/users/carlo/ccm_wa/ALTERLEGO/Alg_global-2.0_alpha_carlo/Alg_global/legocad/icons/unknown.bmp
+
+!Parte per XlCurve
+
+*Curve*.seldata.labelString: Sel. hora 
+*Curve*.abstime.labelString: t. abs 
+*Curve*.flow.labelString: caudal 
+*Curve*.labCod.labelString: Cod. ident. planta 
+*Curve*.labDescr.labelString: Texto 
+*Curve*.labLi.labelString: LI 
+*Curve*.labVal.labelString: Val. 
+*Curve*.labLs.labelString: LS 
+*Curve*.labUn.labelString: Unidad 
+*Curve*.labCur.labelString: Cursor 
+
+!Parte per XlCurve -->  window per manipolazione singola variabile 
+
+*handleVar*.title.labelString: Manipular curva 
+*handleVar*.toggleButton1.labelString: Fluctua curva 
+*handleVar*.toggleButton2.labelString: Escala fisica 
+*handleVar*.toggleButton3.labelString: Curva invisibile
+*handleVar*.pb_exit.labelString: INTERR. 

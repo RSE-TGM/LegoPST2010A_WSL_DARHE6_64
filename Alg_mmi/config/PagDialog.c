@@ -244,6 +244,8 @@ printf("appo=%s\n",appo);
    XmTextFieldSetString(RefreshFrequenzy,appo);
 
    printf("pag->refreshFreq=%d\n",pag->refreshFreq);
+   printf("pag->gerarchia=%s\n",pag->gerarchia);
+
    if(operazione == MODIFY_PAGE)
    	hierarchy_format_new(appo,pag->gerarchia);
    else
@@ -253,11 +255,14 @@ printf("appo=%s\n",appo);
       sprintf(msg,"Hierarchy resource not correct! Page:%s\tHierarchy:%s\n",pag->nomepag,pag->gerarchia);
       /* strcpy(msg,"Hierarchy specification not correct!\n"); */
       show_message(msg);
-      XmTextFieldSetString(Hierarchy,"");
+// se GUAG2025 GERARCHIA_KO allora lasciola gerarchia vecchia
+//      XmTextFieldSetString(Hierarchy,"");
+      XmTextFieldSetString(Hierarchy,pag->gerarchia);
    }
    else {
       XmTextFieldSetString(Hierarchy,appo);
    }
+   printf("DOPO: pag->gerarchia=%s\n",pag->gerarchia);
 
    XmTextFieldSetString(PagBackground,pag->geom.background);
 
@@ -533,9 +538,13 @@ printf("activateCB_OkButton:nomepag=%s\n",nomepag);
 	
 	/*
 	      CAPPE. Per le pagine di regolazione la risorsa 'gerarchia' viene posta uguale a '-1,-1,-1,-1,-1,-1'
-	      (pagine fuori dalla gerarchia)????       
-	      strcpy(pagina->gerarchia,"-1,-1,-1,-1,-1,-1");
-	*/
+	      (pagine fuori dalla gerarchia)????      
+	      strcpy(pagina->gerarchia,"-1,-1,-1,-1,-1,-1");*/ 
+
+		  //GUAG2025  problema gerarchia
+	      strcpy(pagina->gerarchia,XmTextFieldGetString(Hierarchy));
+	
+	
 	
 	      get_something(menu7,XmNmenuHistory, (void*) &WgtOptMenu);
 	      if(WgtOptMenu == In_use)

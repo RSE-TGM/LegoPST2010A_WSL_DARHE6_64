@@ -1,0 +1,30 @@
+*dragInitiatorProtocolStyle:    DRAG_NONE
+Dati*foreground:                  #f6f6f6
+Dati*background:                  #3d8093
+Dati*XmScrolledWindow*background: #396674
+Dati*XmText.background:           #396674
+Dati*XmTextField.background:      #396674
+
+Dati*XmList.fontList: -adobe-courier-bold-r-normal--14-*
+
+Dati*fontList:        -adobe-helvetica-bold-r-normal--14-*
+
+!!
+!! Defaults utilizzati per la parte di visualizzazione grafica
+!!
+dati*icon_label*fontList:              fixed
+!dati*Macro_label*fontList:             Rom14
+dati*Remark_label*fontList:            TimBI14
+dati*Lista_moduli*fontList:            9x15
+!dati*Text*fontList:                    Rom14
+
+dati*Pagina_indice*background:         #1996ab6de646
+dati*Pagina_indice*foreground:         #000000
+dati*Scroll_index*background:          #1996ab6de646
+dati*Scroll_index*foreground:          #000000
+dati*Finestra_blocchi*background:      #1996ab6de646
+dati*Finestra_blocchi*foreground:      #000000
+dati*Simboli*background:               #1996ab6de646
+dati*Simboli*foreground:               #000000
+dati*Scroll_simboli*background:        #1996ab6de646
+dati*Scroll_simboli*foreground:        #000000

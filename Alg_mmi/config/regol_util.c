@@ -327,7 +327,7 @@ char app[500];
 char nome_task[9];
 char work_pag[500];
 char messaggio[500];
-char path_pwd[500];
+char path_pwd[FILENAME_MAX];
 char desc_pagina[LUNDESC];  /* N.B. desc_pagina in config.h e' dimensionato 200
                                     mentre topsch scrive su file 54 caratteri
                                     ( LUNDESC) percio' anche sul file .reg

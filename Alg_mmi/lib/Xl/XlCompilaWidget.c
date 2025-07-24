@@ -277,8 +277,8 @@ OlDestroyConn(conn_obj);
 
 data(&g,&m,&a);
 ora(&o,&min,&s);
-sprintf(res_data,"*%s",XlNcompilationDate);
-sprintf(str_data,"%d/%d/%d %d:%d:%d",g,m,a,o,min,s);
+snprintf(res_data,sizeof(res_data),"*%s",XlNcompilationDate);
+snprintf(str_data,sizeof(str_data),"%d/%d/%d %d:%d:%d",g,m,a,o,min,s);
 if(RisDb!=NULL)
 	XrmPutStringResource(RisDb,res_data,str_data);
 

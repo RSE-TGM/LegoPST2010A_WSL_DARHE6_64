@@ -1,0 +1,8 @@
+Calcstaz*foreground:                  #f6f6f6
+Calcstaz*background:                  #3d8093
+Calcstaz*Background:                  #3d8093
+Calcstaz*XmScrolledWindow*background: #396674
+Calcstaz*XmText.background:           #396674
+Calcstaz*XmTextField.background:      #396674
+Calcstaz*XmList.fontList: -adobe-courier-bold-r-normal--14-*
+Calcstaz*fontList:        -adobe-helvetica-bold-r-normal--14-*

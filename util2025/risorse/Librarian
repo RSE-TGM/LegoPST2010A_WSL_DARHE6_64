@@ -1,0 +1,26 @@
+librarian*title:			LEGO MODULES EDITOR
+librarian*iconName:			LIBRARIAN
+librarian*fontList:-adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+librarian*icon_label*fontList:		fixed
+librarian*module_p_list*fontList:		9x15
+librarian*module_np_list*fontList:	9x15
+librarian*icon_files_list*fontList:	9x15
+librarian*background:grey72
+librarian*foreground:			black
+librarian*menuCursor:hand1
+librarian*buttonBindings:        DefaultButtonBindings
+librarian*keyBindings:           		DefaultKeyBindings
+librarian*geometry:			+50+150
+librarian*module_name_iniz*foreground:Black
+librarian*module_description_iniz*foreground:	blue
+librarian*icon_module_label*foreground:	blue
+librarian*file_bitmap_label*foreground:	blue
+librarian*order_of_icons_label*background:	white
+librarian*icons_of_module_label*background:	white
+librarian*foreground:                  #f6f6f6
+librarian*background:                  #3d8093
+librarian*Background:                  #3d8093
+librarian*XmScrolledWindow*background: #396674
+librarian*XmText.background:           #396674
+librarian*XmTextField.background:      #396674
+librarian*XmList.fontList: -adobe-courier-bold-r-normal--14-*

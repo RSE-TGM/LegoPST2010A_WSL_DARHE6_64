@@ -1,0 +1,54 @@
+DXsession.host_list:	puerto8.car.enel.it,puerto6.cra.enel.it,puerto1.cra.enel.it,puerto2.cra.enel.it,puerto4.cra.enel.it,puerto5.cra.enel.it,ucin33.cra.enel.it,ucin14.cra.enel.it,puerto7.cra.enel.it
+DXsession.num_hosts:	9
+DXsession.screenprompt:	1
+DXsession.AutoStart:	DECterm,xbiff,xeyes,DECterm2
+DXsession.num_AutoStart:	4
+DXsession.NETSCAPE.command:	$HOME/bin/sbin/knetscape &
+DXsession.applications:	AUDIO CD,AccessX,Bookreader,CDA Viewer,Calculator,Calendar,Cardfiler,Clock,DECterm,DECterm2,Differences,Mail,Mwm,Netscape,Notepad,Paint,Print Screen,XTerm,bitmap,editres,pc,pc_new,pc_new_big,puzzle,xbiff,xbiff2 ,xclipboard,xeyes,xfish,xload,ypcat
+DXsession.num_applications:	31
+DXsession.AppMenu:	AUDIO CD,AccessX,Bookreader,CDA Viewer,Calculator,Calendar,Cardfiler,Clock,DECterm,Differences,Mail,Netscape,Notepad,Paint,Print Screen,XTerm,bitmap,editres,pc,pc_new,pc_new_big,puzzle,xbiff,xclipboard,xfish,xload,ypcat
+DXsession.num_AppMenu:	27
+DXsession.x:	417
+DXsession.y:	36
+DXsession.AUDIO CD.command:	/usr/users/kristof/xcd -cd /dev/rrz4c
+DXsession.display_pattern:	2
+#endif
+#endif
+DXsession.xbiff.command:	xbiff -geometry 40x40+800+10 -volume 100 -bg Yellow &
+DXsession.puzzle.command:	/usr/bin/X11/puzzle &
+DXsession.bitmap.command:	/usr/bin/X11/bitmap &
+DXsession.dxpresto.command:	/usr/bin/X11/dxpresto &
+DXsession.editres.command:	/usr/bin/X11/editres &
+DXsession.xclipboard.command:	/usr/bin/X11/xclipboard &
+DXsession.DECterm2.command:	/usr/bin/X11/dxterm -ls -d $HOST:0.1
+DXsession.pc.command:	$HOME/bin/kalias/pc &
+DXsession.xeyes.command:	xeyes&
+DXsession.xbiff2 .command:	xbiff -file //ucin33/usr/spool/mail/kristof &
+DXsession.bell_percent:	100
+DXsession.keyclick_percent:	100
+DXsession.screennum:	0
+#ifdef COLOR
+DXsession.pointer_foreground:	#ffff00000000
+#endif
+DXsession.mouse_accel_denominator:	1
+DXsession.mouse_accel_numerator:	10
+DXsession.mouse_accel_threshold:	2
+DXsession.pc_new.command:	$HOME/bin/kalias/pc_new
+DXsession.pc_new_big.command:	$HOME/bin/pc_new_big
+DXsession.ypcat.command:	ypcat auto.home | grep puerto5 | sort
+DXsession.confirm_endsession:	1
+DXsession.pause_text:	TOP SECRET
+DXsession.screen_saver_period:	60
+#ifdef COLOR
+DXsession.pointer_background:	#ffffffff0000
+#endif
+DXsession.lock_state:	caps
+DXsession.xfish.command:	$HOME/bin/sbin/xf &
+DXsession.xfish1.command:	export DISPLAY=puerto5:0.1 &  /usr/users/kristof/bin/xf &
+DXsession.xfish2.command:	/usr/users/kristof/bin/xf puerto5:0.1 &
+DXsession.xload.command:	/usr/bin/X11/xload &
+DXsession.Netscape.command:	$HOME/sbin/netscape_soft/netscape &
+#ifdef COLOR
+*Background:	#5959bfbfffff
+*Foreground:	#000000000000
+#endif
