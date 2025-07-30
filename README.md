@@ -2,7 +2,7 @@
 # LegoPST
 ## LegoPowerSystemTechnology
 ## Ambiente modulare di simulazione e controllo di processi termici, idraulici ed elettrici per la produzione e trasporto di energia.
-### Versione  Ubuntu 20.04 - WSL </div>
+### Versione Fedora 41 -  WSL </div>
 ***
 ### Compilazione e installazione di LegoPST
 * Installare i pacchetti indicati in portingWSL_Ubuntu.md
