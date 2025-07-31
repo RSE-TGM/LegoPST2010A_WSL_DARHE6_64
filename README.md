@@ -42,17 +42,7 @@ LegoPST/
 └── util2007/         # Modern utilities
 ```
 
-### Core Libraries
-
-- **libcom.a**: Communication and event handling
-- **libsim.a**: Core simulation functions  
-- **libnet.a**: Network communication
-- **libipc.a**: Inter-process communication
-- **libdispatcher.a**: Message dispatching system
-- **libmanovra.a**: Control operations
-
 ## 🚀 Quick Start
-
 
 ### Download package and set up environment
 
@@ -71,7 +61,8 @@ source .profile_legoroot
 # Fedora 41 dependencies for docker running:
 sudo dnf update
 sudo dnf install docker
-```a
+```
+
 ```bash
 # Run LegoPST in a preconfigured Docker container
 lgdock
@@ -135,8 +126,6 @@ make -f Makefile.mk
 # then go to 
 # Option 2 - running in a fully configured Fedora 41
 ```
-
-
 
 ## 🎮 Usage
 
