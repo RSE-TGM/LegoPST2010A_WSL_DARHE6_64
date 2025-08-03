@@ -45,6 +45,7 @@ extern int path_rel_to_abs(char *,char *);
 //Cardinal lnargs;
 
 
+
 /*-------------------------------------------------------------------------
  *
  * load_nomifile

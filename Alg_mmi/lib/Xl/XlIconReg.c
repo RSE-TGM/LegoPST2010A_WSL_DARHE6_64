@@ -1835,15 +1835,89 @@ XWarpPointer(XtDisplay(wid),XtWindow(wid),XtWindow(wid),
                 (int)0,(int)0,(unsigned int)0,(unsigned int)0, x,y);
 }
 
+/* Flag per modalità connessione interfaccia tra pagine - globale per libXl.a */
+Boolean StateInterfaceMode = False;
+
 static void Seleziona(w,event,params,num_params)
 Widget w;
 XEvent *event;
 String *params;
 Cardinal *num_params;
 {
+// GUAG2025 Nuovo sistema di connessione basta un click sull'icona 
+// Iconreg grande per connettere due porte di interfaccia tra gli schemi:
+// se siamo in connect mode, si cerca una porta di interfaccia
+// tra i figli di questa IconReg e si simula un click su di essa
+// per gestire la connessione, altrimenti si prosegue con la selezione normale
+
 /*
- Richiama la routine di select di XlIconReg per la gestione della
- selezione
+ NUOVO SISTEMA: Se siamo in connect mode, cerca porte di interfaccia
+ in questa IconReg e gestisci la connessione
+*/
+if(StateInterfaceMode)
+	{
+	/* Cerca porte di interfaccia tra i figli di questa IconReg */
+	WidgetList children;
+	Cardinal num_children;
+	int i;
+	
+	XtVaGetValues(w, XmNchildren, &children, XmNnumChildren, &num_children, NULL);
+	
+	for(i = 0; i < num_children; i++)
+		{
+		/* Controlla se questo figlio è una porta di interfaccia */
+		extern Boolean XlIsInterfacePort(Widget);
+		if(XlIsInterfacePort(children[i]))
+			{
+			/* Trovata porta di interfaccia! Simula click su di essa */
+			extern Boolean proc_SelPort(Widget w, Widget wseconda, int modo, GC gcPort);
+			
+			/* Crea un GC per il disegno */
+			GC gc_interface;
+			XGCValues values;
+			unsigned long valuemask = GCForeground | GCBackground | GCLineWidth | GCLineStyle;
+			
+			/* Ottieni i colori dalla porta */
+			Pixel start_color;
+			XtVaGetValues(children[i], "portColorStartConnection", &start_color, NULL);
+			
+			values.foreground = start_color;
+			values.background = XtParent(children[i]) ? 
+								((XlIconRegWidget)XtParent(children[i]))->core.background_pixel : 
+								WhitePixelOfScreen(XtScreen(children[i]));
+			values.line_width = 2;
+			values.line_style = LineSolid;
+			gc_interface = XtGetGC(children[i], valuemask, &values);
+			
+			/* Simula la selezione della porta attraverso il sistema esistente */
+			printf("DEBUG: Click su IconReg - delegato a porta interfaccia %s\n", XtName(children[i]));
+			
+			/* Simula un click sulla porta chiamando la sua action Seleziona */
+			XEvent fake_event;
+			String params[1];
+			Cardinal num_params = 0;
+			
+			/* Crea un evento fittizio */
+			fake_event.type = ButtonPress;
+			fake_event.xbutton.button = Button1;
+			fake_event.xbutton.x = 0;
+			fake_event.xbutton.y = 0;
+			fake_event.xbutton.time = CurrentTime;
+			fake_event.xbutton.state = 0;
+			fake_event.xbutton.window = XtWindow(children[i]);
+			
+			/* Chiama l'action Seleziona della porta */
+			XtCallActionProc(children[i], "Seleziona", &fake_event, params, num_params);
+			
+			XtReleaseGC(children[i], gc_interface);
+			return; /* Non proseguire con selezione normale */
+			}
+		}
+	}
+
+/*
+ Comportamento normale: Richiama la routine di select di XlIconReg 
+ per la gestione della selezione
 */
 (*supersuperclass->xlmanager_class.select) (w,0);
 }

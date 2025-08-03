@@ -118,7 +118,7 @@ FILE *fpLogMsg;
 Boolean ContextLoaded;      /* True se c'e' un Context caricato */
 Boolean ContextModified;    /* True se un Context e' stato modificato */
 
-Boolean StateInterfaceMode = False;    /* flag interfaccia connessione tra pagine */
+extern Boolean StateInterfaceMode;    /* flag interfaccia connessione tra pagine */
 
 extern char  Context_Path[];
 
