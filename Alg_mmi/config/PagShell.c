@@ -3733,10 +3733,10 @@ Widget	create_PagShell( _Uxnome_pagina, _Uxindice, _Uxtipop )
 		draw_edit=NULL;
 		editing_background=False; /* indica che non e' stato ancora richiamato
 		                             l'editor del background */
-		printf("indice pagina chiamata %d\n",indice);
+		printf("create_PagShell: indice pagina chiamata %d\n",indice);
 		if( pagina_init(nome_pagina,&actual_page,tipop) == False)
 		{
-		   printf("errore nella inizializzazione della pagina\n");
+		   printf("create_PagShell: errore nella inizializzazione della pagina\n");
 		   return(NULL);
 		}
 		
@@ -3746,9 +3746,9 @@ Widget	create_PagShell( _Uxnome_pagina, _Uxindice, _Uxtipop )
 		
 		if(  pagina_getres(actual_page,&lista_oggetti) == False)
 		{
-		   printf("non ci sono risorse nel file della pagina\n");
+		   printf("create_PagShell: non ci sono risorse nel file della pagina\n");
 		}
-		printf("ho teminato di caricare la pagina=%s\n",actual_page->filepag); 
+		printf("create_PagShell: ho terminato di caricare la pagina=%s\n",actual_page->filepag); 
 		lista_draget = XdCreateLista();
 		lista_draget_undo=NULL;
 		lista_liste_undo=undoCreateLists();

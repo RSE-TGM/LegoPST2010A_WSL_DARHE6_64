@@ -42,6 +42,7 @@ static char SccsID[] = "@(#)XlIconReg.c	5.1\t11/13/95";
 #include <Xl/XlPort.h>
 
 
+
 /* lista delle risorse  */
 static XtResource resources[]= {
         {
@@ -1838,6 +1839,43 @@ XWarpPointer(XtDisplay(wid),XtWindow(wid),XtWindow(wid),
 /* Flag per modalità connessione interfaccia tra pagine - globale per libXl.a */
 Boolean StateInterfaceMode = False;
 
+/* Variabili per gestione del feedback visivo delle connessioni */
+static Widget selected_iconreg = NULL;    /* IconReg attualmente selezionata */
+static GC green_gc = NULL;                /* GC per il quadratino verde */
+
+/* Funzione per creare il GC verde se non esiste */
+static void create_green_gc(Widget w)
+{
+    if (green_gc == NULL) {
+        XGCValues values;
+        values.foreground = 0x00FF00; /* Verde brillante */
+        values.line_width = 2;
+        values.line_style = LineSolid;
+        green_gc = XtGetGC(w, GCForeground | GCLineWidth | GCLineStyle, &values);
+    }
+}
+
+/* Funzione per disegnare il quadratino verde */
+static void draw_green_square(Widget w)
+{
+    if (!XtIsRealized(w)) return;
+    
+    create_green_gc(w);
+    
+    /* Disegna un quadratino verde nell'angolo in alto a sinistra */
+    XDrawRectangle(XtDisplay(w), XtWindow(w), green_gc, 2, 2, 8, 8);
+    XFillRectangle(XtDisplay(w), XtWindow(w), green_gc, 3, 3, 6, 6);
+}
+
+/* Funzione per rimuovere il quadratino verde (ridisegnando l'area) */
+static void clear_green_square(Widget w)
+{
+    if (!XtIsRealized(w)) return;
+    
+    /* Forza il ridisegno dell'area del quadratino */
+    XClearArea(XtDisplay(w), XtWindow(w), 2, 2, 8, 8, True);
+}
+
 static void Seleziona(w,event,params,num_params)
 Widget w;
 XEvent *event;
@@ -1851,8 +1889,8 @@ Cardinal *num_params;
 // per gestire la connessione, altrimenti si prosegue con la selezione normale
 
 /*
- NUOVO SISTEMA: Se siamo in connect mode, cerca porte di interfaccia
- in questa IconReg e gestisci la connessione
+ NUOVO SISTEMA: Se siamo in connect mode, gestisci il workflow a due click
+ con feedback visivo tramite quadratino verde
 */
 if(StateInterfaceMode)
 	{
@@ -1860,56 +1898,125 @@ if(StateInterfaceMode)
 	WidgetList children;
 	Cardinal num_children;
 	int i;
+	Boolean has_interface_port = False;
 	
 	XtVaGetValues(w, XmNchildren, &children, XmNnumChildren, &num_children, NULL);
 	
 	for(i = 0; i < num_children; i++)
 		{
-		/* Controlla se questo figlio è una porta di interfaccia */
 		extern Boolean XlIsInterfacePort(Widget);
 		if(XlIsInterfacePort(children[i]))
 			{
-			/* Trovata porta di interfaccia! Simula click su di essa */
-			extern Boolean proc_SelPort(Widget w, Widget wseconda, int modo, GC gcPort);
+			has_interface_port = True;
+			break;
+			}
+		}
+	
+	if(has_interface_port)
+		{
+		printf("DEBUG: IconReg %s ha porte di interfaccia, selected_iconreg=%p, w=%p\n", 
+			   XtName(w), (void*)selected_iconreg, (void*)w);
+		
+		/* PRIMO CLICK: Se nessuna IconReg è selezionata */
+		if(selected_iconreg == NULL)
+			{
+			/* Seleziona questa IconReg e disegna il quadratino verde */
+			selected_iconreg = w;
+			draw_green_square(w);
+			printf("DEBUG: Primo click - IconReg %s (ptr=%p) selezionata con quadratino verde\n", 
+				   XtName(w), (void*)w);
+			return; /* Non procedere con la selezione normale */
+			}
+		/* SECONDO CLICK: Se questa è la stessa IconReg già selezionata */
+		else if(selected_iconreg == w)
+			{
+			/* Deseleziona e rimuovi il quadratino verde */
+			clear_green_square(w);
+			selected_iconreg = NULL;
+			printf("DEBUG: Click sulla stessa IconReg %s - deselezionata, quadratino rimosso\n", XtName(w));
+			return; /* Non procedere con la selezione normale */
+			}
+		/* SECONDO CLICK: Su IconReg diversa - crea la connessione */
+		else
+			{
+			/* Rimuovi i quadratini verdi da entrambe le IconReg */
+			clear_green_square(selected_iconreg);
+			clear_green_square(w);
 			
-			/* Crea un GC per il disegno */
-			GC gc_interface;
-			XGCValues values;
-			unsigned long valuemask = GCForeground | GCBackground | GCLineWidth | GCLineStyle;
+			printf("DEBUG: Secondo click - connessione tra %s e %s, quadratini rimossi\n", 
+				   XtName(selected_iconreg), XtName(w));
 			
-			/* Ottieni i colori dalla porta */
-			Pixel start_color;
-			XtVaGetValues(children[i], "portColorStartConnection", &start_color, NULL);
+			/* Trova le porte nelle due IconReg e crea la connessione */
+			Widget port1 = NULL, port2 = NULL;
+			WidgetList first_children;
+			Cardinal first_num_children;
 			
-			values.foreground = start_color;
-			values.background = XtParent(children[i]) ? 
-								((XlIconRegWidget)XtParent(children[i]))->core.background_pixel : 
-								WhitePixelOfScreen(XtScreen(children[i]));
-			values.line_width = 2;
-			values.line_style = LineSolid;
-			gc_interface = XtGetGC(children[i], valuemask, &values);
+			/* Trova la porta nella prima IconReg */
+			XtVaGetValues(selected_iconreg, XmNchildren, &first_children, 
+						  XmNnumChildren, &first_num_children, NULL);
+			for(int j = 0; j < first_num_children; j++)
+				{
+				if(XlIsInterfacePort(first_children[j]))
+					{
+					port1 = first_children[j];
+					printf("DEBUG: Trovata porta1 %s nella prima IconReg %s (ptr=%p)\n", 
+						   XtName(port1), XtName(selected_iconreg), (void*)selected_iconreg);
+					break;
+					}
+				}
 			
-			/* Simula la selezione della porta attraverso il sistema esistente */
-			printf("DEBUG: Click su IconReg - delegato a porta interfaccia %s\n", XtName(children[i]));
+			/* Trova la porta nella seconda IconReg */
+			for(int k = 0; k < num_children; k++)
+				{
+				if(XlIsInterfacePort(children[k]))
+					{
+					port2 = children[k];
+					printf("DEBUG: Trovata porta2 %s nella seconda IconReg %s (ptr=%p)\n", 
+						   XtName(port2), XtName(w), (void*)w);
+					break;
+					}
+				}
 			
-			/* Simula un click sulla porta chiamando la sua action Seleziona */
-			XEvent fake_event;
-			String params[1];
-			Cardinal num_params = 0;
+			/* Se entrambe le porte sono trovate, crea la connessione */
+			if(port1 && port2)
+				{
+				printf("DEBUG: Iniziando connessione tra porte %s e %s\n", XtName(port1), XtName(port2));
+				
+				/* Prima chiamata: inizia la connessione dalla prima porta */
+				XEvent fake_event1;
+				String params1[1];
+				Cardinal num_params1 = 0;
+				
+				fake_event1.type = ButtonPress;
+				fake_event1.xbutton.button = Button1;
+				fake_event1.xbutton.x = 0;
+				fake_event1.xbutton.y = 0;
+				fake_event1.xbutton.time = CurrentTime;
+				fake_event1.xbutton.state = 0;
+				fake_event1.xbutton.window = XtWindow(port1);
+				
+				printf("DEBUG: Chiamando Seleziona sulla prima porta %s\n", XtName(port1));
+				XtCallActionProc(port1, "Seleziona", &fake_event1, params1, num_params1);
+				
+				/* Seconda chiamata: completa la connessione con la seconda porta */
+				XEvent fake_event2;
+				String params2[1];
+				Cardinal num_params2 = 0;
+				
+				fake_event2.type = ButtonPress;
+				fake_event2.xbutton.button = Button1;
+				fake_event2.xbutton.x = 0;
+				fake_event2.xbutton.y = 0;
+				fake_event2.xbutton.time = CurrentTime;
+				fake_event2.xbutton.state = 0;
+				fake_event2.xbutton.window = XtWindow(port2);
+				
+				printf("DEBUG: Chiamando Seleziona sulla seconda porta %s\n", XtName(port2));
+				XtCallActionProc(port2, "Seleziona", &fake_event2, params2, num_params2);
+				}
 			
-			/* Crea un evento fittizio */
-			fake_event.type = ButtonPress;
-			fake_event.xbutton.button = Button1;
-			fake_event.xbutton.x = 0;
-			fake_event.xbutton.y = 0;
-			fake_event.xbutton.time = CurrentTime;
-			fake_event.xbutton.state = 0;
-			fake_event.xbutton.window = XtWindow(children[i]);
-			
-			/* Chiama l'action Seleziona della porta */
-			XtCallActionProc(children[i], "Seleziona", &fake_event, params, num_params);
-			
-			XtReleaseGC(children[i], gc_interface);
+			/* Reset dello stato */
+			selected_iconreg = NULL;
 			return; /* Non proseguire con selezione normale */
 			}
 		}
