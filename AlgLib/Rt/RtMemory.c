@@ -171,7 +171,8 @@ void  RtFree(void *ing, char *file, int line)
 {
 int i;
 char *punt = ing;
-
+//char *disable_rtfree_errors = getenv("LG_DISABLE_RTFREE_ERRORS");
+//printf("Rtfree:  disable_rtfree_errors = %s\n", disable_rtfree_errors);
 if(num_punt_rtmemory == -1)
 	alloca_punt_rtmemory();
 
@@ -189,7 +190,14 @@ for(i=0;i<num_punt_rtmemory;i++)
 		break;
 if(i == num_punt_rtmemory)
 	{
-	fprintf(stderr,"Errore [RtFree] puntatore=%s non trovato pid=[%d] file %s line %d\n",punt, getpid(),file,line);
+	/* Controlla variabile d'ambiente per disattivare i messaggi di errore */
+// GUAG2025 
+	// 		fprintf(stderr,"Errore [RtFree] puntatore=%s non trovato pid=[%d] file %s line %d\n",punt, getpid(),file,line);
+	char *disable_rtfree_errors = getenv("LG_DISABLE_RTFREE_ERRORS");
+	if(disable_rtfree_errors == NULL || strcmp(disable_rtfree_errors, "1") != 0)
+		{
+		fprintf(stderr,"Errore [RtFree] puntatore=%s non trovato pid=[%d] file %s line %d\n",punt, getpid(),file,line);
+		}
 	return;
 	}
 

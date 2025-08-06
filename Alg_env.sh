@@ -186,6 +186,8 @@ export XPHOME=$LEGOROOT/Tools/xprinter
 export HHHOME=$LEGOROOT/Tools/hyperhelp
 export HLPPATH=$LEGOROOT/Alg_help/bin
 
+# evita la stampa di errori di tipo RtFree
+export LG_DISABLE_RTFREE_ERRORS=1
 #
 # **************************************
 # *            LEGO-profile             *
