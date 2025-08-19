@@ -129,7 +129,20 @@ extern int rxpio_tcb, txpio_tcb, duatask_tcb;
 
 // inserito 18.4 task idle m.b.
 long idletime;
-idle()
+
+// Function declarations
+void tra(int mbox, int flag);
+void scd(void);
+void NetMarteStartup(void);
+void syn(int tcb, int priority1, int priority2);
+void alldef(void);
+void tas(int tcb);
+void synsim(int tcb, int priority1, int priority2);
+void arcopen(void);
+void sce(void);
+void ter(void);
+
+void idle()
 {
 	while(1)
 		idletime +=1;

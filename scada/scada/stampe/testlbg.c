@@ -43,7 +43,12 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 extern int mbox_lbg;
 
-testlbg(n_file)
+// Function declarations
+int bitvalue(short *buffer, short indice);
+void rew(int mbox, int flag, int *ier);
+void tra(int mbox, int flag);
+
+void testlbg(n_file)
 short n_file;
 {
 short pros_file;

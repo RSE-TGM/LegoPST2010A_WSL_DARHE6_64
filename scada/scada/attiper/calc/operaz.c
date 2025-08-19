@@ -44,7 +44,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "calas.inc"
 
-operaz()
+// External function declarations
+extern int bitvalue(short *, short);
+extern void bitset(short *, short, short);
+
+void operaz()
 {
 PUNTATORE temp[2];
 int i,j;

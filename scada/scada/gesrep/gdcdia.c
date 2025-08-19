@@ -43,7 +43,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 short GdcOldStatus;           // stato precedente Gdc
 
-GdcDia(short GdcNewStatus)
+void GdcDia(short GdcNewStatus)
 {
 short status;
 S_MDIA mess;

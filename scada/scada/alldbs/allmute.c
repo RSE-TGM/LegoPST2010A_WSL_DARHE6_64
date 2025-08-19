@@ -37,7 +37,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "messcada.inc"
 #include "allar.inc"
 
-allmute()
+// External function declarations
+extern void CmdBell(int);
+
+int allmute()
 {
 S_DBS_ALL *paldbs;
 short i;

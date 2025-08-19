@@ -60,7 +60,16 @@ static char *_csrc = "@(#) %filespec: allricsminiASD.c-6 %  (%full_filespec: all
 #include "mesqueue.h"
 #include "diagnoan.inc"
 
-ricsminiASD(alv)
+// External function declarations
+extern int abzon(short *, short *, short, char *);
+extern int rew(int, int, int*);
+extern int tra(int, int);
+extern int allpvis(short, short, short);
+extern int allmatch(void *, void *);
+extern int gestri(short, short, short);
+extern int allsev(short*, short, short);
+
+int ricsminiASD(alv)
 S_DBS_ALV *alv;               // tabella video allarmi 
 {
 short limite;                 // n. massimo allarmi da riconoscere

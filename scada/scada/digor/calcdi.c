@@ -46,9 +46,14 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tipal.inc"
 #include	"mesqueue.h"
 
+/* Function prototypes */
+extern int bitvalue(short *, short);
+extern void bitset(short *, short, short);
+extern void pscserr(int, int, int, int, int);
+
 extern DB_HEADER h_db;
 
-calcdi(punt)
+void calcdi(punt)
 short punt ;
 {
 QUEUE_PACKET queue;
@@ -56,7 +61,7 @@ S_TRATG mtra ;
 S_DCALC *des ;
 short i,stato,val,flag  ;
 
-if(punt<0 || punt>=h_db.dimds) {visch('C'); return(0);}
+if(punt<0 || punt>=h_db.dimds) {visch('C'); return;}
 
 queue.que = c_digor;
 queue.flg = MSG_NOWAIT;
@@ -68,7 +73,7 @@ queue.lmsg=sizeof(S_TRATG);
 	fuori scansione o forzato
 */
 if(bitvalue(&dbds[punt],g2or_fs) || bitvalue(&dbds[punt],
-			     g2or_fz)) return(0) ;
+			     g2or_fz)) return ;
 
 des=& dbdsde[punt] ;
 
@@ -153,7 +158,7 @@ if(stato  != bitvalue(&dbds[punt],g2di_sl) && !flag)
 	if(enqueue(&queue))     // verra' calcolato da attiper
    {
       flag_ordi=1;
-      return (0);
+      return ;
    }
 }
 else		/* se e` variato solo il flag di FA richiedo solo il */
@@ -169,5 +174,5 @@ else		/* se e` variato solo il flag di FA richiedo solo il */
 */
 if(!flag) bitset(&dbds[punt],g2di_sl,stato) ;
 bitset(&dbds[punt],g2di_fa,flag) ;
-return(0) ;
+return ;
 }

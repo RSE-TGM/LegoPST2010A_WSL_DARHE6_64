@@ -48,6 +48,10 @@ static char *_csrc = "@(#) %filespec: allabzon.c-6 %  (%full_filespec: allabzon.
 #include "messcada.inc"
 #include "allar.inc"
 S_ALL_PER_ZONE allxzone;
+
+extern int bitvalue(void *, int);
+extern int allinger(void *, void *, void *);
+
 #ifndef GERARC
 abzon(mask1,mask2,aldb)
 short *mask1,*mask2,aldb;
@@ -78,7 +82,7 @@ for(j=0,mask=mask1;j<2;mask=mask2,j++)
 return(0);
 }
 #else
-abzon(mask1,mask2,aldb,gerarchie)
+int abzon(mask1,mask2,aldb,gerarchie)
 short *mask1,*mask2,aldb;
 char *gerarchie;
 {

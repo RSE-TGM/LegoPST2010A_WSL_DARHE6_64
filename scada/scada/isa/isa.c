@@ -41,6 +41,7 @@ static char *_csrc = "@(#) %filespec: isa.c-5 %  (%full_filespec: isa.c-5:csrc:1
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <io.h>
+#include <unistd.h>
 
 #if !defined OSF1_40 && !defined LINUX
 #pragma pack(1)
@@ -59,6 +60,19 @@ static char *_csrc = "@(#) %filespec: isa.c-5 %  (%full_filespec: isa.c-5:csrc:1
 #include "dconf.inc"
 #include "isa.h"
 
+/* Function prototypes */
+extern int ricerca(char *, short *, short *, long *, short *, FILE *);
+extern void bitset(short *, short, short);
+extern int bitvalue(short *, short);
+extern void invstring(unsigned char, short, unsigned char *);
+extern void isalloc(void);
+extern void isadia(int, int);
+extern void isadescr(void *, short, short);
+extern void diagnet(short, void *, short *);
+extern void ges_mflbgpr(void);
+extern void ges_mapr(void);
+extern void ges_meflgr(void);
+extern void ges_mtfdr(void);
 
 #define fnomi 0     
 
@@ -74,7 +88,7 @@ static  QUEUE_PACKET rpack,spack;
  #error "Errore Numero Utenti ISA"
 #else
  extern unsigned short cisa_samp1,cisa_samp2,cisa_samp3,cisa_samp4;
- static *tabcode[NCHAN_ISA] = {&cisa_samp1,&cisa_samp2,&cisa_samp3,&cisa_samp4};
+ static unsigned short *tabcode[NCHAN_ISA] = {&cisa_samp1,&cisa_samp2,&cisa_samp3,&cisa_samp4};
  /* tabella andamento trasferimento per msputfile */
  static struct _TABPUTF { 
     char nomefile[14];
@@ -180,7 +194,7 @@ enqueue(&spack);
 /* gestione messaggio SCNVSD
    converte le stringhe delle sigle in puntatori in DB */
 
-mscnvsd()
+int mscnvsd()
     {
     PUNDB *point=messg.brcnvsd.token;
     char *psigle=messg.bscnvsd.sigle;
@@ -207,10 +221,10 @@ mscnvsd()
 /* messaggio SGETSD
    invia i dati secondo i puntatori passati */
 
-msgetsd()
+int msgetsd()
     {
     short i=messg.brgetsd.npunti -1;
-    register ind;
+    register int ind;
     PUNDB * p= &messg.bsgetsd.token[i];
     VDB * v= &messg.brgetsd.val[i];
 
@@ -269,10 +283,10 @@ msgetsd()
 /* messaggio SGETSTR
    invia i dati stringhe secondo puntatori passati */
 
-msgetstr()
+int msgetstr()
     {
     short i=messg.brgetstr.npunti -1;
-    register ind;
+    register int ind;
     PUNDB * p= &messg.bsgetsd.token[i];
     VDBSTR * v= &messg.brgetstr.val[i];
 
@@ -298,7 +312,7 @@ msgetstr()
 
 /* messaggio LSFILE invia l' elenco dei file */
 
-mlsfile()
+int mlsfile()
 {
 struct find_t c_file;
 char   *p = messg.brlsfile.b;
@@ -332,7 +346,7 @@ spack.lmsg = p - (char *) &messg;
 enqueue(&spack);
 }
 
-msgetfile()
+int msgetfile()
 {
 char  path[64];
 long  offs,total;
@@ -371,7 +385,7 @@ while(1)
    if(h != -1) close(h);
  }
 
-msputfile(struct _TABPUTF *pTabPutF)
+int msputfile(struct _TABPUTF *pTabPutF)
 {
     char  path[64];
     long  offs,total;
@@ -426,7 +440,7 @@ msputfile(struct _TABPUTF *pTabPutF)
     pTabPutF->h = h;    
 }
 
-msgetcnf()
+int msgetcnf()
     {
     messg.brgetcnf.h.cod=MRGETCNF;
     memcpy(&messg.brgetcnf.hdb,&h_db,sizeof(h_db));
@@ -439,7 +453,7 @@ msgetcnf()
 /* messaggio SWRDB
    scrive i dati secondo i puntatori passati */
 
-mswrdb()
+int mswrdb()
     {
     short i,err;
     WRDB *w;
@@ -554,7 +568,7 @@ mswrdb()
 /* messaggio SWRDBSTR
    scrive i dati secondo i puntatori passati solo per stringhe*/
 
-mswrdbstr()
+int mswrdbstr()
     {
     short i,err;
     WRDBSTR *w;
@@ -616,10 +630,10 @@ mswrdbstr()
     }
 
 
-msgetinf()
+int msgetinf()
     {
     short i=messg.brgetinf.npunti -1;
-    register ind;
+    register int ind;
     PUNDB * p= &messg.bsgetsd.token[i];
     STINF * v= &messg.brgetinf.stinf[i];
 
@@ -634,7 +648,7 @@ msgetinf()
     }
 
 
-_isa()
+int _isa()
     {
     short app;
     short i;

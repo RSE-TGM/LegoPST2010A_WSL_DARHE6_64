@@ -68,6 +68,7 @@ static char SccsID[] = "@(#)iconvert.c	1.3\t3/28/95";
  
 #include <file_icone.h>
 #include <libutilx.h>
+#include <utile.h>
 
 #include "iconvert.h"
 #include "files.h"
@@ -108,7 +109,7 @@ Find_struct find_block;
 /* Strutture riguardanti il geometry management delle varie Dialog...
    Specificare, nell'ordine: { DefaultPosition TRUE/FALSE,XmNx,XmNy,
                                XmNwidth,XmNHeight }                 */
-Dialog_geometry geom_attention   = { TRUE, NULL, NULL, NULL, 120};
+Dialog_geometry geom_attention   = { TRUE, 0, 0, 0, 120};
 /********************************************************************/
 
 /* ALTRE VARIABILI GLOBALI */
@@ -143,8 +144,31 @@ XmString stringa_nulla, cstring;
 Arg args[20];
 Cardinal nargs;
 
+/* Function declarations */
+void leggi_file_f01(void);
+void crea_distinta_blocchi(void);
+void update_macro(void);
+void crea_main_window(void);
+void aggiorna_lista_blocchi(void);
+void leggi_macroblocchi(MacroBlockType *macroblocks, int *num_macro);
+void assign_default(Widget block_add_list, int num_nuovi_blocchi);
+void fine_trasmissioni(void);
+int cerca_macroblocco(MacroBlockType *macroblocks, int num_macro, char *nome);
+void add_blocks_macro(char *nome_macro, BlockType *blocks_tmp, int num_items);
+int Empty(char *str);
+void salva_macroblocchi(MacroBlockType *macroblocks, int *num_macro);
+
+/* Callback function declarations */
+void f01_checked(Widget w, XtPointer client_data, XtPointer call_data);
+void quit_iconvert(Widget w, XtPointer client_data, XtPointer call_data);
+void macro_selected(Widget w, XtPointer client_data, XtPointer call_data);
+void assign_block(Widget w, XtPointer client_data, XtPointer call_data);
+void new_macroblock(Widget w, XtPointer client_data, XtPointer call_data);
+void restart_conv(Widget w, XtPointer client_data, XtPointer call_data);
+void global_selection(Widget w, XtPointer client_data, XtPointer call_data);
+
 /********  INIZIO MAIN()  ********/
-main (int argc, char **argv)
+int main (int argc, char **argv)
 {
   int i;
   char item_macro[80];
@@ -230,10 +254,7 @@ main (int argc, char **argv)
  *** XmAnyCallbackStruct *call_data : non utilizzato. 
  *** callback di terminazione dell'applicativo 
  ***/
-f01_checked(w, client_data, call_data)
-Widget w;
-caddr_t client_data; 
-XmAnyCallbackStruct *call_data;
+void f01_checked(Widget w, XtPointer client_data, XtPointer call_data)
 {
    assign_default(block_add_list,num_nuovi_blocchi);
    fine_trasmissioni();
@@ -248,10 +269,7 @@ XmAnyCallbackStruct *call_data;
  *** XmAnyCallbackStruct *call_data : non utilizzato. 
  *** callback di terminazione dell'applicativo 
  ***/
-quit_iconvert(w, client_data, call_data)
-Widget w;
-caddr_t client_data; 
-XmAnyCallbackStruct *call_data;
+void quit_iconvert(Widget w, XtPointer client_data, XtPointer call_data)
 {
   /* Se sono rimasti blocchi nella lista, vengono assegnati al
      macroblocco di default */
@@ -269,16 +287,17 @@ XmAnyCallbackStruct *call_data;
  *** XmListCallbackStruct *list_info : informazioni sulla widget-list
  *** callback di refresh della block_list
  ***/
-macro_selected(w, client_data, list_info)
+void macro_selected(w, client_data, call_data)
 Widget w;
-caddr_t client_data; 
-XmListCallbackStruct *list_info;
+XtPointer client_data; 
+XtPointer call_data;
 {
    char *nome, stringa[100];
    int ind_macro, i, block_height, block_width;
    int maxy = 0, height_tmp = 0;
    XmString cs_blocks[1000];
    BlockType *blk;
+   XmListCallbackStruct *list_info = (XmListCallbackStruct *)call_data;
 
    nome = extract_string( list_info->item );
    sprintf(nome, "%.14s", nome);
@@ -332,10 +351,10 @@ XmListCallbackStruct *list_info;
  *** XmAnyCallbackStruct *call_data : non utilizzato. 
  *** Assegna i blocchi selezionati al macroblocco corrente.
  ***/
-assign_block(w, client_data, call_data)
+void assign_block(w, client_data, call_data)
 Widget w;
-caddr_t client_data; 
-XmAnyCallbackStruct *call_data;
+XtPointer client_data; 
+XtPointer call_data;
 {
    char *nome_blocco1, nome[100], *nome_blocco2;
    int i, num_items, *pos_list, pos_count, num_macro, max_height = 0;
@@ -437,10 +456,10 @@ XmAnyCallbackStruct *call_data;
  *** Prende dal Text Widget nome e descrizione del nuovo macroblocco.
  *** Il nome viene inserito nella lista dei macroblocchi.
  ***/
-new_macroblock(w, client_data, call_data)
+void new_macroblock(w, client_data, call_data)
 Widget w;
-caddr_t client_data; 
-XmAnyCallbackStruct *call_data;
+XtPointer client_data; 
+XtPointer call_data;
 {
    char *nome_macro, *descr_macro;
    char item_macro[80];
@@ -510,10 +529,10 @@ XmAnyCallbackStruct *call_data;
  *** Ricomincia da zero l'attivita' di assegnazione, riempiendo la lista
  *** dei blocchi e cancellando il file macroblocks.dat.
  ***/
-restart_conv(w, client_data, call_data)
+void restart_conv(w, client_data, call_data)
 Widget w;
-caddr_t client_data; 
-XmAnyCallbackStruct *call_data;
+XtPointer client_data; 
+XtPointer call_data;
 {
    int i;
 
@@ -572,12 +591,13 @@ XmAnyCallbackStruct *call_data;
  *** XmAnyCallbackStruct *call_data : non utilizzato. 
  *** Seleziona o de-seleziona tutti gli item presenti nella lista dei blocchi
  ***/
-global_selection(w, parameter, call_data)
+void global_selection(w, client_data, call_data)
 Widget w;
-int parameter; 
-XmAnyCallbackStruct *call_data;
+XtPointer client_data; 
+XtPointer call_data;
 {
    int i, num_items;
+   int parameter = (int)(long)client_data;
 
    switch (parameter) {
 
@@ -608,7 +628,7 @@ XmAnyCallbackStruct *call_data;
  *** non assegnati ad alcun macroblocco.
  *** Schiaffa tali blocchi in un macroblocco di nome 'default'.
  ***/
-assign_default(block_to_add,num_lista_blocchi)
+void assign_default(block_to_add,num_lista_blocchi)
 Widget block_to_add;
 int num_lista_blocchi;
 {
@@ -706,7 +726,7 @@ int num_lista_blocchi;
  *** leggi_file_f01()
  *** Fa quello che dice.
  ***/
-leggi_file_f01()
+void leggi_file_f01()
 {
    char buffer[100], temp[5];
    int i = 0;
@@ -749,7 +769,7 @@ leggi_file_f01()
 /*-----------------------------------------------------------------------*/
 /*** aggiorna_lista_blocchi()
  ***/
-aggiorna_lista_blocchi()
+void aggiorna_lista_blocchi()
 {
    nargs=0;
    XtSetArg(args[nargs], XmNitemCount, num_lista_blocchi); nargs++;
@@ -799,7 +819,7 @@ Widget widget_sup;
  *** void crea_main_window()
  *** creazione della main-window 
  ***/
-crea_main_window()
+void crea_main_window()
 {
    /* Push-buttons */
    Widget lb1, lb2, lb3, lb4, lb5, lb6;
@@ -904,7 +924,7 @@ crea_main_window()
    XtSetArg(args[nargs],XmNbottomPosition,56); nargs++;
    deselect = XmCreatePushButton (form_widget,"Deselect all",args,nargs);
    XtManageChild (deselect);
-   XtAddCallback (deselect, XmNactivateCallback, global_selection, False);
+   XtAddCallback (deselect, XmNactivateCallback, global_selection, (XtPointer) False);
 
 /* Creazione del push button di Select_all */
    nargs=0;
@@ -915,7 +935,7 @@ crea_main_window()
    XtSetArg(args[nargs],XmNbottomPosition,56); nargs++;
    select = XmCreatePushButton (form_widget,"Select all",args,nargs);
    XtManageChild (select);
-   XtAddCallback (select, XmNactivateCallback, global_selection, True);
+   XtAddCallback (select, XmNactivateCallback, global_selection, (XtPointer) True);
 
 /* Creazione della lista dei macroblocchi */
    cstring = CREATE_CSTRING("MACROBLOCK");
@@ -1178,7 +1198,7 @@ crea_main_window()
  *** fine_trasmissioni ()
  *** Augura la buona notte a tutti.
  ***/
-fine_trasmissioni ()
+void fine_trasmissioni ()
 {
    XtCloseDisplay (display);
    fprintf(stdout, "Saving in macroblocks.dat...\n");
@@ -1194,7 +1214,7 @@ fine_trasmissioni ()
  *** e MACROBLOCKS.DAT, dando la priorita' a F01.DAT.
  *** N.B.  NON VISUALIZZA L'APPLICATIVO MA SOLTANTO UN MESSAGGIO
  ***/
-update_macro()
+void update_macro()
 {
    int i, j, k;
    BlockType *blk;
@@ -1254,7 +1274,7 @@ update_macro()
  *** da aggiungere e/o cancellare dopo il confronto tra f01.dat
  *** e macroblocks.dat.
  ***/
-crea_distinta_blocchi()
+void crea_distinta_blocchi()
 {
    /* Push-buttons */
    Widget lb1, lb2, lb3, lb4, lb5, lb6;
@@ -1383,7 +1403,7 @@ crea_distinta_blocchi()
  ***     Blocks blk : blocchi da aggiungere nel macroblocco.
  ***     int num_blk : numero di blocchi.
 Aggiunge i blocchi nel macroblocco in memoria ***/
-add_blocks_macro(nome_macro, blk, num_blk)
+void add_blocks_macro(nome_macro, blk, num_blk)
 char *nome_macro;
 BlockType blk[];
 int num_blk;
@@ -1397,7 +1417,7 @@ int num_blk;
    {
       s_warning(top_level, &geom_attention, APPLICATION_NAME,
                 warning_mesg, WMACRONOTFOUND );
-      return(-1);
+      return;
    }
 
    ind = macroblocks[i].num_blocchi;
@@ -1410,7 +1430,7 @@ int num_blk;
 
    memcpy((char *) &macroblocks[i].blocks[ind], (char *) blk,
           num_blk * sizeof(BlockType));
-   return(0);
+   return;
 }
     
 /*** fine iconvert.c ***/

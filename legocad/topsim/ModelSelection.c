@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <Xm/DialogS.h>
 #include <Xm/MenuShell.h>
@@ -45,6 +46,8 @@
 	corresponding entry in the context structure.
 *******************************************************************************/
 
+void set_something_val(Widget wid, String resource_name, XtArgVal value);
+extern char *getwd(char *);
 typedef	struct
 {
 	Widget	UxModelSelection;

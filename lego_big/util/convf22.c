@@ -26,6 +26,7 @@ VARIABILE variabili_;
 FILE  *file22, *file22out;
 int importo=1,flag,formato_dati,test=FALSE;
 
+int leggi_testa_bin_vms();
 
 void main(argc,argv)
 int     argc;                   /* # of elements in argv */
@@ -183,7 +184,7 @@ leggi_testa_bin()
       fread(variabili_.simboli,80,variabili_.numsimb,file22);
    }
 
-leggi_testa_bin_vms()
+int leggi_testa_bin_vms()
    {
    char pad[2];
    int i;

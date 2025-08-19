@@ -47,6 +47,9 @@ static char SccsID[] = "@(#)draw.c	2.7\t4/11/95";
 #endif 
 
 short round_mio(double);
+void traccia_freccia(Widget w, XPoint *p1, XPoint *p2, int len_arrw, int wdt_arrw);
+void tmp_fine_linee(int ind_macro, int accetta);
+int check_line(GLine *line, int x, int y);
 
 /* VARIABILI UTILIZZATE NELLE FUNZIONI Xlib */
 extern Display *display;
@@ -259,9 +262,7 @@ XmAnyCallbackStruct *call_data;
 L'utente ha terminato il gruppo di linee. si possono salvare nel vettore
 line oppure scartare (in questo caso le linee precedentemente tracciate
 vengono scartate ***/
-tmp_fine_linee(ind_macro, accetta)
-int ind_macro;
-Boolean accetta;
+void tmp_fine_linee(int ind_macro, int accetta)
 {
    GLine **line;
    int *num_line, *num_line_alloc;
@@ -308,11 +309,11 @@ Boolean accetta;
          (*num_line)++;
 
          if (*num_line >= *num_line_alloc)
-            *line = (GLine *) realloc_mem(*line, *num_line_alloc += 50,
+            *line = (GLine *) realloc_mem((char*)*line, *num_line_alloc += 50,
                                        sizeof(GLine));
       }
    }
-   XtFree(tmpline);
+   XtFree((char*)tmpline);
 }
 
 /*---------------------------------------------------------------------*/
@@ -327,7 +328,7 @@ XPoint *xp;
    tmpline[num_tmpline++].y = yy1;
    XDrawLine(display, XtWindow(w), xorGC, xx1, yy1, xx2, yy2);
    if (num_tmpline >= num_tmpline_alloc)
-       tmpline = (XPoint *) realloc_mem(tmpline, num_tmpline_alloc += 50,
+       tmpline = (XPoint *) realloc_mem((char*)tmpline, num_tmpline_alloc += 50,
                                        sizeof(XPoint));
 }
 
@@ -370,7 +371,7 @@ Boolean draw_arrow;
    }
 
    if (num_tmpline+1 >= num_tmpline_alloc)
-       tmpline = (XPoint *) realloc_mem(tmpline, num_tmpline_alloc += 50,
+       tmpline = (XPoint *) realloc_mem((char*)tmpline, num_tmpline_alloc += 50,
                                        sizeof(XPoint));
    if (draw_arrow)
    {
@@ -400,10 +401,7 @@ Boolean draw_arrow;
    }
 }
 
-traccia_freccia( w, p1, p2, len_arrw, wdt_arrw )
-Widget w;
-XPoint *p1, *p2;
-int len_arrw, wdt_arrw;
+void traccia_freccia(Widget w, XPoint *p1, XPoint *p2, int len_arrw, int wdt_arrw)
 {
    int bx, by, cx, cy;
    double lung, alfa, beta, fxx2, fyy2, fxx1, fyy1;
@@ -539,7 +537,7 @@ XmAnyCallbackStruct *call_data;
                }
 
             /* cancella dalla memoria la linea */
-               XtFree(lp->points);
+               XtFree((char*)lp->points);
                offset = macroblocks[ind_macro].num_line-i-1;
                if (offset)
                   memmove((char *) lp, (char *) (lp+1), offset*sizeof(GLine));
@@ -559,9 +557,7 @@ XmAnyCallbackStruct *call_data;
 /*** Boolean check_line(line,x,y)
 controlla se il punto (x,y) e' nelle vicinanze delle linee 'line'.
 In tal caso ritorna True senno' False. ***/
-int check_line(lp,x1,y1)
-GLine *lp;
-int x1, y1;
+int check_line(GLine *lp, int x1, int y1)
 {
    int i, j;
    double minx, maxx, miny, maxy;

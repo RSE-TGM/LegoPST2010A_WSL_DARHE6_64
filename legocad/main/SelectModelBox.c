@@ -5,6 +5,8 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <X11/Shell.h>
 #include <Xm/MenuShell.h>
@@ -14,6 +16,7 @@
 #include <Xm/PushB.h>
 #include <Xm/RowColumn.h>
 #include <Xm/SelectioB.h>
+#include <Xm/List.h>
 #include <Xm/MainW.h>
 
 /*******************************************************************************
@@ -42,6 +45,16 @@
 #include "lc_errore.h"
 extern int model_filter(char *);
 extern char path_legocad[];
+
+/* Missing function declarations */
+extern void genera_lista_entry(char *, int (*)(char *), int *, char ***);
+extern int is_path_modello(char *);
+extern int aggiorna_attivi();
+extern int read_descr(char *, char **);
+extern void set_something_val(Widget, String, XtArgVal);
+extern int proc_legocad_attivi();
+extern void lc_errore(char *, ...);
+
 Boolean attesa_oknew;
 char *strret;
 
@@ -94,7 +107,7 @@ Widget	SelModelsActivate();
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-salva_descrizione()
+int salva_descrizione()
 {
    extern int save_descr();
    char path[200];
@@ -103,7 +116,7 @@ salva_descrizione()
    save_descr(path,strret);
 }
 
-refresh_lista(swidget w)
+int refresh_lista(swidget w)
 {
 Arg arg[2];
 XmString *modelli;
@@ -118,7 +131,7 @@ _UxCSelectModelBox      *UxSaveCtx, *UxContext;
                         (_UxCSelectModelBox *) UxGetContext( w );
 #endif
 
-lista = XmFileSelectionBoxGetChild( SelectModel ,XmDIALOG_LIST);
+lista = XmSelectionBoxGetChild( SelectModel ,XmDIALOG_LIST);
 
 
 XmListDeleteAllItems( lista );
@@ -155,7 +168,7 @@ char  *get_select_model_new()
    return(UxGetTextString( SelectModel ));
 }
 
-modifi()
+int modifi()
 {
 }
 

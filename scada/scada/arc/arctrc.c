@@ -35,13 +35,12 @@ static char *_csrc = "@(#) %filespec: arctrc.c-4 %  (%full_filespec: arctrc.c-4:
 */
 #include <osf1.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "arc.inc"
 #include "arcvis.inc"
 #include "fileop_names.h"
-arctrc(mric,msen)
-short *mric;
-S_FLOPPY *msen;
+int arctrc(short *mric, S_FLOPPY *msen)
 {
 char *str;
 char app[3];
@@ -90,7 +89,7 @@ else                    // file d'archivio: aggiungo estensione e n. file
    posname=arcnome[msen->archivio-1].arc;
    for(i=0;i<arcdes[msen->archivio-1].hea.n_file;i++,posname++)
    {
-      if(!strcmp(posname,msen->nome)) break;
+      if(!strcmp((char*)posname,msen->nome)) break;
    }
    msen->n_file=i;
 }

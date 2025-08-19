@@ -15,8 +15,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-main(argc,argv)
+int main(argc,argv)
 int argc;
 char *argv[];
 {
@@ -26,7 +28,7 @@ FILE *fp = NULL;
 char nome_file[FILENAME_MAX+1]; 
 
 if(argc<2)
-	return;
+	return 1;
 num = atoi(argv[1]);
 sprintf(nome_out,"tty >apptty%d\n",num);
 system(nome_out);

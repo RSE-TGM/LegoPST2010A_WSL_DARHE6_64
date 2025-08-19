@@ -54,6 +54,8 @@
 /* VARIABILI GLOBALI ESTERNE					*/
 /****************************************************************/
 
+extern int lcDestroySwidget(Widget);
+
 extern Boolean non_salvato;
 
 extern Arg args[20];
@@ -142,6 +144,12 @@ Widget	jac_text_scrolledText;
 
 Widget	create_dbox_userjac();
 
+/* Forward declarations for functions defined in this file */
+int text_user_jac(Dimension *form_height);
+int crea_labels_jac(int ind_row, int ind_col, char *nome_var, Position posy);
+int crea_texts_jac(Widget *wdg, Position posy, int num_col, int i, int j);
+int memo_textJC(Boolean flag);
+
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
@@ -156,7 +164,7 @@ Widget	create_dbox_userjac();
  ***     delle dipendenze dello jacobiano del nuovo modulo (jac_yes=True=BLACK).
  ***     Abilitata dopo le definizioni per il nuovo modulo.
  ***/
-text_user_jac (form_height)
+int text_user_jac (form_height)
 Dimension *form_height;
 {
    int i=0, j=0, num_resid = 0;
@@ -209,7 +217,7 @@ Dimension *form_height;
  ***     Crea le label di intestazione degli elementi della matrice jacobiana
  ***     (numero del residuo e nome della variabile)
  ***/
-crea_labels_jac (ind_row,ind_col,nome_var,posy)
+int crea_labels_jac (ind_row,ind_col,nome_var,posy)
 int ind_row,ind_col;
 char *nome_var;
 Position posy;
@@ -253,7 +261,7 @@ Position posy;
  ***     generatore di Fortran si preoccupa di porre un simbolo di
  ***     continuazione ('$') alla colonna 6.
  ***/
-crea_texts_jac (wdg,posy,num_col,i,j)
+int crea_texts_jac (wdg,posy,num_col,i,j)
 Widget *wdg;
 Position posy;
 int num_col;
@@ -310,7 +318,7 @@ int i,j;
  ***     memorizza il contenuto dei text-widget della window dei dati nelle
  ***     variabili globali str_dichJC, str_codJC e str_coefJC
  ***/
-memo_textJC(flag)
+int memo_textJC(flag)
 Boolean flag;
 {
    int i, j, k;
@@ -338,7 +346,7 @@ Boolean flag;
 
    if (flag)
    {
-      XtFree(text_jac_dipend);
+      XtFree((char*)text_jac_dipend);
       UxDestroySwidget(dbox_user_jac);
       dbox_userjac_managed = False;
    }
@@ -386,7 +394,7 @@ static void	activateCB_cancel_jac_pb( UxWidget, UxClientData, UxCallbackArg )
 	UxDbox_user_jacContext = UxContext =
 			(_UxCdbox_user_jac *) UxGetContext( UxWidget );
 	{
-	XtFree(text_jac_dipend);
+	XtFree((char*)text_jac_dipend);
 	UxDestroySwidget(dbox_user_jac);
 	dbox_userjac_managed = False;
 	}

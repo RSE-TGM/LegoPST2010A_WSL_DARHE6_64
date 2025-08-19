@@ -35,7 +35,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "calas.inc"
 
-setpunt(indice)
+void setpunt(indice)
 short indice;
 {
  switch(desc->a.periodo & 0x7F)

@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <Xm/DialogS.h>
 #include <Xm/MenuShell.h>
@@ -38,6 +39,8 @@
 #include "autodoc.h"
 
 int copia_file(char*, char*);
+int IsNumeric(char*);
+int Empty(char*);
 
 #define TOGGLE_ALL_PAGES	0
 #define TOGGLE_DA_PAGE_A_PAGE	1

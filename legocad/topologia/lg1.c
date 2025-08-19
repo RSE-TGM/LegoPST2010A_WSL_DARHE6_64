@@ -55,6 +55,8 @@ static char SccsID[] = "@(#)lg1.c	2.26\t5/12/95";
 #include <locale.h>
 #endif
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <X11/Intrinsic.h>
 #include <X11/StringDefs.h>
 #include <Xm/Xm.h>
@@ -107,8 +109,12 @@ extern swidget create_BlockSelectionBox();
 extern swidget create_EditDescrDialog1();
 extern int lg1_init_arg();
 
+/* Function prototypes for missing functions */
+int make_pixmap_cursor(Widget, const char*, const char*, const char*);
+int create_gost_win_gc();
+int lg1_start_modello();
 
-main(argc,argv)
+int main(argc,argv)
 	int 	argc;
 	char 	*argv[];
 {

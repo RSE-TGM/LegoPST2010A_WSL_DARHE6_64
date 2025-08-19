@@ -35,10 +35,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "arc.inc"
 
+// External function declarations
+extern void pscserr(int, int, int, int, int);
 
-arcave(point,dbs)
-PUNTDBS *point;
-DATDBS *dbs;
+short arcave(PUNTDBS *point, DATDBS *dbs)
 {
 float valore;
 short flag;

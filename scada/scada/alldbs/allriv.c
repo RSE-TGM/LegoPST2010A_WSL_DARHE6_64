@@ -49,8 +49,14 @@ static char *_csrc = "@(#) %filespec: allriv.c-4 %  (%full_filespec: allriv.c-4:
 #include "allar.inc"
 #include "mesqueue.h"
 
-allriv(alv,nvideo)
+// External function declarations
+extern int abzon(short *, short *, short, char *);
+extern int allinger(void *, void *, void *);
+extern int dec(int, int, void *, void *);
+
+int allriv(alv,nvideo)
 S_DBS_ALV *alv;
+int nvideo;
 {
 S_DBS_ALL *ald;
 struct buff_all *all, *alp;

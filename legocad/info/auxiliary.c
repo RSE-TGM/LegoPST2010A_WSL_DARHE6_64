@@ -18,7 +18,9 @@ static char SccsID[] = "@(#)aux.c	1.11\t3/27/95";
         Fine sezione per SCCS
 */
 #include <stdio.h>
+#include <string.h>
 #include <ctype.h>
+#include <X11/Intrinsic.h>
 #include "linfo.h"
 
 #if defined LINUX

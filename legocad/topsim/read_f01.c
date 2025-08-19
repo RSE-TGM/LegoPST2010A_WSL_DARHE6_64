@@ -19,6 +19,8 @@ static char SccsID[] = "@(#)read_f01.c	1.26\t2/5/96";
         Fine sezione per SCCS
 */
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "topsim.h"
 #include "lg1_topsim.h"
 
@@ -33,6 +35,9 @@ static char SccsID[] = "@(#)read_f01.c	1.26\t2/5/96";
 
 int tipo_modello;
 int num_reg_var;
+
+static int leggi_f01_var( MODELLO *task, FILE *fp );
+extern char *trim_blank(char *str);
 
 /***
    legge una riga dal file 
@@ -159,7 +164,7 @@ int cont_var (FILE *fp)
 }
 
 /* Lettura delle variabili di ogni blocco */
-leggi_f01_var( MODELLO *task, FILE *fp )
+static int leggi_f01_var( MODELLO *task, FILE *fp )
 {
   char riga[200];
   int  i, j, num_var,posreg;
@@ -338,7 +343,7 @@ static LISTA_ING *search_ing(LISTA_ING *lista,char *ing )
 
 
 
-static libera ( lista )
+static void libera ( lista )
 LISTA_ING *lista;
 {
   if ( lista )
@@ -375,7 +380,7 @@ int make_connessione (MODELLO *task, int in_bl, int in_var, int out_bl, int out_
 }
  
 
-static ins_lista (LISTA_ING **lista, char *riga )
+static void ins_lista (LISTA_ING **lista, char *riga )
 {
     LISTA_ING *new_entry;
 

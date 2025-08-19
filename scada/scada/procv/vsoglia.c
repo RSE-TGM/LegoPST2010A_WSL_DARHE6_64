@@ -29,6 +29,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
                 3       bassa conduzione
 */
 #include <stdio.h>
+#include <string.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"

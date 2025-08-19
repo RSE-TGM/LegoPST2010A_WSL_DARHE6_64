@@ -56,8 +56,15 @@ static char *_csrc = "@(#) %filespec: allcod.c-6_deb1.1.2 %  (%full_filespec: al
 #include "diagnodi.inc"
 #include "tipal.inc"
 
+// External function declarations
+extern int rbyte(int, char *, long, int);
+extern void pscserr(int, int, int, int, int);
+extern int IsAlarmSignal(short);
+extern int GetAlarmValue(short);
+extern void decnum(char *, short, short, short, float);
 
-allcod (flag, str, all)
+
+int allcod (flag, str, all)
 short flag;
 S_STRALL *str;
 struct buff_all *all;
@@ -100,7 +107,7 @@ memset(str->desc,' ',sizeof(str->desc));
         posizionandomi con fseek
 */
 tot=off_f[ptipo]+(long)nbyte[ptipo]*(long)pdata;
-if(rbyte(fileno(fpp[fdde]),(short*)desc,tot,nbyte[ptipo])==-1)
+if(rbyte(fileno(fpp[fdde]),(char*)desc,tot,nbyte[ptipo])==-1)
             pscserr(ERR_IO,TASK_ALLARMI,ROU_ALLDEC,pdata,SYS_CONT);
 /*
         copio nome punto descrizione nel buffer allarmi

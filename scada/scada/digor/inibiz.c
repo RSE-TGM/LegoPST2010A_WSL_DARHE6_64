@@ -46,7 +46,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tipal.inc"
 #include	"mesqueue.h"
 
-inibiz(ext,punt,tipo,stato)
+/* Function prototypes */
+extern void bitset(short *, short, short);
+extern int bitvalue(short *, short);
+
+void inibiz(ext,punt,tipo,stato)
 short stato ;
 char ext ;
 short punt ;

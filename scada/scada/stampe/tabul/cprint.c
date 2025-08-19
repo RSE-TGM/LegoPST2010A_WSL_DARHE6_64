@@ -18,6 +18,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 #include <osf1.h>
 #include <stdio.h>
+#include <string.h>
 #include <dos.h>
 
 #include "g1tipdb.inc"
@@ -32,6 +33,13 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #define _PUBLIC 0
 #include "defpub.h"
 #include "cprint.inc"
+
+// External function declarations
+extern void invia(short, void *);
+extern void decnum(char *, int, int, short, float);
+extern int rbyte(int, short *, long, int);
+extern void pscserr(int, int, int, int, int);
+
 /*
 	cprint:	routine per la codifica dell'istruzione PRINT
 			   del linguaggio POL
@@ -150,7 +158,7 @@ case p_format :
 		  		{ 
 				lunprint=pform->f.in;
 				memset(ta.strprint,0x20,lunprint);
-				if(diff=( pform->f.in - strlen(dbs+(i.re.byad>>1))) <=0 )
+				if(diff=( pform->f.in - strlen((char*)(dbs+(i.re.byad>>1)))) <=0 )
 					memcpy(ta.strprint,dbs+(i.re.byad>>1),lunprint);
 				else
             	strcpy(ta.strprint,(char*)dbs+(i.re.byad)) ;

@@ -28,10 +28,13 @@ static char SccsID[] = "@(#)errore.c	2.24\t3/30/95";
 
 
 #include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "errore.h"
 
 
-errore ( char * StringaErrore, ... )
+int errore ( char * StringaErrore, ... )
 {
    va_list args;
 
@@ -40,10 +43,11 @@ errore ( char * StringaErrore, ... )
    int  int_arg;
 
    char *fmt, *format, fmt_ch, save_ch, str[2001], mess[2001];
-   char *format2, format_save;
+   char *format2, *format_save;
 
-   extern show_error( char * );
-   extern fatal_err( char * );
+   extern int show_error( char * );
+   extern int fatal_err( char * );
+   extern int write_message( char * );
 
    extern ERR_LEVEL err_level;
 
@@ -109,7 +113,7 @@ errore ( char * StringaErrore, ... )
    else
      write_message( mess );
 
-
+   return 0;
 }
 
 

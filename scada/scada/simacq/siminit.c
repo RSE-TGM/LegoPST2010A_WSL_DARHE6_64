@@ -31,7 +31,10 @@ static char *_csrc = "@(#) %filespec: siminit.c-3 %  (%full_filespec: siminit.c-
 #include "simana.inc"
 #include "g2comdb.inc"
 
-siminit()
+// External function declarations
+extern void bitset(short *, short, short);
+
+int siminit()
 {
 
 short i;

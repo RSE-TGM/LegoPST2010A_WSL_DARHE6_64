@@ -326,8 +326,7 @@ char *suffisso;
  *** char *str: stringa da epurare
  *** Toglie i blank eventualmente presenti alla fine di una stringa.
  ***/
-char *trim_blank(str)
-char *str;
+char *trim_blank(char *str)
 {
    int n;
 

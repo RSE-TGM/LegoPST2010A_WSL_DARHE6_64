@@ -474,6 +474,63 @@ extern int errno;
 extern int _Xdebug;
 #endif
 
+/* Forward declarations of structures and enums */
+struct command_data {
+  char *name;
+  void (*proc)(); 
+  int data;
+  Window window;
+  int name_length;
+  int x_offset;
+  boolean inverted;
+};
+
+enum RepaintGridType {e_AgainstBackground, e_AgainstForeground, e_Invert};
+
+enum output_error {e_malloc, e_open, e_rename, e_write};
+
+/* Function declarations */
+int SetUp(int argc, char **argv);
+int ProcessEvent(XEvent *event);
+void ProcessGridWindowEvent(XEvent *event);
+void ProcessOuterWindowEvent(XEvent *event);
+int ProcessCommandButtonEvent(struct command_data *command, XEvent *event);
+int InvertCommandWindow(struct command_data *command);
+int RepaintGridLines(enum RepaintGridType how);
+int RepaintGridLinesPartially(int x1, int y1, int x2, int y2, enum RepaintGridType how, int include_boundaries);
+int RefillGridPartially(int x1, int y1, int x2, int y2, int paint_background);
+int PaintSquare(int x, int y, unsigned long pixel);
+int InvertSquare(int x, int y);
+int SetRasterBit(char *raster, int x, int y, int new);
+int InvertRasterBit(char *raster, int x, int y);
+int RepaintRaster(void);
+int RepaintRasterInverted(void);
+int WriteOutputToFile(FILE *file);
+int LayoutStage1(void);
+int LayoutStage2(void);
+int OuterWindowDims(int square_size, int right_side_width, int right_side_bottom, int *outer_width, int *outer_height);
+int RepaintRectangles(int x1, int y1, int x2, int y2, int x3, int y3);
+int DialogInputHandler(XEvent *event);
+void HighlightHotSpot(void);
+void ExThroughRectangle(int x1, int y1, int x2, int y2);
+void ExThroughSquare(int x, int y);
+void PlusThroughRectangle(int x1, int y1, int x2, int y2);
+void PlusThroughSquare(int x, int y);
+void LineIntoBuffer(int x1, int y1, int x2, int y2);
+void FlushLineBuffer(void);
+int LayoutStage1(void);
+int LayoutStage2(void);
+int usage(void);
+int cleanup(char *data, FILE *stream);
+int WhatSquare(XEvent *event, int *x_square, int *y_square);
+int GetRasterBit(char *raster, int x, int y);
+int MouseMovedEventQueued(void);
+int AskUserForArea(int *x1, int *y1, int *x2, int *y2);
+int AskUserForDest(int *x1dest, int *y1dest, int width, int height);
+int AskUserForPoint(int *xp, int *yp, int plus);
+int HandleOutputError(enum output_error e);
+int dialog(Window window, XFontStruct *font, char *message, char *suggestion, char *strings[], int num_strings, int (*event_handler)(XEvent*));
+
 /* global "constants" -- set once at startup time */
 /* the first few variables are not static because they are shared
    with dialog.c */
@@ -515,16 +572,7 @@ void ClearOrSetAll(), InvertAll(),
       SetHotSpot(), ClearHotSpot(), Quit();
 boolean WriteOutput();
 
-static struct command_data {
-  char *name;
-  void (*proc)(); 
-     /* function to invoke when command button is "pressed" */
-  int data;  /* arbitrary instance data to call procedure back with */
-  Window window;
-  int name_length;
-  int x_offset;  /* so text is centered within command box */
-  boolean inverted;
-  } commands [] = {
+static struct command_data commands [] = {
 	{"Clear All",	ClearOrSetAll, 0},
 	{"Set All",	ClearOrSetAll, 1},
 	{"Invert All",	InvertAll},
@@ -574,8 +622,6 @@ static int y_hot_spot = OUT_OF_RANGE;
 static boolean changed = FALSE;
    /* has user changed bitmap since starting program or last write? */
 
-static enum RepaintGridType {e_AgainstBackground, e_AgainstForeground, e_Invert};
-
 #if !defined OSF1 && !defined LINUX
 #ifdef AIX
 extern void *malloc();
@@ -606,7 +652,7 @@ static boolean is_in_table (s, tab)
 
 
 
-main (argc, argv)
+int main (argc, argv)
   int argc;
   char **argv;
   {
@@ -619,7 +665,7 @@ main (argc, argv)
   }
 
 
-static cleanup(data, stream)
+int cleanup(data, stream)
   char *data;
   FILE *stream;
 {
@@ -780,7 +826,7 @@ struct attribs {
 
 char *backup_fonts[] = {"variable", "fixed", "vtsingle", NULL};
 
-usage ()
+int usage ()
 {
     struct attribs *attr;
 
@@ -803,7 +849,7 @@ usage ()
     exit (1);
 }
 
-SetUp (argc, argv)
+int SetUp (argc, argv)
   int argc;
   char **argv;
   {
@@ -1063,7 +1109,7 @@ SetUp (argc, argv)
   }
 
 
-ProcessEvent (event)
+int ProcessEvent (event)
   register XEvent *event;
   {
   register Window w = event->xany.window;
@@ -1082,7 +1128,7 @@ ProcessEvent (event)
   }
 
 
-ProcessGridWindowEvent (event)
+void ProcessGridWindowEvent (event)
   XEvent *event;
   {
   int x_square, y_square;
@@ -1201,7 +1247,7 @@ boolean MouseMovedEventQueued () {
   }
 
 
-ProcessOuterWindowEvent (event)
+void ProcessOuterWindowEvent (event)
   XEvent *event;
   {
   if (event->type != ConfigureNotify)
@@ -1218,7 +1264,7 @@ ProcessOuterWindowEvent (event)
   XMapSubwindows (d, outer_window);
   }
   
-ProcessCommandButtonEvent (command, event)
+int ProcessCommandButtonEvent (command, event)
   struct command_data *command;
   XEvent *event;
   {
@@ -1267,7 +1313,7 @@ ProcessCommandButtonEvent (command, event)
   }
 
 
-InvertCommandWindow (command)
+int InvertCommandWindow (command)
   struct command_data *command;
   {
   XSetState (d, gc, 1L, 0L, GXinvert, invertplane);
@@ -1292,13 +1338,13 @@ boolean WhatSquare (event, x_square, y_square)
   }
 
 
-RepaintGridLines(how)
+int RepaintGridLines(how)
   enum RepaintGridType how;
   {
   RepaintGridLinesPartially (0, 0, image.width, image.height, how, TRUE);
   }
 
-RepaintGridLinesPartially (x1, y1, x2, y2, how, include_boundaries)
+int RepaintGridLinesPartially (x1, y1, x2, y2, how, include_boundaries)
   int x1, y1, x2, y2;
   enum RepaintGridType how;
   boolean include_boundaries;
@@ -1361,11 +1407,11 @@ RepaintGridLinesPartially (x1, y1, x2, y2, how, include_boundaries)
   }
 
 
-RefillGridPartially(x1, y1, x2, y2, paint_background)
+int RefillGridPartially(x1, y1, x2, y2, paint_background)
   register int x1, y1, x2, y2;
   boolean paint_background;
   {
-  register i, j;
+  register int i, j;
   for (i=x1; i<=x2; i++) {
     for (j=y1; j<=y2; j++) {
       bit b = GetRasterBit (raster, i, j);
@@ -1376,7 +1422,7 @@ RefillGridPartially(x1, y1, x2, y2, paint_background)
   }
 
 
-PaintSquare(x, y, pixel)
+int PaintSquare(x, y, pixel)
   int x, y;
   unsigned long pixel;
   {
@@ -1385,7 +1431,7 @@ PaintSquare(x, y, pixel)
     square_size - 1, square_size - 1);
   }
 
-InvertSquare(x, y)
+int InvertSquare(x, y)
   int x, y;
   {
   XSetState (d, gc, 1L, 0L, GXinvert, invertplane);
@@ -1403,7 +1449,7 @@ bit GetRasterBit (raster, x, y)
   }
 
 
-SetRasterBit (raster, x, y, new)
+int SetRasterBit (raster, x, y, new)
   char *raster;
   register int x;
   int y;
@@ -1415,7 +1461,7 @@ SetRasterBit (raster, x, y, new)
   }
 
 
-InvertRasterBit (raster, x, y)
+int InvertRasterBit (raster, x, y)
   char *raster;
   register int x;
   int y;
@@ -1425,21 +1471,21 @@ InvertRasterBit (raster, x, y)
   }
 
 
-RepaintRaster() {
+int RepaintRaster() {
   XSetState (d, gc, foreground, background, GXcopy, AllPlanes);
   XPutImage (d, raster_window, gc, &image,
      0, 0, 3, 3, image.width, image.height);
   }
 
 
-RepaintRasterInverted () {
+int RepaintRasterInverted () {
   XSetState (d, gc, background, foreground, GXcopy, AllPlanes);
   XPutImage (d, raster_invert_window, gc, &image,
      0, 0, 3, 3, image.width, image.height);
   }
 
 
-WriteOutputToFile (file)
+int WriteOutputToFile (file)
   FILE *file;
   {
   register int i;
@@ -1525,7 +1571,7 @@ char *TmpFileName(name)
    Everything done at this stage stays the same even if the user later
    reshapes the window. */
 
-LayoutStage1 ()
+int LayoutStage1 ()
   {
   int widths [N_COMMANDS];
   int command_width = 0;
@@ -1602,7 +1648,7 @@ LayoutStage1 ()
    command and raster windows, then reconfigures those windows
    appropriately. */
 
-LayoutStage2 ()
+int LayoutStage2 ()
   {
   int x_room = outer_width - 1 - LEFT_MARGIN - right_side_width;
   int y_room = outer_height - 1 - TOP_MARGIN - BOTTOM_MARGIN;
@@ -1636,7 +1682,7 @@ LayoutStage2 ()
    command/raster area ("right side" of the window).  It is called
    at startup time. */
 
-OuterWindowDims (square_size, right_side_width,
+int OuterWindowDims (square_size, right_side_width,
   right_side_bottom, width, height)
   int square_size, right_side_width, right_side_bottom;
   int *width, *height; /* RETURN */
@@ -1731,6 +1777,7 @@ void InvertArea() {
 
 
 void CopyOrMoveArea (what)
+  int what;
   {
   int x1, y1, x2, y2;
   int x1dest, y1dest;
@@ -1845,6 +1892,7 @@ void Line ()
 #include <math.h>
 
 void Circle(filled)
+  int filled;
 {
 	int	i, j, x, x1, y1, x2, y2, dx, dy;
 	double	rad, half;
@@ -1951,7 +1999,7 @@ void SetHotSpot() {
 	}
     }
 
-RepaintRectangles (x1, y1, x2, y2, x3, y3)
+int RepaintRectangles (x1, y1, x2, y2, x3, y3)
     int x1, y1; /* first rectangle's top & left */
     int x2, y2; /* first rectangle's bottom & right */
     int x3, y3; /* second rectangle's top & left */
@@ -2174,6 +2222,7 @@ boolean AskUserForDest (px1, py1, width, height)
 
 boolean AskUserForPoint (xp, yp, plus)
   int *xp, *yp;
+  int plus;
   {
   XEvent event;
   boolean this_window;
@@ -2219,14 +2268,13 @@ boolean AskUserForPoint (xp, yp, plus)
     return (!this_window);
     }
 
-DialogInputHandler (event)
+int DialogInputHandler (event)
   XEvent *event;
   {
   if (event->type == Expose || event->type == ConfigureNotify)
   	ProcessEvent (event);
   }
 
-enum output_error {e_rename, e_write};
 
 /* WriteOutput returns TRUE if output successfully written, FALSE if not */
 
@@ -2314,7 +2362,7 @@ void Quit() {
   exit(0);
   }
 
-HighlightHotSpot() {
+void HighlightHotSpot() {
   /* Draw a diamond in the hot spot square */
   /* x1 and y1 are the center of the hot spot square */
   register int x1 = x_hot_spot*square_size + square_size/2;
@@ -2332,7 +2380,7 @@ HighlightHotSpot() {
   XDrawLines (d, grid_window, gc, points, 5, CoordModeOrigin);
   }
 
-ExThroughRectangle (x1, y1, x2, y2)
+void ExThroughRectangle (x1, y1, x2, y2)
   register int x1, y1, x2, y2;
   {
   register int x, y;
@@ -2343,7 +2391,7 @@ ExThroughRectangle (x1, y1, x2, y2)
   }
 
 
-ExThroughSquare (x, y)
+void ExThroughSquare (x, y)
   register int x, y;
   {
   register int x1 = x*square_size;
@@ -2355,7 +2403,7 @@ ExThroughSquare (x, y)
   }
 
 
-PlusThroughRectangle (x1, y1, x2, y2)
+void PlusThroughRectangle (x1, y1, x2, y2)
   register int x1, y1, x2, y2;
   {
   register int x, y;
@@ -2365,7 +2413,7 @@ PlusThroughRectangle (x1, y1, x2, y2)
   FlushLineBuffer();
   }
 
-PlusThroughSquare (x, y)
+void PlusThroughSquare (x, y)
   register int x, y;
   {
   register int x1 = x*square_size;
@@ -2381,7 +2429,9 @@ PlusThroughSquare (x, y)
 static XSegment buffer [BUFFER_MAXLENGTH];
 static int buffer_length = 0;
 
-LineIntoBuffer (x1, y1, x2, y2) {
+void LineIntoBuffer (x1, y1, x2, y2)
+  int x1, y1, x2, y2;
+{
   register XSegment *seg = &buffer[buffer_length];
   seg->x1 = x1;
   seg->y1 = y1;
@@ -2391,7 +2441,7 @@ LineIntoBuffer (x1, y1, x2, y2) {
     FlushLineBuffer();
   }
   
-FlushLineBuffer () {
+void FlushLineBuffer () {
   XSetLineAttributes (d, gc, 0, LineSolid, CapNotLast, JoinMiter);
   XSetState (d, gc, 1L, 0L, GXinvert, highlightplane);
   XDrawSegments (d, grid_window, gc, buffer, buffer_length);

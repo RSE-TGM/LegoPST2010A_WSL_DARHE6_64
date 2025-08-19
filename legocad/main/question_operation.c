@@ -5,12 +5,21 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <Xm/DialogS.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
 
 #include <Xm/MessageB.h>
+
+/* Missing function declarations */
+extern int refresh_lista();
+extern void copy_fileoutedi14();
+extern void save_foraus(int);
+extern void close_interface(Widget);
+extern void rimuovi_moduli_foraus(Widget);
+extern void delete_foraus(Widget);
 
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:
@@ -85,11 +94,10 @@ Widget	create_question_operation();
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-delete_model(char *path)
+int delete_model(char *path)
 {
   extern swidget create_vis_msg();
   extern char path_modello[];
-  extern refresh_lista();
   char comando[256];
 
   strcpy(comando,"rm -r ");

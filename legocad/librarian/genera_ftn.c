@@ -77,13 +77,33 @@ extern WdgDatiGeometrici *wdati_geometrici;
 
 extern swidget nmod_bboard;
 
+/* Forward declarations for functions defined in this file */
+int leggi_file_interfaccia(void);
+int genera_fortran(char *nome_modulo, char *titolo_esteso);
+int ifile_nome_modulo(FILE *fp, char nome[], char descr[]);
+int ifile_header(FILE *fp, int *nstati, int *nuscite, int *ningressi, int *ndati);
+int ifile_variabili(FILE *fp, StructVars *variabili, int numero_stati, int numero_uscite, int numero_ingressi);
+int ifile_dati_geometrici(FILE *fp, StructDati *dati_f14, int numero_dati);
+int ifile_jacobiano(FILE *fp, byte *tipo_jacobiano, JacToggStruct jactoggstruct[MAX_EQUAZIONI][MAX_VARIABILI_IN_OUT], int *num_coef);
+int ifile_subI2(FILE *fp, char **dichI2, char **codiceI2);
+int ifile_subJC(FILE *fp, char **dichJC, char **codiceJC, JacToggStruct jactoggstruct[MAX_EQUAZIONI][MAX_VARIABILI_IN_OUT], int num_equazioni, int num_variabili);
+int ifile_subMOD(FILE *fp, char **dichMOD, char **codiceMOD, char **residuiMOD, int num_eq);
+int ifile_subD1(FILE *fp, char **signeq, char **uniteq, char **cosnor, int num_eq);
+int da_file_a_buffer(FILE *fp, char **varbuf);
+void da_buffer_a_fileFTN(FILE *fp, char *lstring, char *buffer, char flag);
+
+/* External function declarations */
+extern void alloca_text_widget(Widget bboard, int num_st, int num_alg, int num_in, int num_dati);
+extern int Empty(char *str);
+extern void copy_n_car(char *dest, char *src, int n);
+
 /*** leggi_file_interfaccia()
  ***
  ***   Descrizione:
  ***     Legge dal file interfaccia le informazioni della NEWMOD e le carica
  ***     in memoria nelle variabili globali
  ***/
-leggi_file_interfaccia()
+int leggi_file_interfaccia()
 {
    FILE *fp_iface;
    char nome_file_interfaccia[256], nome[5],titolo_esteso[51];
@@ -179,7 +199,7 @@ leggi_file_interfaccia()
  ***     Genera il codice FORTRAN dalle informazioni inserite dall'utente
  ***     nelle window della NEWMOD
  ***/
-genera_fortran(nome_modulo,titolo_esteso)
+int genera_fortran(nome_modulo,titolo_esteso)
 char *nome_modulo, *titolo_esteso; 
 {
    FILE *fp_ftn;
@@ -245,7 +265,7 @@ char *nome_modulo, *titolo_esteso;
  ***     Legge dal file interfaccia (.i) il nome del modulo e la sua
  ***     descrizione.
  ***/
-ifile_nome_modulo( fp, nome, descr )
+int ifile_nome_modulo( fp, nome, descr )
 FILE *fp;
 char nome[], descr[];
 {
@@ -270,7 +290,7 @@ char nome[], descr[];
  ***     Recupera dall'header del file interfaccia (.i) il il numero delle
  ***     variabili e dei dati geometrici e fisici
  ***/
-ifile_header( fp, nstati, nuscite, ningressi, ndati )
+int ifile_header( fp, nstati, nuscite, ningressi, ndati )
 FILE *fp;
 int *nstati, *nuscite, *ningressi, *ndati;
 {
@@ -296,7 +316,7 @@ int *nstati, *nuscite, *ningressi, *ndati;
  ***     Recupera dal file interfaccia (.i) le variabili di ingresso, stato e 
  ***     algebriche 
  ***/
-ifile_variabili( fp, variabili, numero_stati, numero_uscite, numero_ingressi )
+int ifile_variabili( fp, variabili, numero_stati, numero_uscite, numero_ingressi )
 FILE *fp;
 StructVars *variabili;
 int numero_stati, numero_uscite, numero_ingressi;
@@ -347,7 +367,7 @@ int numero_stati, numero_uscite, numero_ingressi;
  ***   Descrizione:
  ***     Legge i dati geometrici e fisici dal file interfaccia (.i)
  ***/
-ifile_dati_geometrici( fp, dati_f14, numero_dati )
+int ifile_dati_geometrici( fp, dati_f14, numero_dati )
 FILE *fp;
 StructDati *dati_f14;
 int numero_dati;
@@ -388,7 +408,7 @@ int numero_dati;
  ***   Descrizione:
  ***     Legge dal file interfaccia il tipo e la topologia dello jacobiano.
  ***/
-ifile_jacobiano( fp, tipo_jacobiano, jactoggstruct, num_coef )
+int ifile_jacobiano( fp, tipo_jacobiano, jactoggstruct, num_coef )
 FILE *fp;
 byte *tipo_jacobiano;
 JacToggStruct  jactoggstruct[MAX_EQUAZIONI][MAX_VARIABILI_IN_OUT];
@@ -427,7 +447,7 @@ int *num_coef;
  ***    Recupera dal file interfaccia la dichiarazione ed il codice utente
  ***    relativi alla subroutine FORTRAN I2.
  ***/
-ifile_subI2( fp, dichI2, codiceI2 )
+int ifile_subI2( fp, dichI2, codiceI2 )
 FILE *fp;
 char **dichI2,**codiceI2;
 {
@@ -452,7 +472,7 @@ char **dichI2,**codiceI2;
  ***    parte guidata dei coefficienti dello jacobiano relativi alla
  ***    subroutine JC.
  ***/
-ifile_subJC( fp, dichJC, codiceJC, jactoggstruct, num_equazioni,
+int ifile_subJC( fp, dichJC, codiceJC, jactoggstruct, num_equazioni,
                  num_variabili )
 FILE *fp;
 char **dichJC, **codiceJC;
@@ -488,7 +508,7 @@ int num_equazioni, num_variabili;
  ***    Recupera dal file interfaccia la dichiarazione, il codice utente e la
  ***    parte guidata dei residui relativi alla subroutine <nome modulo>.
  ***/
-ifile_subMOD( fp, dichMOD, codiceMOD, residuiMOD, num_eq )
+int ifile_subMOD( fp, dichMOD, codiceMOD, residuiMOD, num_eq )
 FILE *fp;
 char **dichMOD, **codiceMOD, *residuiMOD[];
 int num_eq;
@@ -520,7 +540,7 @@ int num_eq;
  ***    Recupera dal file interfaccia il significato, l'unita di misura e la 
  ***    costante di normalizzazione di ogni equazione (subroutine D1).
  ***/
-ifile_subD1( fp, signeq, uniteq, cosnor, num_eq )
+int ifile_subD1( fp, signeq, uniteq, cosnor, num_eq )
 FILE *fp;
 char *signeq[MAX_EQUAZIONI], *uniteq[MAX_EQUAZIONI], *cosnor[MAX_EQUAZIONI];
 int num_eq;
@@ -565,7 +585,7 @@ int num_eq;
  ***     interrompe quando si incontra la fine del file, se si incontra la
  ***     stringa "****" o la stringa "++++".
  ***/
-da_file_a_buffer(fp, varbuf)
+int da_file_a_buffer(fp, varbuf)
 FILE *fp;
 char **varbuf;
 {
@@ -1540,7 +1560,7 @@ FILE *fp;
  ***   Descrizione:
  ***     Riporta il contentuto del buffer nel file FORTRAN.
  ***/
-da_buffer_a_fileFTN(fp, lstring, buffer, flag)
+void da_buffer_a_fileFTN(fp, lstring, buffer, flag)
 FILE *fp;
 char *lstring, *buffer, flag;
 {

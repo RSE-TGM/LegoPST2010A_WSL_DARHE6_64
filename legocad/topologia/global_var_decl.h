@@ -194,7 +194,7 @@ MODULO  moduli[];
 
 
   /* Lettura delle variabili di ogni blocco */
-  leggi_f01_var ( f01, modello, *num_blocchi, blocchi );
+  int leggi_f01_var ( f01, modello, *num_blocchi, blocchi );
 
 
 
@@ -332,7 +332,7 @@ MODULO  moduli[];
 
 
 /* Lettura delle variabili di ogni blocco */
-leggi_f01_var ( f01, modello, num_blocchi, blocchi )
+static int leggi_f01_var ( f01, modello, num_blocchi, blocchi )
 FILE    *f01;
 MODELLO modello;
 int     num_blocchi;

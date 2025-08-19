@@ -43,7 +43,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 float vsoglia(short punt,char ext,char soglia);
 
-stamalt(S_MALLAT *al)
+int stamalt(S_MALLAT *al)
 {
 S_STALLT  stalt;
 QUEUE_PACKET  packs;

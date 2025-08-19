@@ -29,7 +29,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "messcada.inc"
 #include "allar.inc"
 
-simclall()
+void simclall()
 {
 
 short i,j;

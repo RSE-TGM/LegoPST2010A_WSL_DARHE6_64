@@ -45,7 +45,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "calas.inc"
 
-sommaist()
+// External function declarations
+extern int bitvalue(short *, short);
+extern void bitset(short *, short, short);
+
+void sommaist()
 {
 int i, valide, nonvalide, totmisure;
 double somma ,val[num_somma];

@@ -31,6 +31,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 */
 #include <stdio.h>
+#include <string.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
@@ -42,7 +43,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 float vsoglia(short punt,char ext,char soglia);
 
-stamal(S_MALLA *al)
+void stamal(S_MALLA *al)
 {
 
 QUEUE_PACKET  packs;

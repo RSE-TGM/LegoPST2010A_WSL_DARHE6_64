@@ -26,9 +26,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 
 #include <stdio.h>
+#include <string.h>
 #include "fileop.inc"
 
-exstati(stato,buf_stati)
+int exstati(stato,buf_stati)
 char *stato;
 char *buf_stati ;
 {

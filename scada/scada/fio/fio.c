@@ -47,6 +47,13 @@ static char *_csrc = "@(#) %filespec: fio.c-3 %  (%full_filespec: fio.c-3:csrc:1
 #include "fio.h"
 #include "pscs.cfg"
 
+// Function declarations
+int wbyte(int fd, char *buffer, long offset, int length);
+int close(int fd);
+int rbyte(int fd, char *buffer, long offset, int length);
+char *itoa(int value, char *str, int base);
+int DosRemove(char *filename);
+
 #ifdef ETH
 #include "gpunt.inc"
 #include "mesprocv.inc"
@@ -58,7 +65,7 @@ BRICFIO	bric;
 
 #endif
 
-__fwrite(arglist)
+int __fwrite(arglist)
 	struct ARGLIST *arglist;	// lista argomenti
 	{
    char 	buffer_fio[LRECFIO+2];			
@@ -66,7 +73,7 @@ __fwrite(arglist)
    int hf;
 	char 	fname[FILENAME_MAX+1];			
 	short lbuff=0;
-	register larg;
+	register int larg;
 	short fileid,recno;
    long pos;
    char  *pbload;
@@ -149,14 +156,14 @@ __fwrite(arglist)
 
 
 
-__fread(arglist)
+int __fread(arglist)
 	struct ARGLIST *arglist;	// lista argomenti
 	{
    char 	buffer_fio[LRECFIO];			
 	FILE *fp;
 	char 	fname[70];			
 	short lbuff=0;
-	register larg;
+	register int larg;
 	short fileid,recno;
 	short dfh;					/* handle file disco */
 	char  *pbload;
@@ -254,7 +261,7 @@ char _fchks(b,l)
 	short	l;
 	{
 	char	c=0;
-	register i;
+	register int i;
 
 	for (i=0; i<l; i++,b++)
 		c+=*b;
@@ -267,7 +274,7 @@ char _fchks(b,l)
  __fdelete  -  cancellazione di un file
 
 ***/
-__fdelete(arglist)
+int __fdelete(arglist)
 	struct ARGLIST *arglist;	// lista argomenti
 	{
 	short fileid;

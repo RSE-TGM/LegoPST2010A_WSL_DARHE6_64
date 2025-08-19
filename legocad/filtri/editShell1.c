@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -42,6 +43,7 @@
 
 extern void delete_all_items();
 extern void add_items_list();
+void refresh_lista_nomi(void);
 
 extern char filedf[];                 /* filename file di editing */
 extern FILE *fpedf;                   /* file di edting */

@@ -52,6 +52,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 
 #include <stdio.h>
+#include <string.h>
 #include <dos.h>
 
 #include "g1tipdb.inc"
@@ -71,7 +72,17 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 extern DB_HEADER h_db;				// header data base
 
-stampe()	          
+// Function declarations
+void invia(int printer, void *message);
+void resetlbg(void);
+void printalt(void *message);
+void printal(void *message);
+void printar(void *message);
+void printele(void *message);
+void decnum(char *str, int width, int precision, short value, float fvalue);
+void pscserr(int error_type, int task_id, int routine_id, int error_code, int sys_action);
+
+void stampe()	          
 {
 /*
         tipo di stampe che possono essere presenti nella coda

@@ -42,6 +42,7 @@ static char *_csrc = "@(#) %filespec: arcfnom.c-4.1.1 %  (%full_filespec: arcfno
 #include <osf1.h>
 #include <io.h>
 #include <fcntl.h>
+#include <unistd.h>
 #if defined OSF1 || defined LINUX
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -61,9 +62,13 @@ static char *_csrc = "@(#) %filespec: arcfnom.c-4.1.1 %  (%full_filespec: arcfno
 #include "dconf.inc"
 #include "g2comdb.inc"
 
-arcfnom(narc,flag)
-short narc;
-char flag;
+// External function declarations
+extern void pscserr(int, int, int, int, int);
+extern int wbyte(int, void *, long, int);
+extern int rbyte(int, void *, long, int);
+extern long filelength(int);
+
+void arcfnom(short narc, char flag)
 {
 char fnome[FILENAME_MAX+1];
 short canale;
@@ -101,7 +106,7 @@ case 0:        // lettura
     close(canale);
     strcpy(fnome,arcpath);
     strcat(fnome,"/");
-    strcat(fnome,arcnome[narc].arc+arcnome[narc].use);
+    strcat(fnome,(char*)(arcnome[narc].arc+arcnome[narc].use));
     canale=open(fnome,O_BINARY | O_CREAT | O_RDWR, S_IWRITE | S_IREAD);
     if(canale==-1) pscserr(ERR_IO,TASK_ARC,ROU_FNOM1,0,SYS_CONT);
     else arcdes[narc].offset=filelength(canale);
@@ -117,9 +122,9 @@ case 3:     // cancellazione
    lung=strlen(fnome);
    for(i=0;i<n_file;i++,bufnomi++)
    {
-      if(strlen(bufnomi) && (strlen(bufnomi)<sizeof(fnome)-lung))      // nome definito accettabile ?
+      if(strlen((char*)bufnomi) && (strlen((char*)bufnomi)<sizeof(fnome)-lung))      // nome definito accettabile ?
       {
-         strcpy(&fnome[lung],bufnomi);
+         strcpy(&fnome[lung],(char*)bufnomi);
          unlink(fnome);
 #if defined (DEBUG)
    printf("canc: %s ",fnome);

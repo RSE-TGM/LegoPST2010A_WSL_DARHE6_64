@@ -30,7 +30,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 extern DB_HEADER h_db;
 
-initor()
+void initor()
 {
 short or_part ;
 

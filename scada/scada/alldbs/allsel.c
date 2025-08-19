@@ -66,6 +66,9 @@ static char *_csrc = "@(#) %filespec: allsel.c-3 %  (%full_filespec: allsel.c-3:
 #include "allar.inc"
 #include "video.inc"
 
+// External function declarations
+extern void bitset(short* buffer, short indice, short bit);
+
 struct  sel_zon {
 								short arg1;
 							   short dbs;
@@ -77,7 +80,7 @@ struct  sel_zon {
 								short zona;
 							} ;
 			
-allsel(mess,video)
+int allsel(mess,video)
 struct sel_zon *mess;
 short video;
 {

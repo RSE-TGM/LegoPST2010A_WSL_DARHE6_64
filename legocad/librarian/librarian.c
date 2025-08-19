@@ -67,6 +67,7 @@ static char SccsID[] = "@(#)librarian.prj	2.25\t1/18/96";
 #include "UxXt.h"
 #endif /* DESIGN_TIME */
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <lc_errore.h>
 
@@ -74,6 +75,13 @@ static char SccsID[] = "@(#)librarian.prj	2.25\t1/18/96";
 #include <file_icone.h>
 
 #include "definizioni.h"
+
+/* Forward declarations */
+extern int copia_file(char *src, char *dest);
+extern void init_vars(void);
+extern int test_environment(void);
+extern void menu_modulo_non_attivo(void);
+
 XtAppContext	UxAppContext;
 Widget		UxTopLevel;
 Display		*UxDisplay;
@@ -106,7 +114,7 @@ ERR_LEVEL err_level;
 /* Strutture riguardanti il geometry management delle varie Dialog...
    Specificare, nell'ordine: { DefaultPosition TRUE/FALSE,XmNx,XmNy,
                                XmNwidth,XmNHeight }                 */
-Dialog_geometry geom_attention   = { TRUE, NULL, NULL, NULL, 150 };
+Dialog_geometry geom_attention   = { TRUE, 0, 0, 0, 150 };
 /********************************************************************/
 Widget attention_wdg;
 
@@ -133,7 +141,7 @@ char *path_legocad, *path_lego, *path_rego;
 
 /******************************************************/ 
 
-main(argc,argv)
+int main(argc,argv)
 	int 	argc;
 	char 	*argv[];
 {

@@ -5,6 +5,8 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <Xm/DialogS.h>
 #include <Xm/MenuShell.h>
@@ -70,6 +72,12 @@ static _UxCSimulatorSelection	*UxSimulatorSelectionContext;
 *******************************************************************************/
 
 Widget	create_SimulatorSelection();
+
+/* Function declarations */
+int remove_simulator(char *path);
+Widget create_ViewS01(char *filename);
+int create_simulator(char *path);
+void set_something_val(Widget widget, String resource, XtArgVal value);
 
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:

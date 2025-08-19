@@ -67,11 +67,17 @@ In questa fase vengono esaminati solamente allarmi di tipo da.
 #include "messcada.inc"
 #include "allar.inc"
 
+// External function declarations
+extern int GetAlarmValue(short);
+extern void bitset_int(int *, int, short);
+extern int bitvalue(short *, short);
+extern void bitset(short *, short, short);
+
 #ifdef GERARC
 
 extern char cAbilCalcGer[];
 int kk,kkk;
-gerarch()
+void gerarch()
 {
 #if defined ALARM_SIGNAL
 char TipoAll;  // tipo di allarme segnale 0..64

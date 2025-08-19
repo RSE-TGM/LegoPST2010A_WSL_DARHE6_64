@@ -18,8 +18,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 #include "stdio.h"
 #include "ctype.h"
+#include <termios.h>
+#include <unistd.h>
 
-get_key(s)
+int get_key(s)
 short *s;
 {
   short key;
@@ -28,7 +30,7 @@ short *s;
   fflush(stdout);
   while (1)
         {
-         key=getch();
+         key=getchar();
          if (key)
             {
    	     	*s=0;
@@ -36,7 +38,7 @@ short *s;
 	    		}
          else
             {
-             key=getch();
+             key=getchar();
    	     	 *s=key;
              return(0);
 			    }

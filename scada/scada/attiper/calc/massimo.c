@@ -46,7 +46,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "calas.inc"
 
-massimo(periodo)
+// External function declarations
+extern void bitset(short *, short, short);
+extern int bitvalue(short *, short);
+
+void massimo(periodo)
 int periodo;
 {
 int i;

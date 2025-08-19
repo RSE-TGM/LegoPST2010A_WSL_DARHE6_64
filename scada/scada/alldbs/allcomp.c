@@ -45,7 +45,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "messcada.inc"
 #include "allar.inc"
 
-allcomp(alv)
+// External function declarations
+extern int rew(int, int, int*);
+extern int tra(int, int);
+
+int allcomp(alv)
 S_DBS_ALV *alv;
 {
 S_DBS_ALL *ald;

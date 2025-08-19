@@ -41,12 +41,33 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "calas.inc"
 #include "maxpar.inc"
 
+// External function declarations
+extern int rew(int, int, int*);
+extern int tra(int, int);
+extern int gettime(int);
+extern int bitvalue(short *, short);
+extern void media(int);
+extern void massimo(int);
+extern void minimo(int);
+extern void integrale(int);
+extern void portata1(void);
+extern void portata2(void);
+extern void filtro(void);
+extern void mediaist(void);
+extern void operaz(void);
+extern void sommaist(void);
+extern void scartoqm(int);
+extern void oreorgani(int);
+extern void oremisure(int);
+extern void gerarch(void);
+extern void verifall(short, short);
+
 #ifdef GERARC
 extern char g_cAbilCalcGer[];
 extern short mbox_abilger;
 #endif
 
-calc()
+void calc()
 {
 int i,j;
 

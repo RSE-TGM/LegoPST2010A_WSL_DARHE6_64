@@ -111,7 +111,7 @@ Widget	popup_NormParamDialog();
 	carica nei campi testo i valori attuali dei parametri
         di normalizzazione
 */
-load_dati_norm()
+void load_dati_norm(void)
 {
 UxPutText(p0_text,dati_norm[0]);
 UxPutText(h0_text,dati_norm[1]);
@@ -123,7 +123,7 @@ UxPutText(v0_text,dati_norm[6]);
 UxPutText(dp0_text,dati_norm[7]);
 }
 
-save_dati_norm()
+void save_dati_norm(void)
 {
 char *str;
 str=UxGetText(p0_text);

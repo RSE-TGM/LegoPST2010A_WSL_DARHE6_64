@@ -5,8 +5,10 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
+#include <X11/IntrinsicP.h>
 #include "UxXt.h"
 
 #include <Xm/CascadeB.h>
@@ -49,6 +51,13 @@
 
 extern int whatConfiguration;
 extern Boolean editabile;
+
+/* External function declarations */
+extern void AllocaDescrmodello(DESCRMODELLO *ptr, int nchar);
+extern int FileExist(char *filename);
+extern void read_file(char *filename, char **str);
+extern int ReadCrealtm(char *path, LTM **ltm, int *nmoduli);
+extern void AllocaForaus(FORAUS *ptr, int nchar);
 
 Arg arg[20];
 Cardinal narg;
@@ -132,7 +141,7 @@ Widget	create_topLevelShell1();
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-save_descr()
+void save_descr()
 {
    FILE *fp;
 

@@ -42,15 +42,19 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "comunic.inc"
 #include "messcada.inc"
 #include "allar.inc"
+#include <string.h>
 #include "tipal.inc"
 #include "mesqueue.h"
 #include "diagnoan.inc"
 #include "mesprocv.inc"
 
+// External function declarations
+extern int allcod(short, void *, void *);
+
 S_STRALL  LStrAll[max_dbsall];         // stringa ultimi allarmi
 struct buff_all LDatAll[max_dbsall];   // dati ultimi allarmi
 
-alllast (char* mess)
+int alllast (char* mess)
 {
    short i,j;
    S_DBS_ALL *all;

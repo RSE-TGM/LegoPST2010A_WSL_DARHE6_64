@@ -31,7 +31,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "simula.inc"      // definizioni e variabili generali per simulatore
 #include "simana.inc"      // analogici di diagnostica per simulatore
 
-simlgini(ptr_db)
+void simlgini(ptr_db)
 short ptr_db;    // indice in DB dell'AD contenente il numero di CI o BT
 {
 

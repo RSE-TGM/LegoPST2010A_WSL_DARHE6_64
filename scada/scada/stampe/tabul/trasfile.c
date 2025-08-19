@@ -21,6 +21,9 @@ static char *_csrc = "@(#) %filespec: trasfile.c-3.1.1 %  (%full_filespec: trasf
  */
 #include <osf1.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include <fcntl.h>
 #if defined OSF1 || defined LINUX
 #include <sys/types.h>
@@ -37,10 +40,11 @@ static char *_csrc = "@(#) %filespec: trasfile.c-3.1.1 %  (%full_filespec: trasf
 #include "diagnodi.inc"
 #include "dconf.inc"
 
+// External function declarations
+extern void bitset(short *, short, short);
+
 #if !defined  OSF1 && !defined LINUX
-trasfile(filename,buf)
-char *filename ;
-char *buf;
+int trasfile(char *filename, char *buf)
 {
 #define l_buf 512
 long offset;
@@ -89,9 +93,7 @@ close(fh2);
 return(0);
 }
 #else
-trasfile(filename,buf)
-char *filename ;
-char *buf;
+int trasfile(char *filename, char *buf)
 {
 int i;
 char nomedir[FILENAME_MAX+1];

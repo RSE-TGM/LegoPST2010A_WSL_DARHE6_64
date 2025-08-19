@@ -12,6 +12,9 @@
 
 #include <Xm/MessageB.h>
 
+/* Missing function declarations */
+extern int testa_ambiente();
+
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/

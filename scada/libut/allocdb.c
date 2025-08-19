@@ -37,7 +37,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 extern char*   dballoc,
                notenmem;
 
-allocdb(flag,db)
+void allocdb(flag,db)
 short flag;
 DB_HEADER *db;
 {

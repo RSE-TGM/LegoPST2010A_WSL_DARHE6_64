@@ -8,12 +8,12 @@
  * 1997-04-21
  */
 
-//#include <math.h>
+#include <math.h>
 
-extern char logbf [ ] ;
+extern char pagmod_logbf [ ] ;
 
 
-extern void log ( char * ) ;
+extern void pagmod_log ( char * ) ;
 extern void log_start ( int , char * * ) ;
 extern void log_stop ( void ) ;
 

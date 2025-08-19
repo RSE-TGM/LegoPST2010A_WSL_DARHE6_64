@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -86,7 +87,7 @@ void OkCB()
    exit(0);
 }
 
-lancia_edit(char *fname,int edit)
+void lancia_edit(char *fname,int edit)
 {
    Arg args[20];
    int narg;

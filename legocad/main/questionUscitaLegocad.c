@@ -5,12 +5,16 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <Xm/DialogS.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
 
 #include <Xm/MessageB.h>
+
+/* Missing function declarations */
+extern void kill_proc_legocad();
 
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:

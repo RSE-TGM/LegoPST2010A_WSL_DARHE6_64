@@ -35,7 +35,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "repgdc.h"
 #include "mesprocv.inc"
 
-GdcAllD(short point, short stato)
+void GdcAllD(short point, short stato)
 {
 S_MDIA mess;
 QUEUE_PACKET pack;

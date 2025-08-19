@@ -45,12 +45,40 @@
 #include <string.h>
 #include <memory.h>
 #include <ctype.h>
+#include <stdlib.h>
+#include <stdint.h>
 #include <Xm/MenuShell.h>
 #include <Xm/BulletinB.h>
 #include "f14.h"
 #include "f03.h"
 #include "uni_mis.h"
 #include "dati.h"
+
+/* Function declarations */
+void lcDestroySwidget(Widget widget);
+Widget lcCreateWidget(Widget widget);
+void aggiungi_item_n(Widget list, const char *item, int pos);
+void aggiorna_lista_var(char *blocchi, int nblocchi, int lun_nome);
+void create_edit(Widget parent);
+void create_edit_param(void);
+void create_edit_var(void);
+void free_righe_edit(void);
+int cerca_blocco(char *nome, int lun_nome);
+void alloca_righe_edit(int num_righe, int num_righe_param);
+void fill_riga_edi(int pos_var, int num_riga, int io_blo);
+void str_cut(char *str);
+void app_n_blank(char *str, int n);
+void filtra_righe_edit(void);
+void spr_float(char *str, float val);
+void elim_selez_lista(void);
+void set_selez_lista(int poslista);
+int cerca_in_lparam(char *str, int direz, int *posriga, int *poslist);
+int cerca_in_lista_edi(char *str, int direz, int *posvis, int *poslist);
+int next_pos_lista(int inizio, int direz);
+int plista_to_pvis(int poslista);
+void update_contatori(void);
+void tominus(char *str);
+int esiste_file(const char *filename);
 extern Boolean glob_modified;
 extern int n_editors;
 extern S_UNI_MIS uni_mis[];
@@ -295,7 +323,7 @@ int is_not_blank(char *str)
 extern int tot_descr; /* numero totale di descrizioni inframmezzate all'area
                          dati: viene settato della routine di libreria
                          read_file_f14 */
-aggiorna_all_lists()
+void aggiorna_all_lists(void)
 {
 int i;
 extern swidget listaBlocchi;
@@ -344,8 +372,7 @@ if(nitems)
  creazione grafica della lista per l'editing dei valori delle
  variabili o dei valori dei parametri
 */ 
-create_edit(parent)
-swidget parent;
+void create_edit(Widget parent)
 {
 /*
  creazione di un row_column che conterra' l'intera lista
@@ -372,7 +399,7 @@ else
  create_edit_var
  creazione lista di editing per le variabili
 */
-create_edit_var()
+void create_edit_var(void)
 {
 RIGA_OPT r_opt;
 int	i,j;
@@ -510,7 +537,7 @@ for (i=0; i<lista.num_righe; i++)
 			UxPutContext(sw_push[j], (char *)UxVardata_dialogContext );
 #endif
 
-			UxAddCallback(sw_push[j],XmNactivateCallback,opt_callback,r_opt.i);
+			UxAddCallback(sw_push[j],XmNactivateCallback,opt_callback,(XtPointer)(intptr_t)r_opt.i);
 			UxCreateWidget(sw_push[j]);
 			}
 
@@ -548,7 +575,7 @@ for (i=0; i<lista.num_righe; i++)
  create_edit_param
  creazione lista di editing parametri
 */
-create_edit_param()
+void create_edit_param(void)
 {
 int i,k;
 swidget sw_riga;
@@ -639,10 +666,10 @@ for (i=0; i<lparam.num_righe; i++)
 }
 
 /*
- recreate_edit()
+ void recreate_edit(void)
 	distrugge e ricrea la lista di editing
 */
-recreate_edit()
+void recreate_edit(void)
 {
 /*
  cancella la lista attuale
@@ -660,10 +687,7 @@ aggiorna_lista_var
 	in base ai blocchi selezionati visualizza le informazioni relative
 	alle variabili
 */
-aggiorna_lista_var(blocchi,nblocchi,lun_nome)
-char *blocchi;
-int nblocchi;
-int lun_nome;
+void aggiorna_lista_var(char *blocchi, int nblocchi, int lun_nome)
 {
 int i;
 int j,k;
@@ -686,7 +710,7 @@ tot_righe_param=0;
  se necessario libera la memoria allocata per la struttura
  lista di editing
 */
-free_righe_edit();
+void free_righe_edit(void);
 /*
  esamina ogni blocco selezionato
 */
@@ -694,7 +718,7 @@ array_blo= (int *)XtMalloc(nblocchi*sizeof(int));
 if(array_blo==NULL)
 	{
 	printf("\n malloc non riuscita ");
-	return(0);
+	return;
 	}
 /*
  calcola il numero totale di righe necessario per l'editing
@@ -712,7 +736,7 @@ for(i=0;i<nblocchi;i++)
 		{
 		printf("\n blocco non trovato");
 		free(array_blo);
-		return(0);
+		return;
 		}
 	tot_righe+=(ip[array_blo[i]+1]-ip[array_blo[i]]);
 /*
@@ -812,16 +836,14 @@ for(i=0;i<nblocchi;i++)
  doppie; in tal caso modifica il tipo delle righe duplicate
  in TIPO_DOPPIO
 */
-filtra_righe_edit();
+void filtra_righe_edit(void);
 free(array_blo);
 }
 
 /*
  alloca_righe_edit
 */
-alloca_righe_edit(num_righe,num_righe_param)
-int num_righe;
-int num_righe_param;
+void alloca_righe_edit(int num_righe, int num_righe_param)
 {
 lista.last_selected= -1;
 lista.num_righe=num_righe;
@@ -842,7 +864,7 @@ memset(lparam.riga,0,lparam.num_righe*sizeof(RIGA_PARAM));
 /*
 free_righe_edit
 */
-free_righe_edit()
+void free_righe_edit(void)
 {
 
 #ifdef ORIGINALE
@@ -862,12 +884,12 @@ lparam.num_righe=0;
 }
 
 /*
- filtra_righe_edit()
+ void filtra_righe_edit(void)
 	esamina le righe di editing per vedere se vi sono righe
  	doppie; in tal caso modifica il tipo delle righe duplicate
  	in TIPO_DOPPIO
 */
-filtra_righe_edit()
+void filtra_righe_edit(void)
 {
 int i,j;
 for(i=0;i<lista.num_righe;i++)
@@ -918,10 +940,7 @@ return(-1);
 /*
  fill_riga_edi
 */
-fill_riga_edi(pos_var,num_riga,io_blo)
-int pos_var;
-int num_riga;
-int io_blo;  /* indica se in ingresso o uscita da un blocco */
+void fill_riga_edi(int pos_var, int num_riga, int io_blo)  /* indica se in ingresso o uscita da un blocco */
 {
 int j,i;
 int ind_var; /* indice della variabile nei vettori nomsivar,nomvari, 
@@ -985,7 +1004,7 @@ int verifica_dato(char *str)
  salva_variazioni
 	salva le variazioni effettuate nella lista di editing
 */
-salva_variazioni()
+void salva_variazioni(void)
 {
 int i,k;
 int ind_riga_dato; /* posizione nell'array dei dati */
@@ -1190,9 +1209,7 @@ UxVardata_dialogContext = UxSaveCtx;
 	effettua lo scrolling della lista di editing a seguito di una
  	operazione di find
 */
-scrolla_lista(pos,poslista)
-int pos;
-int poslista;
+void scrolla_lista(int pos, int poslista)
 {
 Widget w_bar;
 int maximum;
@@ -1213,7 +1230,7 @@ if(lista_edit_on)
 	elimina l'evidenziazione sulla riga precedentemente 
 	selezionata
 */
-	elim_selez_lista();
+	void elim_selez_lista(void);
 
 /*
  Ricava l'indice di widget della scroll bar verticale
@@ -1254,7 +1271,7 @@ if(lista_edit_on)
 	}
 }
 
-elim_selez_lista()
+void elim_selez_lista(void)
 {
 int poslista;
 if(tipo_lista==ALL_DATA)
@@ -1281,8 +1298,7 @@ else
 	}
 }
 
-set_selez_lista(poslista)
-int poslista;
+void set_selez_lista(int poslista)
 {
 if(tipo_lista==ALL_DATA)
 	{
@@ -1305,11 +1321,7 @@ else
 
 
 
-cerca_in_lista(str,direz,posvis,poslist)
-char *str;
-int direz;
-int *posvis;
-int *poslist;
+int cerca_in_lista(char *str, int direz, int *posvis, int *poslist)
 {
 int posriga;
 int iret;
@@ -1325,11 +1337,7 @@ return(iret);
 
 
 
-cerca_in_lista_edi(str,direz,posvis,poslist)
-char *str;
-int direz;
-int *posvis;
-int *poslist;
+int cerca_in_lista_edi(char *str, int direz, int *posvis, int *poslist)
 {
 int i;
 int start,inc;
@@ -1380,11 +1388,7 @@ else
  cerca_in_lparam
  	ricerca nella lista dei parametri
 */
-cerca_in_lparam(str,direz,posriga,poslist)
-char *str;
-int direz;
-int *poslist;
-int *posriga; /* posizione all'interno della riga */
+int cerca_in_lparam(char *str, int direz, int *posriga, int *poslist) /* posriga: posizione all'interno della riga */
 {
 int start,i,j;
 int trovato;
@@ -1441,10 +1445,7 @@ if(i==start && !trovato)
 
 
 
-next_pos_lista(inizio,direz)
-int inizio;  /* posizione di partenza */
-int direz;  /* direzione dello spostamento
-		==1 -> in avanti */
+int next_pos_lista(int inizio, int direz)  /* inizio: posizione di partenza, direz: direzione dello spostamento (==1 -> in avanti) */
 {
 int i;
 int num_righe;
@@ -1476,8 +1477,7 @@ return(i);
    edit window scrollabile tenendo conto del tipo di 
    variabili visualizzate
 */
-plista_to_pvis(poslista)
-int poslista;
+int plista_to_pvis(int poslista)
 {
 int i;
 int posvis; /* posizione in visualizzazione */
@@ -1531,7 +1531,7 @@ XmAnyCallbackStruct *call_data;
 if (which_button == 0)
 	{
 	modified=False;
-	free_righe_edit();
+	void free_righe_edit(void);
 	UxDestroyInterface(vardata_dialog);
 	n_editors--;
 	}
@@ -1558,7 +1558,7 @@ XSync((XtDisplay(w)),False);
 if (which_button != 100)
 	{
 	tipo_lista=which_button;
-	recreate_edit();
+	void recreate_edit(void);
 	modified=False;
 	}
 else
@@ -1606,7 +1606,7 @@ static void	activateCB_apply_button( UxWidget, UxClientData, UxCallbackArg )
 	 estrae dalla window di editing le
 	 variazioni effettuate e le salva
 	*/
-	salva_variazioni();
+	void salva_variazioni(void);
 	/*
 	aggiorna i contatori di var note/non note
 	*/
@@ -1730,7 +1730,7 @@ static void	activateCB_edit_Close( UxWidget, UxClientData, UxCallbackArg )
 	        }
 	else
 		{
-		free_righe_edit();
+		void free_righe_edit(void);
 		UxDestroyInterface(vardata_dialog);
 		n_editors--;
 		}
@@ -1747,7 +1747,7 @@ static void	activateCB_edit_Restore( UxWidget, UxClientData, UxCallbackArg )
 	UxSaveCtx = UxVardata_dialogContext;
 	UxVardata_dialogContext = UxContext =
 			(_UxCvardata_dialog *) UxGetContext( UxWidget );
-	recreate_edit();
+	void recreate_edit(void);
 	UxVardata_dialogContext = UxSaveCtx;
 }
 
@@ -1848,7 +1848,7 @@ static void	activateCB_valori_Variables( UxWidget, UxClientData, UxCallbackArg )
 	*/
 			{
 			tipo_lista=ALL_VAR;
-			recreate_edit();
+			void recreate_edit(void);
 			}
 		}
 	}
@@ -1886,7 +1886,7 @@ static void	activateCB_valori_Inp_Var( UxWidget, UxClientData, UxCallbackArg )
 	*/
 			{
 			tipo_lista=INP_VAR;
-			recreate_edit();
+			void recreate_edit(void);
 			}
 		}
 	}
@@ -1923,7 +1923,7 @@ static void	activateCB_valori_Out_Var( UxWidget, UxClientData, UxCallbackArg )
 	*/
 			{
 			tipo_lista=OUT_VAR;
-			recreate_edit();
+			void recreate_edit(void);
 			}
 		}
 	}
@@ -1960,7 +1960,7 @@ static void	activateCB_valori_Data( UxWidget, UxClientData, UxCallbackArg )
 	*/
 			{
 			tipo_lista=ALL_DATA;
-			recreate_edit();
+			void recreate_edit(void);
 			}
 		}
 	}
@@ -2491,7 +2491,7 @@ static Widget	_Ux_popup_vardata( _Uxtipolista )
 			}
 		set_something_val(UxGetWidget(menu_valori),
 		                       XmNmenuHistory,
-		                       UxGetWidget(sw_sel));
+		                       (XtArgVal)UxGetWidget(sw_sel));
 		
 		lista_edit_on=False;
 #ifdef ORIGINALE

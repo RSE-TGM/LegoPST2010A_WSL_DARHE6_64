@@ -27,8 +27,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #define _PUBLIC 0          // definisco le strutture per i tabulati
 #include "tabulati.inc"
 
-readtab(fp)
-FILE *fp;
+int readtab(FILE *fp)
 {
 return(fread(diztab,rec_fdiztab*n_tabu,1,fp));
 }

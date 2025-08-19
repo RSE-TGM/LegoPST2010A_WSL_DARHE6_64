@@ -32,6 +32,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
          nessuno
 */
 #include <stdio.h>
+#include <string.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
@@ -44,7 +45,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 extern DB_HEADER h_db;
 
-descrizwin(mes)
+/* Function prototypes */
+extern int ricerca(short *, short *, short *, long *, short *, FILE *);
+extern int rbyte(int, char *, long, int);
+
+int descrizwin(mes)
 S_MRDPWIN* mes ;
 {
 
@@ -131,7 +136,7 @@ default:
    a.ext=m_nondef; a.punt=errtip;
 	goto RISP;
 }
-rbyte(fileno(fpp[fdde]),(short*)desc,offset+nbyte*point,nbyte) ;
+rbyte(fileno(fpp[fdde]),(char*)desc,offset+nbyte*point,nbyte) ;
 if(a.tipo==m_analogico || a.tipo==m_organo)
 {
    //memcpy(a.nome,desc,SCD_SIGLA+SCD_DESCRIZIONE+winlu_mi);

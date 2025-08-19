@@ -27,7 +27,9 @@ static char SccsID[] = "@(#)reader.c	1.11\t3/27/95";
  *------------------------------------------------------*/
 
 #include <stdio.h>
+#include <string.h>
 #include <sys/stat.h>
+#include <X11/Intrinsic.h>
 #include "linfo.h"
 
 #if defined LINUX

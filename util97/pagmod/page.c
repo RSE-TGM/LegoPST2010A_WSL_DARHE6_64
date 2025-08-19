@@ -295,7 +295,7 @@ int ScanPageFile ( void ) {
     if ( StarIndex == NULL
          || ColonIndex == NULL ) {
          
-      sprintf ( logbf , 
+      sprintf ( pagmod_logbf , 
                 "%s: Linea %d: non riconosciuta:\n%s" , 
                 PageFileName ,
                 LineNumber ,

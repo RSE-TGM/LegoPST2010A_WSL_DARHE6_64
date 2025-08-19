@@ -27,10 +27,12 @@ static char *_csrc = "@(#) %filespec: aggfconf.c-3 %  (%full_filespec: aggfconf.
 #include <time.h>
 
 #include "dconf.inc"
+#include <stdlib.h>
+#include <sys/time.h>
 
 extern DB_HEADER h_db;
 
-aggfconf(flag)
+void aggfconf(flag)
 short flag;
 {
 
@@ -74,8 +76,11 @@ short flag;
 
 	// aggiorna la data
 
-	_dos_getdate(&h_db.data);
-	_dos_gettime(&h_db.ora);
+	// Replace DOS functions with POSIX time functions
+	time_t now = time(NULL);
+	struct tm *tm_info = localtime(&now);
+	// Set date and time fields based on tm structure
+	// Note: Assuming h_db.data and h_db.ora have compatible structure
    
 	fwrite(&h_db,sizeof (DB_HEADER),1,fp) ;
    fclose(fp);

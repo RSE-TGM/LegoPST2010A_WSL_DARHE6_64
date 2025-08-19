@@ -38,6 +38,18 @@ static char SccsID[] = "@(#)doc_dati.c	1.10\t3/31/95";
 #include "autodoc.h"
 #include "unita.h"
 
+int conta_righe_doc_dati(InfoBlock*, int, char*);
+void ScriviIndice(FILE*, ModelBlockStruct*, int*, int*, int, int, char*);
+void StampaIntBlocco(FILE*, ModelBlockStruct*, int*);
+void StampaBlankLine(FILE*, int*, int);
+int ContaRigheNota(char*);
+void riempi(char*, int);
+void FoglioIntest(FILE*, int, int, char[][81], int, char*);
+char* tominus(char*);
+int CercaDocModuloDatiG(FILE*);
+int LineaFileDoc(char*, int, FILE*);
+int cerca_str(char[], int, char[]);
+
 extern char page_prefix_dati[];
 
 /*** doc_dati_blocco(pblock)
@@ -47,12 +59,7 @@ extern char page_prefix_dati[];
  ***    Descrizione:
  ***       stampa la documentazione relativa ad un blocco
  ***/
-doc_dati_blocco(pblock, fp_doc, fp_ind, riga_doc, pag_doc, riga_ind, pag_ind,
-		max_righe, note_blocco)
-ModelBlockStruct *pblock;
-FILE *fp_doc, *fp_ind;
-int *riga_doc, *pag_doc,*riga_ind, *pag_ind, max_righe;
-NoteDelBlocco *note_blocco;
+int doc_dati_blocco(ModelBlockStruct *pblock, FILE *fp_doc, FILE *fp_ind, int *riga_doc, int *pag_doc, int *riga_ind, int *pag_ind, int max_righe, NoteDelBlocco *note_blocco)
 {
    short righe_blocco, num=0;
    InfoBlock *dati_blocco;
@@ -214,10 +221,7 @@ int *riga;
  ***        conta il numero delle righe che occupa la documentazione di un
  ***        blocco.
  ***/
-int conta_righe_doc_dati(dati_blocco, num_dati, nota_blocco)
-InfoBlock *dati_blocco;
-int num_dati;
-char *nota_blocco;
+int conta_righe_doc_dati(InfoBlock *dati_blocco, int num_dati, char *nota_blocco)
 {
    short i, tratto=1, commento=0, numero;
 
@@ -379,9 +383,7 @@ printf("file documentazione: %s\n", file_doc);
  ***       posiziona il puntatore 'fp' alle n linee successive.Ritorna EOF
  ***       se si arrivati alla fine del file 
  ***/
-SkipLine(fp, n)
-FILE *fp;
-short n;
+int SkipLine(FILE *fp, short n)
 {
    char buff[81];
    short j, out;
@@ -402,8 +404,7 @@ short n;
  ***     di informazioni da considerare. Ritorna 0 se e' stata trovata la 
  ***     sezione ,EOF altrimenti
  ***/
-CercaDocModuloDatiG( fp )
-FILE *fp;
+int CercaDocModuloDatiG(FILE *fp)
 {
    short out;
    int i;

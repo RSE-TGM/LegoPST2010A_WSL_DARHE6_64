@@ -29,8 +29,12 @@ static char SccsID[] = "@(#)write_f01.c	2.26\t3/30/95";
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 #include "lg1.h"
 #include "errore.h"
+
+/* Function declarations */
+void errore(const char*, ...);
 
 #define COL0 0
 #define COL1 10 
@@ -43,15 +47,16 @@ extern int graphics_on;
 
 static FILE *f01;
 
-write_f01_tappo()
+int write_f01_tappo()
 {
   char *tappo = {"****"};
 
   fprintf(f01,"%s\n",tappo);
+  return 0;
 }
 
 
-write_f01_bl()
+int write_f01_bl()
 {
   char riga[80];
   int i;
@@ -81,10 +86,11 @@ write_f01_bl()
 */
      fprintf(f01,"%s\n",riga);
   }
+  return 0;
 }
 
 
-write_f01_modello()
+int write_f01_modello()
 {
   extern char *str_toupper();
   char nome[80];
@@ -100,10 +106,11 @@ write_f01_modello()
   strncat(nome,"                                                        ", (80-len) );
   nome[79]=0;
   fprintf(f01,"%s\n",nome);
+  return 0;
 }
 
 
-write_f01_var()
+int write_f01_var()
 {
   char riga[150];
   int i,j,k,ind_var_int,ind_var_ext,ind_bl_ext;
@@ -220,9 +227,10 @@ write_f01_var()
      riga[79]=0; 
      fprintf(f01,"%s\n",riga);
   }
+  return 0;
 }
 
-write_f01_ing()
+int write_f01_ing()
 {
    char riga[86];
    int i,j;
@@ -251,10 +259,11 @@ write_f01_ing()
         }
      }
    } 
+  return 0;
 }
 
 
-write_f01_conn()
+int write_f01_conn()
 {
   char riga[86];
   int i,j,k,ind_var_int,ind_var_ext,ind_bl_ext;
@@ -283,6 +292,7 @@ write_f01_conn()
          }
       }
    }
+  return 0;
 }
 
 
@@ -317,14 +327,14 @@ int write_f01()
   {
     err_level = ERROR;
     errore ( OPEN_F01_ERR, modello.nome );
-    return;
+    return -1;
   }
   if(num_blocchi == 0)
   {
      fclose(f01);
      remove(path);
      remove(direttorio);
-     return;  
+     return 0;  
   }
 
 
@@ -341,7 +351,7 @@ int write_f01()
 
   changes_in_F01 = 0;
   fclose(f01);
-
+  return 0;
 }
 
 

@@ -43,6 +43,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 #include	"mesqueue.h"
 
+/* Function prototypes */
+extern int rbyte(int, char *, long, int);
+extern void wbyte(int, char *, long, int);
+extern int DosRemove(char *);
+
 /*
 	la struttura del messaggio FREAD per MMI Window prevede l'elenco
 	dei puntatori nel data base locale in cui inserire i dati successivamente
@@ -66,7 +71,7 @@ typedef struct {			 					// definizione struttura per FREAD
 	        } BRICFIOREADW;
 
 
-hostfiow(bric)
+void hostfiow(bric)
 	BRICFIO *bric;
 	{
 	FILE *fp;
@@ -87,7 +92,7 @@ hostfiow(bric)
 			else
 			{
 				memset(pBuff,FILL_PATT,LRECFIO);		// clear buffer
-				rbyte(fileno(fp),pBuff,(long)bric->recno * (long)LRECFIO,LRECFIO);
+				rbyte(fileno(fp),(char *)pBuff,(long)bric->recno * (long)LRECFIO,LRECFIO);
 				fclose(fp);
 			}
 			spack.lmsg=sizeof(BRICFIOREADW)+(pRead->npoint-1)*2+LRECFIO;

@@ -44,6 +44,7 @@ static char *_csrc = "@(#) %filespec: pscserr.c-3 %  (%full_filespec: pscserr.c-
 	Aggiunta gestione errore con marte non ancora attivo
 */
 #include <stdlib.h>
+#include <stdio.h>
 #include "pscserr.inc"
 #include "dconf.inc"
 #include "switch.inc"
@@ -51,7 +52,16 @@ static char *_csrc = "@(#) %filespec: pscserr.c-3 %  (%full_filespec: pscserr.c-
 
 extern DB_HEADER h_db;
 
-pscserr(tipoerr,task,codice,errore,flag)
+// Function declarations
+void scd(void);
+void NetMarteEnd(void);
+void RestIDT(void);
+void QuitScadaNoWriteDBS(int error_code);
+void rwdbal(int flag, DB_HEADER *db1, DB_HEADER *db2);
+void allocdb(int flag, DB_HEADER *db);
+int fcloseall(void);
+
+int pscserr(tipoerr,task,codice,errore,flag)
 short tipoerr,task,codice,errore,flag;
 {
 printf("\n");

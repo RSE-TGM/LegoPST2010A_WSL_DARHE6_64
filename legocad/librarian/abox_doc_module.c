@@ -58,6 +58,18 @@
 #endif
 
 #include "definizioni.h"
+#include <stdlib.h>
+
+/* Function prototypes for missing declarations */
+extern void scrivi_messaggio(char *);
+extern int tomaius(char *);
+extern void set_label(Widget, char *);
+extern int lcDestroySwidget(Widget);
+
+/* Forward declarations for functions defined in this file */
+int leggi_sezione_doc(int);
+int cambia_sezione_doc(int);
+int confronta_stringhe(char *, char *, int);
 
 /****************************************************************/
 /* VARIABILI GLOBALI ESTERNE					*/
@@ -206,7 +218,7 @@ char modulo[];
  ***      Visualizza la parte di documentazione relativa alla sezione
  ***      indicata.
  ***/
-leggi_sezione_doc(ind_sez)
+int leggi_sezione_doc(ind_sez)
 int ind_sez;
 {
    char  ptr[81], titolo_finestra[30], modulo_lowercase[5];
@@ -306,7 +318,7 @@ int ind_sez;
  ***    Descrizione:
  ***       Cambia la sezione (successiva o precedente alla sezione corrente).
  ***/
-cambia_sezione_doc(verso)
+int cambia_sezione_doc(verso)
 byte verso;
 {
    Boolean status; /* stato Sensitive True/False per gli arrow button */
@@ -338,6 +350,7 @@ byte verso;
    }  /* Fine switch */
 
    leggi_sezione_doc (sezione_attiva);
+   return 0;
 }
 
 /*****************************************************************/
@@ -349,7 +362,7 @@ byte verso;
  ***   Descrizione:
  ***      Confronta due stringhe a partire dal primo carattere non-blank.
  ***/
-confronta_stringhe(stringa1, stringa2, numchar)
+int confronta_stringhe(stringa1, stringa2, numchar)
 char *stringa1, *stringa2;
 int numchar;
 {

@@ -30,6 +30,7 @@
         Fine sezione per SCCS
 */
 
+void lcDestroySwidget(Widget);
 
 #ifndef DESIGN_TIME
 #define CH_SET                   XmSTRING_DEFAULT_CHARSET

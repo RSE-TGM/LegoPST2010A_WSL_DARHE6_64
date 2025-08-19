@@ -31,7 +31,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "comunic.inc"
 #include "g1tipdb.inc"
 
-simvardd(p_index,st_log)
+void simvardd(p_index,st_log)
 short p_index;    /* indice in DBS del punto */
 short st_log;     /* stato logico digitale */
 {

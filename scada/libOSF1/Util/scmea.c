@@ -29,7 +29,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include <memory.h>
 #include <string.h>
 
-scmea(coda  ,buff)
+/* Function declarations for scheduler control */
+void scd();
+void sce();
+
+int scmea(coda  ,buff)
 char *buff      ;
 int coda ;
 {

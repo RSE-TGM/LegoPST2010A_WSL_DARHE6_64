@@ -27,6 +27,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 
 #include <stdio.h>
+#include <string.h>
 
 #include "dconf.inc"
 #include "g1tipdb.inc"
@@ -37,9 +38,13 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "video.inc"
 #include "allar.inc"
 
+/* Function prototypes */
+extern void bitset(short *, short, short);
+extern int bitvalue(short *, short);
+
 extern DB_HEADER h_db;
 
-gesele(tipo_p, n_flag,zona)
+void gesele(tipo_p, n_flag,zona)
 short n_flag, tipo_p,zona;
 {
 QUEUE_PACKET pack;

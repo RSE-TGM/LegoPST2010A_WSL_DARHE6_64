@@ -66,6 +66,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "allar.inc"
 #include "mesqueue.h"
 
+// External function declarations
+extern int rew(int, int, int*);
+extern int tra(int, int);
+
 struct stam_zone  {
                      short arg;
                      short zona;
@@ -79,7 +83,7 @@ struct stam_mess {
 struct stam_zone z[max_zone];
                   };
 
-stamar(mess, peri)
+int stamar(mess, peri)
 struct stam_mess *mess;
 short peri;                   /* n. gruppo periferiche su cui      */
                               /* indirizzare l'elenco              */

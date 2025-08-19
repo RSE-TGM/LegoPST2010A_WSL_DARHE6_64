@@ -28,6 +28,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "fileop.inc"
 #include "comunic.inc"
 
+extern int rbyte(int, char *, long, int);
+extern void bitset(void *, int, int);
+extern int bitvalue(void *, int);
+
 void ReadAlarmSignal(DB_HEADER *);
 int IsAlarmSignal(short);
 int GetAlarmValue(short);
@@ -59,7 +63,7 @@ for(i=0;i<db->dimda;i++)
 	if(dbdau[i]>=0)
 		{
 		tot=off_f[g1tipda]+(long)nbyte[g1tipda]*(long)i;
-		rbyte(fileno(fpp[fdde]),(short*)nome_var,tot,SCD_SIGLA);
+		rbyte(fileno(fpp[fdde]),(char*)nome_var,tot,SCD_SIGLA);
 		nome_var[SCD_SIGLA]=0;
 		if((app=strstr(nome_var,"$"))==NULL)
 			continue;
@@ -81,8 +85,8 @@ for(i=0;i<db->dimas;i++)
 		dbasde[i].g.sTipoAll= -1;
 		dbasde[i].g.cont_err= 0;
 		tot=off_f[g1tipas]+(long)nbyte[g1tipas]*(long)i;
-		rbyte(fileno(fpp[fdde]),(short*)nome_var,tot,SCD_SIGLA);
-		rbyte(fileno(fpp[fdde]),(short*)descr_var,
+		rbyte(fileno(fpp[fdde]),(char*)nome_var,tot,SCD_SIGLA);
+		rbyte(fileno(fpp[fdde]),(char*)descr_var,
 			tot+SCD_SIGLA,SCD_DESCRIZIONE);
 		nome_var[SCD_SIGLA]=0;
 		descr_var[SCD_DESCRIZIONE]=0;

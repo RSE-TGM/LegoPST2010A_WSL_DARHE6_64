@@ -44,6 +44,7 @@ static char *_csrc = "@(#) %filespec: stfile.c-4 %  (%full_filespec: stfile.c-4:
 #include <osf1.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <unistd.h>
 #if defined OSF1 || defined LINUX
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -57,9 +58,14 @@ static char *_csrc = "@(#) %filespec: stfile.c-4 %  (%full_filespec: stfile.c-4:
 #include "print.inc"
 #include "pscserr.inc"
 
+// External function declarations
+extern void pscserr(int, int, int, int, int);
+extern int rbyte(int, char *, long, int);
+extern void invia(short, void *);
+
 #define l_stin		100					// buffer massimo da inviare in stampa
 
-stfile(char *nfile, char *bfile, short dim, short prn)
+void stfile(char *nfile, char *bfile, short dim, short prn)
 {
    char *bfileo;
 	short canale;
@@ -71,7 +77,7 @@ stfile(char *nfile, char *bfile, short dim, short prn)
 	if((canale=open(nfile,O_RDONLY|O_BINARY))==-1)
 	{
 	   pscserr(ERR_IO,TASK_STAMPE,ROU_STFILE,canale,SYS_CONT);
-		return(0);
+		return;
 	}
 
 	offset=0;
@@ -97,5 +103,5 @@ stfile(char *nfile, char *bfile, short dim, short prn)
 		}
 	close(canale);
  	invia(tpr_reset,(char*) 0);
-	return(0);
+	return;
 }

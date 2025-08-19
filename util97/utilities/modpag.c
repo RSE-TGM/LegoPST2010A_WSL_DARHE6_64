@@ -23,9 +23,13 @@ static char SccsID[] = "@(#)modpag.c	1.1\t1/8/96";
 
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 
 int rinombak(char *,char *,char *);
 int menu();
+int menu1();
+void tiposoglia(int,char*,char*,char*,char*,int);
+void copiafile(char*,char*);
 void sostituisci(char*,char*,char**,int,int,char*);
 
 
@@ -89,12 +93,12 @@ if (argc==1)
         break;
 
         case 1:
-             sostituisci(pathnomepagina,salvapagina,wordkeymodify,8,1);
+             sostituisci(pathnomepagina,salvapagina,wordkeymodify,8,1,"");
              printf("terminata operazione di sostituzione\n");
         break;
   
         case 2:
-             sostituisci(pathnomepagina,salvapagina,wordkeymodify,8,2);
+             sostituisci(pathnomepagina,salvapagina,wordkeymodify,8,2,"");
              printf("terminata operazione di sostituzione\n");
         break;
 
@@ -189,7 +193,7 @@ scanf ("%d",&s);
 return(s);
 }
 
-copiafile(fil1,fil2)
+void copiafile(fil1,fil2)
 char *fil1,*fil2;
 {
 char linea[DIM];

@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <sys/wait.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -69,6 +70,16 @@
 #endif
 
 #include "definizioni.h"
+
+/* Forward declarations */
+extern int cancella_modulo_lista(int tipo);
+extern int unselect_module(void);
+extern int copia_file(char *src, char *dest);
+extern void set_label(Widget w, char *text);
+extern void apponi_tag_record(int tipo, long offset);
+extern void tominus(char *str);
+extern int esegui_comando(char *cmd);
+extern int lancia_comando(Display *dpy, char *cmd);
 
 /* 12-1-95 Micheletti */
 #include <aggiunte.h>
@@ -153,7 +164,7 @@ Widget weditcode, wwinedit;
 static Elenco_callback cancella_modulo = {
 	{"Yes", delete_module, YES },
 	{"No" , delete_module, NO  },
-	{ NULL, NULL,   NULL       }};
+	{ NULL, NULL,   0       }};
 
 /***************************************************/
 /* Callback editor codice FORTRAN		   */
@@ -181,7 +192,7 @@ static void	_UxmainWindow1MenuPost( wgt, client_data, event, ctd )
 
 	if ( event->xbutton.button == which_button )
 	{
-		XmMenuPosition( menu, event );
+		XmMenuPosition( menu, (XButtonEvent *)event );
 		XtManageChild( menu );
 	}
 }
@@ -347,9 +358,9 @@ Widget	create_mainWindow1();
 /*** get_debug()
  ***
  ***/
-get_debug()
+int get_debug()
 {
-   extern int scrivi_messaggio();
+   extern void scrivi_messaggio();
    char varenv[256];
    FILE *fenv; 
 
@@ -384,7 +395,7 @@ get_debug()
  ***
  ***/
 
-set_debug(Boolean yes)
+void set_debug(Boolean yes)
 {
   Boolean cista=False;
   char *dove= NULL;
@@ -426,7 +437,7 @@ printf("settata LEGOCAD_MOD_DEBUG=%s\n",getenv("LEGOCAD_MOD_DEBUG"));
 
 }
     
-force_compile(Boolean yes)
+void force_compile(Boolean yes)
 {
    char path[200];
 
@@ -441,7 +452,7 @@ force_compile(Boolean yes)
  ***    Visualizza il messaggio nella scroll-list dei messaggi della
  ***    main-window.
  ***/
-scrivi_messaggio(message)
+void scrivi_messaggio(message)
 char *message;
 {
     XmTextPosition pos;
@@ -459,7 +470,7 @@ char *message;
  ***   Disattiva alcune voci di menu della main-window nel caso in cui non
  ***   e' selezionato nessun modulo.
  ***/
-menu_modulo_non_attivo ()
+void menu_modulo_non_attivo ()
 {
 
    set_something_val (UxGetWidget(pb_edit_ftn),XmNsensitive, (XtArgVal) False);
@@ -479,7 +490,7 @@ menu_modulo_non_attivo ()
  ***   Attiva alcune voci di menu della main-window nel caso in cui si e'
  ***   selezionato un modulo.
  ***/
-menu_modulo_attivo ()
+void menu_modulo_attivo ()
 {
    set_something_val (UxGetWidget(pb_edit_ftn),XmNsensitive, (XtArgVal) True);
    set_something_val (UxGetWidget(pb_delete),XmNsensitive, (XtArgVal) True);
@@ -586,7 +597,7 @@ XmAnyCallbackStruct *call_data;
  ***     Cancellazione della riga di un modulo nel file lista moduli
  ***     (processo o regolazione).
  ***/
-cancella_modulo_lista(tipo_lib)
+int cancella_modulo_lista(tipo_lib)
 byte tipo_lib;
 {
    FILE *fp, *fp_tmp;
@@ -695,7 +706,7 @@ int esiste_foraux(char *nome_modulo)
  ***    Inserimento o aggiornamento della riga di un modulo nel file lista dei
  ***    moduli della libreria appropriata (LIBUT,LIBUTREG o LIBREG).
  ***/
-aggiungi_modulo_lista(tipo_lib, nome, descr, tag)
+int aggiungi_modulo_lista(tipo_lib, nome, descr, tag)
 byte tipo_lib;
 char *nome, *descr;
 Boolean tag;
@@ -785,7 +796,7 @@ Boolean tag;
  ***     1	il modulo esiste ed ha il tag '!' 
  ***    -1	il modulo esiste e non ha il tag '!' 
  ***/
-controlla_lista_moduli(tipo_lib, nome_inserito, offset_listamod)
+int controlla_lista_moduli(tipo_lib, nome_inserito, offset_listamod)
 byte tipo_lib;
 char *nome_inserito;
 long *offset_listamod;
@@ -804,7 +815,7 @@ long *offset_listamod;
      attention_wdg = (Widget) attention (UxTopLevel, message, MAPPA,
 					 geom_attention);
      scrivi_messaggio(message);
-     return;
+     return(-1);
   }
 
   /* Controllo che il nome del modulo non esista gia' */
@@ -998,7 +1009,7 @@ XmAnyCallbackStruct *data;
 
    /* Dealloca la struttura utlizzata dall'editor per il find */
       get_something(wwinedit, XmNuserData, (void*) &ptr);
-      XtFree(ptr);
+      XtFree((char *)ptr);
 
       dbox_code_managed = False;
       XtDestroyWidget(wwinedit);
@@ -1011,7 +1022,7 @@ XmAnyCallbackStruct *data;
  ***    Descrizione:
  ***      La funzione viene chiamata per deselezionare il modulo corrente 
  ***/
-unselect_module()
+int unselect_module()
 {
 /* Riporto la label del modulo selezionato a '<none>'  */
    set_label(UxGetWidget(selected_module_label),"<none>"); 
@@ -1199,7 +1210,7 @@ byte tipo_lib, quale_lib;
  ***     Attiva il processo make per il controllo dell'ambiente LEGOCAD
  ***     dell'utente.
  ***/
-test_environment()
+int test_environment()
 {
     return(esegui_comando(TEST_ENVIRONMENT));
 }
@@ -1210,7 +1221,7 @@ test_environment()
  ***     Attiva il processo make per la creazione dell'ambiente LEGOCAD
  ***     dell'utente extra-vergine.
  ***/
-crea_environment()
+int crea_environment()
 {
     return(lancia_comando(display,CREA_ENVIRONMENT));
 }
@@ -1221,7 +1232,7 @@ crea_environment()
  ***     Attiva il processo make per la copia della libreria standard 
  ***     nell'ambiente LEGOCAD dell'utente (vergihe o no).
  ***/
-copia_std_environment()
+int copia_std_environment()
 {
     return(lancia_comando(display,COPIA_STD_ENVIRONMENT));
 }
@@ -1231,7 +1242,7 @@ copia_std_environment()
  ***   Descrizione:
  ***      Compila e crea la libreria libut (moduli di processo)
  ***/
-cad_crealibut()
+int cad_crealibut()
 {
     return(lancia_comando(display,CREA_LIBUT));
 }
@@ -1241,7 +1252,7 @@ cad_crealibut()
  ***   Descrizione:
  ***      Compila e crea la libreria libut_reg (moduli di regolazione)
  ***/
-cad_crealibut_reg()
+int cad_crealibut_reg()
 {
     return(lancia_comando(display,CREA_LIBUT_REG));
 }
@@ -1251,7 +1262,7 @@ cad_crealibut_reg()
  ***   Descrizione:
  ***      Compila e crea la libreria libreg (moduletti di regolazione)
  ***/
-cad_crealibreg()
+int cad_crealibreg()
 {
     return(lancia_comando(display,CREA_LIBREG));
 }
@@ -1261,7 +1272,7 @@ cad_crealibreg()
  ***   Descrizione:
  ***      Compila e crea l'applicativo LEGOCAD LG1
  ***/
-cad_crealg1()
+int cad_crealg1()
 {
     return(lancia_comando(display,CREA_LG1));
 }
@@ -1299,7 +1310,7 @@ char *mess;
  ***   Descrizione:
  ***     Fine applicativo (chiamato da close_prog_legocad() nel file lc_ops.c)
  ***/
-chiudi_prog_legocad()
+int chiudi_prog_legocad()
 {
    XtCloseDisplay(display);
    exit(1);

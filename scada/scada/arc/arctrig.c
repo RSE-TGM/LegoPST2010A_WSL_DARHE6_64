@@ -39,9 +39,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "arc.inc"
 
 
-arctrig(w_flag,trig)
-short w_flag;				// word di flag
-short trig;	            // codice trigger
+short arctrig(short w_flag, short trig)	// word di flag, codice trigger
 {
 /*
    se il punto e' fuori attendibilita' o fuori scansione, il

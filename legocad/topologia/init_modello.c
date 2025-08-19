@@ -24,6 +24,8 @@ static char SccsID[] = "@(#)init_modello.c	2.24\t3/30/95";
 #include <sys/stat.h>
 #include "lg1.h"
 #include "errore.h"
+#include <string.h>
+#include <unistd.h>
 
 
 
@@ -37,8 +39,15 @@ int     num_tot_moduli;
 
 extern ERR_LEVEL err_level;
 
+/* Function declarations */
+int libera_modello(void);
+int read_moduli(void);
+int read_f01(void);
+void errore(const char*, ...);
+int libera_blocco(int);
 
-init_modello(nome_modello, path_legocad)
+
+int init_modello(nome_modello, path_legocad)
 char *nome_modello, *path_legocad;
 {
    char appmod[400];
@@ -74,7 +83,7 @@ char *nome_modello, *path_legocad;
         printf("SORRY CANNOT CREATE NEW MODEL\n");
         err_level = ERROR;
         errore("Can't open the model"); 
-        return;
+        return -1;
      }
    }
 
@@ -86,14 +95,16 @@ char *nome_modello, *path_legocad;
      errore("ERROR returned when read F01.dat\n");
      libera_modello();
      num_blocchi = num_tot_moduli = 0;
+     return -1;
    }
+   return 0;
 }
 
 
 
 
 
-libera_modello()
+int libera_modello()
 {
   int i;
 

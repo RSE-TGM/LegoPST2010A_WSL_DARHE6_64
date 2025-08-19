@@ -18,9 +18,10 @@
 #include <locale.h>
 #include <sys/signal.h>
 
-int stato_processo();
-int attiva_figlio();
-int messaggio_scada();
+int stato_processo(pid_t pid);
+void attiva_figlio(void);
+void messaggio_scada(int sig);
+void StrTime(char * nowstr);
 
 int pid_figlio;
 int num_parametri;
@@ -28,7 +29,7 @@ char par[100][255];
 char nome_exe[255];
 char path_exe[255];
 
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 int i;
 	if(argc <3)
@@ -76,7 +77,7 @@ int i;
 		printf(" %s",par[i]);
 	printf("\n");
 	
-	signal(SIGALRM,messaggio_scada);
+	signal(SIGALRM,(void(*)(int))messaggio_scada);
 
 	attiva_figlio();
 	while(1)
@@ -88,7 +89,7 @@ int i;
 }
 
 
-int attiva_figlio()
+void attiva_figlio(void)
 {
 char *proc_envp[9];
 char proc_name[255];
@@ -187,7 +188,7 @@ fclose(fp_log);
 }
 
 
-stato_processo(pid)
+int stato_processo(pid)
 pid_t pid;
 {
 int ritorno;
@@ -207,7 +208,7 @@ else
         return(1);
 }
 
-StrTime(char * nowstr)
+void StrTime(char * nowstr)
 {
           time_t nowbin;
            struct tm *nowstruct;
@@ -224,7 +225,7 @@ StrTime(char * nowstr)
 }
 
 
-int messaggio_scada()
+void messaggio_scada(int sig)
 {
 char str_time[80];
 FILE *fp_log;

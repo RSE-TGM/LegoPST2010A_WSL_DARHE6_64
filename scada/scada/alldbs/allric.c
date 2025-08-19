@@ -62,8 +62,17 @@ static char *_csrc = "@(#) %filespec: allric.c-6 %  (%full_filespec: allric.c-6:
 #include "mesqueue.h"
 #include "diagnoan.inc"
 
+// External function declarations
+extern int abzon(short *, short *, short, char *);
+extern int rew(int, int, void *);
+extern void allpvis(short, short, short);
+extern int allinger(void *, void *, void *);
+extern void gestri(int, int, int);
+extern void allsev(void *, int, short);
+extern void tra(int, int);
 
-rical(alv)
+
+void rical(alv)
 S_DBS_ALV *alv;               // tabella video allarmi 
 {
 short limite;                 // n. massimo allarmi da riconoscere
@@ -91,7 +100,7 @@ abzon(&alv->mask1,&alv->mask2,alv->pal,alv->abgera);  // ricerco zone e gerarchi
 #else
 abzon(&alv->mask1,&alv->mask2,alv->pal);  // ricerco zone abilitate
 #endif
-if(!abilzo.n_al) return(0);
+if(!abilzo.n_al) return;
 
 
 if (SEGNALA_RIC_ALLARMI)
@@ -367,5 +376,5 @@ printf("allric:SEGNALA_RIC_ALLARMI !!!\n");
 	   }
    }
 
-return(0);
+return;
 }

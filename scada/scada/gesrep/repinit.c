@@ -51,6 +51,10 @@ short StrnChar(char *pch, char ch);
 char IsComment(char *pch);
 char IsNull(char *pch);
 
+// External function declarations
+extern void pscserr(int, int, int, int, int);
+extern int ricerca(short *, short *, short *, long *, short *, FILE *);
+
 
 extern DB_HEADER h_db;
 
@@ -342,7 +346,7 @@ short RepInit(void)
 
   	memset(chBuffer,0,lLine);
    strcpy(chBuffer,szNonRicTag);
-	if(ricerca(chBuffer,&point,&ext,&blocco,&posiz,fp))
+	if(ricerca((short*)chBuffer,&point,&ext,&blocco,&posiz,fp))
    {
       pscserr(ERR_CONF,TASK_REP,ROU_INI_DIA,0,SYS_HALT);
       return 1;
@@ -351,7 +355,7 @@ short RepInit(void)
 
   	memset(chBuffer,0,lLine);
    strcpy(chBuffer,szRicTag);
-	if(ricerca(chBuffer,&point,&ext,&blocco,&posiz,fp))
+	if(ricerca((short*)chBuffer,&point,&ext,&blocco,&posiz,fp))
    {
      	pscserr(ERR_CONF,TASK_REP,ROU_INI_DIA,0,SYS_HALT);
      	return 1;
@@ -360,7 +364,7 @@ short RepInit(void)
 		
   	memset(chBuffer,0,lLine);
    strcpy(chBuffer,szTag);
-	if(ricerca(chBuffer,&point,&ext,&blocco,&posiz,fp))
+	if(ricerca((short*)chBuffer,&point,&ext,&blocco,&posiz,fp))
    {
      	pscserr(ERR_CONF,TASK_REP,ROU_INI_DIA,0,SYS_HALT);
      	return 1;
@@ -369,7 +373,7 @@ short RepInit(void)
 
   	memset(chBuffer,0,lLine);
    strcpy(chBuffer,szTel);
-	if(ricerca(chBuffer,&point,&ext,&blocco,&posiz,fp))
+	if(ricerca((short*)chBuffer,&point,&ext,&blocco,&posiz,fp))
    {
      	pscserr(ERR_CONF,TASK_REP,ROU_INI_DIA,0,SYS_HALT);
      	return 1;
@@ -378,7 +382,7 @@ short RepInit(void)
 
   	memset(chBuffer,0,lLine);
    strcpy(chBuffer,szPref);
-	if(ricerca(chBuffer,&point,&ext,&blocco,&posiz,fp))
+	if(ricerca((short*)chBuffer,&point,&ext,&blocco,&posiz,fp))
    {
      	pscserr(ERR_CONF,TASK_REP,ROU_INI_DIA,0,SYS_HALT);
      	return 1;

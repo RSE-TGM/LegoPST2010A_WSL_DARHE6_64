@@ -37,7 +37,17 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tipal.inc"
 #include	"mesqueue.h"
 
-asinct()
+/* Function prototypes */
+extern void bitset(short *, short, short);
+extern int bitvalue(short *, short);
+extern void calcdi(short);
+extern void calcor(short);
+extern void inibiz(short, short, short, short);
+extern void calcau(short);
+extern void calcort(short, void *);
+extern void calcdit(short, void *);
+
+int asinct()
 {
 
 S_CALIN *dig ;		      /* puntatore alla tabella CALIN       */
@@ -412,5 +422,6 @@ if(bitvalue(dbtr,g2di_io) && inibire)
 	}
 }
 goto INIZIO ;
+return 0;  /* Never reached */
 }
 

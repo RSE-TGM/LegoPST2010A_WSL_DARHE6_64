@@ -45,8 +45,9 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "mesprocv.inc"
 #include "tabulati.inc"
 #include	"mesqueue.h"
+#include <string.h>
 
-tabFound(char * NomeTab, S_MSEN* sen)
+int tabFound(char * NomeTab, S_MSEN* sen)
 {
    S_VSTAT risp;
    S_DIZTAB *pdiz;

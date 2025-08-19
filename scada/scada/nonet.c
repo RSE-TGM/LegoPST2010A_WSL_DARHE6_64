@@ -16,14 +16,14 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 /*
         Fine sezione per SCCS
 */
-NetMarteStartup()
+void NetMarteStartup()
    {
    }
 
-NetDosStartup()
+void NetDosStartup()
    {
    }
 
-NetMarteEnd()
+void NetMarteEnd()
    {
    }

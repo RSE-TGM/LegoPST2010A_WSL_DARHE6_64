@@ -33,7 +33,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 #include "defpub.h"
 #include "print.inc"
-resetlbg()
+void resetlbg()
 {
    short i;
 

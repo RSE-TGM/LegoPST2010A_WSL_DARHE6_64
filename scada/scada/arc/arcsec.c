@@ -40,9 +40,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include <time.h>
 #include "arc.inc"
 
-arcsec(bcamp,secondi)
-HEAD_CAMP *bcamp;
-long *secondi;
+int arcsec(HEAD_CAMP *bcamp, long *secondi)
 {
 struct tm stimep;
 

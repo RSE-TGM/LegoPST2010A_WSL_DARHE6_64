@@ -53,11 +53,12 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "allar.inc"
 #include "arc.inc"
 
-arcfind(mess,arfile,arpos,bcamp)
-S_STAB* mess;
-short *arfile;
-long *arpos;
-ARC_DBS **bcamp;
+// External function declarations
+extern int rew(int, int, int*);
+extern int tra(int, int);
+extern int arcread(short, short*, ARC_DBS**, long*);
+
+int arcfind(S_STAB* mess, short *arfile, long *arpos, ARC_DBS **bcamp)
 {
 PARCDES *arc;
 float fdata;

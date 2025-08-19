@@ -54,8 +54,15 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 extern char *arc_errore;
 extern char stat_diz[];
 
-arctab(mess)
-S_STAB *mess ;	 
+// External function declarations
+extern int arctabin(PARCDES*, short, short, short, short, void*);
+extern int arcfind(S_STAB*, short*, long*, ARC_DBS**);
+extern void decnum(char*, int, int, short, float);
+extern short arcpar(ARC_DBS*, short);
+extern void invia(int, void*);
+extern int arcread(short, short*, ARC_DBS**, long*);
+
+int arctab(S_STAB *mess)	 
 {
 PARCDES *arc;
 long arpos;

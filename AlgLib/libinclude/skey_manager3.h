@@ -30,7 +30,12 @@ int skey_verifica_e_carica3 (int , char *, char *, char *, int * );
                 char data_ultimo_uso[8];
                 char codice_societa[4];
                 char spare[12];
-        } buff;
+        };
+        
+#ifndef SKEY_BUFF_DEFINED
+#define SKEY_BUFF_DEFINED
+        static struct BUFFER buff;
+#endif
 
 #define LICBLOCKDIM sizeof(buff)
 #define MAXLICINKEY (int)((DATA_LENGTH + EXTENDED_DATA_LENGTH)/LICBLOCKDIM)

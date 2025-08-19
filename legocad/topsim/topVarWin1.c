@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <X11/Shell.h>
 #include <Xm/MenuShell.h>
@@ -45,6 +46,20 @@
 #include "filtri.h"
 
 int gost_win(int, int);
+void gost_win_event_handler(Widget, XtPointer, XEvent *, Boolean *);
+void set_var_win_list_context(Widget, char **);
+int get_something(Widget, char *, void *);
+void set_var_pixmap(Widget, char *);
+void reset_var_win_list_context(char *);
+Widget lcCreateWidget(swidget);
+void clear_gost_win(void);
+int highlight(Widget, char *);
+int set_something_val(Widget, char *, XtArgVal);
+int set_title(BLOCCO);
+int add_variables(BLOCCO);
+int trim_blank(char *);
+int make_task_connection(int, int, int, int, int, int);
+int tenta_connessione(int, int, int, int, int, int);
 
 extern SIMULATORE *simulatore;
 VAR_SEL  move_var;
@@ -74,7 +89,7 @@ static void	_UxtopVarWin1MenuPost( wgt, client_data, event, ctd )
 
 	if ( event->xbutton.button == which_button )
 	{
-		XmMenuPosition( menu, event );
+		XmMenuPosition( menu, (XButtonPressedEvent *)event );
 		XtManageChild( menu );
 	}
 }
@@ -185,12 +200,12 @@ Widget	create_topVarWin1();
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-void var_press();
-int var_release();
-int show_all_conn();
-int no_show_all_connections();
-int show_connections();
-int no_show_connections(); 
+void var_press(Widget, XtPointer, XEvent *, Boolean *);
+void var_release(Widget, XtPointer, XEvent *, Boolean *);
+void show_all_conn(void);
+void no_show_all_connections(void);
+void show_connections(int, Widget);
+void no_show_connections(Widget); 
 
 
 
@@ -501,7 +516,7 @@ int delete_connection( Widget widctx )
 
 ---*/
 
-no_show_connections(Widget var_wid)
+void no_show_connections(Widget var_wid)
 {
    Arg arg[5];
    Cardinal narg;
@@ -536,7 +551,7 @@ no_show_connections(Widget var_wid)
 /*
  elimina la visualizzazione di tutte le connessioni
 */
-no_show_all_connections()
+void no_show_all_connections(void)
 {
    Arg arg[10];
    Cardinal num,nc;
@@ -603,7 +618,7 @@ no_show_all_connections()
    del blocco 
 */
 
-show_connections( int variabile, Widget var_wid)
+void show_connections( int variabile, Widget var_wid)
 {
    swidget lb;
    Widget  wid;
@@ -675,7 +690,7 @@ show_connections( int variabile, Widget var_wid)
    visualizze tutte le connessioni di tutte le variabili di un blocco
 */
 
-show_all_conn()
+void show_all_conn(void)
 {
    Arg arg[10];
    Cardinal num,nc;
@@ -747,7 +762,7 @@ show_all_conn()
  *
  * Inverte il background ed il foreground del widget argomento.
  */
-inverti_colori(swidget  swid )
+void inverti_colori(swidget  swid )
 {
    char *background;
 
@@ -762,7 +777,7 @@ inverti_colori(swidget  swid )
    Viene attivato dalla press del button2 (var_press)
 */
   
-event_loop_for_conn(Widget w)
+void event_loop_for_conn(Widget w)
 {
   int     fine=False;
   char    *name;
@@ -780,7 +795,7 @@ event_loop_for_conn(Widget w)
                  Button2MotionMask | ButtonReleaseMask |
                  LeaveWindowMask | EnterWindowMask,
                  GrabModeSync, GrabModeAsync,
-                 None, NULL, CurrentTime );
+                 None, None, CurrentTime );
 
    if ( bloc[blocco].variabili[move_var.var].tipo == INGRESSO )
      strcpy(list_name, "uscSW");
@@ -852,7 +867,7 @@ event_loop_for_conn(Widget w)
    utilizzato per evidenziare una variabile connessa sulla lista
  
 */
-set_var_pixmap(Widget w,char *nome)
+void set_var_pixmap(Widget w,char *nome)
 {
    Arg arg;
    Widget *wids;
@@ -870,7 +885,7 @@ set_var_pixmap(Widget w,char *nome)
    visualizza il pixmap di avvenuta connessione "U"
    sulla item della lista della variabile
 */ 
-visualizza_connessione(Widget w, int var)
+void visualizza_connessione(Widget w, int var)
 {
    Arg arg[2];
    Cardinal narg,num;
@@ -880,7 +895,7 @@ visualizza_connessione(Widget w, int var)
 
    narg=0;
    XtSetArg( arg[narg], XmNnumChildren, &num );narg++;
-   XtGetValues( XtParent(w), &arg, narg );
+   XtGetValues( XtParent(w), arg, narg );
 
    if ( path_pxm = getenv( "LEGOCAD_ICO" ) )
    {
@@ -900,7 +915,7 @@ visualizza_connessione(Widget w, int var)
    effettua la connessione tra due variabili 
 */
 
-make_task_connection(int mod1,int bl1, int var1,int mod2, int bl2, int var2)
+int make_task_connection(int mod1,int bl1, int var1,int mod2, int bl2, int var2)
 {
     extern Boolean simulator_changed;
    CONNMODEL *new_conn;
@@ -990,7 +1005,7 @@ make_task_connection(int mod1,int bl1, int var1,int mod2, int bl2, int var2)
    verifico se' la connessione e' effettuabile
 */
 
-tenta_connessione(int mod1,int bl1, int var1,int mod2, int bl2, int var2)
+int tenta_connessione(int mod1,int bl1, int var1,int mod2, int bl2, int var2)
 {
    CONNMODEL *conn;
    BLOCCO *b1,*b2,*dummy;
@@ -1128,7 +1143,7 @@ int num_conn(Widget w)
 
 
 
-var_menu_set()
+void var_menu_set(void)
 {
    printf("var_menu_set NULL FUNCTION\n"); 
 }
@@ -1198,7 +1213,7 @@ int filtra(char *nome)
 
 #ifndef DESIGN_TIME
 
-set_var_win_list_context(Widget w, char **salva_context)
+void set_var_win_list_context(Widget w, char **salva_context)
 {
    swidget swid;
 
@@ -1209,7 +1224,7 @@ set_var_win_list_context(Widget w, char **salva_context)
 
 
 
-reset_var_win_list_context(char *salva_context)
+void reset_var_win_list_context(char *salva_context)
 {
    UxTopVarWin1Context = (_UxCtopVarWin1 *) salva_context;
 }
@@ -1267,7 +1282,7 @@ int set_title(BLOCCO bloc)
    event handler sulla lista
 */
     
-int list_leave(Widget w,XtPointer cd,XLeaveWindowEvent *event)
+void list_leave(Widget w, XtPointer cd, XEvent *event, Boolean *cont)
 {
    char *salva_context;
    Arg  arg;
@@ -1275,14 +1290,14 @@ int list_leave(Widget w,XtPointer cd,XLeaveWindowEvent *event)
 
    set_var_win_list_context( XtParent(w), &salva_context);
 
-   if ( event->mode == NotifyNormal  &&  event->detail != NotifyInferior )
+   if ( event->xcrossing.mode == NotifyNormal  &&  event->xcrossing.detail != NotifyInferior )
    {
 
       if ( sel_var.status == SEL_ON )
          XGrabPointer( XtDisplay(w), XtWindow(w), False,
                        EnterWindowMask | ButtonReleaseMask,
                        GrabModeAsync, GrabModeAsync,
-                       None, NULL, CurrentTime );
+                       None, None, CurrentTime );
 
       if ( move_var.status == MOVE_ON  &&  highlight_on )
       {
@@ -1300,7 +1315,7 @@ int list_leave(Widget w,XtPointer cd,XLeaveWindowEvent *event)
    enter
 */
 
-int list_enter(Widget w, XtPointer cd, XEvent *event )
+void list_enter(Widget w, XtPointer cd, XEvent *event, Boolean *cont)
 {
    char   *salva_context;
    Arg    arg;
@@ -1351,7 +1366,7 @@ int list_enter(Widget w, XtPointer cd, XEvent *event )
   release
 */
 
-int var_release(Widget w,XtPointer variable,XButtonEvent *event)
+void var_release(Widget w, XtPointer variable, XEvent *event, Boolean *cont)
 {
   Widget wid;
   char *salva_context;
@@ -1375,7 +1390,7 @@ var = (int)variable;
 
    bloc = locmod->blocchi;
 
-   switch ( event->button )
+   switch ( event->xbutton.button )
    {
 
       case Button1:
@@ -1431,7 +1446,7 @@ var = (int)variable;
    press
 */
  
-void var_press( Widget w, XtPointer variabile, XButtonEvent *event )
+void var_press( Widget w, XtPointer variabile, XEvent *event, Boolean *cont )
 {
    swidget swid;
    int width, height, var;
@@ -1442,7 +1457,7 @@ void var_press( Widget w, XtPointer variabile, XButtonEvent *event )
    set_var_win_list_context(w, &salva_context);
 
 
-   switch ( event->button )
+   switch ( event->xbutton.button )
    {
      case Button1:
                     /*
@@ -1487,8 +1502,8 @@ void var_press( Widget w, XtPointer variabile, XButtonEvent *event )
                         */
                        gost_win_par.width   = UxGetWidth( swid );
                        gost_win_par.height  = UxGetHeight( swid );
-                       gost_win_par.mouse_x =  event->x;
-                       gost_win_par.mouse_y =  event->y;
+                       gost_win_par.mouse_x =  event->xbutton.x;
+                       gost_win_par.mouse_y =  event->xbutton.y;
 
                        gost_win_drag_on     = True;
 
@@ -1525,7 +1540,7 @@ int add_var_list_event_handler(Widget wid)
 }
 
 
-make_var_entry(swidget lista,BLOCCO bloc, int ind_var)
+void make_var_entry(swidget lista,BLOCCO bloc, int ind_var)
 {
   swidget fr, rc, pm, pmconn,lb;
   Widget  wid;
@@ -1665,7 +1680,7 @@ printf("make_var_entry ind_var = %d ",ind_var);
   XtAddEventHandler( wid, LeaveWindowMask, False, var_leave, NULL );
 **/
   XtAddEventHandler( wid, ButtonReleaseMask, False,var_release, (XtPointer)ind_var );
-  XtAddEventHandler( wid, Button2MotionMask, False, gost_win, NULL );
+  XtAddEventHandler( wid, Button2MotionMask, False, gost_win_event_handler, NULL );
 
 #ifndef DESIGN_TIME
   UxPutContext(wid, (char *) UxTopVarWin1Context );
@@ -1722,6 +1737,18 @@ int add_variables(BLOCCO bloc)
 
 
 /*
+ * gost_win_event_handler()
+ *
+ * Event handler wrapper for gost_win function
+ */
+void gost_win_event_handler(Widget w, XtPointer client_data, XEvent *event, Boolean *cont)
+{
+    if (event->type == MotionNotify) {
+        gost_win(event->xmotion.x_root, event->xmotion.y_root);
+    }
+}
+
+/*
  * gost_win()
  *
  * La funzione viene attivata su ogni evento di motion con il button2 premuto.
@@ -1767,7 +1794,7 @@ int gost_win(int event_x,int event_y )
  *
  * Cancella l'ultima gost window dopo che aver rilasciato il button2
  */
-clear_gost_win()
+void clear_gost_win(void)
 {
 
    XDrawRectangle( UxDisplay, DefaultRootWindow(UxDisplay), gost_win_gc,
@@ -1778,7 +1805,7 @@ clear_gost_win()
 }
 
 
-create_gost_win_gc()
+void create_gost_win_gc(void)
 {
 
   gost_win_gc  = XCreateGC( UxDisplay, DefaultRootWindow(UxDisplay), 0, NULL );

@@ -5,6 +5,8 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -38,6 +40,12 @@ extern char filedf[];                 /* filename file di editing */
 extern FILE *fpedf;                   /* file di edting */
 extern FILTRI *filtri[];              /* vettore filtri */
 extern short num_filtri;              /* numero di filtri definiti */
+
+int closedf(void);
+void swap_filtri(int ind);
+int openedf(void);
+int readedf(void);
+int writedf(void);
 
 extern void add_items_list();         /* definita in filtri Shell1 */
 extern void delete_all_items();       /* definita in filtri Shell1 */
@@ -186,7 +194,7 @@ int Aclosedf()
 
 int Areadedf()
 {
-   char *buff[MAXCHNAME];
+   char buff[MAXCHNAME];
    short i=0,j=0;
 
    printf("\ninizia la lettura filtri \n");
@@ -239,7 +247,7 @@ int Areadedf()
 
 int Awritedf()
 {
-   char *buff[MAXCHNAME];
+   char buff[MAXCHNAME];
    short i=0,j=0;
 
    if(fpedf == NULL)

@@ -27,8 +27,12 @@ static char *_csrc = "@(#) %filespec: rwgerarc.c-3 %  (%full_filespec: rwgerarc.
 #include "g0strdb.inc"
 #include "g2ptrdb.inc"
 #include "dconf.inc"
+#include <string.h>
+#include <stdlib.h>
 
-rwgerarc(flag,db,ut)
+extern void iodb(FILE *, short, char *, int, int);
+
+void rwgerarc(flag,db,ut)
 DB_HEADER *db, *ut;
 short flag ;
 {

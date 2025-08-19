@@ -5,6 +5,8 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -150,6 +152,11 @@ static _UxCModelDefinitionWindow	*UxModelDefinitionWindowContext;
 
 Widget	create_ModelDefinitionWindow();
 
+/* Function declarations */
+int tominus(char *str);
+void set_something_val(Widget widget, String resource, XtArgVal value);
+void set_listbl(SIMULATORE *sim);
+
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
@@ -159,13 +166,13 @@ void set_sel_path(char *path)
     XmTextFieldSetString(ModelPath,path);
 }
 
-read_input_data(MODELLO *modap)
+int read_input_data(MODELLO *modap)
 {
    char *appo;
 
    strcpy(modap->nome,XmTextFieldGetString(ModelName));
 
-   tomaius(modap->nome);
+   tominus(modap->nome);
    strcpy(modap->descr,XmTextFieldGetString(ModelDescription));
    strcpy(modap->local_path,XmTextFieldGetString(ModelPath));
    strcpy(modap->remote_path,XmTextFieldGetString(RemoteModelPath));
@@ -188,9 +195,10 @@ read_input_data(MODELLO *modap)
   printf("host=%s\n",modap->host);
   printf("OS=%s\n",modap->OS);
 
+  return 0;
 }
 
-riempi_campi(MODELLO *mod)
+int riempi_campi(MODELLO *mod)
 {
    char cfloat[50];
 
@@ -206,15 +214,17 @@ riempi_campi(MODELLO *mod)
 
    strcpy(OSS,mod->OS);
 
+   return 0;
 }     
 
 
-set_menu_actual_button(swidget menuId,swidget buttonId)
+int set_menu_actual_button(swidget menuId,swidget buttonId)
 {
    set_something_val( menuId,XmNmenuHistory, (XtArgVal) buttonId);
+   return 0;
 } 
 
-set_menu(int operaz,MODELLO *model)
+int set_menu(int operaz,MODELLO *model)
 {
  
   if( operaz == MODTASK )
@@ -228,6 +238,7 @@ set_menu(int operaz,MODELLO *model)
         set_menu_actual_button(ModelType,Nolego);
 
   }
+  return 0;
 }
 
 /*******************************************************************************

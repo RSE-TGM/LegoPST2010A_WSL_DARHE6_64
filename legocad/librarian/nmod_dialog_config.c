@@ -51,6 +51,17 @@
 
 #include "definizioni.h"
 
+/* Function prototypes for missing declarations */
+extern void scrivi_messaggio(char *);
+extern int IsNumeric(char *);
+extern int lcDestroySwidget(Widget);
+extern int menu_newmod_init(void);
+extern void alloca_text_widget(Widget, int, int, int, int);
+
+/* Forward declarations for functions defined in this file */
+int test_input_setup(swidget);
+int chiudi_dlg_config(void);
+
 /****************************************************************/
 /* VARIABILI GLOBALI ESTERNE                                    */
 /****************************************************************/
@@ -152,7 +163,7 @@ Widget	create_nmod_dialog_config();
  ***     swidget text_swdg : text input
 Controlla l'input nella window di setup. Ritorna il numero positivo se
 tutto e' corretto, altrimenti ritorna -1 */
-test_input_setup(text_swdg)
+int test_input_setup(text_swdg)
 swidget text_swdg;
 {
    char *str_val;
@@ -181,7 +192,7 @@ swidget text_swdg;
 
 /*** chiudi_dlg_config()
  *** chiude la window di configurazione delle variabili (OK e CANCEL) ***/
-chiudi_dlg_config()
+int chiudi_dlg_config()
 {
 /* cancella la window */
    UxDestroySwidget(nmod_dialog_config);
@@ -196,6 +207,7 @@ chiudi_dlg_config()
    }
 
    bool_dialog_config = True;
+   return 0;
 }
 
 /*******************************************************************************

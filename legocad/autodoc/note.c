@@ -21,7 +21,7 @@ static char SccsID[] = "@(#)note.c	1.12\t3/31/95";
  funzione per la gestione del campo note */
 
 #include <stdio.h>
-#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <X11/Xlib.h>
 #include <X11/Intrinsic.h>
@@ -29,8 +29,9 @@ static char SccsID[] = "@(#)note.c	1.12\t3/31/95";
 #include <Xm/Xm.h>
 #include "UxXt.h"
 
-
 #include "autodoc.h"
+
+void copy_n_car(char*, char*, int);
 
 /*** HeaderNote *cerca_testo(testi,cmp_note)
  ***   Parametri:
@@ -64,8 +65,7 @@ char *cmp_note;
  ***       Ritorna 0 se l'elemento e' stato cancellato altrimenti ritorna 1
  ***       cancella l'header di un testo dalla lista testi
  ***/
-canc_testo( addr_testi,header )
-HeaderNote **addr_testi,*header;
+int canc_testo(HeaderNote **addr_testi, HeaderNote *header)
 {
    HeaderNote *prec_head;
 

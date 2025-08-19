@@ -45,12 +45,12 @@ char		Path[PATH_SZ];
 	ListFile	= fopen( ListFileName, "r" );
 	if( ListFile == NULL )
 	{
-    sprintf ( logbf , 
+    sprintf ( pagmod_logbf , 
               "Errore apertura file lista  : %s" ,
 														ListFileName ) ;
 
-				log ( logbf ) ;
-    fprintf ( stderr , "pagmod: %s\n" , logbf ) ;
+				pagmod_log ( pagmod_logbf ) ;
+    fprintf ( stderr , "pagmod: %s\n" , pagmod_logbf ) ;
 		return ( -1 ) ;
 	}
 
@@ -86,14 +86,14 @@ char*	ppp;
 	sts	= stat( Path, &buf );
 	if( sts != 0 )
 	{
-		sprintf( logbf, "File NON esistente  : %s", Path );
-		log( logbf );
+		sprintf( pagmod_logbf, "File NON esistente  : %s", Path );
+		pagmod_log( pagmod_logbf );
 		return;
 	}
 	if( ! S_ISREG( buf.st_mode ) )
 	{
-		sprintf( logbf, "File NON regolare   : %s", Path );
-		log( logbf );
+		sprintf( pagmod_logbf, "File NON regolare   : %s", Path );
+		pagmod_log( pagmod_logbf );
 		return;
 	}
 
@@ -105,8 +105,8 @@ char*	ppp;
 	else
 	{
 /*+		printf( "KO |%-32s|% 4d.\n", Path, errno );	*/
-		sprintf( logbf, "File NON accessibile: %s", Path );
-		log( logbf );
+		sprintf( pagmod_logbf, "File NON accessibile: %s", Path );
+		pagmod_log( pagmod_logbf );
 		return;
 	}
 

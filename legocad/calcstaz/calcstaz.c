@@ -33,6 +33,7 @@ static char SccsID[] = "@(#)calcstaz.c	1.12\t3/30/95";
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/file.h>
+#include <sys/wait.h>
 #include <X11/Xlib.h>
 #include <X11/Intrinsic.h> 
 #include <X11/StringDefs.h>
@@ -48,6 +49,8 @@ static char SccsID[] = "@(#)calcstaz.c	1.12\t3/30/95";
 #include <Xm/Text.h>
 #include <Xm/MessageB.h>
 #include <Xm/DialogS.h>
+#include <Xm/List.h>
+#include <Xm/FileSB.h>
 #include <Mrm/MrmAppl.h>
 
 #include "calcstaz.h"
@@ -60,7 +63,24 @@ static char SccsID[] = "@(#)calcstaz.c	1.12\t3/30/95";
 #include "f11.h"
 
 extern Widget create_fileSelectionBox(); 
-extern void free_array_XmString( XmString, int );
+extern void free_array_XmString( XmString *, int );
+
+/* Missing function declarations */
+int copy_file(char *src, char *dst);
+int leggi_dati_geometrici(void);
+int read_file_f03(void);
+int dim_array_f11(int neqsis, int npvrt, int nu, int nvart);
+int Empty(char *str);
+int cambia_stato_menu(int nvoci, VOCE_MENU *voci_array);
+int s_information(int codice_info);
+int modify_options(double new_tolerance, int new_mode);
+int trim_zero(char *str);
+int print_file(char *filename);
+int read_data_f11(int fd);
+int ordinale(int num, char *output);
+int attiva_prog_par(char *prog, char *dir, char *arg);
+int recv_message(int fd, char *msg, header_mesg *hmsg);
+int read_header_f11(int fd, int flag);
 
 int fd_out, fd_stdout;
 typedef struct {
@@ -202,32 +222,32 @@ Widget widget_array[ MAX_WIDGETS ];
 static Elenco_callback funzioni_f24 = {
 	{ "Ok",     msgbox_button, STAMPA_F24 },
 	{ "Cancel", msgbox_button, CANCELLA },
-	{ NULL,     NULL,          NULL }
+	{ NULL,     NULL,          0 }
 };
 
 static Elenco_callback funzioni_err = {
         { "Ok",     msgbox_button, VIEW_LG3_OUT },
         { "Cancel", msgbox_button, CANCELLA },
-        { NULL,     NULL,          NULL }
+        { NULL,     NULL,          0 }
 };
 
 static Elenco_callback funzioni_lg3 = {
 	{ "Print",  msgbox_button, STAMPA_LG3 },
 	{ "Cancel", msgbox_button, CANCELLA },
-	{ NULL,     NULL,          NULL }
+	{ NULL,     NULL,          0 }
 };
 
 static Elenco_callback funzioni_f14 = {
 	{ "Save",   msgbox_button, SALVA_F14 },
 	{ "Cancel", msgbox_button, CANCELLA },
-	{ NULL,     NULL,          NULL }
+	{ NULL,     NULL,          0 }
 };
 /***********************************************************/ 
 /* Strutture riguardanti il geometry management delle varie Dialog...
    Specificare, nell'ordine: { DefaultPosition TRUE/FALSE,XmNx,XmNy,
 			       XmNwidth,XmNHeight }		    */
-Dialog_geometry geom_information = { FALSE, 700, 865, NULL, 120};
-Dialog_geometry geom_attention   = { TRUE, NULL, NULL, NULL, 120};
+Dialog_geometry geom_information = { FALSE, 700, 865, 0, 120};
+Dialog_geometry geom_attention   = { TRUE, 0, 0, 0, 120};
 Dialog_geometry geom_editor      = { FALSE, 605, 20, 650, 750};
 /***********************************************************/ 
 
@@ -332,7 +352,7 @@ void main(int argc,char **argv)
 /* Registrazione dei nomi delle funzioni di callback */
     MrmRegisterNames(reglist, reglist_num);
     if (MrmFetchWidget(s_RMHierarchy,"MAIN_WINDOW",toplevel_widget,
-                       &main_window_widget, &dummy_class) != MrmSUCCESS )
+                       &main_window_widget, dummy_class) != MrmSUCCESS )
 	s_error( APPLICATION_NAME, error_mesg, EFETCHMWIN, 1 );
 
     XtManageChild(main_window_widget);
@@ -388,7 +408,7 @@ void main(int argc,char **argv)
  ***					dei wigdet e stato del menu (attivo/
  ***					non attivo)
  Procedura per aggiornare lo stato delle voci di menu */
-cambia_stato_menu( nvoci, voci_array )
+int cambia_stato_menu( nvoci, voci_array )
 short nvoci;
 VOCE_MENU *voci_array;
 {
@@ -444,7 +464,7 @@ void read_user_setting()
  ***      short  new_mode: nuova modalita' di calcolo
 Modifica i valori delle rispettive variabili globali e cambia i testi delle
 rispettive label */
-modify_options( new_tolerance, new_mode )
+int modify_options( new_tolerance, new_mode )
 double new_tolerance;
 short  new_mode;
 {
@@ -485,7 +505,7 @@ char temp[20];
  *** parametro:
  ***      char *messaggio;
 Stampa un messaggio nella finestra di stato */
-mesg_status_window( messaggio )
+int mesg_status_window( messaggio )
 char *messaggio;
 {
    Cardinal argcount;
@@ -519,7 +539,7 @@ Funzione che restituisce i valori di una data variabile ( indicata tramite
 l'indice del vettore var ).La funzione fa' riferimento ai valori contentuti
 nei vettori xy e xy0 utilizzando il vettore di indici ipvrs_f11.
 (Attualmente, viene utilizzata nella funzione show_results). */
-valori_var_blocco(indice, noto, val1, val2)
+int valori_var_blocco(indice, noto, val1, val2)
 int indice;
 char *noto;
 double *val1, *val2;
@@ -546,7 +566,7 @@ double *val1, *val2;
 Funzione utilizzata per allocare l'array di XmString elenco_item utilizzato per 
 riempire le scrolled-list. Se l'allocazione fallisce ,ritorna un errore
 al sistema operativo. */
-alloca_memoria_x_items(num_items)
+int alloca_memoria_x_items(num_items)
 int num_items;
 {
    elenco_item = (XmString *) XtCalloc(sizeof(XmString),num_items);
@@ -738,7 +758,7 @@ unsigned long *reason;
              if (MrmFetchWidget(s_RMHierarchy, "tolerance_dialog",
     			     toplevel_widget,
 			     &widget_array[ *widget_num ],
-			     &dummy_class) != MrmSUCCESS )
+			     dummy_class) != MrmSUCCESS )
 		s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
          XtManageChild( widget_array[ *widget_num ] );
 
@@ -764,7 +784,7 @@ unsigned long *reason;
              if (MrmFetchWidget(s_RMHierarchy, "steady_state_results_dialog",
     			     toplevel_widget,
 			     &widget_array[ *widget_num ],
-			     &dummy_class) != MrmSUCCESS )
+			     dummy_class) != MrmSUCCESS )
 		s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
 
          XtManageChild( widget_array[ *widget_num ] );
@@ -815,7 +835,7 @@ unsigned long *reason;
              if (MrmFetchWidget(s_RMHierarchy, "equation_dialog",
     			     toplevel_widget,
 			     &widget_array[ *widget_num ],
-			     &dummy_class) != MrmSUCCESS )
+			     dummy_class) != MrmSUCCESS )
 		s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
 
          XtManageChild( widget_array[ *widget_num ] );
@@ -887,9 +907,9 @@ unsigned long *reason;
 
     /* Libera la memoria utilizzata */
          free_array_XmString(elenco_item, numero_item ); 
-         XtFree( iterazioni );
-         XtFree( n_equazione );
-         XtFree( elenco_item );
+         XtFree( (char *)iterazioni );
+         XtFree( (char *)n_equazione );
+         XtFree( (char *)elenco_item );
 	 break;
 
 /***************************************  dialog_proc   ****************/
@@ -907,7 +927,7 @@ unsigned long *reason;
              if (MrmFetchWidget(s_RMHierarchy, "iteration_dialog",
     			     toplevel_widget,
 			     &widget_array[ *widget_num ],
-			     &dummy_class) != MrmSUCCESS )
+			     dummy_class) != MrmSUCCESS )
 		s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
 
          XtManageChild( widget_array[ *widget_num ] );
@@ -999,7 +1019,7 @@ unsigned long *reason;
 
     /* Libera la memoria utilizzata */
          free_array_XmString(elenco_item, numero_item ); 
-         XtFree(elenco_item);
+         XtFree((char *)elenco_item);
 	break;
 
 /***************************************  dialog_proc   ****************/
@@ -1017,7 +1037,7 @@ unsigned long *reason;
              if (MrmFetchWidget(s_RMHierarchy, "jacobian_dialog",
     			     toplevel_widget,
 			     &widget_array[ K_JACOBIAN_WINDOW ],
-			     &dummy_class) != MrmSUCCESS )
+			     dummy_class) != MrmSUCCESS )
 		s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
 
          XtManageChild( widget_array[ K_JACOBIAN_WINDOW ] );
@@ -1077,7 +1097,7 @@ unsigned long *reason;
 
     /* Libera la memoria utilizzata */
          free_array_XmString(elenco_item, numero_item ); 
-         XtFree(elenco_item);
+         XtFree((char *)elenco_item);
 	break;
    }
    undef_cursore (toplevel_widget);
@@ -1142,7 +1162,7 @@ XmListCallbackStruct *list_info;
              if (MrmFetchWidget(s_RMHierarchy, "iteration_equation_dialog",
     	  		        toplevel_widget,
 			        &widget_array[K_ITERATION_EQUATION_WINDOW],
-			        &dummy_class) != MrmSUCCESS )
+			        dummy_class) != MrmSUCCESS )
 		s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
 
           XtManageChild( widget_array[K_ITERATION_EQUATION_WINDOW] );
@@ -1227,7 +1247,7 @@ XmListCallbackStruct *list_info;
 
        /* Libera la memoria utilizzata */
           free_array_XmString( elenco_item, numero_item );
-          XtFree( elenco_item );
+          XtFree( (char *)elenco_item );
 
   	  break;
 
@@ -1238,7 +1258,7 @@ XmListCallbackStruct *list_info;
              if (MrmFetchWidget(s_RMHierarchy, "equation_iteration_dialog",
     	  		        toplevel_widget,
 			        &widget_array[K_EQUATION_ITERATION_WINDOW],
-			        &dummy_class) != MrmSUCCESS )
+			        dummy_class) != MrmSUCCESS )
 		s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
 
           XtManageChild( widget_array[K_EQUATION_ITERATION_WINDOW] );
@@ -1342,9 +1362,9 @@ XmListCallbackStruct *list_info;
                        argcount);
 
           free_array_XmString( elenco_item, numero_item ); 
-          XtFree(elenco_item);
-          XtFree( residui_eqz );
-          XtFree( n_equazione );
+          XtFree((char *)elenco_item);
+          XtFree( (char *)residui_eqz );
+          XtFree( (char *)n_equazione );
           break;
 
 /***************************************   selez_proc   ****************/
@@ -1355,7 +1375,7 @@ XmListCallbackStruct *list_info;
              if (MrmFetchWidget(s_RMHierarchy, "variable_equation_dialog",
     	  		        toplevel_widget,
 			        &widget_array[K_VARIABLE_EQUATION_WINDOW],
-			        &dummy_class) != MrmSUCCESS )
+			        dummy_class) != MrmSUCCESS )
 		s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
 
           XtManageChild( widget_array[K_VARIABLE_EQUATION_WINDOW] );
@@ -1477,7 +1497,7 @@ XmListCallbackStruct *list_info;
                        argcount);
 
           free_array_XmString( elenco_item, numero_item ); 
-          XtFree(elenco_item);
+          XtFree((char *)elenco_item);
          break;
 
    }
@@ -1508,7 +1528,7 @@ unsigned long *reason;
    if ( lista_dati != NULL )
    {
       free_array_XmString( lista_dati, numero_dati ); 
-      XtFree( lista_dati );
+      XtFree( (char *)lista_dati );
    }
 
    numero_dati = 0;
@@ -1748,12 +1768,12 @@ void cancel_proc(w, widget_num, selez)
            /* Libera la memoria occupata */
               free_array_XmString(lista_blocchi, numero_blocchi);
 
-              XtFree(lista_blocchi);
+              XtFree((char *)lista_blocchi);
 
               if ( lista_dati != NULL )
               {
                  free_array_XmString( lista_dati, numero_dati ); 
-                 XtFree( lista_dati );
+                 XtFree( (char *)lista_dati );
               }
 
               lista_blocchi = NULL;
@@ -1812,7 +1832,7 @@ void cancel_proc(w, widget_num, selez)
           /* Libera la memoria allocata per la matrice */
 
               XtFree( int_colonna_jac );
-              XtFree( int_riga_jac );
+              XtFree( (char *)int_riga_jac );
               XtFree( riga_jac );
               widget_array[*widget_num] = NULL; 
               break;
@@ -2150,7 +2170,7 @@ int   label_ID;
     XmString messaggio[2];
 
     if ( !num_elem )
-       return;
+       return 0;
 
     messaggio[0] = CREATE_CSTRING ("");
     messaggio[1] = CREATE_CSTRING ("<NO  PATTERN  MATCHED>");
@@ -2208,7 +2228,7 @@ int   label_ID;
 funzione che apre il file f14.dat in lettura e setta l'offset relativo
 al primo blocco nel file.
 Ritorna 0 se tutto ok, altrimenti ritorna -1 */
-leggi_dati_geometrici()
+int leggi_dati_geometrici()
 {
    char temp[140];
 
@@ -2366,7 +2386,7 @@ char *addr;
  *** Parametri:
  ***      codice_info : codice informazione
 stampa messaggio di informazione nella status window */
-s_information(codice_info)
+int s_information(codice_info)
 int codice_info;
 {
    int i;

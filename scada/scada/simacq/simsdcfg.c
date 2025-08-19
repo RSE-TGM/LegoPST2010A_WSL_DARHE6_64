@@ -28,18 +28,22 @@ static char *_csrc = "@(#) %filespec: simsdcfg.c-4 %  (%full_filespec: simsdcfg.
 #include <osf1.h>
 #include <stdio.h>
 
+#include <string.h>
 #include "comunic.inc"
 #include "mesqueue.h"
 #include "simmsg.inc"      // strutture messaggi da simulatore
 #include "simula.inc"      // definizioni generali per simulatore
 #include "dconf.inc"
 
+// External function declarations
+extern int rbyte(int, void *, long, int);
+
 #if defined OSF1 || defined LINUX
 #undef long
 #define  long int
 #endif
 
-simsdcfg(tipo, rc)
+int simsdcfg(tipo, rc)
 char tipo;     // tipo di punti: ANA=0: Analogici; DIG=1: Digitali
 SM_DIAGNO* rc;   /* dignostica ricezione configurazione */
 {

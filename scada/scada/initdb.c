@@ -26,6 +26,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "pscs.cfg"
 #include "g1tipdb.inc"
@@ -47,7 +48,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 extern DB_HEADER h_db;
 
-initdb()
+// Function declarations
+void bitset(short *buffer, short indice, short bit);
+int bitvalue(short *buffer, short indice);
+
+void initdb()
 {
 short i, ier;
 short mask, maskal,bit,j ;

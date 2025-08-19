@@ -22,6 +22,7 @@ static char SccsID[] = "@(#)creasuperlist1.c	1.1\t1/8/96";
 
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 
 #define DIM 2000
 #define DIM_BUF 60

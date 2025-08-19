@@ -62,7 +62,9 @@ extern Dialog_geometry geom_attention;
 extern Widget attention_wdg;
 extern XmFontList fontList;
 
-extern num_var_stato, num_var_algebriche;
+extern int lcDestroySwidget(Widget);
+
+extern int num_var_stato, num_var_algebriche;
 extern char *str_dichMOD, *str_codMOD, *str_resMOD[];
 
 /****************************************************************/
@@ -132,6 +134,12 @@ Widget	resid_code_scrolledText;
 
 Widget	create_dbox_userresid();
 
+/* Forward declarations for functions defined in this file */
+int text_user_resid(Dimension *form_height);
+int crea_label_resid(int num_resid, int leftPos, Position posy);
+int crea_texts_resid(Widget *wdg, int leftPos, Position posy, int num_col);
+int memo_textMOD(Boolean flag);
+
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
@@ -145,7 +153,7 @@ Widget	create_dbox_userresid();
  ***     dei residui delle equazioni del nuovo modulo.
  ***     Abilitata dopo le definizioni per il nuovo modulo.
  ***/
-text_user_resid (form_height)
+int text_user_resid (form_height)
 Dimension *form_height;
 {
    int i;
@@ -186,7 +194,7 @@ Dimension *form_height;
  ***      Crea la label di intestazione dei residui.
  ***
  ***/
-crea_label_resid (num_resid,leftPos,posy)
+int crea_label_resid (num_resid,leftPos,posy)
 int num_resid;
 int leftPos;
 Position posy;
@@ -230,7 +238,7 @@ Position posy;
  ***     generatore di Fortran si preoccupa di porre un simbolo di
  ***     continuazione ('$') a colonna 6.
  ***/
-crea_texts_resid (wdg,leftPos,posy,num_col)
+int crea_texts_resid (wdg,leftPos,posy,num_col)
 Widget *wdg;
 int leftPos;
 Position posy;
@@ -264,7 +272,7 @@ int num_col;
  ***     memorizza il contenuto dei text-widget della window dei dati nelle
  ***     variabili globali str_dichMOD, str_codMOD e str_resMOD
  ***/
-memo_textMOD(flag)
+int memo_textMOD(flag)
 Boolean flag;
 {
    int i;
@@ -288,7 +296,7 @@ Boolean flag;
    {
       UxDestroySwidget(dbox_user_resid);
       dbox_userresid_managed = False;    
-      XtFree(text_residui);
+      XtFree((char*)text_residui);
    }
 }
 
@@ -334,7 +342,7 @@ static void	activateCB_cancel_resid_pb( UxWidget, UxClientData, UxCallbackArg )
 	{
 	UxDestroySwidget(dbox_user_resid);
 	dbox_userresid_managed = False;    
-	XtFree(text_residui);
+	XtFree((char*)text_residui);
 	}
 	UxDbox_user_residContext = UxSaveCtx;
 }

@@ -21,6 +21,7 @@ static char SccsID[] = "@(#)graf_list_interface.c	2.15\t4/26/95";
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <stdlib.h>
 
 #include <X11/Xlib.h>
 #include <X11/Intrinsic.h>
@@ -28,11 +29,15 @@ static char SccsID[] = "@(#)graf_list_interface.c	2.15\t4/26/95";
 #include <Xm/Xm.h>
 #include <Xm/List.h>
 
-
 #include "libutilx.h"
 #include "macro.h"
 #include "utile.h"
 #include "files.h"
+
+/* Function declarations */
+void seleziona_blocco_lista(MacroBlockType *macro, BlockType *blocco, Boolean flag);
+void aggiungi_sel_lista(Widget wlista, int pos);
+int posiz_in_lista_blocchi(char *nome);
 
 extern MacroBlockType *macroblocks;  /* vettore puntatore a descrittori macroblo
 cchi */
@@ -44,7 +49,7 @@ extern int num_macro,macro_allocate; /* num macro istanziate, num macro allocate
   deseleziona tutti i blocchi presenti nelle pagina 
  grafiche
 */
-deselez_all_graf()
+void deselez_all_graf(void)
 {
 int i,j;
 MacroBlockType *ind;
@@ -92,10 +97,7 @@ if(!ind->cancellato)
   in base alla selezione effettuata sullo schema grafico aggiorna la
   selezione in lista
 */
-void seleziona_blocco_lista(macro,blocco,flag)
-MacroBlockType *macro;
-BlockType *blocco;
-Boolean flag;
+void seleziona_blocco_lista(MacroBlockType *macro, BlockType *blocco, Boolean flag)
 {
 int pos;
 extern Widget widget_list_blocchi;
@@ -129,9 +131,7 @@ printf("\n aggiunta selez");
 	}
 }
 
-aggiungi_sel_lista(wlista,pos)
-Widget wlista;
-int pos;
+void aggiungi_sel_lista(Widget wlista, int pos)
 {
 Arg arg[2];
 int narg;
@@ -196,8 +196,7 @@ retval=XmListGetSelectedPos(wlista,&item_positions,&num_selez);
 
 
 
-posiz_in_lista_blocchi(nome)
-char *nome;
+int posiz_in_lista_blocchi(char *nome)
 {
 extern char **nom_bloc;
 extern int nbl;

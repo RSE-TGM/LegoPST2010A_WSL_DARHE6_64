@@ -19,6 +19,8 @@ static char SccsID[] = "@(#)gest_filtri.c	2.24\t3/30/95";
 */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "filtri.h"
 
 extern FILTRI *filtri;
@@ -44,7 +46,7 @@ FILTRI *filtro_init()
    return(ftr);
 }
 
-libera_filtri(FILTRI *filtri,int num_filtri)
+int libera_filtri(FILTRI *filtri,int num_filtri)
 {
    int j;
 
@@ -52,6 +54,7 @@ libera_filtri(FILTRI *filtri,int num_filtri)
       free(filtri->var[j]);
 
    free(filtri);
+   return 0;
 }
 
 /*=================================================================== 
@@ -107,7 +110,7 @@ int openedf()
 
 int readedf(FILTRI *filtri[],int *num_filtri)
 {
-   char *buff[MAXCHNAME];
+   char buff[MAXCHNAME];
    short i=0,j=0,filtro_corrente=0;
  
    while(1)

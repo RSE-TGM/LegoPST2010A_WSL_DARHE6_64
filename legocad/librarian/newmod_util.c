@@ -124,6 +124,22 @@ StructDati *dati_geom;
 
 char *nome_nuovo_modulo, *descr_nuovo_modulo;
 
+/* Forward declarations for functions defined in this file */
+void cambia_tipo_text(Widget bboard, int tipo, Boolean flag);
+void load_text_widget(int tipo, int op);
+void alloca_text_widget(Widget bboard, int num_st, int num_alg, int num_in, int num_dati);
+void set_label(Widget wdg, char *stringa);
+int controlla_input_def(Widget wdg_nome, Widget wdg_descr);
+int salva_interfaccia(void);
+int nomi_var_unici(void);
+void init_vars(void);
+
+/* External function declarations */
+extern int contiene_blanks(char *);
+extern void scrivi_messaggio(char *);
+extern char *ordinale(int, char *);
+extern void aggiorna_jac_var_labels(void);
+
 /***************************************************************/
 /*** cambia_tipo_text(bboard, tipo, flag)
  ***   Parametri:
@@ -136,7 +152,7 @@ char *nome_nuovo_modulo, *descr_nuovo_modulo;
  ***     Cambia il tipo di text-widget da visualizzare nella scrolled-window.
  ***     Viene fatto riferimento alla variabile globale option_scelto. 
  ***/
-cambia_tipo_text(bboard, tipo, flag)
+void cambia_tipo_text(bboard, tipo, flag)
 Widget bboard;
 int tipo;
 Boolean flag;
@@ -215,7 +231,7 @@ Boolean flag;
  ***      Carica (crea se non sono ancora stati creati) i text widget relativi 
  ***      alla tipologia selezionata dal menu option
  ***/
-load_text_widget(tipo, op)
+void load_text_widget(tipo, op)
 int tipo, op;
 {
    WdgVariabili *wdg_eq;
@@ -327,7 +343,7 @@ int tipo, op;
  ***   Descrizione:
  ***     alloca la memoria per gli array che contengono i text-widget 
  ***/
-alloca_text_widget(bboard, num_st, num_alg, num_in, num_dati)
+void alloca_text_widget(bboard, num_st, num_alg, num_in, num_dati)
 Widget bboard;
 int num_st, num_alg, num_in, num_dati;
 {
@@ -341,7 +357,7 @@ int num_st, num_alg, num_in, num_dati;
        XtDestroyWidget(wvar_stato[i].text_simbolo);
        XtDestroyWidget(wvar_stato[i].text_valore);
    }
-   wvar_stato = (WdgVariabili *) XtRealloc(wvar_stato,
+   wvar_stato = (WdgVariabili *) XtRealloc((char*)wvar_stato,
 					  num_st*sizeof(WdgVariabili));
    for (i=num_var_stato ; i<num_st ; i++)
    {
@@ -357,7 +373,7 @@ int num_st, num_alg, num_in, num_dati;
        XtDestroyWidget(wvar_algebriche[i].text_simbolo);
        XtDestroyWidget(wvar_algebriche[i].text_valore);
    }  
-   wvar_algebriche = (WdgVariabili *) XtRealloc(wvar_algebriche,
+   wvar_algebriche = (WdgVariabili *) XtRealloc((char*)wvar_algebriche,
 					       num_alg*sizeof(WdgVariabili));
    for (i=num_var_algebriche ; i<num_alg ; i++)
    {
@@ -373,7 +389,7 @@ int num_st, num_alg, num_in, num_dati;
        XtDestroyWidget(wvar_ingresso[i].text_simbolo);
        XtDestroyWidget(wvar_ingresso[i].text_valore);
    }
-   wvar_ingresso = (WdgVariabili *) XtRealloc(wvar_ingresso, 
+   wvar_ingresso = (WdgVariabili *) XtRealloc((char*)wvar_ingresso, 
 					     num_in*sizeof(WdgVariabili));
    for (i=num_var_ingresso ; i<num_in ; i++)
    {
@@ -388,7 +404,7 @@ int num_st, num_alg, num_in, num_dati;
        XtDestroyWidget(wdati_geometrici[i].text_dato);
        XtDestroyWidget(wdati_geometrici[i].text_sigla);
    }
-   wdati_geometrici = (WdgDatiGeometrici *) XtRealloc(wdati_geometrici, 
+   wdati_geometrici = (WdgDatiGeometrici *) XtRealloc((char*)wdati_geometrici, 
                                             num_dati*sizeof(WdgDatiGeometrici));
    for (i=num_dati_geometrici ; i<num_dati ; i++)
    {
@@ -399,10 +415,10 @@ int num_st, num_alg, num_in, num_dati;
 /*** 
    if ( num_st+num_alg > (num_var_stato+num_var_algebriche) || flag)
    {
-      jactoggstruct = (JacToggStruct **) XtRealloc(jactoggstruct,
+      jactoggstruct = (JacToggStruct **) XtRealloc((char*)jactoggstruct,
                                  (num_st+num_alg)*sizeof(JacToggStruct *));
       for (i=0 ; i < num_st+num_alg ; i++)
-          jactoggstruct[i] = (JacToggStruct *) XtRealloc(jactoggstruct[i],
+          jactoggstruct[i] = (JacToggStruct *) XtRealloc((char*)jactoggstruct[i],
                               (num_st+num_alg+num_in)*sizeof(JacToggStruct));
       printf("alloco jactoggstruct [%2d][%2d]\n", 
               num_st+num_alg, num_st+num_alg+num_in);
@@ -420,13 +436,13 @@ int num_st, num_alg, num_in, num_dati;
 /* Allocazione memoria per i text relativi ai residui ed al significato */
 /* delle equazioni */
 /***** SURGELATO ...
-   str_resMOD = (char **) XtRealloc(str_resMOD, jac_rows*sizeof(char *));
+   str_resMOD = (char **) XtRealloc((char*)str_resMOD, jac_rows*sizeof(char *));
    for ( i=0 ; i<jac_rows ; i++ ) str_resMOD[i] = NULL;
-   str_signeq = (char **) XtRealloc(str_signeq, jac_rows*sizeof(char *));
+   str_signeq = (char **) XtRealloc((char*)str_signeq, jac_rows*sizeof(char *));
    for ( i=0 ; i<jac_rows ; i++ ) str_signeq[i] = NULL;
-   str_uniteq = (char **) XtRealloc(str_uniteq, jac_rows*sizeof(char *));
+   str_uniteq = (char **) XtRealloc((char*)str_uniteq, jac_rows*sizeof(char *));
    for ( i=0 ; i<jac_rows ; i++ ) str_uniteq[i] = NULL;
-   str_cosnor = (char **) XtRealloc(str_cosnor, jac_rows*sizeof(char *));
+   str_cosnor = (char **) XtRealloc((char*)str_cosnor, jac_rows*sizeof(char *));
    for ( i=0 ; i<jac_rows ; i++ ) str_cosnor[i] = NULL;
 *****/
 
@@ -500,7 +516,7 @@ int posx, posy;
  ***   Descrizione:
  ***      Utilita' che assegna una stringa ad una label
  ***/
-set_label(wdg, stringa)
+void set_label(wdg, stringa)
 Widget wdg;
 char *stringa;
 {
@@ -525,7 +541,7 @@ char *stringa;
  ***     - simboli delle variabili;
  ***     - non-ripetitivita' dei simboli delle variabili.
  ***/
-controlla_input_def (wdg_nome, wdg_descr)
+int controlla_input_def (wdg_nome, wdg_descr)
 Widget wdg_nome, wdg_descr;
 {
    int i,j, num_variabili;
@@ -549,9 +565,9 @@ Widget wdg_nome, wdg_descr;
 
    num_variabili = num_var_stato+num_var_algebriche+num_var_ingresso;
 
-   variabili = (StructVars *) XtRealloc(variabili, 
+   variabili = (StructVars *) XtRealloc((char*)variabili, 
 				        num_variabili*sizeof(StructVars));
-   dati_geom = (StructDati *) XtRealloc(dati_geom,
+   dati_geom = (StructDati *) XtRealloc((char*)dati_geom,
 					num_dati_geometrici*sizeof(StructDati));
 
 /*************************************************/
@@ -805,7 +821,7 @@ Widget wdg_nome, wdg_descr;
  *** 
  ***     last revised 31.1.96
  ***/
-salva_interfaccia ()
+int salva_interfaccia ()
 {
    FILE *fp;
    char filename[256], *message;
@@ -946,7 +962,7 @@ salva_interfaccia ()
  ***     Funzione che controlla l'unicita' dei nome delle variabili
  ***     del nuovo modulo.
  ***/
-nomi_var_unici ()
+int nomi_var_unici ()
 {
 
    int i,j,num_variabili;
@@ -1005,7 +1021,7 @@ XmTextVerifyCallbackStruct *text_struct;
  ***    Descrizione:
  ***      Inizializzazione di alcune variabili globali
  ***/
-init_vars()
+void init_vars()
 {
    int i;
 

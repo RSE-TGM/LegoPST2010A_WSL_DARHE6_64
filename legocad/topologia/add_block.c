@@ -20,8 +20,14 @@ static char SccsID[] = "@(#)add_block.c	2.28\t5/31/95";
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <unistd.h>
 #include "lg1.h"
 #include "errore.h"
+
+/* Function declarations */
+void errore(const char*, ...);
 
 #define SIZE_RIGA 85
 
@@ -103,7 +109,7 @@ int read_process()
      err_level = ERROR;
      printf("errore getcwd ha restituito un NULL\n");
      errore("error on getcwd");
-     return;
+     return -1;
   }
 
 /* genero il nome del file da aprire comprensivo della path */
@@ -116,7 +122,7 @@ int read_process()
      printf("File %s not generated or not found",fname);
      err_level = ERROR;
      errore("File %s not generated or not found",fname);
-     return;
+     return -1;
   }
   
 /* leggo tutto il file e lo mappo in memoria */
@@ -284,7 +290,7 @@ else
 /* READ_REGOL 
  * routine di lettura modulo di regolazione
  */
-void read_regol()
+int read_regol()
 {
    extern void add_item();
    char path[300],modname[10],fname[300];
@@ -320,7 +326,7 @@ void read_regol()
      printf("File %s not generated or not found",fname);
      err_level = ERROR;
      errore("File %s not generated or not found",fname);
-     return;
+     return -1;
   }
 
    strcpy(new_block.sigla_modulo,modulename);
@@ -434,6 +440,7 @@ void read_regol()
 
    add_item(buffappo,1);
 
+   return 0;
 }
 
 

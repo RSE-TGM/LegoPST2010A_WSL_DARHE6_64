@@ -21,11 +21,13 @@ static char SccsID[] = "@(#)graphics_interface.c	2.26\t4/11/95";
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <stdlib.h>
 
 #include <X11/Xlib.h>
 #include <X11/Intrinsic.h>
 #include <X11/StringDefs.h>
 #include <Xm/Xm.h>
+#include <Xm/List.h>
 
 #include "libutilx.h"
 #include "macro.h"
@@ -51,8 +53,8 @@ extern SELECTION bl_selezionati;
 #endif
 #endif
 
-extern void seleziona_blocco();      /* seleziona/deseleziona un blocco in grafica */
-extern delete_selected_macro();      /* cancella i macro selezionati */
+extern void seleziona_blocco(MacroBlockType *, BlockType *, Boolean);      /* seleziona/deseleziona un blocco in grafica */
+extern int delete_selected_macro();      /* cancella i macro selezionati */
 extern void salva_macroblocchi();    
 extern int modifiche; 
 extern short int tipo_modulo;        /* identifica se di processo o regolazione */
@@ -64,7 +66,7 @@ extern int num_macro,macro_allocate; /* num macro istanziate, num macro allocate
 extern ERR_LEVEL err_level;
 extern BLOCCO blocchi[];
 
-extern dbx_nuovo_blocco;
+extern Widget dbx_nuovo_blocco;
 extern void dialog_nuovo_blocco();
 extern void carica_lista_moduli();
 extern Widget text_nome_blocco;
@@ -342,7 +344,7 @@ int Iselect_this_block_from_list(Widget listaBlocchi,char *nome)
       XmStringFree(lista[i]); 
 //      XtFree(lista[i]); 
 
-   XtFree( lista );
+   XtFree( (char *)lista );
 
 
 }
@@ -350,7 +352,7 @@ int Iselect_this_block_from_list(Widget listaBlocchi,char *nome)
 
 /* set della descrizione e del nome blocco nella grafica */
 
-Iset_graf_new_blname(char *oldname,char *nome_blocco)
+int Iset_graf_new_blname(char *oldname,char *nome_blocco)
 {
    int i,j;
    char *strappo;
@@ -377,20 +379,23 @@ Iset_graf_new_blname(char *oldname,char *nome_blocco)
        }
    }
 
+   return 0;
 }
 
-Iset_list_new_descr(char *new_nome_blocco,char * new_descr_blocco)
+int Iset_list_new_descr(char *new_nome_blocco,char * new_descr_blocco)
 {
    set_new_descr(new_nome_blocco,new_descr_blocco);
+   return 0;
 }
 
-Iget_descr_blocco(char *nome_blocco,char *descr)
+int Iget_descr_blocco(char *nome_blocco,char *descr)
 {
    int i;
     
    for(i=0;i<num_blocchi;i++)
       if( !strcmp(nome_blocco,blocchi[i].sigla_blocco) )
          strcpy(descr,blocchi[i].descr_blocco);
+   return 0;
 }
 
 
@@ -411,7 +416,7 @@ struct {
       
 } par_creaico;
 
-Iset_parico(MacroBlockType *ptr_macro,int x,int y,int tipo,Boolean selez,
+int Iset_parico(MacroBlockType *ptr_macro,int x,int y,int tipo,Boolean selez,
             PixmapInfo *pix_info,char *label_blocco,char *nome_modulo,
             Widget wdg,int ind_macro)
 {
@@ -425,12 +430,13 @@ Iset_parico(MacroBlockType *ptr_macro,int x,int y,int tipo,Boolean selez,
    strcpy(par_creaico.nome_modulo,nome_modulo);
    par_creaico.ind_macro = ind_macro;
    par_creaico.wdg = wdg;
+   return 0;
 }
 
-Icrea_ico()
+int Icrea_ico()
 {
-   extern int alloca_nuovo_blocco();
-   extern int crea_icona();
+   extern int alloca_nuovo_blocco(MacroBlockType *, int, int, short int, PixmapInfo *, char *, char *, char *);
+   extern int crea_icona(Widget, PixmapInfo *, char *, int, int, short int, int, int);
 
      int ind;
 
@@ -439,7 +445,6 @@ Icrea_ico()
                                 par_creaico.x, 
                                 par_creaico.y, 
                                 par_creaico.tipo, 
-                                par_creaico.selez,
                                 par_creaico.pixmap_info, 
                                 par_creaico.label_blocco,
                                 "", 
@@ -453,4 +458,5 @@ Icrea_ico()
                   FROM_WINDOW_BLOCK, 
                   par_creaico.ind_macro, 
                   ind );
+      return 0;
 }

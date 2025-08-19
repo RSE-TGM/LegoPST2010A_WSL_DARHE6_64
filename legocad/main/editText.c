@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <X11/Shell.h>
 #include <Xm/MenuShell.h>
@@ -41,6 +42,9 @@
    descrizione,foraus...etc
 */
 #include "legomain.h"
+
+/* Missing function declarations */
+extern void set_something_val(Widget, String, XtArgVal);
 
 extern Boolean attesa_oknew;
 
@@ -107,12 +111,12 @@ Widget	create_editText();
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-set_titolo(char *title)
+void set_titolo(char *title)
 {
   UxPutLabelString(label11,title);
 }
 
-set_editabile(Boolean edi)
+void set_editabile(Boolean edi)
 {
    if( edi == True)
       set_something_val(scrolledText2,XmNeditable, (XtArgVal) True);
@@ -120,12 +124,12 @@ set_editabile(Boolean edi)
       set_something_val(scrolledText2,XmNeditable, (XtArgVal) False);
 }
 
-set_text(char *stringa)
+void set_text(char *stringa)
 {
    XmTextSetString(scrolledText2,stringa);
 }
 
-get_text(char **text_output)
+void get_text(char **text_output)
 {
    char *appo;
    appo = XmTextGetString(scrolledText2);
@@ -156,11 +160,11 @@ static void	activateCB_pushButton12( UxWidget, UxClientData, UxCallbackArg )
 	   case VIEW_FORAUS:
 	   break;
 	   case EDIT_FORAUS:
-	    get_text(&text_out);
+	    get_text((char **)&text_out);
 	    *outtext = text_out;
 	   break;
 	   case EDIT_DESCR:
-	     get_text(&text_out);
+	     get_text((char **)&text_out);
 	     *outtext = text_out;
 	     if( (OkCB) != NULL)
 	        OkCB();

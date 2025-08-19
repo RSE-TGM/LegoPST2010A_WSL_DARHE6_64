@@ -78,6 +78,11 @@ static char SccsID[] = "@(#)legocad.c	2.26\t5/15/95";
 
 #include "CAP.h"		/* Serve per la gestione delle licenze software*/
 #include "skey_manager3.h"	/* Serve per la gestione delle licenze hardware*/
+#include <stdlib.h>		/* For exit() function */
+
+/* Function declarations */
+int skey_stampa_errore(int error_code, char *messaggio_errore);
+void make_pixmap_cursor(Widget wid, char *name, char *fg_color, char *bg_color);
 
 XtAppContext	UxAppContext;
 Widget		UxTopLevel;
@@ -91,7 +96,7 @@ int             flag_demo = 0;
  *---------------------------------------------*/
 
 
-main(argc,argv)
+int main(argc,argv)
 	int 	argc;
 	char 	*argv[];
 {

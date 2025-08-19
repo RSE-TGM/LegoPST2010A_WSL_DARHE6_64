@@ -23,12 +23,14 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 #include <osf1.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #include "ansiscr.h"
 #include "ctasti.inc"
 #include "dconf.inc"
 
-readdb(header)
+int readdb(header)
 DB_HEADER *header;
 {
 FILE *fp;

@@ -53,7 +53,12 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "messcada.inc"
 #include "allar.inc"
 
-ricono (elem,unita)
+// External function declarations
+extern int rew(int, int, void *);
+extern void allsev(void *, int, short);
+extern void tra(int, int);
+
+void ricono (elem,unita)
 struct buff_all * elem;
 short unita;
 {
@@ -110,7 +115,7 @@ for(i=0;i<max_dbsall;i++,upal++)
    }
    tra(all->mbox,1 );
 }
-return(0) ;
+return ;
 }
 
 

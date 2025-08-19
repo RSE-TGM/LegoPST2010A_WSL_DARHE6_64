@@ -49,8 +49,14 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "mesqueue.h"
 #include "diagnoan.inc"
 
+// External function declarations
+extern int rew(int, int, int*);
+extern int tra(int, int);
+extern int gestri(short, short, short);
+extern int allsev(short*, short, short);
 
-allpag(Ndba,point)
+
+void allpag(Ndba,point)
 short Ndba;
 S_PUNT * point;               // vettore misure da riconoscere
 {

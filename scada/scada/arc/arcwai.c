@@ -51,6 +51,14 @@ static char *_csrc = "@(#) %filespec: arcwai.c-3 %  (%full_filespec: arcwai.c-3:
 #include "arc.inc"
 #include "arctab.inc"
 
+// External function declarations
+extern void waisim(int);
+extern void arcfile(int);
+extern int SimArcwai(void);
+extern void arcrac(long);
+extern void arclen(long);
+extern void arcwr(void);
+
 extern short time_as;
 #define attesa 18
 
@@ -58,7 +66,7 @@ extern short time_as;
 #define wai(par) waisim(par)
 #endif
 
-arcwai()
+void arcwai(void)
 {
 short test_time, timer;
 short mes_prec=0;

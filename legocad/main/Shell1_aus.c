@@ -27,7 +27,23 @@ Shell1_aus.c
 #include "legomain.h"
 #include "lc_errore.h"
 
-ERR_LEVEL err_level;
+/* Missing function declarations */
+extern int esegui_comando(char *);
+extern int proc_legocad_attivi();
+extern void lc_errore(char *, ...);
+extern void set_win_cursor(char *);
+extern void aggiorna_attivi();
+extern void reset_win_cursor();
+extern int attiva_prog_par(char *, char *, ...);
+extern int attiva_programma(char *);
+extern int stato_processo(int);
+extern int testa_ambiente();
+extern void agg_label_ambiente();
+extern void update_pulldown();
+extern void uccidi_processo(int);
+extern int esiste_file(char *);
+
+extern ERR_LEVEL err_level;
 char *getcwd();
 char *getenv();
 extern int tipo_modello; /* tipo di modello : se processo
@@ -57,32 +73,31 @@ static char appoggio[120];
 extern pid_t pid_topology,pid_data,pid_steady,pid_transient,pid_librarian;
 
 
-test_transient()
+int test_transient()
 {
 printf("\n richiamato test transient");
 return(esegui_comando(TEST_TRANSIENT));
 }
 
-test_data_editor()
+int test_data_editor()
 {
 printf("\n richiamato test data editor");
 return(esegui_comando(TEST_DATA_EDITING));
 }
 
-test_steady()
+int test_steady()
 {
 printf("\n richiamato test stazionario");
 return(esegui_comando(TEST_STEADY));
 }
 
-test_topologia()
+int test_topologia()
 {
 printf("\n richiamato test topologia");
 return(esegui_comando(TEST_TOPOLOGY));
 }
 
-get_comando_lg1(comando)
-char *comando;
+int get_comando_lg1(char *comando)
 {
 switch(tipo_modello)
 	{
@@ -98,8 +113,7 @@ switch(tipo_modello)
 	}
 }
 	
-get_comando_lg3(comando)
-char *comando;
+int get_comando_lg3(char *comando)
 {
 switch(tipo_modello)
 	{
@@ -115,8 +129,7 @@ switch(tipo_modello)
 	}
 }
 
-get_comando_lg5sk(comando)
-char *comando;
+int get_comando_lg5sk(char *comando)
 {
 switch(tipo_modello)
 	{
@@ -132,17 +145,16 @@ switch(tipo_modello)
 	}
 }
 
-esegui_crea(comando)
-char *comando;
+int esegui_crea(char *comando)
 {
 /*
  se vi sono processi di costruzione attivi esce direttamente
 */
 if(proc_legocad_attivi())
         {
-        err_level == ERROR;
+        err_level = ERROR;
         lc_errore(MODEL_IN_PROGRESS_ERR,comando);
-        return;
+        return 0;
         }
 set_win_cursor("wait");
 if(esegui_comando(comando))
@@ -154,28 +166,28 @@ aggiorna_attivi();
 reset_win_cursor();
 }
 
-esegui_crealg1()
+void esegui_crealg1()
 {
 char comando[150];
 get_comando_lg1(comando);
 esegui_crea(comando);
 }
 
-esegui_crealg3()
+void esegui_crealg3()
 {
 char comando[150];
 get_comando_lg3(comando);
 esegui_crea(comando);
 }
 
-esegui_crealg5sk()
+void esegui_crealg5sk()
 {
 char comando[150];
 get_comando_lg5sk(comando);
 esegui_crea(comando);
 }
 
-attiva_topology()
+void attiva_topology()
 {
 char str_grafica_on[2];
 char str_tipo_modello[2];
@@ -210,7 +222,7 @@ else
 /*
  Attivazione data editor (attivita' DATI)
 */
-attiva_data()
+void attiva_data()
 {
 char str_grafica_on[2];
 if(proc_legocad_attivi())
@@ -225,7 +237,7 @@ else
 /*
  Attivazione del calcolo dello stazionario (steady-state)
 */
-attiva_steady()
+void attiva_steady()
 {
 if(proc_legocad_attivi())
 	lc_errore(MODEL_IN_PROGRESS_ERR,"Steady state");
@@ -236,7 +248,7 @@ else
 /*
  Attivazione del calcolo del transitorio
 */
-attiva_transient()
+void attiva_transient()
 {
 if(proc_legocad_attivi())
 	lc_errore(MODEL_IN_PROGRESS_ERR,"Transient");
@@ -247,7 +259,7 @@ else
 /*
  Attivazione librarian
 */
-attiva_librarian()
+void attiva_librarian()
 {
 if(proc_legocad_attivi())
 	lc_errore(MODEL_IN_PROGRESS_ERR,"Librarian");
@@ -258,7 +270,7 @@ else if(strlen(path_legocad)!=0)
 /*
  Attivazione graphics
 */
-attiva_graphics()
+void attiva_graphics()
 {
 if(stato==SCELTO && strlen(path_modello))
 	{
@@ -273,7 +285,7 @@ else
 /*
  Attivazione tavole del vapore
 */
-attiva_tables()
+void attiva_tables()
 {
 attiva_programma("tables");
 }
@@ -281,7 +293,7 @@ attiva_programma("tables");
 /*
  Attivazione documentazione automatica del modello
 */
-attiva_autodoc()
+void attiva_autodoc()
 {
 if(stato==SCELTO && strlen(path_modello))
 	{
@@ -291,7 +303,7 @@ if(stato==SCELTO && strlen(path_modello))
 }
 
 
-proc_legocad_attivi()
+int proc_legocad_attivi()
 {
 return((stato_processo(pid_topology) && pid_topology!=0) ||
     (stato_processo(pid_data) && pid_data!=0) ||
@@ -321,7 +333,7 @@ if(stato == SCELTO)
 /*
  Uccide eventuali processi gestiti da legocad
 */
-kill_proc_legocad()
+void kill_proc_legocad()
 {
 if(stato_processo(pid_topology) && pid_topology!=0)
 	uccidi_processo(pid_topology);
@@ -337,14 +349,13 @@ if(stato_processo(pid_librarian) && pid_librarian!=0)
  verifica che il path selezionato sia accettabile per la costruzione del
  modello lego
 */
-is_path_modello(path)
-char *path;
+int is_path_modello(char *path)
 {
 return(1);
 }
 
 
-testa_ambiente()
+int testa_ambiente()
 {
 char *path;
 char app[120];
@@ -380,7 +391,7 @@ if(path=getenv("LEGOCAD_USER"))
 return(ok_libut && ok_libreg); /* l'ambiente e' corretto se torna True */	
 }
 
-chdir_path_legocad()
+void chdir_path_legocad()
 {
 if(ok_path_legocad)
 	{

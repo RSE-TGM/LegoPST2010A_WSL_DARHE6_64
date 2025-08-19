@@ -86,7 +86,13 @@ static char *_csrc = "@(#) %filespec: alldec.c-12 %  (%full_filespec: alldec.c-1
 S_VDEAL   dec_mess;
 extern S_ALL_PER_ZONE allxzone;
 
-dec (flag,off,ald,alv)
+// External function declarations
+extern int rew(int, int, void *);
+extern void tra(int, int);
+extern int allinger(void *, void *, void *);
+extern void allcod(int, void *, void *);
+
+int dec (flag,off,ald,alv)
 short flag,off;
 S_DBS_ALV *alv;
 S_DBS_ALL *ald;

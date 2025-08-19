@@ -134,7 +134,7 @@ for(i=0;i<n_gerarchie;i++)
 	}
 for(i=0;i<n_gerarchie;i++,pcGerar++,pcPuntGerar++)
 	{
-	if(*pcGerar!=*pcPuntGerar && *pcGerar!=ger_default) return(NULL);
+	if(*pcGerar!=*pcPuntGerar && *pcGerar!=ger_default) return(0);
 	}
 
 return (1);

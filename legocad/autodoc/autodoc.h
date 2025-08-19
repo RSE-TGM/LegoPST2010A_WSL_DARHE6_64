@@ -253,7 +253,7 @@ void copia_descr_var();
 void cambio_dim_window();
 void blocco_selezionato();
 void info_aggiuntive();
-void copia_str();
+void copia_str(char *, char *, char , int );
 void conferma_note_inserite();
 void recupera_nota_blocco();
 void callback_note();
@@ -296,7 +296,7 @@ int crea_docdati(int*, int*);
 
 int conta_pagine_doc(char*, int);
 int crea_docvar(int*, int*);
-int crea_sstate_doc(int);
+int crea_sstate_doc(int*);
  
 
 #include "note.h"

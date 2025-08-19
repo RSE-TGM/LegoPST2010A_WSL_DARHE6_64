@@ -95,7 +95,7 @@ FILE *fpedf;                             /* file di edting */
 FILTRI *filtri[MAXFILTRI];               /* vettore filtri */
 short num_filtri;
 
-main(argc,argv)
+int main(argc,argv)
 	int 	argc;
 	char 	*argv[];
 {

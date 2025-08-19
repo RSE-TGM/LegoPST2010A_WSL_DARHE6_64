@@ -51,6 +51,9 @@ static char SccsID[] = "@(#)nn.c	1.13\t11/13/95";
  * $Date: 92/06/25 11:00:40 $  		$Revision: 1.11.37.1.43.2 $ 
  *-----------------------------------------------------------*/ 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #ifdef XOPEN_CATALOG
 #include <locale.h>
@@ -89,7 +92,7 @@ int		UxScreen;
  static String nnEzHfile;
 
 
-main(argc,argv)
+int main(argc,argv)
 	int 	argc;
 	char 	*argv[];
 {

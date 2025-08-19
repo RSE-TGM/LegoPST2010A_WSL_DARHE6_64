@@ -42,10 +42,16 @@ static char SccsID[] = "@(#)tables.c	1.3\t3/29/95";
 #include <Xm/PushB.h>
 #include <Xm/BulletinB.h>
 #include <Xm/ToggleB.h>
+#include <Xm/List.h>
 
 //#include <libutilx.h>
 
 #include  "../../AlgLib/libinclude/libutilx.h"
+
+/* Function prototypes for missing functions */
+int crea_input_output();
+int crea_elenco_funzioni();
+extern void calcola_(int*, float*, float*, float*, int*, float*, float*);
 #include "tables.h"
 #include "def_tav.h"
 #include "sfondo.px"  /* Bitmap dell'icona dell'applicazione */

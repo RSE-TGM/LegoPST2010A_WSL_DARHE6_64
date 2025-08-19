@@ -40,6 +40,32 @@ static char SccsID[] = "@(#)f03.c	2.2\t2/13/95";
 #include "read_ftn.h"
 #include "f03.h"
 
+/* Global variable definitions */
+_INTEGER  nbl, neqal, nbl1, nvart, neqsis, neqs1, npvrt;
+_INTEGER  nu, nu1, nvri, isiss, nbtri, nst;
+
+char     sigla[8];
+char     *nosl;
+
+char     **nosub, **noblc, **nom_bloc;
+_INTEGER *nusta, *nusci, *ningr, *islb;
+
+_INTEGER *ip;   /* IP(1,NBL1)   puntatore alle variabili */
+char     **var;
+_INTEGER *ipvrs;
+
+_INTEGER *ips; /* IPS(1,NEQS1) puntatore variabili di uscita e di stato */
+char     **sivar, **nom_sivar;
+_INTEGER *iout_sivar;
+
+_INTEGER *ipvrt; /* IPVRT(1,NPVRT) puntatore alle incognite(+) o noti(-) */
+
+_INTEGER *ipi;  /* IPI(1,NPVRT) puntatore alle variabili di ingresso */
+char     **vari, **nom_vari;
+_INTEGER *iout_vari;
+
+_INTEGER *ipvri; /* IPVRI(1,NVRI)  puntatore alla roulette */
+
 int leggi_record_ftn( int , int , int , char , int , ...);
 int dim_array_f03();
 void crea_array_bidim( char*[], char[], int, int );

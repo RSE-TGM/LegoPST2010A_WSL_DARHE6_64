@@ -37,7 +37,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "allar.inc"
 #include "diagnoan.inc"
 
-GdcAllS(short point, char* val)
+void GdcAllS(short point, char* val)
 {
 S_MALLA mess;
 QUEUE_PACKET queue;

@@ -40,7 +40,7 @@ static char *_csrc = "@(#) %filespec: allmatch.c-1 %  (%full_filespec: allmatch.
 #include "diagnoan.inc"
 
 
-allmatch(all_ex,alv)
+int allmatch(all_ex,alv)
 struct buff_all *all_ex;      /* allarme da esaminare */
 S_DBS_ALV *alv;               // tabella video allarmi
 {

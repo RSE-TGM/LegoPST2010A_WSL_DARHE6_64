@@ -34,6 +34,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
    12 Dicembre 1994
 */
 #include <stdio.h>
+#include <string.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
@@ -44,9 +45,15 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include	"mesqueue.h"
 #include "tipal.inc"
 
+/* Function prototypes */
 float vsoglia();
+extern void verifall(short, short);
+extern int bitvalue(short *, short);
+extern void bitset(short *, short, short);
+extern int msoglia(float, short, char, char, short);
+extern void wrdb(short);
 
-Rwritewi (m)
+void Rwritewi (m)
 S_MCSP * m ;
 {
 S_VSTAT v;

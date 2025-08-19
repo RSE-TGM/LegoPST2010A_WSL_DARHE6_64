@@ -47,7 +47,7 @@ short qperif_07;
 short c_hcwin;
 short c_rep;
 
-initcod()
+int initcod()
 {
 int i ;
 
@@ -110,13 +110,13 @@ for(i=1;i<num_code;i++)
 }
 for(i=0;i<num_code;i++)
 	{
-        pthread_mutex_init(&(cd[i].mutex),pthread_mutexattr_default);
+        pthread_mutex_init(&(cd[i].mutex),NULL);
         pthread_mutex_init(&(cd[i].mutex_condition_r),
-			pthread_mutexattr_default);
-	pthread_cond_init(&(cd[i].condition_r),pthread_condattr_default);
+			NULL);
+	pthread_cond_init(&(cd[i].condition_r),NULL);
         pthread_mutex_init(&(cd[i].mutex_condition_s),
-			pthread_mutexattr_default);
-	pthread_cond_init(&(cd[i].condition_s),pthread_condattr_default);
+			NULL);
+	pthread_cond_init(&(cd[i].condition_s),NULL);
 	}
 
 /*

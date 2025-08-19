@@ -23,6 +23,9 @@ static char SccsID[] = "@(#)modallpag.c	1.1\t1/8/96";
 #include<string.h>
 #include<stdlib.h>     /*necessario per utilizzo funzione system*/
 
+int menu1();
+extern int t;
+
 
 #define DIM 200        /*dimensione max della linea da leggere da file*/
 
@@ -30,7 +33,7 @@ static char SccsID[] = "@(#)modallpag.c	1.1\t1/8/96";
 char comando[200];
 
 
-main (argc,argv)
+int main (argc,argv)
 int argc;
 char *argv[];
 {
@@ -79,7 +82,9 @@ FILE *fp;
 if (argc==1)
 {
   printf ("INSERIRE PATH COMPLETO DIRETTORIO DOVE RISIEDE IL CONTEXT.CTX:\n");
-  gets (pathcontext);
+  fgets (pathcontext, sizeof(pathcontext), stdin);
+  /* Remove newline if present */
+  pathcontext[strcspn(pathcontext, "\n")] = 0;
 
  /* per UNIX
   *esempio pathcontext=/usr/users/pag

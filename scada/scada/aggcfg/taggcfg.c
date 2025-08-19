@@ -55,10 +55,11 @@ static char *_csrc = "@(#) %filespec: taggcfg.c-4 %  (%full_filespec: taggcfg.c-
 #include "mesprocv.inc"
 #include "pscserr.inc"                   
 #include "netmsg.h"
+#include "netstr.h"
 #include "aggcfg.inc"
 
 #if defined OSF1 || defined LINUX
-char release_slave[];
+char release_slave[4] = {0};
 #else
 extern	char release_slave[];
 #endif
@@ -67,7 +68,29 @@ extern   DB_HEADER h_db;
 S_VOUUT_CONFIG stcfg;      		/* struttura messaggio di stato config */
 short stvid[max_video];          /* stato dei video */
 
-taggcfg()	
+// Function declarations
+int diagnet(short pdb, SPO_STATO *mess, short *porta);
+int bitvalue(short *buffer, short indice);
+void pscserr(int stop_task, int task_id, int routine_id, int error_code, int sys_halt);
+void wai(int delay);
+void CloseConn(void);
+void scd(void);
+void sce(void);
+void InvSlave(short *mess, short lmsg);
+void wrdb(int header);
+int wbyte(int fd, char *buffer, int offset, int length);
+void NetMarteEnd(void);
+int fcloseall(void);
+void RestIDT(void);
+void rwdbal(int flag, DB_HEADER *db1, DB_HEADER *db2);
+int DosRemove(char *filename);
+int DosRename(char *oldname, char *newname);
+void to_ascii(char *filename);
+void readdb(DB_HEADER *db);
+void allocdb(int flag, DB_HEADER *db);
+void RestartScada(void);
+
+void taggcfg()	
 {
 short lung;
 short num_mes;                   // numero di messaggi (file *.RTF) inviati
@@ -137,7 +160,7 @@ fwai(0.02);	// apparentemente arrivava un messaggio duplicato
 switch((unsigned char)mconfig.i.tipomess)
 {
 case STATOPORTA:
-      if((stato=diagnet(config,&mconfig,&portaRet))>-1)    // variazione di stato della config
+      if((stato=diagnet(config,(SPO_STATO*)&mconfig,&portaRet))>-1)    // variazione di stato della config
       {
       short lungst;
       // invio stringa di stato config ai video
@@ -193,7 +216,7 @@ case STATOPORTA:
          else
             {
       	      memcpy(ssys.rel_duale,release_slave,2);
-      	      memcpy(ssys.rel_duale[2],release_slave[3],2);
+      	      memcpy(&ssys.rel_duale[2],&release_slave[2],2);
             }
          }
      else
@@ -206,7 +229,7 @@ case STATOPORTA:
      else
      {
         memcpy(ssys.rel_duale,release_slave,2);
-        memcpy(ssys.rel_duale[2],release_slave[3],2);
+        memcpy(&ssys.rel_duale[2],&release_slave[2],2);
      }
 	  ssys.n_video=num_video;
 	  memcpy(ssys.stvideo,stvid,num_video*2);
@@ -515,7 +538,7 @@ goto LOOP;
 /*
 	Chiusura connessione con Config
 */
-CloseConn()
+void CloseConn()
 {
 	QUEUE_PACKET pack;
 
@@ -534,7 +557,7 @@ CloseConn()
 /*
 	InvSlave
 
-   Usata solo se il sistema Š duale.
+   Usata solo se il sistema ï¿½ duale.
 	Routine per l'invio del messaggio al sistema slave se il sistema e'
 	master.	Nella prim word (n. nodo) viene inserito il codice del
 	messaggio RTF_TRASF interpretato dal task duale.
@@ -550,7 +573,7 @@ CloseConn()
 
 	nessuno
 */
-InvSlave(mess,lmsg)
+void InvSlave(mess,lmsg)
 short *mess;
 short lmsg;
 {
@@ -563,12 +586,12 @@ short lmsg;
 					pack.wto=100;
 					pack.flg=MSG_WAIT;
 					pack.que=c_dua_tx;
-					pack.amsg=mess;
+					pack.amsg=(char *)mess;
 					pack.lmsg=lmsg;
 					*mess=RTF_TRASF;
 					if(enqueue(&pack)) CloseConn();	// time out
 				}
 			else CloseConn();					// slave non aggiornato
 		}
-	return(0);
+	return;
 }

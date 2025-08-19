@@ -62,6 +62,8 @@ static char SccsID[] = "@(#)edit_f01.c	2.6\t3/20/95";
 #include <locale.h>
 #endif
 
+#include <stdlib.h>
+#include <string.h>
 #include <X11/Intrinsic.h>
 #include <X11/StringDefs.h>
 #include <Xm/Xm.h>
@@ -83,8 +85,9 @@ int		UxScreen;
  * Insert application global declarations here
  *---------------------------------------------*/
 
+void lancia_edit(char *file, int editabile);
 
-main(argc,argv)
+int main(argc,argv)
 	int 	argc;
 	char 	*argv[];
 {

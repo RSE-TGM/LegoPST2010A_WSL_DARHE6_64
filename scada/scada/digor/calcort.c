@@ -45,7 +45,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 extern	DB_HEADER h_db;
 
-calcort(punt,time)
+/* Function prototypes */
+extern void bitset(short *, short, short);
+extern int bitvalue(short *, short);
+
+int calcort(punt,time)
 short punt ;
 MISTIME *time;
 {

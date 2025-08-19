@@ -50,6 +50,7 @@ static char *_csrc = "@(#) %filespec: gdac.c-3 %  (%full_filespec: gdac.c-3:csrc
 #endif
 #include "pscs.cfg"
 #include <all_1.h>
+#include <string.h>
 
 #define coeff_att 1
 short cont_ora=1;
@@ -63,7 +64,13 @@ union u_messaggi {   S_VDASI   dmess;
 
 float vsoglia();
 
-gdac( )
+// Function declarations
+float fsoglia(short point, char tipo, char soglia);
+void ter(void);
+int bitvalue(short *buffer, short indice);
+int alllast(char *buffer);
+
+void gdac( )
 {
 S_ZONE *ptv ;
 

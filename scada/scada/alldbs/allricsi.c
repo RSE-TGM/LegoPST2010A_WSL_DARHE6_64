@@ -51,7 +51,13 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "allar.inc"
 #include "diagnoan.inc"
 
-ricsi (apos,alv)
+// External function declarations
+extern int rew(int, int, int*);
+extern int tra(int, int);
+extern int gestri(short, short, short);
+extern int allsev(short*, short, short);
+
+int ricsi (apos,alv)
 short apos;
 S_DBS_ALV *alv;
 {

@@ -47,10 +47,19 @@ static char *_csrc = "@(#) %filespec: arcopen.c-4 %  (%full_filespec: arcopen.c-
 #include "dconf.inc"
 #include "diagnodi.inc"
 
+// External function declarations
+extern void bitset(short *, short, short);
+extern void pscserr(int, int, int, int, int);
+extern void arcfnom(int, int);
+extern int tra(int, int);
+
+// Forward declarations
+int calc_timer(short, short *);
+
 static long fzq[n_freq]= {5L, 15L, 30L, 60L, 300L, 900L, 1800L,
          		         3600L, 28800L, 86400L, 600L};
 
-arcopen()
+int arcopen(void)
 {
 FILE *fp;
 char fnome[FILENAME_MAX+1];
@@ -224,9 +233,7 @@ return(0);
 
    10 Marzo 1992     Rel. 1.0 Fc
 */
-calc_timer(freq,to)
-short freq;
-short *to;
+int calc_timer(short freq, short *to)
 {
 short i;
 short to_max;

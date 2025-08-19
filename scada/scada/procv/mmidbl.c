@@ -47,6 +47,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "dconf.inc"
 
 #include "mmidbl.h"
+#include <string.h>
 //
 // definizione aree per posto operatore
 //
@@ -59,7 +60,7 @@ struct s_db_postop {
       char pt[chPT*nGbcPT];
                   } dbpostop[max_video];
         
-mmidbl(S_MMIDBL* mess)
+void mmidbl(S_MMIDBL* mess)
 {
    QUEUE_PACKET pack;
 
@@ -69,17 +70,17 @@ mmidbl(S_MMIDBL* mess)
    switch (mess->idbl)
    {
    case iGbcAN:
-      dim=chAN;   pbuf=&dbpostop[mess->npostop-1].an;   break;
+      dim=chAN;   pbuf=(char *)dbpostop[mess->npostop-1].an;   break;
    case iGbcIN:
-      dim=chIN;   pbuf=&dbpostop[mess->npostop-1].in;   break;
+      dim=chIN;   pbuf=(char *)dbpostop[mess->npostop-1].in;   break;
    case iGbcDI:
-      dim=chDI;   pbuf=&dbpostop[mess->npostop-1].di;   break;
+      dim=chDI;   pbuf=(char *)dbpostop[mess->npostop-1].di;   break;
    case iGbcOR:
-      dim=chOR;   pbuf=&dbpostop[mess->npostop-1].or;   break;
+      dim=chOR;   pbuf=(char *)dbpostop[mess->npostop-1].or;   break;
    case iGbcST:
-      dim=chST;   pbuf=&dbpostop[mess->npostop-1].st;   break;
+      dim=chST;   pbuf=(char *)dbpostop[mess->npostop-1].st;   break;
    case iGbcPT:
-      dim=chPT;   pbuf=&dbpostop[mess->npostop-1].pt;   break;
+      dim=chPT;   pbuf=(char *)dbpostop[mess->npostop-1].pt;   break;
    default:
       return;
    }

@@ -31,10 +31,13 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "mesprocv.inc"
 #include	"mesqueue.h"
 
+/* Function prototypes */
+extern void hcwin(int, int, int);
+
 extern short coda_hc_mi;
 extern short c_hcwin;
 
-thcwin()
+void thcwin()
 {
    QUEUE_PACKET  queue, hcqueue;         
    S_IHCPY hcp;                 // messaggio richiesta hardcopy da MMI Win

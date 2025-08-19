@@ -53,6 +53,9 @@
 
 #include "definizioni.h"
 
+/* Function prototypes for missing declarations */
+extern void scrivi_messaggio(char *);
+
 /****************************************************************/
 /* VARIABILI GLOBALI ESTERNE					*/
 /****************************************************************/

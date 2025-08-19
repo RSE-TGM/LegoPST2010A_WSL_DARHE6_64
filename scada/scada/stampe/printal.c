@@ -44,7 +44,13 @@ static char *_csrc = "@(#) %filespec: printal.c-3 %  (%full_filespec: printal.c-
 extern long  off_f[] ;     /* definiti nel main mpscs */
 extern short nbyte[] ;     /* come sopra */
 
-printal (al)
+// Function declarations
+void decnum(char *str, int width, int precision, short value, float fvalue);
+int rbyte(int fd, short *buffer, int offset, int count);
+short cunita(short point, char ext);
+void invia(int printer, void *message);
+
+void printal (al)
 S_STALL *al ;
 {
 short ier ;
@@ -108,7 +114,7 @@ stam.blank_8=0x20202020 ;
 
 // Modifica richiesta da Stefanini (Fax 14/11/95)
 stam.new=0x0A0D ;
-stam.eos=0x0A0D ;              /* fine riga    */
+stam.eos=(short)0x0A0D ;              /* fine riga    */
 
 
 

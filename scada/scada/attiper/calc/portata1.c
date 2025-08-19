@@ -53,7 +53,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "calas.inc"
 
-portata1()
+// External function declarations
+extern int bitvalue(short *, short);
+extern void bitset(short *, short, short);
+
+void portata1()
 {
 PUNTATORE temp[3];
 int i;

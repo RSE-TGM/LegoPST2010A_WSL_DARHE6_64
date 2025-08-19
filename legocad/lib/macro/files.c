@@ -44,15 +44,25 @@ extern Widget warning_widget;
 extern char *error_mesg[];
 extern char NomeModello[];
 
+/* Function declarations */
+int s_error(char *app_name, char **messages, int msg_id, int exit_code);
+void copy_n_car(char *dest, char *src, int n);
+void trim_blank(char *str);
+int unlink(const char *pathname);
+void set_something_val(Widget widget, String resource, XtArgVal value);
+int leggi_file_macro(FILE *fp, MacroBlockType *mblock, int flag);
+int leggi_blocchi(FILE *fp, MacroBlockType *mblock, int k);
+int cerca_macro_nel_file(FILE *fp, char *nome_macro);
+int salva_blocco(FILE *fp, BlockType *block);
+int salva_linea(FILE *fp, GLine *line);
+
 
 /*** leggi_macroblocchi( mblocks, num_mblocks )
  *** Parametri:
  ***    MacroBlockType *mblocks : struttura dei macroblocchi da aggiornare
  ***    int *num_mblocks : numero di macroblocchi letti
 legge i macroblocchi nel file macroblocks.dat */
-leggi_macroblocchi( mblocks, num_mblocks, macro_allocate )
-MacroBlockType **mblocks;
-int *num_mblocks, *macro_allocate;
+int leggi_macroblocchi(MacroBlockType **mblocks, int *num_mblocks, int *macro_allocate)
 {
    char buffer[100], temp[10];
    int  stato = 0;
@@ -94,7 +104,7 @@ printf("nome macroblocco letto: %s\n", (*mblocks)[ *num_mblocks ].nome_macro);
    /* Alloca altri 100 elementi se necessario */
       if ( *num_mblocks > *macro_allocate )
            *mblocks = (MacroBlockType *) 
-                      realloc_mem( *mblocks, *macro_allocate += 100,
+                      realloc_mem((char*)*mblocks, *macro_allocate += 100,
 			 	   sizeof(MacroBlockType));
    }
    fclose(fp);
@@ -106,9 +116,7 @@ printf("nome macroblocco letto: %s\n", (*mblocks)[ *num_mblocks ].nome_macro);
  ***     char *nome_macro : nome del macroblocco.
  ***     char *descr_macro : descrizione del macroblocco.
 modifica il macroblocco nel file macroblocks.dat */
-modifica_macroblocco( mblock, nome_macro, descr_macro )
-MacroBlockType *mblock;
-char *nome_macro, *descr_macro;
+int modifica_macroblocco(MacroBlockType *mblock, char *nome_macro, char *descr_macro)
 {
    FILE *fp;
 
@@ -133,8 +141,7 @@ char *nome_macro, *descr_macro;
  *** Parametri :
  ***     MacroBlockType *mblock : struttura macroblocco.
 aggiunge il macroblocco nel file macroblocks.dat */
-aggiungi_macroblocco( mblock, nome_macro, descr_macro )
-MacroBlockType *mblock;
+int aggiungi_macroblocco(MacroBlockType *mblock, char *nome_macro, char *descr_macro)
 {
    FILE *fp;
 
@@ -158,9 +165,7 @@ MacroBlockType *mblock;
  ***    MacroBlockType *mblocks : struttura dei macroblocchi da salvare
  ***    int num_mblocks : numero di macroblocchi letti
 salva i macroblocchi nel file macroblocks.dat */
-salva_macroblocchi( mblocks, num_mblocks )
-MacroBlockType *mblocks;
-int *num_mblocks;
+int salva_macroblocchi(MacroBlockType *mblocks, int *num_mblocks)
 {
    int i, j, flag = 0;
    char buffer[100], file_temp[50];
@@ -226,7 +231,7 @@ printf("salvataggio...\n");
           mblocks[i].cancellato = -1;  /* macro cancellato anche nel file */
           if (mblocks[i].blocks != NULL)
 	  {
-             XtFree(mblocks[i].blocks);
+             XtFree((char*)mblocks[i].blocks);
 	     mblocks[i].blocks = NULL;
 	  }
        }
@@ -243,10 +248,7 @@ printf("salvataggio...\n");
  ***  Boolean flag : indica se bisogna leggere il file dall'inizio.
 legge la prima macro e ,ad ogni chiamata , le successive che incontra nel
 file  macroblocks.dat. restituisce 0 se trovato , altrimenti restituisce -1 */
-leggi_file_macro( fp, mblock, flag )
-FILE *fp;
-MacroBlockType *mblock;
-Boolean flag;
+int leggi_file_macro(FILE *fp, MacroBlockType *mblock, int flag)
 {
    char buffer[100], *str;
    Boolean macro_found = True, primo = False;
@@ -307,9 +309,7 @@ Boolean flag;
  *** char *nome_macro : nome del macroblocco da cercare
 cerca un macroblocco nel file. Restituisce 0 se trovato, -1 altrimenti.
 Il File pointer viene posizionato sul record del macroblocco. */
-cerca_macro_nel_file(fp, nome_macro)
-FILE *fp;
-char *nome_macro;
+int cerca_macro_nel_file(FILE *fp, char *nome_macro)
 {
    int stato;
    MacroBlockType mblock;
@@ -331,10 +331,7 @@ char *nome_macro;
  *** char *nome_macro : nome del macroblocco da cercare.
 cerca una macro in macroblocks. restituisce 0 se trovato , altrimenti
 restituisce -1 */
-cerca_macroblocco( macroblocks, num_macro, nome_macro )
-MacroBlockType *macroblocks;
-int num_macro;
-char *nome_macro;
+int cerca_macroblocco(MacroBlockType *macroblocks, int num_macro, char *nome_macro)
 {
    while ( num_macro-- )
    {
@@ -351,9 +348,7 @@ char *nome_macro;
  ***     MacroBlockType *mblock : struttura macroblocco da aggiornare
 legge il file macroblocks.dat ed aggiorna la struttura MacroBlockType del
 relativo macroblocco */
-carica_blocchi_macro( mblock, k )
-MacroBlockType *mblock;
-int k;
+int carica_blocchi_macro(MacroBlockType *mblock, int k)
 {
    FILE *fp;
 
@@ -366,8 +361,9 @@ int k;
    if (cerca_macro_nel_file(fp, mblock[k].nome_macro) == -1)
       return(-1);
 
-   leggi_blocchi( mblock, k );
+   leggi_blocchi( fp, mblock, k );
    fclose( fp );
+   return 0;
 }
 
 /*** leggi_blocchi( fp, mblock )
@@ -378,10 +374,7 @@ int k;
 recupera i blocchi dal file macroblocks.dat ed aggiorna la struttura
 macroblocco. Il file pointer deve essere posizionato sul nome del
 macroblocco */
-leggi_blocchi( fp, mblock, k )
-FILE *fp;
-MacroBlockType *mblock;
-int k;
+int leggi_blocchi(FILE *fp, MacroBlockType *mblock, int k)
 {
    int iblk = 0, iline = 0, i, *num_blk_alloc, *num_line_alloc, tipo;
    short int with_arrow, dummy;
@@ -475,7 +468,7 @@ int k;
       {
           iline++;
           if ( iline >= *num_line_alloc )
-             mblock[k].line = (GLine *) realloc_mem( mblock[k].line,
+             mblock[k].line = (GLine *) realloc_mem((char*)mblock[k].line,
 					             *num_line_alloc += 50,
 						     sizeof(GLine));
       }
@@ -497,7 +490,7 @@ int k;
 
           if ( iblk >= *num_blk_alloc )
              mblock[k].blocks = (BlockType *) 
-					realloc_mem( mblock[k].blocks,
+					realloc_mem((char*)mblock[k].blocks,
 					             *num_blk_alloc += 100,
 						     sizeof(BlockType));
        }
@@ -509,15 +502,14 @@ int k;
    mblock[k].num_blocchi_selez=0;
    mblock[k].num_line_selez=0;
 /* fine L.C. */
+   return 0;
 }
 
 /*** salva_blocchi_macro( mblock )
  ***   Parametri:
  ***     MacroBlockType *mblock : struttura macroblocco da aggiornare
 salva nel file macroblocks.dat i blocchi del macroblocco relativo */
-salva_blocchi_macro( macroblocks, ind_macro )
-MacroBlockType *macroblocks;
-int ind_macro;
+int salva_blocchi_macro(MacroBlockType *macroblocks, int ind_macro)
 {
    short int trovato = 0;
    int i, j, flag = 0;
@@ -620,12 +612,10 @@ int ind_macro;
  ***    FILE *fp;
  ***    BlockType *block : blocco da salvare nel file 
 salva un blocco nel file puntato da fp nella posizione corrente */
-salva_blocco( fp, block )
-FILE *fp;
-BlockType *block;
+int salva_blocco(FILE *fp, BlockType *block)
 {
    if (block->cancellato)
-      return;
+      return 0;
 
    switch (block->tipo)
    {
@@ -655,15 +645,14 @@ BlockType *block;
            fprintf( fp, "%-50.50s\n",block->descr_blocco );
                     break;
    }
+   return 0;
 }
 
 /*** salva_linea( fp, line )
  *** Parametri :
  ***    FILE *fp: file pointer.
  ***    GLine *line : gruppo di linee da salvare. */
-salva_linea(fp, line)
-FILE *fp;
-GLine *line;
+int salva_linea(FILE *fp, GLine *line)
 {
    int i;
 
@@ -682,6 +671,7 @@ GLine *line;
        fprintf(fp, "(%d,%d)\n", 
 		   line->points[i].x,
 		   line->points[i].y );
+   return 0;
 }
 
 /*** char *calloc_mem(num, nbytes)

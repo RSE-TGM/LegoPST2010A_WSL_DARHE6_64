@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <X11/Shell.h>
 #include <Xm/MenuShell.h>
@@ -43,6 +44,11 @@
 
 char path_modello_training[200];
 extern int model_filter(char *);
+
+/* Missing function declarations */
+extern swidget create_vis_msg(char *);
+extern void genera_lista_entry(char *, int (*)(char *), int *, char ***);
+extern swidget create_question_operation(Widget, int);
 
 /*******************************************************************************
 	The definition of the context structure:
@@ -91,7 +97,7 @@ Widget	create_TrainingModels();
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-get_selection(char *selezione)
+int get_selection(char *selezione)
 {
   char appo[200];
 
@@ -410,7 +416,7 @@ static Widget	_Ux_create_TrainingModels()
 		XtSetValues( selectionBox1 , arg, 2);
 		for(i=0;i<num;i++)
 			{
-			XtFree(modelli[i]);
+			XmStringFree(modelli[i]);
 			}
 		
 		

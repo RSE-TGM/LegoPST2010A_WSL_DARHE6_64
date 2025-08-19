@@ -52,11 +52,16 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tipal.inc"	  
 #include "mesqueue.h"
 
+// External function declarations
+extern void decnum(char *, int, int, short, float);
+extern int rbyte(int, void *, long, int);
+extern short cunita(short, short);
+extern int invia(short, void *);
+
 extern long  off_f[] ;     /* definiti nel main mpscs */
 extern short nbyte[] ;     /* come sopra */
 
-printalt (al)
-S_STALLT *al ;
+int printalt(S_STALLT *al)
 {
 short ier ;
 short atipo ;

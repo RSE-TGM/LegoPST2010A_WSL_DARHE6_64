@@ -34,6 +34,8 @@ static char *_csrc = "@(#) %filespec: arcwr.c-3.1.1 %  (%full_filespec: arcwr.c-
 */
 #include <osf1.h>
 #include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 #include <fcntl.h>
 #if defined OSF1 || defined LINUX
 #include <sys/types.h>
@@ -50,7 +52,18 @@ static char *_csrc = "@(#) %filespec: arcwr.c-3.1.1 %  (%full_filespec: arcwr.c-
 #include "diagnodi.inc"
 #include "tipal.inc"
 
-arcwr()
+// External function declarations
+extern int bitvalue(short *, short);
+extern void pscserr(int, int, int, int, int);
+extern int wbyte(int, char *, long, int);
+extern int rew(int, int, int *);
+extern int tra(int, int);
+extern void wai(int);
+extern void arcfnom(int, int);
+extern void bitset(short *, short, short);
+extern void arcdia(short, short, short);
+
+int arcwr(void)
 {
 char j;
 short  canale;
@@ -90,7 +103,7 @@ for(j=0,timer=t_N,dbs=&arcdbsN[0];j<2;j++,timer=t_L,dbs=&arcdbsL[0])
 */
       strcpy(fnome,arcpath);
       strcat(fnome,"/");
-      strcat(fnome,(arcnome[narc].arc+arcnome[narc].use));
+      strcat(fnome,(char*)(arcnome[narc].arc+arcnome[narc].use));
 #if defined (DEBUG)
    printf("\n wr %d %s %ld \n",narc,fnome,arc->offset);
 #endif

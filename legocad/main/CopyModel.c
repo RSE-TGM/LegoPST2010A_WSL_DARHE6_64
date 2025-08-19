@@ -46,6 +46,9 @@
 #include "legomain.h"
 extern int model_filter(char *);
 
+/* Missing function declarations */
+extern void genera_lista_entry(char *, int (*)(char *), int *, char ***);
+
 /*******************************************************************************
 	The definition of the context structure:
 	If you create multiple instances of your interface, the context

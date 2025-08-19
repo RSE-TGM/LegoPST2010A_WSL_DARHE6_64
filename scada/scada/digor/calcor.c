@@ -36,9 +36,14 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tipal.inc"
 #include	"mesqueue.h"
 
+/* Function prototypes */
+extern int bitvalue(short *, short);
+extern void bitset(short *, short, short);
+extern void inibiz(short, short, short, short);
+
 extern DB_HEADER h_db;
 
-calcor(punt)
+void calcor(punt)
 short punt ;
 {
 struct punto_inibito *inib ;
@@ -49,13 +54,13 @@ char flagc;		/* flag contribuenti fa o fs */
 char stato ;		/* stato organo		     */
 char flago ;		/* flag organo	fa           */
 
-if(punt<0 || punt>=h_db.dimor) {visch('O'); return(0);}
+if(punt<0 || punt>=h_db.dimor) {visch('O'); return;}
 /*
 	l'organo non viene calcolato se e' forzato o
 	fuori scansione
 */
 if(bitvalue(&dbosc[punt],g2or_fz) || bitvalue(&dbosc[punt],
-			      g2or_fs)) return(0) ;
+			      g2or_fs)) return ;
 
 org=&dbode[punt] ;
 /*
@@ -94,7 +99,7 @@ for(i=0;i<or_cont;i++)
 	e lo stato non viene calcolato
 */
 	if(flagc) {bitset(&dbosc[punt],g2or_fa,1);
-		   return(0) ; }
+		   return ; }
         stato=stato +(val<<i) ;
 }
 FINE :
@@ -133,5 +138,5 @@ if(org->stinib != -1 && !(dboft[punt] & mask_it))
 */
 dboft[punt]=dboft[punt] | mask_it ;
 if(!dbto[punt]) dbto[punt]=org->time_out ;
-return(0) ;
+return ;
 }

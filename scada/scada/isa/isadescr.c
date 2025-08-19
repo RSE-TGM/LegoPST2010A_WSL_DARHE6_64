@@ -25,6 +25,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 #include <osf1.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
@@ -34,11 +35,14 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "isarc.inc"
 #include "isa.h"
 
+/* Function prototypes */
+extern int rbyte(int fd, char *buffer, long offset, int len);
+
 /*
 	leggo la descrizione dai file operativi
 */
 
-isadescr(STINF * st, short ext,short pointdb)
+void isadescr(STINF * st, short ext,short pointdb)
    {
    char buf[64];
    long offset;

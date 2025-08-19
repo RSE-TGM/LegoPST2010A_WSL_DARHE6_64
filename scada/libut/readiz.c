@@ -24,10 +24,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 	fp		file pointer file dizionario
 */
 #include <stdio.h>
+#include <string.h>
 
 #include "fileop.inc"
 
-readiz(buff,fp)
+void readiz(buff,fp)
 FILE *fp ;
 char *buff ;
 {

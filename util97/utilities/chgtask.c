@@ -23,6 +23,7 @@ static char SccsID[] = "@(#)chgtask.c	1.1\t1/8/96";
 #include<stdio.h>
 #include<string.h>
 #include <stdlib.h>
+#include<unistd.h>
 
 #define DIM 200
 #define LUNG_VAR 60
@@ -32,7 +33,7 @@ static char SccsID[] = "@(#)chgtask.c	1.1\t1/8/96";
 
 extern int converti(FILE *,FILE *,FILE *);
 
-main (argc,argv)
+int main (argc,argv)
 int argc;
 char *argv[];
 

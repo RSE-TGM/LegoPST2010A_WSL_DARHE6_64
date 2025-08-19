@@ -35,6 +35,8 @@ static char *_csrc = "@(#) %filespec: arcfile.c-3 %  (%full_filespec: arcfile.c-
 */
 #include <osf1.h>
 #include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 #include <fcntl.h>
 #if defined OSF1 || defined LINUX
 #include <sys/types.h>
@@ -50,8 +52,16 @@ static char *_csrc = "@(#) %filespec: arcfile.c-3 %  (%full_filespec: arcfile.c-
 #include "diagnoan.inc"
 #include "tipal.inc"
 
-arcfile(dur)
-short dur;
+// External function declarations
+extern void decnum(char *, int, int, int, float);
+extern void bitset(short *, short, short);
+extern void arcdia(short, short, short);
+extern int rew(int, int, int *);
+extern int tra(int, int);
+extern void wai(int);
+extern void arcfnom(int, int);
+
+void arcfile(short dur)
 {
 short narc;
 char fnome[FILENAME_MAX+1], fdel[FILENAME_MAX+1];
@@ -113,7 +123,7 @@ for(narc=0;narc<n_arc;narc++)
    se e' diverso aggiorno la tabella e la salvo su disco
 */
    posname=arcnome[narc].arc+arcnome[narc].use;
-   if(strcmp(posname,&fnome[lung]))
+   if(strcmp((char*)posname,&fnome[lung]))
    {
 /*
    Dichiaro il file in uso da copiare (bit FA)

@@ -22,6 +22,8 @@ static char SccsID[] = "@(#)modifica.c	1.1\t1/8/96";
 
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
+#include<unistd.h>
 
 #define DIM 200
 
@@ -29,7 +31,7 @@ int found[DIM];
 /*
  cambia : sostituisce nel file .pag la risorsa relativa alla
  parola chiave passata come parametro e ritorna un intero che indica
- se l' operazione è riuscita o il tipo di errore
+ se l' operazione ï¿½ riuscita o il tipo di errore
 */
 /************************************************************/
 int cambia(pagina,findword,numword,newstring,operaz,posiz)
@@ -126,7 +128,7 @@ while ((fgets(linea,DIM-1,fp))!=NULL) {
 
 			if(operaz){
 			
-			/* inizia sostituz. parziale: punta a 1° car da sostituire */
+			/* inizia sostituz. parziale: punta a 1ï¿½ car da sostituire */
 
 			/* se #posizioni > #caratteri risorsa -> errore */
 
@@ -135,9 +137,9 @@ while ((fgets(linea,DIM-1,fp))!=NULL) {
 					return(4);
 					}	/*errore*/
 				car+=posiz;
-				car1=car;	/* punto al 1° car da cambiare */
+				car1=car;	/* punto al 1ï¿½ car da cambiare */
 
-			/* Se il n° di caratteri da sost.< n° caratteri newstring
+			/* Se il nï¿½ di caratteri da sost.< nï¿½ caratteri newstring
 			copia direttamente la nuova stringa*/	
 			
 				if(strlen(car)<strlen(newstring)){

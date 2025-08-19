@@ -31,7 +31,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "messcada.inc"
 #include "mesqueue.h"
 
-gestri(ext,punt,val)
+// External function declarations
+extern void bitset(short* buffer, short indice, short bit);
+extern int bitvalue(short* buffer, short indice);
+
+int gestri(ext,punt,val)
 short ext,punt,val;
 {
 short *tab;

@@ -39,9 +39,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 #include <osf1.h>
 #include "arc.inc"
-arcpar(dbs,ind)
-ARC_DBS *dbs;
-short ind;
+short arcpar(ARC_DBS *dbs, short ind)
 {
 DATDBS *val;
 short i;

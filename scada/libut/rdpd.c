@@ -23,19 +23,19 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
  *				rdp(xin,yin,buff,maxlun,mod);
  *		con:
  *				xin,yin = colonna e riga di inizio input stringa
- *				buff = puntatore al buffer in cui verr… inserita la stringa o
- *						 in cui Š gi… presente una stringa da modificare
+ *				buff = puntatore al buffer in cui verrï¿½ inserita la stringa o
+ *						 in cui ï¿½ giï¿½ presente una stringa da modificare
  *				maxlun = massima lunghezza ammissibile per la stringa in ingresso.
- *							se maxlun Š settato a 0 viene acquisito un singolo carattere
+ *							se maxlun ï¿½ settato a 0 viene acquisito un singolo carattere
  *							senza conferma con return e senza visualizzazione.
- *							Il carattere Š posto in stringa[0]. 
+ *							Il carattere ï¿½ posto in stringa[0]. 
  *				mod = specifica il modo di funzionamento.
  *		valore di ritorno : numero di caratteri letti ( 0 in funzionamento
  *								  con maxlun = 0.	
  *		modi di funzionamento:
  *					- modifica :(mod=1)	la stringa viene ripresentata sullo schermo
  *									e modificata in base agli input da tastiera.
- *					- normale :(mod=0) non vi Š una stringa di partenza.
+ *					- normale :(mod=0) non vi ï¿½ una stringa di partenza.
  *		uscita con : return -> memorizzazione in buffer della stringa ; la
  *									  funzione ritorna il numero di caratteri letti
  *									  se solo return ritorna il valore 0.	
@@ -46,6 +46,9 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+
+extern int get_key(short *);
 
 
 #include "ansiscr.h"
@@ -63,7 +66,7 @@ char string[LMAX];				  /* stringa di servizio per visualizzazione */
 char *pstring;
 short i_str;	 /* indice che scorre la stringa				*/	
 short ii;		 /* indice di servizio						 	*/
-static char ins=0;	/* flag che indica se si Š in modalit… INS(=1) o normale (=0) */
+static char ins=0;	/* flag che indica se si ï¿½ in modalitï¿½ INS(=1) o normale (=0) */
 short s;
 short car;
 short x,xfin;								  /* posizione corrente del cursore				*/	
@@ -76,7 +79,7 @@ scrxy(yin,xin);
 /*
       se in modifica scrive la stringa in input e la copia nella stringa di servizio
 */
-/* se Š specificata una lunghezza massima di 0 viene acquisito un singolo
+/* se ï¿½ specificata una lunghezza massima di 0 viene acquisito un singolo
 	carattere senza bisogno di return e senza visualizzazione												*/
 if(!maxlun){buff[0]=get_key(&s);buff[0]=toupper(buff[0]); return(0);}
 if(mod) 
@@ -140,8 +143,8 @@ while(1)
 			default:
 				if (car>31 && car<123)
 					{
-					if(car>96) car-=32;		 	/* se il carattere Š minuscolo lo converto in maiuscolo */
-					if(ins)	/* modalit… inserimento  */
+					if(car>96) car-=32;		 	/* se il carattere ï¿½ minuscolo lo converto in maiuscolo */
+					if(ins)	/* modalitï¿½ inserimento  */
 						{
 						if(i_str==maxlun)
 							string[maxlun-1]=car;
@@ -157,7 +160,7 @@ while(1)
 						printf("%s",string);
 						scrxy(yin,x);
 						}
-					else	  /* modalit… sovrapposizione */
+					else	  /* modalitï¿½ sovrapposizione */
 						{
 						if(i_str<maxlun)
 							{

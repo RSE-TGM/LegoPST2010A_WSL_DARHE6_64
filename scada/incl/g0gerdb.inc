@@ -15,7 +15,7 @@
 
 #include "all_1.h"
 #ifdef GERARC
-#ifndef _g0gerdb.inc
+#ifndef _g0gerdb_inc
 
 #define n_gerarchie       6
 #define n_liv_gerarchie 128
@@ -25,7 +25,7 @@ typedef struct s_gerarc {
                 unsigned char chLivello[n_gerarchie];
                         } S_DBGERA;
 
-#define _g0gerdb.inc
+#define _g0gerdb_inc
 #endif
 #endif
 #include "all_16.h"

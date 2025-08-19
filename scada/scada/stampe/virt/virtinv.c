@@ -67,6 +67,12 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "virtinv.h"
 #include "diagnodi.inc"
 
+// External function declarations
+extern int bitvalue(short *, short);
+extern void wai(int);
+extern void intesta(int, int, int, int);
+extern void stdisk(void *, int, int);
+
 extern short qperif_00;
 extern short c_prnrem0;          // coda stampanti remote
 
@@ -95,7 +101,7 @@ extern short c_prnrem0;          // coda stampanti remote
          nessuno
 
 */
-stinvia(short tab_al, short indvirt, S_PVIRT* stplog, S_FORAL* st)
+void stinvia(short tab_al, short indvirt, S_PVIRT* stplog, S_FORAL* st)
 {
 short j, i, ind, linea;
 S_PFIS *stpfis;
@@ -237,9 +243,7 @@ if(j>=n_DevFis) stplog->prev=-1;
 return;
 }
 
-invia(tab_al,st)
-S_FORAL *st ;
-short tab_al ;
+int invia(short tab_al, S_FORAL *st)
 {
 S_PVIRT *stplog ;	
 short i;

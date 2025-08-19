@@ -20,9 +20,17 @@ static char SccsID[] = "@(#)del_blocchi.c	2.24\t3/30/95";
 
 
 #include "lg1.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* Function declarations */
+int cancella_con(int, int, int);
+int libera_blocco(int);
+int libera_con(CONN*);
 
 
-del_blocchi ( bl_sel_count, bl_sel )
+int del_blocchi ( bl_sel_count, bl_sel )
 int    bl_sel_count, bl_sel[];
 {
 
@@ -132,7 +140,7 @@ int    bl_sel_count, bl_sel[];
    num_blocchi = num_blocchi - bl_sel_count;
 
    /*printf("test step end del_blocchi\n");*/
-
+   return 0;
 }
 
 
@@ -141,25 +149,27 @@ int    bl_sel_count, bl_sel[];
 
 
 
-libera_blocco( num )
+int libera_blocco( num )
 int num;
 {
    libera_con ( blocchi[num].variabili_connesse );
    free ( blocchi[num].variabili );
+   return 0;
 }
 
 
-libera_con( lista )
+int libera_con( lista )
 CONN *lista;
 {
    if ( lista )
      libera_con( lista->succ );
    free( lista );
+   return 0;
 }
 
 
 
-cancella_con( bl1, bl2, var )
+int cancella_con( bl1, bl2, var )
 int bl1, bl2, var;
 {
 
@@ -172,7 +182,7 @@ int bl1, bl2, var;
     blocchi[bl1].variabili[cur->var_interna].connessioni--;
     blocchi[bl1].variabili_connesse = cur->succ;
     free ( cur );
-    return;
+    return 0;
   }
 
 
@@ -193,7 +203,7 @@ int bl1, bl2, var;
   rem = cur->succ;
   cur->succ = cur->succ->succ;
   free ( rem );
-
+  return 0;
 }
 
 

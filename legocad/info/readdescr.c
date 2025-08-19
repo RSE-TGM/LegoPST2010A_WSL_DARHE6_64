@@ -18,6 +18,7 @@ static char SccsID[] = "@(#)readdescr.c	1.11\t3/27/95";
         Fine sezione per SCCS
 */
 #include <stdio.h>
+#include <X11/Intrinsic.h>
 #include "linfo.h"
 
 void AllocaDescrmodello(DESCRMODELLO *ptr,int nchar)

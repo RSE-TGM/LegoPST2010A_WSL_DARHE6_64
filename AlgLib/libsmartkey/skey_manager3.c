@@ -18,7 +18,6 @@ static char *_csrc = "@(#) %filespec: skey_manager3.c-4 %  (%full_filespec: skey
 #include "skey_manager3.h"
 
 
-
 // cambiata la funzione per evitare il tes della smartkey
 
 int skey_verifica_e_carica3 (int WriteMode, char label[], char password[], char product[],

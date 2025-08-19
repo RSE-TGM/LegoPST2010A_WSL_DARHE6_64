@@ -66,6 +66,15 @@ extern int num_modulo;
 extern char modulename[];
 extern int main_menu_setup();
 extern int add_block();
+extern int Iverifica_nome_blocco(char *nomebl);
+extern int Iverifica_errore(void);
+extern void do_dialogo(void);
+extern void Iselect_this_block_from_list(Widget widget, char *blockname);
+extern void Ideselect_this_block_from_list(Widget widget, char *blockname);
+#endif
+
+#ifdef DATI
+extern void seleziona_blocco_lista(MacroBlockType *macro, BlockType *block, int selezionato);
 #endif
 
 /* Variabili esterne dichiarate in MACRO.C ... */
@@ -783,15 +792,15 @@ int ind_macro;
    pulldown = XmCreatePulldownMenu (w,"Pulldown",NULL,0);
 
    pushb = XmCreatePushButton (pulldown,"Draw",NULL,0);
-   XtAddCallback (pushb,XmNactivateCallback,funz_draw_line,ind_macro);
+   XtAddCallback (pushb,XmNactivateCallback,funz_draw_line,(XtPointer)(long)ind_macro);
    XtManageChild (pushb);
                          
    pushb = XmCreatePushButton (pulldown,"Delete",NULL,0);
-   XtAddCallback (pushb,XmNactivateCallback,delete_line,ind_macro);
+   XtAddCallback (pushb,XmNactivateCallback,delete_line,(XtPointer)(long)ind_macro);
    XtManageChild (pushb);
 
    pushb = XmCreatePushButton (pulldown,"Setup...",NULL,0);
-   XtAddCallback (pushb,XmNactivateCallback,setup_line,ind_macro);
+   XtAddCallback (pushb,XmNactivateCallback,setup_line,(XtPointer)(long)ind_macro);
    XtManageChild (pushb);
 
    nargs=0;
@@ -1792,7 +1801,7 @@ Boolean boh;
 
     if (wdg_ico_selez != NULL)
        set_something_val (XtParent(wdg_ico_selez), XmNborderColor,
-		      (char*)apix[BLOCKS_TABLE_BG]);
+		      (XtArgVal)apix[BLOCKS_TABLE_BG]);
     set_something_val( XtParent(w), XmNborderColor, (XtArgVal) apix[ RED ]);
     wdg_ico_selez = w;
     pixm_ico_selez = pixm_info;
@@ -1912,7 +1921,7 @@ Boolean boh;
          case ButtonRelease:
               end_rubberband( &ev2, RootWindow(display, screen), dim_widgets,
 	           	        num_dim_wdg, True, BB_WIDTH, BB_HEIGHT );
-              XtFree(dim_widgets);
+              XtFree((char*)dim_widgets);
               num_dim_wdg = 0;
               fine = True;
               break;
@@ -1941,7 +1950,7 @@ Boolean boh;
         wdg == pointer_macro->wtavblock)  /* ok! il puntatore e' nella */
    {	  				   /* window corretta */
       int xx, yy, k;
-      int *ind = &pointer_macro->num_blocchi;
+      int ind;
       int *num_blk_alloc = &pointer_macro->num_blocchi_alloc;
       char *blockname;
 
@@ -2021,8 +2030,8 @@ Boolean boh;
    else /* symobolo */
    {
    /* Aggiorna la struttura blocks del macroblocco relativo */
-      ind = alloca_nuovo_blocco(pointer_macro, xx, yy, tipo, False,
-			pixmap_info, label_blocco, "", /* <- descr.blk */
+      ind = alloca_nuovo_blocco(pointer_macro, xx, yy, tipo, pixmap_info,
+			label_blocco, "", /* <- descr.blk */
 			nome_modulo );
 
       crea_icona( wdg, pixmap_info, label_blocco, xx, yy, 
@@ -2062,7 +2071,7 @@ Boolean boh;
       yy = yy - yy%snap_val;
 
    /* Aggiorna la struttura blocks del macroblocco relativo */
-      ind = alloca_nuovo_blocco(pointer_macro, xx, yy, tipo, False,
+      ind = alloca_nuovo_blocco(pointer_macro, xx, yy, tipo, 
 			pixmap_info, label_blocco, "", /* <- descr.blk */
 			nome_modulo );
 
@@ -2388,9 +2397,7 @@ char *ricostruisci_nome_blocco();
  ***    char *nome_blocco : nome del blocco da selezionare/deselezionare
  ***    int selezionato : flag , indica se il blocco e' selezionato o meno
 seleziona un blocco se la window dei blocchi relativa e' aperta */
-selgraf_blocco(nome_blocco, selezionato)
-char *nome_blocco;
-int selezionato;
+void selgraf_blocco(char *nome_blocco, int selezionato)
 {
    int i, j;
    Boolean trovato=False;
@@ -2425,7 +2432,7 @@ int selezionato;
  ***    ind_macro : indice in macroblocks[]
 evidenzia le icone selezionate all'apertura della 
 finestra dei blocchi */
-display_icone_selezionate(ind_macro)
+void display_icone_selezionate(int ind_macro)
 {
    extern Widget widget_list_blocchi;
    int num_blk_selez, i, j;

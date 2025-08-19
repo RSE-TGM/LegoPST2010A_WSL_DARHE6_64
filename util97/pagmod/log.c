@@ -26,14 +26,14 @@ extern	char*	datetime();
 
 FILE*	logfp;
 char	logfn[] = "pagmod.log";
-char	logbf[256];
+char	pagmod_logbf[256];
 char	logsep[] = "\n\
 =============================================================================";
 
 /*======================================================================*/
 /*		CODE							*/
 
-void	log( ppp )
+void	pagmod_log( ppp )
 char*	ppp;
 {
 	if( logfp == NULL ) return;

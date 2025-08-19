@@ -7,6 +7,8 @@
 #include	<string.h>
 #include	<errno.h>
 #include	<ndbm.h>
+#include	<stdio.h>
+#include	<stdlib.h>
 
 /*----------------------------------------------------------------------*/
 DBM*	dbp;
@@ -27,7 +29,7 @@ char	Con[1024];
 
 
 /*----------------------------------------------------------------------*/
-main( argc, argv )
+int main( argc, argv )
 int	argc;
 char**	argv;
 {

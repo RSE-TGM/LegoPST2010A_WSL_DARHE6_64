@@ -40,7 +40,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "diagnodi.inc"
 #include "tipal.inc"
 
-fsoglia(punt,ext,soglia)
+short fsoglia(punt,ext,soglia)
 short punt;
 char ext,soglia;
 {

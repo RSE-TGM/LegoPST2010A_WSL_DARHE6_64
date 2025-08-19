@@ -51,6 +51,7 @@ static char *_csrc = "@(#) %filespec: arcread.c-4 %  (%full_filespec: arcread.c-
 */
 #include <osf1.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <fcntl.h>
 #if defined OSF1 || defined LINUX
 #include <sys/types.h>
@@ -63,6 +64,9 @@ static char *_csrc = "@(#) %filespec: arcread.c-4 %  (%full_filespec: arcread.c-
 #include "arc.inc"
 #include "dconf.inc"
 
+// External function declarations
+extern void pscserr(int, int, int, int, int);
+extern int rbyte(int, void *, long, int);
 
 short arcan=-1;              // canale per open file
 short arcnuma=-1;            // numero dell'archivio dell'ultima operazione
@@ -71,14 +75,7 @@ long  arcoff;                // offset da cui e' stata effettuata l'ultima
                              // lettura
 short arcdim;                // numero byte letti nell'ultima read
 
-
-
-
-arcread(narc, ifile, bcamp, off)
-short narc;
-short *ifile;
-ARC_DBS ** bcamp;
-long *off;
+int arcread(short narc, short *ifile, ARC_DBS **bcamp, long *off)
 {
 char fnome[FILENAME_MAX+1];
 short max_occup;
@@ -103,7 +100,7 @@ for(;;)
       arcfilea=*ifile;
       strcpy(fnome,arcpath);
       strcat(fnome,"/");
-      strcat(fnome,arcnome[arcnuma].arc+(*ifile));
+      strcat(fnome,(char*)(arcnome[arcnuma].arc+(*ifile)));
       arcan=open(fnome,O_BINARY | O_RDONLY, 0);
       if(arcan==-1) {pscserr(ERR_IO,TASK_ARC,ROU_READ,0,SYS_CONT); return(1); }
       arcoff=-1;
@@ -144,7 +141,7 @@ for(;;)
    calcolo l'indirizzo e aggiorno il puntatore al prossimo
    campione
 */
-*bcamp=((char*)arcsort.indir+(short)((long)(*off)-(long)arcoff));
+*bcamp=(ARC_DBS*)((char*)arcsort.indir+(short)((long)(*off)-(long)arcoff));
 *off=(*off)+sizeof(HEAD_CAMP)+
      (long)sizeof(DATDBS)*(long)((*bcamp)->hea.n_mis+(*bcamp)->hea.n_misvel);
 return(0);

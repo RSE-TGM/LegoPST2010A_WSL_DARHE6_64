@@ -154,6 +154,9 @@ static XtCallbackProc
  nnVokCB(),
  nnVcancelCB();
 
+void spr_float(char *str, float val);
+void fnnV_ritorna_E( Boolean);
+
 /* ------------------ */
 static void textValue( float val )
 {
@@ -478,10 +481,10 @@ static Widget	_Uxbuild_nnValues()
 			(XtPointer) UxNnValuesContext );
 
 	XtAddCallback( nnValues, XmNunmapCallback,
-			nnVcancelCB,
+			(XtCallbackProc)nnVcancelCB,
 			(XtPointer) UxNnValuesContext );
 	XtAddCallback( nnValues, XmNhelpCallback,
-			nnVhelpCB,
+			(XtCallbackProc)nnVhelpCB,
 			(XtPointer) UxNnValuesContext );
 
 	XtAddCallback( nnV_sList, XmNbrowseSelectionCallback,
@@ -489,15 +492,15 @@ static Widget	_Uxbuild_nnValues()
 			(XtPointer) UxNnValuesContext );
 
 	XtAddCallback( nnV_pbOk, XmNactivateCallback,
-			nnVokCB,
+			(XtCallbackProc)nnVokCB,
 			(XtPointer) UxNnValuesContext );
 
 	XtAddCallback( nnV_pbCancel, XmNactivateCallback,
-			nnVcancelCB,
+			(XtCallbackProc)nnVcancelCB,
 			(XtPointer) UxNnValuesContext );
 
 	XtAddCallback( nnV_pbHelp, XmNactivateCallback,
-			nnVhelpCB,
+			(XtCallbackProc)nnVhelpCB,
 			(XtPointer) UxNnValuesContext );
 
 	XtAddCallback( nnV_textValue, XmNvalueChangedCallback,

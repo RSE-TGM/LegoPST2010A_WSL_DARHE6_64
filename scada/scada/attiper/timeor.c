@@ -48,7 +48,12 @@ static char *_csrc = "@(#) %filespec: timeor.c-3 %  (%full_filespec: timeor.c-3:
 #include "tipal.inc"
 #include "messcada.inc"
 
-timeor(inizio,fine)
+/* Function prototypes */
+extern void scd(void);
+extern void sce(void);
+extern void inibiz(short, short, short, short);
+
+void timeor(inizio,fine)
 short inizio, fine;       /* inizio e fine loop   */
 {
 #define st_trans 0
@@ -79,7 +84,7 @@ pack.amsg = (char *)  &mess;
 pack.lmsg=sizeof(S_MALLA);
 
 mess.ext=g1tipor;
-ipoint=&dbto[inizio*4] ;               // esamino 4 organi alla volta
+ipoint=(int *)&dbto[inizio*4] ;               // esamino 4 organi alla volta
 for (i=inizio ;i<fine ;i++,ipoint++)
 {
 /*

@@ -27,12 +27,19 @@ static char SccsID[] = "@(#)readltm.c	1.11\t3/27/95";
  *------------------------------------------------------*/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "linfo.h"
 
 #if defined LINUX
 #define TRUE 1
 #define FALSE 0
 #endif
+
+/* Forward declarations */
+extern void skip_riga(FILE *fp);
+extern int read_riga(FILE *fp, char *riga);
+extern int FileExist(char *filename);
 
 
 /*--------------------------------------------------------
@@ -58,7 +65,7 @@ int AllocaLtm(LTM **ltm,int nrecord)
     if(nrecord > 0 )
        (*ltm) = (LTM *)calloc(nrecord,sizeof(LTM));
        if(*ltm == NULL)
-          return(NULL);
+          return(FALSE);
     return(TRUE);
 }
 
@@ -107,7 +114,7 @@ int ReadCrealtm(char *path,LTM **ltm,int *nmoduli)
 
    printf("\n\tIl file crealtm contiene %d moduli\n\n",*nmoduli);
  
-   if( AllocaLtm(ltm,*nmoduli) == NULL)
+   if( AllocaLtm(ltm,*nmoduli) == FALSE)
       printf("\n\n\tallocazione lista moduli fallita \n");
    
    LeggiLtm(*ltm,fpltm);

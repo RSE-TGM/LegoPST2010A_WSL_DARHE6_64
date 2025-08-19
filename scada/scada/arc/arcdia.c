@@ -46,8 +46,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "tipal.inc"
 
-arcdia(point,ext,tipall)
-short point, ext, tipall;
+int arcdia(short point, short ext, short tipall)
 {
 QUEUE_PACKET pack;
 S_MALLA mess;

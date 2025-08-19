@@ -27,6 +27,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
    27 Marzo 1995  Fc Porting 32Bit
       La funzione viene eseguita solo in caso di (AC_SIM_ENEL)
 */
+#include <string.h>
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
 #include "comunic.inc"
@@ -36,7 +37,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include	"messcada.inc"
 #include "simdia.inc"      // indirizzi in DB dei digitali di diagnostica per simulatore
 
-simclpag(clall, cltrd)
+void simclpag(clall, cltrd)
 short clall;         // se 1: clear pagina allarmi
 short cltrd;         // se 1: clear dei trend
 {

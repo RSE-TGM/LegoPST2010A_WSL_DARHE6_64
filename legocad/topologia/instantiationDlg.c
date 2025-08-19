@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <X11/Shell.h>
 #include <Xm/MenuShell.h>

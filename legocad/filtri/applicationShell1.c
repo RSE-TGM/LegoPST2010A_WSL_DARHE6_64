@@ -5,6 +5,8 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -46,6 +48,9 @@ extern char filedf[];                 /* filename file di editing */
 extern FILE *fpedf;                   /* file di edting */
 extern FILTRI *filtri[];              /* vettore filtri */
 extern short num_filtri;              /* numero di filtri definiti */
+
+int closedf(void);
+void aggiorna_edit_shell(FILTRI *filtro);
 
 
 extern swidget create_exitdialogShell1();  
@@ -320,7 +325,7 @@ int closedf()
 
 int readedf()
 {
-   char *buff[MAXCHNAME];
+   char buff[MAXCHNAME];
    short i=0,j=0;
 
    printf("\ninizia la lettura filtri \n");
@@ -364,7 +369,7 @@ int readedf()
 
 int writedf()
 {
-   char *buff[MAXCHNAME];
+   char buff[MAXCHNAME];
    short i=0,j=0;
 
    if(fpedf == NULL)

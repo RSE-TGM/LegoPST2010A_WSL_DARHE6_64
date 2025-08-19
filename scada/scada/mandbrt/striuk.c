@@ -26,6 +26,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <dos.h>
 #include "switch.inc"
 
@@ -354,7 +355,7 @@ char **s_tiel=s_tieli;
 
 char *point_t;
 
-striuk(char *utente)
+void striuk(char *utente)
    {
    /* Determina le stringhe di intestazione della stampante in funzione dell'utente */
 

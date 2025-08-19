@@ -11,6 +11,7 @@
 #include	<time.h>
 #include	<sys/types.h>
 #include	<sys/timeb.h>
+#include	<stdlib.h>
 
 /*----------------------------------------------------------------------*/
 DBM*	dbp;
@@ -45,7 +46,7 @@ static	char	tmbf[22];
 struct	tm 	*tm_p;
 
 /*----------------------------------------------------------------------*/
-main( argc, argv )
+int main( argc, argv )
 int	argc;
 char**	argv;
 {

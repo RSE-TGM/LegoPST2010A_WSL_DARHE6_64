@@ -24,12 +24,14 @@ static char *_csrc = "@(#) %filespec: decnum.c-3 %  (%full_filespec: decnum.c-3:
 	n_int	 short  n. cifre totali
 	n_flo  short  n. cifre parte decimale (se -1 o -2 il numero e' intero)
 					  se n_flo =-2 il numero intero messo in stringa preceduto
-					  da 0 se il numero di cifre Š inferire a quelle del formato
+					  da 0 se il numero di cifre ï¿½ inferire a quelle del formato
 	v_int	  short valore intero
 	v_flo	  float valore floating
 */
 #include <string.h>
-decnum(stringa,n_int,n_flo,v_int,v_flo)
+#include <stdio.h>
+#include <stdlib.h>
+void decnum(stringa,n_int,n_flo,v_int,v_flo)
 char *stringa;
 short v_int,n_int,n_flo;
 float v_flo;
@@ -43,13 +45,13 @@ union {
 
 if(n_flo==-1 || n_flo== -2) 			/*	e' un intero	*/
 {
-	itoa(v_int,b_intero,10);
+	sprintf(b_intero, "%d", v_int);
 	if(n_flo==-1)
 		memset(stringa,' ',n_int);
 	else 
 		memset(stringa,'0',n_int);
 	memcpy(&stringa[n_int-strlen(b_intero)],b_intero,strlen(b_intero));
-	return(0);
+	return;
 }
 else
 {						/* e' un float			*/
@@ -58,7 +60,7 @@ else
 //   DecFl86(stringa,un.f,n_int,n_flo);
         sprintf(stringa, "%f", v_flo);
 printf("decnum:stringa=|%s|\n", stringa);
-	return(0);
+	return;
 }
 }
 

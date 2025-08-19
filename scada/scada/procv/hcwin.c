@@ -58,7 +58,7 @@ short vhcpy, ihcpy;     // n. video che sta eseguendo l'hardcopy ed indice
 char stvihc[max_video][max_hcpy_video];
                         // matrice video*n. hardcopy =1 hardcopy prenotata
 
-hcwin (funz, video, nhcp)
+void hcwin (funz, video, nhcp)
 short funz, video, nhcp;
 {
 QUEUE_PACKET  queue;         

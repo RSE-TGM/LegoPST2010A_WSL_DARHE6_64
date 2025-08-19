@@ -11,6 +11,7 @@
 #include "UxXt.h"
 
 #include <Xm/MessageB.h>
+#include <stdlib.h>
 
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:
@@ -70,7 +71,7 @@ Widget	create_IconvertExitDialog();
 
    elimina i bottoni di help e cancel
 */
-elimina_button()
+int elimina_button()
 {
    Widget hb;
 

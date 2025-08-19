@@ -2,6 +2,7 @@
 
 /*----------------------------------------------------------------------*/
 #include	<stdio.h>
+#include <stdlib.h>
 #include	<fcntl.h>
 #include	<sys/stat.h>
 #include	<sys/types.h>
@@ -30,7 +31,7 @@ char	Buffer2[1024];
 
 
 /*----------------------------------------------------------------------*/
-main( argc, argv )
+int main( argc, argv )
 int	argc;
 char**	argv;
 {

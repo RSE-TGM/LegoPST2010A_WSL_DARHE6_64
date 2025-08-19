@@ -29,14 +29,21 @@ static char *_csrc = "@(#) %filespec: simclarc.c-3 %  (%full_filespec: simclarc.
 
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
+#include <unistd.h>
 #include "g2comdb.inc"
 #include "arc.inc"
 #include "simana.inc"
 #include "simula.inc"
 
+// External function declarations
+extern void arcfnom(short, short);
+extern void bitset(short *, short, short);
+extern void res(int);
+
 extern int arcwai_tcb;
 
-simclarc()
+void simclarc()
 {
 short i, narc, nfil, nmaxfile;
 short ora;

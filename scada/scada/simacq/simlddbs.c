@@ -33,7 +33,13 @@ static char *_csrc = "@(#) %filespec: simlddbs.c-5 %  (%full_filespec: simlddbs.
 #include "pscserr.inc"      
 #include "simdia.inc"      
 #include "simmsg.inc"      
-#include "simula.inc"      
+#include "simula.inc"
+
+// External function declarations
+extern void verifall(short, short);
+extern void bitset(short *, short, short);
+extern int bitvalue(short *, short);
+extern void pscserr(int, int, int, int, int);      
 
 extern DB_HEADER h_db;
 
@@ -52,7 +58,7 @@ extern char riconosci_all;
 short anapack;        // indice dell'ultimo pacchetto di analogici ricevuto
 short digpack;        // indice dell'ultimo pacchetto di digitali ricevuto
 
-simlddbs(ud)
+int simlddbs(ud)
 SM_DBUPD *ud;
 {
 short i;

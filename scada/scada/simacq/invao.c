@@ -40,9 +40,15 @@ static char *_csrc = "@(#) %filespec: invao.c-3 %  (%full_filespec: invao.c-3:cs
 #include "simmsg.inc"      // strutture messaggi da simulatore
 #include "dconf.inc"
 
+// External function declarations
+extern int bitvalue(short *, short);
+extern int rbyte(int, void *, long, int);
+extern void bitset(short *, short, short);
+extern void simvardd(short, short);
+
 extern short c_comani, c_comano;
 
-invao(puntdb,valore)
+int invao(puntdb,valore)
 unsigned puntdb ;
 float valore;
 {

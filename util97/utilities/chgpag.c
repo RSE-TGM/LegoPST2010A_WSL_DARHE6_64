@@ -46,7 +46,7 @@ char pathnomepagina[80],salvapagina[80];    /*in salvapagina .bak */
 FILE *fp,*fp1,*fp2;
 
 
-main (argc,argv)
+int main (argc,argv)
 int argc;
 char **argv;
 { 
@@ -68,7 +68,7 @@ if (argc<2) {
   printf("\n <operation(0,1)>: 0=sostituzione completa");
   printf("\n                 : 1=sostituzione parziale");
   printf("\n <position>: posizione iniziale per la sostituzione se operation=1");
-  printf("\n <keyname>: elenco di una o più parole chiave");
+  printf("\n <keyname>: elenco di una o piï¿½ parole chiave");
 #else
   printf("\n \t\tSintassi di chgpag:\n");
   printf("chgpag <page_name> <newstringa> <operation(0,1)> <position> ");

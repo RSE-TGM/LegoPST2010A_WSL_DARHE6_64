@@ -34,8 +34,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "arc.inc"
 #include "g1tipdb.inc"
 
-arclen(freq)
-long freq;
+int arclen(long freq)
 {
 short nmis, narc;
 PUNTDBS *point;

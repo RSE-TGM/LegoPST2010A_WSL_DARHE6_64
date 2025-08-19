@@ -48,7 +48,20 @@
 #include "dati.h"
 /* #include "UxFsBox.h" */
 #include <Xm/Protocols.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include "f03.h"
+
+/* Function declarations */
+int write_file_f14(FILE *fp);
+int macro_is_open(void);
+void deselez_all_graf(void);
+void selgraf_blocco(const char *nome, Boolean sel);
+void tominus(char *str);
+char *trim_blank(char *str);
+void ricostruisci_nome_blocco(char *nome);
+void aggiungi_item_n(Widget list, const char *item, int pos);
+void lancia_macro(Widget widget, Widget list_widget);
 extern int num_note;
 Boolean glob_modified=False;
 int n_editors=0; /* numero di editors aperti */
@@ -207,10 +220,7 @@ void CreateWindowManagerProtocols(shell)
 
 
 
-confirm_exit(w,which_button,call_data)
-Widget w;
-int which_button;
-XmAnyCallbackStruct *call_data;
+void confirm_exit(Widget w, int which_button, XmAnyCallbackStruct *call_data)
 {
 /*
  L'utente ha richiesto di uscire dall'applicativo
@@ -285,7 +295,7 @@ void SaveSessionCB()
 	abilita e/o disabilita i bottoni costituenti il
 	pulldown menu a seconda dello stato del programma
 */
-update_pulldown()
+void update_pulldown(void)
 {
 if(stato == NON_SCELTO)
 	{
@@ -317,7 +327,7 @@ else if(stato == SCELTO)
 	eqz.,numero variabili note, numero var non
         note,numero variabili in ingresso.
 */
-update_contatori()
+void update_contatori(void)
 {
 char app[10];
 sprintf(app,"%d",neqsis);

@@ -41,10 +41,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 #include <osf1.h>
 #include "arc.inc"
-arcind(indir,dim,vdir,vdim)
-ARC_DBS *indir;
-char *vdir;
-short dim, vdim;
+int arcind(ARC_DBS *indir, short dim, char *vdir, short vdim)
 {
 arcsort.indir=indir;
 arcsort.dim=dim;

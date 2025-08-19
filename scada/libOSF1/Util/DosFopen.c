@@ -21,6 +21,7 @@ static char *_csrc = "@(#) %filespec: DosFopen.c-3 %  (%full_filespec: DosFopen.
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <string.h>
 
 static void ToLower(char *psz)
 {
@@ -75,7 +76,7 @@ return (fp);
    Funzione che effettua la conversione dal formato
    ascii DOS a quello UNIX (DOS->UNIX)              
 */
-to_ascii(char *nome)
+void to_ascii(char *nome)
 {
 FILE *fp = NULL;
 FILE *fp_out = NULL;
@@ -83,7 +84,7 @@ char c;
 
 fp = fopen(nome,"r");
 fp_out = fopen("kk__kk.kkk","w");
-if((int)fp == NULL)
+if(fp == NULL)
         return;
 while(1)
         {

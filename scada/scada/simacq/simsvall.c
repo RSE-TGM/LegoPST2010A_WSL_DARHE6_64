@@ -29,14 +29,20 @@ static char *_csrc = "@(#) %filespec: simsvall.c-3 %  (%full_filespec: simsvall.
 
 #include <osf1.h>
 #include <stdio.h>
+#include <string.h>
 #include "messcada.inc"
 #include "allar.inc"
 #include "dconf.inc"
 #include "simula.inc"
 #include "pscserr.inc"
 
+// External function declarations
+extern void pscserr(int, int, int, int, int);
+extern int wbyte(int, void *, long, int);
+extern int rbyte(int, void *, long, int);
 
-simsvall(opz)
+
+int simsvall(opz)
 short opz;     // opz=SAVE: salva Allarmi; opz=RESTORE: ripristino Allarmi
 {
 

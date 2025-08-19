@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdint.h>
 #include <Xm/Xm.h>
 #include <X11/Shell.h>
 #include <Xm/MenuShell.h>
@@ -56,6 +57,31 @@
 
 #include "filtri.h"
 
+/* function declarations */
+Widget lcCreateWidget(swidget);
+int make_var_entry(swidget, int);
+int set_something_val(Widget, String, XtArgVal);
+int set_var_win_list_context(Widget, void**);
+int inverti_colori(swidget);
+int event_loop_for_conn(Widget);
+int reset_var_win_list_context(void*);
+int make_connessione(int, int, int, int);
+int questionDB_activate(const char*);
+int search_sec_conn_wid(Widget*, int*, int*);
+int delete_connessione(int, int, int);
+int num_conn(Widget);
+int var_menu_set(void);
+void errore(const char*, ...);
+int tenta_connessione(int, int, int, int);
+int visualizza_connessione(Widget, int);
+int _XmUnhighlightBorder(Widget);
+int highlight(Widget, char*);
+int clear_gost_win(void);
+int get_something(Widget, String, void*);
+int sensitive(Widget, Boolean);
+int get_pixmap_cursor(const char*, Cursor*);
+int messageDB_activate(const char*);
+
 void var_press();
 void var_enter();
 void var_leave();
@@ -101,7 +127,7 @@ static void	_UxvarWinMenuPost( wgt, client_data, event, ctd )
 
 	if ( event->xbutton.button == which_button )
 	{
-		XmMenuPosition( menu, event );
+		XmMenuPosition( menu, (XButtonPressedEvent*)event );
 		XtManageChild( menu );
 	}
 }
@@ -275,7 +301,7 @@ int filtra(char *nome)
  * Essa inserisce le variabili del blocco nelle due liste dell'interfaccia a 
  * seconda che siano di ingresso o di uscita.
  */
-add_variables()
+int add_variables()
 {
    int i,j;
    BLOCCO *bloc=blocchi;  /* a causa dell'interprete uimx */
@@ -343,7 +369,7 @@ add_variables()
  * intercettato da un qualunque altro widget. Comunque il release viene
  * grabbato quando si esce dalla scrolled window ( vedi list_leave() ).
  */
-make_var_entry( list_swid, variabile )
+int make_var_entry( list_swid, variabile )
 swidget list_swid;
 int variabile;
 {
@@ -363,7 +389,7 @@ int variabile;
 
   /* cattura un eventuale release event accaduto al di fuori di un "var_lb" */
   XtAddEventHandler( fr, ButtonReleaseMask, False,
-                     var_release, (XtPointer)variabile );
+                     var_release, (XtPointer)(intptr_t)variabile );
 
   rc = UxCreateRowColumn( "var_rc", fr );
   UxPutOrientation( rc, "horizontal" );
@@ -376,7 +402,7 @@ int variabile;
 
   /* cattura un eventuale release event accaduto al di fuori di un "var_lb" */
   XtAddEventHandler( wid, ButtonReleaseMask, False,
-                     var_release, (XtPointer)variabile );
+                     var_release, (XtPointer)(intptr_t)variabile );
 
 
   pm = UxCreateLabel( "var_pm", rc );
@@ -406,7 +432,7 @@ int variabile;
   UxPutLabelPixmap( pm, nome_file );
   /* cattura un eventuale release event accaduto al di fuori di un "var_lb" */
   XtAddEventHandler( wid, ButtonReleaseMask, False,
-                     var_release, (XtPointer)variabile );
+                     var_release, (XtPointer)(intptr_t)variabile );
 
 
   lb = UxCreateLabel( "var_lb", rc );
@@ -421,11 +447,11 @@ int variabile;
    * Setta il funzionamento dei widget "var_lb".
    */
   XtAddEventHandler( wid, ButtonPressMask | OwnerGrabButtonMask, False,
-                     var_press, (XtPointer)variabile );
+                     var_press, (XtPointer)(intptr_t)variabile );
   XtAddEventHandler( wid, EnterWindowMask, False, var_enter, NULL );
   XtAddEventHandler( wid, LeaveWindowMask, False, var_leave, NULL );
   XtAddEventHandler( wid, ButtonReleaseMask, False,
-                     var_release, (XtPointer)variabile );
+                     var_release, (XtPointer)(intptr_t)variabile );
   XtAddEventHandler( wid, Button2MotionMask, False, gost_win, NULL );
 
 #ifndef DESIGN_TIME
@@ -453,8 +479,8 @@ XtPointer variabile;
 XButtonEvent *event;
 {
    swidget swid;
-   int width, height, var=(int)variabile;
-   char *salva_context;
+   int width, height, var=(intptr_t)variabile;
+   void *salva_context;
 
 
    set_var_win_list_context(w, &salva_context);
@@ -542,8 +568,8 @@ Widget w;
 XtPointer variabile;
 XEnterWindowEvent *event;
 {
-  char *salva_context;
-  int  var=(int)variabile;
+  void *salva_context;
+  int  var=(intptr_t)variabile;
 
   set_var_win_list_context(w, &salva_context);
 
@@ -584,7 +610,7 @@ Widget w;
 XtPointer cd;
 XLeaveWindowEvent *event;
 {
-  char *salva_context;
+  void *salva_context;
 
   set_var_win_list_context(w, &salva_context);
 
@@ -634,9 +660,9 @@ XtPointer variabile;
 XButtonEvent *event;
 {
   Widget wid;
-  char *salva_context;
+  void *salva_context;
   char str[1024];
-  int var=(int)variabile;
+  int var=(intptr_t)variabile;
   BLOCCO *bloc=blocchi;
   Arg arg;
 
@@ -691,7 +717,7 @@ XButtonEvent *event;
                      if ( move_var.bloc == blocco )
                      {
                         err_level = ERROR;
-                        errore( "ERROR  same block" );
+                        printf("ERROR: same block\n");
                      }
                      else 
                      { 
@@ -757,7 +783,7 @@ XButtonEvent *event;
  *
  * Inverte il background ed il foreground del widget argomento.
  */
-inverti_colori( swid )
+int inverti_colori( swid )
 swidget swid;
 {
    char *background;
@@ -798,7 +824,7 @@ XEvent *event;
    Widget *wids;
 
 
-   set_var_win_list_context(XtParent(w), &salva_context);
+   set_var_win_list_context(XtParent(w), (void**)&salva_context);
 
    if ( sel_var.status == SEL_ON &&
         (
@@ -863,7 +889,7 @@ Widget w;
 XtPointer cd;
 XLeaveWindowEvent *event;
 {
-   char *salva_context;
+   void *salva_context;
    Arg  arg;
    Widget *wids;
 
@@ -878,7 +904,7 @@ XLeaveWindowEvent *event;
          XGrabPointer( XtDisplay(w), XtWindow(w), False,
                        EnterWindowMask | ButtonReleaseMask,
                        GrabModeAsync, GrabModeAsync,
-                       None, NULL, CurrentTime );
+                       None, None, CurrentTime );
  
       if ( move_var.status == MOVE_ON  &&  highlight_on )
       {
@@ -899,7 +925,7 @@ XLeaveWindowEvent *event;
  *
  * Setta l'attributo highlightOnEnter per i figli 'var_lb' del widget 'w'.
  */
-highlight( w, val )
+int highlight( w, val )
 Widget w;
 char *val;
 {
@@ -987,7 +1013,7 @@ int event_x, event_y;
  *
  * Cancella l'ultima gost window dopo che aver rilasciato il button2
  */
-clear_gost_win()
+int clear_gost_win()
 {
 
    XDrawRectangle( display, root, gost_win_gc,
@@ -1002,7 +1028,7 @@ clear_gost_win()
 
 
 
-show_connections(variabile, var_wid)
+int show_connections(variabile, var_wid)
 int variabile;
 Widget var_wid;
 {
@@ -1036,11 +1062,11 @@ Widget var_wid;
              bloc[conn->blocco_esterno].variabili[conn->var_esterna].descr );
         UxPutLabelString( lb, str );
         XtAddEventHandler( wid, ButtonPressMask | OwnerGrabButtonMask, False,
-                           var_press, (XtPointer)variabile );
+                           var_press, (XtPointer)(intptr_t)variabile );
         XtAddEventHandler( wid, EnterWindowMask, False, var_enter, NULL );
         XtAddEventHandler( wid, LeaveWindowMask, False, var_leave, NULL );
         XtAddEventHandler( wid, ButtonReleaseMask, False,
-                           var_release, (XtPointer)variabile );
+                           var_release, (XtPointer)(intptr_t)variabile );
 
         if (!count)
         {
@@ -1059,7 +1085,7 @@ Widget var_wid;
 
 
 
-no_show_connections( var_wid )
+int no_show_connections( var_wid )
 Widget var_wid;
 {
    Arg arg[2];
@@ -1086,7 +1112,7 @@ Widget var_wid;
 
 
 
-var_menu_set()
+int var_menu_set()
 {
    Arg arg[1];
    int num;
@@ -1197,7 +1223,7 @@ var_menu_set()
 
 
 
-show_all_conn( list, tipo, on )
+int show_all_conn( list, tipo, on )
 swidget list;
 TIPO_VAR tipo;
 int on;
@@ -1248,7 +1274,7 @@ int on;
 
 
 
-create_gost_win_gc()
+int create_gost_win_gc()
 {
 
   gost_win_gc  = XCreateGC( display, root, 0, NULL );
@@ -1262,7 +1288,7 @@ create_gost_win_gc()
 
 
 
-add_var_list_event_handler(wid)
+int add_var_list_event_handler(wid)
 Widget wid;
 {
   XtAddEventHandler( wid, LeaveWindowMask, False, list_leave, NULL );
@@ -1274,7 +1300,7 @@ Widget wid;
 
 
 
-event_loop_for_conn(w)
+int event_loop_for_conn(w)
 Widget w;
 {
   int     fine=False;
@@ -1368,21 +1394,21 @@ Widget w;
 
 #ifndef DESIGN_TIME
 
-set_var_win_list_context(w, salva_context)
+int set_var_win_list_context(w, salva_context)
 Widget w;
-char   **salva_context;
+void   **salva_context;
 {
    swidget swid;
 
    swid            = UxWidgetToSwidget(w);
-   *salva_context  = (char *) UxVarWinContext;
+   *salva_context  = (void *) UxVarWinContext;
    UxVarWinContext = (_UxCvarWin *) UxGetContext(swid);
 }
 
 
 
-reset_var_win_list_context(salva_context)
-char *salva_context;
+int reset_var_win_list_context(salva_context)
+void *salva_context;
 {
    UxVarWinContext = (_UxCvarWin *) salva_context;
 }
@@ -1392,7 +1418,7 @@ char *salva_context;
 
 
 
-set_var_pixmap( w, nome )
+int set_var_pixmap( w, nome )
 Widget w;
 char   *nome;
 {
@@ -1409,13 +1435,13 @@ char   *nome;
 
 
 
-visualizza_connessione( w, var )
+int visualizza_connessione( w, var )
 Widget w;
 int    var;
 {
    Arg arg;
    int num;
-   char *salva_context;
+   void *salva_context;
    char *path_pxm;
    char nome_file[1024];
 
@@ -1461,7 +1487,7 @@ int    var;
 
 
 
-tenta_connessione( bl1, var1, bl2, var2 )
+int tenta_connessione( bl1, var1, bl2, var2 )
 int bl1, var1, bl2, var2;
 {
    extern MESSAGE message;
@@ -1546,7 +1572,7 @@ bloc[bl1].variabili[i].connessioni);
 
 
 
-clear_list( list )
+int clear_list( list )
 swidget list;
 {
    Arg arg[4];
@@ -1566,7 +1592,7 @@ swidget list;
 
 
 
-put_var_win_title( str1, str2, descr )
+int put_var_win_title( str1, str2, descr )
 char *str1;
 char *str2;
 char *descr;
@@ -1583,7 +1609,7 @@ char *descr;
 
 
 
-num_conn( w )
+int num_conn( w )
 Widget w;
 {
   Arg    arg;
@@ -1606,7 +1632,7 @@ Widget w;
 
 
 
-del_conn_cb(w)
+int del_conn_cb(w)
 Widget w;
 {
   extern QUESTION question;
@@ -1620,12 +1646,12 @@ Widget w;
 
 
 
-del_conn_qst_cb()
+int del_conn_qst_cb()
 {
    extern int changes_in_F01;
    Widget sec_w;
    int sec_bl, sec_var;
-   char *salva_context1, *salva_context2;
+   void *salva_context1, *salva_context2;
    char *path_pxm;
    char nome_file[1024];
    BLOCCO *bloc=blocchi;
@@ -1679,7 +1705,7 @@ del_conn_qst_cb()
 
 
 
-search_sec_conn_wid ( w, bb, var )
+int search_sec_conn_wid ( w, bb, var )
 Widget *w;
 int    *bb, *var;
 {
@@ -1690,7 +1716,7 @@ int    *bb, *var;
    Widget *fr_ch, *rc_ch, *wids;
    Arg arg[2];
    int i, count, ind_wid, ind_var, num, sec_var, sec_bl;
-   char *salva_context;
+   void *salva_context;
    char nomeappo[100];
 
    extern VAR_WIN_TYPE  *var_win_list;
@@ -1765,11 +1791,11 @@ int    *bb, *var;
 }
 
 
-set_bloc( swid, bloc )
+int set_bloc( swid, bloc )
 swidget swid;
 int bloc;
 {
-   char *salva_context;
+   void *salva_context;
 
    set_var_win_list_context(UxGetWidget(swid), &salva_context);
 
@@ -1779,7 +1805,7 @@ int bloc;
 }
 
 
-var_edit_descr(int ind_bloc,int ind_var)
+int var_edit_descr(int ind_bloc,int ind_var)
 {
   extern swidget EditVarDescr;
   char descrizione[100];
@@ -1828,7 +1854,7 @@ UxVarWinContext = UxContext =
  * effettua il refresh completo della lista delle veriabili
  * sia di ingresso che di uscita
  */
-refresh_lista()
+int refresh_lista()
 {
    clear_list(ingList);
    clear_list(uscList);
@@ -1922,7 +1948,7 @@ void add_filt_opt_butt(swidget w)
       UxCreateWidget(OptFilterButt[i]);
 
 /* e definisco la callback */
-      UxAddCallback(OptFilterButt[i],XmNactivateCallback,OptFilterCB,i);
+      UxAddCallback(OptFilterButt[i],XmNactivateCallback,(XtCallbackProc)OptFilterCB,(XtPointer)(intptr_t)i);
 #ifndef DESIGN_TIME
       UxPutContext( OptFilterButt[i], (char *) UxVarWinContext );
 #endif

@@ -47,7 +47,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "calas.inc"
 
-filtro()
+// External function declarations
+extern int bitvalue(short *, short);
+extern void bitset(short *, short, short);
+
+void filtro()
 {
 int i,counter;
 double generata,val,cf;

@@ -50,7 +50,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "diagnoan.inc"
 #include "dconf.inc"
 
-gettime(periodo)
+// External function declarations
+extern void wrdb(short);
+
+int gettime(periodo)
 int periodo;
 {
 int i,j, date[n_freset];

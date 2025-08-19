@@ -42,12 +42,15 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "isa.h"
 #include "diagnodi.inc"
 
+/* Function prototypes */
+extern void bitset(short *, short, short);
+
 extern char* isaAC;
 extern char* isaDC;
 
 short isafl[NCHAN_ISA];
 
-isadia(short nodo, short flag)
+void isadia(short nodo, short flag)
 {
 	short i, inizio, fine;
 

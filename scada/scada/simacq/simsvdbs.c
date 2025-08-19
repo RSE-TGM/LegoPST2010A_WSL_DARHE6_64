@@ -29,11 +29,17 @@ static char *_csrc = "@(#) %filespec: simsvdbs.c-3 %  (%full_filespec: simsvdbs.
 
 #include <osf1.h>
 #include <stdio.h>
+#include <string.h>
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
 #include "dconf.inc"
 #include "simula.inc"
 #include "pscserr.inc"
+
+// External function declarations
+extern void pscserr(int, int, int, int, int);
+extern int wbyte(int, void *, long, int);
+extern int rbyte(int, void *, long, int);
 
 #define	of_dbaav		(long)ldb_header
 #define  of_dbaaf		(long)of_dbaav  + ((long)h_db.dimaa*sizeof(S_DBAAV))
@@ -100,7 +106,7 @@ static char *_csrc = "@(#) %filespec: simsvdbs.c-3 %  (%full_filespec: simsvdbs.
 
 extern DB_HEADER h_db;
 
-simsvdbs(opz)
+int simsvdbs(opz)
 short opz;     // opz=SAVE: salva DBS; opz=RESTORE: ripristina DBS
 {
 FILE *fp;

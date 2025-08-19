@@ -38,6 +38,13 @@ static char *_csrc = "@(#) %filespec: ricPreviousAll.c-4 %  (%full_filespec: ric
 #include "diagnoan.inc"
 #include "diagnodi.inc"
 
+// External function declarations
+extern int rew(int, int, int*);
+extern int tra(int, int);
+extern int allpvis(short, short, short);
+extern int gestri(short, short, short);
+extern int allsev(short*, short, short);
+
 
 int ricPreviousAll(S_DBS_ALV *alv,S_MALLA point)
 {

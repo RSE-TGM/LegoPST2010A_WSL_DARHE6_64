@@ -5,6 +5,8 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -142,7 +144,7 @@ static Elenco_callback conferma_close = {
 static Elenco_callback conferma_setup = {
  { "Ok",        nnEsetupDlgCB,  0 },
  { "Cancel",    nnEsetupDlgCB,  1 },
- { NULL,        NULL,           NULL } };
+ { NULL,        NULL,           0 } };
 static Find_struct
  fsOut,
  fsInp;
@@ -374,6 +376,9 @@ static _UxCnnEdit	*UxNnEditContext;
 *******************************************************************************/
 
 Widget	create_nnEdit();
+extern int write_file_f14(FILE *fp);
+extern int read_file_f03(void);
+extern int read_file_f14(int neqsis, int nu);
 
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
@@ -435,8 +440,8 @@ static void inizia_dati_privati( void)
    mPair = (neqsis > nu) ? nu : neqsis;
    aiPinp = (int *) XtMalloc( sizeof(int) * mPair);
    aiPout = (int *) XtMalloc( sizeof(int) * mPair);
-   azPinp = (char **) XtMalloc( sizeof(char *) * mPair);
-   azPout = (char **) XtMalloc( sizeof(char *) * mPair);
+   azPinp = (unsigned char **) XtMalloc( sizeof(char *) * mPair);
+   azPout = (unsigned char **) XtMalloc( sizeof(char *) * mPair);
    avvEdit = (VAL_VAR *) XtMalloc( sizeof(VAL_VAR) * (neqsis+nu) );
    memcpy( &avvEdit[0], &valout[0], sizeof(VAL_VAR) * neqsis);
    memcpy( &avvEdit[neqsis], &valinp[0], sizeof(VAL_VAR) * nu);
@@ -444,7 +449,7 @@ static void inizia_dati_privati( void)
    for (i=0; i<neqsis+nu; i++)
       if (avvEdit[i].noto)
          cKnown++;
-   cPair = read_file_fpp( azPout, azPinp);
+   cPair = read_file_fpp( (char**)azPout, (char**)azPinp);
    nnEsimpleCB_omuVars( NULL, NN_VARS_ALL, 0);
    XmToggleButtonSetState( nnE_mu_pM_tN, True, True);
 }
@@ -485,7 +490,7 @@ static void msgOn( /*String z*/ int e )
    if (idMsg)
       XtRemoveTimeOut( idMsg);
    UxPutStrRes( nnE_dbMsg, XmNlabelString, nnEazMsgs[ lastMsg=e ]);
-   idMsg = XtAppAddTimeOut( UxAppContext, durata, msgOff, NULL);
+   idMsg = XtAppAddTimeOut( UxAppContext, durata, (XtTimerCallbackProc)msgOff, NULL);
 }
 
 /* ---------------------------------- */
@@ -531,7 +536,7 @@ static void nnE_load_NN( void )
          aiMout[cMout] =i;
          strncpy( zM+2, sivar[ivj-1], 8);
          zM[2+8] ='\0';
-         if (k = ceInElencoStr( zM+2, cPair, azPout)) {
+         if (k = ceInElencoStr( zM+2, cPair, (char**)azPout)) {
             zM[0] ='-';
             strcat( zM, "-");
             strcat( zM, azPinp[k-1]);
@@ -552,7 +557,7 @@ static void nnE_load_NN( void )
          aiMinp[cMinp] =i;
          strncpy( zM+2, vari[-ivj-1], 8);
          zM[2+8] ='\0';
-         if (k = ceInElencoStr( zM+2, cPair, azPinp)) {
+         if (k = ceInElencoStr( zM+2, cPair, (char**)azPinp)) {
             zM[0] ='-';
             strcat( zM, "-");
             strcat( zM, azPout[k-1]);
@@ -777,7 +782,7 @@ static XtCallbackProc nnEsaveCB(
       fclose( fp);
    }
    if (bPP) {
-      write_file_fpp( sigla, cPair, azPout, azPinp);
+      write_file_fpp( sigla, cPair, (char**)azPout, (char**)azPinp);
    }
    if (bNN) {
       e = (bPP) ? ennEmsg_save_14_pp : ennEmsg_save_14;
@@ -2161,11 +2166,11 @@ static Widget	_Uxbuild_nnEdit()
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnEdit, XmNdestroyCallback,
-			nnEdestroyShellCB,
+			(XtCallbackProc)nnEdestroyShellCB,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_mainWin, XmNhelpCallback,
-			nnEhelpCB,
+			(XtCallbackProc)nnEhelpCB,
 			(XtPointer) UxNnEditContext );
 
 	XtVaSetValues(nnE_mu,
@@ -2173,95 +2178,95 @@ static Widget	_Uxbuild_nnEdit()
 			NULL );
 
 	XtAddCallback( nnE_mu_pF_bL, XmNactivateCallback,
-			nnEloadCB,
+			(XtCallbackProc)nnEloadCB,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_mu_pF_bS, XmNactivateCallback,
-			nnEsaveCB,
+			(XtCallbackProc)nnEsaveCB,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_mu_pF_bZ, XmNactivateCallback,
-			nnEcloseCB,
+			(XtCallbackProc)nnEcloseCB,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_mu_pM_tN, XmNvalueChangedCallback,
-			valueChangedCB_nnE_mu_pM_tN,
+			(XtCallbackProc)valueChangedCB_nnE_mu_pM_tN,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_mu_pM_tP, XmNvalueChangedCallback,
-			valueChangedCB_nnE_mu_pM_tP,
+			(XtCallbackProc)valueChangedCB_nnE_mu_pM_tP,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_mu_pO_bG, XmNactivateCallback,
-			activateCB_nnE_mu_pO_bG,
+			(XtCallbackProc)activateCB_nnE_mu_pO_bG,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_mu_pO_bV, XmNactivateCallback,
-			activateCB_nnE_mu_pO_bV,
+			(XtCallbackProc)activateCB_nnE_mu_pO_bV,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_mu_pO_bK, XmNactivateCallback,
-			nnEsetupCB,
+			(XtCallbackProc)nnEsetupCB,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_mu_pH_bP, XmNactivateCallback,
-			nnEhelpCB,
+			(XtCallbackProc)nnEhelpCB,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_scale, XmNvalueChangedCallback,
-			valueChangedCB_nnE_scale,
+			(XtCallbackProc)valueChangedCB_nnE_scale,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_pbOadd, XmNactivateCallback,
-			activateCB_nnE_pbOadd,
+			(XtCallbackProc)activateCB_nnE_pbOadd,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_pbOdel, XmNactivateCallback,
-			activateCB_nnE_pbOdel,
+			(XtCallbackProc)activateCB_nnE_pbOdel,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_sListLout, XmNsingleSelectionCallback,
-			singleSelectionCB_nnE_sListLout,
+			(XtCallbackProc)singleSelectionCB_nnE_sListLout,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_sListMout, XmNsingleSelectionCallback,
-			singleSelectionCB_nnE_sListMout,
+			(XtCallbackProc)singleSelectionCB_nnE_sListMout,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_pbPadd, XmNactivateCallback,
-			activateCB_nnE_pbPadd,
+			(XtCallbackProc)activateCB_nnE_pbPadd,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_pbIadd, XmNactivateCallback,
-			activateCB_nnE_pbIadd,
+			(XtCallbackProc)activateCB_nnE_pbIadd,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_pbIdel, XmNactivateCallback,
-			activateCB_nnE_pbIdel,
+			(XtCallbackProc)activateCB_nnE_pbIdel,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_sListLinp, XmNsingleSelectionCallback,
-			singleSelectionCB_nnE_sListLinp,
+			(XtCallbackProc)singleSelectionCB_nnE_sListLinp,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_sListMinp, XmNsingleSelectionCallback,
-			singleSelectionCB_nnE_sListMinp,
+			(XtCallbackProc)singleSelectionCB_nnE_sListMinp,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_pbPdel, XmNactivateCallback,
-			activateCB_nnE_pbPdel,
+			(XtCallbackProc)activateCB_nnE_pbPdel,
 			(XtPointer) UxNnEditContext );
 
 	XtAddCallback( nnE_omuVAll, XmNactivateCallback,
-			nnEsimpleCB_omuVars,
+			(XtCallbackProc)nnEsimpleCB_omuVars,
 			(XtPointer) NN_VARS_ALL );
 
 	XtAddCallback( nnE_omuVFilter, XmNactivateCallback,
-			nnEsimpleCB_omuVars,
+			(XtCallbackProc)nnEsimpleCB_omuVars,
 			(XtPointer) NN_VARS_FILTER );
 
 	XtAddCallback( nnE_dbMsg, XmNactivateCallback,
-			activateCB_nnE_dbMsg,
+			(XtCallbackProc)activateCB_nnE_dbMsg,
 			(XtPointer) UxNnEditContext );
 
 

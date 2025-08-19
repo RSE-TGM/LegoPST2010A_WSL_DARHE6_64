@@ -44,10 +44,13 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tipal.inc"
 #include "mesqueue.h"
 
+/* Function prototypes */
+extern void bitset(short *, short, short);
+
 extern short c_visall;
 extern short debsamp;		// flag per emissione non attendibilita'
 
-exfa(punt,tipo, all, flag, exfl)
+void exfa(punt,tipo, all, flag, exfl)
 short punt, tipo, exfl;
 short *flag;
 S_DBALL* all;

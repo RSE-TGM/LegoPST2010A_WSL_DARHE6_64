@@ -50,8 +50,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "mesprocv.inc"
 #include "diagnodi.inc"
 
+// External function declarations
+extern int bitvalue(short *, short);
 
-virttlbg(short nvirt)
+void virttlbg(short nvirt)
 {
 short pros_file;
 S_MDIA mess;

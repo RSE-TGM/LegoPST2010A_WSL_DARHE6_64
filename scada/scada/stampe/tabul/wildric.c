@@ -36,20 +36,20 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "fileop.inc"
 #include "mesprocv.inc"
 
+// External function declarations
+extern int rbyte(int, short *, long, int);
+extern void wai(int);
+
+// Forward declarations
+int wildstrcmp(char *, char *);
+
 /* 
 	per la bufferizzazione viene utilizzato il buffer r_tamp definito
 	per la routine RICERCA
 */
 extern short r_tamp[SCD_FATBLK/2];	
 
-
-wildric(pbuf,point,ext,bFirst,fp)
-short *pbuf ; /* puntatore al nome del punto */
-short *point ; /* indice  in data base */
-short *ext  ; /* tipo di estensione */
-char bFirst;  /* se a 1	indica di partire dal primo blocco
-                 prima posizione */
-FILE *fp   ; /* canale open fnomi */
+int wildric(short *pbuf, short *point, short *ext, char bFirst, FILE *fp)
 {
 static long blocco;	// blocco a cui si e' arrivati nella
 							// ricerca sequenziale
@@ -73,7 +73,7 @@ for(;;)
 		strncpy(AppStr,(char*)&r_tamp[posiz],SCD_SIGLA);
 		if(AppStr[0])				// stringa non nulla
 			{
-			if(!wildstrcmp(AppStr,pbuf))   /* trovata stringa */
+			if(!wildstrcmp(AppStr,(char*)pbuf))   /* trovata stringa */
 				{
          	*point=r_tamp[posiz+SCD_SIGLA/2];
 	         *ext =r_tamp[posiz+SCD_SIGLA/2+1];
@@ -121,9 +121,7 @@ for(;;)
 */
 
 
-wildstrcmp(str,wildstr)
-char *str;
-char *wildstr;
+int wildstrcmp(char *str, char *wildstr)
 {
 short i;
 /*

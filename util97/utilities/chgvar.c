@@ -40,7 +40,7 @@ char pathnomelist[80],salvapagina[80];    /*in salvapagina .bak */
 FILE *fp,*fp1,*fp2;
 
 
-main (argc,argv)
+int main (argc,argv)
 int argc;
 char **argv;
 { 

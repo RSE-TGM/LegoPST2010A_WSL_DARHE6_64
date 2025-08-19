@@ -26,6 +26,7 @@ static char SccsID[] = "@(#)helpkit.c	1.15\t11/13/95";
 */
 
 #include <stdio.h>
+#include <ctype.h>
 #include <Xm/Xm.h>
 #include <Xm/MessageB.h>
 #include <Xm/SelectioB.h>
@@ -375,12 +376,12 @@ Widget helpkit_assocInfo(
    wInfo = XmCreateSelectionDialog( parent, zTitle, a, n);
    XtUnmanageChild( XmSelectionBoxGetChild( wInfo, XmDIALOG_SELECTION_LABEL));
    XtUnmanageChild( XmSelectionBoxGetChild( wInfo, XmDIALOG_TEXT));
-   XtAddCallback( wInfo, XmNapplyCallback, helpkit_InfoCB,  NULL);
-   XtAddCallback( wInfo, XmNcancelCallback, helpkit_InfoCB,  NULL);
-   XtAddCallback( wInfo, XmNokCallback, helpkit_InfoCB,  NULL);
-   XtAddCallback( wInfo, XmNhelpCallback, helpkit_InfoCB,  NULL);
-   XtAddCallback( wInfo, XmNmapCallback, helpkit_InfoCB, NULL);
-   XtAddCallback( wInfo, XmNdestroyCallback, helpkit_freeDataCB, NULL);
+   XtAddCallback( wInfo, XmNapplyCallback, (XtCallbackProc)helpkit_InfoCB,  NULL);
+   XtAddCallback( wInfo, XmNcancelCallback, (XtCallbackProc)helpkit_InfoCB,  NULL);
+   XtAddCallback( wInfo, XmNokCallback, (XtCallbackProc)helpkit_InfoCB,  NULL);
+   XtAddCallback( wInfo, XmNhelpCallback, (XtCallbackProc)helpkit_InfoCB,  NULL);
+   XtAddCallback( wInfo, XmNmapCallback, (XtCallbackProc)helpkit_InfoCB, NULL);
+   XtAddCallback( wInfo, XmNdestroyCallback, (XtCallbackProc)helpkit_freeDataCB, NULL);
    XmListSelectPos( XmSelectionBoxGetChild( wInfo, XmDIALOG_LIST), 1, False);
    for (i=0; i<cDescr; i++)
       XmStringFree( axsHeads[i]);
@@ -446,7 +447,7 @@ Widget helpkit_displayMsg(
    XtUnmanageChild( XmMessageBoxGetChild( wDlg, XmDIALOG_CANCEL_BUTTON));
    XtUnmanageChild( XmMessageBoxGetChild( wDlg, XmDIALOG_HELP_BUTTON));
    if (autoDestroy)
-      XtAddCallback( wDlg, XmNunmapCallback, helpkit_autoDestroyCB, NULL);
+      XtAddCallback( wDlg, XmNunmapCallback, (XtCallbackProc)helpkit_autoDestroyCB, NULL);
    XtManageChild( wDlg);
    return wDlg;
 }

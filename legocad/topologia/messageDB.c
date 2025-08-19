@@ -35,6 +35,7 @@
 #endif
 
 #include "message_type.h"
+#include <stdlib.h>
 
 MESSAGE message;
 
@@ -71,7 +72,7 @@ Widget	create_messageDB();
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-messageDB_activate ( message )
+int messageDB_activate ( message )
 char *message;
 {
 
@@ -87,7 +88,7 @@ char *message;
 
 
 
-show_error( mess )
+int show_error( mess )
 char *mess;
 {
    extern MESSAGE message;
@@ -97,7 +98,7 @@ char *mess;
    messageDB_activate( mess );
 }
 
-fatal_err( mess )
+int fatal_err( mess )
 char *mess;
 {
    extern MESSAGE message;

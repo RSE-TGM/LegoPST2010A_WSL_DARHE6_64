@@ -37,6 +37,9 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "simmsg.inc"      // strutture messaggi da simulatore
 #include "simdia.inc"      // indirizzi in DB dei digitali di diagnostica per simulatore
 #include "simana.inc"      // indirizzi in DB degli analogici di diagnostica per simulatore
+
+// External function declarations
+extern int bitvalue(short *, short);
 #include "netmsg.h"
 
 /*

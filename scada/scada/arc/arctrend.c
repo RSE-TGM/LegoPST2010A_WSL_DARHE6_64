@@ -59,17 +59,29 @@ static char *_csrc = "@(#) %filespec: arctrend.c-4 %  (%full_filespec: arctrend.
 #include "tag.h"
 
 #if defined (LINUX)
+#ifdef min
+#undef min
+#endif
 #define min(x,y) ((x)<(y) ? (x) : (y))
 #endif
 
 extern short nbyte[];
 extern long off_f[];
 
+// External function declarations
+extern int rew(int, int, int*);
+extern void trdata(short, double*);
+extern int tra(int, int);
+extern int arcread(short, short*, ARC_DBS**, long*);
+extern void arcsec(ARC_DBS*, long*);
+extern int rbyte(int, void*, long, int);
+extern short arcpar(ARC_DBS*, short);
+extern void wai(int);
+
 char winFlagArc;           // flag per abilitare nella routine arctrend l'attesa dell'ack
 char winStopArc;           // =1 procedere all'invio del messaggio dati =0 attendere messaggio vdsgrack
 
-arctrend(mess)
-S_VISARC *mess;
+int arctrend(S_VISARC *mess)
 {
 QUEUE_PACKET pack;
 S_VPRGR *desc;             // messaggio descrizioni
@@ -314,9 +326,7 @@ return(0);
 
    1 Aprile 1992  Rel 1.0  Fc
 */
-trdata(tipo,data)
-short tipo;
-double *data;
+void trdata(short tipo, double *data)
 {
 short anno, mese, giorno, ora;
 extern double fsec_double();
@@ -345,5 +355,5 @@ else
    giorno--;
 }
 *data=fsec_double(0.0,0.0,(double)ora,(double)giorno,(double)mese,(double)anno);
-return(0);
+return;
 }

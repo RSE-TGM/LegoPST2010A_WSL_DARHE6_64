@@ -41,6 +41,8 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include <io.h>
 #include <string.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <sys/stat.h>
 
 #include "dconf.inc"	
 #include "isarc.inc"
@@ -51,6 +53,9 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "comunic.inc"
 #include "messcada.inc"
 #include "isa.h"
+
+/* Function prototypes */
+extern int rbyte(int fd, char *buffer, long offset, int len);
 
 static  QUEUE_PACKET spack;
 extern U_ISA_MESS messg;
@@ -146,7 +151,7 @@ for (i=0,ms.num_file=0;i<arcdes[messg.efr.iarc-1].hea.n_file;i++,filarc++)
    		ms.num_file++;
          continue;
          }
-      ms.flength[ms.num_file]=filelength(farcp);
+      ms.flength[ms.num_file]=lseek(farcp, 0, SEEK_END);
       close(farcp);
 		ms.num_file++;
 		}

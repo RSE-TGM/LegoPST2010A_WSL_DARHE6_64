@@ -53,8 +53,12 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "calas.inc"
 
+// External function declarations
+extern void bitset(short *, short, short);
+extern int bitvalue(short *, short);
+
 extern float convertempo[4][5] ;
-oremisure(scansione)
+void oremisure(scansione)
 int scansione;
 {
 PUNTATORE temp[2];

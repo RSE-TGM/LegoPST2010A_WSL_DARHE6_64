@@ -22,6 +22,9 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 #include "tag.h"
 
+extern int rbyte(int, char *, long, int);
+extern int wbyte(int, char *, long, int);
+
 /*
         la subroutine ricerca verifica l'esistenza di un punto
         data la sigla pbuf sul file fnomi
@@ -38,7 +41,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 short r_tamp[SCD_FATBLK/2];
 short r_tampo[SCD_FATBLK/2];   /* buffer per overflow */
 
-ricerca(pbuf,point,ext,blocco,posiz,fp)
+int ricerca(pbuf,point,ext,blocco,posiz,fp)
 
 short *pbuf ; /* puntatore al nome del punto */
 short *point ; /* indice  in data base */
@@ -78,7 +81,7 @@ somma = somma % BLK_NORM;
       /*printf(" somma %d tot*SCD_FATBLK = %d\n",somma,tot*SCD_FATBLK) ;  */
 RIPROVA :
 tot=somma;
-rbyte(fileno(fp),r_tamp,tot*SCD_FATBLK,SCD_FATBLK) ;
+rbyte(fileno(fp),(char *)r_tamp,tot*SCD_FATBLK,SCD_FATBLK) ;
 /*
         ciclo di scansione del buffer per verificare
         se il nome esiste

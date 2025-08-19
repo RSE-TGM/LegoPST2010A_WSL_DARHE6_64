@@ -86,6 +86,7 @@ static char *_csrc = "@(#) %filespec: scgev.c-6 %  (%full_filespec: scgev.c-6:cs
 #include "dconf.inc"
 #include "pscs.cfg"
 #include <all_1.h>
+#include <string.h>
 
 extern short c_hcwin;
 extern int rxpio_tcb, txpio_tcb;
@@ -140,7 +141,40 @@ short varstvid[max_video];          /* tabella variazione stato dei video */
 extern char winFlagArc;           // flag per abilitare nella routine arctrend l'attesa dell'ack
 extern char winStopArc;           // =1 procedere all'invio del messaggio dati =0 attendere messaggio vdsgrack
 
-scgev ( )
+// Function declarations for missing functions
+int bitvalue(short *buffer, short indice);
+void hostfio(void *message);
+void hostfiow(void *message);
+void bitset(short *buffer, short indice, short bit);
+void CmdBell(int flag);
+void res(int tcb);
+int arcvis(void *message, void *result);
+void modpun(S_MCSP mcp, int flag);
+void Rwritewi(S_MCSP *mcp);
+void descriz(S_MRDP mrd);
+void descrizwin(S_MRDP *mrd);
+void wai(int delay);
+void pscserr(int error_type, int task_id, int routine_id, int error_code, int sys_action);
+int allselASD(short *buffer, int video);
+int allsel(short *buffer, int video);
+int allgerzo(short *buffer, int video);
+void rall(short param1, short param2, short video);
+void allsric(short *buffer, short video, int flags);
+int tabFound(char *name, void *mut);
+int arctrc(short *buffer, void *result);
+void stamar(short *buffer, int flags);
+void gesele(short param1, short param2, short param3);
+int _dos_settime(struct dostime_t *time);
+int _dos_setdate(struct dosdate_t *date);
+void virtsel(short *buffer);
+void isainv(short *buffer, int length);
+int diagnet(short stvide, void *message, short *video);
+void hcwin(int op, int video, int param);
+void CloseTrFile(int video);
+void mmidbl(void *message);
+void trfile(void *message);
+
+void scgev ( )
 {
 short video;
 S_ZONE  *ptv ;

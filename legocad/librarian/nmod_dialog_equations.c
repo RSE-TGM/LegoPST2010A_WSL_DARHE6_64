@@ -17,6 +17,7 @@
 #include <Xm/PushB.h>
 #include <Xm/Form.h>
 #include <Xm/DialogS.h>
+#include <Xm/DrawnB.h>
 
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:
@@ -40,7 +41,7 @@
 #endif
 
 /****************************************************************/
-/* INCLUDE FILES						*/
+/* INCLUDE FILES				*/
 /****************************************************************/
 
 #include <string.h>
@@ -54,8 +55,25 @@
 #define LIBUTILX
 #endif
 
+#include <unistd.h>
+#include <fcntl.h>
+
+/* Function prototypes for missing declarations */
+extern int lcDestroySwidget(Widget);
+
+/* Forward declarations for functions defined in this file */
+int dimensiona_widgets(void);
+int salva_jac(void);
+int leggi_jac(void);
+int crea_jac_toggles(JacToggStruct *, int, int);
+int crea_jac_eq_labels(int, int);
+int crea_jac_var_labels(int, int);
+int aggiorna_jac_var_labels(void);
+int scrolling_bird(Widget, Widget, Widget);
+int chiudi_dialog_equation(void);
+
 /****************************************************************/
-/* VARIABILI GLOBALI ESTERNE					*/
+/* VARIABILI GLOBALI ESTERNE				*/
 /****************************************************************/
 
 extern Boolean non_salvato;
@@ -90,7 +108,7 @@ extern Widget _nmod_varsetup;
 extern XmString cstring;
 
 /****************************************************************/
-/* VARIABILI GLOBALI						*/
+/* VARIABILI GLOBALI					*/
 /****************************************************************/
 
 /* indica il numero di toggle settati a 'yes' e serve per dimensionare */
@@ -167,19 +185,20 @@ Widget	create_dialog_equation();
  ***   Descrizione:
  ***      Dimensiona alcuni widgets per l'allineamento della matrice jacobiana.
  ***/
-dimensiona_widgets()
+int dimensiona_widgets()
 {
 /* Dimensionamento tavola dei toggleButtons */
    set_something_val (UxGetWidget(bboard_jac_toggles),
-                  XmNwidth, (MARGIN+WIDTH_JAC_TOGGLES)*jac_cols+MARGIN);
+			  XmNwidth, (MARGIN+WIDTH_JAC_TOGGLES)*jac_cols+MARGIN);
    set_something_val (UxGetWidget(bboard_jac_toggles),
-                  XmNheight,(MARGIN+HEIGHT_JAC_TOGGLES)*jac_rows+MARGIN);
+			  XmNheight,(MARGIN+HEIGHT_JAC_TOGGLES)*jac_rows+MARGIN);
 
 /* Dimensionamento tavola delle labels  */
    set_something_val (UxGetWidget(bboard_jac_equ),
-                  XmNheight,(MARGIN+HEIGHT_JAC_TOGGLES)*jac_rows+MARGIN);
+			  XmNheight,(MARGIN+HEIGHT_JAC_TOGGLES)*jac_rows+MARGIN);
    set_something_val (UxGetWidget(bboard_jac_var),
-                  XmNwidth, (MARGIN+WIDTH_JAC_TOGGLES)*jac_cols+MARGIN);
+			  XmNwidth, (MARGIN+WIDTH_JAC_TOGGLES)*jac_cols+MARGIN);
+   return 0;
 }
 
 /***************************************************************/
@@ -191,7 +210,7 @@ dimensiona_widgets()
  ***     Gli stati possono essere cosi' recuperati se l'utente abbandona 
  ***     le eventuali modifiche.
  ***/
-salva_jac()
+int salva_jac()
 {
    int i,j,fd;
 
@@ -216,7 +235,7 @@ salva_jac()
  ***      Legge da un file temp, in modalita' binaria, gli stati YES-NO
  ***      dello jacobiano prima della visualizzazione della window.
  ***/
-leggi_jac()
+int leggi_jac()
 {
    int i,j,fd;
 
@@ -244,7 +263,7 @@ leggi_jac()
  ***     bensi' di drawnButtons pieni e vuoti (bianchi e neri).
  ***     Inizialmente sono tutti BLACK, cioe' settati a YES (=dipendenza).
  ***/
-crea_jac_toggles(jacstructptr, posx, posy)
+int crea_jac_toggles(jacstructptr, posx, posy)
 JacToggStruct *jacstructptr;
 int posx, posy;
 {
@@ -312,12 +331,12 @@ XmDrawnButtonCallbackStruct *reason;
  ***      Crea la label relativa al numero dell'equazione (intestazione righe
  ***      matrice jacobiana).
  ***/
-crea_jac_eq_labels(indice, posy)
+int crea_jac_eq_labels(indice, posy)
 int indice;
 int posy;
 {
    Widget wdg;
-   char *num_eq[5];
+   char num_eq[5];
 
    sprintf (num_eq,"%4d",indice+1);
 
@@ -328,13 +347,14 @@ int posy;
    XtSetArg(args[argcount], XmNheight, HEIGHT_JAC_TOGGLES); argcount++;
    XtSetArg(args[argcount], XmNalignment, XmALIGNMENT_END); argcount++;
    XtSetArg(args[argcount], XmNlabelString, cstring); argcount++;
-/* XtSetArg(args[argcount], XmNrecomputeSize, False); argcount++; */
+/*XtSetArg(args[argcount], XmNrecomputeSize, False); argcount++; */
    XtSetArg(args[argcount], XmNmarginWidth, 0); argcount++;
    wdg = XmCreateLabel(UxGetWidget(bboard_jac_equ), 
                                "NewmodJacLabel", args, argcount);
    XmStringFree(cstring);
 
    XtManageChild (wdg);
+   return 0;
 }
 
 
@@ -349,7 +369,7 @@ int posy;
  ***      Crea la label relativa al nome della variabile (intestazione colonne
  ***      matrice jacobiana).
  ***/
-crea_jac_var_labels(indice, posx)
+int crea_jac_var_labels(indice, posx)
 int indice;
 int posx;
 {
@@ -371,6 +391,7 @@ int posx;
    XtManageChild (wdg);
 
    XmStringFree (cstring_var);
+   return 0;
 }
 
 /***************************************************************/
@@ -379,7 +400,7 @@ int posx;
  ***   Descrizione:  
  ***      Aggiorna le labelStrings della matrice jacobiana se e' visualizzata.
  ***/
-aggiorna_jac_var_labels()
+int aggiorna_jac_var_labels()
 {
    WidgetList wdg; /* Puntatore ad una lista di Widgets */
    XmString cstring_var;
@@ -394,6 +415,7 @@ aggiorna_jac_var_labels()
       set_something_val (wdg[indice],XmNlabelString, (XtArgVal) cstring_var);
       XmStringFree (cstring_var);
    }
+   return 0;
 }
 
 /***************************************************************/
@@ -406,7 +428,7 @@ aggiorna_jac_var_labels()
  ***    Descrizione:
  ***       Funzione che gestisce lo scrolling unificato della matrice jacobiana.
  ***/
-scrolling_bird (sw_row,sw_col,sw_val)
+int scrolling_bird (sw_row,sw_col,sw_val)
 Widget sw_row,sw_col,sw_val;
 {
    Widget sbar_cols_hor,   sbar_cols_vert;    /* VARIABILI */
@@ -489,7 +511,7 @@ XmScrollBarCallbackStruct *list_info;
  ***
  ***   Descrizione: 
  ***     Funzione che recupera i valori RGB dei nomi dei colori specificati. 
- ***/
+ ***/ 
 void get_pixel(names,apix,count)
 char *names[];
 Pixel *apix;
@@ -517,7 +539,7 @@ int count;
  ***   Descrizione:
  ***     chiude la window di settaggio dello jacobiano
  ***     (viene chiamato quando si preme OK o CANCEL) ***/
-chiudi_dialog_equation()
+int chiudi_dialog_equation()
 {
    UxDestroySwidget(nmod_dialog_equations);
    bool_dialog_equation = True;
@@ -527,6 +549,7 @@ chiudi_dialog_equation()
    set_something_val (UxGetWidget(pb_nmod_varsetup),XmNsensitive, (XtArgVal) True);
    if (nmod_def_initialized && jacobian_type == ANALYTICAL)
       set_something_val (UxGetWidget(pb_nmod_JC),XmNsensitive, (XtArgVal) True);
+   return 0;
 }
 
 /*******************************************************************************

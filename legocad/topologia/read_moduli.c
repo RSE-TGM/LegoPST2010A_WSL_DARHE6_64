@@ -22,14 +22,19 @@ static char SccsID[] = "@(#)read_moduli.c	2.24\t3/30/95";
 #include <stdio.h>
 #include "lg1.h"
 #include "errore.h"
+#include <string.h>
 
 
 extern ERR_LEVEL err_level;
 
+/* Function declarations */
+void errore(const char*, ...);
+int get_moduli(void);
+
 static FILE *lis_mod;
 
 
-read_moduli()
+int read_moduli()
 {
   int i;
   char path[1024];
@@ -42,7 +47,7 @@ read_moduli()
   {
     err_level = ERROR;
     errore ( OPEN_LIS_MOD_ERR, modello.nome );
-    return;
+    return -1;
   }
    
   get_moduli();
@@ -60,7 +65,7 @@ read_moduli()
   {
     err_level = ERROR;
     errore ( OPEN_LIS_SCH_ERR, modello.nome );
-    return;
+    return -1;
   }
    
   get_moduli();
@@ -69,11 +74,12 @@ read_moduli()
     moduli[i].tipo = REGOLAZIONE;
 
   fclose( lis_mod );
+  return 0;
 }
 
 
 
-get_moduli()
+int get_moduli()
 {
    char riga[85];
 
@@ -85,7 +91,7 @@ get_moduli()
         {
           err_level = ERROR;
           errore ( MAX_MOD_ERR, modello.nome );
-          return;
+          return -1;
         }
 
         strncpy ( moduli[num_tot_moduli].sigla, riga, 4 );
@@ -96,4 +102,5 @@ get_moduli()
       else
         break;
    }
+   return 0;
 }

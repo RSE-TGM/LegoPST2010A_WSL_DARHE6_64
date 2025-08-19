@@ -26,7 +26,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "print.inc"
 #include "pscs.cfg"
 
-initline()
+/* Function prototypes */
+extern void IniLine(void *);
+extern void inprser(void *);
+
+void initline()
 {
 short j;
 

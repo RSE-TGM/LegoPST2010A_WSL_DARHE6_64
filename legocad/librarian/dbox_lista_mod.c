@@ -61,6 +61,21 @@
 #include "definizioni.h"
 #include "aggiunte.h"
 
+/* Function prototypes for missing declarations */
+extern void scrivi_messaggio(char *);
+extern int tominus(char *);
+extern int copia_file(char *, char *);
+extern void set_label(Widget, char *);
+extern int shift_file_bytes(FILE *, int);
+extern void menu_modulo_attivo(void);
+extern int lcDestroySwidget(Widget);
+
+/* Forward declarations for functions defined in this file */
+int recupera_nome_e_descr(char *, char *, char *);
+int copia_nella_libreria(byte, char *, char *, int, char *);
+int rimuovi_tag_record(byte, long);
+int apponi_tag_record(byte, long);
+
 /********************************************************/
 /* VARIABILI GLOBALI ESTERNE				*/
 /********************************************************/
@@ -118,7 +133,7 @@ XEvent evento;
 static Elenco_callback copre_moduli = {
 	{"Yes", overwrite_yes, 0 },
 	{"No" , overwrite_no,  0  },
-	{ NULL, NULL,          NULL} }; 
+	{ NULL, NULL,          0} }; 
 
 /* E' consentita la conferma/cancellazione di moduli con tag '!' */
 /* fino ad un massimo di 50 */
@@ -201,7 +216,7 @@ Widget	create_lista_moduli();
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
-extern void free_array_XmString( XmString, int );
+extern void free_array_XmString( XmString*, int );
 
 /***********************************************************************/
 /*** riempi_lista_moduli (file, lista_moduli)
@@ -213,7 +228,7 @@ extern void free_array_XmString( XmString, int );
  ***     Visualizza nella scrolledList appropriata una lista di moduli
  ***    (LIBUT,LIBUTREG,LIBREG)
  ***/
-riempi_lista_moduli (file, lista_moduli)
+int riempi_lista_moduli (file, lista_moduli)
 FILE *file;
 Widget lista_moduli;
 {
@@ -244,6 +259,7 @@ Widget lista_moduli;
    XtSetValues (lista_moduli, args, argcount);
 
    free_array_XmString(cstrings, i);
+   return 0;
 }
 
 /***********************************************************************/
@@ -277,7 +293,7 @@ Widget lista_moduli;
  ***    descrizione del modulo sono settate sull'ultimo modulo, nel caso di
  ***    selezione multipla.
  ***/
-modulo_selezionato (tipo_lib, flag)
+int modulo_selezionato (tipo_lib, flag)
 byte tipo_lib;
 byte flag;
 {
@@ -286,12 +302,12 @@ byte flag;
    XmString *moduli_selez; 
    ModuleCheck *mchk;
    long offset;
-   Boolean predproc();
+   Bool predproc(Display *, XEvent *, char *);
 
    get_something(UxGetWidget(scrolledList_moduli), XmNselectedItemCount,
-                                                   &num_moduli_selez);
+                                                   (char*)&num_moduli_selez);
    get_something(UxGetWidget(scrolledList_moduli), XmNselectedItems,
-                                                   &moduli_selez);
+                                                   (char*)&moduli_selez);
    printf("TIPO LIBRERIA: %d\n", tipo_lib);
    if (num_moduli_selez == 0)
    {
@@ -430,12 +446,12 @@ byte flag;
    return(0);
 }
 
-/*** Boolean predproc(display, event, arg)
+/*** Bool predproc(display, event, arg)
  ***
  ***    Descrizione:
  ***       Accetta qualsiasi tipo di evento.
  ***/
-Boolean predproc(display, event, arg)
+Bool predproc(display, event, arg)
 Display *display;
 XEvent *event;
 char *arg;
@@ -546,7 +562,7 @@ XmAnyCallbackStruct *call_data;
  ***     aggiorna anche il file lista dei moduli della libreria opportuna
  ***     (LIBUT, LIBUTREG o LIBREG).
  ***/
-copia_nella_libreria(tipo_lib, nome_mod, descr_mod, flag, percorso)
+int copia_nella_libreria(tipo_lib, nome_mod, descr_mod, flag, percorso)
 byte tipo_lib;
 char *nome_mod, *descr_mod;
 int flag;
@@ -714,7 +730,7 @@ char *percorso;
  *** alla lib_graf utente. Aggiorna anche il file lib_graf/icon_list.dat
  *** ( chiamando aggiungi_record_icona() )
  ***/
-copia_nella_libgraf(nome_mod, descr_mod, tipo_copia, flag, percorso)
+int copia_nella_libgraf(nome_mod, descr_mod, tipo_copia, flag, percorso)
 char *nome_mod, *descr_mod;
 byte tipo_copia;
 int flag;
@@ -739,7 +755,7 @@ char *percorso;
          attention_wdg = (Widget) attention (UxTopLevel, message, MAPPA,
                                              geom_attention);
          scrivi_messaggio (message);
-         return;
+         return 0;
       }
 
    /* Se nel file icon_list.dat esiste il record relativo al modulo si */
@@ -747,7 +763,7 @@ char *percorso;
       if (cerca_modulo_proc(fp_ico, &rec_icone, nome_mod) != RETURN_ERROR)
       {
          fclose(fp_ico);
-         return;
+         return 0;
       }
    }
 
@@ -812,13 +828,13 @@ char *percorso;
       attention_wdg = (Widget) attention (UxTopLevel, message, MAPPA,
                                           geom_attention);
       scrivi_messaggio (message);
-      return;
+      return 0;
    }
 
 /* Se e' selezionato ONLY_FORTRAN non si procede alla copia degli eventuali */
 /* file bmp (bitmap) */
    if ( tipo_copia == ONLY_FORTRAN )
-      return;
+      return 0;
 
 /* Copia gli n file bitmap associati al nuovo modulo */
    for (i=0; i<MAX_ICON_X_PMODULE; i++)
@@ -858,7 +874,7 @@ char *percorso;
  *** Aggiorna i bitmap filenames nel record di icon_list.dat
  *** (la funzione, attualmente, NON E' UTILIZZATA).
  ***/
-cambia_filebmp_record (record)
+int cambia_filebmp_record (record)
 IconFileRec *record;
 {
    int  i;
@@ -872,6 +888,7 @@ IconFileRec *record;
       tominus (kuskus);
       strcpy (record->bmap_record[i].nome_file, kuskus);
    }
+   return 0;
 }
 
 
@@ -907,7 +924,7 @@ char *nome_e_descr;
  *** Rimuove il tag '!' alla posizione 6 del record relativo al modulo
  *** copiato dall'utente selezionando 'Yes' dalla dbox di conferma
  ***/
-rimuovi_tag_record(tipo_lib, offset)
+int rimuovi_tag_record(tipo_lib, offset)
 byte tipo_lib;
 long int offset;
 {
@@ -920,7 +937,7 @@ long int offset;
       sprintf(message," Can't open file %s for updating.",file_lista);
       attention_wdg = (Widget) attention (UxTopLevel, message, MAPPA,
                                           geom_attention);
-      return;
+      return 0;
    }
 
    fseek(fp_lista, offset, SEEK_SET);
@@ -945,7 +962,7 @@ long int offset;
  *** Appone il tag '!' alla posizione 6 del record relativo al modulo
  *** modificato dall'utente selezionando Module-->Modify-->FORTRAN code
  ***/
-apponi_tag_record(tipo_lib, offset)
+int apponi_tag_record(tipo_lib, offset)
 byte tipo_lib;
 long int offset;
 {
@@ -959,7 +976,7 @@ long int offset;
       attention_wdg = (Widget) attention (UxTopLevel, message, MAPPA,
                                           geom_attention);
       scrivi_messaggio (message);
-      return;
+      return 0;
    }
 
    fseek (fp_lista, offset, SEEK_SET);
@@ -1009,7 +1026,7 @@ XmPushButtonCallbackStruct *zip;
  ***     char *nome, *descr : nome e descrizione modulo (uscita)
 La funzione recupera il nome e la descrizione del modulo dal record del file
 lista_moduli.dat ***/
-recupera_nome_e_descr(record, nome, descr)
+int recupera_nome_e_descr(record, nome, descr)
 char *record, *nome, *descr;
 {
    sprintf ( nome,"%.4s", record);
@@ -1019,6 +1036,7 @@ char *record, *nome, *descr;
       sprintf (descr,"%.80s", record+6);
    else 
       strcpy(descr,"");
+   return 0;
 }
 
 /*******************************************************************************
@@ -1080,7 +1098,7 @@ static void	multipleSelectionCB_scrolledList_moduli( UxWidget, UxClientData, UxC
 	char item_label[4];
 	
 	get_something (UxGetWidget(scrolledList_moduli),XmNselectedItemCount,
-	               &selected_item);
+	               (char*)&selected_item);
 	
 	sprintf (item_label,"%3d",selected_item);
 	cstring = CREATE_CSTRING(item_label);
@@ -1103,7 +1121,7 @@ static void	singleSelectionCB_scrolledList_moduli( UxWidget, UxClientData, UxCal
 	char item_label[4];
 	
 	get_something (UxGetWidget(scrolledList_moduli), XmNselectedItemCount,
-	               &selected_item);
+	               (char*)&selected_item);
 	
 	sprintf (item_label,"%3d",selected_item);
 	cstring = CREATE_CSTRING(item_label);
@@ -1150,7 +1168,7 @@ static void	activateCB_deselect_all_pb( UxWidget, UxClientData, UxCallbackArg )
 	
 	/* Azzera il contatore degli items selezionati */
 	set_something_val (UxGetWidget(label_select_item),XmNlabelString,
-	               CREATE_CSTRING("0"));
+	               (XtArgVal)CREATE_CSTRING("0"));
 	}
 	UxDbox_lista_modContext = UxSaveCtx;
 }

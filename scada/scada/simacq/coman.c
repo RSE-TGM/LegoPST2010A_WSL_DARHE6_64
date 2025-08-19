@@ -40,9 +40,16 @@ static char *_csrc = "@(#) %filespec: coman.c-3 %  (%full_filespec: coman.c-3:cs
 #include "simmsg.inc"      // strutture messaggi da simulatore
 #include "dconf.inc"
 
+// External function declarations
+extern int bitvalue(short *, short);
+extern int rbyte(int, void *, long, int);
+extern void bitset(short *, short, short);
+extern void simvardd(short, short);
+extern void simsetcom(void *);
+
 extern short c_comani, c_comano;
 
-coman(puntdb)
+int coman(puntdb)
 unsigned puntdb ;
 {
 

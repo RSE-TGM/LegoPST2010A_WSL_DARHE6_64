@@ -44,6 +44,11 @@ static char *_csrc = "@(#) %filespec: virtini.c-4 %  (%full_filespec: virtini.c-
 #include "g2comdb.inc"
 #include "diagnodi.inc"
 
+// External function declarations
+extern void pscserr(int, int, int, int, int);
+extern void bitset(short *, short, short);
+extern void IniLine(void *);
+
 int addrbb[2]={0x208,0x220};
 
 char IsComment(char *pch);

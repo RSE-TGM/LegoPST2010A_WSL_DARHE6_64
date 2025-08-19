@@ -25,7 +25,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 #include <osf1.h>
 #include <stdio.h>
-
+#include <string.h>
 
 #include "comunic.inc"
 #include "messcada.inc"
@@ -33,8 +33,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tabulati.inc"
 #include "mesqueue.h"
 
-lantab(per)
-short per;
+void lantab(short per)
 {
 S_DIZTAB *pdiz;
 register int i ;
@@ -59,7 +58,7 @@ mess.richiesta=-1;
 */
 for(i=0;i<n_tabu;i++,pdiz++)
 	{
-   if(pdiz->periodo==per)		 // se il periodo Š quello desiderato
+   if(pdiz->periodo==per)		 // se il periodo ï¿½ quello desiderato
 		{
 		mess.lung=sizeof(S_STAB);
       memcpy(mess.nome,pdiz->nome,l_tnome) ;	 // copia il nome nel messaggio

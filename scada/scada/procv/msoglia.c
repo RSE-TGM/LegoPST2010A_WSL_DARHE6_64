@@ -30,6 +30,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 		  altrimenti -1
 */
 #include <stdio.h>
+#include <string.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
@@ -43,7 +44,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tipal.inc"
 #include "allar.inc"
 
-msoglia(valore,punt,ext,soglia,funz)
+/* Function prototypes */
+extern void bitset(short *, short, short);
+int contr_all(S_DBALL *all);
+
+int msoglia(valore,punt,ext,soglia,funz)
 short punt;
 char ext,soglia;
 float valore;
@@ -185,7 +190,7 @@ return(0) ;
 	controllo che i nuovi limiti di allarme siano accettabili
 	in riferimento a quelli gia' presenti
 */
-contr_all(all)
+int contr_all(all)
 S_DBALL *all;
 {
 short num, i;

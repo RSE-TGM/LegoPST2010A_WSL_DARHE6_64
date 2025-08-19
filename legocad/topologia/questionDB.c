@@ -35,6 +35,7 @@
 #endif
 
 #include "question_type.h"
+#include <stdlib.h>
 
 
 QUESTION question;
@@ -68,12 +69,18 @@ Widget	questionDB;
 *******************************************************************************/
 
 Widget	create_questionDB();
+int init_modello(char*, char*);
+int set_bl_list(void);
+int set_model_name(void);
+int bl_del_qst_cb(void);
+int del_conn_qst_cb(void);
+int Isalva_grafica(void);
 
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-questionDB_activate ( messaggio )
+int questionDB_activate ( messaggio )
 char *messaggio;
 {
 

@@ -53,6 +53,8 @@
 /* VARIABILI GLOBALI ESTERNE					*/
 /****************************************************************/
 
+extern int lcDestroySwidget(Widget);
+
 extern Boolean non_salvato;
 
 extern Arg args[20];
@@ -133,7 +135,7 @@ Widget	create_dbox_userdata();
  ***     memorizza il contenuto dei text-widget della window dei dati nelle
  ***     variabili globali str_dichI2 e str_codI2 
  ***/
-memo_textI2(flag)
+void memo_textI2(flag)
 Boolean flag;
 {
 

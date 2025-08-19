@@ -63,6 +63,22 @@ static char SccsID[] = "@(#)macro.c	2.14\t4/26/95";
 #include "lg1.h"  /* non so se serve realmente */
 #endif
 
+/* Function declarations */
+int leggi_macroblocchi(MacroBlockType **mblocks, int *num_mblocks, int *macro_allocate);
+int salva_macroblocchi(MacroBlockType *mblocks, int *num_mblocks);
+void display_icone_selezionate(int ind_macro);
+void dialog_modify_snap(void);
+int dialog_modify_block(void);
+int cerca_macroblocco(MacroBlockType *macroblocks, int num_macro, char *nome_macro);
+void disegna_macroblocco(int num_macro);
+void del_block_from_list(void);
+
+#ifdef TOPOLOGIA
+int Iget_descr_blocco(char *strappo, char *descriz);
+int Iverifica_nome_blocco(char *nome_blocco);
+void set_new_descr(char *nome_blocco, char *descr_blocco);
+#endif
+
 
 /*******************************************/
 /* DEFINIZIONE  DELLE  VARIABILI  GLOBALI  */
@@ -114,7 +130,11 @@ char *warning_mesg[] = {   /* MESSAGGI SU FINESTRELLA MOTIF */
                         "Maximum number of block reached. Sorry, i can't add it." };
 
 /* VARIABILI UTILIZZATE NELLE FUNZIONI Xlib */
+#ifdef TOPOLOGIA
+extern Display *display;
+#else
 Display *display;
+#endif
 int screen;
 Cursor cursore_a_crocetta;
 Pixmap icona;
@@ -147,7 +167,7 @@ Widget warning_widget, dialog_uscita;
 /* Strutture riguardanti il geometry management delle varie Dialog...
    Specificare, nell'ordine: { DefaultPosition TRUE/FALSE,XmNx,XmNy,
                                XmNwidth,XmNHeight }                 */
-Dialog_geometry geom_attention   = { TRUE, NULL, NULL, NULL, 150 };
+Dialog_geometry geom_attention   = { TRUE, 0, 0, 0, 150 };
 /********************************************************************/
 
 Widget macro_tavola;
@@ -257,7 +277,7 @@ extern int block_selection_activate(); /* attivazione interfaccia inserimento
                                           nuovo blocco , definita in BlockSelect                                          ionBox */ 
 
 
-extern del_block_from_list(); /* effettua la cancellazione di un blocco 
+extern void del_block_from_list(void); /* effettua la cancellazione di un blocco 
                                  dalla lista dei blocchi in lg1 */
 
 #endif
@@ -265,14 +285,11 @@ extern del_block_from_list(); /* effettua la cancellazione di un blocco
 /********  INIZIO MAIN()  ********/
 #ifdef MAIN
 
-main(argc, argv)
-int argc;
-char *argv[];
+int main(int argc, char *argv[])
 
 #else
 
-lancia_macro(toplevel_appl, listaBlocchi)
-Widget toplevel_appl, listaBlocchi;
+int lancia_macro(Widget toplevel_appl, Widget listaBlocchi)
 
 #endif
 
@@ -1248,7 +1265,7 @@ XmAnyCallbackStruct *call_data;
       /* crea il nuovo blocco */
 	 pixmap_info = ptr_macro1->blocks[ind1].pixmap_info;
          ind2 = alloca_nuovo_blocco(ptr_macro2, posx, posy, 
-			     ptr_macro1->blocks[ind1].tipo, True,
+			     ptr_macro1->blocks[ind1].tipo, 
 			     ptr_macro1->blocks[ind1].pixmap_info,
 			     ptr_macro1->blocks[ind1].nome_blocco,
 			     ptr_macro1->blocks[ind1].descr_blocco,
@@ -1351,7 +1368,7 @@ XmAnyCallbackStruct *call_data;
               /* Alloca altri 100 elementi se necessario */
                   if ( num_macro > macro_allocate )
                      macroblocks = (MacroBlockType *)
-                                 realloc_mem( macroblocks,
+                                 realloc_mem((char*)macroblocks,
 					      macro_allocate += 100,
                                               sizeof(MacroBlockType));
 		  modifiche = True; /* Setta il flag di modifica ! */
@@ -1422,7 +1439,7 @@ XmAnyCallbackStruct *call_data;
 	       modifiche = True; /* Setta il flag di modifica ! */
 
                ind = alloca_nuovo_blocco(&macroblocks[macro_selez_tmp], 0, 0, 
-			                 TP_REMARK, False, NULL,"",remark,"");
+			                 TP_REMARK, NULL, "", remark, "");
 
             /* Crea la label di commento */
 	       crea_remark(macroblocks[macro_selez_tmp].wtavblock,
@@ -1680,7 +1697,7 @@ void crea_pixmap_moduli()
          }
          else
          {
-            pix_info->pixmap = NULL;
+            pix_info->pixmap = 0;
          }
       }
    }
@@ -1694,7 +1711,7 @@ void crea_pixmap_moduli()
       pix_scheme_std.pixmap = crea_pixmap(&rec_std.bmap_record);
    }
    else
-      pix_scheme_std.pixmap = NULL;
+      pix_scheme_std.pixmap = 0;
 
 /* lista dei moduli di regolazione */
    fp_modnp = apri_file_icoscheme(LIB_UTENTE);
@@ -1712,7 +1729,7 @@ void crea_pixmap_moduli()
    {
        strcpy(pixmap_mod_schema[k].nome_modulo, rec_modnp.nome_modulo);
        strcpy(pixmap_mod_schema[k].descr_modulo, rec_modnp.descr_modulo);
-       if ( pix_scheme_std.pixmap != NULL )
+       if ( pix_scheme_std.pixmap != 0 )
        {
           pixmap_mod_schema[k].num_icone = 1;
           memcpy( &(pixmap_mod_schema[k].pixmap_info[0]), &pix_scheme_std,
@@ -1880,7 +1897,7 @@ BitmapFileRec *record;
           s_warning( top_level, &geom_attention, APPLICATION_NAME,
                      warning_mesg, WREADBMAP );
           printf(">>> can't read file: %s\n", filebitmap );
-          pixm = NULL;
+          pixm = 0;
       }
       else
       {  
@@ -1897,7 +1914,7 @@ BitmapFileRec *record;
       }
    }
    else
-      pixm = NULL;
+      pixm = 0;
    return(pixm);
 }
 

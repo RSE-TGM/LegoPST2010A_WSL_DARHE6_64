@@ -43,6 +43,17 @@ static char SccsID[] = "@(#)jacobian.c	1.7\t3/30/95";
 #include "f03.h"
 #include "f11.h"
 #include "messaggi.h"
+#include <stdlib.h>
+#include <unistd.h>
+
+/* Missing function declarations */
+int s_error(char *app_name, char **error_mesg, int error_code, int num_mesg);
+int alloca_memoria_x_items(int num_items);
+int cambia_stato_menu(int nvoci, VOCE_MENU *voci_array);
+int read_data_f11(int fd);
+int cerca_elemento(int *array, int size, int element);
+int nzero(char *str, double value, char *format, char *zero_str);
+int app_n_car(char *dest, char *src, int max_chars);
 
 extern char *error_mesg[];
 
@@ -82,7 +93,7 @@ extern XmString *int_riga_jac;
 extern Dialog_geometry geom_information;  /* Per Dialog di informazione
 					     sullo jacobiano		*/
 
-extern void free_array_XmString( XmString, int );
+extern void free_array_XmString( XmString *, int );
 
 /*-----------------------------------------------------------------------*/
 /*** show_jacobian( w, client_data, call_data)
@@ -112,7 +123,7 @@ XmAnyCallbackStruct *call_data;
              if (MrmFetchWidget(s_RMHierarchy, "jacobian_blocks_dialog",
                                 toplevel_widget,
                                 &widget_array[K_JACOBIAN_BLOCKS_WINDOW],
-                                &dummy_class) != MrmSUCCESS )
+                                dummy_class) != MrmSUCCESS )
                 s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
 
          get_something( widget_array[K_JACOBIAN_VALUES_LIST],
@@ -197,7 +208,7 @@ XmAnyCallbackStruct *call_data;
          XtUnmapWidget( sbar_rows_vert );
 
          free_array_XmString(elenco_item, numero_item ); 
-         XtFree(elenco_item);
+         XtFree((char *)elenco_item);
 
        break;
 
@@ -208,7 +219,7 @@ XmAnyCallbackStruct *call_data;
             if (MrmFetchWidget(s_RMHierarchy, "jacobian_variables_dialog",
                                toplevel_widget,
                                &widget_array[K_JACOBIAN_VARIABLES_WINDOW],
-                               &dummy_class) != MrmSUCCESS )
+                               dummy_class) != MrmSUCCESS )
                s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
 
          XtManageChild( widget_array[K_JACOBIAN_VARIABLES_WINDOW] );
@@ -251,7 +262,7 @@ XmAnyCallbackStruct *call_data;
          XtSetValues (widget_array[K_JACOBIAN_VARIABLES_VAR_LIST],
                       args, argcount);
          free_array_XmString( elenco_item, numero_item );
-         XtFree(elenco_item);
+         XtFree((char *)elenco_item);
        break;
 
 /*************************************** show_jacobian *****************/
@@ -283,7 +294,7 @@ XmAnyCallbackStruct *call_data;
              if (MrmFetchWidget(s_RMHierarchy, "jacobian_sing_row_dialog",
                                 toplevel_widget,
                                 &widget_array[K_JAC_SING_ROW_WINDOW],
-                                &dummy_class) != MrmSUCCESS )
+                                dummy_class) != MrmSUCCESS )
                s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
 
           XtManageChild( widget_array[K_JAC_SING_ROW_WINDOW] );
@@ -318,7 +329,7 @@ XmAnyCallbackStruct *call_data;
          XtSetValues (widget_array[K_JAC_SING_ROW_LIST],
                       args, argcount);
          free_array_XmString( elenco_item, n_null_row );
-         XtFree( elenco_item );
+         XtFree( (char *)elenco_item );
        break;
 
 /*************************************** show_jacobian *****************/
@@ -328,7 +339,7 @@ XmAnyCallbackStruct *call_data;
              if (MrmFetchWidget(s_RMHierarchy, "jacobian_sing_col_dialog",
                                 toplevel_widget,
                                 &widget_array[K_JAC_SING_COL_WINDOW],
-                                &dummy_class) != MrmSUCCESS )
+                                dummy_class) != MrmSUCCESS )
                s_error( APPLICATION_NAME, error_mesg, EFETCHDBOX, 1 );
 
          XtManageChild( widget_array[K_JAC_SING_COL_WINDOW] );
@@ -369,7 +380,7 @@ XmAnyCallbackStruct *call_data;
          XtSetValues (widget_array[K_JAC_SING_COL_LIST],
                       args, argcount);
          free_array_XmString( elenco_item, n_null_column );
-         XtFree( elenco_item );
+         XtFree( (char *)elenco_item );
 
       /* Scrittura dei messaggi per l'utente sfigato  */
           strcpy (temp,
@@ -597,8 +608,8 @@ XmListCallbackStruct *list_info;
   
             XmStringFree(intestazione[0]);
             free_array_XmString( elenco_item, eq_fine-eq_iniz );
-            XtFree(no_var_blocco);
-            XtFree( elenco_item );
+            XtFree((char *)no_var_blocco);
+            XtFree( (char *)elenco_item );
             numero_item = 0;
             undef_cursore (widget_array[K_JACOBIAN_BLOCKS_WINDOW]);
             break; 
@@ -647,7 +658,7 @@ XmListCallbackStruct *list_info;
                          argcount); 
   
             free_array_XmString( elenco_item, k );
-            XtFree( elenco_item );
+            XtFree( (char *)elenco_item );
             undef_cursore (widget_array[K_JACOBIAN_VARIABLES_WINDOW]);
             break;
 
@@ -703,7 +714,7 @@ XmListCallbackStruct *list_info;
                          argcount); 
   
             free_array_XmString( elenco_item, i );
-            XtFree( elenco_item );
+            XtFree( (char *)elenco_item );
             undef_cursore (widget_array[K_JAC_SING_ROW_WINDOW]);
             break;
    } 

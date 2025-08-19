@@ -62,11 +62,15 @@ SOLO PER RICONOSCIMENTO:
 
 */
 
+#include <stdio.h>
 #include "g2comdb.inc"
 #include "messcada.inc"
 #include "allar.inc"
 #include "video.inc"
 #include "mesprocv.inc"
+
+// External function declarations
+extern void bitset(short* buffer, short indice, short bit);
 
 
 
@@ -88,7 +92,7 @@ struct  sel_ger
    short zona;
    } ;
 			
-allselASD(mess,video)
+int allselASD(mess,video)
 struct sel_ger *mess;
 short video;
 {

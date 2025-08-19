@@ -22,6 +22,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
  *
  */
 #include <stdio.h>
+#include <string.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
@@ -34,7 +35,12 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "intesta.inc"
 #include "mesqueue.h"
 
-intesta(coda,mess,ind,pagina)
+/* Function prototypes */
+extern void stdisk(void *, int, int);
+extern void decnum(char *, int, int, short, int);
+extern int bitvalue(short *, short);
+
+void intesta(coda,mess,ind,pagina)
 short mess,pagina,ind,coda ;
 {
 QUEUE_PACKET pack;

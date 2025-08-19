@@ -55,6 +55,13 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 #include "paglib.h"
 
+/* Function prototypes */
+extern void pri(int tcb, int priority);
+extern int tra(int mbox, int signal);
+extern int ricerca(char *sigla, short *punt, short *ext, long *displ, short *posiz, FILE *fp);
+extern int bitvalue(short *buffer, short bit);
+extern void bitset(short *buffer, short bit, short value);
+extern void verifall(short punt, short tipo);
 
 void PagInitDos();    
 void PagInitMarte();  
@@ -107,7 +114,7 @@ typedef struct {
                 short periodo;
                 short priorita;
                 char nomedll[20];
-                void (* init)();
+                void (* init)(short);
                 void (* corpo)(); } PAG_DEF;
 
 

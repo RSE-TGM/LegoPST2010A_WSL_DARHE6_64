@@ -6,6 +6,8 @@
    reserved @(#)convf22.c	1.4
 */
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "libnet.h"
 
 #ifndef TRUE
@@ -33,6 +35,12 @@ VARIABILE variabili_;
 FILE  *file22, *file22out;
 int importo=1,flag,formato_dati,test=FALSE;
 
+static int leggi_testa_bin();
+static int leggi_testa_bin_vms();
+static int scrivi_testa_bin_();
+static int scrivi_corpo_bin_();
+static int leggi_corpo_bin();
+static int leggi_testa_bin();
 
 void main(argc,argv)
 int     argc;                   /* # of elements in argv */
@@ -174,7 +182,7 @@ char  **argv;                   /* vector of command line arguments */
       scrivi_corpo_bin_();
 }
 
-leggi_testa_bin()
+int leggi_testa_bin()
    {
    int i;
    char nomi[8][1000];
@@ -183,14 +191,14 @@ leggi_testa_bin()
       if (!strncmp(getenv("DEBUG"),"YES",3))
 	 printf("Titolo: %s\n",variabili_.titolo);
       fread(&variabili_.numvar,sizeof(variabili_.numvar),1,file22);
-      if (test) return;
+      if (test) return(0);
       fread(variabili_.nomi_misure,8,variabili_.numvar,file22);
       fread(variabili_.model,8,1,file22);
       fread(&variabili_.numsimb,sizeof(variabili_.numsimb),1,file22);
       fread(variabili_.simboli,80,variabili_.numsimb,file22);
    }
 
-leggi_testa_bin_vms()
+int leggi_testa_bin_vms()
    {
    char pad[2];
    int i;
@@ -204,7 +212,7 @@ printf("Titolo: %s\n",variabili_.titolo);
 printf("numvar: %d-%d\n",variabili_.numvar,converti_int_f(&variabili_.numvar,RICEZIONE,AIX_VMS));
 printf("Numero variabili =%d \n",*converti_int_f(&variabili_.numvar,TRASMISSIONE,AIX_VMS));
       fread(pad,sizeof(pad),1,file22);
-      if (test) return;
+      if (test) return(0);
       for (i=0;i< *converti_int_f(&variabili_.numvar,RICEZIONE,AIX_VMS) ;i++)
       {
           fread(variabili_.nomi_misure[8*i],8,1,file22);
@@ -222,7 +230,7 @@ printf("numvar: %d\n",variabili_.numsimb);
       }
    }
 
-leggi_corpo_bin()
+int leggi_corpo_bin()
    {
    int i;
             if ( ! fread(&variabili_.tempo,sizeof(variabili_.tempo),1,file22))
@@ -231,7 +239,7 @@ leggi_corpo_bin()
 
    }
 
-scrivi_testa_bin_()
+int scrivi_testa_bin_()
    {
    int i;
    char nomi[8][1000];
@@ -245,7 +253,7 @@ scrivi_testa_bin_()
    }
 
 
-scrivi_corpo_bin_()
+int scrivi_corpo_bin_()
    {
    int i;
       fwrite(converti_float_f(&variabili_.tempo,0,formato_dati),sizeof(variabili_.tempo),1,file22out);

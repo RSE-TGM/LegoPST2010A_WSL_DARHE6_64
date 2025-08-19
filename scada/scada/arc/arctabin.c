@@ -57,10 +57,12 @@ extern char *arc_stampato;
 extern short nbyte[];
 extern long off_f[];
 
-arctabin(p_des,mess,pagina,misini,mistot,str)
-PARCDES *p_des;
-short mess, pagina, misini, mistot;
-char *str;
+// External function declarations
+extern void decnum(char*, int, int, short, float);
+extern void invia(int, void*);
+extern int rbyte(int, void*, long, int);
+
+int arctabin(PARCDES *p_des, short mess, short pagina, short misini, short mistot, void *str)
 {
 short anno;
 PUNTDBS *point;
@@ -161,7 +163,7 @@ case msigle:
    	invia(tpr_tabulato,&arcontrol);
 	   invia(tpr_tabulato,&arcontrol);
    }
-   else invia(tpr_tabulato,str);
+   else invia(tpr_tabulato,(char*)str);
 	invia(tpr_tabulato,&arcontrol);
 	invia(tpr_tabulato,&arcontrol);
 break;   

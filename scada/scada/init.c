@@ -37,6 +37,7 @@ static char *_csrc = "@(#) %filespec: init.c-4 %  (%full_filespec: init.c-4:csrc
 #include <osf1.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <string.h>
 #if defined OSF1 || defined LINUX
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -57,7 +58,12 @@ static char *_csrc = "@(#) %filespec: init.c-4 %  (%full_filespec: init.c-4:csrc
 #include "diagnoan.inc"
 #include "pscserr.inc"
 
-init()
+/* Function prototypes */
+extern void pscserr(int, int, int, int, int);
+extern void readiz(void *, FILE *);
+extern void readtab(FILE *);
+
+int init()
 {
 char fnome[FILENAME_MAX+1];
 short lung;

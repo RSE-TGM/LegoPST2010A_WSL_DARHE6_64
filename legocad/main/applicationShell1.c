@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -65,6 +66,27 @@ extern swidget create_vis_msg();
 extern swidget create_questionUscitaLegocad();
 extern swidget popup_EnvironmentDialog();
 extern swidget create_question_environment();
+
+/* Missing function declarations */
+extern int test_transient();
+extern int test_steady();
+extern int test_data_editor();
+extern int test_topologia();
+extern void set_pixmap_cursor(Widget, char *);
+extern int proc_legocad_attivi();
+extern void attiva_topology();
+extern void esegui_crealg1();
+extern void attiva_data();
+extern void esegui_crealg3();
+extern void attiva_steady();
+extern void esegui_crealg5sk();
+extern void attiva_transient();
+extern void attiva_librarian();
+extern void attiva_graphics();
+extern void attiva_tables();
+extern void attiva_autodoc();
+extern void testa_ambiente();
+extern void chdir_path_legocad();
 swidget w_selectionD;
 int stato; /* stato di selezione del modello */
 int tipo_modello; /* specifica se modello di solo processo
@@ -124,7 +146,7 @@ static void	_UxapplicationShell1MenuPost( wgt, client_data, event, ctd )
 
 	if ( event->xbutton.button == which_button )
 	{
-		XmMenuPosition( menu, event );
+		XmMenuPosition( menu, (XButtonPressedEvent *)event );
 		XtManageChild( menu );
 	}
 }
@@ -375,7 +397,7 @@ Widget	create_applicationShell1();
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-help_not_available_msg()
+int help_not_available_msg()
 {
    extern swidget create_vis_msg();
    char msg[100];
@@ -384,7 +406,7 @@ help_not_available_msg()
    create_vis_msg(msg);
 }
 
-reset_wsel()
+int reset_wsel()
 {
    wsel = NULL;
 }  
@@ -393,7 +415,7 @@ reset_wsel()
    a seconda della situazione dell'ambiente LEGOCAD
    aggiorna l'attivazione delle voci del pulldown menu.
 */
-update_pulldown()
+int update_pulldown()
 {
 /*
  la libreria moduli processo esiste: posso costruire modelli
@@ -429,7 +451,7 @@ UxPutSensitive(Edi14_viewout,"false");
    rende attivi o disattivi i bottoni relativi alle diverse fasi di
    sviluppo.
 */
-aggiorna_attivi()
+int aggiorna_attivi()
 {
 #ifndef DESIGN_TIME
 char app[100];
@@ -601,7 +623,7 @@ UxPutBackground(Documentazione_pb2,"LightBlue");
 /*
  aggiorna la possibilita' di accesso alle routines di utilita'
 */
-aggiorna_utilities()
+int aggiorna_utilities()
 {
 UxPutSensitive(Librarian_pb1,"true");
 UxPutSensitive(Librarian_pb2,"true");
@@ -615,7 +637,7 @@ if(ok_path_libut)
 }
 
 
-agg_label_ambiente()
+int agg_label_ambiente()
 {
 char app[FILENAME_MAX];
 if(ok_path_legocad)
@@ -677,7 +699,7 @@ return(0);
 
 
 
-show_warning(mess)
+int show_warning(mess)
 char *mess;
 {
   char   *str, *new_str;
@@ -696,13 +718,13 @@ char *mess;
 
 
 
-show_error(mess)
+int show_error(mess)
 char *mess;
 {
 create_vis_msg(mess);
 }
 
-set_icone()
+int set_icone()
 {
 #ifndef DESIGN_TIME
 path_icone=getenv("LEGOCAD_ICO");
@@ -757,7 +779,7 @@ UxPutLabelInsensitivePixmap(Documentazione_pb1,icon);
 UxPutLabelPixmap(Documentazione_pb1,icon);
 }
 
-set_win_cursor(cursore)
+int set_win_cursor(cursore)
 char *cursore;
 {
 
@@ -765,7 +787,7 @@ set_pixmap_cursor(UxGetWidget(applicationShell1), cursore );
 
 }
 
-reset_win_cursor()
+int reset_win_cursor()
 {
 
 undef_cursore(UxGetWidget(applicationShell1));
@@ -3222,7 +3244,7 @@ static Widget	_Ux_create_applicationShell1()
 		/*
 		 setta le icone associate ai botoni di attivazione
 		*/
-		set_icone();
+		int set_icone();
 		
 		
 		
@@ -3237,7 +3259,7 @@ static Widget	_Ux_create_applicationShell1()
 		 sono specificati i path names delle librerie dei
 		 moduli utilizzate
 		*/
-		agg_label_ambiente();
+		int agg_label_ambiente();
 		/*
 		 a seconda delle librerie presenti vengono abilitate
 		 le voci per la creazione di modelli di processo e/o
@@ -3248,7 +3270,7 @@ static Widget	_Ux_create_applicationShell1()
 		 aggiorna la attivazione o meno dei bottoni delle
 		 utilities utilizzabili
 		*/
-		aggiorna_utilities();
+		int aggiorna_utilities();
 		/*
 		 si posizione nella directory di lavoro per l'utente
 		 (specificata dalla variabile di environment LEGOCAD_USER)

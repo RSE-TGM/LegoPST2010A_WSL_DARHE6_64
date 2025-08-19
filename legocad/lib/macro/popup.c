@@ -179,19 +179,19 @@ Widget voci_wdg[];
    XtSetArg(args[nargs],XmNsensitive, True); nargs++;
    items[2] = XmCreatePushButton (menu_padre,"New",args, nargs);
    XtAddCallback(items[2], XmNactivateCallback,
-                 menu_macro, K_NEW_MACRO);
+                 menu_macro, (XtPointer)(long)K_NEW_MACRO);
    voci_wdg[K_NEW_MACRO] = items[2];
 
    nargs=0;
    XtSetArg(args[nargs],XmNsensitive, False); nargs++;
    items[3] = XmCreatePushButton (menu_padre,"Modify",args, nargs);
-   XtAddCallback(items[3], XmNactivateCallback, menu_macro, K_MODIFY_MACRO);
+   XtAddCallback(items[3], XmNactivateCallback, menu_macro, (XtPointer)(long)K_MODIFY_MACRO);
    voci_wdg[K_MODIFY_MACRO] = items[3];
 
    nargs=0;
    XtSetArg(args[nargs],XmNsensitive, False); nargs++;
    items[4] = XmCreatePushButton (menu_padre,"Delete",args, nargs);
-   XtAddCallback(items[4], XmNactivateCallback, menu_macro, K_DELETE_MACRO);
+   XtAddCallback(items[4], XmNactivateCallback, menu_macro, (XtPointer)(long)K_DELETE_MACRO);
    voci_wdg[K_DELETE_MACRO] = items[4];
 
    XtManageChildren (items, 5);
@@ -228,7 +228,7 @@ Widget voci_wdg[];
    nargs=0;
    XtSetArg(args[nargs],XmNsensitive, True); nargs++;
    items[1] = XmCreatePushButton (menu_padre,"Data...",args,nargs);
-   XtAddCallback(items[1], XmNactivateCallback, menu_dati_callb, K_DATA_BLOCK);
+   XtAddCallback(items[1], XmNactivateCallback, menu_dati_callb, (XtPointer)(long)K_DATA_BLOCK);
    voci_wdg[K_DATA_BLOCK] = items[1];
 
    items[2] = XmCreateSeparatorGadget (menu_padre,"Separator",NULL,0);
@@ -236,7 +236,7 @@ Widget voci_wdg[];
    nargs=0;
    XtSetArg(args[nargs],XmNsensitive, True); nargs++;
    items[3] = XmCreatePushButton (menu_padre,"Known/Unknown...",args,nargs);
-   XtAddCallback(items[3], XmNactivateCallback, menu_dati_callb, K_KNOW_BLOCK);
+   XtAddCallback(items[3], XmNactivateCallback, menu_dati_callb, (XtPointer)(long)K_KNOW_BLOCK);
    voci_wdg[K_KNOW_BLOCK] = items[3];
 
    items[4] = XmCreateSeparatorGadget (menu_padre,"Separator",NULL,0);
@@ -244,7 +244,7 @@ Widget voci_wdg[];
    nargs=0;
    XtSetArg(args[nargs],XmNsensitive, True); nargs++;
    items[5] = XmCreatePushButton (menu_padre,"Normalization...",args,nargs);
-   XtAddCallback(items[5], XmNactivateCallback, menu_dati_callb, K_NORM_BLOCK);
+   XtAddCallback(items[5], XmNactivateCallback, menu_dati_callb, (XtPointer)(long)K_NORM_BLOCK);
    voci_wdg[K_NORM_BLOCK] = items[5];
 
    XtManageChildren (items,6);
@@ -252,7 +252,7 @@ Widget voci_wdg[];
    nargs=0;
    XtSetArg(args[nargs],XmNsensitive, True); nargs++;
    items[0] = XmCreatePushButton (menu_padre,"Variables",args,nargs);
-   XtAddCallback(items[0], XmNactivateCallback, variables_block, ind_macro);
+   XtAddCallback(items[0], XmNactivateCallback, variables_block, (XtPointer)(long)ind_macro);
    voci_wdg[K_VARIABLES_BLOCK] = items[0];
 
 /* creazione sottomenu istanziazione nuovo blocco */
@@ -281,7 +281,7 @@ Widget voci_wdg[];
    nargs=0;
    XtSetArg(args[nargs],XmNsensitive, False); nargs++;
    items[3] = XmCreatePushButton (menu_padre,"Modify ",args,nargs);
-   XtAddCallback(items[3], XmNactivateCallback, modify_block, ind_macro);
+   XtAddCallback(items[3], XmNactivateCallback, modify_block, (XtPointer)(long)ind_macro);
    voci_wdg[K_MODIFY_BLOCK] = items[3]; 
 
    nargs=0;
@@ -312,14 +312,14 @@ Widget voci_wdg[];
    nargs=0;
    XtSetArg(args[nargs],XmNsensitive, False); nargs++;
    items[4] = XmCreatePushButton (menu_padre,"Modify",args,nargs);
-   XtAddCallback(items[4], XmNactivateCallback, modify_block, ind_macro);
+   XtAddCallback(items[4], XmNactivateCallback, modify_block, (XtPointer)(long)ind_macro);
    voci_wdg[K_MODIFY_BLOCK] = items[4];
 
    nargs=0;
    XtSetArg(args[nargs],XmNsensitive, False); nargs++;
    items[5] = XmCreatePushButton (menu_padre,"Delete",args,nargs);
    XtAddCallback(items[5], XmNactivateCallback, delete_selected_blocks,
-                                                ind_macro);
+                                                (XtPointer)(long)ind_macro);
    voci_wdg[K_DELETE_BLOCK] = items[5];
 
    items[6] = XmCreateSeparatorGadget (menu_padre,"Separator",NULL,0);
@@ -328,7 +328,7 @@ Widget voci_wdg[];
    XtSetArg(args[nargs],XmNsensitive, False); nargs++;
    items[7] = XmCreatePushButton (menu_padre,"Move",args,nargs);
    XtAddCallback(items[7], XmNactivateCallback, move_selected_blocks,
-                                                ind_macro);
+                                                (XtPointer)(long)ind_macro);
    voci_wdg[K_MOVE_BLOCK] = items[7];
 
    items[8] = XmCreateSeparatorGadget (menu_padre,"Separator",NULL,0);
@@ -338,15 +338,15 @@ Widget voci_wdg[];
    voci_wdg[K_ADD_PBLOCK] = items[9];
 
    items[10] = XmCreatePushButton (menu_padre,"Add scheme block",NULL,0);
-   XtAddCallback(items[10], XmNactivateCallback, new_block, TP_BLOCK_REG);
+   XtAddCallback(items[10], XmNactivateCallback, new_block, (XtPointer)(long)TP_BLOCK_REG);
    voci_wdg[K_ADD_SBLOCK] = items[10];
 
    items[11] = XmCreatePushButton (menu_padre,"Add symbol",NULL,0);
-   XtAddCallback(items[11], XmNactivateCallback, add_symbol, ind_macro);
+   XtAddCallback(items[11], XmNactivateCallback, add_symbol, (XtPointer)(long)ind_macro);
    voci_wdg[K_ADD_SYMBOL] = items[11];
 
    items[12] = XmCreatePushButton (menu_padre,"Add remark",NULL,0);
-   XtAddCallback(items[12], XmNactivateCallback, add_remark, ind_macro);
+   XtAddCallback(items[12], XmNactivateCallback, add_remark, (XtPointer)(long)ind_macro);
    voci_wdg[K_ADD_REMARK] = items[12];
 
    XtManageChildren (items,13);

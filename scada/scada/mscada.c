@@ -84,7 +84,27 @@ char   *dati_license[2];        /* Vettore utilizzato per passare
                                    informazioni relative alle licenze
                                    (tempo_license) a Xscada             */
 
-main(argc,argv)
+// Function declarations
+void skey_stampa_errore(int error_code, char *message);
+void striuk(char *str);
+void scan_arg(char *arg);
+void restart(void);
+void readef(void);
+void readdb(DB_HEADER *db);
+void NetDosStartup(void);
+void allocdb(int flag, DB_HEADER *db);
+void rwdbal(int flag, DB_HEADER *db1, DB_HEADER *db2);
+void init(void);
+void initdb(void);
+void initcalc(void);
+void initor(void);
+void leggifile(void);
+void initline(void);
+void ReadAlarmSignal(DB_HEADER *db);
+void beg_marte(void);
+void AttivaXscada(int flag, char **license_data);
+
+int main(argc,argv)
 short int argc;
 char *argv[];
 
@@ -202,13 +222,14 @@ else
 	signal(SIGINT,	SIG_IGN);
 
 restart() ;
+	return 0;
 }
 
 
 //
 //	effettua il restart del sistema
 //--------------------------------
-restart()
+void restart()
 {
 char c;
    	readef();

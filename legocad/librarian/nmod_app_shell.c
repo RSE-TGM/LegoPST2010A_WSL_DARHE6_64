@@ -55,6 +55,23 @@
 #define LIBUTILX
 #endif
 
+#include <stdlib.h>
+
+/* Function prototypes for missing declarations */
+extern void scrivi_messaggio(char *);
+extern int salva_interfaccia(void);
+extern int genera_fortran(char *, char *);
+extern int controlla_input_def(Widget, Widget);
+extern void cambia_tipo_text(Widget, int, Boolean);
+extern int leggi_file_interfaccia(void);
+extern void alloca_text_widget(Widget, int, int, int, int);
+extern int lcDestroySwidget(Widget);
+
+/* Forward declarations for functions defined in this file */
+int salva_e_genera(void);
+int menu_newmod_init(void);
+int quit_newmod(void);
+
 /****************************************************************/
 /* VARIABILI GLOBALI ESTERNE					*/
 /****************************************************************/
@@ -139,10 +156,10 @@ char nomitmp[7][256]; /* nomi di file temporanei (come sopra) */
 /*************************************************************/
 Elenco_callback funz_editor = {
         { "Done",  editor_done, 0},
-        { NULL, NULL, NULL },
-        { NULL, NULL, NULL }};
+        { NULL, NULL, 0 },
+        { NULL, NULL, 0 }};
 
-Dialog_geometry geom_editor = { TRUE, NULL, NULL, 700, 500};
+Dialog_geometry geom_editor = { TRUE, 0, 0, 700, 500};
 
 /****************************************************/
 /* Struttura di callback per gli widget di conferma */
@@ -150,12 +167,12 @@ Dialog_geometry geom_editor = { TRUE, NULL, NULL, 700, 500};
 Elenco_callback rilancia_setup_nmod = {
         {"Yes", setup_again, YES },
         {"No" , setup_again, NO  },
-        { NULL, NULL,   NULL    }};
+        { NULL, NULL,   0    }};
 
 Elenco_callback funz_confirm_save = {
         {"Yes", confirm_save, YES },
         {"No" , confirm_save, NO  },
-        { NULL, NULL,   NULL    }};
+        { NULL, NULL,   0    }};
 
 Elenco_callback funz_confirm_quit = {
         {"Yes",    confirm_quit, YES    },
@@ -326,7 +343,7 @@ XmAnyCallbackStruct *call_data;
 
 /* Dealloca la memoria */
    get_something(weditor[indice], XmNuserData, (void*) &ptr);
-   XtFree(ptr);
+   XtFree((char*)ptr);
  
 /* Cancella file temporaneo */
 #ifdef VMS
@@ -386,7 +403,7 @@ XmAnyCallbackStruct *call_data;
  ***     La funzione salva le informazione della NEWMOD, genera il FORTRAN ed 
  ***     aggiorna il file lista_moduli.dat 
  ***/
-salva_e_genera()
+int salva_e_genera()
 {
    if ( !salva_interfaccia())
    {
@@ -422,6 +439,7 @@ salva_e_genera()
    }
    else
      scrivi_messaggio("Cannot save NEWMOD information (file busy).");
+   return 0;
 }
 
 /***
@@ -432,7 +450,7 @@ salva_e_genera()
  ***     Tali voci di menu vengono attivate qunado l'utente ha premuto
  ***     OK e le informazioni sono corrette.
  ***/
-menu_newmod_init()
+int menu_newmod_init()
 {
 /* Disabilita l'accesso alle sezioni USER (I2,JC,D1,resid.,D1) */
    set_something_val (UxGetWidget(pb_nmod_I2),XmNsensitive, (XtArgVal) False);
@@ -452,6 +470,7 @@ menu_newmod_init()
    set_something_val (UxGetWidget(pb_nmod_save), XmNsensitive, (XtArgVal) False);
 
    nmod_def_initialized = False;
+   return 0;
 }
 
 /*** quit_newmod()
@@ -460,7 +479,7 @@ menu_newmod_init()
  ***       Dealloca la memoria utilizzata durante la sessione NEWMOD e 
  ***       ritorna al menu principale.
  ***/
-quit_newmod()
+int quit_newmod()
 {
    int i,j;
 
@@ -471,25 +490,25 @@ quit_newmod()
 
 /* Dealloca la memoria utilizzata per i text-widget delle variabili e dei */
 /* dati geometrici */
-   XtFree(wvar_stato);
+   XtFree((char*)wvar_stato);
    wvar_stato = NULL;
 
-   XtFree(wvar_algebriche);
+   XtFree((char*)wvar_algebriche);
    wvar_algebriche = NULL;
 
-   XtFree(wvar_ingresso);
+   XtFree((char*)wvar_ingresso);
    wvar_ingresso = NULL;
 
-   XtFree(wdati_geometrici);
+   XtFree((char*)wdati_geometrici);
    wdati_geometrici = NULL;
    
 /* Deallocazione delle stringhe utilizzate per l'inserimento del codice */
 /* utente ed altro */
    if (nmod_def_initialized)
    {
-      XtFree(variabili);
+      XtFree((char*)variabili);
       variabili = NULL;
-      XtFree(dati_geom);
+      XtFree((char*)dati_geom);
       dati_geom = NULL;
 
       XtFree(str_dichI2);
@@ -533,6 +552,7 @@ quit_newmod()
       }
    }
    scrivi_messaggio("Done.");
+   return 0;
 }
 
 /*******************************************************************************

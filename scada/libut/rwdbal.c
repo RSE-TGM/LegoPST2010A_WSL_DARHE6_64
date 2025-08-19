@@ -40,8 +40,12 @@ static char *_csrc = "@(#) %filespec: rwdbal.c-3 %  (%full_filespec: rwdbal.c-3:
 #include "g0strdb.inc"
 #include "g2ptrdb.inc"
 #include "dconf.inc"
+#include <stdlib.h>
 
-rwdbal (flag,db,ut)
+extern void rwgerarc(short, DB_HEADER *, DB_HEADER *);
+void iodb(FILE *, short, char *, int, int);
+
+void rwdbal (flag,db,ut)
 DB_HEADER *db, *ut;
 short flag ;
 {
@@ -194,7 +198,7 @@ return;
 /*
 	iodb legge o scrive la tabella passata
 */
-iodb(fp,flag,ptr,size,n)
+void iodb(fp,flag,ptr,size,n)
 short n, size, flag;
 //MAXchar huge *ptr;
 char *ptr;

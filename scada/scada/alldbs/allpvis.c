@@ -43,7 +43,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 short pvis0_save[max_video], pvis1_save[max_video];
 
-allpvis(short dbsal, short ind, short flag)
+int allpvis(short dbsal, short ind, short flag)
 {
 short j;
 S_DBS_ALV *alc;

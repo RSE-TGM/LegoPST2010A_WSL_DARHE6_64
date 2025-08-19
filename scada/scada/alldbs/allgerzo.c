@@ -71,6 +71,9 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "allar.inc"
 #include "video.inc"
 
+// External function declarations
+extern void bitset(short* buffer, short indice, short bit);
+
 #ifdef GERARC
 typedef struct  s_selgerzo {
 				short arg1;
@@ -95,7 +98,7 @@ typedef struct  s_selgerzo {
 				short zona;
 		       	   }S_SELGERZO;
 			
-allgerzo(mess,video)
+int allgerzo(mess,video)
 S_SELGERZO *mess;
 short video;
 {

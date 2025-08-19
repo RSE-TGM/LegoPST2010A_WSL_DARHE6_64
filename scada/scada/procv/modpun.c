@@ -29,6 +29,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
       gici e digitali) mediante i messaggi con funzione mvaf o mfla
 */
 #include <stdio.h>
+#include <string.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
@@ -39,9 +40,23 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include	"mesqueue.h"
 #include "tipal.inc"
 
-extern get_aa_val(short);
+extern int get_aa_val(short);
 
 float vsoglia();
+
+/* Function prototypes */
+extern int ricerca(short *, short *, short *, long *, short *, FILE *);
+extern void bitset(short *, short, short);
+extern int bitvalue(short *, short);
+extern void exfa(short, short, void *, short *, short);
+extern int exall(short, short, void *, short *, short);
+extern void verifall(short, short);
+extern void invao(short, float);
+extern void coman(short);
+extern void wrdb(short);
+extern int msoglia(float, short, short, short, short);
+extern short ctrlstato(char *, void *, void *);
+
 /*	
 	la subroutine modpun gestisce la modifica
 	di un qualsiasi punto in data base
@@ -72,7 +87,7 @@ Viene preparato il messaggio di risposta VSTAT in cui compaiono i campi
          del punto (routine exall e exfa)
 
 */
-modpun(m,bWild)
+int modpun(m,bWild)
 S_MCSP m ;
 short bWild;   // e' a 1 se si stanno modificando punti con wildcharacters
 	     		   // 	a 2 se si vuole inviare un messaggio di fine scansione
@@ -172,7 +187,7 @@ case m_analogico:			 		/*			analogici 						*/
 		break ;
 	case g1tipao:			 				/* invio del set point */
 		invao(punt,m.dat.f);
-		return;
+		return 0;
 	default :
 		punt=errtip ;	ext=errtip;
 		goto RISP ;
@@ -424,7 +439,7 @@ case m_organo :
 	break ;
 case m_dout    :			  
 	coman(punt) ;					/*	 invio comando	*/	 
-	return ;
+	return 0;
 	break;
 case m_stringa :
 	switch(m.funz)
@@ -508,7 +523,7 @@ case f_fsca:
 case f_mvaf :                 /* modif.valori e flag 				*/
 case f_mval :                 /* modif. solo valori 				*/
 //	wrdb(ext); 						// problematico in caso di collegamento isa in continuo aggiornamento   
-	return;							/* in caso di scrittura in dbs   */
+	return 0;							/* in caso di scrittura in dbs   */
 }										/* non devo inviare il mess. di  */
 										/* risposta								*/
 
@@ -518,10 +533,10 @@ RISP : 						/* invio messaggio di risposta al task della stop */
 /*
   in caso di wildch e scansione fnomi in atto non manda il messaggio di errore
 */
-if(bWild==1) return;
+if(bWild==1) return 0;
 
 // /* Modifica per permettere l' accesso anche da pag */
-if (m.video == 0) return;
+if (m.video == 0) return 0;
 v.indice=vstat ;
 /*
    il messaggio deve essere sempre riferito alla zona window utilizzata
@@ -540,4 +555,5 @@ spack.wto = 0;
 spack.lmsg=sizeof(S_VSTAT);
 spack.amsg=(char *) & v;
 enqueue(&spack);
+return 0;
 }

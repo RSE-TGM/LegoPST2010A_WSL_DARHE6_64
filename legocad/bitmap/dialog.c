@@ -20,12 +20,12 @@ static char SccsID[] = "@(#)dialog.c	1.2\t3/20/95";
 
 #include <X11/Xlib.h>
 #include <X11/cursorfont.h>
+#include <stdlib.h>
+#include <string.h>
 
 #ifndef lint
 static char *rcsid_dialog_c = "$Header: dialog.c,v 1.3 87/12/19 00:11:16 newman Exp $";
 #endif
-
-char *malloc();
 
 extern Display *d;
 extern int screen;
@@ -40,8 +40,8 @@ static int ProcessCommandEvent ();
 static int ProcessDialogWindowEvent();
 static int InvertCommand();
 static int DeterminePlace();
+int Initialize();
 
-#define NULL 0
 #define MIN_BETWEEN_COMMANDS 10
 #define BETWEEN_LINES 10
 #define TOP_MARGIN 10
@@ -54,21 +54,21 @@ static int DeterminePlace();
 
 static Cursor cross_cursor;
 
-static struct dialog_data {
+struct dialog_data {
   Window w;
   XFontStruct *font;
   char *msg1, *msg2;
   int msg1_length, msg2_length;
   struct command_data *command_info;
-  };
+};
 
-static struct command_data {
+struct command_data {
   Window window;
   char *name;
   int name_length;
   int name_width;  /* in pixels */
   int x_offset;
-  };
+};
 
 int dialog (w, font,
     msg1, msg2, command_names, n_commands, input_handler)
@@ -184,7 +184,7 @@ int dialog (w, font,
   }   /* end of dialog procedure */
 
 
-Initialize ()
+int Initialize ()
   {
   cross_cursor = XCreateFontCursor (d, XC_crosshair);
   }
@@ -237,7 +237,7 @@ static int ProcessCommandEvent (data, command, event)
   }
 
 
-static ProcessDialogWindowEvent (data, event)
+static int ProcessDialogWindowEvent (data, event)
   struct dialog_data *data;
   XEvent *event;
   {
@@ -253,7 +253,7 @@ static ProcessDialogWindowEvent (data, event)
   }
 
 
-static InvertCommand (command)
+static int InvertCommand (command)
   struct command_data *command;
   {
   XSetState (d, gc, 1L, 0L, GXinvert, invertplane);
@@ -261,7 +261,7 @@ static InvertCommand (command)
   }
 
 
-static DeterminePlace (w, px, py)
+static int DeterminePlace (w, px, py)
   Window w;
   int *px, *py;
   {

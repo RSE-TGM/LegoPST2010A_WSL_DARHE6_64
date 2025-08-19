@@ -71,6 +71,12 @@ extern DB_HEADER h_db;
 char leggi_data=1;
 char leggi_data_sim=1;
 
+// Function declarations
+void ter(void);
+void _time(void);
+int GetOra(int *ora, int *minuti, int *secondi, int *milli);
+int GetData(int *giorno, int *mese, int *anno, int *gio_set, int *gio_anno);
+
 #if defined ENEL_SIM
 extern int ora_simulatore;
 extern int minuti_simulatore;
@@ -82,7 +88,7 @@ extern int anno_simulatore;
 extern float tempo_simulatore;
 #endif
 
-pscswd()
+int pscswd()
 {
    short i;
 
@@ -221,7 +227,7 @@ time()
  return(0);
 }
 #else
-_time()
+void _time()
 {
 int ora,minuti,secondi,milli;
 int giorno,mese,anno,gio_set,gio_anno;

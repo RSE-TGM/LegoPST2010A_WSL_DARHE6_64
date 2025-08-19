@@ -37,7 +37,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 extern DB_HEADER h_db;
 
-simcldbs()
+void simcldbs()
 {
 short i;
 short mask;

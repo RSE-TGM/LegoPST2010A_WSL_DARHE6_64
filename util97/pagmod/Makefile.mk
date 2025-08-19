@@ -19,7 +19,7 @@ FILES=pagmod.c \
       log.c
 
 ../bin/pagmod : $(FILES)
-	cc $(C_FLAGS) -DDEBUG -D_POSIX_SOURCE -D_POSIX_C_SOURCE=2 -o $@ $(FILES) -lgdbm -lbsd
+	cc $(C_FLAGS) -DDEBUG -D_POSIX_SOURCE -D_POSIX_C_SOURCE=2 -o $@ $(FILES) -lgdbm_compat -lgdbm -lbsd
 
 clean :
 	rm *.o pagmod

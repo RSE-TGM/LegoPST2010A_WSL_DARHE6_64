@@ -31,7 +31,13 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "diagnoan.inc"
 #include "taskwd.inc"
 
-tabper()
+// External function declarations
+extern int SimTabper(void);
+extern void wai(int);
+extern void waisim(int);
+extern void lantab(int);
+
+void tabper()
 {
 short itime ;
 unsigned short attesa;
@@ -77,7 +83,7 @@ for(;;)
         chiedo il nuovo tempo
 */
 	gsett=dbadv[db_gioset];
-	if(dbadv[db_minuti] >= 30.0) continue ;	// se Š alla mezzora torna all'inizio
+	if(dbadv[db_minuti] >= 30.0) continue ;	// se ï¿½ alla mezzora torna all'inizio
 															// del ciclo
 	lantab(2) ;		  // lancia i tabulati relativi all'ora
 /*

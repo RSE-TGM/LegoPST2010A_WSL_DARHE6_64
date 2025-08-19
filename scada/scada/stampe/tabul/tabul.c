@@ -20,7 +20,7 @@ static char *_csrc = "@(#) %filespec: tabul.c-5 %  (%full_filespec: tabul.c-5:cs
  *      task di stampa tabulati:
  *      - inizializza i parametri per l'interprete (puntatori a codice,
  *        data base locale, stack presenti nel descrittore S_INTERP).
- *        N.B. L'inizializzazione Š stata effettuata direttamente nelle
+ *        N.B. L'inizializzazione ï¿½ stata effettuata direttamente nelle
  *        dichiarazioni per risparmiare tempo (utilizzando variabili
  *        static in modo che l'inizializzazione avvenga prima che il
  *        programma venga eseguito).
@@ -38,11 +38,12 @@ static char *_csrc = "@(#) %filespec: tabul.c-5 %  (%full_filespec: tabul.c-5:cs
  */
 #include <osf1.h>
 #include <stdio.h>
+#include <string.h>
 #include <dos.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
-#include "comunic.inc"		 // N.B. fileop Š incluso in comunic
+#include "comunic.inc"		 // N.B. fileop ï¿½ incluso in comunic
 #include "messcada.inc"
 #include "allar.inc"
 #include "tabulati.inc"
@@ -58,11 +59,27 @@ static char *_csrc = "@(#) %filespec: tabul.c-5 %  (%full_filespec: tabul.c-5:cs
 #include "mesprocv.inc"
 #include "cprint.inc"
 
+// External function declarations
+extern void arcind(short *, int, char *, int);
+extern void bitset(short *, short, short);
+extern void stfile(char *, short *, int, short);
+extern int wildric(char *, short *, short *, char, FILE *);
+extern void arctab(void *);
+extern void invia(short, void *);
+extern int trasfile(char *, short *);
+extern char *itoa(int, char *, int);
+extern void testlbg(int);
+extern void arctrend(void *);
+extern int rbyte(int, short *, long, int);
+extern void racdbs(HEAD_DATAB *, char *);
+extern void interfc(struct SCB *, struct SCHEDULER *);
+extern void wai(int);
+
 /*
    il buffer viene utilizzato anche in fase di visualizzazione dei trend
    storici (non variarne le dimensioni !!!)
 */
-char buftab[l_htab+l_datab];  // buffer che conterr… l'header del tabulato
+char buftab[l_htab+l_datab];  // buffer che conterrï¿½ l'header del tabulato
 								      // e la parte dati 
 
 S_HCOD phcod;									  // header sezione programma
@@ -71,8 +88,8 @@ struct SCHEDULER da_tab;
 struct SCHEDULER *s_interp=&da_tab;
 struct SCB *scb;
 
-_tabulati()      // nome preceduto da underscore per non confonderlo
-                 // con la define #TABULATI TAB_SI  
+void _tabulati()      // nome preceduto da underscore per non confonderlo
+                      // con la define #TABULATI TAB_SI  
 {
 short point;
 short ext;
@@ -207,7 +224,7 @@ for(;;)
 	break;
    case mtrasfpol: 
 /*
-	Esamina se Š una richiesta di trasferimento di un file POL su dischetto
+	Esamina se ï¿½ una richiesta di trasferimento di un file POL su dischetto
 */
 		strcpy(filename,"FPOL");
 		itoa(mess.s.archivio,filename+strlen(filename),10);
@@ -216,7 +233,7 @@ for(;;)
 	 break;
    case mtrasfall: 
 /*
-	Esamina se Š una richiesta di trasferimento di un file FILBGn su dischetto
+	Esamina se ï¿½ una richiesta di trasferimento di un file FILBGn su dischetto
 */
 		strcpy(filename,FILBG0);
 		filename[strlen(filename)-1]=filename[strlen(filename)-1]+mess.s.archivio;
@@ -283,7 +300,7 @@ for(;;)
 /*
         verifico se il tabulato ha una testa
 */
-	if(phcod.entryI!=-1)		// se ENTRY INIT Š diversa da -1 esiste testa
+	if(phcod.entryI!=-1)		// se ENTRY INIT ï¿½ diversa da -1 esiste testa
 		{
 	     racdbs(hdat,s_interp->buf_dbl);		// raccolta da data base di sistema
 		  scb->st_seq=SEQATTI;
@@ -307,7 +324,7 @@ for(;;)
 		   interfc(scb,s_interp);
 /*
         in caso di di prelievo dati da data base				 
-        se non Š l'ultimo ciclo ripeto il corpo dopo un'attesa
+        se non ï¿½ l'ultimo ciclo ripeto il corpo dopo un'attesa
 		  pari alla frequenza specificata nel descrittore
 */
          if(phtab->tip_dat==DATBAS && j<(phtab->cicli-1))

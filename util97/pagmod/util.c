@@ -117,15 +117,15 @@ void * Malloc ( size_t size ) {
 
   if ( ptr == NULL ) {
 
-    sprintf ( logbf ,
+    sprintf ( pagmod_logbf ,
               "Errore: Memoria insufficiente ( %ld bytes ) !" ,
               size ) ;
 
-    log ( logbf ) ;
+    pagmod_log ( pagmod_logbf ) ;
 
     fprintf ( stderr ,
               "%s\n" ,
-              logbf ) ;
+              pagmod_logbf ) ;
 
     exit ( EXIT_FAILURE ) ;
 
@@ -365,16 +365,16 @@ FILE * OpenFile ( const char * Path ,
 
   if ( fd == NULL ) {
   
-    sprintf ( logbf ,
+    sprintf ( pagmod_logbf ,
               "Errore apertura file %s - errno=%d" ,
               Path ,
               errno ) ;
   
-    log ( logbf ) ;
+    pagmod_log ( pagmod_logbf ) ;
     
     fprintf ( stderr ,
               "%s\n" ,
-              logbf ) ;
+              pagmod_logbf ) ;
   
   }
   

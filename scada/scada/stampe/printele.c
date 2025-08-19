@@ -39,9 +39,13 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 extern long  off_f[] ;     /* definiti nel main mpscs */
 extern short nbyte[] ;     /* come sopra */
 
+// Function declarations
+int rbyte(int fd, short *buffer, int offset, int count);
+void decnum(char *str, int width, int precision, short value, float fvalue);
+void invia(int printer, void *message);
 float vsoglia();
 
-printele (ele)
+void printele (ele)
 S_STELEN *ele ;
 {
 char desc[rec_fdda] ;           /* dimens. come il piu' */

@@ -47,6 +47,7 @@ static char *_csrc = "@(#) %filespec: arcflop.c-4 %  (%full_filespec: arcflop.c-
 #include <fcntl.h>
 #include <io.h>
 #include <stdio.h>
+#include <unistd.h>
 #if defined OSF1 || defined LINUX
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -67,11 +68,16 @@ static char *_csrc = "@(#) %filespec: arcflop.c-4 %  (%full_filespec: arcflop.c-
 #include "diagnodi.inc"
 #include "diagnoan.inc"
 
+// External function declarations
+extern void decnum(char*, int, int, short, float);
+extern void bitset(short*, short, short);
+extern int rbyte(int, void*, long, int);
+extern int wbyte(int, void*, long, int);
+extern void wai(int);
+
 #define  bytes_IO    2048      // n. bytes trasferiti per ciclo
 
-arcflop(mess,bufio)
-S_FLOPPY *mess;
-char *bufio;
+int arcflop(S_FLOPPY *mess, char *bufio)
 {
 short caninp, canout;
 char fsorg[FILENAME_MAX+1], fdest[FILENAME_MAX+1];

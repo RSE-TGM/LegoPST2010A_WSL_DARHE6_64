@@ -32,6 +32,7 @@ static char *_csrc = "@(#) %filespec: allcval.c-9 %  (%full_filespec: allcval.c-
       singolo e congelamento pagina allarmi
 */
 #include <stdio.h>
+#include <string.h>
 
 #include "g2comdb.inc"
 #include "comunic.inc"
@@ -52,7 +53,19 @@ char g_cAbilCalcGer[max_dbsall];
 extern short mbox_abilger;
 #endif
 
-tcval ( )
+// External function declarations
+extern int abzon(short *, short *, short, char *);
+extern int dec(int, int, void *, void *);
+extern void decminiASD(int, int, void *, void *);
+extern int rew(int, int, void *);
+extern void tra(int, int);
+extern void allmute(void);
+extern void rical(void *);
+extern void ricsminiASD(void *);
+extern void allcomp(void *);
+extern void allriv(void *, int);
+
+int tcval ( )
 {
 /*
         definizione messaggio da scodare

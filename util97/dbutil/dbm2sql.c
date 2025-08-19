@@ -2,6 +2,7 @@
 
 /*----------------------------------------------------------------------*/
 #include	<stdio.h>
+#include <stdlib.h>
 #include	<fcntl.h>
 #include	<sys/stat.h>
 #include	<sys/types.h>
@@ -44,7 +45,7 @@ static int callbackSqlite(void *NotUsed, int argc, char **argv, char **azColName
   return 0;
 }
 
-main( argc, argv )
+int main( argc, argv )
 int	argc;
 char**	argv;
 {

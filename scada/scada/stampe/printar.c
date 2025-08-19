@@ -45,13 +45,18 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 extern long  off_f[] ;     /* definiti nel main mpscs */
 extern short nbyte[] ;     /* come sopra */
 
+// Function declarations
+void decnum(char *str, int width, int precision, short value, float fvalue);
+short cunita(short point, char ext);
+int rbyte(int fd, short *buffer, int offset, int count);
+void invia(int printer, void *message);
 float vsoglia();
 static union {
        S_FORAR stam ;		  /* struttura contenente il formato di stampa
 			              			  normale per gli allarmi	*/
 		 }	uar;
 
-printar (nal)
+int printar (nal)
 S_STAR *nal ;
 {
 short ier ;
@@ -79,7 +84,7 @@ uar.stam.eos=0x0D0A ;                  /* fine riga    */
 */
 if(nal->al.m.punt==-1) goto SEND;
 
-   decnum((char*)&uar.stam.blank_1,3,-1,cunita(nal->al.m.punt,nal->al.m.ext));
+   decnum((char*)&uar.stam.blank_1,3,-1,cunita(nal->al.m.punt,nal->al.m.ext),0.0);
    if(nal->flag!=mstar_a) memset((char*)&uar.stam.blank_1,'*',1);
 
 decnum(uar.stam.gior,2,-1,nal->al.giorno,0.) ;					

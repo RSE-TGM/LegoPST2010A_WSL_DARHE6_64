@@ -32,7 +32,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tipal.inc"
 #include "simfile.inc"
 
-simsetcom(com)
+int simsetcom(com)
 S_FDCOM_SIM *com;
 {
 S_MALLA mess;

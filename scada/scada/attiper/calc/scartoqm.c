@@ -48,12 +48,17 @@ static char *_csrc = "@(#) %filespec: scartoqm.c-3 %  (%full_filespec: scartoqm.
 *************************************************************/
 
 #include <stdio.h>
+#include <string.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
 #include "calas.inc"
 
-scartoqm(periodo)
+// External function declarations
+extern void bitset(short *, short, short);
+extern int bitvalue(short *, short);
+
+void scartoqm(periodo)
 int periodo;
 {
 int i;

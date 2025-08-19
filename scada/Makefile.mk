@@ -47,23 +47,22 @@ SQLITE_LIB=-I$(LEGOROOT_LIB)/sqlite_include -L$(LEGOROOT_LIB)/sqlite_lib
 #       %date_created:  Mon May 17 17:48:23 2004 %
 
 all:
-	 cd ./libOSF1/Marte; $(MAKE) -f Makefile.mk
-	 cd ./libOSF1/Net; $(MAKE) -f Makefile.mk
-	 cd ./libOSF1/Xscada; $(MAKE) -f Makefile.mk
-	 cd ./libOSF1/Util; $(MAKE) -f Makefile.mk
-	 cd ./libOSF1/InterPol; $(MAKE) -f Makefile.mk
-	 cd ./libut; $(MAKE) -f Makefile.mk
-	 cd ./UtilPrint; $(MAKE) -f Makefile.mk
-	 cd ./starter; $(MAKE) -f Makefile.mk
-	 cd ./scada/alldbs; $(MAKE) -f Makefile.mk
-	 cd ./scada/simacq; $(MAKE) -f Makefile.mk
+# 	cd ./libOSF1/Marte; $(MAKE) -f Makefile.mk
+# 	cd ./libOSF1/Net; $(MAKE) -f Makefile.mk
+# 	cd ./libOSF1/Xscada; $(MAKE) -f Makefile.mk
+# 	cd ./libOSF1/Util; $(MAKE) -f Makefile.mk
+# 	cd ./libOSF1/InterPol; $(MAKE) -f Makefile.mk
+	cd ./libut; $(MAKE) -f Makefile.mk
+	cd ./UtilPrint; $(MAKE) -f Makefile.mk
+	cd ./starter; $(MAKE) -f Makefile.mk
+	cd ./scada/alldbs; $(MAKE) -f Makefile.mk
+	cd ./scada/simacq; $(MAKE) -f Makefile.mk
 	cd ./scada/attiper/calc; $(MAKE) -f Makefile.mk
 	cd ./scada/gesrep; $(MAKE) -f Makefile.mk
 	cd ./scada/mandbrt; $(MAKE) -f Makefile.mk
 	cd ./scada/stampe/tabul; $(MAKE) -f Makefile.mk
 	cd ./scada/stampe/virt; $(MAKE) -f Makefile.mk
 	cd ./scada/arc; $(MAKE) -f Makefile.mk
-	cd ./scada/gesrep; $(MAKE) -f Makefile.mk
 	cd ./scada/isa; $(MAKE) -f Makefile.mk
 	cd ./scada/acqui; $(MAKE) -f Makefile.mk
 	cd ./scada; $(MAKE) -f Makefile.mk

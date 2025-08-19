@@ -63,7 +63,11 @@ static char *_csrc = "@(#) %filespec: diagnet.c-3 %  (%full_filespec: diagnet.c-
 
 extern short c_digor;
 
-diagnet(pdb,mess,porta)
+// Function declarations for bit manipulation
+int bitvalue(short *buffer, short indice);
+void bitset(short *buffer, short indice, short bit);
+
+int diagnet(pdb,mess,porta)
 short pdb;
 SPO_STATO *mess;
 short *porta;
@@ -86,7 +90,7 @@ if(bitvalue(&dbdd[point],g2di_sl) != mess->stato)     // variazione di stato
    pack.que=c_digor;               
    pack.wto=0;                     
    pack.flg=MSG_WAIT;
-   pack.amsg=&mtra;
+   pack.amsg=(char *)&mtra;
    pack.lmsg=sizeof(S_TRATG);
   	mtra.mess=macdd;  mtra.ext=g1tipdd;
    mtra.indice=point; mtra.stato=mess->stato;

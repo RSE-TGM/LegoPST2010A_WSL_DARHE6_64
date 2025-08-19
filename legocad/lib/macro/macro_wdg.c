@@ -42,9 +42,17 @@ static char SccsID[] = "@(#)macro_wdg.c	2.9\t4/11/95";
 #include <Xm/BulletinB.h>
 #include <Xm/ToggleB.h>
 #include <Xm/MainW.h>
+#include <Xm/ScrolledW.h>
 
 #include "macro.h"
 #include "ico_mesg.h"
+
+/* Function declarations */
+void disegna_macroblocco(int indice);
+void set_something_val(Widget widget, String resource, XtArgVal value);
+void get_something(Widget widget, String resource, void *value);
+void def_cursore(Widget widget, int cursor);
+void undef_cursore(Widget widget);
 
 /* Variabili esterne dichiarate in MACRO.C ... */
 extern Widget top_level, main_window;
@@ -196,8 +204,7 @@ void crea_pagina_indice()
  ***    int indice : indice in macroblocks[]
 crea la label corrispondente del macroblocco nella window pagina indice.
 ( MacroBlockType macroblocks[] e' globale ). */
-disegna_macroblocco(indice)
-int indice;
+void disegna_macroblocco(int indice)
 {
    cstring = CREATE_CSTRING( macroblocks[indice].nome_macro );
 
@@ -233,7 +240,7 @@ int indice;
  ***     indice : indice in macroblocks[];
 definisce le translation per la selezione/deselezione del macroblocco e
 gli event-handler utilizzati per spostare i macroblocchi */
-void def_handler_macro(indice)
+void def_handler_macro(int indice)
 {
    char stringa[100];
 
@@ -245,12 +252,12 @@ void def_handler_macro(indice)
 
 /* gestione dello spostamento dei macroblocchi */
    XtAddEventHandler( macroblocks[indice].wmacro, ButtonPressMask, False,
-			 macro_bpress, indice );
+			 macro_bpress, (XtPointer)(long)indice );
 #ifndef DATI
    XtAddEventHandler( macroblocks[indice].wmacro, ButtonMotionMask, False,
 			 macro_bcont, NULL ); 
    XtAddEventHandler( macroblocks[indice].wmacro, ButtonReleaseMask, False,
-			 macro_brelease, indice );
+			 macro_brelease, (XtPointer)(long)indice );
 #endif
 }
 
@@ -379,7 +386,7 @@ Boolean boh;
                                (void*) &dim_widgets[i].height );
             }
             num_dim_wdg = num_macro_selez;
-            XtFree(indici);
+            XtFree((char*)indici);
             start_rubberband(ev, XtWindow(macro_tavola), dim_widgets,
                              num_dim_wdg, False ); 
             break;
@@ -459,7 +466,7 @@ Boolean boh;
               macroblocks[ ind ].pos_icona.posx = dim_widgets[i].x;
               macroblocks[ ind ].pos_icona.posy = dim_widgets[i].y;
            }
-           XtFree(dim_widgets);
+           XtFree((char*)dim_widgets);
            num_dim_wdg = 0;
 
         /* Resetta il cursore */
@@ -711,8 +718,8 @@ XButtonEvent *event;
    if (event->button == Button3)
    {
       nargs=0;
-      XmMenuPosition(popup_widget,event);
-      XtManageChild (popup_widget);
+      XmMenuPosition(*popup_widget,event);
+      XtManageChild (*popup_widget);
    }
 }
 
@@ -770,17 +777,17 @@ Widget w;
    pulldown = XmCreatePulldownMenu (w,"Pulldown1",NULL,0);
 
    pushbutton = XmCreatePushButton (pulldown,"Load icons",NULL,0);
-   XtAddCallback (pushbutton,XmNactivateCallback,menu_macro,K_LOAD_ICONS);
+   XtAddCallback (pushbutton,XmNactivateCallback,menu_macro,(XtPointer)(long)K_LOAD_ICONS);
    XtManageChild (pushbutton);
 
    pushbutton = XmCreatePushButton (pulldown,"Save",NULL,0);
-   XtAddCallback (pushbutton,XmNactivateCallback,menu_macro,K_SAVE);
+   XtAddCallback (pushbutton,XmNactivateCallback,menu_macro,(XtPointer)(long)K_SAVE);
    XtManageChild (pushbutton);
 
    pushbutton = XmCreatePushButton (pulldown,"Quit",NULL,0);
 /* 2-2-95 Micheletti */
 #ifndef TOPOLOGIA
-   XtAddCallback (pushbutton,XmNactivateCallback,menu_macro,K_QUIT);
+   XtAddCallback (pushbutton,XmNactivateCallback,menu_macro,(XtPointer)(long)K_QUIT);
 #endif
    XtManageChild (pushbutton);
 
@@ -812,7 +819,7 @@ Widget w;
    pulldown = XmCreatePulldownMenu (w,"Pulldown3",NULL,0);
 
    pushbutton = XmCreatePushButton (pulldown,"modify value",NULL,0);
-   XtAddCallback (pushbutton,XmNactivateCallback,menu_macro,K_MODIFY_SNAP);
+   XtAddCallback (pushbutton,XmNactivateCallback,menu_macro,(XtPointer)(long)K_MODIFY_SNAP);
    XtManageChild (pushbutton);
 
    snap_status = True;
@@ -906,7 +913,7 @@ void dialog_modify_snap()
    row_col = XmCreateRowColumn(dbx_modify_snap, "RadioBox", args, nargs );
 
    pushb = XmCreatePushButton (row_col,"Ok", NULL, 0);
-   XtAddCallback(pushb, XmNactivateCallback, ok_proc, DBOX_MODIFY_SNAP);
+   XtAddCallback(pushb, XmNactivateCallback, ok_proc, (XtPointer)(long)DBOX_MODIFY_SNAP);
    XtManageChild(pushb);
 
    pushb = XmCreatePushButton (row_col,"Cancel", NULL, 0);
@@ -1048,7 +1055,7 @@ int parametro;
    XtSetArg(args[nargs],XmNlabelString,CREATE_CSTRING("Ok")); nargs++;
    ok_dbox = XmCreatePushButton (*dbox_window,"Pagina_indice",args,nargs);
    XtManageChild (ok_dbox);
-   XtAddCallback (ok_dbox,XmNactivateCallback,ok_proc,parametro);
+   XtAddCallback (ok_dbox,XmNactivateCallback,ok_proc,(XtPointer)(long)parametro);
 
 /* button 'Cancel' */
    nargs=0;

@@ -82,7 +82,7 @@ extern int create_gost_win_gc();
  *---------------------------------------------*/
 
 
-main(argc,argv)
+int main(argc,argv)
 	int 	argc;
 	char 	*argv[];
 {

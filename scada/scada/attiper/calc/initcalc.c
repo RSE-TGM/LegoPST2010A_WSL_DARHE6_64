@@ -44,9 +44,12 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "calas.inc"
 #include "converti.inc"
 
+// External function declarations
+extern void setpunt(short);
+
 extern DB_HEADER h_db;
 
-initcalc()
+void initcalc()
 {
 short i,j;
 

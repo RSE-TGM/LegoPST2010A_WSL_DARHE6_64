@@ -37,6 +37,22 @@ static char SccsID[] = "@(#)document.c	1.10\t3/31/95";
 #include "autodoc.h"
 #include "unita.h"
 
+int conta_pagine_ind(int, int);
+int descr_modello(char[][81]);
+void FoglioIntest(FILE*, int, int, char[][81], int, char*);
+void StampaIntIndice(FILE*, int*);
+extern int doc_dati_blocco();
+extern int StampaDocModuli();
+int StampaNoteCalcolo(FILE*, NoteDelBlocco*, int, int, int);
+extern int doc_var_blocco();
+extern void leggi_all_var_f14();
+void StampaIntestSteadyState(FILE*, char[][81], int, int*);
+void copy_n_car(char*, char*, int);
+int Empty(char*);
+void StampaBlankLine(FILE*, int*, int);
+int centra(char*, char*, int);
+void riempi(char*, int);
+
 extern ModelBlockStruct *lista_blocchi;
 extern int num_blocchi;
 
@@ -194,8 +210,7 @@ int *pag_document, *pag_index;
  ***       creazione della documentazione relativa ai risultati di piu'
  ***       calcoli dello stazionario.
  ***/
-int crea_sstate_doc(pag_document)
-int *pag_document;
+int crea_sstate_doc(int *pag_document)
 {
    FILE *fp_doc;
    int num_f14, pag_doc, riga_doc, i, j;
@@ -283,11 +298,7 @@ int *pag_document;
  ***       Stampa l'intestazione della tabella relativa ai calcoli dello
  *+*       stazionario riferiti a piu' file f14.dat
  ***/
-StampaIntestSteadyState(fp_doc, intest, num_varianti, riga_doc)
-FILE *fp_doc;
-char intest[][81];
-int num_varianti;
-int *riga_doc;
+void StampaIntestSteadyState(FILE *fp_doc, char intest[][81], int num_varianti, int *riga_doc)
 {
     int i;
     char buff[143], buff2[80];
@@ -349,10 +360,7 @@ char stringhe[][81];
  ***   Descrizione:
  ***      Stampa l'intestazione di un blocco nel file di documentazione
  ***/
-StampaIntBlocco(fp, blocco, riga)
-FILE *fp;
-ModelBlockStruct *blocco;
-int *riga;
+void StampaIntBlocco(FILE *fp, ModelBlockStruct *blocco, int *riga)
 {
    fprintf(fp, "Descrizione componente: %s\n",blocco->descr);
    fprintf(fp, "Sigla componente: %s\n",blocco->nome);
@@ -434,10 +442,7 @@ char *pedice;
  ***    Descrizione:
  ***       Stampa n righe vuote.
  ***/
-StampaBlankLine(fp, riga, num_righe)
-FILE *fp;
-int *riga;
-int num_righe;
+void StampaBlankLine(FILE *fp, int *riga, int num_righe)
 {
    *riga = *riga + num_righe;
    while ( num_righe-- ) fprintf(fp,"\n");
@@ -519,12 +524,7 @@ int left_marg, lung_riga;
  ***  Descrizione:
  ***     stampa la pagina di intestazione documento
  ***/
-FoglioIntest(fp, max_righe, lung_riga, str, n_str, pedice)
-FILE *fp;
-int max_righe, lung_riga;
-char str[][81];
-int n_str;
-char *pedice;
+void FoglioIntest(FILE *fp, int max_righe, int lung_riga, char str[][81], int n_str, char *pedice)
 {
    int riga = 0, i;
    char buff[81];
@@ -586,9 +586,7 @@ char  *stringa;
  ***    Descrizione:
  ***       Stampa l'intestazione nel file indice della documentazione dati
  ***/
-StampaIntIndice(fp, riga)
-FILE *fp;
-int *riga;
+void StampaIntIndice(FILE *fp, int *riga)
 {
    StampaTrattoOrizzontale( fp, 0, MAX_COL_VER );
    StampaStrInTabella(fp, 0, MAX_COL_VER, "Blocco   |Modulo| Pag.  |");
@@ -614,12 +612,7 @@ int *riga;
  ***       dalla struttura DatiBlocco ed aggiorna il file indice della
  ***       documentazione
  ***/
-ScriviIndice(fp, pblock, riga, pagina, max_righe, pag_blocco, strpref)
-FILE *fp;
-ModelBlockStruct *pblock;
-int *riga, *pagina;
-int max_righe, pag_blocco;
-char *strpref;
+void ScriviIndice(FILE *fp, ModelBlockStruct *pblock, int *riga, int *pagina, int max_righe, int pag_blocco, char *strpref)
 {
    char tmp[82];
 
@@ -628,8 +621,7 @@ char *strpref;
    {
        sprintf(tmp, "Pag. %s %d", strpref, (*pagina)++);
        FinePagina(fp, max_righe-(*riga), MAX_COL_VER, tmp);
-       StampaIntIndice(fp);
-       *riga = 3;
+       StampaIntIndice(fp, riga);
    }
 
    sprintf(tmp, "%8.8s | %4.4s | %-5d | %52.52s",
@@ -650,9 +642,7 @@ char *strpref;
  ***       Copia in dest la stringa sorg centrata rispetto alla lunghezza
  ***       della riga
  ***/
-centra(dest,sorg,lung_riga)
-char *sorg,*dest;
-int lung_riga;
+int centra(char *dest, char *sorg, int lung_riga)
 {
     riempi(dest,(int) (lung_riga-strlen(sorg))/2);
     strcat(dest,sorg);
@@ -668,10 +658,7 @@ int lung_riga;
  ***       controlla se nel buffer ' buf' e' contenuta la stringa 'str'
  ***       ritorna -1 se non e' stata trovata
  ***/
-cerca_str(buf,n,str)
-char buf[];
-int n;
-char str[];
+int cerca_str(char buf[], int n, char str[])
 {
    int i, j, lung_str;
 
@@ -701,11 +688,7 @@ char str[];
  ***       funzione per la stampa dei testi delle note sul file di
  ***       documentazione
  ***/
-int StampaNoteCalcolo(fp_doc, note_blocchi, num_blocchi, lung_riga, max_righe)
-FILE *fp_doc;
-NoteDelBlocco *note_blocchi;
-int num_blocchi;
-int lung_riga, max_righe;
+int StampaNoteCalcolo(FILE *fp_doc, NoteDelBlocco *note_blocchi, int num_blocchi, int lung_riga, int max_righe)
 {
    char *str, buffer[90], appendice[80], intest[2][81];
    HeaderNote *ptr;
@@ -922,7 +905,7 @@ long offs_doc;
 	if (fseek(fp, offs_doc-i, SEEK_SET) == -1)
 	   return(-1);
 
-	if ((c = fgetc(fp)) == NULL)
+	if ((c = fgetc(fp)) == EOF)
 	    return(-1);
 	else
 	    if ( c == '\n' )

@@ -30,7 +30,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tipal.inc"
 #include "mesqueue.h"
 
-cunita(point,ext)
+int cunita(point,ext)
 short point;
 char ext;
 {

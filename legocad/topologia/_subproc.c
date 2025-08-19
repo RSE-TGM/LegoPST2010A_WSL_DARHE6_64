@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 /**********************************************************************
 *
 *       C Source:               _subproc.c
@@ -166,6 +167,12 @@ struct msgbuf
 
 #include <X11/Intrinsic.h>
 #include <X11/X.h>
+#include <Xm/Text.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
 
 #include "UxSubproc.h"
 #include "uimx_cat.h"
@@ -363,12 +370,12 @@ extern  void    UxFree();
  sistemazione provvisoria
 ****/
 
-UxInternalError()
+int UxInternalError()
 {
 printf(" Errore Interno \n");
 }
 
-UxStandardError(char * tipo, char * stringa)
+int UxStandardError(char * tipo, char * stringa)
 {
 printf("Errore standard: %s\n", stringa);
 }
@@ -406,12 +413,12 @@ void    UxTextAppend(w,str)
 
 
 #include <nl_types.h>
-static nl_catd  catd = -1;
+static nl_catd  catd = (nl_catd)-1;
 
 int UxCatOpen()
 {
         catd = catopen(CAT_FILE, 0);
-        return (catd);
+        return (int)(intptr_t)catd;
 }
 
 
@@ -422,7 +429,7 @@ char    *default_str;
 {
     char *result;
 
-    if (catd == -1)
+    if (catd == (nl_catd)-1)
         return(default_str);
     result = catgets(catd, set_num, msg_num, default_str);
     if ( *result == '\0' )
@@ -589,7 +596,7 @@ handle index;
 	if(sp_array[index]->defarg)
 		UxFree(sp_array[index]->defarg);
 
-	UxFree(sp_array[index]);
+	UxFree((char*)sp_array[index]);
 	sp_array[index] = NULL;
 
 	return NO_ERROR;
@@ -671,7 +678,7 @@ handle UxCreateSubproc(process, defarg, fnt)
 	return(index);
 }
 
-UxSetSubprocEcho(sp_h, echo)
+int UxSetSubprocEcho(sp_h, echo)
 	handle		sp_h;
 	int		echo;
 {
@@ -714,8 +721,8 @@ char *msg2;
 	    (void) strcat(buffer, ": ");
 	}
     }
-    if(error > 0 && error < sys_nerr) {
-	(void) strcat(buffer, sys_errlist[errno]);
+    if(error > 0) {
+	(void) strcat(buffer, strerror(errno));
 	(void) strcat(buffer, "\n");
     } else {
 	(void) strcat(buffer, CGETS( MS_MISC_SYS_ERR, DS_MS_MISC_SYS_ERR));
@@ -2547,11 +2554,11 @@ int 	UxRunSubproc(sp_vh, cmd_line)
 #endif
 
 #ifdef _STREAM_DRIVER
-	sp->input_id= XtAppAddInput(UxAppContext, sp->stream, XtInputReadMask,
+	sp->input_id= XtAppAddInput(UxAppContext, sp->stream, (XtPointer)XtInputReadMask,
 				       output_handler, sp);
 	/* It is necessary to handle exceptions due to a bug in select(2) */
 	sp->except_id= XtAppAddInput(UxAppContext, sp->stream, 
-				XtInputExceptMask, exception_handler, sp);
+				(XtPointer)XtInputExceptMask, exception_handler, sp);
 #endif
 
 	return(NO_ERROR);

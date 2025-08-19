@@ -60,12 +60,21 @@ static char *_csrc = "@(#) %filespec: attiper.c-4 %  (%full_filespec: attiper.c-
 
 #define T_HTEST   15
 
+/* Function prototypes */
+extern void wai(int);
+extern void calc(void);
+extern void timeor(short, short);
+extern void calcor(short);
+extern void calcdi(short);
+extern int bitvalue(short *, short);
+extern void ter(void);
+
 extern DB_HEADER h_db;
 short count_calc=-1;
 short minuto;
 
 
-attiper()
+void attiper()
 {
 short i;
 QUEUE_PACKET packs;

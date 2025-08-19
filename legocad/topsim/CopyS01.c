@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <X11/Shell.h>
 #include <Xm/MenuShell.h>
@@ -15,6 +16,7 @@
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
+
 
 /*
    modulo CopyS01.i
@@ -35,6 +37,7 @@
 
 extern SIMULATORE *simulatore;
 
+static void copy_from(char *from);
 /*******************************************************************************
 	The definition of the context structure:
 	If you create multiple instances of your interface, the context
@@ -63,12 +66,14 @@ static _UxCCopyS01	*UxCopyS01Context;
 *******************************************************************************/
 
 Widget	create_CopyS01();
+extern int set_wait_cursor();
 
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-copy_from(char *from)
+
+void copy_from(char *from)
 {
     extern int set_wait_cursior(),set_normal_cursor();
     char comando[512];

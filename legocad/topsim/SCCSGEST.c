@@ -5,6 +5,9 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -92,6 +95,9 @@ static _UxCSCCSGEST	*UxSCCSGESTContext;
 *******************************************************************************/
 
 Widget	create_SCCSGEST();
+
+/* Function declarations */
+char *extract_string(XmString item);
 
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:

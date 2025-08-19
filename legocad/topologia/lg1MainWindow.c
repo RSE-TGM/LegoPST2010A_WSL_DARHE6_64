@@ -5,10 +5,34 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <stdint.h>
 #include <Xm/Xm.h>
 #include <X11/Shell.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
+
+/* Function prototypes for missing functions */
+int sensitive(Widget, int);
+int set_pixmap_cursor(Widget, const char*);
+int undef_cursore(Widget);
+int questionDB_activate(const char*);
+int messageDB_activate(const char*);
+void selModelActivate();
+int Idel_graph_bloc();
+int del_blocchi(int, int*);
+int set_bloc(Widget, void*);
+int libera_filtri(void*, int);
+int Iadd_new_block_graf(int);
+int tominus(char*);
+char* trim_blank(char*);
+int selgraf_blocco(char*, int);
+int lancia_macro(Widget, Widget);
+int Iset_graf_new_blname(char*, char*);
+int lcDestroySwidget(Widget);
+int lcCreateWidget(Widget);
+void errore(const char*, ...);
 
 #include <Xm/Text.h>
 #include <Xm/List.h>
@@ -120,7 +144,7 @@ static void	_Uxlg1MainWindowMenuPost( wgt, client_data, event, ctd )
 
 	if ( event->xbutton.button == which_button )
 	{
-		XmMenuPosition( menu, event );
+		XmMenuPosition( menu, (XButtonPressedEvent*)event );
 		XtManageChild( menu );
 	}
 }
@@ -261,14 +285,14 @@ Widget	create_lg1MainWindow();
 *******************************************************************************/
 
 /* 
- * set_bl_list()
+ * int set_bl_list()
  *
  * Scrive nella lista dei blocchi visualizzata dalla main window
  * le descrizioni dei blocchi contenuti in memoria nella variabile 'blocchi'.
  */
 extern ERR_LEVEL err_level;
 
-set_bl_list()
+int set_bl_list()
 {
 
    extern swidget blListSL;
@@ -291,7 +315,7 @@ set_bl_list()
       XtSetArg(arg[0], XmNitems, NULL);
       XtSetArg(arg[1], XmNitemCount, 0);   
       XtSetValues(UxGetWidget(blListSL), arg, 2);
-      return;
+      return 0;
    } 
 
 
@@ -326,7 +350,7 @@ set_bl_list()
       XmStringFree(lista[i]); 
 //      XtFree(lista[i]); 
 
-   XtFree( lista );
+   XtFree( (char*)lista );
 
 
 }
@@ -335,11 +359,11 @@ set_bl_list()
 
 
 /*
- * set_model_name()
+ * int set_model_name()
  *
  * Scrive il nome del modello nel widget 'modNAmeLb'.
  */
-set_model_name()
+int set_model_name()
 {
   extern swidget   modNameLb;
   extern char      *str_toupper();
@@ -367,7 +391,7 @@ set_model_name()
  *
  * Appende un messaggio nel widget 'messageSt'.
  */
-write_message( mess )
+int write_message( mess )
 char *mess;
 {
   char   *str, *new_str;
@@ -410,7 +434,7 @@ char *mess;
  * Settaggio dei menu puldown e del menu popup della main window.
  * Si setta l'attributo sensitive dei vari bottoni e lo stato dei toggle button.
  */
-main_menu_setup()
+int main_menu_setup()
 {
 
    /*
@@ -450,7 +474,7 @@ main_menu_setup()
 }
 
 
-desel_open_but()
+int desel_open_but()
 {
    sensitive(openBt,False);
 }
@@ -460,7 +484,7 @@ desel_open_but()
  *
  * Setta l'attributo 'sensitive' di un bottone.
  */
-sensitive( swid, val )
+int sensitive( swid, val )
 swidget swid;
 int     val;
 {
@@ -482,7 +506,7 @@ int     val;
  *
  * Setta il cursore per la main window e per le interfacce 'varWin' attive.
  */
-set_win_cursors( cursor )
+int set_win_cursors( cursor )
 char *cursor;
 {
    VAR_WIN_TYPE *cur;
@@ -504,7 +528,7 @@ char *cursor;
  * Ristabilisce il cursore di sistema per la main window e le window delle
  * interfacce 'varWin' attive.
  */
-reset_win_cursors()
+int reset_win_cursors()
 {
    VAR_WIN_TYPE *cur;
 
@@ -526,7 +550,7 @@ reset_win_cursors()
  * Essa attiva l'interfaccia 'questionDB' per chiedere conferma della 
  * cancellazione.
  */
-bl_del_cb()
+int bl_del_cb()
 {
    extern QUESTION question;
    char str[1024];
@@ -564,7 +588,7 @@ bl_del_cb()
  * La funzione viene attivata quando si conferma la cancellazione di un insieme 
  * di blocchi.
  */
-bl_del_qst_cb()
+int bl_del_qst_cb()
 {
   extern int changes_in_F01;
 
@@ -591,7 +615,7 @@ bl_del_qst_cb()
   if(bl_selezionati.num)
      del_blocchi ( bl_selezionati.num, bl_selezionati.pos );
   else
-     return;
+     return 0;
 
   /*printf("test step 2 bl_del_qst_cb\n");*/
 
@@ -632,7 +656,7 @@ bl_del_qst_cb()
    * con il nuovo valore calcolato del campo 'bloc'
    */
   for ( cor=var_win_list; cor; cor=cor->succ )
-     set_bloc( cor->swid, cor->bloc );
+     set_bloc( cor->swid, (void*)(intptr_t)cor->bloc );
 
 
   /*
@@ -664,7 +688,7 @@ bl_del_qst_cb()
  * Esa attiva l'interfaccia 'varWin' per il blocco selezionato ed inserisce
  * un elemento corrispondente nella lista 'var_win_list'.
  */
-bl_var_cb()
+int bl_var_cb()
 {
    extern swidget create_varWin();
    swidget swid;
@@ -688,7 +712,7 @@ bl_var_cb()
    {
       XRaiseWindow( XtDisplay(UxGetWidget(cor->swid)),
                     XtWindow(XtParent(UxGetWidget(cor->swid))) );
-      return;
+      return 0;
    }
 
 
@@ -723,7 +747,7 @@ void routine_vuota()
 }
 
 
-do_dialogo()
+int do_dialogo()
 {
 
 
@@ -740,7 +764,7 @@ do_dialogo()
    {
       printf("Can't start subprocess\n");
       err_level = ERROR;
-      errore("Can't start subprocess");
+      printf("ERROR: Can't start subprocess\n");
       return(1);
    }
 
@@ -750,7 +774,7 @@ do_dialogo()
    {
       printf("Can't set subproc closure \n");
       err_level = ERROR;
-      errore("Can't set subproc closure");
+      printf("ERROR: Can't set subproc closure\n");
       return(1);
    }
 
@@ -759,14 +783,14 @@ do_dialogo()
    {
       printf("Can't set exit callback \n");
       err_level = ERROR;
-      errore("Can't set subproc closure");
+      printf("ERROR: Can't set subproc closure\n");
       return(1);
    }
    if(-1 == UxRunSubproc(id_subproc,str_num_modulo))
    {
       printf("\n Can't start the application\n");
       err_level = ERROR;
-      errore("Can't set subproc closure");
+      printf("ERROR: Can't set subproc closure\n");
       return(1);
    }
    UxPopupInterface(instantiationDlg,no_grab);
@@ -779,7 +803,7 @@ do_dialogo()
 
 
 
-del_block_from_list()
+int del_block_from_list()
 {
   extern int changes_in_F01;
 
@@ -827,7 +851,7 @@ del_block_from_list()
    * con il nuovo valore calcolato del campo 'bloc'
    */
   for ( cor=var_win_list; cor; cor=cor->succ )
-     set_bloc( cor->swid, cor->bloc );
+     set_bloc( cor->swid, (void*)(intptr_t)cor->bloc );
 
 
 /*
@@ -852,7 +876,7 @@ del_block_from_list()
  * di un blocco.
  */
 
-bl_edit_cb()
+int bl_edit_cb()
 {
    extern swidget EditDescrDialog1; 
    extern swidget BlocName;
@@ -958,7 +982,8 @@ void add_item(char *buff,int pos)
    *item = (XmString)XmStringCreateSimple( buff );
 
    XmListAddItem(UxGetWidget(blListSL),*item,pos);  
-   XmStringFree(item);
+   XmStringFree(*item);
+   XtFree((char*)item);
 }
 
 
@@ -980,7 +1005,7 @@ int DefFilterCB(Widget w,int ind_filtro, XmAnyCallbackStruct *call_data)
 
 void add_filter_button()
 {
-   extern num_filtri;
+   extern int num_filtri;
    extern FILTRI *filtri[];
    int i,j;
    char label_button[20];
@@ -1008,7 +1033,7 @@ printf("DEBUG add_filter_button: button_already_defined=%d num_filtri=%d\n",butt
       UxCreateWidget(DefFilterButt[i]);
 
 /* e definisco la callback */
-      UxAddCallback(DefFilterButt[i],XmNactivateCallback,DefFilterCB,i);
+      UxAddCallback(DefFilterButt[i],XmNactivateCallback,(XtCallbackProc)DefFilterCB,(XtPointer)(intptr_t)i);
    }
    button_already_defined = True;
 }  
@@ -1028,7 +1053,7 @@ void elimina_filter_button()
    }
 }
 
-def_filtri()
+int def_filtri()
 {
    extern int inizializza_filtri();
   
@@ -1220,7 +1245,7 @@ static void	activateCB_DefineFilter( UxWidget, UxClientData, UxCallbackArg )
 	  strcat(nome,"/filtri");
 	
 #ifndef DESIGN_TIME
-	   signal(SIGCHLD,def_filtri);
+	   signal(SIGCHLD,(void(*)(int))def_filtri);
 	   if(!vfork())
 	      execlp(nome,nome,(char *)0);
 #endif
@@ -1452,7 +1477,7 @@ static void	extendedSelectionCB_blListSL( UxWidget, UxClientData, UxCallbackArg 
 	 * della selezione.
 	 */
 	
-	main_menu_setup();
+	int main_menu_setup();
 	
 	}
 	UxLg1MainWindowContext = UxSaveCtx;
@@ -2227,7 +2252,7 @@ static Widget	_Ux_create_lg1MainWindow()
 		 * Viene settato l'attributo sensitive dei vari bottoni e lo stato
 		 * dei toggle button.
 		 */
-		main_menu_setup();
+		int main_menu_setup();
 		
 		/* se e' attiva la grafica verifico la congruenza tra macroblocks.dat e f01.dat */
 		if(graphics_on)

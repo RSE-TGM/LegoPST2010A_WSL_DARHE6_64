@@ -35,6 +35,9 @@
 
 #include "legomain.h"
 
+/* Missing function declarations */
+extern void copy_file(char *, char *);
+
 /*******************************************************************************
 	The definition of the context structure:
 	If you create multiple instances of your interface, the context

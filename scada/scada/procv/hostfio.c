@@ -29,8 +29,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 #include	"mesqueue.h"
 
+/* Function prototypes */
+extern int rbyte(int, char *, long, int);
+extern void wbyte(int, char *, long, int);
 
-hostfio(bric)
+void hostfio(bric)
 	BRICFIO *bric;
 	{
 	FILE *fp;

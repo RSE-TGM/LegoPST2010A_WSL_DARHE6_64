@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <ctype.h>
 #include <Xm/Xm.h>
 #include <Xm/DialogS.h>
 #include <Xm/MenuShell.h>
@@ -450,7 +451,7 @@ static void	activateCB_nnF_aroVars( UxWidget, UxClientData, UxCallbackArg )
 	         XmStringFree( xs);
 	      }
 	      set_something_val( nnF_slistVars,
-	       XmNvisibleItemCount, (XtArgVal) ? cSelVars : 1);
+	       XmNvisibleItemCount, (XtArgVal)(cSelVars ? cSelVars : 1));
 	   }
 	   mostra_selVars();
 	}
@@ -753,10 +754,10 @@ static Widget	_Uxbuild_nnFilter()
 			(XtPointer) UxNnFilterContext );
 
 	XtAddCallback( nnFilter, XmNunmapCallback,
-			nnFcancelCB,
+			(XtCallbackProc)nnFcancelCB,
 			(XtPointer) UxNnFilterContext );
 	XtAddCallback( nnFilter, XmNhelpCallback,
-			nnFhelpCB,
+			(XtCallbackProc)nnFhelpCB,
 			(XtPointer) UxNnFilterContext );
 
 	XtAddCallback( nnF_slistMod, XmNmultipleSelectionCallback,
@@ -768,7 +769,7 @@ static Widget	_Uxbuild_nnFilter()
 			(XtPointer) UxNnFilterContext );
 
 	XtAddCallback( nnF_slistBloc, XmNmultipleSelectionCallback,
-			nnFslistBlocSelelectionCB,
+			(XtCallbackProc)nnFslistBlocSelelectionCB,
 			(XtPointer) UxNnFilterContext );
 
 	XtAddCallback( nnF_aroVars, XmNactivateCallback,
@@ -784,11 +785,11 @@ static Widget	_Uxbuild_nnFilter()
 			(XtPointer) UxNnFilterContext );
 
 	XtAddCallback( nnF_pbCancel, XmNactivateCallback,
-			nnFcancelCB,
+			(XtCallbackProc)nnFcancelCB,
 			(XtPointer) UxNnFilterContext );
 
 	XtAddCallback( nnF_pbHelp, XmNactivateCallback,
-			nnFhelpCB,
+			(XtCallbackProc)nnFhelpCB,
 			(XtPointer) UxNnFilterContext );
 
 

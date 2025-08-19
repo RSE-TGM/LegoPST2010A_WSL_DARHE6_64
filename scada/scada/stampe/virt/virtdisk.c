@@ -40,6 +40,7 @@ static char *_csrc = "@(#) %filespec: virtdisk.c-3 %  (%full_filespec: virtdisk.
 #include <osf1.h>
 #include <dos.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "print.inc"
 #include "virtinv.h"
@@ -47,7 +48,12 @@ static char *_csrc = "@(#) %filespec: virtdisk.c-3 %  (%full_filespec: virtdisk.
 #include "g2comdb.inc"
 #include "diagnoan.inc"
 
-stdisk(char* stringa, short lung, short flag)
+// External function declarations
+extern void bitset(short *, short, short);
+extern void virttlbg(int);
+extern int wbyte(int, short *, long, int);
+
+void stdisk(char* stringa, short lung, short flag)
 {
 short ier;
 S_PVIRT *pVirt;

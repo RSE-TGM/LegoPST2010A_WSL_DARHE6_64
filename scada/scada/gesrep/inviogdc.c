@@ -53,8 +53,19 @@ extern struct dati_507
 
 GDC_RPL  BRx;           //   buffer utilizzato per ricezione messaggi da GDC
 
+#include <string.h>
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
+
+// External function declarations
+extern void RepSend(int, int, char *);
+extern void _disable(void);
+extern void _enable(void);
+extern int suw(int);
+extern void GdcDia(short);
+
+// Forward declarations for functions in this file
+extern int CodStatGdc(char *);
 
 short InvioGdc(char* mess)
 {
@@ -102,7 +113,7 @@ short InvioGdc(char* mess)
       inizializza le aree di comunicazione per routine di risposta
       ad interrupt
 */
-IniGdc()
+void IniGdc()
 {
    struct_507D.RxBuff=(char*) &BRx;
    struct_507D.nMaxRx=max_BRx;
@@ -119,7 +130,7 @@ IniGdc()
    Ritorno
       int o short contenente la codifica dello stato
 */
-InterpGdc(char ** pcampi)
+int InterpGdc(char ** pcampi)
 {
    char* pbyte, *ptoken;
    short i;
@@ -163,7 +174,7 @@ InterpGdc(char ** pcampi)
       valore intero tradotto
 
 */
-CodStatGdc(char * dato)
+int CodStatGdc(char * dato)
 {
    if(*dato > 0x40)
       return((*dato)-0x37);     // lettera A, B...F

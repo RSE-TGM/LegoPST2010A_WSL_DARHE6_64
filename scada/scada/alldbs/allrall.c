@@ -67,7 +67,13 @@ static char *_csrc = "@(#) %filespec: allrall.c-3 %  (%full_filespec: allrall.c-
 extern short mbox_scgev;
 #endif
 
-rall (codice,operazione,numvideo)
+// External function declarations
+extern int abzon(short *, short *, short, char *);
+extern int ricsi(short, void *);
+extern int rew(int, int, int*);
+extern int tra(int, int);
+
+int rall (codice,operazione,numvideo)
 short codice,operazione,numvideo;
 {
 S_DBS_ALV *alv;

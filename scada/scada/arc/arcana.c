@@ -40,15 +40,16 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "arc.inc"
 
+// External function declarations
+extern void pscserr(int, int, int, int, int);
+
 /*
    definizione maschere per raccolta flag analogici
 */
 #define  mask_al (mask_ahs + mask_als + mask_ahc + mask_alc)			// maschera flag di allarme
 #define mask_fl (mask_afs + mask_afz + mask_afa) 			            // maschera flag di FA, FS,FZ
 
-arcana(point,dbs)
-PUNTDBS *point;
-DATDBS *dbs;
+void arcana(PUNTDBS *point, DATDBS *dbs)
 {
 float valore;
 short flag;

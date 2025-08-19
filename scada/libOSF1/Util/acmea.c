@@ -34,7 +34,11 @@ static char *_csrc = "@(#) %filespec: acmea.c-4 %  (%full_filespec: acmea.c-4:cs
 #include <memory.h>
 #include <string.h>
 
-acmea(coda,buff,lung)
+/* Function declarations for scheduler control */
+void scd();
+void sce();
+
+int acmea(coda,buff,lung)
 char *buff      ;
 int   coda ;
 int   lung ;

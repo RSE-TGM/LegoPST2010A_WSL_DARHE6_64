@@ -77,10 +77,17 @@ static char *_csrc = "@(#) %filespec: alldecminiASD.c-4 %  (%full_filespec: alld
 #include "diagnodi.inc"
 #include "tipal.inc"
 
+// External function declarations
+extern int rew(int, int, int*);
+extern int tra(int, int);
+extern int allinger(void *, void *, void *);
+extern int GetAlarmValue(short);
+extern int allcod(short, void *, void *);
+
 S_VDEAL   dec_mess;
 extern S_ALL_PER_ZONE allxzone;
 
-decminiASD (flag,off,ald,alv)
+int decminiASD (flag,off,ald,alv)
 short flag,off;
 S_DBS_ALV *alv;
 S_DBS_ALL *ald;
@@ -94,7 +101,7 @@ char desc[rec_fdda] ;  			/* buffer per leggere dai file descrittori */
 short trat,ind_colore;
 S_DBS_ALL *ali;
 int kk;               
-char *appo;
+int appo;
 
 #define l_header (sizeof(S_VDEAL)-16*sizeof(S_STRALL))
 

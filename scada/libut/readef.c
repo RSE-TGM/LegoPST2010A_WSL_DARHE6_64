@@ -28,7 +28,7 @@ static char *_csrc = "@(#) %filespec: readef.c-5 %  (%full_filespec: readef.c-5:
 #include "dconf.inc"
 
 #if !defined OSF1 && !defined LINUX
-readef()
+int readef()
  {
  FILE *fp;
  fp=fopen("conf.cfg","r+");
@@ -45,8 +45,12 @@ fclose(fp);
 }
 #else
 #include <string.h>
+#include <stdlib.h>
+
+extern int IsComment(char *);
+
 #define lcBuffer 256
-readef()
+int readef()
 {
 FILE *fp;
 char cBuffer[lcBuffer];

@@ -35,6 +35,7 @@ static char SccsID[] = "@(#)fpp.c	1.15\t11/13/95";
  */
 
 #include <stdio.h>
+#include <string.h>
 
 #include "fpp.h"
 

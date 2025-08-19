@@ -47,7 +47,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "comunic.inc"
 #include "messcada.inc"
 
-calcau(point)
+/* Function prototypes */
+extern void bitset(short *, short, short);
+extern int bitvalue(short *, short);
+
+void calcau(point)
 short point;
 {
 short i;
@@ -95,6 +99,5 @@ if(val_au != bitvalue(&dbds[point],g2di_au))
    mess.mess=maudi; 
    enqueue(&pack);        
 }
-return(0);
 }	
 	

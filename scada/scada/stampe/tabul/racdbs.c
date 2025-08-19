@@ -26,13 +26,12 @@ static char *_csrc = "@(#) %filespec: racdbs.c-4 %  (%full_filespec: racdbs.c-4:
  *	   in DBL.
  */
 #include <osf1.h>
+#include <string.h>
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
 #include "fileop.inc"
 
-racdbs(hdat,dbl)
-HEAD_DATAB *hdat;
-char *dbl;
+void racdbs(HEAD_DATAB *hdat, char *dbl)
 {
 short i;
 struct punto { short ext;   // estensione punto di data base di sistema.				  

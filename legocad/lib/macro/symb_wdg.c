@@ -158,7 +158,7 @@ void carica_simboli()
 
            pixm_info = &pixmap_symbol.pixmap_info[i];
            crea_icona( tavola_simboli, pixm_info, "", xx, yy, FROM_ADD_BLOCK,
-		       NULL, 0 );
+		       0, 0 );
 
            xx += pixm_info->width + 20;
 

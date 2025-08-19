@@ -36,7 +36,11 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */ 
 
 #include  "g2comdb.inc"
-allsev (ptdbsad,numalls,livsev)
+
+// External function declarations
+extern void bitset(short* buffer, short indice, short bit);
+
+int allsev (ptdbsad,numalls,livsev)
 
 short *ptdbsad;   // puntatore in dbs an. diag. per flag coontatori allarmi   
 short numalls ;   // num degli allarmi pendenti per quel livello di sev.  

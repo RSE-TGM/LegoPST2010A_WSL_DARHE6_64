@@ -810,7 +810,7 @@ static Widget	_Ux_create_ashell_print( _Uxtipo_doc )
 		              }
 		
 		        if (genera)
-		           crea_sstate_doc((int)&max_page_doc);
+		           crea_sstate_doc(&max_page_doc);
 		        else
 		           max_page_doc = conta_pagine_doc(DOC_SSTATE_MODELLO, num_lines_horiz);
 		

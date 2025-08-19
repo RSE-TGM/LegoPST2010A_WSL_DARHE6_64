@@ -31,6 +31,7 @@ static char SccsID[] = "@(#)files.c	1.3\t3/28/95";
 #include <Xm/Xm.h>
 
 #include <file_icone.h>
+#include <utile.h>
 
 #include "iconvert.h"
 #include "files.h"
@@ -39,12 +40,19 @@ extern Widget warning_widget;
 extern char *error_mesg[];
 extern char nome_modello[];
 
+/* Forward declarations */
+int leggi_file_macro(FILE *fp, MacroBlockType mblock[], Boolean flag);
+int leggi_blocchi(FILE *fp, MacroBlockType mblock[], int k);
+void salva_blocco(FILE *fp, BlockType *block);
+void salva_linea(FILE *fp, GLine *line);
+int cerca_macro_nel_file(FILE *fp, char *nome_macro);
+
 /*** leggi_macroblocchi( mblocks, num_mblocks )
  *** Parametri:
  ***    MacroBlockType *mblocks : struttura dei macroblocchi da aggiornare
  ***    int *num_mblocks : numero di macroblocchi letti
 legge i macroblocchi nel file macroblocks.dat */
-leggi_macroblocchi( mblocks, num_mblocks, macro_allocate )
+void leggi_macroblocchi( mblocks, num_mblocks, macro_allocate )
 MacroBlockType mblocks[];
 int *num_mblocks, *macro_allocate;
 {
@@ -62,7 +70,7 @@ int *num_mblocks, *macro_allocate;
          fprintf(fp, "%s\n", nome_modello);
          fprintf(fp, "****\n");
          fclose(fp);
-         return(1);
+         return;
       }
 
    stato = True;
@@ -79,7 +87,7 @@ int *num_mblocks, *macro_allocate;
       (*num_mblocks)++;
    }
    fclose(fp);
-   return(0);
+   return;
 }
 
 /*** salva_macroblocchi( mblocks, num_mblocks )
@@ -87,7 +95,7 @@ int *num_mblocks, *macro_allocate;
  ***    MacroBlockType *mblocks : struttura dei macroblocchi da salvare
  ***    int num_mblocks : numero di macroblocchi letti
 salva i macroblocchi nel file macroblocks.dat */
-salva_macroblocchi( mblocks, num_mblocks )
+void salva_macroblocchi( mblocks, num_mblocks )
 MacroBlockType mblocks[];
 int *num_mblocks;
 {
@@ -98,7 +106,7 @@ int *num_mblocks;
 
 /* apertura file macroblocks.dat */
    if (( fp = fopen( FILE_MACROBLOCKS, "w")) == NULL )
-      return(1);
+      return;
 
 /* nome modello e descrizione */
    fprintf(fp, "****\n");
@@ -136,14 +144,14 @@ int *num_mblocks;
           mblocks[i].cancellato = -1;  /* macro cancellato anche nel file */
           if (mblocks[i].blocks != NULL)
 	  {
-             XtFree(mblocks[i].blocks);
+             XtFree((char *)mblocks[i].blocks);
 	     mblocks[i].blocks = NULL;
 	  }
        }
    }
 
    fclose(fp);
-   return(0);
+   return;
 }
 
 /*** leggi_file_macro( fp, mblock, flag )
@@ -153,7 +161,7 @@ int *num_mblocks;
  ***  Boolean flag : indica se bisogna leggere il file dall'inizio.
 legge la prima macro e ,ad ogni chiamata , le successive che incontra nel
 file  macroblocks.dat. restituisce 0 se trovato , altrimenti restituisce -1 */
-leggi_file_macro( fp, mblock, flag )
+int leggi_file_macro( fp, mblock, flag )
 FILE *fp;
 MacroBlockType mblock[];
 Boolean flag;
@@ -216,7 +224,7 @@ Boolean flag;
  *** char *nome_macro : nome del macroblocco da cercare.
 cerca una macro in macroblocks. restituisce 0 se trovato , altrimenti
 restituisce -1 */
-cerca_macroblocco( macroblocks, num_macro, nome_macro )
+int cerca_macroblocco( macroblocks, num_macro, nome_macro )
 MacroBlockType macroblocks[];
 int num_macro;
 char *nome_macro;
@@ -236,7 +244,7 @@ char *nome_macro;
  ***     MacroBlockType *mblock : struttura macroblocco da aggiornare
 legge il file macroblocks.dat ed aggiorna la struttura MacroBlockType del
 relativo macroblocco */
-carica_blocchi_macro( mblock, k )
+int carica_blocchi_macro( mblock, k )
 MacroBlockType mblock[];
 int k;
 {
@@ -246,13 +254,14 @@ int k;
    mblock[k].num_blocchi_selez = 0;
 
    if (( fp = fopen( FILE_MACROBLOCKS, "r")) == NULL )
-      return(1);
+      return(-1);
 
    if (cerca_macro_nel_file(fp, mblock[k].nome_macro) == -1)
       return(-1);
 
-   leggi_blocchi( mblock, k );
+   leggi_blocchi( fp, mblock, k );
    fclose( fp );
+   return(0);
 }
 
 /*** cerca_macro_nel_file(fp, nome_macro)
@@ -261,7 +270,7 @@ int k;
  *** char *nome_macro : nome del macroblocco da cercare
 cerca un macroblocco nel file. Restituisce 0 se trovato, -1 altrimenti.
 Il File pointer viene posizionato sul record del macroblocco. */
-cerca_macro_nel_file(fp, nome_macro)
+int cerca_macro_nel_file(fp, nome_macro)
 FILE *fp;
 char *nome_macro;
 {
@@ -286,7 +295,7 @@ char *nome_macro;
 recupera i blocchi dal file macroblocks.dat ed aggiorna la struttura
 macroblocco. Il file pointer deve essere posizionato sul nome del
 macroblocco */
-leggi_blocchi( fp, mblock, k )
+int leggi_blocchi( fp, mblock, k )
 FILE *fp;
 MacroBlockType mblock[];
 int k;
@@ -422,7 +431,7 @@ int k;
  ***    FILE *fp;
  ***    BlockType *block : blocco da salvare nel file 
 salva un blocco nel file puntato da fp nella posizione corrente */
-salva_blocco( fp, block )
+void salva_blocco( fp, block )
 FILE *fp;
 BlockType *block;
 {
@@ -464,7 +473,7 @@ BlockType *block;
  *** Parametri :
  ***    FILE *fp: file pointer.
  ***    GLine *line : gruppo di linee da salvare. */
-salva_linea(fp, line)
+void salva_linea(fp, line)
 FILE *fp;
 GLine *line;
 {

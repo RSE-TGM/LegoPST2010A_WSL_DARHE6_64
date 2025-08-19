@@ -55,6 +55,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "allar.inc"
 #include "video.inc"
 
+// External function declarations
+extern void bitset(short *, short, short);
+extern void virttlbg(short);
+
 struct  sel_zon {
 								short arg1;
 							   short funz;
@@ -64,8 +68,7 @@ struct  sel_zon {
 								short nfile;
 							} ;
 			
-virtsel(mess)
-struct sel_zon *mess;
+void virtsel(struct sel_zon *mess)
 {
    short i;
    switch (mess->funz)

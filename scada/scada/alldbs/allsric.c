@@ -57,11 +57,16 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 */
 
+#include <string.h>
 #include "g2comdb.inc"
 #include "comunic.inc"
 #include "messcada.inc"
 #include "allar.inc"
 #include "video.inc"
+
+// External function declarations
+extern void allpag(short, void *);
+extern int ricerca(short *, short *, short *, long *, short *, FILE *);
 
 struct  ric_all {
 								short arg1;
@@ -72,7 +77,7 @@ struct  ric_all {
 								short tag;
 							} ;
 			
-allsric(mess,video,zona)
+void allsric(mess,video,zona)
 struct ric_all *mess;
 short video, zona;
 {
@@ -119,7 +124,7 @@ else
    {
       memset(nome,0,sizeof(nome));
       memcpy(nome,arg+1,*arg);
-      if(!ricerca(nome,&p->point,&tipo,&blocco,&posiz,fpp[fnomi]))
+      if(!ricerca((short*)nome,&p->point,&tipo,&blocco,&posiz,fpp[fnomi]))
       {
          p->tipo=tipo;
          nTag++;

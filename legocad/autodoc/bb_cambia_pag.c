@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <Xm/DialogS.h>
 #include <Xm/MenuShell.h>
@@ -34,6 +35,11 @@
         Fine sezione per SCCS
 */
 
+#include "autodoc.h"
+
+Widget crea_errorDialog(unsigned char*);
+void set_label(Widget, char*);
+void lcDestroySwidget(Widget);
 
 /*******************************************************************************
 	The definition of the context structure:

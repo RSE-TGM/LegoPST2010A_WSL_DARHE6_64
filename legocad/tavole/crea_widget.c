@@ -33,6 +33,7 @@ static char *_csrc = "@(#) %filespec: crea_widget.c,2 %  (%full_filespec: 1,csrc
 #include <Xm/BulletinB.h>
 #include <Xm/ToggleB.h>
 #include <Xm/ScrolledW.h>
+#include <Xm/List.h>
 
 #include "tables.h"
 
@@ -61,7 +62,7 @@ extern Arg args[20];
 extern Cardinal nargs;
 
 extern Struct_toggle *tavola_scelta;
-extern num_funzioni;
+extern int num_funzioni;
 
 extern int toggle_premuto;
 
@@ -103,7 +104,7 @@ void crea_main_window()
 
 /*------------------------------------------------------------------*/
 /*** void componi_menu()
-*** Il menu Š composto da tre voci (=CascadeButton):
+*** Il menu ï¿½ composto da tre voci (=CascadeButton):
 
 FILE	SELECT		HISTORY
 ====	======		=======
@@ -136,13 +137,13 @@ void componi_menu()
    pulldown2 = XmCreatePulldownMenu (menubar,"Pulldown2",NULL,0);
 
    vapore = XmCreatePushButton (pulldown2,"H2O",NULL,0);
-   XtAddCallback (vapore,XmNactivateCallback,selez_tavola,K_VAPORE);
+   XtAddCallback (vapore,XmNactivateCallback,selez_tavola,(XtPointer)K_VAPORE);
    XtManageChild (vapore);
 
    nargs=0;
    XtSetArg(args[nargs],XmNsensitive,False); nargs++;
    gas = XmCreatePushButton (pulldown2,"Combustion\ngasses",args,nargs);
-   XtAddCallback (gas,XmNactivateCallback,selez_tavola,K_GAS);
+   XtAddCallback (gas,XmNactivateCallback,selez_tavola,(XtPointer)K_GAS);
    XtManageChild (gas);
 
    nargs=0;
@@ -210,7 +211,7 @@ void crea_elenco_funzioni()
       cstring = CREATE_CSTRING(tavola_scelta[i].nome_funzione);
       XtSetArg(args[nargs], XmNlabelString, cstring); nargs++;
       atoggles[i] = XmCreateToggleButton(radio_box, "", args, nargs);
-      XtAddCallback(atoggles[i], XmNvalueChangedCallback, toggle_on, i);
+      XtAddCallback(atoggles[i], XmNvalueChangedCallback, toggle_on, (XtPointer)i);
       XtManageChild(atoggles[i]);
       XmStringFree(cstring);
    }
@@ -322,8 +323,8 @@ void crea_input_output()
       XtSetArg(args[nargs], XmNresizeHeight, False); nargs++;
       XtSetArg(args[nargs], XmNvalue, strval); nargs++;
       ainputtext[i] = XmCreateText(input_box, "Text", args, nargs);
-      XtAddCallback(ainputtext[i], XmNactivateCallback, next_text, i);
-      XtAddCallback(ainputtext[i], XmNmodifyVerifyCallback, text_verify, i);
+      XtAddCallback(ainputtext[i], XmNactivateCallback, next_text, (XtPointer)i);
+      XtAddCallback(ainputtext[i], XmNmodifyVerifyCallback, text_verify, (XtPointer)i);
       XtManageChild(ainputtext[i]);
    }
 
@@ -339,7 +340,7 @@ void crea_input_output()
    XtSetArg(args[nargs], XmNtopOffset, 10); nargs++;
    XtSetArg(args[nargs], XmNlabelString, cstring); nargs++;
    w_equal = XmCreatePushButton(in_out_form,PB_EQUAL,args, nargs);
-   XtAddCallback(w_equal, XmNactivateCallback, display_results, i);
+   XtAddCallback(w_equal, XmNactivateCallback, display_results, (XtPointer)i);
    XtManageChild(w_equal);
    XmStringFree(cstring);
 

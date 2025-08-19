@@ -54,10 +54,16 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "arc.inc"
 
+// External function declarations
+extern void arcana(PUNTDBS *, DATDBS *);
+extern short arcave(PUNTDBS *, DATDBS *);
+extern short arcdig(PUNTDBS *);
+extern void bitset(short *, short, short);
+extern short arctrig(short, short);
+
 char tabmem[n_misarc];  // tabella memorizzazione misura
 
-arcrac(freq)
-long freq;		// periodo di acquisizione in secondi
+void arcrac(long freq)		// periodo di acquisizione in secondi
 {
 
 short i_arc;	 		// indice archivio attuale

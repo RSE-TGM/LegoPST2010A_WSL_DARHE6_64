@@ -35,12 +35,16 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 #include <osf1.h>
 #include <stdio.h>
+#include <string.h>
 #include "switch.inc"
 #include "gpunt.inc"
 #include "comunic.inc"
 #include "arc.inc"
 #include "arcvis.inc"
 #include "video.inc"
+
+// External function declarations
+extern int ricerca(char*, short*, short*, long*, short*, FILE*);
 /*
    codtrend e' una variabile utilizzata come lock fra il task
    scgev che che riceve il messaggio di richiesta visualizzazione 
@@ -54,9 +58,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 short codtrend[max_video];
 
-arcvis(mric,msen)
-S_MAGGR *mric;
-S_VISARC *msen;
+int arcvis(S_MAGGR *mric, S_VISARC *msen)
 {
 short i, j;
 long blocco; 	// per routine ricerca 

@@ -21,6 +21,8 @@ static char SccsID[] = "@(#)read_f01.c	2.25\t3/30/95";
 
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "lg1.h"
 #include "errore.h"
 
@@ -34,7 +36,7 @@ static char SccsID[] = "@(#)read_f01.c	2.25\t3/30/95";
           errore ( EOF_F01_ERR, modello.nome ); \
         else \
           errore ( READ_F01_ERR, modello.nome ); \
-        return; \
+        return -1; \
       } \
     \
     *((char*) strrchr(riga,'\n')) = '\0'; \
@@ -43,13 +45,20 @@ static char SccsID[] = "@(#)read_f01.c	2.25\t3/30/95";
 
 extern ERR_LEVEL err_level;
 
-static ins_lista ();
+/* Function declarations */
+void errore(const char*, ...);
+int leggi_f01_bl(void);
+static int leggi_f01_var(void);
+int leggi_f01_ing(void);
+int cont_var(void);
+int make_connessione(int, int, int, int);
+int delete_connessione(int, int, int);
 
 static FILE *f01;
 
 
 
-read_f01()
+int read_f01()
 {
   char path[1024];
 
@@ -61,7 +70,7 @@ read_f01()
   if ( !(f01=fopen (  path, "r" )) )
   {
     /** siamo nel caso di un nuovo modello ***/
-    return;
+    return -1;
   }
 
 
@@ -75,7 +84,7 @@ read_f01()
   if ( err_level == ERROR )
   {
     fclose(f01);
-    return;
+    return -1;
   }
 
 
@@ -83,7 +92,7 @@ read_f01()
   if ( num_blocchi == 0 )
   {
     fclose(f01);
-    return;
+    return -1;
   }
 
 
@@ -96,7 +105,7 @@ read_f01()
   if ( err_level == ERROR )
   {
     fclose(f01);
-    return;
+    return -1;
   }
 
 
@@ -110,12 +119,12 @@ read_f01()
     err_level = ERROR;
     errore( "Found warnings parsing F01 file" );
     fclose(f01);
-    return;
+    return -1;
   }
 
 
   fclose(f01);
-
+  return 0;
 }
 
 
@@ -123,7 +132,7 @@ read_f01()
 /* Lettura della prima parte del file F01 contenente la lista dei blocchi
  * con le loro descrizioni
  */
-leggi_f01_bl ()
+int leggi_f01_bl ()
 {
 
   char riga[86];
@@ -158,7 +167,7 @@ leggi_f01_bl ()
      {
        err_level = ERROR;
        errore ( FORMATO_F01_ERR, modello.nome );
-       return;
+       return -1;
      }
 
 
@@ -167,7 +176,7 @@ leggi_f01_bl ()
      {
        err_level = ERROR;
        errore ( MAX_BL_ERR, modello.nome, MAX_BLOCCHI );
-       return;
+       return -1;
      }
 
 
@@ -215,7 +224,7 @@ leggi_f01_bl ()
 
 
 /* Lettura delle variabili di ogni blocco */
-leggi_f01_var ()
+static int leggi_f01_var (void)
 {
 
   char riga[86];
@@ -339,11 +348,13 @@ typedef struct _tag_lista_ing {
                     struct _tag_lista_ing *succ;
 } LISTA_ING;
 
+/* Function declarations using LISTA_ING */
 static LISTA_ING *search_ing( LISTA_ING *, char * );
-static libera ( LISTA_ING * );
+static int libera ( LISTA_ING * );
+static int ins_lista(LISTA_ING**, char*);
 
 
-leggi_f01_ing ()
+int leggi_f01_ing ()
 {
 
   int       in_bl, out_bl, in_var, out_var;
@@ -362,7 +373,7 @@ leggi_f01_ing ()
       { 
         err_level = ERROR; 
         errore ( READ_F01_ERR, modello.nome ); 
-        return; 
+        return -1; 
       }
     }
     *((char*) strrchr(riga,'\n')) = '\0'; 
@@ -465,7 +476,7 @@ leggi_f01_ing ()
 
 
 
-static ins_lista ( lista, riga )
+static int ins_lista ( lista, riga )
 LISTA_ING **lista;
 char *riga;
 {
@@ -479,7 +490,7 @@ char *riga;
     new_entry->succ     = *lista;
     new_entry->visitato = 0;
     *lista = new_entry;
-
+    return 0;
 }
 
 
@@ -500,12 +511,13 @@ char *ing;
 
 
 
-static libera ( lista )
+static int libera ( lista )
 LISTA_ING *lista;
 {
   if ( lista )
     libera( lista->succ );
   free ( lista );
+  return 0;
 }
 
 
@@ -531,7 +543,7 @@ int cont_var ()
 }
 
 
-make_connessione ( in_bl, in_var, out_bl, out_var )
+int make_connessione ( in_bl, in_var, out_bl, out_var )
 int in_bl, in_var, out_bl, out_var;
 {
 
@@ -559,7 +571,7 @@ int in_bl, in_var, out_bl, out_var;
 
 
 
-delete_connessione( bl, var, conn )
+int delete_connessione( bl, var, conn )
 int bl, var, conn;
 {
    CONN *cor, *prec;

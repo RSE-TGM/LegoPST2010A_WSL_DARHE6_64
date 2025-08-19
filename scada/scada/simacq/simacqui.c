@@ -52,10 +52,30 @@ static char *_csrc = "@(#) %filespec: simacqui.c-5 %  (%full_filespec: simacqui.
 #include "arc.inc"
 #include "taskwd.inc"      // tabella di watch-dog e stato dei task
 #include "simula.inc"      // definizioni e variabili generali per simulatore
+#include <stdlib.h>
+#include <string.h>
 #include "simmsg.inc"      // strutture messaggi da simulatore
 #include "simdia.inc"      // indirizzi in DB dei digitali di diagnostica per simulatore
 #include "simana.inc"      // indirizzi in DB degli analogici di diagnostica per simulatore
 #include "netmsg.h"
+
+// External function declarations
+extern int siminit(void);
+extern void diagnet(short, void *, void *);
+extern int bitvalue(short *, short);
+extern int simsdcfg(int, void *);
+extern void bitset(short *, short, short);
+extern void simvardd(short, short);
+extern void pscserr(int, int, int, int, int);
+extern void simcldbs(void);
+extern void simclall(void);
+extern void simclpag(int, int);
+extern int simlddbs(void *);
+extern void simlgini(short);
+extern void simclarc(void);
+extern int simsvdbs(int);
+extern int simsvall(int);
+extern void ter(void);
 
 extern short arcwai_tcb;
 extern short mbox_time;
@@ -97,7 +117,7 @@ extern int anno_simulatore;
 extern float tempo_simulatore;
 #endif
 
-acqui() 
+int acqui() 
 {
 
 double divisione;

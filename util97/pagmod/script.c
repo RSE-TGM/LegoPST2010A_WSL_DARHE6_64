@@ -165,11 +165,11 @@ int ApplyQuery ( void ) {
 # endif
             ++ Knew ;
           } else {
-            sprintf ( logbf ,
+            sprintf ( pagmod_logbf ,
                       "newattrib=%s attributo gia' presente in *%s" ,
                       NewAttrib -> Name ,
                       Handle -> Widget -> Name  ) ;
-            log ( logbf ) ;
+            pagmod_log ( pagmod_logbf ) ;
           }
           NewAttrib = NewAttrib -> Next ;
         }
@@ -214,13 +214,13 @@ int ApplyQuery ( void ) {
                                      NewModule ,
                                      InputValueAttrib -> Value ,
                                      NewInputValue ) ) {
-              sprintf ( logbf , 
+              sprintf ( pagmod_logbf , 
                         "Errore modifica risorsa *%s.inputValue" ,
                         Handle -> Widget -> Name ) ;
-              log ( logbf ) ;
+              pagmod_log ( pagmod_logbf ) ;
               fprintf ( stderr ,
                         "pagmod: %s\n" ,
-                        logbf ) ;
+                        pagmod_logbf ) ;
               break ;
             }
             if ( AskConfirm ) {
@@ -345,7 +345,7 @@ int ApplyQuery ( void ) {
   if ( Ktot > 0 ) {
     ++ Gpag ;
   }
-  sprintf ( logbf , 
+  sprintf ( pagmod_logbf , 
             "% 4d +% 4d +% 4d +% 4d +% 4d =%4d.  %s" ,
             Kchg ,
             Knew ,
@@ -354,7 +354,7 @@ int ApplyQuery ( void ) {
             Kadd ,
             Ktot ,
             PageFileName ) ;
-  log ( logbf ) ;
+  pagmod_log ( pagmod_logbf ) ;
   return 0 ;
 }
 static int CheckWidget ( struct PageWidget * HandleWidget , 
@@ -787,16 +787,16 @@ int ScanScriptFile ( void )
       
       ++ ScriptError ;
 
-      sprintf ( logbf , 
+      sprintf ( pagmod_logbf , 
                 "#% 6d - Token non riconosciuto: %s" ,
                 LineNumber ,
                 Token ) ;
 
-      log ( logbf ) ;
+      pagmod_log ( pagmod_logbf ) ;
 
       fprintf ( stderr ,
                 "pagmod: %s\n" ,
-                logbf ) ;
+                pagmod_logbf ) ;
 
       continue ;
     
@@ -817,16 +817,16 @@ int ScanScriptFile ( void )
     
       ++ ScriptError ;
 
-      sprintf ( logbf , 
+      sprintf ( pagmod_logbf , 
                 "#% 6d - Token non riconosciuto: %s" ,
                 LineNumber ,
                 Token ) ;
 
-      log ( logbf ) ;
+      pagmod_log ( pagmod_logbf ) ;
 
       fprintf ( stderr ,
                 "pagmod: %s\n" ,
-                logbf ) ;
+                pagmod_logbf ) ;
 
       continue ;
     
@@ -841,16 +841,16 @@ int ScanScriptFile ( void )
       
         ++ ScriptError ;
         
-        sprintf ( logbf , 
+        sprintf ( pagmod_logbf , 
                   "#% 6d - Argomento nullo: %s=" ,
                   LineNumber ,
                   Token ) ;
 
-        log ( logbf ) ;
+        pagmod_log ( pagmod_logbf ) ;
  
         fprintf ( stderr ,
                   "pagmod: %s\n" ,
-                  logbf ) ;
+                  pagmod_logbf ) ;
 
         break ;
       
@@ -1921,7 +1921,7 @@ int ScanScriptFile ( void )
 
       if ( TokenError ) {
       
-        sprintf ( logbf , 
+        sprintf ( pagmod_logbf , 
                   "#% 6d - Token inatteso: %s=%s" ,
                   LineNumber ,
                   Token ,
@@ -1931,7 +1931,7 @@ int ScanScriptFile ( void )
       
       if ( ArgError ) {
       
-        sprintf ( logbf , 
+        sprintf ( pagmod_logbf , 
                   "#% 6d - Argomento errato: %s=%s" ,
                   LineNumber ,
                   Token ,
@@ -1939,11 +1939,11 @@ int ScanScriptFile ( void )
       
       }
       
-      log ( logbf ) ;
+      pagmod_log ( pagmod_logbf ) ;
 
       fprintf ( stderr ,
                 "pagmod: %s\n" ,
-                logbf ) ;
+                pagmod_logbf ) ;
 
     }
 

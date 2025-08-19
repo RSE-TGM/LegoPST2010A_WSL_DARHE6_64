@@ -27,14 +27,27 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "comunic.inc"
 #include "mesqueue.h"
 #include "mesprocv.inc"
+#include <string.h>
 #include "dconf.inc"
 #include "print.inc"
 #include "repgdc.h"
 #include "gesrep.h"
 
+// External function declarations
+extern void SetInt(void);
+extern void _Vuota(void);
+extern void IniGdc(void);
+extern void GdcAllD(int, int);
+extern void IniLine(void *);
+extern int InvioGdc(char *);
+extern void wai(int);
+extern int InterpGdc(char **);
+extern void GdcAllS(int);
+extern void ter(void);
+
 extern short c_rep;
 
-reptask()
+void reptask()
 {
 	S_FIS  stlin;
    short i;

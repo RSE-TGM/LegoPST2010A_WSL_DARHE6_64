@@ -20,7 +20,9 @@ static char SccsID[] = "@(#)unita.c	1.12\t3/31/95";
 /*** file unita.c : gestione delle unita di misura ***/
 
 #include <stdio.h>
+#include <string.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 #include "unita.h"
 

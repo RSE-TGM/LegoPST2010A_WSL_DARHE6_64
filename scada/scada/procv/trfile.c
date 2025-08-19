@@ -60,6 +60,20 @@ static char *_csrc = "@(#) %filespec: trfile.c-3 %  (%full_filespec: trfile.c-3:
 #include	"mesqueue.h"
 #include "dconf.inc"
 
+/* Function prototypes */
+extern int DosOpen(char *, int);
+extern int rbyte(int, char *, long, int);
+extern void wbyte(int, char *, long, int);
+extern void decnum(char *, int, int, int);
+extern void close(int);
+
+/* Internal function prototypes */
+void OpenTrFile(char *, int);
+void ReadTrFile(S_INVFILE *, S_RICHFILE *);
+void WriteTrFile(S_ACKFILE *, S_INVFILE *);
+void CloseTrFile(int);
+void CheckTrFile(S_INVFILE *, S_RICHFILE *);
+
 struct s_messfile {
          short tipo;             // tipo di operazione
          char nfile[FILENAME_MAX+1]; // nome del file in uso
@@ -74,7 +88,7 @@ long  OfTrFile=0L;
 
 extern FILE* LbgFp;
 
-trfile (mess)
+void trfile (mess)
 char *mess;
 {
 S_ACKFILE *ack;      // ack
@@ -143,7 +157,7 @@ switch (ack->indice)
          ViTrFile=inv->video-1;   // video che ha richiesto il messaggio
          strcpy(InTrFile[inv->video-1].nfile,"MMI.");
          decnum(&InTrFile[inv->video-1].nfile[4],2,-2,ViTrFile);
-         OpenTrFile(&InTrFile[inv->video-1].nfile, O_CREAT|O_BINARY|O_WRONLY|O_TRUNC);
+         OpenTrFile(InTrFile[inv->video-1].nfile, O_CREAT|O_BINARY|O_WRONLY|O_TRUNC);
          rispack.bInit=1;
       }
       else
@@ -162,7 +176,7 @@ switch (ack->indice)
                memcpy(rispack.pag,InTrFile[i].pag, l_pagina);
                strcpy(InTrFile[i].nfile,"MMI.");
                decnum(&InTrFile[i].nfile[4],2,-2,ViTrFile);
-               OpenTrFile(&InTrFile[i].nfile, O_CREAT|O_BINARY|O_WRONLY|O_TRUNC);
+               OpenTrFile(InTrFile[i].nfile, O_CREAT|O_BINARY|O_WRONLY|O_TRUNC);
                rispack.bInit=1;
                inv->bLast=0;     // invio solo ACK
                inv->nByte=0;
@@ -186,7 +200,7 @@ return;
       char *   nome del file
       int      flag per open
 */
-OpenTrFile(name, flag)
+void OpenTrFile(name, flag)
 char *name;
 int flag;
 {
@@ -229,7 +243,7 @@ OfTrFile=0L;
       S_INVFILE* mess      messaggio da inviare
       S_RICHFILE *rich     messaggio di richiesta
 */
-ReadTrFile(mess, rich)
+void ReadTrFile(mess, rich)
 S_INVFILE* mess;
 S_RICHFILE *rich;
 {
@@ -278,7 +292,7 @@ enqueue(&pack);
       S_ACKFILE* mess      messaggio di risposta
       S_INVFILE *rich     messaggio ricevuto
 */
-WriteTrFile(mess, inv)
+void WriteTrFile(mess, inv)
 S_ACKFILE* mess;
 S_INVFILE *inv;
 {
@@ -339,7 +353,7 @@ return;
    Parametri
    short video
 */
-CloseTrFile(video)
+void CloseTrFile(video)
 short video;
 {
 if(ViTrFile==video)    // coincidono
@@ -358,7 +372,7 @@ if(ViTrFile==video)    // coincidono
       S_INVFILE* mess      messaggio da inviare
       S_RICHFILE *rich     messaggio di richiesta
 */
-CheckTrFile(risp, rich)
+void CheckTrFile(risp, rich)
 S_INVFILE *risp;
 S_RICHFILE *rich;    // richiesta dati file
 {

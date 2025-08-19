@@ -49,9 +49,13 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tipal.inc"
 #include "mesqueue.h"
 
+/* Function prototypes */
+extern void inibiz(short, short, short, short);
+extern short statoall(short *);
+
 extern short c_visall;
 
-exall(punt,tipo,all,pflag, exfl)
+int exall(punt,tipo,all,pflag, exfl)
 short punt, tipo, exfl;
 short *pflag;
 S_DBALL* all;

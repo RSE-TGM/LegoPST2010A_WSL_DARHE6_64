@@ -24,6 +24,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 		se e' organo descrizione e tipo di organo
 */
 #include <stdio.h>
+#include <string.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
@@ -34,9 +35,13 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include	"mesqueue.h"
 #include "dconf.inc"
 
+/* Function prototypes */
+extern int ricerca(char *, short *, short *, long *, short *, FILE *);
+extern int rbyte(int, char *, long, int);
+
 extern DB_HEADER h_db;
 
-descriz(mes)
+void descriz(mes)
 S_MRDP mes ;
 {
 
@@ -58,7 +63,7 @@ if(mes.punto[0])
 {
 	p1=(char*) & mes.punto[0] ;
 	for(i=0;i<SCD_SIGLA;i++,p1++) { if((*p1)==' ') (*p1)=0 ; }
-   if(ricerca(mes.punto,&point,&ext,&blocco,&posiz,fpp[fnomi]))
+   if(ricerca((char *)mes.punto,&point,&ext,&blocco,&posiz,fpp[fnomi]))
 	{   
 			a.ext =m_nondef;	/*  misura non esistente */
 	      a.punt=erres ; 	/* punto non esistente */
@@ -120,7 +125,7 @@ default:
 	goto RISP;
 }
 memset(a.desc,' ',lu_de) ;
-rbyte(fileno(fpp[fdde]),(short*)a.desc,offset+nbyte*point,nbyte) ;
+rbyte(fileno(fpp[fdde]),(char *)a.desc,offset+nbyte*point,nbyte) ;
 a.punt=point;
 a.ext=ext;
 
@@ -142,5 +147,5 @@ spack.amsg=(char *) & a;
 
 enqueue(&spack);
 
-return(0);
+return;
 }

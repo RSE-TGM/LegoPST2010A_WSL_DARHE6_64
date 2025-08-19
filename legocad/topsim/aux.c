@@ -38,7 +38,7 @@ static char SccsID[] = "@(#)aux.c	1.27\t2/16/96";
 extern SIMULATORE *simulatore;
 char *TIPO_MOD_STR[] = {"R","P","N"};
 char *OS_STR[] = {"OS","AIX","OSF1","VMS","SCO","LINUX"};
-
+char *trim_blank();
 
 /*----------------------------------------------------------------
  *
@@ -403,7 +403,7 @@ int save_S01(char *path)
             }
             
             /* ordinamento alfabetico matrice */
-            qsort(matrice,nrighe,size_riga,strcmp);
+            qsort(matrice,nrighe,size_riga,(__compar_fn_t)strcmp);
 
             /* stampa su S01 delle connessioni ordinate */
             for(nr=0;nr<nrighe;nr++)

@@ -68,7 +68,11 @@ extern DB_HEADER h_db; // header del database, contienele dimensioni
 extern short max_repall;
 extern short max_repretry;
 
-alldef()
+extern void pscserr(int, int, int, int, int);
+extern void alsost(char *);
+extern void bitset(void *, int, int);
+
+int alldef()
 {
 FILE *fp;
 char stringa[200];	 	// buffer in cui leggere il testo
@@ -84,7 +88,7 @@ S_DBS_ALV *pav;         // puntatore dbs allarmi per video
 S_DBS_ALU *pau;         // puntatore dbs allarmi per unita' appartenenza
 short ndbsal;           // n. data base allarmi
 char *pzone[max_zone];  // puntatori al buffer bDbsAlu->pal per ciascuna unita' 
-int priorita;           // appoggio per leggere priorit… allarmi   
+int priorita;           // appoggio per leggere prioritï¿½ allarmi   
 short nGroup;           // n. gruppo in esame
 S_GROUP_ACQ* pGroup;
 char *arm;
@@ -426,13 +430,13 @@ for(;;)
                                           if(!strncmp(stringa,"REP_RETRY",9))
 	                                          {
 			                                    if(sscanf(stringa,"%s %hd",app,&max_repretry) !=2) 
-                                                pscserr(ERR_CONF,TASK_ALLARMI,REP_RETRY,SYS_HALT);
+                                                pscserr(ERR_CONF,TASK_ALLARMI,REP_RETRY,0,SYS_HALT);
 	                                          }
 	                                    else 
                                           if(!strncmp(stringa,"REP_MESS",8))
 	                                          {
 			                                    if(sscanf(stringa,"%s %hd",app,&max_repall) !=2) 
-                                                pscserr(ERR_CONF,TASK_ALLARMI,REP_MESS,SYS_HALT);
+                                                pscserr(ERR_CONF,TASK_ALLARMI,REP_MESS,0,SYS_HALT);
 	                                          }
                                  }
    }
@@ -443,7 +447,7 @@ fclose(fp);
 /*
    funzione per la sostituzione del carattere '_' con blank
 */
-alsost(str)
+void alsost(str)
 char *str;
 {
 

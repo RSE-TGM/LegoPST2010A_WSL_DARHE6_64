@@ -78,12 +78,19 @@ Widget	user_pathTF;
 *******************************************************************************/
 
 Widget	create_selectModelBox();
+int sel_model_fill(char*);
+int genera_lista_entry(char*, int (*)(char*), int*, char***);
+void errore(const char*, ...);
+int questionDB_activate(const char*);
+int init_modello(char*, char*);
+int set_bl_list(void);
+int set_model_name(void);
 
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-selModelActivate()
+int selModelActivate()
 {
      extern char      path_legocad[];
      extern ERR_LEVEL err_level;
@@ -102,7 +109,7 @@ selModelActivate()
 
 
 
-sel_model_fill(path)
+int sel_model_fill(path)
 char *path;
 {
 
@@ -136,7 +143,7 @@ char *path;
      XtSetValues(UxGetWidget(selectModelBox), arg, 2);
 
      for(i=0;i<num;i++)
-       XtFree(modelli[i]);
+       XmStringFree(modelli[i]);
    }
    else
    {

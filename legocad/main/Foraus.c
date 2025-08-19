@@ -5,6 +5,8 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include <Xm/Xm.h>
 #include <X11/Shell.h>
 #include <Xm/MenuShell.h>
@@ -42,7 +44,7 @@
 #include <sys/stat.h>
 
 #if defined LINUX
-int esiste_file(path);
+int esiste_file(char *path);
 #include <unistd.h>
 #else
 #include <sys/access.h>
@@ -50,6 +52,11 @@ int esiste_file(path);
 
 #include <linfo.h>
 #include "legomain.h"
+
+/* Missing function declarations */
+extern int svuota_file(char *);
+extern swidget create_question_operation(Widget, int);
+extern int esegui_comando(char *);
 
 /********************************* in legomain.h
 #define SAVE_TMP_FORAUS  90
@@ -93,7 +100,7 @@ static void	_UxForausMenuPost( wgt, client_data, event, ctd )
 
 	if ( event->xbutton.button == which_button )
 	{
-		XmMenuPosition( menu, event );
+		XmMenuPosition( menu, (XButtonPressedEvent *)event );
 		XtManageChild( menu );
 	}
 }
@@ -187,7 +194,7 @@ Widget	create_Foraus();
  * della interfaccia
  *---------------------------------*/
 
-close_interface(swidget wid)
+void close_interface(swidget wid)
 {
 /* forse e' necessario recuperare il Context */
 /* distruggo la interfacccia Foraus */
@@ -199,7 +206,7 @@ close_interface(swidget wid)
  *  L'utente ha la rsponsabilita' di liberare la memoria occupata
  *-----*/
 
-get_selection_list(Widget lista,int **positions,int  *nitem)
+int get_selection_list(Widget lista,int **positions,int  *nitem)
 {
   return( XmListGetSelectedPos(lista,positions,nitem) );
 }
@@ -210,7 +217,7 @@ get_selection_list(Widget lista,int **positions,int  *nitem)
  *
  *-----*/
 
-select_all_item(Widget lista)
+int select_all_item(Widget lista)
 {
    int tot_item,i;
 
@@ -227,7 +234,7 @@ select_all_item(Widget lista)
  *
  *--------*/
 
-unselect_all_item(Widget lista)
+int unselect_all_item(Widget lista)
 {
    UxPutSensitive(arrowButton1,"false");
    XmListDeselectAllItems(lista);
@@ -238,7 +245,7 @@ unselect_all_item(Widget lista)
  * set di un item nella lista
  *
  *----------*/
-set_item_list(Widget lista,char *cstr,int pos)
+int set_item_list(Widget lista,char *cstr,int pos)
 {
    XmString item;
 
@@ -292,7 +299,7 @@ char *cerca_pattern(char *str,char *pattern)
    return( strstr(str,pattern) );
 }
 
-put_string_on_file(char *fname,char *str)
+int put_string_on_file(char *fname,char *str)
 {
    FILE *fp;
    char appo[10]; 
@@ -326,13 +333,13 @@ put_string_on_file(char *fname,char *str)
  *
  *----------*/
  
-int alloca_ltm(LTM **ltm,int nrecord)
+void* alloca_ltm(LTM **ltm,int nrecord)
 {
     if(nrecord > 0 )
        (*ltm) = (LTM *)calloc(nrecord,sizeof(LTM));
        if(*ltm == NULL)
           return(NULL);
-    return(TRUE);
+    return(*ltm);
 }
 
 /*----------
@@ -341,7 +348,7 @@ int alloca_ltm(LTM **ltm,int nrecord)
  *
  *----------*/
  
-read_riga(FILE *fp,char *riga)
+int read_riga(FILE *fp,char *riga)
 {
    int retval;
    char nl;
@@ -429,7 +436,7 @@ int leggi_ltm(LTM *sltm,FILE *fp)
  *
  *------------------------------*/
 
-LoadModulesList(Widget lista)
+int LoadModulesList(Widget lista)
 {
    extern char path_modello[];
    char fileltm[100],cstring[200];
@@ -469,7 +476,7 @@ LoadModulesList(Widget lista)
    return(True);
 }
 
-get_foraux(char *modname,char *path,char **auxcode)
+int get_foraux(char *modname,char *path,char **auxcode)
 {
    char minname[10];
    char pathfile[200];
@@ -529,7 +536,7 @@ get_foraux(char *modname,char *path,char **auxcode)
    return(True);
 }
 
-get_fortran_module(char *nome_mod,char **code)
+int get_fortran_module(char *nome_mod,char **code)
 {
 
    if( get_foraux(nome_mod,path_libut,code) == False)
@@ -579,7 +586,7 @@ char *get_module_name(char *ptr)
  * set del nome del modulo nell'elenco moduli
  *
  *------------------------------------------------*/
-set_elenco_modulo(char *modname,int pos)
+int set_elenco_modulo(char *modname,int pos)
 {
    
    elenco[pos] = malloc( strlen(modname)+2 );
@@ -591,20 +598,20 @@ set_elenco_modulo(char *modname,int pos)
  * set del codice del modulo 
  *
  *------------------------------------------------*/
-salva_elenco_codice(char *code,int pos)
+int salva_elenco_codice(char *code,int pos)
 {
    codice[pos] = malloc( strlen(code)+2 );
    strcpy(codice[pos] , code);
 }
 
 
-libera_elenco_codice(int pos)
+void libera_elenco_codice(int pos)
 {
    if( codice[pos] )
       free(codice[pos]);
 }
 
-libera_elenco_moduli(int pos)
+void libera_elenco_moduli(int pos)
 {
    if( elenco[pos] )
       free( elenco[pos] );
@@ -615,7 +622,7 @@ libera_elenco_moduli(int pos)
  *           posinlist  posizione nella lista
  ----------------------------------------------*/
 
-rimuovi_modulo(int posinlist)
+int rimuovi_modulo(int posinlist)
 {
    int iarray,i;
 
@@ -647,7 +654,7 @@ rimuovi_modulo(int posinlist)
  *
  *------------------------------*/
 
-crea_elenco(char *str)
+int crea_elenco(char *str)
 {
    char *ptr1=NULL,*ptr2=NULL,appo[100];
    char *ptrini=NULL,*ptrfin=NULL,*ptrapp=NULL;
@@ -697,7 +704,7 @@ crea_elenco(char *str)
    return(True);
 }
 
-LoadForausStdList()
+int LoadForausStdList()
 {
    extern char path_modello[];
    FILE *fpfor;
@@ -804,7 +811,7 @@ int aggiungi_in_foraus()
    if( get_selection_list(scrolledList1,&pos,&nitem) == 0 )
    {
       retswidget=create_vis_msg("Nothing selected!");
-      return;
+      return 0;
    }
 
    for(i=0;i<nitem;i++)
@@ -812,7 +819,7 @@ int aggiungi_in_foraus()
       found = False;
       for(j=0;j<nmodaux;j++)
       {
-         if( strcmp(ltm[ pos[i] -1 ].nome_modulo,elenco[j]) == NULL)
+         if( strcmp(ltm[ pos[i] -1 ].nome_modulo,elenco[j]) == 0)
          {
              found = True;
              break;
@@ -852,7 +859,7 @@ int aggiungi_in_foraus()
    return(True);
 }
 
-svuota_file(char *filename)
+int svuota_file(char *filename)
 {
    FILE *fp;
   
@@ -878,7 +885,7 @@ svuota_file(char *filename)
  *
  *--------------*/
 
-testa_foraus()
+int testa_foraus()
 {
 //   extern swidget create_vis_msg();
    extern char path_modello[];
@@ -899,7 +906,7 @@ testa_foraus()
 
 
 
-rimuovi_moduli_foraus(Widget wcaller)
+void rimuovi_moduli_foraus(Widget wcaller)
 {
 #ifndef DESIGN_TIME
    _UxCForaus              *UxSaveCtx, *UxContext;
@@ -943,7 +950,7 @@ rimuovi_moduli_foraus(Widget wcaller)
 }
 
 
-delete_foraus(Widget wcaller)
+void delete_foraus(Widget wcaller)
 {
 #ifndef DESIGN_TIME
    _UxCForaus              *UxSaveCtx, *UxContext;
@@ -1163,7 +1170,7 @@ static void	activateCB_view_doc( UxWidget, UxClientData, UxCallbackArg )
 	  retswidget=create_vis_msg("Use Librarian (Documentation View) for see module documentation");
 	  return;
 	
-	  if( get_selection_list(scrolledList1,pos,&nit) == 0)
+	  if( get_selection_list(scrolledList1,&pos,&nit) == 0)
 	  {
 	     retswidget=create_vis_msg("Nothing selected");
 	     return;

@@ -11,6 +11,7 @@
 #include "UxXt.h"
 
 #include <Xm/MessageB.h>
+#include <stdlib.h>
 
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:
@@ -68,7 +69,7 @@ Widget	create_IconvertDialog();
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-quitting()
+int quitting()
 {
     exit(0);
 }

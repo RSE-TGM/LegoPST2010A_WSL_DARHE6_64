@@ -70,6 +70,7 @@ Widget	ModuleName;
 *******************************************************************************/
 
 Widget	create_EditDescrDialog1();
+int tomaius(char*);
 
 /*******************************************************************************
 	The following are callback functions.

@@ -12,6 +12,9 @@
 
 #include <Xm/FileSB.h>
 
+/* Missing function declarations */
+extern swidget create_vis_msg(char *);
+
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
@@ -82,7 +85,7 @@ Widget	create_edi14FileSelection();
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-fine_edi14c()
+int fine_edi14c()
 {
    create_vis_msg("edi14c Completed");
    

@@ -19,12 +19,16 @@ static char SccsID[] = "@(#)lg1_init_arg.c	2.24\t3/30/95";
 */
 
 #include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 #include "errore.h"
 
 
 extern int init_modello();
 extern int set_bl_list();
 extern int set_model_name();
+extern void errore(const char*, ...);
+extern int desel_open_but(void);
 
 
 extern ERR_LEVEL   err_level;
@@ -84,9 +88,11 @@ int lg1_init_arg(char *pathmodel)
       errore(OPEN_F01_ERR,pathmodel);
       return(-1);
    }
+   
+   return 0;
 }
 
-lg1_start_modello() 
+int lg1_start_modello() 
 {
 /* inizializzo il modello
 */
@@ -115,4 +121,5 @@ if(err_level == NO_ERROR)
       desel_open_but(); 
    }
 
+   return err_level;
 }

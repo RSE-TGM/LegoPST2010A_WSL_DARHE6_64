@@ -32,6 +32,7 @@ static char SccsID[] = "@(#)aux_autodoc.c	1.12\t3/31/95";
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <ctype.h>
 
 #include <X11/Xlib.h>
 #include <X11/Intrinsic.h>
@@ -66,7 +67,13 @@ extern int num_blocchi;
 extern UnitaMisura unimis[];
 extern int num_unita_misura;
 
-extern void free_array_XmString( XmString, int );
+extern void free_array_XmString( XmString*, int );
+
+void copy_n_car(char*, char*, int);
+int Empty(char*);
+void riempi(char*, int);
+void app_n_blank(char*, int);
+int IsNumeric(char*);
 
 /****************************************************************/
 /* VARIABILI GLOBALI						*/
@@ -81,9 +88,7 @@ extern void free_array_XmString( XmString, int );
  ***      recupera dai file f14.dat e f01.dat i blocchi del modello ed 
  ***      aggiorna la struttura blocchi.
  ***/
-get_blocchi_modello(blocchi, n_blocchi)
-ModelBlockStruct **blocchi;
-int *n_blocchi;
+int get_blocchi_modello(ModelBlockStruct **blocchi, int *n_blocchi)
 {
    FILE *fp_f14, *fp_f01;
    char buffer[151], temp[50];
@@ -168,10 +173,7 @@ int n_blocchi;
  ***      Aggiorna la scroll-list relativa alla lista dei blocchi del modello.
  ***     Ritorna il numero dei blocchi del modello.
  ***/
-update_blocks_list(blocchi, n_blocchi, wlist)
-ModelBlockStruct *blocchi;
-int n_blocchi;
-Widget wlist;
+int update_blocks_list(ModelBlockStruct *blocchi, int n_blocchi, Widget wlist)
 {
    int i;
    char item[100];
@@ -381,7 +383,7 @@ long offs_blocco;
             (*(record_f14+74) == '*');
 
       *num_dati += num;
-      *dati_blocco = (InfoBlock *) XtRealloc(*dati_blocco, 
+      *dati_blocco = (InfoBlock *) XtRealloc((char*)*dati_blocco, 
  					   *num_dati * sizeof(InfoBlock));
 
       for (i = 0; i < num ; i++)
@@ -586,7 +588,7 @@ char **nota_blocco;
    while ( fgets(buffer,140,fp_f01) != NULL && strncmp(buffer,"****",4))
    {
       ind = (*num_dati)++;
-      *dati_blocco = (InfoBlock *) XtRealloc(*dati_blocco, 
+      *dati_blocco = (InfoBlock *) XtRealloc((char*)*dati_blocco, 
  	 			             *num_dati * sizeof(InfoBlock));
       vars = &(*dati_blocco+ind)->var;
 
@@ -1134,8 +1136,7 @@ int size;
  max_car : numero massimo di caratteri da copiare (r)
  copia la stringa str2 in str1 finche' la stringa str2 non termina
  con '\0' oppure con il terminatore endcar */
-void copia_str(str1,str2,endcar,max_car)
-char *str1,*str2,endcar;
+void copia_str(char *str1, char *str2, char endcar, int max_car)
 {
    for(; *str2 != endcar && *str2 && max_car-- ; *(str1++) = *(str2++) );
    if ( *(str1-1) )

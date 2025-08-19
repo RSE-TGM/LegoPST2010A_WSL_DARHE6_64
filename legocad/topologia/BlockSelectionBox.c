@@ -39,6 +39,8 @@
 
 #include "errore.h"
 #include "lg1.h"
+#include <stdlib.h>
+#include <ctype.h>
 
 extern ERR_LEVEL err_level;
 extern int num_modulo;
@@ -82,6 +84,8 @@ static _UxCBlockSelectionBox	*UxBlockSelectionBoxContext;
 *******************************************************************************/
 
 Widget	create_BlockSelectionBox();
+void errore(const char*, ...);
+int do_dialogo(void);
 
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
@@ -92,7 +96,7 @@ Widget	create_BlockSelectionBox();
 */
    
 
-block_selection_setitem(int tipo_mod)
+int block_selection_setitem(int tipo_mod)
 {
    extern MODULO moduli[];
    MODULO *lista_mod = moduli;        /*per ingannare l'interprete UIMX */
@@ -145,7 +149,7 @@ block_selection_setitem(int tipo_mod)
           strcpy(riga,lista_mod[i].sigla);
           strcat(riga,"  ");
           strcat(riga,lista_mod[i].descr);
-riga[strlen(riga) - 1]= NULL;
+riga[strlen(riga) - 1]= '\0';
           modu[trovati]=XmStringCreateSimple(riga);
           trovati++;
        }

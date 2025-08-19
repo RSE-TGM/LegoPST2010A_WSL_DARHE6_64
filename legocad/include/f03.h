@@ -26,30 +26,30 @@
 
 #define   FILE_F03      "proc/f03.dat"
 
-_INTEGER  nbl, neqal, nbl1, nvart, neqsis, neqs1, npvrt;
-_INTEGER  nu, nu1, nvri, isiss, nbtri, nst;
+extern _INTEGER  nbl, neqal, nbl1, nvart, neqsis, neqs1, npvrt;
+extern _INTEGER  nu, nu1, nvri, isiss, nbtri, nst;
 
-char     sigla[8];
-char     *nosl;
+extern char     sigla[8];
+extern char     *nosl;
 
-char     **nosub, **noblc, **nom_bloc;
-_INTEGER *nusta, *nusci, *ningr, *islb;
+extern char     **nosub, **noblc, **nom_bloc;
+extern _INTEGER *nusta, *nusci, *ningr, *islb;
 
-_INTEGER *ip;   /* IP(1,NBL1)   puntatore alle variabili */
-char     **var;
-_INTEGER *ipvrs;
+extern _INTEGER *ip;   /* IP(1,NBL1)   puntatore alle variabili */
+extern char     **var;
+extern _INTEGER *ipvrs;
 
-_INTEGER *ips; /* IPS(1,NEQS1) puntatore variabili di uscita e di stato */
-char     **sivar, **nom_sivar;
-_INTEGER *iout_sivar;
+extern _INTEGER *ips; /* IPS(1,NEQS1) puntatore variabili di uscita e di stato */
+extern char     **sivar, **nom_sivar;
+extern _INTEGER *iout_sivar;
 
-_INTEGER *ipvrt; /* IPVRT(1,NPVRT) puntatore alle incognite(+) o noti(-) */
+extern _INTEGER *ipvrt; /* IPVRT(1,NPVRT) puntatore alle incognite(+) o noti(-) */
 
-_INTEGER *ipi;  /* IPI(1,NPVRT) puntatore alle variabili di ingresso */
-char     **vari, **nom_vari;
-_INTEGER *iout_vari;
+extern _INTEGER *ipi;  /* IPI(1,NPVRT) puntatore alle variabili di ingresso */
+extern char     **vari, **nom_vari;
+extern _INTEGER *iout_vari;
 
-_INTEGER *ipvri; /* IPVRI(1,NVRI)  puntatore alla roulette */
+extern _INTEGER *ipvri; /* IPVRI(1,NVRI)  puntatore alla roulette */
 
 /* funzioni definite in f03.c */
 int rd_file_f03();

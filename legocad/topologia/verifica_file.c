@@ -19,11 +19,15 @@ static char SccsID[] = "@(#)verifica_file.c	2.24\t3/30/95";
 */
 
 #include <stdio.h>
+#include <string.h>
 #include <Xm/Xm.h>
 #include <UxXt.h>
 #include "lg1.h"
 #include "errore.h"
 #include "macro.h"
+
+/* Function declarations */
+void errore(const char*, ...);
 
 
 extern int num_macro;
@@ -31,7 +35,7 @@ extern MacroBlockType *macroblocks;
 extern int err_level;
 extern swidget create_IconvertDialog();
 
-verifica_congruenza_file()
+int verifica_congruenza_file()
 {
    int i,j,k,tot_block=0,found=False;
    char nome_riferim[10];

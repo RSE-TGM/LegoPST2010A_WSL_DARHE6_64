@@ -5,6 +5,7 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <Xm/Xm.h>
 #include <Xm/DialogS.h>
 #include <Xm/MenuShell.h>
@@ -69,6 +70,11 @@ static _UxCquestionDialog	*UxQuestionDialogContext;
 
 Widget	create_questionDialog();
 
+/* Function declarations */
+void libera_simulatore(SIMULATORE *sim);
+int confermata_remove_task(void);
+void del_all_task_conn(void);
+
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
@@ -77,12 +83,13 @@ Widget	create_questionDialog();
    
    elimina il bottone di help 
 */
-qelimina_help_button()
+int qelimina_help_button()
 {
    Widget hb;
   
    hb = XmMessageBoxGetChild(questionDialog,XmDIALOG_HELP_BUTTON);
    XtDestroyWidget(hb);
+   return 0;
 }
 
 /* set_message 
@@ -90,7 +97,7 @@ qelimina_help_button()
  set del messaggio sulla message box
 */
 
-qset_message(char *mess)
+int qset_message(char *mess)
 {
    Arg args[1];
    Cardinal nargs;
@@ -100,6 +107,7 @@ qset_message(char *mess)
    nargs=0;
    XtSetArg(args[nargs],XmNmessageString,mesg);nargs++;
    XtSetValues(questionDialog,args,nargs);
+   return 0;
 }
 
 /*******************************************************************************
@@ -125,7 +133,7 @@ static void	okCallback_questionDialog( UxWidget, UxClientData, UxCallbackArg )
 	        libera_simulatore(simulatore);
 	 
 	     printf("Topsim Normally Terminated\n"); 
-	     exit();
+	     exit(0);
 	   break;
 	   case OPENSIM:
 	      /* do nothing */

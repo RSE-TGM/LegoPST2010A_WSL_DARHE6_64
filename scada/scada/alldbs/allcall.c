@@ -37,6 +37,8 @@ static char *_csrc = "@(#) %filespec: allcall.c-6.1.3 %  (%full_filespec: allcal
       rientro ed emissione
 */
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #include "switch.inc"         // contiene parametri di attivazione
 #include "g2comdb.inc"
@@ -59,8 +61,24 @@ extern short mbox_abilger;
 
 extern int ricPreviousAll(S_DBS_ALV *,S_MALLA);
 
+// External function declarations
+extern void wai(int);
+extern void trigger(int, int);
+extern void GestRep(int, int, int, int);
+extern void stamalt(void *);
+extern void stamal(void *);
+extern int cunita(int, int);
+extern void ricono(void *, int);
+extern void CmdBell(int);
+extern int bitvalue(void *, int);
+extern void bitset(void *, int, int);
+extern void gestri(int, int, int);
+extern int rew(int, int, void *);
+extern void tra(int, int);
+extern void rical(void *);
+extern void allsev(void *, int, short);
 
-_call ( )
+int _call ( )
 {
 struct buff_all app , *all_ex;   /* buffer di appoggio per trasf. messaggio */
                                  /* e modifiche X ric. autom. dopo INITDB   */

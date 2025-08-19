@@ -27,6 +27,7 @@ static char *_csrc = "@(#) %filespec: wrdb.c-3 %  (%full_filespec: wrdb.c-3:csrc
 */
 #include <osf1.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "g1tipdb.inc"
 #include "g2comdb.inc"
@@ -98,7 +99,10 @@ static char *_csrc = "@(#) %filespec: wrdb.c-3 %  (%full_filespec: wrdb.c-3:csrc
 
 extern DB_HEADER h_db;
 
-wrdb(type)
+// Function declaration
+int wbyte(int fd, short *buffer, long offset, int length);
+
+int wrdb(type)
 short type;
 {
 FILE *fp;

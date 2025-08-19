@@ -57,6 +57,10 @@ static char SccsID[] = "@(#)linfo.c	1.10\t3/27/95";
 #include <locale.h>
 #endif
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 #include <X11/Intrinsic.h>
 #include <X11/StringDefs.h>
 #include <Xm/Xm.h>
@@ -82,7 +86,7 @@ char pathmodel[256];
 int whatConfiguration; /* 1= solo descrizione 2 descr+lista moduli + foraus */
 Boolean editabile;     /* True = descrizione editabile False = non editabile */
 
-main(argc,argv)
+int main(argc,argv)
 	int 	argc;
 	char 	*argv[];
 {

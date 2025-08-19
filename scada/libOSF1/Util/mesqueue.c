@@ -19,8 +19,15 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include <pthread.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <sched.h>
 #include <mesqueue.h>
 #include <code.h>
+
+/* Function declarations */
+int acmea(int coda, char *buff, int lung);
+int scmea(int coda, char *buff);
+int GetAbsTime(int timeout, struct timespec *abstime);
 
 short enqueue(sep)
 QUEUE_PACKET *sep;
@@ -81,7 +88,7 @@ if(ret == 0)
 	pthread_mutex_lock(&(cd[sep->que].mutex_condition_r));
 	pthread_cond_signal(&(cd[sep->que].condition_r));
 	pthread_mutex_unlock(&(cd[sep->que].mutex_condition_r));
-	pthread_yield();
+	sched_yield();
 	}
 
 /*

@@ -12,6 +12,10 @@
 
 #include <Xm/SelectioB.h>
 
+/* Missing function declarations */
+extern void copy_file(char *, char *);
+extern swidget create_vis_msg(char *);
+
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
@@ -69,7 +73,7 @@ Widget	create_selectionBoxDialog1();
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
 
-copy_fileoutedi14()
+void copy_fileoutedi14()
 {
    copy_file("edi14.out",output_fil);
   create_vis_msg("Result Copy File Terminated!");
@@ -98,7 +102,7 @@ static void	okCallback_selectionBoxDialog1( UxWidget, UxClientData, UxCallbackAr
 	
 	printf("output_file = %s\n",output_fil);
 	
-	if( output_fil[0] == NULL)
+	if( output_fil[0] == '\0')
 	{
 	   create_vis_msg("Invalid Selection");
 	   return;

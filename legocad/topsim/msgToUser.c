@@ -43,7 +43,7 @@
 	and a #define.  The #define makes the variable name refer to the
 	corresponding entry in the context structure.
 *******************************************************************************/
-
+void set_something_val(Widget wid, String resource_name, XtArgVal value);
 typedef	struct
 {
 	int	Uxlevel;

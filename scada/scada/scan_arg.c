@@ -34,12 +34,17 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 */
 #include <osf1.h>
 #include <stdlib.h>
+#include <string.h>
+#include <strings.h>
 #include "switch.inc"
 extern char _STR_LOCK[];
 pub short sys_master;
 short tcp_retry=12;
 
-scan_arg(parameter)
+/* Function prototypes */
+void help(void);
+
+int scan_arg(parameter)
 	char *parameter;
 	{
 	int ival,j,lun;
@@ -194,7 +199,7 @@ scan_arg(parameter)
    }
 
 
-help()
+void help()
 	{
    printf("\n\nSCADA 32 bit - versione: %s \n\n",(_STR_LOCK+7));
 

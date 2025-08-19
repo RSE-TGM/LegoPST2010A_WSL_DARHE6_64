@@ -5,6 +5,9 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <X11/Shell.h>
 #include <Xm/MenuShell.h>
@@ -80,6 +83,15 @@ Cardinal narg;
 /* numero di finestre di connessione aperte */
 int fin_conn_open = 0;
 
+/* Function declarations */
+int read_f01(MODELLO *task);
+int tominus(char *str);
+int libera_modello(MODELLO *task);
+int save_S01(char *path);
+int check_delta_time(void);
+Widget create_questionDialog(Widget parent, int type);
+int get_model_selected(swidget ListaMod,int **positions,int *count);
+
 /*******************************************************************************
 	The following function is an event-handler for posting menus.
 *******************************************************************************/
@@ -97,7 +109,7 @@ static void	_UxTopSimMenuPost( wgt, client_data, event, ctd )
 
 	if ( event->xbutton.button == which_button )
 	{
-		XmMenuPosition( menu, event );
+		XmMenuPosition( menu, (XButtonPressedEvent*)event );
 		XtManageChild( menu );
 	}
 }
@@ -263,15 +275,17 @@ int distruggi_interfaccie( swidget wid )
     }
 }
 
-set_wait_cursor()
+int set_wait_cursor()
 {
    XDefineCursor(UxDisplay,XtWindow(TopSim),waitCursor);
    XmUpdateDisplay(UxTopLevel);
+   return 0;
 }
 
-set_normal_cursor()
+int set_normal_cursor()
 {
    XDefineCursor(UxDisplay,XtWindow(TopSim),normalCursor);
+   return 0;
 }
 
 /*** 
@@ -322,7 +336,7 @@ int init_modello(MODELLO *task)
 /*
  imposta il menu di edit 
 */
-setta_edit_menu()
+int setta_edit_menu()
 {
    Cardinal nitem;
 
@@ -372,6 +386,7 @@ setta_edit_menu()
          XtSetValues(MainEditConnect,argq,narg);
       }
    }
+   return 0;
 }
 
 /***
@@ -395,7 +410,7 @@ void set_listbl(SIMULATORE *sim)
    } 
 }
 
-esiste_task(MODELLO *task)
+int esiste_task(MODELLO *task)
 {
    int i,len;
    char appo1[STRLONG],appo2[STRLONG];
@@ -416,7 +431,7 @@ esiste_task(MODELLO *task)
          sprintf(appo2,"%s/",simulatore->modelli[i]->local_path);
       tominus(appo1);
       tominus(appo2);
-      if( strcmp(appo1,appo2) == NULL)
+      if( strcmp(appo1,appo2) == 0)
          return(TRUE);
    }
    return(FALSE);
@@ -595,9 +610,10 @@ void aggiorna_sccsstate()
 }
 
 
-get_model_selected(swidget ListaMod,int **positions,int *count )
+int get_model_selected(swidget ListaMod,int **positions,int *count )
 {
    XmListGetSelectedPos(ListaMod,positions,count); 
+   return 0;
 }
 
 
@@ -606,12 +622,13 @@ get_model_selected(swidget ListaMod,int **positions,int *count )
    widget 
 ***/
     
-set_wind_position(Widget wid,Position x,Position y)
+int set_wind_position(Widget wid,Position x,Position y)
 {
    narg=0;
    XtSetArg(argq[narg],XmNx,x);narg++;
    XtSetArg(argq[narg],XmNy,y);narg++;
    XtSetValues(wid,argq,narg);
+   return 0;
 }
 
 
@@ -896,7 +913,7 @@ Boolean aggiungi_task(MODELLO *task)
 }
 
 
-compatta_modelli(int indice_start)
+int compatta_modelli(int indice_start)
 {
    int i;
 
@@ -905,6 +922,7 @@ compatta_modelli(int indice_start)
        simulatore->modelli[i] = simulatore->modelli[i+1];
    }
    simulatore->modelli[simulatore->nmodelli-1] = 0;
+   return 0;
 }
 
 /***
@@ -931,7 +949,7 @@ Boolean rimuovi_task(MODELLO *task)
    }
 }
 
-confermata_remove_task()
+int confermata_remove_task()
 {
    int *lpos,nsel;
 
@@ -947,6 +965,7 @@ confermata_remove_task()
       confermata_remove_task();
 
    setta_edit_menu();    
+   return 0;
 }
 
 

@@ -73,12 +73,13 @@ Widget	create_messageDialog();
    
    elimina il bottone di help 
 */
-melimina_help_button()
+int melimina_help_button()
 {
    Widget hb;
   
    hb = XmMessageBoxGetChild(messageDialog,XmDIALOG_HELP_BUTTON);
    XtDestroyWidget(hb);
+   return 0;
 }
 
 /* set_message 
@@ -86,7 +87,7 @@ melimina_help_button()
  set del messaggio sulla message box
 */
 
-mset_message(char *mess)
+int mset_message(char *mess)
 {
    Arg args[1];
    Cardinal nargs;
@@ -96,6 +97,7 @@ mset_message(char *mess)
    nargs=0;
    XtSetArg(args[nargs],XmNmessageString,mesg);nargs++;
    XtSetValues(messageDialog,args,nargs);
+   return 0;
 }
 
 /*******************************************************************************

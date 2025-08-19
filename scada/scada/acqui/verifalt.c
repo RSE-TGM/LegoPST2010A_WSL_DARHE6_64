@@ -46,7 +46,7 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 MISTIME timeac;       /* valore tempo posto periferico    */
 
-verifalt(pack,mess)
+void verifalt(pack,mess)
 QUEUE_PACKET *pack;
 S_MALLA *mess;
 {

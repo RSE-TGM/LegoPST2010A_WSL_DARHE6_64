@@ -775,7 +775,11 @@ int InitEnv ( void ) {
     fprintf(stderr, "       LICENSE CONFIGURATION ERROR!!!\n");
     fprintf(stderr, "#################################################\n");
     fprintf(stderr, "Environment variable ALTERLEGO_CAP_DIR not set!!!\n");
-    return(-1);
+       fprintf(stderr, "       MA VA BENE LO STESSO\n");
+       fprintf(stderr, "#################################################\n");
+//       GUAG 2024
+//       return ( -1 ) ;
+       return ( 0 ) ;
   }
 
   if ( Debug ) {
@@ -863,7 +867,11 @@ printf("CAP DEBUG: Buffer = %s\n",Buffer);
     fprintf(stderr, "#################################################\n");
     fprintf(stderr, "License configuration file CAP.conf not found in:\n");
     fprintf(stderr, "ALTERLEGO_CAP_DIR = %s\n", CAPdirname);
-    return (-1) ;
+       fprintf(stderr, "       MA VA BENE LO STESSO\n");
+       fprintf(stderr, "#################################################\n");
+//       GUAG 2024
+//       return ( -1 ) ;
+       return ( 0 ) ;
 
   }
 

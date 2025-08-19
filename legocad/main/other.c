@@ -11,9 +11,12 @@
 static char *_csrc = "@(#) %filespec: other.c-3 %  (%full_filespec: other.c-3:csrc:3 %)";
 #endif
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <X11/Intrinsic.h>
 
 #include "legomain.h"
 
@@ -24,7 +27,7 @@ static char *_csrc = "@(#) %filespec: other.c-3 %  (%full_filespec: other.c-3:cs
 
 char *varenv;
 
-set_var_env(char *var,char *value)
+void set_var_env(char *var,char *value)
 {
    varenv = malloc(sizeof(char)*(strlen(var) + strlen(value)));
    strcpy(varenv,"");

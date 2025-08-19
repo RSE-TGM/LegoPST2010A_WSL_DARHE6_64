@@ -54,6 +54,8 @@
 /* VARIABILI GLOBALI ESTERNE					*/
 /****************************************************************/
 
+extern int lcDestroySwidget(Widget);
+
 extern Boolean non_salvato;
 
 extern Arg args[20];
@@ -127,6 +129,12 @@ static _UxCdbox_user_eq	*UxDbox_user_eqContext;
 
 Widget	create_dbox_usereq();
 
+/* Forward declarations for functions defined in this file */
+int text_user_eq(void);
+int crea_label_eq(char *stringa, int num_eq, int leftPos, int rightPos, Position posy);
+int crea_texts_eq(Widget *wdg, int leftPos, int rightPos, int rightOff, Position posy, int num_col);
+int memo_textD1(Boolean flag);
+
 /*******************************************************************************
 	Auxiliary code from the Declarations Editor:
 *******************************************************************************/
@@ -138,7 +146,7 @@ Widget	create_dbox_usereq();
  ***     delle equazioni del nuovo modulo.
  ***     Abilitata dopo le definizioni per il nuovo modulo.
  ***/
-text_user_eq()
+int text_user_eq()
 {
    int i;
    XmString cstring;
@@ -201,7 +209,7 @@ text_user_eq()
  ***      Crea la label per intestare i text relativi al significato delle
  ***      equazioni.
  ***/
-crea_label_eq (stringa,num_eq,leftPos,rightPos,posy)
+int crea_label_eq (stringa,num_eq,leftPos,rightPos,posy)
 char *stringa;
 int num_eq;
 int leftPos, rightPos;
@@ -246,7 +254,7 @@ Position posy;
  ***      Crea i text widget relativi al significato delle equazioni, unita di
  ***      misura e costante di normalizzazione.
  ***/
-crea_texts_eq (wdg,leftPos,rightPos,rightOff,posy,num_col)
+int crea_texts_eq (wdg,leftPos,rightPos,rightOff,posy,num_col)
 Widget *wdg;
 int leftPos, rightPos, rightOff;
 Position posy;
@@ -294,7 +302,7 @@ Boolean boh;
  ***     Boolean flag : indica se la window deve sparire o meno.
 memorizza il contenuto dei text-widget della window dei dati nelle
 variabili globali str_dichMOD, str_codMOD e str_resMOD */
-memo_textD1(flag)
+int memo_textD1(flag)
 Boolean flag;
 {
    int i;
@@ -317,9 +325,9 @@ Boolean flag;
    {
       UxDestroySwidget(dbox_user_eq);
       dbox_usereq_managed = False;    
-      XtFree(text_signeq);
-      XtFree(text_uniteq);
-      XtFree(text_cosnor);
+      XtFree((char*)text_signeq);
+      XtFree((char*)text_uniteq);
+      XtFree((char*)text_cosnor);
    }
 }
 
@@ -366,9 +374,9 @@ static void	activateCB_cancel_eq_pb( UxWidget, UxClientData, UxCallbackArg )
 	UxDestroySwidget(dbox_user_eq);
 	dbox_usereq_managed = False;
 	
-	XtFree(text_signeq);
-	XtFree(text_uniteq);
-	XtFree(text_cosnor);
+	XtFree((char*)text_signeq);
+	XtFree((char*)text_uniteq);
+	XtFree((char*)text_cosnor);
 	}
 	UxDbox_user_eqContext = UxSaveCtx;
 }

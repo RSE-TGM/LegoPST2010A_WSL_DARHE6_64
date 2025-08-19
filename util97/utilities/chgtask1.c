@@ -22,6 +22,8 @@ static char SccsID[] = "@(#)chgtask1.c	1.1\t1/8/96";
 
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
+#include<ctype.h>
 
 #define DIM 200
 #define LUNG_VAR 60
@@ -54,7 +56,7 @@ Inserisce nuovo nome di task di regolaz.in var_regolazione[][]
 int risultato,x;
 char *car;
 /*
-inserire controllo per verificare che la variabile non sia già 
+inserire controllo per verificare che la variabile non sia giï¿½ 
 stata inserita
 */
 
@@ -118,7 +120,7 @@ for(i=0;i<4;i++)
 sscanf(stringa,"%s %s %s %[^\n]%s",stringhe[0],stringhe[1],stringhe[2],stringhe[3]);
 
 /*
-Se il task è di regolazione cambia la var sulla 1a colonna
+Se il task ï¿½ di regolazione cambia la var sulla 1a colonna
 */
 
 if(nome_task!=NULL)
@@ -128,7 +130,7 @@ if(nome_task!=NULL)
 
 	if(strlen(stringhe[0])>6)
 		{
-		printf("Variabili già convertite\n");
+		printf("Variabili giï¿½ convertite\n");
 		exit(1);		
 		}
 	strcat(stringhe[0],due_caratteri);
@@ -140,7 +142,7 @@ for(i=0;i<num_task_regolazione;i++)
 	{	
 	
 /*
-Se il task è di regolazione cambia nome variabile
+Se il task ï¿½ di regolazione cambia nome variabile
 */	
 	if((strstr(stringhe[1],&var_regolazione[i][0]))!=NULL)
 		{
@@ -148,11 +150,11 @@ Se il task è di regolazione cambia nome variabile
 		due_caratteri[0]=stringhe[1][0];
 		due_caratteri[1]=stringhe[1][1];
 /*
-controllo per verificare se le var sono già state modificate
+controllo per verificare se le var sono giï¿½ state modificate
 */		
 		if(strlen(stringhe[2])>6)/*modifica*/
 			{
-			printf("Variabile già modificata\n");
+			printf("Variabile giï¿½ modificata\n");
 			exit(1);
 			}
 		strcat(stringhe[2],due_caratteri);
@@ -227,7 +229,7 @@ while ((fgets(linea,DIM-1,fp1))!=NULL)
 	
 	if(num_task_regolazione>200)/*controllo sul # di task*/
 		{
-		printf("N° di task troppo grande: programma terminato\n");
+		printf("Nï¿½ di task troppo grande: programma terminato\n");
 		exit(1);
 		}
 		
@@ -286,7 +288,7 @@ Cambia nomi dei task di regolazione e delle relative variabili di processo
 		}/*end if(i==6)*/
 
 /*
-Se leggi *** allora la prossima linea conterrà un task
+Se leggi *** allora la prossima linea conterrï¿½ un task
 */	
 	if(*linea=='*')
 		{

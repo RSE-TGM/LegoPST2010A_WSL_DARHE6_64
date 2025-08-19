@@ -36,12 +36,12 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "print.inc"
 #include "virtinv.h"
 
-resetlbg()
+void resetlbg(void)
 {
    short i;
    S_PVIRT * pVirt;
 
-   if(LbgFp!=NULL) fclose(LbgFp);      // no! chiudo il file attualmente in uso…
+   if(LbgFp!=NULL) fclose(LbgFp);      // no! chiudo il file attualmente in usoï¿½
 
    pVirt=&virtprn[0];
    for(i=0;i<n_virt_lbg+n_virt_tab;i++,pVirt++)

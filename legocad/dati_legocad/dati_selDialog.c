@@ -34,9 +34,18 @@
 
 #include <malloc.h>
 #include <string.h>
+#include <unistd.h>
 #include <f03.h>
 #include <libuimleg.h>
 #include "dati.h"
+
+/* Function declarations */
+int write_file_f14(FILE *fp);
+int read_file_f03(void);
+int read_file_f14(int neqsis, int nu);
+void update_pulldown(void);
+void update_contatori(void);
+void lancia_macro(Widget widget, Widget list_widget);
 Boolean  saving;
 extern Boolean graphics_on;
 

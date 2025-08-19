@@ -34,7 +34,9 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 
 #include "fileop.inc"
 
-ctrlstato(stato,tab,diz)
+extern int exstati(char *, char *);
+
+int ctrlstato(stato,tab,diz)
 char *stato;
 char *diz;
 S_FSTATO *tab ;

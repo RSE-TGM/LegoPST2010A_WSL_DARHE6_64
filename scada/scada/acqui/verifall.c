@@ -43,9 +43,14 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "tipal.inc"
 #include "mesqueue.h"
 
+/* Function prototypes */
+extern int bitvalue(short *, short);
+extern void bitset(short *, short, short);
+extern void verifalt(QUEUE_PACKET *, S_MALLA *);
+
 extern short c_visall;
 
-verifall(punt,tipo)
+void verifall(punt,tipo)
 short punt;
 short tipo;
 {

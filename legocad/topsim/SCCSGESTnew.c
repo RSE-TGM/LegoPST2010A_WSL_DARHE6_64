@@ -5,6 +5,8 @@
 *******************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <Xm/Xm.h>
 #include <Xm/MenuShell.h>
 #include "UxXt.h"
@@ -23,6 +25,11 @@
 /*******************************************************************************
 	Includes, Defines, and Global variables from the Declarations Editor:
 *******************************************************************************/
+
+void crea_item();
+void set_something_val(Widget wid, String resource_name, XtArgVal value);
+char *extract_string(XmString);
+extern Boolean get_working_directory();
 
 /*
    modulo SCCSGESTnew.i
@@ -74,7 +81,7 @@ static void	_UxSCCSGESTnewMenuPost( wgt, client_data, event, ctd )
 
 	if ( event->xbutton.button == which_button )
 	{
-		XmMenuPosition( menu, event );
+		XmMenuPosition( menu, (XButtonEvent *)event );
 		XtManageChild( menu );
 	}
 }
@@ -240,7 +247,7 @@ int read_file_prs()
    ver data user comment 
    devo creare nitem = nver
 */
-crea_item()
+void crea_item()
 {
    char result[MAXLENCOMM+(MAXLEN*3)];
    int i;

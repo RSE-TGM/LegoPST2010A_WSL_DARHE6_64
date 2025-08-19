@@ -22,6 +22,9 @@ static char SccsID[] = "@(#)modpagutil.c	1.1\t1/8/96";
 
 #include<stdio.h>
 #include<string.h>
+#include<unistd.h>
+
+void sostituisci(char*,char*,char**,int,int,char*);
 
 #define DIM 200
 
@@ -82,7 +85,7 @@ char *wordkeycolor10[]={"coloreStimato1:","coloreStimato2:",
 #endif
                   
 
-menu1()        
+int menu1()        
 /*gestisce un secondo menu se l'opzione scelta nel precedente menu' e' 2 */
 {
 int s1=0;
@@ -152,7 +155,7 @@ for(i=0;i<lungpag;i++)
 #ifdef VMS
 tiposoglia(int ritornomenu,char *colore,char *path,char *salva,int col)
 #else
-tiposoglia(int ritornomenu,char *colore,char *path,char *salva,char *bak2,int col)
+void tiposoglia(int ritornomenu,char *colore,char *path,char *salva,char *bak2,int col)
 #endif
 {
              /*verifico se l'opz e' diversa da zero o non maggiore
@@ -191,7 +194,7 @@ tiposoglia(int ritornomenu,char *colore,char *path,char *salva,char *bak2,int co
 #endif
                         }
                         t=0;
-                        return(-1);
+                        return;
                    break;
 
                    case 1:

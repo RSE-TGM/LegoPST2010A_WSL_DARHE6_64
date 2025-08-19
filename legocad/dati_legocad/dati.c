@@ -81,6 +81,12 @@ Boolean graphics_on; /* indica se si desidera la rappresentazione dello
                      schema associato o meno */
 
 #include "dati.h"
+#include <stdlib.h>
+#include <unistd.h>
+
+/* Missing function declarations */
+int read_file_f03(void);
+int read_file_f14(int neqsis, int nu);
 
 int stato;
 /*
@@ -91,9 +97,7 @@ extern int neqsis,nu;
 
 Widget topwidget;
 
-main(argc,argv)
-	int 	argc;
-	char 	*argv[];
+int main(int argc, char *argv[])
 {
 	/*-----------------------------------------------------------
 	 * Declarations.

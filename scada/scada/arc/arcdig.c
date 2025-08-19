@@ -34,9 +34,10 @@ static char *_csrc = "@(#) %filespec: %  (%full_filespec: %)";
 #include "g2comdb.inc"
 #include "arc.inc"
 
+// External function declarations
+extern void pscserr(int, int, int, int, int);
 
-arcdig(point)
-PUNTDBS *point;
+short arcdig(PUNTDBS *point)
 {
 
 switch(point->ext)

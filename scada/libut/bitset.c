@@ -10,6 +10,8 @@
 #ifndef lint
 static char *_csrc = "@(#) %filespec: bitset.c-5 %  (%full_filespec: bitset.c-5:csrc:1 %)";
 #endif
+#include <stdio.h>
+
 /*-> bitset
 
      setto bit  in una word

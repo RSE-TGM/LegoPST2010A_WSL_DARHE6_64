@@ -39,6 +39,14 @@ static char SccsID[] = "@(#)doc_var.c	1.10\t3/31/95";
 #include "autodoc.h"
 #include "unita.h"
 
+int conta_righe_var(InfoBlock*, int, char*);
+void ScriviIndice(FILE*, ModelBlockStruct*, int*, int*, int, int, char*);
+void StampaIntBlocco(FILE*, ModelBlockStruct*, int*);
+int Empty(char*);
+void StampaBlankLine(FILE*, int*, int);
+int ContaRigheNota(char*);
+void riempi(char*, int);
+
 extern char page_prefix_var[];
 
 /*** doc_var_blocco(pblock, fp_doc, fp_ind, riga_doc, pag_doc, riga_ind,
@@ -57,11 +65,7 @@ extern char page_prefix_var[];
  ***    Descrizione:
  ***       stampa la documentazione di un blocco relativa alle variabili
  ***/
-doc_var_blocco(pblock, fp_doc, fp_ind, riga_doc, pag_doc, riga_ind, pag_ind,
-		max_righe_p, max_righe_l)
-ModelBlockStruct *pblock;
-FILE *fp_doc, *fp_ind;
-int *riga_doc, *pag_doc,*riga_ind, *pag_ind, max_righe_p, max_righe_l;
+int doc_var_blocco(ModelBlockStruct *pblock, FILE *fp_doc, FILE *fp_ind, int *riga_doc, int *pag_doc, int *riga_ind, int *pag_ind, int max_righe_p, int max_righe_l)
 {
    InfoBlock *dati_blocco;
    int i, j, num_var, righe_blocco;
@@ -209,10 +213,7 @@ int *riga_doc, *pag_doc,*riga_ind, *pag_ind, max_righe_p, max_righe_l;
  ***       calcola il numero di righe che occupa la documentazione relativa
  ***       alle variabili di un blocco
  ***/
-int conta_righe_var(dati_blocco, num_var, nota_blocco)
-InfoBlock *dati_blocco;
-char *nota_blocco;
-int num_var;
+int conta_righe_var(InfoBlock *dati_blocco, int num_var, char *nota_blocco)
 {
    int i, num = 0;
 
@@ -253,9 +254,7 @@ int num_var;
  ***       Stampa l'intestazione della tabella della documentazione
  ***       delle variabili.
  ***/
-void StampaIntestVar(fp, riga)
-FILE *fp;
-int *riga;
+void StampaIntestVar(FILE *fp, int *riga)
 {
    char stringa[133];
 
