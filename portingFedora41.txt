@@ -55,3 +55,6 @@ differanza tra due file sui primi 50 caratteri di ogni linea:
 diff <(cut -c -50 f14.out) <(cut -c -50 proc/f14.dat)
 
 documentazione funzioni. https://www.die.net/
+
+Disabilita il log su free mmoria xtfree. Definire la variabile di envronment in .profile_legoroot:
+LG_DISABLE_RTFREE_ERRORS=1
