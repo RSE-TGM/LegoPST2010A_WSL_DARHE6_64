@@ -1100,9 +1100,13 @@ char *messaggio;
 int esito;
 
 #ifndef OLD_STAT
-   sprintf (old_val,"%4.1f",statistiche.stato_parametri.stepscaling_sim);
+// GUAG2025
+//   sprintf (old_val,"%4.1f",statistiche.stato_parametri.stepscaling_sim);
+   sprintf (old_val,"%10.5f",statistiche.stato_parametri.stepscaling_sim);
 #else
-   sprintf (old_val,"%4.1f",val.actual.stepscaling_sim);
+// GUAG2025
+//   sprintf (old_val,"%4.1f",val.actual.stepscaling_sim);
+   sprintf (old_val,"%10.5f",val.actual.stepscaling_sim);
 #endif
    create_richiestaDati (w, STEPSCALE, old_val, risp);
    new_val = (float)atof(risp);
@@ -1112,10 +1116,13 @@ int esito;
    messaggio = malloc (strlen(STEPSCALE)+strlen(OPER_FALLITA)+20);
 
    if (SD_stepscaling (BANCO, &new_val) >0)
-      sprintf (messaggio,"%s :%4.1f",STEPSCALE,new_val);
+// GUAG2025
+//      sprintf (messaggio,"%s :%4.1f",STEPSCALE,new_val);
+      sprintf (messaggio,"%s :%10.5f",STEPSCALE,new_val);
    else
       {
-      sprintf (messaggio,"%s :%4.1f %s",STEPSCALE,new_val,OPER_FALLITA);
+//      sprintf (messaggio,"%s :%4.1f %s",STEPSCALE,new_val,OPER_FALLITA);
+      sprintf (messaggio,"%s :%10.5f %s",STEPSCALE,new_val,OPER_FALLITA);
       esito = -1;
       attenzione(w,messaggio);
       }

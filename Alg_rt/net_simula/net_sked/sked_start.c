@@ -150,10 +150,10 @@ static void update_envir(char**,char[][FILENAME_MAX], char**, int, char*);
 
 static void update_envir(char **envir, char envp[][FILENAME_MAX], char** task_envp, int env_idx, char* reinit)
 {
-printf("-----------------------> DEBUG update_envir: inizio - N001=%s \n",getenv("N001"));
+// printf("-----------------------> DEBUG update_envir: inizio - N001=%s \n",getenv("N001"));
   // Copia le variabili d'ambiente esistenti in task_envp, saltando LD_LIBRARY_PATH
    for (char **env = envir; *env != NULL && env_idx < MAXENVVAR - 10; ++env) { // -10 per lasciare spazio
-printf("-----------------------> DEBUG update_envir: N001=%s *env=%s\n",getenv("N001"), *env);
+// printf("-----------------------> DEBUG update_envir: N001=%s *env=%s\n",getenv("N001"), *env);
        if (strncmp(*env, "LD_LIBRARY_PATH=", strlen("LD_LIBRARY_PATH=")) == 0) {
            printf("update_envir: Rimuovo LD_LIBRARY_PATH: %s \n", *env);
            // Salva il valore se necessario
@@ -165,9 +165,9 @@ printf("-----------------------> DEBUG update_envir: N001=%s *env=%s\n",getenv("
        } else {
            // Copia la stringa nel buffer envp e il puntatore in task_envp
            if (strlen(*env) < FILENAME_MAX) {
-printf("-----------------------> DEBUG update_envir: N001=%s *env=%s env_idx=%d\n",getenv("N001"), *env, env_idx);
+// printf("-----------------------> DEBUG update_envir: N001=%s *env=%s env_idx=%d\n",getenv("N001"), *env, env_idx);
             strcpy(envp[env_idx], *env);
-printf("-----------------------> DEBUG update_envir: DOPO strcoy N001=%s *env=%s env_idx=%d\n",getenv("N001"), *env, env_idx);
+// printf("-----------------------> DEBUG update_envir: DOPO strcoy N001=%s *env=%s env_idx=%d\n",getenv("N001"), *env, env_idx);
 
             task_envp[env_idx] = envp[env_idx];
                env_idx++;

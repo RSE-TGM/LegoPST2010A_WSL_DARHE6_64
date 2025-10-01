@@ -2414,7 +2414,9 @@ else
     if (val_agg.stepscaling_sim_a == 1)
         {
 	if(val_agg.stepscaling_sim>0)
-		sprintf (app_str, "%7.1f", val_agg.stepscaling_sim);
+		sprintf (app_str, "%10.5f", val_agg.stepscaling_sim);
+// GUAG2025 
+//		sprintf (app_str, "%7.1f", val_agg.stepscaling_sim);
 	c_app_str = XmStringCreateLtoR (app_str, XmSTRING_DEFAULT_CHARSET);
 	set_something_val (widget_array[k_stepscaling_sim_val], XmNlabelString, (XtArgVal) c_app_str);
 	XmStringFree (c_app_str);

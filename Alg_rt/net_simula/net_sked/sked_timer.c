@@ -67,6 +67,7 @@ void sked_timer(int agg_dbpunti)
       nnrip = 1;
 
       tempo_sim = tempo_sim + ((float) nnrip) * 100.0 * fattore_step;
+
       /*
        * se la velocita e' minore di 0 la schedulazione procede alla velocita
        * massima 
@@ -82,6 +83,17 @@ void sked_timer(int agg_dbpunti)
 
 	 ritardo_sim = tempo_impiegato - ((float) nnrip / (velocita)) * 100 * fattore_step + (ritardo_sim);
 	 /* printf("tempo impiegato =%f\n",tempo_impiegato); */
+
+      // DEBUG GUAG2025
+   //    printf("sked_timer--> tempo_sim=%f tempo_ritardo=%f velocità=%f fattore_step=%f tempo_impiegato=%f fattore_vel=%f tempo_iniziale=%f tempo_attesa=%d\n",
+   //     tempo_sim,
+   //     ritardo_sim,
+   //     velocita,
+   //     fattore_step,
+   //     tempo_impiegato,
+   //     ((float) nnrip / (velocita)) * 100 * fattore_step,
+   //    tempo_iniziale,
+   // (unsigned int) (ritardo_sim * (-1)));
 
 	 /* se il ritardo e' negativo attende */
 	 if (ritardo_sim < 0)
