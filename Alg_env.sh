@@ -379,6 +379,10 @@ export LD_LIBRARY_PATH=$LG_BASE/tcltktix/lib:$LD_LIBRARY_PATH
 alias lgpc='wish $LG_TIX/legopc.tix'
 export LG_WISH=$LEGOROOT/tcltktix-8.3.5b/tcltktix/bin/wish
 alias lgpcu='$LG_WISH $LG_TIX/legopc.tix'
+lgpc2() {
+  wish $LG_TIX/legopc.tix
+#  /percorso/completo/al/programma --con --opzioni "$@"
+}
 #
 #############################################################
 #                 LINUX

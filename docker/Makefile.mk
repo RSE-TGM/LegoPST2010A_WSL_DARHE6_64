@@ -8,7 +8,7 @@ BUILD_SCRIPT := ./BuildImage
 
 # Dipendenze per la regola di build dell'immagine
 #BUILD_DEPENDENCIES := $(DOCKERFILE) lgdock lgdock startDock
-BUILD_DEPENDENCIES := $(DOCKERFILE) lgdock 
+BUILD_DEPENDENCIES := $(DOCKERFILE) lgdock lgdock_socat
 
 # Target principale, spesso chiamato 'all' o il nome dell'eseguibile/immagine principale
 # In questo caso, potremmo considerare il risultato di BuildImage come un file "segnaposto"
@@ -19,7 +19,7 @@ BUILD_DEPENDENCIES := $(DOCKERFILE) lgdock
 # Questo è il modo più semplice se BuildImage non crea un file specifico tracciabile da Make.
 .PHONY: all build clean check_docker
 
-all: build $(LEGORT_BIN)/lgdock
+all: build $(LEGORT_BIN)/lgdock $(LEGORT_BIN)/lgdock_socat
 
 check_docker:
 	@if ! command -v docker >/dev/null 2>&1; then \
@@ -55,6 +55,10 @@ $(LEGORT_BIN)/lgdock: lgdock.sh
 	cp $? $@
 	chmod 755 $@
 
+$(LEGORT_BIN)/lgdock_socat: lgdock_socat.sh
+	cp $? $@
+	chmod 755 $@
+
 # Regola di pulizia (opzionale, ma buona pratica)
 clean:
 	@echo "Pulizia..."
@@ -64,6 +68,8 @@ clean:
 	# -rm -f $(LAST_BUILD_STAMP)
 	@echo "Rimuovo lgdock"
 	rm -f $(LEGORT_BIN)/lgdock
+	@echo "Rimuovo lgdock_socat"
+	rm -f $(LEGORT_BIN)/lgdock_socat
 	@echo "Pulizia completata."
 
 # Nota: L'uso di '@' all'inizio di un comando sopprime la stampa del comando stesso.
