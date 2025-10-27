@@ -11,6 +11,15 @@ HOST_GROUP_ID=$(id -g)
 #HOST_USER_HOME="/home/$HOST_USERNAME" # Home dell'utente SULL'HOST
 HOST_USER_HOME="$HOME" # Home dell'utente SULL'HOST
 DESIRED_USER_PASSWORD=$HOST_USERNAME
+HOST_DEFAULTS_DIR="$HOME/defaults"
+echo "=== Controllo della directory: $HOST_DEFAULTS_DIR ==="
+if [[ -d "$HOST_DEFAULTS_DIR" ]]; then
+    echo "La directory '$HOST_DEFAULTS_DIR' esiste già."
+else
+    echo "La directory '$HOST_DEFAULTS_DIR' NON esiste. La creo"
+    mkdir -p "$HOST_DEFAULTS_DIR"
+fi
+
 
 echo "Avviando container per utente: $HOST_USERNAME (UID: $HOST_USER_ID, GID: $HOST_GROUP_ID)"
 echo "Directory home host: $HOST_USER_HOME"
