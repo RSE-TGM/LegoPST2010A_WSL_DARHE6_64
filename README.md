@@ -44,23 +44,10 @@ LegoPST/
 ```
 
 ## 🚀 Quick Start
+The quickest way to run LegoPST is to launch it in a [Docker container](#option-1-docker-container-execution), without installing the package and without having a machine running the Fedora 41 Linux distribution. In this case the host machine can be a generic Linux distribution running on a X86-64, Intel or AMD platform.
+Alternatively, if you want a stable installation on your Fedora 41 machine, you can [download and install directly in your Fedora](#option-2-running-into-a-fully-configured-linux-fedora-41-distribution).
 
-### Download package and set up environment
 
-
-```bash
-# From the user HOME dirictory
-cd $HOME 
-# Clone the repository, git is the prerequisite
-git clone remotepath/to/LegoPST2010A_WSL_DARHE6_64.git
-cd LegoPST2010A_WSL_DARHE6_64  
-source .profile_legoroot # Environment setup
-# The environment variable LEGOROOT will be defined as LEGOROOT=$HOME/LegoPST2010A_WSL_DARHE6_64
-
-# For a stable LEGOROOT installation, it is recommend to add LEGOROOT set up to .bashrc with this command:
-echo "source $LEGOROOT/.profile_legoroot " >> $HOME/.bashrc
-
-```
 ### Option 1: Docker Container Execution
 #### Prerequisites
 ```bash
@@ -86,9 +73,9 @@ sudo systemctl enable --now docker
 sudo docker run hello-world
 ```
 
+Once installed Docker, legoPST can be launched by running the following command:
 ```bash
-# In a machine with Docker installed you can Run LegoPST in the preconfigured Docker container:
-lgdock
+ bash -c "$(curl -fsSL https://gist.githubusercontent.com/aguag/d7c030f939f69b07784a309889b8510a/raw/lgdock.sh)"
 
 # The lgdock command automatically starts:
 # - Fedora 41 container with all dependencies
@@ -97,7 +84,13 @@ lgdock
 # - X11 support for graphical applications
 # - Fully configured LegoPST environment
 ```
-### Option 2: running into a fully configured linux Fedora 41 distribution
+If you have problem with the X11 display, you can try to tunnelize X11 with the socat utility that shall be installed into your host machine. The command will be:
+```bash
+ bash -c "$(curl -fsSL https://gist.githubusercontent.com/aguag/83c887ef78610842508b9f972130d3e1/raw/lgdock_socat.sh)"
+```
+
+
+### Option 2: Running into a fully configured linux Fedora 41 distribution
 #### Prerequisites
 
 Fedora 41 running into a :
@@ -142,6 +135,29 @@ sudo dnf install gcc gfortran make
 #To install this required dependency, execute the following script:
 sudo sh $LEGOROOT/gdbm-install/install.sh
 ```
+
+### Download package and set up environment
+
+```bash
+# From the user HOME dirictory
+cd $HOME 
+# Clone the repository, git is the prerequisite
+git clone remotepath/to/LegoPST2010A_WSL_DARHE6_64.git
+cd LegoPST2010A_WSL_DARHE6_64  
+source .profile_legoroot # Environment setup
+# The environment variable LEGOROOT will be defined as LEGOROOT=$HOME/LegoPST2010A_WSL_DARHE6_64
+
+# For a stable LEGOROOT installation, it is recommend to add LEGOROOT set up to .bashrc with this command:
+echo "source $LEGOROOT/.profile_legoroot " >> $HOME/.bashrc
+
+```
+
+```bash
+# Note: In a machine with Docker installed you can Run LegoPST in the preconfigured Docker container:
+lgdock
+```
+
+
 #### Environment Configuration and Installation
 
 ```bash
@@ -177,7 +193,7 @@ make -f Makefile.mk clean
 make -f Makefile.mk
 
 # then go to 
-# Option 2 - running in a fully configured Fedora 41
+# Option 2 - Running in a fully configured Fedora 41
 ```
 
 ## 🎮 Usage

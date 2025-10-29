@@ -4,6 +4,16 @@
 # Crea dinamicamente l'utente dell'host nel container
 #
 
+# Controlla se Docker è installato
+if ! command -v docker >/dev/null 2>&1; then
+    echo "---------------------------------------------------------------------"
+    echo "WARNING: Docker appears to be missing or is not in your PATH."
+    echo "         Please install Docker to create the LegoPST container. "
+    echo "---------------------------------------------------------------------"
+    exit 0
+fi
+
+
 # Ottieni le informazioni dell'utente host
 HOST_USERNAME=$(whoami)
 HOST_USER_ID=$(id -u)
