@@ -13,6 +13,9 @@ Inoltre lo script consente il download di una applicazione demo di LegoPST costi
 # Esecuzione dello script:  
  bash -c "$(curl -fsSL https://gist.githubusercontent.com/aguag/d7c030f939f69b07784a309889b8510a/raw/lgdock.sh)"
 
+# Esecuzione dello script multipiattaforma:  
+ bash -c "$(curl -fsSL https://gist.githubusercontent.com/aguag/85841fc5c6eba4ac860f4f648da4f89b/raw/lgdock_multi.sh)" _ "-s"
+
 # Esecuzione dello script con socat:  
  bash -c "$(curl -fsSL https://gist.githubusercontent.com/aguag/d7c030f939f69b07784a309889b8510a/raw/lgdock.sh)" _ "-s"
 

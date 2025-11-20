@@ -2,13 +2,13 @@
 # Modifica questo se il tuo script BuildImage costruisce un'immagine con un nome specifico.
 # Se BuildImage non produce un target tangibile che Make può tracciare,
 # useremo un file "timestamp" per forzare la riesecuzione.
-IMAGE_NAME := aguagliardi/legopst:latestls
+IMAGE_NAME := aguagliardi/legopst:latest
 DOCKERFILE := Dockerfile_LegoPST
 BUILD_SCRIPT := ./BuildImage
 
 # Dipendenze per la regola di build dell'immagine
 #BUILD_DEPENDENCIES := $(DOCKERFILE) lgdock lgdock startDock
-BUILD_DEPENDENCIES := $(DOCKERFILE) lgdock lgdock_socat
+BUILD_DEPENDENCIES := $(DOCKERFILE) lgdock lgdock_socat lgdock_multi
 
 # Target principale, spesso chiamato 'all' o il nome dell'eseguibile/immagine principale
 # In questo caso, potremmo considerare il risultato di BuildImage come un file "segnaposto"
@@ -19,7 +19,7 @@ BUILD_DEPENDENCIES := $(DOCKERFILE) lgdock lgdock_socat
 # Questo è il modo più semplice se BuildImage non crea un file specifico tracciabile da Make.
 .PHONY: all build clean check_docker
 
-all: build $(LEGORT_BIN)/lgdock $(LEGORT_BIN)/lgdock_socat
+all: build $(LEGORT_BIN)/lgdock $(LEGORT_BIN)/lgdock_socat $(LEGORT_BIN)/lgdock_multi
 
 check_docker:
 	@if ! command -v docker >/dev/null 2>&1; then \
@@ -55,6 +55,10 @@ $(LEGORT_BIN)/lgdock: lgdock.sh
 	cp $? $@
 	chmod 755 $@
 
+$(LEGORT_BIN)/lgdock_multi: lgdock_multi.sh
+	cp $? $@
+	chmod 755 $@
+
 $(LEGORT_BIN)/lgdock_socat: lgdock_socat.sh
 	cp $? $@
 	chmod 755 $@
@@ -70,6 +74,8 @@ clean:
 	rm -f $(LEGORT_BIN)/lgdock
 	@echo "Rimuovo lgdock_socat"
 	rm -f $(LEGORT_BIN)/lgdock_socat
+	@echo "Rimuovo multi"
+	rm -f $(LEGORT_BIN)/lgdock_multi
 	@echo "Pulizia completata."
 
 # Nota: L'uso di '@' all'inizio di un comando sopprime la stampa del comando stesso.
