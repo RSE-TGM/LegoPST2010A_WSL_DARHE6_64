@@ -27,3 +27,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GIST_SECRET }}
         run: |
           gh gist edit 83c887ef78610842508b9f972130d3e1 docker/lgdock_socat.sh
+
+      - name: Sync lgdock_multi.sh to Gist
+        env:
+          GH_TOKEN: ${{ secrets.GIST_SECRET }}
+        run: |
+          gh gist edit 85841fc5c6eba4ac860f4f648da4f89b docker/lgdock_multi.sh
