@@ -1,15 +1,15 @@
 #!/bin/bash
 #
-# versione multipiattorma
-# installare prima buildx:
+# Versione multipiattorma
+# PREREQUISITO: installare prima buildx così:
 # docker buildx create --name mybuilder --use
 #
-versione="aguagliardi/legopst_multi:2.0"
+IMAGE_NAME="aguagliardi/legopst_multi:2.0"
 PROCEED_AUTOMATICALLY=false
 DOCKERFILE_PATH="LegoPST2010A_WSL_DARHE6_64/docker/Dockerfile_LegoPST"
 CONTEXT_PATH="."
 
-echo "Building immagine Docker: $versione"
+echo "Building immagine Docker: $IMAGE_NAME"
 echo "NOTA: Ora l'immagine supporta creazione utenti dinamici"
 
 # Controlla se Docker è installato
@@ -34,21 +34,21 @@ build_logic() {
     echo " "
     echo "---------------------------------------------------------------------"
     echo " Docker installato"
-    echo " Building dell'immagine Docker $versione"
+    echo " Building dell'immagine Docker $IMAGE_NAME"
     echo " Modalità: Utenti dinamici (non serve più specificare UID/GID)"
     echo "---------------------------------------------------------------------"
 
     # Build dell'immagine senza build arguments (non servono più)
     (cd ../.. && \
      docker buildx build --platform linux/amd64,linux/arm64 \
-        -t "$versione" --push \
+        -t "$IMAGE_NAME" --push \
         --file "$DOCKERFILE_PATH" \
         "$CONTEXT_PATH" \
     )
 
     local build_status=$?
     if [ $build_status -eq 0 ]; then
-        echo "--------------> Fine building dell'immagine $versione <---------------"
+        echo "--------------> Fine building dell'immagine $IMAGE_NAME <---------------"
         echo "L'immagine supporta ora la creazione dinamica di utenti"
         echo "Gli utenti verranno creati automaticamente al lancio del container"
     else
@@ -64,7 +64,7 @@ if [ "$PROCEED_AUTOMATICALLY" = true ]; then
 else
     while true; do
         echo " "
-        echo "Verrà costruita l'immagine Docker: $versione"
+        echo "Verrà costruita l'immagine Docker: $IMAGE_NAME"
         echo "Modalità: Creazione utenti dinamici"
         read -p "Procedo? (y/n) " yn
 

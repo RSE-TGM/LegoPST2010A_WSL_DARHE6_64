@@ -5,6 +5,7 @@
 IMAGE_NAME := aguagliardi/legopst:latest
 DOCKERFILE := Dockerfile_LegoPST
 BUILD_SCRIPT := ./BuildImage
+BUILD_SCRIPT_MULTI := ./BuildImage_multiplat
 
 # Dipendenze per la regola di build dell'immagine
 #BUILD_DEPENDENCIES := $(DOCKERFILE) lgdock lgdock startDock
@@ -36,6 +37,8 @@ build: check_docker $(BUILD_DEPENDENCIES)
 	# La logica per decidere se buildare è ora dentro BuildImage
 	$(BUILD_SCRIPT) -y # Passa l'opzione -y se necessario, es: $(BUILD_SCRIPT) -y
 	@echo "Script BuildImage completato."
+	$(BUILD_SCRIPT_MULTI) -y # Passa l'opzione -y se necessario, es: $(BUILD_SCRIPT) -y
+	@echo "Script BuildImage_multi completato."
 
 # Opzione 2: Usare un file "timestamp" per evitare ricompilazioni non necessarie
 # se BuildImage è costoso e vuoi essere più preciso.
@@ -74,7 +77,7 @@ clean:
 	rm -f $(LEGORT_BIN)/lgdock
 	@echo "Rimuovo lgdock_socat"
 	rm -f $(LEGORT_BIN)/lgdock_socat
-	@echo "Rimuovo multi"
+	@echo "Rimuovo lgdock_multi"
 	rm -f $(LEGORT_BIN)/lgdock_multi
 	@echo "Pulizia completata."
 

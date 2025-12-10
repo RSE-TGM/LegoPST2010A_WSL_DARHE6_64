@@ -15,6 +15,9 @@
 # =============================================================================
 VERSION="1.1"
 
+IMAGE_NAME="aguagliardi/legopst_multi:2.0"
+
+
 show_help() {
     cat << EOF
 Uso: $0 [OPZIONI]
@@ -391,7 +394,7 @@ if [[ "$USE_SOCAT" == true ]]; then
         -v "$HOST_USER_HOME:/host_home" \
         --network=host \
         --ipc=host \
-        aguagliardi/legopst:2.0 \
+        $IMAGE_NAME \
         bash -c "$CONTAINER_SCRIPT"
 else
     # Modalità standard: X11 forwarding diretto
@@ -403,6 +406,6 @@ else
         -v /tmp/.X11-unix:/tmp/.X11-unix \
         -v "$HOST_USER_HOME:/host_home" \
         --network=host \
-        aguagliardi/legopst:2.0 \
+        $IMAGE_NAME \
         bash -c "$CONTAINER_SCRIPT"
 fi

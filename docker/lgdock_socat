@@ -17,6 +17,8 @@ fi
 # Gestione Parametri
 # =============================================================================
 VERSION=1.0
+IMAGE_NAME="aguagliardi/legopst:2.0"
+
 show_help() {
     echo "Uso: $0 [OPZIONI]"
     echo
@@ -243,5 +245,5 @@ docker run --rm -it \
     -v "$HOST_USER_HOME:/host_home" \
     --network=host \
     --ipc=host \
-    aguagliardi/legopst:2.0 \
+    $IMAGE_NAME \
     bash -c "$CONTAINER_SCRIPT"
