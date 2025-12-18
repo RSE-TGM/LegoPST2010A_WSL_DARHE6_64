@@ -129,17 +129,13 @@ sudo dnf install libxmu-dev freeglut3-dev libxext-dev libxi-dev
 sudo dnf install libbsd-dev libsqlite3-dev libgdbm-compat-dev
 sudo dnf install gcc gfortran make
 
-# Critical Prerequisite: libgdbm.so.2
-#The LegoPST control configurator tool, config, has a critical dependency on the dbmftc2 utility. 
-#This utility, in turn, requires a specific and obsolete version of the GDBM library: libgdbm.so.2. 
-#To install this required dependency, execute the following script:
-sudo sh $LEGOROOT/gdbm-install/install.sh
+
 ```
 
 ### Download package and set up environment
 
 ```bash
-# From the user HOME dirictory
+# From the user HOME folder
 cd $HOME 
 # Clone the repository, git is the prerequisite
 git clone remotepath/to/LegoPST2010A_WSL_DARHE6_64.git
@@ -159,10 +155,18 @@ echo "source $LEGOROOT/.profile_legoroot " >> $HOME/.bashrc
 
 ```bash
 # Edit .profile_legoroot with correct path
+If "/home/user" was the $HOME path:
 export LEGOROOT=/home/user/LegoPST2010A_WSL_DARHE6_64
 
 # Add to .bashrc
 echo "source $LEGOROOT/.profile_legoroot" >> ~/.bashrc
+
+# Critical Prerequisite: libgdbm.so.2
+#The LegoPST control configurator tool, config, has a critical dependency on the dbmftc2 utility. 
+#This utility, in turn, requires a specific and obsolete version of the GDBM library: libgdbm.so.2. 
+#To install this required dependency, execute the following script:
+sudo sh $LEGOROOT/gdbm-install/install.sh
+
 
 # Restart shell session
 ```
